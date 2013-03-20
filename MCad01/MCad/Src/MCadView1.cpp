@@ -53,18 +53,16 @@ BEGIN_MESSAGE_MAP(CMCadView1, CView)
 	ON_COMMAND(ID_FILE_PRINT_DIRECT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CMCadView1::OnFilePrintPreview)
 	ON_WM_CONTEXTMENU()
-//	ON_WM_RBUTTONUP()
 	ON_WM_PAINT()
 	ON_WM_LBUTTONDOWN()
-//	ON_WM_RBUTTONDOWN()
 	ON_WM_LBUTTONUP()
-	ON_WM_MOUSEMOVE()
-	ON_WM_MBUTTONDOWN()
-	ON_WM_MBUTTONUP()
-	ON_WM_MOUSEWHEEL()
-	ON_WM_SIZE()
 	ON_WM_RBUTTONDOWN()
 	ON_WM_RBUTTONUP()
+	ON_WM_MBUTTONDOWN()
+	ON_WM_MBUTTONUP()
+	ON_WM_MOUSEMOVE()
+	ON_WM_SIZE()
+	ON_WM_MOUSEWHEEL()
 END_MESSAGE_MAP()
 
 // CMCadView1 コンストラクション/デストラクション
@@ -184,6 +182,9 @@ void CMCadView1::OnRButtonUp(UINT nFlags, CPoint point)
 void CMCadView1::OnMouseMove(UINT nFlags, CPoint point)
 {
 	// TODO: ここにメッセージ ハンドラー コードを追加するか、既定の処理を呼び出します。
+	z_ptCurCursorD = point;
+	
+	MC::ViewInp::MouseMove( this, nFlags,  point);
 
 	CView::OnMouseMove(nFlags, point);
 }
@@ -192,6 +193,7 @@ void CMCadView1::OnMouseMove(UINT nFlags, CPoint point)
 void CMCadView1::OnMButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: ここにメッセージ ハンドラー コードを追加するか、既定の処理を呼び出します。
+	MC::ViewInp::MButtonDown( this, nFlags, point);
 
 	CView::OnMButtonDown(nFlags, point);
 }
@@ -200,6 +202,7 @@ void CMCadView1::OnMButtonDown(UINT nFlags, CPoint point)
 void CMCadView1::OnMButtonUp(UINT nFlags, CPoint point)
 {
 	// TODO: ここにメッセージ ハンドラー コードを追加するか、既定の処理を呼び出します。
+	MC::ViewInp::MButtonUp( this, nFlags, point);
 
 	CView::OnMButtonUp(nFlags, point);
 }
@@ -208,6 +211,7 @@ void CMCadView1::OnMButtonUp(UINT nFlags, CPoint point)
 BOOL CMCadView1::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
 {
 	// TODO: ここにメッセージ ハンドラー コードを追加するか、既定の処理を呼び出します。
+	MC::ViewInp::MouseWheel( this, nFlags, zDelta, z_ptCurCursorD);
 
 	return CView::OnMouseWheel(nFlags, zDelta, pt);
 }
