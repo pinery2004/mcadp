@@ -174,26 +174,6 @@ BOOL CMCadApp::InitInstance()
 	m_pMainWnd = pMainFrame;
 	m_pMainFrame = pMainFrame;
 
-	// 接尾辞が存在する場合にのみ DragAcceptFiles を呼び出します。
-	//  MDI アプリケーションでは、この呼び出しは、m_pMainWnd を設定した直後に発生しなければなりません。
-	// ドラッグ/ドロップ オープンを許可します。
-	m_pMainWnd->DragAcceptFiles();
-
-	// DDE、file open など標準のシェル コマンドのコマンド ラインを解析します。
-	CCommandLineInfo cmdInfo;
-	ParseCommandLine( cmdInfo);
-
-	// DDE Execute open を使用可能にします。
-	EnableShellOpen();
-	RegisterShellFileTypes( TRUE);
-
-	MC::WindowCtrl::MmWndSetSyubetsuC( 1, MTHEIMENZU, 1, 1);
-
-	// コマンド ラインで指定されたディスパッチ コマンドです。アプリケーションが
-	// /RegServer、/Register、/Unregserver または /Unregister で起動された場合、False を返します。
-	if ( !ProcessShellCommand(cmdInfo))
-		return FALSE;
-
 //-----------------------------------------------------------------------------
 
 	MC::System::MmInitialize();
@@ -213,6 +193,25 @@ BOOL CMCadApp::InitInstance()
 
 //-----------------------------------------------------------------------------
 
+	// 接尾辞が存在する場合にのみ DragAcceptFiles を呼び出します。
+	//  MDI アプリケーションでは、この呼び出しは、m_pMainWnd を設定した直後に発生しなければなりません。
+	// ドラッグ/ドロップ オープンを許可します。
+	m_pMainWnd->DragAcceptFiles();
+
+	// DDE、file open など標準のシェル コマンドのコマンド ラインを解析します。
+	CCommandLineInfo cmdInfo;
+	ParseCommandLine( cmdInfo);
+
+	// DDE Execute open を使用可能にします。
+	EnableShellOpen();
+	RegisterShellFileTypes( TRUE);
+
+	MC::WindowCtrl::MmWndSetSyubetsuC( 1, MTHEIMENZU, 1, 1);
+
+	// コマンド ラインで指定されたディスパッチ コマンドです。アプリケーションが
+	// /RegServer、/Register、/Unregserver または /Unregister で起動された場合、False を返します。
+	if ( !ProcessShellCommand(cmdInfo))
+		return FALSE;
 
 	// メイン ウィンドウが初期化されたので、表示と更新を行います。
 	pMainFrame->ShowWindow(m_nCmdShow);
