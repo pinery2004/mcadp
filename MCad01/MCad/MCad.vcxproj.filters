@@ -1,0 +1,1254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="MCad">
+      <UniqueIdentifier>{bf20fd6d-ed96-4dd3-93f9-5f9223403837}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MCad\src">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="MCad\hdr">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Mfile">
+      <UniqueIdentifier>{acaa696e-821a-4753-b9be-fc3102140e73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Msys">
+      <UniqueIdentifier>{e732ccf6-7473-4fc2-ae62-f464bbd654a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Msys\hdr">
+      <UniqueIdentifier>{3b24b734-13bb-4e01-9de9-0ff2379be74e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Msys\src">
+      <UniqueIdentifier>{86431d54-b753-4a64-a18a-ddf6cb5987ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mfile\hdr">
+      <UniqueIdentifier>{eee00ed4-fdf5-4155-8b4f-162580681d40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mfile\src">
+      <UniqueIdentifier>{b8ac5f7f-6f9a-4ce8-842d-08302eb43c51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mt">
+      <UniqueIdentifier>{49ee0b1d-153f-437b-a41a-271a9e2653ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mt\hdr">
+      <UniqueIdentifier>{dd9f32a3-d4c9-4d03-adaf-1b3cfcc2daa1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mt\src">
+      <UniqueIdentifier>{2b157c4e-bb9c-4209-9e10-982b19413ec5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mh">
+      <UniqueIdentifier>{50bf41be-12df-4494-a9b7-2e6cbcb9a483}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mh\hdr">
+      <UniqueIdentifier>{80334f62-8d71-4e0a-8233-7e229693f240}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mh\src">
+      <UniqueIdentifier>{f822a77f-d215-4640-b4de-d3cdd307b5f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mo">
+      <UniqueIdentifier>{2e53847d-e361-4f15-9538-c220f346e293}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mo\hdr">
+      <UniqueIdentifier>{f9f292a5-e4c3-4267-98d2-32aa4e6ac62c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mo\src">
+      <UniqueIdentifier>{4862d970-b8df-4d44-a7b1-a3fd59e8309a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mgeo">
+      <UniqueIdentifier>{76affd76-1862-4d73-ab77-251814e551a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mgeo\Src">
+      <UniqueIdentifier>{6b71788b-9474-4d52-977c-394713338e87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mgeo\hdr">
+      <UniqueIdentifier>{1d8445dd-9f5c-4d99-9774-3847575451df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mm">
+      <UniqueIdentifier>{982dfa4d-2cf9-46da-bcdf-8dee37b3d5c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mm\src">
+      <UniqueIdentifier>{91caa64f-d0f9-4406-825a-f78be8fd3542}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mm\hdr">
+      <UniqueIdentifier>{b4b4dcba-bf8a-4a1e-95d1-c5df74355942}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mmwin">
+      <UniqueIdentifier>{2ccf869c-f447-4056-9dd4-b906cb3b982a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mmwin\hdr">
+      <UniqueIdentifier>{a6d6ed93-5a34-4b7d-aca9-8ce40104216e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mmwin\src">
+      <UniqueIdentifier>{0c602baf-b594-43e9-b634-865acd0ee6fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mdm">
+      <UniqueIdentifier>{64a0aa46-b0b3-41ec-9f91-250c33378671}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mdm\src">
+      <UniqueIdentifier>{0385d41d-750c-4606-baeb-33636d4eb3e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mdm\hdr">
+      <UniqueIdentifier>{0d012350-9b10-4675-9318-9cbae91791a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mlog">
+      <UniqueIdentifier>{9844162e-f3a4-48a8-a72b-c7f5623cf000}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mlog\hdr">
+      <UniqueIdentifier>{1721aa84-76fb-4093-bcdc-8631a7e17f72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mlog\src">
+      <UniqueIdentifier>{bb09832e-549d-459e-815f-fc1176e8796a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mi">
+      <UniqueIdentifier>{a1c2f75e-26a9-4b33-aa6f-8450e9c8ac06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mi\src">
+      <UniqueIdentifier>{7749afe1-19a1-41c9-b142-e9170bf89f4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mi\hdr">
+      <UniqueIdentifier>{c052cdf8-7fec-49a0-a3fb-752771da039c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mr">
+      <UniqueIdentifier>{79b94e27-4465-48cf-b2b8-934395fed539}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mr\src">
+      <UniqueIdentifier>{a180929a-e333-4f1c-bb0b-9647be9a20ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mr\hdr">
+      <UniqueIdentifier>{8781c7c2-4602-4bc0-8bd0-52dca69a9833}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mdb">
+      <UniqueIdentifier>{bed3eced-0263-41a0-a5d3-bb0ef89a3d1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mdb\hdr">
+      <UniqueIdentifier>{27fc58ca-5d2f-4ce1-b360-d4f5b79e9cd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mdb\src">
+      <UniqueIdentifier>{9b8490b3-b723-4fb3-a8d7-22998232f23b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mc">
+      <UniqueIdentifier>{632c5e9b-b6b7-4384-9a3d-45d8a0fc5d31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mc\src">
+      <UniqueIdentifier>{eada625d-93bf-4bcf-add5-b77a5b8954ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mc\hdr">
+      <UniqueIdentifier>{da7f64b1-356e-43ad-b805-9991428506bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MCmd1">
+      <UniqueIdentifier>{8d76aa9f-615f-4c86-96f0-2a7f956a4a7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MCmd2">
+      <UniqueIdentifier>{31158e93-fc72-4334-95a7-c3b231c6981c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MCmd3">
+      <UniqueIdentifier>{8536cdb3-1d8c-4357-b7e0-dddc3d1e3e84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MCmd4">
+      <UniqueIdentifier>{d23981cd-84d3-477d-a87b-e62eb1801b8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MCmd5">
+      <UniqueIdentifier>{7f3a68e4-3471-4946-a1e1-a0f4bf91aaf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MCmd6">
+      <UniqueIdentifier>{cab9d133-9fd5-4e07-a719-f0353204a968}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MCmd1\Src">
+      <UniqueIdentifier>{d463b26e-17ca-4772-b13a-aef032c372c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MCmd2\Src">
+      <UniqueIdentifier>{cb5d924c-4a73-4cb2-9f1f-5c174e980de7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MCmd3\Src">
+      <UniqueIdentifier>{a96ca8b4-db49-42fd-aa0b-00703f4a84d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MCmd4\Src">
+      <UniqueIdentifier>{ffdae77e-6233-473e-8425-c1c0481537d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MCmd5\Src">
+      <UniqueIdentifier>{0198f83e-0686-4304-b24b-01ef93655e18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MCmd6\Src">
+      <UniqueIdentifier>{d3c56156-72d1-4c59-b180-b3292fd9b41c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MCmd0">
+      <UniqueIdentifier>{4f575cf7-42e2-4ce3-bde0-090c7d5bf2e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MCmd0\Src">
+      <UniqueIdentifier>{be3d7c1a-32ab-4142-aacb-1a5612b68b77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GridCtrl">
+      <UniqueIdentifier>{3f1589aa-ee31-4d02-a43b-7540cfb76db1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GridCtrl\Src">
+      <UniqueIdentifier>{682b35e5-063c-4ba8-9514-66fab26cece8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GridCtrl\hdr">
+      <UniqueIdentifier>{81c06959-9953-4e0a-ade0-3a5592560dcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MCmd2\hdr">
+      <UniqueIdentifier>{934d2ee1-90f2-4ed0-bfc4-967038ac02ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MCmd3\hdr">
+      <UniqueIdentifier>{b4ee042f-d5d7-46d5-8560-99affa1e4324}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MCmd4\hdr">
+      <UniqueIdentifier>{01267c8d-f0d6-45a3-afd8-2959a077d8c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MCmd5\hdr">
+      <UniqueIdentifier>{61045f87-8ec5-4385-9007-bf308d6b8707}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MCmd6\hdr">
+      <UniqueIdentifier>{25ab1f80-6f45-4829-bee8-c8a7e56f6a30}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+    <None Include="MCad.reg" />
+    <None Include="res\buttons.bmp">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="res\filelarge.bmp">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="res\filesmall.bmp">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="res\main.bmp">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="res\writelarge.bmp">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="res\writesmall.bmp">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="res\ribbon.mfcribbon-ms">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="res\MCad.rc2">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="res\MCadDoc.ico">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="res\MCad.ico">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="res\Toolbar.bmp">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="res\Toolbar256.bmp">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="res\cross1.cur">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="res\cross3.cur">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="res\cross2.cur">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="res\zoom.cur">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="res\grab.cur">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="res\bitmap1.bmp">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="res\Toolbar0.bmp">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="res\toolbar1.bmp">
+      <Filter>リソース ファイル</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>MCad\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>MCad\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>MCad\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ChildFrm1.h">
+      <Filter>MCad\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ChildFrm2.h">
+      <Filter>MCad\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ChildFrm3.h">
+      <Filter>MCad\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MainFrm.h">
+      <Filter>MCad\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MCadDoc.h">
+      <Filter>MCad\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MCadForm3.h">
+      <Filter>MCad\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MCadView1.h">
+      <Filter>MCad\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MCadView2.h">
+      <Filter>MCad\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MsMCadDef.h">
+      <Filter>MCad\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MgAngle.h">
+      <Filter>Mgeo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MgTol.h">
+      <Filter>Mgeo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MgArc.h">
+      <Filter>Mgeo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MgArea.h">
+      <Filter>Mgeo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MgCircle.h">
+      <Filter>Mgeo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MgConnect.h">
+      <Filter>Mgeo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MgConnect1.h">
+      <Filter>Mgeo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MgDefine.h">
+      <Filter>Mgeo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MgEnt.h">
+      <Filter>Mgeo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MGeo.h">
+      <Filter>Mgeo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MgGeo.h">
+      <Filter>Mgeo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MgGrp.h">
+      <Filter>Mgeo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MgKeijyou.h">
+      <Filter>Mgeo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MgKeijyou2.h">
+      <Filter>Mgeo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MgLib.h">
+      <Filter>Mgeo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MgLine.h">
+      <Filter>Mgeo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MgMat.h">
+      <Filter>Mgeo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MgMatE.h">
+      <Filter>Mgeo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MgPlane.h">
+      <Filter>Mgeo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MgPoint.h">
+      <Filter>Mgeo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MgPoint2D.h">
+      <Filter>Mgeo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MgPoint3D.h">
+      <Filter>Mgeo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MgPointDf.h">
+      <Filter>Mgeo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MgPolygon.h">
+      <Filter>Mgeo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MgPolyline.h">
+      <Filter>Mgeo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MgRect.h">
+      <Filter>Mgeo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MgSort.h">
+      <Filter>Mgeo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MlLog.h">
+      <Filter>Mlog\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MfFile.h">
+      <Filter>Mfile\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MmWnd.h">
+      <Filter>Mmwin\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MdRoofQueue.h">
+      <Filter>Mdb\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MdLib.h">
+      <Filter>Mdb\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MdCmds.h">
+      <Filter>Mdb\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Mdb.h">
+      <Filter>Mdb\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MdAryh.h">
+      <Filter>Mdb\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Md.h">
+      <Filter>Mdb\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MhZukei.h">
+      <Filter>Mh\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MhTpPts.h">
+      <Filter>Mh\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MhTategu.h">
+      <Filter>Mh\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MhRoof.h">
+      <Filter>Mh\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MhPlcInfo.h">
+      <Filter>Mh\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MhModel.h">
+      <Filter>Mh\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MhMbr.h">
+      <Filter>Mh\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MhLib.h">
+      <Filter>Mh\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Mdm.h">
+      <Filter>Mdm\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MdModel.h">
+      <Filter>Mdm\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MdmAtr.h">
+      <Filter>Mdm\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MdmEnt.h">
+      <Filter>Mdm\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MdmGrp.h">
+      <Filter>Mdm\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MdmLyr.h">
+      <Filter>Mdm\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MdmScm.h">
+      <Filter>Mdm\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MdmWin.h">
+      <Filter>Mdm\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MdmDB.h">
+      <Filter>Mdm\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MdmSet.h">
+      <Filter>Mdm\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MdmSetC.h">
+      <Filter>Mdm\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MdmSetP.h">
+      <Filter>Mdm\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MdmDefine.h">
+      <Filter>Mdm\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MdZukei.h">
+      <Filter>Mdm\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MdPartsQueue.h">
+      <Filter>Mdb\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MdAry.h">
+      <Filter>Mdb\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MdmFig.h">
+      <Filter>Mdm\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MdHist.h">
+      <Filter>Mdb\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MdList.h">
+      <Filter>Mdb\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MdListS.h">
+      <Filter>Mdb\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MdOpt.h">
+      <Filter>Mdb\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MdPlex.h">
+      <Filter>Mdb\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MhDefine.h">
+      <Filter>Mh\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MhGp.h">
+      <Filter>Mh\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MhIeModel.h">
+      <Filter>Mh\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MhParts.h">
+      <Filter>Mh\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MhTpParts.h">
+      <Filter>Mh\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MoMaterial.h">
+      <Filter>Mo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MoMdlDispList.h">
+      <Filter>Mo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MoOpengl.h">
+      <Filter>Mo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MsArray.h">
+      <Filter>Msys\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MsBasic.h">
+      <Filter>Msys\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MsBitSet.h">
+      <Filter>Msys\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MsCod.h">
+      <Filter>Msys\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MsCode.h">
+      <Filter>Msys\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MsCriticalSection.h">
+      <Filter>Msys\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MsDefArea.h">
+      <Filter>Msys\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MsDefCheck.h">
+      <Filter>Msys\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MsDefConst.h">
+      <Filter>Msys\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MsDefFunc.h">
+      <Filter>Msys\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MsDefine.h">
+      <Filter>Msys\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MsDefMCad.h">
+      <Filter>Msys\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MsDefType.h">
+      <Filter>Msys\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MsLib.h">
+      <Filter>Msys\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MsSynchroObj.h">
+      <Filter>Msys\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MmCmd.h">
+      <Filter>Mm\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MmCmdMsg.h">
+      <Filter>Mm\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MmDefine.h">
+      <Filter>Mm\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MmDrag.h">
+      <Filter>Mm\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MmGridNum.h">
+      <Filter>Mm\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MmInp.h">
+      <Filter>Mm\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MmLib.h">
+      <Filter>Mm\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MmPrompt.h">
+      <Filter>Mm\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MmSystem.h">
+      <Filter>Mm\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MmTenkai.h">
+      <Filter>Mm\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MmValid.h">
+      <Filter>Mm\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MmWindow.h">
+      <Filter>Mm\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MtPrcEventQueue.h">
+      <Filter>Mt\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MtPrcEvent.h">
+      <Filter>Mt\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MtInpEventQueue.h">
+      <Filter>Mt\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MtInpEventFilter.h">
+      <Filter>Mt\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MtInpEvent.h">
+      <Filter>Mt\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MtEngine.h">
+      <Filter>Mt\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MtDefine.h">
+      <Filter>Mt\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MtAskForPoint.h">
+      <Filter>Mt\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\McSystemProperty.h">
+      <Filter>Mc\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MrAPI.h">
+      <Filter>Mr\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MrCmd.h">
+      <Filter>Mr\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MdDefine.h">
+      <Filter>Mdb\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MdmFig.h">
+      <Filter>MCad\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MoDispList.h">
+      <Filter>Mo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MtInp.h">
+      <Filter>Mt\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MtInpAttr.h">
+      <Filter>Mt\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MtMCadApi.h">
+      <Filter>Mt\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GridCtrl\CellRange.h">
+      <Filter>GridCtrl\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GridCtrl\GridCell.h">
+      <Filter>GridCtrl\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GridCtrl\GridCellBase.h">
+      <Filter>GridCtrl\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GridCtrl\GridCellCheck.h">
+      <Filter>GridCtrl\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GridCtrl\GridCellCombo.h">
+      <Filter>GridCtrl\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GridCtrl\GridCellDateTime.h">
+      <Filter>GridCtrl\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GridCtrl\GridCellNumeric.h">
+      <Filter>GridCtrl\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GridCtrl\GridCtrl.h">
+      <Filter>GridCtrl\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GridCtrl\GridDropTarget.h">
+      <Filter>GridCtrl\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GridCtrl\GridURLCell.h">
+      <Filter>GridCtrl\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GridCtrl\InPlaceEdit.h">
+      <Filter>GridCtrl\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GridCtrl\MemDC.h">
+      <Filter>GridCtrl\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GridCtrl\TitleTip.h">
+      <Filter>GridCtrl\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MmDialogHist.h">
+      <Filter>MCmd2\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MmDialogOpt.h">
+      <Filter>MCmd3\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MmDialogGrid.h">
+      <Filter>MCmd4\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MmDialogTenkai.h">
+      <Filter>MCmd5\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MmDialogPtsEdit.h">
+      <Filter>MCmd6\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="MCad.h">
+      <Filter>MCad\hdr</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>MCad\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ChildFrm1.cpp">
+      <Filter>MCad\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ChildFrm2.cpp">
+      <Filter>MCad\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ChildFrm3.cpp">
+      <Filter>MCad\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\MainFrm.cpp">
+      <Filter>MCad\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\MCadDoc.cpp">
+      <Filter>MCad\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\MCadForm3.cpp">
+      <Filter>MCad\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\MCadView1.cpp">
+      <Filter>MCad\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\MCadView2.cpp">
+      <Filter>MCad\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MGeo\MgAngle.cpp">
+      <Filter>Mgeo\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MGeo\MgArc.cpp">
+      <Filter>Mgeo\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MGeo\MgCircle.cpp">
+      <Filter>Mgeo\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MGeo\MgConnect.cpp">
+      <Filter>Mgeo\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MGeo\MgDist.cpp">
+      <Filter>Mgeo\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MGeo\MgDivide.cpp">
+      <Filter>Mgeo\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MGeo\MgGeo.cpp">
+      <Filter>Mgeo\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MGeo\MgInit.cpp">
+      <Filter>Mgeo\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MGeo\MgIntr.cpp">
+      <Filter>Mgeo\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MGeo\MgKeijou.cpp">
+      <Filter>Mgeo\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MGeo\MgLine.cpp">
+      <Filter>Mgeo\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MGeo\MgMat.cpp">
+      <Filter>Mgeo\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MGeo\MgMatE.cpp">
+      <Filter>Mgeo\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MGeo\MgMerge.cpp">
+      <Filter>Mgeo\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MGeo\MgMove.cpp">
+      <Filter>Mgeo\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MGeo\MgOn.cpp">
+      <Filter>Mgeo\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MGeo\Mgperp.cpp">
+      <Filter>Mgeo\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MGeo\MgPlane.cpp">
+      <Filter>Mgeo\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MGeo\MgPoint.cpp">
+      <Filter>Mgeo\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MGeo\MgPolygon.cpp">
+      <Filter>Mgeo\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MGeo\MgPolyline.cpp">
+      <Filter>Mgeo\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MGeo\MgRect.cpp">
+      <Filter>Mgeo\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MGeo\MgSort.cpp">
+      <Filter>Mgeo\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MGeo\MgSval.cpp">
+      <Filter>Mgeo\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mlog\MlLog.cpp">
+      <Filter>Mlog\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Msys\MsBasic.cpp">
+      <Filter>Msys\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Msys\MsCriticalSection.cpp">
+      <Filter>Msys\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Msys\MsSynchroObj.cpp">
+      <Filter>Msys\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Msys\MsSysError.cpp">
+      <Filter>Msys\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mfile\MfFile.cpp">
+      <Filter>Mfile\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mmwin\MmWnd.cpp">
+      <Filter>Mmwin\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mmwin\MmWndKDraw.cpp">
+      <Filter>Mmwin\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mmwin\MmWndKDrawKabe.cpp">
+      <Filter>Mmwin\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mmwin\MmWndKDrawKiso.cpp">
+      <Filter>Mmwin\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mmwin\MmWndKDrawParts.cpp">
+      <Filter>Mmwin\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mmwin\MmWndKInp.cpp">
+      <Filter>Mmwin\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mmwin\MmWndKSetStatusBar.cpp">
+      <Filter>Mmwin\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Msys\MsCOD.cpp">
+      <Filter>Msys\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Msys\MsCodTlerance.cpp">
+      <Filter>Msys\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mh\MhFile.cpp">
+      <Filter>Mh\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mh\MhHist.cpp">
+      <Filter>Mh\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mh\MhKabe.cpp">
+      <Filter>Mh\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mh\MhKiso.cpp">
+      <Filter>Mh\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mh\MhMdlIO.cpp">
+      <Filter>Mh\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mh\MhModel.cpp">
+      <Filter>Mh\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mh\MhOpt.cpp">
+      <Filter>Mh\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mh\MhParts.cpp">
+      <Filter>Mh\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mh\MhPlcInfo.cpp">
+      <Filter>Mh\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mh\MhRoof.cpp">
+      <Filter>Mh\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mh\MhRoofInfo.cpp">
+      <Filter>Mh\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Msys\MsFile.cpp">
+      <Filter>Msys\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Msys\MsLib.cpp">
+      <Filter>Msys\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Msys\MsReg.cpp">
+      <Filter>Msys\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Msys\MsSort.cpp">
+      <Filter>Msys\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Msys\MsString.cpp">
+      <Filter>Msys\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Msys\MsTime.cpp">
+      <Filter>Msys\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mr\MrDrawing.cpp">
+      <Filter>Mr\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mm\MmCursor.cpp">
+      <Filter>Mm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mm\MmDrag.cpp">
+      <Filter>Mm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mm\MmDragObject.cpp">
+      <Filter>Mm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mm\MmGetKosei.cpp">
+      <Filter>Mm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mm\MmGridNum.cpp">
+      <Filter>Mm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mm\MmMainFrame.cpp">
+      <Filter>Mm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mm\MmPrompt.cpp">
+      <Filter>Mm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mm\MmSDialogBarAttr.cpp">
+      <Filter>Mm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mm\MmSDialogBarInp.cpp">
+      <Filter>Mm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mm\MmSDialogBarPanel.cpp">
+      <Filter>Mm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mm\MmSDialogBarParts.cpp">
+      <Filter>Mm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mm\MmSetCurrentWndFocus.cpp">
+      <Filter>Mm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mm\MmSetDialog.cpp">
+      <Filter>Mm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mm\MmSystem.cpp">
+      <Filter>Mm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mdm\Mdm.cpp">
+      <Filter>Mdm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mdm\MdmAtr.cpp">
+      <Filter>Mdm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mdm\MdmBuhin.cpp">
+      <Filter>Mdm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mdm\MdmDispControl.cpp">
+      <Filter>Mdm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mdm\MdmEnt.cpp">
+      <Filter>Mdm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mdm\MdmExternalIo.cpp">
+      <Filter>Mdm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mdm\MdmFigPmt.cpp">
+      <Filter>Mdm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mdm\MdmGrp.cpp">
+      <Filter>Mdm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mdm\MdmHyo.cpp">
+      <Filter>Mdm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mdm\MdmInp.cpp">
+      <Filter>Mdm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mdm\MdmLight.cpp">
+      <Filter>Mdm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mdm\MdmLyr.cpp">
+      <Filter>Mdm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mdm\MdmMessage.cpp">
+      <Filter>Mdm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mdm\MdmModel.cpp">
+      <Filter>Mdm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mdm\MdmScm.cpp">
+      <Filter>Mdm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mdm\MdmSystem.cpp">
+      <Filter>Mdm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mdm\MdmUE.cpp">
+      <Filter>Mdm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mdm\MdmWin.cpp">
+      <Filter>Mdm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mdm\MdmZGeometry.cpp">
+      <Filter>Mdm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mdm\MdmZukei.cpp">
+      <Filter>Mdm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mdb\MdCmdErrorPrompt.cpp">
+      <Filter>Mdb\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mdb\MdGrobal.cpp">
+      <Filter>Mdb\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mdb\MdHist.cpp">
+      <Filter>Mdb\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mdb\MdList.cpp">
+      <Filter>Mdb\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mdb\MdListS.cpp">
+      <Filter>Mdb\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mdb\MdOpt.cpp">
+      <Filter>Mdb\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mdb\MdPartsQueue.cpp">
+      <Filter>Mdb\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mdb\MdPlex.cpp">
+      <Filter>Mdb\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mdb\MdRoofQueue.cpp">
+      <Filter>Mdb\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mdb\MdUndoRedo.cpp">
+      <Filter>Mdb\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mo\MoDispList.cpp">
+      <Filter>Mo\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mo\MoDispModel.cpp">
+      <Filter>Mo\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mo\MoMakeDisplayList.cpp">
+      <Filter>Mo\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mt\MtAskForPoint.cpp">
+      <Filter>Mt\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mt\MtBuildPrcEvent.cpp">
+      <Filter>Mt\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mt\MtGetEventQueue.cpp">
+      <Filter>Mt\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mt\MtInpEventFilter.cpp">
+      <Filter>Mt\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mt\MtInpEventQueue.cpp">
+      <Filter>Mt\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mt\MtInput.cpp">
+      <Filter>Mt\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mt\MtPrcEventQueue.cpp">
+      <Filter>Mt\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mt\MtSendMessage.cpp">
+      <Filter>Mt\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mt\MtWaitLoop.cpp">
+      <Filter>Mt\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mi\MiHitBuzai.cpp">
+      <Filter>Mi\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mi\MiKabe.cpp">
+      <Filter>Mi\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mi\MiPartsPlace.cpp">
+      <Filter>Mi\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mi\MiPresetCmd.cpp">
+      <Filter>Mi\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mi\MiRoofPlace.cpp">
+      <Filter>Mi\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mi\MiTenkai.cpp">
+      <Filter>Mi\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mi\MiUndoRedo.cpp">
+      <Filter>Mi\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mi\MiYane.cpp">
+      <Filter>Mi\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mc\McSystemProperty.cpp">
+      <Filter>Mc\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mo\MoOpenGLMono.cpp">
+      <Filter>Mo\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mo\MoOpenGLSet.cpp">
+      <Filter>Mo\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mdm\MdmFig.cpp">
+      <Filter>Mdm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mdm\MdmDEnt.cpp">
+      <Filter>Mdm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mt\MtInp.cpp">
+      <Filter>Mt\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mt\MtMCadApi.cpp">
+      <Filter>Mt\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MCmd1\MCmdCyuki.cpp">
+      <Filter>MCmd1\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MCmd1\MCmdSeizu.cpp">
+      <Filter>MCmd1\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MCmd1\MCmdSekkei.cpp">
+      <Filter>MCmd1\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MCmd1\MCmdTest001.cpp">
+      <Filter>MCmd1\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MCmd0\MCmdDelete.cpp">
+      <Filter>MCmd0\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MCmd0\MCmdLine.cpp">
+      <Filter>MCmd0\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MCmd0\MCmdLoadDxfFile.cpp">
+      <Filter>MCmd0\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MCmd0\MCmdMode.cpp">
+      <Filter>MCmd0\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MCmd0\MCmdModLineLength.cpp">
+      <Filter>MCmd0\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MCmd0\MCmdModPanelNo.cpp">
+      <Filter>MCmd0\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MCmd0\MCmdParts.cpp">
+      <Filter>MCmd0\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MCmd0\MCmdRoof.cpp">
+      <Filter>MCmd0\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MCmd0\MCmdUndo.cpp">
+      <Filter>MCmd0\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MCmd0\MCmdWall.cpp">
+      <Filter>MCmd0\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MCmd2\MCmdHist.cpp">
+      <Filter>MCmd2\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MCmd3\MCmdOpt.cpp">
+      <Filter>MCmd3\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MCmd4\MCmdGridNum.cpp">
+      <Filter>MCmd4\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MCmd5\MCmdTenkai.cpp">
+      <Filter>MCmd5\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MCmd6\MCmdPartsEdit.cpp">
+      <Filter>MCmd6\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GridCtrl\GridCell.cpp">
+      <Filter>GridCtrl\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GridCtrl\GridCellBase.cpp">
+      <Filter>GridCtrl\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GridCtrl\GridCellCheck.cpp">
+      <Filter>GridCtrl\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GridCtrl\GridCellCombo.cpp">
+      <Filter>GridCtrl\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GridCtrl\GridCellDateTime.cpp">
+      <Filter>GridCtrl\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GridCtrl\GridCellNumeric.cpp">
+      <Filter>GridCtrl\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GridCtrl\GridCtrl.cpp">
+      <Filter>GridCtrl\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GridCtrl\GridDropTarget.cpp">
+      <Filter>GridCtrl\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GridCtrl\GridURLCell.cpp">
+      <Filter>GridCtrl\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GridCtrl\InPlaceEdit.cpp">
+      <Filter>GridCtrl\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GridCtrl\TitleTip.cpp">
+      <Filter>GridCtrl\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MCmd2\MmDialogHist.cpp">
+      <Filter>MCmd2\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MCmd3\MmDialogOpt.cpp">
+      <Filter>MCmd3\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MCmd4\MmDialogGrid.cpp">
+      <Filter>MCmd4\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MCmd5\MmDialogTenkai.cpp">
+      <Filter>MCmd5\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MCmd6\MmDialogPtsEdit.cpp">
+      <Filter>MCmd6\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\MCadApp.cpp">
+      <Filter>MCad\src</Filter>
+    </ClCompile>
+    <ClCompile Include="mcad.CPP">
+      <Filter>MCad\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MCad.rc">
+      <Filter>リソース ファイル</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

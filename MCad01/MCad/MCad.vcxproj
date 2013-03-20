@@ -1,0 +1,467 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{AC053DF9-36FB-4EB4-88CB-C99F18FF0194}</ProjectGuid>
+    <RootNamespace>MCad</RootNamespace>
+    <Keyword>MFCProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;DLL_NO_IMPORT_GEO_DO;DLL_NO_IMPORT_MBASIC_DO;DLL_NO_IMPORT_MD_DO;DLL_NO_IMPORT_SUB_DO;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\;..\include\</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0411</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_AFXEXT;DLL_NO_IMPORT_GEO_DO;DLL_NO_IMPORT_MBASIC_DO;DLL_NO_IMPORT_SUB_DO;DLL_NO_IMPORT_MD_DO;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\;..\include\</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0411</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="MCad.reg" />
+    <None Include="ReadMe.txt" />
+    <None Include="res\bitmap1.bmp" />
+    <None Include="res\buttons.bmp" />
+    <None Include="res\cross1.cur" />
+    <None Include="res\cross2.cur" />
+    <None Include="res\cross3.cur" />
+    <None Include="res\filelarge.bmp" />
+    <None Include="res\filesmall.bmp" />
+    <None Include="res\grab.cur" />
+    <None Include="res\main.bmp" />
+    <None Include="res\MCad.ico" />
+    <None Include="res\MCad.rc2" />
+    <None Include="res\MCadDoc.ico" />
+    <None Include="res\ribbon.mfcribbon-ms">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="res\Toolbar.bmp" />
+    <None Include="res\Toolbar0.bmp" />
+    <None Include="res\toolbar1.bmp" />
+    <None Include="res\Toolbar256.bmp" />
+    <None Include="res\writelarge.bmp" />
+    <None Include="res\writesmall.bmp" />
+    <None Include="res\zoom.cur" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\GridCtrl\CellRange.h" />
+    <ClInclude Include="..\GridCtrl\GridCell.h" />
+    <ClInclude Include="..\GridCtrl\GridCellBase.h" />
+    <ClInclude Include="..\GridCtrl\GridCellCheck.h" />
+    <ClInclude Include="..\GridCtrl\GridCellCombo.h" />
+    <ClInclude Include="..\GridCtrl\GridCellDateTime.h" />
+    <ClInclude Include="..\GridCtrl\GridCellNumeric.h" />
+    <ClInclude Include="..\GridCtrl\GridCtrl.h" />
+    <ClInclude Include="..\GridCtrl\GridDropTarget.h" />
+    <ClInclude Include="..\GridCtrl\GridURLCell.h" />
+    <ClInclude Include="..\GridCtrl\InPlaceEdit.h" />
+    <ClInclude Include="..\GridCtrl\MemDC.h" />
+    <ClInclude Include="..\GridCtrl\TitleTip.h" />
+    <ClInclude Include="..\include\ChildFrm1.h" />
+    <ClInclude Include="..\include\ChildFrm2.h" />
+    <ClInclude Include="..\include\ChildFrm3.h" />
+    <ClInclude Include="..\include\MainFrm.h" />
+    <ClInclude Include="..\include\MCadDoc.h" />
+    <ClInclude Include="..\include\MCadForm3.h" />
+    <ClInclude Include="..\include\MCadView1.h" />
+    <ClInclude Include="..\include\MCadView2.h" />
+    <ClInclude Include="..\include\McSystemProperty.h" />
+    <ClInclude Include="..\include\Md.h" />
+    <ClInclude Include="..\include\MdAry.h" />
+    <ClInclude Include="..\include\MdAryh.h" />
+    <ClInclude Include="..\include\Mdb.h" />
+    <ClInclude Include="..\include\MdCmds.h" />
+    <ClInclude Include="..\include\MdDefine.h" />
+    <ClInclude Include="..\include\MdHist.h" />
+    <ClInclude Include="..\include\MdLib.h" />
+    <ClInclude Include="..\include\MdList.h" />
+    <ClInclude Include="..\include\MdListS.h" />
+    <ClInclude Include="..\include\Mdm.h" />
+    <ClInclude Include="..\include\MdmAtr.h" />
+    <ClInclude Include="..\include\MdmDB.h" />
+    <ClInclude Include="..\include\MdmDefine.h" />
+    <ClInclude Include="..\include\MdmEnt.h" />
+    <ClInclude Include="..\include\MdmFig.h" />
+    <ClInclude Include="..\include\MdmGrp.h" />
+    <ClInclude Include="..\include\MdmLyr.h" />
+    <ClInclude Include="..\include\MdModel.h" />
+    <ClInclude Include="..\include\MdmScm.h" />
+    <ClInclude Include="..\include\MdmSet.h" />
+    <ClInclude Include="..\include\MdmSetC.h" />
+    <ClInclude Include="..\include\MdmSetP.h" />
+    <ClInclude Include="..\include\MdmWin.h" />
+    <ClInclude Include="..\include\MdOpt.h" />
+    <ClInclude Include="..\include\MdPartsQueue.h" />
+    <ClInclude Include="..\include\MdPlex.h" />
+    <ClInclude Include="..\include\MdRoofQueue.h" />
+    <ClInclude Include="..\include\MdZukei.h" />
+    <ClInclude Include="..\include\MfFile.h" />
+    <ClInclude Include="..\include\MgAngle.h" />
+    <ClInclude Include="..\include\MgArc.h" />
+    <ClInclude Include="..\include\MgArea.h" />
+    <ClInclude Include="..\include\MgCircle.h" />
+    <ClInclude Include="..\include\MgConnect.h" />
+    <ClInclude Include="..\include\MgConnect1.h" />
+    <ClInclude Include="..\include\MgDefine.h" />
+    <ClInclude Include="..\include\MgEnt.h" />
+    <ClInclude Include="..\include\MGeo.h" />
+    <ClInclude Include="..\include\MgGeo.h" />
+    <ClInclude Include="..\include\MgGrp.h" />
+    <ClInclude Include="..\include\MgKeijyou.h" />
+    <ClInclude Include="..\include\MgKeijyou2.h" />
+    <ClInclude Include="..\include\MgLib.h" />
+    <ClInclude Include="..\include\MgLine.h" />
+    <ClInclude Include="..\include\MgMat.h" />
+    <ClInclude Include="..\include\MgMatE.h" />
+    <ClInclude Include="..\include\MgPlane.h" />
+    <ClInclude Include="..\include\MgPoint.h" />
+    <ClInclude Include="..\include\MgPoint2D.h" />
+    <ClInclude Include="..\include\MgPoint3D.h" />
+    <ClInclude Include="..\include\MgPointDf.h" />
+    <ClInclude Include="..\include\MgPolygon.h" />
+    <ClInclude Include="..\include\MgPolyline.h" />
+    <ClInclude Include="..\include\MgRect.h" />
+    <ClInclude Include="..\include\MgSort.h" />
+    <ClInclude Include="..\include\MgTol.h" />
+    <ClInclude Include="..\include\MhDefine.h" />
+    <ClInclude Include="..\include\MhGp.h" />
+    <ClInclude Include="..\include\MhIeModel.h" />
+    <ClInclude Include="..\include\MhLib.h" />
+    <ClInclude Include="..\include\MhMbr.h" />
+    <ClInclude Include="..\include\MhModel.h" />
+    <ClInclude Include="..\include\MhParts.h" />
+    <ClInclude Include="..\include\MhPlcInfo.h" />
+    <ClInclude Include="..\include\MhRoof.h" />
+    <ClInclude Include="..\include\MhTategu.h" />
+    <ClInclude Include="..\include\MhTpParts.h" />
+    <ClInclude Include="..\include\MhTpPts.h" />
+    <ClInclude Include="..\include\MhZukei.h" />
+    <ClInclude Include="..\include\MlLog.h" />
+    <ClInclude Include="..\include\MmCmd.h" />
+    <ClInclude Include="..\include\MmCmdMsg.h" />
+    <ClInclude Include="..\include\MmDefine.h" />
+    <ClInclude Include="..\include\MmDialogGrid.h" />
+    <ClInclude Include="..\include\MmDialogHist.h" />
+    <ClInclude Include="..\include\MmDialogOpt.h" />
+    <ClInclude Include="..\include\MmDialogPtsEdit.h" />
+    <ClInclude Include="..\include\MmDialogTenkai.h" />
+    <ClInclude Include="..\include\MmDrag.h" />
+    <ClInclude Include="..\include\MmGridNum.h" />
+    <ClInclude Include="..\include\MmInp.h" />
+    <ClInclude Include="..\include\MmLib.h" />
+    <ClInclude Include="..\include\MmPrompt.h" />
+    <ClInclude Include="..\include\MmSystem.h" />
+    <ClInclude Include="..\include\MmTenkai.h" />
+    <ClInclude Include="..\include\MmValid.h" />
+    <ClInclude Include="..\include\MmWindow.h" />
+    <ClInclude Include="..\include\MmWnd.h" />
+    <ClInclude Include="..\include\MoDispList.h" />
+    <ClInclude Include="..\include\MoMaterial.h" />
+    <ClInclude Include="..\include\MoMdlDispList.h" />
+    <ClInclude Include="..\include\MoOpengl.h" />
+    <ClInclude Include="..\include\MrAPI.h" />
+    <ClInclude Include="..\include\MrCmd.h" />
+    <ClInclude Include="..\include\MsArray.h" />
+    <ClInclude Include="..\include\MsBasic.h" />
+    <ClInclude Include="..\include\MsBitSet.h" />
+    <ClInclude Include="..\include\MsCod.h" />
+    <ClInclude Include="..\include\MsCode.h" />
+    <ClInclude Include="..\include\MsCriticalSection.h" />
+    <ClInclude Include="..\include\MsDefArea.h" />
+    <ClInclude Include="..\include\MsDefCheck.h" />
+    <ClInclude Include="..\include\MsDefConst.h" />
+    <ClInclude Include="..\include\MsDefFunc.h" />
+    <ClInclude Include="..\include\MsDefine.h" />
+    <ClInclude Include="..\include\MsDefMCad.h" />
+    <ClInclude Include="..\include\MsDefType.h" />
+    <ClInclude Include="..\include\MsLib.h" />
+    <ClInclude Include="..\include\MsMCadDef.h" />
+    <ClInclude Include="..\include\MsSynchroObj.h" />
+    <ClInclude Include="..\include\MtAskForPoint.h" />
+    <ClInclude Include="..\include\MtDefine.h" />
+    <ClInclude Include="..\include\MtEngine.h" />
+    <ClInclude Include="..\include\MtInp.h" />
+    <ClInclude Include="..\include\MtInpAttr.h" />
+    <ClInclude Include="..\include\MtInpEvent.h" />
+    <ClInclude Include="..\include\MtInpEventFilter.h" />
+    <ClInclude Include="..\include\MtInpEventQueue.h" />
+    <ClInclude Include="..\include\MtMCadApi.h" />
+    <ClInclude Include="..\include\MtPrcEvent.h" />
+    <ClInclude Include="..\include\MtPrcEventQueue.h" />
+    <ClInclude Include="MCad.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\GridCtrl\GridCell.cpp" />
+    <ClCompile Include="..\GridCtrl\GridCellBase.cpp" />
+    <ClCompile Include="..\GridCtrl\GridCellCheck.cpp" />
+    <ClCompile Include="..\GridCtrl\GridCellCombo.cpp" />
+    <ClCompile Include="..\GridCtrl\GridCellDateTime.cpp" />
+    <ClCompile Include="..\GridCtrl\GridCellNumeric.cpp" />
+    <ClCompile Include="..\GridCtrl\GridCtrl.cpp" />
+    <ClCompile Include="..\GridCtrl\GridDropTarget.cpp" />
+    <ClCompile Include="..\GridCtrl\GridURLCell.cpp" />
+    <ClCompile Include="..\GridCtrl\InPlaceEdit.cpp" />
+    <ClCompile Include="..\GridCtrl\TitleTip.cpp" />
+    <ClCompile Include="..\MCmd0\MCmdDelete.cpp" />
+    <ClCompile Include="..\MCmd0\MCmdLine.cpp" />
+    <ClCompile Include="..\MCmd0\MCmdLoadDxfFile.cpp" />
+    <ClCompile Include="..\MCmd0\MCmdMode.cpp" />
+    <ClCompile Include="..\MCmd0\MCmdModLineLength.cpp" />
+    <ClCompile Include="..\MCmd0\MCmdModPanelNo.cpp" />
+    <ClCompile Include="..\MCmd0\MCmdParts.cpp" />
+    <ClCompile Include="..\MCmd0\MCmdRoof.cpp" />
+    <ClCompile Include="..\MCmd0\MCmdUndo.cpp" />
+    <ClCompile Include="..\MCmd0\MCmdWall.cpp" />
+    <ClCompile Include="..\MCmd1\MCmdCyuki.cpp" />
+    <ClCompile Include="..\MCmd1\MCmdSeizu.cpp" />
+    <ClCompile Include="..\MCmd1\MCmdSekkei.cpp" />
+    <ClCompile Include="..\MCmd1\MCmdTest001.cpp" />
+    <ClCompile Include="..\MCmd2\MCmdHist.cpp" />
+    <ClCompile Include="..\MCmd2\MmDialogHist.cpp" />
+    <ClCompile Include="..\MCmd3\MCmdOpt.cpp" />
+    <ClCompile Include="..\MCmd3\MmDialogOpt.cpp" />
+    <ClCompile Include="..\MCmd4\MCmdGridNum.cpp" />
+    <ClCompile Include="..\MCmd4\MmDialogGrid.cpp" />
+    <ClCompile Include="..\MCmd5\MCmdTenkai.cpp" />
+    <ClCompile Include="..\MCmd5\MmDialogTenkai.cpp" />
+    <ClCompile Include="..\MCmd6\MCmdPartsEdit.cpp" />
+    <ClCompile Include="..\MCmd6\MmDialogPtsEdit.cpp" />
+    <ClCompile Include="..\Mc\McSystemProperty.cpp" />
+    <ClCompile Include="..\Mdb\MdCmdErrorPrompt.cpp" />
+    <ClCompile Include="..\Mdb\MdGrobal.cpp" />
+    <ClCompile Include="..\Mdb\MdHist.cpp" />
+    <ClCompile Include="..\Mdb\MdList.cpp" />
+    <ClCompile Include="..\Mdb\MdListS.cpp" />
+    <ClCompile Include="..\Mdb\MdOpt.cpp" />
+    <ClCompile Include="..\Mdb\MdPartsQueue.cpp" />
+    <ClCompile Include="..\Mdb\MdPlex.cpp" />
+    <ClCompile Include="..\Mdb\MdRoofQueue.cpp" />
+    <ClCompile Include="..\Mdb\MdUndoRedo.cpp" />
+    <ClCompile Include="..\Mdm\Mdm.cpp" />
+    <ClCompile Include="..\Mdm\MdmAtr.cpp" />
+    <ClCompile Include="..\Mdm\MdmBuhin.cpp" />
+    <ClCompile Include="..\Mdm\MdmDEnt.cpp" />
+    <ClCompile Include="..\Mdm\MdmDispControl.cpp" />
+    <ClCompile Include="..\Mdm\MdmEnt.cpp" />
+    <ClCompile Include="..\Mdm\MdmExternalIo.cpp" />
+    <ClCompile Include="..\Mdm\MdmFig.cpp" />
+    <ClCompile Include="..\Mdm\MdmFigPmt.cpp" />
+    <ClCompile Include="..\Mdm\MdmGrp.cpp" />
+    <ClCompile Include="..\Mdm\MdmHyo.cpp" />
+    <ClCompile Include="..\Mdm\MdmInp.cpp" />
+    <ClCompile Include="..\Mdm\MdmLight.cpp" />
+    <ClCompile Include="..\Mdm\MdmLyr.cpp" />
+    <ClCompile Include="..\Mdm\MdmMessage.cpp" />
+    <ClCompile Include="..\Mdm\MdmModel.cpp" />
+    <ClCompile Include="..\Mdm\MdmScm.cpp" />
+    <ClCompile Include="..\Mdm\MdmSystem.cpp" />
+    <ClCompile Include="..\Mdm\MdmUE.cpp" />
+    <ClCompile Include="..\Mdm\MdmWin.cpp" />
+    <ClCompile Include="..\Mdm\MdmZGeometry.cpp" />
+    <ClCompile Include="..\Mdm\MdmZukei.cpp" />
+    <ClCompile Include="..\Mfile\MfFile.cpp" />
+    <ClCompile Include="..\MGeo\MgAngle.cpp" />
+    <ClCompile Include="..\MGeo\MgArc.cpp" />
+    <ClCompile Include="..\MGeo\MgCircle.cpp" />
+    <ClCompile Include="..\MGeo\MgConnect.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\MGeo\MgDist.cpp" />
+    <ClCompile Include="..\MGeo\MgDivide.cpp" />
+    <ClCompile Include="..\MGeo\MgGeo.cpp" />
+    <ClCompile Include="..\MGeo\MgInit.cpp" />
+    <ClCompile Include="..\MGeo\MgIntr.cpp" />
+    <ClCompile Include="..\MGeo\MgKeijou.cpp" />
+    <ClCompile Include="..\MGeo\MgLine.cpp" />
+    <ClCompile Include="..\MGeo\MgMat.cpp" />
+    <ClCompile Include="..\MGeo\MgMatE.cpp" />
+    <ClCompile Include="..\MGeo\MgMerge.cpp" />
+    <ClCompile Include="..\MGeo\MgMove.cpp" />
+    <ClCompile Include="..\MGeo\MgOn.cpp" />
+    <ClCompile Include="..\MGeo\Mgperp.cpp" />
+    <ClCompile Include="..\MGeo\MgPlane.cpp" />
+    <ClCompile Include="..\MGeo\MgPoint.cpp" />
+    <ClCompile Include="..\MGeo\MgPolygon.cpp" />
+    <ClCompile Include="..\MGeo\MgPolyline.cpp" />
+    <ClCompile Include="..\MGeo\MgRect.cpp" />
+    <ClCompile Include="..\MGeo\MgSort.cpp" />
+    <ClCompile Include="..\MGeo\MgSval.cpp" />
+    <ClCompile Include="..\Mh\MhFile.cpp" />
+    <ClCompile Include="..\Mh\MhHist.cpp" />
+    <ClCompile Include="..\Mh\MhKabe.cpp" />
+    <ClCompile Include="..\Mh\MhKiso.cpp" />
+    <ClCompile Include="..\Mh\MhMdlIO.cpp" />
+    <ClCompile Include="..\Mh\MhModel.cpp" />
+    <ClCompile Include="..\Mh\MhOpt.cpp" />
+    <ClCompile Include="..\Mh\MhParts.cpp" />
+    <ClCompile Include="..\Mh\MhPlcInfo.cpp" />
+    <ClCompile Include="..\Mh\MhRoof.cpp" />
+    <ClCompile Include="..\Mh\MhRoofInfo.cpp" />
+    <ClCompile Include="..\Mi\MiHitBuzai.cpp" />
+    <ClCompile Include="..\Mi\MiKabe.cpp" />
+    <ClCompile Include="..\Mi\MiPartsPlace.cpp" />
+    <ClCompile Include="..\Mi\MiPresetCmd.cpp" />
+    <ClCompile Include="..\Mi\MiRoofPlace.cpp" />
+    <ClCompile Include="..\Mi\MiTenkai.cpp" />
+    <ClCompile Include="..\Mi\MiUndoRedo.cpp" />
+    <ClCompile Include="..\Mi\MiYane.cpp" />
+    <ClCompile Include="..\Mlog\MlLog.cpp" />
+    <ClCompile Include="..\Mmwin\MmWnd.cpp" />
+    <ClCompile Include="..\Mmwin\MmWndKDraw.cpp" />
+    <ClCompile Include="..\Mmwin\MmWndKDrawKabe.cpp" />
+    <ClCompile Include="..\Mmwin\MmWndKDrawKiso.cpp" />
+    <ClCompile Include="..\Mmwin\MmWndKDrawParts.cpp" />
+    <ClCompile Include="..\Mmwin\MmWndKInp.cpp" />
+    <ClCompile Include="..\Mmwin\MmWndKSetStatusBar.cpp" />
+    <ClCompile Include="..\Mm\MmCursor.cpp" />
+    <ClCompile Include="..\Mm\MmDrag.cpp" />
+    <ClCompile Include="..\Mm\MmDragObject.cpp" />
+    <ClCompile Include="..\Mm\MmGetKosei.cpp" />
+    <ClCompile Include="..\Mm\MmGridNum.cpp" />
+    <ClCompile Include="..\Mm\MmMainFrame.cpp" />
+    <ClCompile Include="..\Mm\MmPrompt.cpp" />
+    <ClCompile Include="..\Mm\MmSDialogBarAttr.cpp" />
+    <ClCompile Include="..\Mm\MmSDialogBarInp.cpp" />
+    <ClCompile Include="..\Mm\MmSDialogBarPanel.cpp" />
+    <ClCompile Include="..\Mm\MmSDialogBarParts.cpp" />
+    <ClCompile Include="..\Mm\MmSetCurrentWndFocus.cpp" />
+    <ClCompile Include="..\Mm\MmSetDialog.cpp" />
+    <ClCompile Include="..\Mm\MmSystem.cpp" />
+    <ClCompile Include="..\Mo\MoDispList.cpp" />
+    <ClCompile Include="..\Mo\MoDispModel.cpp" />
+    <ClCompile Include="..\Mo\MoMakeDisplayList.cpp" />
+    <ClCompile Include="..\Mo\MoOpenGLMono.cpp" />
+    <ClCompile Include="..\Mo\MoOpenGLSet.cpp" />
+    <ClCompile Include="..\Mr\MrDrawing.cpp" />
+    <ClCompile Include="..\Msys\MsBasic.cpp" />
+    <ClCompile Include="..\Msys\MsCOD.cpp" />
+    <ClCompile Include="..\Msys\MsCodTlerance.cpp" />
+    <ClCompile Include="..\Msys\MsCriticalSection.cpp" />
+    <ClCompile Include="..\Msys\MsFile.cpp" />
+    <ClCompile Include="..\Msys\MsLib.cpp" />
+    <ClCompile Include="..\Msys\MsReg.cpp" />
+    <ClCompile Include="..\Msys\MsSort.cpp" />
+    <ClCompile Include="..\Msys\MsString.cpp" />
+    <ClCompile Include="..\Msys\MsSynchroObj.cpp" />
+    <ClCompile Include="..\Msys\MsSysError.cpp" />
+    <ClCompile Include="..\Msys\MsTime.cpp" />
+    <ClCompile Include="..\Mt\MtAskForPoint.cpp" />
+    <ClCompile Include="..\Mt\MtBuildPrcEvent.cpp" />
+    <ClCompile Include="..\Mt\MtGetEventQueue.cpp" />
+    <ClCompile Include="..\Mt\MtInp.cpp" />
+    <ClCompile Include="..\Mt\MtInpEventFilter.cpp" />
+    <ClCompile Include="..\Mt\MtInpEventQueue.cpp" />
+    <ClCompile Include="..\Mt\MtInput.cpp" />
+    <ClCompile Include="..\Mt\MtMCadApi.cpp" />
+    <ClCompile Include="..\Mt\MtPrcEventQueue.cpp" />
+    <ClCompile Include="..\Mt\MtSendMessage.cpp" />
+    <ClCompile Include="..\Mt\MtWaitLoop.cpp" />
+    <ClCompile Include="mcad.CPP" />
+    <ClCompile Include="Src\ChildFrm1.cpp" />
+    <ClCompile Include="Src\ChildFrm2.cpp" />
+    <ClCompile Include="Src\ChildFrm3.cpp" />
+    <ClCompile Include="Src\MainFrm.cpp" />
+    <ClCompile Include="Src\MCadApp.cpp" />
+    <ClCompile Include="Src\MCadDoc.cpp" />
+    <ClCompile Include="Src\MCadForm3.cpp" />
+    <ClCompile Include="Src\MCadView1.cpp" />
+    <ClCompile Include="Src\MCadView2.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MCad.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="MCad.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
