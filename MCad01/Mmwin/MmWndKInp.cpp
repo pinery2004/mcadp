@@ -289,11 +289,11 @@ MINT ViewInp::MouseMove(
 		}
 	}
 
-	// ステイタスバーにマウス位置座標表示
-	Msprintf_s(strPtMouthR, Mstr( " %6.0f: %6.0f"),
-						  ptMouthR.x, ptMouthR.y);
-	Msg::DispSelStatusBar( MC_STSBAR_COORDINATE, strPtMouthR);						// ステイタスバーへマウス座標を表示
-
+//E	// ステイタスバーにマウス位置座標表示
+//	Msprintf_s(strPtMouthR, Mstr( " %6.0f: %6.0f"),
+//						  ptMouthR.x, ptMouthR.y);
+//	Msg::DispSelStatusBar( MC_STSBAR_COORDINATE, strPtMouthR);						// ステイタスバーへマウス座標を表示
+//
 	pWndInfo->GetMemDC()->SetMapMode( iOldMM);
 //070907	ist = 0;
 
