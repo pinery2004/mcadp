@@ -57,13 +57,13 @@ inline void MdDelLink::Print( MCHAR* s, MINT i_i)
 #define	MDSPACENEXT( pD)	( ( MdDelLink*)pD)->m_idNext
 #define	MDSPACEBEFORE( pD)	( ( MdDelLink*)pD)->m_idBefore
 
-#define MDISGRP( i_idGrp)	( i_idGrp >= 1 && i_idGrp <= Mdm::GetCurModel()->m_GrpBf.m_n && \
-							  MDSPACEID( &Mdm::GetCurModel()->m_GrpBf.m_st[MIDtoHN( i_idGrp)]) >= 0)
-#define MDISSCM( i_idScm)	( i_idScm >= 1 && i_idScm <= Mdm::GetCurModel()->m_ScmBf.m_n && \
-							  MDSPACEID( &Mdm::GetCurModel()->m_ScmBf.m_st[MIDtoHN( i_idScm)]) >= 0)
-#define MDISLYR( i_idLyr)	( i_idLyr >= 1 && i_idLyr <= Mdm::GetCurModel()->m_LyrBf.m_n && \
-							  MDSPACEID( &Mdm::GetCurModel()->m_LyrBf.m_st[MIDtoHN( i_idLyr)]) >= 0)
-#define MDISENT( i_idEnt)	( i_idEnt >= 1 && i_idEnt <= Mdm::GetCurModel()->m_EntBf.m_n && \
-							  MDSPACEID( &Mdm::GetCurModel()->m_EntBf.m_st[MIDtoHN( i_idEnt)]) >= 0)
+#define MDISGRP( i_idGrp)	( i_idGrp >= 1 && i_idGrp <= pCurMdl->m_GrpBf.m_n && \
+							  MDSPACEID( &pCurMdl->m_GrpBf.m_pst[MIDtoHN( i_idGrp)]) >= 0)
+#define MDISSCM( i_idScm)	( i_idScm >= 1 && i_idScm <= pCurMdl->m_ScmBf.m_n && \
+							  MDSPACEID( &pCurMdl->m_ScmBf.m_pst[MIDtoHN( i_idScm)]) >= 0)
+#define MDISLYR( i_idLyr)	( i_idLyr >= 1 && i_idLyr <= pCurMdl->m_LyrBf.m_n && \
+							  MDSPACEID( &pCurMdl->m_LyrBf.m_pst[MIDtoHN( i_idLyr)]) >= 0)
+#define MDISENT( i_idEnt)	( i_idEnt >= 1 && i_idEnt <= pCurMdl->m_EntBf.m_n && \
+							  MDSPACEID( &pCurMdl->m_EntBf.m_pst[MIDtoHN( i_idEnt)]) >= 0)
 
 } // namespace MC

@@ -38,9 +38,9 @@ void MCmdOpening()
 void MCmdStairs()
 {
 	MINT	ist;
-	MCHAR	Pass[256];
+	MCHAR	Pass[MAX_PATH];
 	
-	ist = MC::McSystemProperty::GetEnvPath( MP_PATH_TABLE, Mstr( "TEST"), Pass);
+	ist = MC::mcsGetEnvPath( MP_PATH_TABLE, Mstr( "TEST"), Pass);
 }
 
 ////////////////////////////////////////////////////////////////////////////

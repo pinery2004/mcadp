@@ -71,7 +71,7 @@ namespace MC
 				ptW[0] = (*(MgPoint2*)&(pPlcEn->GetPIPlcIti( 0))) + vKisoSinZ;
 				ptW[1] = (*(MgPoint2*)&(pPlcEn->GetPIPlcIti( 1))) + vKisoSinZ;
 
-				PtsLineColor = McSystemProperty::GetColor( MM_COLOR_KISOSIN);
+				PtsLineColor = mcs::GetColor( MM_COLOR_KISOSIN);
 				pCod->SetLineAttr( MPS_DASHDOT, 1, PtsLineColor);
 				pCod->Line( MgLine2( ptW[0], ptW[1]));
 			}

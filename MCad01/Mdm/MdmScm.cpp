@@ -37,27 +37,28 @@ MINT DGrp::CreateScm(								//
 				)
 {
 	MdmSetSCM*	pScm;
+	MdModel*	pCurMdl = Mdm::GetCurModel();
 	
 	// ScmBfより空きのIDを取得し、スキーマの子のID設定用領域を設ける
 	//
-	if ( Mdm::GetCurModel()->m_ScmBf.m_idSpaceLast == 0) {
+	if ( pCurMdl->m_ScmBf.m_idSpaceLast == 0) {
 		// 削除して空きになっているIDがない場合は最終ID+1を使用する
-		Mdm::GetCurModel()->m_ScmBf ++;
-		*o_pidScm = Mdm::GetCurModel()->m_ScmBf.m_n;
-		pScm = &Mdm::GetCurModel()->m_ScmBf.m_st[MIDtoHN( *o_pidScm)];
+		pCurMdl->m_ScmBf ++;
+		*o_pidScm = pCurMdl->m_ScmBf.m_n;
+		pScm = &pCurMdl->m_ScmBf.m_pst[MIDtoHN( *o_pidScm)];
 
 	} else {
 		// 削除して空きになっているIDがある場合はそのIDを使用する
-		ASSERT( Mdm::GetCurModel()->m_ScmBf.m_nidSpace >= 1);
+		ASSERT( pCurMdl->m_ScmBf.m_nidSpace >= 1);
 
-		*o_pidScm = Mdm::GetCurModel()->m_ScmBf.m_idSpaceLast;
-		pScm = &Mdm::GetCurModel()->m_ScmBf.m_st[MIDtoHN( *o_pidScm)];
+		*o_pidScm = pCurMdl->m_ScmBf.m_idSpaceLast;
+		pScm = &pCurMdl->m_ScmBf.m_pst[MIDtoHN( *o_pidScm)];
 
 		// 空きエリアへのIDを一つ戻す
-		Mdm::GetCurModel()->m_ScmBf.m_idSpaceLast = MDSPACEBEFORE( pScm);
-		if ( Mdm::GetCurModel()->m_ScmBf.m_idSpaceLast)
-			MDSPACENEXT( &Mdm::GetCurModel()->m_ScmBf.m_st[MIDtoHN( Mdm::GetCurModel()->m_ScmBf.m_idSpaceLast)]) = 0;
-		Mdm::GetCurModel()->m_ScmBf.m_nidSpace--;
+		pCurMdl->m_ScmBf.m_idSpaceLast = MDSPACEBEFORE( pScm);
+		if ( pCurMdl->m_ScmBf.m_idSpaceLast)
+			MDSPACENEXT( &pCurMdl->m_ScmBf.m_pst[MIDtoHN( pCurMdl->m_ScmBf.m_idSpaceLast)]) = 0;
+		pCurMdl->m_ScmBf.m_nidSpace--;
 	}
 
 	//	スキーマIDにに子IDの設定用領域を確保する
@@ -78,26 +79,27 @@ MINT DGrp::DeleteScm(							//
 {
 	MdmSetSCM*	idScmB;							// 直前に削除したスキーマ
 	MdmSetSCM*	idScmC;							// 削除レスキーマ
+	MdModel*	pCurMdl = Mdm::GetCurModel();
 
 	ASSERT( MDISSCM( i_idScm));
 
 	// 削除し割り当て待ちのスキーマ数
-	Mdm::GetCurModel()->m_ScmBf.m_nidSpace++;
+	pCurMdl->m_ScmBf.m_nidSpace++;
 	// スキーマ削除
-	idScmC = &Mdm::GetCurModel()->m_ScmBf.m_st[MIDtoHN( i_idScm)];
+	idScmC = &pCurMdl->m_ScmBf.m_pst[MIDtoHN( i_idScm)];
 	MDSPACEID( idScmC) = MDID_DELETE;
 	idScmC->Free();
 
 	// 空きエリアリンクに追加
 	// 直前に削除したスキーマの次のスキーマとする
-	if ( Mdm::GetCurModel()->m_ScmBf.m_idSpaceLast) {
-		idScmB = &Mdm::GetCurModel()->m_ScmBf.m_st[MIDtoHN( Mdm::GetCurModel()->m_ScmBf.m_idSpaceLast)];
+	if ( pCurMdl->m_ScmBf.m_idSpaceLast) {
+		idScmB = &pCurMdl->m_ScmBf.m_pst[MIDtoHN( pCurMdl->m_ScmBf.m_idSpaceLast)];
 		MDSPACENEXT( idScmB) = i_idScm;
 	}
 	// 空きエリアリンクの先頭にリンク付ける
-	MDSPACEBEFORE( idScmC) = Mdm::GetCurModel()->m_ScmBf.m_idSpaceLast;
+	MDSPACEBEFORE( idScmC) = pCurMdl->m_ScmBf.m_idSpaceLast;
 	MDSPACENEXT( idScmC) = 0;
-	Mdm::GetCurModel()->m_ScmBf.m_idSpaceLast = i_idScm;
+	pCurMdl->m_ScmBf.m_idSpaceLast = i_idScm;
 	return 0;
 }
 
@@ -107,7 +109,8 @@ MINT DGrp::DeleteScm(							//
 //
 MDID DGrp::GetCurScmId()
 {
-	return	Mdm::GetCurModel()->m_idCurScm;
+	MdModel* pCurMdl = Mdm::GetCurModel();
+	return	pCurMdl->m_idCurScm;
 }
 
 //
@@ -119,11 +122,12 @@ MDID DGrp::SetCurScmId(
 				)
 {
 	MDID idCurScm;
+	MdModel* pCurMdl = Mdm::GetCurModel();
 
 	ASSERT( MDISSCM( i_idScm));
 
-	idCurScm = Mdm::GetCurModel()->m_idCurScm;
-	Mdm::GetCurModel()->m_idCurScm = i_idScm;
+	idCurScm = pCurMdl->m_idCurScm;
+	pCurMdl->m_idCurScm = i_idScm;
 	return	idCurScm;
 }
 
@@ -133,12 +137,15 @@ MDID DGrp::SetCurScmId(
 //
 MINT DGrp::GetScmNameFromId(
 						MDID		i_idScm,	// スキーマId
-						MCHAR*		o_psName	// レイヤー名
+						MCHAR*		o_sLName,	// レイヤー名
+						int			i_nLName	// レイヤー名最大文字数
 				)
 {
+	MdModel* pCurMdl = Mdm::GetCurModel();
+
 	ASSERT( MDISSCM( i_idScm));
 
-	Mstrcpy_s( o_psName, 256, Mdm::GetCurModel()->m_ScmBf.m_st[MIDtoHN( i_idScm)].m_sName);
+	Mstrcpy_s( o_sLName, i_nLName, pCurMdl->m_ScmBf.m_pst[MIDtoHN( i_idScm)].m_psName);
 	return 0;
 }
 
@@ -148,12 +155,15 @@ MINT DGrp::GetScmNameFromId(
 //
 MINT DGrp::SetScmNameFromId(
 						MDID		i_idScm,	// スキーマId
+						int			i_nLName,	// レイヤー名最大文字数				)
 						MCHAR*		i_psName	// レイヤー名
 				)
 {
+	MdModel* pCurMdl = Mdm::GetCurModel();
+
 	ASSERT( MDISSCM( i_idScm));
 
-	Mstrcpy_s( Mdm::GetCurModel()->m_ScmBf.m_st[MIDtoHN( i_idScm)].m_sName, 256, i_psName);
+	Mstrcpy_s( pCurMdl->m_ScmBf.m_pst[MIDtoHN( i_idScm)].m_psName, i_nLName, i_psName);
 	return 0;
 }
 
@@ -167,12 +177,13 @@ MINT DGrp::GetScmIdFromName (
 				)
 {
 	MINT	iC;
+	MdModel* pCurMdl = Mdm::GetCurModel();
 
-	for ( iC=0; iC<Mdm::GetCurModel()->m_ScmBf.m_n; iC++) {
-		if ( Mstrcmp(  Mdm::GetCurModel()->m_ScmBf.m_st[iC].m_sName, i_psName))
+	for ( iC=0; iC<pCurMdl->m_ScmBf.m_n; iC++) {
+		if ( Mstrcmp(  pCurMdl->m_ScmBf.m_pst[iC].m_psName, i_psName))
 			break;
 	}
-	if ( iC < Mdm::GetCurModel()->m_ScmBf.m_n)
+	if ( iC < pCurMdl->m_ScmBf.m_n)
 		*o_pidScm = iC;
 	else
 		*o_pidScm = 0;
@@ -185,7 +196,9 @@ MINT DGrp::GetScmIdFromName (
 //
 MINT DGrp::GetScmCount ()
 {
-	return ( Mdm::GetCurModel()->m_ScmBf.m_n - Mdm::GetCurModel()->m_ScmBf.m_nidSpace);
+	MdModel* pCurMdl = Mdm::GetCurModel();
+
+	return ( pCurMdl->m_ScmBf.m_n - pCurMdl->m_ScmBf.m_nidSpace);
 }
 
 //
@@ -199,10 +212,11 @@ MINT DGrp::GetScmIdAll (
 				)
 {
 	MINT	iC;
+	MdModel* pCurMdl = Mdm::GetCurModel();
 
 	o_pGidScm->m_n = 0;
-	for ( iC=0; iC<Mdm::GetCurModel()->m_ScmBf.m_n; iC++) {
-		if ( MDSPACEID( &Mdm::GetCurModel()->m_ScmBf.m_st[iC]) != MDID_DELETE)
+	for ( iC=0; iC<pCurMdl->m_ScmBf.m_n; iC++) {
+		if ( MDSPACEID( &pCurMdl->m_ScmBf.m_pst[iC]) != MDID_DELETE)
 			(*o_pGidScm) += (iC+1);
 	}
 	return 0;

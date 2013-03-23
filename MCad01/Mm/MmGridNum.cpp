@@ -130,14 +130,14 @@ MmGridNum::MmGridNum()
 	static MINT nGrid[4];
 	MgMinMaxR2	rMinMaxG;
 
-	nGrid[0] = McSystemProperty::GetInt( MM_INT_GRID_N);
-	nGrid[1] = McSystemProperty::GetInt( MM_INT_GRID_W);
-	nGrid[2] = McSystemProperty::GetInt( MM_INT_GRID_S);
-	nGrid[3] = McSystemProperty::GetInt( MM_INT_GRID_E);
+	nGrid[0] = mcs::GetInt( MM_INT_GRID_N);
+	nGrid[1] = mcs::GetInt( MM_INT_GRID_W);
+	nGrid[2] = mcs::GetInt( MM_INT_GRID_S);
+	nGrid[3] = mcs::GetInt( MM_INT_GRID_E);
 
 	m_bFlgDrawG = TRUE;
 	m_PtOriginG = MgPoint2( 0., 0.);
-	m_PichG[0][0] = m_PichG[1][0] = McSystemProperty::GetReal( MM_REAL_PITCH);
+	m_PichG[0][0] = m_PichG[1][0] = mcs::GetReal( MM_REAL_PITCH);
 	
 	SetGridNum( nGrid);
 }
@@ -246,8 +246,8 @@ MgMinMaxR2 MmGridNum::GetMinMaxGA(
 	MgVect2		Haba;
 	MgMinMaxR2	Waku;
 
-	GridHeight	= McSystemProperty::GetReal( MM_REAL_GRID_HEI) * 20.f;	// グリッド文字高さ
-	GridAki		= McSystemProperty::GetReal( MM_REAL_GRID_AKI);			// グリッド枠表示空き
+	GridHeight	= mcs::GetReal( MM_REAL_GRID_HEI) * 20.f;	// グリッド文字高さ
+	GridAki		= mcs::GetReal( MM_REAL_GRID_AKI);			// グリッド枠表示空き
 	rHosei		= MGMAX( m_nGrid[0][0] / (MGeo::Abs( iWidth) / 1300.f),
 						 m_nGrid[1][0] / (MGeo::Abs( iHeight) / 1170.f));
 	GridHeight	*= rHosei;											// グリッド文字高さ
@@ -296,16 +296,16 @@ void MmGridNum::DrawGrid(
 	MgMinMaxI2	rMinMaxGA = pCod->GetMinMaxL();						// 論理座標MinMax取得
 	MgPoint2	ptGAMin = pCod->LPtoRP( rMinMaxGA.min);				// 表示領域の最小実座標を求める
 
-	GridSpace	= McSystemProperty::GetReal( MM_REAL_GRID_SPC);			// グリッド番号表示空き
-	GridHeight	= McSystemProperty::GetReal( MM_REAL_GRID_HEI) * 20.f;	// グリッド文字高さ
-	GridAki		= McSystemProperty::GetReal( MM_REAL_GRID_AKI);			// グリッド枠表示空き
+	GridSpace	= mcs::GetReal( MM_REAL_GRID_SPC);			// グリッド番号表示空き
+	GridHeight	= mcs::GetReal( MM_REAL_GRID_HEI) * 20.f;	// グリッド文字高さ
+	GridAki		= mcs::GetReal( MM_REAL_GRID_AKI);			// グリッド枠表示空き
 
 	Haba = rMinMaxG.max - rMinMaxG.min;
 	vOffset.x = pCod->LPtoRP( MINT( GridAki + GridHeight)) * 1.53f;	// グリッド空きと文字高さ分を補正
 	vOffset.y = pCod->LPtoRP( MINT( GridAki + GridHeight)) * 1.28f;	// グリッド空きと文字高さ分を補正
 
-	GridLineColor = McSystemProperty::GetColor( MM_COLOR_GRID_LINE);
-	GridTextColor = McSystemProperty::GetColor( MM_COLOR_GRID_TEXT);
+	GridLineColor = mcs::GetColor( MM_COLOR_GRID_LINE);
+	GridTextColor = mcs::GetColor( MM_COLOR_GRID_TEXT);
 
 	// 縦のグリッド線を表示	
 

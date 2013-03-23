@@ -248,12 +248,12 @@ void Window::ReDrawHitBzi()
 MINT ViewInp::MouseMove(
 						CWnd*		pWnd,			// (I  ) ウィンドウのインスタンス
 						UINT 		nFlags,			// (I  ) 
-						CPoint		ptMouthD			// (I  ) 表示座標
+						CPoint		ptMouthD		// (I  ) 表示座標
 				) 
 {
 // 070907	MINT		ist = 1;
 	MINT		ist = 0;
-	MCHAR		strPtMouthR[20];
+//E	MCHAR		strPtMouthR[20];
 	CPoint		ptMouthL;
 	MgPoint2	ptMouthR;
 	MgPolyg2	pgHitBzi;

@@ -79,7 +79,7 @@ void Panelfig(
 	iCdHgt = i_pPlcEn->GetPTCdHgt();
 	iULCd = i_pPlcEn->GetPTCdToritk();
 
-	rZ = McSystemProperty::GetStnd( i_pPlcEn->GetPIKai(), iCdHgt);
+	rZ = mcs::GetStnd( i_pPlcEn->GetPIKai(), iCdHgt);
 	LnPlc = i_pPlcEn->GetPIPlcIti();
 
 	VuLng = LnPlc.Vu();

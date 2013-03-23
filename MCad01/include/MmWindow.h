@@ -375,7 +375,7 @@ public:
 
 	static void DispSelStatusBar(
 							MINT		i_iStb,		// ステイタスバー項目番号
-					const	MCHAR*		i_pcStb		// ステイタスバー項目表示内容
+					const	MCHAR*		i_sStb		// ステイタスバー項目表示内容
 					);
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -383,7 +383,7 @@ public:
 
 	static void SetSelStatusBar(
 							MINT		i_iStb,		// ステイタスバー表示先番号
-					const	MCHAR*		i_pcStb		// ステイタスバー表示内容
+					const	MCHAR*		i_sStb		// ステイタスバー表示内容
 					);
 
 	static void DispStatusBar();
@@ -407,7 +407,7 @@ public:
 	// 　エラーメッセージ1 + エラーメッセージ2 + プロンプト
 
 	static void ErrorMsg(
-							MCHAR*		i_pcErrMsg1,	// エラーメッセージ１　または　NULL
+							MCHAR*		i_sErrMsg1,		// エラーメッセージ１　または　NULL
 							MINT		i_idErrMsg2,	// エラーメッセージ２表示ID
 							MINT		i_imdDisp = -1	// エラー表示モード
 														//		1: メッセージボックスへ表示

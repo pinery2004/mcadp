@@ -83,7 +83,7 @@ void mtInpAttr::InitComboTpPtsAttr()
 //	返値
 //							≧ 0: 部材ID
 //							＝-1: 該当なし
-static MINT MmGetKmIdTpPts( MCHAR* i_pcNmPts1)
+static MINT MmGetKmIdTpPts( MCHAR* i_sNmPts1)
 {
 	MINT		iKmIdTpPts;
 	MINT		ic1;
@@ -93,7 +93,7 @@ static MINT MmGetKmIdTpPts( MCHAR* i_pcNmPts1)
 	for ( ic1=0; ic1<z_nComboIdTpPts; ic1++) {
 		iIdTpPts = z_iComboIdTpPts[ic1];
 		pTpPts = BuzaiCode::MhGetpTpPts( iIdTpPts);
-		if ( Mstrcmp( pTpPts->GetPTNmPts1(), i_pcNmPts1) == 0)
+		if ( Mstrcmp( pTpPts->GetPTNmPts1(), i_sNmPts1) == 0)
 			break;
 	}
 	if ( ic1 < z_nComboIdTpPts)
@@ -130,14 +130,14 @@ void mtInpAttr::SetComboKmIdTpPts(
 //	返値
 //							≧ 0: 部材ID
 //							＝-1: 該当なし
-MINT mtInpAttr::SetComboCdTpPts( MCHAR* i_pcNmPts1)
+MINT mtInpAttr::SetComboCdTpPts( MCHAR* i_sNmPts1)
 {
 	MINT 	iIdTpPts = -1;
 	MINT	iKmIdTpPts;
 
-	iKmIdTpPts = MmGetKmIdTpPts( i_pcNmPts1);
+	iKmIdTpPts = MmGetKmIdTpPts( i_sNmPts1);
 	if ( iKmIdTpPts < 0) {
-		Msg::ErrorMsg( i_pcNmPts1, MC_ERR_NOTSET_PARTS_TABLE);	// "が部品テーブルに未設定です．"
+		Msg::ErrorMsg( i_sNmPts1, MC_ERR_NOTSET_PARTS_TABLE);	// "が部品テーブルに未設定です．"
 		MQUIT;
 	}
 	mtInpAttr::SetComboKmIdTpPts( iKmIdTpPts);
@@ -151,7 +151,7 @@ exit:
 //	部材名より部材IDを取得する
 //							＝-1: 未選択
 //							≧ 0: 部材ID
-MINT mtInpAttr::GetIdTpPts( MCHAR* i_pcNmPts1)
+MINT mtInpAttr::GetIdTpPts( MCHAR* i_sNmPts1)
 {
 	MINT		ist;
 	MINT		ic1;
@@ -160,7 +160,7 @@ MINT mtInpAttr::GetIdTpPts( MCHAR* i_pcNmPts1)
 	MINT	mxPtsNm = BuzaiCode::MhGetNoOfTpPts();
 	for ( ic1=0; ic1<mxPtsNm; ic1++) {
 		pTpPts = BuzaiCode::MhGetpTpPts( ic1);
-		if ( Mstrcmp( pTpPts->GetPTNmPts1(), i_pcNmPts1) == 0)
+		if ( Mstrcmp( pTpPts->GetPTNmPts1(), i_sNmPts1) == 0)
 			break;
 	}
 	if ( ic1 < mxPtsNm)

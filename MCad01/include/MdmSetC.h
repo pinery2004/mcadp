@@ -69,9 +69,9 @@ inline void MdmSetC::operator -= (MDID i_idMd)
 
 	ASSERT(i_idMd >0 && i_idMd <= m_GidC.m_n);
 	for ( iC=0; iC<m_GidC.m_n; iC++) {
-		if ( m_GidC.m_st[iC] == i_idMd) {
+		if ( m_GidC.m_pst[iC] == i_idMd) {
 			for ( iC++; iC<m_GidC.m_n; iC++) {
-				m_GidC.m_st[iC-1] = m_GidC.m_st[iC];
+				m_GidC.m_pst[iC-1] = m_GidC.m_pst[iC];
 			}
 			m_GidC.m_n --;
 			break;

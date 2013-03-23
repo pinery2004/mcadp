@@ -31,7 +31,8 @@ MgPolyl2::MgPolyl2( MINT sz1)
 	m_isz = sz1;
 	m_n = 0;
 	m_fa = 1;
-	MBMALLOC( m_p, MgPoint2, sz1);
+//E	MBMALLOC( m_p, MgPoint2, sz1);
+	MbAlloc<MgPoint2>( m_p, sz1);
 }
 
 //	構成点の領域を配列で与える場合のコンストラクタ
@@ -67,7 +68,8 @@ void MgPolyl2::operator = ( const MgPolyl2& Pg)
 		if ( m_fa) MBFREE( m_p);								//	構成点の領域をmallocで確保していた場合は一旦free
 		m_isz = nn;
 		m_fa = 1;
-		MBMALLOC( m_p, MgPoint2, nn);			//	構成点の領域をmallocで確保
+//E		MBMALLOC( m_p, MgPoint2, nn);			//	構成点の領域をmallocで確保
+		MbAlloc<MgPoint2>( m_p, nn);
 	}
 	m_n = nn;
 	memcpy( m_p, Pg.m_p, sizeof( MgPoint2) * nn);
@@ -81,7 +83,8 @@ void MgPolyl2::operator = ( const MgPolyl3& Pg)
 		if ( m_fa) MBFREE( m_p);								//	構成点の領域をmallocで確保していた場合は一旦free
 		m_isz = nn;
 		m_fa = 1;
-		MBMALLOC( m_p, MgPoint2, nn);			//	構成点の領域をmallocで確保
+//E		MBMALLOC( m_p, MgPoint2, nn);			//	構成点の領域をmallocで確保
+		MbAlloc<MgPoint2>( m_p, nn);
 	}
 	m_n = nn;
 	for ( ic1 = 0; ic1<nn; ic1++)
@@ -122,7 +125,8 @@ void MgPolyl2::Set( const MgPolyl3 &Pg)
 		if ( m_fa) MBFREE( m_p);								//	構成点の領域をmallocで確保していた場合は一旦free
 		m_isz = nn;
 		m_fa = 1;
-		MBMALLOC( m_p, MgPoint2, nn);			//	構成点の領域をmallocで確保
+//E		MBMALLOC( m_p, MgPoint2, nn);			//	構成点の領域をmallocで確保
+		MbAlloc<MgPoint2>( m_p, nn);
 	}
 	m_n = nn;
 	for ( ic1 = 0; ic1<nn; ic1++)
@@ -181,7 +185,8 @@ void MgPolyl2::Resize( MINT szn)
 
 	if (szn > m_isz) {
 		MgPoint2*	pb = m_p;
-		MBMALLOC( m_p, MgPoint2, szn);		 					//	構成点の新領域をmallocで確保
+//E		MBMALLOC( m_p, MgPoint2, szn);		 					//	構成点の新領域をmallocで確保
+		MbAlloc<MgPoint2>( m_p, szn);
 		if ( m_n)
 			 memcpy( m_p, pb, m_n * sizeof( MgPoint2));			//	構成点の領域にデータがあった場合は新領域へコピーする
 		if ( m_fa && pb)										//	構成点の領域をmallocで確保していた場合はその領域を開放する
@@ -243,7 +248,8 @@ MgPolyl3::MgPolyl3( MINT sz1)
 	m_isz = sz1;
 	m_n = 0;
 	m_fa = 1;
-	MBMALLOC( m_p, MgPoint3, sz1);
+//E	MBMALLOC( m_p, MgPoint3, sz1);
+	MbAlloc<MgPoint3>( m_p, sz1);
 }
 
 //	構成点の領域を配列で与える場合のコンストラクタ
@@ -279,7 +285,8 @@ void MgPolyl3::operator = ( const MgPolyl3& Pg)
 		if ( m_fa) MBFREE( m_p);								//	構成点の領域をmallocで確保していた場合は一旦free
 		m_isz = nn;
 		m_fa = 1;
-		MBMALLOC( m_p, MgPoint3, nn);							//	構成点の領域をmallocで確保
+//E		MBMALLOC( m_p, MgPoint3, nn);							//	構成点の領域をmallocで確保
+		MbAlloc<MgPoint3>( m_p, nn);
 	}
 	memcpy( m_p, Pg.m_p, sizeof( MgPoint3) * nn);
 	m_n = nn;
@@ -293,7 +300,8 @@ void MgPolyl3::operator = (const MgPolyl2 &pg)					// ２次元→３次元 (z = 0.)
 		if (m_fa) MBFREE( m_p);									//	構成点の領域をmallocで確保していた場合は一旦free
 		m_isz = nn;
 		m_fa = 1;
-		MBMALLOC( m_p, MgPoint3, nn);							//	構成点の領域をmallocで確保
+//E		MBMALLOC( m_p, MgPoint3, nn);							//	構成点の領域をmallocで確保
+		MbAlloc<MgPoint3>( m_p, nn);
 	}
 	m_n = nn;
 	for ( ic1 = 0; ic1<nn; ic1++)
@@ -333,7 +341,8 @@ void MgPolyl3::Set( const MgPolyl2 &pg, MREAL z)				// ２次元→３次元代入用 (z =
 		if ( m_fa) MBFREE( m_p);								//	構成点の領域をmallocで確保していた場合は一旦free
 		m_isz = nn;
 		m_fa = 1;
-		MBMALLOC( m_p, MgPoint3, nn);							//	構成点の領域をmallocで確保
+//E		MBMALLOC( m_p, MgPoint3, nn);							//	構成点の領域をmallocで確保
+		MbAlloc<MgPoint3>( m_p, nn);
 	}
 	m_n = nn;
 	for ( ic1 = 0; ic1<nn; ic1++)
@@ -349,7 +358,8 @@ void MgPolyl3::Set( const MgPolyl2 &pg, const MgPlane3& Ply)	// ２次元→３次元代
 		if ( m_fa) MBFREE( m_p);								//	構成点の領域をmallocで確保していた場合は一旦free
 		m_isz = nn;
 		m_fa = 1;
-		MBMALLOC( m_p, MgPoint3, nn);							//	構成点の領域をmallocで確保
+//E		MBMALLOC( m_p, MgPoint3, nn);							//	構成点の領域をmallocで確保
+		MbAlloc<MgPoint3>( m_p, nn);
 	}
 	m_n = nn;
 	for ( ic1 = 0; ic1<nn; ic1++)
@@ -384,7 +394,8 @@ void MgPolyl3::Resize( MINT szn)
 
 	if (szn > m_isz) {
 		MgPoint3	*pb = m_p;
-		MBMALLOC( m_p, MgPoint3, szn);		 					//	構成点の新領域をmallocで確保
+//E		MBMALLOC( m_p, MgPoint3, szn);		 					//	構成点の新領域をmallocで確保
+		MbAlloc<MgPoint3>( m_p, szn);
 		if ( m_n)
 			memcpy( m_p, pb, sizeof( MgPoint3) * m_n);				//	構成点の領域にデータがあった場合は新領域へコピーする
 		if (m_fa && pb)											//	構成点の領域をmallocで確保していた場合はその領域を開放する
@@ -431,7 +442,8 @@ MgGPolyl2::MgGPolyl2( MINT sz1)
 	m_isz = sz1;
 	m_n = 0;
 	m_fa = 1;
-	MBMALLOC( m_pg, MgPolyl2, sz1);
+//E	MBMALLOC( m_pg, MgPolyl2, sz1);
+	MbAlloc<MgPolyl2>( m_pg, sz1);
 	memset( m_pg, 0, sizeof( MgPolyl2) * sz1);
 }
 
@@ -609,7 +621,8 @@ void MgGPolyl2::Resize( MINT szn)
 
 	if (szn > m_isz) {
 		MgPolyl2	*pgb = m_pg;
-		MBMALLOC( m_pg, MgPolyl2, szn);			 				//	構成点の新領域をmallocで確保
+//E		MBMALLOC( m_pg, MgPolyl2, szn);			 				//	構成点の新領域をmallocで確保
+		MbAlloc<MgPolyl2>( m_pg, szn);
 		if ( m_n)
 			 memcpy( m_pg, pgb, m_n * sizeof( MgPolyl2));			//	構成点の領域にデータがあった場合は新領域へコピーする
 		if (m_fa && pgb)											//	構成点の領域をmallocで確保していた場合はその領域を開放する
@@ -641,7 +654,8 @@ MgGPolyl3::MgGPolyl3( MINT sz1)
 	m_isz = sz1;
 	m_n = 0;
 	m_fa = 1;
-	MBMALLOC( m_pg, MgPolyl3, sz1);
+//E	MBMALLOC( m_pg, MgPolyl3, sz1);
+	MbAlloc<MgPolyl3>( m_pg, sz1);
 	memset( m_pg, 0, sizeof( MgPolyl3) * sz1);
 }
 
@@ -834,7 +848,8 @@ void MgGPolyl3::Resize( MINT szn)
 
 	if (szn > m_isz) {
 		MgPolyl3	*pgb = m_pg;
-		MBMALLOC( m_pg, MgPolyl3, szn);		 					//	構成点の新領域をmallocで確保
+//E		MBMALLOC( m_pg, MgPolyl3, szn);		 					//	構成点の新領域をmallocで確保
+		MbAlloc<MgPolyl3>( m_pg, szn);
 		if ( m_n)
 			 memcpy( m_pg, pgb, m_n * sizeof( MgPolyl3));			//	構成点の領域にデータがあった場合は新領域へコピーする
 		if (m_fa && pgb)											//	構成点の領域をmallocで確保していた場合はその領域を開放する

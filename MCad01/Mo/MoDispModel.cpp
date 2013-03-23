@@ -84,12 +84,12 @@ namespace MC
 			maxKai = pPlcEn->GetPIKai();
 	}
 
-	rMmMdl.max.z = McSystemProperty::GetStnd( maxKai, MM_STNDH_ROOF) + 200.f;
+	rMmMdl.max.z = mcs::GetStnd( maxKai, MM_STNDH_ROOF) + 200.f;
 	for ( pRoofEn = HaitiDb::MdGetHeadRoof( &posR); pRoofEn!=0;
 		  pRoofEn = HaitiDb::MdGetNextRoof( &posR)) {
 		if ( !MmChkValidRoof( pRoofEn))							// オプションと履歴のチェック
 			continue;
-		rRoofZ = McSystemProperty::GetStnd( pRoofEn->GetKai(),MM_STNDH_ROOF);
+		rRoofZ = mcs::GetStnd( pRoofEn->GetKai(),MM_STNDH_ROOF);
 		for ( ic1=0; ic1<pRoofEn->GetpGRfm()->m_n; ic1++) {
 			for ( ic2=0; ic2<pRoofEn->GetpGRfm()->m_st[ic1].m_Pg.m_n; ic2++) {
 				Py1 = pRoofEn->GetpGRfm()->m_st[ic1].m_Pg.m_P[ic2];
@@ -126,8 +126,8 @@ void MdlDispList::DrawKabe(
 	MgGPolyg3	GPgR;
 	MgGPolyg3	GPgL;
 
-	rZU = McSystemProperty::GetStnd( i_pPlcEn->GetPIKai(), MM_STNDH_CEILING);	// 天井基準
-	rZL = McSystemProperty::GetStnd( i_pPlcEn->GetPIKai(), MM_STNDH_LOWER);	// 下基準
+	rZU = mcs::GetStnd( i_pPlcEn->GetPIKai(), MM_STNDH_CEILING);	// 天井基準
+	rZL = mcs::GetStnd( i_pPlcEn->GetPIKai(), MM_STNDH_LOWER);	// 下基準
 	LnKabe0 = i_pPlcEn->GetPIPlcIti();
 	vuLnKabe0 = LnKabe0.Vu();
 	LnKabe1 = i_pPlcEn->GetPIZukei()->m_lnZukei[0];				// 右側壁面線分
@@ -247,7 +247,7 @@ void MdlDispList::DrawYane1(
 //			DispList::SetMaterial( 0, 0);
 		}
 		ist1 = MGeo::DivideTriPg3( pRfm2->m_Pg, pRfm2->m_Pln.v, &GPg2);
-		rZ = McSystemProperty::GetStnd( pRoofEn->GetKai(), MM_STNDH_ROOF);
+		rZ = mcs::GetStnd( pRoofEn->GetKai(), MM_STNDH_ROOF);
 		for ( ic2=0; ic2<GPg2.m_n; ic2++) {
 			DPtoDSP3R( GPg2.m_Pg[ic2], rZ, VtL, PtCtr, rB, &Pg3L);
 			DPtoDSP3( GPg2.m_Pg[ic2], rZ, VtU, PtCtr, rB, &Pg3U);
@@ -300,7 +300,7 @@ void MdlDispList::DrawYagiri(
 			continue;
 		}
 		ist1 = MGeo::DivideTriPg3( pRfm2->m_Pg, pRfm2->m_Pln.v, &GPg2);
-		rZ = McSystemProperty::GetStnd( pRoofEn->GetKai(), MM_STNDH_ROOF);
+		rZ = mcs::GetStnd( pRoofEn->GetKai(), MM_STNDH_ROOF);
 		for ( ic2=0; ic2<GPg2.m_n; ic2++) {
 			DPtoDSP3R( GPg2.m_Pg[ic2], rZ, VtL, PtCtr, rB, &Pg3L);
 			DPtoDSP3( GPg2.m_Pg[ic2], rZ, VtU, PtCtr, rB, &Pg3U);
@@ -352,7 +352,7 @@ void MdlDispList::DrawYane2(
 			VtL = MgVect3( 0., 0., 0.);
 		}
 		ist1 = MGeo::DivideTriPg3( pRfm2->m_Pg, pRfm2->m_Pln.v, &GPg2);
-		rZ = McSystemProperty::GetStnd( pRoofEn->GetKai(), MM_STNDH_ROOF);
+		rZ = mcs::GetStnd( pRoofEn->GetKai(), MM_STNDH_ROOF);
 		for ( ic2=0; ic2<GPg2.m_n; ic2++) {
 			DPtoDSP3R( GPg2.m_Pg[ic2], rZ, VtL, PtCtr, rB, &Pg3L);
 			DPtoDSP3( GPg2.m_Pg[ic2], rZ, VtU, PtCtr, rB, &Pg3U);

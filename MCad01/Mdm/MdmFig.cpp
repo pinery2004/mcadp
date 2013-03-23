@@ -198,7 +198,8 @@ inline_nu void MDFIG::operator = ( const MDFIG& i_Fig)
 
 		if ( wi_n > w_sz) {
 			MBFREE( m_pPmtl);									//	構成点の領域をmallocで確保していた場合は一旦free
-			MBMALLOCF( MDPMTL, m_pPmtl, MINT, (wi_n + 1));		//	構成点の領域をmallocで確保
+//E			MBMALLOCF( MDPMTL, m_pPmtl, MINT, (wi_n + 1));		//	構成点の領域をmallocで確保
+			MbAllocF<MDPMTL,MINT>( m_pPmtl, wi_n + 1);
 			SetSz( wi_n);
 		}
 		memcpy( m_pPmtl, i_Fig.m_pPmtl, SZMINT( wi_n + 1));
@@ -217,7 +218,8 @@ inline_nu void MDFIG::operator = ( const MDPMT& i_Pmt)
 
 	if ( wi_n > w_sz) {
 		MBFREE( m_pPmtl);										//	構成点の領域をmallocで確保していた場合は一旦free
-		MBMALLOCF( MDPMTL, m_pPmtl, MINT, wi_n);				//	構成点の領域をmallocで確保
+//E		MBMALLOCF( MDPMTL, m_pPmtl, MINT, wi_n);				//	構成点の領域をmallocで確保
+		MbAllocF<MDPMTL,MINT>( m_pPmtl, wi_n);
 		SetSz( i_Pmt.GetN());
 	}
 	memcpy( &((MREAL*)m_pPmtl)[1], &i_Pmt, SZMINT( wi_n));
@@ -294,7 +296,8 @@ inline_nu void MDFIG::Alloc( MINT i_sz)
 {
 	ASSERT( m_pPmtl == 0);
 
-	MBMALLOCF( MDPMTL, m_pPmtl, MINT, i_sz);					//	構成点の領域をmallocで確保
+//E	MBMALLOCF( MDPMTL, m_pPmtl, MINT, i_sz);					//	構成点の領域をmallocで確保
+	MbAllocF<MDPMTL,MINT>( m_pPmtl, i_sz);
 	SetSz( i_sz);
 }
 
@@ -304,7 +307,8 @@ inline_nu void MDFIG::ReSize( MINT i_sz)
 	MDPMTL*	pFigs;
 
 	if ( i_sz > m_pPmtl->m_sz) {
-		MBMALLOCF( MDPMTL, pFigs, MINT, i_sz);					//	構成点の領域をmallocで確保
+//E		MBMALLOCF( MDPMTL, pFigs, MINT, i_sz);					//	構成点の領域をmallocで確保
+		MbAllocF<MDPMTL,MINT>( pFigs, i_sz);
 		memcpy( pFigs, m_pPmtl, SZMINT( i_sz));
 		SetSz( i_sz);
 

@@ -334,8 +334,8 @@ void CMCadApp::OnFileOpen()
 {
 	// TODO : ここにコマンド ハンドラ コードを追加します。
 //	MINT		Ist1;
-	MCHAR		PathI[256];
-	MCHAR		PathO[256];
+	MCHAR		PathI[MAX_PATH];
+	MCHAR		PathO[MAX_PATH];
 //	CWnd*		ViewId;															// ﾋﾞｭｰのｲﾝｽﾀﾝｽ
 	MINT		ist1;
 
@@ -344,7 +344,7 @@ void CMCadApp::OnFileOpen()
 //
 //	Ist1 = MsGetRegistryPath( PathI);													// ﾚｼﾞｽﾄﾘよりﾊﾟｽを取得
 	Mstrcpy_s( PathI, Mstr("C:\\MCAD_32\\マスタ\\データ\\"));
-	ist1 = MC::IeModel::MhFileDialog( true, PathI, PathO);								// ﾌｧｲﾙﾀﾞｲｱﾛｸﾞの表示
+	ist1 = MC::IeModel::MhFileDialog( true, PathI, PathO, MAX_PATH);					// ﾌｧｲﾙﾀﾞｲｱﾛｸﾞの表示
 
 	if ( ist1 == 1) {																	// OKの場合読み込み
 		//　３次元表示は一旦消す

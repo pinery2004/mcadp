@@ -115,7 +115,7 @@ void WindowCtrl::MmWndKDrawTemp(
 	if ( pRfm) {
 
 		CClientDC	dc( pWndInfo->GetWnd());
-		DWORD		rgbTempRfm = McSystemProperty::GetColor( MM_COLOR_TEMP);
+		DWORD		rgbTempRfm = mcs::GetColor( MM_COLOR_TEMP);
 
 		pCod->SetLineAttr( MPS_SOLID, 1, rgbTempRfm);
 
@@ -127,7 +127,7 @@ void WindowCtrl::MmWndKDrawTemp(
 	if ( ppgBziFig->m_n != 0) {
 
 		CClientDC	dc( pWndInfo->GetWnd());
-		DWORD		rgbTempRfm = McSystemProperty::GetColor( MM_COLOR_TEMP);
+		DWORD		rgbTempRfm = mcs::GetColor( MM_COLOR_TEMP);
 
 		pCod->SetLineAttr( MPS_SOLID, 1, rgbTempRfm);
 
@@ -221,7 +221,7 @@ MINT Window::DispHitBzi(
 
 	CClientDC	dc( z_pHitBziWndInfo->GetWnd());
 
-	DWORD		rgbHitBzi = McSystemProperty::GetColor( MM_COLOR_HITBZI);
+	DWORD		rgbHitBzi = mcs::GetColor( MM_COLOR_HITBZI);
 	CPen		HitBziPen( PS_SOLID, 1, rgbHitBzi);
 	CPen*		OldPen = dc.SelectObject( &HitBziPen);
 

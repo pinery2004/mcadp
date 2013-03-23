@@ -113,7 +113,7 @@ void WindowCtrl::MmWndKDrawRoof(
 	if ( iGpC < MP_GP_TAIRYOKU)
 		return;													// 耐力壁、天井、小屋、屋根　のみ表示する
 
-	RoofTextColor = McSystemProperty::GetColor( MM_COLOR_GRID_TEXT);
+	RoofTextColor = mcs::GetColor( MM_COLOR_GRID_TEXT);
 	pCod->SetTextAttr( Mstr( "ＭＳ ゴシック"), 100.f, MT_LOWER, MT_CENTER, RoofTextColor,
 					   MgVect2( 1., 0.), vOffset, MT_FREESIZE);
 

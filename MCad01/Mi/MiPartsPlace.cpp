@@ -101,8 +101,8 @@ void HaitiCmd::MmPtsPlc(
 		if ( MGeo::GT( PlcEn.m_rHgt[1], 0.f)) {
 			PlcEn.SetPIHgt( 1, PlcEn.m_rHgt[1]);
 		} else {
-			PlcEn.SetPIHgt( 1, McSystemProperty::GetStnd( PlcEn.m_ibKai, MM_STNDH_CEILING) -	// “VˆäŠî€
-							   McSystemProperty::GetStnd( PlcEn.m_ibKai, MM_STNDH_LOWER) +		// ‰ºŠî€
+			PlcEn.SetPIHgt( 1, mcs::GetStnd( PlcEn.m_ibKai, MM_STNDH_CEILING) -	// “VˆäŠî€
+							   mcs::GetStnd( PlcEn.m_ibKai, MM_STNDH_LOWER) +		// ‰ºŠî€
 							   PlcEn.m_rHgt[1]);
 		}
 	}

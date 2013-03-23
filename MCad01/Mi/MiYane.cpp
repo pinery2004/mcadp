@@ -67,7 +67,7 @@ void mtInput::MmGetMarumeYaneLine(
 	if ( iCdMarume == 0)
 		rTol = MC_MARUME_TOL;
 	else
-		rTol = McSystemProperty::GetReal( MM_REAL_PITCH) / ( iCdMarume * 2);
+		rTol = mcs::GetReal( MM_REAL_PITCH) / ( iCdMarume * 2);
 
 	pGLn->m_n = 0;
 	for ( pRoofEn = HaitiDb::MdGetHeadRoof(); pRoofEn!=0;

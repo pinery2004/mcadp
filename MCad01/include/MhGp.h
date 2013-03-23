@@ -27,9 +27,9 @@ class	MhGp									// 構成レコード
 	MCHAR	m_sNmFusezu[MHKSSZ_NMFUSEZU + 1];	// 伏図名
 public:
 	void	SetCdGp( MINT iCdGp)	{ m_iCdGp = iCdGp;}
-	void	SetNmGp( MCHAR* cNmGp)	{ Mstrncpy_s( m_sNmGp, cNmGp, MHKSSZ_NMKOSEI + 1);}
+	void	SetNmGp( MCHAR* cNmGp)	{ Mstrncpy_s( m_sNmGp, cNmGp, MHKSSZ_NMKOSEI);}
 	void	SetNmFusezu( MCHAR* cNmFusezu)
-									{ Mstrncpy_s( m_sNmFusezu, cNmFusezu, MHKSSZ_NMKOSEI + 1);}
+									{ Mstrncpy_s( m_sNmFusezu, cNmFusezu, MHKSSZ_NMKOSEI);}
 
 	MINT	GetCdGp()		{ return m_iCdGp;}
 	MCHAR*	GetNmGp()		{ return m_sNmGp;}

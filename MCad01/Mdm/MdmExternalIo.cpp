@@ -29,7 +29,7 @@ namespace MC
 //		flenを０で渡すと本関数内でDXFファイル名を問い合わせる。（コモンダイアログ表示）
 //
 MINT	MdeDxfIn(
-						MCHAR*		i_psFName		// DXFファイル名　または　０
+						MCHAR*		i_sFName		// DXFファイル名　または　０
 				)
 {
 	return 0;
@@ -44,7 +44,7 @@ MINT	MdeDxfIn(
 //		flenを０で渡すと本関数内でADFファイル名を問い合わせる。（コモンダイアログ表示）
 //
 MINT	MdeDxfOut(
-						MCHAR*		i_psFName		// DXFファイル名　または　０
+						MCHAR*		i_sFName		// DXFファイル名　または　０
 				)
 {
 	return 0;
@@ -199,7 +199,7 @@ MINT	MdeSetDxfOutParamLong(
 //		flenを０で渡すと本関数内で入力するファイル名を問い合わせる。（コモンダイアログ表示）
 //
 MINT	MdeJwwIn(
-						MCHAR*		i_psFNameDxf	// DXFファイル名　または　０
+						MCHAR*		i_sFNameDxf	// DXFファイル名　または　０
 				)
 {
 	return 0;
@@ -260,7 +260,7 @@ MINT	MdeSetJwwInParamLong(
 //		flenを０で渡すと本関数内で入力するファイル名を問い合わせる。（コモンダイアログ表示）
 //
 MINT	MdeADFIn(
-						MCHAR*		i_psFNameAdf	// ADFファイル名　または　０
+						MCHAR*		i_sFNameAdf	// ADFファイル名　または　０
 				)
 {
 	return 0;
@@ -275,7 +275,7 @@ MINT	MdeADFIn(
 //		flenを０で渡すと本関数内でADFファイル名を問い合わせる。（コモンダイアログ表示）
 //
 MINT	MdeADFOut(
-						MCHAR*		i_psFNameAdf	// ADFファイル名　または　０
+						MCHAR*		i_sFNameAdf	// ADFファイル名　または　０
 				)
 {
 	return 0;
@@ -291,7 +291,7 @@ MINT	MdeADFOut(
 //
 MINT	MdePovRayOut(
 						MINT		i_idWin,		// ウィンドウID
-						MCHAR*		i_psFnamePov	// Pov-Rayファイル名　または　０
+						MCHAR*		i_sFnamePov	// Pov-Rayファイル名　または　０
 				)
 {
 	return 0;
@@ -304,8 +304,8 @@ MINT	MdePovRayOut(
 //		Pov-Rayを起動して、指定されたPov-Rayファイル名のイメージファイルを作成する。
 //
 MINT	MdePovRayExecute(
-						MCHAR*		i_psFNamePov,	// Pov-Rayファイル名
-						MCHAR*		i_psFNameImg	// イメージファイル名
+						MCHAR*		i_sFNamePov,	// Pov-Rayファイル名
+						MCHAR*		i_sFNameImg	// イメージファイル名
 
 				)
 {

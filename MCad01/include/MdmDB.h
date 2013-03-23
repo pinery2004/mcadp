@@ -1224,7 +1224,7 @@ public:
 //		flenを０で渡すと本関数内でDXFファイル名を問い合わせる。（コモンダイアログ表示）
 //
 static MINT	DxfIn(
-						MCHAR*		i_psFName		// DXFファイル名　または　０
+						MCHAR*		i_sFName		// DXFファイル名　または　０
 				);
 
 //===========================================================================
@@ -1235,7 +1235,7 @@ static MINT	DxfIn(
 //		flenを０で渡すと本関数内でADFファイル名を問い合わせる。（コモンダイアログ表示）
 //
 static MINT	DxfOut(
-						MCHAR*		i_psFName		// DXFファイル名　または　０
+						MCHAR*		i_sFName		// DXFファイル名　または　０
 				);
 
 //===========================================================================
@@ -1366,7 +1366,7 @@ static MINT	SetDxfOutParamLong(
 //		flenを０で渡すと本関数内で入力するファイル名を問い合わせる。（コモンダイアログ表示）
 //
 static MINT	JwwIn(
-						MCHAR*		i_psFNameDxf	// DXFファイル名　または　０
+						MCHAR*		i_sFNameDxf	// DXFファイル名　または　０
 				);
 
 //===========================================================================
@@ -1415,7 +1415,7 @@ static MINT	SetJwwInParamLong(
 //		flenを０で渡すと本関数内で入力するファイル名を問い合わせる。（コモンダイアログ表示）
 //
 static MINT	ADFIn(
-						MCHAR*		i_psFNameAdf	// ADFファイル名　または　０
+						MCHAR*		i_sFNameAdf	// ADFファイル名　または　０
 						);
 
 //===========================================================================
@@ -1426,7 +1426,7 @@ static MINT	ADFIn(
 //		flenを０で渡すと本関数内でADFファイル名を問い合わせる。（コモンダイアログ表示）
 //
 static MINT	ADFOut(
-						MCHAR*		i_psFNameAdf	// ADFファイル名　または　０
+						MCHAR*		i_sFNameAdf	// ADFファイル名　または　０
 				);
 
 //===========================================================================
@@ -1438,7 +1438,7 @@ static MINT	ADFOut(
 //
 static MINT	PovRayOut(
 						MINT		i_idWin,		// ウィンドウID
-						MCHAR*		i_psFnamePov	// Pov-Rayファイル名　または　０
+						MCHAR*		i_sFnamePov	// Pov-Rayファイル名　または　０
 				);
 
 //===========================================================================
@@ -1447,8 +1447,8 @@ static MINT	PovRayOut(
 //		Pov-Rayを起動して、指定されたPov-Rayファイル名のイメージファイルを作成する。
 //
 static MINT	PovRayExecute(
-						MCHAR*		i_psFNamePov,	// Pov-Rayファイル名
-						MCHAR*		i_psFNameImg	// イメージファイル名
+						MCHAR*		i_sFNamePov,	// Pov-Rayファイル名
+						MCHAR*		i_sFNameImg	// イメージファイル名
 
 				);
 
@@ -1577,7 +1577,8 @@ static MDID	SetCurGrpId(
 //
 static MINT	GetGrpNameFromId(
 						MDID		i_idGrp,	// グループId
-						MCHAR*		o_psName	// グループ名
+						MCHAR*		o_sGName,	// グループ名
+						int			i_nGName	// グループ名最大文字数
 				);
 
 //===========================================================================
@@ -1585,14 +1586,15 @@ static MINT	GetGrpNameFromId(
 //
 static MINT	SetGrpNameFromId(
 						MDID		i_idGrp,	// グループId
-						MCHAR*		i_psName	// グループ名
+						int			i_nGName,	// グループ名最大文字数
+						MCHAR*		i_sGName	// グループ名
 				);
 
 //===========================================================================
 //		グループ名よりグループIdを得る
 //
 static MINT	GetGrpIdFromName(
-						MCHAR*		i_psName,	// グループ名
+						MCHAR*		i_sName,	// グループ名
 						MDID*		o_pidGrp	// グループId
 				);
 
@@ -1643,7 +1645,8 @@ static MDID	SetCurScmId(
 //
 static MINT	GetScmNameFromId(
 						MDID		i_idLyr,	// スキーマId
-						MCHAR*		o_psName	// レイヤー名
+						MCHAR*		o_sLName,	// レイヤー名
+						int			i_nLName	// レイヤー名最大文字数
 				);
 
 //===========================================================================
@@ -1651,6 +1654,7 @@ static MINT	GetScmNameFromId(
 //
 static MINT	SetScmNameFromId(
 						MDID		i_idLyr,	// スキーマId
+						int			i_nLName,	// レイヤー名最大文字数				)
 						MCHAR*		i_psName	// レイヤー名
 				);
 
@@ -1658,7 +1662,7 @@ static MINT	SetScmNameFromId(
 //		レイヤー名よりスキーマIdを得る
 //
 static MINT	GetScmIdFromName(
-						MCHAR*		i_psName,	// レイヤー名
+						MCHAR*		i_sName,	// レイヤー名
 						MDID*		o_pidLyr	// スキーマId
 				);
 
@@ -5670,7 +5674,7 @@ static MINT	MdwChangeType(
 static MINT	MdwGetTypeName(
 						MDID		i_idWFn,	// ウィンドウ機能番号
 						MCHAR		o_snmFn,	// 機能名
-						MINT*		o_psznmFn	// 機能名サイズ
+						MINT*		o_sznmFn	// 機能名サイズ
 				);
 
 //===========================================================================

@@ -188,7 +188,7 @@ MINT Window::DispDragging(
 	iUpL = z_pLDragWndInfo->GetUpL();							// c‰¡•\Ž¦•â³’l
 
 	CClientDC	dc( z_pLDragWndInfo->GetWnd());
-	DWORD		rgbCursor = McSystemProperty::GetColor( MM_COLOR_DRAGGING);
+	DWORD		rgbCursor = mcs::GetColor( MM_COLOR_DRAGGING);
 	CPen		CrossHairPen( PS_SOLID, 1, rgbCursor);
 	CPen*		OldPen = dc.SelectObject( &CrossHairPen);
 

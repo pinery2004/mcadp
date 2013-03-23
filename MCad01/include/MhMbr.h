@@ -25,14 +25,14 @@ class	MhMbr									// 寸法型式レコード
 	friend	void	MhLoadPtsMst();
 
 //public:
-	MINT				m_iMbrId;				// 寸法型式ID
-	MCHAR				m_cMbrCode[16];			// 寸法型式
-	MREAL				m_rBziWidth;			// 部材幅
-	MREAL				m_rBziSZure;			// 幅補正用芯ずれ量		右幅 = m_rWidth/2 + m_rSZure
-												//						左幅 = m_rWidth/2 - m_rSZure
-	MREAL				m_rBziHeight;			// 部材高さ
-	MCHAR				m_cMbrType[16];			// 寸法型式選択用種類コード
-	MCHAR				m_cMbrCodeW[16];		// 寸法型式 (書き込み用　通常m_cCodeと同じ VerUp時に変更した内容が入る)
+	MINT				m_iMbrId;							// 寸法型式ID
+	MCHAR				m_cMbrCode[MHMBSZ_CODE+1];			// 寸法型式
+	MREAL				m_rBziWidth;						// 部材幅
+	MREAL				m_rBziSZure;						// 幅補正用芯ずれ量		右幅 = m_rWidth/2 + m_rSZure
+															//						左幅 = m_rWidth/2 - m_rSZure
+	MREAL				m_rBziHeight;						// 部材高さ
+	MCHAR				m_cMbrType[MHMBSZ_TYPE+1];			// 寸法型式選択用種類コード
+	MCHAR				m_cMbrCodeW[MHMBSZ_CODEW+1];		// 寸法型式 (書き込み用　通常m_cCodeと同じ VerUp時に変更した内容が入る)
 
 public:
 	void	SetMbrId( MINT iMbrId)	
@@ -50,16 +50,11 @@ public:
 	void	SetMbrCodeW( MCHAR* cMbrCodeW)
 									{ Mstrncpy_s( m_cMbrCodeW, cMbrCodeW, MHMBSZ_CODEW);}
 	MINT 	GetMbrId()				{ return m_iMbrId;}
-//	void	GetMbrCode( MCHAR* cMbrCode)	{ Mstrncpy_s( cMbrCode, m_cMbrCode, MHMBSZ_CODE);}
 	MCHAR*	GetMbrCode()			{ return m_cMbrCode;}
 	MREAL 	GetBziWidth()			{ return m_rBziWidth;}
 	MREAL	GetBziSZure()			{ return m_rBziSZure;}
 	MREAL	GetBziHeight()			{ return m_rBziHeight;}
-//E	void	GetMbrType( MCHAR* cMbrType)
-//E									{ Mstrncpy_s( cMbrType, m_cMbrType, MHMBSZ_TYPE);}
 	MCHAR*	GetMbrType()			{ return m_cMbrType;}
-//E	void	GetMbrCodeW( MCHAR* cMbrCodeW)
-//E									{ Mstrncpy_s( cMbrCodeW, m_cMbrCodeW, MHMBSZ_CODEW);}
 	MCHAR*	GetMbrCodeW()			{ return m_cMbrCodeW;}
 };
 

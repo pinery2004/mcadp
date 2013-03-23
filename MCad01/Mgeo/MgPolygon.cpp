@@ -31,7 +31,8 @@ MgPolyg2::MgPolyg2( MINT sz1)
 	m_isz = sz1;
 	m_n = 0;
 	m_fa = 1;
-	MBMALLOC( m_p, MgPoint2, sz1);
+//E	MBMALLOC( m_p, MgPoint2, sz1);
+	MbAlloc<MgPoint2>( m_p, sz1);
 }
 
 //	\¬“_‚Ì—Ìˆæ‚ð”z—ñ‚Å—^‚¦‚éê‡‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^
@@ -67,7 +68,8 @@ void MgPolyg2::operator = ( const MgPolyg2& Pg)
 		if ( m_fa) MBFREE( m_p);								//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
 		m_isz = nn;
 		m_fa = 1;
-		MBMALLOC( m_p, MgPoint2, nn);							//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_p, MgPoint2, nn);							//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MgPoint2>( m_p, nn);
 	}
 	m_n = nn;
 	memcpy( m_p, Pg.m_p, sizeof( MgPoint2) * nn);
@@ -81,7 +83,8 @@ void MgPolyg2::operator = ( const MgPolyg3& Pg)
 		if ( m_fa) MBFREE( m_p);								//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
 		m_isz = nn;
 		m_fa = 1;
-		MBMALLOC( m_p, MgPoint2, nn);							//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_p, MgPoint2, nn);							//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MgPoint2>( m_p, nn);
 	}
 	m_n = nn;
 	for ( ic1 = 0; ic1<nn; ic1++)
@@ -122,7 +125,8 @@ void MgPolyg2::Set( const MgPolyg3 &Pg)
 		if ( m_fa) MBFREE( m_p);								//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
 		m_isz = nn;
 		m_fa = 1;
-		MBMALLOC( m_p, MgPoint2, nn);							//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_p, MgPoint2, nn);							//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MgPoint2>( m_p, nn);
 	}
 	m_n = nn;
 	for ( ic1 = 0; ic1<nn; ic1++)
@@ -181,7 +185,8 @@ void MgPolyg2::Resize( MINT szn)
 
 	if (szn > m_isz) {
 		MgPoint2*	pb = m_p;
-		MBMALLOC( m_p, MgPoint2, szn);		 					//	\¬“_‚ÌV—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_p, MgPoint2, szn);		 					//	\¬“_‚ÌV—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MgPoint2>( m_p, szn);
 		if ( m_n)
 			 memcpy( m_p, pb, m_n * sizeof( MgPoint2));			//	\¬“_‚Ì—Ìˆæ‚Éƒf[ƒ^‚ª‚ ‚Á‚½ê‡‚ÍV—Ìˆæ‚ÖƒRƒs[‚·‚é
 		if ( m_fa && pb)										//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Í‚»‚Ì—Ìˆæ‚ðŠJ•ú‚·‚é
@@ -243,7 +248,8 @@ MgPolyg3::MgPolyg3( MINT sz1)
 	m_isz = sz1;
 	m_n = 0;
 	m_fa = 1;
-	MBMALLOC( m_P, MgPoint3, sz1);
+//E	MBMALLOC( m_P, MgPoint3, sz1);
+	MbAlloc<MgPoint3>( m_P, sz1);
 }
 
 //	\¬“_‚Ì—Ìˆæ‚ð”z—ñ‚Å—^‚¦‚éê‡‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^
@@ -279,7 +285,8 @@ void MgPolyg3::operator = ( const MgPolyg3& Pg)
 		if ( m_fa) MBFREE( m_P);								//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
 		m_isz = nn;
 		m_fa = 1;
-		MBMALLOC( m_P, MgPoint3, nn);							//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_P, MgPoint3, nn);							//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MgPoint3>( m_P, nn);
 	}
 	memcpy( m_P, Pg.m_P, sizeof( MgPoint3) * nn);
 	m_n = nn;
@@ -293,7 +300,8 @@ void MgPolyg3::operator = (const MgPolyg2 &pg)					// ‚QŽŸŒ³¨‚RŽŸŒ³ (z = 0.)
 		if (m_fa) MBFREE( m_P);									//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
 		m_isz = nn;
 		m_fa = 1;
-		MBMALLOC( m_P, MgPoint3, nn);							//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_P, MgPoint3, nn);							//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MgPoint3>( m_P, nn);
 	}
 	m_n = nn;
 	for ( ic1 = 0; ic1<nn; ic1++)
@@ -333,7 +341,8 @@ void MgPolyg3::Set( const MgPolyg2 &i_pg, MREAL z)				// ‚QŽŸŒ³¨‚RŽŸŒ³‘ã“ü—p (z
 		if ( m_fa) MBFREE( m_P);								//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
 		m_isz = nn;
 		m_fa = 1;
-		MBMALLOC( m_P, MgPoint3, nn);							//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_P, MgPoint3, nn);							//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MgPoint3>( m_P, nn);
 	}
 	m_n = nn;
 	for ( ic1 = 0; ic1<nn; ic1++)
@@ -349,7 +358,8 @@ void MgPolyg3::Set( const MgPolyg2 &i_pg, const MgPlane3& o_pPly)// ‚QŽŸŒ³¨‚RŽŸ
 		if ( m_fa) MBFREE( m_P);								//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
 		m_isz = nn;
 		m_fa = 1;
-		MBMALLOC( m_P, MgPoint3, nn);							//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_P, MgPoint3, nn);							//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MgPoint3>( m_P, nn);
 	}
 	m_n = nn;
 	for ( ic1 = 0; ic1<nn; ic1++)
@@ -384,11 +394,12 @@ void MgPolyg3::Resize( MINT szn)
 
 	if (szn > m_isz) {
 		MgPoint3	*pb = m_P;
-		MBMALLOC( m_P, MgPoint3, szn);		 					//	\¬“_‚ÌV—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_P, MgPoint3, szn);		 					//	\¬“_‚ÌV—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MgPoint3>( m_P, szn);
 		if ( m_n)
-			memcpy( m_P, pb, sizeof( MgPoint3) * m_n);				//	\¬“_‚Ì—Ìˆæ‚Éƒf[ƒ^‚ª‚ ‚Á‚½ê‡‚ÍV—Ìˆæ‚ÖƒRƒs[‚·‚é
+			memcpy( m_P, pb, sizeof( MgPoint3) * m_n);			//	\¬“_‚Ì—Ìˆæ‚Éƒf[ƒ^‚ª‚ ‚Á‚½ê‡‚ÍV—Ìˆæ‚ÖƒRƒs[‚·‚é
 		if (m_fa && pb)											//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Í‚»‚Ì—Ìˆæ‚ðŠJ•ú‚·‚é
-			delete (char*)pb;											//
+			delete (char*)pb;									//
 		m_fa = 1;
 		m_isz = szn;
 	}
@@ -431,7 +442,8 @@ MgGPolyg2::MgGPolyg2( MINT sz1)
 	m_isz = sz1;
 	m_n = 0;
 	m_fa = 1;
-	MBMALLOC( m_pg, MgPolyg2, sz1);
+//E	MBMALLOC( m_pg, MgPolyg2, sz1);
+	MbAlloc<MgPolyg2>( m_pg, sz1);
 	memset( m_pg, 0, sizeof( MgPolyg2) * sz1);
 }
 
@@ -609,7 +621,8 @@ void MgGPolyg2::Resize( MINT szn)
 
 	if (szn > m_isz) {
 		MgPolyg2*	pgb = m_pg;
-		MBMALLOC( m_pg, MgPolyg2, szn);			 				//	\¬“_‚ÌV—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_pg, MgPolyg2, szn);			 				//	\¬“_‚ÌV—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MgPolyg2>( m_pg, szn);
 		if ( m_n)
 			 memcpy( m_pg, pgb, m_n * sizeof( MgPolyg2));		//	\¬“_‚Ì—Ìˆæ‚Éƒf[ƒ^‚ª‚ ‚Á‚½ê‡‚ÍV—Ìˆæ‚ÖƒRƒs[‚·‚é
 		if (m_fa && pgb)										//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Í‚»‚Ì—Ìˆæ‚ðŠJ•ú‚·‚é
@@ -641,7 +654,8 @@ MgGPolyg3::MgGPolyg3( MINT sz1)
 	m_isz = sz1;
 	m_n = 0;
 	m_fa = 1;
-	MBMALLOC( m_Pg, MgPolyg3, sz1);
+//E	MBMALLOC( m_Pg, MgPolyg3, sz1);
+	MbAlloc<MgPolyg3>( m_Pg, sz1);
 	memset( m_Pg, 0, sizeof( MgPolyg3) * sz1);
 }
 
@@ -834,7 +848,8 @@ void MgGPolyg3::Resize( MINT szn)
 
 	if (szn > m_isz) {
 		MgPolyg3*	pgb = m_Pg;
-		MBMALLOC( m_Pg, MgPolyg3, szn);		 					//	\¬“_‚ÌV—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_Pg, MgPolyg3, szn);		 					//	\¬“_‚ÌV—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MgPolyg3>( m_Pg, szn);
 		if ( m_n)
 			 memcpy( m_Pg, pgb, m_n * sizeof( MgPolyg3));		//	\¬“_‚Ì—Ìˆæ‚Éƒf[ƒ^‚ª‚ ‚Á‚½ê‡‚ÍV—Ìˆæ‚ÖƒRƒs[‚·‚é
 		if (m_fa && pgb)										//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Í‚»‚Ì—Ìˆæ‚ðŠJ•ú‚·‚é
@@ -866,7 +881,8 @@ MgGLine2::MgGLine2( MINT sz1)
 	m_isz = sz1;
 	m_n = 0;
 	m_fa = 1;
-	MBMALLOC( m_ln, MgLine2, sz1);
+//E	MBMALLOC( m_ln, MgLine2, sz1);
+	MbAlloc<MgLine2>( m_ln, sz1);
 }
 
 //	\¬ü•ª‚Ì—Ìˆæ‚ð”z—ñ‚Å—^‚¦‚éê‡‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^
@@ -900,7 +916,8 @@ void MgGLine2::operator = ( const MgGLine2& GLn)
 	MINT	nn = GLn.m_n;
 	if ( nn > m_isz) {
 		if (m_fa) MBFREE( m_ln);								//	\¬ü•ª‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
-		MBMALLOC( m_ln, MgLine2, nn);							//	\¬ü•ª‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_ln, MgLine2, nn);							//	\¬ü•ª‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MgLine2>( m_ln, nn);
 		m_fa = 1;
 		m_isz = nn;
 	}
@@ -914,7 +931,8 @@ void MgGLine2::operator = ( const MgGLine3 &GLn)				// ‚RŽŸŒ³¨‚QŽŸŒ³
 	MINT	nn = GLn.m_n;
 	if ( nn > m_isz) {
 		if ( m_fa) MBFREE( m_ln);								//	\¬ü•ª‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
-		MBMALLOC( m_ln, MgLine2, nn);							//	\¬ü•ª‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_ln, MgLine2, nn);							//	\¬ü•ª‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MgLine2>( m_ln, nn);
 		m_fa = 1;
 		m_isz = nn;
 	}
@@ -954,7 +972,8 @@ void MgGLine2::Set( const MgGLine3 &GLn)						// ‚RŽŸŒ³¨‚QŽŸŒ³‘ã“ü—p
 	MINT	nn = GLn.m_n;
 	if ( nn > m_isz) {
 		if ( m_fa) MBFREE( m_ln);								//	\¬ü•ª‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
-		MBMALLOC( m_ln, MgLine2, nn);							//	\¬ü•ª‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_ln, MgLine2, nn);							//	\¬ü•ª‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MgLine2>( m_ln, nn);
 		m_fa = 1;
 		m_isz = nn;
 	}
@@ -989,7 +1008,8 @@ void MgGLine2::Resize( MINT szn)
 
 	if (szn > m_isz) {
 		MgLine2	*lnb = m_ln;
-		MBMALLOC( m_ln, MgLine2, szn);			 				//	\¬“_‚ÌV—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_ln, MgLine2, szn);			 				//	\¬“_‚ÌV—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MgLine2>( m_ln, szn);
 		if ( m_n)
 			 memcpy( m_ln, lnb, m_n * sizeof( MgLine2));		//	\¬“_‚Ì—Ìˆæ‚Éƒf[ƒ^‚ª‚ ‚Á‚½ê‡‚ÍV—Ìˆæ‚ÖƒRƒs[‚·‚é
 		if (m_fa && lnb)										//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Í‚»‚Ì—Ìˆæ‚ðŠJ•ú‚·‚é
@@ -1026,7 +1046,8 @@ MgGLine3::MgGLine3( MINT sz1)
 	m_isz = sz1;
 	m_n = 0;
 	m_fa = 1;
-	MBMALLOC( m_ln, MgLine3, sz1);
+//E	MBMALLOC( m_ln, MgLine3, sz1);
+	MbAlloc<MgLine3>( m_ln, sz1);
 }
 
 //	\¬ü•ª‚Ì—Ìˆæ‚ð”z—ñ‚Å—^‚¦‚éê‡‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^
@@ -1060,7 +1081,8 @@ void MgGLine3::operator = ( const MgGLine3& GLn)
 	MINT	nn = GLn.m_n;
 	if ( nn > m_isz) {
 		if ( m_fa) MBFREE( m_ln);								//	\¬ü•ª‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
-		MBMALLOC( m_ln, MgLine3, nn);							//	\¬ü•ª‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_ln, MgLine3, nn);							//	\¬ü•ª‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MgLine3>( m_ln, nn);
 		m_fa = 1;
 		m_isz = nn;
 	}
@@ -1075,7 +1097,8 @@ void MgGLine3::operator = (const MgGLine2 &Gln)					// ‚QŽŸŒ³¨‚RŽŸŒ³ (z = 0.)
 	MINT	nn = Gln.m_n;
 	if ( nn > m_isz) {
 		if ( m_fa) MBFREE( m_ln);								//	\¬ü•ª‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
-		MBMALLOC( m_ln, MgLine3, nn);							//	\¬ü•ª‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_ln, MgLine3, nn);							//	\¬ü•ª‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MgLine3>( m_ln, nn);
 		m_fa = 1;
 		m_isz = nn;
 	}
@@ -1115,7 +1138,8 @@ void MgGLine3::Set( const MgGLine2 &Gln, const MgPlane3& Pln)	// ‚QŽŸŒ³¨‚RŽŸŒ³‘
 	MINT	nn = Gln.m_n;
 	if ( nn > m_isz) {
 		if ( m_fa) MBFREE( m_ln);								//	\¬ü•ª‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
-		MBMALLOC( m_ln, MgLine3, nn);							//	\¬ü•ª‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_ln, MgLine3, nn);							//	\¬ü•ª‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MgLine3>( m_ln, nn);
 		m_fa = 1;
 		m_isz = nn;
 	}
@@ -1130,7 +1154,8 @@ void MgGLine3::Set( const MgGLine2 &Gln, MREAL z)				// ‚QŽŸŒ³¨‚RŽŸŒ³‘ã“ü—p (z 
 	MINT	nn = Gln.m_n;
 	if ( nn > m_isz) {
 		if ( m_fa) MBFREE( m_ln);								//	\¬ü•ª‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
-		MBMALLOC( m_ln, MgLine3, nn);							//	\¬ü•ª‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_ln, MgLine3, nn);							//	\¬ü•ª‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MgLine3>( m_ln, nn);
 		m_fa = 1;
 		m_isz = nn;
 	}
@@ -1165,7 +1190,8 @@ void MgGLine3::Resize( MINT szn)
 
 	if (szn > m_isz) {
 		MgLine3	*lnb = m_ln;
-		MBMALLOC( m_ln, MgLine3, szn);		 					//	\¬“_‚ÌV—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_ln, MgLine3, szn);		 					//	\¬“_‚ÌV—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MgLine3>( m_ln, szn);
 		if ( m_n)
 			 memcpy( m_ln, lnb, m_n * sizeof( MgLine3));			//	\¬“_‚Ì—Ìˆæ‚Éƒf[ƒ^‚ª‚ ‚Á‚½ê‡‚ÍV—Ìˆæ‚ÖƒRƒs[‚·‚é
 		if (m_fa && lnb)										//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Í‚»‚Ì—Ìˆæ‚ðŠJ•ú‚·‚é
@@ -1202,7 +1228,8 @@ MgGInt::MgGInt( MINT sz1)
 	m_isz = sz1;
 	m_n = 0;
 	m_fa = 1;
-	MBMALLOC( m_i, MINT, sz1);
+//E	MBMALLOC( m_i, MINT, sz1);
+	MbAlloc<MINT>( m_i, sz1);
 }
 
 //	\¬®”‚Ì—Ìˆæ‚ð”z—ñ‚Å—^‚¦‚éê‡‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^
@@ -1236,7 +1263,8 @@ void MgGInt::operator = ( const MgGInt& GI)
 	MINT	nn = GI.m_n;
 	if ( nn > m_isz) {
 		if ( m_fa) MBFREE( m_i);								//	\¬®”‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
-		MBMALLOC( m_i, MINT, nn);								//	\¬®”‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_i, MINT, nn);								//	\¬®”‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MINT>( m_i, nn);
 		m_fa = 1;
 		m_isz = nn;
 	}
@@ -1250,7 +1278,8 @@ void MgGInt::operator = (const MgGReal &GR)					// ŽÀ”ŒQ ¨ ®”ŒQ
 	MINT	nn = GR.m_n;
 	if ( nn > m_isz) {
 		if ( m_fa) MBFREE( m_i);								//	\¬®”‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
-		MBMALLOC( m_i, MINT, nn);								//	\¬®”‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_i, MINT, nn);								//	\¬®”‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MINT>( m_i, nn);
 		m_fa = 1;
 		m_isz = nn;
 	}
@@ -1290,7 +1319,8 @@ void MgGInt::Set( const MgGReal &GR)							// ŽÀ”ŒQ¨®”ŒQ ‘ã“ü—p
 	MINT	nn = GR.m_n;
 	if ( nn > m_isz) {
 		if ( m_fa) MBFREE( m_i);								//	\¬®”‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
-		MBMALLOC( m_i, MINT, nn);								//	\¬®”‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_i, MINT, nn);								//	\¬®”‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MINT>( m_i, nn);
 		m_fa = 1;
 		m_isz = nn;
 	}
@@ -1316,7 +1346,8 @@ void MgGInt::Resize( MINT szn)
 
 	if (szn > m_isz) {
 		MINT	*ib = m_i;
-		MBMALLOC( m_i, MINT, szn);			 					//	\¬“_‚ÌV—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_i, MINT, szn);			 					//	\¬“_‚ÌV—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MINT>( m_i, szn);
 		if ( m_n)
 			 memcpy( m_i, ib, m_n * sizeof( MINT));				//	\¬“_‚Ì—Ìˆæ‚Éƒf[ƒ^‚ª‚ ‚Á‚½ê‡‚ÍV—Ìˆæ‚ÖƒRƒs[‚·‚é
 		if (m_fa && ib)											//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Í‚»‚Ì—Ìˆæ‚ðŠJ•ú‚·‚é
@@ -1352,7 +1383,8 @@ MgGReal::MgGReal( MINT sz1)
 	m_isz = sz1;
 	m_n = 0;
 	m_fa = 1;
-	MBMALLOC( m_r, MREAL, sz1);
+//E	MBMALLOC( m_r, MREAL, sz1);
+	MbAlloc<MREAL>( m_r, sz1);
 }
 
 //	\¬ŽÀ”‚Ì—Ìˆæ‚ð”z—ñ‚Å—^‚¦‚éê‡‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^
@@ -1386,7 +1418,8 @@ void MgGReal::operator = ( const MgGReal& GR)
 	MINT	nn = GR.m_n;
 	if ( nn > m_isz) {
 		if ( m_fa) MBFREE( m_r);								//	\¬ŽÀ”‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
-		MBMALLOC( m_r, MREAL, nn);								//	\¬ŽÀ”‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_r, MREAL, nn);								//	\¬ŽÀ”‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MREAL>( m_r, nn);
 		m_fa = 1;
 		m_isz = nn;
 	}
@@ -1400,7 +1433,8 @@ void MgGReal::operator = (const MgGInt &GI)					// ®”ŒQ ¨ ŽÀ”ŒQ
 	MINT	nn = GI.m_n;
 	if ( nn > m_isz) {
 		if ( m_fa) MBFREE( m_r);								//	\¬ŽÀ”‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
-		MBMALLOC( m_r, MREAL, nn);								//	\¬ŽÀ”‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_r, MREAL, nn);								//	\¬ŽÀ”‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MREAL>( m_r, nn);
 		m_fa = 1;
 		m_isz = nn;
 	}
@@ -1440,7 +1474,8 @@ void MgGReal::Set( const MgGInt &GI)							// ®”ŒQ¨ŽÀ”ŒQ ‘ã“ü—p
 	MINT	nn = GI.m_n;
 	if ( nn > m_isz) {
 		if ( m_fa) MBFREE( m_r);								//	\¬ŽÀ”‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
-		MBMALLOC( m_r, MREAL, nn);								//	\¬ŽÀ”‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_r, MREAL, nn);								//	\¬ŽÀ”‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MREAL>( m_r, nn);
 		m_fa = 1;
 		m_isz = nn;
 	}
@@ -1466,7 +1501,8 @@ void MgGReal::Resize( MINT szn)
 
 	if (szn > m_isz) {
 		MREAL	*rb = m_r;
-		MBMALLOC( m_r, MREAL, szn);				 			//	\¬“_‚ÌV—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_r, MREAL, szn);				 			//	\¬“_‚ÌV—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MREAL>( m_r, szn);
 		if ( m_n)
 			 memcpy( m_r, rb, m_n * sizeof( MREAL));			//	\¬“_‚Ì—Ìˆæ‚Éƒf[ƒ^‚ª‚ ‚Á‚½ê‡‚ÍV—Ìˆæ‚ÖƒRƒs[‚·‚é
 		if (m_fa && rb)											//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Í‚»‚Ì—Ìˆæ‚ðŠJ•ú‚·‚é
@@ -1502,7 +1538,8 @@ MgGPoint2::MgGPoint2( MINT sz1)
 	m_isz = sz1;
 	m_n = 0;
 	m_fa = 1;
-	MBMALLOC( m_p, MgPoint2, sz1);
+//E	MBMALLOC( m_p, MgPoint2, sz1);
+	MbAlloc<MgPoint2>( m_p, sz1);
 }
 
 //	\¬“_‚Ì—Ìˆæ‚ð”z—ñ‚Å—^‚¦‚éê‡‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^
@@ -1536,7 +1573,8 @@ void MgGPoint2::operator = ( const MgGPoint2& Pg)
 	MINT	nn = Pg.m_n;
 	if ( nn > m_isz) {
 		if ( m_fa) MBFREE( m_p);								//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
-		MBMALLOC( m_p, MgPoint2, nn);							//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_p, MgPoint2, nn);							//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MgPoint2>( m_p, nn);
 		m_fa = 1;
 		m_isz = nn;
 	}
@@ -1550,7 +1588,8 @@ void MgGPoint2::operator = (const MgGPoint3 &GPt)				// ‚RŽŸŒ³¨‚QŽŸŒ³
 	MINT	nn = GPt.m_n;
 	if ( nn > m_isz) {
 		if ( m_fa) MBFREE( m_p);								//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
-		MBMALLOC( m_p, MgPoint2, nn);							//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_p, MgPoint2, nn);							//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MgPoint2>( m_p, nn);
 		m_fa = 1;
 		m_isz = nn;
 	}
@@ -1590,7 +1629,8 @@ void MgGPoint2::Set( const MgGPoint3 &GPt)						// ‚RŽŸŒ³¨‚QŽŸŒ³‘ã“ü—p
 	MINT	nn = GPt.m_n;
 	if ( nn > m_isz) {
 		if ( m_fa) MBFREE( m_p);								//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
-		MBMALLOC( m_p, MgPoint2, nn);							//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_p, MgPoint2, nn);							//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MgPoint2>( m_p, nn);
 		m_fa = 1;
 		m_isz = nn;
 	}
@@ -1616,7 +1656,8 @@ void MgGPoint2::Resize( MINT szn)
 
 	if (szn > m_isz) {
 		MgPoint2*	pb = m_p;
-		MBMALLOC( m_p, MgPoint2, szn);			 				//	\¬“_‚ÌV—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_p, MgPoint2, szn);			 				//	\¬“_‚ÌV—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MgPoint2>( m_p, szn);
 		if ( m_n)
 			 memcpy( m_p, pb, m_n * sizeof( MgPoint2));			//	\¬“_‚Ì—Ìˆæ‚Éƒf[ƒ^‚ª‚ ‚Á‚½ê‡‚ÍV—Ìˆæ‚ÖƒRƒs[‚·‚é
 		if ( m_fa && pb)										//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Í‚»‚Ì—Ìˆæ‚ðŠJ•ú‚·‚é
@@ -1664,7 +1705,8 @@ MgGPoint3::MgGPoint3( MINT sz1)
 	m_isz = sz1;
 	m_n = 0;
 	m_fa = 1;
-	MBMALLOC( m_p, MgPoint3, sz1);
+//E	MBMALLOC( m_p, MgPoint3, sz1);
+	MbAlloc<MgPoint3>( m_p, sz1);
 }
 
 //	\¬“_‚Ì—Ìˆæ‚ð”z—ñ‚Å—^‚¦‚éê‡‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^
@@ -1699,7 +1741,8 @@ void MgGPoint3::operator = ( const MgGPoint3& GPt)
 	if ( nn > m_isz) {
 		if ( m_fa)
 			MBFREE( m_p);										//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
-		MBMALLOC( m_p, MgPoint3, nn);							//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_p, MgPoint3, nn);							//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MgPoint3>( m_p, nn);
 		m_fa = 1;
 		m_isz = nn;
 	}
@@ -1714,7 +1757,8 @@ void MgGPoint3::operator = ( const MgGPoint2& Gpt)
 	if ( nn > m_isz) {
 		if ( m_fa)
 			MBFREE( m_p);										//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
-		MBMALLOC( m_p, MgPoint3, nn);							//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_p, MgPoint3, nn);							//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MgPoint3>( m_p, nn);
 		m_fa = 1;
 		m_isz = nn;
 	}
@@ -1755,7 +1799,8 @@ void MgGPoint3::Set( const MgGPoint2 &Gpt, const MgPlane3& Pln)	// ‚QŽŸŒ³¨‚RŽŸŒ
 	if ( nn > m_isz) {
 		if ( m_fa)
 			MBFREE( m_p);										//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
-		MBMALLOC( m_p, MgPoint3, nn);							//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_p, MgPoint3, nn);							//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MgPoint3>( m_p, nn);
 		m_fa = 1;
 		m_isz = nn;
 	}
@@ -1771,7 +1816,8 @@ void MgGPoint3::Set( const MgGPoint2 &Gpt, MREAL z)			// ‚QŽŸŒ³¨‚RŽŸŒ³‘ã“ü—p (z
 	if ( nn > m_isz) {
 		if ( m_fa)
 			MBFREE( m_p);										//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
-		MBMALLOC( m_p, MgPoint3, nn);							//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_p, MgPoint3, nn);							//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MgPoint3>( m_p, nn);
 		m_fa = 1;
 		m_isz = nn;
 	}
@@ -1797,7 +1843,8 @@ void MgGPoint3::Resize( MINT szn)
 
 	if (szn > m_isz) {
 		MgPoint3	*pb = m_p;
-		MBMALLOC( m_p, MgPoint3, szn);							//	\¬“_‚ÌV—Ìˆæ‚ðmalloc‚ÅŠm•Û
+//E		MBMALLOC( m_p, MgPoint3, szn);							//	\¬“_‚ÌV—Ìˆæ‚ðmalloc‚ÅŠm•Û
+		MbAlloc<MgPoint3>( m_p, szn);
 		if ( m_n)
 			memcpy( m_p, pb, sizeof( MgPoint3) * m_n);			//	\¬“_‚Ì—Ìˆæ‚Éƒf[ƒ^‚ª‚ ‚Á‚½ê‡‚ÍV—Ìˆæ‚ÖƒRƒs[‚·‚é
 		if ( m_fa && pb)										//	\¬“_‚Ì—Ìˆæ‚ðmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Í‚»‚Ì—Ìˆæ‚ðŠJ•ú‚·‚é

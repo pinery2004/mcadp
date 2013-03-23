@@ -34,8 +34,8 @@ public:
 	void	Init()
 	{
 		m_iTpAtr = 0;
-		m_GidC.m_st = 0;
-		m_Grfc.m_st = 0;
+		m_GidC.m_pst = 0;
+		m_Grfc.m_pst = 0;
 		m_pAtr = 0;
 		m_Fig.SetpPmtl( 0);
 	}		

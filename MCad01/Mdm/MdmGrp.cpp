@@ -37,27 +37,28 @@ namespace MC
 				)
 {
 	MdmSetGRP*	pGrp;
-	
+	MdModel*	pCurMdl = Mdm::GetCurModel();
+
 	// GrpBfより空きのIDを取得し、グループの子のID設定用領域を設ける
 	//
-	if ( Mdm::GetCurModel()->m_GrpBf.m_idSpaceLast == 0) {
+	if ( pCurMdl->m_GrpBf.m_idSpaceLast == 0) {
 		// 削除して空きになっているIDがない場合は最終ID+1を使用する
-		Mdm::GetCurModel()->m_GrpBf ++;
-		*o_pidGrp = Mdm::GetCurModel()->m_GrpBf.m_n;
-		pGrp = &Mdm::GetCurModel()->m_GrpBf.m_st[MIDtoHN( *o_pidGrp)];
+		pCurMdl->m_GrpBf ++;
+		*o_pidGrp = pCurMdl->m_GrpBf.m_n;
+		pGrp = &pCurMdl->m_GrpBf.m_pst[MIDtoHN( *o_pidGrp)];
 
 	} else {
 		// 削除して空きになっているIDがある場合はそのIDを使用する
-		ASSERT( Mdm::GetCurModel()->m_GrpBf.m_nidSpace >= 1);
+		ASSERT( pCurMdl->m_GrpBf.m_nidSpace >= 1);
 
-		*o_pidGrp = Mdm::GetCurModel()->m_GrpBf.m_idSpaceLast;
-		pGrp = &Mdm::GetCurModel()->m_GrpBf.m_st[MIDtoHN( *o_pidGrp)];
+		*o_pidGrp = pCurMdl->m_GrpBf.m_idSpaceLast;
+		pGrp = &pCurMdl->m_GrpBf.m_pst[MIDtoHN( *o_pidGrp)];
 
 		// 空きエリアへのIDを一つ戻す
-		Mdm::GetCurModel()->m_GrpBf.m_idSpaceLast = MDSPACEBEFORE( pGrp);
-		if ( Mdm::GetCurModel()->m_GrpBf.m_idSpaceLast)
-			MDSPACENEXT( &Mdm::GetCurModel()->m_GrpBf.m_st[MIDtoHN( Mdm::GetCurModel()->m_GrpBf.m_idSpaceLast)]) = 0;
-		Mdm::GetCurModel()->m_GrpBf.m_nidSpace--;
+		pCurMdl->m_GrpBf.m_idSpaceLast = MDSPACEBEFORE( pGrp);
+		if ( pCurMdl->m_GrpBf.m_idSpaceLast)
+			MDSPACENEXT( &pCurMdl->m_GrpBf.m_pst[MIDtoHN( pCurMdl->m_GrpBf.m_idSpaceLast)]) = 0;
+		pCurMdl->m_GrpBf.m_nidSpace--;
 	}
 
 	//	生成グループに子IDの設定用領域を確保する
@@ -77,28 +78,29 @@ MINT DGrp::DeleteGrp(								//
 {
 	MdmSetGRP*	pGrpB;							// 直前に削除したグループ
 	MdmSetGRP*	pGrpC;							// 削除グループ
+	MdModel* pCurMdl = Mdm::GetCurModel();
 
 	ASSERT( MDISGRP( i_idGrp));
 
 	// 削除し割り当て待ちのグループ数
-	Mdm::GetCurModel()->m_GrpBf.m_nidSpace++;
+	pCurMdl->m_GrpBf.m_nidSpace++;
 
 	// グループ削除
-	pGrpC = &Mdm::GetCurModel()->m_GrpBf.m_st[MIDtoHN( i_idGrp)];
+	pGrpC = &pCurMdl->m_GrpBf.m_pst[MIDtoHN( i_idGrp)];
 	MDSPACEID( pGrpC) = MDID_DELETE;
 	pGrpC->Free();
 
 	// 空きエリアリンクに追加
 	// 直前に削除したグループの次のグループとする
-	if ( Mdm::GetCurModel()->m_GrpBf.m_idSpaceLast) {
-		pGrpB = &Mdm::GetCurModel()->m_GrpBf.m_st[MIDtoHN( Mdm::GetCurModel()->m_GrpBf.m_idSpaceLast)];
+	if ( pCurMdl->m_GrpBf.m_idSpaceLast) {
+		pGrpB = &pCurMdl->m_GrpBf.m_pst[MIDtoHN( pCurMdl->m_GrpBf.m_idSpaceLast)];
 		MDSPACENEXT( pGrpB) = i_idGrp;
 	}
 
 	// 空きエリアリンクの先頭にリンク付ける
-	MDSPACEBEFORE( pGrpC) = Mdm::GetCurModel()->m_GrpBf.m_idSpaceLast;
+	MDSPACEBEFORE( pGrpC) = pCurMdl->m_GrpBf.m_idSpaceLast;
 	MDSPACENEXT( pGrpC) = 0;
-	Mdm::GetCurModel()->m_GrpBf.m_idSpaceLast = i_idGrp;
+	pCurMdl->m_GrpBf.m_idSpaceLast = i_idGrp;
 	return 0;
 }
 
@@ -112,10 +114,11 @@ MINT DGrp::GetGrpParam(
 				)
 {
 	MdmSetGRP*	pGrp;
+	MdModel* pCurMdl = Mdm::GetCurModel();
 
 	ASSERT( MDISGRP( i_idGrp));
 
-	pGrp = &Mdm::GetCurModel()->m_GrpBf.m_st[MIDtoHN( i_idGrp)];
+	pGrp = &pCurMdl->m_GrpBf.m_pst[MIDtoHN( i_idGrp)];
 	*o_prKt = pGrp->m_rKt;
 	*o_prFl = pGrp->m_rFl;
 	return 0;
@@ -131,10 +134,11 @@ MINT DGrp::SetGrpParam(
 				)
 {
 	MdmSetGRP*	pGrp;
+	MdModel* pCurMdl = Mdm::GetCurModel();
 
 	ASSERT( MDISGRP( i_idGrp));
 
-	pGrp = &Mdm::GetCurModel()->m_GrpBf.m_st[MIDtoHN( i_idGrp)];
+	pGrp = &pCurMdl->m_GrpBf.m_pst[MIDtoHN( i_idGrp)];
 	pGrp->m_rKt = i_rKt;
 	pGrp->m_rFl = i_rFl;
 	return 0;
@@ -145,7 +149,9 @@ MINT DGrp::SetGrpParam(
 //
 MDID DGrp::GetCurGrpId()
 {
-	return	Mdm::GetCurModel()->m_idCurGrp;
+	MdModel* pCurMdl = Mdm::GetCurModel();
+
+	return	pCurMdl->m_idCurGrp;
 }
 
 //===========================================================================
@@ -156,14 +162,15 @@ MDID DGrp::SetCurGrpId(							// 直前のグループId
 				)
 {
 	MDID idCurGrp;
+	MdModel* pCurMdl = Mdm::GetCurModel();
 
 	ASSERT( MDISGRP( i_idGrp));
 
-	idCurGrp = Mdm::GetCurModel()->m_idCurGrp;
-	Mdm::GetCurModel()->m_idCurGrp = i_idGrp;
+	idCurGrp = pCurMdl->m_idCurGrp;
+	pCurMdl->m_idCurGrp = i_idGrp;
 
 	// カレント座標変換マトリックスを設定する
-	DLyr::SetCurCoord( Mdm::GetCurModel()->m_GrpBf.m_st[MIDtoHN( i_idGrp)].m_MTrans);
+	DLyr::SetCurCoord( pCurMdl->m_GrpBf.m_pst[MIDtoHN( i_idGrp)].m_MTrans);
 	return	idCurGrp;
 }
 
@@ -172,12 +179,15 @@ MDID DGrp::SetCurGrpId(							// 直前のグループId
 //
 MINT DGrp::GetGrpNameFromId(
 						MDID		i_idGrp,	// グループId
-						MCHAR*		o_psName	// グループ名
+						MCHAR*		o_sGName,	// グループ名
+						int			i_nGName	// グループ名最大文字数
 				)
 {
+	MdModel* pCurMdl = Mdm::GetCurModel();
+
 	ASSERT( MDISGRP( i_idGrp));
 
-	Mstrcpy_s( o_psName, 256, Mdm::GetCurModel()->m_GrpBf.m_st[MIDtoHN( i_idGrp)].m_sName);
+	Mstrcpy_s( o_sGName, i_nGName, pCurMdl->m_GrpBf.m_pst[MIDtoHN( i_idGrp)].m_psName);
 	return 0;
 }
 
@@ -186,12 +196,15 @@ MINT DGrp::GetGrpNameFromId(
 //
 MINT DGrp::SetGrpNameFromId(
 						MDID		i_idGrp,	// グループId
-						MCHAR*		i_psName	// グループ名
+						int			i_nGName,	// グループ名最大文字数
+						MCHAR*		i_sGName	// グループ名
 				)
 {
+	MdModel* pCurMdl = Mdm::GetCurModel();
+
 	ASSERT( MDISGRP( i_idGrp));
 
-	Mstrcpy_s( Mdm::GetCurModel()->m_GrpBf.m_st[MIDtoHN( i_idGrp)].m_sName, 256, i_psName);
+	Mstrcpy_s( pCurMdl->m_GrpBf.m_pst[MIDtoHN( i_idGrp)].m_psName, i_nGName, i_sGName);
 	return 0;
 }
 
@@ -199,17 +212,18 @@ MINT DGrp::SetGrpNameFromId(
 //		グループ名よりグループIdを得る
 //
 MINT DGrp::GetGrpIdFromName (
-						MCHAR*		i_psName,	// グループ名
+						MCHAR*		i_sName,	// グループ名
 						MDID*		o_pidGrp	// グループId
 				)
 {
 	MINT	iC;
+	MdModel* pCurMdl = Mdm::GetCurModel();
 
-	for ( iC=0; iC<Mdm::GetCurModel()->m_GrpBf.m_n; iC++) {
-		if ( Mstrcmp(  Mdm::GetCurModel()->m_GrpBf.m_st[iC].m_sName, i_psName))
+	for ( iC=0; iC<pCurMdl->m_GrpBf.m_n; iC++) {
+		if ( Mstrcmp(  pCurMdl->m_GrpBf.m_pst[iC].m_psName, i_sName))
 			break;
 	}
-	if ( iC < Mdm::GetCurModel()->m_GrpBf.m_n)
+	if ( iC < pCurMdl->m_GrpBf.m_n)
 		*o_pidGrp = MHNtoID( iC);
 	else
 		*o_pidGrp = 0;
@@ -221,7 +235,9 @@ MINT DGrp::GetGrpIdFromName (
 //
 MINT DGrp::GetGrpCount ()
 {
-	return ( Mdm::GetCurModel()->m_GrpBf.m_n - Mdm::GetCurModel()->m_GrpBf.m_nidSpace);
+	MdModel* pCurMdl = Mdm::GetCurModel();
+
+	return ( pCurMdl->m_GrpBf.m_n - pCurMdl->m_GrpBf.m_nidSpace);
 }
 
 //===========================================================================
@@ -233,10 +249,11 @@ MINT DGrp::GetGrpIdAll (
 				)
 {
 	MINT	iC;
+	MdModel* pCurMdl = Mdm::GetCurModel();
 
 	o_pGidGrp->m_n = 0;
-	for ( iC=0; iC<Mdm::GetCurModel()->m_GrpBf.m_n; iC++) {
-		if ( MDSPACEID( &Mdm::GetCurModel()->m_GrpBf.m_st[iC]) != MDID_DELETE)
+	for ( iC=0; iC<pCurMdl->m_GrpBf.m_n; iC++) {
+		if ( MDSPACEID( &pCurMdl->m_GrpBf.m_pst[iC]) != MDID_DELETE)
 			(*o_pGidGrp) += MHNtoID( iC);
 	}
 	return 0;
@@ -250,9 +267,11 @@ MINT	MdlGetGrpCoord (
 						MgMat3E*		o_mTrans	// 座標変換マトリックス
 				)
 {
+	MdModel* pCurMdl = Mdm::GetCurModel();
+
 	ASSERT( MDISGRP( i_idGrp));
 
-	*o_mTrans = Mdm::GetCurModel()->m_GrpBf.m_st[MIDtoHN( i_idGrp)].m_MTrans;
+	*o_mTrans = pCurMdl->m_GrpBf.m_pst[MIDtoHN( i_idGrp)].m_MTrans;
 	return 0;
 }
 
@@ -263,7 +282,9 @@ MINT	MdlGetGrpCoord (
 //
 MgMat3E	MdlGetBaseCoord ( )						// 基準座標変換マトリックス
 {
-	return Mdm::GetCurModel()->m_MBaseTrans;
+	MdModel* pCurMdl = Mdm::GetCurModel();
+
+	return pCurMdl->m_MBaseTrans;
 }
 
 
@@ -277,7 +298,9 @@ MgMat3E	MdlGetBaseCoord ( )						// 基準座標変換マトリックス
 //
 MgMat3E	MdlGetCurCoord ( )						// カレント座標変換マトリックス
 {
-	return Mdm::GetCurModel()->m_MCurTrans;
+	MdModel* pCurMdl = Mdm::GetCurModel();
+
+	return pCurMdl->m_MCurTrans;
 }
 
 //===========================================================================
@@ -296,9 +319,10 @@ MgMat3E DLyr::SetCurCoord (
 				)
 {
 	MgMat3E	MTrans;
+	MdModel* pCurMdl = Mdm::GetCurModel();
 
-	MTrans = Mdm::GetCurModel()->m_MCurTrans;
-	Mdm::GetCurModel()->m_MCurTrans = i_MTransr;
+	MTrans = pCurMdl->m_MCurTrans;
+	pCurMdl->m_MCurTrans = i_MTransr;
 	return MTrans;
 }
 

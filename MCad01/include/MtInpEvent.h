@@ -26,7 +26,7 @@ class MtInpEvent
 		MUINT		m_nflag;
 		MCHAR		m_key;
 		MgPoint2	m_pt;
-		MCHAR*		m_pcMenuStr;
+		MCHAR*		m_sMenuStr;
 #else
 		MUINT		m_type;
 		MUINT		m_nflag;
@@ -43,14 +43,14 @@ class MtInpEvent
 						{ memset( this, 0, sizeof( *this)); m_type = type; m_nflag = nflag; m_pt= pt;}
 		MtInpEvent( int type, int nflag, MCHAR* pcMenuString)
 						{ memset( this, 0, sizeof( *this)); m_type = type;  m_nflag = nflag;
-						  m_pt = MgPoint2( 0.f, 0.f); m_pcMenuStr = pcMenuString;}
+						  m_pt = MgPoint2( 0.f, 0.f); m_sMenuStr = pcMenuString;}
 #else
 		MtInpEvent( int type, int nflag, MgPoint2 pt)
 						{ memset( this, 0, sizeof( *this)); m_type = type; m_nflag = nflag; m_pt= pt;}
 #endif
 		//MtInpEvent( const MtInpEvent &theOther)
 		//				{ m_type = theOther.m_type; m_nflag = theOther.m_nflag; m_key = theOther.m_key;
-		//				  m_pcMenuStr = theOther.m_pcMenuStr; m_pt = theOther.m_pt;}
+		//				  m_sMenuStr = theOther.m_sMenuStr; m_pt = theOther.m_pt;}
 		virtual ~MtInpEvent( void)
 						{ m_type = 0;}
 
@@ -67,7 +67,7 @@ class MtInpEvent
 						{ pPt[0] = m_pt.x; pPt[1] = m_pt.y;}
 #ifdef	MS_CMDMENU_STR_TYPE
 		const MCHAR* GetMenuString( void)
-						{ return m_pcMenuStr;}
+						{ return m_sMenuStr;}
 #endif
 		bool	IsValid( void)
 						{ return CHECKSTRUCTPTR( this);}

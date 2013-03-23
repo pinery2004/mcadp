@@ -210,7 +210,7 @@ void MmWndInfo::FreeMDC()
 
 void MmWndInfo::ClearMDC()
 {
-	CBrush	brushBG = McSystemProperty::GetColor( MM_COLOR_BACKGROUND);
+	CBrush	brushBG = mcs::GetColor( MM_COLOR_BACKGROUND);
 	CBrush* pOldBrush = m_pMemDC->SelectObject( &brushBG);
 
 	MINT iOldMM = SetMapMode( MMAPMODE);						// マップモードを初期設定する

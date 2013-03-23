@@ -133,7 +133,7 @@ public:
 	//							≧ 0: 部材ID
 
 	static MINT SetComboCdTpPts(
-							MCHAR* 		i_pcNmPts1		// （操作用）部材名
+							MCHAR* 		i_sNmPts1		// （操作用）部材名
 					);
 
 	///////////////////////////////////////////////////////////////////////////////
@@ -142,7 +142,7 @@ public:
 	//							≧ 0: 部材ID
 
 	static MINT GetIdTpPts(
-							MCHAR* 		i_pcNmPts1		// （操作用）部材名
+							MCHAR* 		i_sNmPts1		// （操作用）部材名
 					);
 
 	///////////////////////////////////////////////////////////////////////////////
@@ -169,7 +169,7 @@ public:
 	//	寸法型式選択項目番号を取得する
 	//							＝-1: 該当なし
 	//							≧ 0: 部材ID
-	static MINT GetComboKmIdMbr( MCHAR* i_pcCdMbr);
+	static MINT GetComboKmIdMbr( MCHAR* i_sCdMbr);
 
 	///////////////////////////////////////////////////////////////////////////////
 	//	寸法型式選択用コンポボックスに寸法型式を設定する
@@ -177,7 +177,7 @@ public:
 	//							≧ 0: 寸法型式ID
 
 	static MINT SetComboCdMbr(
-							MCHAR* 		i_pcCdMbr
+							MCHAR* 		i_sCdMbr
 					);
 
 	///////////////////////////////////////////////////////////////////////////////
@@ -186,7 +186,7 @@ public:
 	//							≧ 0: 寸法型式ID
 
 	static MINT GetComboCdMbr(
-							MCHAR* 		i_pcCdMbr
+							MCHAR* 		i_sCdMbr
 					);
 
 	///////////////////////////////////////////////////////////////////////////////
@@ -208,8 +208,8 @@ public:
 	static MINT SetDialogBar(							// ステイタス 0:正常 -1:エラー
 							MINT		i_iKumi,		// 組
 							MINT		i_iBr,			// 分類
-							MCHAR*		i_pcTpPts,		// 部品タイプ
-							MCHAR*		i_pcMbr			// 寸法型式 または NULL
+							MCHAR*		i_sTpPts,		// 部品タイプ
+							MCHAR*		i_sMbr			// 寸法型式 または NULL
 					);
 };
 
@@ -257,8 +257,8 @@ public:
 	static MINT GetPts(
 							MINT		i_iKai,			// 階
 							MINT		i_iIdTpPts,		// 部品ID
-					const	MCHAR*		i_pcGeneralName,// 総称 または NULL
-					const	MCHAR*		i_pcNmPts1,		// 操作用部材名 または NULL
+					const	MCHAR*		i_sGeneralName,	// 総称 または NULL
+					const	MCHAR*		i_sNmPts1,		// 操作用部材名 または NULL
 							MINT		i_szPlcEn,		// 部品配置最大数
 					class	mhPlcInfo*	*o_pPlcEn,		// 選択部品配置
 					class	MPOSITION*	o_pPlcpos = NULL// 選択[部品配置]位置 または NULL
@@ -271,8 +271,8 @@ public:
 	static bool ChkPts(
 							MINT		i_iKai,			// 階 または NULL
 							MINT		i_iIdTpPts,		// 部品ID または NULL
-					const	MCHAR*		i_pcGeneralName,// 総称 または NULL
-					const	MCHAR*		i_pcNmPts1,		// 操作用部材名 または NULL
+					const	MCHAR*		i_sGeneralName,	// 総称 または NULL
+					const	MCHAR*		i_sNmPts1,		// 操作用部材名 または NULL
 					class	mhPlcInfo*	i_pPlcEn		// 調査部品配置
 					);
 

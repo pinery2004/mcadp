@@ -65,7 +65,7 @@ namespace MC
 
 	// 開口の上端高さと下端高さを求める
 	pAuxTategu = (MhTateguInfo *)pPlcTEn->GetPIAuxTategu();
-	rZU = McSystemProperty::GetStnd( pPlcTEn->GetPIKai(), MM_STNDH_LOWER) + pAuxTategu->GetHeight();
+	rZU = mcs::GetStnd( pPlcTEn->GetPIKai(), MM_STNDH_LOWER) + pAuxTategu->GetHeight();
 	rZL = rZU - pAuxTategu->GetROH();
 
 	ptW[0] = (MgPoint2&)pPlcTEn->GetPIPlcIti( 0);
@@ -164,7 +164,7 @@ void MdlDispList::DrawKiso(
 	MgGPolyg3	GPgR;
 	MgGPolyg3	GPgL;
 
-	rZU = McSystemProperty::GetStnd( i_pPlcEn->GetPIKai(), MM_STNDH_KISO);			// 基礎基準
+	rZU = mcs::GetStnd( i_pPlcEn->GetPIKai(), MM_STNDH_KISO);			// 基礎基準
 	rZL = 0.;																	// グランド
 	LnKiso0 = i_pPlcEn->GetPIPlcIti();
 	vuLnKiso0 = LnKiso0.Vu();
@@ -251,8 +251,8 @@ void MdlDispList::DrawTatewaku(
 
 	MgPoint3	PT[2][2][2];						// 頂点座標
 
-	rZ1 = McSystemProperty::GetStnd( i_pPlcEn->GetPIKai(), MM_STNDH_LOWER);
-	rZ2 = McSystemProperty::GetStnd( i_pPlcEn->GetPIKai(), MM_STNDH_CEILING);
+	rZ1 = mcs::GetStnd( i_pPlcEn->GetPIKai(), MM_STNDH_LOWER);
+	rZ2 = mcs::GetStnd( i_pPlcEn->GetPIKai(), MM_STNDH_CEILING);
 //	LnPlc.Set( i_pPlcEn->m_lnPlc);
 	LnPlc = i_pPlcEn->GetPIPlcIti();
 
@@ -326,7 +326,7 @@ void MdlDispList::DrawOukaZai(
 	iCdHgt = i_pPlcEn->GetPTCdHgt();
 	iULCd = i_pPlcEn->GetPTCdToritk();
 
-	rZ = McSystemProperty::GetStnd( i_pPlcEn->GetPIKai(), iCdHgt);
+	rZ = mcs::GetStnd( i_pPlcEn->GetPIKai(), iCdHgt);
 	LnPlc = i_pPlcEn->GetPIPlcIti();
 
 	VuLng = LnPlc.Vu();
@@ -401,7 +401,7 @@ void MdlDispList::DrawKaiko(
 	iCdHgt = (MSTNDH)i_pPlcEn->GetPICdHgt();
 	iULCd = i_pPlcEn->GetPTCdToritk();
 
-	rZ = McSystemProperty::GetStnd( i_pPlcEn->GetPIKai(), iCdHgt);
+	rZ = mcs::GetStnd( i_pPlcEn->GetPIKai(), iCdHgt);
 	LnPlc = i_pPlcEn->GetPIPlcIti();
 
 	VuLng = LnPlc.Vu();

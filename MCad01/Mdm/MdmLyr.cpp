@@ -35,30 +35,31 @@ MINT DLyr::CreateLyr(
 				)
 {
 	MdmSetLYR*	pLyr;
+	MdModel* pCurMdl = Mdm::GetCurModel();
 	
 	ASSERT( MDISSCM( i_idScm));
 	ASSERT( MDISGRP( i_idGrp));
 
 	// LyrBfより空きのIDを取得し、レイヤーの子のID設定用領域を設ける
 	//
-	if ( Mdm::GetCurModel()->m_LyrBf.m_idSpaceLast == 0) {
+	if ( pCurMdl->m_LyrBf.m_idSpaceLast == 0) {
 		// 削除して空きになっているIDがない場合は最終ID+1を使用する
-		Mdm::GetCurModel()->m_LyrBf ++;
-		*o_pidLyr = Mdm::GetCurModel()->m_LyrBf.m_n;
-		pLyr = &Mdm::GetCurModel()->m_LyrBf.m_st[MIDtoHN( *o_pidLyr)];
+		pCurMdl->m_LyrBf ++;
+		*o_pidLyr = pCurMdl->m_LyrBf.m_n;
+		pLyr = &pCurMdl->m_LyrBf.m_pst[MIDtoHN( *o_pidLyr)];
 
 	} else {
 		// 削除して空きになっているIDがある場合はそのIDを使用する
-		ASSERT( Mdm::GetCurModel()->m_LyrBf.m_nidSpace >= 1);
+		ASSERT( pCurMdl->m_LyrBf.m_nidSpace >= 1);
 
-		*o_pidLyr = Mdm::GetCurModel()->m_LyrBf.m_idSpaceLast;
-		pLyr = &Mdm::GetCurModel()->m_LyrBf.m_st[MIDtoHN( *o_pidLyr)];
+		*o_pidLyr = pCurMdl->m_LyrBf.m_idSpaceLast;
+		pLyr = &pCurMdl->m_LyrBf.m_pst[MIDtoHN( *o_pidLyr)];
 
 		// 空きエリアへのIDを一つ戻す
-		Mdm::GetCurModel()->m_LyrBf.m_idSpaceLast = MDSPACEBEFORE( pLyr);
-		if ( Mdm::GetCurModel()->m_LyrBf.m_idSpaceLast)
-			MDSPACENEXT( &Mdm::GetCurModel()->m_LyrBf.m_st[MIDtoHN( Mdm::GetCurModel()->m_LyrBf.m_idSpaceLast)]) = 0;
-		Mdm::GetCurModel()->m_LyrBf.m_nidSpace--;
+		pCurMdl->m_LyrBf.m_idSpaceLast = MDSPACEBEFORE( pLyr);
+		if ( pCurMdl->m_LyrBf.m_idSpaceLast)
+			MDSPACENEXT( &pCurMdl->m_LyrBf.m_pst[MIDtoHN( pCurMdl->m_LyrBf.m_idSpaceLast)]) = 0;
+		pCurMdl->m_LyrBf.m_nidSpace--;
 	}
 
 	// スキーマID、グループIDの設定、エンティティIdバッファの生成
@@ -66,8 +67,8 @@ MINT DLyr::CreateLyr(
 																// 子IDエリア、
 																// ウィンドウ毎の表示・検知モード(初期は4ウィンドウ)
 	// 生成レイヤーとグループ、スキーマとのリンクを付ける
-	Mdm::GetCurModel()->m_GrpBf.m_st[MIDtoHN( i_idGrp)].m_GidC += (*o_pidLyr);
-	Mdm::GetCurModel()->m_ScmBf.m_st[MIDtoHN( i_idScm)].m_GidC += (*o_pidLyr);
+	pCurMdl->m_GrpBf.m_pst[MIDtoHN( i_idGrp)].m_GidC += (*o_pidLyr);
+	pCurMdl->m_ScmBf.m_pst[MIDtoHN( i_idScm)].m_GidC += (*o_pidLyr);
 
 //EXIT:
 	return 0;
@@ -84,32 +85,33 @@ MINT DLyr::DeleteLyr(							//
 	MdmSetLYR*	pLyrC;							// 削除レイヤー
 	MDID		idGrp;
 	MDID		idScm;
+	MdModel* pCurMdl = Mdm::GetCurModel();
 
 	ASSERT( MDISLYR( i_idLyr));
 
 	// グループ、スキーマからのリンクを削除する
-	pLyrC = &Mdm::GetCurModel()->m_LyrBf.m_st[ MIDtoHN( i_idLyr)];
+	pLyrC = &pCurMdl->m_LyrBf.m_pst[ MIDtoHN( i_idLyr)];
 	idGrp = pLyrC->m_idP1;
 	idScm = pLyrC->m_idP2;
-	Mdm::GetCurModel()->m_GrpBf.m_st[MIDtoHN( idGrp)] -= i_idLyr;
-	Mdm::GetCurModel()->m_ScmBf.m_st[MIDtoHN( idScm)] -= i_idLyr;
+	pCurMdl->m_GrpBf.m_pst[MIDtoHN( idGrp)] -= i_idLyr;
+	pCurMdl->m_ScmBf.m_pst[MIDtoHN( idScm)] -= i_idLyr;
 
 	// 削除し割り当て待ちの空きレイヤー数に追加
-	Mdm::GetCurModel()->m_LyrBf.m_nidSpace++;
+	pCurMdl->m_LyrBf.m_nidSpace++;
 	// レイヤー削除フラグ設定と使用エリア開放
 	MDSPACEID( pLyrC) = MDID_DELETE;
 	pLyrC->Free();
 
 	// 空きエリアリンクに追加
 	// 直前に削除したレイヤーの次のレイヤーとする
-	if ( Mdm::GetCurModel()->m_LyrBf.m_idSpaceLast) {
-		pLyrB = &Mdm::GetCurModel()->m_LyrBf.m_st[ MIDtoHN( Mdm::GetCurModel()->m_LyrBf.m_idSpaceLast)];
+	if ( pCurMdl->m_LyrBf.m_idSpaceLast) {
+		pLyrB = &pCurMdl->m_LyrBf.m_pst[ MIDtoHN( pCurMdl->m_LyrBf.m_idSpaceLast)];
 		MDSPACENEXT( pLyrB) = i_idLyr;
 	}
 	// 空きエリアリンクの先頭にリンク付ける
-	MDSPACEBEFORE( pLyrC) = Mdm::GetCurModel()->m_LyrBf.m_idSpaceLast;
+	MDSPACEBEFORE( pLyrC) = pCurMdl->m_LyrBf.m_idSpaceLast;
 	MDSPACENEXT( pLyrC) = 0;
-	Mdm::GetCurModel()->m_LyrBf.m_idSpaceLast = i_idLyr;
+	pCurMdl->m_LyrBf.m_idSpaceLast = i_idLyr;
 	return 0;
 }
 
@@ -118,7 +120,9 @@ MINT DLyr::DeleteLyr(							//
 //
 MDID DLyr::GetCurLyrId()
 {
-	return	Mdm::GetCurModel()->m_idCurGrp;
+	MdModel* pCurMdl = Mdm::GetCurModel();
+
+	return	pCurMdl->m_idCurGrp;
 }
 
 //===========================================================================
@@ -129,11 +133,12 @@ MDID DLyr::SetCurLyrId(					// 直前のカレントレイヤーId
 				)
 {
 	MDID idCurGrp;
+	MdModel* pCurMdl = Mdm::GetCurModel();
 
 	ASSERT( MDISLYR( i_idLyr));
 
-	idCurGrp = Mdm::GetCurModel()->m_idCurGrp;
-	Mdm::GetCurModel()->m_idCurGrp = i_idLyr;
+	idCurGrp = pCurMdl->m_idCurGrp;
+	pCurMdl->m_idCurGrp = i_idLyr;
 	return	idCurGrp;
 }
 
@@ -142,7 +147,9 @@ MDID DLyr::SetCurLyrId(					// 直前のカレントレイヤーId
 //
 MINT DLyr::GetLyrCount ()
 {
-	return ( Mdm::GetCurModel()->m_LyrBf.m_n - Mdm::GetCurModel()->m_LyrBf.m_nidSpace);
+	MdModel* pCurMdl = Mdm::GetCurModel();
+
+	return ( pCurMdl->m_LyrBf.m_n - pCurMdl->m_LyrBf.m_nidSpace);
 }
 
 //===========================================================================
@@ -154,10 +161,11 @@ MINT DLyr::GetLyrIdAll (
 				)
 {
 	MINT	iC;
+	MdModel* pCurMdl = Mdm::GetCurModel();
 
 	o_pGidLyr->m_n = 0;
-	for ( iC=0; iC<Mdm::GetCurModel()->m_LyrBf.m_n; iC++) {
-		if ( MDSPACEID( &Mdm::GetCurModel()->m_LyrBf.m_st[iC]) != MDID_DELETE)
+	for ( iC=0; iC<pCurMdl->m_LyrBf.m_n; iC++) {
+		if ( MDSPACEID( &pCurMdl->m_LyrBf.m_pst[iC]) != MDID_DELETE)
 			(*o_pGidLyr) += MHNtoID( iC);
 	}
 	return 0;
@@ -176,19 +184,20 @@ MINT DLyr::GetLyrId(
 	MINT		iC;
 	MDIDSET*	pGidL;
 	MDID		idLyr;
+	MdModel* pCurMdl = Mdm::GetCurModel();
 
 	ASSERT( MDISSCM( i_idScm));
 	ASSERT( MDISGRP( i_idGrp));
 
 	// 指定Idのスキーマの子Idセット(レイヤーIdセット)を得る
-	pGidL = &Mdm::GetCurModel()->m_ScmBf.m_st[MIDtoHN( i_idScm)].m_GidC;
+	pGidL = &pCurMdl->m_ScmBf.m_pst[MIDtoHN( i_idScm)].m_GidC;
 
 	// 親のグループIdが指定グループIdのレイヤーを探す
 	*o_pidLyr = 0;
 	for ( iC=0; iC<pGidL->m_n; iC++) {
-		idLyr = pGidL->m_st[iC];
+		idLyr = pGidL->m_pst[iC];
 		if ( idLyr > 0) {
-			if ( Mdm::GetCurModel()->m_LyrBf.m_st[MIDtoHN( idLyr)].m_idP2 == i_idGrp) {
+			if ( pCurMdl->m_LyrBf.m_pst[MIDtoHN( idLyr)].m_idP2 == i_idGrp) {
 				*o_pidLyr = idLyr;
 				break;
 			}
@@ -205,12 +214,14 @@ MINT DLyr::GetGrpId (
 						MDID*	o_idGrp			// グループId
 				)
 {
+	MdModel* pCurMdl = Mdm::GetCurModel();
+
 	ASSERT( MDISLYR( i_idLyr));
 
-	if ( i_idLyr > Mdm::GetCurModel()->m_LyrBf.m_n)
+	if ( i_idLyr > pCurMdl->m_LyrBf.m_n)
 		ms::SysError( MBCstr( "GetGrpId"), MC_ERR_ID);
 
-	*o_idGrp = Mdm::GetCurModel()->m_LyrBf.m_st[MIDtoHN( i_idLyr)].m_idP1;
+	*o_idGrp = pCurMdl->m_LyrBf.m_pst[MIDtoHN( i_idLyr)].m_idP1;
 	return 0;
 }
 
@@ -222,12 +233,14 @@ MINT DLyr::GetScm (
 						MDID*	o_idScm			// スキーマId
 				)
 {
+	MdModel* pCurMdl = Mdm::GetCurModel();
+
 	ASSERT( MDISLYR( i_idLyr));
 
-	if ( i_idLyr > Mdm::GetCurModel()->m_LyrBf.m_n)
+	if ( i_idLyr > pCurMdl->m_LyrBf.m_n)
 		ms::SysError( MBCstr( "GetScm"), MC_ERR_ID);
 
-	*o_idScm = Mdm::GetCurModel()->m_LyrBf.m_st[MIDtoHN( i_idLyr)].m_idP2;
+	*o_idScm = pCurMdl->m_LyrBf.m_pst[MIDtoHN( i_idLyr)].m_idP2;
 	return 0;
 }
 
@@ -239,12 +252,14 @@ MINT DLyr::GetEnt(
 						MDIDSET*	o_pGidEnt	// エンティティIdセット
 				)
 {
+	MdModel* pCurMdl = Mdm::GetCurModel();
+
 	ASSERT( MDISLYR( i_idLyr));
 
-	if ( i_idLyr > Mdm::GetCurModel()->m_LyrBf.m_n)
+	if ( i_idLyr > pCurMdl->m_LyrBf.m_n)
 		ms::SysError( MBCstr( "GetScm"), MC_ERR_ID);
 
-	*o_pGidEnt = Mdm::GetCurModel()->m_LyrBf.m_st[MIDtoHN( i_idLyr)].m_GidC;
+	*o_pGidEnt = pCurMdl->m_LyrBf.m_pst[MIDtoHN( i_idLyr)].m_GidC;
 	return 0;
 }
 
@@ -265,17 +280,18 @@ MINT DLyr::GetLyrDispMode (
 				)
 {
 	MUBYTESET*	pAWDSet;
+	MdModel* pCurMdl = Mdm::GetCurModel();
 
 	ASSERT( MDISLYR( i_idLyr));
 
-	pAWDSet = &Mdm::GetCurModel()->m_LyrBf.m_st[MIDtoHN( i_idLyr)].m_GaWD;
+	pAWDSet = &pCurMdl->m_LyrBf.m_pst[MIDtoHN( i_idLyr)].m_GaWD;
 	if ( pAWDSet->m_n == 0)
 		*o_iaWD = 0;
 	else {
 		if ( i_idWin > pAWDSet->m_n) {
 			ms::SysError( MBCstr( "GetLyrDispMode"), MC_ERR_ID);
 		}
-		*o_iaWD = pAWDSet->m_st[MIDtoHN( i_idWin)];
+		*o_iaWD = pAWDSet->m_pst[MIDtoHN( i_idWin)];
 	}
 	return 0;
 }
@@ -291,15 +307,16 @@ MINT DLyr::SetLyrDispMode (
 				)
 {
 	MUBYTESET*	pAWDSet;
+	MdModel* pCurMdl = Mdm::GetCurModel();
 
 	ASSERT( MDISLYR( i_idLyr));
 
-	pAWDSet = &Mdm::GetCurModel()->m_LyrBf.m_st[MIDtoHN( i_idLyr)].m_GaWD;
+	pAWDSet = &pCurMdl->m_LyrBf.m_pst[MIDtoHN( i_idLyr)].m_GaWD;
 
 	if ( i_idWin > pAWDSet->m_sz) {
 		pAWDSet->ReSize( i_idWin+3);
 	}
-	pAWDSet->m_st[MIDtoHN( i_idWin)] = i_iaWD;
+	pAWDSet->m_pst[MIDtoHN( i_idWin)] = i_iaWD;
 	if ( i_idWin > pAWDSet->m_n)
 		pAWDSet->m_n = i_idWin;
 	return 0;
@@ -317,10 +334,10 @@ MINT DLyr::SetLyrsDispMode (
 {
 	MINT	iC;
 	MDID	idLyr;
-
+	MdModel* pCurMdl = Mdm::GetCurModel();
 
 	for ( iC=0; iC<i_GidScm.m_n; iC++) {
-		idLyr = i_GidScm.m_st[iC];
+		idLyr = i_GidScm.m_pst[iC];
 		ASSERT( MDISLYR( idLyr));
 		SetLyrDispMode ( i_idWin, idLyr, i_iaWD);
 	}
@@ -344,11 +361,13 @@ MINT DLyr::SerachLyrDispMode (
 	MINT	iC;
 	MINT	iaWD;
 	bool	bD;
+	MdModel* pCurMdl = Mdm::GetCurModel();
+
 	//	レイヤーセットの検索
 	o_GidScm->m_n = 0;
 
-	for ( iC=0; iC<Mdm::GetCurModel()->m_LyrBf.m_n; iC++) {
-		iaWD = Mdm::GetCurModel()->m_LyrBf.m_st[iC].m_GaWD[MIDtoHN( Mdm::GetCurModel()->m_idCurWin)];
+	for ( iC=0; iC<pCurMdl->m_LyrBf.m_n; iC++) {
+		iaWD = pCurMdl->m_LyrBf.m_pst[iC].m_GaWD[MIDtoHN( pCurMdl->m_idCurWin)];
 		switch ( i_imdD )
 		{
 		case 1:
@@ -368,7 +387,7 @@ MINT DLyr::SerachLyrDispMode (
 	}
 
 	//	カレントウィンドウタイプ
-	*o_itpCurWin = Mdm::GetCurModel()->m_WinBf.m_st[MIDtoHN( Mdm::GetCurModel()->m_idCurWin)].m_itpWin;
+	*o_itpCurWin = pCurMdl->m_WinBf.m_pst[MIDtoHN( pCurMdl->m_idCurWin)].m_itpWin;
 	return 0;
 }
 
@@ -380,9 +399,11 @@ MINT DLyr::GetLyrCurMaterial (
 						MDFIG*	o_pFig			// カレントレイヤー表示属性
 				)
 {
+	MdModel* pCurMdl = Mdm::GetCurModel();
+
 	ASSERT( MDISLYR( i_idLyr));
 
-	*o_pFig = Mdm::GetCurModel()->m_LyrBf.m_st[MIDtoHN( i_idLyr)].m_CurFig;
+	*o_pFig = pCurMdl->m_LyrBf.m_pst[MIDtoHN( i_idLyr)].m_CurFig;
 	return 0;
 }
 
@@ -394,9 +415,11 @@ MINT DLyr::SetlyrCurMaterial (
 						MDFIG&	i_Fig			// レイヤー表示属性
 				)
 {
+	MdModel* pCurMdl = Mdm::GetCurModel();
+
 	ASSERT( MDISLYR( i_idLyr));
 
-	Mdm::GetCurModel()->m_LyrBf.m_st[MIDtoHN( i_idLyr)].m_CurFig = i_Fig;
+	pCurMdl->m_LyrBf.m_pst[MIDtoHN( i_idLyr)].m_CurFig = i_Fig;
 
 	return 0;
 }
@@ -409,9 +432,11 @@ MINT DLyr::GetLyrDefaultMaterial (
 						MDFIG*	o_pFig			// デフォルトレイヤー表示属性
 				)
 {
+	MdModel* pCurMdl = Mdm::GetCurModel();
+
 	ASSERT( MDISLYR( i_idLyr));
 
-	*o_pFig = Mdm::GetCurModel()->m_LyrBf.m_st[MIDtoHN( i_idLyr)].m_DfltFig;
+	*o_pFig = pCurMdl->m_LyrBf.m_pst[MIDtoHN( i_idLyr)].m_DfltFig;
 	return 0;
 }
 
@@ -423,9 +448,11 @@ MINT DLyr::SetlyrDefaultMaterial (
 						MDFIG&	i_Fig			// レイヤー表示属性
 				)
 {
+	MdModel* pCurMdl = Mdm::GetCurModel();
+
 	ASSERT( MDISLYR( i_idLyr));
 
-	Mdm::GetCurModel()->m_LyrBf.m_st[MIDtoHN( i_idLyr)].m_DfltFig = i_Fig;
+	pCurMdl->m_LyrBf.m_pst[MIDtoHN( i_idLyr)].m_DfltFig = i_Fig;
 	return 0;
 }
 

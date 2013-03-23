@@ -67,7 +67,7 @@ public:
 	static MINT		m_iCtl;
 
 public:
-	static void	OpenTrace( MCHAR* i_pcFileName);
+	static void	OpenTrace( MCHAR* i_sFileName);
 	static void	CloseTrace( );
 	static void	Ctrl( int ictrl);
 	static int	Wait( MCHAR* str);

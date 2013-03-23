@@ -65,8 +65,8 @@ void 	ms::SysError(
 	default:				iErrorMsgCd = MM_ERR_OTHER;			break;			// その他エラー
 	}
 	Msprintf_s( cErrorMsg, Mstr( "%s\n\n%s　\n\n%s　"), i_cFunction,
-													McSystemProperty::GetStr( iErrorMsgCd),
-													McSystemProperty::GetStr( MM_ERR_SYSTEMEXIT));
+													mcs::GetStr( iErrorMsgCd),
+													mcs::GetStr( MM_ERR_SYSTEMEXIT));
 
 	ist = AfxMessageBox( cErrorMsg, 256, MB_ICONSTOP);
 	__debugbreak();

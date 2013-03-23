@@ -42,7 +42,7 @@ namespace MC
 // ********************************************************************************
 
 int		MBFILE::Open( 
-				MCHAR*	i_pcFileName,			// ファイル名
+				MCHAR*	i_sFileName,			// ファイル名
 				DWORD	i_Mode					// 処理モード
 												//		== MBREAD:		読み込み専用
 												//		== MBWRITE:		書き込み専用
@@ -55,10 +55,10 @@ int		MBFILE::Open(
 			ist0 = STS_OPENED;	goto END;
 		};
 	if ( i_Mode == MBREAD) {
-		m_fileHandle = CreateFileW( i_pcFileName, GENERIC_READ, 0, 0, OPEN_EXISTING, 0, 0);
+		m_fileHandle = CreateFileW( i_sFileName, GENERIC_READ, 0, 0, OPEN_EXISTING, 0, 0);
 		m_stat = MBREAD;
 	} else if ( i_Mode == MBWRITE) {
-		m_fileHandle = CreateFileW( i_pcFileName, GENERIC_WRITE, 0, 0, CREATE_ALWAYS, 0, 0);
+		m_fileHandle = CreateFileW( i_sFileName, GENERIC_WRITE, 0, 0, CREATE_ALWAYS, 0, 0);
 		m_stat = MBWRITE;
 	} else {
 		ist0 = STS_ACSMDERR;	goto END;
@@ -132,13 +132,13 @@ MINT MBFILE::GetFileDate(
 // ********************************************************************************
 
 int		MBHZDT::Open( 
-				MCHAR*	i_pcFileName			// ( I ) ファイル名
+				MCHAR*	i_sFileName			// ( I ) ファイル名
 				)
 {
 	m_icsLine = 0;
 	m_icsDbuf = 0;
 	m_fhead = 1;
-	return 	MBFILE::Open( i_pcFileName, MBREAD);
+	return 	MBFILE::Open( i_sFileName, MBREAD);
 }
 
 // *******************************************************************************

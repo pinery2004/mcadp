@@ -50,7 +50,7 @@ void mlLog::OpenTrace( MCHAR* i_cLogFilePath)
 	if ( Mstrcmp( i_cLogFilePath, Mstr( "stdout")) == 0) {
 		m_File = stdout;
 	} else {
-//		m_File = Mfopen( i_pcFileName, Mstr( "w"));
+//		m_File = Mfopen( i_sFileName, Mstr( "w"));
 		err = Mfopen_s( &m_File, i_cLogFilePath, Mstr( "w"));
 		if ( err != 0) {
 			ms::SysError( i_cLogFilePath, MC_ERR_FILEOPEN);

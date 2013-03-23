@@ -192,7 +192,7 @@ void MtProcessEvent( MtInpEvent *event )
 
     case MT_EVM_MENUCOMMAND:									// 入力イベントがメニュー入力の場合
     case MT_EVM_POPUPCOMMAND:
-////E		if( z_IgnoreMenuWQuote && event->m_pcMenuStr[0] == '\'' ) 
+////E		if( z_IgnoreMenuWQuote && event->m_sMenuStr[0] == '\'' ) 
 ////E			break;
 //
 //		//tRb.m_restype = MTRT_RBTNDWN;						// コマンドタイプを座標(MTRT_RBTNDWN)とする
@@ -201,8 +201,8 @@ void MtProcessEvent( MtInpEvent *event )
 //		//MtGetCommandQueue()->Push( &tRb);					// コマンドキューに追加する
 
 #ifdef	MS_CMDMENU_STR_TYPE
-		MtMnuStrToRB( &RbQue, event->m_pcMenuStr);			// メニューキューに追加する
-		MBFREE( event->m_pcMenuStr); 
+		MtMnuStrToRB( &RbQue, event->m_sMenuStr);			// メニューキューに追加する
+		MBFREE( event->m_sMenuStr); 
 #else
 		pcMenuStr = GetGlobalName( event->GetNFlag());	// メニューIDよりコマンド名取得
 		MtMnuStrToRB( &RbQue, pcMenuStr);						// メニューキューに追加する
@@ -261,18 +261,18 @@ void MtProcessEvent( MtInpEvent *event )
 // 指定したコマンド名のメニューコマンドをメニューキューに登録型で返す
 void MtMnuStrToRB(
 						MtPrcEventQueue* i_pRbQue,	// メニューコマンドキュー
-						MCHAR*			 i_pcMnuStr	// コマンド
+						MCHAR*			 i_sMnuStr	// コマンド
 				)
 {
 	MINT iSt;
-	if ( i_pcMnuStr != NULL && i_pcMnuStr[0] != 0) {
+	if ( i_sMnuStr != NULL && i_sMnuStr[0] != 0) {
 
 #ifdef MS_CMDMENU_STR_TYPE
-		MtInpEvent theMtInpEvent( MT_EVM_KEYCHAR, 0, i_pcMnuStr);
+		MtInpEvent theMtInpEvent( MT_EVM_KEYCHAR, 0, i_sMnuStr);
 		MtProcessEvent( &theMtInpEvent);
 #endif
  
-		iSt = MtBuildPrcEvent( i_pRbQue, MTRT_MENUCOMMAND, i_pcMnuStr, 0);
+		iSt = MtBuildPrcEvent( i_pRbQue, MTRT_MENUCOMMAND, i_sMnuStr, 0);
 		if ( iSt == NULL) {
 			ASSERT( iSt);
 			MdCmdErrorPrompt( CMD_ERR_UNABLE, 0);					// The user shouldn't need to care what went wrong internally.  OK?

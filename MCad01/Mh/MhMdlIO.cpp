@@ -54,7 +54,7 @@ extern	int iCrf_IO;
 //	[返値] ステイタス     0 : 正常  -1 : 異常
 
 MINT IeModel::MhMdlLoad(										//
-						MCHAR*		i_pcPathI		// 読み込みファイル　フルパス
+						MCHAR*		i_sPathI		// 読み込みファイル　フルパス
 				)
 {
 	MINT		ist = -1;
@@ -78,7 +78,7 @@ MINT IeModel::MhMdlLoad(										//
 	MINT		isz = 1;
 	static MINT	iCe = 0;
 
-	if ( i_pcPathI == 0) {
+	if ( i_sPathI == 0) {
 		mtInpMode::SetKai( 1);
 		mtPlcInp::SetKai( 1);
 		WindowCtrl::MmGridNumSet( NULL);													// 初期設定
@@ -92,7 +92,7 @@ MINT IeModel::MhMdlLoad(										//
 	MhModel::Open();
 
 	// DBファイルオープン
-	ist1 = hMdl.Open( MBREAD, i_pcPathI);
+	ist1 = hMdl.Open( MBREAD, i_sPathI);
 	if ( ist1 != 0)
 		MQUIT;
 
@@ -215,7 +215,7 @@ MINT MhOptionSave(								//
 //	[返値] ステイタス     0 : 正常  -1 : 異常
 
 MINT IeModel::MhMdlSave(									//
-				const	MCHAR*		i_pcPathO	// 書き込みファイル　フルパス
+				const	MCHAR*		i_sPathO	// 書き込みファイル　フルパス
 				)
 {
 	mhPlcInfo*		pPlcEn1;
@@ -226,7 +226,7 @@ MINT IeModel::MhMdlSave(									//
 	MINT			iDumy = 0;
 	MINT			nGrid[4];
 
-	hMdl.Open( MBWRITE, i_pcPathO);
+	hMdl.Open( MBWRITE, i_sPathO);
 
 	// グリッドの保存
 	WindowCtrl::MmGridNumGet( nGrid);

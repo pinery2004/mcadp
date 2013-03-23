@@ -405,19 +405,19 @@ inline_nu void	MDFIG::zShininess(
 // PovRayèoóÕëÆê´
 
 inline_nu void	MDPMT::zPovRay(
-						MCHAR*	i_pcStr			// ï∂éöóÒ
+						MCHAR*	i_sStr			// ï∂éöóÒ
 				)
 { 
-	SetHd( MZAT_POVRAY, 0, MNWORD( i_pcStr));
-	Mstrcpy_s( (MCHAR*)&m_dt[0], 256, i_pcStr);
+	SetHd( MZAT_POVRAY, 0, MNWORD( i_sStr));
+	Mstrcpy_s( (MCHAR*)&m_dt[0], 256, i_sStr);
 }
 
 inline_nu void	MDFIG::zPovRay(
-						MCHAR*	i_pcStr			// ï∂éöóÒ
+						MCHAR*	i_sStr			// ï∂éöóÒ
 				)
 { 
-	GetpPmt( m_pPmtl->m_n)->zPovRay( i_pcStr);
-	IncrN( MZWD_POVRAY + MNWORD( i_pcStr));
+	GetpPmt( m_pPmtl->m_n)->zPovRay( i_sStr);
+	IncrN( MZWD_POVRAY + MNWORD( i_sStr));
 }
 
 // ==================== ê}å`óvëf ==========================

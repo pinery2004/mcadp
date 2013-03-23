@@ -20,16 +20,16 @@ namespace MC
 
 //S McSystemProperty	g_SysProp;
 //	システム定数
-DWORD	McSystemProperty::m_Color[MM_N_COLOR];					// 色
-MREAL	McSystemProperty::m_Real[MM_N_REAL];					// 実数
-MINT	McSystemProperty::m_Int[MM_N_INT];						// 整数
-MCHAR*	McSystemProperty::m_Str[MM_N_STR];						// 文字列
-MCHAR*	McSystemProperty::m_Path[MM_N_PATH];					// PATH
-MREAL	McSystemProperty::m_Stnd[MMAX_KAI][MM_N_STNDH];			// 基準高さ、厚さ　
+DWORD	mcs::m_Color[MM_N_COLOR];					// 色
+MREAL	mcs::m_Real[MM_N_REAL];					// 実数
+MINT	mcs::m_Int[MM_N_INT];						// 整数
+MCHAR*	mcs::m_Str[MM_N_STR];						// 文字列
+MCHAR*	mcs::m_Path[MM_N_PATH];					// PATH
+MREAL	mcs::m_Stnd[MMAX_KAI][MM_N_STNDH];			// 基準高さ、厚さ　
 
 /////////////////////////////////////////////////////////////////////////////
 //	システム定数の初期化　(固有部分)
-void	McSystemProperty::Init()
+void	mcs::Init()
 {
 	m_Color[MM_COLOR_GRID_LINE]			= RGB( 110, 180, 150);	// グリッド線表示色
 	m_Color[MM_COLOR_GRID_TEXT]			= RGB(  50, 100,  60);	// グリッド番号表示色
@@ -132,96 +132,98 @@ void	McSystemProperty::Init()
 
 /////////////////////////////////////////////////////////////////////////////
 //	システム色を取得する
-DWORD	McSystemProperty::GetColor( MSYSTEMCOLOR iCol)
+DWORD	mcs::GetColor( MSYSTEMCOLOR iCol)
 {
 	return m_Color[iCol];
 }
 
 /////////////////////////////////////////////////////////////////////////////
 //	システム実数定数を取得する
-MREAL	McSystemProperty::GetReal( MSYSTEMREAL iReal)
+MREAL	mcs::GetReal( MSYSTEMREAL iReal)
 {
 	return m_Real[iReal];
 }
 
 /////////////////////////////////////////////////////////////////////////////
 //	システム整数定数を取得する
-MINT	McSystemProperty::GetInt( MSYSTEMINT iInt)
+MINT	mcs::GetInt( MSYSTEMINT iInt)
 {
 	return m_Int[iInt];
 }
 
 /////////////////////////////////////////////////////////////////////////////
 //	システム文字列定数を取得する
-MCHAR*	McSystemProperty::GetStr( MSYSTEMSTR iStr)
+MCHAR*	mcs::GetStr( MSYSTEMSTR iStr)
 {
 	return m_Str[iStr];
 }
 
 /////////////////////////////////////////////////////////////////////////////
 //	PATH定数を取得する
-MCHAR*	McSystemProperty::GetPath( MSYSTEMPATH iPath)
+MCHAR*	mcs::GetPath( MSYSTEMPATH iPath)
 {
 	return m_Path[iPath];
 }
 
 /////////////////////////////////////////////////////////////////////////////
-//	システム環境　ファイルパスを得る
-MINT McSystemProperty::GetEnvPath(				// (  O) ステイタス	0:正常	!=0:エラー
-						MPPATHENV	i_iType,	// (I  ) 環境パス種類
+//	システム環境　環境パスにファイル名を付加したファイルパスを得る
+MINT mcs::GetEnvPath(				// ステイタス	0:正常	!=0:エラー
+						MPPATHENV	i_iType,	// 環境パス種類
 												//		 MP_PATH_ROOT:	ルート
 												//		 MP_PATH_TABLE:	テーブル
 												//		 MP_PATH_ATTR:	属性
 												//		 MP_PATH_TEX:	テクスチャ(TEXTURE)
 												//		 MP_PATH_FIG:	図形
-						MCHAR*		i_cFile,	// (I  ) ファイル名
-						MCHAR*		o_cPath		// (  O) パス名			最大260文字(MAX_PATH)
+						MCHAR*		i_cFile,	// ファイル名
+						MCHAR*		o_cPath,	// パス名		最大259+1文字(MAX_PATH)
+						int			i_ncPath	// パス名最大文字数+1
 				)
 {
 	MINT	ist = 0;
-	MSYSTEMSTR	iPathCd;
-	MINT	nSize;
-	MINT	nSizeN;
-	MCHAR*	pPathN;
+	MSYSTEMSTR	icdPath;
+	MINT	cPathN;
+	MINT	ncFile;
+	MCHAR*	pFile;
 
-//	Mstrcpy( o_cPath, McSystemProperty::GetPath( MM_PATH_ROOT_FLDR));
-//	Mstrcpy( o_cPath, McSystemProperty::GetPath( MM_PATH_PARTS_FLDR));
-	Mstrcpy_s( o_cPath, MAX_PATH, McSystemProperty::GetPath( MM_PATH_SYS_ENV_FLDR));		// 環境ルート\
+//	Mstrcpy( o_cPath, mcs::GetPath( MM_PATH_ROOT_FLDR));
+//	Mstrcpy( o_cPath, mcs::GetPath( MM_PATH_PARTS_FLDR));
 
-	nSize = (MINT)Mstrlen( o_cPath);
-	nSizeN = MAX_PATH - nSize;
-	pPathN = &o_cPath[nSize-1];
-	if ( *pPathN != Mchar( '\\')) {
-		pPathN++;
-		*pPathN = Mchar( '\\');
-		pPathN++;
-		*pPathN = 0;
-		nSizeN--;
+	Mstrcpy_s( o_cPath, i_ncPath, mcs::GetPath( MM_PATH_SYS_ENV_FLDR));		// 環境ルート\
+
+	cPathN = (MINT)Mstrlen( o_cPath);
+	ncFile = i_ncPath - cPathN;
+	pFile = &o_cPath[cPathN-1];
+	if ( *pFile != Mchar( '\\')) {
+		pFile++;
+		*pFile = Mchar( '\\');
+		pFile++;
+		*pFile = 0;
+		ncFile--;
 	}
 
 	switch( i_iType)
 	{
 	case MP_PATH_ROOT:											break;			// 環境ルート
-	case MP_PATH_TABLE:			iPathCd = MM_STR_TABLE;			break;			// 環境ルート\テーブル
-	case MP_PATH_PARTSTABLE:	iPathCd = MM_STR_PARTSTABLE;	break;			// 環境ルート\テーブル\部品
-	case MP_PATH_ATTR:			iPathCd = MM_STR_ATTR;			break;			// 環境ルート\属性
-	case MP_PATH_TEX:			iPathCd = MM_STR_TEX;			break;			// 環境ルート\テクスチャ
-	case MP_PATH_FIG:			iPathCd = MM_STR_FIG;			break;			// 環境ルート\図形
+	case MP_PATH_TABLE:			icdPath = MM_STR_TABLE;			break;			// 環境ルート\テーブル
+	case MP_PATH_PARTSTABLE:	icdPath = MM_STR_PARTSTABLE;	break;			// 環境ルート\テーブル\部品
+	case MP_PATH_ATTR:			icdPath = MM_STR_ATTR;			break;			// 環境ルート\属性
+	case MP_PATH_TEX:			icdPath = MM_STR_TEX;			break;			// 環境ルート\テクスチャ
+	case MP_PATH_FIG:			icdPath = MM_STR_FIG;			break;			// 環境ルート\図形
 	default:					ist = -1;
 	}
 	if ( ist == 0) {
 		if ( i_iType != MP_PATH_ROOT) {
-			Mstrcat_s( pPathN, nSizeN, McSystemProperty::GetStr( iPathCd));
-			Mstrcat_s( pPathN, nSizeN, Mstr( "\\"));
+			Mstrcat_s( pFile, ncFile, mcs::GetStr( icdPath));
+			Mstrcat_s( pFile, ncFile, Mstr( "\\"));
 		}
-		Mstrcat_s( pPathN, nSizeN, i_cFile);
+		Mstrcat_s( pFile, ncFile, i_cFile);
 	}
 	return ist;
 }
 
 /////////////////////////////////////////////////////////////////////////////
 //	基準高さを設定する
-void	McSystemProperty::SetStnd(
+void	mcs::SetStnd(
 						MINT		iKai,				// (I  ) 階　(1,2,3)
 						MSTNDH		iKTCode,			// (I  ) 基準高さコード
 						MREAL		rHA					// (I  ) 基準高さ(厚さ)
@@ -233,7 +235,7 @@ void	McSystemProperty::SetStnd(
 
 /////////////////////////////////////////////////////////////////////////////
 //	基準高さを取得する
-MREAL	McSystemProperty::GetStnd(						// (  O) 基準高さ(厚さ)
+MREAL	mcs::GetStnd(						// (  O) 基準高さ(厚さ)
 						MINT		iKai,				// (I  ) 階　(1,2,3)
 						MSTNDH		iKTCode				// (I  ) 基準高さコード
 				)

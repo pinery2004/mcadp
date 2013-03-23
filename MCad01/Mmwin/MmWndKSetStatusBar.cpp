@@ -32,35 +32,35 @@
 #include "MmCmdMsg.h"
 #include "MmPrompt.h"
 
-#define	MAXNCSTBGUIDANCE	61
-#define	MAXNCSTBERROR		61
-#define	MAXNCSTBOPERATION	11
+#define	MAXNCSTBGUIDANCE	60
+#define	MAXNCSTBERROR		60
+#define	MAXNCSTBOPERATION	10
 
 namespace MC
 {
 
-static	MCHAR		z_cStbGuidance[MAXNCSTBGUIDANCE];				// ステイタスバーのガイダンスメッセージ表示内容
-static	MCHAR		z_cStbError[MAXNCSTBERROR];						// ステイタスバーのエラーメッセージ表示内容
-static	MCHAR		z_cStbOperation[MAXNCSTBOPERATION];				// ステイタスバーのオペレーションメッセージ表示内容
+static	MCHAR		z_cStbGuidance[MAXNCSTBGUIDANCE+1];				// ステイタスバーのガイダンスメッセージ表示内容
+static	MCHAR		z_cStbError[MAXNCSTBERROR+1];						// ステイタスバーのエラーメッセージ表示内容
+static	MCHAR		z_cStbOperation[MAXNCSTBOPERATION+1];				// ステイタスバーのオペレーションメッセージ表示内容
 
 /////////////////////////////////////////////////////////////////////////////
 //  ステイタスバー表示処理　
 
 void Msg::SetSelStatusBar(
 						MINT		i_iStb,		// ステイタスバー項目番号
-				const	MCHAR*		i_pcStb		// ステイタスバー項目表示内容
+				const	MCHAR*		i_sStb		// ステイタスバー項目表示内容
 				)
 {
 	CWnd*		pWnd;
 	MmWndInfo*	pWndInfo;
 
 	if ( i_iStb == MC_STSBAR_GUIDANCE) {
-		Mstrncpy_s( z_cStbGuidance, i_pcStb, MAXNCSTBGUIDANCE);
+		Mstrncpy_s( z_cStbGuidance, i_sStb, MAXNCSTBGUIDANCE);
 	} else if ( i_iStb == MC_STSBAR_ERROR) {
-		Mstrncpy_s( z_cStbError, i_pcStb, MAXNCSTBERROR);
+		Mstrncpy_s( z_cStbError, i_sStb, MAXNCSTBERROR);
 		z_cStbGuidance[0] = NULL;
 	} else if ( i_iStb == MC_STSBAR_OPERATION) {
-		Mstrncpy_s( z_cStbOperation, i_pcStb, MAXNCSTBOPERATION);
+		Mstrncpy_s( z_cStbOperation, i_sStb, MAXNCSTBOPERATION);
 	} else {
 		return;
 	}
@@ -85,7 +85,7 @@ void Msg::DispStatusBar()
 
 void Msg::DispSelStatusBar(
 						MINT		i_iStb,		// ステイタスバー項目番号
-				const	MCHAR*		i_pcStb		// ステイタスバー項目表示内容
+				const	MCHAR*		i_sStb		// ステイタスバー項目表示内容
 				)
 {
 	CMDIFrameWnd*	MainFrm;					// メインフレーム
@@ -94,7 +94,7 @@ void Msg::DispSelStatusBar(
 	MainFrm = System::GetpMainFrame();										// メインフレームを取得
 	if ( MainFrm != NULL) {
 		StBar = (CStatusBar*)(MainFrm->GetDescendantWindow( AFX_IDW_STATUS_BAR));
-		StBar->SetPaneText( i_iStb, i_pcStb);
+		StBar->SetPaneText( i_iStb, i_sStb);
 	}
 }
 

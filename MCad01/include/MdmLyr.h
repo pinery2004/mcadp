@@ -61,7 +61,7 @@ public:
 						MDID	i_idP1,			// 親ID1
 						MDID	i_idP2,			// 親ID2
 						MINT	i_szCID,		// 子IDエリアサイズ
-						MINT	i_szMdD		// 表示検知モード設定ウィンドウ数
+						MINT	i_szMdD			// 表示検知モード設定ウィンドウ数
 				);
 	// デバッグ用トレース出力
 	void Print( MCHAR* s, MINT i_i);
@@ -90,9 +90,9 @@ inline void MdmSetLYR::operator -= (MDID i_idMd)
 	MINT iC;
 	bool bFnd = false;
 	for ( iC=0; iC<m_GidC.m_n; iC++) {
-		if ( m_GidC.m_st[iC] == i_idMd) {
+		if ( m_GidC.m_pst[iC] == i_idMd) {
 			for ( iC++; iC<m_GidC.m_n; iC++) {
-				m_GidC.m_st[iC-1] = m_GidC.m_st[iC];
+				m_GidC.m_pst[iC-1] = m_GidC.m_pst[iC];
 			}
 			m_GidC.m_n --;
 			bFnd = true;
@@ -112,8 +112,8 @@ inline void MdmSetLYR::SetInit(
 {
 	m_idP1 = i_idP1;
 	m_idP2 = i_idP2;
-	m_GidC.Alloc( i_szCID);					// 子IDエリア
-	m_GaWD.Alloc( i_szMdD);					// ウィンドウ毎の表示・検知モード(初期は4ウィンドウ)
+	m_GidC.Alloc( i_szCID);						// 子IDエリア
+	m_GaWD.Alloc( i_szMdD);						// ウィンドウ毎の表示・検知モード(初期は4ウィンドウ)
 	m_DfltFig.SetpPmtl( NULL);
 	m_CurFig.SetpPmtl( NULL);
 }

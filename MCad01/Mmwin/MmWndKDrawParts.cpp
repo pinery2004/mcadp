@@ -71,7 +71,7 @@ void WindowCtrl::MmWndKDrawPts(
 	
 	DWORD		PtsTextColor;
 
-	PtsTextColor = McSystemProperty::GetColor( MM_COLOR_GRID_TEXT);
+	PtsTextColor = mcs::GetColor( MM_COLOR_GRID_TEXT);
 	pCod->SetTextAttr( Mstr( "‚l‚r ƒSƒVƒbƒN"), 100.f, MT_CENTER, MT_CENTER,
 					   PtsTextColor, MgVect2( 1., 0.), vOffset, MT_FREESIZE);
 
@@ -95,7 +95,7 @@ void WindowCtrl::MmWndKDrawPts(
 		}
 	}
 
-	PtsTextColor = McSystemProperty::GetColor( MM_COLOR_GRID_TEXT);
+	PtsTextColor = mcs::GetColor( MM_COLOR_GRID_TEXT);
 	pCod->SetTextAttr( Mstr( "‚l‚r ƒSƒVƒbƒN"), 100.f, MT_LOWER, MT_CENTER,
 					   PtsTextColor, MgVect2( 1., 0.), vOffset, MT_FREESIZE);
 
@@ -128,7 +128,7 @@ void WindowCtrl::MmWndKDrawPts(
 			if ( pPlcEn->GetPTBr() == MP_BR_KISO) {
 				if ( iKaiC == 1 && iGpC == MP_GP_YUKA) {	// ‚PŠK°‘g•\Ž¦‚Ìê‡‚ÍA•Çcü•ª‚Å•\Ž¦‚·‚é
 					iMdBziFig = 1;
-					PtsLineColor = McSystemProperty::GetColor( MM_COLOR_KISOSIN);
+					PtsLineColor = mcs::GetColor( MM_COLOR_KISOSIN);
 				} else {
 					continue;									// Šî‘b‘g‚Æ°‘gˆÈŠO‚Í•\Ž¦‚µ‚È‚¢
 				}
@@ -253,7 +253,7 @@ void DrawPart(
 
 	// üF‚ÌÝ’è
 	if ( iGpC == MP_GP_KABE && pPlcEn->IsKabe()) {
-		PtsLineColor = McSystemProperty::GetColor( MM_COLOR_KABESEN);
+		PtsLineColor = mcs::GetColor( MM_COLOR_KABESEN);
 
 	} else {
 		PtsLineColor = pPlcEn->GetPTColor();

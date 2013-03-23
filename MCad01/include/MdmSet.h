@@ -106,14 +106,14 @@ public:
 //public:
 //	MUSHORT	m_isz;
 //	MUSHORT	m_n;
-//	MINT	m_st[100];
+//	MINT	m_pst[100];
 //
 //	MUSHORT	icdPrim( MINT iP)
-//				{ return ((MUSHORT*)&m_st[iP])[0];}
+//				{ return ((MUSHORT*)&m_pst[iP])[0];}
 //	MUSHORT	Next( MINT iP)
-//				{ return (iP + ((MUSHORT*)&m_st[iP])[1]);}
+//				{ return (iP + ((MUSHORT*)&m_pst[iP])[1]);}
 //	MINT*	pPrim( MINT iP)
-//				{ return &m_st[iP + 1];}
+//				{ return &m_pst[iP + 1];}
 //};
 
 //==========================================================================================
@@ -158,8 +158,8 @@ inline void MdAryH_F_D<T>::Print( MCHAR* i_s, MINT i_i)
 	// グループ(セット)有効データ出力
 	int iG;
 	for ( iG=1; iG<=m_n; iG++) {
-		if ( MDSPACEID( &m_st[MIDtoHN( iG)]) != MDID_DELETE)				// Validグループデータ
-			m_st[MIDtoHN( iG)].Print( Mstr( "レコード"), iG);
+		if ( MDSPACEID( &m_pst[MIDtoHN( iG)]) != MDID_DELETE)				// Validグループデータ
+			m_pst[MIDtoHN( iG)].Print( Mstr( "レコード"), iG);
 	}
 
 	// グループ(セット)削除データのリンクを出力
@@ -173,14 +173,14 @@ inline void MdAryH_F_D<T>::Print( MCHAR* i_s, MINT i_i)
 		MBTRCPRINTI( Mstr( "\tLAST削除ID"), idDelTrc);
 
 	for ( ; GidSpNext.m_n < m_nidSpace && idDelTrc; ) {
-		GidSpNext += MDSPACENEXT( &m_st[MIDtoHN( idDelTrc)]);
-		GidSpBefore += MDSPACEBEFORE( &m_st[MIDtoHN( idDelTrc)]);
-		idDelTrc = MDSPACEBEFORE( &m_st[MIDtoHN( idDelTrc)]);
+		GidSpNext += MDSPACENEXT( &m_pst[MIDtoHN( idDelTrc)]);
+		GidSpBefore += MDSPACEBEFORE( &m_pst[MIDtoHN( idDelTrc)]);
+		idDelTrc = MDSPACEBEFORE( &m_pst[MIDtoHN( idDelTrc)]);
 	}
 
 	if ( GidSpNext.m_n) {
-		MBTRCPRINTIN( Mstr( "\t削除NextIDセット"), GidSpNext.m_st, GidSpNext.m_n);
-		MBTRCPRINTIN( Mstr( "\t削除BeforeIDセット"), GidSpBefore.m_st, GidSpBefore.m_n);
+		MBTRCPRINTIN( Mstr( "\t削除NextIDセット"), GidSpNext.m_pst, GidSpNext.m_n);
+		MBTRCPRINTIN( Mstr( "\t削除BeforeIDセット"), GidSpBefore.m_pst, GidSpBefore.m_n);
 	}
 #endif
 }

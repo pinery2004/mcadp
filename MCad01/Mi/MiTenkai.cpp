@@ -162,10 +162,10 @@ void JTTenkai::CreJTTArea()
 	mtInpMode::SetKai( 1);
 	mtPlcInp::SetKai( 1);
 	MINT nGrid[4];
-	nGrid[1] = MINT(mm.min.x / McSystemProperty::GetReal( MM_REAL_PITCH) - 3.99);							// 西
-	nGrid[2] = MINT(mm.min.y / McSystemProperty::GetReal( MM_REAL_PITCH) - 2.34 - z_TenkaiPara.nJuko /3.);	// 南
-	nGrid[3] = MINT(mm.max.x / McSystemProperty::GetReal( MM_REAL_PITCH) + 3.99);							// 東
-	nGrid[0] = MINT(mm.max.y / McSystemProperty::GetReal( MM_REAL_PITCH) + 1.99 + z_TenkaiPara.nJuko);		// 北
+	nGrid[1] = MINT(mm.min.x / mcs::GetReal( MM_REAL_PITCH) - 3.99);							// 西
+	nGrid[2] = MINT(mm.min.y / mcs::GetReal( MM_REAL_PITCH) - 2.34 - z_TenkaiPara.nJuko /3.);	// 南
+	nGrid[3] = MINT(mm.max.x / mcs::GetReal( MM_REAL_PITCH) + 3.99);							// 東
+	nGrid[0] = MINT(mm.max.y / mcs::GetReal( MM_REAL_PITCH) + 1.99 + z_TenkaiPara.nJuko);		// 北
 
 	WindowCtrl::MmGridNumSet( nGrid);										// 初期設定
 	WindowCtrl::MmGridNumXqt();												// グリッド数変更表示

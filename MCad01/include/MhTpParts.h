@@ -68,11 +68,11 @@ public:
 	void	SetPTBr( MINT iPTBr)	{													// 分類コード("部材", "金物", "パネル", "屋根", "壁", "基礎", "線分", "区画", "注記", "その他")
 									m_iPTBr = iPTBr;}
 	void	SetPTNmGeneral( MCHAR* cPTNmGeneral)	{									// 総称
-									Mstrncpy_s( m_sPTNmGeneral, cPTNmGeneral, MHPTSZ_NMGENERAL+1);}
+									Mstrncpy_s( m_sPTNmGeneral, cPTNmGeneral, MHPTSZ_NMGENERAL);}
 	void	SetPTNmPts1( MCHAR* cPTNmPts1)	{											// 操作用部材名1
-									Mstrncpy_s( m_sPTNmPts1, cPTNmPts1, MHPTSZ_NMPARTS1+1);}
+									Mstrncpy_s( m_sPTNmPts1, cPTNmPts1, MHPTSZ_NMPARTS1);}
 	void	SetPTNmPts2( MCHAR* cPTNmPts2)	{											// 積算用部材名2
-									Mstrncpy_s( m_sPTNmPts2, cPTNmPts2, MHPTSZ_NMPARTS2+1);}
+									Mstrncpy_s( m_sPTNmPts2, cPTNmPts2, MHPTSZ_NMPARTS2);}
 	void	SetPTColor( DWORD dPTColor)	{												// 色
 									m_dPTColor = dPTColor;}
 	void	SetPTCdBuzaiR( MINT iPTCdBuzaiR)	{										// 部材コード	読込み用
@@ -80,9 +80,9 @@ public:
 	void	SetPTCdBuzaiW( MINT iPTCdBuzaiW)	{										// 部材コード	書き込み用(部材種類テーブルVerUpメインテナンス用)
 									m_iPTCdBuzaiW = iPTCdBuzaiW;}
 	void	SetPTTpMbr( MCHAR* sPTTpMbr)	{											// 寸法型式選択用種類コード
-									Mstrncpy_s( m_sPTTpMbr, sPTTpMbr, MHPTSZ_TPMEMBER+1);}
+									Mstrncpy_s( m_sPTTpMbr, sPTTpMbr, MHPTSZ_TPMEMBER);}
 	void	SetPTCdMbr( MCHAR* sPTCdMbr)	{											// 寸法型式
-									Mstrncpy_s( m_sPTCdMbr, sPTCdMbr, MHPTSZ_CDMEMBER+1);}
+									Mstrncpy_s( m_sPTCdMbr, sPTCdMbr, MHPTSZ_CDMEMBER);}
 	void	SetPTInpKb( MINT iPTInpKb)	{												// 入力コード
 									m_iPTKbInp = iPTInpKb;}
 	void	SetPTCdHgt( MSTNDH iPTCdHgt)	{											// 取り付け高さ基準コード

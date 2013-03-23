@@ -1,4 +1,8 @@
 #pragma once
+
+#include "MsDefFunc.h"
+#include "MsDefCheck.h"
+
 //==========================================================================================
 //  Copyright (C) K.Matsubayashi All rights reserved.
 //
@@ -40,8 +44,26 @@ public:
 //		MREAL	*dd = ( MREAL*)new char[MX_PNT1 * sizeof( MREAL)];
 //				MBCHECK_POINTER( dd);
 //
-#define		MBMALLOC( P, T, S)	{ P = ( T*)new char[( S) * sizeof( T)]; MBCHECK_POINTER( P);}
-#define		MBMALLOCF( F, P, T, S)	{ P = ( F*)new char[( S) * sizeof( T)]; MBCHECK_POINTER( P);}
+//E #define		MBMALLOC( P, T, S)	{ P = ( T*)new char[( S) * sizeof( T)]; MBCHECK_POINTER( P);}
+//E #define		MBMALLOCF( F, P, T, S)	{ P = ( F*)new char[( S) * sizeof( T)]; MBCHECK_POINTER( P);}
+
+template<class T>
+inline void MbAlloc( T*& P, int S)
+{
+	int isz = S * sizeof( T);
+	P = (T*)new char[isz];
+//E	MBCHECK_POINTER( P);
+	if ( P == NULL) MC::ms::SysError( __FILE__ + __LINE__, MC_ERR_POINTER);
+}
+
+template<class F, class T>
+inline void MbAllocF( F*& P, int S)
+{
+	int isz = S * sizeof( T);
+	P = (F*)new char[isz];
+//E	MBCHECK_POINTER( P);
+	if ( P == NULL) MC::ms::SysError( __FILE__ + __LINE__, MC_ERR_POINTER);
+}
 
 //===========================================================================
 //	MBFREE( アロケーションメモリアドレス設定ポインタ);

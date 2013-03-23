@@ -87,7 +87,7 @@ void Msg::OperationMsg(
 // 　エラーメッセージ1 + エラーメッセージ2
 
 void Msg::ErrorMsg(
-						MCHAR*	i_pcErrMsg1,	// エラーメッセージ１　または　NULL
+						MCHAR*	i_sErrMsg1,		// エラーメッセージ１　または　NULL
 						MINT	i_idErrMsg2,	// エラーメッセージ２表示ID
 						MINT	i_imd_Disp		// エラー表示モード
 												//		1: メッセージボックスへ表示
@@ -105,8 +105,8 @@ void Msg::ErrorMsg(
 		case MC_ERR_NOTSET_MEMBER_TABLE:	ErrorMsg = Mstr( "が寸法型式テーブルに未設定です");			break;
 		default:							ErrorMsg = Mstr( "未定義 ERROR MSG");
 	}
-	if ( i_pcErrMsg1 != NULL && i_pcErrMsg1[0] != 0)
-		ErrorMsg = i_pcErrMsg1 + ErrorMsg;
+	if ( i_sErrMsg1 != NULL && i_sErrMsg1[0] != 0)
+		ErrorMsg = i_sErrMsg1 + ErrorMsg;
 	Msg::SetSelStatusBar( MC_STSBAR_ERROR, ErrorMsg);								// ステイタスバーのエラー表示部へ表示する
 }
 

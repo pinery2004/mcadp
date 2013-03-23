@@ -62,7 +62,7 @@ void mtInput::GetMarumeKabeLine(
 		rTol = MC_KABE_TOL;
 	else
 //		rTol = g_SysProp.Real[MM_REAL_PITCH] / iCdMarume;
-		rTol = McSystemProperty::GetReal( MM_REAL_PITCH) / iCdMarume;
+		rTol = mcs::GetReal( MM_REAL_PITCH) / iCdMarume;
 
 	nHaiKabe = mtHaitiIn::GetPts( iKai, MP_GP_TAIRYOKU, Mstr( "壁"), NULL, MAXHAIKABE, pHaiKabe);
 																				// 家モデルよりカレント階の全ての壁を取得

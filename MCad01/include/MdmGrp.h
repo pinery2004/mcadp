@@ -21,7 +21,7 @@ class MdmSetGRP
 {
 public:
 	MDID		m_idP;							// 親ID(0)	( -1: 削除し無効グループ)
-	MCHAR*		m_sName;						// グループ名
+	MCHAR*		m_psName;						// グループ名
 	MREAL		m_rKt;							// 階高さ
 	MREAL		m_rFl;							// 床高さ
 	MgMat3E		m_MTrans;						// 座標変換マトリックス
@@ -32,12 +32,12 @@ public:
 	~MdmSetGRP()		{ Free();}
 	void Init()
 	{
-		m_sName = NULL;
+		m_psName = NULL;
 		m_GidC.Init();
 	}
 	void Free()	
 	{
-		MBFREE( m_sName);
+		MBFREE( m_psName);
 		m_GidC.Free();
 	}
 
@@ -51,7 +51,7 @@ public:
 	// グループに初期値を設定する
 	void SetInit(
 						MDID	i_idP,			// 親ID(0)
-						MCHAR*	i_psName,		// グループ名
+						MCHAR*	i_sName,		// グループ名
 						MREAL	i_rKt,			// 階高さ
 						MREAL	i_rFl			// 床高さ
 				);
@@ -65,7 +65,7 @@ inline void* MdmSetGRP::operator new( size_t i_sz)
 {
 	MdmSetGRP* pSetGC = (MdmSetGRP*)DEBUG_NEW char[sizeof( MdmSetGRP)];
 	pSetGC->m_idP = 0;
-	pSetGC->m_sName = NULL;
+	pSetGC->m_psName = NULL;
 	pSetGC->m_rKt = 0.;
 	pSetGC->m_rFl = 0.;
 	pSetGC->m_GidC.Alloc( (int)i_sz);
@@ -101,14 +101,16 @@ inline void MdmSetGRP::operator -= (MDID i_idMd)
 	// グループに初期値を設定する
 inline void MdmSetGRP::SetInit(
 						MDID	i_idP,			// 親ID(0)
-						MCHAR*	i_psName,		// グループの子IDセット名	最大256文字
+						MCHAR*	i_sName,		// グループの子IDセット名	最大256文字
 						MREAL	i_rKt,			// 階高さ
 						MREAL	i_rFl			// 床高さ
 				)
 {
 	m_idP = i_idP;
-	m_sName = (MCHAR*)DEBUG_NEW char[( Mstrlen( i_psName) + 1) * sizeof( MCHAR)];
-	Mstrcpy_s( m_sName, 256, i_psName);
+	int	nsz = Mstrlen( i_sName) + 1;
+	int	isz = nsz * sizeof( MCHAR);
+	m_psName = (MCHAR*)DEBUG_NEW char[isz];
+	Mstrcpy_s( m_psName, nsz, i_sName);
 	m_rKt = i_rKt;
 	m_rFl = i_rFl;
 }
@@ -117,7 +119,7 @@ inline void MdmSetGRP::SetInit(
 inline void MdmSetGRP::Print( MCHAR* s, MINT i_i)
 {
 #ifdef _DEBUG
-	Msprintf_s( mlLog::m_Str, Mstr( "	%3d: %s < MdmSetGRP > 親ID = %d，"), i_i, m_sName, m_idP);
+	Msprintf_s( mlLog::m_Str, Mstr( "	%3d: %s < MdmSetGRP > 親ID = %d，"), i_i, m_psName, m_idP);
 	MBTRCPRBF;
 	Msprintf_s( mlLog::m_Str, Mstr( "階高さ = %.1f, 床高さ = %.1f\n"),
 									m_rKt, m_rFl);

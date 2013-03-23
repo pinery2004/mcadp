@@ -275,7 +275,7 @@ void MhLoadPtsMst()
 
 	//	構成（組）テーブルの読み込み
 
-	McSystemProperty::GetEnvPath( MP_PATH_PARTSTABLE, McSystemProperty::GetStr( MM_STR_CSV_KOUSEI), TablePath);
+	mcsGetEnvPath( MP_PATH_PARTSTABLE, mcs::GetStr( MM_STR_CSV_KOUSEI), TablePath);
 
 	ist = csvTbl.Open( TablePath);
 	ASSERT( ist == 0);													// 構成テーブル　読み込み開始エラー　<ERROR>
@@ -298,7 +298,7 @@ void MhLoadPtsMst()
 	ist = csvTbl.Close();
 
 	//	部品種類テーブルの読み込み
-	McSystemProperty::GetEnvPath( MP_PATH_PARTSTABLE, McSystemProperty::GetStr( MM_STR_CSV_PARTS), TablePath);
+	mcsGetEnvPath( MP_PATH_PARTSTABLE, mcs::GetStr( MM_STR_CSV_PARTS), TablePath);
 
 	ist = csvTbl.Open( TablePath);
 	ASSERT( ist == 0);													// 部品種類テーブル　読み込み開始エラー　<ERROR>
@@ -361,7 +361,7 @@ void MhLoadPtsMst()
 	ist = csvTbl.Close();
 	
 	//	寸法型式テーブルの読み込み
-	McSystemProperty::GetEnvPath( MP_PATH_PARTSTABLE, McSystemProperty::GetStr( MM_STR_CSV_MEMBER), TablePath);
+	mcsGetEnvPath( MP_PATH_PARTSTABLE, mcs::GetStr( MM_STR_CSV_MEMBER), TablePath);
 
 	ist = csvTbl.Open( TablePath);
 	ASSERT( ist == 0);													// 寸法型式テーブル　読み込み開始エラー　<ERROR>

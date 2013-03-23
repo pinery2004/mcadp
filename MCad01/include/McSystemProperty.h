@@ -140,7 +140,7 @@ public:
 	MREAL	rRoof;
 };
 */
-class DLL_EXPORT_SYSTEMPROPERTY McSystemProperty
+class DLL_EXPORT_SYSTEMPROPERTY mcs
 {
 private:
 //	システム定数
@@ -154,43 +154,44 @@ static MREAL	m_Stnd[MMAX_KAI][MM_N_STNDH];	// 基準高さ、厚さ　
 public:
 /////////////////////////////////////////////////////////////////////////////
 //	システムプロパティの初期化
-static void		McSystemProperty::Init();
+static void		Init();
 
 /////////////////////////////////////////////////////////////////////////////
 //	システム色を取得する
-static DWORD	McSystemProperty::GetColor( MSYSTEMCOLOR iCol);
+static DWORD	GetColor( MSYSTEMCOLOR iCol);
 
 /////////////////////////////////////////////////////////////////////////////
 //	システム実数定数を取得する
-static MREAL	McSystemProperty::GetReal( MSYSTEMREAL iReal);
+static MREAL	GetReal( MSYSTEMREAL iReal);
 
 /////////////////////////////////////////////////////////////////////////////
 //	システム整数定数を取得する
-static MINT		McSystemProperty::GetInt( MSYSTEMINT iInt);
+static MINT		GetInt( MSYSTEMINT iInt);
 
 /////////////////////////////////////////////////////////////////////////////
 //	システム文字列定数を取得する
-static _TCHAR*	McSystemProperty::GetStr( MSYSTEMSTR iStr);
+static _TCHAR*	GetStr( MSYSTEMSTR iStr);
 
 /////////////////////////////////////////////////////////////////////////////
 //	PATH定数を取得する
-static _TCHAR*	McSystemProperty::GetPath( MSYSTEMPATH iPath);
+static _TCHAR*	GetPath( MSYSTEMPATH iPath);
 
 /////////////////////////////////////////////////////////////////////////////
 //	システム環境　ファイルパスを得る
-static MINT		McSystemProperty::GetEnvPath(	// ステイタス	0:正常	!=0:エラー
+static MINT		GetEnvPath(	// ステイタス	0:正常	!=0:エラー
 						MPPATHENV	i_iType,	// 環境パス種類
 												//	MM_STR_TABLE:	テーブル
 												//	MM_STR_ATTR:	属性
 												//	MM_STR_TEX:	テクスチャ(TEXTURE)
 												//	MM_STR_FIG:	図形
-						MCHAR*		i_pcFile,	// ファイル名
-						MCHAR*		o_pcPath	// パス名
+						MCHAR*		i_cFile,	// ファイル名
+						MCHAR*		o_cPath,	// パス名
+						int			i_ncPath	// パス名最大文字数+1
 				);
 
 /////////////////////////////////////////////////////////////////////////////
 //	基準高さを設定する
-static void		McSystemProperty::SetStnd(
+static void		SetStnd(
 						MINT		i_iKai,		// 階　(1,2,3)
 						MSTNDH		i_iKTCode,	// 基準高さコード
 						MREAL		i_rHA		// 基準高さ(厚さ)
@@ -199,10 +200,51 @@ static void		McSystemProperty::SetStnd(
 
 /////////////////////////////////////////////////////////////////////////////
 //	基準高さを取得する
-static MREAL	McSystemProperty::GetStnd(		// 基準高さ(厚さ)
+static MREAL	GetStnd(		// 基準高さ(厚さ)
 						MINT		i_iKai,		// 階　(1,2,3)
 						MSTNDH		i_iKTCode	// 基準高さコード
 				);
 };
 
+//template<typename TYPE, size_t SIZE>
+//inline MINT		mcsGetEnvPath(	// ステイタス	0:正常	!=0:エラー
+//						MPPATHENV	i_iType,	// 環境パス種類
+//												//	MM_STR_TABLE:	テーブル
+//												//	MM_STR_ATTR:	属性
+//												//	MM_STR_TEX:	テクスチャ(TEXTURE)
+//												//	MM_STR_FIG:	図形
+//						MCHAR*		i_cFile,	// ファイル名
+//						TYPE (&o_cPath)[SIZE]	// パス名配列
+//				)
+//				{
+//					return mcs::GetEnvPath( i_iType, i_cFile, o_cPath, SIZE);
+//				}
+
+template<size_t SIZE>
+inline MINT		mcsGetEnvPath(	// ステイタス	0:正常	!=0:エラー
+						MPPATHENV	i_iType,	// 環境パス種類
+												//	MM_STR_TABLE:	テーブル
+												//	MM_STR_ATTR:	属性
+												//	MM_STR_TEX:	テクスチャ(TEXTURE)
+												//	MM_STR_FIG:	図形
+						MCHAR*		i_cFile,	// ファイル名
+						MCHAR (&o_cPath)[SIZE]	// パス名配列
+				)
+				{
+					return mcs::GetEnvPath( i_iType, i_cFile, o_cPath, SIZE);
+				}
+
+inline MINT		mcsGetEnvPath(	// ステイタス	0:正常	!=0:エラー
+						MPPATHENV	i_iType,	// 環境パス種類
+												//	MM_STR_TABLE:	テーブル
+												//	MM_STR_ATTR:	属性
+												//	MM_STR_TEX:	テクスチャ(TEXTURE)
+												//	MM_STR_FIG:	図形
+						MCHAR*		i_cFile,	// ファイル名
+						MCHAR*		o_cPath,	// パス名
+						int			i_ncPath	// パス名最大文字数+1
+				)
+				{
+					return mcs::GetEnvPath( i_iType, i_cFile, o_cPath, i_ncPath);
+				}
 } // namespace MC

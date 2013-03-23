@@ -494,10 +494,12 @@ MINT MhMdlIO::WriteItemCS(
 //	ファイルダイアログを表示しフルパスを取得する
 //	[返値] ステイタス     0 : キャンセル  1 : ＯＫ
 
-MINT IeModel::MhFileDialog(									//
-				const	MINT		fRead,			// (I  ) 読み取りフラグ		true:開く	false:保存
-				const	MCHAR*		cPathI,			// (I  ) 指定ファイル名（フルパス）
-						MCHAR*		cPathO)			// (  O) 選択ファイル名（フルパス）
+MINT IeModel::MhFileDialog(							//
+				const	MINT		i_fRead,		// 読み取りフラグ		true:開く	false:保存
+				const	MCHAR*		i_sPath,		// 指定ファイル名（フルパス）
+						MCHAR*		o_sPath,		// 選択ファイル名（フルパス）
+						int			i_nPath			// 選択ファイル名（フルパス）最大文字数
+				)
 {
 	MINT			ist;
 	CFileDialog*	DlgFile = NULL;
@@ -505,25 +507,24 @@ MINT IeModel::MhFileDialog(									//
 	MCHAR			cFileName[MAX_PATH];
 	MCHAR*			pcFileName = NULL;
 
-
 	ist = 0;
 
-	Mstrcpy_s( cPathO, 256, Mstr( ""));
+	Mstrcpy_s( o_sPath, i_nPath, Mstr( ""));
 
 	DWORD dwFlags = OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT | OFN_ENABLESIZING;
 
-	if ( cPathI) {																		// 指定ファイル名あり
-		IeModel::MhSeparateFname( cPathI, cFldPath, cFileName, (MCHAR*)NULL, (MCHAR*)NULL);
+	if ( i_sPath) {																		// 指定ファイル名あり
+		IeModel::MhSeparateFname( i_sPath, cFldPath, MAX_PATH, cFileName, MAX_PATH);
 		pcFileName = cFileName;
 	}
 
-	CFileDialog FDlg( fRead,  Mstr( "mdk"), pcFileName, dwFlags,
+	CFileDialog FDlg( i_fRead,  Mstr( "mdk"), pcFileName, dwFlags,
 						 	    Mstr( "構造家モデルファイル(*.mdk)|*.mdk|全ファイル(*.*)|*.*||"), NULL);
-	if ( cPathI)
+	if ( i_sPath)
 		FDlg.m_ofn.lpstrInitialDir = cFldPath;
 
 	if ( FDlg.DoModal() == IDOK) {													// ダイアログを表示する
-		Mstrcpy_s( cPathO, 256, FDlg.GetPathName());
+		Mstrcpy_s( o_sPath, i_nPath, FDlg.GetPathName());
 		ist = 1;
 	}
 	return( ist);
@@ -533,11 +534,15 @@ MINT IeModel::MhFileDialog(									//
 //	フルパス名から、フォルダーパス名、ファイル名、ファイルタイトル、
 //					ファイル拡張子を取得する
 void IeModel::MhSeparateFname(
-				const	MCHAR*		cFullPath,		// (I  ) ファイルフルパス名
-						MCHAR*		cFolderPath,	// (  O) フォルダーパス名	または　NULL
-						MCHAR*		cFileName,		// (  O) ファイル名			または　NULL
-						MCHAR*		cFileTitle,		// (  O) ファイルタイトル	または　NULL
-						MCHAR*		cFileExt		// (  O) ファイル拡張子		または　NULL
+				const	MCHAR*		i_sFullPath,	// ファイルフルパス名
+						MCHAR*		o_sFolderPath,	// フォルダーパス名	または　NULL
+						int			i_nFolderPath,	// フォルダーパス名最大文字数
+						MCHAR*		o_sFileName,	// ファイル名			または　NULL
+						int			i_nFileName,	// ファイル名			または　NULL
+						MCHAR*		o_sFileTitle,	// ファイルタイトル	または　NULL
+						int			i_nFileTitle,	// ファイルタイトル	または　NULL
+						MCHAR*		o_sFileExt,		// ファイル拡張子		または　NULL
+						int			i_nFileExt		// ファイル拡張子		または　NULL
 				)
 {
 	MINT		ist = 0;
@@ -547,44 +552,44 @@ void IeModel::MhSeparateFname(
 	MINT		szName;
 	MINT		szTitle;
 
-	szFullPath = (MINT)Mstrlen( cFullPath);
+	szFullPath = (MINT)Mstrlen( i_sFullPath);
 	for ( ic=szFullPath-1; ic>=0; ic--) {
-		if ( cFullPath[ic] == Mchar('\\'))
+		if ( i_sFullPath[ic] == Mchar('\\'))
 			break;
 	}
 	szPath = ic;
-	if ( cFolderPath) {
+	if ( o_sFolderPath) {
 		if ( szPath > 1) {
-			Mstrncpy_s( cFolderPath, 256, cFullPath, szPath);
-			cFolderPath[szPath] = NULL;
+			Mstrncpy_s( o_sFolderPath, i_nFolderPath, i_sFullPath, szPath);
+			o_sFolderPath[szPath] = NULL;
 		} else {
-			Mstrcpy_s( cFolderPath, 256, Mstr( ".\\"));
+			Mstrcpy_s( o_sFolderPath, i_nFolderPath, Mstr( ".\\"));
 		}
 	}
-	if ( cFileName)
-		Mstrcpy_s( cFileName, 256, &cFullPath[szPath+1]);
+	if ( o_sFileName)
+		Mstrcpy_s( o_sFileName, i_nFileName, &i_sFullPath[szPath+1]);
 	
 	szName = szFullPath - szPath - 1;
-	if ( cFileTitle || cFileExt) {
+	if ( o_sFileTitle || o_sFileExt) {
 		for ( ic=szName-1; ic>=0; ic--) {
-			if ( cFileName[ic] == Mchar('.'))
+			if ( o_sFileName[ic] == Mchar('.'))
 				break;
 		}
 		szTitle = ic;
-		if ( cFileTitle) {
+		if ( o_sFileTitle) {
 			if ( szTitle < 0) {
-				Mstrcpy_s( cFileTitle, 256, cFileName);
+				Mstrcpy_s( o_sFileTitle, i_nFileTitle, o_sFileName);
 			} else {
 				if ( szTitle)
-					Mstrncpy_s( cFileTitle, 256, cFileName, szTitle);
-				cFileTitle[szTitle] = NULL;
+					Mstrncpy_s( o_sFileTitle, i_nFileTitle, o_sFileName, szTitle);
+				o_sFileTitle[szTitle] = NULL;
 			}
 		}
-		if ( cFileExt) {
+		if ( o_sFileExt) {
 			if ( szTitle < 0) {
-				cFileExt[0] = NULL;
+				o_sFileExt[0] = NULL;
 			} else {
-                Mstrcpy_s( cFileExt, 256, &cFileName[szTitle+1]);
+                Mstrcpy_s( o_sFileExt, i_nFileExt, &o_sFileName[szTitle+1]);
 			}
 		}
 	}

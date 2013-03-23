@@ -16,7 +16,7 @@ class MdmSetSCM
 {
 public:
 	MDID		m_idP;							// 親ID
-	MCHAR*		m_sName;						// スキーマ名称
+	MCHAR*		m_psName;						// スキーマ名称
 	MDIDSET		m_GidC;							// 子レイヤーID群
 
 public:
@@ -24,12 +24,12 @@ public:
 	~MdmSetSCM()	{ Free();}
 	void Init()
 	{
-		m_sName = NULL;
+		m_psName = NULL;
 		m_GidC.Init();
 	}
 	void Free()
 	{
-		MBFREE( m_sName);
+		MBFREE( m_psName);
 		m_GidC.Free();
 	}
 	// スキーマの子IDセット生成
@@ -44,7 +44,7 @@ public:
 	// スキーマに初期値を設定する
 	void SetInit(
 						MDID	i_idP,			// 親ID
-						MCHAR*	i_psName		// グループの子IDセット名
+						MCHAR*	i_sName			// グループの子IDセット名
 				);
 	// デバッグ用トレース出力
 	void Print( MCHAR* s, MINT i_i);
@@ -56,7 +56,7 @@ inline void* MdmSetSCM::operator new( size_t i_sz)
 {
 	MdmSetSCM* pSetSCM = (MdmSetSCM*)DEBUG_NEW char[sizeof( MdmSetSCM)];
 	pSetSCM->m_idP = 0;
-	pSetSCM->m_sName = NULL;
+	pSetSCM->m_psName = NULL;
 	pSetSCM->m_GidC.Alloc( (int)i_sz);
 	return pSetSCM;
 }
@@ -89,12 +89,14 @@ inline void MdmSetSCM::operator -= (MDID i_idMd)
 // スキーマに初期値を設定する
 inline void MdmSetSCM::SetInit(
 						MDID	i_idP,			// 親ID
-						MCHAR*	i_psName		// 子IDセット名
+						MCHAR*	i_sName			// 子IDセット名
 				)
 {
 	m_idP = i_idP;
-	m_sName = (MCHAR*)DEBUG_NEW char[(Mstrlen( i_psName) + 1) * sizeof( MCHAR)];
-	Mstrcpy_s( m_sName, 256, i_psName);
+	int nsz = Mstrlen( i_sName) + 1;
+	int isz = nsz * sizeof( MCHAR);
+	m_psName = (MCHAR*)DEBUG_NEW char[isz];
+	Mstrcpy_s( m_psName, nsz, i_sName);
 }
 
 //	トレース
@@ -102,7 +104,7 @@ inline void MdmSetSCM::Print( MCHAR* s, MINT i_i)
 {
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "\t%3d: %s	< MdmSetSCM > 親ID = %d\n"),
-									i_i, m_sName, m_idP);
+									i_i, m_psName, m_idP);
 	MBTRCPRBF;
 	m_GidC.Print( Mstr( "子レイヤーID群"), MDC_NONE_ID);
 #endif

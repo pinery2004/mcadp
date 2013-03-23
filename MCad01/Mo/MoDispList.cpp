@@ -57,7 +57,7 @@ namespace MC
 	// 全レイヤーIdのセットを得る
 	DLyr::GetLyrIdAll( &GidLyr);
 	for ( iCl=0; iCl<GidLyr.m_n; iCl++) {
-		idLyr = GidLyr.m_st[iCl];
+		idLyr = GidLyr.m_pst[iCl];
 
 		// 表示モードがOFFのものは無視する
 		DLyr::GetLyrDispMode( 1, idLyr, &iaWD);
@@ -65,11 +65,11 @@ namespace MC
 			continue;
 
 		// レイヤー内の全エンティティを得る
-		DLyr::GetEnt( GidLyr.m_st[iCl], &GidEnt);
+		DLyr::GetEnt( GidLyr.m_pst[iCl], &GidEnt);
 		for ( iCe=0; iCe<GidEnt.m_n; iCe++) {
 
 			// エンティティの図形を得る
-			mdmDEnt::GetFig( GidEnt.m_st[iCe], &Fig);
+			mdmDEnt::GetFig( GidEnt.m_pst[iCe], &Fig);
 
 			// 図形をディスプレイリストに追加する
 			DispList::DrawFig( Fig, i_PtCtr, i_rB);

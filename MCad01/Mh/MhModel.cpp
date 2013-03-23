@@ -129,7 +129,7 @@ MINT MhModel::Open( void)
 {
 	MINT	ist;
 
-	MINT	isz = 1;
+	MINT	isz = 10;
 	static MINT	iCe = 0;
 
 	// DBê›íË

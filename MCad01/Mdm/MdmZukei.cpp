@@ -34,7 +34,7 @@ namespace MC
 //{
 //	ASSERT( MDISENT( i_idEnt));
 //
-//	Mdm::GetCurModel()->m_EntBf.m_st[MIDtoHN( i_idEnt)].m_stFig.m_GiFig = i_GiFig;
+//	pCurMdl->m_EntBf.m_st[MIDtoHN( i_idEnt)].m_stFig.m_GiFig = i_GiFig;
 //	return 0;
 //}
 //
@@ -58,7 +58,7 @@ namespace MC
 ////
 //MINT	MdzGet (
 //						MDID		i_idEnt,	// エンティテイID
-//						MDFIG*		o_pstFig	// 図形情報
+//						MDFIG*		o_stFig		// 図形情報
 //				)
 //{
 //	return 0;
@@ -79,9 +79,9 @@ namespace MC
 //		図形情報の座標変換
 //
 MINT DZukei::MdzTrans (
-						MgMat3E&		i_Mat,		// 配置座標系マトリックス
+						MgMat3E&	i_Mat,		// 配置座標系マトリックス
 						MDFIG&		i_stFig,	// 図形情報
-						MDFIG*		o_pstFig	// 座標変換後図形情報
+						MDFIG*		o_stFig		// 座標変換後図形情報
 				)
 {
 	return 0;
@@ -93,7 +93,7 @@ MINT DZukei::MdzTrans (
 MINT DZukei::MdzMove (
 						MgVect3&	i_VMv,		// 移動ベクトル
 						MDFIG&		i_stFig,	// 図形情報
-						MDFIG*		o_pstFig	// 座標変換後図形情報
+						MDFIG*		o_stFig		// 座標変換後図形情報
 				)
 {
 	return 0;
@@ -105,7 +105,7 @@ MINT DZukei::MdzMove (
 MINT DZukei::MdzMirror (
 						MREAL		i_pln[4],	// 面情報（ax+by+cz+d=0）
 						MDFIG&		i_stFig,	// 図形情報
-						MDFIG*		o_pstFig	// 座標変換後図形情報
+						MDFIG*		o_stFig		// 座標変換後図形情報
 				)
 {
 	return 0;
@@ -120,7 +120,7 @@ MINT DZukei::MdzExpansion (
 						MgPoint3&	i_ptOrg,	// 原点
 						MREAL		i_rScl,		// 拡大率
 						MDFIG&		i_stFig,	// 図形情報
-						MDFIG*		o_pstFig	// 座標変換後図形情報
+						MDFIG*		o_stFig		// 座標変換後図形情報
 				)
 {
 	return 0;

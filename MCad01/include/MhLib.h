@@ -103,8 +103,9 @@ public:
 
 	static MINT MhFileDialog(
 					const	MINT		DFlag,			// (I  ) 0:開く  1:保存
-					const	MCHAR*		Path1,			// (I  ) 前回のﾌｧｲﾙ名  (ﾌﾙﾊﾟｽ)
-							MCHAR*		Path2			// (  O) 選択したﾌｧｲﾙ名(ﾌﾙﾊﾟｽ)
+					const	MCHAR*		i_sPath,		// 指定ファイル名（フルパス）
+							MCHAR*		o_sPath,		// 選択ファイル名（フルパス）
+							int			i_nPath			// 選択ファイル名（フルパス）最大文字数
 					);
 
 	////////////////////////////////////////////////////////////////////////////
@@ -112,12 +113,17 @@ public:
 	//						　ファイル拡張子を取得する
 
 	static void MhSeparateFname(
-					const	MCHAR*		cFilePath,			// (I  ) ファイル名（フルパス）
-							MCHAR*		cFolderPath = NULL,	// (  O) フォルダーパス名	または　NULL
-							MCHAR*		cFileName = NULL,	// (  O) ファイル名			または　NULL
-							MCHAR*		cFileTitle = NULL,	// (  O) ファイルタイトル	または　NULL
-							MCHAR*		cFileExt = NULL		// (  O) ファイル拡張子		または　NULL
-					);
+					const	MCHAR*		i_sFullPath,			// ファイルフルパス名
+							MCHAR*		o_sFolderPath = NULL,	// フォルダーパス名	または　NULL
+							int			i_nFolderPath = 0,		// フォルダーパス名最大文字数
+							MCHAR*		o_sFileName = NULL,		// ファイル名			または　NULL
+							int			i_nFileName = 0,		// ファイル名最大文字数
+							MCHAR*		o_sFileTitle = NULL,	// ファイルタイトル	または　NULL
+							int			i_nFileTitle = 0,		// ファイルタイトル最大文字数
+							MCHAR*		o_sFileExt = NULL,		// ファイル拡張子		または　NULL
+							int			i_nFileExt = 0			// ファイル拡張子最大文字数
+				);
+
 	////////////////////////////////////////////////////////////////////////////
 	//【機能】構造家モデル保存
 	//【返値】	0 : 正常、1 : 異常

@@ -54,7 +54,7 @@ void MmWndKDrawLine(
 	ptW[0] = (*(MgPoint2*)&(pPlcEn->GetPIPlcIti( 0))) + vSinZ;
 	ptW[1] = (*(MgPoint2*)&(pPlcEn->GetPIPlcIti( 1))) + vSinZ;
 
-	PtsLineColor = McSystemProperty::GetColor( iLineColor);
+	PtsLineColor = mcs::GetColor( iLineColor);
 	pCod->SetLineAttr( LineType, 1, PtsLineColor);
 	pCod->Line( MgLine2( ptW[0], ptW[1]));
 
@@ -81,7 +81,7 @@ void MmWndKDrawLine(
 	ptW[0] = (*(MgPoint2*)&(pPlcEn->GetPIPlcIti( 0))) + vSinZ;
 	ptW[1] = (*(MgPoint2*)&(pPlcEn->GetPIPlcIti( 1))) + vSinZ;
 
-	PtsLineColor = McSystemProperty::GetColor( iLineColor);
+	PtsLineColor = mcs::GetColor( iLineColor);
 	pCod->SetLineAttr( LineType, 1, PtsLineColor);
 
 	pZukei = pPlcEn->GetPIZukei();

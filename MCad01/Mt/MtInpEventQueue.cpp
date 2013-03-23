@@ -216,6 +216,7 @@ void MtInpEventQueue::flushQueue( void)
 //
 void ProcessMsgWaitForObject( HANDLE hSynchroObject) 
 {
+	CWinApp* pWinApp = AfxGetApp();
 	static const DWORD GOTWINDOWSMESSAGE = (WAIT_OBJECT_0 + 1);
 
 	DWORD dwWaitResult;
@@ -224,7 +225,7 @@ void ProcessMsgWaitForObject( HANDLE hSynchroObject)
 		// process any and all windows messages
 		//
 		while( ::PeekMessage( &msg, NULL, 0, 0, PM_REMOVE)) {
-			if ( !AfxGetApp()->PreTranslateMessage(&msg)) {
+			if ( !pWinApp->PreTranslateMessage(&msg)) {
 				::TranslateMessage(&msg);
 				::DispatchMessage(&msg);
 			}

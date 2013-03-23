@@ -200,29 +200,30 @@ MINT mdmDEnt::CreateEnt(
 				)
 {
 	mdmEnt*	pEnt;
+	MdModel* pCurMdl = Mdm::GetCurModel();
 
 	ASSERT( MDISLYR( i_idLyr));
 
 	// EntBfより空きのIDを取得し、エンティティの領域を設ける
 	//
-	if ( Mdm::GetCurModel()->m_EntBf.m_idSpaceLast == 0) {
+	if ( pCurMdl->m_EntBf.m_idSpaceLast == 0) {
 		// 削除して空きになっているIDがない場合は最終ID+1を使用する
-		Mdm::GetCurModel()->m_EntBf ++;
-		*o_pidEnt = Mdm::GetCurModel()->m_EntBf.m_n;
-		pEnt = &Mdm::GetCurModel()->m_EntBf.m_st[MIDtoHN( *o_pidEnt)];
+		pCurMdl->m_EntBf ++;
+		*o_pidEnt = pCurMdl->m_EntBf.m_n;
+		pEnt = &pCurMdl->m_EntBf.m_pst[MIDtoHN( *o_pidEnt)];
 
 	} else {
 		// 削除して空きになっているIDがある場合はそのIDを使用する
-		ASSERT( Mdm::GetCurModel()->m_EntBf.m_nidSpace >= 1);
+		ASSERT( pCurMdl->m_EntBf.m_nidSpace >= 1);
 
-		*o_pidEnt = Mdm::GetCurModel()->m_EntBf.m_idSpaceLast;
-		pEnt = &Mdm::GetCurModel()->m_EntBf.m_st[MIDtoHN( *o_pidEnt)];
+		*o_pidEnt = pCurMdl->m_EntBf.m_idSpaceLast;
+		pEnt = &pCurMdl->m_EntBf.m_pst[MIDtoHN( *o_pidEnt)];
 
 		// 空きエリアへのIDを一つ戻す
-		Mdm::GetCurModel()->m_EntBf.m_idSpaceLast = MDSPACEBEFORE( pEnt);
-		if ( Mdm::GetCurModel()->m_EntBf.m_idSpaceLast)
-			MDSPACENEXT( &Mdm::GetCurModel()->m_EntBf.m_st[MIDtoHN( Mdm::GetCurModel()->m_EntBf.m_idSpaceLast)]) = 0;
-		Mdm::GetCurModel()->m_EntBf.m_nidSpace--;
+		pCurMdl->m_EntBf.m_idSpaceLast = MDSPACEBEFORE( pEnt);
+		if ( pCurMdl->m_EntBf.m_idSpaceLast)
+			MDSPACENEXT( &pCurMdl->m_EntBf.m_pst[MIDtoHN( pCurMdl->m_EntBf.m_idSpaceLast)]) = 0;
+		pCurMdl->m_EntBf.m_nidSpace--;
 	}
 
 	// エンティティIDに子IDの設定用領域を確保する
@@ -231,7 +232,7 @@ MINT mdmDEnt::CreateEnt(
 	// レイヤーとのリンクを付ける
 //	pEnt->m_SC.m_idP = i_idLyr;
 	pEnt->m_idP = i_idLyr;
-	Mdm::GetCurModel()->m_LyrBf.m_st[MIDtoHN( i_idLyr)].m_GidC += (*o_pidEnt);
+	pCurMdl->m_LyrBf.m_pst[MIDtoHN( i_idLyr)].m_GidC += (*o_pidEnt);
 
 	return 0;
 }
@@ -245,33 +246,34 @@ MINT mdmDEnt::DeleteEnt(						//
 {
 	mdmEnt*	pEntB;								// 直前に削除したエンティティ
 	mdmEnt*	pEntC;								// 削除エンティティ
-	MDID		idLyr;
+	MDID	idLyr;
+	MdModel* pCurMdl = Mdm::GetCurModel();
 
-	ASSERT( i_idEnt >= 1 && i_idEnt <= Mdm::GetCurModel()->m_EntBf.m_n);
+	ASSERT( i_idEnt >= 1 && i_idEnt <= pCurMdl->m_EntBf.m_n);
 
 	// レイヤーからのリンクを削除する
-	pEntC = &Mdm::GetCurModel()->m_EntBf.m_st[MIDtoHN( i_idEnt)];
+	pEntC = &pCurMdl->m_EntBf.m_pst[MIDtoHN( i_idEnt)];
 //	idLyr = pEntC->m_SC.m_idP;
 	idLyr = pEntC->m_idP;
-	Mdm::GetCurModel()->m_LyrBf.m_st[MIDtoHN( idLyr)] -= i_idEnt;
+	pCurMdl->m_LyrBf.m_pst[MIDtoHN( idLyr)] -= i_idEnt;
 	// その他のリンクを削除する
 
 	// 削除し割り当て待ちの空きエンティティ数に追加
-	Mdm::GetCurModel()->m_EntBf.m_nidSpace++;
+	pCurMdl->m_EntBf.m_nidSpace++;
 	// エンティティ削除フラグ設定と使用エリア開放
 	MDSPACEID( pEntC) = MDID_DELETE;
 	pEntC->Free();
 
 	// 空きエリアリンクに追加
 	// 直前に削除したエンティティの次のエンティティとする
-	if ( Mdm::GetCurModel()->m_EntBf.m_idSpaceLast) {
-		pEntB = &Mdm::GetCurModel()->m_EntBf.m_st[MIDtoHN( Mdm::GetCurModel()->m_EntBf.m_idSpaceLast)];
+	if ( pCurMdl->m_EntBf.m_idSpaceLast) {
+		pEntB = &pCurMdl->m_EntBf.m_pst[MIDtoHN( pCurMdl->m_EntBf.m_idSpaceLast)];
 		MDSPACENEXT( pEntB) = i_idEnt;
 	}
 	// 空きエリアリンクの先頭にリンク付ける
-	MDSPACEBEFORE( pEntC) = Mdm::GetCurModel()->m_EntBf.m_idSpaceLast;
+	MDSPACEBEFORE( pEntC) = pCurMdl->m_EntBf.m_idSpaceLast;
 	MDSPACENEXT( pEntC) = 0;
-	Mdm::GetCurModel()->m_EntBf.m_idSpaceLast = i_idEnt;
+	pCurMdl->m_EntBf.m_idSpaceLast = i_idEnt;
 	return 0;
 }
 
@@ -285,10 +287,12 @@ MINT mdmDEnt::SetFigPmt(
 						MDPMT&		i_Pmt		// 図形情報
 				)
 {
+	MdModel* pCurMdl = Mdm::GetCurModel();
+
 	ASSERT( MDISENT( i_idEnt));
 
 	// 図形情報をエンティティにコピーする
-	Mdm::GetCurModel()->m_EntBf.m_st[MIDtoHN( i_idEnt)].m_Fig = i_Pmt;
+	pCurMdl->m_EntBf.m_pst[MIDtoHN( i_idEnt)].m_Fig = i_Pmt;
 	return 0;
 }
 
@@ -302,10 +306,12 @@ MINT mdmDEnt::SetFig(
 						MDFIG&		i_Fig		// 図形情報
 				)
 {
+	MdModel* pCurMdl = Mdm::GetCurModel();
+
 	ASSERT( MDISENT( i_idEnt));
 
 	// 図形情報をエンティティにコピーする
-	Mdm::GetCurModel()->m_EntBf.m_st[MIDtoHN( i_idEnt)].m_Fig = i_Fig;
+	pCurMdl->m_EntBf.m_pst[MIDtoHN( i_idEnt)].m_Fig = i_Fig;
 	return 0;
 }
 
@@ -334,10 +340,12 @@ MINT mdmDEnt::GetFig(
 						MDFIG*		o_pFig		// 図形情報
 				)
 {
+	MdModel* pCurMdl = Mdm::GetCurModel();
+
 	ASSERT( MDISENT( i_idEnt));
 
 	// 図形情報をエンティティからコピーする
-	*o_pFig = Mdm::GetCurModel()->m_EntBf.m_st[MIDtoHN( i_idEnt)].m_Fig;
+	*o_pFig = pCurMdl->m_EntBf.m_pst[MIDtoHN( i_idEnt)].m_Fig;
 	return 0;
 }
 
@@ -349,10 +357,12 @@ MINT mdmDEnt::CngZukei(
 						MDFIG&		i_Fig		// 図形情報
 				)
 {
+	MdModel* pCurMdl = Mdm::GetCurModel();
+
 	ASSERT( MDISENT( i_idEnt));
 
 	// 図形情報をエンティティにコピーする
-	Mdm::GetCurModel()->m_EntBf.m_st[MIDtoHN( i_idEnt)].m_Fig = i_Fig;
+	pCurMdl->m_EntBf.m_pst[MIDtoHN( i_idEnt)].m_Fig = i_Fig;
 	return 0;
 }
 
@@ -365,11 +375,13 @@ MINT mdmDEnt::SetAttr(
 						void*		i_pAtr		// 属性
 				)
 {
+	MdModel* pCurMdl = Mdm::GetCurModel();
+
 	ASSERT( MDISENT( i_idEnt));
 
 	// 属性をエンティティにコピーする
-	Mdm::GetCurModel()->m_EntBf.m_st[MIDtoHN( i_idEnt)].m_iTpAtr = i_iTpAtr;
-	Mdm::GetCurModel()->m_EntBf.m_st[MIDtoHN( i_idEnt)].m_pAtr = i_pAtr;
+	pCurMdl->m_EntBf.m_pst[MIDtoHN( i_idEnt)].m_iTpAtr = i_iTpAtr;
+	pCurMdl->m_EntBf.m_pst[MIDtoHN( i_idEnt)].m_pAtr = i_pAtr;
 	return 0;
 }
 
@@ -380,10 +392,12 @@ void* mdmDEnt::GetAttr(
 						MDID		i_idEnt	// エンティティ-ID
 				)
 {
+	MdModel* pCurMdl = Mdm::GetCurModel();
+
 	ASSERT( MDISENT( i_idEnt));
 
 	// 属性をエンティティから得る
-	return Mdm::GetCurModel()->m_EntBf.m_st[MIDtoHN( i_idEnt)].m_pAtr;
+	return pCurMdl->m_EntBf.m_pst[MIDtoHN( i_idEnt)].m_pAtr;
 }
 
 //===========================================================================
@@ -397,7 +411,9 @@ MINT mdmDEnt::GetLyrId(
 						MDID*		o_pidLyr	// レイヤーID
 				)
 {
-	*o_pidLyr = Mdm::GetCurModel()->m_EntBf.m_st[MIDtoHN( i_idEnt)].m_idP;
+	MdModel* pCurMdl = Mdm::GetCurModel();
+
+	*o_pidLyr = pCurMdl->m_EntBf.m_pst[MIDtoHN( i_idEnt)].m_idP;
 	return 0;
 }
 
@@ -414,12 +430,14 @@ MINT mdmDEnt::CreateFigEnt(
 						MDID*		o_pidEnt	// エンティティ-ID
 				)
 {
+	MdModel* pCurMdl = Mdm::GetCurModel();
+
 	// カレントレイヤーが未生成の場合はレイヤーを生成
-	if ( Mdm::GetCurModel()->m_idCurLyr == 0) {
-		DLyr::CreateLyr( Mdm::GetCurModel()->m_idCurScm, Mdm::GetCurModel()->m_idCurGrp, &Mdm::GetCurModel()->m_idCurLyr, 10);
+	if ( pCurMdl->m_idCurLyr == 0) {
+		DLyr::CreateLyr( pCurMdl->m_idCurScm, pCurMdl->m_idCurGrp, &pCurMdl->m_idCurLyr, 10);
 	}
 	// カレントレイヤーにリンクしたエンティティを生成
-	mdmDEnt::CreateEnt( Mdm::GetCurModel()->m_idCurLyr, o_pidEnt, 0);
+	mdmDEnt::CreateEnt( pCurMdl->m_idCurLyr, o_pidEnt, 0);
 	// 図形をコピー
 	mdmDEnt::SetFig( *o_pidEnt, i_stFig);
 	return 0;
@@ -447,19 +465,20 @@ MINT mdmDEnt::CngLyr(
 	MgMat3E* pMTransT;							// 変更先グループの座標変換マトリックス
 	MgMat3E	MTransTR;							// 変更先グループの座標逆変換マトリックス
 	MgMat3E	MTrans;								// 変更先グループから変更先グループへの座標変換マトリックス
+	MdModel* pCurMdl = Mdm::GetCurModel();
 
 	// 変更先のレイヤーが属するグループの座標逆変換マトリックスを求める
-	idGrpT = Mdm::GetCurModel()->m_LyrBf.m_st[MIDtoHN( i_idLyrT)].m_idP1;
-	pMTransT = &Mdm::GetCurModel()->m_GrpBf.m_st[MIDtoHN( idGrpT)].m_MTrans;
+	idGrpT = pCurMdl->m_LyrBf.m_pst[MIDtoHN( i_idLyrT)].m_idP1;
+	pMTransT = &pCurMdl->m_GrpBf.m_pst[MIDtoHN( idGrpT)].m_MTrans;
 	MTransTR = MGeo::Mat3Inv( *pMTransT);
 
 	// 指定全エンティティのレイヤーを変更する
 	idGrpFB = MDC_ID_NULL;
 	for ( iC=0; iC<i_GidEntF.m_n; iC++) {
 		// 変更元のレイヤーとグループを求める
-		idEntF = i_GidEntF.m_st[iC];
-		idLyrF = Mdm::GetCurModel()->m_EntBf.m_st[MIDtoHN( idEntF)].m_idP;
-		idGrpF = Mdm::GetCurModel()->m_LyrBf.m_st[MIDtoHN( idLyrF)].m_idP1;
+		idEntF = i_GidEntF.m_pst[iC];
+		idLyrF = pCurMdl->m_EntBf.m_pst[MIDtoHN( idEntF)].m_idP;
+		idGrpF = pCurMdl->m_LyrBf.m_pst[MIDtoHN( idLyrF)].m_idP1;
 		// レイヤーに変化があるもののみ変更する
 		if ( idLyrF != i_idLyrT) {
 			// グループに変化があるもののみ座標変換する
@@ -467,15 +486,15 @@ MINT mdmDEnt::CngLyr(
 				// 変換元グループが直前の変換元グループと異なる場合には座標変換マトリックスを求める
 				if ( idGrpF != idGrpFB) {
 					idGrpFB = idGrpF;
-					MTrans = Mdm::GetCurModel()->m_GrpBf.m_st[MIDtoHN( idGrpF)].m_MTrans;
+					MTrans = pCurMdl->m_GrpBf.m_pst[MIDtoHN( idGrpF)].m_MTrans;
 					MTrans *= MTransTR;
 				}
 				// エンティティの座標を変換する
-				DZukei::MdzTrans( MTrans, Mdm::GetCurModel()->m_EntBf.m_st[MIDtoHN( idEntF)].m_Fig, 
-								  &Mdm::GetCurModel()->m_EntBf.m_st[MIDtoHN( idEntF)].m_Fig);
+				DZukei::MdzTrans( MTrans, pCurMdl->m_EntBf.m_pst[MIDtoHN( idEntF)].m_Fig, 
+								  &pCurMdl->m_EntBf.m_pst[MIDtoHN( idEntF)].m_Fig);
 			}
 			// レイヤーを変換する
-			Mdm::GetCurModel()->m_EntBf.m_st[MIDtoHN( idEntF)].m_idP = i_idLyrT;
+			pCurMdl->m_EntBf.m_pst[MIDtoHN( idEntF)].m_idP = i_idLyrT;
 		}
 	}
 	return 0;
@@ -496,18 +515,19 @@ MINT mdmDEnt::CpyEnt(
 						MDIDSET*	o_pGidEnt	// コピーエンティティ-IDセット
 				)
 {
-	MINT		iC;
-	MDID		idEnt;
+	MINT	iC;
+	MDID	idEnt;
 	mdmEnt	entW;
+	MdModel* pCurMdl = Mdm::GetCurModel();
 
 	// 指定全エンティティをコピーする
 	o_pGidEnt->m_n = 0;
 	for ( iC=0; iC<i_GidEnt.m_n; iC++) {
 		// コピー元のエンティティを得る
-		entW = Mdm::GetCurModel()->m_EntBf.m_st[MIDtoHN( i_GidEnt[iC])];
+		entW = pCurMdl->m_EntBf.m_pst[MIDtoHN( i_GidEnt[iC])];
 		// 同エンティティを生成する
 		mdmDEnt::CreateEnt( 0, &idEnt, 0);
-		Mdm::GetCurModel()->m_EntBf.m_st[MIDtoHN( idEnt)] = entW;
+		pCurMdl->m_EntBf.m_pst[MIDtoHN( idEnt)] = entW;
 	}
 
 	// コピーエンティティのレイヤーを変更する
@@ -539,10 +559,10 @@ MINT mdmDEnt::GetEntInBox(
 	o_pGidEnt->m_n = 0;
 	DLyr::GetLyrIdAll( &GidLyr);
 	for ( iCl=0; iCl<GidLyr.m_n; iCl++) {
-		DLyr::GetEnt( GidLyr.m_st[iCl], &GidEnt);
+		DLyr::GetEnt( GidLyr.m_pst[iCl], &GidEnt);
 		for ( iCe=0; iCe<GidEnt.m_n; iCe++) {
-			idEnt = GidEnt.m_st[iCe];
-//			rMnMxEnt = Mdm::GetCurModel()->m_EntBf.m_st[MIDtoHN( idEnt)].m_Fig.m_pPmts->m_Mmx;
+			idEnt = GidEnt.m_pst[iCe];
+//			rMnMxEnt = pCurMdl->m_EntBf.m_pst[MIDtoHN( idEnt)].m_Fig.m_pPmts->m_Mmx;
 			if ( MGeo::ChkPt3InMMR3( rMnMxEnt.min, i_rMnmx) &&
 				 MGeo::ChkPt3InMMR3( rMnMxEnt.max, i_rMnmx) ) {
 				(*o_pGidEnt) += idEnt;
@@ -567,7 +587,7 @@ MINT mdmDEnt::Link(
 						MINT		i_icdRef2	// エンティティID2からエンティティID1への関係コード
 				)
 {
-//	Mdm::GetCurModel()->m_EntBf.m_st[MIDtoHN( i_idEnt1)]
+//	pCurMdl->m_EntBf.m_pst[MIDtoHN( i_idEnt1)]
 	return 0;
 }
 

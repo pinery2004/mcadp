@@ -61,7 +61,7 @@ MINT System::MmInitialize()
 
 	// ルートディレクトリの設定
 	// システムのプロパティをイニシャル設定する
-	McSystemProperty::Init();
+	mcs::Init();
 
 	//
 	Msg::ClearErrorMsg();
@@ -72,12 +72,12 @@ MINT System::MmInitialize()
 
 	// MCAD.ini ファイルの読み込み
 	MCHAR	cIniFilePath[MAX_PATH];
-	McSystemProperty::GetEnvPath( MP_PATH_ROOT, McSystemProperty::GetStr( MM_STR_INIFILE), cIniFilePath);
+	mcsGetEnvPath( MP_PATH_ROOT, mcs::GetStr( MM_STR_INIFILE), cIniFilePath);
 	LoadMCADIniFile( cIniFilePath);
 
 	// Logファイルの削除とオープン
 	MCHAR	cLogFilePath[MAX_PATH];
-	McSystemProperty::GetEnvPath( MP_PATH_ROOT, McSystemProperty::GetStr( MM_STR_LOGFILE), cLogFilePath);
+	mcsGetEnvPath( MP_PATH_ROOT, mcs::GetStr( MM_STR_LOGFILE), cLogFilePath);
 	Trace::OpenLogFile( cLogFilePath);
 	
 	// DBを初期化する
@@ -94,8 +94,7 @@ MINT System::MmInitialize()
 
 	// トレース処理のファイルオープン
 	MCHAR	cTraceFilePath[MAX_PATH];
-	McSystemProperty::GetEnvPath( MP_PATH_ROOT, McSystemProperty::GetStr( MM_STR_TRACEFILE), cTraceFilePath);
-//S	MBTRCOPEN( Mstr( "C:/temp/MCadDebugTrace.txt"));
+	mcsGetEnvPath( MP_PATH_ROOT, mcs::GetStr( MM_STR_TRACEFILE), cTraceFilePath);
 	MBTRCOPEN( cTraceFilePath);
 #if(0)
 	// メッセージの出力先設定

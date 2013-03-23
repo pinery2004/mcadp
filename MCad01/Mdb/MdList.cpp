@@ -30,7 +30,7 @@ MbListO::MbListO(
 
 	m_nRecSize = sizeof( CNode);
 
-	m_pNodeFree = NULL;
+	m_pFree = NULL;
 	m_pBlocks = NULL;
 	m_nBlockSize = i_nBlockSize;
 }
@@ -131,7 +131,7 @@ void MbListO::RemoveAll( )
 
 	m_pBlocks->FreeDataChain( );
 	m_pBlocks = NULL;
-	m_pNodeFree = NULL;
+	m_pFree = NULL;
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -189,7 +189,7 @@ MbListO::NewNode(
 					CNode*		io_pNext		// 
 				)
 {
-	if ( m_pNodeFree == NULL) {
+	if ( m_pFree == NULL) {
 		// 空きノードがない場合は、ノードブロックを追加
 		mdPlex* pNewBlock = mdPlex::Create( m_pBlocks, m_nBlockSize, m_nRecSize);
 		// chain them into free list
@@ -198,15 +198,15 @@ MbListO::NewNode(
 		pNode = ( CNode*)( ( char*)pNode + m_nRecSize * ( m_nBlockSize - 1));
 		for ( MINT i = m_nBlockSize-1; i >= 0; i--)
 		{
-			pNode->pNext = m_pNodeFree;
-			m_pNodeFree = pNode;
+			pNode->pNext = m_pFree;
+			m_pFree = pNode;
 			pNode = ( CNode*)( ( char*)pNode - m_nRecSize);
 		}
 	}
-	_ASSERTE( m_pNodeFree);  // we must have something
+	_ASSERTE( m_pFree);  // we must have something
 
-	CNode*	pNode = m_pNodeFree;
-	m_pNodeFree = m_pNodeFree->pNext;
+	CNode*	pNode = m_pFree;
+	m_pFree = m_pFree->pNext;
 	
 	pNode->pEnt = i_pEnt;
 
@@ -229,8 +229,8 @@ void	MbListO::FreeNode(
 	i_pNode->pPrev->pNext = i_pNode->pNext;
 	i_pNode->pNext->pPrev = i_pNode->pPrev;
 
-	i_pNode->pNext = m_pNodeFree;
-	m_pNodeFree = i_pNode;
+	i_pNode->pNext = m_pFree;
+	m_pFree = i_pNode;
 	
 	m_nCount--;
 	_ASSERTE( m_nCount >= 0);  // make sure we don't underflow
@@ -268,7 +268,7 @@ MbListE::MbListE(
 	m_nEntType = i_nRecSize;
 	m_nRecSize = sizeof( CNode) + ( i_nRecSize - sizeof( char*));
 
-	m_pNodeFree = NULL;
+	m_pFree = NULL;
 	m_pBlocks = NULL;
 	m_nBlockSize = i_nBlockSize;
 }
@@ -373,7 +373,7 @@ void MbListE::RemoveAll( )
 
 	m_pBlocks->FreeDataChain( );
 	m_pBlocks = NULL;
-	m_pNodeFree = NULL;
+	m_pFree = NULL;
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -431,7 +431,7 @@ MbListE::NewNode(
 					CNode*		io_pNext
 				)
 {
-	if ( m_pNodeFree == NULL) {
+	if ( m_pFree == NULL) {
 		// 空きノードがない場合は、ノードブロックを追加
 		mdPlex* pNewBlock = mdPlex::Create( m_pBlocks, m_nBlockSize, m_nRecSize);
 		// chain them into free list
@@ -440,15 +440,15 @@ MbListE::NewNode(
 		pNode = ( CNode*)( ( char*)pNode + m_nRecSize * ( m_nBlockSize - 1));
 		for ( MINT i = m_nBlockSize-1; i >= 0; i--)
 		{
-			pNode->pNext = m_pNodeFree;
-			m_pNodeFree = pNode;
+			pNode->pNext = m_pFree;
+			m_pFree = pNode;
 			pNode = ( CNode*)( ( char*)pNode - m_nRecSize);
 		}
 	}
-	_ASSERTE( m_pNodeFree);  // we must have something
+	_ASSERTE( m_pFree);  // we must have something
 
-	CNode*	pNode = m_pNodeFree;
-	m_pNodeFree = m_pNodeFree->pNext;
+	CNode*	pNode = m_pFree;
+	m_pFree = m_pFree->pNext;
 	
 	memcpy( &( pNode->pEnt), i_pEnt, m_nEntType);
 
@@ -471,8 +471,8 @@ void	MbListE::FreeNode(
 	i_pNode->pPrev->pNext = i_pNode->pNext;
 	i_pNode->pNext->pPrev = i_pNode->pPrev;
 
-	i_pNode->pNext = m_pNodeFree;
-	m_pNodeFree = i_pNode;
+	i_pNode->pNext = m_pFree;
+	m_pFree = i_pNode;
 	
 	m_nCount--;
 	_ASSERTE( m_nCount >= 0);  // make sure we don't underflow

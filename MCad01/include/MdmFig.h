@@ -287,10 +287,10 @@ public:
 						{ return *(UINT*)this;}
 };
 
-inline MINT MNWORD( MCHAR* i_pcStr)
-					{ return ( (int)Mstrlen( i_pcStr) * sizeof( MCHAR) / SZMINT() + 1);}
-inline MINT MNWORD( char* i_pcStr)
-					{ return ( (int)strlen( i_pcStr) * sizeof( char) / SZMINT() + 1);}
+inline MINT MNWORD( MCHAR* i_sStr)
+					{ return ( (int)Mstrlen( i_sStr) * sizeof( MCHAR) / SZMINT() + 1);}
+inline MINT MNWORD( char* i_sStr)
+					{ return ( (int)strlen( i_sStr) * sizeof( char) / SZMINT() + 1);}
 
 // カラーマップ部
 typedef struct _pgrgbquad {
@@ -319,19 +319,19 @@ public:
 	MUBYTE		m_itp;							// 図形タイプ			BIT(0,1,2,3,4,5,6,7)単位で定義
 												// 図形モード			BIT(1,2,3,4,5,6,7)
 												// 図形次元(idim)		BIT(0):	0:3Dデータ、1:2Dデータ
-	MUSHORT		m_n;								// 図形データサイズ(ヘッダ部を除く)
+	MUSHORT		m_n;							// 図形データサイズ(ヘッダ部を除く)
 };
 
 ///////////////////////////////////////////////////////////////////////////////
 // 図形要素(可変長ワード(仮に整数で定義))
-class DLL_EXPORT_FIG MDPMT							// サイズ指定が最大2**16-1までの形式
+class DLL_EXPORT_FIG MDPMT						// サイズ指定が最大2**16-1までの形式
 {
 	friend	class	MDFIG;
 
 	MDPHD		m_hd;							// 図形要素ヘッダ
 	union {
-		MDPMTDT	m_dt[MP_SZ_MDFIG - 1];				// 図形情報(図形要素郡)
-		MINT	m_i[MP_SZ_MDFIG - 1];					// デバッグ参照用
+		MDPMTDT	m_dt[MP_SZ_MDFIG - 1];			// 図形情報(図形要素郡)
+		MINT	m_i[MP_SZ_MDFIG - 1];			// デバッグ参照用
 		MDPHD	m_h[MP_SZ_MDFIG - 1];
 	};
 
@@ -378,19 +378,19 @@ public:
 	void zMaterialRGBA( MINT i_iMtN, MUQUARTER i_iRgb);		// 材質( RGB) ( byte * 3)
 	void zMaterialRGBA( MINT i_iMtN, FLOAT3& i_f3Rgb,
 						MFLOAT i_fAlpha = 1);				// 材質( RGB) ( float * 3)
-	void zMaterialShininess( MREAL i_rShns);						// 材質鏡面光(光沢)係数
+	void zMaterialShininess( MREAL i_rShns);				// 材質鏡面光(光沢)係数
 	void zTexture( MINT i_iTxtrId);							// テクスチャ
 	void zTextureCoordinate(
 						MINT		i_iMdCA,
 						MINT		i_iMdCB = 0,
 				const	MgVect2*	i_vszimg = 0,
-				const	MgMat3E*		i_matH = 0);			// テクスチャ座標
+				const	MgMat3E*		i_matH = 0);		// テクスチャ座標
 	void zTextureParam( MINT i_iTp, MINT i_iPxLap,
 					    MINT i_iPyLap, MINT i_iFltEx,
 					    MINT i_iFltRd, MREAL3& i_fColBlc1,
 					    MREAL3& i_fColBlc2);				// テクスチャパラメータ
 	void zShininess( MREAL i_fShns);						// 鏡面反射率 ( 0. ～ 1.)
-	void zPovRay( MCHAR* i_pcStr);							// PovRay出力属性
+	void zPovRay( MCHAR* i_sStr);							// PovRay出力属性
 
 	void Point3( const MgPoint3&	i_Pt);
 	void Line3( const MgLine3&		i_Ln);
@@ -540,13 +540,13 @@ public:
 						MINT		i_iMdCA,
 						MINT		i_iMdCB, 
 				const	MgVect2*	i_vszimg,
-				const	MgMat3E*		i_matH);				// テクスチャ座標
+				const	MgMat3E*		i_matH);			// テクスチャ座標
 	void zTextureParam( MINT i_iTp, MINT i_iPxLap,
 						MINT i_iPyLap, MINT i_iFltEx,
 						MINT i_iFltRd, MREAL3& i_fColBlc1,
 						MREAL3& i_fColBlc2);				// テクスチャパラメータ
 	void zShininess( MREAL i_fShns);						// 鏡面反射率 ( 0. ～ 1.)
-	void zPovRay( MCHAR* i_pcStr);							// PovRay出力属性 文字列
+	void zPovRay( MCHAR* i_sStr);							// PovRay出力属性 文字列
 
 	// 図形要素
 	void Point3( const MgPoint3&	i_Pt);
@@ -579,7 +579,8 @@ inline MDFIG::MDFIG(
 						MINT	i_sz			// 図形情報サイズ
 				)
 {
-	MBMALLOCF( MDPMTL, m_pPmtl, MINT, i_sz);
+//E	MBMALLOCF( MDPMTL, m_pPmtl, MINT, i_sz);
+	MbAllocF<MDPMTL,MINT>( m_pPmtl, i_sz);
 	m_pPmtl->SetSz( i_sz);
 	m_pPmtl->SetN( 0);
 }

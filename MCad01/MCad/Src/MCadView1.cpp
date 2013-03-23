@@ -63,6 +63,17 @@ BEGIN_MESSAGE_MAP(CMCadView1, CView)
 	ON_WM_MOUSEMOVE()
 	ON_WM_SIZE()
 	ON_WM_MOUSEWHEEL()
+	ON_WM_SETCURSOR()
+	ON_WM_KILLFOCUS()
+	ON_WM_CANCELMODE()
+	ON_WM_SETFOCUS()
+	ON_WM_CREATE()
+	ON_WM_CLOSE()
+	ON_WM_CHAR()
+	ON_WM_KEYDOWN()
+	ON_WM_KEYUP()
+	ON_WM_MOUSEACTIVATE()
+	ON_WM_SHOWWINDOW()
 END_MESSAGE_MAP()
 
 // CMCadView1 ƒRƒ“ƒXƒgƒ‰ƒNƒVƒ‡ƒ“/ƒfƒXƒgƒ‰ƒNƒVƒ‡ƒ“
@@ -300,3 +311,100 @@ CMCadDoc* CMCadView1::GetDocument() const // ƒfƒoƒbƒOˆÈŠO‚Ìƒo[ƒWƒ‡ƒ“‚ÍƒCƒ“ƒ‰ƒCƒ
 
 
 // CMCadView1 ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰[
+
+
+BOOL CMCadView1::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
+{
+	// TODO: ‚±‚±‚ÉƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰[ ƒR[ƒh‚ğ’Ç‰Á‚·‚é‚©AŠù’è‚Ìˆ—‚ğŒÄ‚Ño‚µ‚Ü‚·B
+	MC::Window::SetCursor( this);
+
+	return CView::OnSetCursor(pWnd, nHitTest, message);
+}
+
+
+void CMCadView1::OnKillFocus(CWnd* pNewWnd)
+{
+	CView::OnKillFocus(pNewWnd);
+
+	// TODO: ‚±‚±‚ÉƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰[ ƒR[ƒh‚ğ’Ç‰Á‚µ‚Ü‚·B
+}
+
+
+void CMCadView1::OnCancelMode()
+{
+	CView::OnCancelMode();
+
+	// TODO: ‚±‚±‚ÉƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰[ ƒR[ƒh‚ğ’Ç‰Á‚µ‚Ü‚·B
+}
+
+
+void CMCadView1::OnSetFocus(CWnd* pOldWnd)
+{
+	CView::OnSetFocus(pOldWnd);
+
+	// TODO: ‚±‚±‚ÉƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰[ ƒR[ƒh‚ğ’Ç‰Á‚µ‚Ü‚·B
+	ms_pMainFrame->m_pCurView = this;
+}
+
+
+int CMCadView1::OnCreate(LPCREATESTRUCT lpCreateStruct)
+{
+	if (CView::OnCreate(lpCreateStruct) == -1)
+		return -1;
+
+	// TODO:  ‚±‚±‚É“Á’è‚Èì¬ƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢B
+
+	return 0;
+}
+
+
+void CMCadView1::OnClose()
+{
+	// TODO: ‚±‚±‚ÉƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰[ ƒR[ƒh‚ğ’Ç‰Á‚·‚é‚©AŠù’è‚Ìˆ—‚ğŒÄ‚Ño‚µ‚Ü‚·B
+
+	CView::OnClose();
+}
+
+
+void CMCadView1::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
+{
+	// TODO: ‚±‚±‚ÉƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰[ ƒR[ƒh‚ğ’Ç‰Á‚·‚é‚©AŠù’è‚Ìˆ—‚ğŒÄ‚Ño‚µ‚Ü‚·B
+	MC::ViewInp::Char( this, nChar, nRepCnt, nFlags);
+
+	CView::OnChar(nChar, nRepCnt, nFlags);
+}
+
+
+void CMCadView1::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
+{
+	// TODO: ‚±‚±‚ÉƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰[ ƒR[ƒh‚ğ’Ç‰Á‚·‚é‚©AŠù’è‚Ìˆ—‚ğŒÄ‚Ño‚µ‚Ü‚·B
+	MC::ViewInp::KeyDown( this, nChar, nRepCnt, nFlags);
+
+	CView::OnKeyDown(nChar, nRepCnt, nFlags);
+}
+
+
+void CMCadView1::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
+{
+	// TODO: ‚±‚±‚ÉƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰[ ƒR[ƒh‚ğ’Ç‰Á‚·‚é‚©AŠù’è‚Ìˆ—‚ğŒÄ‚Ño‚µ‚Ü‚·B
+	MC::ViewInp::KeyUp( this, nChar, nRepCnt, nFlags);
+
+	CView::OnKeyUp(nChar, nRepCnt, nFlags);
+}
+
+
+int CMCadView1::OnMouseActivate(CWnd* pDesktopWnd, UINT nHitTest, UINT message)
+{
+	// TODO: ‚±‚±‚ÉƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰[ ƒR[ƒh‚ğ’Ç‰Á‚·‚é‚©AŠù’è‚Ìˆ—‚ğŒÄ‚Ño‚µ‚Ü‚·B
+	SetFocus();
+
+	return CView::OnMouseActivate(pDesktopWnd, nHitTest, message);
+}
+
+
+void CMCadView1::OnShowWindow(BOOL bShow, UINT nStatus)
+{
+	CView::OnShowWindow(bShow, nStatus);
+
+	// TODO: ‚±‚±‚ÉƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰[ ƒR[ƒh‚ğ’Ç‰Á‚µ‚Ü‚·B
+}

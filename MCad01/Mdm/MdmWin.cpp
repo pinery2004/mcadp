@@ -1183,7 +1183,7 @@ MINT	MdwChangeType (
 MINT	MdwGetTypeName (
 						MDID		i_idWFn,	// ウィンドウ機能番号
 						MCHAR		o_snmFn,	// 機能名
-						MINT*		o_psznmFn	// 機能名サイズ
+						MINT*		o_sznmFn	// 機能名サイズ
 				)
 {
 	return 0;

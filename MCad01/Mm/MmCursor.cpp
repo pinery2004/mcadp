@@ -116,7 +116,7 @@ MINT Window::DispCrossHair(
 		return 0;
 
 	CClientDC	dc( z_pCurWndInfo->GetWnd());
-	DWORD		rgbCursor = McSystemProperty::GetColor( MM_COLOR_CURSOR);
+	DWORD		rgbCursor = mcs::GetColor( MM_COLOR_CURSOR);
 	CPen		CrossHairPen( PS_SOLID, 1, rgbCursor);
 	CPen*		OldPen = dc.SelectObject( &CrossHairPen);
 

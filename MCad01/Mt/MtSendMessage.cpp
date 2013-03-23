@@ -159,8 +159,8 @@ MINT MtSendMessage(
 #ifdef	MS_CMDMENU_STR_TYPE
 		pcMenuStr	= GetGlobalName( nFlags);					// メニューIDよりコマンド名取得
 		if ( pcMenuStr) {
-			event.m_pcMenuStr = (MCHAR* )new char[(Mstrlen( pcMenuStr) + 1)*sizeof( MCHAR)];
-			Mstrcpy( event.m_pcMenuStr, pcMenuStr);
+			event.m_sMenuStr = (MCHAR* )new char[(Mstrlen( pcMenuStr) + 1)*sizeof( MCHAR)];
+			Mstrcpy( event.m_sMenuStr, pcMenuStr);
 		} else {
 			hadevent = 0;
 		}

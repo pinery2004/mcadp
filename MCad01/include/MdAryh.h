@@ -22,20 +22,20 @@ template <typename T> class MdAryH
 public:
 	MUSHORT		m_sz;							// 最大構造体数
 	MUSHORT		m_n;							// 構造体数
-	T*			m_st;							// 構造体
+	T*			m_pst;							// 構造体
 public:
 	MdAryH()	
-						{ m_sz = m_n = 0; m_st = NULL;}
+						{ m_sz = m_n = 0; m_pst = NULL;}
 	MdAryH( MUSHORT i_sz);
 
 	void Alloc( MUSHORT i_sz);									// 指定最大構造体数の領域を確保、エラー表示用にProg名称を入力
 	
-	void ReSize( MUSHORT i_sz);								// 最大構造体数の変更と領域確保、エラー表示用にProg名称を入力
+	void ReSize( MUSHORT i_sz);									// 最大構造体数の変更と領域確保、エラー表示用にProg名称を入力
 
-	void Init()			{ m_sz = m_n = 0; m_st = NULL;}		// この群がさらに群になった場合の最終データより後のデータのクリア用
+	void Init()			{ m_sz = m_n = 0; m_pst = NULL;}		// この群がさらに群になった場合の最終データより後のデータのクリア用
 
 	T& operator [] (MUSHORT idx)								// ()のチェック機能と領域拡張機能を取り外し高速版	
-						{ return m_st[MIDtoHN( idx)];}
+						{ return m_pst[MIDtoHN( idx)];}
 
 	// デバッグ用トレース出力
 	void PrintC( MCHAR* i_s);
@@ -48,19 +48,18 @@ template <typename T> inline MdAryH<T>::MdAryH(
 {
 	m_sz = i_sz;
 	m_n = 0;
-	MBMALLOC( m_st, T, i_sz);
+//E	MBMALLOC( m_pst, T, i_sz);
+	MbAlloc<T>( m_pst, i_sz);
 }
 
 //	構造体群領域の確保
 template <typename T> inline void MdAryH<T>::Alloc( MUSHORT i_sz)
 {
 	int isz = i_sz * sizeof( T);
-	if ( isz == 520 || isz == 1600 || isz == 16000 || isz == 320 || isz == 800 || isz == 1760) {
-		int iii=1;
-	}
 
-	MBMALLOC( m_st, T, i_sz);									//	構成構造体の領域をmallocで確保
-	memset( m_st, 0, sizeof( T) * ( i_sz));
+//E	MBMALLOC( m_pst, T, i_sz);									//	構成構造体の領域をmallocで確保
+	MbAlloc<T>( m_pst, i_sz);
+	memset( m_pst, 0, sizeof( T) * ( i_sz));
 	m_sz = i_sz;
 }
 
@@ -68,13 +67,14 @@ template <typename T> inline void MdAryH<T>::Alloc( MUSHORT i_sz)
 template <typename T> inline void MdAryH<T>::ReSize( MUSHORT i_sz)
 {
 	if ( i_sz > m_sz) {
-		T	*stb = m_st;
-		MBMALLOC( m_st, T, i_sz);		 						//	構成点の新領域をmallocで確保
+		T	*stb = m_pst;
+//E		MBMALLOC( m_pst, T, i_sz);		 						//	構成点の新領域をmallocで確保
+		MbAlloc<T>( m_pst, i_sz);
 		if ( m_sz)
-			memcpy( m_st, stb, m_sz * sizeof( T));				//	構成点の領域にデータがあった場合は新領域へコピーする
+			memcpy( m_pst, stb, m_sz * sizeof( T));				//	構成点の領域にデータがあった場合は新領域へコピーする
 		if ( stb)												//	構成点の領域をmallocで確保していた場合はその領域を開放する
 			delete (char*)stb;									//
-		memset( &m_st[m_sz], 0, sizeof( T) * ( i_sz - m_sz));
+		memset( &m_pst[m_sz], 0, sizeof( T) * ( i_sz - m_sz));
 		m_sz = i_sz;
 	}
 }
@@ -87,7 +87,7 @@ template <typename T> inline void MdAryH<T>::PrintC(MCHAR* i_s)
 									i_s, m_sz, m_n);
 	MBTRCPRBF;
 	for ( MUSHORT iC=0; iC<m_n; iC++) {
-		m_st[iC].Print( i_s);
+		m_pst[iC].Print( i_s);
 	}
 #endif
 }
@@ -125,13 +125,13 @@ public:
 //	デストラクタ
 template <typename T> inline MdAryH_S<T>::~MdAryH_S()
 {
-	MBFREE( m_st);
+	MBFREE( m_pst);
 }
 
 template <typename T> inline void MdAryH_S<T>::Free()
 {
-	if ( m_st) {
-		MBFREE( m_st);
+	if ( m_pst) {
+		MBFREE( m_pst);
 		m_sz = 0;
 		m_n = 0;
 	}
@@ -143,7 +143,7 @@ template <typename T> inline void MdAryH_S<T>::operator += (const T &i_st)					/
 	if ( m_n >= m_sz)
 		ReSize( m_sz + MGMAX( m_sz, 4));
 																//	２倍に領域拡張(拡張後の最低領域サイズは４とする)
-	m_st[m_n] = i_st;
+	m_pst[m_n] = i_st;
 	m_n++;
 }
 
@@ -153,9 +153,9 @@ template <typename T> inline void MdAryH_S<T>::operator -= (const T &i_st)
 	MINT iC;
 	bool bFnd = false;
 	for ( iC=0; iC<m_n; iC++) {
-		if ( m_st[iC] == i_st) {
+		if ( m_pst[iC] == i_st) {
 			for ( iC++; iC<m_n; iC++) {
-				m_st[iC-1] = m_st[iC];
+				m_pst[iC-1] = m_pst[iC];
 			}
 			m_n --;
 			bFnd = true;
@@ -170,11 +170,12 @@ template <typename T> inline void MdAryH_S<T>::operator = (const MdAryH_S<T>& i_
 {
 	MUSHORT	nn = i_Gst.m_n;
 	if ( nn > m_sz) {
-			MBFREE( m_st);										//	構成点の領域をmallocで確保していた場合は一旦free
-		MBMALLOC( m_st, T, nn);									//	構成点の領域をmallocで確保
+			MBFREE( m_pst);										//	構成点の領域をmallocで確保していた場合は一旦free
+//E		MBMALLOC( m_pst, T, nn);									//	構成点の領域をmallocで確保
+		MbAlloc<T>( m_pst, nn);
 		m_sz = nn;
 	}
-	memcpy( m_st, i_Gst.m_st, sizeof( T) * nn);
+	memcpy( m_pst, i_Gst.m_pst, sizeof( T) * nn);
 	m_n = nn;
 }
 
@@ -206,8 +207,8 @@ template <typename T> inline T& MdAryH_S<T>::operator () (MUSHORT i_idx)
 	} else if ( idx > m_sz) {
 		MbSysError( MBCstr( "MdAryH()"), MC_ERR_OVERFLOW);
 	}
-	for (; m_n<=i_idx; n++) m_st[m_n].SetInit();						// 最終データより後のデータはクリアし、n = idx+1　にする
-	return m_st[i_idx];
+	for (; m_n<=i_idx; n++) m_pst[m_n].SetInit();						// 最終データより後のデータはクリアし、n = idx+1　にする
+	return m_pst[i_idx];
 }
 
 //===================================================================
@@ -241,7 +242,7 @@ template <typename T> inline void MdAryH_S_C<T>::Print(MCHAR* i_s, MINT i_i)
 		}
 		MBTRCPRBF;
 		for (MUSHORT iC=0; iC<m_n; iC++) {
-			m_st[iC].Print( i_s, iC);
+			m_pst[iC].Print( i_s, iC);
 		}
 	}
 #endif
@@ -278,7 +279,7 @@ template <typename T> inline void MdAryH_S_I<T>::Print(MCHAR* i_s, MINT i_i)
 		}
 		MBTRCPRBF;
 		if ( m_n)
-			MBTRCPRINTIN( Mstr( "\t\t\tデータ"), m_st, m_n);
+			MBTRCPRINTIN( Mstr( "\t\t\tデータ"), m_pst, m_n);
 	}
 #endif
 }
@@ -313,7 +314,7 @@ template <typename T> inline void MdAryH_S_B<T>::PrintB(MCHAR* i_s, MINT i_i)
 	}
 	MBTRCPRBF;
 	if ( m_n)
-		MBTRCPRINTBN( Mstr( "			データ"), m_st, m_n);
+		MBTRCPRINTBN( Mstr( "			データ"), m_pst, m_n);
 #endif
 }
 
@@ -349,11 +350,11 @@ public:
 template <typename T> inline MdAryH_F<T>::~MdAryH_F()
 {
 	MUSHORT	ic;
-	if ( m_st) {
+	if ( m_pst) {
 		for( ic=0; ic<m_n; ic++)									// MdAryH_S　に、子の構造体の領域開放を追加 
-			if ( MDSPACEID( &m_st[ic]) != MDID_DELETE)			//
-				delete [] &m_st[ic];							//	領域開放
-		MBFREE( m_st);
+			if ( MDSPACEID( &m_pst[ic]) != MDID_DELETE)			//
+				delete [] &m_pst[ic];							//	領域開放
+		MBFREE( m_pst);
 	}
 }
 
@@ -361,12 +362,12 @@ template <typename T> inline MdAryH_F<T>::~MdAryH_F()
 template <typename T> inline void MdAryH_F<T>::Free()
 {
 	MUSHORT	ic;
-	if ( m_st) {
+	if ( m_pst) {
 		for( ic=0; ic<m_n; ic++) {
-			if ( MDSPACEID( &m_st[ic]) != MDID_DELETE)
-				m_st[ic].Free();								// 領域開放
+			if ( MDSPACEID( &m_pst[ic]) != MDID_DELETE)
+				m_pst[ic].Free();								// 領域開放
 		}
-		MBFREE( m_st);
+		MBFREE( m_pst);
 		m_sz = 0;
 		m_n = 0;
 	}
@@ -378,8 +379,8 @@ template <typename T> inline void MdAryH_F<T>::operator += (const T& i_st)					/
 	if (m_n >= m_sz)
 		ReSize( m_sz + MGMAX( m_sz, 4), Mstr( "MdAryH_F += i_st"));
 																//	２倍に領域拡張(拡張後の最低領域サイズは４とする)
-	m_st[n].Init();
-	m_st[n] = i_st;
+	m_pst[n].Init();
+	m_pst[n] = i_st;
 	m_n++;
 }
 
@@ -389,14 +390,15 @@ template <typename T> inline void MdAryH_F<T>::operator = (const MdAryH_F<T>& i_
 	MUSHORT	iC;
 	MUSHORT	nn = i_Gst.m_n;
 	if ( nn > m_sz) {
-			MBFREE( m_st);										//	構成点の領域をmallocで確保していた場合は一旦free
-		MBMALLOC( m_st, T, nn);									//	構成点の領域をmallocで確保
+			MBFREE( m_pst);										//	構成点の領域をmallocで確保していた場合は一旦free
+//E		MBMALLOC( m_pst, T, nn);									//	構成点の領域をmallocで確保
+		MbAlloc<T>( m_pst, nn);
 		m_sz = nn;
 	}
 //	memcpy( st, i_Gst.st, sizeof( T) * nn);
 	for ( iC=0; iC<i_Gst.m_n; iC++) {
-		m_st[m_n].Init();
-		m_st[iC] = i_Gst.m_st[iC];
+		m_pst[m_n].Init();
+		m_pst[iC] = i_Gst.m_pst[iC];
 	}
 	m_n = nn;
 }
@@ -410,7 +412,7 @@ template <typename T> inline void MdAryH_F<T>::operator += (const MdAryH_F<T>& i
 
 	for ( iC=0; iC<Gst.n; iC++) {
 		st[iC+n].Init();
-		st[iC+n] = Gst.m_st[iC];
+		st[iC+n] = Gst.m_pst[iC];
 	}
 	n = nn;
 }
@@ -421,7 +423,7 @@ template <typename T> inline void MdAryH_F<T>::operator ++ ( int)							// Gst +
 	if (m_n >= m_sz)
 		ReSize( m_sz + MGMAX( m_sz, 4));
 																//	２倍に領域拡張(拡張後の最低領域サイズは４とする)
-	m_st[m_n].Init();
+	m_pst[m_n].Init();
 	m_n++;
 }
 
@@ -435,8 +437,8 @@ template <typename T> inline T& MdAryH_F<T>::operator () (MUSHORT i_idx)
 		MbSysError( MBCstr( "MdAryH_F()"), MC_ERR_OVERFLOW);
 	}
 	for (; m_n<=i_idx; n++)										// 最終データより後のデータはクリアし、n = idx+1　にする
-		m_st[m_n].SetInit();
-	return m_st[i_idx];
+		m_pst[m_n].SetInit();
+	return m_pst[i_idx];
 }
 
 //	トレース
@@ -444,7 +446,7 @@ template <typename T> inline void MdAryH_F<T>::Print(MCHAR* i_s, MINT i_i)
 {
 	MBTRCPRBF;
 	for (MUSHORT ic=0; ic<m_n; ic++) {
-		m_st[ic].Print( i_s, i_i, ic);
+		m_pst[ic].Print( i_s, i_i, ic);
 	}
 }
 
