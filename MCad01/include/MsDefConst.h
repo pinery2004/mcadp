@@ -40,7 +40,8 @@
 //
 #define		MX_PATH				MAX_PATH		// ƒpƒX•¶š—ñ@Å‘å•¶š” 260
 
-#define		MC_MCADBUF			512				// max mcad buffer for getstring & tile
+//#define		MC_MCADBUF			512				// max mcad buffer for getstring & tile
+#define		MC_MCADBUF			32				// max mcad buffer for getstring & tile
 //#define	MC_MCADNMLEN		256				// number of MCHAR in MCAD name
 //#define	MC_SLBHEADER		32L				// length of slide library header
 //#define	MC_SLBDIRHEAD		36L				// length of slide library directory

@@ -80,35 +80,35 @@ class CMainFrame*	_System::ms_pMainFrame;		// メインフレームポインタ
 CComboBox* MmpComboCdBuzai()
 {
 //U	return (CComboBox*)( MC::System::GetpMainFrame()->m_wndDlgBar3.GetDlgItem(IDC_CMB_BZI1));
-	return 0;
+	return (CComboBox*)( MC::System::GetpMainFrame()->m_wndRibbonBar.GetDlgItem(IDC_CMB_BZI1));
 }
 
 CComboBox* MmpComboMbr()
 {
 //U	return (CComboBox*)( MC::System::GetpMainFrame()->m_wndDlgBar3.GetDlgItem(IDC_CMB_BZI2));
-	return 0;
+	return (CComboBox*)( MC::System::GetpMainFrame()->m_wndRibbonBar.GetDlgItem(IDC_CMB_BZI2));
 }
 
 CComboBox* MmpComboInpTp()
 {
 //U	return (CComboBox*)( MC::System::GetpMainFrame()->m_wndDlgBar1.GetDlgItem(IDC_CMB_Inp1));
-	return 0;
+	return (CComboBox*)( MC::System::GetpMainFrame()->m_wndRibbonBar.GetDlgItem(IDC_CMB_Inp1));
 }
 
 CComboBox* MmpComboCdMarume()
 {
 //U	return (CComboBox*)( MC::System::GetpMainFrame()->m_wndDlgBar1.GetDlgItem(IDC_CMB_Inp2));
-	return 0;
+	return (CComboBox*)( MC::System::GetpMainFrame()->m_wndRibbonBar.GetDlgItem(IDC_CMB_Inp2));
 }
 
 CComboBox* MmpComboCdPlc()
 {
 //U	return (CComboBox*)( MC::System::GetpMainFrame()->m_wndDlgBar1.GetDlgItem(IDC_CMB_Inp3));
-	return 0;
+	return (CComboBox*)( MC::System::GetpMainFrame()->m_wndRibbonBar.GetDlgItem(IDC_CMB_Inp3));
 }
 
 CComboBox* MmpComboPanelNo()
 {
 //U	return (CComboBox*)( MC::System::GetpMainFrame()->m_wndDlgBar4.GetDlgItem(IDC_COMBOPANELNO));
-	return 0;
+	return (CComboBox*)( MC::System::GetpMainFrame()->m_wndRibbonBar.GetDlgItem(IDC_COMBOPANELNO));
 }

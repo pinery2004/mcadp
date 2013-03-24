@@ -64,10 +64,10 @@ void Msg::SetSelStatusBar(
 	} else {
 		return;
 	}
-	pWndInfo = WindowCtrl::MmWndKGetCurWnd();								// カレントウィンドウ取得
+	pWndInfo = WindowCtrl::MmWndKGetCurWnd();							// カレントウィンドウ取得
 	if ( pWndInfo) {
 		pWnd = pWndInfo->GetWnd();
-		pWnd->PostMessage(WM_MYMESSAGESTATUSBAR);				// ステイタスバー表示用メッセージハンドラを起動する
+		pWnd->PostMessage(WM_MYMESSAGESTATUSBAR);						// ステイタスバー表示用メッセージハンドラを起動する
 	}
 }
 
@@ -75,7 +75,7 @@ void Msg::SetSelStatusBar(
 //  ステイタスバー表示処理　(メッセージハンドラより呼ばれる)
 void Msg::DispStatusBar()
 {
-	Msg::DispSelStatusBar( MC_STSBAR_GUIDANCE, z_cStbGuidance);		// ステイタスバーのガイダンスメッセージを表示する
+	Msg::DispSelStatusBar( MC_STSBAR_GUIDANCE, z_cStbGuidance);			// ステイタスバーのガイダンスメッセージを表示する
 	Msg::DispSelStatusBar( MC_STSBAR_OPERATION, z_cStbOperation);		// ステイタスバーのオペレーションメッセージを表示する
 	Msg::DispSelStatusBar( MC_STSBAR_ERROR, z_cStbError);				// ステイタスバーのエラーメッセージを表示する
 }
@@ -91,7 +91,7 @@ void Msg::DispSelStatusBar(
 	CMDIFrameWnd*	MainFrm;					// メインフレーム
 	CStatusBar*		StBar;						// ステイタスバー
 
-	MainFrm = System::GetpMainFrame();										// メインフレームを取得
+	MainFrm = System::GetpMainFrame();									// メインフレームを取得
 	if ( MainFrm != NULL) {
 		StBar = (CStatusBar*)(MainFrm->GetDescendantWindow( AFX_IDW_STATUS_BAR));
 		StBar->SetPaneText( i_iStb, i_sStb);

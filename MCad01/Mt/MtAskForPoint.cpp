@@ -111,9 +111,9 @@ MINT MtSetKeyWord( const MCHAR* str) {
 	return MTRT_KWORD;
 }
 
-MINT MtGetInp( MCHAR* szEntry)
+MINT MtGetInp( MCHAR* o_sEntry, int i_nEntry)
 {
-    Mstrcpy_s(szEntry, 256, MT_zthekeyword);
+    Mstrcpy_s( o_sEntry, i_nEntry, MT_zthekeyword);
 	return MTRT_NORM;
 }
 

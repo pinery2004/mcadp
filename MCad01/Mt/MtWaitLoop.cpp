@@ -195,16 +195,16 @@ void MtProcessEvent( MtInpEvent *event )
 ////E		if( z_IgnoreMenuWQuote && event->m_sMenuStr[0] == '\'' ) 
 ////E			break;
 //
-//		//tRb.m_restype = MTRT_RBTNDWN;						// コマンドタイプを座標(MTRT_RBTNDWN)とする
-//		//tRb.m_nflag = event->GetNFlag();					// nflag
-//		//event->GetPoint( tRb.m_resval.rpoint);			// コマンド入力座標を入力イベント座標とする
-//		//MtGetCommandQueue()->Push( &tRb);					// コマンドキューに追加する
+//		//tRb.m_restype = MTRT_RBTNDWN;							// コマンドタイプを座標(MTRT_RBTNDWN)とする
+//		//tRb.m_nflag = event->GetNFlag();						// nflag
+//		//event->GetPoint( tRb.m_resval.rpoint);				// コマンド入力座標を入力イベント座標とする
+//		//MtGetCommandQueue()->Push( &tRb);						// コマンドキューに追加する
 
 #ifdef	MS_CMDMENU_STR_TYPE
-		MtMnuStrToRB( &RbQue, event->m_sMenuStr);			// メニューキューに追加する
+		MtMnuStrToRB( &RbQue, event->m_sMenuStr);				// メニューキューに追加する
 		MBFREE( event->m_sMenuStr); 
 #else
-		pcMenuStr = GetGlobalName( event->GetNFlag());	// メニューIDよりコマンド名取得
+		pcMenuStr = GetGlobalName( event->GetNFlag());			// メニューIDよりコマンド名取得
 		MtMnuStrToRB( &RbQue, pcMenuStr);						// メニューキューに追加する
 #endif
 

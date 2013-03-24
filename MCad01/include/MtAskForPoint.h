@@ -30,7 +30,15 @@ struct MT_InternalCmdList {
 };
 
 MINT MtSetKeyWord( const MCHAR* str);
-MINT MtGetInp( MCHAR* szEntry);
+
+MINT MtGetInp( MCHAR* o_sEntry, int i_nEntry);
+
+template<size_t SIZE>
+MINT MtGetInp( MCHAR (&o_sEntry)[SIZE])
+{
+    return MtGetInp( o_sEntry, SIZE);
+}
+
 void MtSetNFlag( const MINT nflag);
 MINT MtGetNFlag( void);
 MINT MtSendMessage( MINT message, MINT nFlags, MgPoint2* pPtMR);

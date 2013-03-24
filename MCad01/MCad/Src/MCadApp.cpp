@@ -38,6 +38,8 @@
 #include "MhLib.h"
 #include "MsDefFunc.h"
 #include "MtInpAttr.h"
+#include "MmCmd.h"
+
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -55,6 +57,12 @@ BEGIN_MESSAGE_MAP(CMCadApp, CWinAppEx)
 	ON_COMMAND(ID_FILE_PRINT_SETUP, &CWinAppEx::OnFilePrintSetup)
 	ON_COMMAND(ID_FILE_NEW, &CMCadApp::OnFileNew)
 	ON_COMMAND(ID_FILE_OPEN, &CMCadApp::OnFileOpen)
+
+ON_COMMAND_RANGE(IDC_P0010, IDC_P0360, OnMainMenuP)
+ON_UPDATE_COMMAND_UI_RANGE(IDC_P0010, IDC_P0360, OnUpdateMainMenuP)
+ON_COMMAND_RANGE(IDP_P0010, IDP_P0340, OnSubMenuP)
+ON_UPDATE_COMMAND_UI_RANGE(IDP_P0010, IDP_P0340, OnUpdateSubMenuP)
+
 END_MESSAGE_MAP()
 
 
@@ -360,6 +368,156 @@ void CMCadApp::OnFileOpen()
 //E		if (pWndInfo) 
 //E			OnView2On();
 	}
+}
+
+
+void CMCadApp::OnView1On()
+{
+	// TODO : ここにコマンド ハンドラ コードを追加します。
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 1, MTHEIMENZU, 1, 1);		// ウィンドウ管理
+	if (pWndInfo)
+		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
+	CreateWnd( 1, MTHEIMENZU, 1, 1);
+}
+
+void CMCadApp::OnView2On()
+{
+	// TODO : ここにコマンド ハンドラ コードを追加します。
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 2, MTHEIMENZU, 1, 1);		// ウィンドウ管理
+	if (pWndInfo) {
+//		pWndInfo->GetWnd()->SetWindowPos(&CWnd::wndTopMost , 0, 0, 0, 0,		// 前面に表示し直そうとしたが失敗し
+//		SWP_NOMOVE|SWP_NOSIZE|SWP_NOACTIVATE | SWP_NOZORDER);				// 仮に一旦削除後に再表示した
+		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
+
+	}
+//	else {
+		CreateWnd( 2, MTHEIMENZU, 1, 1);
+//	}
+#if( DEBUG001)
+//=============================	from OnView1On()
+//S	// TODO : ここにコマンド ハンドラ コードを追加します。
+	MC::MmWndInfo* pWndInfo1 = MC::WindowCtrl::MmWndKFindSyu( 1, MTHEIMENZU, 1, 1);		// ウィンドウ管理
+//	if (pWndInfo1)
+//		pWndInfo1->m_pChildFrm->SendMessage(WM_CLOSE);
+	CreateWnd( 1, MTHEIMENZU, 1, 1);
+//-----------------------------
+#endif
+}
+
+void CMCadApp::OnView3On()
+{
+	// TODO : ここにコマンド ハンドラ コードを追加します。
+#if( 1 - DEBUG001)
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 3, MTHEIMENZU, 1, 1);		// ウィンドウ管理
+	if (pWndInfo)
+		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
+#endif
+	CreateWnd( 3, MTHEIMENZU, 1, 1);
+}
+
+void CMCadApp::OnView4On()
+{
+	// TODO : ここにコマンド ハンドラ コードを追加します。
+#if( 1 - DEBUG001)
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 4, MTHEIMENZU, 1, 1);		// ウィンドウ管理
+	if (pWndInfo)
+		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
+	CreateWnd( 4, MTHEIMENZU, 1, 1);
+#endif
+}
+
+void CMCadApp::OnView5On()
+{
+	// TODO : ここにコマンド ハンドラ コードを追加します。
+#if( 1 - DEBUG001)
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 5, MTHEIMENZU, 1, 1);		// ウィンドウ管理
+	if (pWndInfo)
+		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
+#endif
+	CreateWnd( 5, MTHEIMENZU, 1, 1);
+}
+
+void CMCadApp::OnView1Off()
+{
+	// TODO : ここにコマンド ハンドラ コードを追加します。
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 1, MTHEIMENZU, 1, 1);
+	if (pWndInfo)
+//		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
+		pWndInfo->m_pChildFrm->PostMessage(WM_CLOSE);
+}
+
+void CMCadApp::OnView2Off()
+{
+	// TODO : ここにコマンド ハンドラ コードを追加します。
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 2, MTHEIMENZU, 1, 1);
+	if (pWndInfo)
+//		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
+		pWndInfo->m_pChildFrm->PostMessage(WM_CLOSE);
+}
+
+void CMCadApp::OnView3Off()
+{
+	// TODO : ここにコマンド ハンドラ コードを追加します。
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 3, MTHEIMENZU, 1, 1);
+	if (pWndInfo)
+//		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
+		pWndInfo->m_pChildFrm->PostMessage(WM_CLOSE);
+}
+
+void CMCadApp::OnView4Off()
+{
+	// TODO : ここにコマンド ハンドラ コードを追加します。
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 4, MTHEIMENZU, 1, 1);
+	if (pWndInfo)
+//		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
+		pWndInfo->m_pChildFrm->PostMessage(WM_CLOSE);
+}
+
+void CMCadApp::OnView5Off()
+{
+	// TODO : ここにコマンド ハンドラ コードを追加します。
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 5, MTHEIMENZU, 1, 1);
+	if (pWndInfo)
+//		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
+		pWndInfo->m_pChildFrm->PostMessage(WM_CLOSE);
+}
+
+void CMCadApp::OnMainMenuP( UINT nID)
+{
+	// TODO : ここにコマンド ハンドラ コードを追加します。
+	// コマンドキュー
+	if ( nID == IDC_DISP_3D) {
+		OnView2On();
+	} else {
+		if ( nID == IDC_ZOOMINIT) {
+			MC::WindowCtrl::MmGridNumSet( NULL);								// 初期設定
+			MC::WindowCtrl::MmGridNumXqt();
+		}
+		MC::WindowCtrl::MmWndKCmdXqt( nID);										//	メニューコマンド
+	}
+}
+
+void CMCadApp::OnUpdateMainMenuP( CCmdUI *pCmdUI)
+{
+	// TODO : ここにコマンド更新 UI ハンドラ コードを追加します。
+	if (pCmdUI->m_nID == IDC_UNDO) {
+		pCmdUI->Enable( MC::HaitiCmd::MmUndoIsNotEmpty());
+	} else if (pCmdUI->m_nID == IDC_REDO) {
+		pCmdUI->Enable( MC::HaitiCmd::MmRedoIsNotEmpty());
+	}
+}
+
+void CMCadApp::OnSubMenuP( UINT nID)
+{
+	// TODO : ここにコマンド ハンドラ コードを追加します。
+	// コマンドキュー
+	MC::WindowCtrl::MmWndKCmdXqt( nID);										//	メニューコマンド
+
+}
+
+void CMCadApp::OnUpdateSubMenuP( CCmdUI *pCmdUI)
+{
+	// TODO : ここにコマンド更新 UI ハンドラ コードを追加します。
 }
 
 void CMCadApp::CreateWnd(

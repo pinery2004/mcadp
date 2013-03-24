@@ -33,6 +33,7 @@ BEGIN_MESSAGE_MAP(CChildFrame1, CMDIChildWndEx)
 	ON_UPDATE_COMMAND_UI(ID_FILE_PRINT_PREVIEW, &CChildFrame1::OnUpdateFilePrintPreview)
 	ON_WM_CREATE()
 	ON_WM_CLOSE()
+	ON_WM_SETFOCUS()
 END_MESSAGE_MAP()
 
 // CChildFrame1 コンストラクション/デストラクション
@@ -149,4 +150,21 @@ void CChildFrame1::OnClose()
 	MC::WindowCtrl::MmWndKDelete( pWndInfo);
 
 	CMDIChildWndEx::OnClose();
+}
+
+void CChildFrame1::OnSetFocus(CWnd* pOldWnd)
+{
+	CMDIChildWndEx::OnSetFocus(pOldWnd);
+
+	// TODO: ここにメッセージ ハンドラー コードを追加します。
+#if( TRCAE_Frame)
+	TRACE( "CChildFrame1::OnSetFocus(%x)\n", this);
+#endif
+	CMDIChildWnd::OnSetFocus(pOldWnd);
+
+	ms_pMainFrame->m_pCurFrame = this;
+
+//	CMainFrame*	pMainFrame = (CMainFrame*)AfxGetMainWnd();
+
+//E	m_wndView.SetFocus();
 }

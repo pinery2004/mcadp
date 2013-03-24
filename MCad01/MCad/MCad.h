@@ -65,8 +65,24 @@ public:
 
 	afx_msg void OnAppAbout();
 	DECLARE_MESSAGE_MAP()
+	afx_msg void OnView1On();
+	afx_msg void OnView2On();
+	afx_msg void OnView3On();
+	afx_msg void OnView4On();
+	afx_msg void OnView5On();
+	afx_msg void OnView1Off();
+	afx_msg void OnView2Off();
+	afx_msg void OnView3Off();
+	afx_msg void OnView4Off();
+	afx_msg void OnView5Off();
+
 	afx_msg void OnFileNew();
 	afx_msg void OnFileOpen();
+
+	afx_msg void OnMainMenuP( UINT nID);
+	afx_msg void OnUpdateMainMenuP(CCmdUI *pCmdUI);
+	afx_msg void OnSubMenuP( UINT nID);
+	afx_msg void OnUpdateSubMenuP(CCmdUI *pCmdUI);
 };
 
 extern CMCadApp g_theApp;

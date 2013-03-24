@@ -295,7 +295,7 @@ public:
 							MINT		iZuNum			// (I  ) 図番号
 					);
 
-	static MmWndInfo* WindowCtrl::MmWndKFindWnd(							// (  O) ウィンドウ管理情報のポインタ
+	static MmWndInfo* MmWndKFindWnd(							// (  O) ウィンドウ管理情報のポインタ
 							CWnd*		m_pWnd			// (I  ) ウィンドウのインスタンス
 					);
 

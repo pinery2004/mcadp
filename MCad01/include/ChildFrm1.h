@@ -31,6 +31,7 @@ public:
 
 // ŽÀ‘•
 public:
+//E	CChildView1 m_wndView;
 	virtual ~CChildFrame1();
 #ifdef _DEBUG
 	virtual void AssertValid() const;
@@ -47,4 +48,5 @@ public:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	virtual BOOL Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD dwStyle = WS_CHILD | WS_VISIBLE | WS_OVERLAPPEDWINDOW, const RECT& rect = rectDefault, CMDIFrameWnd* pParentWnd = NULL, CCreateContext* pContext = NULL);
 	afx_msg void OnClose();
+	afx_msg void OnSetFocus(CWnd* pOldWnd);
 };

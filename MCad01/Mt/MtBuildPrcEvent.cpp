@@ -38,10 +38,10 @@ MINT MtBuildPrcEvent( MtPrcEventQueue* pRbQue, ...) {
 	MCHAR		*fcp1;
 	MREAL		*rp;
     MtBinary	*rbbinary;
+	int			isz;
+	int			nsz;
 
 	rc = 0;
-
-	MINT isz;
 
 //	ASSERT( iRType!=0);
 //	ASSERT( iRType!=MT_RTNONE);
@@ -67,11 +67,11 @@ MINT MtBuildPrcEvent( MtPrcEventQueue* pRbQue, ...) {
                 fcp1 = va_arg( ap, MCHAR* );
 				if ( fcp1 == NULL)
 					break;
-				isz = ( MINT)Mstrlen( fcp1)+1;
-				isz = (( MINT)Mstrlen( fcp1)+1) * sizeof( MCHAR);
-                if ( ( Rb.m_resval.rstring = ( MCHAR* )new char[( ( MINT)Mstrlen( fcp1)+1) * sizeof( MCHAR)]) == NULL)
+				nsz = ( MINT)Mstrlen( fcp1)+1;
+				isz = nsz * sizeof( MCHAR);
+                if ( ( Rb.m_resval.rstring = ( MCHAR* )new char[isz]) == NULL)
 					MQUIT;
-				Mstrcpy_s( Rb.m_resval.rstring, 256, fcp1);
+				Mstrcpy_s( Rb.m_resval.rstring, nsz, fcp1);
                 break;
             case MTRT_SHORT:
                 Rb.m_resval.rint = va_arg( ap, short);

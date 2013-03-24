@@ -52,6 +52,7 @@ public:
 
 
 protected:  // コントロール バー用メンバー
+public:
 	CMFCRibbonBar     m_wndRibbonBar;
 	CMFCRibbonApplicationButton m_MainButton;
 	CMFCToolBarImages m_PanelImages;
