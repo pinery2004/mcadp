@@ -138,6 +138,7 @@
     <ClInclude Include="..\include\ChildFrm1.h" />
     <ClInclude Include="..\include\ChildFrm2.h" />
     <ClInclude Include="..\include\ChildFrm3.h" />
+    <ClInclude Include="..\include\M3View.h" />
     <ClInclude Include="..\include\MainFrm.h" />
     <ClInclude Include="..\include\MCadDoc.h" />
     <ClInclude Include="..\include\MCadForm3.h" />
@@ -442,6 +443,7 @@
     <ClCompile Include="Src\ChildFrm1.cpp" />
     <ClCompile Include="Src\ChildFrm2.cpp" />
     <ClCompile Include="Src\ChildFrm3.cpp" />
+    <ClCompile Include="Src\M3View.cpp" />
     <ClCompile Include="Src\MainFrm.cpp" />
     <ClCompile Include="Src\MCadApp.cpp" />
     <ClCompile Include="Src\MCadDoc.cpp" />

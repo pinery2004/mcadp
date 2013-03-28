@@ -721,6 +721,9 @@
     <ClInclude Include="MCad.h">
       <Filter>MCad\hdr</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\M3View.h">
+      <Filter>MCad\hdr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1243,6 +1246,9 @@
       <Filter>MCad\src</Filter>
     </ClCompile>
     <ClCompile Include="mcad.CPP">
+      <Filter>MCad\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\M3View.cpp">
       <Filter>MCad\src</Filter>
     </ClCompile>
   </ItemGroup>
