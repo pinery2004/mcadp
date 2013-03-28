@@ -1,7 +1,6 @@
 #pragma once
 
 
-
 // CMCadForm3 フォーム ビュー
 
 class CMCadForm3 : public CFormView

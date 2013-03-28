@@ -31,7 +31,7 @@ public:
 
 // ŽÀ‘•
 public:
-//E	CChildView1 m_wndView;
+	CMCadView1* m_pwndView;
 	virtual ~CChildFrame1();
 #ifdef _DEBUG
 	virtual void AssertValid() const;

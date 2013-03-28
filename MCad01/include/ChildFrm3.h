@@ -31,6 +31,8 @@ public:
 
 // 実装
 public:
+	// フレームのクライアント領域用のビュー
+	CMCadForm3* m_pwndForm;
 	virtual ~CChildFrame3();
 #ifdef _DEBUG
 	virtual void AssertValid() const;
