@@ -17,14 +17,15 @@
 #include "afxdialogex.h"
 #include "MCad.h"
 #include "MainFrm.h"
+#include "M3View.h"
 
-#include "ChildFrm1.h"
-#include "ChildFrm2.h"
-#include "ChildFrm3.h"
 #include "MCadDoc.h"
 #include "MCadView1.h"
 #include "MCadView2.h"
 #include "MCadForm3.h"
+#include "ChildFrm1.h"
+#include "ChildFrm2.h"
+#include "ChildFrm3.h"
 
 #include "MainFrm.h"
 #include "MmSystem.h"
@@ -228,8 +229,10 @@ BOOL CMCadApp::InitInstance()
 //	((CMainFrame*)pFrame)->OnView1On();
 //E	CreateWnd( 1, MTHEIMENZU, 1, 1);
 
-	// ウィンドウのオープン
+	//// ウィンドウのオープン
+	MC::WindowCtrl::MmWndSetSyubetsuC( 2, MTHEIMENZU, 1, 1);
 	pMainFrame->OpenView( m_pDocTemplate2);
+	MC::WindowCtrl::MmWndSetSyubetsuC( 3, MTHEIMENZU, 1, 1);
 	pMainFrame->OpenView( m_pDocTemplate3);
 	return TRUE;
 }
@@ -382,58 +385,37 @@ void CMCadApp::OnView1On()
 
 void CMCadApp::OnView2On()
 {
-	// TODO : ここにコマンド ハンドラ コードを追加します。
 	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 2, MTHEIMENZU, 1, 1);		// ウィンドウ管理
 	if (pWndInfo) {
 //		pWndInfo->GetWnd()->SetWindowPos(&CWnd::wndTopMost , 0, 0, 0, 0,		// 前面に表示し直そうとしたが失敗し
-//		SWP_NOMOVE|SWP_NOSIZE|SWP_NOACTIVATE | SWP_NOZORDER);				// 仮に一旦削除後に再表示した
+//		SWP_NOMOVE|SWP_NOSIZE|SWP_NOACTIVATE | SWP_NOZORDER);					// 仮に一旦削除後に再表示した
 		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
 
 	}
-//	else {
-		CreateWnd( 2, MTHEIMENZU, 1, 1);
-//	}
-#if( DEBUG001)
-//=============================	from OnView1On()
-//S	// TODO : ここにコマンド ハンドラ コードを追加します。
-	MC::MmWndInfo* pWndInfo1 = MC::WindowCtrl::MmWndKFindSyu( 1, MTHEIMENZU, 1, 1);		// ウィンドウ管理
-//	if (pWndInfo1)
-//		pWndInfo1->m_pChildFrm->SendMessage(WM_CLOSE);
-	CreateWnd( 1, MTHEIMENZU, 1, 1);
-//-----------------------------
-#endif
+	CreateWnd( 2, MTHEIMENZU, 1, 1);
 }
 
 void CMCadApp::OnView3On()
 {
-	// TODO : ここにコマンド ハンドラ コードを追加します。
-#if( 1 - DEBUG001)
 	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 3, MTHEIMENZU, 1, 1);		// ウィンドウ管理
 	if (pWndInfo)
 		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
-#endif
 	CreateWnd( 3, MTHEIMENZU, 1, 1);
 }
 
 void CMCadApp::OnView4On()
 {
-	// TODO : ここにコマンド ハンドラ コードを追加します。
-#if( 1 - DEBUG001)
 	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 4, MTHEIMENZU, 1, 1);		// ウィンドウ管理
 	if (pWndInfo)
 		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
 	CreateWnd( 4, MTHEIMENZU, 1, 1);
-#endif
 }
 
 void CMCadApp::OnView5On()
 {
-	// TODO : ここにコマンド ハンドラ コードを追加します。
-#if( 1 - DEBUG001)
 	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 5, MTHEIMENZU, 1, 1);		// ウィンドウ管理
 	if (pWndInfo)
 		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
-#endif
 	CreateWnd( 5, MTHEIMENZU, 1, 1);
 }
 
@@ -442,7 +424,6 @@ void CMCadApp::OnView1Off()
 	// TODO : ここにコマンド ハンドラ コードを追加します。
 	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 1, MTHEIMENZU, 1, 1);
 	if (pWndInfo)
-//		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
 		pWndInfo->m_pChildFrm->PostMessage(WM_CLOSE);
 }
 
@@ -451,7 +432,6 @@ void CMCadApp::OnView2Off()
 	// TODO : ここにコマンド ハンドラ コードを追加します。
 	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 2, MTHEIMENZU, 1, 1);
 	if (pWndInfo)
-//		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
 		pWndInfo->m_pChildFrm->PostMessage(WM_CLOSE);
 }
 
@@ -469,7 +449,6 @@ void CMCadApp::OnView4Off()
 	// TODO : ここにコマンド ハンドラ コードを追加します。
 	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 4, MTHEIMENZU, 1, 1);
 	if (pWndInfo)
-//		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
 		pWndInfo->m_pChildFrm->PostMessage(WM_CLOSE);
 }
 
@@ -478,7 +457,6 @@ void CMCadApp::OnView5Off()
 	// TODO : ここにコマンド ハンドラ コードを追加します。
 	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 5, MTHEIMENZU, 1, 1);
 	if (pWndInfo)
-//		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
 		pWndInfo->m_pChildFrm->PostMessage(WM_CLOSE);
 }
 

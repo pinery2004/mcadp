@@ -14,7 +14,10 @@
 
 #include "stdafx.h"
 #include "MCad.h"
-
+#include "MmWnd.h"
+#include "M3View.h"
+#include "MCadDoc.h"
+#include "MCadView2.h"
 #include "ChildFrm2.h"
 
 #ifdef _DEBUG
@@ -31,13 +34,14 @@ BEGIN_MESSAGE_MAP(CChildFrame2, CMDIChildWndEx)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CChildFrame2::OnFilePrintPreview)
 	ON_UPDATE_COMMAND_UI(ID_FILE_PRINT_PREVIEW, &CChildFrame2::OnUpdateFilePrintPreview)
 	ON_WM_CREATE()
+	ON_WM_CLOSE()
+	ON_WM_SETFOCUS()
 END_MESSAGE_MAP()
 
 // CChildFrame2 コンストラクション/デストラクション
 
 CChildFrame2::CChildFrame2()
 {
-	// TODO: メンバー初期化コードをここに追加してください。
 }
 
 CChildFrame2::~CChildFrame2()
@@ -50,6 +54,28 @@ BOOL CChildFrame2::PreCreateWindow(CREATESTRUCT& cs)
 	// TODO: CREATESTRUCT cs を変更して、Window クラスまたはスタイルを変更します。
 	if( !CMDIChildWndEx::PreCreateWindow(cs) )
 		return FALSE;
+
+	// ディスプレイ画面サイズの取得
+	CRect rect;
+	SystemParametersInfo(SPI_GETWORKAREA, 0, &rect, 0);
+
+	HDC hdc = ::GetDC( NULL);
+	int Width = GetDeviceCaps(hdc, HORZRES);
+	int Height = GetDeviceCaps(hdc, VERTRES);
+
+	::ReleaseDC(NULL, hdc);
+
+	// 表示ウィンドウサイズの設定
+	if ( Width >= 0x500) {
+		cs.x = 500; cs.cx = 700;					// 実行直後のウィンドウのサイズ 1280x??? 
+	} else {
+		cs.x = 200; cs.cx = 580; 					// 実行直後のウィンドウのサイズ 1024x???
+	}
+	if ( Height >= 0x400) {
+		cs.y = 0;	cs.cy = 700;					// 実行直後のウィンドウのサイズ ????x1024
+	} else {
+		cs.y = 0;	cs.cy = 580;					// 実行直後のウィンドウのサイズ ????x768
+	}
 
 	return TRUE;
 }
@@ -95,6 +121,7 @@ BOOL CChildFrame2::Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD d
 						  CMDIFrameWnd* pParentWnd , CCreateContext* pContext)
 {
 	// TODO: ここに特定なコードを追加するか、もしくは基本クラスを呼び出してください。
+	MC::WindowCtrl::MmWndSetFrameC( 2, this);
 
 	return CMDIChildWndEx::Create(lpszClassName, lpszWindowName, dwStyle, rect, pParentWnd, pContext);
 }
@@ -107,4 +134,21 @@ int CChildFrame2::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	// TODO:  ここに特定な作成コードを追加してください。
 
 	return 0;
+}
+
+void CChildFrame2::OnClose()
+{
+	// TODO: ここにメッセージ ハンドラー コードを追加するか、既定の処理を呼び出します。
+
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindFrm( this);
+	MC::WindowCtrl::MmWndKDelete( pWndInfo);
+
+	CMDIChildWndEx::OnClose();
+}
+
+void CChildFrame2::OnSetFocus(CWnd* pOldWnd)
+{
+	CMDIChildWndEx::OnSetFocus(pOldWnd);
+
+//E	m_pwndView->SetFocus();
 }
