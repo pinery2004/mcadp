@@ -16,6 +16,8 @@
 #include "MCad.h"
 #include "MmWnd.h"
 
+#include "MCadDoc.h"
+#include "MCadView1.h"
 #include "ChildFrm1.h"
 
 #ifdef _DEBUG
@@ -166,5 +168,5 @@ void CChildFrame1::OnSetFocus(CWnd* pOldWnd)
 
 //	CMainFrame*	pMainFrame = (CMainFrame*)AfxGetMainWnd();
 
-//E	m_wndView.SetFocus();
+	m_pwndView->SetFocus();
 }
