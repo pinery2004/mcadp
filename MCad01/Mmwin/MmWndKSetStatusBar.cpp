@@ -17,7 +17,7 @@
 #include "MmGridNum.h"
 #include "MmDrag.h"
 #include "MmWnd.h"
-#include "MmDefine.h"
+#include "MhDefParts.h"
 
 #define DLL_EXPORT_MC_MSG_DO
 #include "MmLib.h"

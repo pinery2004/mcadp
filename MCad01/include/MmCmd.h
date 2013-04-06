@@ -33,25 +33,25 @@ class DLL_EXPORT HaitiCmd
 public:
 /////////////////////////////////////////////////////////////////////////////
 //	部材表確認変更入力
-static void MmPtsEditInp(
+static void MmPartsEditInp(
 				CWnd*		pWnd					// (I  ) ウィンドウのインスタンス
 				);
 
 /////////////////////////////////////////////////////////////////////////////
 //	部材表確認変更実行
-//ZZ	void MmPtsEditXqt();
+//ZZ	void MmPartsEditXqt();
 
 /////////////////////////////////////////////////////////////////////////////
 //	部材表確認変更キャンセル
-//ZZ	void MmPtsEditCancel();
+//ZZ	void MmPartsEditCancel();
 
 /////////////////////////////////////////////////////////////////////////////
 //	部材表変更終了
-static void MmPtsEditEnd();
+static void MmPartsEditEnd();
 
 /////////////////////////////////////////////////////////////////////////////
 //	部品を配置する
-static void MmPtsPlc(
+static void MmPartsPlc(
 				const	MgPoint3	*Pt,			// (I  ) 配置点、配置方向点
 				const	MgVect3		vUp = MgVect3( 0., 0., 1.),	// (I  ) 左方向
 				const	MgPolyg2	*pPg = NULL		// (I  ) 図形用の区画　または NULL

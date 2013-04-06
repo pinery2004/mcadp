@@ -12,6 +12,7 @@
 #include "stdafx.h"
 #define DLL_EXPORT_MC_INPUT_DO
 #include "MrAPI.h"
+#include "MhInpAttr.h"
 
 #define		MC_YANE_TAKASA_HOSEI 97.
 
@@ -21,7 +22,7 @@ namespace MC
 /////////////////////////////////////////////////////////////////////////////
 //	連続した長さ２点入力用の２点目の入力(外壁入力用)
 
-MINT mtInput::GetLenEPt( MgLine2*	pLn)
+MINT mhInput::GetLenEPt( MgLine2*	pLn)
 {
 	MINT		irt;
 	MgPoint2	pt1, pt2;
@@ -36,7 +37,7 @@ MINT mtInput::GetLenEPt( MgLine2*	pLn)
 		Window::DragModeEnd();									// ドラッギングモード終了（ラバーバンド図形表示モード）
 		MQUIT;
 	}
-	mtInput::Marume( pt1, &pt2);
+	mhInput::Marume( pt1, &pt2);
 	pLn->p[1] = pt2;
 exit:
 	Window::DragModeEnd();										// ドラッギングモード終了（ラバーバンド図形表示モード）
@@ -46,7 +47,7 @@ exit:
 /////////////////////////////////////////////////////////////////////////////
 //	長方形区画入力
 
-MINT mtInput::GetRect2Pt( MgLine2*	pLn)
+MINT mhInput::GetRect2Pt( MgLine2*	pLn)
 {
 	MINT		irt;
 	MgPoint2	pt1, pt2;
@@ -60,7 +61,7 @@ MINT mtInput::GetRect2Pt( MgLine2*	pLn)
 				break;
 			if ( irt != MTRT_LBTNDWN)							// マウス左ボタンでない場合は、
 				continue;										//	再入力
-			mtInput::Marume( pt1, &pt2);
+			mhInput::Marume( pt1, &pt2);
 			pLn->p[0] = pt2;
 			iSeq = 1;
 
@@ -78,7 +79,7 @@ MINT mtInput::GetRect2Pt( MgLine2*	pLn)
 			}
 			if ( irt != MTRT_LBTNDWN)							// マウス左ボタンでない場合は、
 				continue;										//	再入力
-			mtInput::Marume( pt1, &pt2);
+			mhInput::Marume( pt1, &pt2);
 			pLn->p[1] = pt2;
 			break;
 		}
@@ -91,7 +92,7 @@ MINT mtInput::GetRect2Pt( MgLine2*	pLn)
 /////////////////////////////////////////////////////////////////////////////
 //	区画入力
 
-MINT mtInput::GetArea(
+MINT mhInput::GetArea(
 						MgPolyg2*	o_ppg1		// ２Ｄ多角形
 				)
 {
@@ -100,12 +101,12 @@ MINT mtInput::GetArea(
 	MgPoint2	pt1, pt2;
 	MgMinMaxR2	mMM;
 	CPoint		ptMouthL;
-	MINT 		iInpKb;
+	MINT 		iCdInpKb;
 	MINT		iSeq = 0;						// 入力シークエンス
 
 	MmWndInfo* pWndInfo = WindowCtrl::MmWndKGetCurWnd();		// カレントウィンドウ取得
 	
-	iInpKb = mtInpMode::GetComboInpKb();
+	iCdInpKb = z_mn.GetComboCdCdInpKb();
 
 	MFOREVER {
 		if ( iSeq == 0) {										// １点目の入力
@@ -113,17 +114,17 @@ MINT mtInput::GetArea(
 			irt = MtAskForPoint( &pt1);							// 点を入力
 
 		} else {												// ２点目以降の入力
-			iInpKb = mtInpMode::GetComboInpKb();
-			if ( iInpKb == MP_INPKB_AREA) {
+			iCdInpKb = z_mn.GetComboCdCdInpKb();
+			if ( iCdInpKb == MP_INPKB_AREA) {
 				Msg::GuidanceMsg( MC_GUID_AREA_TAIKAKUTEN);		// 対角２点タイプ区画
 				irt = Window::DragObject( MC_RBND_RECT, (void*)o_ppg1->m_p, &pt1);	// ラバーバンド図形表示しながら対角点を入力
 																// ドラッギングモード開始
 
 			} else {											// 自由入力タイプ区画
 				if ( iSeq == 1)
-					Msg::GuidanceMsg( MC_GUID_AREA_HOUKOUTEN);		// ２点目　方向点
+					Msg::GuidanceMsg( MC_GUID_AREA_HOUKOUTEN);	// ２点目　方向点
 				else
-					Msg::GuidanceMsg( MC_GUID_AREA_TUUKATEN);		// ３点目以降　通過点
+					Msg::GuidanceMsg( MC_GUID_AREA_TUUKATEN);	// ３点目以降　通過点
 				irt = Window::DragObject( MC_RBND_POLYGON, (void*)o_ppg1, &pt1);		// ラバーバンド図形表示しながら２点目以降を入力
 																// ドラッギングモード開始
 			}
@@ -133,8 +134,10 @@ MINT mtInput::GetArea(
 
 		if ( irt == MTRT_RBTNDWN) {								// マウス右ボタン
 			if ( iSeq == 0) {									//	１点目の入力の場合は、
-				iInpKb = MP_INPKB_AREA + MP_INPKB_FREE - iInpKb;//	入力点区分を自由入力→対角入力、または、対角入力→自由入力に変更
-				mtInpMode::SetComboInpKb( iInpKb);
+				iCdInpKb = MP_INPKB_AREA + MP_INPKB_FREE - iCdInpKb;//	入力点区分を自由入力→対角入力、または、対角入力→自由入力に変更
+//E				z_mn.SetComboCdInpKb( iCdInpKb);
+				z_mn.RibbonIO( MSET_INPUT_KUBUN_CD, iCdInpKb);
+
 			} else {											//	２点目以降の入力の場合は、
 				iSeq --;										//	１点キャンセル
 				( *o_ppg1) --;									//	ポリゴンの座標を１点削る
@@ -148,7 +151,7 @@ MINT mtInput::GetArea(
 		if ( irt != MTRT_LBTNDWN)								// マウス左ボタンでない場合は、
 			continue;											//	再入力
 
-		mtInput::Marume( pt1, &pt2);								// 座標を丸める
+		mhInput::Marume( pt1, &pt2);								// 座標を丸める
 
 		if ( iSeq > 1 && pt2 == o_ppg1->m_p[0]) 
 			break;												// 開始点と同一位置の場合は区画入力終了とする
@@ -159,7 +162,7 @@ MINT mtInput::GetArea(
 			iSeq ++;
 		}
 
-		if ( iSeq == 2 && iInpKb == MP_INPKB_AREA) {
+		if ( iSeq == 2 && iCdInpKb == MP_INPKB_AREA) {
 			mMM.SetInit();
 			mMM.Ins2( o_ppg1->m_p[0]);
 			mMM.Ins2( o_ppg1->m_p[1]);
@@ -184,7 +187,7 @@ MINT mtInput::GetArea(
 // 屋根面が見つからなければ、屋根面選択はフリーの初期状態となる
 // 返値: 0: 正常
 //		 1: 
-MINT mtInput::GetLen2Pt(
+MINT mhInput::GetLen2Pt(
 						MINT		i_iMode,	// 入力モード
 												//				　0: 長さ２点入力（複数部材の場合は、平行四辺形を表示）
 												//				　1: 連続長さ２点の終点入力
@@ -219,21 +222,21 @@ MINT mtInput::GetLen2Pt(
 
 			if ( irt == MTRT_SYSTEMSTOP || irt == MTRT_CAN)		// システムストップまたはキャンセル
 				break;
-			if ( mtHaitiIn::GetComboCdPlc() == MP_HAICD_YANEKOUSEISENZUKE) {
+			if ( z_mn.GetComboCdPlc() == MP_HAICD_YANEKOUSEISENZUKE) {
 																// 配置コードが屋根構成線付け丸め
 				nflag = MtGetNFlag();							// 仮想キー(nflag)取得（1:キー入力無し、5:shiftキー入力あり)
 				if ( irt == MTRT_RBTNDWN || MF_CHECK_OR( nflag, MK_SHIFT)) {	
 																// マウス右ボタンまたはシフトキーが押されている場合は屋根面を検索し
 																// 屋根面が見つかれば、以降はその屋根面上の部材とみなし、
 																// 屋根面が見つからなければ、初期の状態となる
-					mtHaitiIn::SetCurRfm( mtHaitiIn::SrchRfm( MC_PRI_MIN_AREA, io_ptln_org[0]));
+					mhHaitiIn::SetCurRfm( mhHaitiIn::SrchRfm( MC_PRI_MIN_AREA, io_ptln_org[0]));
 					WindowCtrl::MmWndKReDraw();
 					continue;
 				}
 			}
 			if ( irt != MTRT_LBTNDWN)							// マウス左ボタンでない場合は、
 				continue;										//	再入力
-			mtInput::Marume( io_ptln_org[0], &io_ptln[0]);
+			mhInput::Marume( io_ptln_org[0], &io_ptln[0]);
 			iSeq = 1;
 
 		} else if ( iSeq == 1) {
@@ -257,8 +260,8 @@ MINT mtInput::GetLen2Pt(
 			}
 			if ( irt != MTRT_LBTNDWN)							// マウス左ボタンでない場合は、
 				continue;										//	２点目を再入力
-			mtInput::Marume( io_ptln_org[1], &io_ptln[1]);
-			ist1 = mtInpAttr::GetComboAttrI( MC_CMB_HONS, &iNum);
+			mhInput::Marume( io_ptln_org[1], &io_ptln[1]);
+			ist1 = z_mn.GetComboAttrI( MC_CMB_HONS, &iNum);
 				iSeq = 2;
 			if ( ( i_iMode != 1) && ( iNum == MC_INT_AREA)) {	// (長さ２点入力 または 方向１点入力)　かつ　iNum == 9998: 複数部材
 				iSeq = 2;
@@ -286,7 +289,7 @@ MINT mtInput::GetLen2Pt(
 			if (  irt != MTRT_LBTNDWN) {						// マウス左ボタンでない場合は、
 				continue;										//	３点目を再入力
 			}
-			mtInput::Marume( io_ptln_org[2], &io_ptln[2]);
+			mhInput::Marume( io_ptln_org[2], &io_ptln[2]);
 			iSeq = 3;											// ３点目入力済み
 			irt = 0;
 			break;
@@ -300,7 +303,7 @@ MINT mtInput::GetLen2Pt(
 /////////////////////////////////////////////////////////////////////////////
 //	１点入力
 
-MINT mtInput::Get1Pt(
+MINT mhInput::Get1Pt(
 						MgPoint2*	ppt1,			// (  O) 入力丸め点
 						MgPoint2*	ppt1_org		// (  O) 入力オリジナル点
 				 )
@@ -314,7 +317,7 @@ MINT mtInput::Get1Pt(
 	irt = MtAskForPoint( ppt1_org);								// １点目を入力
 
 	if ( irt != MTRT_SYSTEMSTOP && irt != MTRT_CAN) {
-		mtInput::Marume( *ppt1_org, ppt1);
+		mhInput::Marume( *ppt1_org, ppt1);
 	}
 	return irt;
 }
@@ -323,7 +326,7 @@ MINT mtInput::Get1Pt(
 /////////////////////////////////////////////////////////////////////////////
 //	長方形区画入力
 
-MINT mtInput::GetRect2Pt( MgLine2*	pLn)
+MINT mhInput::GetRect2Pt( MgLine2*	pLn)
 {
 	MINT		irt;
 	MgPoint2	pt1, pt2;
@@ -362,7 +365,7 @@ MINT mtInput::GetRect2Pt( MgLine2*	pLn)
 //	区画入力 
 //	各辺に　シフトキー有無のフラグ付き
 
-MINT mtInput::GetAreaI(
+MINT mhInput::GetAreaI(
 						MgPolyg2*	pPg1,			// (  O) 地廻り区画
 						MgGInt*		pGifInp			// (  O) 地廻り線種類(仮想キー(nflag)  MK_SHIFT(004): シフトキー)
 				)
@@ -372,19 +375,19 @@ MINT mtInput::GetAreaI(
 	MgPolyg2		PgS(20);
 	MgPoint2		pt1, pt2;
 
-	MINT iInpKb = mtInpMode::GetComboInpKb();
+	MINT iCdInpKb = z_mn.GetComboCdCdInpKb();
 
 	for ( ic=0;;ic++) {
 		if ( ic == 0) {
 			Msg::GuidanceMsg( MC_GUID_JIM_SITEN);
 			irt = MtAskForPoint( &pt1);							// １点目を入力
 		} else {
-			if ( ic == 1)
+			if ( ic == 1) {
 //				Msg::GuidanceMsg( MC_GUIDMSG_JIMAWARI_HOUKOUTEN);
 				Msg::GuidanceMsg( MC_GUID_JIM_TUUKATEN);
-			else
+			} else {
 				Msg::GuidanceMsg( MC_GUID_JIM_TUUKATEN);
-
+			}
 			irt = Window::DragObject( MC_RBND_POLYGON, (void*)pPg1, &pt1);	// ラバーバンド図形表示しながら２点目以降を入力
 																// ドラッギングモード開始
 		}
@@ -397,8 +400,9 @@ MINT mtInput::GetAreaI(
 				(*pGifInp) --;
 				(*pPg1) --;										// ポリゴンの座標を１点削る
 			} else {
-				iInpKb = MP_INPKB_AREA + MP_INPKB_FREE - iInpKb;
-				mtInpMode::SetComboInpKb( iInpKb);
+				iCdInpKb = MP_INPKB_AREA + MP_INPKB_FREE - iCdInpKb;	// 区画入力 | 自由入力 | 
+//E				z_mn.SetComboCdInpKb( iCdInpKb);
+				z_mn.RibbonIO( MSET_INPUT_KUBUN_CD, iCdInpKb);	// 入力点区分選択用のコンボボックスに表示する
 			}
 			if (pPg1->m_n == 0) {
 				Window::DragModeEnd();							// ドラッギングモード終了（ラバーバンド図形表示モード）
@@ -409,7 +413,7 @@ MINT mtInput::GetAreaI(
 
 		MINT nflag = MtGetNFlag();								// 仮想キー(nflag)を取得する（1:キー入力無し、5:shiftキー入力あり)
 
-		mtInput::Marume( pt1, &pt2);								// 座標を丸める
+		mhInput::Marume( pt1, &pt2);								// 座標を丸める
 
 		if ( ic > 1 && pt2 == pPg1->m_p[0]) {
 			pGifInp->m_i[0] = nflag;
@@ -427,7 +431,7 @@ MINT mtInput::GetAreaI(
 
 /////////////////////////////////////////////////////////////////////////////
 //	丸め
-void mtInput::Marume(
+void mhInput::Marume(
 				const	MgPoint2	&Pi,
 						MgPoint2*	pPo
 				)
@@ -448,18 +452,18 @@ void mtInput::Marume(
 
 	MmWndInfo* pWndInfo = WindowCtrl::MmWndKGetCurWnd();		// カレントウィンドウを取得する
 
-	MINT iKai = mtInpMode::GetKai();
+	MINT iKai = z_mn.GetKai();
 
-	iCdMarume = mtInpMode::GetComboCdMarume();
-	iCdPlc = mtHaitiIn::GetComboCdPlc();
+	iCdMarume = z_mn.GetComboCdMarume();
+	iCdPlc = z_mn.GetComboCdPlc();
 
 	if ( iCdPlc == MP_HAICD_KABESINZUKE ||
 		iCdPlc == MP_HAICD_YANEKOUSEISENZUKE) {									// 壁芯付け丸め　または　屋根構成線付け丸め
 		// 付近の丸め対象線分を求める
 		if ( iCdPlc == MP_HAICD_KABESINZUKE) {									// 壁芯付け丸めの場合は、最寄の壁芯を求める
-			mtInput::GetMarumeKabeLine( iKai, Pi, &GLnk);
+			mhInput::GetMarumeKabeLine( iKai, Pi, &GLnk);
 		} else if ( iCdPlc == MP_HAICD_YANEKOUSEISENZUKE) {						// 屋根構成線付け丸めの場合は、最寄の屋根構成線を求める
-			mtInput::MmGetMarumeYaneLine( iKai, Pi, &GLnk);
+			mhInput::MmGetMarumeYaneLine( iKai, Pi, &GLnk);
 		}
 		// 複数本の丸め対象線分があった場合は交点が近くにあるならその交点を返す
 		rDisMin_2 = MREALMAX;
@@ -484,7 +488,7 @@ void mtInput::Marume(
 		GLnk.m_n = 0;
 	}
 				
-//	iCdMarume = mtInpMode::GetComboCdMarume();
+//	iCdMarume = z_mn.GetComboCdMarume();
 
 	// グリッド丸めなしの場合
 	if ( iCdMarume == 0) {

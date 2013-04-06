@@ -1,4 +1,4 @@
-// MmDialogPtsEdit.cpp : 実装ファイル
+// MmDialogPartsEdit.cpp : 実装ファイル
 //
 
 #include "stdafx.h"
@@ -9,14 +9,14 @@
 #define DLL_EXPORT_DO
 #include "../gridctrl/gridctrl.h"
 
-#include "MmDialogPtsEdit.h"
+#include "MmDialogPartsEdit.h"
 
-// CMmDialogPtsEdit ダイアログ
+// CMmDialogPartsEdit ダイアログ
 
-IMPLEMENT_DYNAMIC(CMmDialogPtsEdit, CDialog)
+IMPLEMENT_DYNAMIC(CMmDialogPartsEdit, CDialog)
 
-CMmDialogPtsEdit::CMmDialogPtsEdit(CWnd* pParent /*=NULL*/)
-	: CDialog(CMmDialogPtsEdit::IDD, pParent)
+CMmDialogPartsEdit::CMmDialogPartsEdit(CWnd* pParent /*=NULL*/)
+	: CDialog(CMmDialogPartsEdit::IDD, pParent)
 	, m_pParent(NULL)
 {
 	m_nFixCols = 1;
@@ -27,34 +27,34 @@ CMmDialogPtsEdit::CMmDialogPtsEdit(CWnd* pParent /*=NULL*/)
 //	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
 
-CMmDialogPtsEdit::~CMmDialogPtsEdit()
+CMmDialogPartsEdit::~CMmDialogPartsEdit()
 {
 }
 
-void CMmDialogPtsEdit::DoDataExchange(CDataExchange* pDX)
+void CMmDialogPartsEdit::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_PARTSLIST1, m_GridPtLst1);
 }
 
-BEGIN_MESSAGE_MAP(CMmDialogPtsEdit, CDialog)
+BEGIN_MESSAGE_MAP(CMmDialogPartsEdit, CDialog)
 	ON_WM_CLOSE()
-	ON_BN_CLICKED(IDCANCEL, &CMmDialogPtsEdit::OnBnClickedCancel)
-	ON_BN_CLICKED(IDOK, &CMmDialogPtsEdit::OnBnClickedOk)
+	ON_BN_CLICKED(IDCANCEL, &CMmDialogPartsEdit::OnBnClickedCancel)
+	ON_BN_CLICKED(IDOK, &CMmDialogPartsEdit::OnBnClickedOk)
 END_MESSAGE_MAP()
 
-// CMmDialogPtsEdit メッセージ ハンドラ
+// CMmDialogPartsEdit メッセージ ハンドラ
 
-BOOL CMmDialogPtsEdit::Create(CWnd* pWnd)
+BOOL CMmDialogPartsEdit::Create(CWnd* pWnd)
 {
 	m_pParent = pWnd;
-	BOOL bret = CDialog::Create( CMmDialogPtsEdit::IDD, m_pParent);
+	BOOL bret = CDialog::Create( CMmDialogPartsEdit::IDD, m_pParent);
 	if (bret == TRUE)
 		this->ShowWindow( SW_SHOW);
 	return bret;
 }
 
-BOOL CMmDialogPtsEdit::OnInitDialog()
+BOOL CMmDialogPartsEdit::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
@@ -148,22 +148,22 @@ exit:
 namespace MC
 {
 
-void MCmdPtsEditEnd();
+void MCmdPartsEditEnd();
 
 } // namespace MC
 
-void CMmDialogPtsEdit::PostNcDestroy()
+void CMmDialogPartsEdit::PostNcDestroy()
 {
 	// TODO: ここに特定なコードを追加するか、もしくは基本クラスを呼び出してください。
 	if (m_pParent != NULL) {
-		MC::MCmdPtsEditEnd();
+		MC::MCmdPartsEditEnd();
 		delete this;
 	}
 
 	CDialog::PostNcDestroy();
 }
 
-void CMmDialogPtsEdit::OnClose()
+void CMmDialogPartsEdit::OnClose()
 {
 	// TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
 	if (m_pParent != NULL) {
@@ -173,7 +173,7 @@ void CMmDialogPtsEdit::OnClose()
 	}
 }
 
-void CMmDialogPtsEdit::OnBnClickedCancel()
+void CMmDialogPartsEdit::OnBnClickedCancel()
 {
 	// TODO: ここにコントロール通知ハンドラ コードを追加します。
 	if (m_pParent != NULL) {
@@ -183,7 +183,7 @@ void CMmDialogPtsEdit::OnBnClickedCancel()
 	}
 }
 
-void CMmDialogPtsEdit::OnBnClickedOk()
+void CMmDialogPartsEdit::OnBnClickedOk()
 {
 	// TODO: ここにコントロール通知ハンドラ コードを追加します。
 	if (m_pParent != NULL) {

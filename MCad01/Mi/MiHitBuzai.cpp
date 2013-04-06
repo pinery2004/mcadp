@@ -22,7 +22,7 @@
 #include "MmDrag.h"
 #include "MmWnd.h"
 
-#include "MmDefine.h"
+#include "MhDefParts.h"
 #include "MsBitSet.h"
 #include "MdOpt.h"
 #include "MdHist.h"
@@ -36,6 +36,7 @@
 #include "MdLib.h"
 
 #include "McSystemProperty.h"
+#include "MhInpAttr.h"
 
 namespace MC
 {
@@ -45,9 +46,9 @@ static	bool			z_fDrawHitBzi = FALSE;
 /////////////////////////////////////////////////////////////////////////////
 //  部材の形状を求める
 
-static void PtsShape(
+static void PartsShape(
 						mhPlcInfo	*pPlcEn,
-						MgPolyg2*	pgPtsShape
+						MgPolyg2*	pgPartsShape
 				);
 
 static	MgPoint2 z_ptBziFig[20];
@@ -85,7 +86,7 @@ static	MhRfm* 	z_pRfm = NULL;
 ////////////////////////////////////////////////////////////////////////////
 //	カレント選択の屋根面を設定する
 
-void mtHaitiIn::SetCurRfm(
+void mhHaitiIn::SetCurRfm(
 						MhRfm* 	pRfm				// (I  ) カレント選択の屋根面
 				)
 {
@@ -95,7 +96,7 @@ void mtHaitiIn::SetCurRfm(
 ////////////////////////////////////////////////////////////////////////////
 //	カレント選択の屋根面を返す
 
-MhRfm* mtHaitiIn::GetCurRfm()
+MhRfm* mhHaitiIn::GetCurRfm()
 {
 	return z_pRfm;
 }
@@ -111,7 +112,7 @@ void WindowCtrl::MmWndKDrawTemp(
 	// 屋根面の選択状況を表示する
 	MgPolyg2	pgRfm(20);
 
-	MhRfm *pRfm = mtHaitiIn::GetCurRfm();
+	MhRfm *pRfm = mhHaitiIn::GetCurRfm();
 	if ( pRfm) {
 
 		CClientDC	dc( pWndInfo->GetWnd());

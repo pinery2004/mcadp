@@ -18,7 +18,7 @@
 #include "MdModel.h"
 #include "MdmDB.h"
 
-#include "MhDefine.h"
+#include "MhDefDB.h"
 #include "MhModel.h"
 
 #ifdef _DEBUG

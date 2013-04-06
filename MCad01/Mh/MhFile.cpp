@@ -21,7 +21,7 @@
 #include "MgLine.h"
 #include "MgPlane.h"
 
-#include "MmDefine.h"
+#include "MhDefParts.h"
 #include "MsBitSet.h"
 #include "MdOpt.h"
 

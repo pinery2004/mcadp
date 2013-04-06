@@ -144,9 +144,9 @@ public:
 	MUSHORT		PED;
 	MUSHORT		NVT;						// Vertex ring
 	MUSHORT		PVT;
-	MUSHORT		DAD;						// Pts Tree
+	MUSHORT		DAD;						// Parts Tree
 	MUSHORT		SON;
-	MUSHORT		BRO;						// Pts Tree
+	MUSHORT		BRO;						// Parts Tree
 	MUSHORT		SIS;
 	MUSHORT		alt;						// Body TRAM
 	MUSHORT		TRAM;

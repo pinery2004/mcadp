@@ -14,7 +14,7 @@
 #include "MgLib.h"
 #include "MhLib.h"
 
-#include "MtInp.h"
+#include "MhInp.h"
 
 #include "MdOpt.h"
 #include "MdHist.h"

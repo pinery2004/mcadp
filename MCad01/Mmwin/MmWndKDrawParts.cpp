@@ -17,7 +17,7 @@
 #include "MmGridNum.h"
 #include "MmDrag.h"
 #include "MmWnd.h"
-#include "MmDefine.h"
+#include "MhDefParts.h"
 #include "MmLib.h"
 #include "McSystemProperty.h"
 
@@ -27,7 +27,7 @@
 #include "MdList.h"
 #include "MhLib.h"
 
-#include "MtInp.h"
+#include "MhInp.h"
 
 #include "MdOpt.h"
 #include "MdLib.h"
@@ -44,13 +44,13 @@ static	MINT			z_ign;
 //	１配置部品を表示する
 void DrawPart( 
 						msCod*		pCod,			// 座標系
-						MINT		iGpC,		// 構成
+						MINT		iGpC,			// 構成
 						mhPlcInfo	*pPlcEn
 				);
 
 /////////////////////////////////////////////////////////////////////////////
 //	配置部品を表示する
-void WindowCtrl::MmWndKDrawPts(
+void WindowCtrl::MmWndKDrawParts(
 						msCod*		pCod,			// 座標系
 						MINT		iKaiC,			// 階  	(1,2,3)
 						MINT		iGpC			// 構成
@@ -61,28 +61,28 @@ void WindowCtrl::MmWndKDrawPts(
 //	MsBitSet	*pOptv1, *pOptv2;
 //	MsBitSet	*pOptv;
 //	MsBitSet*	pHstv;
-	MgLine2		LnPts;
-	MgPoint2	ptPtsN;
+	MgLine2		LnParts;
+	MgPoint2	ptPartsN;
 	MgPoint2	ptW[2];
 	MgPoint2	ptH;
 	MgPoint2	ptK[4];
 	MgVect2		vptH;
 	MgVect2		vOffset = MgVect2( 0., 20.);
 	
-	DWORD		PtsTextColor;
+	DWORD		PartsTextColor;
 
-	PtsTextColor = mcs::GetColor( MM_COLOR_GRID_TEXT);
+	PartsTextColor = mcs::GetColor( MM_COLOR_GRID_TEXT);
 	pCod->SetTextAttr( Mstr( "ＭＳ ゴシック"), 100.f, MT_CENTER, MT_CENTER,
-					   PtsTextColor, MgVect2( 1., 0.), vOffset, MT_FREESIZE);
+					   PartsTextColor, MgVect2( 1., 0.), vOffset, MT_FREESIZE);
 
 	// パネルを表示する
 	z_ign = 0;
-	for ( pPlcEn = HaitiDb::MdGetHeadPts( &pos1); pPlcEn!=0;
-		  pPlcEn = HaitiDb::MdGetNextPts( &pos1)) {
+	for ( pPlcEn = HaitiDb::MdGetHeadParts( &pos1); pPlcEn!=0;
+		  pPlcEn = HaitiDb::MdGetNextParts( &pos1)) {
 
 		if ( pPlcEn->GetPIKai() != iKaiC)
 			continue;											// 異なる階の部材は表示しない
-//		if ( pPlcEn->GetPITpPts()->m_pGp->m_iCode != iGpC)
+//		if ( pPlcEn->GetPIPartsTp()->m_pGp->m_iCode != iGpC)
 //			continue;											// 異なる構成の部材は表示しない
 		if ( pPlcEn->GetPTCdGp() != iGpC)
 			continue;											// 異なる構成の部材は表示しない
@@ -95,25 +95,25 @@ void WindowCtrl::MmWndKDrawPts(
 		}
 	}
 
-	PtsTextColor = mcs::GetColor( MM_COLOR_GRID_TEXT);
+	PartsTextColor = mcs::GetColor( MM_COLOR_GRID_TEXT);
 	pCod->SetTextAttr( Mstr( "ＭＳ ゴシック"), 100.f, MT_LOWER, MT_CENTER,
-					   PtsTextColor, MgVect2( 1., 0.), vOffset, MT_FREESIZE);
+					   PartsTextColor, MgVect2( 1., 0.), vOffset, MT_FREESIZE);
 
 	// 部材形状を表示する
 	MINT iDB = 0;												// Debug Trace用
-	for ( pPlcEn = HaitiDb::MdGetHeadPts( &pos1); pPlcEn!=0;
-		  pPlcEn = HaitiDb::MdGetNextPts( &pos1)) {
+	for ( pPlcEn = HaitiDb::MdGetHeadParts( &pos1); pPlcEn!=0;
+		  pPlcEn = HaitiDb::MdGetNextParts( &pos1)) {
 
 		iDB++;
 
-		DWORD PtsLineColor;
+		DWORD PartsLineColor;
 		MINT iMdBziFig = 0;
 
 		if ( pPlcEn->GetPIKai() != iKaiC)
 			continue;											// 異なる階の部材は表示しない
 
 //D		MUINT	*iOptv = pPlcEn->GetPIOpt1()->GetSOB();
-//D		TRACE1( "MmWndKDrawPts(%d)		", iDB);
+//D		TRACE1( "MmWndKDrawParts(%d)		", iDB);
 //D		if ( iOptv == 0)
 //D			TRACE0( "pOptv_ON NULL		");
 //D		else
@@ -124,16 +124,16 @@ void WindowCtrl::MmWndKDrawPts(
 //D		else
 //D			TRACE3( "pOptv_OFF %x, %x, %x\n", iOptv[0], iOptv[1], iOptv[2]);
 
-		if ( pPlcEn->GetPTCdGp() != iGpC) {			// 基礎は
-			if ( pPlcEn->GetPTBr() == MP_BR_KISO) {
-				if ( iKaiC == 1 && iGpC == MP_GP_YUKA) {	// １階床組表示の場合は、壁芯線分で表示する
+		if ( pPlcEn->GetPTCdGp() != iGpC) {						// 基礎は
+			if ( pPlcEn->GetPTCdBr() == MP_BR_KISO) {
+				if ( iKaiC == 1 && iGpC == MP_GP_YUKA) {		// １階床組表示の場合は、壁芯線分で表示する
 					iMdBziFig = 1;
-					PtsLineColor = mcs::GetColor( MM_COLOR_KISOSIN);
+					PartsLineColor = mcs::GetColor( MM_COLOR_KISOSIN);
 				} else {
 					continue;									// 基礎組と床組以外は表示しない
 				}
-			} else if ( pPlcEn->GetPTBr() == MP_BR_KABE) {		// 壁は
-				if ( iGpC == MP_GP_KABE) {					// 壁枠組表示の場合は表示する
+			} else if ( pPlcEn->GetPTCdBr() == MP_BR_KABE) {	// 壁は
+				if ( iGpC == MP_GP_KABE) {						// 壁枠組表示の場合は表示する
 				} else {
 					continue;
 				}
@@ -145,11 +145,11 @@ void WindowCtrl::MmWndKDrawPts(
 		if ( !MmChkValidParts( pPlcEn))							// オプションと履歴のチェック
 			continue;
 
-		if ( pPlcEn->GetPTBr() != MP_BR_PANEL) {		// パネル以外の部材を表示
+		if ( pPlcEn->GetPTCdBr() != MP_BR_PANEL) {				// パネル以外の部材を表示
 			if ( iMdBziFig == 0) {
-				DrawPart( pCod, iGpC, pPlcEn);				// 部材形状を表示
+				DrawPart( pCod, iGpC, pPlcEn);					// 部材形状を表示
 			} else {
-				pCod->SetLineAttr( MPS_DASHDOT, 1, PtsLineColor);		// 一点鎖線の線分を表示
+				pCod->SetLineAttr( MPS_DASHDOT, 1, PartsLineColor);		// 一点鎖線の線分を表示
 				ptW[0] = MgPoint2C( pPlcEn->GetPIPlcIti( 0));
 				ptW[1] = MgPoint2C( pPlcEn->GetPIPlcIti( 1));
 				pCod->Line( MgLine2( ptW[0], ptW[1]));
@@ -169,8 +169,8 @@ void DrawPart(
 						mhPlcInfo	*pPlcEn
 				)
 {
-	MgLine2		LnPts;
-	MgPoint2	ptPtsN;
+	MgLine2		LnParts;
+	MgPoint2	ptPartsN;
 	MINT		iKeijoF;
 	MREAL		rWidthR, rWidth;
 	MgVect2		VtWidthR, VtWidth;
@@ -183,7 +183,7 @@ void DrawPart(
 	
 	MhZukei		*pZukei;
 
-	DWORD		PtsLineColor;
+	DWORD		PartsLineColor;
 
 	MCHAR		SGN[100];
 
@@ -211,16 +211,16 @@ void DrawPart(
 	} else if ( pPlcEn->IsPanel() || pPlcEn->IsKaiko()) {
 		// 床・天井
 		if ( pPlcEn->IsYuka() || pPlcEn->IsTenjo()) {
-			rWidthR = pPlcEn->GetPIMaeHosei();				// 手前側補正
+			rWidthR = pPlcEn->GetPIMaeHosei();					// 手前側補正
 			rWidth = pPlcEn->GetPIOkuHosei() + pPlcEn->GetPIOku() +
-							   pPlcEn->GetPIMaeHosei();		// 手前側補正 + 奥行き + 奥行き補正
+							   pPlcEn->GetPIMaeHosei();			// 手前側補正 + 奥行き + 奥行き補正
 			iKeijoF = 2;
 
 		// 屋根
 		} else if ( pPlcEn->IsYane()) {
-			rWidthR = pPlcEn->GetPIMaeHosei();				// 手前側補正
+			rWidthR = pPlcEn->GetPIMaeHosei();					// 手前側補正
 			rWidth = pPlcEn->GetPIOkuHosei() + pPlcEn->GetPIOku() +
-							   pPlcEn->GetPIMaeHosei();		// 手前側補正 + 奥行き + 奥行き補正
+							   pPlcEn->GetPIMaeHosei();			// 手前側補正 + 奥行き + 奥行き補正
 			iKeijoF = 2;
 
 		// その他?
@@ -242,7 +242,7 @@ void DrawPart(
 	}
 
 	// 矩形形状作成
-	if ( iKeijoF != 0) {											// 形状算出
+	if ( iKeijoF != 0) {										// 形状算出
 		VtWidthR = rWidthR * VtUtW.RotR90(); 
 		VtWidth = rWidth * VtUtW.RotL90(); 
 		ptK[0] = ptW[0] - pPlcEn->GetPILenHosei( 0) * VtUtW + VtWidthR;
@@ -253,12 +253,12 @@ void DrawPart(
 
 	// 線色の設定
 	if ( iGpC == MP_GP_KABE && pPlcEn->IsKabe()) {
-		PtsLineColor = mcs::GetColor( MM_COLOR_KABESEN);
+		PartsLineColor = mcs::GetColor( MM_COLOR_KABESEN);
 
 	} else {
-		PtsLineColor = pPlcEn->GetPTColor();
+		PartsLineColor = pPlcEn->GetPTColor();
 	}
-	pCod->SetLineAttr( MPS_SOLID, 1, PtsLineColor);
+	pCod->SetLineAttr( MPS_SOLID, 1, PartsLineColor);
 	
 	pZukei = pPlcEn->GetPIZukei();
 	if ( pZukei) {												// 図形データ有りの場合は、それを表示
@@ -273,7 +273,7 @@ void DrawPart(
 	// 部材の注記を表示
 
 	// パネルの場合はパネル番号を表示
-	if ( iKeijoF == 2) {											// パネル
+	if ( iKeijoF == 2) {										// パネル
 		MgPoint2 ptCenter = (ptK[0] + ptK[2]) / 2.f;
 		MgVect2  vtL1 = ptK[2] - ptK[0];
 		MgVect2  vtutL1 = MGeo::UnitizeV2( vtL1);
@@ -297,11 +297,11 @@ void DrawPart(
 
 	// 壁枠組以外は部材注記を表示
 	if ( iGpC != MP_GP_KABE) {
-		ptPtsN = (ptK[3] + ptK[2]) * 0.5;
+		ptPartsN = (ptK[3] + ptK[2]) * 0.5;
 		pCod->SetTextDirect( VtW);
-		Msprintf_s( SGN, Mstr( "%s %s %d"), pPlcEn->GetPTNmPts1(),
+		Msprintf_s( SGN, Mstr( "%s %s %d"), pPlcEn->GetPTNmParts1(),
 										 pPlcEn->GetMbCdMbr(), z_ign++);
-		pCod->Text( ptPtsN, SGN);
+		pCod->Text( ptPartsN, SGN);
 	}
 }
 

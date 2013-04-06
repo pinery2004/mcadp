@@ -23,6 +23,7 @@
 */
 #define		MMAX_NPANEL				500
 #include "MmValid.h"
+#include "MhInpAttr.h"
 
 namespace MC
 {
@@ -54,8 +55,8 @@ void MCmdMdPanelNo()
 	MINT		iPtNoMin;
 
 	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
-	MINT		iKaiC   = mtInpMode::GetKai();						// 階  	(1,2,3)
-	MINT		iGpC = mtInpMode::GetKGp();							// 構成
+	MINT		iKaiC   = z_mn.GetKai();						// 階  	(1,2,3)
+	MINT		iGpC = z_mn.GetKCdGp();							// 構成
 
 	Window::CurWndFocus();
 
@@ -63,7 +64,7 @@ void MCmdMdPanelNo()
 	Msg::OperationMsg( MC_OPRT_MOD_BUZAI);							// ステイタスバーの操作表示部へ"部材修正"を表示
 
 	MFOREVER {
-		Window::SetDispSelPts( NULL);
+		Window::SetDispSelParts( NULL);
 
 		Msg::GuidanceMsg( MC_GUID_MOD_PANELNO);					// パネル番号を設定し、パネル番号を修正するパネルを指示して下さい
 		irt = MtAskForPoint( &pt1);
@@ -71,7 +72,7 @@ void MCmdMdPanelNo()
 		if ( irt == MTRT_SYSTEMSTOP || irt == MTRT_CAN)
 			break;
 
-		iSetPtNo = mtInpAttr::GetComboPanelNo();
+		iSetPtNo = z_mn.GetComboPanelNo();
 		if ( iSetPtNo < 1)
 			iSetPtNo = 1;
 
@@ -79,15 +80,15 @@ void MCmdMdPanelNo()
 			break;
 
 		iBuzaiCd = NULL;
-		if ( ( pPtInfo1 = mtHaitiIn::SrchBuzai( pWndInfo, pt1, iBuzaiCd, &pgHitBzi)) &&
+		if ( ( pPtInfo1 = mhHaitiIn::SrchBuzai( pWndInfo, pt1, iBuzaiCd, &pgHitBzi)) &&
 			pPtInfo1->IsPanel()) {
 
 			iPt = 0;
-			for ( pPlcEn = HaitiDb::MdGetHeadPts( &posH); pPlcEn!=0;
-				  pPlcEn = HaitiDb::MdGetNextPts( &posH)) {
+			for ( pPlcEn = HaitiDb::MdGetHeadParts( &posH); pPlcEn!=0;
+				  pPlcEn = HaitiDb::MdGetNextParts( &posH)) {
 				if (pPlcEn->GetPIKai() != iKaiC)
 					continue;									// 異なる階の部材は対象外とする
-				if (pPlcEn->GetPITpPts()->GetPTCdGp() != iGpC)
+				if (pPlcEn->GetPIPartsTp()->GetPTCdGp() != iGpC)
 					continue;									// 異なる構成の部材は対象外とする
 				if (!pPlcEn->IsPanel())
 					continue;									// パネル以外は対象外とする
@@ -140,7 +141,9 @@ void MCmdMdPanelNo()
 			}
 			if ( iSetPtNo < iPt)
 				iSetPtNo++;
-			mtInpAttr::SetComboPanelNo( iSetPtNo);
+//E			z_mn.SetComboPanelNo( iSetPtNo);
+			z_mn.RibbonIO( MSET_COMBO_PANELNO, iSetPtNo);			// パネル番号選択用のコンボボックスに表示する
+			
 
 			WindowCtrl::MmWndKReDraw();
 			Msg::ClearErrorMsg();

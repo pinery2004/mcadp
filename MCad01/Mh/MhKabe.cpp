@@ -12,12 +12,13 @@
 #include "MsBasic.h"
 #include "MgLib.h"
 #define DLL_EXPORT_IEMODEL_DO
-#include "MmDefine.h"
+#include "MhDefParts.h"
 #include "MmLib.h"
 #include "MdLib.h"
 #include "MdList.h"
 #include "MsBitSet.h"
 #include "MhPlcInfo.h"
+#include "MhInpAttr.h"
 
 #define		MAXHAIKABE		500									// 配列制限値
 #define		EXPKABELN		1000								// 壁線算出用の仮延長量
@@ -70,8 +71,8 @@ void IeModel::MhNormKabe(
 	if ( !z_fUpdateKabe) MQUIT;
 
 	//　家モデルよりカレント階の全ての壁を取得する
-	MINT iKai = mtInpMode::GetKai();
-	nHaiKabeI = mtHaitiIn::GetPts( iKai, MP_GP_TAIRYOKU, Mstr( "壁"), NULL, MAXHAIKABE, pHaiKabe, pPlcPos);
+	MINT iKai = z_mn.GetKai();
+	nHaiKabeI = mhHaitiIn::GetParts( iKai, MP_GP_TAIRYOKU, Mstr( "壁"), NULL, MAXHAIKABE, pHaiKabe, pPlcPos);
 																					// 家モデルよりカレント階の全ての壁を取得する
 		ASSERT( nHaiKabeI >= 0);													//		壁数オーバーフロー　<ERROR>
 	nHaiKabe = nHaiKabeI;
@@ -140,8 +141,8 @@ void IeModel::MhNormKabe(
 
 //D				MINT ist1;
 				mhPlcInfo *pPlcEnM;
-//D				ist1 = MdPtsModify( pHaiKabe[ic1], &pPlcEnM);						//		修正先レコードを求める
-				HaitiDb::MdPtsModify( pHaiKabe[ic1], &pPlcEnM);								//		修正先レコードを求める
+//D				ist1 = MdPartsModify( pHaiKabe[ic1], &pPlcEnM);						//		修正先レコードを求める
+				HaitiDb::MdPartsModify( pHaiKabe[ic1], &pPlcEnM);								//		修正先レコードを求める
 
 //D				if ( ist1 == 3) {
 					pPlcEnM->m_lnPlc.p[1] = po;										//		元の壁は始点から交差点まで残す
@@ -156,15 +157,15 @@ void IeModel::MhNormKabe(
 				nHaiKabe++;
 
 				HaiKabeI.m_lnPlc.p[0] = po;											//		追加壁は交差点から終点まで残す
-				pPlcPos[nHaiKabe] = HaitiDb::MdPtsAdd( &HaiKabeI, 1);						//		分割による壁を追加
-				pHaiKabe[nHaiKabe] = (mhPlcInfo*)HaitiDb::MdPtsGet( pPlcPos[nHaiKabe]);
+				pPlcPos[nHaiKabe] = HaitiDb::MdPartsAdd( &HaiKabeI, 1);						//		分割による壁を追加
+				pHaiKabe[nHaiKabe] = (mhPlcInfo*)HaitiDb::MdPartsGet( pPlcPos[nHaiKabe]);
 
 				fPlc[nHaiKabe] = 0;
 				nHaiKabe++;
 				break;
 
 			} else if ( idivdel == 2) {												// 削除
-				HaitiDb::MdPtsDelete( pPlcPos[ic1]);											//		壁1を削除
+				HaitiDb::MdPartsDelete( pPlcPos[ic1]);											//		壁1を削除
 				fPlc[ic1] = -1;
 				break;
 			}
@@ -230,13 +231,13 @@ void IeModel::MhNormKabe(
 		}
 		if ( iPlcCn[0] >= 0) {
 			pHaiKabe[ic1]->m_lnPlc.p[0] = lnKabe1.p[0];								// 壁１を延長
-			HaitiDb::MdPtsDelete( pPlcPos[iPlcCn[0]]);										// 始点側単一連結壁を削除
+			HaitiDb::MdPartsDelete( pPlcPos[iPlcCn[0]]);										// 始点側単一連結壁を削除
 			fPlc[iPlcCn[0]] = -1;
 			fModify = true;
 		}
 		if ( iPlcCn[1] >= 0) {
 			pHaiKabe[ic1]->m_lnPlc.p[1] = lnKabe1.p[1];								// 壁１を延長
-			HaitiDb::MdPtsDelete( pPlcPos[iPlcCn[1]]);										// 終点側単一連結壁を削除
+			HaitiDb::MdPartsDelete( pPlcPos[iPlcCn[1]]);										// 終点側単一連結壁を削除
 			fPlc[iPlcCn[1]] = -1;
 			fModify = true;
 		}

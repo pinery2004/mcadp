@@ -5,6 +5,7 @@
 
 #include	"MgGrp.h"
 #include	"MhZukei.h"
+#include	"MhInpAttr.h"
 
 #define HDBID MINT
 
@@ -148,7 +149,7 @@ public:
 class MhRoofInfo: public MOBJECT
 {
 
-	friend	class	mtHaitiIn;							//ZZZZZ 091115
+	friend	class	mhHaitiIn;							//ZZZZZ 091115
 	friend	class	MdRoofQueue;
 	friend	MINT	MdRoofModify( MhRoofInfo *pRfInfoR, MhRoofInfo* *ppRfInfoM);
 	friend	void	MdRoofDelete( MPOSITION pPosition);
@@ -234,6 +235,10 @@ public:
 									return	m_pZukei;
 								}
 	
+	void SetKai( int i_iKai)
+								{
+									m_iKai = i_iKai;
+								}
 	MINT	GetKai()
 								{
 									return m_iKai;

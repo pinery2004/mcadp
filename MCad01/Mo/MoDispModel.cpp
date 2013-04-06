@@ -14,7 +14,7 @@
 #include "MmWnd.h"
 
 #include "MgLib.h"
-#include "MmDefine.h"
+#include "MhDefParts.h"
 #include "McSystemProperty.h"
 
 #include "MsBitSet.h"
@@ -25,7 +25,7 @@
 #include "MhRoof.h"
 #include "MdLib.h"
 
-#include "MtInp.h"
+#include "MhInp.h"
 
 #include "MdOpt.h"
 #include "MdHist.h"
@@ -71,8 +71,8 @@ namespace MC
 	rMmMdl.SetInit();
 
 	maxKai = 0;
-	for ( pPlcEn = HaitiDb::MdGetHeadPts( &posH); pPlcEn!=0;
-		  pPlcEn = HaitiDb::MdGetNextPts( &posH)) {
+	for ( pPlcEn = HaitiDb::MdGetHeadParts( &posH); pPlcEn!=0;
+		  pPlcEn = HaitiDb::MdGetNextParts( &posH)) {
 		if ( !MmChkValidParts( pPlcEn))							// オプションと履歴のチェック
 			continue;
 
@@ -151,15 +151,15 @@ void MdlDispList::DrawKabe(
 
 	// 建具の開口と重なり有りなら開口を追加する
 	mhPlcInfo *pPlcTEn;
-	MPOSITION	PtsPos;
+	MPOSITION	PartsPos;
 	MhTateguInfo	*pAuxTategu;
-	for ( pPlcTEn = HaitiDb::MdGetHeadPts( &PtsPos); pPlcTEn!=0;
-		  pPlcTEn = HaitiDb::MdGetNextPts( &PtsPos)) {
+	for ( pPlcTEn = HaitiDb::MdGetHeadParts( &PartsPos); pPlcTEn!=0;
+		  pPlcTEn = HaitiDb::MdGetNextParts( &PartsPos)) {
 		if ( !MmChkValidParts( i_pPlcEn))						// オプションと履歴のチェック
 			continue;
 
 		if ( pPlcTEn->GetPIKai() == i_pPlcEn->GetPIKai() &&
-			Mstrcmp( (&pPlcTEn->GetPITpPts()->GetPTNmGeneral()[2]), Mstr( "建具")) == 0) {
+			Mstrcmp( (&pPlcTEn->GetPIPartsTp()->GetPTNmGeneral()[2]), Mstr( "建具")) == 0) {
 			if ( MGeo::ChkLn3OnLn3WS( pPlcTEn->GetPIPlcIti(), i_pPlcEn->GetPIPlcIti(), &ist1)) {
 				MdlDispList::TateguHole( i_pPlcEn, pPlcTEn, &PgR, &PgL);
 				pAuxTategu = (MhTateguInfo*)pPlcTEn->GetPIAuxTategu();
@@ -376,8 +376,8 @@ void MdlDispList::DrawYane2(
 //  表示倍率と中心座標を求める
 //
 void MdlDispList::MhGetBCtr(
-				MREAL		*rB,					// 表示倍率
-				MgPoint3	*PtCtr					// 中心座標
+						MREAL		*rB,			// 表示倍率
+						MgPoint3	*PtCtr			// 中心座標
 				)
 {
 	MgMinMaxR3		rMmMdl;
@@ -517,8 +517,8 @@ MINT MdlDispList::DrawIeMdl1(
 	mhPlcInfo*	pPlcEn;
 	MPOSITION	posH;
 
-	for ( pPlcEn = HaitiDb::MdGetHeadPts( &posH); pPlcEn!=0;
-		  pPlcEn = HaitiDb::MdGetNextPts( &posH)) {
+	for ( pPlcEn = HaitiDb::MdGetHeadParts( &posH); pPlcEn!=0;
+		  pPlcEn = HaitiDb::MdGetNextParts( &posH)) {
 
 		if ( !MmChkValidParts( pPlcEn))							// オプションと履歴のチェック
 			continue;
@@ -578,8 +578,8 @@ int MdlDispList::DrawIeMdl2(
 		return 1;
 
 	//	壁のディスプレイリストを作成する
-	for ( pPlcEn = HaitiDb::MdGetHeadPts( &posH); pPlcEn!=0;
-		  pPlcEn = HaitiDb::MdGetNextPts( &posH)) {
+	for ( pPlcEn = HaitiDb::MdGetHeadParts( &posH); pPlcEn!=0;
+		  pPlcEn = HaitiDb::MdGetNextParts( &posH)) {
 
 		if ( !MmChkValidParts( pPlcEn))							// オプションと履歴のチェック
 			continue;

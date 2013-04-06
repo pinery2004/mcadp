@@ -49,8 +49,8 @@ class CARRAY : public CArray <T, T&> {
 	static int Compare( const void *, const void *);
 public:
 	void Sort() { qsort( GetData(), GetSize(), sizeof( T), Compare);};
-	T * Search( T PtsInfo)
-	{ return ( T *)bsearch( &PtsInfo, GetData(), GetSize(), sizeof( T), Compare);};
+	T * Search( T PartsInfo)
+	{ return ( T *)bsearch( &PartsInfo, GetData(), GetSize(), sizeof( T), Compare);};
 };
 
 

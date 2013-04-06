@@ -29,16 +29,16 @@
 
 #include "MainFrm.h"
 #include "MmSystem.h"
-#include "MmDefine.h"
+#include "MhDefParts.h"
 #include "MmCmdMsg.h"
 
 #include "MmWnd.h"
 #include "Mmlib.h"
 #include "MhPlcInfo.h"
-#include "MtInp.h"
+#include "MhInp.h"
 #include "MhLib.h"
 #include "MsDefFunc.h"
-#include "MtInpAttr.h"
+#include "MnInpAttr.h"
 #include "MmCmd.h"
 
 
@@ -64,6 +64,80 @@ ON_UPDATE_COMMAND_UI_RANGE(IDC_P0010, IDC_P0360, OnUpdateMainMenuP)
 ON_COMMAND_RANGE(IDP_P0010, IDP_P0340, OnSubMenuP)
 ON_UPDATE_COMMAND_UI_RANGE(IDP_P0010, IDP_P0340, OnUpdateSubMenuP)
 
+ON_COMMAND(IDC_RADIO1F, &CMCadApp::OnBnClickedRadio1f)
+ON_UPDATE_COMMAND_UI(IDC_RADIO1F, &CMCadApp::OnUpdateRadio1f)
+ON_COMMAND(IDC_RADIO2F, &CMCadApp::OnBnClickedRadio2f)
+ON_UPDATE_COMMAND_UI(IDC_RADIO2F, &CMCadApp::OnUpdateRadio2f)
+ON_COMMAND(IDC_RADIO3F, &CMCadApp::OnBnClickedRadio3f)
+ON_UPDATE_COMMAND_UI(IDC_RADIO3F, &CMCadApp::OnUpdateRadio3f)
+ON_COMMAND(IDC_RADIOYANE, &CMCadApp::OnBnClickedRadioYane)
+ON_UPDATE_COMMAND_UI(IDC_RADIOYANE, &CMCadApp::OnUpdateRadioYane)
+ON_COMMAND(IDC_RADIOTENJO, &CMCadApp::OnBnClickedRadioTenjo)
+ON_UPDATE_COMMAND_UI(IDC_RADIOTENJO, &CMCadApp::OnUpdateRadioTenjo)
+ON_COMMAND(IDC_RADIOTAIRYOKU, &CMCadApp::OnBnClickedRadioTairyoku)
+ON_UPDATE_COMMAND_UI(IDC_RADIOTAIRYOKU, &CMCadApp::OnUpdateRadioTairyoku)
+ON_COMMAND(IDC_RADIOKABE, &CMCadApp::OnBnClickedRadioKabe)
+ON_UPDATE_COMMAND_UI(IDC_RADIOKABE, &CMCadApp::OnUpdateRadioKabe)
+ON_COMMAND(IDC_RADIOYUKA, &CMCadApp::OnBnClickedRadioYuka)
+ON_UPDATE_COMMAND_UI(IDC_RADIOYUKA, &CMCadApp::OnUpdateRadioYuka)
+ON_COMMAND(IDC_RADIOKOYA, &CMCadApp::OnBnClickedRadioKoya)
+ON_UPDATE_COMMAND_UI(IDC_RADIOKOYA, &CMCadApp::OnUpdateRadioKoya)
+ON_COMMAND(IDC_RADIODODAI, &CMCadApp::OnBnClickedRadioDodai)
+ON_UPDATE_COMMAND_UI(IDC_RADIODODAI, &CMCadApp::OnUpdateRadioDodai)
+ON_COMMAND(IDC_RADIOKISO, &CMCadApp::OnBnClickedRadioKiso)
+ON_UPDATE_COMMAND_UI(IDC_RADIOKISO, &CMCadApp::OnUpdateRadioKiso)
+ON_COMMAND(IDC_RADIOBUZAI, &CMCadApp::OnBnClickedRadioBuzai)
+ON_UPDATE_COMMAND_UI(IDC_RADIOBUZAI, &CMCadApp::OnUpdateRadioBuzai)
+ON_COMMAND(IDC_RADIOKANAGU, &CMCadApp::OnBnClickedRadioKanagu)
+ON_UPDATE_COMMAND_UI(IDC_RADIOKANAGU, &CMCadApp::OnUpdateRadioKanagu)
+ON_COMMAND(IDC_RADIOPANEL, &CMCadApp::OnBnClickedRadioPanel)
+ON_UPDATE_COMMAND_UI(IDC_RADIOPANEL, &CMCadApp::OnUpdateRadioPanel)
+ON_COMMAND(IDC_RADIOOTHER, &CMCadApp::OnBnClickedRadioOther)
+ON_UPDATE_COMMAND_UI(IDC_RADIOOTHER, &CMCadApp::OnUpdateRadioOther)
+ON_COMMAND(IDC_RADIOSEL1, &CMCadApp::OnBnClickedRadioSel1)
+ON_UPDATE_COMMAND_UI(IDC_RADIOSEL1, &CMCadApp::OnUpdateRadioSel1)
+ON_COMMAND(IDC_RADIOSEL2, &CMCadApp::OnBnClickedRadioSel2)
+ON_UPDATE_COMMAND_UI(IDC_RADIOSEL2, &CMCadApp::OnUpdateRadioSel2)
+ON_COMMAND(IDC_RADIOSEL3, &CMCadApp::OnBnClickedRadioSel3)
+ON_UPDATE_COMMAND_UI(IDC_RADIOSEL3, &CMCadApp::OnUpdateRadioSel3)
+ON_COMMAND(IDC_CHUKIDELETE, &CMCadApp::OnBnClickedChukiDelete)
+ON_UPDATE_COMMAND_UI(IDC_CHUKIDELETE, &CMCadApp::OnUpdateChukiDelete)
+ON_COMMAND(IDC_CHUKIMOVE, &CMCadApp::OnBnClickedChukiMove)
+ON_UPDATE_COMMAND_UI(IDC_CHUKIMOVE, &CMCadApp::OnUpdateChukiMove)
+ON_COMMAND(IDC_CHUKICHANGE, &CMCadApp::OnBnClickedChukiChange)
+ON_UPDATE_COMMAND_UI(IDC_CHUKICHANGE, &CMCadApp::OnUpdateChukiChange)
+ON_COMMAND(IDC_CHECKBUZAI, &CMCadApp::OnBnClickedCheckBuzai)
+ON_UPDATE_COMMAND_UI(IDC_CHECKBUZAI, &CMCadApp::OnUpdateCheckBuzai)
+ON_COMMAND(IDC_CHECKKANAGU, &CMCadApp::OnBnClickedCheckKanagu)
+ON_UPDATE_COMMAND_UI(IDC_CHECKKANAGU, &CMCadApp::OnUpdateCheckKanagu)
+ON_COMMAND(IDC_CHECKGOHAN, &CMCadApp::OnBnClickedCheckGohan)
+ON_UPDATE_COMMAND_UI(IDC_CHECKGOHAN, &CMCadApp::OnUpdateCheckGohan)
+ON_COMMAND(IDC_CHECKATTR1, &CMCadApp::OnBnClickedCheckAttr1)
+ON_UPDATE_COMMAND_UI(IDC_CHECKATTR1, &CMCadApp::OnUpdateCheckAttr1)
+ON_COMMAND(IDC_CHECKATTR2, &CMCadApp::OnBnClickedCheckAttr2)
+ON_UPDATE_COMMAND_UI(IDC_CHECKATTR2, &CMCadApp::OnUpdateCheckAttr2)
+ON_COMMAND(IDC_CHECKATTR3, &CMCadApp::OnBnClickedCheckAttr3)
+ON_UPDATE_COMMAND_UI(IDC_CHECKATTR3, &CMCadApp::OnUpdateCheckAttr3)
+ON_COMMAND(IDC_CHECKATTR4, &CMCadApp::OnBnClickedCheckAttr4)
+ON_UPDATE_COMMAND_UI(IDC_CHECKATTR4, &CMCadApp::OnUpdateCheckAttr4)
+ON_COMMAND(IDC_PANELBEFORE, &CMCadApp::OnBnClickedPanelBefore)
+ON_UPDATE_COMMAND_UI(IDC_PANELBEFORE, &CMCadApp::OnUpdatePanelBefore)
+ON_COMMAND(IDC_PANELNEXT, &CMCadApp::OnBnClickedPanelNext)
+ON_UPDATE_COMMAND_UI(IDC_PANELNEXT, &CMCadApp::OnUpdatePanelNext)
+ON_COMMAND(IDC_PANELALL, &CMCadApp::OnBnClickedPanelAll)
+ON_UPDATE_COMMAND_UI(IDC_PANELALL, &CMCadApp::OnUpdatePanelAll)
+ON_COMMAND(IDC_RADIOJYUUKO, &CMCadApp::OnBnClickedRadioJyuuko)
+ON_UPDATE_COMMAND_UI(IDC_RADIOJYUUKO, &CMCadApp::OnUpdateRadioJyuuko)
+ON_COMMAND(IDC_RADIOJYUUTO, &CMCadApp::OnBnClickedRadioJyuuto)
+ON_UPDATE_COMMAND_UI(IDC_RADIOJYUUTO, &CMCadApp::OnUpdateRadioJyuuto)
+ON_COMMAND(IDC_RADIOBUKKEN, &CMCadApp::OnBnClickedRadioBukken)
+ON_UPDATE_COMMAND_UI(IDC_RADIOBUKKEN, &CMCadApp::OnUpdateRadioBukken)
+ON_COMMAND(IDC_RADIO_S_YANE, &CMCadApp::OnBnClickedRadioSYane)
+ON_UPDATE_COMMAND_UI(IDC_RADIO_S_YANE, &CMCadApp::OnUpdateRadioSYane)
+ON_COMMAND(IDC_RADIOSIKITI, &CMCadApp::OnBnClickedRadioSikiti)
+ON_UPDATE_COMMAND_UI(IDC_RADIOSIKITI, &CMCadApp::OnUpdateRadioSikiti)
+ON_COMMAND(IDC_RADIOHEKIRYOU, &CMCadApp::OnBnClickedRadioHekiryou)
+ON_UPDATE_COMMAND_UI(IDC_RADIOHEKIRYOU, &CMCadApp::OnUpdateRadioHekiryou)
 END_MESSAGE_MAP()
 
 
@@ -187,18 +261,22 @@ BOOL CMCadApp::InitInstance()
 
 	MC::System::MmInitialize();
 
-	MC::mtInpMode::SetKai( MP_KAI1);
-	MC::mtPlcInp::SetKai( MC::mtInpMode::GetKai());
-	MC::mtInpMode::SetMode( MP_MD_CREATE);
+	MC::z_mn.SetKai( MP_KAI1);
+	MC::mtPlcInp::SetKai( MC::z_mn.GetKai());
+	MC::z_mn.SetMode( MP_MD_CREATE);
 
-	MC::mtInpMode::SetSGp( MP_GP_JYUKO);
+	MC::z_mn.SetSCdGp( MP_GP_JYUKO);
 
-	MC::mtInpMode::SetKGp( MP_GP_KABE);
-	MC::mtInpMode::SetKBr( MP_BR_BUZAI);
-	MC::mtInpMode::SetKSel( MP_SEL1);
-	m_bPtsListBuzai	= false;
-	m_bPtsListKanagu = false;
-	m_bPtsListGohan	= false;
+	MC::z_mn.SetKCdGp( MP_GP_KABE);
+	MC::z_mn.SetKCdBr( MP_BR_BUZAI);
+	MC::z_mn.SetKSel( MP_SEL1);
+	m_bPartsListBuzai	= false;
+	m_bPartsListKanagu = false;
+	m_bPartsListGohan	= false;
+	m_bPartsAttr1 = false;
+	m_bPartsAttr2 = false;
+	m_bPartsAttr3 = false;
+	m_bPartsAttr4 = false;
 
 //-----------------------------------------------------------------------------
 
@@ -226,9 +304,6 @@ BOOL CMCadApp::InitInstance()
 	pMainFrame->ShowWindow(m_nCmdShow);
 	pMainFrame->UpdateWindow();
 
-//	((CMainFrame*)pFrame)->OnView1On();
-//E	CreateWnd( 1, MTHEIMENZU, 1, 1);
-
 	//// ウィンドウのオープン
 	MC::WindowCtrl::MmWndSetSyubetsuC( 2, MTHEIMENZU, 1, 1);
 	pMainFrame->OpenView( m_pDocTemplate2);
@@ -241,11 +316,6 @@ int CMCadApp::ExitInstance()
 {
 	//TODO: 追加したリソースがある場合にはそれらも処理してください
 	MC::System::MmTerminate();
-
-//S	if (m_hMDIMenu != NULL)
-//		FreeResource(m_hMDIMenu);
-//	if (m_hMDIAccel != NULL)
-//		FreeResource(m_hMDIAccel);
 
 	AfxOleTerm(FALSE);
 
@@ -314,19 +384,12 @@ void CMCadApp::SaveCustomState()
 // CMCadApp メッセージ ハンドラー
 void CMCadApp::OnFileNew() 
 {
-//A ------------------------------------------------------------------------
-//A	CMainFrame* pFrame = STATIC_DOWNCAST(CMainFrame, m_pMainWnd);
-
 	// 新しい MDI 子ウィンドウを作成します
-//A	pFrame->CreateNewChild(
-//A		RUNTIME_CLASS(CChildFrame5), IDR_MCADTYPE, m_hMDIMenu, m_hMDIAccel);
-//A ------------------------------------------------------------------------
 
 	MINT				ist1;
 
 	if ( MC::IeModel::MhGetModFIeMdl()) {
 		ist1 = MessageBox( NULL, Mstr( "初期化しますか"), Mstr( "初期化確認"), MB_OKCANCEL);
-//		ist1 = MessageBox( NULL, Mstr( "終了しますか"), Mstr( "終了確認"), MB_OKCANCEL);
 		if ( ist1 == IDCANCEL)
 			return;
 	}
@@ -368,8 +431,8 @@ void CMCadApp::OnFileOpen()
 		MC::WindowCtrl::MmWndKReDrawAll();
 
 		//　３次元表示がされていた場合は新しいデータで再度表示する
-//E		if (pWndInfo) 
-//E			OnView2On();
+		if (pWndInfo) 
+			OnView2On();
 	}
 }
 
@@ -534,7 +597,511 @@ void CMCadApp::CreateWnd(
 
 	case 5:
 		pFrame->OnView5open();
-//		OnFileNew();
 		break;
 	}
+}
+
+void CMCadApp::OnBnClickedRadio1f()
+{
+	MC::z_mn.SetKai( MP_KAI1);										// １階
+	MC::mtPlcInp::SetKai( MC::z_mn.GetKai());
+//E	MC::Window::CurWndFocus();
+	MC::WindowCtrl::MmWndKReDraw();
+}
+
+
+void CMCadApp::OnUpdateRadio1f(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck( MC::z_mn.GetKai() == MP_KAI1);
+}
+
+
+void CMCadApp::OnBnClickedRadio2f()
+{
+	MC::z_mn.SetKai( MP_KAI2);										// ２階
+	MC::mtPlcInp::SetKai( MC::z_mn.GetKai());
+//E	MC::Window::CurWndFocus();
+	MC::WindowCtrl::MmWndKReDraw();
+}
+
+
+void CMCadApp::OnUpdateRadio2f(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck( MC::z_mn.GetKai() == MP_KAI2);
+}
+
+
+void CMCadApp::OnBnClickedRadio3f()
+{
+	MC::z_mn.SetKai( MP_KAI3);										// ３階
+	MC::mtPlcInp::SetKai( MC::z_mn.GetKai());
+//E	MC::Window::CurWndFocus();
+	MC::WindowCtrl::MmWndKReDraw();
+}
+
+
+void CMCadApp::OnUpdateRadio3f(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck( MC::z_mn.GetKai() == MP_KAI3);
+}
+
+
+void CMCadApp::OnBnClickedRadioYane()
+{
+	MC::z_mn.SetKCdGp( MP_GP_YANE);
+	MC::z_mn.SetComboParts();
+//	コマンドキャンセル
+	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
+}
+
+
+void CMCadApp::OnUpdateRadioYane(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck( MC::z_mn.GetKCdGp() == MP_GP_YANE);
+}
+
+
+void CMCadApp::OnBnClickedRadioTenjo()
+{
+	MC::z_mn.SetKCdGp( MP_GP_TENJO);
+	MC::z_mn.SetComboParts();
+//	コマンドキャンセル
+	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
+}
+
+
+void CMCadApp::OnUpdateRadioTenjo(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck( MC::z_mn.GetKCdGp() == MP_GP_TENJO);
+}
+
+
+void CMCadApp::OnBnClickedRadioTairyoku()
+{
+	// TODO : ここにコントロール通知ハンドラ コードを追加します。
+	MC::z_mn.SetKCdGp( MP_GP_TAIRYOKU);
+	MC::z_mn.SetComboParts();
+//	コマンドキャンセル
+	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
+}
+
+
+void CMCadApp::OnUpdateRadioTairyoku(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck( MC::z_mn.GetKCdGp() == MP_GP_TAIRYOKU);
+}
+
+
+void CMCadApp::OnBnClickedRadioKabe()
+{
+	// TODO : ここにコントロール通知ハンドラ コードを追加します。
+	MC::z_mn.SetKCdGp( MP_GP_KABE);
+	MC::z_mn.SetComboParts();
+//	コマンドキャンセル
+	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
+}
+
+
+void CMCadApp::OnUpdateRadioKabe(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck( MC::z_mn.GetKCdGp() == MP_GP_KABE);
+}
+
+
+void CMCadApp::OnBnClickedRadioYuka()
+{
+	MC::z_mn.SetKCdGp( MP_GP_YUKA);
+	MC::z_mn.SetComboParts();
+//	コマンドキャンセル
+	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
+}
+
+
+void CMCadApp::OnUpdateRadioYuka(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck( MC::z_mn.GetKCdGp() == MP_GP_YUKA);
+}
+
+
+void CMCadApp::OnBnClickedRadioKoya()
+{
+	MC::z_mn.SetKCdGp( MP_GP_KOYA);
+	MC::z_mn.SetComboParts();
+//	コマンドキャンセル
+	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
+}
+
+
+void CMCadApp::OnUpdateRadioKoya(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck( MC::z_mn.GetKCdGp() == MP_GP_KOYA);
+}
+
+
+void CMCadApp::OnBnClickedRadioDodai()
+{
+	MC::z_mn.SetKCdGp( MP_GP_DODAI);
+	MC::z_mn.SetComboParts();
+//	コマンドキャンセル
+	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
+}
+
+
+void CMCadApp::OnUpdateRadioDodai(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck( MC::z_mn.GetKCdGp() == MP_GP_DODAI);
+}
+
+
+void CMCadApp::OnBnClickedRadioKiso()
+{
+	MC::z_mn.SetKCdGp( MP_GP_KISO);
+	MC::z_mn.SetComboParts();
+//	コマンドキャンセル
+	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
+}
+
+
+void CMCadApp::OnUpdateRadioKiso(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck( MC::z_mn.GetKCdGp() == MP_GP_KISO);
+}
+
+
+void CMCadApp::OnBnClickedRadioBuzai()
+{
+	MC::z_mn.SetKCdBr( MP_BR_BUZAI);
+	MC::z_mn.SetComboParts();
+//	コマンドキャンセル
+	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
+}
+
+
+void CMCadApp::OnUpdateRadioBuzai(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck( MC::z_mn.GetKCdBr() == MP_BR_BUZAI);
+}
+
+
+void CMCadApp::OnBnClickedRadioKanagu()
+{
+	MC::z_mn.SetKCdBr( MP_BR_KANAGU);
+	MC::z_mn.SetComboParts();
+//	コマンドキャンセル
+	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
+}
+
+
+void CMCadApp::OnUpdateRadioKanagu(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck( MC::z_mn.GetKCdBr() == MP_BR_KANAGU);
+}
+
+
+void CMCadApp::OnBnClickedRadioPanel()
+{
+	MC::z_mn.SetKCdBr( MP_BR_PANEL);
+	MC::z_mn.SetComboParts();
+//	コマンドキャンセル
+	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
+}
+
+
+void CMCadApp::OnUpdateRadioPanel(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck( MC::z_mn.GetKCdBr() == MP_BR_PANEL);
+}
+
+
+void CMCadApp::OnBnClickedRadioOther()
+{
+	MC::z_mn.SetKCdBr( MP_BR_OTHER);
+	MC::z_mn.SetComboParts();
+//	コマンドキャンセル
+	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
+}
+
+
+void CMCadApp::OnUpdateRadioOther(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck( MC::z_mn.GetKCdBr() == MP_BR_OTHER);
+}
+
+
+void CMCadApp::OnBnClickedRadioSel1()
+{
+	m_iKInpSel = MP_SEL1;
+//E	MC::Window::CurWndFocus();
+}
+
+
+void CMCadApp::OnUpdateRadioSel1(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck( m_iKInpSel == MP_SEL1);
+}
+
+
+void CMCadApp::OnBnClickedRadioSel2()
+{
+	m_iKInpSel = MP_SEL2;
+//E	MC::Window::CurWndFocus();
+}
+
+
+void CMCadApp::OnUpdateRadioSel2(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck( m_iKInpSel == MP_SEL2);
+}
+
+
+void CMCadApp::OnBnClickedRadioSel3()
+{
+	m_iKInpSel = MP_SEL3;
+//E	MC::Window::CurWndFocus();
+}
+
+
+void CMCadApp::OnUpdateRadioSel3(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck( m_iKInpSel == MP_SEL3);
+}
+
+
+void CMCadApp::OnBnClickedChukiDelete()
+{
+//E	MC::Window::CurWndFocus();
+}
+
+
+void CMCadApp::OnUpdateChukiDelete(CCmdUI *pCmdUI)
+{
+	// TODO: ここにコマンド更新 UI ハンドラー コードを追加します。
+}
+
+
+void CMCadApp::OnBnClickedChukiMove()
+{
+//E	MC::Window::CurWndFocus();
+}
+
+
+void CMCadApp::OnUpdateChukiMove(CCmdUI *pCmdUI)
+{
+	// TODO: ここにコマンド更新 UI ハンドラー コードを追加します。
+}
+
+
+void CMCadApp::OnBnClickedChukiChange()
+{
+//E	MC::Window::CurWndFocus();
+}
+
+
+void CMCadApp::OnUpdateChukiChange(CCmdUI *pCmdUI)
+{
+	// TODO: ここにコマンド更新 UI ハンドラー コードを追加します。
+}
+
+void CMCadApp::OnBnClickedCheckBuzai()
+{
+//E	MC::Window::CurWndFocus();
+	m_bPartsListBuzai = !m_bPartsListBuzai;
+
+//E	MCHAR sTitle[] =Mstr( "テスト");
+//	CButton* pCheckBuzai = (CButton*)(MC::System::GetpMainFrame()->m_wndRibbonBar.GetDlgItem(IDC_CHECKBUZAI));
+//	pCheckBuzai->SetWindowText( sTitle);
+//	MINT i1 = pCheckBuzai->GetCheck();
+//	pCheckBuzai->ShowWindow( 0);
+}
+
+
+void CMCadApp::OnUpdateCheckBuzai(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck ( m_bPartsListBuzai);
+}
+
+
+void CMCadApp::OnBnClickedCheckKanagu()
+{
+//E	MC::Window::CurWndFocus();
+	m_bPartsListKanagu = !m_bPartsListKanagu;
+}
+
+
+void CMCadApp::OnUpdateCheckKanagu(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck ( m_bPartsListKanagu);	
+}
+
+
+void CMCadApp::OnBnClickedCheckGohan()
+{
+//E	MC::Window::CurWndFocus();
+	m_bPartsListGohan = !m_bPartsListGohan;
+}
+
+
+void CMCadApp::OnUpdateCheckGohan(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck ( m_bPartsListGohan);	
+}
+
+
+void CMCadApp::OnBnClickedCheckAttr1()
+{
+//E	MC::Window::CurWndFocus();
+	m_bPartsAttr1 = !m_bPartsAttr1;
+}
+
+
+void CMCadApp::OnUpdateCheckAttr1(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck ( m_bPartsAttr1);	
+}
+
+
+void CMCadApp::OnBnClickedCheckAttr2()
+{
+//E	MC::Window::CurWndFocus();
+	m_bPartsAttr2 = !m_bPartsAttr2;
+}
+
+
+void CMCadApp::OnUpdateCheckAttr2(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck ( m_bPartsAttr2);	
+}
+
+
+void CMCadApp::OnBnClickedCheckAttr3()
+{
+//E	MC::Window::CurWndFocus();
+	m_bPartsAttr3 = !m_bPartsAttr3;
+}
+
+
+void CMCadApp::OnUpdateCheckAttr3(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck ( m_bPartsAttr3);	
+}
+
+
+void CMCadApp::OnBnClickedCheckAttr4()
+{
+//E	MC::Window::CurWndFocus();
+	m_bPartsAttr4 = !m_bPartsAttr4;
+}
+
+
+void CMCadApp::OnUpdateCheckAttr4(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck ( m_bPartsAttr4);	
+}
+
+
+void CMCadApp::OnBnClickedPanelBefore()
+{
+//E	MC::Window::CurWndFocus();
+}
+
+
+void CMCadApp::OnUpdatePanelBefore(CCmdUI *pCmdUI)
+{
+	// TODO: ここにコマンド更新 UI ハンドラー コードを追加します。
+}
+
+
+void CMCadApp::OnBnClickedPanelNext()
+{
+//E	MC::Window::CurWndFocus();
+}
+
+
+void CMCadApp::OnUpdatePanelNext(CCmdUI *pCmdUI)
+{
+	// TODO: ここにコマンド更新 UI ハンドラー コードを追加します。
+}
+
+
+void CMCadApp::OnBnClickedPanelAll()
+{
+//E	MC::Window::CurWndFocus();
+}
+
+
+void CMCadApp::OnUpdatePanelAll(CCmdUI *pCmdUI)
+{
+	// TODO: ここにコマンド更新 UI ハンドラー コードを追加します。
+}
+
+
+void CMCadApp::OnBnClickedRadioJyuuko()
+{
+	MC::z_mn.SetSCdGp( MP_GP_JYUKO);
+}
+
+
+void CMCadApp::OnUpdateRadioJyuuko(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck( MC::z_mn.GetSCdGp() == MP_GP_JYUKO);
+}
+
+
+void CMCadApp::OnBnClickedRadioJyuuto()
+{
+	MC::z_mn.SetSCdGp( MP_GP_JYUTO);
+}
+
+
+void CMCadApp::OnUpdateRadioJyuuto(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck( MC::z_mn.GetSCdGp() == MP_GP_JYUTO);
+}
+
+
+void CMCadApp::OnBnClickedRadioBukken()
+{
+	MC::z_mn.SetSCdGp( MP_GP_BUKKEN);
+}
+
+
+void CMCadApp::OnUpdateRadioBukken(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck( MC::z_mn.GetSCdGp() == MP_GP_BUKKEN);
+}
+
+
+void CMCadApp::OnBnClickedRadioSYane()
+{
+	MC::z_mn.SetSCdGp( MP_GP_S_YANE);
+}
+
+
+void CMCadApp::OnUpdateRadioSYane(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck( MC::z_mn.GetSCdGp() == MP_GP_S_YANE);
+}
+
+
+void CMCadApp::OnBnClickedRadioSikiti()
+{
+	MC::z_mn.SetSCdGp( MP_GP_SIKITI);
+}
+
+
+void CMCadApp::OnUpdateRadioSikiti(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck( MC::z_mn.GetSCdGp() == MP_GP_SIKITI);
+}
+
+
+void CMCadApp::OnBnClickedRadioHekiryou()
+{
+	MC::z_mn.SetSCdGp( MP_GP_HEKIRYOU);
+}
+
+
+void CMCadApp::OnUpdateRadioHekiryou(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck( MC::z_mn.GetSCdGp() == MP_GP_HEKIRYOU);
 }

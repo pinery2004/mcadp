@@ -14,7 +14,7 @@
 #include "MgLib.h"
 #include "McSystemProperty.h"
 
-#include "MtInp.h"
+#include "MhInp.h"
 #define DLL_EXPORT_MDLDISPLIST_DO
 #include "MoMdlDispList.h"
 

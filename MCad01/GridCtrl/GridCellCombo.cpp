@@ -8,7 +8,7 @@
 // Written by Chris Maunder <cmaunder@mail.com>
 // Copyright (c) 1998-2001. All Rights Reserved.
 //
-// Pts of the code contained in this file are based on the original
+// Parts of the code contained in this file are based on the original
 // CInPlaceList from http://www.codeguru.com/listview
 //
 // This code may be used in compiled form in any way you desire. This

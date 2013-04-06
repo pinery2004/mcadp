@@ -16,8 +16,10 @@
 
 class CMCadView2 : public CView
 {
-protected: // シリアル化からのみ作成します。
+public:
 	CMCadView2();
+	virtual ~CMCadView2();
+protected: // シリアル化からのみ作成します。
 	DECLARE_DYNCREATE(CMCadView2)
 
 // 属性
@@ -37,8 +39,6 @@ protected:
 	virtual void OnEndPrinting(CDC* pDC, CPrintInfo* pInfo);
 
 // 実装
-public:
-	virtual ~CMCadView2();
 #ifdef _DEBUG
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext& dc) const;
@@ -78,6 +78,7 @@ public:
 	afx_msg void OnRButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnMButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnMButtonUp(UINT nFlags, CPoint point);
+	afx_msg void OnClose();
 };
 
 #ifndef _DEBUG  // MCadView2.cpp のデバッグ バージョン

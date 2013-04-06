@@ -17,7 +17,7 @@
 #include "MmGridNum.h"
 #include "MmDrag.h"
 #include "MmWnd.h"
-#include "MmDefine.h"
+#include "MhDefParts.h"
 #include "MmLib.h"
 #include "McSystemProperty.h"
 
@@ -27,7 +27,7 @@
 #include "MdList.h"
 #include "MhLib.h"
 
-#include "MtInp.h"
+#include "MhInp.h"
 
 #include "MdOpt.h"
 #include "MdLib.h"
@@ -51,7 +51,7 @@ namespace MC
 //	MsBitSet	*pOptv;
 //	MsBitSet*	pHstv;
 	MgPoint2	ptW[2];
-	DWORD		PtsLineColor;
+	DWORD		PartsLineColor;
 
 	MREAL		rKisoSinZ = pCod->LPtoRP( MINT( pCod->DPtoLP(1)));
 	MgVect2		vKisoSinZ = MgVect2( rKisoSinZ, rKisoSinZ);
@@ -60,8 +60,8 @@ namespace MC
 
 	if ( iKaiC == 1 && iGpC == MP_GP_DODAI) {
 
-		for ( pPlcEn = HaitiDb::MdGetHeadPts( &pos1); pPlcEn!=0;
-			  pPlcEn = HaitiDb::MdGetNextPts( &pos1)) {
+		for ( pPlcEn = HaitiDb::MdGetHeadParts( &pos1); pPlcEn!=0;
+			  pPlcEn = HaitiDb::MdGetNextParts( &pos1)) {
 
 			if ( pPlcEn->IsKiso()) {								// Šî‘b(‘Ï—ÍŠî‘b)•”Þ
 
@@ -71,8 +71,8 @@ namespace MC
 				ptW[0] = (*(MgPoint2*)&(pPlcEn->GetPIPlcIti( 0))) + vKisoSinZ;
 				ptW[1] = (*(MgPoint2*)&(pPlcEn->GetPIPlcIti( 1))) + vKisoSinZ;
 
-				PtsLineColor = mcs::GetColor( MM_COLOR_KISOSIN);
-				pCod->SetLineAttr( MPS_DASHDOT, 1, PtsLineColor);
+				PartsLineColor = mcs::GetColor( MM_COLOR_KISOSIN);
+				pCod->SetLineAttr( MPS_DASHDOT, 1, PartsLineColor);
 				pCod->Line( MgLine2( ptW[0], ptW[1]));
 			}
 		}

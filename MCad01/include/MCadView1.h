@@ -18,7 +18,6 @@
 class CMCadView1 : public CView
 {
 protected: // ƒVƒŠƒAƒ‹‰»‚©‚ç‚Ì‚İì¬‚µ‚Ü‚·B
-	CMCadView1();
 	DECLARE_DYNCREATE(CMCadView1)
 
 // ‘®«
@@ -39,6 +38,7 @@ protected:
 
 // À‘•
 public:
+	CMCadView1();
 	virtual ~CMCadView1();
 #ifdef _DEBUG
 	virtual void AssertValid() const;

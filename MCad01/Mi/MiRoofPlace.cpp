@@ -17,7 +17,7 @@
 #include "MmGridNum.h"
 #include "MmDrag.h"
 #include "MmWnd.h"
-#include "MmDefine.h"
+#include "MhDefParts.h"
 
 #define DLL_EXPORT_MC_HAITIIN_DO
 #include "MmLib.h"
@@ -35,7 +35,8 @@
 #include "MhRoof.h"
 #include "MdLib.h"
 
-#include "MtInp.h"
+#include "MhInp.h"
+#include "MhInpAttr.h"
 
 #include "MdOpt.h"
 
@@ -50,7 +51,7 @@ namespace MC
 
 /////////////////////////////////////////////////////////////////////////////
 //	屋根を配置する
-MINT mtHaitiIn::RoofPlc(									// (  O) ステイタス	0: 正常、-1: 屋根配置エラー
+MINT mhHaitiIn::RoofPlc(									// (  O) ステイタス	0: 正常、-1: 屋根配置エラー
 				const	MgPolyg2	&pgJim,			// (I  ) 地廻り区画
 				const	MgGInt		&GifInp,		// (I  ) 地廻り線種類(仮想キー(nflag)  MK_SHIFT(004): シフトキー)
 				const	MgPoint2	&pth			// (I  ) 方向点
@@ -62,21 +63,21 @@ MINT mtHaitiIn::RoofPlc(									// (  O) ステイタス	0: 正常、-1: 屋根配置エラー
 
 	RoofEn.InitAllAtr();
 
-	RoofEn.m_iKai = mtInpMode::GetKai();
+	RoofEn.SetKai( z_mn.GetKai());
 	RoofEn.SetAttr();
 	RoofEn.SetJimCd( pgJim, GifInp, pth);
 	RoofEn.CreateRfmForJim();
 	ist1 = RoofEn.AdjustRfm1();
 	if ( ist1 < 0)
 		MQUIT;
-//								RoofEn.Print( Mstr( "1112 mtHaitiIn::RoofPlc"));
+//								RoofEn.Print( Mstr( "1112 mhHaitiIn::RoofPlc"));
 	RoofEn.ConnectRfm();
-//								RoofEn.Print( Mstr( "1113 mtHaitiIn::RoofPlc"));
+//								RoofEn.Print( Mstr( "1113 mhHaitiIn::RoofPlc"));
 	RoofEn.OffsetRfm();
 	ist1 = RoofEn.AdjustRfm2();
 	if ( ist1 < 0)
 		MQUIT;
-//								RoofEn.Print( Mstr( "1114 mtHaitiIn::RoofPlc"));
+//								RoofEn.Print( Mstr( "1114 mhHaitiIn::RoofPlc"));
 	RoofEn.CreateRfmZukei();
 
 	HaitiDb::MdRoofAdd( &RoofEn, 1);
@@ -142,7 +143,7 @@ static MPOSITION	z_RoofPos;
 /////////////////////////////////////////////////////////////////////////////
 //	屋根面を検索する
 //	返値 =NULL: 該当屋根面なし !=NULL: 該当屋根面数
-MhRfm*	mtHaitiIn::SrchRfm(									// (  O) 屋根面　または　NULL
+MhRfm*	mhHaitiIn::SrchRfm(									// (  O) 屋根面　または　NULL
 						MINT		imode,			// 検索モード　指示点に該当する屋根面が複数ある場合の優先選択条件
 													//				MC_PRI_MIN_AREA(0):	 面積が小を優先
 													//				MC_PRI_MIN_HIGHT(1): 高さが小を優先
@@ -163,7 +164,7 @@ MhRfm*	mtHaitiIn::SrchRfm(									// (  O) 屋根面　または　NULL
 	MhRfm		*pRfm = 0;
 	MREAL		rHight;
 
-	MINT	iKaiC = mtInpMode::GetKai();								// 現在の階
+	MINT	iKaiC = z_mn.GetKai();								// 現在の階
 
 	MREAL	rMinArea = MREALMAX;
 	MREAL	rMinHight = MREALMAX;

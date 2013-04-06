@@ -19,7 +19,7 @@
 #include "MmGridNum.h"
 #include "MmDrag.h"
 #include "MmWnd.h"
-#include "MmDefine.h"
+#include "MhDefParts.h"
 #include "MmLib.h"
 #include "McSystemProperty.h"
 

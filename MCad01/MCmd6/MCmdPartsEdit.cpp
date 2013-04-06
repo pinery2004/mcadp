@@ -1,7 +1,7 @@
 //==========================================================================================
 //  Copyright (C) 2006-2008. K.Matsu. All rights reserved.
 //
-//  MODULE: MmPtsEdit.cpp
+//  MODULE: MmPartsEdit.cpp
 //
 //		部品展開
 //
@@ -16,17 +16,17 @@
 #include "MmWnd.h"
 #include "MmCmdMsg.h"
 
-#include "MmDialogPtsEdit.h"
+#include "MmDialogPartsEdit.h"
 
 namespace MC
 {
 
-static	CMmDialogPtsEdit* z_pDlgPtsEdit = NULL;	// モードレスバージョンダイアログの表示用
+static	CMmDialogPartsEdit* z_pDlgPartsEdit = NULL;	// モードレスバージョンダイアログの表示用
 
 /////////////////////////////////////////////////////////////////////////////
 //	部品展開
 
-void MCmdPtsEdit()
+void MCmdPartsEdit()
 {
 	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();
@@ -36,23 +36,23 @@ void MCmdPtsEdit()
 
 /////////////////////////////////////////////////////////////////////////////
 //	部品展開設定入力
-void MCmdPtsEditInp(
+void MCmdPartsEditInp(
 						CWnd*		pWnd			// (I  ) ウィンドウのインスタンス
 				)
 {
-	if (z_pDlgPtsEdit == NULL) {
-		z_pDlgPtsEdit = new CMmDialogPtsEdit( pWnd);
-		z_pDlgPtsEdit->Create( pWnd);
+	if (z_pDlgPartsEdit == NULL) {
+		z_pDlgPartsEdit = new CMmDialogPartsEdit( pWnd);
+		z_pDlgPartsEdit->Create( pWnd);
 	} else {
-		z_pDlgPtsEdit->BringWindowToTop();
+		z_pDlgPartsEdit->BringWindowToTop();
 	}
 }
 
 /////////////////////////////////////////////////////////////////////////////
 //	部品展開設定終了
-void MCmdPtsEditEnd()
+void MCmdPartsEditEnd()
 {
-	z_pDlgPtsEdit = NULL;
+	z_pDlgPartsEdit = NULL;
 }
 
 } // namespace MC

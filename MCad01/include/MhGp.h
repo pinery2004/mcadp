@@ -7,7 +7,7 @@
 //		構成レコード
 //
 //
-//  K.Matsu           08/01/04    Created.
+//  K.Matsu           13/04/03    Created.
 //==========================================================================================
 
 // 構成( 屋根、小屋、天井、耐力壁、壁、床、基礎)
@@ -17,10 +17,10 @@
 namespace MC
 {
 
-class	MhGp									// 構成レコード
+class	mhGp									// 構成レコード
 {
 	friend	class	mhPlcInfo;
-	friend	class	mhTpPts;
+	friend	class	mhPartsTp;
 
 	MINT	m_iCdGp;							// 構成(組)コード
 	MCHAR	m_sNmGp[MHKSSZ_NMKOSEI + 1];		// 構成(組)名

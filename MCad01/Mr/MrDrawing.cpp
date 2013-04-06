@@ -18,7 +18,7 @@
 #include "MmDrag.h"
 #define DLL_EXPORT_MC_WINDOWCTRL_DO
 #include "MmWnd.h"
-#include "MmDefine.h"
+#include "MhDefParts.h"
 #include "MmLib.h"
 
 #ifdef _DEBUG
@@ -63,11 +63,11 @@ void WindowCtrl::MmDrawStructure(
 
 	// ÇcÇbÇ…ï\é¶
 	WindowCtrl::MmWndKDrawGrid( pWndInfo, pCod);
-	MINT iKaiC = mtInpMode::GetKai();									// åªç›ÇÃäK
-	MINT iGpC = mtInpMode::GetKGp();							// åªç›ÇÃç\ê¨
+	MINT iKaiC = z_mn.GetKai();									// åªç›ÇÃäK
+	MINT iGpC = z_mn.GetKCdGp();							// åªç›ÇÃç\ê¨
 	WindowCtrl::MmWndKDrawKabe( pCod, iKaiC, iGpC);
 	WindowCtrl::MmWndKDrawKiso( pCod, iKaiC, iGpC);
-	WindowCtrl::MmWndKDrawPts( pCod, iKaiC, iGpC);
+	WindowCtrl::MmWndKDrawParts( pCod, iKaiC, iGpC);
 	WindowCtrl::MmWndKDrawRoof( pCod, iKaiC, iGpC);
 //	WindowCtrl::MmWndKDrawTemp( pWndInfo, pCod);
 

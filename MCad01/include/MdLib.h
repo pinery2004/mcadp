@@ -31,7 +31,7 @@ class DLL_EXPORT HaitiDb
 public:
 /////////////////////////////////////////////////////////////////////////////
 //	ＤＢをイニシャライズする
-static void MdPtsDbInit( void);
+static void MdPartsDbInit( void);
 
 /////////////////////////////////////////////////////////////////////////////
 //	エンティティとPOSITIONのポインタの差を求める
@@ -40,14 +40,14 @@ static MINT MdGetSizeOfHd();
 
 /////////////////////////////////////////////////////////////////////////////
 //	部品を削除する
-static void MdPtsDelete(
+static void MdPartsDelete(
 						MPOSITION	i_pPosition		// (I  ) 部品レコード位置（ノード位置）
 				);
 
 /////////////////////////////////////////////////////////////////////////////
 //	部品を追加する
 //	レコードの属性領域は追加したレコードに引渡し、引数のレコードはイニシャライズする。
-static MPOSITION MdPtsAdd(
+static MPOSITION MdPartsAdd(
 						mhPlcInfo*	i_pPlcEn,		// (I  ) 部品レコード
 						MINT		i_fdispCtrl		// (I  ) 表示制御フラグ
 													//		 0: ＯＰＴ群ｾｯﾄ・展開ｺｰﾄﾞ・履歴管理ｺｰﾄﾞを追加しない
@@ -56,7 +56,7 @@ static MPOSITION MdPtsAdd(
 
 /////////////////////////////////////////////////////////////////////////////
 //	部品配置を修正する
-static void MdPtsModify(
+static void MdPartsModify(
 						mhPlcInfo* io_pPlcEnR,		// 修正元部材
 						mhPlcInfo* *o_ppPlcEnM		// 修正先部材
 				);
@@ -79,7 +79,7 @@ static MPOSITION MdRoofAdd(
 
 //////////////////////////////////////////////////////////////
 //	指定ノードの部品を得る
-static mhPlcInfo* MdPtsGet(							// (  O) 部品レコード
+static mhPlcInfo* MdPartsGet(							// (  O) 部品レコード
 						MPOSITION	i_pPosition		// (I  ) 部品レコード位置（ノード位置）
 				);
 
@@ -87,34 +87,34 @@ static mhPlcInfo* MdPtsGet(							// (  O) 部品レコード
 //	先頭の部品を得る
 //	返値 =NULL: レコードなし !=NULL: 読み込み部品位置
 
-static mhPlcInfo* MdGetHeadPts(
-						MPOSITION*	o_pPtsPos = NULL	// (  O) 部品レコード位置（ノード位置）
+static mhPlcInfo* MdGetHeadParts(
+						MPOSITION*	o_pPartsPos = NULL	// (  O) 部品レコード位置（ノード位置）
 				);
 
 /////////////////////////////////////////////////////////////////////////////
 //	次の部品を得る
 //	返値 =NULL: レコードなし !=NULL: 読み込み部品位置
 
-static mhPlcInfo* MdGetNextPts(
-						MPOSITION*	io_pPtsPos = NULL	// (I O) 部品レコード位置（ノード位置）
+static mhPlcInfo* MdGetNextParts(
+						MPOSITION*	io_pPartsPos = NULL	// (I O) 部品レコード位置（ノード位置）
 				);
 
 /////////////////////////////////////////////////////////////////////////////
 //	家モデルＤ／Ｂの部品の有無を調べる
 
-static bool MdIsNotEmptyPts();							// true: 部品有り/ false: 部品無し
+static bool MdIsNotEmptyParts();							// true: 部品有り/ false: 部品無し
 
 /////////////////////////////////////////////////////////////////////////////
 //	家モデルＤ／Ｂの最後に部品を追加する
 
-static mhPlcInfo* MdInjectPts(
+static mhPlcInfo* MdInjectParts(
 						mhPlcInfo*	i_pPlcEn	// (I  ) 部品レコード
 				);
 
 /////////////////////////////////////////////////////////////////////////////
 //	家モデルＤ／Ｂの最後の部品を得る
 
-static void MdEjectPts(
+static void MdEjectParts(
 						mhPlcInfo*	i_pPlcEn	// (  O) 部品レコード
 				);
 /*
@@ -199,19 +199,19 @@ static void MdEjectRoof(
 /////////////////////////////////////////////////////////////////////////////
 //	ＲＥＤＯ用保存領域の部品の有無を調べる
 
-static bool MdIsNotEmptyRedoPts();						// true: 部品有り/ false: 部品無し
+static bool MdIsNotEmptyRedoParts();						// true: 部品有り/ false: 部品無し
 
 /////////////////////////////////////////////////////////////////////////////
 //	ＲＥＤＯ用保存領域の先頭に部品を追加する
 
-static void MdPushRedoPts(
+static void MdPushRedoParts(
 						mhPlcInfo*	i_pRedoEn	// (I  ) 部品レコード
 				);
 
 /////////////////////////////////////////////////////////////////////////////
 //	ＲＥＤＯ用保存領域の先頭の部品を得る
 
-static void MdPopRedoPts(
+static void MdPopRedoParts(
 						mhPlcInfo*	o_pRedoEn	// (  O) 部品レコード
 				);
 

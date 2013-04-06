@@ -12,6 +12,7 @@
 
 #define DLL_EXPORT_MC_INPUT_DO
 #include "MrAPI.h"
+#include "MhInpAttr.h"
 
 namespace MC
 {
@@ -27,7 +28,7 @@ static void	MmPackAreaI(
 void MCmdRoof()
 {
 	MINT iMode;
-	iMode = mtInpMode::GetMode();
+	iMode = z_mn.GetMode();
 	if ( iMode == MP_MD_CREATE)
 		MCmdRoofAdd();
 	else if ( iMode == MP_MD_DELETE)
@@ -43,26 +44,30 @@ void MCmdRoofAdd()
 	MgGInt		GifInp(20);
 
 	Msg::ClearErrorMsg();
-	mtInpMode::SetKGp( MP_GP_YANE);
-	mtInpMode::SetKBr( MP_BR_OTHER);
-	mtInpAttr::InitComboAttr( MP_AT_YANE);								// 属性入力用コンボボックスを属性値入力無しにする
-	mtInpAttr::InitComboTpPtsAttr();
-	mtInpAttr::SetComboCdTpPts( Mstr( "屋根"));
-	mtInpAttr::InitComboPtsMbr();
-	mtInpAttr::SetComboCdMbr( Mstr( "204"));
+//S	z_mn.SetKCdGp( MP_GP_YANE);
+//	z_mn.SetKCdBr( MP_BR_OTHER);
+//	z_mn.InitComboAttr( MP_AT_YANE);								// 属性入力用コンボボックスを属性値入力無しにする
+//	z_mn.InitComboPartsTp();
+//	z_mn.SetComboCdPartsTp( Mstr( "屋根"));
+//	z_mn.InitComboPartsMbr();
+//	z_mn.SetComboCdMbr( Mstr( "204"));
+
+	ist1 = z_mn.SetRibbonBar( MP_GP_YANE, MP_BR_OTHER, Mstr( "屋根"), Mstr( "204"));
 
 	WindowCtrl::MmWndKReDraw();
 
 	Msg::OperationMsg( MC_OPRT_ROOF);								// ステイタスバーの操作表示部へ"屋根入力"を表示
 
-	mhTpPts* pTpPts	= BuzaiCode::MhGetpTpPts( mtInpAttr::GetCurIdTpPts());
-	mtInpMode::SetComboInpKb( pTpPts->GetPTInpKb());
-	mtInpMode::SetComboCdMarume( pTpPts->GetPTCdMarume());
+	mhPartsTp* pPartsTp	= BuzaiCode::MhGetpPartsTp( z_mn.GetCurIdPartsTp());
+//E	z_mn.SetComboCdInpKb( pPartsTp->GetPTCdInpKb());
+	z_mn.RibbonIO( MSET_INPUT_KUBUN_CD, pPartsTp->GetPTCdInpKb());	// 入力点区分選択用のコンボボックスに表示する
+//E	z_mn.SetComboCdMarume( pPartsTp->GetPTCdMarume());
+	z_mn.RibbonIO( MSET_INPUT_MARUME_CD, pPartsTp->GetPTCdMarume());	// 丸めコードを選択用のコンボボックスに表示する
 
 	MFOREVER {
 		pgJim.m_n = 0;
 		GifInp.m_n = 0;
-		ist1 = mtInput::GetAreaI( &pgJim, &GifInp);
+		ist1 = mhInput::GetAreaI( &pgJim, &GifInp);
 
 		if ( ist1 == MTRT_SYSTEMSTOP || ist1 == MTRT_CAN)
 			break;
@@ -72,7 +77,7 @@ void MCmdRoofAdd()
 
 		HaitiCmd::MmPresetCmd();
 
-		ist1 = mtHaitiIn::RoofPlc( pgJim, GifInp, pth);
+		ist1 = mhHaitiIn::RoofPlc( pgJim, GifInp, pth);
 
 		WindowCtrl::MmWndKReDraw();
 		Msg::ClearErrorMsg();

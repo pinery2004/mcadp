@@ -14,11 +14,11 @@ namespace MC
 
 
 //	ïîçﬁÉLÉÖÅ[
-class MdPtsQueue : public MbListE
+class MdPartsQueue : public MbListE
 {
 public:
-	MdPtsQueue(  MINT nBk, MINT iSz);
-	virtual ~MdPtsQueue( void);
+	MdPartsQueue(  MINT nBk, MINT iSz);
+	virtual ~MdPartsQueue( void);
 
 	MPOSITION Push( mhPlcInfo *pPlcEn);
 	MPOSITION Inject( mhPlcInfo *pPlcEn);

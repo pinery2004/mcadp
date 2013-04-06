@@ -55,14 +55,13 @@ BEGIN_MESSAGE_MAP(CMCadView2, CView)
 	ON_WM_RBUTTONDOWN()
 	ON_WM_MBUTTONDOWN()
 	ON_WM_MBUTTONUP()
+	ON_WM_CLOSE()
 END_MESSAGE_MAP()
 
 // CMCadView2 ƒRƒ“ƒXƒgƒ‰ƒNƒVƒ‡ƒ“/ƒfƒXƒgƒ‰ƒNƒVƒ‡ƒ“
 
 CMCadView2::CMCadView2()
 {
-	// TODO: \’zƒR[ƒh‚ð‚±‚±‚É’Ç‰Á‚µ‚Ü‚·B
-
 }
 
 CMCadView2::~CMCadView2()
@@ -87,7 +86,6 @@ BOOL CMCadView2::PreCreateWindow(CREATESTRUCT& cs)
 	_ASSERTE( ist == 0);														// ƒEƒBƒ“ƒhƒEŠÇ—
 
 //E	return TRUE;
-
 	return CView::PreCreateWindow(cs);
 }
 
@@ -150,67 +148,6 @@ int CMCadView2::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	return 0;
 }
 
-
-
-// CMCadView2 •`‰æ
-
-void CMCadView2::OnDraw(CDC* /*pDC*/)
-{
-	CMCadDoc* pDoc = GetDocument();
-	ASSERT_VALID(pDoc);
-	if (!pDoc)
-		return;
-
-	// TODO: ‚±‚ÌêŠ‚ÉƒlƒCƒeƒBƒu ƒf[ƒ^—p‚Ì•`‰æƒR[ƒh‚ð’Ç‰Á‚µ‚Ü‚·B
-}
-
-
-// CMCadView2 ˆóü
-
-
-void CMCadView2::OnFilePrintPreview()
-{
-#ifndef SHARED_HANDLERS
-	AFXPrintPreview(this);
-#endif
-}
-
-BOOL CMCadView2::OnPreparePrinting(CPrintInfo* pInfo)
-{
-	// Šù’è‚Ìˆóü€”õ
-	return DoPreparePrinting(pInfo);
-}
-
-void CMCadView2::OnBeginPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
-{
-	// TODO: ˆóü‘O‚Ì“Á•Ê‚È‰Šú‰»ˆ—‚ð’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢B
-}
-
-void CMCadView2::OnEndPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
-{
-	// TODO: ˆóüŒã‚ÌŒãˆ—‚ð’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢B
-}
-
-void CMCadView2::OnRButtonUp(UINT nFlags, CPoint point)
-{
-//E	ClientToScreen(&point);
-//E	OnContextMenu(this, point);
-
-	ReleaseCapture();
-
-	CWnd::OnRButtonUp(nFlags, point);
-
-}
-
-void CMCadView2::OnContextMenu(CWnd* /* pWnd */, CPoint point)
-{
-#ifndef SHARED_HANDLERS
-	g_theApp.GetContextMenuManager()->ShowPopupMenu(IDR_POPUP_EDIT, point.x, point.y, this, TRUE);
-#endif
-}
-
-
-
 void CMCadView2::OnDestroy()
 {
 	CView::OnDestroy();
@@ -263,7 +200,7 @@ void CMCadView2::OnMouseMove(UINT nFlags, CPoint point)
 	CPoint	iSzWin;												// ƒEƒBƒ“ƒhƒE‚Ì•‚Æ‚‚³
 	MC::MgVect3	PtD( 0., 0., 0.);
 	MC::MgVect3	RtD( 0., 0., 0.);
-	MREAL	SclD;
+	MREAL	SclD = 0.;
 
 	if (!(nFlags & MK_LBUTTON) && !( nFlags & MK_RBUTTON))
 		MQUIT;													// ƒ}ƒEƒX‚Ì¶‚Ü‚½‚Í‰Eƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ä‚¢‚È‚¢ê‡‚Í–³Ž‹
@@ -326,6 +263,16 @@ void CMCadView2::OnRButtonDown(UINT nFlags, CPoint point)
 	CView::OnRButtonDown(nFlags, point);
 }
 
+void CMCadView2::OnRButtonUp(UINT nFlags, CPoint point)
+{
+//E	ClientToScreen(&point);
+//E	OnContextMenu(this, point);
+
+	ReleaseCapture();
+
+	CWnd::OnRButtonUp(nFlags, point);
+
+}
 
 void CMCadView2::OnMButtonDown(UINT nFlags, CPoint point)
 {
@@ -365,3 +312,55 @@ CMCadDoc* CMCadView2::GetDocument() const // ƒfƒoƒbƒOˆÈŠO‚Ìƒo[ƒWƒ‡ƒ“‚ÍƒCƒ“ƒ‰ƒCƒ
 
 
 // CMCadView2 ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰[
+
+void CMCadView2::OnClose()
+{
+	// TODO: ‚±‚±‚ÉƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰[ ƒR[ƒh‚ð’Ç‰Á‚·‚é‚©AŠù’è‚Ìˆ—‚ðŒÄ‚Ño‚µ‚Ü‚·B
+
+	CView::OnClose();
+}
+
+// CMCadView2 •`‰æ
+
+void CMCadView2::OnDraw(CDC* /*pDC*/)
+{
+	CMCadDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+	if (!pDoc)
+		return;
+
+	// TODO: ‚±‚ÌêŠ‚ÉƒlƒCƒeƒBƒu ƒf[ƒ^—p‚Ì•`‰æƒR[ƒh‚ð’Ç‰Á‚µ‚Ü‚·B
+}
+
+// CMCadView2 ˆóü
+
+void CMCadView2::OnFilePrintPreview()
+{
+#ifndef SHARED_HANDLERS
+	AFXPrintPreview(this);
+#endif
+}
+
+BOOL CMCadView2::OnPreparePrinting(CPrintInfo* pInfo)
+{
+	// Šù’è‚Ìˆóü€”õ
+	return DoPreparePrinting(pInfo);
+}
+
+void CMCadView2::OnBeginPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
+{
+	// TODO: ˆóü‘O‚Ì“Á•Ê‚È‰Šú‰»ˆ—‚ð’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢B
+}
+
+void CMCadView2::OnEndPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
+{
+	// TODO: ˆóüŒã‚ÌŒãˆ—‚ð’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢B
+}
+
+void CMCadView2::OnContextMenu(CWnd* /* pWnd */, CPoint point)
+{
+#ifndef SHARED_HANDLERS
+	g_theApp.GetContextMenuManager()->ShowPopupMenu(IDR_POPUP_EDIT, point.x, point.y, this, TRUE);
+#endif
+}
+

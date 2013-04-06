@@ -17,7 +17,7 @@
 #include "MmGridNum.h"
 #include "MmDrag.h"
 #include "MmWnd.h"
-#include "MmDefine.h"
+#include "MhDefParts.h"
 #include "MmLib.h"
 #include "McSystemProperty.h"
 
@@ -33,6 +33,7 @@
 #include "MhPlcInfo.h"
 
 #include "MmPrompt.h"
+#include "MhInpAttr.h"
 
 #define		MAXHAIKABE		500									// 配列制限値
 #define		MC_KABE_TOL		44.5								// 壁判定トレランス
@@ -43,7 +44,7 @@ namespace MC
 /////////////////////////////////////////////////////////////////////////////
 //	壁芯丸め線を取得する
 //
-void mtInput::GetMarumeKabeLine(
+void mhInput::GetMarumeKabeLine(
 						MINT		iKai,			// 検索階
 				const	MgPoint2	&Pi,			// 入力座標
 						MgGLine2	*pGLn			// 対象壁芯
@@ -57,14 +58,14 @@ void mtInput::GetMarumeKabeLine(
 	MINT		ic2;
 	MgLine2		ln1;
 
-	iCdMarume = mtInpMode::GetComboCdMarume();
+	iCdMarume = z_mn.GetComboCdMarume();
 	if ( iCdMarume == 0)
 		rTol = MC_KABE_TOL;
 	else
 //		rTol = g_SysProp.Real[MM_REAL_PITCH] / iCdMarume;
 		rTol = mcs::GetReal( MM_REAL_PITCH) / iCdMarume;
 
-	nHaiKabe = mtHaitiIn::GetPts( iKai, MP_GP_TAIRYOKU, Mstr( "壁"), NULL, MAXHAIKABE, pHaiKabe);
+	nHaiKabe = mhHaitiIn::GetParts( iKai, MP_GP_TAIRYOKU, Mstr( "壁"), NULL, MAXHAIKABE, pHaiKabe);
 																				// 家モデルよりカレント階の全ての壁を取得
 	pGLn->m_n = 0;
 	for ( ic2=0; ic2<nHaiKabe; ic2++) {											// 壁

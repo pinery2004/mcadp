@@ -31,7 +31,7 @@ MdModel::MdModel( void)
 	m_BriBf.Alloc( 20);
 	m_LyrBf.Alloc( 50);
 	m_EntBf.Alloc( 500);
-	m_PtsBf.Alloc( 50);
+	m_PartsBf.Alloc( 50);
 	m_WinBf.Alloc( 10);
 
 	m_MBaseTrans.SetUnit();
@@ -48,7 +48,7 @@ MdModel::~MdModel( void)
 	m_BriBf.Free();
 	m_LyrBf.Free();
 	m_EntBf.Free();
-	m_PtsBf.Free();
+	m_PartsBf.Free();
 	m_WinBf.Free();
 
 	//MBFREE( m_idGrp);

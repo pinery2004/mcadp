@@ -286,7 +286,7 @@ void Test006_DBModule()
 	iSt = mdmDEnt::CreateEnt( idLyr[1], &idEnt[12], isz);
 	pIeModel->Print( Mstr( "●家モデル　エンティティ１３"));
 	iSt = mdmDEnt::CreateEnt( idLyr[1], &idEnt[13], isz);
-	pIeModel->Print( Mstr( "●家モデル　エンティティ１３"));
+	pIeModel->Print( Mstr( "●家モデル　エンティティ１４"));
 
 	iSt = mdmDEnt::DeleteEnt( idEnt[1]);
 	pIeModel->Print( Mstr( "●家モデル　ＤＥＬエンティティ２"));
@@ -416,7 +416,7 @@ void Test006_DBModule()
 //				  100., 200., 300., 1.);
 	MgMat3E mat3( 1., 0., 0.,
 				  0., 1., 0.,
-				  0., 1., 1.,
+				  0., 0., 1.,
 				  100., 200., 300.);
 	stFig13.zTextureCoordinate( 0, 1, &MgVect2( 1., 0.), &mat3);// 配置マトリックス
 	stFig13.zTextureParam( 1, 1, 2, 3, 4,						// 拡大／縮小フィルタ

@@ -133,9 +133,6 @@ MmWndInfo::MmWndInfo(
 
 MmWndInfo::~MmWndInfo      ()
 {
-//	DeleteWnd();
-//	MBDELETE( m_pMemBmp);
-//	MBDELETE( m_pMemDC);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -403,8 +400,6 @@ MmWndInfo* WindowCtrl::MmWndKGetCurWnd()						// (  O) ステイタス  NULL : エラー
 	pChildFrm = pMainFrm->m_pCurFrame;
 
 	pWndInfo = MmWndKFindFrm( pChildFrm);
-
-//exit:
 
 	return( pWndInfo);
 }

@@ -23,6 +23,7 @@
 
 #include "MmLib.h"
 #include "MhRoof.h"
+#include "MhInpAttr.h"
 
 #define	 	MCMAXIESIZE		50000.								// ‰®ª–ÊÅ‘å‰œs‚«50m
 #define		MCMINKSSIZE		1.
@@ -177,14 +178,14 @@ void MhRoofInfo::SetAttr()
 	MREAL	rNokinoDe;
 	MREAL	rKerabeDa;
 
-	ist = mtInpAttr::GetComboAttrI( MC_CMB_KOBY, &iKobai);
+	ist = z_mn.GetComboAttrI( MC_CMB_KOBY, &iKobai);
 	m_rKb = MREAL( iKobai);
 
-	ist = mtInpAttr::GetComboAttrR( MC_CMB_NKDE, &rNokinoDe);
+	ist = z_mn.GetComboAttrR( MC_CMB_NKDE, &rNokinoDe);
 	m_rNkD[0] = m_rNkD[1] = rNokinoDe;							// Œ¬‚Ìo
 	McRfmOffset[MHRL_NOKI] = rNokinoDe;
 
-	ist = mtInpAttr::GetComboAttrR( MC_CMB_KRDE, &rKerabeDa);
+	ist = z_mn.GetComboAttrR( MC_CMB_KRDE, &rKerabeDa);
 	m_rKrD[0] = m_rKrD[1] = rKerabeDa;							// ‚¯‚ç‚Î‚Ìo
 	McRfmOffset[MHRL_KERABA] = rKerabeDa;
 }
@@ -471,8 +472,8 @@ MINT MhRoofInfo::AdjustRfm2()						// (  O) ƒXƒeƒCƒ^ƒX@0: ³í@-1: ‰®ª–ÊŒ`ó
 	MhRfm		Rfm;
 
 	//@‰Æƒ‚ƒfƒ‹‚æ‚èƒJƒŒƒ“ƒgŠK‚ÌãŠK‚Ì‘S‚Ä‚Ì•Ç‚ğæ“¾‚·‚é
-	MINT iKai = mtInpMode::GetKai() + 1;
-	nHaiKabe = mtHaitiIn::GetPts( iKai, MP_GP_TAIRYOKU, NULL, Mstr( "ŠO•Ç"), MAXHAIKABE, pHaiKabe, pPlcPos);
+	MINT iKai = z_mn.GetKai() + 1;
+	nHaiKabe = mhHaitiIn::GetParts( iKai, MP_GP_TAIRYOKU, NULL, Mstr( "ŠO•Ç"), MAXHAIKABE, pHaiKabe, pPlcPos);
 																// ‰Æƒ‚ƒfƒ‹‚æ‚èƒJƒŒƒ“ƒgŠK‚ÌãŠK‚Ì‘S‚Ä‚Ì•Ç‚ğæ“¾‚·‚é
 	if ( nHaiKabe <= 0)
 		return ist;												//		ãŠKŠO•Ç‚È‚µ

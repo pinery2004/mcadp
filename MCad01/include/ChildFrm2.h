@@ -19,6 +19,7 @@ class CChildFrame2 : public CMDIChildWndEx
 	DECLARE_DYNCREATE(CChildFrame2)
 public:
 	CChildFrame2();
+	virtual ~CChildFrame2();
 
 // 属性
 public:
@@ -32,8 +33,7 @@ public:
 // 実装
 public:
 	// フレームのクライアント領域用のビュー
-	CMCadView2* m_pwndView;
-	virtual ~CChildFrame2();
+//E	CMCadView2 m_wndView2;
 #ifdef _DEBUG
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext& dc) const;
@@ -50,4 +50,5 @@ public:
 	virtual BOOL Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD dwStyle = WS_CHILD | WS_VISIBLE | WS_OVERLAPPEDWINDOW, const RECT& rect = rectDefault, CMDIFrameWnd* pParentWnd = NULL, CCreateContext* pContext = NULL);
 	afx_msg void OnClose();
 	afx_msg void OnSetFocus(CWnd* pOldWnd);
+	afx_msg void OnFileClose();
 };

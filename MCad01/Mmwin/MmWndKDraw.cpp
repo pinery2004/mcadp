@@ -18,7 +18,7 @@
 #include "MmDrag.h"
 #define DLL_EXPORT_MC_WINDOWCTRL_DO
 #include "MmWnd.h"
-#include "MmDefine.h"
+#include "MhDefParts.h"
 #include "MmLib.h"
 
 #include "resource.h"
@@ -126,11 +126,11 @@ void WindowCtrl::MmWndKDrawMDC(								// ステイタス　0:正常  1:エラー
 
 	//	メモリーＤＣに表示
 	WindowCtrl::MmWndKDrawGrid( i_pWndInfo, pCod);
-	MINT iKaiC = mtInpMode::GetKai();									// 現在の階
-	MINT iGpC = mtInpMode::GetKGp();									// 現在の構成
+	MINT iKaiC = z_mn.GetKai();									// 現在の階
+	MINT iGpC = z_mn.GetKCdGp();									// 現在の構成
 	WindowCtrl::MmWndKDrawKabe( pCod, iKaiC, iGpC);
 	WindowCtrl::MmWndKDrawKiso( pCod, iKaiC, iGpC);
-	WindowCtrl::MmWndKDrawPts( pCod, iKaiC, iGpC);
+	WindowCtrl::MmWndKDrawParts( pCod, iKaiC, iGpC);
 	WindowCtrl::MmWndKDrawRoof( pCod, iKaiC, iGpC);
 	WindowCtrl::MmWndKDrawTemp( i_pWndInfo, pCod);
 

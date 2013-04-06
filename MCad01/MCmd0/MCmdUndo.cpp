@@ -25,7 +25,7 @@ void MCmdUndo()
 
 	WindowCtrl::MmWndKReDraw();
 
-//	ist1 = mtInpAttr::SetDialogBar( MP_GP_YUKA, MP_BR_BUZAI, Mstr( "è∞ç™ëæ"), Mstr( "210"));
+//	ist1 = z_mn.SetRibbonBar( MP_GP_YUKA, MP_BR_BUZAI, Mstr( "è∞ç™ëæ"), Mstr( "210"));
 //	if ( ist1 == 0)
 		MCmdLine();
 }

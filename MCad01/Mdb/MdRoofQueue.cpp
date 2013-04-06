@@ -24,7 +24,7 @@
 #define DLL_EXPORT_HAITIDB_DO
 #include "MdLib.h"
 
-#include "MmDefine.h"
+#include "MhDefParts.h"
 #include "MsBitSet.h"
 #include "MdOpt.h"
 #include "MdHist.h"

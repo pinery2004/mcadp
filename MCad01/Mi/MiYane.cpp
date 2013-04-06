@@ -17,7 +17,7 @@
 #include "MmGridNum.h"
 #include "MmDrag.h"
 #include "MmWnd.h"
-#include "MmDefine.h"
+#include "MhDefParts.h"
 #include "MmLib.h"
 #include "McSystemProperty.h"
 
@@ -41,6 +41,7 @@
 #include "MmValid.h"
 
 #include "MmPrompt.h"
+#include "MhInpAttr.h"
 
 
 namespace MC
@@ -49,7 +50,7 @@ namespace MC
 /////////////////////////////////////////////////////////////////////////////
 //	‰®ª\¬üŠÛ‚ßü‚ğæ“¾‚·‚é
 //
-void mtInput::MmGetMarumeYaneLine(
+void mhInput::MmGetMarumeYaneLine(
 						MINT		iKai,			// ŒŸõŠK
 				const	MgPoint2	&Pi,			// “ü—ÍÀ•W
 						MgGLine2	*pGLn			// ‘ÎÛ‰®ª\¬ü
@@ -63,7 +64,7 @@ void mtInput::MmGetMarumeYaneLine(
 	MgPoint3	Py1;
 	MgLine2		Ln1;
 
-	iCdMarume = mtInpMode::GetComboCdMarume();
+	iCdMarume = z_mn.GetComboCdMarume();
 	if ( iCdMarume == 0)
 		rTol = MC_MARUME_TOL;
 	else

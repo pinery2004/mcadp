@@ -398,7 +398,7 @@ public:
 	/////////////////////////////////////////////////////////////////////////////
 	//	配置部品を表示する
 
-	static void MmWndKDrawPts(
+	static void MmWndKDrawParts(
 							msCod*		pCod,			// 座標系
 							MINT		iKaiC,			// 階  	(1,2,3)
 							MINT		iGpC			// 構成

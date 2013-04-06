@@ -14,12 +14,13 @@
 
 #define DLL_EXPORT_IEMODEL_DO
 #include "MhLib.h"
-#include "MmDefine.h"
+#include "MhDefParts.h"
 #include "MmLib.h"
 #include "MdLib.h"
 #include "MdList.h"
 #include "MsBitSet.h"
 #include "MhPlcInfo.h"
+#include "MhInpAttr.h"
 
 #define		MAXHAIKISO		500									// 配列制限値
 #define		EXPKISOLN		1000								// 基礎線算出用の仮延長量
@@ -72,8 +73,8 @@ void IeModel::MhNormKiso(
 	if ( !z_fUpdateKiso) MQUIT;
 
 	//　家モデルよりカレント階の全ての基礎を取得する
-	MINT iKai = mtInpMode::GetKai();
-	nHaiKisoI = mtHaitiIn::GetPts( iKai, MP_GP_KISO, Mstr( "基礎"), NULL, MAXHAIKISO, pHaiKiso, pPlcPos);
+	MINT iKai = z_mn.GetKai();
+	nHaiKisoI = mhHaitiIn::GetParts( iKai, MP_GP_KISO, Mstr( "基礎"), NULL, MAXHAIKISO, pHaiKiso, pPlcPos);
 																					// 家モデルよりカレント階の全ての基礎を取得する
 		ASSERT( nHaiKisoI >= 0);													//		基礎数オーバーフロー　<ERROR>
 	nHaiKiso = nHaiKisoI;
@@ -148,14 +149,14 @@ void IeModel::MhNormKiso(
 				nHaiKiso++;
 
 				HaiKisoI.m_lnPlc.p[0] = po;										//		追加基礎は交差点から終点まで残す
-				pPlcPos[nHaiKiso] = HaitiDb::MdPtsAdd( &HaiKisoI, 1);						//		分割による基礎を追加
-				pHaiKiso[nHaiKiso] = (mhPlcInfo*)HaitiDb::MdPtsGet( pPlcPos[nHaiKiso]);
+				pPlcPos[nHaiKiso] = HaitiDb::MdPartsAdd( &HaiKisoI, 1);						//		分割による基礎を追加
+				pHaiKiso[nHaiKiso] = (mhPlcInfo*)HaitiDb::MdPartsGet( pPlcPos[nHaiKiso]);
 				fPlc[nHaiKiso] = 0;
 				nHaiKiso++;
 				break;
 
 			} else if ( idivdel == 2) {												// 削除
-				HaitiDb::MdPtsDelete( pPlcPos[ic1]);										//		基礎1を削除
+				HaitiDb::MdPartsDelete( pPlcPos[ic1]);										//		基礎1を削除
 				fPlc[ic1] = -1;
 				break;
 			}
@@ -226,13 +227,13 @@ void IeModel::MhNormKiso(
 		}
 		if ( iPlcCn[0] >= 0) {
 			pHaiKiso[ic1]->m_lnPlc.p[0] = lnKiso1.p[0];							// 基礎１を延長
-			HaitiDb::MdPtsDelete( pPlcPos[iPlcCn[0]]);									// 始点側単一連結基礎を削除
+			HaitiDb::MdPartsDelete( pPlcPos[iPlcCn[0]]);									// 始点側単一連結基礎を削除
 			fPlc[iPlcCn[0]] = -1;
 			fModify = true;
 		}
 		if ( iPlcCn[1] >= 0) {
 			pHaiKiso[ic1]->m_lnPlc.p[1] = lnKiso1.p[1];							// 基礎１を延長
-			HaitiDb::MdPtsDelete( pPlcPos[iPlcCn[1]]);									// 終点側単一連結基礎を削除
+			HaitiDb::MdPartsDelete( pPlcPos[iPlcCn[1]]);									// 終点側単一連結基礎を削除
 			fPlc[iPlcCn[1]] = -1;
 			fModify = true;
 		}

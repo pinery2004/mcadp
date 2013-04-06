@@ -2,5 +2,5 @@
 
 #include "MmSystem.h"
 #include "MmWindow.h"
-#include "MtInpAttr.h"
+#include "MnInpAttr.h"
 

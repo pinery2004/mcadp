@@ -17,7 +17,7 @@
 #include "MmGridNum.h"
 #include "MmDrag.h"
 #include "MmWnd.h"
-#include "MmDefine.h"
+#include "MhDefParts.h"
 #include "MmLib.h"
 #include "McSystemProperty.h"
 
@@ -150,7 +150,7 @@ MINT MhHist::MmVerUp(
 	mhPlcInfo	*PlcEn;
 	MsBitSet*	pVer;
 
-	for ( PlcEn = HaitiDb::MdGetHeadPts( &pos1); PlcEn!=0; PlcEn = HaitiDb::MdGetNextPts( &pos1)) {
+	for ( PlcEn = HaitiDb::MdGetHeadParts( &pos1); PlcEn!=0; PlcEn = HaitiDb::MdGetNextParts( &pos1)) {
 		pVer = PlcEn->GetPIVer();
 		if ( pVer) {
 			if ( *pVer && z_Verv.vVerB) {

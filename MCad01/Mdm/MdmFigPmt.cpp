@@ -409,7 +409,14 @@ inline_nu void	MDPMT::zPovRay(
 				)
 { 
 	SetHd( MZAT_POVRAY, 0, MNWORD( i_sStr));
-	Mstrcpy_s( (MCHAR*)&m_dt[0], 256, i_sStr);
+
+#pragma warning(push)
+#pragma warning(disable:4996)
+
+	Mstrcpy( (MCHAR*)&m_dt[0], i_sStr);
+
+#pragma warning(pop)
+
 }
 
 inline_nu void	MDFIG::zPovRay(

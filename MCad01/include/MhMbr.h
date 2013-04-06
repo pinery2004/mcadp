@@ -22,7 +22,7 @@ class	MhMbr									// 寸法型式レコード
 {
 	friend	class	mhPlcInfo;
 
-	friend	void	MhLoadPtsMst();
+	friend	void	MhLoadPartsMst();
 
 //public:
 	MINT				m_iMbrId;							// 寸法型式ID

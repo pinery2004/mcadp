@@ -24,12 +24,12 @@
 #include "MfFile.h"
 #include "MmTenkai.h"
 
-#include "MhDefine.h"
+#include "MhDefDB.h"
 
 PZBUF*	____pzbuf;
 
-																				//void MdPtsDbInit();
-																				//void MdRedoPtsDbInit();
+																				//void MdPartsDbInit();
+																				//void MdRedoPartsDbInit();
 																				//void MdRoofDbInit();
 
 namespace MC
@@ -102,8 +102,10 @@ MINT MhRoofInfo::Load(							//
 	do {
 		iSize = i_phMdl->ReadItem( &iType, (void**)&pEnt);
 //===
+#if( TRACE_IO)
 		static	int iCyane = 0;
 		TRACE( "%d; iType=%d\n", ++iCyane, iType);
+#endif
 //---
 
 		if ( iSize <= 0)
@@ -230,8 +232,10 @@ MINT MhJim::Load(								//
 	do {
 		iSize = i_phMdl->ReadItem( &iType, (void**)&pEnt);
 //===
+#if( TRACE_IO)
 		static	int iCyane = 0;
 		TRACE( "%d; iType=%d\n", ++iCyane, iType);
+#endif
 //---
 
 		if ( iSize <= 0)
@@ -320,8 +324,10 @@ MINT MgKs1::Load(								//
 	do {
 		iSize = i_phMdl->ReadItem( &iType, (void**)&pEnt);
 //===
+#if( TRACE_IO)
 		static	int iCyane = 0;
 		TRACE( "%d; iType=%d\n", ++iCyane, iType);
+#endif
 //---
 
 		if ( iSize <= 0)
@@ -404,8 +410,10 @@ MINT MhRfm::Load(								//
 	do {
 		iSize = i_phMdl->ReadItem( &iType, (void**)&pEnt);
 //===
+#if( TRACE_IO)
 		static	int iCyane = 0;
 		TRACE( "%d; iType=%d\n", ++iCyane, iType);
+#endif
 //---
 
 		if ( iSize <= 0)

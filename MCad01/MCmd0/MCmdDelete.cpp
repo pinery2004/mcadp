@@ -24,10 +24,10 @@ void MCmdLineDelete()
 	MgPoint2		ptW[2];
 	MgLine2			Ln1;
 	MgPolyg2		pg1(20);
-	MINT			iIdTpPts, iIdTpPtsB;
+	MINT			iIdPartsTp, iIdPartsTpB;
 	MINT			iKaiC;
 	MINT			iGpC, iGpB;
-	mhTpPts*		pTpPts;
+	mhPartsTp*		pPartsTp;
 	mhPlcInfo*		pPlcEn;
 	MPOSITION		pos1;
 	Window::CurWndFocus();
@@ -35,10 +35,10 @@ void MCmdLineDelete()
 	Msg::ClearErrorMsg();
 	Msg::OperationMsg( MC_OPRT_DEL_PARTS);							// ステイタスバーの操作表示部へ"部材追加"を表示
 
-	iKaiC = mtInpMode::GetKai();
-	iGpC = mtInpMode::GetKGp();
-	iIdTpPts = mtInpAttr::GetCurIdTpPts();
-	pTpPts = BuzaiCode::MhGetpTpPts( iIdTpPts);
+	iKaiC = z_mn.GetKai();
+	iGpC = z_mn.GetKCdGp();
+	iIdPartsTp = z_mn.GetCurIdPartsTp();
+	pPartsTp = BuzaiCode::MhGetpPartsTp( iIdPartsTp);
 
 	MFOREVER {
 		Msg::GuidanceMsg( MC_GUID_DEL_PARTS);
@@ -50,14 +50,14 @@ void MCmdLineDelete()
 
 		HaitiCmd::MmPresetCmd();
 		// 指示部材を検索する
-		for ( pPlcEn = HaitiDb::MdGetHeadPts( &pos1); pPlcEn!=0;
-			  pPlcEn = HaitiDb::MdGetNextPts( &pos1)) {
+		for ( pPlcEn = HaitiDb::MdGetHeadParts( &pos1); pPlcEn!=0;
+			  pPlcEn = HaitiDb::MdGetNextParts( &pos1)) {
 
 			if (pPlcEn->GetPIKai() != iKaiC)
 				continue;										// 異なる階の部材は表示しない
-			iGpB = pPlcEn->GetPITpPts()->GetPTCdGp();
-			iIdTpPtsB = pPlcEn->GetPIIdTpPts();
-			if ( iGpB != iGpC || iIdTpPtsB != iIdTpPts)
+			iGpB = pPlcEn->GetPIPartsTp()->GetPTCdGp();
+			iIdPartsTpB = pPlcEn->GetPIIdPartsTp();
+			if ( iGpB != iGpC || iIdPartsTpB != iIdPartsTp)
 				continue;										// 異なる構成の部材は表示しない
 
 			if ( !MmChkValidParts( pPlcEn))						// オプションと履歴のチェック
@@ -78,14 +78,14 @@ void MCmdLineDelete()
 
 			MGeo::ChkPt2OnPg2WS( pt1, pg1, &ist1);
 			if ( ist1 == MC_IN_BORDER) {
-				if (mtHaitiIn::ChkPts( NULL, MP_GP_TAIRYOKU, Mstr( "壁"), NULL, pPlcEn))
+				if (mhHaitiIn::ChkParts( NULL, MP_GP_TAIRYOKU, Mstr( "壁"), NULL, pPlcEn))
 					IeModel::MhKabeSetUpFlg();
 				break;
 			}
 		}
 		// 削除する
 		if (pPlcEn != 0)
-			HaitiDb::MdPtsDelete( pos1);
+			HaitiDb::MdPartsDelete( pos1);
 
 		IeModel::MhNormKabe( 0);
 

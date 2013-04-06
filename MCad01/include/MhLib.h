@@ -19,8 +19,8 @@ class	mhPlcInfo;
 class	MhRoofInfo;
 
 class	MhMbr;
-class	MhGp;
-class	mhTpPts;
+class	mhGp;
+class	mhPartsTp;
 
 /////////////////////////////////////////////////////////////////////////////
 //【機能】定数
@@ -64,12 +64,12 @@ public:
 	////////////////////////////////////////////////////////////////////////////
 	//【機能】部品データを読み込む
 
-	static void MhInitPts();
+	static void MhInitParts();
 
 	////////////////////////////////////////////////////////////////////////////
 	//【機能】入力属性値を初期化する
 
-	static void MhInitInpAt();
+	static void MnInitInpAt();
 
 	////////////////////////////////////////////////////////////////////////////
 	//【機能】壁データ　追加、修正フラグをセットする
@@ -516,20 +516,20 @@ public:
 	static MINT MhGetNoOfGp();
 
 	// 組レコードを取得する
-	static MhGp* MhGetpGp(
-							MINT		iGp						// 読み込み構成(組)レコード番号
+	static mhGp* MhGetpGp(
+							MINT		iGp							// 読み込み構成(組)レコード番号
 					);
 
 	// 部品種類レコード数を取得する
-	static MINT	BuzaiCode::MhGetNoOfTpPts();
+	static MINT	BuzaiCode::MhGetNoOfPartsTp();
 
 	// 部品種類レコードを取得する
-	static mhTpPts* BuzaiCode::MhGetpTpPts(
-							MINT		iTpPts					// 読み込み部品種類レコード番号
+	static mhPartsTp* BuzaiCode::MhGetpPartsTp(
+							MINT		iPartsTp					// 読み込み部品種類レコード番号
 					);
 
 	// 部品IDを取得する
-	static MINT BuzaiCode::MhGetPIIdTpPts(
+	static MINT BuzaiCode::MhGetPIIdPartsTp(
 							MINT		iCdBuzai					// 部材コード
 					);
 

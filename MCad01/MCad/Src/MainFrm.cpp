@@ -20,9 +20,14 @@
 
 #include "MainFrm.h"
 #include "MmWnd.h"
+#include "MhDefParts.h"
 #include "MsBasic.h"
 #include "MtMCadApi.h"
-#include "MtInpAttr.h"
+#include "MhGp.h"
+#include "MhPartsSpec.h"
+#include "MhInpAttr.h"
+#include "MnInpAttr.h"
+#include "MmCmdMsg.h"
 #include "MgLine.h"
 #include "MmLib.h"
 #include "MhLib.h"
@@ -62,8 +67,19 @@ BEGIN_MESSAGE_MAP(CMainFrame, CMDIFrameWndEx)
 	ON_COMMAND(IDC_VIEW3OPEN, &CMainFrame::OnView3open)
 	ON_COMMAND(IDC_VIEW4OPEN, &CMainFrame::OnView4open)
 	ON_COMMAND(IDC_VIEW5OPEN, &CMainFrame::OnView5open)
+
+	ON_MESSAGE( WM_USER100 , OnUserMsg1)
+
 	ON_WM_CLOSE()
 END_MESSAGE_MAP()
+
+// User Msg
+
+LRESULT CMainFrame::OnUserMsg1( UINT wParam, LONG lParam)
+{
+	MC::z_mn.InitComboAttr( MP_AT_AUTO);						// 部材入力種類に合った属性入力コンボボックスを表示
+	return 0;
+}
 
 // CMainFrame コンストラクション/デストラクション
 
@@ -75,7 +91,6 @@ CMainFrame::CMainFrame()
 	ms_pMainFrame = this;
 	MC::System::SetpMainFrame( this);
 
-//	MtInit( GetSafeHwnd(), 1);
 	MC::MtCmdOpen();
 }
 
@@ -162,6 +177,34 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 		return FALSE;
 	// TODO: この位置で CREATESTRUCT cs を修正して Window クラスまたはスタイルを
 	//  修正してください。
+	//cs.x  = -GetSystemMetrics( SM_CXSIZEFRAME);
+	//cs.y  = -GetSystemMetrics( SM_CYSIZEFRAME);
+	//cs.cx = GetSystemMetrics( SM_CXMAXIMIZED);
+	//cs.cy = GetSystemMetrics( SM_CYMAXIMIZED);
+	cs.x  = 0;
+	cs.y  = 0;
+	cs.cx = min( GetSystemMetrics( SM_CXMAXIMIZED), 1280);
+	cs.cy = min( GetSystemMetrics( SM_CYMAXIMIZED), 1060);
+
+	int i11 = ::GetSystemMetrics( SM_CXBORDER);				// 1
+	int i12 = ::GetSystemMetrics( SM_CYBORDER);				// 1
+	int i13 = ::GetSystemMetrics( SM_CXEDGE);				// 2
+	int i14 = ::GetSystemMetrics( SM_CYEDGE);				// 2
+	int i15 = ::GetSystemMetrics( SM_CXFIXEDFRAME);			// 3
+	int i16 = ::GetSystemMetrics( SM_CYFIXEDFRAME);			// 3
+	int i17 = ::GetSystemMetrics( SM_CXFULLSCREEN);			// 1280
+	int i18 = ::GetSystemMetrics( SM_CYFULLSCREEN);			// 968
+	int i19 = ::GetSystemMetrics( SM_CXMAXIMIZED);			// 1288
+	int i20 = ::GetSystemMetrics( SM_CYMAXIMIZED);			// 1002
+	int i21 = ::GetSystemMetrics( SM_CXMAXTRACK);			// 1292
+	int i22 = ::GetSystemMetrics( SM_CYMAXTRACK);			// 1036
+	int i23 = ::GetSystemMetrics( SM_CXSCREEN);				// 1280
+	int i24 = ::GetSystemMetrics( SM_CYSCREEN);				// 1024
+	int i25 = ::GetSystemMetrics( SM_CXSIZEFRAME);			// 4
+	int i26 = ::GetSystemMetrics( SM_CYSIZEFRAME);			// 4
+	int i27 = ::GetSystemMetrics( SM_CYMENU);				// 20
+	int i28 = ::GetSystemMetrics( SM_CYCAPTION);			// 26
+	int i29 = ::GetSystemMetrics( SM_CYSMCAPTION);			// 18
 
 	return TRUE;
 }
@@ -293,7 +336,7 @@ CMDIChildWnd* CMainFrame::OpenView(CDocTemplate *pTemplate)
 	return pNewFrame;
 }
 
-// PARTS ダイアログバー　部材名
+// PARTS リボンバー　部材名
 
 void CMainFrame::SetCombo1( MINT iCombo1)
 {
@@ -333,80 +376,106 @@ void CMainFrame::OnDummy(UINT /*id*/)
 {
 }
 
+// PARTS リボンバー　部材名
 void CMainFrame::OnCbnSelchangeCombo1()
 {
-	// TODO: ここにコマンド ハンドラー コードを追加します。
-	int ic1 = 1;
+//E	m_iCombo1 = ((CComboBox*)(m_wndDlgBar3.GetDlgItem(IDC_CMB_BZI1)))->GetCurSel();	// 部品ID
+	CMFCRibbonComboBox* pCmbBox = MnpComboBuzai();
+	m_iCombo1 = pCmbBox->GetCurSel();											// 部品ID
+	MC::z_mn.SetComboKmIdPartsTp( m_iCombo1);
+	MC::z_mn.InitComboPartsMbr();
+	MC::Window::CurWndFocus();
+	MC::mhPartsTp* pPartsTp	= MC::BuzaiCode::MhGetpPartsTp( MC::z_mn.GetCurIdPartsTp());
+	if (pPartsTp->GetPTCdBr() >= MP_BR_SENBUN || MC::z_mn.GetMode() == MP_MD_DELETE)
+		MC::WindowCtrl::MmWndKCmdXqt( IDC_PARTSCREATE);							//	部材入力コマンド
+	else 
+		MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
 }
 
 
+// PARTS リボンバー　寸法型式
 void CMainFrame::OnCbnSelchangeCombo2()
 {
-	// TODO: ここにコマンド ハンドラー コードを追加します。
-	int ic1 = 1;
+//E	m_iCombo2 = ((CComboBox*)(m_wndDlgBar3.GetDlgItem(IDC_CMB_BZI2)))->GetCurSel();	// 寸法型式ID
+	CMFCRibbonComboBox *pCmbBox = MmpComboMbr();
+	m_iCombo2 = pCmbBox->GetCurSel();											// 寸法型式ID
+	MC::z_mn.SetComboKmIdMbr( m_iCombo2);
+	MC::Window::CurWndFocus();
+
+	MC::WindowCtrl::MmWndKCmdXqt( IDC_PARTSCREATE);								//	部品入力
 }
 
-
+// INPUT リボンバー　入力点区分
 void CMainFrame::OnCbnSelchangeCombo11()
 {
-	// TODO: ここにコマンド ハンドラー コードを追加します。
-	m_iComboInp1 = ((CComboBox*)(m_wndRibbonBar.GetDlgItem(IDC_CMB_Inp1)))->GetCurSel();
-	MC::mtInpMode::SetComboInpKb( m_iComboInp1);
+//E	m_iComboInp1 = ((CComboBox*)(m_wndRibbonBar.GetDlgItem(IDC_CMB_Inp1)))->GetCurSel();
+	CMFCRibbonComboBox *pCmbBox = MmpComboInpTp();
+	m_iComboInp1 = pCmbBox->GetCurSel();
+	MC::z_mn.SetComboCdInpKb( m_iComboInp1);
 	MC::Window::CurWndFocus();
-	int ic1 = 1;
 }
 
-
+// INPUT リボンバー　丸めコード
 void CMainFrame::OnCbnSelchangeCombo12()
 {
-	// TODO: ここにコマンド ハンドラー コードを追加します。
-	int ic1 = 1;
+//E	m_iComboInp2 = ((CComboBox*)(m_wndDlgBar1.GetDlgItem(IDC_CMB_Inp2)))->GetCurSel();
+	CMFCRibbonComboBox *pCmbBox = MmpComboCdMarume();
+	m_iComboInp2 = pCmbBox->GetCurSel();										// 丸めコード
+	MC::z_mn.SetComboCdMarume( m_iComboInp2);
+	MC::Window::CurWndFocus();
 }
 
-
+//void CMainFrame::OnCbnSelchangeCombo13()
+//{
+//	// TODO: ここにコマンド ハンドラー コードを追加します。
+//}
+// INPUT リボンバー　配置コード
 void CMainFrame::OnCbnSelchangeCombo13()
 {
-	// TODO: ここにコマンド ハンドラー コードを追加します。
+//E	m_iComboInp3 = ((CComboBox*)(m_wndDlgBar1.GetDlgItem(IDC_CMB_Inp3)))->GetCurSel();
+	CMFCRibbonComboBox *pCmbBox = MmpComboCdPlc();
+	m_iComboInp3 = pCmbBox->GetCurSel();										// 配置コード
+	MC::z_mn.SetComboCdPlc( m_iComboInp3);
+	MC::Window::CurWndFocus();
 }
 
-
+// PANEL リボンバー　パネル番号
 void CMainFrame::OnCbnSelchangeComboPanelNo()
 {
-	// TODO: ここにコマンド ハンドラー コードを追加します。
 	int ic1 = 1;
 }
 
-
+// ATTR リボンバー　長さ補正値1
 void CMainFrame::OnCbnSelchangeComboAttr1()
 {
 	// TODO: ここにコマンド ハンドラー コードを追加します。
 }
 
-
+// ATTR リボンバー　長さ補正値2
 void CMainFrame::OnCbnSelchangeComboAttr2()
 {
 	// TODO: ここにコマンド ハンドラー コードを追加します。
 }
 
-
+// ATTR リボンバー　材軸芯ずれ量
 void CMainFrame::OnCbnSelchangeComboAttr3()
 {
 	// TODO: ここにコマンド ハンドラー コードを追加します。
 }
 
-
+// ATTR リボンバー　配置点ずれ量
 void CMainFrame::OnCbnSelchangeComboAttr4()
 {
 	// TODO: ここにコマンド ハンドラー コードを追加します。
 }
 
-
+// ATTR リボンバー　取り付け高さ
 void CMainFrame::OnCbnSelchangeComboAttr5()
 {
 	// TODO: ここにコマンド ハンドラー コードを追加します。
 }
 
-
+// ATTR リボンバー　開口部高さ(ROH)
 void CMainFrame::OnCbnSelchangeComboAttr6()
 {
 	// TODO: ここにコマンド ハンドラー コードを追加します。

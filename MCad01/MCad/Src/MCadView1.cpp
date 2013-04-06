@@ -24,7 +24,7 @@
 
 #include "MmWnd.h"
 
-#include "MmDefine.h"
+#include "MhDefParts.h"
 #include "MmLib.h"
 
 #include "MmCmd.h"

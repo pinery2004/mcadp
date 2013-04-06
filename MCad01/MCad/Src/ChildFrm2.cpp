@@ -36,6 +36,7 @@ BEGIN_MESSAGE_MAP(CChildFrame2, CMDIChildWndEx)
 	ON_WM_CREATE()
 	ON_WM_CLOSE()
 	ON_WM_SETFOCUS()
+	ON_COMMAND(ID_FILE_CLOSE, &CChildFrame2::OnFileClose)
 END_MESSAGE_MAP()
 
 // CChildFrame2 コンストラクション/デストラクション
@@ -52,6 +53,7 @@ CChildFrame2::~CChildFrame2()
 BOOL CChildFrame2::PreCreateWindow(CREATESTRUCT& cs)
 {
 	// TODO: CREATESTRUCT cs を変更して、Window クラスまたはスタイルを変更します。
+
 	if( !CMDIChildWndEx::PreCreateWindow(cs) )
 		return FALSE;
 
@@ -96,6 +98,36 @@ void CChildFrame2::Dump(CDumpContext& dc) const
 
 // CChildFrame2 メッセージ ハンドラー
 
+void CChildFrame2::OnFileClose()
+{
+	// このフレームを閉じるには、WM_CLOSE を送ります。このメッセージは、
+	// システム メニューの [閉じる] を選択した場合と同じです。
+	SendMessage(WM_CLOSE);
+}
+
+int CChildFrame2::OnCreate(LPCREATESTRUCT lpCreateStruct)
+{
+	if (CMDIChildWndEx::OnCreate(lpCreateStruct) == -1)							// view2 Create
+		return -1;
+
+//E	// フレームのクライアント領域全体を占めるビューを作成します。
+//	if (!m_wndView2.Create(NULL, NULL, AFX_WS_DEFAULT_VIEW,						// 
+//		CRect(0, 0, 0, 0), this, AFX_IDW_PANE_FIRST, NULL))
+//	{
+//		TRACE0("ビュー ウィンドウを作成できませんでした。\n");
+//		return -1;
+//	}
+
+	return 0;
+}
+
+void CChildFrame2::OnSetFocus(CWnd* pOldWnd)
+{
+	CMDIChildWndEx::OnSetFocus(pOldWnd);
+
+//E	m_wndView2.SetFocus();
+}
+
 void CChildFrame2::OnFilePrint()
 {
 	if (m_dockManager.IsPrintPreviewValid())
@@ -126,16 +158,6 @@ BOOL CChildFrame2::Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD d
 	return CMDIChildWndEx::Create(lpszClassName, lpszWindowName, dwStyle, rect, pParentWnd, pContext);
 }
 
-int CChildFrame2::OnCreate(LPCREATESTRUCT lpCreateStruct)
-{
-	if (CMDIChildWndEx::OnCreate(lpCreateStruct) == -1)
-		return -1;
-
-	// TODO:  ここに特定な作成コードを追加してください。
-
-	return 0;
-}
-
 void CChildFrame2::OnClose()
 {
 	// TODO: ここにメッセージ ハンドラー コードを追加するか、既定の処理を呼び出します。
@@ -144,11 +166,4 @@ void CChildFrame2::OnClose()
 	MC::WindowCtrl::MmWndKDelete( pWndInfo);
 
 	CMDIChildWndEx::OnClose();
-}
-
-void CChildFrame2::OnSetFocus(CWnd* pOldWnd)
-{
-	CMDIChildWndEx::OnSetFocus(pOldWnd);
-
-//E	m_pwndView->SetFocus();
 }

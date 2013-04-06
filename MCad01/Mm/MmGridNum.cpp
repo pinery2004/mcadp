@@ -19,7 +19,7 @@
 #include "MmGridNum.h"
 #define DLL_EXPORT_MC_WINDOWCTRL_DO
 #include "MmWnd.h"
-#include "MmDefine.h"
+#include "MhDefParts.h"
 #include "MmLib.h"
 #include "McSystemProperty.h"
 
@@ -412,10 +412,10 @@ void MmGridNum::DrawGrid(
 ////	MgLine2		Lnm[2];
 ////	MGGLINE2( GLnk, 10);
 ////
-////	MINT iKai = mtInpMode::GetKai();
+////	MINT iKai = z_mn.GetKai();
 ////
-////	iCdMarume = mtInpMode::GetComboCdMarume();
-////	iCdPlc = mtHaitiIn::GetComboCdPlc();
+////	iCdMarume = z_mn.GetComboCdMarume();
+////	iCdPlc = mhHaitiIn::GetComboCdPlc();
 ////
 ////	if ( iCdPlc == MP_HAICD_KABESINZUKE ||
 ////		iCdPlc == MP_HAICD_YANEKOUSEISENZUKE) {									// 壁芯付け丸め　または　屋根構成線付け丸め
@@ -448,7 +448,7 @@ void MmGridNum::DrawGrid(
 ////		GLnk.m_n = 0;
 ////	}
 ////				
-//////	iCdMarume = mtInpMode::GetComboCdMarume();
+//////	iCdMarume = z_mn.GetComboCdMarume();
 ////
 ////	// グリッド丸めなしの場合
 ////	if ( iCdMarume == 0) {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MmDefine.h"
+#include "MhDefParts.h"
 
 namespace MC
 {
@@ -178,7 +178,7 @@ public:
 	/////////////////////////////////////////////////////////////////////////////
 	//  マウス選択部材の表示制御
 
-	static void SetDispSelPts(
+	static void SetDispSelParts(
 							MINT 		i_iCdBuzai	// マウスで選択対象の部材コード、NULL(全)、または -1(非表示)
 					);
 

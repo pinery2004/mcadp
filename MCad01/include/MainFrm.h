@@ -15,6 +15,8 @@
 #pragma once
 #include "MsDefType.h"
 
+#define WM_USER100 WM_USER + 100
+
 class CMainFrame : public CMDIFrameWndEx
 {
 	DECLARE_DYNAMIC(CMainFrame)
@@ -82,6 +84,8 @@ public:
 	afx_msg void OnCbnSelchangeComboAttr6();
 	afx_msg void OnDummy(UINT id);
 
+	afx_msg LRESULT OnUserMsg1( UINT wParam, LONG lParam);
+
 	void SetCombo1( MINT iCombo1);
 	void SetCombo2( MINT iCombo2);
 	void SetComboInp1( MINT iCombo11);
@@ -89,12 +93,12 @@ public:
 	void SetComboInp3( MINT iCombo13);
 //	void SetComboPanelNo( MINT iComboPanelNo);
 
-	friend CComboBox* MmpComboCdBuzai();
-	friend CComboBox* MmpComboMbr();
-	friend CComboBox* MmpComboInpTp();
-	friend CComboBox* MmpComboMarumeCd();
-	friend CComboBox* MmpComboPlcCd();
-	friend CComboBox* MmpComboPanelNo();
+	friend CMFCRibbonComboBox* MnpComboBuzai();
+	friend CMFCRibbonComboBox* MmpComboMbr();
+	friend CMFCRibbonComboBox* MmpComboInpTp();
+	friend CMFCRibbonComboBox* MmpComboCdMarume();
+	friend CMFCRibbonComboBox* MmpComboCdPlc();
+	friend CMFCRibbonComboBox* MnpComboPanelNo();
 
 	BOOL CreateRibbonBar ();
 	afx_msg void OnView1open();

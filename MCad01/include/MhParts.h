@@ -30,16 +30,7 @@ public:
 		ULnW[0] = MgULine3( Ln.p[0] + vtUt.RotR90() * rW[0], vtUt);
 		ULnW[1] = MgULine3( Ln.p[0] + vtUt.RotL90() * rW[1], vtUt);
 	}
-/*
-	void operator = (mhPlcInfo &PlcEn) {
-		Ln     = PlcEn.GetPIPlcIti();						// 長さ調整側の部材
-		vtUt   = Ln.V();
-		rLH[0] = PlcEn.GetPILenHosei( 0);
-		rLH[1] = PlcEn.GetPILenHosei( 1);
-		rW[0]  = PlcEn.GetMbWidthR() + PlcEn.GetPISinZure();
-		rW[1]  = PlcEn.GetMbWidthL() - PlcEn.GetPISinZure();
-	}	
-*/
+
 	//　横置部材と横置部材の位置関係を調べる。
 	//　２線部材が重なっている場合は、交差なし（平行）とみなす。
 	//  ２線部材が重なりなく直線的に交差している場合はその交差点を交点とみなす。

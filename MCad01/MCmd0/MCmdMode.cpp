@@ -22,7 +22,7 @@ void MCmdLine();
 
 void MCmdMdCreate()
 {
-	mtInpMode::SetMode( MP_MD_CREATE);
+	z_mn.SetMode( MP_MD_CREATE);
 
 	MCmdLine();
 }
@@ -32,7 +32,7 @@ void MCmdMdCreate()
 
 void MCmdMdDelete()
 {
-	mtInpMode::SetMode( MP_MD_DELETE);
+	z_mn.SetMode( MP_MD_DELETE);
 
 	MCmdLine();
 }
@@ -42,7 +42,7 @@ void MCmdMdDelete()
 
 void MCmdMdModify()
 {
-	mtInpMode::SetMode( MP_MD_MODIFY);
+	z_mn.SetMode( MP_MD_MODIFY);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -50,7 +50,7 @@ void MCmdMdModify()
 
 void MCmdMdMove()
 {
-	mtInpMode::SetMode( MP_MD_MOVE);
+	z_mn.SetMode( MP_MD_MOVE);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -58,7 +58,7 @@ void MCmdMdMove()
 
 void MCmdMdCopy()
 {
-	mtInpMode::SetMode( MP_MD_COPY);
+	z_mn.SetMode( MP_MD_COPY);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -66,7 +66,7 @@ void MCmdMdCopy()
 
 void MCmdMdProperty()
 {
-	mtInpMode::SetMode( MP_MD_PROPERTY);
+	z_mn.SetMode( MP_MD_PROPERTY);
 }
 /*
 /////////////////////////////////////////////////////////////////////////////
@@ -115,7 +115,7 @@ void MCmdBaseHeight()
 /////////////////////////////////////////////////////////////////////////////
 //	部品表入力
 
-void MCmdPtsEdit()
+void MCmdPartsEdit()
 {
 	MmWndInfo*	pWndInfo = MmWndKGetCurWnd();					// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();

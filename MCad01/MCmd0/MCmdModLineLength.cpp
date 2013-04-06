@@ -10,7 +10,8 @@
 //==========================================================================================
 #include "stdafx.h"
 #include "MrAPI.h"
-//#include "MhPts1.h"
+//#include "MhParts1.h"
+#include "MhInpAttr.h"
 
 namespace MC
 {
@@ -27,8 +28,8 @@ namespace MC
 	MgLine2		ln1;
 	MgLine3		Ln1;
 	MgPolyg2	Pg1(20);
-//	MINT		iIdTpPts;
-//	mhTpPts*	pTpPts;
+//	MINT		iIdPartsTp;
+//	mhPartsTp*	pPartsTp;
 	bool		bFirst = TRUE;
 	MINT		iKati;
 //	MINT		iMulti;
@@ -50,13 +51,14 @@ namespace MC
 	Msg::ClearErrorMsg();
 	Msg::OperationMsg( MC_OPRT_MOD_BUZAI);							// ステイタスバーの操作表示部へ"部材修正"を表示
 
-	mtInpAttr::InitComboAttr( MP_AT_ADJLNG);							// 属性入力用コンボボックスを部材長さ調整用にする
+//E	z_mn.InitComboAttr( MP_AT_ADJLNG);							// 属性入力用コンボボックスを部材長さ調整用にする
+	z_mn.RibbonIO( MINIT_COMBO_ATTR, MP_AT_ADJLNG);
 
 	MmWndInfo* pWndInfo = WindowCtrl::MmWndKGetCurWnd();			// カレントウィンドウを取得する
 	Window::CurWndFocus();											// フォーカスをカレントウィンドウに設定する
 
 	MFOREVER {
-		Window::SetDispSelPts( NULL);
+		Window::SetDispSelParts( NULL);
 
 		Msg::GuidanceMsg( MC_GUID_MOD_BUZAILENGTH1);				// "部材の長さ調整側の端部を指示して下さい"
 		irt = MtAskForPoint( &pt1);
@@ -65,7 +67,7 @@ namespace MC
 			break;
 
 		iBuzaiCd = NULL;
-		if ( pBziInfo1 = mtHaitiIn::SrchBuzai( pWndInfo, pt1, iBuzaiCd, &pgHitBzi)) {
+		if ( pBziInfo1 = mhHaitiIn::SrchBuzai( pWndInfo, pt1, iBuzaiCd, &pgHitBzi)) {
 			Window::SetCurBziFig( &pgHitBzi);						// カレント選択(長さ調整側)の部材(長さ調整側)形状を設定する
 			WindowCtrl::MmWndKReDraw();
 		} else {
@@ -73,7 +75,7 @@ namespace MC
 			continue;
 		}
 
-		Window::SetDispSelPts( NULL);
+		Window::SetDispSelParts( NULL);
 
 		Msg::GuidanceMsg( MC_GUID_MOD_BUZAILENGTH2);				// "部材の長さ調整先を指示して下さい"
 		irt = MtAskForPoint( &pt2);
@@ -82,7 +84,7 @@ namespace MC
 			break;
 
 		iBuzaiCd = NULL;
-		pBziInfo2 = mtHaitiIn::SrchBuzai( pWndInfo, pt2, iBuzaiCd, &pgHitBzi);
+		pBziInfo2 = mhHaitiIn::SrchBuzai( pWndInfo, pt2, iBuzaiCd, &pgHitBzi);
 		if ( pBziInfo1 == pBziInfo2)								// 長さ調整側部材と長さ調整先部材と同一部材を選択の場合は座標指示とみなす
 			pBziInfo2 = NULL;
 
@@ -90,28 +92,28 @@ namespace MC
 
 		Window::DrawHitBzi( pWndInfo, &pgHitBzi);					//	ヒット部材（長さ調整先部材）を表示する
 																	//	（既表示ヒット部材を消去後に、ヒット部材を表示する）
-		ist1 = mtInpAttr::GetCheckAttr( MC_CHK_KATI, &iKati);			// 勝ち負けチェックボックスの勝ちマークを取得する(1:勝ち,0:負け)
-		ist1 = mtInpAttr::GetCheckAttr( MC_CHK_INTC, &iCrsC);			// 交差部材調整チェックボックスの調整マークを取得する(1:あり,0:なし)
+		ist1 = z_mn.GetCheckAttr( MC_CHK_KATI, &iKati);			// 勝ち負けチェックボックスの勝ちマークを取得する(1:勝ち,0:負け)
+		ist1 = z_mn.GetCheckAttr( MC_CHK_INTC, &iCrsC);			// 交差部材調整チェックボックスの調整マークを取得する(1:あり,0:なし)
 
-		mtHaitiIn::MmSrchCrossBuzai( pWndInfo, pBziInfo1, iBuzaiCd, pbTchBziI, pbCrsBziI);
+		mhHaitiIn::MmSrchCrossBuzai( pWndInfo, pBziInfo1, iBuzaiCd, pbTchBziI, pbCrsBziI);
 																	// 長さ調整側部材と調整前に触れている部材群と交差している部材群を求める
 		if ( pBziInfo2) {
-			ist1 = mtHaitiIn::MhAdjBzL( iKati, pBziInfo1, Pt1, pBziInfo2);	// 長さ調整
+			ist1 = mhHaitiIn::MhAdjBzL( iKati, pBziInfo1, Pt1, pBziInfo2);	// 長さ調整
 		} else {
-			mtInput::Marume( pt2, &pt2m);
+			mhInput::Marume( pt2, &pt2m);
 			Pt2m = MgPoint3C( pt2m);
-			mtHaitiIn::MhAdjBzL( pBziInfo1, Pt1, Pt2m);
+			mhHaitiIn::MhAdjBzL( pBziInfo1, Pt1, Pt2m);
 		}
 
 		if ( ist1 == MC_PARALLEL) {
 			Pt2 = MgPoint3C( pt2);
-			mtHaitiIn::MhAdjBzL( pBziInfo1, Pt1, pBziInfo2, Pt2);		// 調整側部材と調整先部材が平行時の調整
+			mhHaitiIn::MhAdjBzL( pBziInfo1, Pt1, pBziInfo2, Pt2);		// 調整側部材と調整先部材が平行時の調整
 		}
 			
-		mtHaitiIn::MmSrchCrossBuzai( pWndInfo, pBziInfo1, iBuzaiCd, pbTchBziO, pbCrsBziO);
+		mhHaitiIn::MmSrchCrossBuzai( pWndInfo, pBziInfo1, iBuzaiCd, pbTchBziO, pbCrsBziO);
 																	// 長さ調整側部材と調整後に触れている部材群と交差している部材群を求める
 			
-		mtHaitiIn::MhChngCrossBuzai( pbTchBziI, pbCrsBziI, pbTchBziO, pbCrsBziO, 
+		mhHaitiIn::MhChngCrossBuzai( pbTchBziI, pbCrsBziI, pbTchBziO, pbCrsBziO, 
 								   pbFRtoTCBzi, pbTCtoFRBzi, pbTCtoTCBzi);
 		if ( iCrsC == 1) {
 			MgLine3 	LnBzi;
@@ -121,7 +123,7 @@ namespace MC
 			for ( ic1=0; pbFRtoTCBzi[ic1]; ic1++) {
 				LnBzi = pbFRtoTCBzi[ic1]->GetPIPlcIti();
 				Pt0 = (LnBzi.p[0] + LnBzi.p[1]) / 2.;
-				mtHaitiIn::MhAdjBzL( 0, pbFRtoTCBzi[ic1], Pt0, pBziInfo1);
+				mhHaitiIn::MhAdjBzL( 0, pbFRtoTCBzi[ic1], Pt0, pBziInfo1);
 			}
 			// 接触　または　交差 → 離れている
 /*
@@ -137,7 +139,7 @@ namespace MC
 			for ( ic1=0; pbTCtoTCBzi[ic1]; ic1++) {
 				LnBzi = pbTCtoTCBzi[ic1]->GetPIPlcIti();
 				Pt0 = (LnBzi.p[0] + LnBzi.p[1]) / 2.;
-				mtHaitiIn::MhAdjBzL( 0, pbTCtoTCBzi[ic1], Pt0, pBziInfo1);
+				mhHaitiIn::MhAdjBzL( 0, pbTCtoTCBzi[ic1], Pt0, pBziInfo1);
 			}
 		}
 		Window::ClrCurBziFig();
@@ -145,7 +147,7 @@ namespace MC
 		WindowCtrl::MmWndKReDraw();
 		Msg::ClearErrorMsg();
 	}
-	Window::SetDispSelPts( -1);
+	Window::SetDispSelParts( -1);
 	Msg::OperationMsg( MC_OPRT_BASE);								// ステイタスバーの操作表示部へ""を表示
 }
 

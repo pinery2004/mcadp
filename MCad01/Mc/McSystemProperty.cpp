@@ -10,7 +10,7 @@
 //==========================================================================================
 #include "stdafx.h"
 #include "MsBasic.h"
-#include "MmDefine.h"
+#include "MhDefParts.h"
 
 #define	DLL_EXPORT_SYSTEMPROPERTY_DO
 #include "McSystemProperty.h"

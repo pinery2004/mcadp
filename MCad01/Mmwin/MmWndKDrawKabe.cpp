@@ -17,7 +17,7 @@
 #include "MmGridNum.h"
 #include "MmDrag.h"
 #include "MmWnd.h"
-#include "MmDefine.h"
+#include "MhDefParts.h"
 #include "MmLib.h"
 #include "McSystemProperty.h"
 
@@ -27,7 +27,7 @@
 #include "MdList.h"
 #include "MhLib.h"
 
-#include "MtInp.h"
+#include "MhInp.h"
 
 #include "MdOpt.h"
 #include "MdLib.h"
@@ -49,13 +49,13 @@ void MmWndKDrawLine(
 				)
 {
 	MgPoint2	ptW[2];
-	DWORD		PtsLineColor;
+	DWORD		PartsLineColor;
 
 	ptW[0] = (*(MgPoint2*)&(pPlcEn->GetPIPlcIti( 0))) + vSinZ;
 	ptW[1] = (*(MgPoint2*)&(pPlcEn->GetPIPlcIti( 1))) + vSinZ;
 
-	PtsLineColor = mcs::GetColor( iLineColor);
-	pCod->SetLineAttr( LineType, 1, PtsLineColor);
+	PartsLineColor = mcs::GetColor( iLineColor);
+	pCod->SetLineAttr( LineType, 1, PartsLineColor);
 	pCod->Line( MgLine2( ptW[0], ptW[1]));
 
 }
@@ -74,15 +74,15 @@ void MmWndKDrawLine(
 				)
 {
 	MgPoint2	ptW[2];
-	DWORD		PtsLineColor;
+	DWORD		PartsLineColor;
 	MhZukei		*pZukei;
 	MINT		ic;
 
 	ptW[0] = (*(MgPoint2*)&(pPlcEn->GetPIPlcIti( 0))) + vSinZ;
 	ptW[1] = (*(MgPoint2*)&(pPlcEn->GetPIPlcIti( 1))) + vSinZ;
 
-	PtsLineColor = mcs::GetColor( iLineColor);
-	pCod->SetLineAttr( LineType, 1, PtsLineColor);
+	PartsLineColor = mcs::GetColor( iLineColor);
+	pCod->SetLineAttr( LineType, 1, PartsLineColor);
 
 	pZukei = pPlcEn->GetPIZukei();
 	if ( iMode == 0 || pZukei == NULL) {
@@ -113,8 +113,8 @@ void WindowCtrl::MmWndKDrawKabe(
 
 	// •Çü‚ð•\Ž¦‚·‚é
 
-	for ( pPlcEn = HaitiDb::MdGetHeadPts( &pos1); pPlcEn!=0;
-		  pPlcEn = HaitiDb::MdGetNextPts( &pos1)) {
+	for ( pPlcEn = HaitiDb::MdGetHeadParts( &pos1); pPlcEn!=0;
+		  pPlcEn = HaitiDb::MdGetNextParts( &pos1)) {
 
 		iEnKai = pPlcEn->GetPIKai();
 

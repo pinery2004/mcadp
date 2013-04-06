@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MmDefine.h"
+#include "MhDefParts.h"
 
 #ifdef DLL_EXPORT
 	#undef DLL_EXPORT

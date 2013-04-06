@@ -10,7 +10,8 @@
 //==========================================================================================
 #include "stdafx.h"
 #include "MrAPI.h"
-#include "MtInp.h"
+#include "MhInp.h"
+#include "MhInpAttr.h"
 
 #define		MAXHAIKABE		500									// 配列制限値
 
@@ -27,7 +28,7 @@ void MCmdWallOuter()
 {
 	MINT	ist1;
 //	MhInitInpAt();
-	ist1 = mtInpAttr::SetDialogBar( MP_GP_TAIRYOKU, MP_BR_OTHER, Mstr( "外壁"), Mstr( "204C"));
+	ist1 = z_mn.SetRibbonBar( MP_GP_TAIRYOKU, MP_BR_OTHER, Mstr( "外壁"), Mstr( "204C"));
 	if ( ist1 == 0)
 		MCmdLine();
 }
@@ -38,7 +39,7 @@ void MCmdWallInner()
 {
 	MINT	ist1;
 //	MhInitInpAt();
-	ist1 = mtInpAttr::SetDialogBar( MP_GP_TAIRYOKU, MP_BR_OTHER, Mstr( "内壁"), Mstr( "204C"));
+	ist1 = z_mn.SetRibbonBar( MP_GP_TAIRYOKU, MP_BR_OTHER, Mstr( "内壁"), Mstr( "204C"));
 	if ( ist1 == 0)
 		MCmdLine();
 }
@@ -50,7 +51,7 @@ void MCmdGaiTateSash()
 	MINT	ist1;
 //	MhInitInpAt();
 //	SetInpAt();
-	ist1 = mtInpAttr::SetDialogBar( MP_GP_KABE, MP_BR_OTHER, Mstr( "サッシ"), Mstr( "204C"));
+	ist1 = z_mn.SetRibbonBar( MP_GP_KABE, MP_BR_OTHER, Mstr( "サッシ"), Mstr( "204C"));
 	if ( ist1 == 0)
 		MCmdLineW();
 }
@@ -62,7 +63,7 @@ void MCmdGaiTateDoor()
 	MINT	ist1;
 //	MhInitInpAt();
 //	SetInpAt();
-	ist1 = mtInpAttr::SetDialogBar( MP_GP_KABE, MP_BR_OTHER, Mstr( "ドア"), Mstr( "204C"));
+	ist1 = z_mn.SetRibbonBar( MP_GP_KABE, MP_BR_OTHER, Mstr( "ドア"), Mstr( "204C"));
 	if ( ist1 == 0)
 		MCmdLineW();
 }
@@ -74,7 +75,7 @@ void MCmdNaiTate()
 	MINT	ist1;
 //	MhInitInpAt();
 //	SetInpAt();
-	ist1 = mtInpAttr::SetDialogBar( MP_GP_KABE, MP_BR_OTHER, Mstr( "内部建具"), Mstr( "204C"));
+	ist1 = z_mn.SetRibbonBar( MP_GP_KABE, MP_BR_OTHER, Mstr( "内部建具"), Mstr( "204C"));
 	if ( ist1 == 0)
 		MCmdLineW();
 }
@@ -88,8 +89,8 @@ void MCmdLineW()
 	MgPoint2	ptln1[3], ptln1_org[3];
 	MgLine3		Ln1;
 	MgPolyg2	pg1(20);
-	MINT		iIdTpPts;
-	mhTpPts*	pTpPts;
+	MINT		iIdPartsTp;
+	mhPartsTp*	pPartsTp;
 
 	mhPlcInfo* pHaiKabe[MAXHAIKABE];				// 壁データ
 	MINT		nHaiKabe;							// 壁数
@@ -101,26 +102,29 @@ void MCmdLineW()
 	Msg::ClearErrorMsg();
 	Msg::OperationMsg( MC_OPRT_PARTS);								// ステイタスバーの操作表示部へ"部材追加"を表示
 
-	mtInpAttr::InitComboAttr( MP_AT_AUTO);								// 建具入力用の属性入力コンボボックスを表示
+//E	z_mn.InitComboAttr( MP_AT_AUTO);								// 建具入力用の属性入力コンボボックスを表示
+	z_mn.RibbonIO( MINIT_COMBO_ATTR, MP_AT_AUTO);
+	
 
-	IeModel::MhInitInpAt();				// 070901
-	SetInpAt();					// 070901
+	IeModel::MnInitInpAt();				// 070901
+	SetInpAt();							// 070901
 
-	iIdTpPts = mtInpAttr::GetCurIdTpPts();
-	pTpPts = BuzaiCode::MhGetpTpPts( iIdTpPts);
-	mtInpMode::SetComboInpKb( pTpPts->GetPTInpKb());
-	mtInpMode::SetComboCdMarume( pTpPts->GetPTCdMarume());
-
+	iIdPartsTp = z_mn.GetCurIdPartsTp();
+	pPartsTp = BuzaiCode::MhGetpPartsTp( iIdPartsTp);
+//E	z_mn.SetComboCdInpKb( pPartsTp->GetPTCdInpKb());
+	z_mn.RibbonIO( MSET_INPUT_KUBUN_CD, pPartsTp->GetPTCdInpKb());	// 入力点区分を選択用のコンボボックスに表示する
+//E	z_mn.SetComboCdMarume( pPartsTp->GetPTCdMarume());
+	z_mn.RibbonIO( MSET_INPUT_MARUME_CD, pPartsTp->GetPTCdMarume());	// 丸めコードを選択用のコンボボックスに表示する
 	MFOREVER {
 		iMode = 0;
-		irt = mtInput::GetLen2Pt( iMode, ptln1, ptln1_org);
+		irt = mhInput::GetLen2Pt( iMode, ptln1, ptln1_org);
 		Ln1 = MgLine3C( MgLine2( ptln1));
 
 		if ( irt == MTRT_SYSTEMSTOP || irt == MTRT_CAN)
 			break;
 
-		MINT iKai = mtInpMode::GetKai();
-		nHaiKabe = mtHaitiIn::GetPts( iKai, MP_GP_TAIRYOKU, Mstr( "壁"),
+		MINT iKai = z_mn.GetKai();
+		nHaiKabe = mhHaitiIn::GetParts( iKai, MP_GP_TAIRYOKU, Mstr( "壁"),
 							   NULL, MAXHAIKABE, pHaiKabe);
 																					// 家モデルよりカレント階の全ての壁を取得する
 		for ( ic2=0; ic2<nHaiKabe; ic2++) {											// 壁
@@ -136,7 +140,8 @@ void MCmdLineW()
 		mtPlcInp::SetIdMbr( IdMbr);
 		mtPlcInp::SetpMbr( BuzaiCode::MhGetpMbr( IdMbr));
 		HaitiCmd::MmPresetCmd();
-		mtInpAttr::GetComboAttrA();
+//E		z_mn.GetComboAttrA();
+		z_mn.RibbonIO( MGET_COMBO_ATTRA, NULL);
 
 //DDD		mtPlcInp::SetpAux_xxxxxx();
 
@@ -146,7 +151,7 @@ void MCmdLineW()
 
 //		g_hInpPIAttr.GetPIAuxAttr();
 
-		HaitiCmd::MmPtsPlc( Ln1.p);
+		HaitiCmd::MmPartsPlc( Ln1.p);
 
 		WindowCtrl::MmWndKReDraw();
 		Msg::ClearErrorMsg();
@@ -170,17 +175,26 @@ void SetInpAt()
 	mtPlcInp::SetLenHosei( 0, -82.5f);
 	mtPlcInp::SetLenHosei( 1, -82.5f);
 //
-	mtInpAttr::SetComboAttrR( MC_CMB_LHS1, -82.5f);
-	mtInpAttr::SetComboAttrR( MC_CMB_LHS2, -82.5f);
+//E	z_mn.SetComboAttrR( MC_CMB_LHS1, -82.5f);
+	z_mn.RibbonIO( MSET_COMBO_ATTRR, MC_CMB_LHS1, -82.5f);
+//E	z_mn.SetComboAttrR( MC_CMB_LHS2, -82.5f);
+	z_mn.RibbonIO( MSET_COMBO_ATTRR, MC_CMB_LHS2, -82.5f);
+//
 	if ( ifirst == 1) {
-		mtInpAttr::SetComboAttrR( MC_CMB_KROH, 1000.0f);
+//E		z_mn.SetComboAttrR( MC_CMB_KROH, 1000.0f);
+		z_mn.RibbonIO( MSET_COMBO_ATTRR, MC_CMB_KROH, 1000.0f);
 	} else {
-		mtInpAttr::SetComboAttrR( MC_CMB_KROH, 2095.0f);
+//E		z_mn.SetComboAttrR( MC_CMB_KROH, 2095.0f);
+		z_mn.RibbonIO( MSET_COMBO_ATTRR, MC_CMB_KROH, 2095.0f);
 		ifirst = 1;
 	}
-	mtInpAttr::SetComboAttrR( MC_CMB_ZJSZ, 0.0f);
-	mtInpAttr::SetComboAttrR( MC_CMB_HAIZ, 0.0f);
-	mtInpAttr::SetComboAttrR( MC_CMB_TRTH, 2095.0f);
+//
+//E	z_mn.SetComboAttrR( MC_CMB_ZJSZ, 0.0f);
+	z_mn.RibbonIO( MSET_COMBO_ATTRR, MC_CMB_ZJSZ, 0.0f);
+//E	z_mn.SetComboAttrR( MC_CMB_HAIZ, 0.0f);
+	z_mn.RibbonIO( MSET_COMBO_ATTRR, MC_CMB_HAIZ, 0.0f);
+//E	z_mn.SetComboAttrR( MC_CMB_TRTH, 2095.0f);
+	z_mn.RibbonIO( MSET_COMBO_ATTRR, MC_CMB_TRTH, 2095.0f);
 }
 
 void MCmdDebug()
@@ -191,8 +205,8 @@ void MCmdDebug()
 	MPOSITION		posR;
 
 
-	for ( pPlcEn1 = HaitiDb::MdGetHeadPts( &posH); pPlcEn1!=0;
-		  pPlcEn1 = HaitiDb::MdGetNextPts( &posH)) {
+	for ( pPlcEn1 = HaitiDb::MdGetHeadParts( &posH); pPlcEn1!=0;
+		  pPlcEn1 = HaitiDb::MdGetNextParts( &posH)) {
 		pPlcEn1->FreeAllAtr();
 	}
 

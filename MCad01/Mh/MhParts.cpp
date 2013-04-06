@@ -1,7 +1,7 @@
 //==========================================================================================
 //  Copyright (C) 2006-2008. K.Matsu. All rights reserved.
 //
-//  MODULE: MhPts.cpp
+//  MODULE: MhParts.cpp
 //
 //		部材マスタを読み込む
 //
@@ -13,7 +13,7 @@
 
 #include "MgLib.h"
 
-#include "MmDefine.h"
+#include "MhDefParts.h"
 #include "MsBitSet.h"
 #include "MdOpt.h"
 #include "MdHist.h"
@@ -113,11 +113,11 @@ void mhPlcInfo::Copy( const mhPlcInfo &Ent)
 //    部材マスタ
 
 static	MINT		z_nGp;
-static	MhGp		z_Gp[MMAX_KUMI];
-static	MINT		z_nTpPts;
-static	mhTpPts		z_TpPts[MMAX_PARTSTP];
+static	mhGp		z_Gp[MMAX_KUMI];
+static	MINT		z_nPartsTp;
+static	mhPartsTp		z_PartsTp[MMAX_PARTSSPEC];
 static	MINT		z_nMbr;
-static	MhMbr		z_Mbr[MMAX_MEMBER];
+static	MhMbr		z_Mbr[MMAX_PARTSMEMBER];
 struct	BZMTBK
 {
 	MCHAR*	c;
@@ -139,7 +139,7 @@ static	const	BZMTBK	z_Br[] =
 };
 
 #define	NBUNRUI		(sizeof(z_Br)/sizeof(BZMTBK))
-static	const	BZMTBK	z_InpKb[] =
+static	const	BZMTBK	z_CdInpKb[] =
 {
 //	Mstr( "無指定"),			MP_INPKB_NONE,
 	Mstr( "１点"),				MP_INPKB_1PT,
@@ -148,7 +148,7 @@ static	const	BZMTBK	z_InpKb[] =
 	Mstr( "区画"),				MP_INPKB_AREA,
 	Mstr( "自由"),				MP_INPKB_FREE
 };
-#define	NInpKb	(sizeof(z_InpKb)/sizeof(BZMTBK))
+#define	NCdInpKb	(sizeof(z_CdInpKb)/sizeof(BZMTBK))
 static	const	BZMTBK	z_CdHgt[] =
 {
 	Mstr( "SGL"),				MP_HGTCD_SGL,			//ZZZZZ
@@ -249,7 +249,7 @@ void GetCdErrorMsg(
 ////////////////////////////////////////////////////////////////////////////
 //    部材マスタを読み込む
 
-void MhLoadPtsMst()
+void MhLoadPartsMst()
 {
 	MINT		ist;
 	MINT		ic1;
@@ -258,15 +258,15 @@ void MhLoadPtsMst()
 	MCHAR		TablePath[MAX_PATH];
 	MBHZDT		csvTbl;
 
-	MhGp		*MKM;							// 構成レコード
-	mhTpPts		*MPT;							// 部材種類レコード
-	MhMbr		*MBR;							// 寸法型式レコード
+	mhGp		*pMKM;							// 構成レコード
+	mhPartsTp	*pMPT;							// 部品仕様レコード
+	MhMbr		*pMBR;							// 寸法型式レコード
 
 	MCHAR		CmntF[2];
 	MCHAR		cLineNo[3];
 	MCHAR		cGp[16];
 	MCHAR		cBr[16];
-	MCHAR		cInpKb[8];
+	MCHAR		cCdInpKb[8];
 	MCHAR		cCdHgt[8];
 	MCHAR		cCdPlc[10];
 	MCHAR		cCdIzon[10];
@@ -285,10 +285,10 @@ void MhLoadPtsMst()
 		if ( ist == MBEOF) break;
 		if ( *CmntF == '#') continue;
 
-		MKM = &z_Gp[ic1];
-		MKM->SetCdGp( ic1);
-		ist = csvTbl.GetStr( MKM->GetNmGp(), MHKSSZ_NMKOSEI);			// ・構成（組）設定
-		ist = csvTbl.GetStr( MKM->GetNmFusezu(), MHKSSZ_NMFUSEZU);		// ・伏図名設定
+		pMKM = &z_Gp[ic1];
+		pMKM->SetCdGp( ic1);
+		ist = csvTbl.GetStr( pMKM->GetNmGp(), MHKSSZ_NMKOSEI);			// ・構成（組）設定
+		ist = csvTbl.GetStr( pMKM->GetNmFusezu(), MHKSSZ_NMFUSEZU);		// ・伏図名設定
 		if ( ist == MBEOF) break;
 		ic1++;
 	}
@@ -303,20 +303,20 @@ void MhLoadPtsMst()
 	ist = csvTbl.Open( TablePath);
 	ASSERT( ist == 0);													// 部品種類テーブル　読み込み開始エラー　<ERROR>
 
-	for ( ic1=0 ;ic1<MMAX_PARTSTP && ist!=MBEOF; ) {
+	for ( ic1=0 ;ic1<MMAX_PARTSSPEC && ist!=MBEOF; ) {
 		ist = csvTbl.Head( CmntF, 1);
 		if ( ist == MBEOF) break;
 		if ( *CmntF == '#') continue;									// '#'　コメント
 
-		MPT = &z_TpPts[ic1];											// 部品種類レコード
+		pMPT = &z_PartsTp[ic1];											// 部品種類レコード
 
 		ist = csvTbl.GetStr( cLineNo, Msizeof( cLineNo));				// ・行番号　読み飛ばし
 		ist = csvTbl.GetStr( cGp, Msizeof( cGp));						// ・構成コード設定
 		if ( ist == MBEOF) break;
 		for ( ik=1; ik<z_nGp; ik++) {
 			if ( Mstrcmp( cGp, z_Gp[ik].GetNmGp()) == 0) {
-				MPT->SetPTGp( &z_Gp[ik]);
-//				MPT->m_iGp = ik;
+				pMPT->SetPTGp( &z_Gp[ik]);
+//				pMPT->m_iGp = ik;
 				break;
 			}
 		}
@@ -324,39 +324,38 @@ void MhLoadPtsMst()
 
 		ist = csvTbl.GetStr( cBr, Msizeof( cBr));						// ・分類コード設定
 		if ( ist == MBEOF) break;
-		MPT->SetPTBr( GetCd( cBr, NBUNRUI, z_Br));	
-		ist = csvTbl.GetStr( MPT->GetPTNmGeneral(), MHPTSZ_NMGENERAL);	// ・総称設定
-		ist = csvTbl.GetStr( MPT->GetPTNmPts1(), MHPTSZ_NMPARTS1);		// ・操作用部材名設定
-		ist = csvTbl.GetStr( MPT->GetPTNmPts2(), MHPTSZ_NMPARTS2);		// ・積算用部材名設定
+		pMPT->SetPTCdBr( GetCd( cBr, NBUNRUI, z_Br));	
+		ist = csvTbl.GetStr( pMPT->GetPTNmGeneral(), MHPTSZ_NMGENERAL);	// ・総称設定
+		ist = csvTbl.GetStr( pMPT->GetPTNmParts1(), MHPTSZ_NMPARTS1);		// ・操作用部材名設定
+		ist = csvTbl.GetStr( pMPT->GetPTNmParts2(), MHPTSZ_NMPARTS2);		// ・積算用部材名設定
 		MINT iPTColor;		ist = csvTbl.GetInt( &iPTColor, 1);			// ・色
-		MPT->SetPTColor( iPTColor); 
+		pMPT->SetPTColor( iPTColor); 
 		MINT iPTCdBuzaiR;	ist = csvTbl.GetInt( &iPTCdBuzaiR, 1);		// ・部材コード設定(読み込み用)
-		MPT->SetPTCdBuzaiR( iPTCdBuzaiR);
+		pMPT->SetPTCdBuzaiR( iPTCdBuzaiR);
 		MINT iPTCdBuzaiW;	ist = csvTbl.GetInt( &iPTCdBuzaiW, 1);		// ・部材コード設定(書き込み用 Ver Up に使用)
-		MPT->SetPTCdBuzaiW( iPTCdBuzaiW);
-		ist = csvTbl.GetStr( MPT->GetPTTpMbr(), MHPTSZ_TPMEMBER);		// ・寸法型式選択用種類コード設定
-		ist = csvTbl.GetStr( MPT->GetPTCdMbr(), MHPTSZ_CDMEMBER);		// ・寸法型式コード設定
-		ist = csvTbl.GetStr( cInpKb, Msizeof( cInpKb));					// ・入力コード
-		MPT->SetPTInpKb( GetCd( cInpKb, NInpKb, z_InpKb));	
+		pMPT->SetPTCdBuzaiW( iPTCdBuzaiW);
+		ist = csvTbl.GetStr( pMPT->GetPTTpMbr(), MHPTSZ_TPMEMBER);		// ・寸法型式選択用種類コード設定
+		ist = csvTbl.GetStr( pMPT->GetPTCdMbr(), MHPTSZ_CDMEMBER);		// ・寸法型式コード設定
+		ist = csvTbl.GetStr( cCdInpKb, Msizeof( cCdInpKb));				// ・入力点区分コード
+		pMPT->SetPTCdInpKb( GetCd( cCdInpKb, NCdInpKb, z_CdInpKb));	
 		ist = csvTbl.GetStr( cCdHgt, Msizeof( cCdHgt));					// ・取り付け高さコード
-		MPT->SetPTCdHgt( (MSTNDH)GetCd( cCdHgt, NHEIGHTCD, z_CdHgt));								
+		pMPT->SetPTCdHgt( (MSTNDH)GetCd( cCdHgt, NHEIGHTCD, z_CdHgt));								
 		ist = csvTbl.GetStr( cCdPlc, Msizeof( cCdPlc));					// ・配置コード
-		MPT->SetPTCdPlc( GetCd( cCdPlc, NHAITICD, z_CdPlc));							
+		pMPT->SetPTCdPlc( GetCd( cCdPlc, NHAITICD, z_CdPlc));							
 		ist = csvTbl.GetStr( cCdIzon, Msizeof( cCdPlc));				// ・依存コード
-		MPT->SetPTCdIzon( GetCd( cCdIzon, NIZONCD, z_CdIzon));								
+		pMPT->SetPTCdIzon( GetCd( cCdIzon, NIZONCD, z_CdIzon));								
 		ist = csvTbl.GetStr( cCdMarume, Msizeof( cCdMarume));			// ・丸めコード
-		MPT->SetPTCdMarume( GetCd( cCdMarume, NMARUMECD, z_CdMarume));	
+		pMPT->SetPTCdMarume( GetCd( cCdMarume, NMARUMECD, z_CdMarume));	
 		ist = csvTbl.GetStr( cCdToritk, Msizeof( cCdToritk));			// ・取り付け位置コード('上':上付け(1), '下':下付け(0))
-//		if ( cCdToritk[0] == MCHAR( '上'))
 		if ( cCdToritk[0] == Mchar( '上'))
-			MPT->SetPTCdToritk( 1);
+			pMPT->SetPTCdToritk( 1);
 		else	
-			MPT->SetPTCdToritk( 0);
+			pMPT->SetPTCdToritk( 0);
 		if ( ist == MBEOF) break;
 		ic1++;
 	}
-	ASSERT( ic1 <= MMAX_PARTSTP);										// 部品種類テーブル　オーバフロー　<ERROR>
-	z_nTpPts = ic1;
+	ASSERT( ic1 <= MMAX_PARTSSPEC);										// 部品種類テーブル　オーバフロー　<ERROR>
+	z_nPartsTp = ic1;
 	
 	ist = csvTbl.Close();
 	
@@ -366,34 +365,34 @@ void MhLoadPtsMst()
 	ist = csvTbl.Open( TablePath);
 	ASSERT( ist == 0);													// 寸法型式テーブル　読み込み開始エラー　<ERROR>
 	
-	for ( ic1=0; ic1<MMAX_MEMBER && ist!=MBEOF; ) {
+	for ( ic1=0; ic1<MMAX_PARTSMEMBER && ist!=MBEOF; ) {
 		ist = csvTbl.Head( CmntF, 1);
 		if ( ist == MBEOF) break;
 		if ( *CmntF == '#') continue;
 
-		MBR = &z_Mbr[ic1];
+		pMBR = &z_Mbr[ic1];
 		ist = csvTbl.GetStr( cLineNo, Msizeof( cLineNo));				// ・行番号　読み飛ばし
-		ist = csvTbl.GetStr( MBR->m_cMbrCode, MHMBSZ_CODE);				// ・寸法型式設定
-		ist = csvTbl.GetReal( (MREAL*)&MBR->m_rBziWidth, 1);			// ・幅設定
-		ist = csvTbl.GetReal( (MREAL*)&MBR->m_rBziSZure, 1);			// ・芯ずれ量設定
-		ist = csvTbl.GetReal( (MREAL*)&MBR->m_rBziHeight, 1);			// ・高さ設定
-		ist = csvTbl.GetStr( MBR->m_cMbrType, MHMBSZ_TYPE);				// ・寸法型式選択用種類コード設定
-		ist = csvTbl.GetStr( MBR->m_cMbrCodeW, MHMBSZ_CODEW);			// ・寸法型式設定　(書き込み用　通常m_cCodeと同じ VerUp時に変更した内容が入る)
+		ist = csvTbl.GetStr( pMBR->m_cMbrCode, MHMBSZ_CODE);			// ・寸法型式設定
+		ist = csvTbl.GetReal( (MREAL*)&pMBR->m_rBziWidth, 1);			// ・幅設定
+		ist = csvTbl.GetReal( (MREAL*)&pMBR->m_rBziSZure, 1);			// ・芯ずれ量設定
+		ist = csvTbl.GetReal( (MREAL*)&pMBR->m_rBziHeight, 1);			// ・高さ設定
+		ist = csvTbl.GetStr( pMBR->m_cMbrType, MHMBSZ_TYPE);			// ・寸法型式選択用種類コード設定
+		ist = csvTbl.GetStr( pMBR->m_cMbrCodeW, MHMBSZ_CODEW);			// ・寸法型式設定　(書き込み用　通常m_cCodeと同じ VerUp時に変更した内容が入る)
 		if ( ist == MBEOF) break;
 		ic1++;
 	}
 	if ( Mstrcmp( z_Mbr[0].m_cMbrCode, Mstr( "無し")) == 0)
 		z_Mbr[0].m_cMbrCode[0] = NULL;									// 先頭の寸法型式=="無し"はNULLに置き換える
-	ASSERT( ic1 <= MMAX_MEMBER);										// 寸法型式テーブル　オーバフロー　<ERROR>
+	ASSERT( ic1 <= MMAX_PARTSMEMBER);										// 寸法型式テーブル　オーバフロー　<ERROR>
 	z_nMbr = ic1;
 
 	ist = csvTbl.Close();
 }
 
 // 部材マスターを読み込む
-void IeModel::MhInitPts()
+void IeModel::MhInitParts()
 {
-	MhLoadPtsMst();
+	MhLoadPartsMst();
 }
 
 // 組レコード数を取得する
@@ -403,7 +402,7 @@ MINT BuzaiCode::MhGetNoOfGp()
 }
 
 // 組レコードを取得する
-//MhGp* BuzaiCode::MhGeTpGp(
+//mhGp* BuzaiCode::MhGeTpGp(
 //				MINT		iGp					// 読み込み構成レコード番号
 //				)
 //{
@@ -411,33 +410,33 @@ MINT BuzaiCode::MhGetNoOfGp()
 //}
 
 // 部品種類レコード数を取得する
-MINT BuzaiCode::MhGetNoOfTpPts()
+MINT BuzaiCode::MhGetNoOfPartsTp()
 {
-	return z_nTpPts;
+	return z_nPartsTp;
 }
 
 // 部品種類レコードを取得する
-mhTpPts* BuzaiCode::MhGetpTpPts(
-				MINT		iTpPts				// 読み込み部品種類レコード番号
+mhPartsTp* BuzaiCode::MhGetpPartsTp(
+				MINT		iPartsTp				// 読み込み部品種類レコード番号
 				)
 {
-	return &z_TpPts[iTpPts];
+	return &z_PartsTp[iPartsTp];
 }
 
 // 部品IDを取得する
-MINT BuzaiCode::MhGetPIIdTpPts(
+MINT BuzaiCode::MhGetPIIdPartsTp(
 						MINT	iCdBuzai		// 部材コード
 				)
 {
 	MINT		ic1;
-	MINT		iIdTpPts = -1;
+	MINT		iIdPartsTp = -1;
 	
-	for ( ic1=0; ic1<z_nTpPts; ic1++) {
-		if ( iCdBuzai == z_TpPts[ic1].GetPTCdBuzai()) {
-			iIdTpPts = ic1;
+	for ( ic1=0; ic1<z_nPartsTp; ic1++) {
+		if ( iCdBuzai == z_PartsTp[ic1].GetPTCdBuzai()) {
+			iIdPartsTp = ic1;
 		}
 	}
-	return iIdTpPts;
+	return iIdPartsTp;
 }
 
 // 寸法型式レコード数を取得する
@@ -481,7 +480,7 @@ void	BuzaiCode::MhBziSin(
 						MgLine2		*plnBziSin	// (  O) 部材の芯線
 				)
 {
-	MgLine2		LnPts;
+	MgLine2		LnParts;
 	MgPoint2	ptW[2];
 	MgVect2		VtW, VtUtW;
 	MgVect2		VtSZ;							// 芯ずれ
@@ -505,12 +504,10 @@ void	BuzaiCode::MhBziSin(
 void	mhPlcInfo::Print(MCHAR* s)
 {
 #ifdef _DEBUG
-//	Msprintf_s( mlLog::m_Str, Mstr( "%s 	mhPlcInfo\n", s);
 	MCHAR sTrc[256], sCat[256];
 	MUINT*	pVmb;
 
 	m_lnPlc.Print( Mstr( "mhPlcInfo Line") );
-//	Msprintf_s( mlLog::m_Str, Mstr( "%s OnOpt %x %x %x, OffOpt %x %x %x\n"), s, m_pOpt1);
 	if ( m_pOpt1) {
 		pVmb = m_pOpt1->GetSOB();
 		Msprintf_s( sTrc, Mstr( "OnOpt %x %x %x"), pVmb[0], pVmb[1], pVmb[2]);
@@ -535,10 +532,10 @@ void	BuzaiCode::MhPrintallmhPlcInfo(MCHAR* s)
 {
 #ifdef _DEBUG
 	mhPlcInfo* pPlcEn;
-	MPOSITION	PtsPos;
+	MPOSITION	PartsPos;
 
 	Msprintf_s( mlLog::m_Str, Mstr( "%s 	All mhPlcInfo\n"), s);
-	for (pPlcEn = HaitiDb::MdGetHeadPts( &PtsPos); pPlcEn!=0; pPlcEn = HaitiDb::MdGetNextPts( &PtsPos)) {
+	for (pPlcEn = HaitiDb::MdGetHeadParts( &PartsPos); pPlcEn!=0; pPlcEn = HaitiDb::MdGetNextParts( &PartsPos)) {
 		pPlcEn->Print( s);
 	}
 	MBTRCPRBF;

@@ -22,7 +22,7 @@
 #include "MgMat.h"
 #include "MgLib.h"
 #include "MtAskForPoint.h"
-#include "MmDefine.h"
+#include "MhDefParts.h"
 #include "MsBitSet.h"
 #include "MdOpt.h"
 #include "MdHist.h"

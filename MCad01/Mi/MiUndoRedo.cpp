@@ -11,7 +11,7 @@
 #include "stdafx.h"
 #include "MsBasic.h"
 #include "MgLib.h"
-#include "MmDefine.h"
+#include "MhDefParts.h"
 
 #define DLL_EXPORT_HAITICMD_DO
 #include "MmCmd.h"
@@ -22,7 +22,8 @@
 #include "MdList.h"
 #include "MhLib.h"
 
-#include "MtInp.h"
+#include "MhInp.h"
+#include "MhInpAttr.h"
 
 #include "MdLib.h"
 
@@ -35,10 +36,10 @@ namespace MC
 {
 	mhPlcInfo	UndoPlcEn;
 
-	if ( HaitiDb::MdIsNotEmptyPts()) {
-		HaitiDb::MdEjectPts( &UndoPlcEn);
-		HaitiDb::MdPushRedoPts( &UndoPlcEn);
-		if ( mtHaitiIn::ChkPts( NULL, MP_GP_TAIRYOKU, Mstr( "•Ç"), NULL, &UndoPlcEn)) {
+	if ( HaitiDb::MdIsNotEmptyParts()) {
+		HaitiDb::MdEjectParts( &UndoPlcEn);
+		HaitiDb::MdPushRedoParts( &UndoPlcEn);
+		if ( mhHaitiIn::ChkParts( NULL, MP_GP_TAIRYOKU, Mstr( "•Ç"), NULL, &UndoPlcEn)) {
 			IeModel::MhKabeSetUpFlg();
 			IeModel::MhNormKabe( 0);
 		}
@@ -47,7 +48,7 @@ namespace MC
 
 bool HaitiCmd::MmUndoIsNotEmpty()
 {
-	return HaitiDb::MdIsNotEmptyPts();
+	return HaitiDb::MdIsNotEmptyParts();
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -56,10 +57,10 @@ void HaitiCmd::MmRedo()
 {
 	mhPlcInfo	RedoPlcEn;
 
-	if ( HaitiDb::MdIsNotEmptyRedoPts()) {
-		HaitiDb::MdPopRedoPts( &RedoPlcEn);
-		HaitiDb::MdInjectPts( &RedoPlcEn);
-		if ( mtHaitiIn::ChkPts( NULL, MP_GP_TAIRYOKU, Mstr( "•Ç"), NULL, &RedoPlcEn)) {
+	if ( HaitiDb::MdIsNotEmptyRedoParts()) {
+		HaitiDb::MdPopRedoParts( &RedoPlcEn);
+		HaitiDb::MdInjectParts( &RedoPlcEn);
+		if ( mhHaitiIn::ChkParts( NULL, MP_GP_TAIRYOKU, Mstr( "•Ç"), NULL, &RedoPlcEn)) {
 			IeModel::MhKabeSetUpFlg();
 			IeModel::MhNormKabe( 1);
 		}
@@ -68,7 +69,7 @@ void HaitiCmd::MmRedo()
 
 bool HaitiCmd::MmRedoIsNotEmpty()
 {
-	return HaitiDb::MdIsNotEmptyRedoPts();
+	return HaitiDb::MdIsNotEmptyRedoParts();
 }
 
 } // namespace MC

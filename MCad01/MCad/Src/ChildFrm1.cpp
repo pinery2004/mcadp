@@ -141,6 +141,13 @@ int CChildFrame1::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		return -1;
 
 	// TODO:  ここに特定な作成コードを追加してください。
+//E	// フレームのクライアント領域全体を占めるビューを作成します。
+//	if (!m_wndView1.Create(NULL, NULL, AFX_WS_DEFAULT_VIEW, 
+//		CRect(0, 0, 0, 0), this, AFX_IDW_PANE_FIRST, NULL))
+//	{
+//		TRACE0("ビュー ウィンドウを作成できませんでした。\n");
+//		return -1;
+//	}
 
 	return 0;
 }
@@ -168,5 +175,5 @@ void CChildFrame1::OnSetFocus(CWnd* pOldWnd)
 
 //	CMainFrame*	pMainFrame = (CMainFrame*)AfxGetMainWnd();
 
-	m_pwndView->SetFocus();
+//E	m_wndView1.SetFocus();
 }

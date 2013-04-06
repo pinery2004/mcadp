@@ -21,7 +21,7 @@
 #include "MgPlane.h"
 #include "MgPolygon.h"
 
-#include "MmDefine.h"
+#include "MhDefParts.h"
 #include "MsBitSet.h"
 #define	DLL_EXPORT_OPTION_DO
 #include "MdOpt.h"
@@ -31,7 +31,7 @@
 #include "MhLib.h"
 
 #include "MmLib.h"
-#include "MtInp.h"
+#include "MhInp.h"
 
 #include "MgGrp.h"
 
@@ -144,7 +144,7 @@ MINT Option::MhModOpt(
 			PlcEnM.FreePIOpt1();
 			PlcEnM.SetPIOpt1( pOptvWN);
 
-			*ppPlcEnM = HaitiDb::MdInjectPts( &PlcEnM);
+			*ppPlcEnM = HaitiDb::MdInjectParts( &PlcEnM);
 	}
 	return iMod;
 }

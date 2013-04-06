@@ -149,7 +149,7 @@ inline MgCir3 MgCir3C( const MgPoint2& pc, const MREAL r, const MgPlane3& Pln)	/
 						  Ciro.V = Pln.v;
 						  Ciro.r = r; return Ciro;}
 
-MINT DLL_EXPORT_CIR MgCir3Div ( const MgCir3 &Cir1, MINT n, const MgPoint3& Pts,	// ‰~‚ðn“™•ª‚·‚é
+MINT DLL_EXPORT_CIR MgCir3Div ( const MgCir3 &Cir1, MINT n, const MgPoint3& Parts,	// ‰~‚ðn“™•ª‚·‚é
 							MgGPoint3 *gPto);
 
 inline MINT SZMgCir2( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgCir2));}

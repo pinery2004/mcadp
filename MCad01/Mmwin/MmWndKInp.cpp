@@ -18,7 +18,7 @@
 #include "MmDrag.h"
 #define DLL_EXPORT_MC_WINDOWCTRL_DO
 #include "MmWnd.h"
-#include "MmDefine.h"
+#include "MhDefParts.h"
 
 #define DLL_EXPORT_MC_VIEWINP_DO
 #define DLL_EXPORT_MC_WINDOW_DO
@@ -27,6 +27,7 @@
 
 #include "MtAskForPoint.h"
 #include "MtDefine.h"
+#include "MhInpAttr.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -214,20 +215,20 @@ MINT ViewInp::MButtonDblClk(
 	return ist;
 }
 
-static	bool	z_fDispSelPts;					// マウスで選択部材の表示フラグ
+static	bool	z_fDispSelParts;					// マウスで選択部材の表示フラグ
 static	MINT	z_iCdBuzai;							// マウスで選択対象の部材コード
 
 /////////////////////////////////////////////////////////////////////////////
 //  マウス選択部材の表示制御
-void Window::SetDispSelPts(
+void Window::SetDispSelParts(
 						MINT 		iCdBuzai		// (I  ) マウスで選択対象の部材コード、NULL(全)、または -1(非表示)
 				) 
 {
 	if ( iCdBuzai >= 0) {
-		z_fDispSelPts = true;
+		z_fDispSelParts = true;
 		z_iCdBuzai = iCdBuzai;
 	} else {
-		z_fDispSelPts = false;
+		z_fDispSelParts = false;
 		z_iCdBuzai = NULL;
 		Window::EraseHitBzi();
 		Window::ResetDispHitBzi();
@@ -238,7 +239,7 @@ void Window::SetDispSelPts(
 //	マウス選択部材を再表示する
 void Window::ReDrawHitBzi()
 {
-	if ( z_fDispSelPts) {
+	if ( z_fDispSelParts) {
 		Window::ReDispHitBzi();
 	}
 }
@@ -281,8 +282,8 @@ MINT ViewInp::MouseMove(
 	Window::EraseDragging();
 	Window::DrawDragging( pWndInfo, ptMouthR);
 	// ヒット部材形状表示
-	if ( z_fDispSelPts) {
-		if ( mtHaitiIn::SrchBuzai( pWndInfo, ptMouthR, z_iCdBuzai, &pgHitBzi)) {
+	if ( z_fDispSelParts) {
+		if ( mhHaitiIn::SrchBuzai( pWndInfo, ptMouthR, z_iCdBuzai, &pgHitBzi)) {
 			Window::DrawHitBzi( pWndInfo, &pgHitBzi);
 		} else {
 			Window::EraseHitBzi();

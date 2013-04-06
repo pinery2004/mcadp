@@ -32,7 +32,7 @@ struct MT_InternalCmdList z_pInternalCmdList[] = {
 	{ Mstr( "_CancelCmd")		,MCmdWait			,0	 ,NULL  ,IDC_CANCELCMD },
 	{ Mstr( "_CreateKabeO")		,MCmdWallOuter		,0	 ,NULL  ,IDP_OUTERWALL },		// 外壁入力
 	{ Mstr( "_CreateKabeI")		,MCmdWallInner		,0	 ,NULL  ,IDP_INNERWALL },		// 内壁入力
-	{ Mstr( "_CreatePts")		,MCmdPts			,0	 ,NULL  ,IDC_PARTSCREATE },		// 部材入力
+	{ Mstr( "_CreateParts")		,MCmdParts			,0	 ,NULL  ,IDC_PARTSCREATE },		// 部材入力
 	{ Mstr( "_GTate1")			,MCmdGaiTateSash	,0	 ,NULL  ,IDP_GAITATESASH },		// 外部建具（サッシ）入力
 	{ Mstr( "_GTate2")			,MCmdGaiTateDoor	,0	 ,NULL  ,IDP_GAITATEDOOR },		// 外部建具（ドア）入力
 	{ Mstr( "_NTate")			,MCmdNaiTate		,0	 ,NULL  ,IDP_NAITATE },			// 内部建具入力
@@ -81,7 +81,7 @@ struct MT_InternalCmdList z_pInternalCmdList[] = {
 	{ Mstr( "_Opt")				,MCmdOpt			,0	 ,NULL  ,IDC_OPTION },			// オプション設定
 	{ Mstr( "_Hist")			,MCmdHist			,0	 ,NULL  ,IDC_HIST },			// 履歴管理
 	{ Mstr( "_Tenkai")			,MCmdTenkai			,0	 ,NULL  ,IDC_TENKAI },			// 住棟展開
-	{ Mstr( "_PtsEdit")			,MCmdPtsEdit		,0	 ,NULL  ,IDC_PARTSEDIT },		// グリッドコントロールテスト
+	{ Mstr( "_PartsEdit")			,MCmdPartsEdit		,0	 ,NULL  ,IDC_PARTSEDIT },		// グリッドコントロールテスト
 	{ Mstr( "_MLoadDxfFile")	,MCmdLoadDxfFile	,0	 ,NULL  ,IDC_LOAD_DXF_FILE },	// ＤＸＦファイルの読込み
 	{ Mstr( "_ModLineLength")	,MCmdMdLineLength	,0	 ,NULL  ,IDC_MOD_LINELENGTH },	// 横置部材の長さ調整
 	{ Mstr( "_ModPanelNo")		,MCmdMdPanelNo		,0	 ,NULL  ,IDC_MOD_PANELNO },		// パネル番号の修正

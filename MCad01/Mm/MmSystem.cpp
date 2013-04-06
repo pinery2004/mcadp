@@ -19,7 +19,7 @@
 #include "MmGridNum.h"
 #include "MmDrag.h"
 #include "MmWnd.h"
-#include "MmDefine.h"
+#include "MhDefParts.h"
 
 #define	DLL_EXPORT_MC_SYSTEM_DO
 #include "MmLib.h"
@@ -87,10 +87,10 @@ MINT System::MmInitialize()
 	MhHist::MmHistInit();
 	MhOptV::MmOptInit();
 	JTTenkai::InitJTT();
-	IeModel::MhInitPts();
+	IeModel::MhInitParts();
 
 	// 入力属性値を初期化する
-	IeModel::MhInitInpAt();
+	IeModel::MnInitInpAt();
 
 	// トレース処理のファイルオープン
 	MCHAR	cTraceFilePath[MAX_PATH];

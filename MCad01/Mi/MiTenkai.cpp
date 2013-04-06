@@ -17,7 +17,7 @@
 #include "MmGridNum.h"
 #include "MmDrag.h"
 #include "MmWnd.h"
-#include "MmDefine.h"
+#include "MhDefParts.h"
 #include "MmLib.h"
 #include "McSystemProperty.h"
 
@@ -32,7 +32,8 @@
 #include "MdList.h"
 #include "MdLib.h"
 
-#include "MtInp.h"
+#include "MhInp.h"
+#include "MhInpAttr.h"
 
 namespace MC
 {
@@ -103,22 +104,22 @@ void JTTenkai::CreJTTArea()
 	MPOSITION	pPlcPos[MX_NJUKO];								// 住戸住棟展開データレコード位置
 	MgPolyg2	pg1(4);
 
-	ist1 = mtHaitiIn::GetPts( 0, MP_GP_KABE, Mstr( "住棟展開"), NULL, 3, pHaiTenkai, pPlcPos);
+	ist1 = mhHaitiIn::GetParts( 0, MP_GP_KABE, Mstr( "住棟展開"), NULL, 3, pHaiTenkai, pPlcPos);
 	ASSERT( ist1 >= 0);											// 住棟展開データ　オーバフロー　<ERROR>
 	if ( ist1 == 1)
-		HaitiDb::MdPtsDelete( pPlcPos[0]);						// 住棟展開データを削除
+		HaitiDb::MdPartsDelete( pPlcPos[0]);						// 住棟展開データを削除
 
-	ist1 = mtHaitiIn::GetPts( 0, MP_GP_KABE, Mstr( "住戸区画"), NULL, MX_NJUKO, pHaiTenkai, pPlcPos);
+	ist1 = mhHaitiIn::GetParts( 0, MP_GP_KABE, Mstr( "住戸区画"), NULL, MX_NJUKO, pHaiTenkai, pPlcPos);
 	ASSERT( ist1 >= 0);											// 住戸区画データ　オーバフロー　<ERROR>
 	for (MINT ic=0; ic<ist1; ic++) {
-		HaitiDb::MdPtsDelete( pPlcPos[ic]);						// 住戸区画データを削除
+		HaitiDb::MdPartsDelete( pPlcPos[ic]);						// 住戸区画データを削除
 	}
 
-	ist1 = mtInpAttr::SetDialogBar( MP_GP_KABE, MP_BR_OTHER, Mstr( "住戸区画"), NULL);
-	mtInpAttr::GetComboAttrA();
+	ist1 = z_mn.SetRibbonBar( MP_GP_KABE, MP_BR_OTHER, Mstr( "住戸区画"), NULL);
+//E	z_mn.GetComboAttrA();
+	z_mn.RibbonIO( MGET_COMBO_ATTRA, NULL);
 
 	MgPoint2	ptJuko[2] = { MgPoint2( 0., 0.), MgPoint2( 0., 0.)};
-
 	MgMinMaxR2	mm = MgMinMaxR2( MREALMAX, MREALMAX, MREALMIN, MREALMIN);
 
 	for (MINT ic=0; ic<z_TenkaiPara.nJuko; ic++) {
@@ -134,15 +135,16 @@ void JTTenkai::CreJTTArea()
 
 		Ln1.p[0] = MgPoint3C( pg1.m_p[0]);
 		Ln1.p[1] = MgPoint3C( pg1.m_p[1]);
-		HaitiCmd::MmPtsPlc( Ln1.p, MgVect3( 0., 0., 1.), &pg1);		// 住戸区画（領域型）の部品配置
+		HaitiCmd::MmPartsPlc( Ln1.p, MgVect3( 0., 0., 1.), &pg1);		// 住戸区画（領域型）の部品配置
 
 		mm.Ins2( ptJuko[0]);
 		mm.Ins2( ptJuko[1]);
 	}
 	mm.Ins2( MgPoint2( 0., 0.));
 
-	ist1 = mtInpAttr::SetDialogBar( MP_GP_KABE, MP_BR_OTHER, Mstr( "住棟展開"), NULL);
-	mtInpAttr::GetComboAttrA();
+	ist1 = z_mn.SetRibbonBar( MP_GP_KABE, MP_BR_OTHER, Mstr( "住棟展開"), NULL);
+//E	z_mn.GetComboAttrA();
+	z_mn.RibbonIO( MGET_COMBO_ATTRA, NULL);
 
 	pg1.m_n = 0;
 	pg1 += mm.min;
@@ -157,9 +159,9 @@ void JTTenkai::CreJTTArea()
 
 	Ln1.p[0] = MgPoint3C( pg1.m_p[0]);
 	Ln1.p[1] = MgPoint3C( pg1.m_p[1]);
-	HaitiCmd::MmPtsPlc( Ln1.p, MgVect3( 0., 0., 1.), &pg1);			// 住棟展開（領域型）の部品配置
+	HaitiCmd::MmPartsPlc( Ln1.p, MgVect3( 0., 0., 1.), &pg1);			// 住棟展開（領域型）の部品配置
 
-	mtInpMode::SetKai( 1);
+	z_mn.SetKai( 1);
 	mtPlcInp::SetKai( 1);
 	MINT nGrid[4];
 	nGrid[1] = MINT(mm.min.x / mcs::GetReal( MM_REAL_PITCH) - 3.99);							// 西

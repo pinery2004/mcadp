@@ -12,14 +12,14 @@
 #include "MsBasic.h"
 #include "MgLib.h"
 
-#include "MmDefine.h"
+#include "MhDefParts.h"
 #define DLL_EXPORT_IEMODEL_DO
 #include "MhLib.h"
 #include "MmLib.h"
 #include "MdLib.h"
 #include "MdList.h"
 
-#include "MtInp.h"
+#include "MhInp.h"
 
 #include "MsBitSet.h"
 #include "MdOpt.h"
@@ -33,7 +33,7 @@
 #include "MfFile.h"
 #include "MmTenkai.h"
 
-#include "MhDefine.h"
+#include "MhDefDB.h"
 
 #include "MdModel.h"
 
@@ -79,7 +79,7 @@ MINT IeModel::MhMdlLoad(										//
 	static MINT	iCe = 0;
 
 	if ( i_sPathI == 0) {
-		mtInpMode::SetKai( 1);
+		z_mn.SetKai( 1);
 		mtPlcInp::SetKai( 1);
 		WindowCtrl::MmGridNumSet( NULL);													// ‰Šúİ’è
 		WindowCtrl::MmGridNumXqt();
@@ -124,7 +124,7 @@ MINT IeModel::MhMdlLoad(										//
 
 				pPlcEn = (mhPlcInfo*)malloc( sizeof( mhPlcInfo));
 				pPlcEn->Load( &hMdl);
-				HaitiDb::MdPtsAdd( pPlcEn, NULL);										// ‚n‚o‚sŒQ•ÏX–³‚µ‚Å’Ç‰Á
+				HaitiDb::MdPartsAdd( pPlcEn, NULL);										// ‚n‚o‚sŒQ•ÏX–³‚µ‚Å’Ç‰Á
 
 				ist = mdmDEnt::CreateEnt( MhModel::m_db.pidLyr[MD_ID_LYR_HAITI], &idEnt[iCe], isz);
 				ist = mdmDEnt::SetAttr( idEnt[iCe++], 2, pPlcEn);
@@ -167,7 +167,7 @@ MINT IeModel::MhMdlLoad(										//
 	hMdl.Close();
 
 	for ( ic=1; ic<=MMAX_KAI; ic++) {
-		mtInpMode::SetKai( ic);
+		z_mn.SetKai( ic);
 		mtPlcInp::SetKai( ic);
 
 		IeModel::MhKabeSetUpFlg();
@@ -176,7 +176,7 @@ MINT IeModel::MhMdlLoad(										//
 		IeModel::MhNormKiso( 0);
 	}
 
-	mtInpMode::SetKai( 1);
+	z_mn.SetKai( 1);
 	mtPlcInp::SetKai( 1);
 
 	WindowCtrl::MmGridNumSet( NULL);														// ‰Šúİ’è
@@ -234,8 +234,8 @@ MINT IeModel::MhMdlSave(									//
 	hMdl.WriteItemI( MDW_ATRCD_GRID, nGrid, 4*SZMINT());					// ƒOƒŠƒbƒh
 	
 	// ”z’u•”•i‚Ì•Û‘¶
-	for ( pPlcEn1 = HaitiDb::MdGetHeadPts( &posH); pPlcEn1!=0;
-		  pPlcEn1 = HaitiDb::MdGetNextPts( &posH)) {
+	for ( pPlcEn1 = HaitiDb::MdGetHeadParts( &posH); pPlcEn1!=0;
+		  pPlcEn1 = HaitiDb::MdGetNextParts( &posH)) {
 		pPlcEn1->Save( &hMdl);
 	}
 

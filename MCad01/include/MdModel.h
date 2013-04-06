@@ -92,7 +92,7 @@ public:
 	MDLYRSET	m_LyrBf;					// レイヤーセット
 	MDBRISET	m_BriBf;					// 分類セット
 	MDENTSET	m_EntBf;					// エンティティセット
-	MDPTSSET	m_PtsBf;					// 部品セット
+	MDPTSSET	m_PartsBf;					// 部品セット
 	MDWINSET	m_WinBf;					// ウィンドウセット
 
 	MgMat3E		m_MBaseTrans;				// 基準座標変換マトリックス
@@ -162,7 +162,7 @@ inline void MdModel::Print( MCHAR* s)
 	m_LyrBf.Print( Mstr( "◇レイヤーセット	"), MDC_NONE_ID);
 	m_BriBf.Print( Mstr( "◇分類セット		"), MDC_NONE_ID);
 	m_EntBf.Print( Mstr( "◇エンティティセット"), MDC_NONE_ID);
-	m_PtsBf.Print( Mstr( "◇部品セット		"), MDC_NONE_ID);
+	m_PartsBf.Print( Mstr( "◇部品セット		"), MDC_NONE_ID);
 	m_WinBf.Print( Mstr( "◇ウィンドウセット	"), MDC_NONE_ID);
 
 	MBTRCPRINTS( Mstr( "◇カレント"));

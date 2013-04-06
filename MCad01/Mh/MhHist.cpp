@@ -21,7 +21,7 @@
 #include "MgPlane.h"
 #include "MgPolygon.h"
 
-#include "MmDefine.h"
+#include "MhDefParts.h"
 #include "MsBitSet.h"
 #define	DLL_EXPORT_OPTION_DO
 #include "MdOpt.h"
@@ -130,7 +130,7 @@ MINT MhOpt::MhHistMod(
 
 			PlcEnM.FreePIVer();
 			PlcEnM.SetPIVer( pHstvAdd);
-			*ppPlcEnM = HaitiDb::MdInjectPts( &PlcEnM);
+			*ppPlcEnM = HaitiDb::MdInjectParts( &PlcEnM);
 	}
 	return iMod;
 }

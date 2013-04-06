@@ -208,6 +208,15 @@
     <Filter Include="MCmd6\hdr">
       <UniqueIdentifier>{25ab1f80-6f45-4829-bee8-c8a7e56f6a30}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Mn">
+      <UniqueIdentifier>{1770fbca-122e-4b4c-a0e9-9e5013748552}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mn\hdr">
+      <UniqueIdentifier>{448f975e-f6c7-4f24-86e7-a50a61a347cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mn\src">
+      <UniqueIdentifier>{88d3732f-0870-4ecb-830e-bcecfadffac2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -270,6 +279,9 @@
       <Filter>リソース ファイル</Filter>
     </None>
     <None Include="res\toolbar1.bmp">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="res\bitmaptest.bmp">
       <Filter>リソース ファイル</Filter>
     </None>
   </ItemGroup>
@@ -421,9 +433,6 @@
     <ClInclude Include="..\include\MhZukei.h">
       <Filter>Mh\hdr</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\MhTpPts.h">
-      <Filter>Mh\hdr</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\MhTategu.h">
       <Filter>Mh\hdr</Filter>
     </ClInclude>
@@ -508,19 +517,7 @@
     <ClInclude Include="..\include\MdPlex.h">
       <Filter>Mdb\hdr</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\MhDefine.h">
-      <Filter>Mh\hdr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\MhGp.h">
-      <Filter>Mh\hdr</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\MhIeModel.h">
-      <Filter>Mh\hdr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\MhParts.h">
-      <Filter>Mh\hdr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\MhTpParts.h">
       <Filter>Mh\hdr</Filter>
     </ClInclude>
     <ClInclude Include="..\include\MoMaterial.h">
@@ -581,9 +578,6 @@
       <Filter>Mm\hdr</Filter>
     </ClInclude>
     <ClInclude Include="..\include\MmCmdMsg.h">
-      <Filter>Mm\hdr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\MmDefine.h">
       <Filter>Mm\hdr</Filter>
     </ClInclude>
     <ClInclude Include="..\include\MmDrag.h">
@@ -655,12 +649,6 @@
     <ClInclude Include="..\include\MoDispList.h">
       <Filter>Mo\hdr</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\MtInp.h">
-      <Filter>Mt\hdr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\MtInpAttr.h">
-      <Filter>Mt\hdr</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\MtMCadApi.h">
       <Filter>Mt\hdr</Filter>
     </ClInclude>
@@ -715,14 +703,38 @@
     <ClInclude Include="..\include\MmDialogTenkai.h">
       <Filter>MCmd5\hdr</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\MmDialogPtsEdit.h">
-      <Filter>MCmd6\hdr</Filter>
-    </ClInclude>
     <ClInclude Include="MCad.h">
       <Filter>MCad\hdr</Filter>
     </ClInclude>
     <ClInclude Include="..\include\M3View.h">
       <Filter>MCad\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MnInpAttr.h">
+      <Filter>Mn\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MhParts.h">
+      <Filter>Mh\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MhGp.h">
+      <Filter>Mh\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MhDefDB.h">
+      <Filter>Mh\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MhDefParts.h">
+      <Filter>Mh\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MhInp.h">
+      <Filter>Mh\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MhInpAttr.h">
+      <Filter>Mh\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MmDialogPartsEdit.h">
+      <Filter>MCmd6\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MhPartsSpec.h">
+      <Filter>Mh\hdr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -891,9 +903,6 @@
     <ClCompile Include="..\Mh\MhOpt.cpp">
       <Filter>Mh\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Mh\MhParts.cpp">
-      <Filter>Mh\src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Mh\MhPlcInfo.cpp">
       <Filter>Mh\src</Filter>
     </ClCompile>
@@ -933,9 +942,6 @@
     <ClCompile Include="..\Mm\MmDragObject.cpp">
       <Filter>Mm\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Mm\MmGetKosei.cpp">
-      <Filter>Mm\src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Mm\MmGridNum.cpp">
       <Filter>Mm\src</Filter>
     </ClCompile>
@@ -945,22 +951,7 @@
     <ClCompile Include="..\Mm\MmPrompt.cpp">
       <Filter>Mm\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Mm\MmSDialogBarAttr.cpp">
-      <Filter>Mm\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Mm\MmSDialogBarInp.cpp">
-      <Filter>Mm\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Mm\MmSDialogBarPanel.cpp">
-      <Filter>Mm\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Mm\MmSDialogBarParts.cpp">
-      <Filter>Mm\src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Mm\MmSetCurrentWndFocus.cpp">
-      <Filter>Mm\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Mm\MmSetDialog.cpp">
       <Filter>Mm\src</Filter>
     </ClCompile>
     <ClCompile Include="..\Mm\MmSystem.cpp">
@@ -1131,9 +1122,6 @@
     <ClCompile Include="..\Mdm\MdmDEnt.cpp">
       <Filter>Mdm\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Mt\MtInp.cpp">
-      <Filter>Mt\src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Mt\MtMCadApi.cpp">
       <Filter>Mt\src</Filter>
     </ClCompile>
@@ -1250,6 +1238,30 @@
     </ClCompile>
     <ClCompile Include="Src\M3View.cpp">
       <Filter>MCad\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mm\MnGetKosei.cpp">
+      <Filter>Mn\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mt\MnInp.cpp">
+      <Filter>Mn\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mh\MhParts.cpp">
+      <Filter>Mh\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mm\MnSRibbonBarAttr.cpp">
+      <Filter>Mn\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mm\MnSRibbonBarInp.cpp">
+      <Filter>Mn\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mm\MnSRibbonBarPanel.cpp">
+      <Filter>Mn\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mm\MnSRibbonBarParts.cpp">
+      <Filter>Mn\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mm\MnSetRibbonBar.cpp">
+      <Filter>Mn\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

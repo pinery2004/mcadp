@@ -11,7 +11,7 @@
 #include "stdafx.h"
 #include "MsBasic.h"
 #include "MgLib.h"
-#include "MmDefine.h"
+#include "MhDefParts.h"
 #include "MsDefine.h"
 #include "MmWnd.h"
 

@@ -21,7 +21,7 @@
 #include "MgPlane.h"
 #include "MgPolygon.h"
 
-#include "MmDefine.h"
+#include "MhDefParts.h"
 #include "MsBitSet.h"
 #include "MdOpt.h"
 #include "MdHist.h"
@@ -39,11 +39,11 @@
 namespace MC
 {
 
-static	MdPtsQueue	z_RedoStk( 10, sizeof( mhPlcInfo));			// ‚q‚d‚c‚n—p•Û‘¶—Ìˆæ
+static	MdPartsQueue	z_RedoStk( 10, sizeof( mhPlcInfo));			// ‚q‚d‚c‚n—p•Û‘¶—Ìˆæ
 
 /////////////////////////////////////////////////////////////////////////////
 //	‚q‚d‚c‚n—p•Û‘¶—Ìˆæ‚ğƒCƒjƒVƒƒƒ‰ƒCƒY‚·‚é
-void MdRedoPtsDbInit( void)
+void MdRedoPartsDbInit( void)
 {
 	z_RedoStk.RemoveAll();
 }
@@ -51,7 +51,7 @@ void MdRedoPtsDbInit( void)
 /////////////////////////////////////////////////////////////////////////////
 //	‚q‚d‚c‚n—p•Û‘¶—Ìˆæ‚Ì•”•i”z’u‚Ì—L–³‚ğ’²‚×‚é
 
-bool HaitiDb::MdIsNotEmptyRedoPts()						// true: •”•i”z’u—L‚è/ false: •”•i”z’u–³‚µ
+bool HaitiDb::MdIsNotEmptyRedoParts()						// true: •”•i”z’u—L‚è/ false: •”•i”z’u–³‚µ
 {
 	return z_RedoStk.IsNotEmpty();
 }
@@ -59,7 +59,7 @@ bool HaitiDb::MdIsNotEmptyRedoPts()						// true: •”•i”z’u—L‚è/ false: •”•i”z’u–
 /////////////////////////////////////////////////////////////////////////////
 //	‚q‚d‚c‚n—p•Û‘¶—Ìˆæ‚Ìæ“ª‚É•”•i”z’u‚ğ’Ç‰Á‚·‚é
 
-void HaitiDb::MdPushRedoPts(
+void HaitiDb::MdPushRedoParts(
 						mhPlcInfo	*pRedoEn		// (I  ) •”•i”z’uŠÇ—î•ñ
 				)
 {
@@ -69,7 +69,7 @@ void HaitiDb::MdPushRedoPts(
 /////////////////////////////////////////////////////////////////////////////
 //	‚q‚d‚c‚n—p•Û‘¶—Ìˆæ‚Ìæ“ª‚Ì•”•i”z’u‚ğæ“¾‚·‚é
 
-void HaitiDb::MdPopRedoPts(
+void HaitiDb::MdPopRedoParts(
 						mhPlcInfo	*pRedoEn		// (I  ) •”•i”z’uŠÇ—î•ñ
 				)
 {

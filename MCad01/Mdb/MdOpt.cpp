@@ -17,7 +17,7 @@
 #include "MmGridNum.h"
 #include "MmDrag.h"
 #include "MmWnd.h"
-#include "MmDefine.h"
+#include "MhDefParts.h"
 #include "MmLib.h"
 #include "McSystemProperty.h"
 
@@ -27,7 +27,7 @@
 #include "MdList.h"
 #include "MhLib.h"
 
-#include "MtInp.h"
+#include "MhInp.h"
 
 #define DLL_EXPORT_MHOPTV_DO
 #include "MdOpt.h"
@@ -446,7 +446,7 @@ void MhOptV::MmOptAddDB()
 	MsBitSet	*pOptv;
 
 	MINT	iDB = 0;
-	for ( pPlcEn = HaitiDb::MdGetHeadPts( &pos1); pPlcEn!=0; pPlcEn = HaitiDb::MdGetNextPts( &pos1)) {
+	for ( pPlcEn = HaitiDb::MdGetHeadParts( &pos1); pPlcEn!=0; pPlcEn = HaitiDb::MdGetNextParts( &pos1)) {
 		pOptv = pPlcEn->GetPIOpt1();
 		if ( pOptv == NULL) {		// オプション設定無しの参照対象レコード
 		} else if ( MhOptV::MmOptChkC( pOptv)) {						// ＯＰＴ群有りの参照対象レコード
