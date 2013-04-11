@@ -22,17 +22,13 @@ namespace MC
 {
 
 ///////////////////////////////////////////////////////////////////////////////
-//	リボンバーの項目を設定する
+//	リボンバーの部品選択用項目を設定する
 //		組、分類、部品タイプ、寸法型式
 //
 MINT mnInpAttr::SetRibbonBar(					// ステイタス 0:正常 -1:エラー
-//S				MINT	iKumi,					// 組
-//				MINT	iBr,					// 分類
-//				MCHAR*	cPartsTp,					// タイプ
-//				MCHAR*	cMbr					// 寸法型式 または NULL
 						MPKOSEI		i_irbKumi,			// 構造	組
 						MPBUNRUI	i_irbBunrui,		// 構造	分類
-						MCHAR*		i_crbPartsTp,		// 部品種類
+						MCHAR*		i_crbPartsSpec,		// 部品種類
 						MCHAR*		i_crbMbr			// 部品メンバー()
 				)
 {
@@ -41,14 +37,14 @@ MINT mnInpAttr::SetRibbonBar(					// ステイタス 0:正常 -1:エラー
 
 	z_mn.SetKCdGp( i_irbKumi);
 	z_mn.SetKCdBr( i_irbBunrui);
-	z_mn.InitComboPartsTp();									// 組、分類に対応する部品を選択可能項目として設定する
-	ist = z_mn.SetComboCdPartsTp( i_crbPartsTp);
+	z_mn.InitComboPartsNm();									// 組、分類に対応する部品を選択可能項目として設定する
+	ist = z_mn.SelectComboPartsNmByPartsNm( i_crbPartsSpec);
 	if ( ist < 0)
 		MQUIT;
 
-	z_mn.InitComboPartsMbr();										// 部品に対応する寸法型式を選択可能項目として設定する
+	z_mn.InitComboPartsMbr();									// 部品に対応する寸法型式を選択可能項目として設定する
 	if ( i_crbMbr) {
-        ist = z_mn.SetComboCdMbr( i_crbMbr);
+        ist = z_mn.SelectComboMbrCdByMbrCd( i_crbMbr);
 		if ( ist < 0)
 			MQUIT;
 		if ( i_irbKumi == MP_GP_YANE) {

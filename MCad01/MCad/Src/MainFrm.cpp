@@ -31,6 +31,7 @@
 #include "MgLine.h"
 #include "MmLib.h"
 #include "MhLib.h"
+#include "MnInpAttr.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -38,7 +39,7 @@
 
 void	MmMainFrame( CMainFrame *pMainFrame);
 
-CMainFrame *ms_pMainFrame;										// メインフレームポインタ(Global) 
+CMainFrame *z_pMainFrame;										// メインフレームポインタ(Global) 
 
 // CMainFrame
 
@@ -49,8 +50,8 @@ BEGIN_MESSAGE_MAP(CMainFrame, CMDIFrameWndEx)
 	ON_COMMAND(ID_WINDOW_MANAGER, &CMainFrame::OnWindowManager)
 	ON_COMMAND_RANGE(ID_VIEW_APPLOOK_WIN_2000, ID_VIEW_APPLOOK_WINDOWS_7, &CMainFrame::OnApplicationLook)
 	ON_UPDATE_COMMAND_UI_RANGE(ID_VIEW_APPLOOK_WIN_2000, ID_VIEW_APPLOOK_WINDOWS_7, &CMainFrame::OnUpdateApplicationLook)
-	ON_COMMAND(IDC_CMB_BZI1, &CMainFrame::OnCbnSelchangeCombo1)
-	ON_COMMAND(IDC_CMB_BZI2, &CMainFrame::OnCbnSelchangeCombo2)
+	ON_COMMAND(IDC_CMBK_BZI1, &CMainFrame::OnCbnSelchangeCombo1)
+	ON_COMMAND(IDC_CMBK_BZI2, &CMainFrame::OnCbnSelchangeCombo2)
 	ON_COMMAND(IDC_CMB_Inp1, &CMainFrame::OnCbnSelchangeCombo11)
 	ON_COMMAND(IDC_CMB_Inp2, &CMainFrame::OnCbnSelchangeCombo12)
 	ON_COMMAND(IDC_CMB_Inp3, &CMainFrame::OnCbnSelchangeCombo13)
@@ -68,16 +69,47 @@ BEGIN_MESSAGE_MAP(CMainFrame, CMDIFrameWndEx)
 	ON_COMMAND(IDC_VIEW4OPEN, &CMainFrame::OnView4open)
 	ON_COMMAND(IDC_VIEW5OPEN, &CMainFrame::OnView5open)
 
-	ON_MESSAGE( WM_USER100 , OnUserMsg1)
+	ON_MESSAGE( WM_USER100 , OnRibbonIO)
 
 	ON_WM_CLOSE()
 END_MESSAGE_MAP()
 
 // User Msg
 
-LRESULT CMainFrame::OnUserMsg1( UINT wParam, LONG lParam)
+LRESULT CMainFrame::OnRibbonIO( UINT wParam, LONG lParam)
 {
-	MC::z_mn.InitComboAttr( MP_AT_AUTO);						// 部材入力種類に合った属性入力コンボボックスを表示
+	int ist = 0;
+
+	switch( MC::z_mn.m_iComboTp)
+	{
+	case MSET_RIBBON_BAR:
+		ist = MC::z_mn.SetRibbonBar( MC::z_mn.m_iRBKosei, MC::z_mn.m_iRBBunrui,
+									 MC::z_mn.m_sRBBuhin, MC::z_mn.m_sRBMbr);
+		break;
+	case MSET_INPUT_KUBUN_CD:
+		MC::z_mn.SelectComboInpKbnByInpKbnCd( MC::z_mn.m_iCdArg1);
+		break;
+	case MSET_INPUT_MARUME_CD:
+		MC::z_mn.SelectComboMarumeByMarumeCd( MC::z_mn.m_iCdArg1);
+		break;
+	case MSET_COMBO_ATTRR:
+		MC::z_mn.SetComboAttrR( MC_CMB_HAIZ, MC::z_mn.m_rCdArg2);
+		break;
+	case MGET_COMBO_ATTRA:
+		MC::z_mn.GetComboAttrA();
+		break;
+	case MSET_COMBO_PARTS:
+		MC::z_mn.SetComboParts();
+		break;
+	case MSET_COMBO_PANELNO:
+		MC::z_mn.SetComboPanelNo( MC::z_mn.m_iCdArg1);
+		break;
+	case MINIT_COMBO_ATTR:
+		MC::z_mn.InitComboAttr( MC::z_mn.m_iCdArg1);
+		break;
+	}
+//S	MC::z_mn.InitComboAttr( MP_AT_AUTO);						// 部材入力種類に合った属性入力コンボボックスを表示
+	MC::z_mn.m_iSts = ist;
 	return 0;
 }
 
@@ -86,9 +118,9 @@ LRESULT CMainFrame::OnUserMsg1( UINT wParam, LONG lParam)
 CMainFrame::CMainFrame()
 {
 	// TODO: メンバー初期化コードをここに追加してください。
-	g_theApp.m_nAppLook = g_theApp.GetInt(_T("ApplicationLook"), ID_VIEW_APPLOOK_OFF_2007_BLUE);
+	z_MCadApp.m_nAppLook = z_MCadApp.GetInt(_T("ApplicationLook"), ID_VIEW_APPLOOK_OFF_2007_BLUE);
 
-	ms_pMainFrame = this;
+	z_pMainFrame = this;
 	MC::System::SetpMainFrame( this);
 
 	MC::MtCmdOpen();
@@ -105,7 +137,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	BOOL bNameValid;
 	// 固定値に基づいてビジュアル マネージャーと visual スタイルを設定します
-	OnApplicationLook(g_theApp.m_nAppLook);
+	OnApplicationLook(z_MCadApp.m_nAppLook);
 
 	// タブ型式のウィンドウ表示
 	if (TAB_WINDOW) {
@@ -248,9 +280,9 @@ void CMainFrame::OnApplicationLook(UINT id)
 {
 	CWaitCursor wait;
 
-	g_theApp.m_nAppLook = id;
+	z_MCadApp.m_nAppLook = id;
 
-	switch (g_theApp.m_nAppLook)
+	switch (z_MCadApp.m_nAppLook)
 	{
 	case ID_VIEW_APPLOOK_WIN_2000:
 		CMFCVisualManager::SetDefaultManager(RUNTIME_CLASS(CMFCVisualManager));
@@ -293,7 +325,7 @@ void CMainFrame::OnApplicationLook(UINT id)
 		break;
 
 	default:
-		switch (g_theApp.m_nAppLook)
+		switch (z_MCadApp.m_nAppLook)
 		{
 		case ID_VIEW_APPLOOK_OFF_2007_BLUE:
 			CMFCVisualManagerOffice2007::SetStyle(CMFCVisualManagerOffice2007::Office2007_LunaBlue);
@@ -319,12 +351,12 @@ void CMainFrame::OnApplicationLook(UINT id)
 
 	RedrawWindow(NULL, NULL, RDW_ALLCHILDREN | RDW_INVALIDATE | RDW_UPDATENOW | RDW_FRAME | RDW_ERASE);
 
-	g_theApp.WriteInt(_T("ApplicationLook"), g_theApp.m_nAppLook);
+	z_MCadApp.WriteInt(_T("ApplicationLook"), z_MCadApp.m_nAppLook);
 }
 
 void CMainFrame::OnUpdateApplicationLook(CCmdUI* pCmdUI)
 {
-	pCmdUI->SetRadio(g_theApp.m_nAppLook == pCmdUI->m_nID);
+	pCmdUI->SetRadio(z_MCadApp.m_nAppLook == pCmdUI->m_nID);
 }
 
 CMDIChildWnd* CMainFrame::OpenView(CDocTemplate *pTemplate)
@@ -338,32 +370,38 @@ CMDIChildWnd* CMainFrame::OpenView(CDocTemplate *pTemplate)
 
 // PARTS リボンバー　部材名
 
-void CMainFrame::SetCombo1( MINT iCombo1)
+void CMainFrame::SelectCombo1( MINT i_iCombo1)
 {
-	m_iCombo1 = iCombo1;
-//U	((CComboBox*)(m_wndDlgBar3.GetDlgItem(IDC_CMB_BZI1)))->SetCurSel( m_iCombo1);
+	m_iCombo1 = i_iCombo1;
+//U	((CComboBox*)(m_wndDlgBar3.GetDlgItem(IDC_CMBK_BZI1)))->SetCurSel( m_iCombo1);
+	CMFCRibbonComboBox* pComboBuzai = mmpComboBuzai();
+	pComboBuzai->SelectItem( i_iCombo1);
 }
 
-void CMainFrame::SetCombo2( MINT iCombo2)
+void CMainFrame::SelectCombo2( MINT i_iCombo2)
 {
-	m_iCombo2 = iCombo2;
-//U	((CComboBox*)(m_wndDlgBar3.GetDlgItem(IDC_CMB_BZI2)))->SetCurSel( m_iCombo2);
+	m_iCombo2 = i_iCombo2;
+//U	((CComboBox*)(m_wndDlgBar3.GetDlgItem(IDC_CMBK_BZI2)))->SetCurSel( m_iCombo2);
+	CMFCRibbonComboBox* pComboMbr = mmpComboMbr();
+	pComboMbr->SelectItem( i_iCombo2);
 }
 
 
-void CMainFrame::SetComboInp1( MINT iCombo11)
+void CMainFrame::SelectComboInp1( MINT i_iCombo11)
 {
-	m_iComboInp1 = iCombo11;
+	m_iComboInp1 = i_iCombo11;
 //U	((CComboBox*)(m_wndDlgBar1.GetDlgItem(IDC_CMB_Inp1)))->SetCurSel( m_iComboInp1);
+	CMFCRibbonComboBox* pComboInpTp = mmpComboInpTp();
+	pComboInpTp->SelectItem( i_iCombo11);
 }
 
-void CMainFrame::SetComboInp2( MINT iCombo12)
+void CMainFrame::SelectComboInp2( MINT iCombo12)
 {
 	m_iComboInp2 = iCombo12;
 //U	((CComboBox*)(m_wndDlgBar1.GetDlgItem(IDC_CMB_Inp2)))->SetCurSel( m_iComboInp2);
 }
 
-void CMainFrame::SetComboInp3( MINT iCombo13)
+void CMainFrame::SelectComboInp3( MINT iCombo13)
 {
 	m_iComboInp3 = iCombo13;
 //U	((CComboBox*)(m_wndDlgBar1.GetDlgItem(IDC_CMB_Inp3)))->SetCurSel( m_iComboInp3);
@@ -379,14 +417,14 @@ void CMainFrame::OnDummy(UINT /*id*/)
 // PARTS リボンバー　部材名
 void CMainFrame::OnCbnSelchangeCombo1()
 {
-//E	m_iCombo1 = ((CComboBox*)(m_wndDlgBar3.GetDlgItem(IDC_CMB_BZI1)))->GetCurSel();	// 部品ID
-	CMFCRibbonComboBox* pCmbBox = MnpComboBuzai();
+//E	m_iCombo1 = ((CComboBox*)(m_wndDlgBar3.GetDlgItem(IDC_CMBK_BZI1)))->GetCurSel();	// 部品ID
+	CMFCRibbonComboBox* pCmbBox = mmpComboBuzai();
 	m_iCombo1 = pCmbBox->GetCurSel();											// 部品ID
-	MC::z_mn.SetComboKmIdPartsTp( m_iCombo1);
+	MC::z_mn.SelectComboPartsNmByKmId( m_iCombo1);
 	MC::z_mn.InitComboPartsMbr();
 	MC::Window::CurWndFocus();
-	MC::mhPartsTp* pPartsTp	= MC::BuzaiCode::MhGetpPartsTp( MC::z_mn.GetCurIdPartsTp());
-	if (pPartsTp->GetPTCdBr() >= MP_BR_SENBUN || MC::z_mn.GetMode() == MP_MD_DELETE)
+	MC::mhPartsSpec* pPartsSpec	= MC::BuzaiCode::MhGetpPartsSpec( MC::z_mn.GetCurPartsNmId());
+	if ( pPartsSpec->GetPTCdBr() >= MP_BR_SENBUN || MC::z_mn.GetMode() == MP_MD_DELETE)
 		MC::WindowCtrl::MmWndKCmdXqt( IDC_PARTSCREATE);							//	部材入力コマンド
 	else 
 		MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
@@ -396,10 +434,10 @@ void CMainFrame::OnCbnSelchangeCombo1()
 // PARTS リボンバー　寸法型式
 void CMainFrame::OnCbnSelchangeCombo2()
 {
-//E	m_iCombo2 = ((CComboBox*)(m_wndDlgBar3.GetDlgItem(IDC_CMB_BZI2)))->GetCurSel();	// 寸法型式ID
-	CMFCRibbonComboBox *pCmbBox = MmpComboMbr();
+//E	m_iCombo2 = ((CComboBox*)(m_wndDlgBar3.GetDlgItem(IDC_CMBK_BZI2)))->GetCurSel();	// 寸法型式ID
+	CMFCRibbonComboBox *pCmbBox = mmpComboMbr();
 	m_iCombo2 = pCmbBox->GetCurSel();											// 寸法型式ID
-	MC::z_mn.SetComboKmIdMbr( m_iCombo2);
+	MC::z_mn.SelectComboPartsMbrByKmId( m_iCombo2);
 	MC::Window::CurWndFocus();
 
 	MC::WindowCtrl::MmWndKCmdXqt( IDC_PARTSCREATE);								//	部品入力
@@ -409,9 +447,9 @@ void CMainFrame::OnCbnSelchangeCombo2()
 void CMainFrame::OnCbnSelchangeCombo11()
 {
 //E	m_iComboInp1 = ((CComboBox*)(m_wndRibbonBar.GetDlgItem(IDC_CMB_Inp1)))->GetCurSel();
-	CMFCRibbonComboBox *pCmbBox = MmpComboInpTp();
+	CMFCRibbonComboBox *pCmbBox = mmpComboInpTp();
 	m_iComboInp1 = pCmbBox->GetCurSel();
-	MC::z_mn.SetComboCdInpKb( m_iComboInp1);
+	MC::z_mn.SelectComboInpKbnByInpKbnCd( m_iComboInp1);
 	MC::Window::CurWndFocus();
 }
 
@@ -419,9 +457,9 @@ void CMainFrame::OnCbnSelchangeCombo11()
 void CMainFrame::OnCbnSelchangeCombo12()
 {
 //E	m_iComboInp2 = ((CComboBox*)(m_wndDlgBar1.GetDlgItem(IDC_CMB_Inp2)))->GetCurSel();
-	CMFCRibbonComboBox *pCmbBox = MmpComboCdMarume();
+	CMFCRibbonComboBox *pCmbBox = mmpComboMarume();
 	m_iComboInp2 = pCmbBox->GetCurSel();										// 丸めコード
-	MC::z_mn.SetComboCdMarume( m_iComboInp2);
+	MC::z_mn.SelectComboMarumeByMarumeCd( m_iComboInp2);
 	MC::Window::CurWndFocus();
 }
 
@@ -433,9 +471,9 @@ void CMainFrame::OnCbnSelchangeCombo12()
 void CMainFrame::OnCbnSelchangeCombo13()
 {
 //E	m_iComboInp3 = ((CComboBox*)(m_wndDlgBar1.GetDlgItem(IDC_CMB_Inp3)))->GetCurSel();
-	CMFCRibbonComboBox *pCmbBox = MmpComboCdPlc();
+	CMFCRibbonComboBox *pCmbBox = mmpComboPlcCd();
 	m_iComboInp3 = pCmbBox->GetCurSel();										// 配置コード
-	MC::z_mn.SetComboCdPlc( m_iComboInp3);
+	MC::z_mn.SelectComboPlcCdByPlcCd( m_iComboInp3);
 	MC::Window::CurWndFocus();
 }
 
@@ -493,7 +531,7 @@ void CMainFrame::OnView1open()
 
 	// ウィンドウのオープン
 	CMDIChildWnd* pChildWnd1;
-	pChildWnd1 = OpenView( g_theApp.m_pDocTemplate1);
+	pChildWnd1 = OpenView( z_MCadApp.m_pDocTemplate1);
 	MC::WindowCtrl::MmWndSetFrameC( 1, pChildWnd1);
 }
 
@@ -509,7 +547,7 @@ void CMainFrame::OnView2open()
 
 	// ウィンドウのオープン
 	CMDIChildWnd* pChildWnd2;
-	pChildWnd2 = OpenView( g_theApp.m_pDocTemplate2);
+	pChildWnd2 = OpenView( z_MCadApp.m_pDocTemplate2);
 	MC::WindowCtrl::MmWndSetFrameC( 2, pChildWnd2);
 }
 
@@ -525,7 +563,7 @@ void CMainFrame::OnView3open()
 
 	// ウィンドウのオープン
 	CMDIChildWnd* pChildWnd3;
-	pChildWnd3 = OpenView( g_theApp.m_pDocTemplate3);
+	pChildWnd3 = OpenView( z_MCadApp.m_pDocTemplate3);
 	MC::WindowCtrl::MmWndSetFrameC( 3, pChildWnd3);
 }
 
@@ -541,7 +579,7 @@ void CMainFrame::OnView4open()
 
 	// ウィンドウのオープン
 	CMDIChildWnd* pChildWnd1;
-	pChildWnd1 = OpenView( g_theApp.m_pDocTemplate1);
+	pChildWnd1 = OpenView( z_MCadApp.m_pDocTemplate1);
 	MC::WindowCtrl::MmWndSetFrameC( 4, pChildWnd1);
 }
 
@@ -557,6 +595,6 @@ void CMainFrame::OnView5open()
 
 	// ウィンドウのオープン
 	CMDIChildWnd* pChildWnd1;
-	pChildWnd1 = OpenView( g_theApp.m_pDocTemplate1);
+	pChildWnd1 = OpenView( z_MCadApp.m_pDocTemplate1);
 	MC::WindowCtrl::MmWndSetFrameC( 5, pChildWnd1);
 }

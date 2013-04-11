@@ -40,7 +40,7 @@ protected:
 // 構造入力用
 	MINT m_iKInpSel;											// 構造入力選択
 	bool m_bPartsListBuzai;										// 部品表用	部材一覧　チェックボックス
-	bool m_bPartsListKanagu;										// 部品表用	金物一覧　チェックボックス
+	bool m_bPartsListKanagu;									// 部品表用	金物一覧　チェックボックス
 	bool m_bPartsListGohan;										// 部品表用	合板一覧　チェックボックス
 	bool m_bPartsAttr1;
 	bool m_bPartsAttr2;
@@ -164,4 +164,4 @@ public:
 	afx_msg void OnUpdateRadioHekiryou(CCmdUI *pCmdUI);
 };
 
-extern CMCadApp g_theApp;
+extern CMCadApp z_MCadApp;

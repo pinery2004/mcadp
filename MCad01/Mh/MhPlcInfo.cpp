@@ -173,7 +173,7 @@ MINT mhPlcInfo::Load(							//
 				ASSERT( iSize == SZMINT());
 				MBFREE( pEnt);													// TYPE_HAITIEN_EORレコード用エリアの削除
 				
-				m_pPartsTp	= BuzaiCode::MhGetpPartsTp( m_isIdPartsTp);
+				m_pPartsSpec	= BuzaiCode::MhGetpPartsSpec( m_isIdPartsSpec);
 				m_pMbr		= BuzaiCode::MhGetpMbr( m_isMbrId);
 				
 				bEor = true;
@@ -197,7 +197,7 @@ MINT mhPlcInfo::Load(							//
 			case MDR_ATRCD_HAITIEN_IPARTSTPCD:									// 部品配置タイプコード 
 				ASSERT( iSize == SZMINT());
 				iCdBuzai = *(MINT*)pEnt;										// (部材コード)
-				m_isIdPartsTp = BuzaiCode::MhGetPIIdPartsTp( iCdBuzai);
+				m_isIdPartsSpec = BuzaiCode::MhGetPIIdPartsSpec( iCdBuzai);
 				MBFREE( pEnt);
 				break;
 			case MDR_ATRCD_HAITIEN_MEMBER:										// メンバー

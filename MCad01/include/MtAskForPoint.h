@@ -22,11 +22,11 @@ MINT MtAskForPoint(
 						);
 
 struct MT_InternalCmdList {
-    MCHAR* globalName;
-	void* funcPtr;
-	short cmdFlags;
-    MCHAR* localName;
-    int   cmdIndex;
+    MCHAR*	globalName;							// コマンドグローバル名称
+	void*	funcPtr;							// 関数エントリーポイント
+	int		cmdType;							// コマンドタイプ		( 1:意匠, 2:構造, 3:共通)
+    MCHAR*	localName;							// コマンド名称
+    int		cmdIndex;							// コマンドID
 };
 
 MINT MtSetKeyWord( const MCHAR* str);

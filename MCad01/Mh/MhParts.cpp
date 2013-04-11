@@ -114,8 +114,8 @@ void mhPlcInfo::Copy( const mhPlcInfo &Ent)
 
 static	MINT		z_nGp;
 static	mhGp		z_Gp[MMAX_KUMI];
-static	MINT		z_nPartsTp;
-static	mhPartsTp		z_PartsTp[MMAX_PARTSSPEC];
+static	MINT		z_nPartsSpec;
+static	mhPartsSpec		z_PartsSpec[MMAX_PARTSSPEC];
 static	MINT		z_nMbr;
 static	MhMbr		z_Mbr[MMAX_PARTSMEMBER];
 struct	BZMTBK
@@ -259,7 +259,7 @@ void MhLoadPartsMst()
 	MBHZDT		csvTbl;
 
 	mhGp		*pMKM;							// 構成レコード
-	mhPartsTp	*pMPT;							// 部品仕様レコード
+	mhPartsSpec	*pMPT;							// 部品仕様レコード
 	MhMbr		*pMBR;							// 寸法型式レコード
 
 	MCHAR		CmntF[2];
@@ -308,7 +308,7 @@ void MhLoadPartsMst()
 		if ( ist == MBEOF) break;
 		if ( *CmntF == '#') continue;									// '#'　コメント
 
-		pMPT = &z_PartsTp[ic1];											// 部品種類レコード
+		pMPT = &z_PartsSpec[ic1];											// 部品種類レコード
 
 		ist = csvTbl.GetStr( cLineNo, Msizeof( cLineNo));				// ・行番号　読み飛ばし
 		ist = csvTbl.GetStr( cGp, Msizeof( cGp));						// ・構成コード設定
@@ -355,7 +355,7 @@ void MhLoadPartsMst()
 		ic1++;
 	}
 	ASSERT( ic1 <= MMAX_PARTSSPEC);										// 部品種類テーブル　オーバフロー　<ERROR>
-	z_nPartsTp = ic1;
+	z_nPartsSpec = ic1;
 	
 	ist = csvTbl.Close();
 	
@@ -410,33 +410,33 @@ MINT BuzaiCode::MhGetNoOfGp()
 //}
 
 // 部品種類レコード数を取得する
-MINT BuzaiCode::MhGetNoOfPartsTp()
+MINT BuzaiCode::MhGetNoOfPartsSpec()
 {
-	return z_nPartsTp;
+	return z_nPartsSpec;
 }
 
 // 部品種類レコードを取得する
-mhPartsTp* BuzaiCode::MhGetpPartsTp(
-				MINT		iPartsTp				// 読み込み部品種類レコード番号
+mhPartsSpec* BuzaiCode::MhGetpPartsSpec(
+				MINT		iPartsSpec				// 読み込み部品種類レコード番号
 				)
 {
-	return &z_PartsTp[iPartsTp];
+	return &z_PartsSpec[iPartsSpec];
 }
 
 // 部品IDを取得する
-MINT BuzaiCode::MhGetPIIdPartsTp(
+MINT BuzaiCode::MhGetPIIdPartsSpec(
 						MINT	iCdBuzai		// 部材コード
 				)
 {
 	MINT		ic1;
-	MINT		iIdPartsTp = -1;
+	MINT		iIdPartsSpec = -1;
 	
-	for ( ic1=0; ic1<z_nPartsTp; ic1++) {
-		if ( iCdBuzai == z_PartsTp[ic1].GetPTCdBuzai()) {
-			iIdPartsTp = ic1;
+	for ( ic1=0; ic1<z_nPartsSpec; ic1++) {
+		if ( iCdBuzai == z_PartsSpec[ic1].GetPTCdBuzai()) {
+			iIdPartsSpec = ic1;
 		}
 	}
-	return iIdPartsTp;
+	return iIdPartsSpec;
 }
 
 // 寸法型式レコード数を取得する

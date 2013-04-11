@@ -50,7 +50,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;DLL_NO_IMPORT_GEO_DO;DLL_NO_IMPORT_MBASIC_DO;DLL_NO_IMPORT_MD_DO;DLL_NO_IMPORT_SUB_DO;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;DLL_NO_IMPORT_GEO_DO;DLL_NO_IMPORT_MBASIC_DO;DLL_NO_IMPORT_MD_DO;DLL_NO_IMPORT_SUB_DO;DLL_NO_IMPORT_MN_DO;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.\;..\include\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -75,7 +75,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_AFXEXT;DLL_NO_IMPORT_GEO_DO;DLL_NO_IMPORT_MBASIC_DO;DLL_NO_IMPORT_SUB_DO;DLL_NO_IMPORT_MD_DO;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_AFXEXT;DLL_NO_IMPORT_GEO_DO;DLL_NO_IMPORT_MBASIC_DO;DLL_NO_IMPORT_SUB_DO;DLL_NO_IMPORT_MD_DO;DLL_NO_IMPORT_MN_DO;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.\;..\include\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>

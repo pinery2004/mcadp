@@ -28,7 +28,7 @@ void MCmdWallOuter()
 {
 	MINT	ist1;
 //	MhInitInpAt();
-	ist1 = z_mn.SetRibbonBar( MP_GP_TAIRYOKU, MP_BR_OTHER, Mstr( "外壁"), Mstr( "204C"));
+	ist1 = z_mn.SetRibbonBarEnt( MP_GP_TAIRYOKU, MP_BR_OTHER, Mstr( "外壁"), Mstr( "204C"));
 	if ( ist1 == 0)
 		MCmdLine();
 }
@@ -39,7 +39,7 @@ void MCmdWallInner()
 {
 	MINT	ist1;
 //	MhInitInpAt();
-	ist1 = z_mn.SetRibbonBar( MP_GP_TAIRYOKU, MP_BR_OTHER, Mstr( "内壁"), Mstr( "204C"));
+	ist1 = z_mn.SetRibbonBarEnt( MP_GP_TAIRYOKU, MP_BR_OTHER, Mstr( "内壁"), Mstr( "204C"));
 	if ( ist1 == 0)
 		MCmdLine();
 }
@@ -51,7 +51,7 @@ void MCmdGaiTateSash()
 	MINT	ist1;
 //	MhInitInpAt();
 //	SetInpAt();
-	ist1 = z_mn.SetRibbonBar( MP_GP_KABE, MP_BR_OTHER, Mstr( "サッシ"), Mstr( "204C"));
+	ist1 = z_mn.SetRibbonBarEnt( MP_GP_KABE, MP_BR_OTHER, Mstr( "サッシ"), Mstr( "204C"));
 	if ( ist1 == 0)
 		MCmdLineW();
 }
@@ -63,7 +63,7 @@ void MCmdGaiTateDoor()
 	MINT	ist1;
 //	MhInitInpAt();
 //	SetInpAt();
-	ist1 = z_mn.SetRibbonBar( MP_GP_KABE, MP_BR_OTHER, Mstr( "ドア"), Mstr( "204C"));
+	ist1 = z_mn.SetRibbonBarEnt( MP_GP_KABE, MP_BR_OTHER, Mstr( "ドア"), Mstr( "204C"));
 	if ( ist1 == 0)
 		MCmdLineW();
 }
@@ -75,7 +75,7 @@ void MCmdNaiTate()
 	MINT	ist1;
 //	MhInitInpAt();
 //	SetInpAt();
-	ist1 = z_mn.SetRibbonBar( MP_GP_KABE, MP_BR_OTHER, Mstr( "内部建具"), Mstr( "204C"));
+	ist1 = z_mn.SetRibbonBarEnt( MP_GP_KABE, MP_BR_OTHER, Mstr( "内部建具"), Mstr( "204C"));
 	if ( ist1 == 0)
 		MCmdLineW();
 }
@@ -89,8 +89,8 @@ void MCmdLineW()
 	MgPoint2	ptln1[3], ptln1_org[3];
 	MgLine3		Ln1;
 	MgPolyg2	pg1(20);
-	MINT		iIdPartsTp;
-	mhPartsTp*	pPartsTp;
+	MINT		iIdPartsSpec;
+	mhPartsSpec*	pPartsSpec;
 
 	mhPlcInfo* pHaiKabe[MAXHAIKABE];				// 壁データ
 	MINT		nHaiKabe;							// 壁数
@@ -109,12 +109,12 @@ void MCmdLineW()
 	IeModel::MnInitInpAt();				// 070901
 	SetInpAt();							// 070901
 
-	iIdPartsTp = z_mn.GetCurIdPartsTp();
-	pPartsTp = BuzaiCode::MhGetpPartsTp( iIdPartsTp);
-//E	z_mn.SetComboCdInpKb( pPartsTp->GetPTCdInpKb());
-	z_mn.RibbonIO( MSET_INPUT_KUBUN_CD, pPartsTp->GetPTCdInpKb());	// 入力点区分を選択用のコンボボックスに表示する
-//E	z_mn.SetComboCdMarume( pPartsTp->GetPTCdMarume());
-	z_mn.RibbonIO( MSET_INPUT_MARUME_CD, pPartsTp->GetPTCdMarume());	// 丸めコードを選択用のコンボボックスに表示する
+	iIdPartsSpec = z_mn.GetCurPartsNmId();
+	pPartsSpec = BuzaiCode::MhGetpPartsSpec( iIdPartsSpec);
+//E	z_mn.SelectComboInpKbnByInpKbnCd( pPartsSpec->GetPTCdInpKb());
+	z_mn.RibbonIO( MSET_INPUT_KUBUN_CD, pPartsSpec->GetPTCdInpKb());	// 入力点区分を選択用のコンボボックスに表示する
+//E	z_mn.SelectComboMarumeByMarumeCd( pPartsSpec->GetPTCdMarume());
+	z_mn.RibbonIO( MSET_INPUT_MARUME_CD, pPartsSpec->GetPTCdMarume());	// 丸めコードを選択用のコンボボックスに表示する
 	MFOREVER {
 		iMode = 0;
 		irt = mhInput::GetLen2Pt( iMode, ptln1, ptln1_org);
@@ -123,7 +123,7 @@ void MCmdLineW()
 		if ( irt == MTRT_SYSTEMSTOP || irt == MTRT_CAN)
 			break;
 
-		MINT iKai = z_mn.GetKai();
+		MINT iKai = z_mn.GetInpKai();
 		nHaiKabe = mhHaitiIn::GetParts( iKai, MP_GP_TAIRYOKU, Mstr( "壁"),
 							   NULL, MAXHAIKABE, pHaiKabe);
 																					// 家モデルよりカレント階の全ての壁を取得する

@@ -4133,7 +4133,7 @@ public:
 			bst = true;
 	//
 	// ‰”’¼‹——£‚ª³‚È‚ç’¼ü‚Ì¶‚Æ‚Ý‚È‚·
-		} else if (pa1 > 0) {
+		} else if ( pa1 > 0) {
 			*ist = MC_LEFT;
 			bst = false;
 	//
@@ -4597,10 +4597,10 @@ public:
 		MREAL	pa1;								//	“_‚©‚ç•½–Ê‚Ü‚Å‚Ì‹——£
 	//
 		pa1 = (Pln2.v * p1) + Pln2.d;
-		if (pa1 > rTol) {
+		if ( pa1 > rTol) {
 			*ist = MC_UPPER;
 			bst = false;
-		} else if (pa1 < -rTol) {
+		} else if ( pa1 < -rTol) {
 			*ist = MC_LOWER;
 			bst = false;
 		} else {

@@ -25,7 +25,7 @@
 
 
 class CMCADApp*		_System::ms_pMCADApp;		// アプリケーションポインタ 
-class CMainFrame*	_System::ms_pMainFrame;		// メインフレームポインタ 
+class CMainFrame*	_System::z_pMainFrame;		// メインフレームポインタ 
 
 ////namespace MC
 ////{
@@ -76,40 +76,52 @@ class CMainFrame*	_System::ms_pMainFrame;		// メインフレームポインタ
 
 // CMainFrame メッセージ ハンドラ
 
-CMFCRibbonComboBox* MnpComboBuzai()
+CMFCRibbonComboBox* mmpComboBuzai()
 {
-	static CMFCRibbonComboBox* pIDC_CMB_BZI1 = 0;
-//E	return DYNAMIC_DOWNCAST(CMFCRibbonComboBox, MC::System::GetpMainFrame()->m_wndRibbonBar.FindByID(IDC_CMB_BZI1));
-//S	CMainFrame*	pMainFrame = MC::System::GetpMainFrame();
-//S	CMFCRibbonBaseElement* pFCRibbonBaseElement = pMainFrame->m_wndRibbonBar.FindByID(IDC_CMB_BZI1);
-//E	return DYNAMIC_DOWNCAST(CMFCRibbonComboBox, pMainFrame->m_wndRibbonBar.FindByID(IDC_CMB_BZI1));
-	if ( pIDC_CMB_BZI1 == 0) {
-		pIDC_CMB_BZI1 =  DYNAMIC_DOWNCAST(CMFCRibbonComboBox, MC::System::GetpMainFrame()->m_wndRibbonBar.FindByID(IDC_CMB_BZI1));
-	}
-	return pIDC_CMB_BZI1;
+// ==>
+	CMFCRibbonBar* pRibbonBar = &MC::System::GetpMainFrame()->m_wndRibbonBar;
+	CMFCRibbonCategory* pRibbonCategory = pRibbonBar->GetActiveCategory();
+
+	CString sName = pRibbonCategory->GetName();
+
+	MCHAR cName[20];
+	Mstrcpy_s( cName, pRibbonCategory->GetName());
+
+	CString sName2 = z_pMainFrame->m_wndRibbonBar.GetActiveCategory()->GetName();
+
+	TRACE( _T(" カレントカテゴリ = %s %s %s\n"), cName, sName, sName2);
+
+	MCHAR sTest[] = _T("意匠");
+	TRACE( _T(" カレントカテゴリ = %s\n"), sTest);
+// ===
+	CArray<CMFCRibbonBaseElement* ,CMFCRibbonBaseElement*> arButtons;
+	MC::System::GetpMainFrame()->m_wndRibbonBar.GetElementsByID( IDC_CMBK_BZI1, arButtons);
+// <==
+
+	return DYNAMIC_DOWNCAST(CMFCRibbonComboBox, MC::System::GetpMainFrame()->m_wndRibbonBar.FindByID(IDC_CMBK_BZI1));
 }
 
-CMFCRibbonComboBox* MmpComboMbr()
+CMFCRibbonComboBox* mmpComboMbr()
 {
-	return DYNAMIC_DOWNCAST(CMFCRibbonComboBox, MC::System::GetpMainFrame()->m_wndRibbonBar.FindByID(IDC_CMB_BZI2));
+	return DYNAMIC_DOWNCAST(CMFCRibbonComboBox, MC::System::GetpMainFrame()->m_wndRibbonBar.FindByID(IDC_CMBK_BZI2));
 }
 
-CMFCRibbonComboBox* MmpComboInpTp()
+CMFCRibbonComboBox* mmpComboInpTp()
 {
 	return DYNAMIC_DOWNCAST(CMFCRibbonComboBox, MC::System::GetpMainFrame()->m_wndRibbonBar.FindByID(IDC_CMB_Inp1));
 }
 
-CMFCRibbonComboBox* MmpComboCdMarume()
+CMFCRibbonComboBox* mmpComboMarume()
 {
 	return DYNAMIC_DOWNCAST(CMFCRibbonComboBox, MC::System::GetpMainFrame()->m_wndRibbonBar.FindByID(IDC_CMB_Inp2));
 }
 
-CMFCRibbonComboBox* MmpComboCdPlc()
+CMFCRibbonComboBox* mmpComboPlcCd()
 {
 	return DYNAMIC_DOWNCAST(CMFCRibbonComboBox, MC::System::GetpMainFrame()->m_wndRibbonBar.FindByID(IDC_CMB_Inp3));
 }
 
-CMFCRibbonComboBox* MnpComboPanelNo()
+CMFCRibbonComboBox* mmpComboPanelNo()
 {
 	return DYNAMIC_DOWNCAST(CMFCRibbonComboBox, MC::System::GetpMainFrame()->m_wndRibbonBar.FindByID(IDC_COMBOPANELNO));
 }

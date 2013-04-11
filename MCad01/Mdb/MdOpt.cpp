@@ -141,9 +141,9 @@ void MhOptV::MmOptSet(
 
 	//　３次元表示がされていた場合は新しいデータで再度表示する
 	if ( pWndInfo) 
-		g_theApp.CreateWnd( 2, MTHEIMENZU, 1, 1);
+		z_MCadApp.CreateWnd( 2, MTHEIMENZU, 1, 1);
 //		pWndInfo->m_pChildFrm->SendMessage(WM_CREATE);
-//		g_theApp.OnView2On();
+//		z_MCadApp.OnView2On();
 
 //------------------------------------------------------
 */

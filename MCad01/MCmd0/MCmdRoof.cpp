@@ -47,22 +47,22 @@ void MCmdRoofAdd()
 //S	z_mn.SetKCdGp( MP_GP_YANE);
 //	z_mn.SetKCdBr( MP_BR_OTHER);
 //	z_mn.InitComboAttr( MP_AT_YANE);								// 属性入力用コンボボックスを属性値入力無しにする
-//	z_mn.InitComboPartsTp();
-//	z_mn.SetComboCdPartsTp( Mstr( "屋根"));
+//	z_mn.InitComboPartsNm();
+//	z_mn.SelectComboPartsNmByPartsNm( Mstr( "屋根"));
 //	z_mn.InitComboPartsMbr();
-//	z_mn.SetComboCdMbr( Mstr( "204"));
+//	z_mn.SelectComboMbrCdByMbrCd( Mstr( "204"));
 
-	ist1 = z_mn.SetRibbonBar( MP_GP_YANE, MP_BR_OTHER, Mstr( "屋根"), Mstr( "204"));
+	ist1 = z_mn.SetRibbonBarEnt( MP_GP_YANE, MP_BR_OTHER, Mstr( "屋根"), Mstr( "204"));
 
 	WindowCtrl::MmWndKReDraw();
 
 	Msg::OperationMsg( MC_OPRT_ROOF);								// ステイタスバーの操作表示部へ"屋根入力"を表示
 
-	mhPartsTp* pPartsTp	= BuzaiCode::MhGetpPartsTp( z_mn.GetCurIdPartsTp());
-//E	z_mn.SetComboCdInpKb( pPartsTp->GetPTCdInpKb());
-	z_mn.RibbonIO( MSET_INPUT_KUBUN_CD, pPartsTp->GetPTCdInpKb());	// 入力点区分選択用のコンボボックスに表示する
-//E	z_mn.SetComboCdMarume( pPartsTp->GetPTCdMarume());
-	z_mn.RibbonIO( MSET_INPUT_MARUME_CD, pPartsTp->GetPTCdMarume());	// 丸めコードを選択用のコンボボックスに表示する
+	mhPartsSpec* pPartsSpec	= BuzaiCode::MhGetpPartsSpec( z_mn.GetCurPartsNmId());
+//E	z_mn.SelectComboInpKbnByInpKbnCd( pPartsSpec->GetPTCdInpKb());
+	z_mn.RibbonIO( MSET_INPUT_KUBUN_CD, pPartsSpec->GetPTCdInpKb());	// 入力点区分選択用のコンボボックスに表示する
+//E	z_mn.SelectComboMarumeByMarumeCd( pPartsSpec->GetPTCdMarume());
+	z_mn.RibbonIO( MSET_INPUT_MARUME_CD, pPartsSpec->GetPTCdMarume());	// 丸めコードを選択用のコンボボックスに表示する
 
 	MFOREVER {
 		pgJim.m_n = 0;
@@ -72,7 +72,7 @@ void MCmdRoofAdd()
 		if ( ist1 == MTRT_SYSTEMSTOP || ist1 == MTRT_CAN)
 			break;
 		MmPackAreaI( &pgJim, &GifInp);
-		if (pgJim.m_n < 3)
+		if ( pgJim.m_n < 3)
 			continue;
 
 		HaitiCmd::MmPresetCmd();
@@ -109,7 +109,7 @@ static void	MmPackAreaI(
 		else
 			icc = ic2;
 
-		if (pGifInp->m_i[icc] == pGifInp->m_i[ic1])				// 同一地廻り線種類の場合は
+		if ( pGifInp->m_i[icc] == pGifInp->m_i[ic1])				// 同一地廻り線種類の場合は
 			MGeo::ChkPt2OnLn2WS( pPg1->m_p[icc], ln1, &ist1);		//	直進か否かを調べる
 		else													// 異なる地廻り線種類の場合は
 			ist1 = 0;											//	非直進とする

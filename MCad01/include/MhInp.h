@@ -101,20 +101,20 @@ public:
 
 public:
 	//	配置データ入力バッファに属性を設定
-	static void SetKai( MINT iKai)					
+	static void SetInpKai( MINT iKai)					
 															{ m_PIInp.SetPIKai( iKai);}
 	static void SetCdHgt( MINT iCdHgt)				
 															{ m_PIInp.SetPICdHgt( iCdHgt);}
 	static void SetPanelNo( MINT iPanelNo)			
 															{ m_PIInp.SetPIPanelNo( iPanelNo);}
-	static void SetKaikoNo( MINT iKaikoNo)			
+	static void SetInpKaikoNo( MINT iKaikoNo)			
 															{ m_PIInp.SetPIKaikoNo( iKaikoNo);}
-	static void SetIdPartsTp( MINT iIdPartsTp)			
-															{ m_PIInp.SetPIIdPartsTp( iIdPartsTp);}
+	static void SetIdPartsSpec( MINT iIdPartsSpec)			
+															{ m_PIInp.SetPIIdPartsSpec( iIdPartsSpec);}
 	static void SetIdMbr( MINT iMbrId)				
 															{ m_PIInp.SetPIIdMbr( iMbrId);}
-	static void SetpPartsTp( mhPartsTp* pPartsTp)		
-															{ m_PIInp.SetPIPartsTp( pPartsTp);}
+	static void SetpPartsSpec( mhPartsSpec* pPartsSpec)		
+															{ m_PIInp.SetPIPartsSpec( pPartsSpec);}
 	static void SetpMbr( MhMbr* pMbr)				
 															{ m_PIInp.SetPIMbr( pMbr);}
 
@@ -140,20 +140,20 @@ public:
 	static void	SetpAuxTenkai( JTTenkaiPr* pAuxTenkai)
 															{ m_PIInp.SetPIAuxTenkai( pAuxTenkai);}
 	//	配置データ入力バッファから属性を取得
-	static MINT GetKai()							
+	static MINT GetInpKai()							
 															{ return m_PIInp.GetPIKai();}
 	static MINT	GetCdHgt()							
 															{ return m_PIInp.GetPICdHgt();}
 	static MINT	GetPanelNo()						
 															{ return m_PIInp.GetPIPanelNo();}
-	static MINT	GetKaikoNo()						
+	static MINT	GetInpKaikoNo()						
 															{ return m_PIInp.GetPIKaikoNo();}
-	static MINT	GetIdPartsTp()						
-															{ return m_PIInp.GetPIIdPartsTp();}
+	static MINT	GetComboPartsNmId()						
+															{ return m_PIInp.GetPIIdPartsSpec();}
 	static MINT	GetIdMbr()							
 															{ return m_PIInp.GetPIIdMbr();}
-	static mhPartsTp* GetPartsTp()						
-															{ return m_PIInp.GetPIPartsTp();}
+	static mhPartsSpec* GetPartsSpec()						
+															{ return m_PIInp.GetPIPartsSpec();}
 	static MhMbr*  GetMbr()						
 															{ return m_PIInp.GetPIMbr();}
 

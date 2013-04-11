@@ -54,7 +54,7 @@ BOOL CMmDialogOpt::OnInitDialog()
 						DEFAULT_QUALITY, DEFAULT_PITCH, Mstr( "ＭＳ Ｐゴシック"));
 
 	pWndInfo = MC::WindowCtrl::MmWndKGetCurWnd();							// カレントウィンドウ取得
-	if (pWndInfo == NULL) MQUIT;
+	if ( pWndInfo == NULL) MQUIT;
 
 exit:
 	return TRUE;  // return TRUE unless you set the focus to a control
@@ -181,11 +181,11 @@ void CMmDialogOpt::OnBnClickedCheckoption10()
 BOOL CMmDialogOpt::PreTranslateMessage(MSG* pMsg)
 {
 	// TODO: ここに特定なコードを追加するか、もしくは基本クラスを呼び出してください。
-	if (pMsg->message == WM_KEYDOWN) {
-		if (pMsg->wParam == VK_RETURN) {
+	if ( pMsg->message == WM_KEYDOWN) {
+		if ( pMsg->wParam == VK_RETURN) {
 			return TRUE;
 		}
-//		if (pMsg->wParam == VK_ESCAPE) {
+//		if ( pMsg->wParam == VK_ESCAPE) {
 //			SetControl();
 //			return TRUE;
 //		}

@@ -242,7 +242,7 @@ void MgSample_sort2()
 //        if (lo <= hi)
 //        {
 //			// swap only if the items are not equal
-//            if (pfnCompare((LPARAM)GetCell(lo, nCol), (LPARAM)GetCell(hi, nCol), data) != 0)
+//            if ( pfnCompare((LPARAM)GetCell(lo, nCol), (LPARAM)GetCell(hi, nCol), data) != 0)
 //            {
 //				for (int col = 0; col < GetColumnCount(); col++)
 //                {

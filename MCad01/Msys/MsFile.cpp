@@ -35,27 +35,28 @@ public:
 					DWORD	dwSize = 0
 				);
 	static void DispFileDlg(
-					BOOL		bDialogType,		// (I  ) ダイアログタイプ　TRUE:読み込み、FAULT:保存
-					CWnd*		i_pWnd,				// (I  ) 親ウィンドウまたはオーナー ウィンドウへのポインタ
-					MCHAR*		i_sInitFilePath,	// (I  ) 初期設定ファイルパス
-					MCHAR*		o_sSelFilePath,	// (  O) 選択ファイルパス
-					MCHAR*		i_sFilters			// (I  ) ファイルを特定するためのフィルタ or NULL
+					BOOL		i_bDialogType,		// ダイアログタイプ　TRUE:読み込み、FAULT:保存
+					CWnd*		i_pWnd,				// 親ウィンドウまたはオーナー ウィンドウへのポインタ
+					MCHAR*		i_sInitFilePath,	// 初期設定ファイルパス
+					MCHAR*		o_sSelFilePath,		// 選択ファイルパス
+					int			i_iszSelFilePath,	// 選択ファイルパスバッファサイズ(文字数)
+					MCHAR*		i_sFilters			// ファイルを特定するためのフィルタ or NULL
 				);
 public:
 	virtual BOOL OnInitDialog();
 };
 
 MsFileDialog::MsFileDialog(
-					BOOL	bOpenFileDialog,	// (I  ) TRUE: ファイルを開く, FALSE: ファイル名を付けて保存
-					LPCTSTR lpszDefExt,			// (I  ) 既定のファイル拡張子 or NULL (拡張子を省略した入力時に付加する拡張子)
-					LPCTSTR lpszFileName,		// (I  ) 初期表示されるファイル名 or NULL
-					DWORD	dwFlags,			// (I  ) ダイアログ ボックスをカスタマイズするためのフラグ
-					LPCTSTR lpszFilter,			// (I  ) ファイルを特定するためのフィルタ
-					CWnd*	pParentWnd,			// (I  ) 親ウィンドウまたはオーナー ウィンドウへのポインタ
-					DWORD	dwSize				// (I  ) OPENFILENAME 構造体のサイズ または 0
+					BOOL	i_bOpenFileDialog,		// TRUE: ファイルを開く, FALSE: ファイル名を付けて保存
+					LPCTSTR i_lpszDefExt,			// 既定のファイル拡張子 or NULL (拡張子を省略した入力時に付加する拡張子)
+					LPCTSTR i_lpszFileName,			// 初期表示されるファイル名 or NULL
+					DWORD	i_dwFlags,				// ダイアログ ボックスをカスタマイズするためのフラグ
+					LPCTSTR i_lpszFilter,			// ファイルを特定するためのフィルタ
+					CWnd*	i_pParentWnd,			// 親ウィンドウまたはオーナー ウィンドウへのポインタ
+					DWORD	i_dwSize				// OPENFILENAME 構造体のサイズ または 0
 				)
-				  : CFileDialog( bOpenFileDialog, lpszDefExt, lpszFileName, 
-								 dwFlags, lpszFilter, pParentWnd, dwSize)
+				  : CFileDialog( i_bOpenFileDialog, i_lpszDefExt, i_lpszFileName, 
+								 i_dwFlags, i_lpszFilter, i_pParentWnd, i_dwSize)
 {
 };
 
@@ -76,36 +77,39 @@ BOOL MsFileDialog::OnInitDialog()
 ///////////////////////////////////////////////////////////////////////////////
 //	読み込み用ファイル選択ダイアログを表示する
 void MsLoadFileDlg(
-					CWnd*		i_pWnd,				// (I  ) 親ウィンドウまたはオーナー ウィンドウへのポインタ
-					MCHAR*		i_sInitFilePath,	// (I  ) 初期設定ファイルパス
-					MCHAR*		o_sSelFilePath,	// (  O) 選択ファイルパス
-					MCHAR*		i_sFilters			// (I  ) ファイルを特定するためのフィルタ or NULL
-)
+					CWnd*		i_pWnd,				// 親ウィンドウまたはオーナー ウィンドウへのポインタ
+					MCHAR*		i_sInitFilePath,	// 初期設定ファイルパス
+					MCHAR*		o_sSelFilePath,		// 選択ファイルパス
+					int			i_iszSelFilePath,	// 選択ファイルパスバッファサイズ(文字数)
+					MCHAR*		i_sFilters			// ファイルを特定するためのフィルタ or NULL
+				)
 {
-	MsFileDialog::DispFileDlg( TRUE, i_pWnd, i_sInitFilePath, o_sSelFilePath, i_sFilters);
+	MsFileDialog::DispFileDlg( TRUE, i_pWnd, i_sInitFilePath, o_sSelFilePath, i_iszSelFilePath, i_sFilters);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 //	保存用ファイル選択ダイアログを表示する
 void MsSaveFileDlg(
-					CWnd*		i_pWnd,				// (I  ) 親ウィンドウまたはオーナー ウィンドウへのポインタ
-					MCHAR*		i_sInitFilePath,	// (I  ) 初期設定ファイルパス
-					MCHAR*		o_sSelFilePath,	// (  O) 選択ファイルパス
-					MCHAR*		i_sFilters			// (I  ) ファイルを特定するためのフィルタ or NULL
-)
+					CWnd*		i_pWnd,				// 親ウィンドウまたはオーナー ウィンドウへのポインタ
+					MCHAR*		i_sInitFilePath,	// 初期設定ファイルパス
+					MCHAR*		o_sSelFilePath,		// 選択ファイルパス
+					int			i_iszSelFilePath,	// 選択ファイルパスバッファサイズ(文字数)
+					MCHAR*		i_sFilters			// ファイルを特定するためのフィルタ or NULL
+				)
 {
-	MsFileDialog::DispFileDlg( FALSE, i_pWnd, i_sInitFilePath, o_sSelFilePath, i_sFilters);
+	MsFileDialog::DispFileDlg( FALSE, i_pWnd, i_sInitFilePath, o_sSelFilePath, i_iszSelFilePath, i_sFilters);
 }
 #define	NCHEXP	10
 ///////////////////////////////////////////////////////////////////////////////
 //	ファイル選択ダイアログを表示する
 void MsFileDialog::DispFileDlg(
-					BOOL		bDialogType,		// (I  ) ダイアログタイプ　TRUE:読み込み、FAULT:保存
-					CWnd*		i_pWnd,				// (I  ) 親ウィンドウまたはオーナー ウィンドウへのポインタ
-					MCHAR*		i_sInitFilePath,	// (I  ) 初期設定ファイルパス
-					MCHAR*		o_sSelFilePath,	// (  O) 選択ファイルパス
-					MCHAR*		i_sFilters			// (I  ) ファイルを特定するためのフィルタ or NULL
-)
+					BOOL		bDialogType,		// ダイアログタイプ　TRUE:読み込み、FAULT:保存
+					CWnd*		i_pWnd,				// 親ウィンドウまたはオーナー ウィンドウへのポインタ
+					MCHAR*		i_sInitFilePath,	// 初期設定ファイルパス
+					MCHAR*		o_sSelFilePath,		// 選択ファイルパスバッファ
+					int			i_iszSelFilePath,	// 選択ファイルパスバッファサイズ(文字数)
+					MCHAR*		i_sFilters			// ファイルを特定するためのフィルタ or NULL
+				)
 {
 	MCHAR*	psFilters; 
 	MCHAR*	psDefExt; 
@@ -131,7 +135,7 @@ void MsFileDialog::DispFileDlg(
 		for ( iC = iLen - 1; iC >= 0 && i_sInitFilePath[iC] != '.'; iC--);
 		if ( iC >= 0 ) {
 			if ( iLen - iC < NCHEXP) 
-				Mstrcpy( sDefExtI, &i_sInitFilePath[iC + 1]);
+				Mstrcpy_s( sDefExtI, &i_sInitFilePath[iC + 1]);
 			psDefExt = sDefExt;
 		} else {
 			psDefExt = NULL;
@@ -143,7 +147,7 @@ void MsFileDialog::DispFileDlg(
 
 	if( fileDlg.DoModal() == IDOK )	{
 		CString pathName = fileDlg.GetPathName();
-		Mstrcpy( o_sSelFilePath, pathName);
+		Mstrcpy_s( o_sSelFilePath, i_iszSelFilePath, pathName);
 
 	} else {
 		o_sSelFilePath[0] = 0;
@@ -159,7 +163,8 @@ void MsForFolderDlg(
 					HWND		i_hWnd,				// (I  ) 親ウィンドウのハンドル
 					MCHAR*		i_sCaptionStr,		// (I  ) 説明の文字列
 					MCHAR*		i_sInitFldrPath,	// (I  ) 初期設定フォルダパス
-					MCHAR*		o_sSelFldrPath		// (I  ) 選択フォルダパス
+					MCHAR*		o_sSelFldrPath,		// (I  ) 選択フォルダパス
+					int			i_iszSelFldrPath	// 選択フォルダパス配列サイズ(文字数)
 					)
 {
 	BROWSEINFO		stBInfo;
@@ -232,7 +237,7 @@ void MsForFolderDlg(
 		//　フルパスを取得します。
 		bRes = SHGetPathFromIDList( pidlBrowse, sPutFolder );
 		if( bRes) {
-			Mstrcpy( o_sSelFldrPath, sPutFolder);
+			Mstrcpy_s( o_sSelFldrPath, i_iszSelFldrPath, sPutFolder);
 		}
         //PIDLを解放する
 		//::CoTaskMemFree( pidlBrowse );

@@ -82,7 +82,7 @@ void WindowCtrl::MmWndKDrawParts(
 
 		if ( pPlcEn->GetPIKai() != iKaiC)
 			continue;											// 異なる階の部材は表示しない
-//		if ( pPlcEn->GetPIPartsTp()->m_pGp->m_iCode != iGpC)
+//		if ( pPlcEn->GetPIPartsSpec()->m_pGp->m_iCode != iGpC)
 //			continue;											// 異なる構成の部材は表示しない
 		if ( pPlcEn->GetPTCdGp() != iGpC)
 			continue;											// 異なる構成の部材は表示しない

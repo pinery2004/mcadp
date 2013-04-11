@@ -52,8 +52,8 @@ MUINT		JTTenkai::z_iTenkai[MX_NJUKO];		// 住棟展開制御
 	MUCHAR ifH[MX_NJUKO];						// 0: コピー、1: 反転コピー
 	MUCHAR nJuko[MX_NJUKO];						// 展開元住戸
 	MREAL rMDJuko[MX_NJUKO];					// 縦方向オフセット
-	MREAL rDJuko[MX_NJUKO];					// 住戸奥行
-	MREAL rWJuko[MX_NJUKO];					// 住戸巾
+	MREAL rDJuko[MX_NJUKO];						// 住戸奥行
+	MREAL rWJuko[MX_NJUKO];						// 住戸巾
 */
 /////////////////////////////////////////////////////////////////////////////
 //【機能】住棟展開情報を初期化する
@@ -107,15 +107,15 @@ void JTTenkai::CreJTTArea()
 	ist1 = mhHaitiIn::GetParts( 0, MP_GP_KABE, Mstr( "住棟展開"), NULL, 3, pHaiTenkai, pPlcPos);
 	ASSERT( ist1 >= 0);											// 住棟展開データ　オーバフロー　<ERROR>
 	if ( ist1 == 1)
-		HaitiDb::MdPartsDelete( pPlcPos[0]);						// 住棟展開データを削除
+		HaitiDb::MdPartsDelete( pPlcPos[0]);					// 住棟展開データを削除
 
 	ist1 = mhHaitiIn::GetParts( 0, MP_GP_KABE, Mstr( "住戸区画"), NULL, MX_NJUKO, pHaiTenkai, pPlcPos);
 	ASSERT( ist1 >= 0);											// 住戸区画データ　オーバフロー　<ERROR>
 	for (MINT ic=0; ic<ist1; ic++) {
-		HaitiDb::MdPartsDelete( pPlcPos[ic]);						// 住戸区画データを削除
+		HaitiDb::MdPartsDelete( pPlcPos[ic]);					// 住戸区画データを削除
 	}
 
-	ist1 = z_mn.SetRibbonBar( MP_GP_KABE, MP_BR_OTHER, Mstr( "住戸区画"), NULL);
+	ist1 = z_mn.SetRibbonBarEnt( MP_GP_KABE, MP_BR_OTHER, Mstr( "住戸区画"));
 //E	z_mn.GetComboAttrA();
 	z_mn.RibbonIO( MGET_COMBO_ATTRA, NULL);
 
@@ -142,7 +142,7 @@ void JTTenkai::CreJTTArea()
 	}
 	mm.Ins2( MgPoint2( 0., 0.));
 
-	ist1 = z_mn.SetRibbonBar( MP_GP_KABE, MP_BR_OTHER, Mstr( "住棟展開"), NULL);
+	ist1 = z_mn.SetRibbonBarEnt( MP_GP_KABE, MP_BR_OTHER, Mstr( "住棟展開"));
 //E	z_mn.GetComboAttrA();
 	z_mn.RibbonIO( MGET_COMBO_ATTRA, NULL);
 
@@ -159,10 +159,10 @@ void JTTenkai::CreJTTArea()
 
 	Ln1.p[0] = MgPoint3C( pg1.m_p[0]);
 	Ln1.p[1] = MgPoint3C( pg1.m_p[1]);
-	HaitiCmd::MmPartsPlc( Ln1.p, MgVect3( 0., 0., 1.), &pg1);			// 住棟展開（領域型）の部品配置
+	HaitiCmd::MmPartsPlc( Ln1.p, MgVect3( 0., 0., 1.), &pg1);				// 住棟展開（領域型）の部品配置
 
-	z_mn.SetKai( 1);
-	mtPlcInp::SetKai( 1);
+	z_mn.SetInpKai( 1);
+	mtPlcInp::SetInpKai( 1);
 	MINT nGrid[4];
 	nGrid[1] = MINT(mm.min.x / mcs::GetReal( MM_REAL_PITCH) - 3.99);							// 西
 	nGrid[2] = MINT(mm.min.y / mcs::GetReal( MM_REAL_PITCH) - 2.34 - z_TenkaiPara.nJuko /3.);	// 南

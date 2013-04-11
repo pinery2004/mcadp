@@ -55,7 +55,7 @@ void MCmdMdPanelNo()
 	MINT		iPtNoMin;
 
 	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
-	MINT		iKaiC   = z_mn.GetKai();						// 階  	(1,2,3)
+	MINT		iKaiC   = z_mn.GetInpKai();						// 階  	(1,2,3)
 	MINT		iGpC = z_mn.GetKCdGp();							// 構成
 
 	Window::CurWndFocus();
@@ -86,9 +86,9 @@ void MCmdMdPanelNo()
 			iPt = 0;
 			for ( pPlcEn = HaitiDb::MdGetHeadParts( &posH); pPlcEn!=0;
 				  pPlcEn = HaitiDb::MdGetNextParts( &posH)) {
-				if (pPlcEn->GetPIKai() != iKaiC)
+				if ( pPlcEn->GetPIKai() != iKaiC)
 					continue;									// 異なる階の部材は対象外とする
-				if (pPlcEn->GetPIPartsTp()->GetPTCdGp() != iGpC)
+				if ( pPlcEn->GetPIPartsSpec()->GetPTCdGp() != iGpC)
 					continue;									// 異なる構成の部材は対象外とする
 				if (!pPlcEn->IsPanel())
 					continue;									// パネル以外は対象外とする
@@ -96,7 +96,7 @@ void MCmdMdPanelNo()
 				if ( !MmChkValidParts( pPlcEn))					// オプションと履歴のチェック
 					continue;
 
-				if (pPlcEn == pPtInfo1)
+				if ( pPlcEn == pPtInfo1)
 					ic1Pt = iPt;
 				pPtInfo[iPt] = pPlcEn;
 				iPtNo[iPt++] = pPlcEn->GetPIPanelNo();

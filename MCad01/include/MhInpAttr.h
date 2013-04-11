@@ -32,7 +32,7 @@ public:
 	////	配置コード選択用コンボボックスに配置コードを表示し
 	////	カレントの配置コードを設定する
 
-	//static void SetComboCdPlc(
+	//static void SelectComboPlcCdByPlcCd(
 	//						MINT		i_iCdPlc	// 配置コード
 	//				);
 
@@ -43,7 +43,7 @@ public:
 	////							＝1 : 壁芯付き
 	////							＝2 : 屋根構成線付き
 
-	//static MINT GetComboCdPlc();
+	//static MINT GetComboPlcCd();
 
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -52,7 +52,7 @@ public:
 
 	static MINT GetParts(
 							MINT		i_iKai,			// 階
-							MINT		i_iIdPartsTp,		// 部品ID
+							MINT		i_iIdPartsSpec,		// 部品ID
 					const	MCHAR*		i_sGeneralName,	// 総称 または NULL
 					const	MCHAR*		i_sNmParts1,		// 操作用部材名 または NULL
 							MINT		i_szPlcEn,		// 部品配置最大数
@@ -66,7 +66,7 @@ public:
 
 	static bool ChkParts(
 							MINT		i_iKai,			// 階 または NULL
-							MINT		i_iIdPartsTp,		// 部品ID または NULL
+							MINT		i_iIdPartsSpec,		// 部品ID または NULL
 					const	MCHAR*		i_sGeneralName,	// 総称 または NULL
 					const	MCHAR*		i_sNmParts1,		// 操作用部材名 または NULL
 					class	mhPlcInfo*	i_pPlcEn		// 調査部品配置

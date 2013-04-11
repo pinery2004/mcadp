@@ -14,11 +14,11 @@ typedef MINT MAryCmpFunc(
 ////////////////////////////////////////////////////////////////////////////
 //【機能】クイックソート
 
-void MsQSort(									// (  O) ｽﾃｰﾀｽ
-						void*	base,			// (I  ) 並び替える配列の先頭
-						MINT	num,			// (I  ) 配列の要素数
-						MINT	width,			// (I  ) 配列の要素サイズ(バイト数)
-						MAryCmpFunc* AryCmpFunc	// (I  ) 比較関数
+void MsQSort(									// ｽﾃｰﾀｽ
+						void*	i_base,			// 並び替える配列の先頭
+						MINT	i_num,			// 配列の要素数
+						MINT	i_width,		// 配列の要素サイズ(バイト数)
+						MAryCmpFunc* i_AryCmpFunc// 比較関数
 				);
 
 ////////////////////////////////////////////////////////////////////////////
@@ -27,9 +27,9 @@ void MsQSort(									// (  O) ｽﾃｰﾀｽ
 //		  == 0 : array1 == array2
 //		   > 0 : array1  > array2 
 
-static MINT AryCompare(							// (  O) ｽﾃｰﾀｽ
-				const	void*	array1,			// (I  ) ﾃﾞｰﾀ1
-				const	void*	array2			// (I  ) ﾃﾞｰﾀ2
+static MINT AryCompare(							// ｽﾃｰﾀｽ
+				const	void*	i_array1,		// ﾃﾞｰﾀ1
+				const	void*	i_array2		// ﾃﾞｰﾀ2
 				);
 
 ////////////////////////////////////////////////////////////////////////////
@@ -67,8 +67,8 @@ MTIME MsGetCurrentTime();
 //					1 : cTime2が早い
 
 MINT MsCmpTime(
-						MTIME	cTime1,			// (I  ) 比較対象時間1
-						MTIME	cTime2			// (I  ) 比較対象時間2
+						MTIME	i_cTime1,		// 比較対象時間1
+						MTIME	i_cTime2		// 比較対象時間2
 				);
 
 ////////////////////////////////////////////////////////////////////////////
@@ -77,63 +77,66 @@ MINT MsCmpTime(
 //		  < 0 : エラー
 
 MTIME MsMTime(
-						MINT	nYear,			// (I  ) 年
-						MINT	nMonth,			// (I  ) 月
-						MINT	nDay,			// (I  ) 日
-						MINT	nHour,			// (I  ) 時
-						MINT	nMin,			// (I  ) 分
-						MINT	nSec			// (I  ) 秒
+						MINT	i_nYear,		// 年
+						MINT	i_nMonth,		// 月
+						MINT	i_nDay,			// 日
+						MINT	i_nHour,		// 時
+						MINT	i_nMin,			// 分
+						MINT	i_nSec			// 秒
 				);
 
 ///////////////////////////////////////////////////////////////////////////////
 //	CStringの文字列を実数に変換する
-MREAL MsGetMREAL(								// (  O) 実数
-						CString&	str			// (I  ) CString文字列
+MREAL MsGetMREAL(								// 実数
+						CString&	i_str		// CString文字列
 				);
 
 ///////////////////////////////////////////////////////////////////////////////
 //	CStringの文字列を整数に変換する
-MINT MsGetMINT(									// (  O) 整数
-						CString&	str			// (I  ) CString文字列
+MINT MsGetMINT(									// 整数
+						CString&	i_str		// CString文字列
 				);
 
 ///////////////////////////////////////////////////////////////////////////////
 //	MINTの整数をCStringに変換する
-CString MsCnvSMINT(								// (  O) 整数文字列
-						MINT	iMode,			// (I  ) モード　0: "n"形式に変換
-						MINT	iNum			// (I  ) 整数
+CString MsCnvSMINT(								// 整数文字列
+						MINT	i_iMode,		// モード　0: "n"形式に変換
+						MINT	i_iNum			// 整数
 				);
 
 ///////////////////////////////////////////////////////////////////////////////
 //	MINTの実数をCStringに変換する
-CString MsCnvSMREAL(							// (  O) 整数文字列
-						MINT	iMode,			// (I  ) モード　1: "0.0"形式に変換
-						MREAL	iReal			// (I  ) 実数
+CString MsCnvSMREAL(							// 整数文字列
+						MINT	i_iMode,		// モード　1: "0.0"形式に変換
+						MREAL	i_iReal			// 実数
 				);
 
 ///////////////////////////////////////////////////////////////////////////////
 //	読み込み用ファイル選択ダイアログを表示する
 void MsLoadFileDlg(
-						CWnd*	i_pWnd,			// (I  ) 親ウィンドウまたはオーナー ウィンドウへのポインタ
-						MCHAR*	i_sInitFilePath,// (I  ) 初期設定ファイルパス
-						MCHAR*	o_sSelFilePath,	// (  O) 選択ファイルパス
-						MCHAR*	i_sFilters		// (I  ) ファイルを特定するためのフィルタ or NULL
+						CWnd*	i_pWnd,			// 親ウィンドウまたはオーナー ウィンドウへのポインタ
+						MCHAR*	i_sInitFilePath,// 初期設定ファイルパス
+						MCHAR*	o_sSelFilePath,	// 選択ファイルパス
+						int		i_iszSelFilePath,// 選択ファイルパス配列サイズ(文字数)
+						MCHAR*	i_sFilters		// ファイルを特定するためのフィルタ or NULL
 				);
 ///////////////////////////////////////////////////////////////////////////////
 //	保存用ファイル選択ダイアログを表示する
 void MsSaveFileDlg(
-						CWnd*	i_pWnd,			// (I  ) 親ウィンドウまたはオーナー ウィンドウへのポインタ
-						MCHAR*	i_sInitFilePath,// (I  ) 初期設定ファイルパス
-						MCHAR*	o_sSelFilePath,	// (  O) 選択ファイルパス
-						MCHAR*	i_sFilters		// (I  ) ファイルを特定するためのフィルタ or NULL
+						CWnd*	i_pWnd,			// 親ウィンドウまたはオーナー ウィンドウへのポインタ
+						MCHAR*	i_sInitFilePath,// 初期設定ファイルパス
+						MCHAR*	o_sSelFilePath,	// 選択ファイルパス
+						int		i_iszSelFilePath,// 選択ファイルパス配列サイズ(文字数)
+						MCHAR*	i_sFilters		// ファイルを特定するためのフィルタ or NULL
 				);
 /////////////////////////////////////////////////////////////////////////////
 //	フォルダ選択ダイアログを表示する
 void MsForFolderDlg( 
-						HWND	i_hWnd,			// (I  ) 親ウィンドウのハンドル
-						MCHAR*	i_sCaptionStr,	// (I  ) 説明の文字列
-						MCHAR*	i_sInitFldrPath,// (I  ) 初期設定フォルダパス
-						MCHAR*	o_sSelFldrPath	// (  O) 選択フォルダパス
+						HWND	i_hWnd,			// 親ウィンドウのハンドル
+						MCHAR*	i_sCaptionStr,	// 説明の文字列
+						MCHAR*	i_sInitFldrPath,// 初期設定フォルダパス
+						MCHAR*	o_sSelFldrPath,	// 選択フォルダパス
+						int		i_iszSelFldrPath// 選択フォルダパス配列サイズ(文字数)
 				);
 ///////////////////////////////////////////////////////////////////////////////
 // ファイル名の拡張子より形式を得る

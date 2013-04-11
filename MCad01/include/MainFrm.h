@@ -55,14 +55,14 @@ public:
 
 protected:  // コントロール バー用メンバー
 public:
-	CMFCRibbonBar     m_wndRibbonBar;
+	CMFCRibbonBar				m_wndRibbonBar;
 	CMFCRibbonApplicationButton m_MainButton;
-	CMFCToolBarImages m_PanelImages;
-	CMFCRibbonStatusBar  m_wndStatusBar;
+	CMFCToolBarImages			m_PanelImages;
+	CMFCRibbonStatusBar			m_wndStatusBar;
 
 // 生成された、メッセージ割り当て関数
 protected:
-	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+	afx_msg int  OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnWindowManager();
 	afx_msg void OnApplicationLook(UINT id);
 	afx_msg void OnUpdateApplicationLook(CCmdUI* pCmdUI);
@@ -84,21 +84,21 @@ public:
 	afx_msg void OnCbnSelchangeComboAttr6();
 	afx_msg void OnDummy(UINT id);
 
-	afx_msg LRESULT OnUserMsg1( UINT wParam, LONG lParam);
+	afx_msg LRESULT OnRibbonIO( UINT wParam, LONG lParam);
 
-	void SetCombo1( MINT iCombo1);
-	void SetCombo2( MINT iCombo2);
-	void SetComboInp1( MINT iCombo11);
-	void SetComboInp2( MINT iCombo12);
-	void SetComboInp3( MINT iCombo13);
-//	void SetComboPanelNo( MINT iComboPanelNo);
+	void SelectCombo1( MINT iCombo1);
+	void SelectCombo2( MINT iCombo2);
+	void SelectComboInp1( MINT iCombo11);
+	void SelectComboInp2( MINT iCombo12);
+	void SelectComboInp3( MINT iCombo13);
+//	void SeelectComboPanelNo( MINT iComboPanelNo);
 
-	friend CMFCRibbonComboBox* MnpComboBuzai();
-	friend CMFCRibbonComboBox* MmpComboMbr();
-	friend CMFCRibbonComboBox* MmpComboInpTp();
-	friend CMFCRibbonComboBox* MmpComboCdMarume();
-	friend CMFCRibbonComboBox* MmpComboCdPlc();
-	friend CMFCRibbonComboBox* MnpComboPanelNo();
+	friend CMFCRibbonComboBox* mmpComboBuzai();
+	friend CMFCRibbonComboBox* mmpComboMbr();
+	friend CMFCRibbonComboBox* mmpComboInpTp();
+	friend CMFCRibbonComboBox* mmpComboMarume();
+	friend CMFCRibbonComboBox* mmpComboPlcCd();
+	friend CMFCRibbonComboBox* mmpComboPanelNo();
 
 	BOOL CreateRibbonBar ();
 	afx_msg void OnView1open();
@@ -109,4 +109,4 @@ public:
 	afx_msg void OnClose();
 };
 
-extern CMainFrame *ms_pMainFrame;								// メインフレーム ポインタ (グローバル変数)
+extern CMainFrame *z_pMainFrame;								// メインフレーム ポインタ (グローバル変数)

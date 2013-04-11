@@ -20,9 +20,9 @@ enum MTCMDSTR{
 #define		IDC_ZOOMINIT		IDC_P0050		// 初期画面表示
 #define		IDC_ZOOMPAN			IDC_P0060		// 画面移動
 #define		IDC_ZOOMSIZE		IDC_P0070		// MIN/MAX指示ズーム
-#define		IDC_InpKai		IDC_P0080		// 階入力
-#define		IDC_InpALL		IDC_P0090		// 全階入力
-#define		IDC_InpEND		IDC_P0100		// 入力終了
+#define		IDC_InpKai			IDC_P0080		// 階入力
+#define		IDC_InpALL			IDC_P0090		// 全階入力
+#define		IDC_InpEND			IDC_P0100		// 入力終了
 #define		IDC_MODECREATE		IDC_P0110		// 創成モード
 #define		IDC_MODEDELETE		IDC_P0120		// 削除モード
 #define		IDC_MODEMOVE		IDC_P0130		// 移動モード

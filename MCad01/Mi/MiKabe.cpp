@@ -58,7 +58,7 @@ void mhInput::GetMarumeKabeLine(
 	MINT		ic2;
 	MgLine2		ln1;
 
-	iCdMarume = z_mn.GetComboCdMarume();
+	iCdMarume = z_mn.GetComboMarumeCd();
 	if ( iCdMarume == 0)
 		rTol = MC_KABE_TOL;
 	else

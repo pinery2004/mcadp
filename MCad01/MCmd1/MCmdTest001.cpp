@@ -58,7 +58,7 @@ void Test001_SelectFile()
 	//	フォルダ選択ダイアログを表示する
 	//
 	MCHAR FolderPath[MAX_PATH] = Mstr( "C:\\Temp");
-	MsForFolderDlg( hWnd, Mstr( "テスト用フォルダの選択"), Mstr( "C:\\Temp"), FolderPath);
+	MsForFolderDlg( hWnd, Mstr( "テスト用フォルダの選択"), Mstr( "C:\\Temp"), FolderPath, MAX_PATH);
 	MessageBox( hWnd, FolderPath, Mstr( "Folder Name"), MB_OK | MB_TOPMOST);
 }
 

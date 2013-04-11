@@ -534,17 +534,17 @@ void msCod::Line(
 /*
 //	if (abs(p1.x - p2.x) < MgTol.D) {
 	if (MgZero( vDirect.x)) {
-		if (p1.y < m_iMinMaxL.min.y)		p1.y = m_iMinMaxL.min.y;
-		else if (p1.y > m_iMinMaxL.max.y)	p1.y = m_iMinMaxL.max.y;
-		if (p2.y < m_iMinMaxL.min.y)		p2.y = m_iMinMaxL.min.y;
-		else if (p2.y > m_iMinMaxL.max.y)	p2.y = m_iMinMaxL.max.y;
+		if ( p1.y < m_iMinMaxL.min.y)		p1.y = m_iMinMaxL.min.y;
+		else if ( p1.y > m_iMinMaxL.max.y)	p1.y = m_iMinMaxL.max.y;
+		if ( p2.y < m_iMinMaxL.min.y)		p2.y = m_iMinMaxL.min.y;
+		else if ( p2.y > m_iMinMaxL.max.y)	p2.y = m_iMinMaxL.max.y;
 	}
 //	if (abs(p1.y - p2.y) < MgTol.D) {
 	if (MgZero( vDirect.y)) {
-		if (p1.x < m_iMinMaxL.min.x)		p1.x = m_iMinMaxL.min.x;
-		else if (p1.x > m_iMinMaxL.max.x)	p1.x = m_iMinMaxL.max.x;
-		if (p2.x < m_iMinMaxL.min.x)		p2.x = m_iMinMaxL.min.x;
-		else if (p2.x > m_iMinMaxL.max.x)	p2.x = m_iMinMaxL.max.x;
+		if ( p1.x < m_iMinMaxL.min.x)		p1.x = m_iMinMaxL.min.x;
+		else if ( p1.x > m_iMinMaxL.max.x)	p1.x = m_iMinMaxL.max.x;
+		if ( p2.x < m_iMinMaxL.min.x)		p2.x = m_iMinMaxL.min.x;
+		else if ( p2.x > m_iMinMaxL.max.x)	p2.x = m_iMinMaxL.max.x;
 	}
 */
 	iPenStyle = PSTbl[z_iLineStyle];

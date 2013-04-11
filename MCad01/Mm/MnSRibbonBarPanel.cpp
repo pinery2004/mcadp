@@ -38,7 +38,7 @@ void mnInpAttr::InitComboPanelNo()
 	MINT		ip = 0;
 	CString		sKomoku;
 
-	CMFCRibbonComboBox* pCmbBox = MnpComboPanelNo();
+	CMFCRibbonComboBox* pCmbBox = mmpComboPanelNo();
 	pCmbBox->RemoveAllItems();
 
 //	全パネル番号設定
@@ -71,7 +71,7 @@ void mnInpAttr::SetComboPanelNo(
 						MINT	iPanelNo			// (I  ) パネル番号
 				)
 {
-	CMFCRibbonComboBox *pCmbBox = MnpComboPanelNo();
+	CMFCRibbonComboBox *pCmbBox = mmpComboPanelNo();
 	CString strPanelNo;
 	strPanelNo.Format( Mstr( "%5d"), iPanelNo);
 //E	pCmbBox->SetWindowText(strPanelNo);
@@ -87,7 +87,7 @@ MINT mnInpAttr::GetComboPanelNo()
 {
 	int iPanelNo;
 	int	iCurItemNo;
-	CMFCRibbonComboBox *pCmbBox = MnpComboPanelNo();
+	CMFCRibbonComboBox *pCmbBox = mmpComboPanelNo();
 	CString strPanelNo;
 //E	pCmbBox->GetWindowText(strPanelNo);
 	iCurItemNo = pCmbBox->GetCurSel();

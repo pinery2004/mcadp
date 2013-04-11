@@ -79,8 +79,8 @@ MINT IeModel::MhMdlLoad(										//
 	static MINT	iCe = 0;
 
 	if ( i_sPathI == 0) {
-		z_mn.SetKai( 1);
-		mtPlcInp::SetKai( 1);
+		z_mn.SetInpKai( 1);
+		mtPlcInp::SetInpKai( 1);
 		WindowCtrl::MmGridNumSet( NULL);													// èâä˙ê›íË
 		WindowCtrl::MmGridNumXqt();
 		IeModel::MhSetModFIeMdl( false);
@@ -167,8 +167,8 @@ MINT IeModel::MhMdlLoad(										//
 	hMdl.Close();
 
 	for ( ic=1; ic<=MMAX_KAI; ic++) {
-		z_mn.SetKai( ic);
-		mtPlcInp::SetKai( ic);
+		z_mn.SetInpKai( ic);
+		mtPlcInp::SetInpKai( ic);
 
 		IeModel::MhKabeSetUpFlg();
 		IeModel::MhNormKabe( 0);
@@ -176,8 +176,8 @@ MINT IeModel::MhMdlLoad(										//
 		IeModel::MhNormKiso( 0);
 	}
 
-	z_mn.SetKai( 1);
-	mtPlcInp::SetKai( 1);
+	z_mn.SetInpKai( 1);
+	mtPlcInp::SetInpKai( 1);
 
 	WindowCtrl::MmGridNumSet( NULL);														// èâä˙ê›íË
 	WindowCtrl::MmGridNumXqt();

@@ -126,7 +126,7 @@ void WindowCtrl::MmWndKDrawMDC(								// ステイタス　0:正常  1:エラー
 
 	//	メモリーＤＣに表示
 	WindowCtrl::MmWndKDrawGrid( i_pWndInfo, pCod);
-	MINT iKaiC = z_mn.GetKai();									// 現在の階
+	MINT iKaiC = z_mn.GetInpKai();									// 現在の階
 	MINT iGpC = z_mn.GetKCdGp();									// 現在の構成
 	WindowCtrl::MmWndKDrawKabe( pCod, iKaiC, iGpC);
 	WindowCtrl::MmWndKDrawKiso( pCod, iKaiC, iGpC);

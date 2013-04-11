@@ -63,7 +63,7 @@ void WindowCtrl::MmDrawStructure(
 
 	// ÇcÇbÇ…ï\é¶
 	WindowCtrl::MmWndKDrawGrid( pWndInfo, pCod);
-	MINT iKaiC = z_mn.GetKai();									// åªç›ÇÃäK
+	MINT iKaiC = z_mn.GetInpKai();									// åªç›ÇÃäK
 	MINT iGpC = z_mn.GetKCdGp();							// åªç›ÇÃç\ê¨
 	WindowCtrl::MmWndKDrawKabe( pCod, iKaiC, iGpC);
 	WindowCtrl::MmWndKDrawKiso( pCod, iKaiC, iGpC);

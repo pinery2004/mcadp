@@ -20,7 +20,7 @@ namespace MC
 class	mhGp									// 構成レコード
 {
 	friend	class	mhPlcInfo;
-	friend	class	mhPartsTp;
+	friend	class	mhPartsSpec;
 
 	MINT	m_iCdGp;							// 構成(組)コード
 	MCHAR	m_sNmGp[MHKSSZ_NMKOSEI + 1];		// 構成(組)名

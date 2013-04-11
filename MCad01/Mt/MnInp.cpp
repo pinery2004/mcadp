@@ -50,7 +50,7 @@ mnInpAttr	z_mn;
 mnInpAttr::mnInpAttr()
 {
 	m_iInpKai = 1;
-	m_iInpMd = 0;
+	m_iInpMd = MP_MD_CREATE;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -60,14 +60,14 @@ void IeModel::MnInitInpAt()
 	// 部材入力属性
 
 	MINT	iKai;
-	iKai = z_mn.GetKai();
-	mtPlcInp::SetKai( iKai);
+	iKai = z_mn.GetInpKai();
+	mtPlcInp::SetInpKai( iKai);
 	mtPlcInp::SetCdHgt( 0);
 	mtPlcInp::SetPanelNo( 0);
-	mtPlcInp::SetKaikoNo( 0);
-//	mtPlcInp::SetIdPartsTp( 0);
+	mtPlcInp::SetInpKaikoNo( 0);
+//	mtPlcInp::SetIdPartsSpec( 0);
 	mtPlcInp::SetIdMbr( 0);
-//	mtPlcInp::SetpPartsTp( NULL);
+//	mtPlcInp::SetpPartsSpec( NULL);
 //Z	mtPlcInp::SetpMbr( BuzaiCode::MhGetpMbr( 0));
 	z_mn.SetKCdBrB( true, true, true);
 
@@ -92,16 +92,19 @@ void IeModel::MnInitInpAt()
 
 ///////////////////////////////////////////////////////////////////////////////
 //	リボンバーの設定と取り込み
-void mnInpAttr::RibbonIO(
-					int		i_iComboTp,		// Combo種類	1:入力点区分コード
+int mnInpAttr::RibbonIO(
+					ComboTp	i_iComboTp,		// Combo種類	1:入力点区分コード
 					int		i_iCdArg1,		//				
 					MREAL	i_rCdArg2		//				
 				)
 {
+	m_iSts = 0;
 	m_iComboTp = i_iComboTp;
 	m_iCdArg1 = i_iCdArg1;
+	m_rCdArg2 = i_rCdArg2;
 	CMainFrame*	pMainFrame = MC::System::GetpMainFrame();
 	pMainFrame->SendMessage( WM_USER100);
+	return m_iSts;
 }
 
 //	SetComboCd( MSET_INPUT_KUBUN_CD, aaa);
@@ -112,7 +115,7 @@ void mnInpAttr::SetComboCdBody( void)
 	switch ( m_iComboTp)
 	{
 	case MSET_INPUT_KUBUN_CD:
-		SetComboCdInpKb( m_iCdArg1);
+		SelectComboInpKbnByInpKbnCd( m_iCdArg1);
 		break;
 	case MGET_COMBO_ATTRA:
 		GetComboAttrA();

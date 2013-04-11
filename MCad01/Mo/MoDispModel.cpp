@@ -89,7 +89,7 @@ namespace MC
 		  pRoofEn = HaitiDb::MdGetNextRoof( &posR)) {
 		if ( !MmChkValidRoof( pRoofEn))							// オプションと履歴のチェック
 			continue;
-		rRoofZ = mcs::GetStnd( pRoofEn->GetKai(),MM_STNDH_ROOF);
+		rRoofZ = mcs::GetStnd( pRoofEn->GetInpKai(),MM_STNDH_ROOF);
 		for ( ic1=0; ic1<pRoofEn->GetpGRfm()->m_n; ic1++) {
 			for ( ic2=0; ic2<pRoofEn->GetpGRfm()->m_st[ic1].m_Pg.m_n; ic2++) {
 				Py1 = pRoofEn->GetpGRfm()->m_st[ic1].m_Pg.m_P[ic2];
@@ -159,7 +159,7 @@ void MdlDispList::DrawKabe(
 			continue;
 
 		if ( pPlcTEn->GetPIKai() == i_pPlcEn->GetPIKai() &&
-			Mstrcmp( (&pPlcTEn->GetPIPartsTp()->GetPTNmGeneral()[2]), Mstr( "建具")) == 0) {
+			Mstrcmp( (&pPlcTEn->GetPIPartsSpec()->GetPTNmGeneral()[2]), Mstr( "建具")) == 0) {
 			if ( MGeo::ChkLn3OnLn3WS( pPlcTEn->GetPIPlcIti(), i_pPlcEn->GetPIPlcIti(), &ist1)) {
 				MdlDispList::TateguHole( i_pPlcEn, pPlcTEn, &PgR, &PgL);
 				pAuxTategu = (MhTateguInfo*)pPlcTEn->GetPIAuxTategu();
@@ -247,7 +247,7 @@ void MdlDispList::DrawYane1(
 //			DispList::SetMaterial( 0, 0);
 		}
 		ist1 = MGeo::DivideTriPg3( pRfm2->m_Pg, pRfm2->m_Pln.v, &GPg2);
-		rZ = mcs::GetStnd( pRoofEn->GetKai(), MM_STNDH_ROOF);
+		rZ = mcs::GetStnd( pRoofEn->GetInpKai(), MM_STNDH_ROOF);
 		for ( ic2=0; ic2<GPg2.m_n; ic2++) {
 			DPtoDSP3R( GPg2.m_Pg[ic2], rZ, VtL, PtCtr, rB, &Pg3L);
 			DPtoDSP3( GPg2.m_Pg[ic2], rZ, VtU, PtCtr, rB, &Pg3U);
@@ -255,7 +255,7 @@ void MdlDispList::DrawYane1(
 			DispList::DspTriangles( Pg3U, pRfm2->m_Pln.v);
 		}
 		for ( ic0b=pRfm2->m_Pg.m_n-1,ic0=0; ic0<pRfm2->m_Pg.m_n; ic0b=ic0,ic0++) {
-			if (pRfm2->m_cdPg.m_i[ic0] == MHRL_NOKI || pRfm2->m_cdPg.m_i[ic0] == MHRL_KERABA) {
+			if ( pRfm2->m_cdPg.m_i[ic0] == MHRL_NOKI || pRfm2->m_cdPg.m_i[ic0] == MHRL_KERABA) {
 				LnU = MgLine3( pRfm2->m_Pg.m_P[ic0b], pRfm2->m_Pg.m_P[ic0]) + VtU;
 				LnL = MgLine3( pRfm2->m_Pg.m_P[ic0b], pRfm2->m_Pg.m_P[ic0]) + VtL;
 				LncU = DPtoDSP( LnU, rZ, PtCtr, rB);
@@ -300,7 +300,7 @@ void MdlDispList::DrawYagiri(
 			continue;
 		}
 		ist1 = MGeo::DivideTriPg3( pRfm2->m_Pg, pRfm2->m_Pln.v, &GPg2);
-		rZ = mcs::GetStnd( pRoofEn->GetKai(), MM_STNDH_ROOF);
+		rZ = mcs::GetStnd( pRoofEn->GetInpKai(), MM_STNDH_ROOF);
 		for ( ic2=0; ic2<GPg2.m_n; ic2++) {
 			DPtoDSP3R( GPg2.m_Pg[ic2], rZ, VtL, PtCtr, rB, &Pg3L);
 			DPtoDSP3( GPg2.m_Pg[ic2], rZ, VtU, PtCtr, rB, &Pg3U);
@@ -308,7 +308,7 @@ void MdlDispList::DrawYagiri(
 			DispList::DspTriangles( Pg3U, pRfm2->m_Pln.v);
 		}
 		for ( ic0b=pRfm2->m_Pg.m_n-1,ic0=0; ic0<pRfm2->m_Pg.m_n; ic0b=ic0,ic0++) {
-			if (pRfm2->m_cdPg.m_i[ic0] == MHRL_NOKI || pRfm2->m_cdPg.m_i[ic0] == MHRL_KERABA) {
+			if ( pRfm2->m_cdPg.m_i[ic0] == MHRL_NOKI || pRfm2->m_cdPg.m_i[ic0] == MHRL_KERABA) {
 				LnU = MgLine3( pRfm2->m_Pg.m_P[ic0b], pRfm2->m_Pg.m_P[ic0]) + VtU;
 				LnL = MgLine3( pRfm2->m_Pg.m_P[ic0b], pRfm2->m_Pg.m_P[ic0]) + VtL;
 				LncU = DPtoDSP( LnU, rZ, PtCtr, rB);
@@ -352,7 +352,7 @@ void MdlDispList::DrawYane2(
 			VtL = MgVect3( 0., 0., 0.);
 		}
 		ist1 = MGeo::DivideTriPg3( pRfm2->m_Pg, pRfm2->m_Pln.v, &GPg2);
-		rZ = mcs::GetStnd( pRoofEn->GetKai(), MM_STNDH_ROOF);
+		rZ = mcs::GetStnd( pRoofEn->GetInpKai(), MM_STNDH_ROOF);
 		for ( ic2=0; ic2<GPg2.m_n; ic2++) {
 			DPtoDSP3R( GPg2.m_Pg[ic2], rZ, VtL, PtCtr, rB, &Pg3L);
 			DPtoDSP3( GPg2.m_Pg[ic2], rZ, VtU, PtCtr, rB, &Pg3U);
@@ -360,7 +360,7 @@ void MdlDispList::DrawYane2(
 			DispList::DspTriangles( Pg3U, pRfm2->m_Pln.v);
 		}
 		for ( ic0b=pRfm2->m_Pg.m_n-1,ic0=0; ic0<pRfm2->m_Pg.m_n; ic0b=ic0,ic0++) {
-			if (pRfm2->m_cdPg.m_i[ic0] == MHRL_NOKI || pRfm2->m_cdPg.m_i[ic0] == MHRL_KERABA) {
+			if ( pRfm2->m_cdPg.m_i[ic0] == MHRL_NOKI || pRfm2->m_cdPg.m_i[ic0] == MHRL_KERABA) {
 				LnU = MgLine3( pRfm2->m_Pg.m_P[ic0b], pRfm2->m_Pg.m_P[ic0]) + VtU;
 				LnL = MgLine3( pRfm2->m_Pg.m_P[ic0b], pRfm2->m_Pg.m_P[ic0]) + VtL;
 				LncU = DPtoDSP( LnU, rZ, PtCtr, rB);
@@ -529,27 +529,27 @@ MINT MdlDispList::DrawIeMdl1(
 			continue;
 
 		//	たて枠のディスプレイリストを作成する
-		if (pPlcEn->IsFrame()) {
+		if ( pPlcEn->IsFrame()) {
 			DispList::SetMaterial( 0, 3);
 			MdlDispList::DrawTatewaku( pPlcEn, PtCtr, rB);
 
 		//	パネルのディスプレイリストを作成する
-		} else if (pPlcEn->IsPanel()) {
+		} else if ( pPlcEn->IsPanel()) {
 			DispList::SetMaterial( 0, 3);
 			MdlDispList::DrawPanel( pPlcEn, PtCtr, rB, 3);
 
 		//	床、天井、屋根の開口のディスプレイリストを作成する
-		} else if (pPlcEn->IsKaiko()) {
+		} else if ( pPlcEn->IsKaiko()) {
 			DispList::SetMaterial( 0, 3);
 			MdlDispList::DrawKaiko( pPlcEn, PtCtr, rB);
 
 		//	基礎のディスプレイリストを作成する
-		} else if (pPlcEn->IsKiso()) {
+		} else if ( pPlcEn->IsKiso()) {
 			DispList::SetMaterial( 0, 4);
 			MdlDispList::DrawKiso( pPlcEn, PtCtr, rB);
 
 		//	横置部材のディスプレイリストを作成する
-		} else if (pPlcEn->IsOukaZai()) {
+		} else if ( pPlcEn->IsOukaZai()) {
 			DispList::SetMaterial( 0, 3);
 			MdlDispList::DrawOukaZai( pPlcEn, PtCtr, rB);
 		}

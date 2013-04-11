@@ -38,7 +38,7 @@
 namespace MC
 {
 
-class	mhPartsTp								// 部品仕様レコード
+class	mhPartsSpec								// 部品仕様レコード
 {
 	friend	class	mhPlcInfo;
 

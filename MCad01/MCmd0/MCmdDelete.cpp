@@ -24,10 +24,10 @@ void MCmdLineDelete()
 	MgPoint2		ptW[2];
 	MgLine2			Ln1;
 	MgPolyg2		pg1(20);
-	MINT			iIdPartsTp, iIdPartsTpB;
+	MINT			iIdPartsSpec, iIdPartsSpecB;
 	MINT			iKaiC;
 	MINT			iGpC, iGpB;
-	mhPartsTp*		pPartsTp;
+	mhPartsSpec*		pPartsSpec;
 	mhPlcInfo*		pPlcEn;
 	MPOSITION		pos1;
 	Window::CurWndFocus();
@@ -35,10 +35,10 @@ void MCmdLineDelete()
 	Msg::ClearErrorMsg();
 	Msg::OperationMsg( MC_OPRT_DEL_PARTS);							// ステイタスバーの操作表示部へ"部材追加"を表示
 
-	iKaiC = z_mn.GetKai();
+	iKaiC = z_mn.GetInpKai();
 	iGpC = z_mn.GetKCdGp();
-	iIdPartsTp = z_mn.GetCurIdPartsTp();
-	pPartsTp = BuzaiCode::MhGetpPartsTp( iIdPartsTp);
+	iIdPartsSpec = z_mn.GetCurPartsNmId();
+	pPartsSpec = BuzaiCode::MhGetpPartsSpec( iIdPartsSpec);
 
 	MFOREVER {
 		Msg::GuidanceMsg( MC_GUID_DEL_PARTS);
@@ -53,11 +53,11 @@ void MCmdLineDelete()
 		for ( pPlcEn = HaitiDb::MdGetHeadParts( &pos1); pPlcEn!=0;
 			  pPlcEn = HaitiDb::MdGetNextParts( &pos1)) {
 
-			if (pPlcEn->GetPIKai() != iKaiC)
+			if ( pPlcEn->GetPIKai() != iKaiC)
 				continue;										// 異なる階の部材は表示しない
-			iGpB = pPlcEn->GetPIPartsTp()->GetPTCdGp();
-			iIdPartsTpB = pPlcEn->GetPIIdPartsTp();
-			if ( iGpB != iGpC || iIdPartsTpB != iIdPartsTp)
+			iGpB = pPlcEn->GetPIPartsSpec()->GetPTCdGp();
+			iIdPartsSpecB = pPlcEn->GetPIIdPartsSpec();
+			if ( iGpB != iGpC || iIdPartsSpecB != iIdPartsSpec)
 				continue;										// 異なる構成の部材は表示しない
 
 			if ( !MmChkValidParts( pPlcEn))						// オプションと履歴のチェック
@@ -84,7 +84,7 @@ void MCmdLineDelete()
 			}
 		}
 		// 削除する
-		if (pPlcEn != 0)
+		if ( pPlcEn != 0)
 			HaitiDb::MdPartsDelete( pos1);
 
 		IeModel::MhNormKabe( 0);
@@ -141,7 +141,7 @@ void MCmdRoofDelete()
 		}
 
 		// 削除する
-		if (pRoofEn != 0)
+		if ( pRoofEn != 0)
 			HaitiDb::MdRoofDelete( pos1);
 
 		WindowCtrl::MmWndKReDraw();

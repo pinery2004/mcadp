@@ -73,7 +73,7 @@ void IeModel::MhNormKiso(
 	if ( !z_fUpdateKiso) MQUIT;
 
 	//　家モデルよりカレント階の全ての基礎を取得する
-	MINT iKai = z_mn.GetKai();
+	MINT iKai = z_mn.GetInpKai();
 	nHaiKisoI = mhHaitiIn::GetParts( iKai, MP_GP_KISO, Mstr( "基礎"), NULL, MAXHAIKISO, pHaiKiso, pPlcPos);
 																					// 家モデルよりカレント階の全ての基礎を取得する
 		ASSERT( nHaiKisoI >= 0);													//		基礎数オーバーフロー　<ERROR>

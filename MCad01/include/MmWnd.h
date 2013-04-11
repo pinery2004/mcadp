@@ -120,9 +120,9 @@ public :
 						{ m_iZuSyu = iZuSyu;}
 	MINT	GetZuSyu()
 						{ return m_iZuSyu;}
-	void	SetKai( const MINT iKai)
+	void	SetInpKai( const MINT iKai)
 						{ m_iKai = iKai;}
-	MINT	GetKai()
+	MINT	GetInpKai()
 						{ return m_iKai;}
 	void	SetZuNum( const MINT iZuNum)
 						{ m_iZuNum = iZuNum;}

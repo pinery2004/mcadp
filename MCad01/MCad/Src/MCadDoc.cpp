@@ -119,7 +119,7 @@ void CMCadDoc::SetSearchContent(const CString& value)
 	{
 		CMFCFilterChunkValueImpl *pChunk = NULL;
 		ATLTRY(pChunk = new CMFCFilterChunkValueImpl);
-		if (pChunk != NULL)
+		if ( pChunk != NULL)
 		{
 			pChunk->SetTextValue(PKEY_Search_Contents, value, CHUNK_TEXT);
 			SetChunkValue(pChunk);

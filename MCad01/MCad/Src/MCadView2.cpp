@@ -239,7 +239,7 @@ void CMCadView2::OnMouseMove(UINT nFlags, CPoint point)
 		RtD.z = (MREAL)iPtD.x / (MREAL)iSzWin.x;
 		SclD  = (MREAL)iPtD.y / (MREAL)iSzWin.y;
 
-		if (point.y < (iRcWin.top + iRcWin.bottom)/2)								// ‚yŽ²‰ñ“]Šp@‰æ–Ê’†‰›‚æ‚è
+		if ( point.y < (iRcWin.top + iRcWin.bottom)/2)								// ‚yŽ²‰ñ“]Šp@‰æ–Ê’†‰›‚æ‚è
 			RtD.z = - RtD.z;														// ã‚Í (³•ûŒü:‚yŽ²‚É‘Î‚µ‚Ä¶‰ñ“]) ‚ÅA
 																					//			   (‚yŽ²‚©‚çŒ©‚Ä‰E‰ñ“])
 																					// ‰º‚Í (³•ûŒü:‚yŽ²‚É‘Î‚µ‚Ä‰E‰ñ“])
@@ -360,7 +360,7 @@ void CMCadView2::OnEndPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
 void CMCadView2::OnContextMenu(CWnd* /* pWnd */, CPoint point)
 {
 #ifndef SHARED_HANDLERS
-	g_theApp.GetContextMenuManager()->ShowPopupMenu(IDR_POPUP_EDIT, point.x, point.y, this, TRUE);
+	z_MCadApp.GetContextMenuManager()->ShowPopupMenu(IDR_POPUP_EDIT, point.x, point.y, this, TRUE);
 #endif
 }
 

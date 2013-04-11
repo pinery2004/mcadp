@@ -63,7 +63,7 @@ MINT mhHaitiIn::RoofPlc(									// (  O) ステイタス	0: 正常、-1: 屋根配置エラー
 
 	RoofEn.InitAllAtr();
 
-	RoofEn.SetKai( z_mn.GetKai());
+	RoofEn.SetInpKai( z_mn.GetInpKai());
 	RoofEn.SetAttr();
 	RoofEn.SetJimCd( pgJim, GifInp, pth);
 	RoofEn.CreateRfmForJim();
@@ -122,7 +122,7 @@ void WindowCtrl::MmWndKDrawRoof(
 	for ( pRoofEn = HaitiDb::MdGetHeadRoof( &pos1); pRoofEn!=0;
 		  pRoofEn = HaitiDb::MdGetNextRoof( &pos1)) {
 
-		if ( pRoofEn->GetKai() != iKaiC)
+		if ( pRoofEn->GetInpKai() != iKaiC)
 			continue;											// 異なる階の部材は表示しない
 		if ( !MmChkValidRoof( pRoofEn))							// オプションと履歴のチェック
 			continue;
@@ -164,7 +164,7 @@ MhRfm*	mhHaitiIn::SrchRfm(									// (  O) 屋根面　または　NULL
 	MhRfm		*pRfm = 0;
 	MREAL		rHight;
 
-	MINT	iKaiC = z_mn.GetKai();								// 現在の階
+	MINT	iKaiC = z_mn.GetInpKai();								// 現在の階
 
 	MREAL	rMinArea = MREALMAX;
 	MREAL	rMinHight = MREALMAX;
@@ -173,7 +173,7 @@ MhRfm*	mhHaitiIn::SrchRfm(									// (  O) 屋根面　または　NULL
 	for ( pRoofEn = HaitiDb::MdGetHeadRoof( &pos1); pRoofEn!=0;
 		  pRoofEn = HaitiDb::MdGetNextRoof( &pos1)) {
 
-		if ( pRoofEn->GetKai() != iKaiC)
+		if ( pRoofEn->GetInpKai() != iKaiC)
 			continue;											// 異なる階の部材は対象外
 		if ( !MmChkValidRoof( pRoofEn))							// オプションと履歴のチェック
 			continue;

@@ -21,9 +21,9 @@
 namespace MC
 {
 
-static MINT		z_iComboCdCdInpKb;
-static MINT		z_iComboCdMarume;
-static MINT		z_iComboCdPlc;
+static MINT		z_iComboInpKbCd;
+static MINT		z_iComboMarume;
+static MINT		z_iComboPlcCd;
 
 // CMnRibbonBarInp ダイアログ
 
@@ -33,12 +33,12 @@ static MINT		z_iComboCdPlc;
 ///////////////////////////////////////////////////////////////////////////////
 //	カレントの入力点区分を設定し、入力点区分選択用のコンボボックスに表示する
 //
-void mnInpAttr::SetComboCdInpKb(
+void mnInpAttr::SelectComboInpKbnByInpKbnCd(
 						MINT		iCdInpKb		// (I  ) 入力点区分
 				)
 {
-	System::GetpMainFrame()->SetComboInp1( iCdInpKb);
-	z_iComboCdCdInpKb = iCdInpKb;
+	System::GetpMainFrame()->SelectComboInp1( iCdInpKb);
+	z_iComboInpKbCd = iCdInpKb;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -49,21 +49,21 @@ void mnInpAttr::SetComboCdInpKb(
 //							＝4 : 区画入力
 //							＝5 : 自由入力
 //
-MINT mnInpAttr::GetComboCdCdInpKb()
+MINT mnInpAttr::GetComboInpKbCd()
 {
-	return z_iComboCdCdInpKb;
+	return z_iComboInpKbCd;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 //	カレントの丸めコードを設定し、コンボボックスに丸めコードを表示する
 //
 
-void mnInpAttr::SetComboCdMarume(
+void mnInpAttr::SelectComboMarumeByMarumeCd(
 						MINT		iCdMarume		// (I  ) 丸めコード
 					)
 {
-	System::GetpMainFrame()->SetComboInp2( iCdMarume);
-	z_iComboCdMarume = iCdMarume;
+	System::GetpMainFrame()->SelectComboInp2( iCdMarume);
+	z_iComboMarume = iCdMarume;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -76,15 +76,15 @@ void mnInpAttr::SetComboCdMarume(
 //							＝5 : １／６グリッド丸め
 //							＝6 : １／８グリッド丸め
 
-MINT mnInpAttr::GetComboCdMarume()
+MINT mnInpAttr::GetComboMarumeCd()
 {
 	MINT	iMCD;
 
-	if ( z_iComboCdMarume >= MP_MRMCDN && z_iComboCdMarume <= MP_MRMCD4) 
-		iMCD = z_iComboCdMarume;
-	else if ( z_iComboCdMarume == MP_MRMCD6)
+	if ( z_iComboMarume >= MP_MRMCDN && z_iComboMarume <= MP_MRMCD4) 
+		iMCD = z_iComboMarume;
+	else if ( z_iComboMarume == MP_MRMCD6)
 		iMCD = 6;
-	else if ( z_iComboCdMarume == MP_MRMCD8)
+	else if ( z_iComboMarume == MP_MRMCD8)
 		iMCD = 8;
 	else
 		ASSERT( 0);												// 丸めコードエラー　<ERROR>
@@ -96,14 +96,14 @@ MINT mnInpAttr::GetComboCdMarume()
 //	カレントの配置コードを設定し、コンボボックスに配置コードを表示する
 //
 
-void mnInpAttr::SetComboCdPlc(
+void mnInpAttr::SelectComboPlcCdByPlcCd(
 						MINT		iCdPlc		// (I  ) 配置コード
 					)
 {
-	System::GetpMainFrame()->SetComboInp3( iCdPlc);
+	System::GetpMainFrame()->SelectComboInp3( iCdPlc);
 //	((CComboBox*)(m_wndDlgBar1.GetDlgItem(IDC_CMB_Inp3)))->SetCurSel( m_iComboInp3);
 // 	System::GetpMainFrame()->((CComboBox*)(m_wndDlgBar1.GetDlgItem(IDC_CMB_Inp3)))->SetCurSel( iCdPlc);
-	z_iComboCdPlc = iCdPlc;
+	z_iComboPlcCd = iCdPlc;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -112,9 +112,9 @@ void mnInpAttr::SetComboCdPlc(
 //							＝1 : 壁芯付き
 //							＝2 : 屋根構成線付き
 
-MINT mnInpAttr::GetComboCdPlc()
+MINT mnInpAttr::GetComboPlcCd()
 {
-	return z_iComboCdPlc;
+	return z_iComboPlcCd;
 }
 
 } // namespace MC

@@ -235,11 +235,11 @@ public:
 									return	m_pZukei;
 								}
 	
-	void SetKai( int i_iKai)
+	void SetInpKai( int i_iKai)
 								{
 									m_iKai = i_iKai;
 								}
-	MINT	GetKai()
+	MINT	GetInpKai()
 								{
 									return m_iKai;
 								}

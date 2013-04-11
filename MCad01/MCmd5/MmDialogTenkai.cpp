@@ -458,12 +458,12 @@ void CMmDialogTenkai::OnEnSetfocusEditJK8()	{ SetnJuko( 8, NULL);}
 
 BOOL CMmDialogTenkai::PreTranslateMessage(MSG* pMsg)
 {
-	if (pMsg->message == WM_KEYDOWN) {
-		if (pMsg->wParam == VK_RETURN) {
+	if ( pMsg->message == WM_KEYDOWN) {
+		if ( pMsg->wParam == VK_RETURN) {
 			SetControl();
 			return TRUE;
 		}
-//		if (pMsg->wParam == VK_ESCAPE) {
+//		if ( pMsg->wParam == VK_ESCAPE) {
 //			SetControl();
 //			return TRUE;
 //		}

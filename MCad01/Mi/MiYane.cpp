@@ -64,7 +64,7 @@ void mhInput::MmGetMarumeYaneLine(
 	MgPoint3	Py1;
 	MgLine2		Ln1;
 
-	iCdMarume = z_mn.GetComboCdMarume();
+	iCdMarume = z_mn.GetComboMarumeCd();
 	if ( iCdMarume == 0)
 		rTol = MC_MARUME_TOL;
 	else
@@ -73,7 +73,7 @@ void mhInput::MmGetMarumeYaneLine(
 	pGLn->m_n = 0;
 	for ( pRoofEn = HaitiDb::MdGetHeadRoof(); pRoofEn!=0;
 		  pRoofEn = HaitiDb::MdGetNextRoof()) {
-		if ( pRoofEn->GetKai() != iKai)
+		if ( pRoofEn->GetInpKai() != iKai)
 			continue;
 		if ( !MmChkValidRoof( pRoofEn))							// オプションと履歴のチェック
 			continue;

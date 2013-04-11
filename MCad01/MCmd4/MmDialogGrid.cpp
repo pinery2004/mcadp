@@ -242,7 +242,7 @@ BOOL CMmDialogGrid::OnInitDialog()
 	m_SpinGridNum4.SetRange( MINGRIDNUM, MAXGRIDNUM);
 
 	pWndInfo = MC::WindowCtrl::MmWndKGetCurWnd();							// カレントウィンドウ取得
-	if (pWndInfo == NULL) MQUIT;
+	if ( pWndInfo == NULL) MQUIT;
 
 	pWndInfo->GetGridNum( nGrid);
 	SetSpinGridNum( nGrid);

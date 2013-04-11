@@ -78,9 +78,9 @@ void HaitiCmd::MmPartsPlc(
 */
 //D	MdPartsAdd( &PlcEn, 1);
 	
-	PlcEn.SetPIKai( mtPlcInp::GetKai());
-	PlcEn.SetPIIdPartsTp( mtPlcInp::GetIdPartsTp());
-	PlcEn.SetPIPartsTp( mtPlcInp::GetPartsTp());
+	PlcEn.SetPIKai( mtPlcInp::GetInpKai());
+	PlcEn.SetPIIdPartsSpec( mtPlcInp::GetComboPartsNmId());
+	PlcEn.SetPIPartsSpec( mtPlcInp::GetPartsSpec());
 	PlcEn.SetPIIdMbr( mtPlcInp::GetIdMbr());
 	PlcEn.SetPIMbr( mtPlcInp::GetMbr());
 	PlcEn.SetPILenHosei( 0, mtPlcInp::GetLenHosei( 0));
@@ -107,7 +107,7 @@ void HaitiCmd::MmPartsPlc(
 		}
 	}
 	PlcEn.SetPIPanelNo( mtPlcInp::GetPanelNo());
-	PlcEn.SetPIKaikoNo( mtPlcInp::GetKaikoNo());
+	PlcEn.SetPIKaikoNo( mtPlcInp::GetInpKaikoNo());
 
 	PlcEn.SetPIPlcIti( 0, Pt[0]);
 	PlcEn.SetPIPlcIti( 1, Pt[1]);
@@ -160,7 +160,7 @@ exit:;
 //	返値 =-1: オーバーフロー, ≧0: 選択部品配置数
 MINT mhHaitiIn::GetParts(
 						MINT		iKai,			// (I  ) 階
-						MINT		iIdPartsTp,		// (I  ) 部品ID
+						MINT		iIdPartsSpec,		// (I  ) 部品ID
 				const	MCHAR*		cGeneralName,	// (I  ) 総称 または NULL
 				const	MCHAR*		cNmParts1,		// (I  ) 操作用部材名 または NULL
 						MINT		szPlcEn,		// (I  ) 部品配置最大数
@@ -179,7 +179,7 @@ MINT mhHaitiIn::GetParts(
 	MINT iHE = 0;
 	for (pPlcEn = HaitiDb::MdGetHeadParts( &pos1); pPlcEn!=0;
 		 pPlcEn = HaitiDb::MdGetNextParts( &pos1)) {
-		if ( !mhHaitiIn::ChkParts( iKai, iIdPartsTp, cGeneralName, cNmParts1, pPlcEn))
+		if ( !mhHaitiIn::ChkParts( iKai, iIdPartsSpec, cGeneralName, cNmParts1, pPlcEn))
 			continue;											// 対象外部品配置
 		if ( !MmChkValidParts( pPlcEn))							// オプションと履歴のチェック
 			continue;
@@ -201,7 +201,7 @@ MINT mhHaitiIn::GetParts(
 //	返値 true : 対象部品配置, false : 対象外部品配置
 bool mhHaitiIn::ChkParts(
 						MINT		iKai,			// (I  ) 階 または NULL
-						MINT		iIdPartsTp,		// (I  ) 部品ID または NULL
+						MINT		iIdPartsSpec,		// (I  ) 部品ID または NULL
 				const	MCHAR*		cGeneralName,	// (I  ) 総称 または NULL
 				const	MCHAR*		cNmParts1,	// (I  ) 操作用部材名 または NULL
 						mhPlcInfo	*pPlcEn1		// (I  ) 調査部品配置
@@ -210,7 +210,7 @@ bool mhHaitiIn::ChkParts(
 	bool	bSt = false;
 	if ( iKai != NULL && pPlcEn1->GetPIKai() != iKai)
 		MQUIT;													// 異なる階の部材は対象外
-	if ( iIdPartsTp != NULL && pPlcEn1->GetPTCdGp() != iIdPartsTp)
+	if ( iIdPartsSpec != NULL && pPlcEn1->GetPTCdGp() != iIdPartsSpec)
 		MQUIT;													// 異なる構成の部材は対象外
 	if ( cGeneralName != NULL &&
 		Mstrcmp( pPlcEn1->GetPTNmGeneral(), cGeneralName) != 0)
@@ -249,7 +249,7 @@ mhPlcInfo* mhHaitiIn::SrchBuzai(
 	MINT		nHitBziEn = 0;
 	MINT		iHitEnMin = 0;
    
-	MINT		iKaiC   = z_mn.GetKai();	// 階  	(1,2,3)
+	MINT		iKaiC   = z_mn.GetInpKai();	// 階  	(1,2,3)
 	MINT		iGpC = z_mn.GetKCdGp();		// 構成
 
 	MREAL		rAMinHitBziEn = MREALMAX;
@@ -332,7 +332,7 @@ void mhHaitiIn::MmSrchCrossBuzai(
 	MINT		nBzi2En = 0;
 	MINT		iHitEnMin = 0;
    
-	MINT		iKaiC   = z_mn.GetKai();					// 階  	(1,2,3)
+	MINT		iKaiC   = z_mn.GetInpKai();					// 階  	(1,2,3)
 	MINT		iGpC = z_mn.GetKCdGp();						// 構成
 
 	MREAL		rAMinBzi2En = MREALMAX;
@@ -410,7 +410,7 @@ void mhHaitiIn::PartsShape(
 						MgPolyg2*	pgPartsShape	// 部材形状
 				)
 {
-	MINT		iKaiC   = z_mn.GetKai();					// 階  	(1,2,3)
+	MINT		iKaiC   = z_mn.GetInpKai();					// 階  	(1,2,3)
 	MINT		iGpC = z_mn.GetKCdGp();						// 構成
 
 	MgLine2		LnParts;
@@ -489,7 +489,7 @@ void mhHaitiIn::PartsShape(
 //			pCod->Polygon( ptK, 4);
 //		}
 
-//		if ( pPlcEn->GetPIPartsTp()->m_iBr == 2)
+//		if ( pPlcEn->GetPIPartsSpec()->m_iBr == 2)
 //			DrawPart( pCod, iGpC, pPlcEn);
 }
 
@@ -735,7 +735,8 @@ void mhHaitiIn::MhAdjBzL(
 		}
 	}
 
-	ist = z_mn.GetComboAttrR( MC_CMB_LHS1, &rLH);				// 長さ補正値を取得する
+//S	ist = z_mn.GetComboAttrR( MC_CMB_LHS1, &rLH);				// 長さ補正値を取得する
+	rLH = z_mn.GetLengthH1();
 	if ( Bz1.Ln.p[1 - iMov] == PtInt) {
 		rLnWH = Bz1.rLH[1 - iMov] + rLH;
 		if ( !MGeo::Zero( rLnWH))

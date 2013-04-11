@@ -189,7 +189,7 @@ MINT MGeo::IntrAddLnULn2(						// (  O) ステイタス
 		SVal(Ln1.p[0], Ln1.p[1], ULn2.p, ULn2.v, &ss, &se);
 		if (ss * se < 0) {										// 交点は線分１の内側
 			po = Ln1.p[0] + (vd1 * (ss / (ss - se)));			// 交点
-			if (po != Ln1.p[0] && po != Ln1.p[1]) {				// 線分１の端部は交差点と見なさない
+			if ( po != Ln1.p[0] && po != Ln1.p[1]) {				// 線分１の端部は交差点と見なさない
 				(*GPt3) += po;									// 交点あり
 				ist = MC_INT;
 				MQUIT;

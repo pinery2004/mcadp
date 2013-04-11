@@ -74,7 +74,7 @@ void	WindowCtrl::MmWndSetSyubetsuC(
 {
 	z_wWndC.SetWndSyu( iWndSyu);
 	z_wWndC.SetZuSyu( iZuSyu);
-	z_wWndC.SetKai( iKai);
+	z_wWndC.SetInpKai( iKai);
 	z_wWndC.SetZuNum( iZuNum);
 }
 

@@ -412,10 +412,10 @@ void MmGridNum::DrawGrid(
 ////	MgLine2		Lnm[2];
 ////	MGGLINE2( GLnk, 10);
 ////
-////	MINT iKai = z_mn.GetKai();
+////	MINT iKai = z_mn.GetInpKai();
 ////
-////	iCdMarume = z_mn.GetComboCdMarume();
-////	iCdPlc = mhHaitiIn::GetComboCdPlc();
+////	iCdMarume = z_mn.GetComboMarumeCd();
+////	iCdPlc = mhHaitiIn::GetComboPlcCd();
 ////
 ////	if ( iCdPlc == MP_HAICD_KABESINZUKE ||
 ////		iCdPlc == MP_HAICD_YANEKOUSEISENZUKE) {									// 壁芯付け丸め　または　屋根構成線付け丸め
@@ -448,7 +448,7 @@ void MmGridNum::DrawGrid(
 ////		GLnk.m_n = 0;
 ////	}
 ////				
-//////	iCdMarume = z_mn.GetComboCdMarume();
+//////	iCdMarume = z_mn.GetComboMarumeCd();
 ////
 ////	// グリッド丸めなしの場合
 ////	if ( iCdMarume == 0) {

@@ -189,11 +189,11 @@ void CMmDialogHist::PostNcDestroy()
 BOOL CMmDialogHist::PreTranslateMessage(MSG* pMsg)
 {
 	// TODO: ここに特定なコードを追加するか、もしくは基本クラスを呼び出してください。
-	if (pMsg->message == WM_KEYDOWN) {
-		if (pMsg->wParam == VK_RETURN) {
+	if ( pMsg->message == WM_KEYDOWN) {
+		if ( pMsg->wParam == VK_RETURN) {
 			return TRUE;
 		}
-//		if (pMsg->wParam == VK_ESCAPE) {
+//		if ( pMsg->wParam == VK_ESCAPE) {
 //			SetControl();
 //			return TRUE;
 //		}

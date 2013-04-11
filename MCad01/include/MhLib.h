@@ -20,7 +20,7 @@ class	MhRoofInfo;
 
 class	MhMbr;
 class	mhGp;
-class	mhPartsTp;
+class	mhPartsSpec;
 
 /////////////////////////////////////////////////////////////////////////////
 //【機能】定数
@@ -521,15 +521,15 @@ public:
 					);
 
 	// 部品種類レコード数を取得する
-	static MINT	BuzaiCode::MhGetNoOfPartsTp();
+	static MINT	BuzaiCode::MhGetNoOfPartsSpec();
 
 	// 部品種類レコードを取得する
-	static mhPartsTp* BuzaiCode::MhGetpPartsTp(
-							MINT		iPartsTp					// 読み込み部品種類レコード番号
+	static mhPartsSpec* BuzaiCode::MhGetpPartsSpec(
+							MINT		iPartsSpec					// 読み込み部品種類レコード番号
 					);
 
 	// 部品IDを取得する
-	static MINT BuzaiCode::MhGetPIIdPartsTp(
+	static MINT BuzaiCode::MhGetPIIdPartsSpec(
 							MINT		iCdBuzai					// 部材コード
 					);
 

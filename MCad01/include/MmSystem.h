@@ -22,7 +22,7 @@ class _System
 {
 private:
 	static class CMCADApp	*ms_pMCADApp;		// アプリケーションポインタ(Global) 
-	static class CMainFrame	*ms_pMainFrame;		// メインフレームポインタ(Global) 
+	static class CMainFrame	*z_pMainFrame;		// メインフレームポインタ(Global) 
 
 public:
 	/////////////////////////////////////////////////////////////////////////////
@@ -36,14 +36,14 @@ public:
 					class	CMainFrame*	pMainFrame
 					)
 	{
-		ms_pMainFrame = pMainFrame;
+		z_pMainFrame = pMainFrame;
 	}
 
 	/////////////////////////////////////////////////////////////////////////////
 	// MainFrame Pointer 取得
 	static CMainFrame* GetpMainFrame()
 	{
-		return ms_pMainFrame;
+		return z_pMainFrame;
 	}
 
 	/////////////////////////////////////////////////////////////////////////////

@@ -28,8 +28,8 @@ namespace MC
 	MgLine2		ln1;
 	MgLine3		Ln1;
 	MgPolyg2	Pg1(20);
-//	MINT		iIdPartsTp;
-//	mhPartsTp*	pPartsTp;
+//	MINT		iIdPartsSpec;
+//	mhPartsSpec*	pPartsSpec;
 	bool		bFirst = TRUE;
 	MINT		iKati;
 //	MINT		iMulti;

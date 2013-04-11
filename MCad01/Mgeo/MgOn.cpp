@@ -89,7 +89,7 @@ namespace MC
 //		bst = true;
 ////
 //// 鉛直距離が正なら直線の左とみなす
-//	} else if (pa1 > 0) {
+//	} else if ( pa1 > 0) {
 //		*ist = MC_LEFT;
 //		bst = false;
 ////
@@ -186,7 +186,7 @@ bool MGeo::ChkPt2OnLn2WS(						// (  O) ステイタス
 	v2tol_2 = tol_2 * Abs_2( v2);
 	v2tol_2_1 = tol_2 * Abs_2( v2) * 0.0001f * 0.0001f;
 	*ist = 0;
-	if (pa1 * pa1 <= v2tol_2) { 								// 点から線分までの鉛直距離がrTol以内
+	if ( pa1 * pa1 <= v2tol_2) { 								// 点から線分までの鉛直距離がrTol以内
 		// 延長直線上
 		cs = v2 * v2s1;
 		ce = v2 * v2e1;
@@ -201,7 +201,7 @@ bool MGeo::ChkPt2OnLn2WS(						// (  O) ステイタス
 		*ist |= MC_ON_LINE;
 	} else {
 		// 延長直線上でないなら、線分の左右どちらにあるかを調べる
-		if (pa1 > 0) {
+		if ( pa1 > 0) {
 			*ist |= MC_LEFT;									// 左側
 		} else {
 			*ist |= MC_RIGHT;									// 右側
@@ -263,7 +263,7 @@ bool MGeo::ChkLn2OnLn2(							// (  O) ステイタス
 	//						 ( pa1 * pa1 <= tol * tol * (v2 * v2))
 	cs22 = v2 * v2;
 	v2tol_2 = rTol * rTol * cs22;
-	if (pa1 * pa1 > v2tol_2) 									// 点から線分までの鉛直距離がrTol超の場合は
+	if ( pa1 * pa1 > v2tol_2) 									// 点から線分までの鉛直距離がrTol超の場合は
 		MQUIT;													// 重なっていないとする
 	cs21 = 0;
 	cs11 = (Ln1.p[0] - Ln2.p[0]) * v2;
@@ -761,7 +761,7 @@ bool MGeo::ChkPt3OnPg3WS(						// (  O) ステイタス
 	MREAL pa1 = (Pln.v * Pt) + Pln.d;							// 点から平面までの距離
 	
 	if (!(MgAbs_2( pa1) <= rTol * rTol)) {						// 多角形の平面上で無い場合に、多角形の上下を判定する
-		if (pa1 > 0) *ist = MC_UPPER;							// 多角形の構成点を右ねじ回転とみなし進む方向を上側とする
+		if ( pa1 > 0) *ist = MC_UPPER;							// 多角形の構成点を右ねじ回転とみなし進む方向を上側とする
 		else *ist = MC_LOWER;
 		return	false;
 	}
@@ -825,10 +825,10 @@ bool MGeo::ChkLn3OnPg3WS(						// (  O) ステイタス
 //	MREAL	pa1;								//	点から平面までの距離
 ////
 //	pa1 = (Pln2.v * p1) + Pln2.d;
-//	if (pa1 > rTol) {
+//	if ( pa1 > rTol) {
 //		*ist = MC_UPPER;
 //		bst = false;
-//	} else if (pa1 < -rTol) {
+//	} else if ( pa1 < -rTol) {
 //		*ist = MC_LOWER;
 //		bst = false;
 //	} else {

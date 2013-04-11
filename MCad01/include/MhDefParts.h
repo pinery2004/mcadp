@@ -223,7 +223,7 @@ enum MCCHKATTR {
 #define		MC_RBND_PARALOG	4					// 平行四辺形表示 Parallelogram
 
 
-//S #define		MMAX_PARTSSPEC	300										// 最大部品仕様数
+//S #define		MMAX_PARTSSPEC	300									// 最大部品仕様数
 
 #define		MMAX_BZILEN		30000.									// 最大部材長さ30m
 #define		MMIN_BZILEN		1.										// 最小部材長さ

@@ -284,7 +284,7 @@ void CMCadView1::OnEndPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
 void CMCadView1::OnContextMenu(CWnd* /* pWnd */, CPoint point)
 {
 #ifndef SHARED_HANDLERS
-	g_theApp.GetContextMenuManager()->ShowPopupMenu(IDR_POPUP_EDIT, point.x, point.y, this, TRUE);
+	z_MCadApp.GetContextMenuManager()->ShowPopupMenu(IDR_POPUP_EDIT, point.x, point.y, this, TRUE);
 #endif
 }
 
@@ -343,7 +343,7 @@ void CMCadView1::OnSetFocus(CWnd* pOldWnd)
 	CView::OnSetFocus(pOldWnd);
 
 	// TODO: ここにメッセージ ハンドラー コードを追加します。
-	ms_pMainFrame->m_pCurView = this;
+	z_pMainFrame->m_pCurView = this;
 }
 
 

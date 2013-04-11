@@ -15,6 +15,7 @@
 #include "MmCmdMsg.h"
 #include "MtPrcEventQueue.h"
 #include "MtMCadApi.h"
+#include "MnInpAttr.h"
 
 //#include "MCADLib.h"
 
@@ -29,34 +30,34 @@ void MtSetCmdList( struct MT_InternalCmdList *pInternalCmdList, MINT nInternalCm
 MINT			z_userbreak;
 
 struct MT_InternalCmdList z_pInternalCmdList[] = {
-	{ Mstr( "_CancelCmd")		,MCmdWait			,0	 ,NULL  ,IDC_CANCELCMD },
-	{ Mstr( "_CreateKabeO")		,MCmdWallOuter		,0	 ,NULL  ,IDP_OUTERWALL },		// 外壁入力
-	{ Mstr( "_CreateKabeI")		,MCmdWallInner		,0	 ,NULL  ,IDP_INNERWALL },		// 内壁入力
-	{ Mstr( "_CreateParts")		,MCmdParts			,0	 ,NULL  ,IDC_PARTSCREATE },		// 部材入力
-	{ Mstr( "_GTate1")			,MCmdGaiTateSash	,0	 ,NULL  ,IDP_GAITATESASH },		// 外部建具（サッシ）入力
-	{ Mstr( "_GTate2")			,MCmdGaiTateDoor	,0	 ,NULL  ,IDP_GAITATEDOOR },		// 外部建具（ドア）入力
-	{ Mstr( "_NTate")			,MCmdNaiTate		,0	 ,NULL  ,IDP_NAITATE },			// 内部建具入力
-	{ Mstr( "_Demado")			,MCmdDemado			,0	 ,NULL  ,IDP_BAYWINDOW },		// 出窓入力
-	{ Mstr( "_CreateRoof")		,MCmdRoof			,0	 ,NULL  ,IDP_ROOF },			// 屋根入力
-	{ Mstr( "_YaneFutai")		,MCmdRoofSupplement	,0	 ,NULL  ,IDP_ROOFSUPPLEMENT },	// 屋根付帯入力
-	{ Mstr( "_Kaikou")			,MCmdOpening		,0	 ,NULL  ,IDP_OPENING },			// 開口部入力
-	{ Mstr( "_KKaidan")			,MCmdStairs			,0	 ,NULL  ,IDP_STAIRS },			// 階段入力
-	{ Mstr( "_KBalcony")		,MCmdBalcony		,0	 ,NULL  ,IDP_BALCONY },			// バルコニー入力
+	{ Mstr( "_CancelCmd")		,MCmdWait			,1	 ,NULL  ,IDC_CANCELCMD },
+	{ Mstr( "_CreateKabeO")		,MCmdWallOuter		,1	 ,NULL  ,IDP_OUTERWALL },		// 外壁入力
+	{ Mstr( "_CreateKabeI")		,MCmdWallInner		,2	 ,NULL  ,IDP_INNERWALL },		// 内壁入力
+	{ Mstr( "_CreateParts")		,MCmdParts			,1	 ,NULL  ,IDC_PARTSCREATE },		// 部材入力
+	{ Mstr( "_GTate1")			,MCmdGaiTateSash	,1	 ,NULL  ,IDP_GAITATESASH },		// 外部建具（サッシ）入力
+	{ Mstr( "_GTate2")			,MCmdGaiTateDoor	,1	 ,NULL  ,IDP_GAITATEDOOR },		// 外部建具（ドア）入力
+	{ Mstr( "_NTate")			,MCmdNaiTate		,1	 ,NULL  ,IDP_NAITATE },			// 内部建具入力
+	{ Mstr( "_Demado")			,MCmdDemado			,1	 ,NULL  ,IDP_BAYWINDOW },		// 出窓入力
+	{ Mstr( "_CreateRoof")		,MCmdRoof			,1	 ,NULL  ,IDP_ROOF },			// 屋根入力
+	{ Mstr( "_YaneFutai")		,MCmdRoofSupplement	,1	 ,NULL  ,IDP_ROOFSUPPLEMENT },	// 屋根付帯入力
+	{ Mstr( "_Kaikou")			,MCmdOpening		,1	 ,NULL  ,IDP_OPENING },			// 開口部入力
+	{ Mstr( "_KKaidan")			,MCmdStairs			,1	 ,NULL  ,IDP_STAIRS },			// 階段入力
+	{ Mstr( "_KBalcony")		,MCmdBalcony		,1	 ,NULL  ,IDP_BALCONY },			// バルコニー入力
 	{ Mstr( "_KDebug")			,MCmdDebug			,0	 ,NULL  ,IDP_P0130 },			// デバッグ用
-	{ Mstr( "_KYane")			,MCmdStructRoof		,0	 ,NULL  ,IDP_STRUCTROOF },		// 構造屋根部材入力
-	{ Mstr( "_KTenjo")			,MCmdStructCeiling	,0	 ,NULL  ,IDP_STRUCTCEILING },	// 構造天井部材入力
-	{ Mstr( "_KKabe")			,MCmdStructWall		,0	 ,NULL  ,IDP_STRUCTWALL },		// 構造壁部材入力
-	{ Mstr( "_KYuka")			,MCmdStructFloor	,0	 ,NULL  ,IDP_STRUCTFLOOR },		// 構造床部材入力
-	{ Mstr( "_KDodai")			,MCmdStructDodai	,0	 ,NULL  ,IDP_STRUCTDODAI },		// 構造土台部材入力
-	{ Mstr( "_KKiso")			,MCmdKiso			,0	 ,NULL  ,IDP_KISO },			// 基礎入力
-	{ Mstr( "_Wasitu")			,MCmdWasitu			,0	 ,NULL  ,IDP_WASITU },			// 和室入力
+	{ Mstr( "_KYane")			,MCmdStructRoof		,2	 ,NULL  ,IDP_STRUCTROOF },		// 構造屋根部材入力
+	{ Mstr( "_KTenjo")			,MCmdStructCeiling	,2	 ,NULL  ,IDP_STRUCTCEILING },	// 構造天井部材入力
+	{ Mstr( "_KKabe")			,MCmdStructWall		,2	 ,NULL  ,IDP_STRUCTWALL },		// 構造壁部材入力
+	{ Mstr( "_KYuka")			,MCmdStructFloor	,2	 ,NULL  ,IDP_STRUCTFLOOR },		// 構造床部材入力
+	{ Mstr( "_KDodai")			,MCmdStructDodai	,2	 ,NULL  ,IDP_STRUCTDODAI },		// 構造土台部材入力
+	{ Mstr( "_KKiso")			,MCmdKiso			,2	 ,NULL  ,IDP_KISO },			// 基礎入力
+	{ Mstr( "_Wasitu")			,MCmdWasitu			,1	 ,NULL  ,IDP_WASITU },			// 和室入力
 //
-	{ Mstr( "_Kitchen")			,MCmdKitchen		,0	 ,NULL  ,IDP_KITCHEN },			// キッチン入力
-	{ Mstr( "_Senmen")			,MCmdSenmen			,0	 ,NULL  ,IDP_SENMEN },			// 洗面・浴室入力
-	{ Mstr( "_Toile")			,MCmdToile			,0	 ,NULL  ,IDP_TOILE },			// トイレ入力
-	{ Mstr( "_Settubi")			,MCmdSettubi		,0	 ,NULL  ,IDP_SETUBI },			// 設備入力
-	{ Mstr( "_Denki")			,MCmdDenki			,0	 ,NULL  ,IDP_DENKI },			// 電気入力
-	{ Mstr( "_Pipe")			,MCmdPipe			,0	 ,NULL  ,IDP_PIPE },			// 配管入力
+	{ Mstr( "_Kitchen")			,MCmdKitchen		,1	 ,NULL  ,IDP_KITCHEN },			// キッチン入力
+	{ Mstr( "_Senmen")			,MCmdSenmen			,1	 ,NULL  ,IDP_SENMEN },			// 洗面・浴室入力
+	{ Mstr( "_Toile")			,MCmdToile			,1	 ,NULL  ,IDP_TOILE },			// トイレ入力
+	{ Mstr( "_Settubi")			,MCmdSettubi		,1	 ,NULL  ,IDP_SETUBI },			// 設備入力
+	{ Mstr( "_Denki")			,MCmdDenki			,1	 ,NULL  ,IDP_DENKI },			// 電気入力
+	{ Mstr( "_Pipe")			,MCmdPipe			,1	 ,NULL  ,IDP_PIPE },			// 配管入力
 //
 	{ Mstr( "_SunpouSen")		,MCmdSunpouSen		,0	 ,NULL  ,IDP_SUNPOUSEN },		// 寸法線入力
 	{ Mstr( "_HikidasiSen")		,MCmdHikidasiSen	,0	 ,NULL  ,IDP_HIKIDASISEN },		// 引出線型注記入力
@@ -81,7 +82,7 @@ struct MT_InternalCmdList z_pInternalCmdList[] = {
 	{ Mstr( "_Opt")				,MCmdOpt			,0	 ,NULL  ,IDC_OPTION },			// オプション設定
 	{ Mstr( "_Hist")			,MCmdHist			,0	 ,NULL  ,IDC_HIST },			// 履歴管理
 	{ Mstr( "_Tenkai")			,MCmdTenkai			,0	 ,NULL  ,IDC_TENKAI },			// 住棟展開
-	{ Mstr( "_PartsEdit")			,MCmdPartsEdit		,0	 ,NULL  ,IDC_PARTSEDIT },		// グリッドコントロールテスト
+	{ Mstr( "_PartsEdit")			,MCmdPartsEdit	,0	 ,NULL  ,IDC_PARTSEDIT },		// グリッドコントロールテスト
 	{ Mstr( "_MLoadDxfFile")	,MCmdLoadDxfFile	,0	 ,NULL  ,IDC_LOAD_DXF_FILE },	// ＤＸＦファイルの読込み
 	{ Mstr( "_ModLineLength")	,MCmdMdLineLength	,0	 ,NULL  ,IDC_MOD_LINELENGTH },	// 横置部材の長さ調整
 	{ Mstr( "_ModPanelNo")		,MCmdMdPanelNo		,0	 ,NULL  ,IDC_MOD_PANELNO },		// パネル番号の修正
@@ -220,8 +221,11 @@ MINT MtDoOneCommand
 	MINT ret = MTRT_ERROR;
 
 	for ( ic=0; ic<z_nInternalCmdList; ic++) {
-		if (Mstrcmp( z_pInternalCmdList[ic].globalName, argcmd) == 0) {
-			fnptr = (MINT(*)(void))(z_pInternalCmdList[ic].funcPtr);
+		if ( Mstrcmp( z_pInternalCmdList[ic].globalName, argcmd) == 0) {
+			// コマンドタイプ
+			z_mn.SetCCategory( z_pInternalCmdList[ic].cmdType);
+			// 実行
+			fnptr = (MINT(*)(void))( z_pInternalCmdList[ic].funcPtr);
 			ret = MTRT_NORM;
 			if (fnptr)
 				(*fnptr)();

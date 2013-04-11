@@ -175,19 +175,22 @@ void MhRoofInfo::SetAttr()
 {
 	MINT	ist;
 	MINT	iKobai;
-	MREAL	rNokinoDe;
-	MREAL	rKerabeDa;
+	MREAL	rNokiDe;
+	MREAL	rKerabaDe;
 
-	ist = z_mn.GetComboAttrI( MC_CMB_KOBY, &iKobai);
+//S	ist = z_mn.GetComboAttrI( MC_CMB_KOBY, &iKobai);			// Œù”z
+	iKobai = z_mn.GetKobai();
 	m_rKb = MREAL( iKobai);
 
-	ist = z_mn.GetComboAttrR( MC_CMB_NKDE, &rNokinoDe);
-	m_rNkD[0] = m_rNkD[1] = rNokinoDe;							// Œ¬‚Ìo
-	McRfmOffset[MHRL_NOKI] = rNokinoDe;
+//S	ist = z_mn.GetComboAttrR( MC_CMB_NKDE, &rNokiDe);
+	rNokiDe = z_mn.GetNokiDe();
+	m_rNkD[0] = m_rNkD[1] = rNokiDe;							// Œ¬‚Ìo
+	McRfmOffset[MHRL_NOKI] = rNokiDe;
 
-	ist = z_mn.GetComboAttrR( MC_CMB_KRDE, &rKerabeDa);
-	m_rKrD[0] = m_rKrD[1] = rKerabeDa;							// ‚¯‚ç‚Î‚Ìo
-	McRfmOffset[MHRL_KERABA] = rKerabeDa;
+//S	ist = z_mn.GetComboAttrR( MC_CMB_KRDE, &rKerabaDe);
+	rKerabaDe = z_mn.GetKerabaDe();
+	m_rKrD[0] = m_rKrD[1] = rKerabaDe;							// ‚¯‚ç‚Î‚Ìo
+	McRfmOffset[MHRL_KERABA] = rKerabaDe;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -304,9 +307,9 @@ void MhRoofInfo::CreateRfmForJim()
 		Pln0 = m_GRfm.m_st[iRfm0].m_Pln;						// ’n‰ô‚èü‚ÉÚ‘±‚·‚é‰®ª–Ê
 		iRfm1 = m_GJim1[ic1].m_iRfm;
 		Pln1 = m_GRfm.m_st[iRfm1].m_Pln;						// Ÿ‚Ì’n‰ô‚èü‚ÉÚ‘±‚·‚é‰®ª–Ê
-		ist = MGeo::Intr2Pln3( Pln0, Pln1, &ULn1);					// ‰®ª–ÊŠÔ‚ÌŒğü‚ğ‹‚ß‚é
+		ist = MGeo::Intr2Pln3( Pln0, Pln1, &ULn1);				// ‰®ª–ÊŠÔ‚ÌŒğü‚ğ‹‚ß‚é
 			ASSERT( ist == MC_INT);								// Šñ“•”\¬üì¬ƒGƒ‰[@<ERROR>
-		if ( ULn1.v.z < 0.0)										// Œğü‚Ì•ûŒü‚ğãŒü‚«‚É‚·‚é
+		if ( ULn1.v.z < 0.0)									// Œğü‚Ì•ûŒü‚ğãŒü‚«‚É‚·‚é
 			ULn1.v = - ULn1.v;
 		P0 = MgPoint3C( m_GJim1[ic0].m_p);
 		P1 = P0 + MCMAXIESIZE * ULn1.v;
@@ -472,7 +475,7 @@ MINT MhRoofInfo::AdjustRfm2()						// (  O) ƒXƒeƒCƒ^ƒX@0: ³í@-1: ‰®ª–ÊŒ`ó
 	MhRfm		Rfm;
 
 	//@‰Æƒ‚ƒfƒ‹‚æ‚èƒJƒŒƒ“ƒgŠK‚ÌãŠK‚Ì‘S‚Ä‚Ì•Ç‚ğæ“¾‚·‚é
-	MINT iKai = z_mn.GetKai() + 1;
+	MINT iKai = z_mn.GetInpKai() + 1;
 	nHaiKabe = mhHaitiIn::GetParts( iKai, MP_GP_TAIRYOKU, NULL, Mstr( "ŠO•Ç"), MAXHAIKABE, pHaiKabe, pPlcPos);
 																// ‰Æƒ‚ƒfƒ‹‚æ‚èƒJƒŒƒ“ƒgŠK‚ÌãŠK‚Ì‘S‚Ä‚Ì•Ç‚ğæ“¾‚·‚é
 	if ( nHaiKabe <= 0)

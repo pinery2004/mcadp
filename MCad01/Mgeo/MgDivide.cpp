@@ -51,7 +51,7 @@ MINT MGeo::Divide2Ln2(							// (  O) ステイタス
 		if (ss1 * se1 < 0) {									// 交点は線分１の内側
 			po = Ln1.p[0] + (vd1 * (ss1 / (ss1 - se1)));		// 交点
 			if (ss2 * se2 < 0 || po == Ln2.p[0] || po == Ln2.p[1]) { // 交点は線分２上
-				if (po != Ln1.p[0] && po != Ln1.p[1]) {			// 線分１の端部は交点と見なさない
+				if ( po != Ln1.p[0] && po != Ln1.p[1]) {			// 線分１の端部は交点と見なさない
 					(*GLn3) += MgLine2(Ln1.p[0], po);			// 分割あり
 					(*GLn3) += MgLine2(po, Ln1.p[1]);
 					ist = MC_INT;
@@ -94,7 +94,7 @@ MINT MGeo::DivideLnULn2(							// (  O) ステイタス
 		SVal( Ln1.p[0], Ln1.p[1], ULn2.p, ULn2.v, &ss, &se);
 		if (ss * se < 0) {										//	交点は線分１の内側
 			po = Ln1.p[0] + (vd1 * (ss / (ss - se)));			//	交点
-			if (po != Ln1.p[0] && po != Ln1.p[1]) {				//	線分１の端部は交点と見なさない
+			if ( po != Ln1.p[0] && po != Ln1.p[1]) {				//	線分１の端部は交点と見なさない
 				(*GLn3) += MgLine2( Ln1.p[0], po);				// 分割あり
 				(*GLn3) += MgLine2( po, Ln1.p[1]);
 				ist = MC_INT;
@@ -160,7 +160,7 @@ MINT MGeo::DivideAddLnULn2(						// (  O) ステイタス
 		SVal( Ln1.p[0], Ln1.p[1], ULn2.p, ULn2.v, &ss, &se);
 		if (ss * se < 0) {										// 交点は線分１の内側にあり
 			po = Ln1.p[0] + (vd1 * (ss / (ss - se)));			// 交点を求める
-			if (po != Ln1.p[0] && po != Ln1.p[1]) {				// 交点が線分１の端部で無いならば
+			if ( po != Ln1.p[0] && po != Ln1.p[1]) {				// 交点が線分１の端部で無いならば
 				if (ss * selr > 0) {							// 線分を分割し選択条件に合う方を分割後の線分群に追加する
 					(*GLn3) += MgLine2( Ln1.p[0], po);
 				} else {
