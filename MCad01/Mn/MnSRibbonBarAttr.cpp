@@ -32,10 +32,10 @@
 namespace MC
 {
 
-static MINT z_IdcComboAttr[6] =		{ IDC_CMB_ATTR1, IDC_CMB_ATTR2, IDC_CMB_ATTR3,
-									  IDC_CMB_ATTR4, IDC_CMB_ATTR5, IDC_CMB_ATTR6};
-static MINT z_IdcStaticAttr[6] =	{ IDC_CMB_ATTR1, IDC_CMB_ATTR2, IDC_CMB_ATTR3,
-									  IDC_CMB_ATTR4, IDC_CMB_ATTR5, IDC_CMB_ATTR6};
+static MINT z_IdcComboAttr[6] =		{ IDC_CMBK_ATTR1, IDC_CMBK_ATTR2, IDC_CMBK_ATTR3,
+									  IDC_CMBK_ATTR4, IDC_CMBK_ATTR5, IDC_CMBK_ATTR6};
+static MINT z_IdcStaticAttr[6] =	{ IDC_CMBK_ATTR1, IDC_CMBK_ATTR2, IDC_CMBK_ATTR3,
+									  IDC_CMBK_ATTR4, IDC_CMBK_ATTR5, IDC_CMBK_ATTR6};
 static MINT z_IdcCheckAttr[4] =		{ IDC_CHECKATTR1, IDC_CHECKATTR2,
 									  IDC_CHECKATTR3, IDC_CHECKATTR4};
 
@@ -238,7 +238,6 @@ void mnInpAttr::InitComboAttrR(
 {
 	int		ist;
 	int		ic1;
-	int		ip = 0;
 	CString	sKomoku;
 
 	CMFCRibbonComboBox *pCmbBox = MnpComboAttr( i_iAttr);
@@ -247,7 +246,6 @@ void mnInpAttr::InitComboAttrR(
 
 	// 選択属性値設定
 	for ( ic1=0; ic1<nComboAttr; ic1++) {
-		ASSERT( ip < MX_CMB_ATTR - 1);							// 属性値選択コンボボックス項目　オーバフロー　<ERROR>
 //		if ( MgEqual( rComboAttr[ic1], 9999.0))
 //			sKomoku = "自動";
 		if ( MGeo::Equal( rComboAttr[ic1], MREAL( MC_INT_JIDO)))
@@ -342,7 +340,6 @@ void mnInpAttr::InitComboAttrI(
 {
 	int		ist;
 	int		ic1;
-	int		ip = 0;
 	CString	sKomoku;
 
 	CMFCRibbonComboBox *pCmbBox = MnpComboAttr( i_iAttr);
@@ -350,7 +347,6 @@ void mnInpAttr::InitComboAttrI(
 	pCmbBox->RemoveAllItems();
 
 	for ( ic1=0; ic1<nComboAttr; ic1++) {
-		ASSERT( ip < MX_CMB_ATTR - 1);							// 開口部高さ選択コンボボックス項目　オーバフロー　<ERROR>
 		if ( iCmbAttr[ic1] == MC_INT_JIDO)
 			sKomoku = MC_STR_JIDO;								// 自動
 		if ( iCmbAttr[ic1] == MC_INT_AREA)

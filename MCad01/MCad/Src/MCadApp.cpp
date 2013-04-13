@@ -322,6 +322,10 @@ BOOL CMCadApp::InitInstance()
 	EnableShellOpen();
 	RegisterShellFileTypes( TRUE);
 
+	// メイン ウィンドウが初期化されたので、表示と更新を行います。
+	pMainFrame->ShowWindow(m_nCmdShow);
+	pMainFrame->UpdateWindow();
+
 	MC::WindowCtrl::MmWndSetSyubetsuC( 1, MTHEIMENZU, 1, 1);
 
 	// コマンド ラインで指定されたディスパッチ コマンドです。アプリケーションが
@@ -329,9 +333,8 @@ BOOL CMCadApp::InitInstance()
 	if ( !ProcessShellCommand(cmdInfo))
 		return FALSE;
 
-	// メイン ウィンドウが初期化されたので、表示と更新を行います。
-	pMainFrame->ShowWindow(m_nCmdShow);
-	pMainFrame->UpdateWindow();
+	MC::z_mn.InitComboPartsNm();												// 組、分類に対応する部品を選択可能項目として設定する
+	MC::z_mn.InitComboAttr( MP_AT_HRZ_PARTS);									// 属性入力用コンボボックスを初期化する
 
 	//// ウィンドウのオープン
 	MC::WindowCtrl::MmWndSetSyubetsuC( 2, MTHEIMENZU, 1, 1);
@@ -581,7 +584,7 @@ void CMCadApp::OnSubMenuP( UINT nID)
 {
 	// TODO : ここにコマンド ハンドラ コードを追加します。
 	// コマンドキュー
-	MC::WindowCtrl::MmWndKCmdXqt( nID);										//	メニューコマンド
+	MC::WindowCtrl::MmWndKCmdXqt( nID);											//	メニューコマンド
 
 }
 
