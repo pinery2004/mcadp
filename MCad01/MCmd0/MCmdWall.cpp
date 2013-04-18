@@ -18,7 +18,7 @@
 namespace MC
 {
 
-void MCmdLine();
+void MCmdLine( CWnd* pWnd);
 void MCmdLineW();
 void SetInpAt();
 
@@ -27,10 +27,13 @@ void SetInpAt();
 void MCmdWallOuter()
 {
 	MINT	ist1;
+	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
+	CWnd*		pWnd = pWndInfo->GetWnd();
+
 //	MhInitInpAt();
 	ist1 = z_mn.SetRibbonBarEnt( MP_GP_TAIRYOKU, MP_BR_OTHER, Mstr( "外壁"), Mstr( "204C"));
 	if ( ist1 == 0)
-		MCmdLine();
+		MCmdLine( pWnd);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -38,10 +41,13 @@ void MCmdWallOuter()
 void MCmdWallInner()
 {
 	MINT	ist1;
+	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
+	CWnd*		pWnd = pWndInfo->GetWnd();
+
 //	MhInitInpAt();
 	ist1 = z_mn.SetRibbonBarEnt( MP_GP_TAIRYOKU, MP_BR_OTHER, Mstr( "内壁"), Mstr( "204C"));
 	if ( ist1 == 0)
-		MCmdLine();
+		MCmdLine( pWnd);
 }
 
 /////////////////////////////////////////////////////////////////////////////

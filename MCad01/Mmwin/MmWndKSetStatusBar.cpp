@@ -94,7 +94,7 @@ void Msg::DispSelStatusBar(
 	MainFrm = System::GetpMainFrame();									// ƒƒCƒ“ƒtƒŒ[ƒ€‚ðŽæ“¾
 	if ( MainFrm != NULL) {
 		StBar = (CStatusBar*)(MainFrm->GetDescendantWindow( AFX_IDW_STATUS_BAR));
-		StBar->SetPaneText( i_iStb, i_sStb);
+//U		StBar->SetPaneText( i_iStb, i_sStb);
 	}
 }
 

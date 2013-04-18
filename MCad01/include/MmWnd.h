@@ -128,8 +128,8 @@ public :
 						{ m_iZuNum = iZuNum;}
 	MINT	GetZuNum()
 						{ return m_iZuNum;}
-	void	SetWnd( CWnd* pWnd)
-						{ m_pWnd = pWnd;}
+	void	SetWnd( CWnd* pWnd) {
+						m_pWnd = pWnd;}
 	CWnd*	GetWnd()
 						{ return m_pWnd;}
 	void	SetFrame( CMDIChildWnd* pChildFrm)

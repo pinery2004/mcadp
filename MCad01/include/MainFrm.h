@@ -15,7 +15,7 @@
 #pragma once
 #include "MsDefType.h"
 
-#define WM_USER100 WM_USER + 100
+//S #define WM_USER100 WM_USER + 100
 
 class CMainFrame : public CMDIFrameWndEx
 {

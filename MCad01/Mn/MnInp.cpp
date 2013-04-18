@@ -36,6 +36,7 @@
 #include "MhInp.h"
 
 #include "MainFrm.h"
+#include "MmCmdMsg.h"
 
 namespace MC
 {
@@ -103,7 +104,7 @@ int mnInpAttr::RibbonIO(
 	m_iCdArg1 = i_iCdArg1;
 	m_rCdArg2 = i_rCdArg2;
 	CMainFrame*	pMainFrame = MC::System::GetpMainFrame();
-	pMainFrame->SendMessage( WM_USER100);
+	pMainFrame->SendMessage( WM_MYMESSAGERIBBONIO);
 	return m_iSts;
 }
 

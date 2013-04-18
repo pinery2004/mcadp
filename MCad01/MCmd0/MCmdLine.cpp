@@ -14,6 +14,8 @@
 #include "MmCmd.h"
 #include "MainFrm.h"
 #include "MhInpAttr.h"
+#include "MmDialogKAttr.h"
+#include "MmCmdMsg.h"
 
 #define		MC_YANE_TAKASA_HOSEI 97.
 
@@ -45,14 +47,19 @@ void MCmdWait()
 ////////////////////////////////////////////////////////////////////////////
 //	入力モードに従い部材を追加または削除する
 
-void MCmdLine()
+void MCmdLine(
+						CWnd*		pWnd			// (I  ) ウィンドウのインスタンス
+	)
 {
 	MINT iMode;
 	iMode = z_mn.GetMode();
-	if ( iMode == MP_MD_CREATE)
+	if ( iMode == MP_MD_CREATE) {
+		MmDialogKAttr();
 		MCmdLineAdd();
-	else if ( iMode == MP_MD_DELETE)
-		MCmdLineDelete();
+	} else {
+		if ( iMode == MP_MD_DELETE)
+			MCmdLineDelete();
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -88,7 +95,7 @@ void MCmdLineAdd()
 
 	Window::CurWndFocus();
 	CMainFrame*	pMainFrame = MC::System::GetpMainFrame();
-	pMainFrame->SendMessage( WM_USER100);
+	pMainFrame->SendMessage( WM_MYMESSAGERIBBONIO);
 
 	Msg::ClearErrorMsg();
 	Msg::OperationMsg( MC_OPRT_PARTS);							// ステイタスバーの操作表示部へ"部材追加"を表示
@@ -177,7 +184,7 @@ void MCmdLineAdd()
 					pRfm2 = mhHaitiIn::SrchRfm( MC_PRI_MIN_HIGHT, ptln1_chk[1]);
 					if ( pRfm1) {								//
 						plnYane = pRfm1->m_Pln;					//	入力点の１点目が屋根面上の場合は、その屋根面なりにZ座標を求める
-					} else if ( pRfm2) {							//
+					} else if ( pRfm2) {						//
 						plnYane = pRfm2->m_Pln;					//	入力点の２点目のみ屋根面上の場合は、その屋根面なりにZ座標を求める
 					} else {
 						plnYane = MgPlane3( MgVect3( 0., 0., 1.), 0.);	//	入力点が屋根面上でない場合の仮想屋根面(Z=0.)
@@ -290,9 +297,12 @@ void MCmdLineAdd()
 void MCmdStructRoof()
 {
 	MINT	ist1;
+	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
+	CWnd*		pWnd = pWndInfo->GetWnd();
+
 	ist1 = z_mn.SetRibbonBarEnt( MP_GP_YANE, MP_BR_BUZAI, Mstr( "垂木"), Mstr( "204"));
 	if ( ist1 == 0)
-		MCmdLine();
+		MCmdLine( pWnd);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -301,9 +311,12 @@ void MCmdStructRoof()
 void MCmdStructCeiling()
 {
 	MINT	ist1;
+	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
+	CWnd*		pWnd = pWndInfo->GetWnd();
+
 	ist1 = z_mn.SetRibbonBarEnt( MP_GP_TENJO, MP_BR_BUZAI, Mstr( "天井根太"), Mstr( "204"));
 	if ( ist1 == 0)
-		MCmdLine();
+		MCmdLine( pWnd);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -312,9 +325,12 @@ void MCmdStructCeiling()
 void MCmdStructWall()
 {
 	MINT	ist1;
+	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
+	CWnd*		pWnd = pWndInfo->GetWnd();
+
 	ist1 = z_mn.SetRibbonBarEnt( MP_GP_KABE, MP_BR_BUZAI, Mstr( "たて枠"), Mstr( "204"));
 	if ( ist1 == 0)
-		MCmdLine();
+		MCmdLine( pWnd);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -323,6 +339,9 @@ void MCmdStructWall()
 void MCmdStructFloor()
 {
 	MINT	ist1;
+
+	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
+	CWnd*		pWnd = pWndInfo->GetWnd();
 
 //S	CMainFrame*	pMainFrame = (CMainFrame*)AfxGetMainWnd();
 //
@@ -336,7 +355,7 @@ void MCmdStructFloor()
 	z_mn.RibbonIO( MSET_COMBO_PARTS);		// 部品選択用のコンボボックスに表示する
 	ist1 = z_mn.SetRibbonBarEnt( MP_GP_YUKA, MP_BR_BUZAI, Mstr( "床根太"), Mstr( "210"));
 	if ( ist1 == 0)
-		MCmdLine();
+		MCmdLine( pWnd);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -345,9 +364,12 @@ void MCmdStructFloor()
 void MCmdStructDodai()
 {
 	MINT	ist1;
+	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
+	CWnd*		pWnd = pWndInfo->GetWnd();
+
 	ist1 = z_mn.SetRibbonBarEnt( MP_GP_DODAI, MP_BR_BUZAI, Mstr( "土台"), Mstr( "404G"));
 	if ( ist1 == 0)
-		MCmdLine();
+		MCmdLine( pWnd);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -356,9 +378,12 @@ void MCmdStructDodai()
 void MCmdKiso()
 {
 	MINT	ist1;
+	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
+	CWnd*		pWnd = pWndInfo->GetWnd();
+
 	ist1 = z_mn.SetRibbonBarEnt( MP_GP_KISO, MP_BR_OTHER, Mstr( "外部布基礎"), Mstr( "120"));
 	if ( ist1 == 0)
-		MCmdLine();
+		MCmdLine( pWnd);
 }
 
 

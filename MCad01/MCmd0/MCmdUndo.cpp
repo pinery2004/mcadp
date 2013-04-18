@@ -14,12 +14,14 @@
 namespace MC
 {
 
-void MCmdLine();
+void MCmdLine( CWnd* pWnd);
 
 ////////////////////////////////////////////////////////////////////////////
 //	‚t‚m‚c‚n
 void MCmdUndo()
 {
+	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// ƒJƒŒƒ“ƒgƒEƒBƒ“ƒhƒE‚ðŽæ“¾‚·‚é
+	CWnd*		pWnd = pWndInfo->GetWnd();
 
 	HaitiCmd::MmUndo();
 
@@ -27,18 +29,21 @@ void MCmdUndo()
 
 //	ist1 = z_mn.SetRibbonBar( MP_GP_YUKA, MP_BR_BUZAI, Mstr( "°ª‘¾"), Mstr( "210"));
 //	if ( ist1 == 0)
-		MCmdLine();
+		MCmdLine( pWnd);
 }
 
 /////////////////////////////////////////////////////////////////////////////
 //	‚q‚d‚c‚n
 void MCmdRedo()
 {
+	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// ƒJƒŒƒ“ƒgƒEƒBƒ“ƒhƒE‚ðŽæ“¾‚·‚é
+	CWnd*		pWnd = pWndInfo->GetWnd();
+
 	HaitiCmd::MmRedo();
 
 	WindowCtrl::MmWndKReDraw();
 
-	MCmdLine();
+	MCmdLine( pWnd);
 }
 
 /////////////////////////////////////////////////////////////////////////////

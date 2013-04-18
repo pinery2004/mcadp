@@ -5,6 +5,8 @@
 #include "MainFrm.h"
 #include "MCad.h"
 
+#include "MmDialogKAttr.h"
+
 #define		MMAX_HOSEI_DBG	999
 #define		MSZ_CROSS_BZI	100
 
@@ -693,6 +695,10 @@ public:
 		m_sRBMbr	= i_crbMbr;
 
 		ist = RibbonIO( MSET_RIBBON_BAR);
+
+//US		z_pDlgKAttr->SetRibbonBarEnt( i_irbKumi, i_irbBunrui, i_crbPartsSpec, i_crbMbr);
+		z_DlgKAttr.SetRibbonBarEnt( i_irbKumi, i_irbBunrui, i_crbPartsSpec, i_crbMbr);
+
 		return ist;
 	}
 

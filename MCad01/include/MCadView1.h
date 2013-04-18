@@ -74,6 +74,13 @@ public:
 	afx_msg void OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags);
 	afx_msg int OnMouseActivate(CWnd* pDesktopWnd, UINT nHitTest, UINT message);
 	afx_msg void OnShowWindow(BOOL bShow, UINT nStatus);
+	afx_msg LRESULT OnMyMessagePtsEdit(WPARAM wParam, LPARAM lParam);
+	afx_msg LRESULT OnMyMessageGridNum(WPARAM wParam, LPARAM lParam);
+	afx_msg LRESULT OnMyMessageStatusBar(WPARAM wParam, LPARAM lParam);
+	afx_msg LRESULT OnMyMessageOpt(WPARAM wParam, LPARAM lParam);
+	afx_msg LRESULT OnMyMessageHist(WPARAM wParam, LPARAM lParam);
+	afx_msg LRESULT OnMyMessageTenkai(WPARAM wParam, LPARAM lParam);
+	afx_msg LRESULT OnMyMessageKAttr(WPARAM wParam, LPARAM lParam);
 };
 
 #ifndef _DEBUG  // MCadView1.cpp のデバッグ バージョン

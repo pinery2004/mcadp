@@ -36,6 +36,7 @@
 #include "MrCmd.h"
 
 #include "MmInp.h"
+#include "MmDialogKAttr.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -74,6 +75,14 @@ BEGIN_MESSAGE_MAP(CMCadView1, CView)
 	ON_WM_KEYUP()
 	ON_WM_MOUSEACTIVATE()
 	ON_WM_SHOWWINDOW()
+    ON_MESSAGE(WM_MYMESSAGEPARTSEDIT, OnMyMessagePtsEdit)			// 1
+    ON_MESSAGE(WM_MYMESSAGEGRIDNUM, OnMyMessageGridNum)				// 1
+    ON_MESSAGE(WM_MYMESSAGESTATUSBAR, OnMyMessageStatusBar)			// 1
+    ON_MESSAGE(WM_MYMESSAGEOPTION, OnMyMessageOpt)					// 1
+    ON_MESSAGE(WM_MYMESSAGEHIST, OnMyMessageHist)					// 1
+	ON_MESSAGE(WM_MYMESSAGETENKAI, OnMyMessageTenkai)				// 1
+	ON_MESSAGE(WM_MYMESSAGEKATTR, OnMyMessageKAttr)				// 1
+	
 END_MESSAGE_MAP()
 
 // CMCadView1 コンストラクション/デストラクション
@@ -248,6 +257,49 @@ void CMCadView1::OnSize(UINT nType, int cx, int cy)
 		MC::ViewInp::Size( this, ptMouthD, ptMouthL);		// ウィンドウサイズ設定
 	}
 }
+
+LRESULT CMCadView1::OnMyMessageStatusBar(WPARAM wParam, LPARAM lParam)
+{
+	MC::Msg::DispStatusBar();
+	return 0;
+}	
+
+LRESULT CMCadView1::OnMyMessagePtsEdit(WPARAM wParam, LPARAM lParam)
+{
+	MC::MCmdPartsEditInp( this);
+	return 0;
+}	
+
+
+LRESULT CMCadView1::OnMyMessageGridNum(WPARAM wParam, LPARAM lParam)
+{
+	MC::MCmdGridNumInp( this);
+	return 0;
+}	
+
+LRESULT CMCadView1::OnMyMessageOpt(WPARAM wParam, LPARAM lParam)
+{
+	MC::MCmdOptInp( this);
+	return 0;
+}	
+
+LRESULT CMCadView1::OnMyMessageHist(WPARAM wParam, LPARAM lParam)
+{
+	MC::MCmdHistInp( this);
+	return 0;
+}	
+
+LRESULT CMCadView1::OnMyMessageTenkai(WPARAM wParam, LPARAM lParam)
+{
+	MC::MCmdTenkaiInp( this);
+	return 0;
+}	
+
+LRESULT CMCadView1::OnMyMessageKAttr(WPARAM wParam, LPARAM lParam)
+{
+	MC::MmDialogKAttrInp( this);
+	return 0;
+}	
 
 // CMCadView1 印刷
 

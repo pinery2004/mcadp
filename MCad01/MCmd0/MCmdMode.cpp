@@ -15,16 +15,19 @@
 namespace MC
 {
 
-void MCmdLine();
+void MCmdLine( CWnd* pWnd);
 
 /////////////////////////////////////////////////////////////////////////////
 //	創成モード
 
 void MCmdMdCreate()
 {
+	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
+	CWnd*		pWnd = pWndInfo->GetWnd();
+
 	z_mn.SetMode( MP_MD_CREATE);
 
-	MCmdLine();
+	MCmdLine( pWnd);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -32,9 +35,12 @@ void MCmdMdCreate()
 
 void MCmdMdDelete()
 {
+	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
+	CWnd*		pWnd = pWndInfo->GetWnd();
+
 	z_mn.SetMode( MP_MD_DELETE);
 
-	MCmdLine();
+	MCmdLine( pWnd);
 }
 
 /////////////////////////////////////////////////////////////////////////////

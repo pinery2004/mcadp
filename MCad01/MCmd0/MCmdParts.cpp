@@ -14,14 +14,18 @@
 namespace MC
 {
 
-void MCmdLine();
+void MCmdLine( CWnd* pWnd);
 
 /////////////////////////////////////////////////////////////////////////////
 //	部材入力
 void MCmdParts()
 {
+	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
+	CWnd*		pWnd = pWndInfo->GetWnd();
+
 //	MhInitInpAt();
-	MCmdLine();
+//U1	MCmdLine( pWnd);
+	MCmdLine( 0);
 }
 
 } // namespace MC
