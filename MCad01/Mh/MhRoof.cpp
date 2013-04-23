@@ -178,17 +178,17 @@ void MhRoofInfo::SetAttr()
 	MREAL	rNokiDe;
 	MREAL	rKerabaDe;
 
-//S	ist = z_mn.GetComboAttrI( MC_CMB_KOBY, &iKobai);			// Œù”z
-	iKobai = z_mn.GetKobai();
+//S	ist = z_mnIA.GetComboAttrI( MC_CMB_KOBY, &iKobai);			// Œù”z
+	iKobai = z_mnIA.GetKobai();
 	m_rKb = MREAL( iKobai);
 
-//S	ist = z_mn.GetComboAttrR( MC_CMB_NKDE, &rNokiDe);
-	rNokiDe = z_mn.GetNokiDe();
+//S	ist = z_mnIA.GetComboAttrR( MC_CMB_NKDE, &rNokiDe);
+	rNokiDe = z_mnIA.GetNokiDe();
 	m_rNkD[0] = m_rNkD[1] = rNokiDe;							// Œ¬‚Ìo
 	McRfmOffset[MHRL_NOKI] = rNokiDe;
 
-//S	ist = z_mn.GetComboAttrR( MC_CMB_KRDE, &rKerabaDe);
-	rKerabaDe = z_mn.GetKerabaDe();
+//S	ist = z_mnIA.GetComboAttrR( MC_CMB_KRDE, &rKerabaDe);
+	rKerabaDe = z_mnIA.GetKerabaDe();
 	m_rKrD[0] = m_rKrD[1] = rKerabaDe;							// ‚¯‚ç‚Î‚Ìo
 	McRfmOffset[MHRL_KERABA] = rKerabaDe;
 }
@@ -475,7 +475,7 @@ MINT MhRoofInfo::AdjustRfm2()						// (  O) ƒXƒeƒCƒ^ƒX@0: ³í@-1: ‰®ª–ÊŒ`ó
 	MhRfm		Rfm;
 
 	//@‰Æƒ‚ƒfƒ‹‚æ‚èƒJƒŒƒ“ƒgŠK‚ÌãŠK‚Ì‘S‚Ä‚Ì•Ç‚ğæ“¾‚·‚é
-	MINT iKai = z_mn.GetInpKai() + 1;
+	MINT iKai = z_mnIA.GetInpKai() + 1;
 	nHaiKabe = mhHaitiIn::GetParts( iKai, MP_GP_TAIRYOKU, NULL, Mstr( "ŠO•Ç"), MAXHAIKABE, pHaiKabe, pPlcPos);
 																// ‰Æƒ‚ƒfƒ‹‚æ‚èƒJƒŒƒ“ƒgŠK‚ÌãŠK‚Ì‘S‚Ä‚Ì•Ç‚ğæ“¾‚·‚é
 	if ( nHaiKabe <= 0)

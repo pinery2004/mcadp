@@ -249,8 +249,8 @@ mhPlcInfo* mhHaitiIn::SrchBuzai(
 	MINT		nHitBziEn = 0;
 	MINT		iHitEnMin = 0;
    
-	MINT		iKaiC   = z_mn.GetInpKai();	// 階  	(1,2,3)
-	MINT		iGpC = z_mn.GetKCdGp();		// 構成
+	MINT		iKaiC   = z_mnIA.GetInpKai();	// 階  	(1,2,3)
+	MINT		iGpC = z_mnIA.GetKCdGp();		// 構成
 
 	MREAL		rAMinHitBziEn = MREALMAX;
 
@@ -332,8 +332,8 @@ void mhHaitiIn::MmSrchCrossBuzai(
 	MINT		nBzi2En = 0;
 	MINT		iHitEnMin = 0;
    
-	MINT		iKaiC   = z_mn.GetInpKai();					// 階  	(1,2,3)
-	MINT		iGpC = z_mn.GetKCdGp();						// 構成
+	MINT		iKaiC   = z_mnIA.GetInpKai();					// 階  	(1,2,3)
+	MINT		iGpC = z_mnIA.GetKCdGp();						// 構成
 
 	MREAL		rAMinBzi2En = MREALMAX;
 
@@ -410,8 +410,8 @@ void mhHaitiIn::PartsShape(
 						MgPolyg2*	pgPartsShape	// 部材形状
 				)
 {
-	MINT		iKaiC   = z_mn.GetInpKai();					// 階  	(1,2,3)
-	MINT		iGpC = z_mn.GetKCdGp();						// 構成
+	MINT		iKaiC   = z_mnIA.GetInpKai();					// 階  	(1,2,3)
+	MINT		iGpC = z_mnIA.GetKCdGp();						// 構成
 
 	MgLine2		LnParts;
 	MgPoint2	ptPartsN;
@@ -735,8 +735,8 @@ void mhHaitiIn::MhAdjBzL(
 		}
 	}
 
-//S	ist = z_mn.GetComboAttrR( MC_CMB_LHS1, &rLH);				// 長さ補正値を取得する
-	rLH = z_mn.GetLengthH1();
+//S	ist = z_mnIA.GetComboAttrR( MC_CMB_LHS1, &rLH);				// 長さ補正値を取得する
+	rLH = z_mnIA.GetLengthH1();
 	if ( Bz1.Ln.p[1 - iMov] == PtInt) {
 		rLnWH = Bz1.rLH[1 - iMov] + rLH;
 		if ( !MGeo::Zero( rLnWH))

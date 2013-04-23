@@ -35,16 +35,16 @@ MINT mnInpAttr::SetRibbonBar(					// ステイタス 0:正常 -1:エラー
 	MINT	ist;
 	MPATTR	iAttr;
 
-	z_mn.SetKCdGp( i_irbKumi);
-	z_mn.SetKCdBr( i_irbBunrui);
-	z_mn.InitComboPartsNm();									// 組、分類に対応する部品を選択可能項目として設定する
-	ist = z_mn.SelectComboPartsNmByPartsNm( i_crbPartsSpec);
+	z_mnIA.SetKCdGp( i_irbKumi);
+	z_mnIA.SetKCdBr( i_irbBunrui);
+	z_mnIA.InitComboPartsNm();									// 組、分類に対応する部品を選択可能項目として設定する
+	ist = z_mnIA.SelectComboPartsNmByPartsNm( i_crbPartsSpec);
 	if ( ist < 0)
 		MQUIT;
 
-	z_mn.InitComboPartsMbr();									// 部品に対応する寸法型式を選択可能項目として設定する
+	z_mnIA.InitComboPartsMbr();									// 部品に対応する寸法型式を選択可能項目として設定する
 	if ( i_crbMbr) {
-        ist = z_mn.SelectComboMbrCdByMbrCd( i_crbMbr);
+        ist = z_mnIA.SelectComboMbrCdByMbrCd( i_crbMbr);
 		if ( ist < 0)
 			MQUIT;
 		if ( i_irbKumi == MP_GP_YANE) {
@@ -52,7 +52,7 @@ MINT mnInpAttr::SetRibbonBar(					// ステイタス 0:正常 -1:エラー
 		} else {
 			iAttr = MP_AT_AUTO;
 		}
-		z_mn.InitComboAttr( iAttr);								// 属性入力用コンボボックスを初期化する
+		z_mnIA.InitComboAttr( iAttr);								// 属性入力用コンボボックスを初期化する
 	}
 	WindowCtrl::MmWndKReDraw();
 

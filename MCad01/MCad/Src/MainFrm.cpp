@@ -80,36 +80,37 @@ LRESULT CMainFrame::OnRibbonIO( UINT wParam, LONG lParam)
 {
 	int ist = 0;
 
-	switch( MC::z_mn.m_iComboTp)
+	switch( MC::z_mnIA.m_iComboTp)
 	{
 	case MSET_RIBBON_BAR:
-		ist = MC::z_mn.SetRibbonBar( MC::z_mn.m_iRBKosei, MC::z_mn.m_iRBBunrui,
-									 MC::z_mn.m_sRBBuhin, MC::z_mn.m_sRBMbr);
+		ist = MC::z_mnIA.SetRibbonBar( MC::z_mnIA.m_iRBKosei, MC::z_mnIA.m_iRBBunrui,
+									   MC::z_mnIA.m_sRBBuhin, MC::z_mnIA.m_sRBMbr);
 		break;
 	case MSET_INPUT_KUBUN_CD:
-		MC::z_mn.SelectComboInpKbnByInpKbnCd( MC::z_mn.m_iCdArg1);
+		MC::z_mnIA.SelectComboInpKbnByInpKbnCd( MC::z_mnIA.m_iCdArg1);
 		break;
 	case MSET_INPUT_MARUME_CD:
-		MC::z_mn.SelectComboMarumeByMarumeCd( MC::z_mn.m_iCdArg1);
+		MC::z_mnIA.SelectComboMarumeByMarumeCd( MC::z_mnIA.m_iCdArg1);
 		break;
 	case MSET_COMBO_ATTRR:
-		MC::z_mn.SetComboAttrR( MC_CMB_HAIZ, MC::z_mn.m_rCdArg2);
+		MC::z_mnIA.SetComboAttrR( MC_CMB_HAIZ, MC::z_mnIA.m_rCdArg2);
 		break;
 	case MGET_COMBO_ATTRA:
-		MC::z_mn.GetComboAttrA();
+		MC::z_mnIA.GetComboAttrA();
 		break;
 	case MSET_COMBO_PARTS:
-		MC::z_mn.SetComboParts();
+		MC::z_mnIA.SetComboParts();
 		break;
 	case MSET_COMBO_PANELNO:
-		MC::z_mn.SetComboPanelNo( MC::z_mn.m_iCdArg1);
+		MC::z_mnIA.SetComboPanelNo( MC::z_mnIA.m_iCdArg1);
 		break;
 	case MINIT_COMBO_ATTR:
-		MC::z_mn.InitComboAttr( MC::z_mn.m_iCdArg1);
+		MC::z_mnIA.InitComboAttr( MC::z_mnIA.m_iCdArg1);
+		MC::z_mmIA.InitComboAttr( MC::z_mnIA.m_iCdArg1);
 		break;
 	}
-//S	MC::z_mn.InitComboAttr( MP_AT_AUTO);						// 部材入力種類に合った属性入力コンボボックスを表示
-	MC::z_mn.m_iSts = ist;
+//S	MC::z_mnIA.InitComboAttr( MP_AT_AUTO);						// 部材入力種類に合った属性入力コンボボックスを表示
+	MC::z_mnIA.m_iSts = ist;
 	return 0;
 }
 
@@ -420,11 +421,16 @@ void CMainFrame::OnCbnSelchangeCombo1()
 //E	m_iCombo1 = ((CComboBox*)(m_wndDlgBar3.GetDlgItem(IDC_CMBK_BZI1)))->GetCurSel();	// 部品ID
 	CMFCRibbonComboBox* pCmbBox = mmpComboBuzai();
 	m_iCombo1 = pCmbBox->GetCurSel();											// 部品ID
-	MC::z_mn.SelectComboPartsNmByKmId( m_iCombo1);
-	MC::z_mn.InitComboPartsMbr();
+
+	MC::z_mmIA.SelectComboPartsNmByKmId( m_iCombo1);
+	MC::z_mmIA.InitComboPartsMbr();
+
+	MC::z_mnIA.SelectComboPartsNmByKmId( m_iCombo1);
+	MC::z_mnIA.InitComboPartsMbr();
+
 	MC::Window::CurWndFocus();
-	MC::mhPartsSpec* pPartsSpec	= MC::BuzaiCode::MhGetpPartsSpec( MC::z_mn.GetCurPartsNmId());
-	if ( pPartsSpec->GetPTCdBr() >= MP_BR_SENBUN || MC::z_mn.GetMode() == MP_MD_DELETE)
+	MC::mhPartsSpec* pPartsSpec	= MC::BuzaiCode::MhGetpPartsSpec( MC::z_mnIA.GetCurPartsNmId());
+	if ( pPartsSpec->GetPTCdBr() >= MP_BR_SENBUN || MC::z_mnIA.GetMode() == MP_MD_DELETE)
 		MC::WindowCtrl::MmWndKCmdXqt( IDC_PARTSCREATE);							//	部材入力コマンド
 	else 
 		MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
@@ -437,9 +443,11 @@ void CMainFrame::OnCbnSelchangeCombo2()
 //E	m_iCombo2 = ((CComboBox*)(m_wndDlgBar3.GetDlgItem(IDC_CMBK_BZI2)))->GetCurSel();	// 寸法型式ID
 	CMFCRibbonComboBox *pCmbBox = mmpComboMbr();
 	m_iCombo2 = pCmbBox->GetCurSel();											// 寸法型式ID
-	MC::z_mn.SelectComboPartsMbrByKmId( m_iCombo2);
-	MC::Window::CurWndFocus();
 
+	MC::z_mmIA.SelectComboPartsMbrByKmId( m_iCombo2);
+
+	MC::z_mnIA.SelectComboPartsMbrByKmId( m_iCombo2);
+	MC::Window::CurWndFocus();
 	MC::WindowCtrl::MmWndKCmdXqt( IDC_PARTSCREATE);								//	部品入力
 }
 
@@ -449,7 +457,7 @@ void CMainFrame::OnCbnSelchangeCombo11()
 //E	m_iComboInp1 = ((CComboBox*)(m_wndRibbonBar.GetDlgItem(IDC_CMB_Inp1)))->GetCurSel();
 	CMFCRibbonComboBox *pCmbBox = mmpComboInpTp();
 	m_iComboInp1 = pCmbBox->GetCurSel();
-	MC::z_mn.SelectComboInpKbnByInpKbnCd( m_iComboInp1);
+	MC::z_mnIA.SelectComboInpKbnByInpKbnCd( m_iComboInp1);
 	MC::Window::CurWndFocus();
 }
 
@@ -459,7 +467,7 @@ void CMainFrame::OnCbnSelchangeCombo12()
 //E	m_iComboInp2 = ((CComboBox*)(m_wndDlgBar1.GetDlgItem(IDC_CMB_Inp2)))->GetCurSel();
 	CMFCRibbonComboBox *pCmbBox = mmpComboMarume();
 	m_iComboInp2 = pCmbBox->GetCurSel();										// 丸めコード
-	MC::z_mn.SelectComboMarumeByMarumeCd( m_iComboInp2);
+	MC::z_mnIA.SelectComboMarumeByMarumeCd( m_iComboInp2);
 	MC::Window::CurWndFocus();
 }
 
@@ -473,7 +481,7 @@ void CMainFrame::OnCbnSelchangeCombo13()
 //E	m_iComboInp3 = ((CComboBox*)(m_wndDlgBar1.GetDlgItem(IDC_CMB_Inp3)))->GetCurSel();
 	CMFCRibbonComboBox *pCmbBox = mmpComboPlcCd();
 	m_iComboInp3 = pCmbBox->GetCurSel();										// 配置コード
-	MC::z_mn.SelectComboPlcCdByPlcCd( m_iComboInp3);
+	MC::z_mnIA.SelectComboPlcCdByPlcCd( m_iComboInp3);
 	MC::Window::CurWndFocus();
 }
 

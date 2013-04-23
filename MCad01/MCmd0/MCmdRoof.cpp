@@ -28,7 +28,7 @@ static void	MmPackAreaI(
 void MCmdRoof()
 {
 	MINT iMode;
-	iMode = z_mn.GetMode();
+	iMode = z_mnIA.GetMode();
 	if ( iMode == MP_MD_CREATE)
 		MCmdRoofAdd();
 	else if ( iMode == MP_MD_DELETE)
@@ -44,25 +44,25 @@ void MCmdRoofAdd()
 	MgGInt		GifInp(20);
 
 	Msg::ClearErrorMsg();
-//S	z_mn.SetKCdGp( MP_GP_YANE);
-//	z_mn.SetKCdBr( MP_BR_OTHER);
-//	z_mn.InitComboAttr( MP_AT_YANE);								// 属性入力用コンボボックスを属性値入力無しにする
-//	z_mn.InitComboPartsNm();
-//	z_mn.SelectComboPartsNmByPartsNm( Mstr( "屋根"));
-//	z_mn.InitComboPartsMbr();
-//	z_mn.SelectComboMbrCdByMbrCd( Mstr( "204"));
+//S	z_mnIA.SetKCdGp( MP_GP_YANE);
+//	z_mnIA.SetKCdBr( MP_BR_OTHER);
+//	z_mnIA.InitComboAttr( MP_AT_YANE);								// 属性入力用コンボボックスを属性値入力無しにする
+//	z_mnIA.InitComboPartsNm();
+//	z_mnIA.SelectComboPartsNmByPartsNm( Mstr( "屋根"));
+//	z_mnIA.InitComboPartsMbr();
+//	z_mnIA.SelectComboMbrCdByMbrCd( Mstr( "204"));
 
-	ist1 = z_mn.SetRibbonBarEnt( MP_GP_YANE, MP_BR_OTHER, Mstr( "屋根"), Mstr( "204"));
+	ist1 = z_mnIA.SetRibbonBarEnt( MP_GP_YANE, MP_BR_OTHER, Mstr( "屋根"), Mstr( "204"));
 
 	WindowCtrl::MmWndKReDraw();
 
 	Msg::OperationMsg( MC_OPRT_ROOF);								// ステイタスバーの操作表示部へ"屋根入力"を表示
 
-	mhPartsSpec* pPartsSpec	= BuzaiCode::MhGetpPartsSpec( z_mn.GetCurPartsNmId());
-//E	z_mn.SelectComboInpKbnByInpKbnCd( pPartsSpec->GetPTCdInpKb());
-	z_mn.RibbonIO( MSET_INPUT_KUBUN_CD, pPartsSpec->GetPTCdInpKb());	// 入力点区分選択用のコンボボックスに表示する
-//E	z_mn.SelectComboMarumeByMarumeCd( pPartsSpec->GetPTCdMarume());
-	z_mn.RibbonIO( MSET_INPUT_MARUME_CD, pPartsSpec->GetPTCdMarume());	// 丸めコードを選択用のコンボボックスに表示する
+	mhPartsSpec* pPartsSpec	= BuzaiCode::MhGetpPartsSpec( z_mnIA.GetCurPartsNmId());
+//E	z_mnIA.SelectComboInpKbnByInpKbnCd( pPartsSpec->GetPTCdInpKb());
+	z_mnIA.RibbonIO( MSET_INPUT_KUBUN_CD, pPartsSpec->GetPTCdInpKb());	// 入力点区分選択用のコンボボックスに表示する
+//E	z_mnIA.SelectComboMarumeByMarumeCd( pPartsSpec->GetPTCdMarume());
+	z_mnIA.RibbonIO( MSET_INPUT_MARUME_CD, pPartsSpec->GetPTCdMarume());	// 丸めコードを選択用のコンボボックスに表示する
 
 	MFOREVER {
 		pgJim.m_n = 0;

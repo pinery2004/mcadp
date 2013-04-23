@@ -52,9 +52,9 @@ void MCmdLine(
 	)
 {
 	MINT iMode;
-	iMode = z_mn.GetMode();
+	iMode = z_mnIA.GetMode();
 	if ( iMode == MP_MD_CREATE) {
-		MmDialogKAttr();
+		z_DlgKAttr.MmDialogKAttr();
 		MCmdLineAdd();
 	} else {
 		if ( iMode == MP_MD_DELETE)
@@ -100,15 +100,15 @@ void MCmdLineAdd()
 	Msg::ClearErrorMsg();
 	Msg::OperationMsg( MC_OPRT_PARTS);							// ステイタスバーの操作表示部へ"部材追加"を表示
 
-//E	z_mn.InitComboAttr( MP_AT_AUTO);			
-	z_mn.RibbonIO( MINIT_COMBO_ATTR, MP_AT_AUTO);				// 部材入力種類に合った属性入力コンボボックスを表示
+//E	z_mnIA.InitComboAttr( MP_AT_AUTO);			
+	z_mnIA.RibbonIO( MINIT_COMBO_ATTR, MP_AT_AUTO);				// 部材入力種類に合った属性入力コンボボックスを表示
 
-	iIdPartsSpec = z_mn.GetCurPartsNmId();
+	iIdPartsSpec = z_mnIA.GetCurPartsNmId();
 	pPartsSpec = BuzaiCode::MhGetpPartsSpec( iIdPartsSpec);
-//E	z_mn.SelectComboInpKbnByInpKbnCd( pPartsSpec->GetPTCdInpKb());		// カレントの入力点区分を設定し、
-	z_mn.RibbonIO( MSET_INPUT_KUBUN_CD, pPartsSpec->GetPTCdInpKb());	// 入力点区分選択用のコンボボックスに表示する
-//E	z_mn.SelectComboMarumeByMarumeCd( pPartsSpec->GetPTCdMarume());		// カレントの丸めコードを設定し、
-	z_mn.RibbonIO( MSET_INPUT_MARUME_CD, pPartsSpec->GetPTCdMarume());	// 丸めコードを選択用のコンボボックスに表示する
+//E	z_mnIA.SelectComboInpKbnByInpKbnCd( pPartsSpec->GetPTCdInpKb());		// カレントの入力点区分を設定し、
+	z_mnIA.RibbonIO( MSET_INPUT_KUBUN_CD, pPartsSpec->GetPTCdInpKb());	// 入力点区分選択用のコンボボックスに表示する
+//E	z_mnIA.SelectComboMarumeByMarumeCd( pPartsSpec->GetPTCdMarume());		// カレントの丸めコードを設定し、
+	z_mnIA.RibbonIO( MSET_INPUT_MARUME_CD, pPartsSpec->GetPTCdMarume());	// 丸めコードを選択用のコンボボックスに表示する
 																		// コンボボックスに丸めコードを表示する
 	mhHaitiIn::SetCurRfm( NULL);
 
@@ -157,14 +157,14 @@ void MCmdLineAdd()
 			// 領域(区画)配置、１点目と２点目を始点終点として配置する
 			Ln1.p[0] = MgPoint3C( pg1.m_p[0]);
 			Ln1.p[1] = MgPoint3C( pg1.m_p[1]);
-//E			z_mn.GetComboAttrA();
-			z_mn.RibbonIO( MGET_COMBO_ATTRA, NULL);
+//E			z_mnIA.GetComboAttrA();
+			z_mnIA.RibbonIO( MGET_COMBO_ATTRA, NULL);
 			HaitiCmd::MmPartsPlc( Ln1.p, MgVect3( 0., 0., 1.), &pg1);	// 領域型の部品配置
 			
 		} else {												// その他
 			// 部材配置
-//S			ist = z_mn.GetComboAttrI( MC_CMB_HONS, &iNum);		// 複数部材の配置本数
-			iNum = z_mn.GetHonsu();
+//S			ist = z_mnIA.GetComboAttrI( MC_CMB_HONS, &iNum);		// 複数部材の配置本数
+			iNum = z_mnIA.GetHonsu();
 //			plnYane.v = MgPoint3( 0., 0., 1.);
 			vUp = MgVect3( 0., 0., 1.);
 			
@@ -211,8 +211,8 @@ void MCmdLineAdd()
 			
 			// 配置本数と方向付き間隔を求める
 			//
-//S			ist = z_mn.GetComboAttrR( MC_CMB_INTR, &rIntrv);	//		間隔
-			rIntrv = z_mn.GetSpan();
+//S			ist = z_mnIA.GetComboAttrR( MC_CMB_INTR, &rIntrv);	//		間隔
+			rIntrv = z_mnIA.GetSpan();
 			if ( iNum == MC_INT_AREA) {							//			本数を領域で指定する複数部材の配置
 				VtArea = PtMltBziAr - Ln1.p[0];
 				iNum = MGMIN( MINT( MGeo::Abs( VtArea) / rIntrv + 1.0 + MGPTOL->D),
@@ -233,11 +233,11 @@ void MCmdLineAdd()
 			HaitiCmd::MmPresetCmd();
 			// 入力した属性を設定する
 			if ( pPartsSpec->IsPanel() || pPartsSpec->IsKaiko()) {
-//E				z_mn.GetComboAttrA();							//		コンボボックスより入力している属性を全て得る
-				z_mn.RibbonIO( MGET_COMBO_ATTRA, NULL);
+//E				z_mnIA.GetComboAttrA();							//		コンボボックスより入力している属性を全て得る
+				z_mnIA.RibbonIO( MGET_COMBO_ATTRA, NULL);
 			} else {
-//E				z_mn.GetComboAttrA();							//		コンボボックスより入力している属性を全て得る
-				z_mn.RibbonIO( MGET_COMBO_ATTRA, NULL);
+//E				z_mnIA.GetComboAttrA();							//		コンボボックスより入力している属性を全て得る
+				z_mnIA.RibbonIO( MGET_COMBO_ATTRA, NULL);
 			}
 			// 本数分配置する
 			if ( iNum == 0) iNum = 1;							//		本数未入力の場合は１本とする
@@ -300,7 +300,7 @@ void MCmdStructRoof()
 	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();
 
-	ist1 = z_mn.SetRibbonBarEnt( MP_GP_YANE, MP_BR_BUZAI, Mstr( "垂木"), Mstr( "204"));
+	ist1 = z_mnIA.SetRibbonBarEnt( MP_GP_YANE, MP_BR_BUZAI, Mstr( "垂木"), Mstr( "204"));
 	if ( ist1 == 0)
 		MCmdLine( pWnd);
 }
@@ -314,7 +314,7 @@ void MCmdStructCeiling()
 	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();
 
-	ist1 = z_mn.SetRibbonBarEnt( MP_GP_TENJO, MP_BR_BUZAI, Mstr( "天井根太"), Mstr( "204"));
+	ist1 = z_mnIA.SetRibbonBarEnt( MP_GP_TENJO, MP_BR_BUZAI, Mstr( "天井根太"), Mstr( "204"));
 	if ( ist1 == 0)
 		MCmdLine( pWnd);
 }
@@ -328,7 +328,7 @@ void MCmdStructWall()
 	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();
 
-	ist1 = z_mn.SetRibbonBarEnt( MP_GP_KABE, MP_BR_BUZAI, Mstr( "たて枠"), Mstr( "204"));
+	ist1 = z_mnIA.SetRibbonBarEnt( MP_GP_KABE, MP_BR_BUZAI, Mstr( "たて枠"), Mstr( "204"));
 	if ( ist1 == 0)
 		MCmdLine( pWnd);
 }
@@ -350,10 +350,10 @@ void MCmdStructFloor()
 
 
 
-	z_mn.SetKCdGp( MP_GP_YUKA);
-//E	z_mn.SetComboParts();
-	z_mn.RibbonIO( MSET_COMBO_PARTS);		// 部品選択用のコンボボックスに表示する
-	ist1 = z_mn.SetRibbonBarEnt( MP_GP_YUKA, MP_BR_BUZAI, Mstr( "床根太"), Mstr( "210"));
+	z_mnIA.SetKCdGp( MP_GP_YUKA);
+//E	z_mnIA.SetComboParts();
+	z_mnIA.RibbonIO( MSET_COMBO_PARTS);		// 部品選択用のコンボボックスに表示する
+	ist1 = z_mnIA.SetRibbonBarEnt( MP_GP_YUKA, MP_BR_BUZAI, Mstr( "床根太"), Mstr( "210"));
 	if ( ist1 == 0)
 		MCmdLine( pWnd);
 }
@@ -367,7 +367,7 @@ void MCmdStructDodai()
 	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();
 
-	ist1 = z_mn.SetRibbonBarEnt( MP_GP_DODAI, MP_BR_BUZAI, Mstr( "土台"), Mstr( "404G"));
+	ist1 = z_mnIA.SetRibbonBarEnt( MP_GP_DODAI, MP_BR_BUZAI, Mstr( "土台"), Mstr( "404G"));
 	if ( ist1 == 0)
 		MCmdLine( pWnd);
 }
@@ -381,7 +381,7 @@ void MCmdKiso()
 	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();
 
-	ist1 = z_mn.SetRibbonBarEnt( MP_GP_KISO, MP_BR_OTHER, Mstr( "外部布基礎"), Mstr( "120"));
+	ist1 = z_mnIA.SetRibbonBarEnt( MP_GP_KISO, MP_BR_OTHER, Mstr( "外部布基礎"), Mstr( "120"));
 	if ( ist1 == 0)
 		MCmdLine( pWnd);
 }

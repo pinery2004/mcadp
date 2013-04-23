@@ -5,20 +5,22 @@
 #include "MainFrm.h"
 #include "MCad.h"
 
-#include "MmDialogKAttr.h"
+//#include "MmDialogKAttr.h"
+#include "MmInpAttr.h"
 
 #define		MMAX_HOSEI_DBG	999
 #define		MSZ_CROSS_BZI	100
 
 enum	ComboTp {
-	MSET_RIBBON_BAR = 1,
-	MSET_INPUT_KUBUN_CD,
-	MSET_INPUT_MARUME_CD,
-	MSET_COMBO_ATTRR,
-	MGET_COMBO_ATTRA,
-	MSET_COMBO_PARTS,
-	MSET_COMBO_PANELNO,
-	MINIT_COMBO_ATTR
+	MSET_RIBBON_BAR = 1,			// リボンバーの部品選択用項目( 組、分類、部品タイプ、寸法型式)を設定する
+	MSET_INPUT_KUBUN_CD,			// カレントの入力点区分を設定し、入力点区分選択用のコンボボックスに表示する
+	MSET_INPUT_MARUME_CD,			// カレントの丸めコードを設定し、コンボボックスに丸めコードを表示する
+	MSET_COMBO_ATTRR,				// 属性値入力用コンボボックスに実数値を表示する
+	MGET_COMBO_ATTRA,				// 属性値入力用コンボボックスの値を取り込む
+	MSET_COMBO_PARTS,				// 部材属性入力用コンボボックスの設定
+	MSET_COMBO_PANELNO,				// カレントのパネル番号選択項目番号を設定し　コンボボックスにパネル番号を表示する
+
+	MINIT_COMBO_ATTR				// 属性値入力モードに沿った部材属性入力用リボンバーの項目を設定する
 };
 
 namespace MC
@@ -67,12 +69,10 @@ protected:
 	MREAL	m_rKerabaDe;						// けらばの出
 
 	MPMODE	m_iInpMd;							// 創成モード		(削除、修正、移動、複写、属性表示)
-
 	MPKOSEI	m_iSInpGp;							// 設計入力構成		(住戸、住棟、物件、屋根、敷地、壁量)
-
 	MPKOSEI  m_iKInpGp;							// 構造入力構成		(屋根、小屋、天井、耐力壁、壁、床、土台、基礎)
 	MPBUNRUI m_iKInpBr;							// 構造入力種類		(部材、金物、パネル、その他)
-	MPSELECT m_iKInpSel;							// 構造入力選択		選択1、選択2、選択3						未使用
+	MPSELECT m_iKInpSel;						// 構造入力選択		選択1、選択2、選択3						未使用
 
 	bool	m_bKDspBuzai;						// 部材表示フラグ
 	bool	m_bKDspKanagu;						// 金物表示フラグ
@@ -113,8 +113,6 @@ public:
 	//		組、分類、部品タイプ、寸法型式
 	MPKOSEI		m_iRBKosei;							// 構造	構成
 	MPBUNRUI	m_iRBBunrui;						// 構造	分類
-//S	CString		m_sRBBuhin;							// 部品
-//S	CString		m_sRBMbr;							// 部品メンバー
 	MCHAR*		m_sRBBuhin;							// 部品
 	MCHAR*		m_sRBMbr;							// 部品メンバー
 
@@ -697,7 +695,8 @@ public:
 		ist = RibbonIO( MSET_RIBBON_BAR);
 
 //US		z_pDlgKAttr->SetRibbonBarEnt( i_irbKumi, i_irbBunrui, i_crbPartsSpec, i_crbMbr);
-		z_DlgKAttr.SetRibbonBarEnt( i_irbKumi, i_irbBunrui, i_crbPartsSpec, i_crbMbr);
+//US		z_DlgKAttr.SetRibbonBarEnt( i_irbKumi, i_irbBunrui, i_crbPartsSpec, i_crbMbr);
+		z_mmIA.SetRibbonBarEnt( i_irbKumi, i_irbBunrui, i_crbPartsSpec, i_crbMbr);
 
 		return ist;
 	}
@@ -814,7 +813,7 @@ public:
 	}
 
 	/////////////////////////////////////////////////////////////////////////////
-	//	属性値入力モードで部品属性入力用リボンバーの項目を設定する
+	//	属性値入力モードに沿った部材属性入力用リボンバーの項目を設定する
 	//	 (コンボボックスとチェックボックスの項目を設定する)
 	//	
 protected:
@@ -860,6 +859,6 @@ public:
 
 };
 
-extern	mnInpAttr z_mn;
+extern	mnInpAttr z_mnIA;
 
 }// namespace MC

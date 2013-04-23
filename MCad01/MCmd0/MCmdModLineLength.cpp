@@ -51,8 +51,8 @@ namespace MC
 	Msg::ClearErrorMsg();
 	Msg::OperationMsg( MC_OPRT_MOD_BUZAI);							// ステイタスバーの操作表示部へ"部材修正"を表示
 
-//E	z_mn.InitComboAttr( MP_AT_ADJLNG);							// 属性入力用コンボボックスを部材長さ調整用にする
-	z_mn.RibbonIO( MINIT_COMBO_ATTR, MP_AT_ADJLNG);
+//E	z_mnIA.InitComboAttr( MP_AT_ADJLNG);							// 属性入力用コンボボックスを部材長さ調整用にする
+	z_mnIA.RibbonIO( MINIT_COMBO_ATTR, MP_AT_ADJLNG);
 
 	MmWndInfo* pWndInfo = WindowCtrl::MmWndKGetCurWnd();			// カレントウィンドウを取得する
 	Window::CurWndFocus();											// フォーカスをカレントウィンドウに設定する
@@ -92,8 +92,8 @@ namespace MC
 
 		Window::DrawHitBzi( pWndInfo, &pgHitBzi);					//	ヒット部材（長さ調整先部材）を表示する
 																	//	（既表示ヒット部材を消去後に、ヒット部材を表示する）
-		ist1 = z_mn.GetCheckAttr( MC_CHK_KATI, &iKati);			// 勝ち負けチェックボックスの勝ちマークを取得する(1:勝ち,0:負け)
-		ist1 = z_mn.GetCheckAttr( MC_CHK_INTC, &iCrsC);			// 交差部材調整チェックボックスの調整マークを取得する(1:あり,0:なし)
+		ist1 = z_mnIA.GetCheckAttr( MC_CHK_KATI, &iKati);			// 勝ち負けチェックボックスの勝ちマークを取得する(1:勝ち,0:負け)
+		ist1 = z_mnIA.GetCheckAttr( MC_CHK_INTC, &iCrsC);			// 交差部材調整チェックボックスの調整マークを取得する(1:あり,0:なし)
 
 		mhHaitiIn::MmSrchCrossBuzai( pWndInfo, pBziInfo1, iBuzaiCd, pbTchBziI, pbCrsBziI);
 																	// 長さ調整側部材と調整前に触れている部材群と交差している部材群を求める

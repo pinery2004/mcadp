@@ -63,7 +63,7 @@ MINT mhHaitiIn::RoofPlc(									// (  O) ステイタス	0: 正常、-1: 屋根配置エラー
 
 	RoofEn.InitAllAtr();
 
-	RoofEn.SetInpKai( z_mn.GetInpKai());
+	RoofEn.SetInpKai( z_mnIA.GetInpKai());
 	RoofEn.SetAttr();
 	RoofEn.SetJimCd( pgJim, GifInp, pth);
 	RoofEn.CreateRfmForJim();
@@ -164,7 +164,7 @@ MhRfm*	mhHaitiIn::SrchRfm(									// (  O) 屋根面　または　NULL
 	MhRfm		*pRfm = 0;
 	MREAL		rHight;
 
-	MINT	iKaiC = z_mn.GetInpKai();								// 現在の階
+	MINT	iKaiC = z_mnIA.GetInpKai();								// 現在の階
 
 	MREAL	rMinArea = MREALMAX;
 	MREAL	rMinHight = MREALMAX;

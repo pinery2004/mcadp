@@ -35,9 +35,9 @@ void MCmdLineDelete()
 	Msg::ClearErrorMsg();
 	Msg::OperationMsg( MC_OPRT_DEL_PARTS);							// ステイタスバーの操作表示部へ"部材追加"を表示
 
-	iKaiC = z_mn.GetInpKai();
-	iGpC = z_mn.GetKCdGp();
-	iIdPartsSpec = z_mn.GetCurPartsNmId();
+	iKaiC = z_mnIA.GetInpKai();
+	iGpC = z_mnIA.GetKCdGp();
+	iIdPartsSpec = z_mnIA.GetCurPartsNmId();
 	pPartsSpec = BuzaiCode::MhGetpPartsSpec( iIdPartsSpec);
 
 	MFOREVER {

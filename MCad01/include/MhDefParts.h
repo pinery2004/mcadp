@@ -131,7 +131,7 @@ enum MPKOSEI {
 
 //	•ª—Þ
 enum MPBUNRUI {
-	MP_BR_BUZAI = 0,							// "•”Þ"
+	MP_BR_BUZAI = 1,							// "•”Þ"
 	MP_BR_KANAGU,								// "‹à•¨"
 	MP_BR_PANEL,								// "ƒpƒlƒ‹"
 	MP_BR_YANE,									// "‰®ª"

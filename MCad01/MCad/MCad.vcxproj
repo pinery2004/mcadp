@@ -229,6 +229,7 @@
     <ClInclude Include="..\include\MmDrag.h" />
     <ClInclude Include="..\include\MmGridNum.h" />
     <ClInclude Include="..\include\MmInp.h" />
+    <ClInclude Include="..\include\MmInpAttr.h" />
     <ClInclude Include="..\include\MmLib.h" />
     <ClInclude Include="..\include\MmPrompt.h" />
     <ClInclude Include="..\include\MmSystem.h" />
@@ -405,7 +406,9 @@
     <ClCompile Include="..\Mm\MmGridNum.cpp" />
     <ClCompile Include="..\Mm\MmMainFrame.cpp" />
     <ClCompile Include="..\Mm\MmPrompt.cpp" />
+    <ClCompile Include="..\Mm\MmSDialogKAttr.cpp" />
     <ClCompile Include="..\Mm\MmSetCurrentWndFocus.cpp" />
+    <ClCompile Include="..\Mm\MmSDialogParts.cpp" />
     <ClCompile Include="..\Mm\MmSystem.cpp" />
     <ClCompile Include="..\Mn\MnGetKosei.cpp" />
     <ClCompile Include="..\Mn\MnInp.cpp" />

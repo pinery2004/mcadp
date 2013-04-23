@@ -740,8 +740,11 @@
     <ClInclude Include="..\include\MhPartsSpec.h">
       <Filter>Mh\hdr</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\MmInpAttr.h">
+      <Filter>Mm\hdr</Filter>
+    </ClInclude>
     <ClInclude Include="MmDialogKAttr.h">
-      <Filter>MCmd0\hdr</Filter>
+      <Filter>Mm\hdr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1270,8 +1273,14 @@
     <ClCompile Include="..\Mn\MnSRibbonBarParts.cpp">
       <Filter>Mn\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Mm\MmSDialogKAttr.cpp">
+      <Filter>Mm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mm\MmSDialogParts.cpp">
+      <Filter>Mm\src</Filter>
+    </ClCompile>
     <ClCompile Include="MmDialogKAttr.cpp">
-      <Filter>MCmd0\Src</Filter>
+      <Filter>Mm\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

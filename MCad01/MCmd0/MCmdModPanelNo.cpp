@@ -55,8 +55,8 @@ void MCmdMdPanelNo()
 	MINT		iPtNoMin;
 
 	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
-	MINT		iKaiC   = z_mn.GetInpKai();						// 階  	(1,2,3)
-	MINT		iGpC = z_mn.GetKCdGp();							// 構成
+	MINT		iKaiC   = z_mnIA.GetInpKai();						// 階  	(1,2,3)
+	MINT		iGpC = z_mnIA.GetKCdGp();							// 構成
 
 	Window::CurWndFocus();
 
@@ -72,7 +72,7 @@ void MCmdMdPanelNo()
 		if ( irt == MTRT_SYSTEMSTOP || irt == MTRT_CAN)
 			break;
 
-		iSetPtNo = z_mn.GetComboPanelNo();
+		iSetPtNo = z_mnIA.GetComboPanelNo();
 		if ( iSetPtNo < 1)
 			iSetPtNo = 1;
 
@@ -141,8 +141,8 @@ void MCmdMdPanelNo()
 			}
 			if ( iSetPtNo < iPt)
 				iSetPtNo++;
-//E			z_mn.SetComboPanelNo( iSetPtNo);
-			z_mn.RibbonIO( MSET_COMBO_PANELNO, iSetPtNo);			// パネル番号選択用のコンボボックスに表示する
+//E			z_mnIA.SetComboPanelNo( iSetPtNo);
+			z_mnIA.RibbonIO( MSET_COMBO_PANELNO, iSetPtNo);			// パネル番号選択用のコンボボックスに表示する
 			
 
 			WindowCtrl::MmWndKReDraw();

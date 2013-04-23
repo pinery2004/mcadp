@@ -297,7 +297,7 @@ LRESULT CMCadView1::OnMyMessageTenkai(WPARAM wParam, LPARAM lParam)
 
 LRESULT CMCadView1::OnMyMessageKAttr(WPARAM wParam, LPARAM lParam)
 {
-	MC::MmDialogKAttrInp( this);
+	MC::z_DlgKAttr.MmDialogKAttrInp( this);
 	return 0;
 }	
 

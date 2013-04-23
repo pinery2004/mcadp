@@ -45,8 +45,8 @@ void mnInpAttr::InitComboPartsNm()
 	int		ist;
 	int		ic1;
 	int		ip = 0;
-	int		iKCdGp = z_mn.GetKCdGp();			// カレント	構造　構成(組)コード
-	int		iKCdBr = z_mn.GetKCdBr();			// カレント	部材　分類コード
+	int		iKCdGp = z_mnIA.GetKCdGp();			// カレント	構造　構成(組)コード
+	int		iKCdBr = z_mnIA.GetKCdBr();			// カレント	部材　分類コード
 	mhPartsSpec	*pPartsSpec;					// 部材テーブル 部材
 	int		iPTCdGp;							// 部材テーブル	部材　構成(組)コード
 	int		iPTCdBr;							// 部材テーブル 部材　分類コード
@@ -55,8 +55,9 @@ void mnInpAttr::InitComboPartsNm()
 	CMFCRibbonComboBox* pCmbBox = mmpComboBuzai();
 	pCmbBox->RemoveAllItems();
 
-	MINT mxPartsNm = BuzaiCode::MhGetNoOfPartsSpec();
-	for ( ic1=0; ic1<mxPartsNm; ic1++) {
+	int		nPartsNm;
+	nPartsNm = BuzaiCode::MhGetNoOfPartsSpec();
+	for ( ic1=0; ic1<nPartsNm; ic1++) {
 		pPartsSpec = BuzaiCode::MhGetpPartsSpec( ic1);
 		iPTCdGp = pPartsSpec->GetPTCdGp();
 		if ( iKCdGp != iPTCdGp)									// 構成(組)コードがカレントと不一致は無視
@@ -82,7 +83,7 @@ void mnInpAttr::InitComboPartsNm()
 		pCmbBox->AddItem( Mstr( "none"));
 	}
 	z_iComboKmIdPartsNm = -1;
-	z_mn.SetKCdBrB( false, false, false);						//	部材、金物、パネル、その他のラジオボタンを未選択に設定
+	z_mnIA.SetKCdBrB( false, false, false);						//	部材、金物、パネル、その他のラジオボタンを未選択に設定
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -105,7 +106,7 @@ void mnInpAttr::SelectComboPartsNmByKmId(
 	mtPlcInp::SetpPartsSpec( pPartsSpec);
 
 	MINT iCdPlc = pPartsSpec->GetPTCdPlc();						// 部品仕様の配置コードで配置コードコンボを選択する
-	z_mn.SelectComboPlcCdByPlcCd( iCdPlc);
+	z_mnIA.SelectComboPlcCdByPlcCd( iCdPlc);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -130,7 +131,7 @@ MINT mnInpAttr::SelectComboPartsNmByPartsNm(
 		Msg::ErrorMsg( i_sNmParts1, MC_ERR_NOTSET_PARTS_TABLE);	// "が部材テーブルに未設定です．"
 		MQUIT;
 	}
-	z_mn.SelectComboPartsNmByKmId( iKmIdPartsNm);
+	z_mnIA.SelectComboPartsNmByKmId( iKmIdPartsNm);
 
 	iIdPartsSpec = z_iComboIdPartsSpec[iKmIdPartsNm];
 exit:
@@ -178,13 +179,13 @@ MINT mnInpAttr::GetComboPartsNmId(
 	MINT		ic1;
 	mhPartsSpec	*pPartsSpec;
 
-	MINT	mxPartsNm = BuzaiCode::MhGetNoOfPartsSpec();
-	for ( ic1=0; ic1<mxPartsNm; ic1++) {
+	MINT	nPartsNm = BuzaiCode::MhGetNoOfPartsSpec();
+	for ( ic1=0; ic1<nPartsNm; ic1++) {
 		pPartsSpec = BuzaiCode::MhGetpPartsSpec( ic1);
 		if ( Mstrcmp( pPartsSpec->GetPTNmParts1(), i_sNmParts1) == 0)
 			break;
 	}
-	if ( ic1 < mxPartsNm)
+	if ( ic1 < nPartsNm)
 		ist = ic1;
 	else
 		ist = -1;
@@ -224,7 +225,7 @@ void mnInpAttr::InitComboPartsMbr()
 	CMFCRibbonComboBox* pCmbBox = mmpComboMbr();
 	pCmbBox->RemoveAllItems();
 
-	MINT		iIdPartsSpec = z_mn.GetCurPartsNmId();
+	MINT		iIdPartsSpec = z_mnIA.GetCurPartsNmId();
 	if ( iIdPartsSpec == -1) {
 //		pCmbBox->>EnableToolTips(0);			NG
 		goto exit;
@@ -286,12 +287,12 @@ MINT mnInpAttr::SelectComboMbrCdByMbrCd( MCHAR* sCdMbr)
 	MINT		iMbrId = -1;
 	MINT		iKmIdMbr;
 
-	iKmIdMbr = z_mn.GetComboMbrKmId( sCdMbr);
+	iKmIdMbr = z_mnIA.GetComboMbrKmId( sCdMbr);
 	if ( iKmIdMbr < 0) {
 		Msg::ErrorMsg( sCdMbr, MC_ERR_NOTSET_MEMBER_TABLE);	// "が寸法型式テーブルに未設定です．"
 		MQUIT;
 	}
-	z_mn.SelectComboPartsMbrByKmId( iKmIdMbr);
+	z_mnIA.SelectComboPartsMbrByKmId( iKmIdMbr);
 
 	iMbrId = z_iComboMbrId[iKmIdMbr];
 exit:

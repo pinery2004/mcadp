@@ -71,7 +71,7 @@ void IeModel::MhNormKabe(
 	if ( !z_fUpdateKabe) MQUIT;
 
 	//　家モデルよりカレント階の全ての壁を取得する
-	MINT iKai = z_mn.GetInpKai();
+	MINT iKai = z_mnIA.GetInpKai();
 	nHaiKabeI = mhHaitiIn::GetParts( iKai, MP_GP_TAIRYOKU, Mstr( "壁"), NULL, MAXHAIKABE, pHaiKabe, pPlcPos);
 																					// 家モデルよりカレント階の全ての壁を取得する
 		ASSERT( nHaiKabeI >= 0);													//		壁数オーバーフロー　<ERROR>

@@ -64,7 +64,7 @@ void mhInput::MmGetMarumeYaneLine(
 	MgPoint3	Py1;
 	MgLine2		Ln1;
 
-	iCdMarume = z_mn.GetComboMarumeCd();
+	iCdMarume = z_mnIA.GetComboMarumeCd();
 	if ( iCdMarume == 0)
 		rTol = MC_MARUME_TOL;
 	else

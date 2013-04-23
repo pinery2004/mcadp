@@ -25,7 +25,7 @@ void MCmdMdCreate()
 	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();
 
-	z_mn.SetMode( MP_MD_CREATE);
+	z_mnIA.SetMode( MP_MD_CREATE);
 
 	MCmdLine( pWnd);
 }
@@ -38,7 +38,7 @@ void MCmdMdDelete()
 	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();
 
-	z_mn.SetMode( MP_MD_DELETE);
+	z_mnIA.SetMode( MP_MD_DELETE);
 
 	MCmdLine( pWnd);
 }
@@ -48,7 +48,7 @@ void MCmdMdDelete()
 
 void MCmdMdModify()
 {
-	z_mn.SetMode( MP_MD_MODIFY);
+	z_mnIA.SetMode( MP_MD_MODIFY);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -56,7 +56,7 @@ void MCmdMdModify()
 
 void MCmdMdMove()
 {
-	z_mn.SetMode( MP_MD_MOVE);
+	z_mnIA.SetMode( MP_MD_MOVE);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -64,7 +64,7 @@ void MCmdMdMove()
 
 void MCmdMdCopy()
 {
-	z_mn.SetMode( MP_MD_COPY);
+	z_mnIA.SetMode( MP_MD_COPY);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -72,7 +72,7 @@ void MCmdMdCopy()
 
 void MCmdMdProperty()
 {
-	z_mn.SetMode( MP_MD_PROPERTY);
+	z_mnIA.SetMode( MP_MD_PROPERTY);
 }
 /*
 /////////////////////////////////////////////////////////////////////////////

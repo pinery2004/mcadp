@@ -290,15 +290,15 @@ BOOL CMCadApp::InitInstance()
 
 	MC::System::MmInitialize();
 
-	MC::z_mn.SetInpKai( MP_KAI1);
-	MC::mtPlcInp::SetInpKai( MC::z_mn.GetInpKai());
-	MC::z_mn.SetMode( MP_MD_CREATE);
+	MC::z_mnIA.SetInpKai( MP_KAI1);
+	MC::mtPlcInp::SetInpKai( MC::z_mnIA.GetInpKai());
+	MC::z_mnIA.SetMode( MP_MD_CREATE);
 
-	MC::z_mn.SetSCdGp( MP_GP_JYUKO);
+	MC::z_mnIA.SetSCdGp( MP_GP_JYUKO);
 
-	MC::z_mn.SetKCdGp( MP_GP_KABE);
-	MC::z_mn.SetKCdBr( MP_BR_BUZAI);
-	MC::z_mn.SetKSel( MP_SEL1);
+	MC::z_mnIA.SetKCdGp( MP_GP_KABE);
+	MC::z_mnIA.SetKCdBr( MP_BR_BUZAI);
+	MC::z_mnIA.SetKSel( MP_SEL1);
 	m_bPartsListBuzai	= false;
 	m_bPartsListKanagu = false;
 	m_bPartsListGohan	= false;
@@ -333,8 +333,8 @@ BOOL CMCadApp::InitInstance()
 	if ( !ProcessShellCommand(cmdInfo))
 		return FALSE;
 
-	MC::z_mn.InitComboPartsNm();												// 組、分類に対応する部品を選択可能項目として設定する
-	MC::z_mn.InitComboAttr( MP_AT_HRZ_PARTS);									// 属性入力用コンボボックスを初期化する
+	MC::z_mnIA.InitComboPartsNm();												// 組、分類に対応する部品を選択可能項目として設定する
+	MC::z_mnIA.InitComboAttr( MP_AT_HRZ_PARTS);									// 属性入力用コンボボックスを初期化する
 
 	//// ウィンドウのオープン
 	MC::WindowCtrl::MmWndSetSyubetsuC( 2, MTHEIMENZU, 1, 1);
@@ -635,8 +635,8 @@ void CMCadApp::CreateWnd(
 
 void CMCadApp::OnBnClickedRadio1f()
 {
-	MC::z_mn.SetInpKai( MP_KAI1);										// １階
-	MC::mtPlcInp::SetInpKai( MC::z_mn.GetInpKai());
+	MC::z_mnIA.SetInpKai( MP_KAI1);										// １階
+	MC::mtPlcInp::SetInpKai( MC::z_mnIA.GetInpKai());
 //E	MC::Window::CurWndFocus();
 	MC::WindowCtrl::MmWndKReDraw();
 }
@@ -644,14 +644,14 @@ void CMCadApp::OnBnClickedRadio1f()
 
 void CMCadApp::OnUpdateRadio1f(CCmdUI *pCmdUI)
 {
-	pCmdUI->SetCheck( MC::z_mn.GetInpKai() == MP_KAI1);
+	pCmdUI->SetCheck( MC::z_mnIA.GetInpKai() == MP_KAI1);
 }
 
 
 void CMCadApp::OnBnClickedRadio2f()
 {
-	MC::z_mn.SetInpKai( MP_KAI2);										// ２階
-	MC::mtPlcInp::SetInpKai( MC::z_mn.GetInpKai());
+	MC::z_mnIA.SetInpKai( MP_KAI2);										// ２階
+	MC::mtPlcInp::SetInpKai( MC::z_mnIA.GetInpKai());
 //E	MC::Window::CurWndFocus();
 	MC::WindowCtrl::MmWndKReDraw();
 }
@@ -659,14 +659,14 @@ void CMCadApp::OnBnClickedRadio2f()
 
 void CMCadApp::OnUpdateRadio2f(CCmdUI *pCmdUI)
 {
-	pCmdUI->SetCheck( MC::z_mn.GetInpKai() == MP_KAI2);
+	pCmdUI->SetCheck( MC::z_mnIA.GetInpKai() == MP_KAI2);
 }
 
 
 void CMCadApp::OnBnClickedRadio3f()
 {
-	MC::z_mn.SetInpKai( MP_KAI3);										// ３階
-	MC::mtPlcInp::SetInpKai( MC::z_mn.GetInpKai());
+	MC::z_mnIA.SetInpKai( MP_KAI3);										// ３階
+	MC::mtPlcInp::SetInpKai( MC::z_mnIA.GetInpKai());
 //E	MC::Window::CurWndFocus();
 	MC::WindowCtrl::MmWndKReDraw();
 }
@@ -674,14 +674,14 @@ void CMCadApp::OnBnClickedRadio3f()
 
 void CMCadApp::OnUpdateRadio3f(CCmdUI *pCmdUI)
 {
-	pCmdUI->SetCheck( MC::z_mn.GetInpKai() == MP_KAI3);
+	pCmdUI->SetCheck( MC::z_mnIA.GetInpKai() == MP_KAI3);
 }
 
 
 void CMCadApp::OnBnClickedRadioYane()
 {
-	MC::z_mn.SetKCdGp( MP_GP_YANE);
-	MC::z_mn.SetComboParts();
+	MC::z_mnIA.SetKCdGp( MP_GP_YANE);
+	MC::z_mnIA.SetComboParts();
 //	コマンドキャンセル
 	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -689,14 +689,14 @@ void CMCadApp::OnBnClickedRadioYane()
 
 void CMCadApp::OnUpdateRadioYane(CCmdUI *pCmdUI)
 {
-	pCmdUI->SetCheck( MC::z_mn.GetKCdGp() == MP_GP_YANE);
+	pCmdUI->SetCheck( MC::z_mnIA.GetKCdGp() == MP_GP_YANE);
 }
 
 
 void CMCadApp::OnBnClickedRadioTenjo()
 {
-	MC::z_mn.SetKCdGp( MP_GP_TENJO);
-	MC::z_mn.SetComboParts();
+	MC::z_mnIA.SetKCdGp( MP_GP_TENJO);
+	MC::z_mnIA.SetComboParts();
 //	コマンドキャンセル
 	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -704,15 +704,15 @@ void CMCadApp::OnBnClickedRadioTenjo()
 
 void CMCadApp::OnUpdateRadioTenjo(CCmdUI *pCmdUI)
 {
-	pCmdUI->SetCheck( MC::z_mn.GetKCdGp() == MP_GP_TENJO);
+	pCmdUI->SetCheck( MC::z_mnIA.GetKCdGp() == MP_GP_TENJO);
 }
 
 
 void CMCadApp::OnBnClickedRadioTairyoku()
 {
 	// TODO : ここにコントロール通知ハンドラ コードを追加します。
-	MC::z_mn.SetKCdGp( MP_GP_TAIRYOKU);
-	MC::z_mn.SetComboParts();
+	MC::z_mnIA.SetKCdGp( MP_GP_TAIRYOKU);
+	MC::z_mnIA.SetComboParts();
 //	コマンドキャンセル
 	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -720,15 +720,15 @@ void CMCadApp::OnBnClickedRadioTairyoku()
 
 void CMCadApp::OnUpdateRadioTairyoku(CCmdUI *pCmdUI)
 {
-	pCmdUI->SetCheck( MC::z_mn.GetKCdGp() == MP_GP_TAIRYOKU);
+	pCmdUI->SetCheck( MC::z_mnIA.GetKCdGp() == MP_GP_TAIRYOKU);
 }
 
 
 void CMCadApp::OnBnClickedRadioKabe()
 {
 	// TODO : ここにコントロール通知ハンドラ コードを追加します。
-	MC::z_mn.SetKCdGp( MP_GP_KABE);
-	MC::z_mn.SetComboParts();
+	MC::z_mnIA.SetKCdGp( MP_GP_KABE);
+	MC::z_mnIA.SetComboParts();
 //	コマンドキャンセル
 	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -736,14 +736,14 @@ void CMCadApp::OnBnClickedRadioKabe()
 
 void CMCadApp::OnUpdateRadioKabe(CCmdUI *pCmdUI)
 {
-	pCmdUI->SetCheck( MC::z_mn.GetKCdGp() == MP_GP_KABE);
+	pCmdUI->SetCheck( MC::z_mnIA.GetKCdGp() == MP_GP_KABE);
 }
 
 
 void CMCadApp::OnBnClickedRadioYuka()
 {
-	MC::z_mn.SetKCdGp( MP_GP_YUKA);
-	MC::z_mn.SetComboParts();
+	MC::z_mnIA.SetKCdGp( MP_GP_YUKA);
+	MC::z_mnIA.SetComboParts();
 //	コマンドキャンセル
 	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -751,14 +751,14 @@ void CMCadApp::OnBnClickedRadioYuka()
 
 void CMCadApp::OnUpdateRadioYuka(CCmdUI *pCmdUI)
 {
-	pCmdUI->SetCheck( MC::z_mn.GetKCdGp() == MP_GP_YUKA);
+	pCmdUI->SetCheck( MC::z_mnIA.GetKCdGp() == MP_GP_YUKA);
 }
 
 
 void CMCadApp::OnBnClickedRadioKoya()
 {
-	MC::z_mn.SetKCdGp( MP_GP_KOYA);
-	MC::z_mn.SetComboParts();
+	MC::z_mnIA.SetKCdGp( MP_GP_KOYA);
+	MC::z_mnIA.SetComboParts();
 //	コマンドキャンセル
 	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -766,14 +766,14 @@ void CMCadApp::OnBnClickedRadioKoya()
 
 void CMCadApp::OnUpdateRadioKoya(CCmdUI *pCmdUI)
 {
-	pCmdUI->SetCheck( MC::z_mn.GetKCdGp() == MP_GP_KOYA);
+	pCmdUI->SetCheck( MC::z_mnIA.GetKCdGp() == MP_GP_KOYA);
 }
 
 
 void CMCadApp::OnBnClickedRadioDodai()
 {
-	MC::z_mn.SetKCdGp( MP_GP_DODAI);
-	MC::z_mn.SetComboParts();
+	MC::z_mnIA.SetKCdGp( MP_GP_DODAI);
+	MC::z_mnIA.SetComboParts();
 //	コマンドキャンセル
 	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -781,14 +781,14 @@ void CMCadApp::OnBnClickedRadioDodai()
 
 void CMCadApp::OnUpdateRadioDodai(CCmdUI *pCmdUI)
 {
-	pCmdUI->SetCheck( MC::z_mn.GetKCdGp() == MP_GP_DODAI);
+	pCmdUI->SetCheck( MC::z_mnIA.GetKCdGp() == MP_GP_DODAI);
 }
 
 
 void CMCadApp::OnBnClickedRadioKiso()
 {
-	MC::z_mn.SetKCdGp( MP_GP_KISO);
-	MC::z_mn.SetComboParts();
+	MC::z_mnIA.SetKCdGp( MP_GP_KISO);
+	MC::z_mnIA.SetComboParts();
 //	コマンドキャンセル
 	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -796,14 +796,14 @@ void CMCadApp::OnBnClickedRadioKiso()
 
 void CMCadApp::OnUpdateRadioKiso(CCmdUI *pCmdUI)
 {
-	pCmdUI->SetCheck( MC::z_mn.GetKCdGp() == MP_GP_KISO);
+	pCmdUI->SetCheck( MC::z_mnIA.GetKCdGp() == MP_GP_KISO);
 }
 
 
 void CMCadApp::OnBnClickedRadioBuzai()
 {
-	MC::z_mn.SetKCdBr( MP_BR_BUZAI);
-	MC::z_mn.SetComboParts();
+	MC::z_mnIA.SetKCdBr( MP_BR_BUZAI);
+	MC::z_mnIA.SetComboParts();
 //	コマンドキャンセル
 	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -811,14 +811,14 @@ void CMCadApp::OnBnClickedRadioBuzai()
 
 void CMCadApp::OnUpdateRadioBuzai(CCmdUI *pCmdUI)
 {
-	pCmdUI->SetCheck( MC::z_mn.GetKCdBr() == MP_BR_BUZAI);
+	pCmdUI->SetCheck( MC::z_mnIA.GetKCdBr() == MP_BR_BUZAI);
 }
 
 
 void CMCadApp::OnBnClickedRadioKanagu()
 {
-	MC::z_mn.SetKCdBr( MP_BR_KANAGU);
-	MC::z_mn.SetComboParts();
+	MC::z_mnIA.SetKCdBr( MP_BR_KANAGU);
+	MC::z_mnIA.SetComboParts();
 //	コマンドキャンセル
 	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -826,14 +826,14 @@ void CMCadApp::OnBnClickedRadioKanagu()
 
 void CMCadApp::OnUpdateRadioKanagu(CCmdUI *pCmdUI)
 {
-	pCmdUI->SetCheck( MC::z_mn.GetKCdBr() == MP_BR_KANAGU);
+	pCmdUI->SetCheck( MC::z_mnIA.GetKCdBr() == MP_BR_KANAGU);
 }
 
 
 void CMCadApp::OnBnClickedRadioPanel()
 {
-	MC::z_mn.SetKCdBr( MP_BR_PANEL);
-	MC::z_mn.SetComboParts();
+	MC::z_mnIA.SetKCdBr( MP_BR_PANEL);
+	MC::z_mnIA.SetComboParts();
 //	コマンドキャンセル
 	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -841,14 +841,14 @@ void CMCadApp::OnBnClickedRadioPanel()
 
 void CMCadApp::OnUpdateRadioPanel(CCmdUI *pCmdUI)
 {
-	pCmdUI->SetCheck( MC::z_mn.GetKCdBr() == MP_BR_PANEL);
+	pCmdUI->SetCheck( MC::z_mnIA.GetKCdBr() == MP_BR_PANEL);
 }
 
 
 void CMCadApp::OnBnClickedRadioOther()
 {
-	MC::z_mn.SetKCdBr( MP_BR_OTHER);
-	MC::z_mn.SetComboParts();
+	MC::z_mnIA.SetKCdBr( MP_BR_OTHER);
+	MC::z_mnIA.SetComboParts();
 //	コマンドキャンセル
 	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -856,7 +856,7 @@ void CMCadApp::OnBnClickedRadioOther()
 
 void CMCadApp::OnUpdateRadioOther(CCmdUI *pCmdUI)
 {
-	pCmdUI->SetCheck( MC::z_mn.GetKCdBr() == MP_BR_OTHER);
+	pCmdUI->SetCheck( MC::z_mnIA.GetKCdBr() == MP_BR_OTHER);
 }
 
 
@@ -1069,71 +1069,71 @@ void CMCadApp::OnUpdatePanelAll(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedRadioJyuuko()
 {
-	MC::z_mn.SetSCdGp( MP_GP_JYUKO);
+	MC::z_mnIA.SetSCdGp( MP_GP_JYUKO);
 }
 
 
 void CMCadApp::OnUpdateRadioJyuuko(CCmdUI *pCmdUI)
 {
-	pCmdUI->SetCheck( MC::z_mn.GetSCdGp() == MP_GP_JYUKO);
+	pCmdUI->SetCheck( MC::z_mnIA.GetSCdGp() == MP_GP_JYUKO);
 }
 
 
 void CMCadApp::OnBnClickedRadioJyuuto()
 {
-	MC::z_mn.SetSCdGp( MP_GP_JYUTO);
+	MC::z_mnIA.SetSCdGp( MP_GP_JYUTO);
 }
 
 
 void CMCadApp::OnUpdateRadioJyuuto(CCmdUI *pCmdUI)
 {
-	pCmdUI->SetCheck( MC::z_mn.GetSCdGp() == MP_GP_JYUTO);
+	pCmdUI->SetCheck( MC::z_mnIA.GetSCdGp() == MP_GP_JYUTO);
 }
 
 
 void CMCadApp::OnBnClickedRadioBukken()
 {
-	MC::z_mn.SetSCdGp( MP_GP_BUKKEN);
+	MC::z_mnIA.SetSCdGp( MP_GP_BUKKEN);
 }
 
 
 void CMCadApp::OnUpdateRadioBukken(CCmdUI *pCmdUI)
 {
-	pCmdUI->SetCheck( MC::z_mn.GetSCdGp() == MP_GP_BUKKEN);
+	pCmdUI->SetCheck( MC::z_mnIA.GetSCdGp() == MP_GP_BUKKEN);
 }
 
 
 void CMCadApp::OnBnClickedRadioSYane()
 {
-	MC::z_mn.SetSCdGp( MP_GP_S_YANE);
+	MC::z_mnIA.SetSCdGp( MP_GP_S_YANE);
 }
 
 
 void CMCadApp::OnUpdateRadioSYane(CCmdUI *pCmdUI)
 {
-	pCmdUI->SetCheck( MC::z_mn.GetSCdGp() == MP_GP_S_YANE);
+	pCmdUI->SetCheck( MC::z_mnIA.GetSCdGp() == MP_GP_S_YANE);
 }
 
 
 void CMCadApp::OnBnClickedRadioSikiti()
 {
-	MC::z_mn.SetSCdGp( MP_GP_SIKITI);
+	MC::z_mnIA.SetSCdGp( MP_GP_SIKITI);
 }
 
 
 void CMCadApp::OnUpdateRadioSikiti(CCmdUI *pCmdUI)
 {
-	pCmdUI->SetCheck( MC::z_mn.GetSCdGp() == MP_GP_SIKITI);
+	pCmdUI->SetCheck( MC::z_mnIA.GetSCdGp() == MP_GP_SIKITI);
 }
 
 
 void CMCadApp::OnBnClickedRadioHekiryou()
 {
-	MC::z_mn.SetSCdGp( MP_GP_HEKIRYOU);
+	MC::z_mnIA.SetSCdGp( MP_GP_HEKIRYOU);
 }
 
 
 void CMCadApp::OnUpdateRadioHekiryou(CCmdUI *pCmdUI)
 {
-	pCmdUI->SetCheck( MC::z_mn.GetSCdGp() == MP_GP_HEKIRYOU);
+	pCmdUI->SetCheck( MC::z_mnIA.GetSCdGp() == MP_GP_HEKIRYOU);
 }

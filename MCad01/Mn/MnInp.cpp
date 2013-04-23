@@ -46,7 +46,7 @@ MhTateguInfo	mtTateguInp::m_TateguInp;
 
 ////////////////////////////////////////////////////////////////////////////
 //	“ü—Íƒ‚[ƒh	
-mnInpAttr	z_mn;
+mnInpAttr	z_mnIA;
 
 mnInpAttr::mnInpAttr()
 {
@@ -61,7 +61,7 @@ void IeModel::MnInitInpAt()
 	// •”Ş“ü—Í‘®«
 
 	MINT	iKai;
-	iKai = z_mn.GetInpKai();
+	iKai = z_mnIA.GetInpKai();
 	mtPlcInp::SetInpKai( iKai);
 	mtPlcInp::SetCdHgt( 0);
 	mtPlcInp::SetPanelNo( 0);
@@ -70,7 +70,7 @@ void IeModel::MnInitInpAt()
 	mtPlcInp::SetIdMbr( 0);
 //	mtPlcInp::SetpPartsSpec( NULL);
 //Z	mtPlcInp::SetpMbr( BuzaiCode::MhGetpMbr( 0));
-	z_mn.SetKCdBrB( true, true, true);
+	z_mnIA.SetKCdBrB( true, true, true);
 
 	mtPlcInp::SetSinZure( 0.f);
 	mtPlcInp::SetPlcZure( 0.f);
