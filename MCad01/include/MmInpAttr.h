@@ -29,7 +29,7 @@ namespace MC
 	#endif
 #endif
 
-class DLL_EXPORT mmInpAttr
+class DLL_EXPORT mmInpAttr: public CMmDialogKAttr
 {
 	friend CMainFrame;
 	friend CMCadApp;
@@ -73,19 +73,29 @@ public:
 //public:
 //	////////////////////////////////////////////////////////////////////////////
 //	//	属性値入力用
-//	ComboTp	m_iComboTp;								// コンボ種類
-//	int		m_iCdArg1;								// 設定コード1 整数
-//	MREAL	m_rCdArg2;								// 設定コード2 実数
-//	int		m_iSts;									// ステイタス
+//	ComboTp	m_iComboTp;							// コンボ種類
+//	int		m_iCdArg1;							// 設定コード1 整数
+//	MREAL	m_rCdArg2;							// 設定コード2 実数
+//	int		m_iSts;								// ステイタス
 
 public:
 	////////////////////////////////////////////////////////////////////////////
 	// 部品入力用、ダイアログの部品選択用項目を設定する
 	//		組、分類、部品タイプ、寸法型式
-	MPKOSEI		m_iRBKosei;							// 構造	構成
-	MPBUNRUI	m_iRBBunrui;						// 構造	分類
-	MCHAR*		m_sRBBuhin;							// 部品
-	MCHAR*		m_sRBMbr;							// 部品メンバー
+	MPKOSEI		m_iRBKosei;						// 構造	構成
+	MPBUNRUI	m_iRBBunrui;					// 構造	分類
+	MCHAR*		m_sRBBuhin;						// 部品
+	MCHAR*		m_sRBMbr;						// 部品メンバー
+
+	// 部品名コンボボックス
+	int m_nComboIdPartsSpec;					// 表示項目数
+	int m_iComboIdPartsSpec[MX_CMB_PARTSNM];	// 表示項目対応部品ID
+	int m_iComboKmIdPartsNm;					// カレント選択項目番号
+
+	// 寸法型式選択用コンボボックス
+	int m_nComboMbrId;							// 表示項目数
+	int m_iComboMbrId[MX_CMB_CDMEMBER];			// 表示項目対応寸法型式ID
+	int m_iComboKmIdMbr;						// カレント選択項目番号
 
 //	///////////////////////////////////////////////////////////////////////////////
 //	//	ダイアログの設定と取り込み
@@ -105,7 +115,7 @@ protected:
 	//	部品名コンポボックスを部品名項目番号で選択する
 protected:
 	void SelectComboPartsNmByKmId(
-						MINT		i_iKmIdPartsNm	// 部品名項目番号
+						int		i_iKmIdPartsNm	// 部品名項目番号
 				);
 
 	///////////////////////////////////////////////////////////////////////////////
@@ -113,7 +123,7 @@ protected:
 	//							＝-1: 該当なし
 	//							≧ 0: 部品ID
 protected:
-	MINT SelectComboPartsNmByPartsNm(
+	int SelectComboPartsNmByPartsNm(
 						MCHAR* 		i_sNmParts1		// 部品名
 				);
 
@@ -125,7 +135,7 @@ protected:
 	//							≧ 0: 部品ID
 	//							＝-1: 該当なし
 public:
-	MINT GetComboPartsNmKmIdFromPartsNm(
+	int GetComboPartsNmKmIdFromPartsNm(
 						MCHAR*		i_sNmParts1		// 部品名
 				);
 
@@ -134,7 +144,7 @@ public:
 	//							＝-1: 該当なし
 	//							≧ 0: 部品ID
 public:
-	MINT GetComboPartsNmId(
+	int GetComboPartsNmId(
 						MCHAR* 		i_sNmParts1		// 部品名
 				);
 
@@ -143,7 +153,7 @@ public:
 	//							＝-1: 未選択
 	//							≧ 0: 部品ID
 public:
-	MINT GetCurPartsNmId();
+	int GetCurPartsNmId();
 
 	///////////////////////////////////////////////////////////////////////////////
 	//	寸法型式選択用コンポボックスの項目を設定する
@@ -154,7 +164,7 @@ protected:
 	//	寸法型式コンボボックスを寸法形式項目番号で選択する
 protected:
 	void SelectComboPartsMbrByKmId(
-						MINT		i_iKmIdMbr		// 寸法型式項目番号
+						int			i_iKmIdMbr		// 寸法型式項目番号
 				);
 
 	///////////////////////////////////////////////////////////////////////////////
@@ -162,7 +172,7 @@ protected:
 	//							＝-1: 該当なし
 	//							≧ 0: 寸法型式ID
 protected:
-	MINT SelectComboMbrCdByMbrCd(
+	int SelectComboMbrCdByMbrCd(
 						MCHAR* 		i_sCdMbr		// 寸法型式
 				);
 
@@ -171,7 +181,7 @@ protected:
 	//							＝-1: 該当なし
 	//							≧ 0: 部品ID
 public:
-	MINT GetComboMbrKmId(
+	int GetComboMbrKmId(
 						MCHAR*		i_sCdMbr		// 寸法型式
 				);
 
@@ -180,7 +190,7 @@ public:
 	//							＝-1: 該当なし
 	//							≧ 0: 寸法型式ID
 public:
-	MINT GetComboMbrCd(
+	int GetComboMbrCd(
 						MCHAR* 		i_sCdMbr		// 寸法型式
 				);
 
@@ -190,12 +200,12 @@ public:
 	//							＝-1: 未選択
 	//							≧ 0: 部品ID
 public:
-	MINT GetComboMbrCdId();
+	int GetComboMbrCdId();
 
 	//////////////////////////////////////////////////////////////////////////////
 	//	属性値入力用コンボボックス番号を取得する
 protected:
-	MINT GetComboAttrNo(
+	int GetComboAttrNo(
 						MCCMBATTR	i_iAttr			// 属性ID
 				);
 
@@ -203,7 +213,7 @@ protected:
 	//	属性値入力用コンボボックスのタイトルを設定する
 protected:
 	void SetComboAttrText(
-						MINT	i_iAttr,			// コンボボックス番号
+						int		i_iAttr,			// コンボボックス番号
 						MCHAR*	i_sTitle			// タイトル
 				);
 
@@ -211,8 +221,8 @@ protected:
 	//	属性値入力用コンポボックスに実数値の項目(一覧)を設定する
 protected:
 	void InitComboAttrR(
-						MINT	i_iAttr,			// コンボボックス番号
-						MINT	i_nComboAttr,		// 選択属性値の数
+						int		i_iAttr,			// コンボボックス番号
+						int		i_nComboAttr,		// 選択属性値の数
 						MREAL*	i_rComboAttr,		// 選択属性値
 						MREAL	i_rInitValue		// 初期表示する属性値
 				);
@@ -228,7 +238,7 @@ protected:
 	///////////////////////////////////////////////////////////////////////////////
 	//	属性値入力用コンボボックスの実数値を取得する
 protected:
-	MINT GetComboAttrR(								// ステイタス0(未設定) 1(設定)
+	int GetComboAttrR(								// ステイタス0(未設定) 1(設定)
 						MCCMBATTR	i_iAttr,		// 属性ID
 						MREAL*		o_prValue		// 実数値
 				);
@@ -237,7 +247,7 @@ protected:
 	//	属性値入力用コンボボックスに実数値を表示する
 protected:
 	void SetComboAttrRCbn(
-						MINT	i_iAttr,			// コンボボックス番号
+						int		i_iAttr,			// コンボボックス番号
 						MREAL	i_rValue			// 表示する実数値
 				);
 
@@ -246,7 +256,7 @@ protected:
 	//
 protected:
 	MREAL GetComboAttrRCbn(		// (  O) 実数値　または　0(未設定)
-						MINT	i_iAttr				// コンボボックス番号
+						int		i_iAttr				// コンボボックス番号
 				);
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -329,15 +339,15 @@ public:
 protected:
 	void SetComboAttrI(
 						MCCMBATTR	i_iAttr,		// 属性ID
-						MINT		i_iValue 		// 表示する整数値
+						int			i_iValue 		// 表示する整数値
 				);
 
 	///////////////////////////////////////////////////////////////////////////////
 	//	属性値入力用コンボボックスの整数を取得する
 protected:
-	MINT GetComboAttrI(								// ステイタス0(未設定) 1(設定)
+	int GetComboAttrI(								// ステイタス0(未設定) 1(設定)
 						MCCMBATTR	i_iAttr,		// 属性ID
-						MINT*		o_piValue		// 整数値
+						int*		o_piValue		// 整数値
 				);
 
 
@@ -345,39 +355,39 @@ protected:
 	//	属性値入力用コンボボックスに整数値を表示する
 protected:
 	void SetComboAttrICbn(
-						MINT	i_iAttr,			// コンボボックス番号
-						MINT	i_iValue 			// 表示する整数値
+						int		i_iAttr,			// コンボボックス番号
+						int		i_iValue 			// 表示する整数値
 				);
 
 	///////////////////////////////////////////////////////////////////////////////
 	//	属性値入力用指定コンポボックスに整数値の項目(一覧)を設定する
 protected:
 	void InitComboAttrI(
-						MINT	i_iAttr,			// コンボボックス番号
-						MINT	i_nComboAttr,		// 選択属性値の数
-						MINT*	i_iCmbAttr,			// 選択属性値
-						MINT	i_iInitValue		// 初期表示する属性値
+						int		i_iAttr,			// コンボボックス番号
+						int		i_nComboAttr,		// 選択属性値の数
+						int*	i_iCmbAttr,			// 選択属性値
+						int		i_iInitValue		// 初期表示する属性値
 				);
 
 	///////////////////////////////////////////////////////////////////////////////
 	//	属性値入力用コンボボックスの整数値を取得する
 	//
 protected:
-	MINT GetComboAttrICbn(							// 整数値　または　0(未設定)
-						MINT	i_iAttr				// コンボボックス番号
+	int GetComboAttrICbn(							// 整数値　または　0(未設定)
+						int		i_iAttr				// コンボボックス番号
 				);
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	本数
 public:
 	void SetHonsu(
-						MINT 		i_nHonsu		// 本数	
+						int		i_nHonsu			// 本数	
 				)
 	{
 		m_nHonsu = i_nHonsu;
 	}
 public:
-	MINT GetHonsu()
+	int GetHonsu()
 	{
 		return m_nHonsu;
 	}
@@ -391,7 +401,7 @@ public:
 //	//	パネル番号コンポボックスにパネル番号を表示する
 //protected:
 //	void SetComboPanelNo(
-//						MINT		i_iPanelNo		// パネル番号
+//						int		i_iPanelNo			// パネル番号
 //				);
 //
 //	///////////////////////////////////////////////////////////////////////////////
@@ -400,19 +410,19 @@ public:
 //	//							＝ 0: 全
 //	//							≧ 1: パネル番号
 //public:
-//	MINT GetComboPanelNo();
+//	int GetComboPanelNo();
 //
 //	/////////////////////////////////////////////////////////////////////////////
 //	//	パネルNo
 //public:
 //	void SetPanelNo(
-//						MINT 		i_iPanelNo	// 本数	
+//						int 		i_iPanelNo		// 本数	
 //				)
 //	{
 //		m_iPanelNo = i_iPanelNo;
 //	}
 //public:
-//	MINT GetPanelNo()
+//	int GetPanelNo()
 //	{
 //		return m_iPanelNo;
 //	}
@@ -421,13 +431,13 @@ public:
 	//	勾配
 public:
 	void SetKobai(
-						MINT 		i_iKobai	// 勾配	
+						int 		i_iKobai		// 勾配	
 				)
 	{
 		m_iKobai = i_iKobai;
 	}
 public:
-	MINT GetKobai()
+	int GetKobai()
 	{
 		return m_iKobai;
 	}
@@ -436,7 +446,7 @@ public:
 	//	軒の出				
 public:
 	void SetNokiDe(
-						MREAL 		i_rNokiDe	// 軒の出	
+						MREAL 		i_rNokiDe		// 軒の出	
 				)
 	{
 		m_rNokiDe = i_rNokiDe;
@@ -451,7 +461,7 @@ public:
 	//	けらばの出				
 public:
 	void SetKerabaDe(
-						MREAL 		i_rKerabaDe	// けらばの出	
+						MREAL 		i_rKerabaDe		// けらばの出	
 				)
 	{
 		m_rKerabaDe = i_rKerabaDe;
@@ -481,7 +491,7 @@ public:
 	// 構造入力種類		部材、金物、パネル、その他
 public:
 	void SetKCdBr(
-						MPBUNRUI		i_iKInpBr		// 構造　種類
+						MPBUNRUI	i_iKInpBr		// 構造　種類
 				)
 	{
 		m_iKInpBr = i_iKInpBr;
@@ -497,10 +507,10 @@ public:
 	//		組、分類、部品タイプ、寸法型式
 public:
 	void SetRibbonBarEnt( 							// ステイタス 0:正常 -1:エラー
-					MPKOSEI		i_irbKumi,			// 構造	組
-					MPBUNRUI	i_irbBunrui,		// 構造	分類
-					MCHAR*		i_crbPartsSpec,		// 部品種類
-					MCHAR*		i_crbMbr = NULL		// 部品メンバー()
+						MPKOSEI		i_irbKumi,		// 構造	組
+						MPBUNRUI	i_irbBunrui,	// 構造	分類
+						MCHAR*		i_crbPartsSpec,	// 部品種類
+						MCHAR*		i_crbMbr = NULL	// 部品メンバー()
 				)
 	{
 		m_iRBKosei	= i_irbKumi;
@@ -508,13 +518,13 @@ public:
 		m_sRBBuhin	= i_crbPartsSpec;
 		m_sRBMbr	= i_crbMbr;
 
-		z_DlgKAttr.MmDialogKAttr();
+		MmDialogKAttr();
 	}
 
 	///////////////////////////////////////////////////////////////////////////////
 	//	構成コード、分類、部品種類IDより、属性値入力モードを求める
 protected:
-	MINT MnCalcInpAtMode();
+	int MnCalcInpAtMode();
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	部品属性入力用コンボボックスとチェックボックスの項目を設定する
@@ -536,14 +546,14 @@ protected:
 	//	部品属性入力用コンボボックスの設定
 protected:
 public:									// 仮設定
-	void SetComboParts();
+	void InitComboParts();
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	カレントの属性値入力モードを取得する
 	//	(部品属性入力用ダイアログの項目設定中の属性値入力モード)
 	//
 public:
-	MINT GetAtMd()
+	int GetAtMd()
 	{
 		return m_iInpAttrMd;
 	}
@@ -554,7 +564,7 @@ public:
 	//	
 protected:
 	void InitComboAttr(
-						MINT	i_iInpAttrMd = MP_AT_NONE	// 属性値入力モード
+						int	i_iInpAttrMd = MP_AT_NONE	// 属性値入力モード
 													//  MP_AT_AUTO(-1)		:自動設定
 													//	MP_AT_NONE(0)		:属性値入力なし
 													//	MP_AT_HRZ_PARTS(1)	:水平部材入力

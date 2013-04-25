@@ -297,7 +297,7 @@ LRESULT CMCadView1::OnMyMessageTenkai(WPARAM wParam, LPARAM lParam)
 
 LRESULT CMCadView1::OnMyMessageKAttr(WPARAM wParam, LPARAM lParam)
 {
-	MC::z_DlgKAttr.MmDialogKAttrInp( this);
+	MC::z_mmIA.MmDialogKAttrInp( this);
 	return 0;
 }	
 
@@ -395,7 +395,7 @@ void CMCadView1::OnSetFocus(CWnd* pOldWnd)
 	CView::OnSetFocus(pOldWnd);
 
 	// TODO: ここにメッセージ ハンドラー コードを追加します。
-	z_pMainFrame->m_pCurView = this;
+	z_MCadApp.m_pMainFrame->m_pCurView = this;
 }
 
 

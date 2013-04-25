@@ -171,7 +171,7 @@ void CChildFrame1::OnSetFocus(CWnd* pOldWnd)
 #endif
 	CMDIChildWnd::OnSetFocus(pOldWnd);
 
-	z_pMainFrame->m_pCurFrame = this;
+	z_MCadApp.m_pMainFrame->m_pCurFrame = this;
 
 //	CMainFrame*	pMainFrame = (CMainFrame*)AfxGetMainWnd();
 

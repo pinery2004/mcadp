@@ -39,7 +39,7 @@
 
 void	MmMainFrame( CMainFrame *pMainFrame);
 
-CMainFrame *z_pMainFrame;										// メインフレームポインタ(Global) 
+//S CMainFrame *z_pMainFrame;										// メインフレームポインタ(Global) 
 
 // CMainFrame
 
@@ -99,7 +99,7 @@ LRESULT CMainFrame::OnRibbonIO( UINT wParam, LONG lParam)
 		MC::z_mnIA.GetComboAttrA();
 		break;
 	case MSET_COMBO_PARTS:
-		MC::z_mnIA.SetComboParts();
+		MC::z_mnIA.InitComboParts();
 		break;
 	case MSET_COMBO_PANELNO:
 		MC::z_mnIA.SetComboPanelNo( MC::z_mnIA.m_iCdArg1);
@@ -121,8 +121,7 @@ CMainFrame::CMainFrame()
 	// TODO: メンバー初期化コードをここに追加してください。
 	z_MCadApp.m_nAppLook = z_MCadApp.GetInt(_T("ApplicationLook"), ID_VIEW_APPLOOK_OFF_2007_BLUE);
 
-	z_pMainFrame = this;
-	MC::System::SetpMainFrame( this);
+	z_MCadApp.m_pMainFrame = this;
 
 	MC::MtCmdOpen();
 }
@@ -440,8 +439,10 @@ void CMainFrame::OnCbnSelchangeCombo1()
 // PARTS リボンバー　寸法型式
 void CMainFrame::OnCbnSelchangeCombo2()
 {
-//E	m_iCombo2 = ((CComboBox*)(m_wndDlgBar3.GetDlgItem(IDC_CMBK_BZI2)))->GetCurSel();	// 寸法型式ID
-	CMFCRibbonComboBox *pCmbBox = mmpComboMbr();
+	MC::z_mmIA.MmDialogKAttrInp( this);
+
+	CMFCRibbonComboBox* pCmbBox;
+	pCmbBox = mmpComboMbr();
 	m_iCombo2 = pCmbBox->GetCurSel();											// 寸法型式ID
 
 	MC::z_mmIA.SelectComboPartsMbrByKmId( m_iCombo2);
@@ -454,8 +455,8 @@ void CMainFrame::OnCbnSelchangeCombo2()
 // INPUT リボンバー　入力点区分
 void CMainFrame::OnCbnSelchangeCombo11()
 {
-//E	m_iComboInp1 = ((CComboBox*)(m_wndRibbonBar.GetDlgItem(IDC_CMB_Inp1)))->GetCurSel();
-	CMFCRibbonComboBox *pCmbBox = mmpComboInpTp();
+	CMFCRibbonComboBox *pCmbBox;
+	pCmbBox = mmpComboInpTp();
 	m_iComboInp1 = pCmbBox->GetCurSel();
 	MC::z_mnIA.SelectComboInpKbnByInpKbnCd( m_iComboInp1);
 	MC::Window::CurWndFocus();
@@ -464,8 +465,8 @@ void CMainFrame::OnCbnSelchangeCombo11()
 // INPUT リボンバー　丸めコード
 void CMainFrame::OnCbnSelchangeCombo12()
 {
-//E	m_iComboInp2 = ((CComboBox*)(m_wndDlgBar1.GetDlgItem(IDC_CMB_Inp2)))->GetCurSel();
-	CMFCRibbonComboBox *pCmbBox = mmpComboMarume();
+	CMFCRibbonComboBox* pCmbBox;
+	pCmbBox = mmpComboMarume();
 	m_iComboInp2 = pCmbBox->GetCurSel();										// 丸めコード
 	MC::z_mnIA.SelectComboMarumeByMarumeCd( m_iComboInp2);
 	MC::Window::CurWndFocus();
@@ -478,8 +479,8 @@ void CMainFrame::OnCbnSelchangeCombo12()
 // INPUT リボンバー　配置コード
 void CMainFrame::OnCbnSelchangeCombo13()
 {
-//E	m_iComboInp3 = ((CComboBox*)(m_wndDlgBar1.GetDlgItem(IDC_CMB_Inp3)))->GetCurSel();
-	CMFCRibbonComboBox *pCmbBox = mmpComboPlcCd();
+	CMFCRibbonComboBox* pCmbBox;
+	pCmbBox = mmpComboPlcCd();
 	m_iComboInp3 = pCmbBox->GetCurSel();										// 配置コード
 	MC::z_mnIA.SelectComboPlcCdByPlcCd( m_iComboInp3);
 	MC::Window::CurWndFocus();

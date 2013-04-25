@@ -28,7 +28,6 @@
 #include "ChildFrm3.h"
 
 #include "MainFrm.h"
-#include "MmSystem.h"
 #include "MhDefParts.h"
 #include "MmCmdMsg.h"
 
@@ -681,7 +680,7 @@ void CMCadApp::OnUpdateRadio3f(CCmdUI *pCmdUI)
 void CMCadApp::OnBnClickedRadioYane()
 {
 	MC::z_mnIA.SetKCdGp( MP_GP_YANE);
-	MC::z_mnIA.SetComboParts();
+	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
 	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -696,7 +695,7 @@ void CMCadApp::OnUpdateRadioYane(CCmdUI *pCmdUI)
 void CMCadApp::OnBnClickedRadioTenjo()
 {
 	MC::z_mnIA.SetKCdGp( MP_GP_TENJO);
-	MC::z_mnIA.SetComboParts();
+	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
 	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -712,7 +711,7 @@ void CMCadApp::OnBnClickedRadioTairyoku()
 {
 	// TODO : ここにコントロール通知ハンドラ コードを追加します。
 	MC::z_mnIA.SetKCdGp( MP_GP_TAIRYOKU);
-	MC::z_mnIA.SetComboParts();
+	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
 	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -728,7 +727,7 @@ void CMCadApp::OnBnClickedRadioKabe()
 {
 	// TODO : ここにコントロール通知ハンドラ コードを追加します。
 	MC::z_mnIA.SetKCdGp( MP_GP_KABE);
-	MC::z_mnIA.SetComboParts();
+	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
 	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -743,7 +742,11 @@ void CMCadApp::OnUpdateRadioKabe(CCmdUI *pCmdUI)
 void CMCadApp::OnBnClickedRadioYuka()
 {
 	MC::z_mnIA.SetKCdGp( MP_GP_YUKA);
-	MC::z_mnIA.SetComboParts();
+	// ダイアログを表示する
+	MC::z_mmIA.MmDialogKAttrInp( z_MCadApp.m_pMainFrame);
+	// ダイアログの項目を設定する
+	MC::z_mmIA.InitComboParts();
+	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
 	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -758,7 +761,7 @@ void CMCadApp::OnUpdateRadioYuka(CCmdUI *pCmdUI)
 void CMCadApp::OnBnClickedRadioKoya()
 {
 	MC::z_mnIA.SetKCdGp( MP_GP_KOYA);
-	MC::z_mnIA.SetComboParts();
+	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
 	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -773,7 +776,7 @@ void CMCadApp::OnUpdateRadioKoya(CCmdUI *pCmdUI)
 void CMCadApp::OnBnClickedRadioDodai()
 {
 	MC::z_mnIA.SetKCdGp( MP_GP_DODAI);
-	MC::z_mnIA.SetComboParts();
+	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
 	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -788,7 +791,7 @@ void CMCadApp::OnUpdateRadioDodai(CCmdUI *pCmdUI)
 void CMCadApp::OnBnClickedRadioKiso()
 {
 	MC::z_mnIA.SetKCdGp( MP_GP_KISO);
-	MC::z_mnIA.SetComboParts();
+	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
 	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -803,7 +806,7 @@ void CMCadApp::OnUpdateRadioKiso(CCmdUI *pCmdUI)
 void CMCadApp::OnBnClickedRadioBuzai()
 {
 	MC::z_mnIA.SetKCdBr( MP_BR_BUZAI);
-	MC::z_mnIA.SetComboParts();
+	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
 	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -818,7 +821,7 @@ void CMCadApp::OnUpdateRadioBuzai(CCmdUI *pCmdUI)
 void CMCadApp::OnBnClickedRadioKanagu()
 {
 	MC::z_mnIA.SetKCdBr( MP_BR_KANAGU);
-	MC::z_mnIA.SetComboParts();
+	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
 	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -833,7 +836,7 @@ void CMCadApp::OnUpdateRadioKanagu(CCmdUI *pCmdUI)
 void CMCadApp::OnBnClickedRadioPanel()
 {
 	MC::z_mnIA.SetKCdBr( MP_BR_PANEL);
-	MC::z_mnIA.SetComboParts();
+	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
 	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -848,7 +851,7 @@ void CMCadApp::OnUpdateRadioPanel(CCmdUI *pCmdUI)
 void CMCadApp::OnBnClickedRadioOther()
 {
 	MC::z_mnIA.SetKCdBr( MP_BR_OTHER);
-	MC::z_mnIA.SetComboParts();
+	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
 	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
 }

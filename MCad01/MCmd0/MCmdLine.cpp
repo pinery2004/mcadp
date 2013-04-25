@@ -54,7 +54,7 @@ void MCmdLine(
 	MINT iMode;
 	iMode = z_mnIA.GetMode();
 	if ( iMode == MP_MD_CREATE) {
-		z_DlgKAttr.MmDialogKAttr();
+		z_mmIA.MmDialogKAttr();
 		MCmdLineAdd();
 	} else {
 		if ( iMode == MP_MD_DELETE)
@@ -351,7 +351,7 @@ void MCmdStructFloor()
 
 
 	z_mnIA.SetKCdGp( MP_GP_YUKA);
-//E	z_mnIA.SetComboParts();
+//E	z_mnIA.InitComboParts();
 	z_mnIA.RibbonIO( MSET_COMBO_PARTS);		// 部品選択用のコンボボックスに表示する
 	ist1 = z_mnIA.SetRibbonBarEnt( MP_GP_YUKA, MP_BR_BUZAI, Mstr( "床根太"), Mstr( "210"));
 	if ( ist1 == 0)

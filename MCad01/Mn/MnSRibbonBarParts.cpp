@@ -22,16 +22,6 @@
 namespace MC
 {
 
-// 部品名コンボボックス
-static MINT z_nComboIdPartsSpec;								// 表示項目数
-static MINT	z_iComboIdPartsSpec[MX_CMB_PARTSNM];				// 表示項目対応部品ID
-static MINT z_iComboKmIdPartsNm;								// カレント選択項目番号
-
-// 寸法型式選択用コンボボックス
-static MINT z_nComboMbrId;										// 表示項目数
-static MINT	z_iComboMbrId[MX_CMB_CDMEMBER];						// 表示項目対応寸法型式ID
-static MINT z_iComboKmIdMbr;									// カレント選択項目番号
-
 ///////////////////////////////////////////////////////////////////////////////
 //	部品選択用コンポボックスにカレントの組と分類の部材名一覧を設定し
 //	対応する部材ＩＤテーブルを作成する
@@ -73,16 +63,16 @@ void mnInpAttr::InitComboPartsNm()
 				 continue;
 		}
 		ASSERT( ip < MX_CMB_PARTSNM - 1);						// 部材コンボボックス項目　オーバフロー　<ERROR>
-		z_iComboIdPartsSpec[ip] = ic1;							// 部材ＩＤをテーブルに設定
+		m_iComboIdPartsSpec[ip] = ic1;							// 部材ＩＤをテーブルに設定
 		pPTNmParts1 = pPartsSpec->GetPTNmParts1();				// 部材名を項目に追加
 		ist = pCmbBox->AddItem( pPTNmParts1);
 		ip++;
 	}
-	z_nComboIdPartsSpec = ip;
+	m_nComboIdPartsSpec = ip;
 	if ( ip == 0) {
 		pCmbBox->AddItem( Mstr( "none"));
 	}
-	z_iComboKmIdPartsNm = -1;
+	m_iComboKmIdPartsNm = -1;
 	z_mnIA.SetKCdBrB( false, false, false);						//	部材、金物、パネル、その他のラジオボタンを未選択に設定
 }
 
@@ -93,19 +83,20 @@ void mnInpAttr::InitComboPartsNm()
 //	部品仕様の配置コードで配置コードコンポボックスをを選択する
 
 void mnInpAttr::SelectComboPartsNmByKmId(
-						MINT	i_iKmIdPartsNm	// 部品名項目番号
+						int		i_iKmIdPartsNm	// 部品名項目番号
 				)
 {
 	System::GetpMainFrame()->SelectCombo1( i_iKmIdPartsNm);
-	z_iComboKmIdPartsNm = i_iKmIdPartsNm;						// カレント部品名項目番号
+	m_iComboKmIdPartsNm = i_iKmIdPartsNm;						// カレント部品名項目番号
 
 	// 部品配置入力データへ設定
-	MINT iIdPartsSpec = z_iComboIdPartsSpec[z_iComboKmIdPartsNm];			// 部品仕様Id
+	int iIdPartsSpec;
+	iIdPartsSpec = m_iComboIdPartsSpec[m_iComboKmIdPartsNm];			// 部品仕様Id
 	mtPlcInp::SetIdPartsSpec( iIdPartsSpec);
 	mhPartsSpec *pPartsSpec = BuzaiCode::MhGetpPartsSpec( iIdPartsSpec);	// 部品仕様
 	mtPlcInp::SetpPartsSpec( pPartsSpec);
-
-	MINT iCdPlc = pPartsSpec->GetPTCdPlc();						// 部品仕様の配置コードで配置コードコンボを選択する
+	int iCdPlc;
+	iCdPlc = pPartsSpec->GetPTCdPlc();						// 部品仕様の配置コードで配置コードコンボを選択する
 	z_mnIA.SelectComboPlcCdByPlcCd( iCdPlc);
 }
 
@@ -119,12 +110,12 @@ void mnInpAttr::SelectComboPartsNmByKmId(
 //							≧ 0: 部品ID
 //							＝-1: 該当なし
 
-MINT mnInpAttr::SelectComboPartsNmByPartsNm(
+int mnInpAttr::SelectComboPartsNmByPartsNm(
 						MCHAR* i_sNmParts1		// 部品名
 				)
 {
-	MINT 	iIdPartsSpec = -1;
-	MINT	iKmIdPartsNm;
+	int	 	iIdPartsSpec = -1;
+	int		iKmIdPartsNm;
 
 	iKmIdPartsNm = GetComboPartsNmKmIdFromPartsNm( i_sNmParts1);
 	if ( iKmIdPartsNm < 0) {
@@ -133,7 +124,7 @@ MINT mnInpAttr::SelectComboPartsNmByPartsNm(
 	}
 	z_mnIA.SelectComboPartsNmByKmId( iKmIdPartsNm);
 
-	iIdPartsSpec = z_iComboIdPartsSpec[iKmIdPartsNm];
+	iIdPartsSpec = m_iComboIdPartsSpec[iKmIdPartsNm];
 exit:
 	return iIdPartsSpec;
 }
@@ -146,20 +137,20 @@ exit:
 //							≧ 0: 部品ID
 //							＝-1: 該当なし
 
-MINT mnInpAttr::GetComboPartsNmKmIdFromPartsNm( MCHAR* i_sNmParts1)
+int mnInpAttr::GetComboPartsNmKmIdFromPartsNm( MCHAR* i_sNmParts1)
 {
-	MINT		iKmIdPartsNm;
-	MINT		ic1;
-	MINT		iIdPartsSpec;
+	int			iKmIdPartsNm;
+	int			ic1;
+	int			iIdPartsSpec;
 	mhPartsSpec	*pPartsSpec;
 	
-	for ( ic1=0; ic1<z_nComboIdPartsSpec; ic1++) {
-		iIdPartsSpec = z_iComboIdPartsSpec[ic1];
+	for ( ic1=0; ic1<m_nComboIdPartsSpec; ic1++) {
+		iIdPartsSpec = m_iComboIdPartsSpec[ic1];
 		pPartsSpec = BuzaiCode::MhGetpPartsSpec( iIdPartsSpec);
 		if ( Mstrcmp( pPartsSpec->GetPTNmParts1(), i_sNmParts1) == 0)
 			break;
 	}
-	if ( ic1 < z_nComboIdPartsSpec)
+	if ( ic1 < m_nComboIdPartsSpec)
 		iKmIdPartsNm = ic1;
 	else
 		iKmIdPartsNm = -1;
@@ -171,15 +162,15 @@ MINT mnInpAttr::GetComboPartsNmKmIdFromPartsNm( MCHAR* i_sNmParts1)
 //							＝-1: 未選択
 //							≧ 0: 部品ID
 
-MINT mnInpAttr::GetComboPartsNmId(
+int mnInpAttr::GetComboPartsNmId(
 						MCHAR* i_sNmParts1		// 部品名
 				)
 {
-	MINT		ist;
-	MINT		ic1;
+	int			ist;
+	int			ic1;
 	mhPartsSpec	*pPartsSpec;
 
-	MINT	nPartsNm = BuzaiCode::MhGetNoOfPartsSpec();
+	int		nPartsNm = BuzaiCode::MhGetNoOfPartsSpec();
 	for ( ic1=0; ic1<nPartsNm; ic1++) {
 		pPartsSpec = BuzaiCode::MhGetpPartsSpec( ic1);
 		if ( Mstrcmp( pPartsSpec->GetPTNmParts1(), i_sNmParts1) == 0)
@@ -197,12 +188,12 @@ MINT mnInpAttr::GetComboPartsNmId(
 //							＝-1: 該当なし
 //							≧ 0: 部品ID
 
-MINT mnInpAttr::GetCurPartsNmId()
+int mnInpAttr::GetCurPartsNmId()
 {
-	MINT iIdPartsSpec;
+	int	 iIdPartsSpec;
 
-	if ( z_iComboKmIdPartsNm >= 0 && z_iComboKmIdPartsNm < z_nComboIdPartsSpec) {
-		iIdPartsSpec = z_iComboIdPartsSpec[z_iComboKmIdPartsNm];
+	if ( m_iComboKmIdPartsNm >= 0 && m_iComboKmIdPartsNm < m_nComboIdPartsSpec) {
+		iIdPartsSpec = m_iComboIdPartsSpec[m_iComboKmIdPartsNm];
 	} else {
 		iIdPartsSpec = -1;
 	}
@@ -225,17 +216,18 @@ void mnInpAttr::InitComboPartsMbr()
 	CMFCRibbonComboBox* pCmbBox = mmpComboMbr();
 	pCmbBox->RemoveAllItems();
 
-	MINT		iIdPartsSpec = z_mnIA.GetCurPartsNmId();
+	int		iIdPartsSpec;
+	iIdPartsSpec = z_mnIA.GetCurPartsNmId();
 	if ( iIdPartsSpec == -1) {
 //		pCmbBox->>EnableToolTips(0);			NG
 		goto exit;
 	}
 
-	MCHAR		cMTp1 = BuzaiCode::MhGetpPartsSpec( iIdPartsSpec)->GetPTTpMbr()[0];
-	MCHAR		cMTp2;
-
-	MINT mxMbr = BuzaiCode::MhGetNoOfMbr();
-	for ( ic1=0; ic1<mxMbr; ic1++) {
+	MCHAR	cMTp1 = BuzaiCode::MhGetpPartsSpec( iIdPartsSpec)->GetPTTpMbr()[0];
+	MCHAR	cMTp2;
+	int		nMbr;
+	nMbr = BuzaiCode::MhGetNoOfMbr();
+	for ( ic1=0; ic1<nMbr; ic1++) {
 		pMbr = BuzaiCode::MhGetpMbr( ic1);
 
 		for ( ic=0; cMTp2=pMbr->GetMbrType()[ic]; ic++) {		// 一致する寸法型式使用部位コードがあるかnullまで調べる
@@ -244,17 +236,17 @@ void mnInpAttr::InitComboPartsMbr()
 		if ( cMTp2 == 0) continue;								// 一致しない場合次の寸法型式に移る
 
 		ASSERT( ip < MX_CMB_CDMEMBER - 1);						// 寸法型式選択コンボボックス項目　オーバフロー　<ERROR>
-		z_iComboMbrId[ip] = ic1;
+		m_iComboMbrId[ip] = ic1;
 		pCmbBox->AddItem( pMbr->GetMbrCode());
 		ip++;
 	}
 exit:
-	z_nComboMbrId = ip;
+	m_nComboMbrId = ip;
 	if ( ip == 0) {
 		pCmbBox->AddItem( Mstr( "none"));
 	}
 
-	z_iComboKmIdMbr = -1;
+	m_iComboKmIdMbr = -1;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -263,14 +255,15 @@ exit:
 //	部品配置入力データへ部品仕様Idと部品仕様を設定する
 
 void mnInpAttr::SelectComboPartsMbrByKmId(
-						MINT	i_iKmIdMbr			// 寸法型式項目番号
+						int		i_iKmIdMbr			// 寸法型式項目番号
 				)
 {
 	System::GetpMainFrame()->SelectCombo2( i_iKmIdMbr);
-	z_iComboKmIdMbr = i_iKmIdMbr;
+	m_iComboKmIdMbr = i_iKmIdMbr;
 
 	// 部品配置入力データへ設定
-	MINT iMbrId = z_iComboMbrId[i_iKmIdMbr];					// 寸法形式ID
+	int	 iMbrId;
+	iMbrId = m_iComboMbrId[i_iKmIdMbr];					// 寸法形式ID
 	mtPlcInp::SetIdMbr( iMbrId); 
 	MhMbr *pMbr = BuzaiCode::MhGetpMbr( iMbrId);				// 寸法形式仕様
 	mtPlcInp::SetpMbr( pMbr);
@@ -282,10 +275,10 @@ void mnInpAttr::SelectComboPartsMbrByKmId(
 //							＝-1: 該当なし
 //							≧ 0: 寸法型式ID
 
-MINT mnInpAttr::SelectComboMbrCdByMbrCd( MCHAR* sCdMbr)
+int mnInpAttr::SelectComboMbrCdByMbrCd( MCHAR* sCdMbr)
 {
-	MINT		iMbrId = -1;
-	MINT		iKmIdMbr;
+	int		iMbrId = -1;
+	int		iKmIdMbr;
 
 	iKmIdMbr = z_mnIA.GetComboMbrKmId( sCdMbr);
 	if ( iKmIdMbr < 0) {
@@ -294,7 +287,7 @@ MINT mnInpAttr::SelectComboMbrCdByMbrCd( MCHAR* sCdMbr)
 	}
 	z_mnIA.SelectComboPartsMbrByKmId( iKmIdMbr);
 
-	iMbrId = z_iComboMbrId[iKmIdMbr];
+	iMbrId = m_iComboMbrId[iKmIdMbr];
 exit:
 	return iMbrId;
 }
@@ -304,20 +297,20 @@ exit:
 //							＝-1: 該当なし
 //							≧ 0: 部品ID
 
-MINT mnInpAttr::GetComboMbrKmId( MCHAR* sCdMbr)
+int mnInpAttr::GetComboMbrKmId( MCHAR* sCdMbr)
 {
-	MINT		ist;
-	MINT		ic1;
-	MINT		iMbrId;
+	int		ist;
+	int		ic1;
+	int		iMbrId;
 	MhMbr	*pMbr;
 	
-	for ( ic1=0; ic1<z_nComboMbrId; ic1++) {
-		iMbrId = z_iComboMbrId[ic1];
+	for ( ic1=0; ic1<m_nComboMbrId; ic1++) {
+		iMbrId = m_iComboMbrId[ic1];
 		pMbr = BuzaiCode::MhGetpMbr( iMbrId);
 		if ( Mstrcmp( pMbr->GetMbrCode(), sCdMbr) == 0)
 			break;
 	}
-	if ( ic1 < z_nComboMbrId)
+	if ( ic1 < m_nComboMbrId)
 		ist = ic1;
 	else
 		ist = -1;
@@ -329,19 +322,20 @@ MINT mnInpAttr::GetComboMbrKmId( MCHAR* sCdMbr)
 //							＝-1: 該当なし
 //							≧ 0: 寸法型式ID
 
-static MINT GetComboMbrCdId( MCHAR* sCdMbr)
+static int GetComboMbrCdId( MCHAR* sCdMbr)
 {
-	MINT		ist;
-	MINT		ic1;
+	int		ist;
+	int		ic1;
 	MhMbr	*pMbr;
+	int		nMbr;
 
-	MINT mxMbr = BuzaiCode::MhGetNoOfMbr();
-	for ( ic1=0; ic1<mxMbr; ic1++) {
+	nMbr = BuzaiCode::MhGetNoOfMbr();
+	for ( ic1=0; ic1<nMbr; ic1++) {
 		pMbr = BuzaiCode::MhGetpMbr( ic1);
 		if ( Mstrcmp( pMbr->GetMbrCode(), sCdMbr) == 0)
 			break;
 	}
-	if ( ic1 < mxMbr)
+	if ( ic1 < nMbr)
 		ist = ic1;
 	else
 		ist = -1;
@@ -353,12 +347,12 @@ static MINT GetComboMbrCdId( MCHAR* sCdMbr)
 //							＝-1: 未選択
 //							≧ 0: 寸法型式ID
 
-MINT mnInpAttr::GetComboMbrCdId()
+int mnInpAttr::GetComboMbrCdId()
 {
-	MINT		iMbrId;
+	int		iMbrId;
 
-	if ( z_iComboKmIdMbr >= 0 && z_iComboKmIdMbr < z_nComboMbrId) {
-		iMbrId = z_iComboMbrId[z_iComboKmIdMbr];
+	if ( m_iComboKmIdMbr >= 0 && m_iComboKmIdMbr < m_nComboMbrId) {
+		iMbrId = m_iComboMbrId[m_iComboKmIdMbr];
 	} else {
 		iMbrId = -1;
 	}

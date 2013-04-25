@@ -109,4 +109,4 @@ public:
 	afx_msg void OnClose();
 };
 
-extern CMainFrame *z_pMainFrame;								// メインフレーム ポインタ (グローバル変数)
+//S	extern CMainFrame *z_pMainFrame;								// メインフレーム ポインタ (グローバル変数)

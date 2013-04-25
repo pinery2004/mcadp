@@ -12,10 +12,6 @@
 namespace MC
 {
 
-	CMmDialogKAttr	z_DlgKAttr;						// 部品入力用	属性入力ダイアログ
-
-																				//US	class CMmDialogKAttr* z_pDlgKAttr = NULL;		// 部品入力用
-
 /////////////////////////////////////////////////////////////////////////////
 // 部材属性コンボボックスの取得
 CComboBox* CMmDialogKAttr::GetCmbBzaiAttr(
@@ -44,17 +40,17 @@ void CMmDialogKAttr::MmDialogKAttrInp(
 				)
 {
 																				//US	if ( z_pDlgKAttr == NULL)
-	if ( !z_DlgKAttr.m_bDispFlg)
+	if ( m_bDispFlg)
 	{
-																				//US		z_pDlgKAttr = new CMmDialogKAttr;	
-																				//US		z_pDlgKAttr->Create( pWnd);																				
-		z_DlgKAttr.m_bDispFlg = true;	
-		z_DlgKAttr.Create( i_pWnd);
+																				//US		z_pDlgKAttr->BringWindowToTop();
+		BringWindowToTop();
 	}
 	else
 	{
-																				//US		z_pDlgKAttr->BringWindowToTop();
-		z_DlgKAttr.BringWindowToTop();
+																				//US		z_pDlgKAttr = new CMmDialogKAttr;	
+																				//US		z_pDlgKAttr->Create( pWnd);																				
+		m_bDispFlg = true;	
+		Create( i_pWnd);
 	}
 }
 
@@ -63,7 +59,7 @@ void CMmDialogKAttr::MmDialogKAttrInp(
 void CMmDialogKAttr::MmDialogKAttrEnd()
 {
 																				//US	z_pDlgKAttr = NULL;
-	z_DlgKAttr.m_bDispFlg = false;
+	m_bDispFlg = false;
 }
 
 // CMmDialogKAttr ダイアログ
@@ -144,7 +140,7 @@ void CMmDialogKAttr::OnClose()
 void CMmDialogKAttr::PostNcDestroy()
 {
 	if (m_pParent != NULL) {
-		MC::z_DlgKAttr.MmDialogKAttrEnd();
+		MmDialogKAttrEnd();
 																			//US		delete	this;
 	}
 
@@ -193,7 +189,7 @@ BOOL CMmDialogKAttr::OnInitDialog()
 	CDialog::OnInitDialog();
 
 	// TODO:  ここに初期化を追加してください
-	MC::z_DlgKAttr.m_CmbKbzi1.InsertString( -1, _T("none"));
+	m_CmbKbzi1.InsertString( -1, _T("none"));
 	m_CmbKbzi2.InsertString( -1, _T("none"));
 	m_CmbKAttr1.InsertString( -1, _T("none"));
 	m_CmbKAttr2.InsertString( -1, _T("none"));

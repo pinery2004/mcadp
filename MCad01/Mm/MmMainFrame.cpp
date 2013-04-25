@@ -23,37 +23,33 @@
 #include "MCAD.h"
 #include "MainFrm.h"
 
-
-class CMCADApp*		_System::ms_pMCADApp;		// アプリケーションポインタ 
-class CMainFrame*	_System::z_pMainFrame;		// メインフレームポインタ 
-
-////namespace MC
-////{
-////// MainFrame Pointer 設定
-////void	MC::System::MmMainFrame( CMainFrame* pMainFrame)
-////{
-////	System::GetpMainFrame = pMainFrame;
-////}
-////
-////// MainFrame Pointer 取得
-////CMainFrame* MC::System::MmGetpMainFrame()
-////{
-////	return System::GetpMainFrame;
-////}
-////
-////// MCADApp Pointer 設定
-////void	MC::System::MmMCADApp( CMCADApp* pMCADApp)
-////{
-////	ms_pMCADApp = pMCADApp;
-////}
-////
-////// MCADApp Pointer 取得
-////CMCADApp* MC::System::MmGetpMCADApp()
-////{
-////	return ms_pMCADApp;
-////}
-////
-////}
+//namespace MC
+//{
+//// MainFrame Pointer 設定
+//void	MC::System::MmMainFrame( CMainFrame* pMainFrame)
+//{
+//	System::GetpMainFrame = pMainFrame;
+//}
+//
+//// MainFrame Pointer 取得
+//CMainFrame* MC::System::MmGetpMainFrame()
+//{
+//	return System::GetpMainFrame;
+//}
+//
+//// MCADApp Pointer 設定
+//void	MC::System::MmMCADApp( CMCADApp* pMCADApp)
+//{
+//	ms_pMCADApp = pMCADApp;
+//}
+//
+//// MCADApp Pointer 取得
+//CMCADApp* MC::System::MmGetpMCADApp()
+//{
+//	return ms_pMCADApp;
+//}
+//
+//}
 
 // MainFrm.cpp : CMainFrame クラスの実装
 //
@@ -87,7 +83,7 @@ CMFCRibbonComboBox* mmpComboBuzai()
 	MCHAR cName[20];
 	Mstrcpy_s( cName, pRibbonCategory->GetName());
 
-	CString sName2 = z_pMainFrame->m_wndRibbonBar.GetActiveCategory()->GetName();
+	CString sName2 = z_MCadApp.m_pMainFrame->m_wndRibbonBar.GetActiveCategory()->GetName();
 
 	TRACE( _T(" カレントカテゴリ = %s %s %s\n"), cName, sName, sName2);
 

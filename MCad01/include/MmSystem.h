@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MhDefParts.h"
+#include "MCad.h"
 
 #ifdef DLL_EXPORT
 	#undef DLL_EXPORT
@@ -17,54 +18,6 @@
 		#define DLL_EXPORT						__declspec( dllimport)
 	#endif
 #endif
-
-class _System
-{
-private:
-	static class CMCADApp	*ms_pMCADApp;		// アプリケーションポインタ(Global) 
-	static class CMainFrame	*z_pMainFrame;		// メインフレームポインタ(Global) 
-
-public:
-	/////////////////////////////////////////////////////////////////////////////
-	//	システム管理                                                           //
-	/////////////////////////////////////////////////////////////////////////////
-
-	/////////////////////////////////////////////////////////////////////////////
-	// MainFrame Pointer 設定
-	// class CMainFrame;
-	static void	SetpMainFrame(
-					class	CMainFrame*	pMainFrame
-					)
-	{
-		z_pMainFrame = pMainFrame;
-	}
-
-	/////////////////////////////////////////////////////////////////////////////
-	// MainFrame Pointer 取得
-	static CMainFrame* GetpMainFrame()
-	{
-		return z_pMainFrame;
-	}
-
-	/////////////////////////////////////////////////////////////////////////////
-	// MCADApp Pointer 設定
-	// class CMCADApp;
-	static void	SetpMCADApp(
-					class	CMCADApp*	pMCADApp
-					)
-	{
-	//	CMCADApp* pApp = (CMCADApp*)AfxGetApp();
-		ms_pMCADApp = pMCADApp;
-	}
-
-	/////////////////////////////////////////////////////////////////////////////
-	// MCADApp Pointer 取得
-	static CMCADApp* GetpMCADApp()
-	{
-		return ms_pMCADApp;
-	}
-
-};
 
 namespace MC
 {
@@ -90,38 +43,38 @@ public:
 	//	MCADINIファイルの読み込み
 	static void LoadMCADIniFile( MCHAR i_cIniFilePath[]);
 
-	/////////////////////////////////////////////////////////////////////////////
-	// MainFrame Pointer 設定
-	// class CMainFrame;
-	static void	SetpMainFrame(
-					class	CMainFrame*	pMainFrame
-					)
-	{
-		::_System::SetpMainFrame( pMainFrame);
-	}
+//	/////////////////////////////////////////////////////////////////////////////
+//	// MainFrame Pointer 設定
+//	// class CMainFrame;
+//	static void	SetpMainFrame(
+//					class	CMainFrame*	pMainFrame
+//					)
+//	{
+//		z_MCadApp.m_pMainFrame = pMainFrame;
+//	}
 
 	/////////////////////////////////////////////////////////////////////////////
 	// MainFrame Pointer 取得
 	static CMainFrame* GetpMainFrame()
 	{
-		return ::_System::GetpMainFrame();
+		return z_MCadApp.m_pMainFrame;
 	}
 
-	/////////////////////////////////////////////////////////////////////////////
-	// MCADApp Pointer 設定
-	//class CMCADApp;
-	static void	SetpMCADApp(
-					class	CMCADApp*	pMCADApp
-					)
-	{
-		::_System::SetpMCADApp( pMCADApp);
-	}
+//	/////////////////////////////////////////////////////////////////////////////
+//	// MCADApp Pointer 設定
+//	//class CMCADApp;
+//	static void	SetpMCADApp(
+//					class	CMCADApp*	pMCADApp
+//					)
+//	{
+//		z_MCadApp = pMCADApp;
+//	}
 
 	/////////////////////////////////////////////////////////////////////////////
 	// MCADApp Pointer 取得
-	static CMCADApp* GetpMCADApp()
+	static CMCadApp* GetpMCADApp()
 	{
-		return ::_System::GetpMCADApp();
+		return &z_MCadApp;
 	}
 
 };
