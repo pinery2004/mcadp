@@ -746,6 +746,9 @@
     <ClInclude Include="MmDialogKAttr.h">
       <Filter>Mm\hdr</Filter>
     </ClInclude>
+    <ClInclude Include="MmdlgPartsAttr.h">
+      <Filter>MCad\hdr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1281,6 +1284,9 @@
     </ClCompile>
     <ClCompile Include="MmDialogKAttr.cpp">
       <Filter>Mm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="MmdlgPartsAttr.cpp">
+      <Filter>MCad\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -272,6 +272,7 @@
     <ClInclude Include="..\include\MtPrcEventQueue.h" />
     <ClInclude Include="MCad.h" />
     <ClInclude Include="MmDialogKAttr.h" />
+    <ClInclude Include="MmdlgPartsAttr.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -447,6 +448,7 @@
     <ClCompile Include="..\Mt\MtWaitLoop.cpp" />
     <ClCompile Include="mcad.CPP" />
     <ClCompile Include="MmDialogKAttr.cpp" />
+    <ClCompile Include="MmdlgPartsAttr.cpp" />
     <ClCompile Include="Src\ChildFrm1.cpp" />
     <ClCompile Include="Src\ChildFrm2.cpp" />
     <ClCompile Include="Src\ChildFrm3.cpp" />
