@@ -5,7 +5,7 @@
 
 #include	"MgGrp.h"
 #include	"MhZukei.h"
-#include	"MhInpAttr.h"
+#include	"MhPlcPartsLib.h"
 
 #define HDBID MINT
 

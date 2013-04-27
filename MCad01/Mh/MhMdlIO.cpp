@@ -19,7 +19,7 @@
 #include "MdLib.h"
 #include "MdList.h"
 
-#include "MhInp.h"
+#include "MhInpPlcParts.h"
 
 #include "MsBitSet.h"
 #include "MdOpt.h"
@@ -27,7 +27,7 @@
 
 #include "MmCmd.h"
 #include "MgGrp.h"
-#include "MhPlcInfo.h"
+#include "MhPlcParts.h"
 #include "MhRoof.h"
 
 #include "MfFile.h"
@@ -65,7 +65,7 @@ MINT IeModel::MhMdlLoad(										//
 	MINT		iSize;
 
 	void*		pEnt;
-	mhPlcInfo*	pPlcEn = 0;
+	mhPlcParts*	pPlcEn = 0;
 	MhRoofInfo*	pRoofEn = 0;
 	MINT*		pnGrid;
 
@@ -122,7 +122,7 @@ MINT IeModel::MhMdlLoad(										//
 				// 配置部品の読込
 				MBFREE( pEnt);
 
-				pPlcEn = (mhPlcInfo*)malloc( sizeof( mhPlcInfo));
+				pPlcEn = (mhPlcParts*)malloc( sizeof( mhPlcParts));
 				pPlcEn->Load( &hMdl);
 				HaitiDb::MdPartsAdd( pPlcEn, NULL);										// ＯＰＴ群変更無しで追加
 
@@ -218,7 +218,7 @@ MINT IeModel::MhMdlSave(									//
 				const	MCHAR*		i_sPathO	// 書き込みファイル　フルパス
 				)
 {
-	mhPlcInfo*		pPlcEn1;
+	mhPlcParts*		pPlcEn1;
 	MPOSITION		posH;
 	MhRoofInfo*		pRoofEn1;
 	MPOSITION		posR;

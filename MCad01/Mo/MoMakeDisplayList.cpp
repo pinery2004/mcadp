@@ -14,7 +14,7 @@
 #include "MgLib.h"
 #include "MhLib.h"
 
-#include "MhInp.h"
+#include "MhInpPlcParts.h"
 
 #include "MdOpt.h"
 #include "MdHist.h"
@@ -38,8 +38,8 @@ namespace MC
 //	【機能】建具の穴の多角形を求める
 //			
 	void MdlDispList::TateguHole(
-						mhPlcInfo	*i_pPlcEn,		// 壁またはNULL
-						mhPlcInfo	*pPlcTEn,		// 建具
+						mhPlcParts	*i_pPlcEn,		// 壁またはNULL
+						mhPlcParts	*pPlcTEn,		// 建具
 						MgPolyg3	*PgR,			// 壁右面開口
 						MgPolyg3	*PgL			// 壁左面開口
 				)
@@ -120,8 +120,8 @@ namespace MC
 //	【機能】建具の開口枠のディスプレイリストを作成する
 //			
 void MdlDispList::DrawTategu(
-						mhPlcInfo	*i_pPlcEn,		// 壁またはNULL
-						mhPlcInfo	*pPlcTEn,		// 建具
+						mhPlcParts	*i_pPlcEn,		// 壁またはNULL
+						mhPlcParts	*pPlcTEn,		// 建具
 				const	MgPoint3	&PtCtr,			// 構造家モデルの中心
 						MREAL		rB				// ３次元表示倍率
 				)
@@ -144,7 +144,7 @@ void MdlDispList::DrawTategu(
 //	【機能】基礎のディスプレイリストを作成する
 //			
 void MdlDispList::DrawKiso(
-						mhPlcInfo	*i_pPlcEn,		// 基礎
+						mhPlcParts	*i_pPlcEn,		// 基礎
 				const	MgPoint3	&PtCtr,			// 構造家モデルの中心
 						MREAL		rB				// ３次元表示倍率
 				)
@@ -234,7 +234,7 @@ void MdlDispList::DrawKiso(
 //	【機能】たて枠、束のディスプレイリストを作成する
 //			
 void MdlDispList::DrawTatewaku( 
-						mhPlcInfo	*i_pPlcEn,
+						mhPlcParts	*i_pPlcEn,
 				const	MgPoint3	&PtCtr,
 						MREAL		rB
 				)
@@ -305,7 +305,7 @@ void MdlDispList::DrawTatewaku(
 //	【機能】横置部材のディスプレイリストを作成する
 //			
 void MdlDispList::DrawOukaZai( 
-						mhPlcInfo	*i_pPlcEn,
+						mhPlcParts	*i_pPlcEn,
 				const	MgPoint3	&PtCtr,
 						MREAL		rB
 				)
@@ -378,7 +378,7 @@ void MdlDispList::DrawOukaZai(
 //	【機能】床、天井、屋根の開口のディスプレイリストを作成する
 //			
 void MdlDispList::DrawKaiko( 
-						mhPlcInfo *i_pPlcEn,
+						mhPlcParts *i_pPlcEn,
 				const	MgPoint3	&PtCtr,
 						MREAL		rB
 				)

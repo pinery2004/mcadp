@@ -22,7 +22,7 @@
 #define DLL_EXPORT_BUZAICODE_DO
 #include "MhLib.h"
 
-#include "MhPlcInfo.h"
+#include "MhPlcParts.h"
 
 #include "MmLib.h"
 
@@ -38,7 +38,7 @@
 namespace MC
 {
 
-void mhPlcInfo::Copy( const mhPlcInfo &Ent)
+void mhPlcParts::Copy( const mhPlcParts &Ent)
 {
 	MINT		szZukei;
 	MINT		szVer;
@@ -476,7 +476,7 @@ MINT	BuzaiCode::MhGetIdMbr(
 
 // 部材の２次元芯線を取得する
 void	BuzaiCode::MhBziSin(
-						mhPlcInfo	*pBziInfo,	// (I  ) 部材
+						mhPlcParts	*pBziInfo,	// (I  ) 部材
 						MgLine2		*plnBziSin	// (  O) 部材の芯線
 				)
 {
@@ -501,13 +501,13 @@ void	BuzaiCode::MhBziSin(
 }
 
 // 配置データ　トレース
-void	mhPlcInfo::Print(MCHAR* s)
+void	mhPlcParts::Print(MCHAR* s)
 {
 #ifdef _DEBUG
 	MCHAR sTrc[256], sCat[256];
 	MUINT*	pVmb;
 
-	m_lnPlc.Print( Mstr( "mhPlcInfo Line") );
+	m_lnPlc.Print( Mstr( "mhPlcParts Line") );
 	if ( m_pOpt1) {
 		pVmb = m_pOpt1->GetSOB();
 		Msprintf_s( sTrc, Mstr( "OnOpt %x %x %x"), pVmb[0], pVmb[1], pVmb[2]);
@@ -528,13 +528,13 @@ void	mhPlcInfo::Print(MCHAR* s)
 }
 
 // 全配置内容をトレース
-void	BuzaiCode::MhPrintallmhPlcInfo(MCHAR* s)
+void	BuzaiCode::MhPrintallmhPlcParts(MCHAR* s)
 {
 #ifdef _DEBUG
-	mhPlcInfo* pPlcEn;
+	mhPlcParts* pPlcEn;
 	MPOSITION	PartsPos;
 
-	Msprintf_s( mlLog::m_Str, Mstr( "%s 	All mhPlcInfo\n"), s);
+	Msprintf_s( mlLog::m_Str, Mstr( "%s 	All mhPlcParts\n"), s);
 	for (pPlcEn = HaitiDb::MdGetHeadParts( &PartsPos); pPlcEn!=0; pPlcEn = HaitiDb::MdGetNextParts( &PartsPos)) {
 		pPlcEn->Print( s);
 	}

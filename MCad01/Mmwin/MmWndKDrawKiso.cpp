@@ -27,7 +27,7 @@
 #include "MdList.h"
 #include "MhLib.h"
 
-#include "MhInp.h"
+#include "MhInpPlcParts.h"
 
 #include "MdOpt.h"
 #include "MdLib.h"
@@ -47,7 +47,7 @@ namespace MC
 				)
 {
 	MPOSITION	pos1;
-	mhPlcInfo	*pPlcEn;
+	mhPlcParts	*pPlcEn;
 //	MsBitSet	*pOptv;
 //	MsBitSet*	pHstv;
 	MgPoint2	ptW[2];

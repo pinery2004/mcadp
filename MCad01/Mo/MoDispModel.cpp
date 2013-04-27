@@ -25,7 +25,7 @@
 #include "MhRoof.h"
 #include "MdLib.h"
 
-#include "MhInp.h"
+#include "MhInpPlcParts.h"
 
 #include "MdOpt.h"
 #include "MdHist.h"
@@ -54,7 +54,7 @@ namespace MC
 //
 	void MdlDispList::MhGetMinMaxMdl( MgMinMaxR3	*prMmMdl)
 {
-	mhPlcInfo*		pPlcEn;
+	mhPlcParts*		pPlcEn;
 	MPOSITION		posH;
 	MgMinMaxR3		rMmMdl;
 	MINT			maxKai;
@@ -104,7 +104,7 @@ namespace MC
 //	【機能】壁のディスプレイリストを作成する 実態、半透明
 //			
 void MdlDispList::DrawKabe(
-						mhPlcInfo	*i_pPlcEn,		// 壁
+						mhPlcParts	*i_pPlcEn,		// 壁
 				const	MgPoint3	&PtCtr,			// 構造家モデルの中心
 						MREAL		rB				// ３次元表示倍率
 				)
@@ -150,7 +150,7 @@ void MdlDispList::DrawKabe(
 	GPgL += PgW;
 
 	// 建具の開口と重なり有りなら開口を追加する
-	mhPlcInfo *pPlcTEn;
+	mhPlcParts *pPlcTEn;
 	MPOSITION	PartsPos;
 	MhTateguInfo	*pAuxTategu;
 	for ( pPlcTEn = HaitiDb::MdGetHeadParts( &PartsPos); pPlcTEn!=0;
@@ -514,7 +514,7 @@ MINT MdlDispList::DrawIeMdl1(
 	MsDrawBox( 2.0, 3.0, 1.0);			//ADD
 	MsDrawPlane( 5.0, 5.0 , 0.0);		//ADD
 #else
-	mhPlcInfo*	pPlcEn;
+	mhPlcParts*	pPlcEn;
 	MPOSITION	posH;
 
 	for ( pPlcEn = HaitiDb::MdGetHeadParts( &posH); pPlcEn!=0;
@@ -569,7 +569,7 @@ int MdlDispList::DrawIeMdl2(
 				const	MgPoint3	&PtCtr			// 中心座標
 				)
 {
-	mhPlcInfo*	pPlcEn;
+	mhPlcParts*	pPlcEn;
 	MPOSITION	posH;
 	MhRoofInfo*	pRoofEn;
 	MPOSITION	posR;

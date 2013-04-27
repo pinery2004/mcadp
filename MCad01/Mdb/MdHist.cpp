@@ -30,7 +30,7 @@
 #include "MdList.h"
 #include "MhLib.h"
 
-#include "MhPlcInfo.h"
+#include "MhPlcParts.h"
 #include "MdLib.h"
 
 namespace MC
@@ -147,7 +147,7 @@ MINT MhHist::MmVerUp(
 		z_Verv.fcStd = false;
 
 	MPOSITION	pos1;
-	mhPlcInfo	*PlcEn;
+	mhPlcParts	*PlcEn;
 	MsBitSet*	pVer;
 
 	for ( PlcEn = HaitiDb::MdGetHeadParts( &pos1); PlcEn!=0; PlcEn = HaitiDb::MdGetNextParts( &pos1)) {

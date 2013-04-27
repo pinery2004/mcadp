@@ -31,10 +31,10 @@
 #include "MdList.h"
 #include "MhLib.h"
 
-#include "MhInp.h"
+#include "MhInpPlcParts.h"
 
 #define	DLL_EXPORT_MC_INPATTR_DO 
-#include "MhInpAttr.h"
+#include "MhPlcPartsLib.h"
 
 #include "MdOpt.h"
 #include "MdLib.h"
@@ -58,7 +58,7 @@ void HaitiCmd::MmPartsPlc(
 				const	MgPolyg2	*ppg		// (I  ) 図形用の区画　または NULL
 				)
 {
-	mhPlcInfo	PlcEn;
+	mhPlcParts	PlcEn;
 	MhZukei*	pZukei;
 	MINT		szZukei;
 	MgVect3		vBz = Pt[1] - Pt[0];
@@ -164,12 +164,12 @@ MINT mhHaitiIn::GetParts(
 				const	MCHAR*		cGeneralName,	// (I  ) 総称 または NULL
 				const	MCHAR*		cNmParts1,		// (I  ) 操作用部材名 または NULL
 						MINT		szPlcEn,		// (I  ) 部品配置最大数
-						mhPlcInfo*	*pPlcEno,		// (  O) 選択部品配置
+						mhPlcParts*	*pPlcEno,		// (  O) 選択部品配置
 						MPOSITION	*pPlcpos		// (  O) 選択[部品配置]位置 または NULL
 				)
 {
 	MPOSITION	pos1;
-	mhPlcInfo* pPlcEn;
+	mhPlcParts* pPlcEn;
 //	MsBitSet	*pOptv;
 //	MsBitSet*	pHstv;
 
@@ -204,7 +204,7 @@ bool mhHaitiIn::ChkParts(
 						MINT		iIdPartsSpec,		// (I  ) 部品ID または NULL
 				const	MCHAR*		cGeneralName,	// (I  ) 総称 または NULL
 				const	MCHAR*		cNmParts1,	// (I  ) 操作用部材名 または NULL
-						mhPlcInfo	*pPlcEn1		// (I  ) 調査部品配置
+						mhPlcParts	*pPlcEn1		// (I  ) 調査部品配置
 				)
 {
 	bool	bSt = false;
@@ -227,7 +227,7 @@ exit:
 /////////////////////////////////////////////////////////////////////////////
 //  部材配置を検索する
 //	返値 検索結果　または　null:ヒットなし
-mhPlcInfo* mhHaitiIn::SrchBuzai(
+mhPlcParts* mhHaitiIn::SrchBuzai(
 						MmWndInfo*	pWndInfo,	// (I  ) ウィンドウ管理情報
 						MgPoint2&	ptMouthR,	// (I  ) 検索指示座標
 						MINT		iCdBuzai,	// (I  ) 部材コード　または　NULL(全)
@@ -238,10 +238,10 @@ mhPlcInfo* mhHaitiIn::SrchBuzai(
 	MINT		ist1;
 	MINT		ic1;
 	MPOSITION	pos1;
-	mhPlcInfo	*pPlcEn;
+	mhPlcParts	*pPlcEn;
 //	MsBitSet	*pOptv;
 //	MsBitSet*	pHstv;							// 履歴管理対応
-	mhPlcInfo	*pHitBziEn[MC_HITBZI_SZ];
+	mhPlcParts	*pHitBziEn[MC_HITBZI_SZ];
 	MREAL		rAHitBziEn[MC_HITBZI_SZ];
 	MgPolyg2	pgHitBzi;
 	MREAL		rArea;
@@ -309,10 +309,10 @@ mhPlcInfo* mhHaitiIn::SrchBuzai(
 //	長さ調整部材に接触する部材と交差する部材を求める
 void mhHaitiIn::MmSrchCrossBuzai(
 						MmWndInfo	*pWndInfo,		// (I  ) ウィンドウ管理情報
-						mhPlcInfo	*pBziInfo1,		// (I  ) 長さ調整部材
+						mhPlcParts	*pBziInfo1,		// (I  ) 長さ調整部材
 						MINT		iCdBuzai,		// (I  ) 検索対象の部材コード
-						mhPlcInfo	**pbTchBzi,		// (  O) 長さ調整後の部材に接触する部材
-						mhPlcInfo	**pbCrsBzi		// (  O) 長さ調整後の部材と交差する部材
+						mhPlcParts	**pbTchBzi,		// (  O) 長さ調整後の部材に接触する部材
+						mhPlcParts	**pbCrsBzi		// (  O) 長さ調整後の部材と交差する部材
 				)
 {
 	MINT		ist1;
@@ -322,7 +322,7 @@ void mhHaitiIn::MmSrchCrossBuzai(
 	MgLine2		lnBziSin1;
 	MgPolyg2	pgBzi1;
 	MPOSITION	pos1;
-	mhPlcInfo	*pPlcEn;
+	mhPlcParts	*pPlcEn;
 	MgLine2		lnBziSin2;
 	MgPolyg2	pgBzi2;
 	MINT		nT;
@@ -406,7 +406,7 @@ void mhHaitiIn::MmSrchCrossBuzai(
 /////////////////////////////////////////////////////////////////////////////
 //  部材の形状を求める
 void mhHaitiIn::PartsShape(
-						mhPlcInfo	*pPlcEn,	// 部材配置レコード
+						mhPlcParts	*pPlcEn,	// 部材配置レコード
 						MgPolyg2*	pgPartsShape	// 部材形状
 				)
 {
@@ -500,10 +500,10 @@ void mhHaitiIn::MhModBzPH(
 						MINT		iMov,			// (I  ) 修正側　(0:始点、1:終点)
 				const	MgPoint3	&PtInt,			// (I  ) 配置点
 						MREAL		rLH,			// (I  ) 長さ補整値
-						mhPlcInfo	*pPlcEnR		// (I O) 長さ調整部材
+						mhPlcParts	*pPlcEnR		// (I O) 長さ調整部材
 				)
 {
-	mhPlcInfo	*pPlcEnM;							// 長さ調整部材2
+	mhPlcParts	*pPlcEnM;							// 長さ調整部材2
 
 	if ( ( pPlcEnR->GetPIPlcIti( iMov) != PtInt) ||
 		( !MGeo::Equal(pPlcEnR->GetPILenHosei( iMov), rLH)) ||
@@ -535,9 +535,9 @@ MINT mhHaitiIn::MhAdjBzL(										// (  O) ステイタス　
 													//	MC_NINT	    (0)	交差なし
 													//	MC_INT      (1)	交差あり長さ調整
 						MINT		iKati,			// (I  ) 勝ち負けフラグ(1:勝ち、0:負け)
-						mhPlcInfo *pPlcEn1,			// (I O) 長さ調整部材1
+						mhPlcParts *pPlcEn1,			// (I O) 長さ調整部材1
 				const	MgPoint3	&Pt1,			// (I  ) 長さ調整指示点（部材1の残す側を示す最寄の点）
-						mhPlcInfo *pPlcEn2			// (I  ) 長さ調整先を示す部材2
+						mhPlcParts *pPlcEn2			// (I  ) 長さ調整先を示す部材2
 				)
 {
 	MINT		ist;
@@ -627,9 +627,9 @@ void mhHaitiIn::MhAdjBzL(										// (  O) ステイタス　
 													//	MC_TWIST    (-2) 交差なし（ねじれ）
 													//	MC_NINT	    (0)	交差なし
 													//	MC_INT      (1)	交差あり
-						mhPlcInfo *pPlcEn1,			// (I O) 長さ調整部材1
+						mhPlcParts *pPlcEn1,			// (I O) 長さ調整部材1
 				const	MgPoint3	&Pt1,			// (I  ) 部材1の長さ調整する側を示す最寄の点
-						mhPlcInfo *pPlcEn2,			// (I  ) 長さ調整先を示す部材2
+						mhPlcParts *pPlcEn2,			// (I  ) 長さ調整先を示す部材2
 				const	MgPoint3	&Pt2			// (I  ) 部材2の長さ調整先を示す最寄の点
 				)
 {
@@ -702,7 +702,7 @@ void mhHaitiIn::MhAdjBzL(										// (  O) ステイタス　
 /////////////////////////////////////////////////////////////////////////////
 //	調整先が点座標で示された部材の長さ調整を行う
 void mhHaitiIn::MhAdjBzL(
-						mhPlcInfo *pPlcEn1,			// 長さ調整部材1
+						mhPlcParts *pPlcEn1,			// 長さ調整部材1
 				const	MgPoint3	&Pt1,			// 部材1の長さ調整する側を示す最寄の点1
 				const	MgPoint3	&Pt2			// 長さ調整先を示す点2
 				)
@@ -749,21 +749,21 @@ void mhHaitiIn::MhAdjBzL(
 /////////////////////////////////////////////////////////////////////////////
 //	長さ調整前後で接触状態と交差状態が変化する部材を求める
 void mhHaitiIn::MhChngCrossBuzai(
-						mhPlcInfo	**pbTchBziI,	// (I  ) 長さ調整前に長さ調整部材に接触する部材
-						mhPlcInfo	**pbCrsBziI,	// (I  ) 長さ調整前に長さ調整部材と交差する部材
-						mhPlcInfo	**pbTchBziO,	// (I  ) 長さ調整後に長さ調整部材に接触する部材
-						mhPlcInfo	**pbCrsBziO,	// (I  ) 長さ調整後に長さ調整部材と交差する部材
-						mhPlcInfo	**pbFRtoTCBzi,	// (  O) 長さ調整前に長さ調整部材と離れていたが
+						mhPlcParts	**pbTchBziI,	// (I  ) 長さ調整前に長さ調整部材に接触する部材
+						mhPlcParts	**pbCrsBziI,	// (I  ) 長さ調整前に長さ調整部材と交差する部材
+						mhPlcParts	**pbTchBziO,	// (I  ) 長さ調整後に長さ調整部材に接触する部材
+						mhPlcParts	**pbCrsBziO,	// (I  ) 長さ調整後に長さ調整部材と交差する部材
+						mhPlcParts	**pbFRtoTCBzi,	// (  O) 長さ調整前に長さ調整部材と離れていたが
 													//		 長さ調整後に接触または交差した部材
-						mhPlcInfo	**pbTCtoFRBzi,	// (  O) 長さ調整前に長さ調整部材と接触または交差していたが
+						mhPlcParts	**pbTCtoFRBzi,	// (  O) 長さ調整前に長さ調整部材と接触または交差していたが
 													//		 長さ調整後に離れた部材
-						mhPlcInfo	**pbTCtoTCBzi	// (  O) 長さ調整前に長さ調整部材に接触または交差していたが
+						mhPlcParts	**pbTCtoTCBzi	// (  O) 長さ調整前に長さ調整部材に接触または交差していたが
 													//		 、長さ調整後にも接触または交差している部材
 				)
 {
 	MINT	ic0, ic1, ic2;
-	mhPlcInfo* TCBziI[MSZ_CROSS_BZI];
-	mhPlcInfo* TCBziO[MSZ_CROSS_BZI];
+	mhPlcParts* TCBziI[MSZ_CROSS_BZI];
+	mhPlcParts* TCBziO[MSZ_CROSS_BZI];
 	MINT	if0;
 //
 	ic0 = 0;

@@ -1,7 +1,7 @@
 //==========================================================================================
 //  Copyright (C) 2006-2008. K.Matsu. All rights reserved.
 //
-//  MODULE: MmsRibbonBarParts.cpp
+//  MODULE: MmIoPartsAttr1.cpp
 //
 //		
 //	1.4	部品選択
@@ -15,7 +15,7 @@
 #define DLL_EXPORT_MC_INPATTR_DO
 #include "MmLib.h"
 #include "MhDefParts.h"
-#include "MhInp.h"
+#include "MhInpPlcParts.h"
 #include "MhLib.h"
 #include "MmPrompt.h"
 
@@ -31,7 +31,7 @@ namespace MC
 //	分類コード("部材", "金物", "パネル", "屋根", "壁", "線分", "区画", "開口", "注記", "その他") とが
 //	一致する部材のみ設定する
 
-void mmInpAttr::InitComboPartsNm()
+void mmIoPartsAttr::InitComboPartsNm()
 {
 	int		ist;
 	int		ic1;
@@ -89,7 +89,7 @@ EXIT:
 //	部品配置入力データへ部品仕様Idと部品仕様を設定する
 //	部品仕様の配置コードで配置コードコンポボックスをを選択する
 
-void mmInpAttr::SelectComboPartsNmByKmId(
+void mmIoPartsAttr::SelectComboPartsNmByKmId(
 						int		i_iKmIdPartsNm	// 部品名項目番号
 				)
 {
@@ -124,7 +124,7 @@ EXIT:;
 //							≧ 0: 部品ID
 //							＝-1: 該当なし
 
-int mmInpAttr::SelectComboPartsNmByPartsNm(
+int mmIoPartsAttr::SelectComboPartsNmByPartsNm(
 						MCHAR* i_sNmParts1		// 部品名
 				)
 {
@@ -151,7 +151,7 @@ exit:
 //							≧ 0: 部品ID
 //							＝-1: 該当なし
 
-int mmInpAttr::GetComboPartsNmKmIdFromPartsNm( MCHAR* i_sNmParts1)
+int mmIoPartsAttr::GetComboPartsNmKmIdFromPartsNm( MCHAR* i_sNmParts1)
 {
 	int			iKmIdPartsNm;
 	int			ic1;
@@ -176,7 +176,7 @@ int mmInpAttr::GetComboPartsNmKmIdFromPartsNm( MCHAR* i_sNmParts1)
 //							＝-1: 未選択
 //							≧ 0: 部品ID
 
-int mmInpAttr::GetComboPartsNmId(
+int mmIoPartsAttr::GetComboPartsNmId(
 						MCHAR* i_sNmParts1		// 部品名
 				)
 {
@@ -203,7 +203,7 @@ int mmInpAttr::GetComboPartsNmId(
 //							＝-1: 該当なし
 //							≧ 0: 部品ID
 
-int mmInpAttr::GetCurPartsNmId()
+int mmIoPartsAttr::GetCurPartsNmId()
 {
 	int iIdPartsSpec;
 
@@ -221,7 +221,7 @@ int mmInpAttr::GetCurPartsNmId()
 //
 //	カレントの部材の寸法型式使用部位コードを持つ寸法型式のみ設定
 
-void mmInpAttr::InitComboPartsMbr()
+void mmIoPartsAttr::InitComboPartsMbr()
 {
 	MhMbr	*pMbr;
 	int		ic1;
@@ -272,7 +272,7 @@ EXIT:
 //	カレントの寸法型式項目番号を設定する
 //	部品配置入力データへ部品仕様Idと部品仕様を設定する
 
-void mmInpAttr::SelectComboPartsMbrByKmId(
+void mmIoPartsAttr::SelectComboPartsMbrByKmId(
 						int		i_iKmIdMbr			// 寸法型式項目番号
 				)
 {
@@ -299,7 +299,7 @@ EXIT:;
 //							＝-1: 該当なし
 //							≧ 0: 寸法型式ID
 
-int mmInpAttr::SelectComboMbrCdByMbrCd( MCHAR* sCdMbr)
+int mmIoPartsAttr::SelectComboMbrCdByMbrCd( MCHAR* sCdMbr)
 {
 	int			iMbrId = -1;
 	int			iKmIdMbr;
@@ -321,7 +321,7 @@ exit:
 //							＝-1: 該当なし
 //							≧ 0: 部品ID
 
-int mmInpAttr::GetComboMbrKmId( MCHAR* sCdMbr)
+int mmIoPartsAttr::GetComboMbrKmId( MCHAR* sCdMbr)
 {
 	int		ist;
 	int		ic1;
@@ -371,7 +371,7 @@ static int GetComboMbrCdId( MCHAR* sCdMbr)
 //							＝-1: 未選択
 //							≧ 0: 寸法型式ID
 
-int mmInpAttr::GetComboMbrCdId()
+int mmIoPartsAttr::GetComboMbrCdId()
 {
 	int		iMbrId;
 

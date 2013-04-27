@@ -33,7 +33,7 @@
 #include "MmLib.h"
 #define	DLL_EXPORT_MHTATEGUINP_DO
 #define	DLL_EXPORT_MHPLCINP_DO
-#include "MhInp.h"
+#include "MhInpPlcParts.h"
 
 #include "MainFrm.h"
 #include "MmCmdMsg.h"
@@ -41,14 +41,14 @@
 namespace MC
 {
 
-mhPlcInfo		mtPlcInp::m_PIInp;
+mhPlcParts		mtPlcInp::m_PIInp;
 MhTateguInfo	mtTateguInp::m_TateguInp;
 
 ////////////////////////////////////////////////////////////////////////////
 //	入力モード	
-mnInpAttr	z_mnIA;
+mnIoPartsAttr	z_mnIA;
 
-mnInpAttr::mnInpAttr()
+mnIoPartsAttr::mnIoPartsAttr()
 {
 	m_iInpKai = 1;
 	m_iInpMd = MP_MD_CREATE;
@@ -93,7 +93,7 @@ void IeModel::MnInitInpAt()
 
 ///////////////////////////////////////////////////////////////////////////////
 //	リボンバーの設定と取り込み
-int mnInpAttr::RibbonIO(
+int mnIoPartsAttr::RibbonIO(
 					ComboTp	i_iComboTp,		// Combo種類	1:入力点区分コード
 					int		i_iCdArg1,		//				
 					MREAL	i_rCdArg2		//				
@@ -111,7 +111,7 @@ int mnInpAttr::RibbonIO(
 //	SetComboCd( MSET_INPUT_KUBUN_CD, aaa);
 ///////////////////////////////////////////////////////////////////////////////
 //	リボンバーのコンボックスの設定　本体
-void mnInpAttr::SetComboCdBody( void)
+void mnIoPartsAttr::SetComboCdBody( void)
 {
 	switch ( m_iComboTp)
 	{

@@ -18,42 +18,51 @@ namespace MC
 #endif
 
 #ifdef DLL_EXPORT_MC_INPATTR_DO
-	#pragma message( "<<< MC::mmInpAttr・dll_EXport >>>")
+	#pragma message( "<<< MC::mmIoPartsAttr・dll_EXport >>>")
 	#define DLL_EXPORT							__declspec( dllexport)
 #else
 	#ifdef DLL_NO_IMPORT_MD_DO
 		#define DLL_EXPORT
 	#else
-//		#pragma message( "=== MC::mmInpAttr・dll_IMport ===")
+//		#pragma message( "=== MC::mmIoPartsAttr・dll_IMport ===")
 		#define DLL_EXPORT						__declspec( dllimport)
 	#endif
 #endif
 
-class DLL_EXPORT mmInpAttr: public CMmDialogKAttr
+class DLL_EXPORT mmIoPartsAttr: public CMmDialogKAttr
 {
 	friend CMainFrame;
 	friend CMCadApp;
 
 protected:
-	int		m_iCdPartsNm;						// 部品名Id
-	int		m_iCdMbr;							// メンバーId
-	MREAL	m_rLengthH1;						// 長さ補正1		(mm)
-	MREAL	m_rLengthH2;						// 長さ補正2		(mm)
-	MREAL	m_rSinzure;							// 芯ずれ			(mm)
-	MREAL	m_rToritukeH;						// 取付高さ			(mm)
-	MREAL	m_rSpan;							// 間隔				(mm)
-	int		m_nHonsu;							// 本数
-//S	int		m_iPanelNo;							// パネルNo			(0:全、1～n)
+	////////////////////////////////////////////////////////////////////////////
+	// 部品入力用、ダイアログの部品選択用項目を設定する
+	//		組、分類、部品タイプ、寸法型式
+	MPKOSEI		m_iRBKosei;						// 構造	構成
+	MPBUNRUI	m_iRBBunrui;					// 構造	分類
+	MCHAR*		m_sRBBuhin;						// 部品
+	MCHAR*		m_sRBMbr;						// 部品メンバー
 
-	int		m_iKobai;							// 勾配
-	MREAL	m_rNokiDe;							// 軒の出
-	MREAL	m_rKerabaDe;						// けらばの出
+protected:
+	int			m_iCdPartsNm;					// 部品名Id
+	int			m_iCdMbr;						// メンバーId
+	MREAL		m_rLengthH1;					// 長さ補正1		(mm)
+	MREAL		m_rLengthH2;					// 長さ補正2		(mm)
+	MREAL		m_rSinzure;						// 芯ずれ			(mm)
+	MREAL		m_rToritukeH;					// 取付高さ			(mm)
+	MREAL		m_rSpan;						// 間隔				(mm)
+	int			m_nHonsu;						// 本数
+//S	int			m_iPanelNo;						// パネルNo			(0:全、1～n)
 
-	MPKOSEI  m_iKInpGp;							// 構造入力構成		(屋根、小屋、天井、耐力壁、壁、床、土台、基礎)
-	MPBUNRUI m_iKInpBr;							// 構造入力種類		(部材、金物、パネル、その他)
-	MPSELECT m_iKInpSel;						// 構造入力選択		選択1、選択2、選択3						未使用
+	int			m_iKobai;						// 勾配
+	MREAL		m_rNokiDe;						// 軒の出
+	MREAL		m_rKerabaDe;					// けらばの出
 
-	int		m_iInpAttrMd;						// 属性値入力モード
+	MPKOSEI		m_iKInpGp;						// 構造入力構成		(屋根、小屋、天井、耐力壁、壁、床、土台、基礎)
+	MPBUNRUI	m_iKInpBr;						// 構造入力種類		(部材、金物、パネル、その他)
+	MPSELECT	m_iKInpSel;						// 構造入力選択		選択1、選択2、選択3						未使用
+
+	int			m_iIoPartsAttrMd;					// 属性値入力モード
 												//		MP_AT_AUTO(-1)		:自動設定
 												//		MP_AT_NONE(0)		:属性値入力なし
 												//		MP_AT_HRZ_PARTS(1)	:水平部材入力
@@ -63,29 +72,6 @@ protected:
 												//		MP_AT_ADJLNG(5)		:部材長さ調整入力
 												//		MP_AT_YANE(6)		:屋根入力
 												//		MP_AT_TATEGU(7)		:建具入力
-
-
-	////////////////////////////////////////////////////////////////////////////
-	//	コンストラクタ
-public:
-	mmInpAttr(){};
-
-//public:
-//	////////////////////////////////////////////////////////////////////////////
-//	//	属性値入力用
-//	ComboTp	m_iComboTp;							// コンボ種類
-//	int		m_iCdArg1;							// 設定コード1 整数
-//	MREAL	m_rCdArg2;							// 設定コード2 実数
-//	int		m_iSts;								// ステイタス
-
-public:
-	////////////////////////////////////////////////////////////////////////////
-	// 部品入力用、ダイアログの部品選択用項目を設定する
-	//		組、分類、部品タイプ、寸法型式
-	MPKOSEI		m_iRBKosei;						// 構造	構成
-	MPBUNRUI	m_iRBBunrui;					// 構造	分類
-	MCHAR*		m_sRBBuhin;						// 部品
-	MCHAR*		m_sRBMbr;						// 部品メンバー
 
 	// 部品名コンボボックス
 	int m_nComboIdPartsSpec;					// 表示項目数
@@ -97,14 +83,10 @@ public:
 	int m_iComboMbrId[MX_CMB_CDMEMBER];			// 表示項目対応寸法型式ID
 	int m_iComboKmIdMbr;						// カレント選択項目番号
 
-//	///////////////////////////////////////////////////////////////////////////////
-//	//	ダイアログの設定と取り込み
-//public:
-//	int RibbonIO(
-//						ComboTp	i_iComboTp,			// Combo種類	1:入力点区分コード
-//						int		i_iCdArg1 = NULL,	//				
-//						MREAL	i_rCdArg2 = NULL	//				
-//				);
+	////////////////////////////////////////////////////////////////////////////
+	//	コンストラクタ
+public:
+	mmIoPartsAttr(){};
 
 	///////////////////////////////////////////////////////////////////////////////
 	//	部品名コンポボックスの項目を設定する
@@ -355,18 +337,18 @@ protected:
 	//	属性値入力用コンボボックスに整数値を表示する
 protected:
 	void SetComboAttrICbn(
-						int		i_iAttr,			// コンボボックス番号
-						int		i_iValue 			// 表示する整数値
+						int			i_iAttr,		// コンボボックス番号
+						int			i_iValue 		// 表示する整数値
 				);
 
 	///////////////////////////////////////////////////////////////////////////////
 	//	属性値入力用指定コンポボックスに整数値の項目(一覧)を設定する
 protected:
 	void InitComboAttrI(
-						int		i_iAttr,			// コンボボックス番号
-						int		i_nComboAttr,		// 選択属性値の数
-						int*	i_iCmbAttr,			// 選択属性値
-						int		i_iInitValue		// 初期表示する属性値
+						int			i_iAttr,		// コンボボックス番号
+						int			i_nComboAttr,	// 選択属性値の数
+						int*		i_iCmbAttr,		// 選択属性値
+						int			i_iInitValue	// 初期表示する属性値
 				);
 
 	///////////////////////////////////////////////////////////////////////////////
@@ -374,14 +356,14 @@ protected:
 	//
 protected:
 	int GetComboAttrICbn(							// 整数値　または　0(未設定)
-						int		i_iAttr				// コンボボックス番号
+						int			i_iAttr			// コンボボックス番号
 				);
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	本数
 public:
 	void SetHonsu(
-						int		i_nHonsu			// 本数	
+						int			i_nHonsu		// 本数	
 				)
 	{
 		m_nHonsu = i_nHonsu;
@@ -401,7 +383,7 @@ public:
 //	//	パネル番号コンポボックスにパネル番号を表示する
 //protected:
 //	void SetComboPanelNo(
-//						int		i_iPanelNo			// パネル番号
+//						int			i_iPanelNo		// パネル番号
 //				);
 //
 //	///////////////////////////////////////////////////////////////////////////////
@@ -555,16 +537,16 @@ public:									// 仮設定
 public:
 	int GetAtMd()
 	{
-		return m_iInpAttrMd;
+		return m_iIoPartsAttrMd;
 	}
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	属性値入力モードで部品属性入力用ダイアログの項目を設定する
 	//	 (コンボボックスとチェックボックスの項目を設定する)
 	//	
-protected:
+public:
 	void InitComboAttr(
-						int	i_iInpAttrMd = MP_AT_NONE	// 属性値入力モード
+						int	i_iIoPartsAttrMd = MP_AT_NONE	// 属性値入力モード
 													//  MP_AT_AUTO(-1)		:自動設定
 													//	MP_AT_NONE(0)		:属性値入力なし
 													//	MP_AT_HRZ_PARTS(1)	:水平部材入力
@@ -588,6 +570,6 @@ protected:
 
 };
 
-extern	mmInpAttr z_mmIA;
+extern	mmIoPartsAttr z_mmIA;
 
 }// namespace MC

@@ -12,7 +12,7 @@
 
 #define DLL_EXPORT_MC_INPUT_DO
 #include "MrAPI.h"
-#include "MhInpAttr.h"
+//#include "MhPlcPartsLib.h"
 
 namespace MC
 {

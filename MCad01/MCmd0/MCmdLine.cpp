@@ -13,7 +13,7 @@
 #include "MrAPI.h"
 #include "MmCmd.h"
 #include "MainFrm.h"
-#include "MhInpAttr.h"
+//#include "MhPlcPartsLib.h"
 #include "MmDialogKAttr.h"
 #include "MmCmdMsg.h"
 

@@ -12,7 +12,7 @@
 #include "stdafx.h"
 #define DLL_EXPORT_MC_INPUT_DO
 #include "MrAPI.h"
-#include "MhInpAttr.h"
+#include "MhPlcPartsLib.h"
 
 #define		MC_YANE_TAKASA_HOSEI 97.
 

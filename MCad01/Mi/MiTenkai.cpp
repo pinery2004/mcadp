@@ -32,8 +32,8 @@
 #include "MdList.h"
 #include "MdLib.h"
 
-#include "MhInp.h"
-#include "MhInpAttr.h"
+#include "MhInpPlcParts.h"
+#include "MhPlcPartsLib.h"
 
 namespace MC
 {
@@ -100,7 +100,7 @@ void JTTenkai::CreJTTArea()
 {
 	MINT	ist1;
 	MgLine3 Ln1;
-	mhPlcInfo*	pHaiTenkai[MX_NJUKO];							// 住棟展開データ
+	mhPlcParts*	pHaiTenkai[MX_NJUKO];							// 住棟展開データ
 	MPOSITION	pPlcPos[MX_NJUKO];								// 住戸住棟展開データレコード位置
 	MgPolyg2	pg1(4);
 
@@ -154,7 +154,7 @@ void JTTenkai::CreJTTArea()
 
 	JTTenkaiPr* pAuxTenkai = (JTTenkaiPr*)new char[sizeof( JTTenkaiPr)];
 	*pAuxTenkai = z_TenkaiPara;
-//	mhPlcInfo* pInfo = &g_hInpPIAttr;
+//	mhPlcParts* pInfo = &g_hInpPIAttr;
 	mtPlcInp::SetpAuxTenkai( pAuxTenkai);
 
 	Ln1.p[0] = MgPoint3C( pg1.m_p[0]);

@@ -31,7 +31,7 @@ static MINT	z_iComboPanelNo[MX_CMB_PANELNO];					// 表示項目対応パネル番号
 //	パネル番号選択用コンポボックスにパネル番号の項目(一覧)を設定し
 //	パネル番号テーブルを作成する
 
-void mnInpAttr::InitComboPanelNo()
+void mnIoPartsAttr::InitComboPanelNo()
 {
 	MINT		ic1;
 	MINT		ic;
@@ -66,7 +66,7 @@ exit:
 ///////////////////////////////////////////////////////////////////////////////
 //	カレントのパネル番号選択項目番号を設定し　コンボボックスにパネル番号を表示する
 
-void mnInpAttr::SetComboPanelNo(
+void mnIoPartsAttr::SetComboPanelNo(
 						MINT	iPanelNo			// (I  ) パネル番号
 				)
 {
@@ -82,7 +82,7 @@ void mnInpAttr::SetComboPanelNo(
 //							＝-1: 未選択
 //							＝ 0: 全
 //							≧ 1: パネル番号
-MINT mnInpAttr::GetComboPanelNo()
+MINT mnIoPartsAttr::GetComboPanelNo()
 {
 	int iPanelNo;
 	int	iCurItemNo;

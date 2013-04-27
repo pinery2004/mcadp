@@ -38,7 +38,7 @@ void mdmEnt::Free()
 		MBDELETE( m_pAtr);
 		break;
 	case 2:
-		((mhPlcInfo*)m_pAtr)->FreeAllAtr();
+		((mhPlcParts*)m_pAtr)->FreeAllAtr();
 		MBDELETE( m_pAtr);
 		break;
 	case 3:

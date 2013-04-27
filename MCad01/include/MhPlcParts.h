@@ -2,9 +2,9 @@
 //==========================================================================================
 //  Copyright (C) 2006-2008. K.Matsu. All rights reserved.
 //
-//  MODULE: MhPlcInfo.h
+//  MODULE: MhPlcParts.h
 //
-//		配置物レコード
+//		部品配置レコード
 //
 //
 //  K.Matsu           08/01/04    Created.
@@ -24,11 +24,11 @@
 namespace MC
 {
 
-// 配置型
-class	mhPlcInfo: public MOBJECT
+// 部品配置型
+class	mhPlcParts: public MOBJECT
 {
 	friend	class	MdPartsQueue;
-	friend	void	MdPartsModify( mhPlcInfo *pPlcEnR, mhPlcInfo* *ppPlcEnM);
+	friend	void	MdPartsModify( mhPlcParts *pPlcEnR, mhPlcParts* *ppPlcEnM);
 	friend	void	MdPartsDelete( MPOSITION pPosition);
 	friend	void	MmPartsPlc( const MgPoint3 *Pt, const MgVect3 vUpPlc, const MgPolyg2 *pPg);
 	friend	void	MmWndKDrawParts( class MmWndInfo* pWndInfo);
@@ -51,9 +51,9 @@ public:
 	MUBYTE				m_ibDisplayFlg;			// 表示フラグ(図形,注記1,注記2)
 	MSHORT				m_isPanelNo;			// パネル番号
 	MSHORT				m_isKaikoNo;			// 開口番号
-	MSHORT				m_isIdPartsSpec;			// 部品ID
+	MSHORT				m_isIdPartsSpec;		// 部品ID
 	MSHORT				m_isMbrId;				// 寸法型式ID
-	mhPartsSpec*			m_pPartsSpec;				// 部品種類
+	mhPartsSpec*			m_pPartsSpec;		// 部品種類
 	MhMbr*				m_pMbr;					// 寸法型式
 	MgLine3				m_lnPlc;				// p[0]: 始点 | 配置点
 												// p[1]: 終点 | 配置方向点
@@ -71,10 +71,10 @@ public:
 	MhZukei*			m_pZukei;				// 図形
 
 public:
-	mhPlcInfo()	{
+	mhPlcParts()	{
 				InitPtrTypeAtr();}
-	void Copy( const mhPlcInfo &Ent);
-	~mhPlcInfo()	{
+	void Copy( const mhPlcParts &Ent);
+	~mhPlcParts()	{
 				FreeAllAtr();}
 
 	void	FreeAllAtr()	{									// 属性用に確保した領域を開放する
@@ -124,11 +124,11 @@ public:
 								m_isPanelNo = iPanelNo;}		
 	void	SetPIKaikoNo( MINT iKaikoNo)	{					// 開口番号
 								m_isKaikoNo = iKaikoNo;}		
-	void	SetPIIdPartsSpec( MINT iIdPartsSpec)	{					// 部品ID
+	void	SetPIIdPartsSpec( MINT iIdPartsSpec)	{			// 部品ID
 								m_isIdPartsSpec = iIdPartsSpec;}		
 	void 	SetPIIdMbr( MINT iMbrId)	{						// 寸法型式ID
 								m_isMbrId = iMbrId;}		
-	void	SetPIPartsSpec( mhPartsSpec* pPartsSpec)	{					// 部品種類
+	void	SetPIPartsSpec( mhPartsSpec* pPartsSpec)	{		// 部品種類
 								m_pPartsSpec = pPartsSpec;}			
 	void	SetPIMbr( MhMbr* pMbr)	{							// 寸法型式							
 								m_pMbr = pMbr;}				
@@ -187,11 +187,11 @@ public:
 	MINT		GetPIKaikoNo()	{
 								return m_isKaikoNo;}			// 開口番号
 	MINT		GetPIIdPartsSpec()	{
-								return m_isIdPartsSpec;}			// 部品ID
+								return m_isIdPartsSpec;}		// 部品ID
 	MINT 		GetPIIdMbr()	{
 								return m_isMbrId;}				// 寸法型式ID
 	mhPartsSpec*	GetPIPartsSpec()	{
-								return m_pPartsSpec;}				// 部品種類
+								return m_pPartsSpec;}			// 部品種類
 	MhMbr*		GetPIMbr()		{	
 								return m_pMbr;}					// 寸法型式
 	MgLine3 	GetPIPlcIti()	{
@@ -240,9 +240,9 @@ public:
 	MCHAR*	GetPTNmGeneral(){
 								return m_pPartsSpec->m_sPTNmGeneral;}	// 総称
 	MCHAR*	GetPTNmParts1()	{	
-								return m_pPartsSpec->m_sPTNmParts1;}		// 操作用部材名1
+								return m_pPartsSpec->m_sPTNmParts1;}	// 操作用部材名1
 	MCHAR*	GetPTNmParts2()	{	
-								return m_pPartsSpec->m_sPTNmParts2;}		// 積算用部材名2
+								return m_pPartsSpec->m_sPTNmParts2;}	// 積算用部材名2
 	DWORD	GetPTColor()	{	
 								return m_pPartsSpec->m_dPTColor;}		// 色
 	MINT	GetPTCdBuzai()	{	
@@ -267,19 +267,19 @@ public:
 								return m_pPartsSpec->m_iPTCdToritk;}	// 取り付けコード　上下付けコード (0:下付け, 1:上付け)
 
 	MCHAR*	GetMbCdMbr()	{	
-								return m_pMbr->m_cMbrCode;}			// 寸法型式
+								return m_pMbr->m_cMbrCode;}				// 寸法型式
 	MCHAR*	GetMbCdMbrW()	{	
-								return m_pMbr->m_cMbrCodeW;}		// 寸法型式 (書き込み用　通常m_cCodeと同じ VerUp時に変更した内容が入る)
+								return m_pMbr->m_cMbrCodeW;}			// 寸法型式 (書き込み用　通常m_cCodeと同じ VerUp時に変更した内容が入る)
 	MREAL	GetMbHeight()	{	
-								return m_pMbr->m_rBziHeight;}		// 部材高さ
+								return m_pMbr->m_rBziHeight;}			// 部材高さ
 	MREAL	GetMbWidth()	{	
-								return m_pMbr->m_rBziWidth;}		// 部材幅
+								return m_pMbr->m_rBziWidth;}			// 部材幅
 	MREAL	GetMbWidthR()	{	
 								return m_pMbr->m_rBziWidth * 0.5f + m_pMbr->m_rBziSZure;}	// 部材右側幅
 	MREAL	GetMbWidthL()	{	
 								return m_pMbr->m_rBziWidth * 0.5f - m_pMbr->m_rBziSZure;}	// 部材左側幅
 	MREAL	GetMbTWidth()	{	
-								return m_pMbr->m_rBziHeight;}		// たて枠用巾
+								return m_pMbr->m_rBziHeight;}			// たて枠用巾
 	MREAL	GetMbTWidthR()	{	
 								return m_pMbr->m_rBziHeight * 0.5f;}	// たて枠用右側幅
 	MREAL	GetMbTWidthL()	{	
@@ -287,11 +287,11 @@ public:
 	MREAL	GetMbTHeight()	{	
 								return m_pMbr->m_rBziWidth;}			// たて枠用厚さ
 	MREAL	GetMbTHeightF()	{	
-								return m_pMbr->m_rBziWidth * 0.5f;}	// たて枠用厚さ/2.
+								return m_pMbr->m_rBziWidth * 0.5f;}		// たて枠用厚さ/2.
 	MREAL	GetMbTHeightB()	{	
-								return m_pMbr->m_rBziWidth * 0.5f;}	// たて枠用厚さ/2.
+								return m_pMbr->m_rBziWidth * 0.5f;}		// たて枠用厚さ/2.
 	MCHAR*	GetMbType()		{		
-								return m_pMbr->m_cMbrType;}			// 寸法型式選択用種類コード
+								return m_pMbr->m_cMbrType;}				// 寸法型式選択用種類コード
 
 	bool	IsYane()		{		
 								return m_pPartsSpec->IsYane();}			// 屋根

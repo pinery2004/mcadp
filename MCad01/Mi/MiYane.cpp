@@ -35,13 +35,13 @@
 #include "MhRoof.h"
 #include "MhLib.h"
 
-#include "MhPlcInfo.h"
+#include "MhPlcParts.h"
 
 #include "MdOpt.h"
 #include "MmValid.h"
 
 #include "MmPrompt.h"
-#include "MhInpAttr.h"
+#include "MhPlcPartsLib.h"
 
 
 namespace MC

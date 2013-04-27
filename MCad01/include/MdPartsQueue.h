@@ -20,8 +20,8 @@ public:
 	MdPartsQueue(  MINT nBk, MINT iSz);
 	virtual ~MdPartsQueue( void);
 
-	MPOSITION Push( mhPlcInfo *pPlcEn);
-	MPOSITION Inject( mhPlcInfo *pPlcEn);
+	MPOSITION Push( mhPlcParts *pPlcEn);
+	MPOSITION Inject( mhPlcParts *pPlcEn);
 
 	void RemoveAll( void);
 };

@@ -101,7 +101,7 @@ public:
 	//	【機能】壁のディスプレイリストを作成する 実態、半透明
 	//			
 	static void DrawKabe(
-							mhPlcInfo	*i_pPlcEn,		// 壁
+							mhPlcParts	*i_pPlcEn,		// 壁
 					const	MgPoint3	&PtCtr,			// 構造家モデルの中心
 							MREAL		rB				// ３次元表示倍率
 					);
@@ -144,8 +144,8 @@ public:
 	//	【機能】建具の開口枠のディスプレイリストを作成する
 	//			
 	static void DrawTategu(
-							mhPlcInfo	*i_pPlcEn,		// 壁またはNULL
-							mhPlcInfo	*pPlcTEn,		// 建具
+							mhPlcParts	*i_pPlcEn,		// 壁またはNULL
+							mhPlcParts	*pPlcTEn,		// 建具
 					const	MgPoint3	&PtCtr,			// 構造家モデルの中心
 							MREAL		rB				// ３次元表示倍率
 					);
@@ -154,7 +154,7 @@ public:
 	//	【機能】たて枠、束のディスプレイリストを作成する
 	//			
 	static void DrawTatewaku( 
-							mhPlcInfo	*i_pPlcEn,
+							mhPlcParts	*i_pPlcEn,
 					const	MgPoint3	&PtCtr,
 							MREAL		rB
 					);
@@ -163,7 +163,7 @@ public:
 	//	【機能】床、天井、屋根の開口のディスプレイリストを作成する
 	//			
 	static void DrawKaiko( 
-							mhPlcInfo *i_pPlcEn,
+							mhPlcParts *i_pPlcEn,
 					const	MgPoint3	&PtCtr,
 							MREAL		rB
 					);
@@ -172,7 +172,7 @@ public:
 	//	【機能】横置部材のディスプレイリストを作成する
 	//			
 	static void DrawOukaZai( 
-							mhPlcInfo	*i_pPlcEn,
+							mhPlcParts	*i_pPlcEn,
 					const	MgPoint3	&PtCtr,
 							MREAL		rB
 					);
@@ -181,7 +181,7 @@ public:
 	//	【機能】パネルのディスプレイリストを作成する
 	//			
 	static void DrawPanel( 
-							mhPlcInfo *i_pPlcEn,
+							mhPlcParts *i_pPlcEn,
 					const	MgPoint3	&PtCtr,
 							MREAL		rB,
 							MINT		iMode			// 表示モード 1:パネル上部線分 2:パネル形状直方体 3:線分+パネル形状
@@ -191,7 +191,7 @@ public:
 	//	【機能】基礎のディスプレイリストを作成する
 	//			
 	static void DrawKiso(
-							mhPlcInfo	*i_pPlcEn,		// 基礎
+							mhPlcParts	*i_pPlcEn,		// 基礎
 					const	MgPoint3	&PtCtr,			// 構造家モデルの中心
 							MREAL		rB				// ３次元表示倍率
 					);
@@ -214,8 +214,8 @@ public:
 	//	【機能】建具の穴の多角形を求める
 	//			
 	static void TateguHole(
-							mhPlcInfo	*i_pPlcEn,		// 壁またはNULL
-							mhPlcInfo	*pPlcTEn,		// 建具
+							mhPlcParts	*i_pPlcEn,		// 壁またはNULL
+							mhPlcParts	*pPlcTEn,		// 建具
 							MgPolyg3	*PgR,			// 壁右面開口
 							MgPolyg3	*PgL			// 壁左面開口
 					);

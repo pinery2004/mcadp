@@ -15,7 +15,7 @@ namespace MC
 extern	int iCzk_IO;
 #endif
 
-class	mhPlcInfo;
+class	mhPlcParts;
 class	MhRoofInfo;
 
 class	MhMbr;
@@ -145,7 +145,7 @@ public:
 //	{
 //		return &g_hInpTateguAttr;
 //	}
-//	static class mhPlcInfo* IeModel::MhpInpPI();
+//	static class mhPlcParts* IeModel::MhpInpPI();
 //	{
 //		return &g_hInpPIAttr;
 //	}
@@ -410,8 +410,8 @@ public:
 	//				さらに、書込みＯＰＴ群を持つ修正後のレコードを新たに追加する。
 	//				（ＯＰＴ群コードが入るエリアの開放と確保は本関数で行う）
 	static MINT MhModOpt(
-							mhPlcInfo	 *pPlcEnR,		// (I O) 修正元部材
-							mhPlcInfo* *ppPlcEnM		// (  O) 修正先部材
+							mhPlcParts	 *pPlcEnR,		// (I O) 修正元部材
+							mhPlcParts* *ppPlcEnM		// (  O) 修正先部材
 					);
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -548,12 +548,12 @@ public:
 
 	// 部材の２次元芯線を取得する
 	static void	BuzaiCode::MhBziSin(
-							mhPlcInfo	*pBziInfo1,					// (I  ) 部材
+							mhPlcParts	*pBziInfo1,					// (I  ) 部材
 							MgLine2		*lnBziSin1					// (  O) 部材の芯線
 					);
 
 	// 全配置内容をトレース
-	static void	BuzaiCode::MhPrintallmhPlcInfo(MCHAR* s);
+	static void	BuzaiCode::MhPrintallmhPlcParts(MCHAR* s);
 };
 
 } // namespace MC

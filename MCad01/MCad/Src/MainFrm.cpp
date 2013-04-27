@@ -25,13 +25,13 @@
 #include "MtMCadApi.h"
 #include "MhGp.h"
 #include "MhPartsSpec.h"
-#include "MhInpAttr.h"
-#include "MnInpAttr.h"
+//#include "MhPlcPartsLib.h"
+#include "MnIoPartsAttr.h"
 #include "MmCmdMsg.h"
 #include "MgLine.h"
 #include "MmLib.h"
 #include "MhLib.h"
-#include "MnInpAttr.h"
+#include "MnIoPartsAttr.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -105,7 +105,7 @@ LRESULT CMainFrame::OnRibbonIO( UINT wParam, LONG lParam)
 		MC::z_mnIA.SetComboPanelNo( MC::z_mnIA.m_iCdArg1);
 		break;
 	case MINIT_COMBO_ATTR:
-		MC::z_mnIA.InitComboAttr( MC::z_mnIA.m_iCdArg1);
+//S		MC::z_mnIA.InitComboAttr( MC::z_mnIA.m_iCdArg1);
 		MC::z_mmIA.InitComboAttr( MC::z_mnIA.m_iCdArg1);
 		break;
 	}

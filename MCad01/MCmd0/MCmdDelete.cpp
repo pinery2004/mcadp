@@ -28,7 +28,7 @@ void MCmdLineDelete()
 	MINT			iKaiC;
 	MINT			iGpC, iGpB;
 	mhPartsSpec*		pPartsSpec;
-	mhPlcInfo*		pPlcEn;
+	mhPlcParts*		pPlcEn;
 	MPOSITION		pos1;
 	Window::CurWndFocus();
 

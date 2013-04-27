@@ -9,7 +9,7 @@
 //
 //==========================================================================================
 //	エンティティ
-#include	"MhPlcInfo.h"
+#include	"MhPlcParts.h"
 #include	"MhRoof.h"
 #include	"MlLog.h"
 

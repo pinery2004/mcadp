@@ -24,7 +24,7 @@ namespace MC
 {
 
 class MhRoofInfo;
-class mhPlcInfo;
+class mhPlcParts;
 
 class DLL_EXPORT HaitiDb
 {
@@ -48,7 +48,7 @@ static void MdPartsDelete(
 //	部品を追加する
 //	レコードの属性領域は追加したレコードに引渡し、引数のレコードはイニシャライズする。
 static MPOSITION MdPartsAdd(
-						mhPlcInfo*	i_pPlcEn,		// (I  ) 部品レコード
+						mhPlcParts*	i_pPlcEn,		// (I  ) 部品レコード
 						MINT		i_fdispCtrl		// (I  ) 表示制御フラグ
 													//		 0: ＯＰＴ群ｾｯﾄ・展開ｺｰﾄﾞ・履歴管理ｺｰﾄﾞを追加しない
 													//		 1: ＯＰＴ群ｾｯﾄ・展開ｺｰﾄﾞ・履歴管理ｺｰﾄﾞを追加する
@@ -57,8 +57,8 @@ static MPOSITION MdPartsAdd(
 /////////////////////////////////////////////////////////////////////////////
 //	部品配置を修正する
 static void MdPartsModify(
-						mhPlcInfo* io_pPlcEnR,		// 修正元部材
-						mhPlcInfo* *o_ppPlcEnM		// 修正先部材
+						mhPlcParts* io_pPlcEnR,		// 修正元部材
+						mhPlcParts* *o_ppPlcEnM		// 修正先部材
 				);
 
 /////////////////////////////////////////////////////////////////////////////
@@ -79,7 +79,7 @@ static MPOSITION MdRoofAdd(
 
 //////////////////////////////////////////////////////////////
 //	指定ノードの部品を得る
-static mhPlcInfo* MdPartsGet(							// (  O) 部品レコード
+static mhPlcParts* MdPartsGet(							// (  O) 部品レコード
 						MPOSITION	i_pPosition		// (I  ) 部品レコード位置（ノード位置）
 				);
 
@@ -87,7 +87,7 @@ static mhPlcInfo* MdPartsGet(							// (  O) 部品レコード
 //	先頭の部品を得る
 //	返値 =NULL: レコードなし !=NULL: 読み込み部品位置
 
-static mhPlcInfo* MdGetHeadParts(
+static mhPlcParts* MdGetHeadParts(
 						MPOSITION*	o_pPartsPos = NULL	// (  O) 部品レコード位置（ノード位置）
 				);
 
@@ -95,7 +95,7 @@ static mhPlcInfo* MdGetHeadParts(
 //	次の部品を得る
 //	返値 =NULL: レコードなし !=NULL: 読み込み部品位置
 
-static mhPlcInfo* MdGetNextParts(
+static mhPlcParts* MdGetNextParts(
 						MPOSITION*	io_pPartsPos = NULL	// (I O) 部品レコード位置（ノード位置）
 				);
 
@@ -107,15 +107,15 @@ static bool MdIsNotEmptyParts();							// true: 部品有り/ false: 部品無し
 /////////////////////////////////////////////////////////////////////////////
 //	家モデルＤ／Ｂの最後に部品を追加する
 
-static mhPlcInfo* MdInjectParts(
-						mhPlcInfo*	i_pPlcEn	// (I  ) 部品レコード
+static mhPlcParts* MdInjectParts(
+						mhPlcParts*	i_pPlcEn	// (I  ) 部品レコード
 				);
 
 /////////////////////////////////////////////////////////////////////////////
 //	家モデルＤ／Ｂの最後の部品を得る
 
 static void MdEjectParts(
-						mhPlcInfo*	i_pPlcEn	// (  O) 部品レコード
+						mhPlcParts*	i_pPlcEn	// (  O) 部品レコード
 				);
 /*
 /////////////////////////////////////////////////////////////////////////////
@@ -128,7 +128,7 @@ static void MmPanelDelete(
 //	部品を追加する
 //	レコードの属性領域は追加したレコードに引渡し、引数のレコードはイニシャライズする。
 static MPOSITION MmPanelAdd(
-						mhPlcInfo*	i_pPlcEn	// (I  ) 部品レコード
+						mhPlcParts*	i_pPlcEn	// (I  ) 部品レコード
 				);
 */
 
@@ -205,14 +205,14 @@ static bool MdIsNotEmptyRedoParts();						// true: 部品有り/ false: 部品無し
 //	ＲＥＤＯ用保存領域の先頭に部品を追加する
 
 static void MdPushRedoParts(
-						mhPlcInfo*	i_pRedoEn	// (I  ) 部品レコード
+						mhPlcParts*	i_pRedoEn	// (I  ) 部品レコード
 				);
 
 /////////////////////////////////////////////////////////////////////////////
 //	ＲＥＤＯ用保存領域の先頭の部品を得る
 
 static void MdPopRedoParts(
-						mhPlcInfo*	o_pRedoEn	// (  O) 部品レコード
+						mhPlcParts*	o_pRedoEn	// (  O) 部品レコード
 				);
 
 /////////////////////////////////////////////////////////////////////////////

@@ -18,7 +18,7 @@ public:
 
 public:
 	MhSenBuzai()		{}
-	MhSenBuzai( mhPlcInfo &PlcEn)		{ 
+	MhSenBuzai( mhPlcParts &PlcEn)		{ 
 		Ln     = PlcEn.GetPIPlcIti();						// í∑Ç≥í≤êÆë§ÇÃïîçﬁ
 		vtUt   = Ln.Vu();
 		rLH[0] = PlcEn.GetPILenHosei( 0);

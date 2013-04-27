@@ -22,8 +22,8 @@
 #include "MdList.h"
 #include "MhLib.h"
 
-#include "MhInp.h"
-#include "MhInpAttr.h"
+#include "MhInpPlcParts.h"
+#include "MhPlcPartsLib.h"
 
 #include "MdLib.h"
 
@@ -34,7 +34,7 @@ namespace MC
 //	‚t‚m‚c‚n
 	void HaitiCmd::MmUndo()
 {
-	mhPlcInfo	UndoPlcEn;
+	mhPlcParts	UndoPlcEn;
 
 	if ( HaitiDb::MdIsNotEmptyParts()) {
 		HaitiDb::MdEjectParts( &UndoPlcEn);
@@ -55,7 +55,7 @@ bool HaitiCmd::MmUndoIsNotEmpty()
 //	‚q‚d‚c‚n
 void HaitiCmd::MmRedo()
 {
-	mhPlcInfo	RedoPlcEn;
+	mhPlcParts	RedoPlcEn;
 
 	if ( HaitiDb::MdIsNotEmptyRedoParts()) {
 		HaitiDb::MdPopRedoParts( &RedoPlcEn);

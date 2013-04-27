@@ -30,13 +30,13 @@
 #include "MdList.h"
 #include "MhLib.h"
 
-#include "MhPlcInfo.h"
+#include "MhPlcParts.h"
 #include "MgGrp.h"
 #include "MhRoof.h"
 #include "MdLib.h"
 
 #include "McSystemProperty.h"
-#include "MhInpAttr.h"
+//#include "MhPlcPartsLib.h"
 
 namespace MC
 {
@@ -47,7 +47,7 @@ static	bool			z_fDrawHitBzi = FALSE;
 //  ïîçﬁÇÃå`èÛÇãÅÇﬂÇÈ
 
 static void PartsShape(
-						mhPlcInfo	*pPlcEn,
+						mhPlcParts	*pPlcEn,
 						MgPolyg2*	pgPartsShape
 				);
 

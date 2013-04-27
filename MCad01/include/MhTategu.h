@@ -20,7 +20,7 @@ class MhMdlIO;
 
 class	MhTateguInfo
 {
-	friend	class	mhPlcInfo;
+	friend	class	mhPlcParts;
 
 	MCHAR	m_cKCode[MHTTSZ_CODE + 1];			// 開口コード
 	MREAL	m_rROW;								// 開口幅

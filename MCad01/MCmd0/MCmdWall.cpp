@@ -10,8 +10,8 @@
 //==========================================================================================
 #include "stdafx.h"
 #include "MrAPI.h"
-#include "MhInp.h"
-#include "MhInpAttr.h"
+#include "MhInpPlcParts.h"
+//#include "MhPlcPartsLib.h"
 
 #define		MAXHAIKABE		500									// 配列制限値
 
@@ -98,7 +98,7 @@ void MCmdLineW()
 	MINT		iIdPartsSpec;
 	mhPartsSpec*	pPartsSpec;
 
-	mhPlcInfo* pHaiKabe[MAXHAIKABE];				// 壁データ
+	mhPlcParts* pHaiKabe[MAXHAIKABE];				// 壁データ
 	MINT		nHaiKabe;							// 壁数
 	MINT		ic2;
 	MINT		iMode;
@@ -205,7 +205,7 @@ void SetInpAt()
 
 void MCmdDebug()
 {
-	mhPlcInfo*	pPlcEn1;
+	mhPlcParts*	pPlcEn1;
 	MPOSITION		posH;
 	MhRoofInfo*		pRoofEn1;
 	MPOSITION		posR;

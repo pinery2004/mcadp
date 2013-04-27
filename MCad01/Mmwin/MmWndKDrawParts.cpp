@@ -27,7 +27,7 @@
 #include "MdList.h"
 #include "MhLib.h"
 
-#include "MhInp.h"
+#include "MhInpPlcParts.h"
 
 #include "MdOpt.h"
 #include "MdLib.h"
@@ -45,7 +45,7 @@ static	MINT			z_ign;
 void DrawPart( 
 						msCod*		pCod,			// ç¿ïWån
 						MINT		iGpC,			// ç\ê¨
-						mhPlcInfo	*pPlcEn
+						mhPlcParts	*pPlcEn
 				);
 
 /////////////////////////////////////////////////////////////////////////////
@@ -57,7 +57,7 @@ void WindowCtrl::MmWndKDrawParts(
 				)
 {
 	MPOSITION	pos1;
-	mhPlcInfo	*pPlcEn;
+	mhPlcParts	*pPlcEn;
 //	MsBitSet	*pOptv1, *pOptv2;
 //	MsBitSet	*pOptv;
 //	MsBitSet*	pHstv;
@@ -166,7 +166,7 @@ void WindowCtrl::MmWndKDrawParts(
 void DrawPart( 
 						msCod*		pCod,		// ç¿ïWån
 						MINT		iGpC,		// ç\ê¨
-						mhPlcInfo	*pPlcEn
+						mhPlcParts	*pPlcEn
 				)
 {
 	MgLine2		LnParts;

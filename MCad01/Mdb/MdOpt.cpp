@@ -27,7 +27,7 @@
 #include "MdList.h"
 #include "MhLib.h"
 
-#include "MhInp.h"
+#include "MhInpPlcParts.h"
 
 #define DLL_EXPORT_MHOPTV_DO
 #include "MdOpt.h"
@@ -442,7 +442,7 @@ bool MhOptV::MmOptIncSrch(
 void MhOptV::MmOptAddDB()
 {
 	MPOSITION	pos1;
-	mhPlcInfo*	pPlcEn;
+	mhPlcParts*	pPlcEn;
 	MsBitSet	*pOptv;
 
 	MINT	iDB = 0;

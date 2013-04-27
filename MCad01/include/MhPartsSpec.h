@@ -40,7 +40,7 @@ namespace MC
 
 class	mhPartsSpec								// 部品仕様レコード
 {
-	friend	class	mhPlcInfo;
+	friend	class	mhPlcParts;
 
 protected:
 	mhGp*	m_pPTGp;							// 構成(組)コード( 屋根、小屋、天井、耐力壁、壁、床、基礎)

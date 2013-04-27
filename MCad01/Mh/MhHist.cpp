@@ -30,7 +30,7 @@
 #include "MdList.h"
 #include "MhLib.h"
 
-#include "MhPlcInfo.h"
+#include "MhPlcParts.h"
 
 #include "MdLib.h"
 
@@ -91,8 +91,8 @@ void MhOpt::MhHistAdd(
 //				さらに、カレントバージョンのみの履歴管理を持つ修正後のレコードを新たに追加する。
 //				（履歴管理コードが入るエリアの開放と確保は本関数で行う）
 MINT MhOpt::MhHistMod(
-						mhPlcInfo	*pPlcEnR,		// (I O) 修正元部材
-						mhPlcInfo*	*ppPlcEnM		// (  O) 修正先部材
+						mhPlcParts	*pPlcEnR,		// (I O) 修正元部材
+						mhPlcParts*	*ppPlcEnM		// (  O) 修正先部材
 				)
 {
 	MsBitSet	*pHstvR;
@@ -125,7 +125,7 @@ MINT MhOpt::MhHistMod(
 				*pHstvR = *pHstvMod;							//			履歴管理をカレントバージョンＯＦＦに修正
 			}
 
-			mhPlcInfo	PlcEnM;								// 		新規に履歴管理がカレントのコピーレコードを作成し修正対象とする
+			mhPlcParts	PlcEnM;								// 		新規に履歴管理がカレントのコピーレコードを作成し修正対象とする
 			PlcEnM.Copy( *pPlcEnR);
 
 			PlcEnM.FreePIVer();

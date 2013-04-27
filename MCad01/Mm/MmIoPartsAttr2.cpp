@@ -19,10 +19,10 @@
 #define	DLL_EXPORT_MC_INPATTR_DO
 #include "MmLib.h"
 #include "MmWnd.h"
-#include "MhInp.h"
+#include "MhInpPlcParts.h"
 #include "resource.h"
 #include "..\\MCAD\\resource.h"
-#include "MhPlcInfo.h"
+#include "MhPlcParts.h"
 #include "MhLib.h"
 #include "MgGeo.h"
 
@@ -31,7 +31,7 @@
 
 namespace MC
 {
-mmInpAttr z_mmIA;
+mmIoPartsAttr z_mmIA;
 
 static int z_IdcComboAttr[6] =	{ IDC_CMBK_ATTR1, IDC_CMBK_ATTR2, IDC_CMBK_ATTR3,
 								  IDC_CMBK_ATTR4, IDC_CMBK_ATTR5, IDC_CMBK_ATTR6};
@@ -143,7 +143,7 @@ static MREAL z_rKerabanoDe[] = { 650.0, 455.0, 330.0, 44.5, 0.};
 ////////////////////////////////////////////////////////////////////////////
 //	部材属性入力用コンボボックスの設定
 
-void mmInpAttr::InitComboParts()
+void mmIoPartsAttr::InitComboParts()
 {
 	//	部品名コンポボックスの項目を設定する
 	InitComboPartsNm();
@@ -163,7 +163,7 @@ void mmInpAttr::InitComboParts()
 
 //S	//////////////////////////////////////////////////////////////////////////////
 //// 属性入力用コンボボックスを取得する
-//CComboBox* mmInpAttr::MnpComboAttr(
+//CComboBox* mmIoPartsAttr::MnpComboAttr(
 //						int		i_iAttr			// コンボボックス番号
 //				)
 //{
@@ -177,7 +177,7 @@ void mmInpAttr::InitComboParts()
 //////////////////////////////////////////////////////////////////////////////
 //	属性値入力用コンボボックス番号を取得する
 
-int mmInpAttr::GetComboAttrNo(
+int mmIoPartsAttr::GetComboAttrNo(
 						MCCMBATTR	i_iAttr		// 属性ID
 				)
 {
@@ -194,7 +194,7 @@ int mmInpAttr::GetComboAttrNo(
 
 ///////////////////////////////////////////////////////////////////////////////
 //	属性値入力用コンボボックスのタイトルを設定する
-void mmInpAttr::SetComboAttrText(
+void mmIoPartsAttr::SetComboAttrText(
 						int		i_iAttr,		// コンボボックス番号
 						MCHAR*	i_sTitle		// タイトル
 				)
@@ -206,7 +206,7 @@ void mmInpAttr::SetComboAttrText(
 ///////////////////////////////////////////////////////////////////////////////
 //	属性値入力用コンボボックスに実数値を表示する
 
-void mmInpAttr::SetComboAttrRCbn(
+void mmIoPartsAttr::SetComboAttrRCbn(
 						int		i_iAttr,		// コンボボックス番号
 						MREAL	i_rValue		// 表示する実数値
 				)
@@ -221,7 +221,7 @@ void mmInpAttr::SetComboAttrRCbn(
 //////////////////////////////////////////////////////////////////////////////
 //	属性値入力用コンボボックスに実数値を表示する
 
-void mmInpAttr::SetComboAttrR(
+void mmIoPartsAttr::SetComboAttrR(
 						MCCMBATTR	i_iAttr,	// 属性ID
 						MREAL		i_rValue	// 表示する実数値
 				)
@@ -235,7 +235,7 @@ void mmInpAttr::SetComboAttrR(
 ///////////////////////////////////////////////////////////////////////////////
 //	属性値入力用コンポボックスに実数値の項目(一覧)を設定する
 
-void mmInpAttr::InitComboAttrR(
+void mmIoPartsAttr::InitComboAttrR(
 						int		i_iAttr,		// コンボボックス番号
 						int		nComboAttr,		// 選択属性値の数
 						MREAL	*rComboAttr,	// 選択属性値
@@ -271,7 +271,7 @@ void mmInpAttr::InitComboAttrR(
 ///////////////////////////////////////////////////////////////////////////////
 //	属性値入力用コンボボックスの実数値を取得する
 //
-MREAL mmInpAttr::GetComboAttrRCbn(				// 実数値　または　0(未設定)
+MREAL mmIoPartsAttr::GetComboAttrRCbn(				// 実数値　または　0(未設定)
 						int		i_iAttr			// コンボボックス番号
 				)
 {
@@ -286,7 +286,7 @@ MREAL mmInpAttr::GetComboAttrRCbn(				// 実数値　または　0(未設定)
 ///////////////////////////////////////////////////////////////////////////////
 //	属性値入力用コンボボックスの実数値を取得する
 
-int mmInpAttr::GetComboAttrR(					// ステイタス0(未設定) 1(設定)
+int mmIoPartsAttr::GetComboAttrR(					// ステイタス0(未設定) 1(設定)
 						MCCMBATTR	i_iAttr,	// 属性ID
 						MREAL*		o_rValue	// 実数値
 				)
@@ -309,7 +309,7 @@ int mmInpAttr::GetComboAttrR(					// ステイタス0(未設定) 1(設定)
 ///////////////////////////////////////////////////////////////////////////////
 //	属性値入力用コンボボックスに整数値を表示する
 
-void mmInpAttr::SetComboAttrICbn(
+void mmIoPartsAttr::SetComboAttrICbn(
 						int		i_iAttr,		// コンボボックス番号
 						int		iValue 			// 表示する整数値
 				)
@@ -324,7 +324,7 @@ void mmInpAttr::SetComboAttrICbn(
 ///////////////////////////////////////////////////////////////////////////////
 //	属性値入力用コンボボックスに整数値を表示する
 
-void mmInpAttr::SetComboAttrI(
+void mmIoPartsAttr::SetComboAttrI(
 						MCCMBATTR	i_iAttr,	// 属性ID
 						int			iValue 		// 表示する整数値
 				)
@@ -338,7 +338,7 @@ void mmInpAttr::SetComboAttrI(
 ///////////////////////////////////////////////////////////////////////////////
 //	属性値入力用指定コンポボックスに整数値の項目(一覧)を設定する
 
-void mmInpAttr::InitComboAttrI(
+void mmIoPartsAttr::InitComboAttrI(
 						int		i_iAttr,		// コンボボックス番号
 						int		nComboAttr,		// 選択属性値の数
 						int		*iCmbAttr,		// 選択属性値
@@ -373,7 +373,7 @@ void mmInpAttr::InitComboAttrI(
 ///////////////////////////////////////////////////////////////////////////////
 //	属性値入力用コンボボックスの整数値を取得する
 //
-int mmInpAttr::GetComboAttrICbn(				// 整数値　または　0(未設定)
+int mmIoPartsAttr::GetComboAttrICbn(				// 整数値　または　0(未設定)
 						int		i_iAttr			// コンボボックス番号
 					)
 {
@@ -396,7 +396,7 @@ int mmInpAttr::GetComboAttrICbn(				// 整数値　または　0(未設定)
 ///////////////////////////////////////////////////////////////////////////////
 //	属性値入力用コンボボックスの整数値を取得する
 
-int	mmInpAttr::GetComboAttrI(					// ステイタス0(未設定) 1(設定)
+int	mmIoPartsAttr::GetComboAttrI(					// ステイタス0(未設定) 1(設定)
 						MCCMBATTR	i_iAttr,	// 属性ID
 						int*		o_iValue 	// 表示する整数値
 					)
@@ -420,7 +420,7 @@ int	mmInpAttr::GetComboAttrI(					// ステイタス0(未設定) 1(設定)
 ///////////////////////////////////////////////////////////////////////////////
 //	属性値入力用コンボボックスの値を取り込む
 
-void mmInpAttr::GetComboAttrA( void)
+void mmIoPartsAttr::GetComboAttrA( void)
 {
 	int		ist;
 
@@ -513,7 +513,7 @@ void mmInpAttr::GetComboAttrA( void)
 ///////////////////////////////////////////////////////////////////////////////
 //	構成コード、分類、部品種類IDより、属性値入力モードを求める
 
-int mmInpAttr::MnCalcInpAtMode()
+int mmIoPartsAttr::MnCalcInpAtMode()
 {
 	int		iMode;								// 属性値入力モード
 	int		iGp;
@@ -561,8 +561,8 @@ int mmInpAttr::MnCalcInpAtMode()
 //	属性値入力モードで部材属性入力用リボンバーの項目を設定する
 //	 (コンボボックスとチェックボックスの項目を設定する)
 //	
-void mmInpAttr::InitComboAttr(
-						int		i_iInpAttrMd	// 属性値入力モード
+void mmIoPartsAttr::InitComboAttr(
+						int		i_iIoPartsAttrMd	// 属性値入力モード
 												//  MP_AT_AUTO(-1)		:自動設定
 												//	MP_AT_NONE(0)		:属性値入力なし
 												//	MP_AT_HRZ_PARTS(1)	:水平部材入力
@@ -574,93 +574,138 @@ void mmInpAttr::InitComboAttr(
 												//	MP_AT_TATEGU(7)		:建具入力
 				)
 {
-	if ( !GetDispFlg())	goto EXIT;	
-
-	if ( i_iInpAttrMd >= 0)
-		m_iInpAttrMd = i_iInpAttrMd;
-	else
-		m_iInpAttrMd = MnCalcInpAtMode();
-
-	//	部材属性入力用コンボボックスとチェックボックスの項目を設定する
-	switch ( m_iInpAttrMd)
-	{
-	case	MP_AT_NONE:
-		MnsInitComboAttr( MC_CMB_NULL, MC_CMB_NULL, MC_CMB_NULL,// null, null, null
+	static int s_Combo_Attr[][10] = {										// MP_AT_NONE:			// 0
+					  {	MC_CMB_NULL, MC_CMB_NULL, MC_CMB_NULL,	// null, null, null
 						MC_CMB_NULL, MC_CMB_NULL, MC_CMB_NULL,	// null, null, null
 						MC_CHK_NULL, MC_CHK_NULL,				// null, null
-						MC_CHK_NULL, MC_CHK_NULL);				// null, null
-		break;
-	case	MP_AT_HRZ_PARTS:									// 横置部材
-		MnsInitComboAttr( MC_CMB_LHS1, MC_CMB_LHS2, MC_CMB_ZJSZ,// 長さ補正1, 長さ補正2, 芯ずれ
+						MC_CHK_NULL, MC_CHK_NULL},				// null, null
+																// MP_AT_HRZ_PARTS:		// 1			// 横置部材
+					  { MC_CMB_LHS1, MC_CMB_LHS2, MC_CMB_ZJSZ,	// 長さ補正1, 長さ補正2, 芯ずれ
 						MC_CMB_TRTH, MC_CMB_INTR, MC_CMB_HONS,	// 取付高さ, 間隔, 本数
 						MC_CHK_NULL, MC_CHK_NULL,				// null, null
-						MC_CHK_NULL, MC_CHK_NULL);				// null, null
-		break;
-	case	MP_AT_VRT_PARTS:									// たて枠
-		MnsInitComboAttr( MC_CMB_UPRH, MC_CMB_LWRH, MC_CMB_HAIZ,// 上端高さ, 下端高さ, 配置ずれ
+						MC_CHK_NULL, MC_CHK_NULL},				// null, null
+																// MP_AT_VRT_PARTS:		// 2			// たて枠
+					  { MC_CMB_UPRH, MC_CMB_LWRH, MC_CMB_HAIZ,	// 上端高さ, 下端高さ, 配置ずれ
 						MC_CMB_NULL, MC_CMB_INTR, MC_CMB_HONS,	// null, 間隔, 本数
 						MC_CHK_NULL, MC_CHK_NULL,				// null, null
-						MC_CHK_NULL, MC_CHK_NULL);				// null, null
-		break;
-	case	MP_AT_TATEGU:										// 建具
-		MnsInitComboAttr( MC_CMB_LHS1, MC_CMB_LHS2, MC_CMB_TRTH,// 長さ補正1, 長さ補正2, 取付高さ
-						MC_CMB_KROH, MC_CMB_HAIZ, MC_CMB_NULL,	// ＲＯＨ, 配置ずれ ,null
-						MC_CHK_NULL, MC_CHK_NULL,				// null, null 
-						MC_CHK_NULL, MC_CHK_NULL);				// null, null
-		break;
-	case	MP_AT_YTPANEL:										// 床・天井パネル
-		MnsInitComboAttr( MC_CMB_LFH1, MC_CMB_RTH1, MC_CMB_TRTH,// 左巾補正, 右巾補正, 取付高さ
+						MC_CHK_NULL, MC_CHK_NULL},				// null, null
+																// MP_AT_YTPANEL:		// 3			// 床・天井パネル
+					  { MC_CMB_LFH1, MC_CMB_RTH1, MC_CMB_TRTH,// 左巾補正, 右巾補正, 取付高さ
 						MC_CMB_FHS1, MC_CMB_OKYK, MC_CMB_OHS2,	// 手前補正, 奥行, 奥行補正
 						MC_CHK_NULL, MC_CHK_NULL,				// null, null
-						MC_CHK_NULL, MC_CHK_NULL);				// null, null
-		break;
-	case	MP_AT_YANEPANEL:									// 屋根パネル
-		MnsInitComboAttr( MC_CMB_LFH2, MC_CMB_RTH2, MC_CMB_TRTH,// 左巾補正, 右巾補正, 取付高さ
+						MC_CHK_NULL, MC_CHK_NULL},				// null, null
+																// MP_AT_YANEPANEL:		// 4			// 屋根パネル
+					  { MC_CMB_LFH2, MC_CMB_RTH2, MC_CMB_TRTH,	// 左巾補正, 右巾補正, 取付高さ
 						MC_CMB_FHS2, MC_CMB_OKYK, MC_CMB_OHS2,	// 軒の出, 奥行, 奥行補正
 						MC_CHK_NULL, MC_CHK_NULL,				// null, null
-						MC_CHK_NULL, MC_CHK_NULL);				// null, null
-		break;
-	case	MP_AT_ADJLNG:										// 部材長さ調整
-		MnsInitComboAttr( MC_CMB_LHS1, MC_CMB_NULL, MC_CMB_NULL,// 長さ補正, null, null
+						MC_CHK_NULL, MC_CHK_NULL},				// null, null
+																// MP_AT_ADJLNG:		// 5			// 部材長さ調整
+					  { MC_CMB_LHS1, MC_CMB_NULL, MC_CMB_NULL,	// 長さ補正, null, null
 						MC_CMB_NULL, MC_CMB_NULL, MC_CMB_NULL,	// null, null, null
 						MC_CHK_NULL, MC_CHK_KATI,				// null, 勝ち
-						MC_CHK_MULT, MC_CHK_INTC);				// 複数, 交差部材調整
-		break;
-	case	MP_AT_YANE:											// 屋根
-		MnsInitComboAttr( MC_CMB_KOBY, MC_CMB_NKDE, MC_CMB_KRDE,// 屋根勾配, 軒の出, ケラバの出
+						MC_CHK_MULT, MC_CHK_INTC},				// 複数, 交差部材調整
+																// MP_AT_YANE:			// 6			// 屋根
+					  { MC_CMB_KOBY, MC_CMB_NKDE, MC_CMB_KRDE,	// 屋根勾配, 軒の出, ケラバの出
 						MC_CMB_NULL, MC_CMB_NULL, MC_CMB_NULL,	// null, null, null
 						MC_CHK_NULL, MC_CHK_NULL,				// null, null
-						MC_CHK_NULL, MC_CHK_NKTP);				// null, 軒タイプ
-		break;
-	}
-EXIT:;
-}
+						MC_CHK_NULL, MC_CHK_NKTP},				// null, 軒タイプ
+																// MP_AT_TATEGU:		// 7			// 建具
+					  { MC_CMB_LHS1, MC_CMB_LHS2, MC_CMB_TRTH,	// 長さ補正1, 長さ補正2, 取付高さ
+						MC_CMB_KROH, MC_CMB_HAIZ, MC_CMB_NULL,	// ＲＯＨ, 配置ずれ ,null
+						MC_CHK_NULL, MC_CHK_NULL,				// null, null 
+						MC_CHK_NULL, MC_CHK_NULL}				// null, null
+					};
 
-/////////////////////////////////////////////////////////////////////////////
-//	部材属性入力用コンボボックスとチェックボックスの項目を設定する
+	if ( !GetDispFlg())	goto EXIT;	
 
-void mmInpAttr::MnsInitComboAttr(
-					MCCMBATTR	i_icombo1,		// 属性入力用コンボボックス1の属性ID
-					MCCMBATTR	i_icombo2,		// 属性入力用コンボボックス2の属性ID
-					MCCMBATTR	i_icombo3,		// 属性入力用コンボボックス3の属性ID
-					MCCMBATTR	i_icombo4,		// 属性入力用コンボボックス4の属性ID
-					MCCMBATTR	i_icombo5,		// 属性入力用コンボボックス5の属性ID
-					MCCMBATTR	i_icombo6,		// 属性入力用コンボボックス6の属性ID
-					MCCHKATTR	i_icheck1,		// 属性入力用チェックボックス1の属性ID
-					MCCHKATTR	i_icheck2,		// 属性入力用チェックボックス2の属性ID
-					MCCHKATTR	i_icheck3,		// 属性入力用チェックボックス3の属性ID
-					MCCHKATTR	i_icheck4		// 属性入力用チェックボックス4の属性ID
-				)
-{
-	z_Combo_Attr[0] = i_icombo1; z_Combo_Attr[1] = i_icombo2; z_Combo_Attr[2] = i_icombo3;
-	z_Combo_Attr[3] = i_icombo4; z_Combo_Attr[4] = i_icombo5; z_Combo_Attr[5] = i_icombo6;
-	z_Check_Attr[0] = i_icheck1; z_Check_Attr[1] = i_icheck2;
-	z_Check_Attr[2] = i_icheck3; z_Check_Attr[3] = i_icheck4;
+	if ( i_iIoPartsAttrMd >= 0)
+		m_iIoPartsAttrMd = i_iIoPartsAttrMd;
+	else
+		m_iIoPartsAttrMd = MnCalcInpAtMode();
+
+	if ( m_iIoPartsAttrMd < 0 || m_iIoPartsAttrMd >= MP_AT_END) goto EXIT;
+
+	//	部材属性入力用コンボボックスとチェックボックスの項目を設定する
+//S	switch ( m_iIoPartsAttrMd)
+//	{
+//	case	MP_AT_NONE:			// 0
+//		MnsInitComboAttr( MC_CMB_NULL, MC_CMB_NULL, MC_CMB_NULL,// null, null, null
+//						MC_CMB_NULL, MC_CMB_NULL, MC_CMB_NULL,	// null, null, null
+//						MC_CHK_NULL, MC_CHK_NULL,				// null, null
+//						MC_CHK_NULL, MC_CHK_NULL);				// null, null
+//		break;
+//	case	MP_AT_HRZ_PARTS:	// 1							// 横置部材
+//		MnsInitComboAttr( MC_CMB_LHS1, MC_CMB_LHS2, MC_CMB_ZJSZ,// 長さ補正1, 長さ補正2, 芯ずれ
+//						MC_CMB_TRTH, MC_CMB_INTR, MC_CMB_HONS,	// 取付高さ, 間隔, 本数
+//						MC_CHK_NULL, MC_CHK_NULL,				// null, null
+//						MC_CHK_NULL, MC_CHK_NULL);				// null, null
+//		break;
+//	case	MP_AT_VRT_PARTS:	// 2							// たて枠
+//		MnsInitComboAttr( MC_CMB_UPRH, MC_CMB_LWRH, MC_CMB_HAIZ,// 上端高さ, 下端高さ, 配置ずれ
+//						MC_CMB_NULL, MC_CMB_INTR, MC_CMB_HONS,	// null, 間隔, 本数
+//						MC_CHK_NULL, MC_CHK_NULL,				// null, null
+//						MC_CHK_NULL, MC_CHK_NULL);				// null, null
+//		break;
+//	case	MP_AT_YTPANEL:		// 3							// 床・天井パネル
+//		MnsInitComboAttr( MC_CMB_LFH1, MC_CMB_RTH1, MC_CMB_TRTH,// 左巾補正, 右巾補正, 取付高さ
+//						MC_CMB_FHS1, MC_CMB_OKYK, MC_CMB_OHS2,	// 手前補正, 奥行, 奥行補正
+//						MC_CHK_NULL, MC_CHK_NULL,				// null, null
+//						MC_CHK_NULL, MC_CHK_NULL);				// null, null
+//		break;
+//	case	MP_AT_YANEPANEL:	// 4							// 屋根パネル
+//		MnsInitComboAttr( MC_CMB_LFH2, MC_CMB_RTH2, MC_CMB_TRTH,// 左巾補正, 右巾補正, 取付高さ
+//						MC_CMB_FHS2, MC_CMB_OKYK, MC_CMB_OHS2,	// 軒の出, 奥行, 奥行補正
+//						MC_CHK_NULL, MC_CHK_NULL,				// null, null
+//						MC_CHK_NULL, MC_CHK_NULL);				// null, null
+//		break;
+//	case	MP_AT_ADJLNG:		// 5							// 部材長さ調整
+//		MnsInitComboAttr( MC_CMB_LHS1, MC_CMB_NULL, MC_CMB_NULL,// 長さ補正, null, null
+//						MC_CMB_NULL, MC_CMB_NULL, MC_CMB_NULL,	// null, null, null
+//						MC_CHK_NULL, MC_CHK_KATI,				// null, 勝ち
+//						MC_CHK_MULT, MC_CHK_INTC);				// 複数, 交差部材調整
+//		break;
+//	case	MP_AT_YANE:			// 6							// 屋根
+//		MnsInitComboAttr( MC_CMB_KOBY, MC_CMB_NKDE, MC_CMB_KRDE,// 屋根勾配, 軒の出, ケラバの出
+//						MC_CMB_NULL, MC_CMB_NULL, MC_CMB_NULL,	// null, null, null
+//						MC_CHK_NULL, MC_CHK_NULL,				// null, null
+//						MC_CHK_NULL, MC_CHK_NKTP);				// null, 軒タイプ
+//		break;
+//	case	MP_AT_TATEGU:		// 7							// 建具
+//		MnsInitComboAttr( MC_CMB_LHS1, MC_CMB_LHS2, MC_CMB_TRTH,// 長さ補正1, 長さ補正2, 取付高さ
+//						MC_CMB_KROH, MC_CMB_HAIZ, MC_CMB_NULL,	// ＲＯＨ, 配置ずれ ,null
+//						MC_CHK_NULL, MC_CHK_NULL,				// null, null 
+//						MC_CHK_NULL, MC_CHK_NULL);				// null, null
+//		break;
+//	}
+//EXIT:;
+//}
+//
+//
+///////////////////////////////////////////////////////////////////////////////
+////	部材属性入力用コンボボックスとチェックボックスの項目を設定する
+//
+//void mmIoPartsAttr::MnsInitComboAttr(
+//					MCCMBATTR	i_icombo1,		// 属性入力用コンボボックス1の属性ID
+//					MCCMBATTR	i_icombo2,		// 属性入力用コンボボックス2の属性ID
+//					MCCMBATTR	i_icombo3,		// 属性入力用コンボボックス3の属性ID
+//					MCCMBATTR	i_icombo4,		// 属性入力用コンボボックス4の属性ID
+//					MCCMBATTR	i_icombo5,		// 属性入力用コンボボックス5の属性ID
+//					MCCMBATTR	i_icombo6,		// 属性入力用コンボボックス6の属性ID
+//					MCCHKATTR	i_icheck1,		// 属性入力用チェックボックス1の属性ID
+//					MCCHKATTR	i_icheck2,		// 属性入力用チェックボックス2の属性ID
+//					MCCHKATTR	i_icheck3,		// 属性入力用チェックボックス3の属性ID
+//					MCCHKATTR	i_icheck4		// 属性入力用チェックボックス4の属性ID
+//				)
+//{
+//	z_Combo_Attr[0] = i_icombo1; z_Combo_Attr[1] = i_icombo2; z_Combo_Attr[2] = i_icombo3;
+//	z_Combo_Attr[3] = i_icombo4; z_Combo_Attr[4] = i_icombo5; z_Combo_Attr[5] = i_icombo6;
+//	z_Check_Attr[0] = i_icheck1; z_Check_Attr[1] = i_icheck2;
+//	z_Check_Attr[2] = i_icheck3; z_Check_Attr[3] = i_icheck4;
 
 	int		ic1;
 	
 	for ( ic1=1; ic1<=MC_SZ_CMBATTR; ic1++) {
-		switch (z_Combo_Attr[ic1-1]) {
+		switch ( s_Combo_Attr[m_iIoPartsAttrMd][ic1-1]) {
 			case MC_CMB_NULL:
 				// コンボボックスを消し無効にする
 				SetComboAttrText( ic1, Mstr( ""));
@@ -785,11 +830,41 @@ void mmInpAttr::MnsInitComboAttr(
 				break;
 		}
 	}
+//	for ( ic1=1; ic1<=MC_SZ_CHKATTR; ic1++) {
+//		switch (z_Check_Attr[ic1-1]) {
+//			case MC_CHK_NULL:
+//				// チェックボックスを消し無効にする
+//				SetCheckAttrText( ic1, NULL);		
+//				SetCheckAttrCkb( ic1, 0);		
+//				break;
+//			case MC_CHK_KATI:
+//				// 勝ち負け入力用チェックボックスを設定する
+//				SetCheckAttrText( ic1, Mstr( "勝ち"));
+//				SetCheckAttrCkb( ic1, 0);
+//				break;
+//			case MC_CHK_MULT:
+//				// 複数入力用チェックボックスを設定する
+//				SetCheckAttrText( ic1, Mstr( "複数"));
+//				SetCheckAttrCkb( ic1, 1);
+//				break;
+//			case MC_CHK_INTC:
+//				// 交差部材調整用チェックボックスを設定する
+//				SetCheckAttrText( ic1, Mstr( "交差部材調整"));
+//				SetCheckAttrCkb( ic1, 1);
+//				break;
+//			case MC_CHK_NKTP:
+//				// 軒先タイプ(0:勾配収まり、1:垂直)
+//				SetCheckAttrText( ic1, Mstr( "軒先タイプ垂直"));
+//				SetCheckAttrCkb( ic1, 1);
+//				break;
+//		}
+//	}
+EXIT:;
 
 //S//////////////////////////////////////////////////////////////////////////////
 ////	属性値入力用チェックボックス番号を取得する
 //
-//int mmInpAttr::GetCheckAttrNo(
+//int mmIoPartsAttr::GetCheckAttrNo(
 //						MCCHKATTR	i_iAttr		// 属性ID
 //				)
 //{
@@ -808,7 +883,7 @@ void mmInpAttr::MnsInitComboAttr(
 //
 /////////////////////////////////////////////////////////////////////////////////
 ////	属性値入力用チェックボックスのタイトルを設定する
-//void mmInpAttr::SetCheckAttrText(
+//void mmIoPartsAttr::SetCheckAttrText(
 //						int		i_iAttr,		// チェックボックス番号
 //						MCHAR*	i_sTitle		// タイトル　または　NULL:チェックボックスを表示しない
 //				)
@@ -823,7 +898,7 @@ void mmInpAttr::MnsInitComboAttr(
 /////////////////////////////////////////////////////////////////////////////////
 ////	属性値入力用チェックボックスのチェックマークを設定する
 //
-//void mmInpAttr::SetCheckAttrCkb(
+//void mmIoPartsAttr::SetCheckAttrCkb(
 //						int		i_iChkNo,		// チェックボックス番号
 //						int		i_iCheckAttr	// チェックマーク　0:OFF, 1:ON
 //				)
@@ -839,7 +914,7 @@ void mmInpAttr::MnsInitComboAttr(
 /////////////////////////////////////////////////////////////////////////////////
 ////	チェックボックスのチェックマークを設定する
 //
-//void mmInpAttr::SetCheckAttr(
+//void mmIoPartsAttr::SetCheckAttr(
 //						MCCHKATTR	i_iAttr,	// 属性ID
 //						int			i_iCheckAttr// チェックマーク　0:OFF, 1:ON
 //				)
@@ -852,7 +927,7 @@ void mmInpAttr::MnsInitComboAttr(
 /////////////////////////////////////////////////////////////////////////////////
 ////	属性値入力用チェックボックスのチェック有無を取得する
 ////
-//int mmInpAttr::GetCheckAttrCkb(				// チェックマーク　0:OFF, 1:ON
+//int mmIoPartsAttr::GetCheckAttrCkb(				// チェックマーク　0:OFF, 1:ON
 //						int		i_iChkNo		// チェックボックス番号
 //				)
 //{
@@ -867,7 +942,7 @@ void mmInpAttr::MnsInitComboAttr(
 ////	チェックボックスのチェック有無を取得する
 ////
 //
-//int mmInpAttr::GetCheckAttr(					// ステイタス0(未設定) 1(設定)
+//int mmIoPartsAttr::GetCheckAttr(					// ステイタス0(未設定) 1(設定)
 //						MCCHKATTR	i_iAttr,	// 属性ID
 //						int*		o_iCheckAttr// チェックマーク　0:OFF, 1:ON
 //				)

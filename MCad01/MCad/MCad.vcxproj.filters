@@ -443,9 +443,6 @@
     <ClInclude Include="..\include\MhRoof.h">
       <Filter>Mh\hdr</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\MhPlcInfo.h">
-      <Filter>Mh\hdr</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\MhModel.h">
       <Filter>Mh\hdr</Filter>
     </ClInclude>
@@ -713,9 +710,6 @@
     <ClInclude Include="..\include\M3View.h">
       <Filter>MCad\hdr</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\MnInpAttr.h">
-      <Filter>Mn\hdr</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\MhParts.h">
       <Filter>Mh\hdr</Filter>
     </ClInclude>
@@ -728,26 +722,29 @@
     <ClInclude Include="..\include\MhDefParts.h">
       <Filter>Mh\hdr</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\MhInp.h">
-      <Filter>Mh\hdr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\MhInpAttr.h">
-      <Filter>Mh\hdr</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\MmDialogPartsEdit.h">
       <Filter>MCmd6\hdr</Filter>
     </ClInclude>
     <ClInclude Include="..\include\MhPartsSpec.h">
       <Filter>Mh\hdr</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\MmInpAttr.h">
-      <Filter>Mm\hdr</Filter>
-    </ClInclude>
     <ClInclude Include="MmDialogKAttr.h">
       <Filter>Mm\hdr</Filter>
     </ClInclude>
-    <ClInclude Include="MmdlgPartsAttr.h">
-      <Filter>MCad\hdr</Filter>
+    <ClInclude Include="..\include\MmIoPartsAttr.h">
+      <Filter>Mm\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MnIoPartsAttr.h">
+      <Filter>Mn\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MhPlcParts.h">
+      <Filter>Mh\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MhPlcPartsLib.h">
+      <Filter>Mh\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MhInpPlcParts.h">
+      <Filter>Mh\hdr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1255,16 +1252,10 @@
     <ClCompile Include="..\Mh\MhParts.cpp">
       <Filter>Mh\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Mn\MnGetKosei.cpp">
-      <Filter>Mn\src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Mn\MnInp.cpp">
       <Filter>Mn\src</Filter>
     </ClCompile>
     <ClCompile Include="..\Mn\MnSetRibbonBar.cpp">
-      <Filter>Mn\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Mn\MnSRibbonBarAttr.cpp">
       <Filter>Mn\src</Filter>
     </ClCompile>
     <ClCompile Include="..\Mn\MnSRibbonBarInp.cpp">
@@ -1273,20 +1264,20 @@
     <ClCompile Include="..\Mn\MnSRibbonBarPanel.cpp">
       <Filter>Mn\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Mn\MnSRibbonBarParts.cpp">
-      <Filter>Mn\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Mm\MmSDialogKAttr.cpp">
-      <Filter>Mm\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Mm\MmSDialogParts.cpp">
-      <Filter>Mm\src</Filter>
-    </ClCompile>
     <ClCompile Include="MmDialogKAttr.cpp">
       <Filter>Mm\src</Filter>
     </ClCompile>
-    <ClCompile Include="MmdlgPartsAttr.cpp">
-      <Filter>MCad\src</Filter>
+    <ClCompile Include="..\Mm\MmIoPartsAttr1.cpp">
+      <Filter>Mm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mm\MmIoPartsAttr2.cpp">
+      <Filter>Mm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mn\MnSRibbonBarPartsAttr1.cpp">
+      <Filter>Mn\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mn\MnSRibbonBarPartsAttr2.cpp">
+      <Filter>Mn\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

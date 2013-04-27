@@ -34,12 +34,12 @@
 #include "MmCmd.h"
 
 #include "MdPartsQueue.h"
-#include "MhPlcInfo.h"
+#include "MhPlcParts.h"
 
 namespace MC
 {
 
-static	MdPartsQueue	z_RedoStk( 10, sizeof( mhPlcInfo));			// ‚q‚d‚c‚n—p•Û‘¶—Ìˆæ
+static	MdPartsQueue	z_RedoStk( 10, sizeof( mhPlcParts));			// ‚q‚d‚c‚n—p•Û‘¶—Ìˆæ
 
 /////////////////////////////////////////////////////////////////////////////
 //	‚q‚d‚c‚n—p•Û‘¶—Ìˆæ‚ğƒCƒjƒVƒƒƒ‰ƒCƒY‚·‚é
@@ -60,7 +60,7 @@ bool HaitiDb::MdIsNotEmptyRedoParts()						// true: •”•i”z’u—L‚è/ false: •”•i”z’
 //	‚q‚d‚c‚n—p•Û‘¶—Ìˆæ‚Ìæ“ª‚É•”•i”z’u‚ğ’Ç‰Á‚·‚é
 
 void HaitiDb::MdPushRedoParts(
-						mhPlcInfo	*pRedoEn		// (I  ) •”•i”z’uŠÇ—î•ñ
+						mhPlcParts	*pRedoEn		// (I  ) •”•i”z’uŠÇ—î•ñ
 				)
 {
 	z_RedoStk.Push( pRedoEn);
@@ -70,7 +70,7 @@ void HaitiDb::MdPushRedoParts(
 //	‚q‚d‚c‚n—p•Û‘¶—Ìˆæ‚Ìæ“ª‚Ì•”•i”z’u‚ğæ“¾‚·‚é
 
 void HaitiDb::MdPopRedoParts(
-						mhPlcInfo	*pRedoEn		// (I  ) •”•i”z’uŠÇ—î•ñ
+						mhPlcParts	*pRedoEn		// (I  ) •”•i”z’uŠÇ—î•ñ
 				)
 {
 	z_RedoStk.Pop( pRedoEn);
@@ -80,7 +80,7 @@ void HaitiDb::MdPopRedoParts(
 //	‚q‚d‚c‚n•Û‘¶—Ìˆæ‚ÌƒNƒŠƒA
 void HaitiCmd::MdClearRedo()
 {
-	mhPlcInfo	PlcEn;
+	mhPlcParts	PlcEn;
 
 	while (z_RedoStk.IsNotEmpty()) {
 		z_RedoStk.Eject( &PlcEn);

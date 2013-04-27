@@ -31,7 +31,7 @@
 #include "MhLib.h"
 
 #include "MmLib.h"
-#include "MhInp.h"
+#include "MhInpPlcParts.h"
 
 #include "MgGrp.h"
 
@@ -99,8 +99,8 @@ void Option::MhAddOpt(
 //				‚³‚ç‚ÉA‘ž‚Ý‚n‚o‚sŒQ‚ðŽ‚ÂC³Œã‚ÌƒŒƒR[ƒh‚ðV‚½‚É’Ç‰Á‚·‚éB
 //				i‚n‚o‚sŒQƒR[ƒh‚ª“ü‚éƒGƒŠƒA‚ÌŠJ•ú‚ÆŠm•Û‚Í–{ŠÖ”‚Ås‚¤j
 MINT Option::MhModOpt(
-						mhPlcInfo	 *pPlcEnR,		// (I O) C³Œ³•”Þ
-						mhPlcInfo* *ppPlcEnM		// (  O) C³æ•”Þ
+						mhPlcParts	 *pPlcEnR,		// (I O) C³Œ³•”Þ
+						mhPlcParts* *ppPlcEnM		// (  O) C³æ•”Þ
 				)
 {
 	MhOpt	OptC;
@@ -129,7 +129,7 @@ MINT Option::MhModOpt(
 			*ppPlcEnM = pPlcEnR;							// C³Œ³ƒŒƒR[ƒh‚ÍA‚n‚o‚sŒQ•ÏX‚È‚µ
 	} else {
 																// C³Œ³‚n‚o‚sŒQ‚É‘ž‚Ý‚n‚o‚sŒQˆÈŠO‚Ì‚n‚o‚sŒQ‚ðŠÜ‚Þê‡
-			mhPlcInfo	PlcEnM;
+			mhPlcParts	PlcEnM;
 			PlcEnM.Copy( *pPlcEnR);							// 
 
 			pOptvDN = pPlcEnR->GetPIOpt2();

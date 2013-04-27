@@ -9,8 +9,8 @@
 #include "MmWnd.h"
 #include "MmCmdMsg.h"
 
-namespace MC
-{
+//S	namespace MC
+//{
 
 /////////////////////////////////////////////////////////////////////////////
 // 部材属性コンボボックスの取得
@@ -27,7 +27,7 @@ CComboBox* CMmDialogKAttr::GetCmbBzaiAttr(
 //	部材属性ダイアログ表示・入力処理の起動(別タスクから起動)
 void CMmDialogKAttr::MmDialogKAttr()
 {
-	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
+	MC::MmWndInfo*	pWndInfo = MC::WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();
 	
 	pWnd->PostMessage(WM_MYMESSAGEKATTR);
@@ -67,7 +67,7 @@ void CMmDialogKAttr::MmDialogKAttrEnd()
 IMPLEMENT_DYNAMIC( CMmDialogKAttr, CDialog)
 
 CMmDialogKAttr::CMmDialogKAttr(CWnd* pParent /*=NULL*/)
-	: CDialog(CMmDialogKAttr::IDD, pParent)
+	: CDialogEx(CMmDialogKAttr::IDD, pParent)
 {
 	m_pParent = NULL;
 }
@@ -119,6 +119,17 @@ BEGIN_MESSAGE_MAP(CMmDialogKAttr, CDialog)
 	ON_WM_CLOSE()
 	ON_BN_CLICKED(IDOK, &CMmDialogKAttr::OnBnClickedOk)
 	ON_BN_CLICKED(IDCANCEL, &CMmDialogKAttr::OnBnClickedCancel)
+//S END_MESSAGE_MAP()
+//S BEGIN_MESSAGE_MAP(CMmDialogKAttr, CDialog)
+	ON_CBN_SELCHANGE(IDC_CMBK_BZI1, &CMmDialogKAttr::OnCbnSelchangeCmbkBzi1)
+	ON_CBN_SELCHANGE(IDC_CMBK_BZI2, &CMmDialogKAttr::OnCbnSelchangeCmbkBzi2)
+	ON_CBN_SELCHANGE(IDC_CMBK_ATTR1, &CMmDialogKAttr::OnCbnSelchangeCmbkAttr1)
+	ON_CBN_SELCHANGE(IDC_CMBK_ATTR2, &CMmDialogKAttr::OnCbnSelchangeCmbkAttr2)
+	ON_CBN_SELCHANGE(IDC_CMBK_ATTR3, &CMmDialogKAttr::OnCbnSelchangeCmbkAttr3)
+	ON_CBN_SELCHANGE(IDC_CMBK_ATTR4, &CMmDialogKAttr::OnCbnSelchangeCmbkAttr4)
+	ON_CBN_SELCHANGE(IDC_CMBK_ATTR5, &CMmDialogKAttr::OnCbnSelchangeCmbkAttr5)
+	ON_CBN_SELCHANGE(IDC_CMBK_ATTR6, &CMmDialogKAttr::OnCbnSelchangeCmbkAttr6)
+	ON_CBN_EDITCHANGE(IDC_CMBK_ATTR1, &CMmDialogKAttr::OnCbnEditchangeCmbkAttr1)
 END_MESSAGE_MAP()
 
 
@@ -202,4 +213,60 @@ BOOL CMmDialogKAttr::OnInitDialog()
 	// 例外 : OCX プロパティ ページは必ず FALSE を返します。
 }
 
+//S	}
+
+
+void CMmDialogKAttr::OnCbnSelchangeCmbkBzi1()
+{
+	// TODO: ここにコントロール通知ハンドラー コードを追加します。
+}
+
+
+void CMmDialogKAttr::OnCbnSelchangeCmbkBzi2()
+{
+	// TODO: ここにコントロール通知ハンドラー コードを追加します。
+}
+
+
+void CMmDialogKAttr::OnCbnSelchangeCmbkAttr1()
+{
+	// TODO: ここにコントロール通知ハンドラー コードを追加します。
+	int i=1;
+}
+
+
+void CMmDialogKAttr::OnCbnSelchangeCmbkAttr2()
+{
+	// TODO: ここにコントロール通知ハンドラー コードを追加します。
+}
+
+
+void CMmDialogKAttr::OnCbnSelchangeCmbkAttr3()
+{
+	// TODO: ここにコントロール通知ハンドラー コードを追加します。
+}
+
+
+void CMmDialogKAttr::OnCbnSelchangeCmbkAttr4()
+{
+	// TODO: ここにコントロール通知ハンドラー コードを追加します。
+}
+
+
+void CMmDialogKAttr::OnCbnSelchangeCmbkAttr5()
+{
+	// TODO: ここにコントロール通知ハンドラー コードを追加します。
+}
+
+
+void CMmDialogKAttr::OnCbnSelchangeCmbkAttr6()
+{
+	// TODO: ここにコントロール通知ハンドラー コードを追加します。
+}
+
+
+void CMmDialogKAttr::OnCbnEditchangeCmbkAttr1()
+{
+	// TODO: ここにコントロール通知ハンドラー コードを追加します。
+	int i=1;
 }

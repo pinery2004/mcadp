@@ -1,7 +1,7 @@
 //==========================================================================================
 //  Copyright (C) 2006-2008. K.Matsu. All rights reserved.
 //
-//  MODULE: mhPlcInfo.cpp
+//  MODULE: mhPlcParts.cpp
 //
 //		部材配置読み書き
 //
@@ -17,7 +17,7 @@
 #include "MdHist.h"
 
 #include "MhLib.h"
-#include "MhPlcInfo.h"
+#include "MhPlcParts.h"
 
 #include "MfFile.h"
 #include "MmTenkai.h"
@@ -71,7 +71,7 @@ inline	short	GetShort(
 //	部材配置レコード書き込み
 //	[返値] ステイタス     0 : 正常  -1 : 異常
 
-MINT mhPlcInfo::Save(							//
+MINT mhPlcParts::Save(							//
 				MhMdlIO*		i_phMdl			// 書き込みファイル　ハンドル
 				)
 {
@@ -127,7 +127,7 @@ MINT mhPlcInfo::Save(							//
 //	配置部材の読み込み
 //	[返値] ステイタス     0 : 正常  -1 : 異常
 
-MINT mhPlcInfo::Load(							//
+MINT mhPlcParts::Load(							//
 						MhMdlIO*	i_phMdl		// 読み込みファイル　ハンドル
 				)
 {
@@ -137,7 +137,7 @@ MINT mhPlcInfo::Load(							//
 	MINT		nVer;
 	
 	void*		pEnt;
-//	mhPlcInfo*	pPlcEn = 0;
+//	mhPlcParts*	pPlcEn = 0;
 	MhTateguInfo*	pAuxTategu;
 	JTTenkaiPr*	pAuxTenkai;
 	MhHistV*	pVer;
@@ -159,7 +159,7 @@ MINT mhPlcInfo::Load(							//
 
 	// 配置レコード開始
 
-	memset( this, 0, sizeof( mhPlcInfo));
+	memset( this, 0, sizeof( mhPlcParts));
 	ppZukei = &m_pZukei;
 
 	do {

@@ -36,7 +36,7 @@
 #include "MhLib.h"
 #include "MmPrompt.h"
 #include "MmCmd.h"
-#include "MhPlcInfo.h"
+#include "MhPlcParts.h"
 #include "MgGrp.h"
 #include "MhRoof.h"
 

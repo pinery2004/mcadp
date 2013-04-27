@@ -27,7 +27,7 @@
 
 #include "MtAskForPoint.h"
 #include "MtDefine.h"
-#include "MhInpAttr.h"
+#include "MhPlcPartsLib.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

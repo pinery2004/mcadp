@@ -17,13 +17,13 @@
 #include "MdList.h"
 #include "MlLog.h"
 
-#include "MhPlcInfo.h"
+#include "MhPlcParts.h"
 
 #include "McSystemProperty.h"
 
 #include "MmLib.h"
 #include "MhRoof.h"
-#include "MhInpAttr.h"
+//#include "MhPlcPartsLib.h"
 
 #define	 	MCMAXIESIZE		50000.								// ‰®ª–ÊÅ‘å‰œs‚«50m
 #define		MCMINKSSIZE		1.
@@ -454,10 +454,10 @@ MINT MhRoofInfo::AdjustRfm2()						// (  O) ƒXƒeƒCƒ^ƒX@0: ³í@-1: ‰®ª–ÊŒ`ó
 	MINT		ist = 0;
 	MINT		ist1;
 
-	mhPlcInfo* pHaiKabe[MAXHAIKABE+2];						// •Çƒf[ƒ^
+	mhPlcParts* pHaiKabe[MAXHAIKABE+2];						// •Çƒf[ƒ^
 	MPOSITION	pPlcPos[MAXHAIKABE+2];						// •Çƒf[ƒ^ƒŒƒR[ƒhˆÊ’u
 	MINT		nHaiKabe;										// •Ç”
-	mhPlcInfo	HaiKabeI;										// ’Ç‰Á•Ç
+	mhPlcParts	HaiKabeI;										// ’Ç‰Á•Ç
 
 	MINT		ic1, ic2, ic3b, ic3, ic4b, ic4;
 

@@ -14,7 +14,7 @@
 #include "GlLib.h"
 
 #include "MgLib.h"
-#include "MhInp.h"
+#include "MhInpPlcParts.h"
 #include "MoMdlDispList.h"
 #include "MoDispList.h"
 #define DLL_EXPORT_DISPLIST_DO

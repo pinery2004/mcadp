@@ -17,8 +17,8 @@
 #include "MdLib.h"
 #include "MdList.h"
 #include "MsBitSet.h"
-#include "MhPlcInfo.h"
-#include "MhInpAttr.h"
+#include "MhPlcParts.h"
+#include "MhPlcPartsLib.h"
 
 #define		MAXHAIKABE		500									// 配列制限値
 #define		EXPKABELN		1000								// 壁線算出用の仮延長量
@@ -44,7 +44,7 @@ void IeModel::MhNormKabe(
 																//		  >0 : 最後のnProc壁を処理する
 				)
 {
-	mhPlcInfo*	pHaiKabe[MAXHAIKABE+2];							// 壁データ
+	mhPlcParts*	pHaiKabe[MAXHAIKABE+2];							// 壁データ
 	MPOSITION	pPlcPos[MAXHAIKABE+2];							// 壁データレコード位置
 	MINT		fPlc[MAXHAIKABE+2];								// -1: 削除壁, 0: 初期からの有効壁, 1: 追加した有効壁, 
 																//  2: 追加壁と端部で交差する有効壁
@@ -52,7 +52,7 @@ void IeModel::MhNormKabe(
 																// -2: 未接続, -1: 交差, >=0: 直進接続
 	MINT		nHaiKabe, nHaiKabeI;							// 壁数
 
-	mhPlcInfo	HaiKabeI;										// 追加壁
+	mhPlcParts	HaiKabeI;										// 追加壁
 
 	MINT		ic1, ic2, icst, ics;
 	MgPoint3	po, p0, p1;
@@ -140,7 +140,7 @@ void IeModel::MhNormKabe(
 				fPlc[ic1] = -1;
 
 //D				MINT ist1;
-				mhPlcInfo *pPlcEnM;
+				mhPlcParts *pPlcEnM;
 //D				ist1 = MdPartsModify( pHaiKabe[ic1], &pPlcEnM);						//		修正先レコードを求める
 				HaitiDb::MdPartsModify( pHaiKabe[ic1], &pPlcEnM);								//		修正先レコードを求める
 
@@ -158,7 +158,7 @@ void IeModel::MhNormKabe(
 
 				HaiKabeI.m_lnPlc.p[0] = po;											//		追加壁は交差点から終点まで残す
 				pPlcPos[nHaiKabe] = HaitiDb::MdPartsAdd( &HaiKabeI, 1);						//		分割による壁を追加
-				pHaiKabe[nHaiKabe] = (mhPlcInfo*)HaitiDb::MdPartsGet( pPlcPos[nHaiKabe]);
+				pHaiKabe[nHaiKabe] = (mhPlcParts*)HaitiDb::MdPartsGet( pPlcPos[nHaiKabe]);
 
 				fPlc[nHaiKabe] = 0;
 				nHaiKabe++;
@@ -378,7 +378,7 @@ exit:;
 //DBG #ifdef _DEBUG
 //DBG	Msprintf_s( mlLog::m_Str, Mstr( "MhNormKabe ===================================\n"));
 //DBG	MBTRCPRBF;
-//DBG	BuzaiCode::MhPrintallmhPlcInfo( Mstr( "MhNormKabe"));
+//DBG	BuzaiCode::MhPrintallmhPlcParts( Mstr( "MhNormKabe"));
 //DBG #endif
 }
 

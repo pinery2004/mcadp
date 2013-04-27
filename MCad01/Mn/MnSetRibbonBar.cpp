@@ -25,7 +25,7 @@ namespace MC
 //	リボンバーの部品選択用項目を設定する
 //		組、分類、部品タイプ、寸法型式
 //
-MINT mnInpAttr::SetRibbonBar(					// ステイタス 0:正常 -1:エラー
+MINT mnIoPartsAttr::SetRibbonBar(					// ステイタス 0:正常 -1:エラー
 						MPKOSEI		i_irbKumi,			// 構造	組
 						MPBUNRUI	i_irbBunrui,		// 構造	分類
 						MCHAR*		i_crbPartsSpec,		// 部品種類
@@ -52,7 +52,8 @@ MINT mnInpAttr::SetRibbonBar(					// ステイタス 0:正常 -1:エラー
 		} else {
 			iAttr = MP_AT_AUTO;
 		}
-		z_mnIA.InitComboAttr( iAttr);								// 属性入力用コンボボックスを初期化する
+//S		z_mnIA.InitComboAttr( iAttr);								// 属性入力用コンボボックスを初期化する
+		z_mmIA.InitComboAttr( iAttr);								// 属性入力用コンボボックスを初期化する
 	}
 	WindowCtrl::MmWndKReDraw();
 

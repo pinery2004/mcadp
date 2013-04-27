@@ -27,7 +27,7 @@
 #include "MdList.h"
 #include "MhLib.h"
 
-#include "MhInp.h"
+#include "MhInpPlcParts.h"
 
 #include "MdOpt.h"
 #include "MdLib.h"
@@ -42,7 +42,7 @@ namespace MC
 //	線分を表示する
 void MmWndKDrawLine(
 						msCod*			pCod,		// 座標系
-						mhPlcInfo		*pPlcEn,	// 配置レコード
+						mhPlcParts		*pPlcEn,	// 配置レコード
 						MPENSTYLE		LineType,	// 線種
 						MSYSTEMCOLOR	iLineColor,	// 線色コード
 						MgVect2			vSinZ		// 芯ずれ
@@ -67,7 +67,7 @@ void MmWndKDrawLine(
 													//		0:配置線分を表示、
 													//		1:配置線分または図形を表示
 						msCod*			pCod,		// 座標系
-						mhPlcInfo		*pPlcEn,	// 配置レコード
+						mhPlcParts		*pPlcEn,	// 配置レコード
 						MPENSTYLE		LineType,	// 線種
 						MSYSTEMCOLOR	iLineColor,	// 線色コード
 						MgVect2			vSinZ		// 芯ずれ
@@ -102,7 +102,7 @@ void WindowCtrl::MmWndKDrawKabe(
 				)
 {
 	MPOSITION	pos1;
-	mhPlcInfo	*pPlcEn;
+	mhPlcParts	*pPlcEn;
 	MINT		iEnKai;
 //	MsBitSet	*pOptv;
 //	MsBitSet*	pHstv;

@@ -33,7 +33,7 @@ static MINT		z_iComboPlcCd;
 ///////////////////////////////////////////////////////////////////////////////
 //	カレントの入力点区分を設定し、入力点区分選択用のコンボボックスに表示する
 //
-void mnInpAttr::SelectComboInpKbnByInpKbnCd(
+void mnIoPartsAttr::SelectComboInpKbnByInpKbnCd(
 						MINT		iCdInpKb		// (I  ) 入力点区分
 				)
 {
@@ -49,7 +49,7 @@ void mnInpAttr::SelectComboInpKbnByInpKbnCd(
 //							＝4 : 区画入力
 //							＝5 : 自由入力
 //
-MINT mnInpAttr::GetComboInpKbCd()
+MINT mnIoPartsAttr::GetComboInpKbCd()
 {
 	return z_iComboInpKbCd;
 }
@@ -58,7 +58,7 @@ MINT mnInpAttr::GetComboInpKbCd()
 //	カレントの丸めコードを設定し、コンボボックスに丸めコードを表示する
 //
 
-void mnInpAttr::SelectComboMarumeByMarumeCd(
+void mnIoPartsAttr::SelectComboMarumeByMarumeCd(
 						MINT		iCdMarume		// (I  ) 丸めコード
 					)
 {
@@ -76,7 +76,7 @@ void mnInpAttr::SelectComboMarumeByMarumeCd(
 //							＝5 : １／６グリッド丸め
 //							＝6 : １／８グリッド丸め
 
-MINT mnInpAttr::GetComboMarumeCd()
+MINT mnIoPartsAttr::GetComboMarumeCd()
 {
 	MINT	iMCD;
 
@@ -96,7 +96,7 @@ MINT mnInpAttr::GetComboMarumeCd()
 //	カレントの配置コードを設定し、コンボボックスに配置コードを表示する
 //
 
-void mnInpAttr::SelectComboPlcCdByPlcCd(
+void mnIoPartsAttr::SelectComboPlcCdByPlcCd(
 						MINT		iCdPlc		// (I  ) 配置コード
 					)
 {
@@ -112,7 +112,7 @@ void mnInpAttr::SelectComboPlcCdByPlcCd(
 //							＝1 : 壁芯付き
 //							＝2 : 屋根構成線付き
 
-MINT mnInpAttr::GetComboPlcCd()
+MINT mnIoPartsAttr::GetComboPlcCd()
 {
 	return z_iComboPlcCd;
 }

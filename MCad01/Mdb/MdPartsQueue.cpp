@@ -23,7 +23,7 @@
 #include "MgPolygon.h"
 
 #define DLL_EXPORT_HAITIIN_DO
-#include "MnInpAttr.h"
+#include "MnIoPartsAttr.h"
 #include "MdLib.h"
 
 #include "MhDefParts.h"
@@ -34,7 +34,7 @@
 
 #include "MdPartsQueue.h"
 #define DLL_EXPORT_IEMODEL_DO
-#include "MhPlcInfo.h"
+#include "MhPlcParts.h"
 
 namespace MC
 {
@@ -43,7 +43,7 @@ extern	int iCht2_IO;
 extern	int iCnw_IO;
 #endif
 
-static	MdPartsQueue	z_PartsQueue( 100, sizeof( mhPlcInfo));		// 家モデル保存領域
+static	MdPartsQueue	z_PartsQueue( 100, sizeof( mhPlcParts));		// 家モデル保存領域
 static	bool		z_modIeModel = false;
 
 /////////////////////////////////////////////////////////////////////////////
@@ -81,7 +81,7 @@ MdPartsQueue::~MdPartsQueue( void)
 //	部品配置キューの先頭に[部品配置]を追加する。
 //	レコードの属性領域は追加したレコードに引渡し、引数のレコードはイニシャライズする。
 MPOSITION MdPartsQueue::Push(						// 追加レコード位置
-						mhPlcInfo*	i_pPlcEn	// 部品配置管理情報
+						mhPlcParts*	i_pPlcEn	// 部品配置管理情報
 				)
 {
 	MPOSITION	pos;
@@ -96,7 +96,7 @@ MPOSITION MdPartsQueue::Push(						// 追加レコード位置
 //	部品配置キューの後尾に[部品配置]を追加する
 //	レコードの属性領域は追加したレコードに引渡し、引数のレコードはイニシャライズする。
 MPOSITION MdPartsQueue::Inject(					// 追加レコード位置
-						mhPlcInfo*	i_pPlcEn	// 部品配置管理情報
+						mhPlcParts*	i_pPlcEn	// 部品配置管理情報
 				)
 {
 	MPOSITION	pos;
@@ -111,9 +111,9 @@ MPOSITION MdPartsQueue::Inject(					// 追加レコード位置
 void MdPartsQueue::RemoveAll( void)
 {
 	MPOSITION	pos1;
-	mhPlcInfo	*PlcEn;
+	mhPlcParts	*PlcEn;
 
-	for (PlcEn=(mhPlcInfo*)this->GetHead( &pos1); PlcEn!=0; PlcEn= (mhPlcInfo*)this->GetNext( &pos1)) {
+	for (PlcEn=(mhPlcParts*)this->GetHead( &pos1); PlcEn!=0; PlcEn= (mhPlcParts*)this->GetNext( &pos1)) {
 		PlcEn->FreeAllAtr();
 	}
 		
@@ -142,13 +142,13 @@ void HaitiDb::MdPartsDelete(
 				)
 {
 	MINT		ist1;
-	mhPlcInfo	*pPlcEn;
+	mhPlcParts	*pPlcEn;
 	MsBitSet	*pOptvRN, *pOptvDN;
 	MsBitSet	HstvMod;
 	MsBitSet	*pHstvR, *pHstvMod;
-	mhPlcInfo	*pPlcEnM;										// カレントバージョンのみ削除対象のＯＰＴ群を削除
+	mhPlcParts	*pPlcEnM;										// カレントバージョンのみ削除対象のＯＰＴ群を削除
 
-	pPlcEn = ( mhPlcInfo*)( i_pPosition + z_PartsQueue.GetSizeOfHd());
+	pPlcEn = ( mhPlcParts*)( i_pPosition + z_PartsQueue.GetSizeOfHd());
 	pOptvRN = pPlcEn->GetPIOpt1();
 	pOptvDN = pPlcEn->GetPIOpt2();
 	if ( Option::MhDelOpt( &pOptvRN, &pOptvDN) == 3) {					// Delete Opt ⊂ Plc Opt	（部品配置のＯＰＴ群が削除ＯＰＴ群より広範囲）
@@ -184,13 +184,13 @@ void HaitiDb::MdPartsDelete(
 /////////////////////////////////////////////////////////////////////////////
 //	部品配置を修正する
 void HaitiDb::MdPartsModify(
-						mhPlcInfo* io_pPlcEnR,	// 修正元部材
-						mhPlcInfo* *o_ppPlcEnM	// 修正先部材
+						mhPlcParts* io_pPlcEnR,	// 修正元部材
+						mhPlcParts* *o_ppPlcEnM	// 修正先部材
 				)
 {
 	MINT	ist1, ist2;
-	mhPlcInfo	*pPlcEnM1;										// 
-	mhPlcInfo	*pPlcEnM2;										// 
+	mhPlcParts	*pPlcEnM1;										// 
+	mhPlcParts	*pPlcEnM2;										// 
 
 	ist1 = Option::MhModOpt( io_pPlcEnR, &pPlcEnM1);
 	ist2 = MhOpt::MhHistMod( pPlcEnM1, &pPlcEnM2);
@@ -202,7 +202,7 @@ void HaitiDb::MdPartsModify(
 //	部品配置を追加する
 //	レコードの属性領域は追加したレコードに引渡し、引数のレコードはイニシャライズする。
 MPOSITION HaitiDb::MdPartsAdd(
-						mhPlcInfo*	i_pPlcEn,	// 部品配置管理情報
+						mhPlcParts*	i_pPlcEn,	// 部品配置管理情報
 						MINT		i_fdispCtrl	// 表示制御フラグ
 												//		 0: ＯＰＴ群ｾｯﾄ・展開ｺｰﾄﾞ・履歴管理ｺｰﾄﾞを追加しない
 												//			外部ファイルからＤＢへ取り込み時にそのまま書き込むため使用する
@@ -229,7 +229,7 @@ MPOSITION HaitiDb::MdPartsAdd(
 	
 #if( TRACE_IO)
 	TRACE( " ○	================================================================\n ○	%d: MdPartsAdd\n ○	", iCht2_IO++);
-	for( int i=0; i<sizeof( mhPlcInfo)/4; i++) {
+	for( int i=0; i<sizeof( mhPlcParts)/4; i++) {
 		if( i == 7 || i == 8) {
 			TRACE( " ********");
 		} else {
@@ -247,11 +247,11 @@ MPOSITION HaitiDb::MdPartsAdd(
 
 //////////////////////////////////////////////////////////////
 //	指定ノードの部品配置を取得する
-mhPlcInfo* HaitiDb::MdPartsGet(
+mhPlcParts* HaitiDb::MdPartsGet(
 						MPOSITION	i_pPosition		// [部品配置]位置
 				)
 {
-	return ( mhPlcInfo*)z_PartsQueue.GetAt( &i_pPosition);
+	return ( mhPlcParts*)z_PartsQueue.GetAt( &i_pPosition);
 }
 
 static MPOSITION	z_PartsPos;
@@ -259,27 +259,27 @@ static MPOSITION	z_PartsPos;
 /////////////////////////////////////////////////////////////////////////////
 //	先頭の部品配置を取得する
 //	返値 =NULL: レコードなし !=NULL: 読み込み[部品配置]位置
-mhPlcInfo* HaitiDb::MdGetHeadParts(
+mhPlcParts* HaitiDb::MdGetHeadParts(
 						MPOSITION*	o_pPartsPos		// [部品配置]位置
 				)
 {
 	if ( o_pPartsPos)
-		return (mhPlcInfo*)z_PartsQueue.GetHead( o_pPartsPos);
+		return (mhPlcParts*)z_PartsQueue.GetHead( o_pPartsPos);
 	else
-		return (mhPlcInfo*)z_PartsQueue.GetHead( &z_PartsPos);
+		return (mhPlcParts*)z_PartsQueue.GetHead( &z_PartsPos);
 }
 
 /////////////////////////////////////////////////////////////////////////////
 //	次の部品配置を取得する
 //	返値 =NULL: レコードなし !=NULL: 読み込み[部品配置]位置
-mhPlcInfo* HaitiDb::MdGetNextParts(
+mhPlcParts* HaitiDb::MdGetNextParts(
 						MPOSITION*	io_pPartsPos		// [部品配置]位置
 				)
 {
 	if ( io_pPartsPos)
-		return (mhPlcInfo*)z_PartsQueue.GetNext( io_pPartsPos);
+		return (mhPlcParts*)z_PartsQueue.GetNext( io_pPartsPos);
 	else
-		return (mhPlcInfo*)z_PartsQueue.GetNext( &z_PartsPos);
+		return (mhPlcParts*)z_PartsQueue.GetNext( &z_PartsPos);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -293,21 +293,21 @@ bool HaitiDb::MdIsNotEmptyParts()							// 部品配置の有無 true: 部品配置有り/ fa
 /////////////////////////////////////////////////////////////////////////////
 //	家モデルＤ／Ｂの最後に部品配置を追加する
 
-mhPlcInfo* HaitiDb::MdInjectParts(
-						mhPlcInfo*	i_pPlcEn	// 部品配置管理情報
+mhPlcParts* HaitiDb::MdInjectParts(
+						mhPlcParts*	i_pPlcEn	// 部品配置管理情報
 				)
 {
 	MPOSITION	pPosition;
 
 	pPosition = z_PartsQueue.Inject( i_pPlcEn);
-	return (mhPlcInfo*)z_PartsQueue.GetAt( &pPosition);
+	return (mhPlcParts*)z_PartsQueue.GetAt( &pPosition);
 }
 
 /////////////////////////////////////////////////////////////////////////////
 //	家モデルＤ／Ｂの最後の部品配置を取得する
 
 void HaitiDb::MdEjectParts(
-						mhPlcInfo*	o_pPlcEn	// 部品配置管理情報
+						mhPlcParts*	o_pPlcEn	// 部品配置管理情報
 				)
 {
 	z_PartsQueue.Eject( o_pPlcEn);

@@ -16,7 +16,7 @@ namespace MC
 
 // 部品配置のオプションと履歴のチェック
 // 
-inline bool MmChkValidParts( mhPlcInfo*	pPlcEn) 
+inline bool MmChkValidParts( mhPlcParts*	pPlcEn) 
 {
 	MsBitSet* pOptv1;
 	MsBitSet* pOptv2;

@@ -19,8 +19,8 @@
 #include "MdLib.h"
 #include "MdList.h"
 #include "MsBitSet.h"
-#include "MhPlcInfo.h"
-#include "MhInpAttr.h"
+#include "MhPlcParts.h"
+#include "MhPlcPartsLib.h"
 
 #define		MAXHAIKISO		500									// 配列制限値
 #define		EXPKISOLN		1000								// 基礎線算出用の仮延長量
@@ -46,14 +46,14 @@ void IeModel::MhNormKiso(
 																//		  >0 : 最後のnProc基礎を処理する
 				)
 {
-	mhPlcInfo* pHaiKiso[MAXHAIKISO+2];						// 基礎データ
+	mhPlcParts* pHaiKiso[MAXHAIKISO+2];						// 基礎データ
 	MPOSITION	pPlcPos[MAXHAIKISO+2];						// 基礎データレコード位置
 	MINT		fPlc[MAXHAIKISO+2];							// -1: 削除基礎, 0: 初期からの有効基礎, 1: 追加した有効基礎, 
 																//  2: 追加基礎と端部で交差する有効基礎
 	MINT		iPlcCn[2];									// 始点、終点での他基礎との交差状況
 																// -2: 未接続, -1: 交差, >=0: 直進接続
 	MINT		nHaiKiso, nHaiKisoI;							// 基礎数
-	mhPlcInfo	HaiKisoI;										// 追加基礎
+	mhPlcParts	HaiKisoI;										// 追加基礎
 
 	MINT		ic1, ic2, icst, ics;
 	MgPoint3	po, p0, p1;
@@ -150,7 +150,7 @@ void IeModel::MhNormKiso(
 
 				HaiKisoI.m_lnPlc.p[0] = po;										//		追加基礎は交差点から終点まで残す
 				pPlcPos[nHaiKiso] = HaitiDb::MdPartsAdd( &HaiKisoI, 1);						//		分割による基礎を追加
-				pHaiKiso[nHaiKiso] = (mhPlcInfo*)HaitiDb::MdPartsGet( pPlcPos[nHaiKiso]);
+				pHaiKiso[nHaiKiso] = (mhPlcParts*)HaitiDb::MdPartsGet( pPlcPos[nHaiKiso]);
 				fPlc[nHaiKiso] = 0;
 				nHaiKiso++;
 				break;

@@ -33,11 +33,11 @@
 
 #include "MmWnd.h"
 #include "Mmlib.h"
-#include "MhPlcInfo.h"
-#include "MhInp.h"
+#include "MhPlcParts.h"
+#include "MhInpPlcParts.h"
 #include "MhLib.h"
 #include "MsDefFunc.h"
-#include "MnInpAttr.h"
+#include "MnIoPartsAttr.h"
 #include "MmCmd.h"
 
 
@@ -333,7 +333,7 @@ BOOL CMCadApp::InitInstance()
 		return FALSE;
 
 	MC::z_mnIA.InitComboPartsNm();												// 組、分類に対応する部品を選択可能項目として設定する
-	MC::z_mnIA.InitComboAttr( MP_AT_HRZ_PARTS);									// 属性入力用コンボボックスを初期化する
+//S	MC::z_mnIA.InitComboAttr( MP_AT_HRZ_PARTS);									// 属性入力用コンボボックスを初期化する
 
 	//// ウィンドウのオープン
 	MC::WindowCtrl::MmWndSetSyubetsuC( 2, MTHEIMENZU, 1, 1);

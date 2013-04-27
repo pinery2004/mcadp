@@ -23,7 +23,7 @@ namespace MC
 //	図形データ
 class	MhZukei
 {
-	friend	class	mhPlcInfo;
+	friend	class	mhPlcParts;
 public:
 	MUBYTE				m_ibObj;								// 使用目的
 																//  MHZK_DISP	: 図形表示用

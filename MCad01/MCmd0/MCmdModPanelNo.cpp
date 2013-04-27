@@ -23,7 +23,7 @@
 */
 #define		MMAX_NPANEL				500
 #include "MmValid.h"
-#include "MhInpAttr.h"
+//#include "MhPlcPartsLib.h"
 
 namespace MC
 {
@@ -40,9 +40,9 @@ void MCmdMdPanelNo()
 	MINT		iBuzaiCd;
 	MgPolyg2	pgHitBzi;
 	
-	mhPlcInfo* pPtInfo[MMAX_NPANEL];							// パネル配置情報
-	mhPlcInfo* pPtInfo1;
-	mhPlcInfo* pPlcEn;
+	mhPlcParts* pPtInfo[MMAX_NPANEL];							// パネル配置情報
+	mhPlcParts* pPtInfo1;
+	mhPlcParts* pPlcEn;
 	MPOSITION	posH;
 //	MsBitSet*	pOptv;
 //	MsBitSet*	pHstv;

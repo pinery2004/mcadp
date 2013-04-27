@@ -30,10 +30,10 @@
 #include "MdList.h"
 #include "MhLib.h"
 
-#include "MhPlcInfo.h"
+#include "MhPlcParts.h"
 
 #include "MmPrompt.h"
-#include "MhInpAttr.h"
+#include "MhPlcPartsLib.h"
 
 #define		MAXHAIKABE		500									// 配列制限値
 #define		MC_KABE_TOL		44.5								// 壁判定トレランス
@@ -53,7 +53,7 @@ void mhInput::GetMarumeKabeLine(
 	MINT		ist1;
 	MINT		iCdMarume;
 	MREAL		rTol;
-	mhPlcInfo*	pHaiKabe[MAXHAIKABE];				// 壁データ
+	mhPlcParts*	pHaiKabe[MAXHAIKABE];				// 壁データ
 	MINT		nHaiKabe;							// 壁数
 	MINT		ic2;
 	MgLine2		ln1;

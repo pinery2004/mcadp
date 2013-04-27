@@ -11,7 +11,7 @@
 #include "stdafx.h"
 #include "MrAPI.h"
 //#include "MhParts1.h"
-#include "MhInpAttr.h"
+//#include "MhPlcPartsLib.h"
 
 namespace MC
 {
@@ -37,16 +37,16 @@ namespace MC
 
 	MINT		iBuzaiCd;
 	MgPolyg2	pgHitBzi;
-	mhPlcInfo* pBziInfo1;
-	mhPlcInfo* pBziInfo2;
-	mhPlcInfo* pbTchBziI[MSZ_CROSS_BZI];
-	mhPlcInfo* pbCrsBziI[MSZ_CROSS_BZI];
-	mhPlcInfo* pbTchBziO[MSZ_CROSS_BZI];
-	mhPlcInfo* pbCrsBziO[MSZ_CROSS_BZI];
+	mhPlcParts* pBziInfo1;
+	mhPlcParts* pBziInfo2;
+	mhPlcParts* pbTchBziI[MSZ_CROSS_BZI];
+	mhPlcParts* pbCrsBziI[MSZ_CROSS_BZI];
+	mhPlcParts* pbTchBziO[MSZ_CROSS_BZI];
+	mhPlcParts* pbCrsBziO[MSZ_CROSS_BZI];
 
-	mhPlcInfo* pbFRtoTCBzi[MSZ_CROSS_BZI];
-	mhPlcInfo* pbTCtoFRBzi[MSZ_CROSS_BZI];
-	mhPlcInfo* pbTCtoTCBzi[MSZ_CROSS_BZI];
+	mhPlcParts* pbFRtoTCBzi[MSZ_CROSS_BZI];
+	mhPlcParts* pbTCtoFRBzi[MSZ_CROSS_BZI];
+	mhPlcParts* pbTCtoTCBzi[MSZ_CROSS_BZI];
 
 	Msg::ClearErrorMsg();
 	Msg::OperationMsg( MC_OPRT_MOD_BUZAI);							// ステイタスバーの操作表示部へ"部材修正"を表示

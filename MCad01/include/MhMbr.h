@@ -20,7 +20,7 @@ namespace MC
 
 class	MhMbr									// 寸法型式レコード
 {
-	friend	class	mhPlcInfo;
+	friend	class	mhPlcParts;
 
 	friend	void	MhLoadPartsMst();
 

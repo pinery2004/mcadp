@@ -14,7 +14,7 @@
 #include "MgLib.h"
 #include "McSystemProperty.h"
 
-#include "MhInp.h"
+#include "MhInpPlcParts.h"
 #define DLL_EXPORT_MDLDISPLIST_DO
 #include "MoMdlDispList.h"
 
@@ -53,7 +53,7 @@ static	GLuint	z_DispListMat[10];			// マテリアルディスプレイリスト
 //	【機能】パネルの形状を求める
 //			
 void Panelfig( 
-						mhPlcInfo	*i_pPlcEn,		// パネル
+						mhPlcParts	*i_pPlcEn,		// パネル
 				const	MgPoint3	&PtCtr,
 						MREAL		rB,
 						MgPoint3	PT[2][2][2],	// 頂点座標
@@ -153,7 +153,7 @@ void Panelfig(
 //	【機能】パネルのディスプレイリストを作成する
 //			
 void MdlDispList::DrawPanel( 
-						mhPlcInfo*	i_pPlcEn,	// パネル配置情報
+						mhPlcParts*	i_pPlcEn,	// パネル配置情報
 				const	MgPoint3	&i_PtCtr,	//
 						MREAL		i_rB,		//
 						MINT		i_iMode		// 表示モード 1:パネル上部線分 2:パネル形状直方体 3:線分+パネル形状

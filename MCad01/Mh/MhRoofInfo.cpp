@@ -82,7 +82,7 @@ MINT MhRoofInfo::Load(							//
 	MINT		iType;
 	MINT		iSize;
 	void*		pEnt;
-	mhPlcInfo*	pPlcEn = 0;
+	mhPlcParts*	pPlcEn = 0;
 																				//	MhRoofInfo*		pRoofEn;
 	MhJim*		pJim1;
 	MhRfm*		pRfm;

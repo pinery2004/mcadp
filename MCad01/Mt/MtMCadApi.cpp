@@ -15,7 +15,7 @@
 #include "MmCmdMsg.h"
 #include "MtPrcEventQueue.h"
 #include "MtMCadApi.h"
-#include "MnInpAttr.h"
+#include "MnIoPartsAttr.h"
 
 //#include "MCADLib.h"
 

@@ -3,12 +3,9 @@
 #include "MhDefParts.h"
 #include "MmDialogKAttr.h"
 
-namespace MC
-{
-
 // CMmDialogKAttr ダイアログ
 
-class CMmDialogKAttr : public CDialog
+class CMmDialogKAttr : public CDialogEx
 {
 	DECLARE_DYNAMIC(CMmDialogKAttr)
 
@@ -88,7 +85,14 @@ public:
 	afx_msg void OnBnClickedOk();
 	afx_msg void OnBnClickedCancel();
 	virtual BOOL OnInitDialog();
+
+	afx_msg void OnCbnSelchangeCmbkBzi1();
+	afx_msg void OnCbnSelchangeCmbkBzi2();
+	afx_msg void OnCbnSelchangeCmbkAttr1();
+	afx_msg void OnCbnSelchangeCmbkAttr2();
+	afx_msg void OnCbnSelchangeCmbkAttr3();
+	afx_msg void OnCbnSelchangeCmbkAttr4();
+	afx_msg void OnCbnSelchangeCmbkAttr5();
+	afx_msg void OnCbnSelchangeCmbkAttr6();
+	afx_msg void OnCbnEditchangeCmbkAttr1();
 };
-
-}
-

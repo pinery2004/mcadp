@@ -35,8 +35,8 @@
 #include "MhRoof.h"
 #include "MdLib.h"
 
-#include "MhInp.h"
-#include "MhInpAttr.h"
+#include "MhInpPlcParts.h"
+//#include "MhPlcPartsLib.h"
 
 #include "MdOpt.h"
 
