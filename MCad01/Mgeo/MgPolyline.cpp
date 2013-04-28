@@ -228,11 +228,11 @@ void MgPolyl2::Print( MCHAR* s) const
 {
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr("%s	MgPolyl2	サイズ: %d, 頂点数: %d\n"), s, m_isz, m_n);
-	MBTRCPRBF;
+	MBLOGPRBF;
 	for (int ic=0; ic<m_n; ic++) {
 		Msprintf_s( mlLog::m_Str, Mstr( "			P[%2d]: (%7.1f,%7.1f)\n"),
 						  ic, m_p[ic].x, m_p[ic].y);
-		MBTRCPRBF;
+		MBLOGPRBF;
 	}
 #endif
 }
@@ -422,11 +422,11 @@ void MgPolyl3::Print( MCHAR* s) const							// Print
 {
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgPolyl3 サイズ: %d, 頂点数: %d\n"), s, m_isz, m_n);
-	MBTRCPRBF;
+	MBLOGPRBF;
 	for (int ic=0; ic<m_n; ic++) {
 		Msprintf_s( mlLog::m_Str, Mstr( "			P[%2d]: (%7.1f,%7.1f,%7.1f)\n"),
 									ic, m_p[ic].x, m_p[ic].y, m_p[ic].z);
-		MBTRCPRBF;
+		MBLOGPRBF;
 	}
 #endif
 }
@@ -637,7 +637,7 @@ void MgGPolyl2::Print( MCHAR* s) const							// Print
 {
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgGPolyl2	サイズ: %d, ポリゴン数: %d\n"), s, m_isz, m_n);
-	MBTRCPRBF;
+	MBLOGPRBF;
 	for (int ic=0; ic<m_n; ic++)
 		m_pg[ic].Print( Mstr( "MgGPolyl2"));
 #endif
@@ -864,7 +864,7 @@ void MgGPolyl3::Print( MCHAR* s) const							// Print
 {
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgGPolyl3	サイズ: %d, ポリゴン数: %d\n"), s, m_isz, m_n);
-	MBTRCPRBF;
+	MBLOGPRBF;
 	for (int ic=0; ic<m_n; ic++)
 		m_pg[ic].Print( Mstr( "MgGPolyl3"));
 #endif

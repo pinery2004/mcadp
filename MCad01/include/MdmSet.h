@@ -76,7 +76,7 @@ inline void MdeRfC::Print( MCHAR* s, MINT i_i)
 	Msprintf_s( mlLog::m_Str,
 			  Mstr( "・%s < MdeRfC > ID = %d, 関係コード = %d, 属性コード = %d, ループコード = %d, 子ID = %d\n"),
 			  s, i_i, m_iC, m_iA, m_iLp, m_idC);
-	MBTRCPRBF;
+	MBLOGPRBF;
 #endif
 }
 
@@ -154,7 +154,7 @@ inline void MdAryH_F_D<T>::Print( MCHAR* i_s, MINT i_i)
 											i_s, i_i, m_idSpaceLast, m_nidSpace);
 		}
 	}
-	MBTRCPRBF;
+	MBLOGPRBF;
 	// グループ(セット)有効データ出力
 	int iG;
 	for ( iG=1; iG<=m_n; iG++) {
@@ -170,7 +170,7 @@ inline void MdAryH_F_D<T>::Print( MCHAR* i_s, MINT i_i)
 	idDelTrc =  m_idSpaceLast;
 
 	if ( idDelTrc)
-		MBTRCPRINTI( Mstr( "\tLAST削除ID"), idDelTrc);
+		MBLOGPRINTI( Mstr( "\tLAST削除ID"), idDelTrc);
 
 	for ( ; GidSpNext.m_n < m_nidSpace && idDelTrc; ) {
 		GidSpNext += MDSPACENEXT( &m_pst[MIDtoHN( idDelTrc)]);
@@ -179,8 +179,8 @@ inline void MdAryH_F_D<T>::Print( MCHAR* i_s, MINT i_i)
 	}
 
 	if ( GidSpNext.m_n) {
-		MBTRCPRINTIN( Mstr( "\t削除NextIDセット"), GidSpNext.m_pst, GidSpNext.m_n);
-		MBTRCPRINTIN( Mstr( "\t削除BeforeIDセット"), GidSpBefore.m_pst, GidSpBefore.m_n);
+		MBLOGPRINTIN( Mstr( "\t削除NextIDセット"), GidSpNext.m_pst, GidSpNext.m_n);
+		MBLOGPRINTIN( Mstr( "\t削除BeforeIDセット"), GidSpBefore.m_pst, GidSpBefore.m_n);
 	}
 #endif
 }

@@ -40,7 +40,7 @@ namespace MC
 
 MINT WindowCtrl::MmWndKReDraw() 
 {
-	MmWndInfo* pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントのウィンドウ管理情報取得
+	MmWndInfo* pWndInfo = WindowCtrl::MmWndKGetCurWnd();		// カレントのウィンドウ管理情報取得
 	pWndInfo->ClearMDC();
 	WindowCtrl::MmWndKDrawMDC( pWndInfo);
 
@@ -126,8 +126,8 @@ void WindowCtrl::MmWndKDrawMDC(								// ステイタス　0:正常  1:エラー
 
 	//	メモリーＤＣに表示
 	WindowCtrl::MmWndKDrawGrid( i_pWndInfo, pCod);
-	MINT iKaiC = z_mnIA.GetInpKai();									// 現在の階
-	MINT iGpC = z_mnIA.GetKCdGp();									// 現在の構成
+	MINT iKaiC = z_mnIA.GetInpKai();							// 現在の階
+	MINT iGpC = z_mnIA.GetKCdGp();								// 現在の構成
 	WindowCtrl::MmWndKDrawKabe( pCod, iKaiC, iGpC);
 	WindowCtrl::MmWndKDrawKiso( pCod, iKaiC, iGpC);
 	WindowCtrl::MmWndKDrawParts( pCod, iKaiC, iGpC);

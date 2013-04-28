@@ -96,7 +96,7 @@ LRESULT CMainFrame::OnRibbonIO( UINT wParam, LONG lParam)
 		MC::z_mnIA.SetComboAttrR( MC_CMB_HAIZ, MC::z_mnIA.m_rCdArg2);
 		break;
 	case MGET_COMBO_ATTRA:
-		MC::z_mnIA.GetComboAttrA();
+		MC::z_mmIA.GetComboAttrA();
 		break;
 	case MSET_COMBO_PARTS:
 		MC::z_mnIA.InitComboParts();

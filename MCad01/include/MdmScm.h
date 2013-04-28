@@ -105,7 +105,7 @@ inline void MdmSetSCM::Print( MCHAR* s, MINT i_i)
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "\t%3d: %s	< MdmSetSCM > 親ID = %d\n"),
 									i_i, m_psName, m_idP);
-	MBTRCPRBF;
+	MBLOGPRBF;
 	m_GidC.Print( Mstr( "子レイヤーID群"), MDC_NONE_ID);
 #endif
 }

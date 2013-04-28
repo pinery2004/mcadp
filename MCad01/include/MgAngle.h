@@ -32,7 +32,7 @@ namespace MC
 //						{ 
 //#ifdef _DEBUG
 //							Msprintf_s( mlLog::m_Str, Mstr( "MgAngleR   %s	= %f\n"), s, a);
-//							MBTRCPRBF;
+//							MBLOGPRBF;
 //#endif
 //						}
 //};
@@ -55,7 +55,7 @@ namespace MC
 //				 		{
 //#ifdef _DEBUG
 //							Msprintf_s( mlLog::m_Str, Mstr( "MgAngleV   %s = (%f, %f)\n"), s, x, y);
-//							MBTRCPRBF;
+//							MBLOGPRBF;
 //#endif
 //						}
 //};

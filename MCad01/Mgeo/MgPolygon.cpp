@@ -228,11 +228,11 @@ void MgPolyg2::Print( MCHAR* s) const
 {
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgPolyg2	サイズ: %d, 頂点数: %d\n"), s, m_isz, m_n);
-	MBTRCPRBF;
+	MBLOGPRBF;
 	for (int ic=0; ic<m_n; ic++) {
 		Msprintf_s( mlLog::m_Str, Mstr( "			P[%2d]: (%7.1f,%7.1f)\n"),
 						  ic, m_p[ic].x, m_p[ic].y);
-		MBTRCPRBF;
+		MBLOGPRBF;
 	}
 #endif
 }
@@ -422,11 +422,11 @@ void MgPolyg3::Print( MCHAR* s) const							// Print
 {
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgPolyg3 サイズ: %d, 頂点数: %d\n"), s, m_isz, m_n);
-	MBTRCPRBF;
+	MBLOGPRBF;
 	for (int ic=0; ic<m_n; ic++) {
 		Msprintf_s( mlLog::m_Str, Mstr( "			P[%2d]: (%7.1f,%7.1f,%7.1f)\n"),
 									ic, m_P[ic].x, m_P[ic].y, m_P[ic].z);
-		MBTRCPRBF;
+		MBLOGPRBF;
 	}
 #endif
 }
@@ -637,7 +637,7 @@ void MgGPolyg2::Print( MCHAR* s) const							// Print
 {
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgGPolyg2	サイズ: %d, ポリゴン数: %d\n"), s, m_isz, m_n);
-	MBTRCPRBF;
+	MBLOGPRBF;
 	for (int ic=0; ic<m_n; ic++)
 		m_pg[ic].Print( Mstr( "MgGPolyg2"));
 #endif
@@ -864,7 +864,7 @@ void MgGPolyg3::Print( MCHAR* s) const							// Print
 {
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgGPolyg3	サイズ: %d, ポリゴン数: %d\n"), s, m_isz, m_n);
-	MBTRCPRBF;
+	MBLOGPRBF;
 	for (int ic=0; ic<m_n; ic++)
 		m_Pg[ic].Print( Mstr( "MgGPolyg3"));
 #endif
@@ -1024,12 +1024,12 @@ void MgGLine2::Print( MCHAR* s) const
 {
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgGLine2	サイズ: %d, 線分数: %d\n"), s, m_isz, m_n);
-	MBTRCPRBF;
+	MBLOGPRBF;
 	for (int ic=0; ic<m_n; ic++) {
 		Msprintf_s( mlLog::m_Str, Mstr( "			ln[%2d]: (%7.1f,%7.1f,%7.1f,%7.1f)\n"),
 						  ic, m_ln[ic].p[0].x, m_ln[ic].p[0].y,
 						      m_ln[ic].p[1].x, m_ln[ic].p[1].y);
-		MBTRCPRBF;
+		MBLOGPRBF;
 	}
 #endif
 }
@@ -1206,12 +1206,12 @@ void MgGLine3::Print( MCHAR* s) const
 {
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgGLine3	サイズ: %d, 線分数: %d\n"), s, m_isz, m_n);
-	MBTRCPRBF;
+	MBLOGPRBF;
 	for (int ic=0; ic<m_n; ic++) {
 		Msprintf_s( mlLog::m_Str, Mstr( "			ln[%2d]: (%7.1f,%7.1f,%7.1f),(%7.1f,%7.1f,%7.1f)\n"),
 						  ic, m_ln[ic].p[0].x, m_ln[ic].p[0].y, m_ln[ic].p[0].z,
 						      m_ln[ic].p[1].x, m_ln[ic].p[1].y, m_ln[ic].p[1].z);
-		MBTRCPRBF;
+		MBLOGPRBF;
 	}
 #endif
 }
@@ -1362,11 +1362,11 @@ void MgGInt::Print( MCHAR* s) const
 {
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgGInt	サイズ: %d, 整数の数: %d\n"), s, m_isz, m_n);
-	MBTRCPRBF;
+	MBLOGPRBF;
 	for (int ic=0; ic<m_n; ic++) {
 		Msprintf_s( mlLog::m_Str, Mstr( "			P[%2d]: %d\n"),
 						  ic, m_i[ic]);
-		MBTRCPRBF;
+		MBLOGPRBF;
 	}
 #endif
 }
@@ -1517,11 +1517,11 @@ void MgGReal::Print( MCHAR* s) const
 {
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgGReal	サイズ: %d, 実数の数: %d\n"), s, m_isz, m_n);
-	MBTRCPRBF;
+	MBLOGPRBF;
 	for (int ic=0; ic<m_n; ic++) {
 		Msprintf_s( mlLog::m_Str, Mstr( "			P[%2d] = %f\n"),
 						  ic, m_r[ic]);
-		MBTRCPRBF;
+		MBLOGPRBF;
 	}
 #endif
 }
@@ -1684,11 +1684,11 @@ void MgGPoint2::Print( MCHAR* s) const
 {
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgPolyg2	サイズ: %d, 頂点数: %d\n"), s, m_isz, m_n);
-	MBTRCPRBF;
+	MBLOGPRBF;
 	for (int ic=0; ic<m_n; ic++) {
 		Msprintf_s( mlLog::m_Str, Mstr( "			P[%2d]: (%7.1f,%7.1f)\n"),
 						  ic, m_p[ic].x, m_p[ic].y);
-		MBTRCPRBF;
+		MBLOGPRBF;
 	}
 #endif
 }
@@ -1871,11 +1871,11 @@ void MgGPoint3::Print( MCHAR* s) const
 {
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgPolyg2	サイズ: %d, 頂点数: %d\n"), s, m_isz, m_n);
-	MBTRCPRBF;
+	MBLOGPRBF;
 	for (int ic=0; ic<m_n; ic++) {
 		Msprintf_s( mlLog::m_Str, Mstr( "			P[%2d]: (%7.1f,%7.1f)\n"),
 						  ic, m_p[ic].x, m_p[ic].y);
-		MBTRCPRBF;
+		MBLOGPRBF;
 	}
 #endif
 }

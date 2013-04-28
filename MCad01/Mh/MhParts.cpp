@@ -69,7 +69,7 @@ void mhPlcParts::Copy( const mhPlcParts &Ent)
 	
 #ifdef _DEBUG
 		Msprintf_s( mlLog::m_Str, Mstr( "MALLOC VERSION TRC %x\n"), pVer);
-		MBTRCPRBF;
+		MBLOGPRBF;
 #endif
 
 		memcpy( pVer, Ent.m_pVer, szVer);
@@ -83,7 +83,7 @@ void mhPlcParts::Copy( const mhPlcParts &Ent)
 
 #ifdef _DEBUG
 		Msprintf_s( mlLog::m_Str, Mstr( "MALLOC OPTION Copy1 TRC %x\n"), pOpt1);
-		MBTRCPRBF;
+		MBLOGPRBF;
 #endif
 
 		memcpy( pOpt1, Ent.m_pOpt1, szOpt1);
@@ -97,7 +97,7 @@ void mhPlcParts::Copy( const mhPlcParts &Ent)
 
 #ifdef _DEBUG
 		Msprintf_s( mlLog::m_Str, Mstr( "MALLOC OPTION Copy2 TRC %x\n"), pOpt2);
-		MBTRCPRBF;
+		MBLOGPRBF;
 #endif
 
 		memcpy( pOpt2, Ent.m_pOpt2, szOpt2);
@@ -523,7 +523,7 @@ void	mhPlcParts::Print(MCHAR* s)
 	Mstrcat_s( sTrc, sCat);
 
 	Msprintf_s( mlLog::m_Str, Mstr( "%s %s\n"), s, sTrc);
-	MBTRCPRBF;
+	MBLOGPRBF;
 #endif
 }
 
@@ -538,7 +538,7 @@ void	BuzaiCode::MhPrintallmhPlcParts(MCHAR* s)
 	for (pPlcEn = HaitiDb::MdGetHeadParts( &PartsPos); pPlcEn!=0; pPlcEn = HaitiDb::MdGetNextParts( &PartsPos)) {
 		pPlcEn->Print( s);
 	}
-	MBTRCPRBF;
+	MBLOGPRBF;
 #endif
 }
 

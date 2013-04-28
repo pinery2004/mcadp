@@ -123,7 +123,7 @@ inline void MdmSetLYR::Print( MCHAR* s, MINT i_i)
 {
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "\t%3d: %s < MdmSetLYR > 親ID1 = %d, 親ID2 = %d\n"), i_i, s, m_idP1, m_idP2);
-	MBTRCPRBF;
+	MBLOGPRBF;
 	m_GidC.Print( Mstr( "子ID群"), MDC_NONE_ID);
 	m_GaWD.PrintB( Mstr( "ウィンドウ表示検地モード"), MDC_NONE_ID);
 #endif

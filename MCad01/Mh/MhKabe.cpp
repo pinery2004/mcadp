@@ -377,7 +377,7 @@ void IeModel::MhNormKabe(
 exit:;
 //DBG #ifdef _DEBUG
 //DBG	Msprintf_s( mlLog::m_Str, Mstr( "MhNormKabe ===================================\n"));
-//DBG	MBTRCPRBF;
+//DBG	MBLOGPRBF;
 //DBG	BuzaiCode::MhPrintallmhPlcParts( Mstr( "MhNormKabe"));
 //DBG #endif
 }

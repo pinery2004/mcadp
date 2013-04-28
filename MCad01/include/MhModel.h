@@ -61,7 +61,7 @@ public:
 //	ÉgÉåÅ[ÉX
 inline void MhModel::Print( MCHAR* s)
 {
-	MBTRCPRINTS( s);
+	MBLOGPRINTS( s);
 }
 
 extern MhModel	z_DbIE;

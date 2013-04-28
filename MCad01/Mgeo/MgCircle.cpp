@@ -29,7 +29,7 @@ void MgCir2::Print(MCHAR* s)
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgCir2	: (%7.1f,%7.1f), %7.1f\n"),
 								 s, pc.x, pc.y, r);
-	MBTRCPRBF;
+	MBLOGPRBF;
 #endif
 }
 //
@@ -41,7 +41,7 @@ void MgCir3::Print(MCHAR* s)
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "%s 	MgCir3 	: (%7.1f,%7.1f,%7.1f), (%7.1f,%7.1f,%7.1f), %7.1f\n"),
 								 s, Pc.x, Pc.y, Pc.z, V.x, V.y, V.z, r);
-	MBTRCPRBF;
+	MBLOGPRBF;
 #endif
 }
 

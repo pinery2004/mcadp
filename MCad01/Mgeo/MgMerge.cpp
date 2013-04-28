@@ -1206,19 +1206,19 @@ void MGeo::ConnectGPgtoPg3(						//
 		V1 = gPgW.m_Pg[0].m_P[ic1b1] - gPgW.m_Pg[0].m_P[ic1b2];
 		V2 = gPgW.m_Pg[0].m_P[ic1] - gPgW.m_Pg[0].m_P[ic1b2];
 
-//								MBTRCPRINTI( L"Count", ic1);
+//								MBLOGPRINTI( L"Count", ic1);
 //								V1.Print( L"V1");
 //								V2.Print( L"V2");
-//								MREAL V22 = V2 * V2;			MBTRCPRINTF( L"V22", V22);
+//								MREAL V22 = V2 * V2;			MBLOGPRINTF( L"V22", V22);
 		// ３点が直線に並んでいる場合は中央の点を間引きする
 		MREAL D12 = (V1 ^ V2) * i_VuH;
-			MBTRCPRINTF( L"D12", D12);
-			MBTRCPRINTF( L"g_gTol.D_2", g_gTol.D_2);
+			MBLOGPRINTF( L"D12", D12);
+			MBLOGPRINTF( L"g_gTol.D_2", g_gTol.D_2);
 		if (D12 * D12 > V2 * V2 * g_gTol.D_2)
 			(*o_pPgO) += gPgW.m_Pg[0].m_P[ic1b1];
 	}
 //								PgO->Print( Mstr( "051127 穴付き多角形を多角形に結合 PgO"));
-//								MBTRCFLUSH;
+//								MBLOGFLUSH;
 }
 
 } // namespace MC

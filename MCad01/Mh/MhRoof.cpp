@@ -178,17 +178,17 @@ void MhRoofInfo::SetAttr()
 	MREAL	rNokiDe;
 	MREAL	rKerabaDe;
 
-//S	ist = z_mnIA.GetComboAttrI( MC_CMB_KOBY, &iKobai);			// å˘îz
-	iKobai = z_mnIA.GetKobai();
+	ist = z_mmIA.GetComboAttrI( MC_CMB_KOBY, &iKobai);			// å˘îz
+//S	iKobai = z_mnIA.GetKobai();
 	m_rKb = MREAL( iKobai);
 
-//S	ist = z_mnIA.GetComboAttrR( MC_CMB_NKDE, &rNokiDe);
-	rNokiDe = z_mnIA.GetNokiDe();
+	ist = z_mmIA.GetComboAttrR( MC_CMB_NKDE, &rNokiDe);
+//S	rNokiDe = z_mnIA.GetNokiDe();
 	m_rNkD[0] = m_rNkD[1] = rNokiDe;							// å¨ÇÃèo
 	McRfmOffset[MHRL_NOKI] = rNokiDe;
 
-//S	ist = z_mnIA.GetComboAttrR( MC_CMB_KRDE, &rKerabaDe);
-	rKerabaDe = z_mnIA.GetKerabaDe();
+	ist = z_mmIA.GetComboAttrR( MC_CMB_KRDE, &rKerabaDe);
+//S	rKerabaDe = z_mnIA.GetKerabaDe();
 	m_rKrD[0] = m_rKrD[1] = rKerabaDe;							// ÇØÇÁÇŒÇÃèo
 	McRfmOffset[MHRL_KERABA] = rKerabaDe;
 }
@@ -370,12 +370,12 @@ MINT MhRoofInfo::AdjustRfm1()						// (  O) ÉXÉeÉCÉ^ÉXÅ@0: ê≥èÌÅ@-1: âÆç™ñ å`èÛç
 	MgPolyg3	Pg0;
 	MgGLine3	GLnW;
 //#ifdef _DEBUG
-//MBTRCON;
+//MBLOGON;
 //#endif
 	for ( ic1=0; ic1<m_GRfm.m_n; ic1++) {
 //#ifdef _DEBUG
-//							MBTRCON;
-//							Msprintf_s( mlLog::m_Str, Mstr( "******* âÆç™ AdjustRfm ic1=%d\n"), ic1); MBTRCPRBF;
+//							MBLOGON;
+//							Msprintf_s( mlLog::m_Str, Mstr( "******* âÆç™ AdjustRfm ic1=%d\n"), ic1); MBLOGPRBF;
 //#endif
 		pPln1 = &m_GRfm.m_st[ic1].m_Pln;						// âÆç™ñ 1ÇéÊÇËèoÇ∑
 
@@ -391,7 +391,7 @@ MINT MhRoofInfo::AdjustRfm1()						// (  O) ÉXÉeÉCÉ^ÉXÅ@0: ê≥èÌÅ@-1: âÆç™ñ å`èÛç
 
 		for ( ic2=0; ic2<m_GRfm.m_n; ic2++) {
 //#ifdef _DEBUG
-//							Msprintf_s( mlLog::m_Str, Mstr( "-------- âÆç™ AdjustRfm ic2=%d\n"), ic2); MBTRCPRBF;
+//							Msprintf_s( mlLog::m_Str, Mstr( "-------- âÆç™ AdjustRfm ic2=%d\n"), ic2); MBLOGPRBF;
 //#endif
 			if ( ic1 == ic2)										// ìØàÍâÆç™ñ ÇÕñ≥éã
 				continue;
@@ -489,7 +489,7 @@ MINT MhRoofInfo::AdjustRfm2()						// (  O) ÉXÉeÉCÉ^ÉXÅ@0: ê≥èÌÅ@-1: âÆç™ñ å`èÛç
 
 	MgPlane3	*pPln1;
 
-//MBTRCON;
+//MBLOGON;
 	for ( ic1=0; ic1<m_GRfm.m_n; ic1++) {
 		pPln1 = &m_GRfm.m_st[ic1].m_Pln;						// âÆç™ñ 1ÇéÊÇËèoÇ∑
 		pPgRfm = &m_GRfm.m_st[ic1].m_Pg;
@@ -784,7 +784,7 @@ void MhJim::Print( MCHAR* s, MINT ic)
 						   Mstr( "	LnR:(%7.1f,%7.1f,%7.1f)	(%7.1f,%7.1f,%7.1f)\n"),
 								s, ic, m_p.x, m_p.y, m_icd, m_ifInp, m_rKb, m_iRfm,
 								m_LnR.p[0].x, m_LnR.p[0].y, m_LnR.p[0].z, m_LnR.p[1].x, m_LnR.p[1].y, m_LnR.p[1].z);
-	MBTRCPRBF;
+	MBLOGPRBF;
 #endif
 }
 void MgKs1::Print( MCHAR* s, MINT ic)
@@ -794,7 +794,7 @@ void MgKs1::Print( MCHAR* s, MINT ic)
 						   Mstr( "	Typ: %d	Cd: %d	fProc: %d	Rfm = %d, %d\n"),
 								s, ic, m_Ln.p[0].x, m_Ln.p[0].y, m_Ln.p[0].z, m_Ln.p[1].x, m_Ln.p[1].y, m_Ln.p[1].z,
 								m_itpLn, m_iCd, m_ifProc, m_iRfm[0], m_iRfm[1]);
-	MBTRCPRBF;
+	MBLOGPRBF;
 #endif
 }
 void MhRfm::Print( MCHAR* s, MINT ic)
@@ -802,7 +802,7 @@ void MhRfm::Print( MCHAR* s, MINT ic)
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MhRfm[%2d]	pln: (%7.3f,%7.3f,%7.3f),%7.1f	Cd: %d\n"),
 								s, ic, m_Pln.v.x, m_Pln.v.y, m_Pln.v.z, m_Pln.d, m_icd);
-	MBTRCPRBF;
+	MBLOGPRBF;
 	m_cdPg.Print( Mstr( "MhRfm pgCd"));
 	m_Pg.Print( Mstr( "MhRfm pg"));
 #endif

@@ -60,7 +60,7 @@ void MgVect2::Print(MCHAR* s) const				// Print
 {
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgPoint2	: (%7.1f,%7.1f)\n"), s, x, y);
-	MBTRCPRBF;
+	MBLOGPRBF;
 #endif
 }
 //
@@ -140,7 +140,7 @@ void MgVect3::Print(MCHAR* s) const				// Print
 {
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "%s 	MgPoint3	: (%7.1f, %7.1f, %7.1f)\n"), s, x, y, z);
-	MBTRCPRBF;
+	MBLOGPRBF;
 #endif
 }
 //

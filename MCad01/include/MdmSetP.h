@@ -76,7 +76,7 @@ inline void MdmSetP::Print( MCHAR* s, MINT i_i)
 {
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "%s < MdmSetP > ID = %d, éqID = %d\n"), s, i_i, m_idC);
-	MBTRCPRBF;
+	MBLOGPRBF;
 	m_GidP.Print( Mstr( "êeIDåQ"));
 #endif
 }

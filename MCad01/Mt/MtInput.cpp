@@ -261,8 +261,8 @@ MINT mhInput::GetLen2Pt(
 			if ( irt != MTRT_LBTNDWN)							// マウス左ボタンでない場合は、
 				continue;										//	２点目を再入力
 			mhInput::Marume( io_ptln_org[1], &io_ptln[1]);
-//S			ist1 = z_mnIA.GetComboAttrI( MC_CMB_HONS, &iNum);
-			iNum = z_mnIA.GetHonsu();								// 
+			ist1 = z_mmIA.GetComboAttrI( MC_CMB_HONS, &iNum);
+//S			iNum = z_mnIA.GetHonsu();							// 
 			iSeq = 2;
 			if ( ( i_iMode != 1) && ( iNum == MC_INT_AREA)) {	// (長さ２点入力 または 方向１点入力)　かつ　iNum == 9998: 複数部材
 //S				iSeq = 2;

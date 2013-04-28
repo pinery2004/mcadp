@@ -195,7 +195,7 @@ void MgPlane3::Print(
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgPlane3	: (%7.1f,%7.1f,%7.1f),%7.1f\n"),
 								s, v.x, v.y, v.z, d);
-	MBTRCPRBF;
+	MBLOGPRBF;
 #endif
 };
 //

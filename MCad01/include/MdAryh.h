@@ -85,7 +85,7 @@ template <typename T> inline void MdAryH<T>::PrintC(MCHAR* i_s)
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	< MdAryH > サイズ: %d，頂点数: %d\n"),
 									i_s, m_sz, m_n);
-	MBTRCPRBF;
+	MBLOGPRBF;
 	for ( MUSHORT iC=0; iC<m_n; iC++) {
 		m_pst[iC].Print( i_s);
 	}
@@ -240,7 +240,7 @@ template <typename T> inline void MdAryH_S_C<T>::Print(MCHAR* i_s, MINT i_i)
 			Msprintf_s( mlLog::m_Str, Mstr( "\t\t%s < MdAryH_S_C > ID = %d，サイズ = %d、データ数 = %d\n"),
 											i_s, i_i, m_sz, m_n);
 		}
-		MBTRCPRBF;
+		MBLOGPRBF;
 		for (MUSHORT iC=0; iC<m_n; iC++) {
 			m_pst[iC].Print( i_s, iC);
 		}
@@ -277,9 +277,9 @@ template <typename T> inline void MdAryH_S_I<T>::Print(MCHAR* i_s, MINT i_i)
 			Msprintf_s( mlLog::m_Str, Mstr( "\t\t\t%s < MdAryH_S_I > ID = %d，整数型データセット，サイズ =%d，データ数 = %d\n"),
 											i_s, i_i, m_sz, m_n);
 		}
-		MBTRCPRBF;
+		MBLOGPRBF;
 		if ( m_n)
-			MBTRCPRINTIN( Mstr( "\t\t\tデータ"), m_pst, m_n);
+			MBLOGPRINTIN( Mstr( "\t\t\tデータ"), m_pst, m_n);
 	}
 #endif
 }
@@ -312,9 +312,9 @@ template <typename T> inline void MdAryH_S_B<T>::PrintB(MCHAR* i_s, MINT i_i)
 		Msprintf_s( mlLog::m_Str, Mstr( "\t\t\t%s < MdAryH_S_B > ID = %d，整数型データセット，サイズ: %d，データ数: %d\n"),
 										i_s, i_i, m_sz, m_n);
 	}
-	MBTRCPRBF;
+	MBLOGPRBF;
 	if ( m_n)
-		MBTRCPRINTBN( Mstr( "			データ"), m_pst, m_n);
+		MBLOGPRINTBN( Mstr( "			データ"), m_pst, m_n);
 #endif
 }
 
@@ -444,7 +444,7 @@ template <typename T> inline T& MdAryH_F<T>::operator () (MUSHORT i_idx)
 //	トレース
 template <typename T> inline void MdAryH_F<T>::Print(MCHAR* i_s, MINT i_i)
 {
-	MBTRCPRBF;
+	MBLOGPRBF;
 	for (MUSHORT ic=0; ic<m_n; ic++) {
 		m_pst[ic].Print( i_s, i_i, ic);
 	}

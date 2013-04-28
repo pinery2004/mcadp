@@ -139,7 +139,7 @@ template <typename T> void MgGrp<T>::ReSize( MINT i_sz)
 template <typename T> void MgGrp<T>::Print(MCHAR* s)
 {
 	Msprintf_s( mlLog::m_Str, Mstr( "%s < MgGrp > サイズ = %d、頂点数 = %d\n"), s, m_isz, m_n);
-	MBTRCPRBF;
+	MBLOGPRBF;
 	for (int ic=0; ic<m_n; ic++) {
 		m_st[ic].Print( s, ic);
 	}

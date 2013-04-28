@@ -199,7 +199,9 @@ enum MCCMBATTR {
 	MC_CMB_RTH1,								// 床・天井パネル右巾補正
 	MC_CMB_LFH2,								// 屋根パネル用左巾補正
 	MC_CMB_RTH2,								// 屋根パネル用右巾補正
+	MC_CMB_ENDA									// 属性入力用コンボボックスの属性IDの最終番号+1
 };
+#define	MC_CMB_N	( MC_CMB_ENDA - MC_CMB_NULL - 1)
 
 //	属性入力用チェックボックスの属性ID
 enum MCCHKATTR {

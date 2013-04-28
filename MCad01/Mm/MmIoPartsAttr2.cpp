@@ -9,21 +9,16 @@
 //  K.Matsu           08/01/04    Created.
 //==========================================================================================
 #include "stdafx.h"
-//#define	 WINVER	0x0400
 #include <afxwin.h>         // MFC のコアおよび標準コンポーネント
 
+#include "MlLog.h"
 #include "MsMCAD.h"
 #include "MainFrm.h"
 #include "MhDefParts.h"
 
 #define	DLL_EXPORT_MC_INPATTR_DO
 #include "MmLib.h"
-#include "MmWnd.h"
 #include "MhInpPlcParts.h"
-#include "resource.h"
-#include "..\\MCAD\\resource.h"
-#include "MhPlcParts.h"
-#include "MhLib.h"
 #include "MgGeo.h"
 
 #define MC_SZ_CMBATTR	6
@@ -33,15 +28,55 @@ namespace MC
 {
 mmIoPartsAttr z_mmIA;
 
-static int z_IdcComboAttr[6] =	{ IDC_CMBK_ATTR1, IDC_CMBK_ATTR2, IDC_CMBK_ATTR3,
+static int s_Combo_Attr[][10] = {								// MP_AT_NONE:			// 0
+					{	MC_CMB_NULL, MC_CMB_NULL, MC_CMB_NULL,	// null, null, null
+					MC_CMB_NULL, MC_CMB_NULL, MC_CMB_NULL,		// null, null, null
+					MC_CHK_NULL, MC_CHK_NULL,					// null, null
+					MC_CHK_NULL, MC_CHK_NULL},					// null, null
+																// MP_AT_HRZ_PARTS:		// 1			// 横置部材
+					{ MC_CMB_LHS1, MC_CMB_LHS2, MC_CMB_ZJSZ,	// 長さ補正1, 長さ補正2, 芯ずれ
+					MC_CMB_TRTH, MC_CMB_INTR, MC_CMB_HONS,		// 取付高さ, 間隔, 本数
+					MC_CHK_NULL, MC_CHK_NULL,					// null, null
+					MC_CHK_NULL, MC_CHK_NULL},					// null, null
+																// MP_AT_VRT_PARTS:		// 2			// たて枠
+					{ MC_CMB_UPRH, MC_CMB_LWRH, MC_CMB_HAIZ,	// 上端高さ, 下端高さ, 配置ずれ
+					MC_CMB_NULL, MC_CMB_INTR, MC_CMB_HONS,		// null, 間隔, 本数
+					MC_CHK_NULL, MC_CHK_NULL,					// null, null
+					MC_CHK_NULL, MC_CHK_NULL},					// null, null
+																// MP_AT_YTPANEL:		// 3			// 床・天井パネル
+					{ MC_CMB_LFH1, MC_CMB_RTH1, MC_CMB_TRTH,	// 左巾補正, 右巾補正, 取付高さ
+					MC_CMB_FHS1, MC_CMB_OKYK, MC_CMB_OHS2,		// 手前補正, 奥行, 奥行補正
+					MC_CHK_NULL, MC_CHK_NULL,					// null, null
+					MC_CHK_NULL, MC_CHK_NULL},					// null, null
+																// MP_AT_YANEPANEL:		// 4			// 屋根パネル
+					{ MC_CMB_LFH2, MC_CMB_RTH2, MC_CMB_TRTH,	// 左巾補正, 右巾補正, 取付高さ
+					MC_CMB_FHS2, MC_CMB_OKYK, MC_CMB_OHS2,		// 軒の出, 奥行, 奥行補正
+					MC_CHK_NULL, MC_CHK_NULL,					// null, null
+					MC_CHK_NULL, MC_CHK_NULL},					// null, null
+																// MP_AT_ADJLNG:		// 5			// 部材長さ調整
+					{ MC_CMB_LHS1, MC_CMB_NULL, MC_CMB_NULL,	// 長さ補正, null, null
+					MC_CMB_NULL, MC_CMB_NULL, MC_CMB_NULL,		// null, null, null
+					MC_CHK_NULL, MC_CHK_KATI,					// null, 勝ち
+					MC_CHK_MULT, MC_CHK_INTC},					// 複数, 交差部材調整
+																// MP_AT_YANE:			// 6			// 屋根
+					{ MC_CMB_KOBY, MC_CMB_NKDE, MC_CMB_KRDE,	// 屋根勾配, 軒の出, ケラバの出
+					MC_CMB_NULL, MC_CMB_NULL, MC_CMB_NULL,		// null, null, null
+					MC_CHK_NULL, MC_CHK_NULL,					// null, null
+					MC_CHK_NULL, MC_CHK_NKTP},					// null, 軒タイプ
+																// MP_AT_TATEGU:		// 7			// 建具
+					{ MC_CMB_LHS1, MC_CMB_LHS2, MC_CMB_TRTH,	// 長さ補正1, 長さ補正2, 取付高さ
+					MC_CMB_KROH, MC_CMB_HAIZ, MC_CMB_NULL,		// ＲＯＨ, 配置ずれ ,null
+					MC_CHK_NULL, MC_CHK_NULL,					// null, null 
+					MC_CHK_NULL, MC_CHK_NULL}					// null, null
+				};
+
+static int s_IdcComboAttr[6] =	{ IDC_CMBK_ATTR1, IDC_CMBK_ATTR2, IDC_CMBK_ATTR3,
 								  IDC_CMBK_ATTR4, IDC_CMBK_ATTR5, IDC_CMBK_ATTR6};
-static int z_IdcStaticAttr[6] =	{ IDC_CMBK_ATTR1, IDC_CMBK_ATTR2, IDC_CMBK_ATTR3,
+static int s_IdcStaticAttr[6] =	{ IDC_CMBK_ATTR1, IDC_CMBK_ATTR2, IDC_CMBK_ATTR3,
 								  IDC_CMBK_ATTR4, IDC_CMBK_ATTR5, IDC_CMBK_ATTR6};
-static int z_IdcCheckAttr[4] =	{ IDC_CHECKATTR1, IDC_CHECKATTR2,
+static int s_IdcCheckAttr[4] =	{ IDC_CHECKATTR1, IDC_CHECKATTR2,
 								  IDC_CHECKATTR3, IDC_CHECKATTR4};
 
-static int z_Combo_Attr[MC_SZ_CMBATTR];
-static int z_Check_Attr[MC_SZ_CHKATTR];
 
 //===========================================================================
 //				初期化用スタティックデータ
@@ -140,39 +175,380 @@ static MREAL z_rKerabanoDe[] = { 650.0, 455.0, 330.0, 44.5, 0.};
 #define	ISZKERABANODE	sizeof(z_rKerabanoDe)/sizeof(MREAL)
 #define	INITKERABANODE	650.0f
 
-////////////////////////////////////////////////////////////////////////////
-//	部材属性入力用コンボボックスの設定
 
-void mmIoPartsAttr::InitComboParts()
+/////////////////////////////////////////////////////////////////////////////
+//	属性値入力モードで部材属性入力用リボンバーの項目を設定する
+//	 (コンボボックスとチェックボックスの項目を設定する)
+//	
+void mmIoPartsAttr::InitComboAttr(
+						int		i_iIoPartsAttrMd	// 属性値入力モード
+												//  MP_AT_AUTO(-1)		:自動設定
+												//	MP_AT_NONE(0)		:属性値入力なし
+												//	MP_AT_HRZ_PARTS(1)	:水平部材入力
+												//	MP_AT_VRT_PARTS(2)	:垂直部材入力
+												//	MP_AT_YTPANEL(3)	:床天井パネル入力
+												//	MP_AT_YANEPANEL(4)	:屋根パネル入力
+												//	MP_AT_ADJLNG(5)		:部材長さ調整入力
+												//	MP_AT_YANE(6)		:屋根入力
+												//	MP_AT_TATEGU(7)		:建具入力
+				)
 {
-	//	部品名コンポボックスの項目を設定する
-	InitComboPartsNm();
+	static int s_Combo_Attr[][10] = {							// MP_AT_NONE:			// 0
+					  {	MC_CMB_NULL, MC_CMB_NULL, MC_CMB_NULL,	// null, null, null
+						MC_CMB_NULL, MC_CMB_NULL, MC_CMB_NULL,	// null, null, null
+						MC_CHK_NULL, MC_CHK_NULL,				// null, null
+						MC_CHK_NULL, MC_CHK_NULL},				// null, null
+																// MP_AT_HRZ_PARTS:		// 1			// 横置部材
+					  { MC_CMB_LHS1, MC_CMB_LHS2, MC_CMB_ZJSZ,	// 長さ補正1, 長さ補正2, 芯ずれ
+						MC_CMB_TRTH, MC_CMB_INTR, MC_CMB_HONS,	// 取付高さ, 間隔, 本数
+						MC_CHK_NULL, MC_CHK_NULL,				// null, null
+						MC_CHK_NULL, MC_CHK_NULL},				// null, null
+																// MP_AT_VRT_PARTS:		// 2			// たて枠
+					  { MC_CMB_UPRH, MC_CMB_LWRH, MC_CMB_HAIZ,	// 上端高さ, 下端高さ, 配置ずれ
+						MC_CMB_NULL, MC_CMB_INTR, MC_CMB_HONS,	// null, 間隔, 本数
+						MC_CHK_NULL, MC_CHK_NULL,				// null, null
+						MC_CHK_NULL, MC_CHK_NULL},				// null, null
+																// MP_AT_YTPANEL:		// 3			// 床・天井パネル
+					  { MC_CMB_LFH1, MC_CMB_RTH1, MC_CMB_TRTH,// 左巾補正, 右巾補正, 取付高さ
+						MC_CMB_FHS1, MC_CMB_OKYK, MC_CMB_OHS2,	// 手前補正, 奥行, 奥行補正
+						MC_CHK_NULL, MC_CHK_NULL,				// null, null
+						MC_CHK_NULL, MC_CHK_NULL},				// null, null
+																// MP_AT_YANEPANEL:		// 4			// 屋根パネル
+					  { MC_CMB_LFH2, MC_CMB_RTH2, MC_CMB_TRTH,	// 左巾補正, 右巾補正, 取付高さ
+						MC_CMB_FHS2, MC_CMB_OKYK, MC_CMB_OHS2,	// 軒の出, 奥行, 奥行補正
+						MC_CHK_NULL, MC_CHK_NULL,				// null, null
+						MC_CHK_NULL, MC_CHK_NULL},				// null, null
+																// MP_AT_ADJLNG:		// 5			// 部材長さ調整
+					  { MC_CMB_LHS1, MC_CMB_NULL, MC_CMB_NULL,	// 長さ補正, null, null
+						MC_CMB_NULL, MC_CMB_NULL, MC_CMB_NULL,	// null, null, null
+						MC_CHK_NULL, MC_CHK_KATI,				// null, 勝ち
+						MC_CHK_MULT, MC_CHK_INTC},				// 複数, 交差部材調整
+																// MP_AT_YANE:			// 6			// 屋根
+					  { MC_CMB_KOBY, MC_CMB_NKDE, MC_CMB_KRDE,	// 屋根勾配, 軒の出, ケラバの出
+						MC_CMB_NULL, MC_CMB_NULL, MC_CMB_NULL,	// null, null, null
+						MC_CHK_NULL, MC_CHK_NULL,				// null, null
+						MC_CHK_NULL, MC_CHK_NKTP},				// null, 軒タイプ
+																// MP_AT_TATEGU:		// 7			// 建具
+					  { MC_CMB_LHS1, MC_CMB_LHS2, MC_CMB_TRTH,	// 長さ補正1, 長さ補正2, 取付高さ
+						MC_CMB_KROH, MC_CMB_HAIZ, MC_CMB_NULL,	// ＲＯＨ, 配置ずれ ,null
+						MC_CHK_NULL, MC_CHK_NULL,				// null, null 
+						MC_CHK_NULL, MC_CHK_NULL}				// null, null
+					};
 
-	//	寸法型式選択用コンポボックスの項目を設定する
-	InitComboPartsMbr();
+	int iC1, iAn;
 
-//S	//	パネル番号選択用コンポボックスの項目を設定する
-//	InitComboPanelNo();
+	if ( !GetDispFlg())	goto EXIT;	
 
-	//	部材属性入力用コンポボックスの項目を設定する
-	InitComboAttr();
+	if ( i_iIoPartsAttrMd >= 0)
+		m_iIoPartsAttrMd = i_iIoPartsAttrMd;
+	else
+		m_iIoPartsAttrMd = MnCalcInpAtMode();
 
-	Window::CurWndFocus();
-	WindowCtrl::MmWndKReDraw();
+	if ( m_iIoPartsAttrMd < 0 || m_iIoPartsAttrMd >= MP_AT_END) {
+		mlLog::LogOutT( MC_LOG_ERROR, Mstr( "属性値入力モードエラー: %d\n"), m_iIoPartsAttrMd);
+		goto EXIT;
+	}
+
+	//	部材属性入力用コンボボックスとチェックボックスの項目を設定する
+	for ( iAn=1; iAn<=MC_SZ_CMBATTR; iAn++) {
+
+//S		m_Combo_Attr[iAn-1] = s_Combo_Attr[s_iIoPartsAttrMd][iAn-1];
+
+		switch ( s_Combo_Attr[m_iIoPartsAttrMd][iAn-1]) {
+			case MC_CMB_NULL:
+				// コンボボックスを消し無効にする
+				SetComboAttrText( iAn, Mstr( ""));
+				InitComboAttrR( iAn, 0, NULL, 0);
+				break;
+			case MC_CMB_LHS1:
+				// 長さ補正値1選択用コンポボックスの項目を設定する
+				SetComboAttrText( iAn, Mstr( "長さ補正1"));
+				InitComboAttrR( iAn, ISZLNGH, z_rLngH, INITLNGTH);
+				break;
+			case MC_CMB_LHS2:
+				// 長さ補正値2選択用コンポボックスの項目を設定する
+				SetComboAttrText( iAn, Mstr( "長さ補正2"));
+				InitComboAttrR( iAn, ISZLNGH, z_rLngH, INITLNGTH);
+				break;
+			case MC_CMB_ZJSZ:
+				// 材軸芯ずれ量選択用コンポボックスの項目を設定する
+				SetComboAttrText( iAn, Mstr( "芯ずれ"));
+				InitComboAttrR( iAn, ISZSINZ, z_rSinZ, INITSINZ);
+				break;
+			case MC_CMB_HAIZ:
+				// 配置点ずれ量選択用コンポボックスの項目を設定する
+				SetComboAttrText( iAn, Mstr( "配置ずれ"));
+				InitComboAttrR( iAn, ISZHAIZ, z_rHaiZ, INITHAIZ);
+				break;
+			case MC_CMB_TRTH:
+				// 取り付け高さ選択用コンポボックスの項目を設定する
+				SetComboAttrText( iAn, Mstr( "取付高さ"));
+				InitComboAttrR( iAn, ISZZ1, z_rZ1, INITZ1);
+				break;
+			case MC_CMB_KROH:
+				// 開口部高さ(ROH)選択用コンポボックスの項目を設定する
+				SetComboAttrText( iAn, Mstr( "ＲＯＨ"));
+				InitComboAttrR( iAn, ISZZ2, z_rZ2, INITZ2);
+				break;
+			case MC_CMB_INTR:
+				// 間隔選択用コンポボックスの項目を設定する
+				SetComboAttrText( iAn, Mstr( "間隔"));
+				InitComboAttrR( iAn, ISZINTV, z_rIntv, INITINTV);
+				break;
+			case MC_CMB_HONS:
+				// 本数選択用コンポボックスの項目を設定する
+				SetComboAttrText( iAn, Mstr( "本数"));
+				InitComboAttrI( iAn, ISZNUM, z_iNum, INITNUM);
+				break;
+
+//			case MC_CMB_HHS1:
+//				// 幅補正値1選択用コンポボックスの項目を設定する
+//				SetComboAttrText( iAn, Mstr( "幅補正1"));
+//				InitComboAttrR( iAn, ISZLNGH2, z_rLngH2, INITLNGTH2);
+//				break;
+//			case MC_CMB_HHS2:
+//				// 幅補正値2選択用コンポボックスの項目を設定する
+//				SetComboAttrText( iAn, Mstr( "幅補正2"));
+//				InitComboAttrR( iAn, ISZLNGH2, z_rLngH2, INITLNGTH2);
+//				break;
+
+			case MC_CMB_FHS1:
+				// 床･天井パネル用　手前補正選択用コンポボックスの項目を設定する
+				SetComboAttrText( iAn, Mstr( "手前補正"));
+				InitComboAttrR( iAn, ISZOKUYUKIH, z_rOkuH, INITOKUYUKIH);
+				break;
+			case MC_CMB_FHS2:
+				// 屋根パネル用　手前補正選択用コンポボックスの項目を設定する
+				SetComboAttrText( iAn, Mstr( "軒の出"));
+				InitComboAttrR( iAn, ISZKOUBAI, z_rNokiDe, INITNOKINODE);
+				break;
+			case MC_CMB_OKYK:
+				// 奥行き選択用コンポボックスの項目を設定する
+				SetComboAttrText( iAn, Mstr( "奥行"));
+				InitComboAttrR( iAn, ISZOKUYUKI, z_rOku, INITOKUYUKI);
+				break;
+			case MC_CMB_OHS2:
+				// 奥行き補正選択用コンポボックスの項目を設定する
+				SetComboAttrText( iAn, Mstr( "奥行補正"));
+				InitComboAttrR( iAn, ISZOKUYUKIH, z_rOkuH, INITOKUYUKIH);
+				break;
+			case MC_CMB_KOBY:
+				// 屋根勾配選択用コンポボックスの項目を設定する
+				SetComboAttrText( iAn, Mstr( "屋根勾配"));
+				InitComboAttrI( iAn, ISZKOUBAI, z_iKoubai, INITKOUBAI);
+				break;
+			case MC_CMB_NKDE:
+				// 軒の出選択用コンポボックスの項目を設定する
+				SetComboAttrText( iAn, Mstr( "軒の出"));
+				InitComboAttrR( iAn, ISZNOKINODE, z_rNokiDe, INITNOKINODE);
+				break;
+			case MC_CMB_KRDE:
+				// ケラバの出選択用コンポボックスの項目を設定する
+				SetComboAttrText( iAn, Mstr( "ケラバの出"));
+				InitComboAttrR( iAn, ISZKERABANODE, z_rKerabanoDe, INITKERABANODE);
+				break;
+			case MC_CMB_UPRH:
+				// 上端高さ選択用コンポボックスの項目を設定する
+				SetComboAttrText( iAn, Mstr( "上端高さ"));
+				InitComboAttrR( iAn, ISZZ2, z_rZ2, INITZ2);
+				break;
+			case MC_CMB_LWRH:
+				// 下端高さ選択用コンポボックスの項目を設定する
+				SetComboAttrText( iAn, Mstr( "下端高さ"));
+				InitComboAttrR( iAn, ISZZ1, z_rZ1, INITZ1);
+				break;
+			case MC_CMB_LFH1:
+				// 床･天井パネル用　左巾補正(長さ補正値1)選択用コンポボックスの項目を設定する
+				SetComboAttrText( iAn, Mstr( "左巾補正"));
+				InitComboAttrR( iAn, ISZLNGH, z_rLngH, INITLNGTH);
+				break;
+			case MC_CMB_RTH1:
+				// 床･天井パネル用　右巾補正(長さ補正値2)選択用コンポボックスの項目を設定する
+				SetComboAttrText( iAn, Mstr( "右巾補正"));
+				InitComboAttrR( iAn, ISZLNGH, z_rLngH, INITLNGTH);
+				break;
+			case MC_CMB_LFH2:
+				// 屋根パネル用　左巾補正(長さ補正値1)選択用コンポボックスの項目を設定する
+				SetComboAttrText( iAn, Mstr( "左巾補正"));
+				InitComboAttrR( iAn, ISZKERABANODE, z_rKerabanoDe, INITLNGTH);
+				break;
+			case MC_CMB_RTH2:
+				// 屋根パネル用　右巾補正(長さ補正値2)選択用コンポボックスの項目を設定する
+				SetComboAttrText( iAn, Mstr( "右巾補正"));
+				InitComboAttrR( iAn, ISZKERABANODE, z_rKerabanoDe, INITLNGTH);
+				break;
+		}
+	}
+//	for ( int iCn=1; iCn<=MC_SZ_CHKATTR; iCn++) {
+//		switch (z_Check_Attr[iCn-1]) {
+//			case MC_CHK_NULL:
+//				// チェックボックスを消し無効にする
+//				SetCheckAttrText( iCn, NULL);		
+//				SetCheckAttrCkb( iCn, 0);		
+//				break;
+//			case MC_CHK_KATI:
+//				// 勝ち負け入力用チェックボックスを設定する
+//				SetCheckAttrText( iCn, Mstr( "勝ち"));
+//				SetCheckAttrCkb( iCn, 0);
+//				break;
+//			case MC_CHK_MULT:
+//				// 複数入力用チェックボックスを設定する
+//				SetCheckAttrText( iCn, Mstr( "複数"));
+//				SetCheckAttrCkb( iCn, 1);
+//				break;
+//			case MC_CHK_INTC:
+//				// 交差部材調整用チェックボックスを設定する
+//				SetCheckAttrText( iCn, Mstr( "交差部材調整"));
+//				SetCheckAttrCkb( iCn, 1);
+//				break;
+//			case MC_CHK_NKTP:
+//				// 軒先タイプ(0:勾配収まり、1:垂直)
+//				SetCheckAttrText( iCn, Mstr( "軒先タイプ垂直"));
+//				SetCheckAttrCkb( iCn, 1);
+//				break;
+//		}
+//	}
+EXIT:;
 }
 
-//S	//////////////////////////////////////////////////////////////////////////////
-//// 属性入力用コンボボックスを取得する
-//CComboBox* mmIoPartsAttr::MnpComboAttr(
-//						int		i_iAttr			// コンボボックス番号
-//				)
-//{
-//	static CComboBox* z_pCmbKAttr[6] =	{ &m_CmbKAttr1, &m_CmbKAttr2,
-//										  &m_CmbKAttr3, &m_CmbKAttr4,
-//										  &m_CmbKAttr5, &m_CmbKAttr6};
-//																				//S	return (CComboBox*)(z_mmIA.m_System::GetpMainFrame()->m_wndRibbonBar.FindByID(z_IdcStaticAttr[i_iAttr - 1]));
-//	return z_pCmbKAttr[i_iAttr - 1];
-//}
+///////////////////////////////////////////////////////////////////////////////
+//	属性値入力用コンボボックスの値を取り込む
+
+void mmIoPartsAttr::GetComboAttrA( void)
+{
+	int		ist;
+
+	MREAL	rComboAttr1;
+	MREAL	rComboAttr2;
+	MREAL	rComboAttr3;
+	MREAL	rComboAttr4;
+	MREAL	rComboAttr5;
+	MREAL	rComboAttr6;
+//S	int		iMode;
+//
+//	iMode = z_mmIA.GetAtMd();						// 属性値入力モード
+
+	switch ( m_iIoPartsAttrMd)
+	{
+	case MP_AT_YTPANEL:
+	case MP_AT_YANEPANEL:
+
+		if ( m_iIoPartsAttrMd == MP_AT_YTPANEL) {				// ***** 床・天井パネル *****
+			z_mmIA.GetComboAttrR( MC_CMB_LFH1, &rComboAttr1);	// 　左巾補正値　→　長さ補正値1
+			z_mmIA.GetComboAttrR( MC_CMB_RTH1, &rComboAttr2);	// 　右巾補正値　→　長さ補正値2
+			z_mmIA.GetComboAttrR( MC_CMB_FHS1, &rComboAttr3);	// 　手前側補正値　→　手前側補正値
+
+		} else if ( m_iIoPartsAttrMd == MP_AT_YANEPANEL) {		// ***** 屋根パネル *****
+			z_mmIA.GetComboAttrR( MC_CMB_LFH2, &rComboAttr1);	// 　左巾補正値　→　長さ補正値1
+			z_mmIA.GetComboAttrR( MC_CMB_RTH2, &rComboAttr2);	// 　右巾補正値　→　長さ補正値2
+			z_mmIA.GetComboAttrR( MC_CMB_FHS2, &rComboAttr3);	// 　軒の出　→　手前側補正値
+		}
+
+		mtPlcInp::SetLenHosei( 0, rComboAttr1);					// →　長さ補正値1
+		mtPlcInp::SetLenHosei( 1, rComboAttr2);					// →　長さ補正値2
+		mtPlcInp::SetMaeHosei( rComboAttr3);					// →　手前側補正値
+
+		z_mmIA.GetComboAttrR( MC_CMB_OKYK, &rComboAttr4);
+		mtPlcInp::SetOku( rComboAttr4);							// 奥行き　→　奥行き
+
+		z_mmIA.GetComboAttrR( MC_CMB_OHS2, &rComboAttr5);
+		mtPlcInp::SetOkuHosei( rComboAttr5);					// 奥行き補正値　→　奥行き補正値　
+
+		z_mmIA.GetComboAttrR( MC_CMB_TRTH, &rComboAttr5);
+		mtPlcInp::SetHgt( 0, rComboAttr5);						// 取り付け高さ　→　取り付け高さ 
+		break;
+
+	case MP_AT_HRZ_PARTS:
+	case MP_AT_VRT_PARTS:
+	case MP_AT_TATEGU:
+																// ***** 横置き部材・縦置き部材・建具 *****
+		z_mmIA.GetComboAttrR( MC_CMB_LHS1, &rComboAttr1);
+		mtPlcInp::SetLenHosei( 0, rComboAttr1);					// 長さ補正値1 　→　長さ補正値1
+
+		z_mmIA.GetComboAttrR( MC_CMB_LHS2, &rComboAttr2);
+		mtPlcInp::SetLenHosei( 1, rComboAttr2);					// 長さ補正値2 　→　長さ補正値2
+
+		z_mmIA.GetComboAttrR( MC_CMB_ZJSZ, &rComboAttr3);
+		mtPlcInp::SetSinZure( rComboAttr3);						// 材軸芯ずれ量　→　材軸芯ずれ量
+
+		z_mmIA.GetComboAttrR( MC_CMB_HAIZ, &rComboAttr4);
+		mtPlcInp::SetPlcZure( rComboAttr4);						// 配置点ずれ量　→　配置点ずれ量
+
+		ist = z_mmIA.GetComboAttrR( MC_CMB_TRTH, &rComboAttr5);	// 取り付け高さ　→　高さ1
+		if ( ist == 0)
+			ist = z_mmIA.GetComboAttrR( MC_CMB_LWRH, &rComboAttr5);	// 下端高さ　→　高さ1
+
+		mtPlcInp::SetHgt( 0, rComboAttr5);						// →　高さ1
+		mtTateguInp::SetHeight( rComboAttr5);					// →　建具高さ
+
+		ist = z_mmIA.GetComboAttrR( MC_CMB_KROH, &rComboAttr6);	// 建具ROH　→　高さ2
+		if ( ist ==0)
+			ist = z_mmIA.GetComboAttrR( MC_CMB_UPRH, &rComboAttr6);	// 上端高さ　→　高さ2
+
+		mtPlcInp::SetHgt( 1, rComboAttr6);						// →　高さ2
+		mtTateguInp::SetROH( rComboAttr6);						// →　建具ROH
+
+//		iIdPartsSpec = z_mmIA.GetCurPartsNmId();				// カレントの部品ID
+//		pPartsSpec = BuzaiCode::MhGetpPartsSpec( iIdPartsSpec);	// 部品種類レコード
+//		if ( pPartsSpec->IsTategu()) {							// 建具 (部材コード = 建具)
+//		}
+		break;
+
+	case MP_AT_ADJLNG:											// ***** 部材長さ調整入力 *****
+	case MP_AT_YANE:											// ***** 屋根入力 *****
+
+		ASSERT(false);											// エラー
+		break;
+	}
+
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//	構成コード、分類、部品種類IDより、属性値入力モードを求める
+
+int mmIoPartsAttr::MnCalcInpAtMode()
+{
+	int		iMode;								// 属性値入力モード
+	int		iGp;
+	int		iBr;
+
+	int		iIdPartsSpec;
+	mhPartsSpec*	pPartsSpec;
+
+	// 部材属性値入力モード( iMode)(表示項目)の決定
+	iGp = z_mnIA.GetKCdGp();
+	iBr = z_mnIA.GetKCdBr();
+
+	iIdPartsSpec = z_mmIA.GetCurPartsNmId();
+	pPartsSpec = BuzaiCode::MhGetpPartsSpec( iIdPartsSpec);
+
+	if ( pPartsSpec->IsTategu()) {								// (部品種類ID == 建具)
+		iMode = MP_AT_TATEGU;									//			建具入力
+
+	} else if ( pPartsSpec->IsFrame())	{						// (部品種類ID == たて枠 | 束) (依存コード == 垂直)
+		iMode = MP_AT_VRT_PARTS;								//			垂直部材入力
+
+	} else if ( pPartsSpec->IsPanel() || pPartsSpec->IsKaiko()) {	// (部品種類ID == パネル | 開口)
+		if ( iGp == MP_GP_YUKA || iGp == MP_GP_TENJO)			//		(構成コード == 床 | 天井)
+			iMode = MP_AT_YTPANEL;								//			床・天井パネル入力
+
+		else if ( iGp == MP_GP_YANE)							//		(構成 == 屋根)
+			iMode = MP_AT_YANEPANEL;							//			屋根パネル入力
+
+		else													//		(その他)
+			iMode = MP_AT_HRZ_PARTS;							//			横置き部材入力
+
+	} else if ( iBr == MP_BR_YANE) {							// (分類 == 屋根)
+		if ( iGp == MP_GP_YANE) 								//		(構成 == 屋根)
+			iMode = MP_AT_YANE;									//			屋根入力
+		else													//		(その他)
+			iMode = MP_AT_HRZ_PARTS;							//			横置き部材入力
+
+	} else {													// (その他)
+		iMode = MP_AT_HRZ_PARTS;								//			横置き部材
+	}
+	return iMode;
+}
 
 //////////////////////////////////////////////////////////////////////////////
 //	属性値入力用コンボボックス番号を取得する
@@ -184,11 +560,15 @@ int mmIoPartsAttr::GetComboAttrNo(
 	int		ic;
 	int		iCmbNo = 0;
 
-	for ( ic=0; ic<MC_SZ_CMBATTR; ic++)
-		if ( i_iAttr == z_Combo_Attr[ic])
-			break;
-	if ( ic < MC_SZ_CMBATTR)
-		iCmbNo = ic + 1;
+	if (  m_iIoPartsAttrMd == -1) {
+		mlLog::LogOutT( MC_LOG_ERROR, Mstr( "属性値入力モードエラー: %d\n"), m_iIoPartsAttrMd);
+	} else {
+		for ( ic=0; ic<MC_SZ_CMBATTR; ic++)
+			if ( i_iAttr == s_Combo_Attr[m_iIoPartsAttrMd][ic])
+				break;
+		if ( ic < MC_SZ_CMBATTR)
+			iCmbNo = ic + 1;
+	}
 	return iCmbNo;
 }
 
@@ -417,450 +797,6 @@ int	mmIoPartsAttr::GetComboAttrI(					// ステイタス0(未設定) 1(設定)
 	return ist;
 }
 
-///////////////////////////////////////////////////////////////////////////////
-//	属性値入力用コンボボックスの値を取り込む
-
-void mmIoPartsAttr::GetComboAttrA( void)
-{
-	int		ist;
-
-	MREAL	rComboAttr1;
-	MREAL	rComboAttr2;
-	MREAL	rComboAttr3;
-	MREAL	rComboAttr4;
-	MREAL	rComboAttr5;
-	MREAL	rComboAttr6;
-	int		iMode;
-
-	iMode = z_mmIA.GetAtMd();						// 属性値入力モード
-
-	switch ( iMode)
-	{
-	case MP_AT_YTPANEL:
-	case MP_AT_YANEPANEL:
-
-		if ( iMode == MP_AT_YTPANEL) {							// ***** 床・天井パネル *****
-			z_mmIA.GetComboAttrR( MC_CMB_LFH1, &rComboAttr1);		// 　左巾補正値　→　長さ補正値1
-			z_mmIA.GetComboAttrR( MC_CMB_RTH1, &rComboAttr2);		// 　右巾補正値　→　長さ補正値2
-			z_mmIA.GetComboAttrR( MC_CMB_FHS1, &rComboAttr3);		// 　手前側補正値　→　手前側補正値
-
-		} else if ( iMode == MP_AT_YANEPANEL) {					// ***** 屋根パネル *****
-			z_mmIA.GetComboAttrR( MC_CMB_LFH2, &rComboAttr1);		// 　左巾補正値　→　長さ補正値1
-			z_mmIA.GetComboAttrR( MC_CMB_RTH2, &rComboAttr2);		// 　右巾補正値　→　長さ補正値2
-			z_mmIA.GetComboAttrR( MC_CMB_FHS2, &rComboAttr3);		// 　軒の出　→　手前側補正値
-		}
-
-		mtPlcInp::SetLenHosei( 0, rComboAttr1);					// →　長さ補正値1
-		mtPlcInp::SetLenHosei( 1, rComboAttr2);					// →　長さ補正値2
-		mtPlcInp::SetMaeHosei( rComboAttr3);					// →　手前側補正値
-
-		z_mmIA.GetComboAttrR( MC_CMB_OKYK, &rComboAttr4);
-		mtPlcInp::SetOku( rComboAttr4);							// 奥行き　→　奥行き
-
-		z_mmIA.GetComboAttrR( MC_CMB_OHS2, &rComboAttr5);
-		mtPlcInp::SetOkuHosei( rComboAttr5);					// 奥行き補正値　→　奥行き補正値　
-
-		z_mmIA.GetComboAttrR( MC_CMB_TRTH, &rComboAttr5);
-		mtPlcInp::SetHgt( 0, rComboAttr5);						// 取り付け高さ　→　取り付け高さ 
-		break;
-
-	case MP_AT_HRZ_PARTS:
-	case MP_AT_VRT_PARTS:
-	case MP_AT_TATEGU:
-																// ***** 横置き部材・縦置き部材・建具 *****
-		z_mmIA.GetComboAttrR( MC_CMB_LHS1, &rComboAttr1);
-		mtPlcInp::SetLenHosei( 0, rComboAttr1);					// 長さ補正値1 　→　長さ補正値1
-
-		z_mmIA.GetComboAttrR( MC_CMB_LHS2, &rComboAttr2);
-		mtPlcInp::SetLenHosei( 1, rComboAttr2);					// 長さ補正値2 　→　長さ補正値2
-
-		z_mmIA.GetComboAttrR( MC_CMB_ZJSZ, &rComboAttr3);
-		mtPlcInp::SetSinZure( rComboAttr3);						// 材軸芯ずれ量　→　材軸芯ずれ量
-
-		z_mmIA.GetComboAttrR( MC_CMB_HAIZ, &rComboAttr4);
-		mtPlcInp::SetPlcZure( rComboAttr4);						// 配置点ずれ量　→　配置点ずれ量
-
-		ist = z_mmIA.GetComboAttrR( MC_CMB_TRTH, &rComboAttr5);	// 取り付け高さ　→　高さ1
-		if ( ist == 0)
-			ist = z_mmIA.GetComboAttrR( MC_CMB_LWRH, &rComboAttr5);	// 下端高さ　→　高さ1
-
-		mtPlcInp::SetHgt( 0, rComboAttr5);						// →　高さ1
-		mtTateguInp::SetHeight( rComboAttr5);					// →　建具高さ
-
-		ist = z_mmIA.GetComboAttrR( MC_CMB_KROH, &rComboAttr6);	// 建具ROH　→　高さ2
-		if ( ist ==0)
-			ist = z_mmIA.GetComboAttrR( MC_CMB_UPRH, &rComboAttr6);	// 上端高さ　→　高さ2
-
-		mtPlcInp::SetHgt( 1, rComboAttr6);						// →　高さ2
-		mtTateguInp::SetROH( rComboAttr6);						// →　建具ROH
-
-//		iIdPartsSpec = z_mmIA.GetCurPartsNmId();					// カレントの部品ID
-//		pPartsSpec = BuzaiCode::MhGetpPartsSpec( iIdPartsSpec);	// 部品種類レコード
-//		if ( pPartsSpec->IsTategu()) {							// 建具 (部材コード = 建具)
-//		}
-		break;
-
-	case MP_AT_ADJLNG:											// ***** 部材長さ調整入力 *****
-	case MP_AT_YANE:											// ***** 屋根入力 *****
-
-		ASSERT(false);											// エラー
-		break;
-	}
-
-}
-
-
-///////////////////////////////////////////////////////////////////////////////
-//	構成コード、分類、部品種類IDより、属性値入力モードを求める
-
-int mmIoPartsAttr::MnCalcInpAtMode()
-{
-	int		iMode;								// 属性値入力モード
-	int		iGp;
-	int		iBr;
-
-	int		iIdPartsSpec;
-	mhPartsSpec*	pPartsSpec;
-
-	// 部材属性値入力モード( iMode)(表示項目)の決定
-	iGp = z_mmIA.GetKCdGp();
-	iBr = z_mmIA.GetKCdBr();
-
-	iIdPartsSpec = z_mmIA.GetCurPartsNmId();
-	pPartsSpec = BuzaiCode::MhGetpPartsSpec( iIdPartsSpec);
-
-	if ( pPartsSpec->IsTategu()) {								// (部品種類ID == 建具)
-		iMode = MP_AT_TATEGU;									//			建具入力
-
-	} else if ( pPartsSpec->IsFrame())	{						// (部品種類ID == たて枠 | 束) (依存コード == 垂直)
-		iMode = MP_AT_VRT_PARTS;								//			垂直部材入力
-
-	} else if ( pPartsSpec->IsPanel() || pPartsSpec->IsKaiko()) {	// (部品種類ID == パネル | 開口)
-		if ( iGp == MP_GP_YUKA || iGp == MP_GP_TENJO)			//		(構成コード == 床 | 天井)
-			iMode = MP_AT_YTPANEL;								//			床・天井パネル入力
-
-		else if ( iGp == MP_GP_YANE)							//		(構成 == 屋根)
-			iMode = MP_AT_YANEPANEL;							//			屋根パネル入力
-
-		else													//		(その他)
-			iMode = MP_AT_HRZ_PARTS;							//			横置き部材入力
-
-	} else if ( iBr == MP_BR_YANE) {							// (分類 == 屋根)
-		if ( iGp == MP_GP_YANE) 								//		(構成 == 屋根)
-			iMode = MP_AT_YANE;									//			屋根入力
-		else													//		(その他)
-			iMode = MP_AT_HRZ_PARTS;							//			横置き部材入力
-
-	} else {													// (その他)
-		iMode = MP_AT_HRZ_PARTS;								//			横置き部材
-	}
-	return iMode;
-}
-
-/////////////////////////////////////////////////////////////////////////////
-//	属性値入力モードで部材属性入力用リボンバーの項目を設定する
-//	 (コンボボックスとチェックボックスの項目を設定する)
-//	
-void mmIoPartsAttr::InitComboAttr(
-						int		i_iIoPartsAttrMd	// 属性値入力モード
-												//  MP_AT_AUTO(-1)		:自動設定
-												//	MP_AT_NONE(0)		:属性値入力なし
-												//	MP_AT_HRZ_PARTS(1)	:水平部材入力
-												//	MP_AT_VRT_PARTS(2)	:垂直部材入力
-												//	MP_AT_YTPANEL(3)	:床天井パネル入力
-												//	MP_AT_YANEPANEL(4)	:屋根パネル入力
-												//	MP_AT_ADJLNG(5)		:部材長さ調整入力
-												//	MP_AT_YANE(6)		:屋根入力
-												//	MP_AT_TATEGU(7)		:建具入力
-				)
-{
-	static int s_Combo_Attr[][10] = {										// MP_AT_NONE:			// 0
-					  {	MC_CMB_NULL, MC_CMB_NULL, MC_CMB_NULL,	// null, null, null
-						MC_CMB_NULL, MC_CMB_NULL, MC_CMB_NULL,	// null, null, null
-						MC_CHK_NULL, MC_CHK_NULL,				// null, null
-						MC_CHK_NULL, MC_CHK_NULL},				// null, null
-																// MP_AT_HRZ_PARTS:		// 1			// 横置部材
-					  { MC_CMB_LHS1, MC_CMB_LHS2, MC_CMB_ZJSZ,	// 長さ補正1, 長さ補正2, 芯ずれ
-						MC_CMB_TRTH, MC_CMB_INTR, MC_CMB_HONS,	// 取付高さ, 間隔, 本数
-						MC_CHK_NULL, MC_CHK_NULL,				// null, null
-						MC_CHK_NULL, MC_CHK_NULL},				// null, null
-																// MP_AT_VRT_PARTS:		// 2			// たて枠
-					  { MC_CMB_UPRH, MC_CMB_LWRH, MC_CMB_HAIZ,	// 上端高さ, 下端高さ, 配置ずれ
-						MC_CMB_NULL, MC_CMB_INTR, MC_CMB_HONS,	// null, 間隔, 本数
-						MC_CHK_NULL, MC_CHK_NULL,				// null, null
-						MC_CHK_NULL, MC_CHK_NULL},				// null, null
-																// MP_AT_YTPANEL:		// 3			// 床・天井パネル
-					  { MC_CMB_LFH1, MC_CMB_RTH1, MC_CMB_TRTH,// 左巾補正, 右巾補正, 取付高さ
-						MC_CMB_FHS1, MC_CMB_OKYK, MC_CMB_OHS2,	// 手前補正, 奥行, 奥行補正
-						MC_CHK_NULL, MC_CHK_NULL,				// null, null
-						MC_CHK_NULL, MC_CHK_NULL},				// null, null
-																// MP_AT_YANEPANEL:		// 4			// 屋根パネル
-					  { MC_CMB_LFH2, MC_CMB_RTH2, MC_CMB_TRTH,	// 左巾補正, 右巾補正, 取付高さ
-						MC_CMB_FHS2, MC_CMB_OKYK, MC_CMB_OHS2,	// 軒の出, 奥行, 奥行補正
-						MC_CHK_NULL, MC_CHK_NULL,				// null, null
-						MC_CHK_NULL, MC_CHK_NULL},				// null, null
-																// MP_AT_ADJLNG:		// 5			// 部材長さ調整
-					  { MC_CMB_LHS1, MC_CMB_NULL, MC_CMB_NULL,	// 長さ補正, null, null
-						MC_CMB_NULL, MC_CMB_NULL, MC_CMB_NULL,	// null, null, null
-						MC_CHK_NULL, MC_CHK_KATI,				// null, 勝ち
-						MC_CHK_MULT, MC_CHK_INTC},				// 複数, 交差部材調整
-																// MP_AT_YANE:			// 6			// 屋根
-					  { MC_CMB_KOBY, MC_CMB_NKDE, MC_CMB_KRDE,	// 屋根勾配, 軒の出, ケラバの出
-						MC_CMB_NULL, MC_CMB_NULL, MC_CMB_NULL,	// null, null, null
-						MC_CHK_NULL, MC_CHK_NULL,				// null, null
-						MC_CHK_NULL, MC_CHK_NKTP},				// null, 軒タイプ
-																// MP_AT_TATEGU:		// 7			// 建具
-					  { MC_CMB_LHS1, MC_CMB_LHS2, MC_CMB_TRTH,	// 長さ補正1, 長さ補正2, 取付高さ
-						MC_CMB_KROH, MC_CMB_HAIZ, MC_CMB_NULL,	// ＲＯＨ, 配置ずれ ,null
-						MC_CHK_NULL, MC_CHK_NULL,				// null, null 
-						MC_CHK_NULL, MC_CHK_NULL}				// null, null
-					};
-
-	if ( !GetDispFlg())	goto EXIT;	
-
-	if ( i_iIoPartsAttrMd >= 0)
-		m_iIoPartsAttrMd = i_iIoPartsAttrMd;
-	else
-		m_iIoPartsAttrMd = MnCalcInpAtMode();
-
-	if ( m_iIoPartsAttrMd < 0 || m_iIoPartsAttrMd >= MP_AT_END) goto EXIT;
-
-	//	部材属性入力用コンボボックスとチェックボックスの項目を設定する
-//S	switch ( m_iIoPartsAttrMd)
-//	{
-//	case	MP_AT_NONE:			// 0
-//		MnsInitComboAttr( MC_CMB_NULL, MC_CMB_NULL, MC_CMB_NULL,// null, null, null
-//						MC_CMB_NULL, MC_CMB_NULL, MC_CMB_NULL,	// null, null, null
-//						MC_CHK_NULL, MC_CHK_NULL,				// null, null
-//						MC_CHK_NULL, MC_CHK_NULL);				// null, null
-//		break;
-//	case	MP_AT_HRZ_PARTS:	// 1							// 横置部材
-//		MnsInitComboAttr( MC_CMB_LHS1, MC_CMB_LHS2, MC_CMB_ZJSZ,// 長さ補正1, 長さ補正2, 芯ずれ
-//						MC_CMB_TRTH, MC_CMB_INTR, MC_CMB_HONS,	// 取付高さ, 間隔, 本数
-//						MC_CHK_NULL, MC_CHK_NULL,				// null, null
-//						MC_CHK_NULL, MC_CHK_NULL);				// null, null
-//		break;
-//	case	MP_AT_VRT_PARTS:	// 2							// たて枠
-//		MnsInitComboAttr( MC_CMB_UPRH, MC_CMB_LWRH, MC_CMB_HAIZ,// 上端高さ, 下端高さ, 配置ずれ
-//						MC_CMB_NULL, MC_CMB_INTR, MC_CMB_HONS,	// null, 間隔, 本数
-//						MC_CHK_NULL, MC_CHK_NULL,				// null, null
-//						MC_CHK_NULL, MC_CHK_NULL);				// null, null
-//		break;
-//	case	MP_AT_YTPANEL:		// 3							// 床・天井パネル
-//		MnsInitComboAttr( MC_CMB_LFH1, MC_CMB_RTH1, MC_CMB_TRTH,// 左巾補正, 右巾補正, 取付高さ
-//						MC_CMB_FHS1, MC_CMB_OKYK, MC_CMB_OHS2,	// 手前補正, 奥行, 奥行補正
-//						MC_CHK_NULL, MC_CHK_NULL,				// null, null
-//						MC_CHK_NULL, MC_CHK_NULL);				// null, null
-//		break;
-//	case	MP_AT_YANEPANEL:	// 4							// 屋根パネル
-//		MnsInitComboAttr( MC_CMB_LFH2, MC_CMB_RTH2, MC_CMB_TRTH,// 左巾補正, 右巾補正, 取付高さ
-//						MC_CMB_FHS2, MC_CMB_OKYK, MC_CMB_OHS2,	// 軒の出, 奥行, 奥行補正
-//						MC_CHK_NULL, MC_CHK_NULL,				// null, null
-//						MC_CHK_NULL, MC_CHK_NULL);				// null, null
-//		break;
-//	case	MP_AT_ADJLNG:		// 5							// 部材長さ調整
-//		MnsInitComboAttr( MC_CMB_LHS1, MC_CMB_NULL, MC_CMB_NULL,// 長さ補正, null, null
-//						MC_CMB_NULL, MC_CMB_NULL, MC_CMB_NULL,	// null, null, null
-//						MC_CHK_NULL, MC_CHK_KATI,				// null, 勝ち
-//						MC_CHK_MULT, MC_CHK_INTC);				// 複数, 交差部材調整
-//		break;
-//	case	MP_AT_YANE:			// 6							// 屋根
-//		MnsInitComboAttr( MC_CMB_KOBY, MC_CMB_NKDE, MC_CMB_KRDE,// 屋根勾配, 軒の出, ケラバの出
-//						MC_CMB_NULL, MC_CMB_NULL, MC_CMB_NULL,	// null, null, null
-//						MC_CHK_NULL, MC_CHK_NULL,				// null, null
-//						MC_CHK_NULL, MC_CHK_NKTP);				// null, 軒タイプ
-//		break;
-//	case	MP_AT_TATEGU:		// 7							// 建具
-//		MnsInitComboAttr( MC_CMB_LHS1, MC_CMB_LHS2, MC_CMB_TRTH,// 長さ補正1, 長さ補正2, 取付高さ
-//						MC_CMB_KROH, MC_CMB_HAIZ, MC_CMB_NULL,	// ＲＯＨ, 配置ずれ ,null
-//						MC_CHK_NULL, MC_CHK_NULL,				// null, null 
-//						MC_CHK_NULL, MC_CHK_NULL);				// null, null
-//		break;
-//	}
-//EXIT:;
-//}
-//
-//
-///////////////////////////////////////////////////////////////////////////////
-////	部材属性入力用コンボボックスとチェックボックスの項目を設定する
-//
-//void mmIoPartsAttr::MnsInitComboAttr(
-//					MCCMBATTR	i_icombo1,		// 属性入力用コンボボックス1の属性ID
-//					MCCMBATTR	i_icombo2,		// 属性入力用コンボボックス2の属性ID
-//					MCCMBATTR	i_icombo3,		// 属性入力用コンボボックス3の属性ID
-//					MCCMBATTR	i_icombo4,		// 属性入力用コンボボックス4の属性ID
-//					MCCMBATTR	i_icombo5,		// 属性入力用コンボボックス5の属性ID
-//					MCCMBATTR	i_icombo6,		// 属性入力用コンボボックス6の属性ID
-//					MCCHKATTR	i_icheck1,		// 属性入力用チェックボックス1の属性ID
-//					MCCHKATTR	i_icheck2,		// 属性入力用チェックボックス2の属性ID
-//					MCCHKATTR	i_icheck3,		// 属性入力用チェックボックス3の属性ID
-//					MCCHKATTR	i_icheck4		// 属性入力用チェックボックス4の属性ID
-//				)
-//{
-//	z_Combo_Attr[0] = i_icombo1; z_Combo_Attr[1] = i_icombo2; z_Combo_Attr[2] = i_icombo3;
-//	z_Combo_Attr[3] = i_icombo4; z_Combo_Attr[4] = i_icombo5; z_Combo_Attr[5] = i_icombo6;
-//	z_Check_Attr[0] = i_icheck1; z_Check_Attr[1] = i_icheck2;
-//	z_Check_Attr[2] = i_icheck3; z_Check_Attr[3] = i_icheck4;
-
-	int		ic1;
-	
-	for ( ic1=1; ic1<=MC_SZ_CMBATTR; ic1++) {
-		switch ( s_Combo_Attr[m_iIoPartsAttrMd][ic1-1]) {
-			case MC_CMB_NULL:
-				// コンボボックスを消し無効にする
-				SetComboAttrText( ic1, Mstr( ""));
-				InitComboAttrR( ic1, 0, NULL, 0);
-				break;
-			case MC_CMB_LHS1:
-				// 長さ補正値1選択用コンポボックスの項目を設定する
-				SetComboAttrText( ic1, Mstr( "長さ補正1"));
-				InitComboAttrR( ic1, ISZLNGH, z_rLngH, INITLNGTH);
-				break;
-			case MC_CMB_LHS2:
-				// 長さ補正値2選択用コンポボックスの項目を設定する
-				SetComboAttrText( ic1, Mstr( "長さ補正2"));
-				InitComboAttrR( ic1, ISZLNGH, z_rLngH, INITLNGTH);
-				break;
-			case MC_CMB_ZJSZ:
-				// 材軸芯ずれ量選択用コンポボックスの項目を設定する
-				SetComboAttrText( ic1, Mstr( "芯ずれ"));
-				InitComboAttrR( ic1, ISZSINZ, z_rSinZ, INITSINZ);
-				break;
-			case MC_CMB_HAIZ:
-				// 配置点ずれ量選択用コンポボックスの項目を設定する
-				SetComboAttrText( ic1, Mstr( "配置ずれ"));
-				InitComboAttrR( ic1, ISZHAIZ, z_rHaiZ, INITHAIZ);
-				break;
-			case MC_CMB_TRTH:
-				// 取り付け高さ選択用コンポボックスの項目を設定する
-				SetComboAttrText( ic1, Mstr( "取付高さ"));
-				InitComboAttrR( ic1, ISZZ1, z_rZ1, INITZ1);
-				break;
-			case MC_CMB_KROH:
-				// 開口部高さ(ROH)選択用コンポボックスの項目を設定する
-				SetComboAttrText( ic1, Mstr( "ＲＯＨ"));
-				InitComboAttrR( ic1, ISZZ2, z_rZ2, INITZ2);
-				break;
-			case MC_CMB_INTR:
-				// 間隔選択用コンポボックスの項目を設定する
-				SetComboAttrText( ic1, Mstr( "間隔"));
-				InitComboAttrR( ic1, ISZINTV, z_rIntv, INITINTV);
-				break;
-			case MC_CMB_HONS:
-				// 本数選択用コンポボックスの項目を設定する
-				SetComboAttrText( ic1, Mstr( "本数"));
-				InitComboAttrI( ic1, ISZNUM, z_iNum, INITNUM);
-				break;
-
-//			case MC_CMB_HHS1:
-//				// 幅補正値1選択用コンポボックスの項目を設定する
-//				SetComboAttrText( ic1, Mstr( "幅補正1"));
-//				InitComboAttrR( ic1, ISZLNGH2, z_rLngH2, INITLNGTH2);
-//				break;
-//			case MC_CMB_HHS2:
-//				// 幅補正値2選択用コンポボックスの項目を設定する
-//				SetComboAttrText( ic1, Mstr( "幅補正2"));
-//				InitComboAttrR( ic1, ISZLNGH2, z_rLngH2, INITLNGTH2);
-//				break;
-
-			case MC_CMB_FHS1:
-				// 床･天井パネル用　手前補正選択用コンポボックスの項目を設定する
-				SetComboAttrText( ic1, Mstr( "手前補正"));
-				InitComboAttrR( ic1, ISZOKUYUKIH, z_rOkuH, INITOKUYUKIH);
-				break;
-			case MC_CMB_FHS2:
-				// 屋根パネル用　手前補正選択用コンポボックスの項目を設定する
-				SetComboAttrText( ic1, Mstr( "軒の出"));
-				InitComboAttrR( ic1, ISZKOUBAI, z_rNokiDe, INITNOKINODE);
-				break;
-			case MC_CMB_OKYK:
-				// 奥行き選択用コンポボックスの項目を設定する
-				SetComboAttrText( ic1, Mstr( "奥行"));
-				InitComboAttrR( ic1, ISZOKUYUKI, z_rOku, INITOKUYUKI);
-				break;
-			case MC_CMB_OHS2:
-				// 奥行き補正選択用コンポボックスの項目を設定する
-				SetComboAttrText( ic1, Mstr( "奥行補正"));
-				InitComboAttrR( ic1, ISZOKUYUKIH, z_rOkuH, INITOKUYUKIH);
-				break;
-			case MC_CMB_KOBY:
-				// 屋根勾配選択用コンポボックスの項目を設定する
-				SetComboAttrText( ic1, Mstr( "屋根勾配"));
-				InitComboAttrI( ic1, ISZKOUBAI, z_iKoubai, INITKOUBAI);
-				break;
-			case MC_CMB_NKDE:
-				// 軒の出選択用コンポボックスの項目を設定する
-				SetComboAttrText( ic1, Mstr( "軒の出"));
-				InitComboAttrR( ic1, ISZNOKINODE, z_rNokiDe, INITNOKINODE);
-				break;
-			case MC_CMB_KRDE:
-				// ケラバの出選択用コンポボックスの項目を設定する
-				SetComboAttrText( ic1, Mstr( "ケラバの出"));
-				InitComboAttrR( ic1, ISZKERABANODE, z_rKerabanoDe, INITKERABANODE);
-				break;
-			case MC_CMB_UPRH:
-				// 上端高さ選択用コンポボックスの項目を設定する
-				SetComboAttrText( ic1, Mstr( "上端高さ"));
-				InitComboAttrR( ic1, ISZZ2, z_rZ2, INITZ2);
-				break;
-			case MC_CMB_LWRH:
-				// 下端高さ選択用コンポボックスの項目を設定する
-				SetComboAttrText( ic1, Mstr( "下端高さ"));
-				InitComboAttrR( ic1, ISZZ1, z_rZ1, INITZ1);
-				break;
-			case MC_CMB_LFH1:
-				// 床･天井パネル用　左巾補正(長さ補正値1)選択用コンポボックスの項目を設定する
-				SetComboAttrText( ic1, Mstr( "左巾補正"));
-				InitComboAttrR( ic1, ISZLNGH, z_rLngH, INITLNGTH);
-				break;
-			case MC_CMB_RTH1:
-				// 床･天井パネル用　右巾補正(長さ補正値2)選択用コンポボックスの項目を設定する
-				SetComboAttrText( ic1, Mstr( "右巾補正"));
-				InitComboAttrR( ic1, ISZLNGH, z_rLngH, INITLNGTH);
-				break;
-			case MC_CMB_LFH2:
-				// 屋根パネル用　左巾補正(長さ補正値1)選択用コンポボックスの項目を設定する
-				SetComboAttrText( ic1, Mstr( "左巾補正"));
-				InitComboAttrR( ic1, ISZKERABANODE, z_rKerabanoDe, INITLNGTH);
-				break;
-			case MC_CMB_RTH2:
-				// 屋根パネル用　右巾補正(長さ補正値2)選択用コンポボックスの項目を設定する
-				SetComboAttrText( ic1, Mstr( "右巾補正"));
-				InitComboAttrR( ic1, ISZKERABANODE, z_rKerabanoDe, INITLNGTH);
-				break;
-		}
-	}
-//	for ( ic1=1; ic1<=MC_SZ_CHKATTR; ic1++) {
-//		switch (z_Check_Attr[ic1-1]) {
-//			case MC_CHK_NULL:
-//				// チェックボックスを消し無効にする
-//				SetCheckAttrText( ic1, NULL);		
-//				SetCheckAttrCkb( ic1, 0);		
-//				break;
-//			case MC_CHK_KATI:
-//				// 勝ち負け入力用チェックボックスを設定する
-//				SetCheckAttrText( ic1, Mstr( "勝ち"));
-//				SetCheckAttrCkb( ic1, 0);
-//				break;
-//			case MC_CHK_MULT:
-//				// 複数入力用チェックボックスを設定する
-//				SetCheckAttrText( ic1, Mstr( "複数"));
-//				SetCheckAttrCkb( ic1, 1);
-//				break;
-//			case MC_CHK_INTC:
-//				// 交差部材調整用チェックボックスを設定する
-//				SetCheckAttrText( ic1, Mstr( "交差部材調整"));
-//				SetCheckAttrCkb( ic1, 1);
-//				break;
-//			case MC_CHK_NKTP:
-//				// 軒先タイプ(0:勾配収まり、1:垂直)
-//				SetCheckAttrText( ic1, Mstr( "軒先タイプ垂直"));
-//				SetCheckAttrCkb( ic1, 1);
-//				break;
-//		}
-//	}
-EXIT:;
-
 //S//////////////////////////////////////////////////////////////////////////////
 ////	属性値入力用チェックボックス番号を取得する
 //
@@ -879,7 +815,6 @@ EXIT:;
 //		iChkNo = ic + 1;
 //	return iChkNo;
 //}
-//
 //
 /////////////////////////////////////////////////////////////////////////////////
 ////	属性値入力用チェックボックスのタイトルを設定する
@@ -937,7 +872,6 @@ EXIT:;
 //	return 0;
 //}
 //
-//
 /////////////////////////////////////////////////////////////////////////////////
 ////	チェックボックスのチェック有無を取得する
 ////
@@ -991,7 +925,6 @@ EXIT:;
 //				break;
 //		}
 //	}
-
-}
+//}
 
 } // namespace MC

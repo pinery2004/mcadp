@@ -61,7 +61,7 @@ inline void mdmEnt::Print( MCHAR* s, MINT i_i)
 {
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "\t%d: %s < mdmDEnt > eID = %d\n"), i_i, s, m_idP);
-	MBTRCPRBF;
+	MBLOGPRBF;
 	m_GidC.Print( Mstr( "•t‘®q"), MDC_NONE_ID);
 	m_Grfc.Print( Mstr( "ŠÖŒW"), MDC_NONE_ID);
 	//m_pAtr->Print( Mstr( "‘®«"));

@@ -49,7 +49,7 @@ inline void MdDelLink::Print( MCHAR* s, MINT i_i)
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	< MdDelLink > ID = %dÅCêeID = %d, éüID = %d, ëOID = %d\n"),
 									s, i_i, m_idP, m_idNext, m_idBefore);
-	MBTRCPRBF;
+	MBLOGPRBF;
 #endif
 }
 

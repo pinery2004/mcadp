@@ -430,7 +430,7 @@ void mnIoPartsAttr::GetComboAttrA( void)
 	MREAL	rComboAttr6;
 	int		iMode;
 
-	iMode = z_mnIA.GetAtMd();						// 属性値入力モード
+	iMode = z_mmIA.GetAtMd();						// 属性値入力モード
 
 	switch ( iMode)
 	{

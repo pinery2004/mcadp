@@ -156,7 +156,7 @@ public:
 //	トレース
 inline void MdModel::Print( MCHAR* s)
 {
-	MBTRCPRINTS( s);
+	MBLOGPRINTS( s);
 	mlLog::Print( Mstr( "◇グループセット	"), MDC_NONE_ID);
 	m_ScmBf.Print( Mstr( "◇スキーマセット	"), MDC_NONE_ID);
 	m_LyrBf.Print( Mstr( "◇レイヤーセット	"), MDC_NONE_ID);
@@ -165,15 +165,15 @@ inline void MdModel::Print( MCHAR* s)
 	m_PartsBf.Print( Mstr( "◇部品セット		"), MDC_NONE_ID);
 	m_WinBf.Print( Mstr( "◇ウィンドウセット	"), MDC_NONE_ID);
 
-	MBTRCPRINTS( Mstr( "◇カレント"));
-	MBTRCPRINTI( Mstr( "	カレントグループID		"), m_idCurGrp);
-	MBTRCPRINTI( Mstr( "	カレントウィンドウID	"), m_idCurWin);
-	MBTRCPRINTI( Mstr( "	カレントウィンドウタイプ ( 0:３Ｄ、1：図面)"), m_itpCurWin);
-	MBTRCPRINTI( Mstr( "	カレントレイヤーID		"), m_idCurLyr);
-	MBTRCPRINTI( Mstr( "	カレントスキーマID		"), m_idCurScm);
-	MBTRCPRINTI( Mstr( "	ポリゴン展開処理モード	"), m_itpCurWin);
-	MBTRCPRINTIN( Mstr( "	ポリゴン展開処理モード	"), m_mdTenkai, 28);
-	MBTRCPRINTFN( Mstr( "	ポリゴン展開処理パラメータ"), m_rmdTenkai, 7);
+	MBLOGPRINTS( Mstr( "◇カレント"));
+	MBLOGPRINTI( Mstr( "	カレントグループID		"), m_idCurGrp);
+	MBLOGPRINTI( Mstr( "	カレントウィンドウID	"), m_idCurWin);
+	MBLOGPRINTI( Mstr( "	カレントウィンドウタイプ ( 0:３Ｄ、1：図面)"), m_itpCurWin);
+	MBLOGPRINTI( Mstr( "	カレントレイヤーID		"), m_idCurLyr);
+	MBLOGPRINTI( Mstr( "	カレントスキーマID		"), m_idCurScm);
+	MBLOGPRINTI( Mstr( "	ポリゴン展開処理モード	"), m_itpCurWin);
+	MBLOGPRINTIN( Mstr( "	ポリゴン展開処理モード	"), m_mdTenkai, 28);
+	MBLOGPRINTFN( Mstr( "	ポリゴン展開処理パラメータ"), m_rmdTenkai, 7);
 }
 
 } // namespace MC

@@ -735,8 +735,8 @@ void mhHaitiIn::MhAdjBzL(
 		}
 	}
 
-//S	ist = z_mnIA.GetComboAttrR( MC_CMB_LHS1, &rLH);				// ’·‚³•â³’l‚ğæ“¾‚·‚é
-	rLH = z_mnIA.GetLengthH1();
+	ist = z_mmIA.GetComboAttrR( MC_CMB_LHS1, &rLH);				// ’·‚³•â³’l‚ğæ“¾‚·‚é
+//S	rLH = z_mnIA.GetLengthH1();
 	if ( Bz1.Ln.p[1 - iMov] == PtInt) {
 		rLnWH = Bz1.rLH[1 - iMov] + rLH;
 		if ( !MGeo::Zero( rLnWH))

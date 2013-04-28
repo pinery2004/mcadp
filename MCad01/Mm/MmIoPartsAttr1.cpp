@@ -18,10 +18,31 @@
 #include "MhInpPlcParts.h"
 #include "MhLib.h"
 #include "MmPrompt.h"
+#include "MmWnd.h"
 
 namespace MC
 {
 
+////////////////////////////////////////////////////////////////////////////
+//	部材属性入力用コンボボックスの設定
+
+void mmIoPartsAttr::InitComboParts()
+{
+	//	部品名コンポボックスの項目を設定する
+	InitComboPartsNm();
+
+	//	寸法型式選択用コンポボックスの項目を設定する
+	InitComboPartsMbr();
+
+//S	//	パネル番号選択用コンポボックスの項目を設定する
+//	InitComboPanelNo();
+
+	//	部材属性入力用コンポボックスの項目を設定する
+	InitComboAttr();
+
+//	Window::CurWndFocus();
+//	WindowCtrl::MmWndKReDraw();
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //	部品選択用コンポボックスにカレントの組と分類の部材名一覧を設定し

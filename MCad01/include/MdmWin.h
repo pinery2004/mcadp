@@ -40,14 +40,14 @@ inline void MdmWin::Print( MCHAR* i_s, MINT i_i)
 {
 #ifdef _DEBUG
 	//Msprintf_s( mlLog::m_Str, Mstr( "%s < MdmSetP > ID = %d\n"), i_s, i_i);
-	//MBTRCPRBF;
-	//MBTRCPRINTI( Mstr( "		ウィンドウタイプ ( 0:３Ｄ、1：図面)", m_itpWin);
-	//MBTRCPRINTI( Mstr( "		透視方法			透視投影と平行投影"), m_iProj);
-	//MBTRCPRINTI( Mstr( "		機能番号"), m_idFn);
-	//MBTRCPRINTIN( Mstr( "		視点／注視点（含む履歴）", m_ViewPt, 3);
-	//MBTRCPRINTFN( Mstr( "		Zクリッピング値"), m_rZClip, 2);
-	//MBTRCPRINTFN( Mstr( "		サイズ"), m_Size, 2);
-	//MBTRCPRINTFN( Mstr( "		縮尺etc", m_Scale);
+	//MBLOGPRBF;
+	//MBLOGPRINTI( Mstr( "		ウィンドウタイプ ( 0:３Ｄ、1：図面)", m_itpWin);
+	//MBLOGPRINTI( Mstr( "		透視方法			透視投影と平行投影"), m_iProj);
+	//MBLOGPRINTI( Mstr( "		機能番号"), m_idFn);
+	//MBLOGPRINTIN( Mstr( "		視点／注視点（含む履歴）", m_ViewPt, 3);
+	//MBLOGPRINTFN( Mstr( "		Zクリッピング値"), m_rZClip, 2);
+	//MBLOGPRINTFN( Mstr( "		サイズ"), m_Size, 2);
+	//MBLOGPRINTFN( Mstr( "		縮尺etc", m_Scale);
 #endif
 }
 
@@ -63,7 +63,7 @@ inline void MdmCordinate::Print( MCHAR* i_s, MINT i_i)
 {
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	< MdmCordinate > ID = %d\n"), i_s, i_i);
-	MBTRCPRBF;
+	MBLOGPRBF;
 #endif
 }
 

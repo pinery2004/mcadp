@@ -120,10 +120,10 @@ inline void MdmSetGRP::Print( MCHAR* s, MINT i_i)
 {
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "	%3d: %s < MdmSetGRP > 親ID = %d，"), i_i, m_psName, m_idP);
-	MBTRCPRBF;
+	MBLOGPRBF;
 	Msprintf_s( mlLog::m_Str, Mstr( "階高さ = %.1f, 床高さ = %.1f\n"),
 									m_rKt, m_rFl);
-	MBTRCPRBF;
+	MBLOGPRBF;
 	m_GidC.Print( Mstr( "子レイヤーID群"), MDC_NONE_ID);
 #endif
 }

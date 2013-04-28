@@ -16,7 +16,7 @@
 #define	DLL_EXPORT_TRACE_DO
 #include "MlLog.h"
 
-//MCHAR	mlLog::m_Str[1000] = { MCHAR( "INIT")};
+//MCHAR	mlLog::m_Str[1000] = { Mstr( "INIT")};
 //FILE*	mlLog::m_File;
 //MINT	mlLog::m_iCtl;
 
@@ -28,44 +28,39 @@ namespace MC
 FILE*	Trace::m_pfp = 0;						// トレースファイルポインタ
 MCHAR	Trace::m_cLogFilePath[MAX_PATH];		// トレースファイル名
 MINT	Trace::m_iDepth = 0;					// トレースインデント深さ
-MCHAR	Trace::m_cDepth[Msizeof( MBTRCINDENT) * ( MBTRCMAXDEPTH + 1)] = Mstr( "");
+MCHAR	Trace::m_cDepth[Msizeof( MBLOGINDENT) * ( MBLOGMAXDEPTH + 1)] = Mstr( "");
 												// トレースインデント
 
 //===========================================================================
-//		デバッグ
+//【機能】	ログ
+//
 MCHAR	mlLog::m_Str[1000];
 FILE*	mlLog::m_File;
 MINT	mlLog::m_iCtl;
-
-//mlLog* MbDbg( )
-//{
-//	return &g_MbDbg;
-//}
 
 void mlLog::OpenTrace( MCHAR* i_cLogFilePath)
 {
 	errno_t	err;
 
-//#ifdef _DEBUG
+#ifdef _DEBUG
 	if ( Mstrcmp( i_cLogFilePath, Mstr( "stdout")) == 0) {
 		m_File = stdout;
 	} else {
-//		m_File = Mfopen( i_sFileName, Mstr( "w"));
 		err = Mfopen_s( &m_File, i_cLogFilePath, Mstr( "w"));
 		if ( err != 0) {
 			ms::SysError( i_cLogFilePath, MC_ERR_FILEOPEN);
 		}
 	}
 	m_iCtl = 1;
-//#endif
+#endif
 }
 
 void mlLog::CloseTrace( )
 {
-//#ifdef _DEBUG
+#ifdef _DEBUG
 	if ( m_File != stdout)
 		fclose( m_File);
-//#endif
+#endif
 }
 
 void mlLog::Ctrl( int ictrl)
@@ -209,6 +204,55 @@ void mlLog::Print( MCHAR* str, MREAL *f1, int nf1)
 #endif
 }
 
+//------------------------------------------------------------------------
+// ログファイルへフォーマット付きで出力する
+void mlLog::LogOut(
+						MCHAR* i_cFormat, ...	// ログ書き込みデータ
+						)
+{
+#ifdef _DEBUG
+	va_list	cList;
+	if( m_iCtl != 0) {
+		va_start( cList, i_cFormat);
+		_vftprintf_s( m_File, i_cFormat, cList);
+		va_end( cList);
+	}
+#endif
+}
+
+//------------------------------------------------------------------------
+// ログファイルへログレベルとフォーマット付きで出力する
+//
+//		Ex.	mlLog::LogOut( MC_LOG_ERROR, Mstr("%s(%d) XXX処理\n"), __FILE__, __LINE__);
+//
+void mlLog::LogOutT(
+						int		i_iLevel,		// ログレベル
+												//				MC_LOG_ERROR
+												//				MC_LOG_WARNING
+												//				MC_LOG_ERROR
+						MCHAR*	i_cFormat, ...	// ログ書き込みデータ
+						)
+{
+#ifdef _DEBUG
+	switch ( i_iLevel) {
+	case MC_LOG_ERROR:
+		fprintf( m_File, " *** ERROR *** ");
+		__debugbreak();										// ブレークポイント
+		break;
+	case MC_LOG_WARNING:
+		fprintf( m_File, " *** WARNING *** ");
+		break;
+	}
+	va_list	cList;
+	if( m_iCtl != 0) {
+		va_start( cList, i_cFormat);
+		_vftprintf( m_File, i_cFormat, cList);
+		va_end( cList);
+	}
+#endif
+}
+
+
 void mlLog::Trace( MCHAR* str)
 {
 #ifdef _DEBUG
@@ -238,7 +282,6 @@ void Trace::OpenLogFile(
 	errno_t	err;
 
 	if ( m_pfp == NULL) {
-//S		m_pfp = Mfopen( i_cLogFilePath, Mstr( "at"));
 		err = Mfopen_s( &m_pfp, i_cLogFilePath, Mstr( "at"));
 		if ( err != 0) {
 			ms::SysError( i_cLogFilePath, MC_ERR_FILEOPEN);
@@ -260,7 +303,7 @@ void Trace::CloseLogFile( void)
 
 
 //===========================================================================
-//【機能】		ログファイル出力コンストラクタ
+//【機能】		トレースファイルへ出力コンストラクタ
 //【返値】		なし
 //===========================================================================
 Trace::Trace( void)
@@ -272,15 +315,15 @@ Trace::Trace( MCHAR* i_cFuncName)
 {
 	ASSERT( m_pfp >= 0);
 	m_iDepth++;
-	if ( m_iDepth < MBTRCMAXDEPTH) {
-		Mstrcpy_s( &m_cDepth[m_iDepth * 2], MBTRCMAXDEPTH * 2 + 1, MBTRCINDENT);
+	if ( m_iDepth < MBLOGMAXDEPTH) {
+		Mstrcpy_s( &m_cDepth[m_iDepth * 2], MBLOGMAXDEPTH * 2 + 1, MBLOGINDENT);
 	}
 	Mstrcpy_s( m_cFuncName, Msizeof( m_cFuncName), i_cFuncName);
 	fprintf( m_pfp, "%s===> Start( %s)", m_cDepth, m_cFuncName);
 }
 
 //===========================================================================
-//【機能】		ログファイル出力デストラクタ
+//【機能】		トレースファイルへ出力デストラクタ
 //【返値】		なし
 //===========================================================================
 Trace::~Trace( void)
@@ -289,13 +332,13 @@ Trace::~Trace( void)
 	fprintf( m_pfp, "%s<=== End( %s)", m_cDepth, m_cFuncName);
 
 	m_iDepth--;
-	if ( m_iDepth < MBTRCMAXDEPTH) {
+	if ( m_iDepth < MBLOGMAXDEPTH) {
 		m_cDepth[m_iDepth * 2] = 0;
 	}
 }
 
 //------------------------------------------------------------------------
-//【機能】		ログファイルへインデントされたフォーマット付きで出力する
+//【機能】		トレースファイルへフォーマット付きで出力する
 //【引数】		なし
 //【返値】		なし
 //------------------------------------------------------------------------
@@ -303,17 +346,14 @@ void Trace::Write(
 						MCHAR* i_cFormat, ...	// ログ書き込みデータ
 						)
 {
-	MCHAR cOut[256];
 	va_list	cList;
 	va_start( cList, i_cFormat);
-	vswprintf_s( cOut, 256, i_cFormat, cList);
+	_vftprintf_s( m_pfp, i_cFormat, cList);
 	va_end( cList);
-
-	fprintf( m_pfp, "%s", cOut);
 }
 
 //------------------------------------------------------------------------
-//【機能】		ログファイルへ一行出力する
+//【機能】		トレースファイルへ一行出力する
 //【引数】		なし
 //【返値】		なし
 //------------------------------------------------------------------------

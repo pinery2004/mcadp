@@ -1140,7 +1140,7 @@ MINT MGeo::DivideTriPg3(						// (  O) ステイタス
 		ist1 = ChkDivTriPtPg3( &Pgw.m_P[ic0], Pgw, iGIrisumi, VuPg1);
 		if ( ist1 == 0)											// 三角形の面積が０の場合は間引き
 		{
-//								MBTRCPRINTI( L"三角形の面積が0でskip_ic0", ic0);
+//								MBLOGPRINTI( L"三角形の面積が0でskip_ic0", ic0);
 			goto skip1;
 			}
 		else if ( ist1 == -1) {									// 三角形内に他の入隅点あり
@@ -1151,7 +1151,7 @@ MINT MGeo::DivideTriPg3(						// (  O) ステイタス
 			ist1 = ChkDivTriPtPg3( &Pgw.m_P[ic0], Pgw, iGIrisumi, VuPg1);
 			if ( ist1 == 0)										// 三角形の面積が０の場合は間引き
 			{
-//										MBTRCPRINTI( L"三角形の面積が0でskip_ic0", ic0);
+//										MBLOGPRINTI( L"三角形の面積が0でskip_ic0", ic0);
 				goto skip1;
 			}
 			else if ( ist1 == -1) {								// 三角形内に他の入隅点あり
@@ -1168,7 +1168,7 @@ MINT MGeo::DivideTriPg3(						// (  O) ステイタス
 		Pg3.m_P[1] = Pgw.m_P[ic0 + 1];
 		Pg3.m_P[2] = Pgw.m_P[ic0 + 2];
 		(*gPg2) += Pg3;
-//										MBTRCPRINTI( Mstr( "分割開始点_ic0"), ic0);
+//										MBLOGPRINTI( Mstr( "分割開始点_ic0"), ic0);
 //										Pg3.Print( Mstr( "分割３角形_Pg3"));
 skip1:
 		// ３角形分割による頂点を間引き
@@ -1176,7 +1176,7 @@ skip1:
 		if ( ic1 >= Pgwn)
 			ic1 -= Pgwn;										// ic1: (1 ～  n-1 | 0)
 		icm = ic1;
-//										MBTRCPRINTI( Mstr( "間引き点_icm"), icm);
+//										MBLOGPRINTI( Mstr( "間引き点_icm"), icm);
 		Pgwn --;
 		Pgw.m_n = Pgwn;
 		for ( ; ic1<Pgwn; ic1++)
@@ -1210,7 +1210,7 @@ skip1:
 		}
 //										Pgw.Print( Mstr( "分割多角形_Pgw"));
 //										iGIrisumi.Print( Mstr( "入隅点_iGIrisumi"));
-//										MBTRCFLUSH;
+//										MBLOGFLUSH;
 	}
 	// 入隅なしなので任意の１点(先頭の点)で３角形分割
 	Pg3[0] = Pgw.m_P[0];

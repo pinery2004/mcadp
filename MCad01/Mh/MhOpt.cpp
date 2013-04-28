@@ -72,7 +72,7 @@ void Option::MhAddOpt(
 
 #ifdef _DEBUG
 						Msprintf_s( mlLog::m_Str, Mstr( "MALLOC OPTION MhAddOpt TRC %x\n"), pOptvW);
-						MBTRCPRBF;
+						MBLOGPRBF;
 #endif
 		if ( MhOptV::MmOptSrch( bOptC) == 0) {				// 新しいオプション群なら追加し
 			MhOptV::MmOptAddDB();									// 参照対象全DBレコードにＯＰＴ群追加

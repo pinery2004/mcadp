@@ -351,12 +351,12 @@ inline_nu void MDFIG::Print(MCHAR* i_s)
 	if ( m_pPmtl) {
 		Msprintf_s( mlLog::m_Str, Mstr( "\t\t\t%s < MDFIG > 整数型データセット，サイズ =%d，データ数 = %d\n"),
 										i_s, m_pPmtl->m_sz, m_pPmtl->m_n);
-		MBTRCPRBF;
+		MBLOGPRBF;
 		if ( m_pPmtl->m_n > 103) 
 			 int iDumy = 1;
 
 	}
-//	MBTRCPRINTIN( Mstr( "\t\t\tデータ"), m_pPmtl->m_st, m_n);
+//	MBLOGPRINTIN( Mstr( "\t\t\tデータ"), m_pPmtl->m_st, m_n);
 #endif
 }
 

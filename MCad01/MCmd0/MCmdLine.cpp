@@ -94,7 +94,8 @@ void MCmdLineAdd()
 	MINT ic1;
 
 	Window::CurWndFocus();
-	CMainFrame*	pMainFrame = MC::System::GetpMainFrame();
+	CMainFrame*	pMainFrame;
+	pMainFrame = MC::System::GetpMainFrame();
 	pMainFrame->SendMessage( WM_MYMESSAGERIBBONIO);
 
 	Msg::ClearErrorMsg();
@@ -163,8 +164,8 @@ void MCmdLineAdd()
 			
 		} else {												// その他
 			// 部材配置
-//S			ist = z_mnIA.GetComboAttrI( MC_CMB_HONS, &iNum);		// 複数部材の配置本数
-			iNum = z_mnIA.GetHonsu();
+			ist = z_mmIA.GetComboAttrI( MC_CMB_HONS, &iNum);	// 複数部材の配置本数
+//S			iNum = z_mmIA.GetHonsu();
 //			plnYane.v = MgPoint3( 0., 0., 1.);
 			vUp = MgVect3( 0., 0., 1.);
 			
@@ -211,8 +212,8 @@ void MCmdLineAdd()
 			
 			// 配置本数と方向付き間隔を求める
 			//
-//S			ist = z_mnIA.GetComboAttrR( MC_CMB_INTR, &rIntrv);	//		間隔
-			rIntrv = z_mnIA.GetSpan();
+			ist = z_mmIA.GetComboAttrR( MC_CMB_INTR, &rIntrv);	//		間隔
+//S			rIntrv = z_mmIA.GetSpan();
 			if ( iNum == MC_INT_AREA) {							//			本数を領域で指定する複数部材の配置
 				VtArea = PtMltBziAr - Ln1.p[0];
 				iNum = MGMIN( MINT( MGeo::Abs( VtArea) / rIntrv + 1.0 + MGPTOL->D),

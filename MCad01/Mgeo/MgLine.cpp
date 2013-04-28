@@ -71,7 +71,7 @@ void MgULine2::Print( MCHAR* s)
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgULine2	: (%7.1f,%7.1f), (%7.1f,%7.1f)\n"),
 								 s, p.x, p.y, v.x, v.y);
-	MBTRCPRBF;
+	MBLOGPRBF;
 #endif
 }
 
@@ -125,7 +125,7 @@ void MgHLine2::Print( MCHAR* s)
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgHLine2	: (%7.1f,%7.1f), (%7.1f,%7.1f)\n"),
 									s, p.x, p.y, v.x, v.y);
-	MBTRCPRBF;
+	MBLOGPRBF;
 #endif
 }
 //
@@ -146,7 +146,7 @@ void MgLine2::Print( MCHAR* s)
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgLine2		: (%7.1f,%7.1f), (%7.1f,%7.1f)\n"),
 									 s, p[0].x, p[0].y, p[1].x, p[1].y);
-	MBTRCPRBF;
+	MBLOGPRBF;
 #endif
 }
 //
@@ -183,7 +183,7 @@ void MgULine3::Print( MCHAR* s)
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "%s 	MgULine3	: (%7.1f,%7.1f,%7.1f), (%7.1f,%7.1f,%7.1f)\n"),
 									s, p.x, p.y, p.z, v.x, v.y, v.z);
-	MBTRCPRBF;
+	MBLOGPRBF;
 #endif
 }
 //
@@ -220,7 +220,7 @@ void MgHLine3::Print( MCHAR* s)
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "%s 	MgHLine3	: (%7.1f,%7.1f,%7.1f), (%7.1f,%7.1f,%7.1f)\n"),
 									s, p.x, p.y, p.z, v.x, v.y, v.z);
-	MBTRCPRBF;
+	MBLOGPRBF;
 #endif
 }
 //
@@ -241,7 +241,7 @@ void MgLine3::Print( MCHAR* s)
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "%s 	MgLine3 	: (%7.1f,%7.1f,%7.1f), (%7.1f,%7.1f,%7.1f)\n"),
 									 s, p[0].x, p[0].y, p[0].z, p[1].x, p[1].y, p[1].z);
-	MBTRCPRBF;
+	MBLOGPRBF;
 #endif
 }
 

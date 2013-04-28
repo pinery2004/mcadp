@@ -77,7 +77,7 @@ MINT System::MmInitialize()
 
 	// Logファイルの削除とオープン
 	MCHAR	cLogFilePath[MAX_PATH];
-	mcsGetEnvPath( MP_PATH_ROOT, mcs::GetStr( MM_STR_LOGFILE), cLogFilePath);
+	mcsGetEnvPath( MP_PATH_ROOT, mcs::GetStr( MM_STR_TRACEFILE), cLogFilePath);
 	Trace::OpenLogFile( cLogFilePath);
 	
 	// DBを初期化する
@@ -94,8 +94,8 @@ MINT System::MmInitialize()
 
 	// トレース処理のファイルオープン
 	MCHAR	cTraceFilePath[MAX_PATH];
-	mcsGetEnvPath( MP_PATH_ROOT, mcs::GetStr( MM_STR_TRACEFILE), cTraceFilePath);
-	MBTRCOPEN( cTraceFilePath);
+	mcsGetEnvPath( MP_PATH_ROOT, mcs::GetStr( MM_STR_LOGFILE), cTraceFilePath);
+	MBLOGOPEN( cTraceFilePath);
 #if(0)
 	// メッセージの出力先設定
 	_CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDOUT);
@@ -117,7 +117,7 @@ void System::MmTerminate()
 	Mdm::MdmTerminate();
 
 	// トレース処理のファイルクローズ
-	MBTRCCLOSE;
+	MBLOGCLOSE;
 }
 
 /////////////////////////////////////////////////////////////////////////////

@@ -8,28 +8,30 @@
 //
 //  K.Matsu           08/01/04    Created.
 //==========================================================================================
-#define MBTRCMAXDEPTH			10							// トレースインデント最大深さ
-#define MBTRCINDENT				Mstr( "  ")					// トレースインデント
-//S #define	MBTRCLOGFILENAME		Mstr( "MCADLOG.txt")		// トレースファイル名
-#define MBTRCFUNCNAME			40							// 関数名最大文字数
+#define MBLOGMAXDEPTH			10							// トレースインデント最大深さ
+#define MBLOGINDENT				Mstr( "  ")					// トレースインデント
+//S #define	MBLOGLOGFILENAME		Mstr( "MCADLOG.txt")		// トレースファイル名
+#define MBLOGFUNCNAME			40							// 関数名最大文字数
 
-#define MBTRCOPEN( fn)			mlLog::OpenTrace( fn)		// トレース開始宣言　ファイル名
-#define MBTRCCLOSE				mlLog::CloseTrace( )		// トレース終了宣言
-#define MBTRCON					mlLog::Ctrl( 1)				// トレース　ＯＮ
-#define MBTRCOFF				mlLog::Ctrl( 0)				// トレース　ＯＦＦ
-#define MBTRCPRBF				mlLog::Trace( )				// トレースバッファ内の文字列
-#define MBTRCPRS( S)			mlLog::Trace( S)			// 文字列
-#define MBTRCFLUSH				mlLog::Flush( )				// フラッシュ（トレース中の作業エリア内文字列を掃きだす）
+#define MBLOGOPEN( fn)			mlLog::OpenTrace( fn)		// トレース開始宣言　ファイル名
+#define MBLOGCLOSE				mlLog::CloseTrace( )		// トレース終了宣言
+#define MBLOGON					mlLog::Ctrl( 1)				// トレース　ＯＮ
+#define MBLOGOFF				mlLog::Ctrl( 0)				// トレース　ＯＦＦ
+#define MBLOGPRBF				mlLog::Trace( )				// トレースバッファ内の文字列
+#define MBLOGPRS( S)			mlLog::Trace( S)			// 文字列
+#define MBLOGFLUSH				mlLog::Flush( )				// フラッシュ（トレース中の作業エリア内文字列を掃きだす）
 
-#define MBTRCPRINTCR			mlLog::PrintCR( )			// 改行
-#define MBTRCPRINTS( S)			mlLog::Print( S)			// 文字列　改行
-#define MBTRCPRINTSS( S, T)		mlLog::Print( S, T)			// 文字列 = 文字列　改行
-#define MBTRCPRINTI( S, I)		mlLog::Print( S, I)			// 文字列 = 整数　改行
-#define MBTRCPRINTIN( S, I, N)	mlLog::Print( S, I, N)		// 文字列 = N個の整数　改行
-#define MBTRCPRINTB( S, B)		mlLog::Print( S, B)			// 文字列 = バイト( MUBYTE)整数　改行
-#define MBTRCPRINTBN( S, B, N)	mlLog::Print( S, B, N)		// 文字列 = N個のバイト( MUBYTE)整数　改行
-#define MBTRCPRINTF( S, F)		mlLog::Print( S, F)			// 文字列 = 実数　改行
-#define MBTRCPRINTFN( S, F, N)	mlLog::Print( S, F, N)			// 文字列 = N個の実数　改行
+#define MBLOGPRINTCR			mlLog::PrintCR( )			// 改行
+#define MBLOGPRINTS( S)			mlLog::Print( S)			// 文字列　改行
+#define MBLOGPRINTSS( S, T)		mlLog::Print( S, T)			// 文字列 = 文字列　改行
+#define MBLOGPRINTI( S, I)		mlLog::Print( S, I)			// 文字列 = 整数　改行
+#define MBLOGPRINTIN( S, I, N)	mlLog::Print( S, I, N)		// 文字列 = N個の整数　改行
+#define MBLOGPRINTB( S, B)		mlLog::Print( S, B)			// 文字列 = バイト( MUBYTE)整数　改行
+#define MBLOGPRINTBN( S, B, N)	mlLog::Print( S, B, N)		// 文字列 = N個のバイト( MUBYTE)整数　改行
+#define MBLOGPRINTF( S, F)		mlLog::Print( S, F)			// 文字列 = 実数　改行
+#define MBLOGPRINTFN( S, F, N)	mlLog::Print( S, F, N)		// 文字列 = N個の実数　改行
+
+#define MBLOGWFMT				mlLog::Write				// フォーマット付きで
 
 #include "MsBasic.h"
 
@@ -55,9 +57,15 @@
 
 namespace MC
 {
+	
+enum LogType {
+	MC_LOG_ERROR = 1,
+	MC_LOG_WARNING,
+	MC_LOG_NORMAL
+};
 
 //===========================================================================
-//【機能】	トレース
+//【機能】	ログ
 //
 class DLL_EXPORT mlLog
 {
@@ -81,6 +89,8 @@ public:
 	static void	Print( MCHAR* str, MUBYTE *i1, int ni1);
 	static void	Print( MCHAR* str, MREAL f1);
 	static void	Print( MCHAR* str, MREAL *f1, int nf1);
+	static void LogOut( MCHAR* i_cFormat, ...);					// ログ書き込みデータ
+	static void LogOutT( int i_iLevel, MCHAR* i_cFormat, ...);	// ログ書き込みデータ
 	static void	Trace( MCHAR* str);
 	static void	Trace( );
 };
@@ -114,24 +124,20 @@ private:
 	static	MCHAR	m_cLogFilePath[MAX_PATH];					// トレースファイル名
 	static	FILE*	m_pfp;										// トレースファイルポインタ
 	static	MINT	m_iDepth;									// トレースインデント深さ
-	static	MCHAR	m_cDepth[Msizeof( MBTRCINDENT) * (MBTRCMAXDEPTH + 1)];
+	static	MCHAR	m_cDepth[Msizeof( MBLOGINDENT) * (MBLOGMAXDEPTH + 1)];
 																// トレースインデント
-			MCHAR	m_cFuncName[MBTRCFUNCNAME];					// 関数名
+			MCHAR	m_cFuncName[MBLOGFUNCNAME];					// 関数名
 	
 public:
 	Trace( void);
 	Trace( MCHAR* i_cFuncName);
 	~Trace( void);
-	// ログファイルの削除とオープン
-	static void OpenLogFile(
+	static void OpenLogFile(									// ログファイルの削除とオープン
 						MCHAR i_cLogFilePath[]	// ログファイルパス
 						);
-	// ログファイルのクローズ
-	static void CloseLogFile( void);
-	// ログデータ書き込み
-	void Write( MCHAR i_cFormat[], ...);
-	// ログデータ行書き込み
-	void WriteLine( MCHAR i_cOut[]);
+	static void CloseLogFile( void);							// ログファイルのクローズ
+	static void Write( MCHAR i_cFormat[], ...);					// ログデータ書き込み
+	static void WriteLine( MCHAR i_cOut[]);						// ログデータ行書き込み
 };
 //extern	CMbDebug g_MbDbg;
 

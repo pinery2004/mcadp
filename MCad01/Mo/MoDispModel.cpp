@@ -178,7 +178,7 @@ void MdlDispList::DrawKabe(
 		}
 	}
 
-	MBTRCPRINTS( L"３Ｄ壁デバッグ");
+	MBLOGPRINTS( L"３Ｄ壁デバッグ");
 
 	DispList::DrawPolygon( GPgR, PtCtr, rB);
 

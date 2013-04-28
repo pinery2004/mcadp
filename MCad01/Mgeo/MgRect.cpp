@@ -56,7 +56,7 @@ void MgRect2::Print(MCHAR* s)														// print
 //#ifdef _DEBUG
 //	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgRect2	= %f, %f, %f, %f\n"),
 //							s, p[0].x, p[0].y, p[1].x, p[1].y);
-//	MBTRCPRBF;
+//	MBLOGPRBF;
 //	mlLog::Trace( mlLog::m_Str);
 //#endif
 }
@@ -75,7 +75,7 @@ void MgRect3::Print(MCHAR* s)														// print
 //	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgRect2	= %f, %f, %f, %f, %f, %f\n"),
 //							s, p[0].x, p[0].y, p[0].z, 
 //							   p[1].x, p[1].y, p[1].z);
-//	MBTRCPRBF;
+//	MBLOGPRBF;
 //	mlLog::Trace( mlLog::m_Str);
 //#endif
 }

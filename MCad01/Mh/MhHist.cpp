@@ -71,7 +71,7 @@ void MhOpt::MhHistAdd(
 
 #ifdef _DEBUG
 						Msprintf_s( mlLog::m_Str, Mstr( "MALLOC Hist MhHistAdd TRC %x\n"), pHstvW);
-						MBTRCPRBF;
+						MBLOGPRBF;
 #endif
 
 		*pHstvW = bHstvC;
