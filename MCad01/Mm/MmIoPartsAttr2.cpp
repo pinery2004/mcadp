@@ -252,8 +252,6 @@ void mmIoPartsAttr::InitComboAttr(
 	//	部材属性入力用コンボボックスとチェックボックスの項目を設定する
 	for ( iAn=1; iAn<=MC_SZ_CMBATTR; iAn++) {
 
-//S		m_Combo_Attr[iAn-1] = s_Combo_Attr[s_iIoPartsAttrMd][iAn-1];
-
 		switch ( s_Combo_Attr[m_iIoPartsAttrMd][iAn-1]) {
 			case MC_CMB_NULL:
 				// コンボボックスを消し無効にする
@@ -488,10 +486,6 @@ void mmIoPartsAttr::GetComboAttrA( void)
 		mtPlcInp::SetHgt( 1, rComboAttr6);						// →　高さ2
 		mtTateguInp::SetROH( rComboAttr6);						// →　建具ROH
 
-//		iIdPartsSpec = z_mmIA.GetCurPartsNmId();				// カレントの部品ID
-//		pPartsSpec = BuzaiCode::MhGetpPartsSpec( iIdPartsSpec);	// 部品種類レコード
-//		if ( pPartsSpec->IsTategu()) {							// 建具 (部材コード = 建具)
-//		}
 		break;
 
 	case MP_AT_ADJLNG:											// ***** 部材長さ調整入力 *****

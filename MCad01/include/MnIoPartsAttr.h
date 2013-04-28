@@ -51,22 +51,6 @@ protected:
 	int		m_iCCategory;						// カレントカテゴリ　1:意匠, 2:構造, 3:共通
 
 	int		m_iInpKai;							// 階				(1階,2階,3階)
-//	int		m_iCdInpKbn;						// 入力点区分コード	(無指定,1点,方向2点,長さ2点,区画,自由)
-//	int		m_iCdMarume;						// 丸めコード		(1,2,3,4,6,8)
-//	int		m_iCdIzon;							// 依存コード		(任意,壁芯付き,屋根構成線付き)
-//	int		m_iCdPartsNm;						// 部品名Id
-//	int		m_iCdMbr;							// メンバーId
-//	MREAL	m_rLengthH1;						// 長さ補正1		(mm)
-//	MREAL	m_rLengthH2;						// 長さ補正2		(mm)
-//	MREAL	m_rSinzure;							// 芯ずれ			(mm)
-//	MREAL	m_rToritukeH;						// 取付高さ			(mm)
-//	MREAL	m_rSpan;							// 間隔				(mm)
-//	int		m_nHonsu;							// 本数
-//	int		m_iPanelNo;							// パネルNo			(0:全、1～n)
-//
-//	int		m_iKobai;							// 勾配
-//	MREAL	m_rNokiDe;							// 軒の出
-//	MREAL	m_rKerabaDe;						// けらばの出
 //
 	MPMODE	m_iInpMd;							// 創成モード		(削除、修正、移動、複写、属性表示)
 	MPKOSEI	m_iSInpGp;							// 設計入力構成		(住戸、住棟、物件、屋根、敷地、壁量)
@@ -77,22 +61,6 @@ protected:
 	bool	m_bKDspBuzai;						// 部材表示フラグ
 	bool	m_bKDspKanagu;						// 金物表示フラグ
 	bool	m_bKDspGohan;						// 合板表示フラグ
-//	bool	m_bKAttr1;							// 属性1フラグ
-//	bool	m_bKAttr2;							// 属性2フラグ
-//	bool	m_bKAttr3;							// 属性3フラグ
-//	bool	m_bKAttr4;							// 属性4フラグ
-//
-//S	int		m_iIoPartsAttrMd;					// 属性値入力モード
-//												//		MP_AT_AUTO(-1)		:自動設定
-//												//		MP_AT_NONE(0)		:属性値入力なし
-//												//		MP_AT_HRZ_PARTS(1)	:水平部材入力
-//												//		MP_AT_VRT_PARTS(2)	:垂直部材入力
-//												//		MP_AT_YTPANEL(3)	:床天井パネル入力
-//												//		MP_AT_YANEPANEL(4)	:屋根パネル入力
-//												//		MP_AT_ADJLNG(5)		:部材長さ調整入力
-//												//		MP_AT_YANE(6)		:屋根入力
-//												//		MP_AT_TATEGU(7)		:建具入力
-//
 
 	////////////////////////////////////////////////////////////////////////////
 	//	コンストラクタ
@@ -203,21 +171,6 @@ protected:
 	//							＝5 : １／８グリッド丸め
 public:
 	int GetComboMarumeCd();
-
-//S	/////////////////////////////////////////////////////////////////////////////
-//	// 依存コード		(任意,壁芯付き,屋根構成線付き)
-//public:
-//	void SetIzonCd(
-//						int	 		i_iCdIzon		// 依存コード	
-//				)
-//	{
-//		m_iCdIzon = i_iCdIzon;
-//	}
-//public:
-//	int GetIzonCd()
-//	{
-//		return m_iCdIzon;
-//	}
 
 	///////////////////////////////////////////////////////////////////////////////
 	//	部品名コンポボックスの項目を設定する
@@ -379,81 +332,6 @@ protected:
 						int		i_iAttr				// コンボボックス番号
 				);
 
-//S	/////////////////////////////////////////////////////////////////////////////
-//	//	長さ補正1				
-//public:
-//	void SetLengthH1(
-//						MREAL 		i_rLengthH1		// 長さ補正1	
-//				)
-//	{
-//		m_rLengthH1 = i_rLengthH1;
-//	}
-//public:
-//	MREAL GetLengthH1()
-//	{
-//		return m_rLengthH1;
-//	}
-//
-//	/////////////////////////////////////////////////////////////////////////////
-//	//	長さ補正2				
-//public:
-//	void SetLengthH2(
-//						MREAL 		i_rLengthH2		// 長さ補正2	
-//				)
-//	{
-//		m_rLengthH2 = i_rLengthH2;
-//	}
-//public:
-//	MREAL GetLengthH2()
-//	{
-//		return m_rLengthH2;
-//	}
-//
-//	/////////////////////////////////////////////////////////////////////////////
-//	//	芯ずれ				
-//public:
-//	void SetSinzure(
-//						MREAL 		i_rSinzure		// 芯ずれ	
-//				)
-//	{
-//		m_rLengthH1 = i_rSinzure;
-//	}
-//public:
-//	MREAL GetSinzure()
-//	{
-//		return m_rSinzure;
-//	}
-//
-//	/////////////////////////////////////////////////////////////////////////////
-//	//	取付高さ				
-//public:
-//	void SetToritukeH(
-//						MREAL 		i_rToritukeH	// 取付高さ	
-//				)
-//	{
-//		m_rToritukeH = i_rToritukeH;
-//	}
-//public:
-//	MREAL GetToritukeH()
-//	{
-//		return m_rToritukeH;
-//	}
-//
-//	/////////////////////////////////////////////////////////////////////////////
-//	//	間隔				
-//public:
-//	void SetSpan(
-//						MREAL 		i_rSpan			// 間隔	
-//				)
-//	{
-//		m_rSpan = i_rSpan;
-//	}
-//public:
-//	MREAL GetSpan()
-//	{
-//		return m_rSpan;
-//	}
-
 	///////////////////////////////////////////////////////////////////////////////
 	//	属性値入力用コンボボックスに整数値を表示する
 protected:
@@ -497,21 +375,6 @@ protected:
 						int		i_iAttr				// コンボボックス番号
 				);
 
-//S	/////////////////////////////////////////////////////////////////////////////
-//	//	本数
-//public:
-//	void SetHonsu(
-//						int	 		i_nHonsu		// 本数	
-//				)
-//	{
-//		m_nHonsu = i_nHonsu;
-//	}
-//public:
-//	int GetHonsu()
-//	{
-//		return m_nHonsu;
-//	}
-
 	/////////////////////////////////////////////////////////////////////////////
 	//	パネル番号コンポボックスの項目を設定する
 protected:
@@ -532,66 +395,6 @@ protected:
 public:
 	int GetComboPanelNo();
 
-//S	/////////////////////////////////////////////////////////////////////////////
-//	//	パネルNo
-//public:
-//	void SetPanelNo(
-//						int	 		i_iPanelNo	// 本数	
-//				)
-//	{
-//		m_iPanelNo = i_iPanelNo;
-//	}
-//public:
-//	int GetPanelNo()
-//	{
-//		return m_iPanelNo;
-//	}
-//
-//	/////////////////////////////////////////////////////////////////////////////
-//	//	勾配
-//public:
-//	void SetKobai(
-//						int	 		i_iKobai	// 勾配	
-//				)
-//	{
-//		m_iKobai = i_iKobai;
-//	}
-//public:
-//	int GetKobai()
-//	{
-//		return m_iKobai;
-//	}
-//
-//	/////////////////////////////////////////////////////////////////////////////
-//	//	軒の出				
-//public:
-//	void SetNokiDe(
-//						MREAL 		i_rNokiDe	// 軒の出	
-//				)
-//	{
-//		m_rNokiDe = i_rNokiDe;
-//	}
-//public:
-//	MREAL GetNokiDe()
-//	{
-//		return m_rNokiDe;
-//	}
-//
-//	/////////////////////////////////////////////////////////////////////////////
-//	//	けらばの出				
-//public:
-//	void SetKerabaDe(
-//						MREAL 		i_rKerabaDe	// けらばの出	
-//				)
-//	{
-//		m_rKerabaDe = i_rKerabaDe;
-//	}
-//public:
-//	MREAL GetKerabaDe()
-//	{
-//		return m_rKerabaDe;
-//	}
-//
 	/////////////////////////////////////////////////////////////////////////////
 	//	創成モード		削除、修正、移動、複写、属性表示
 public:
@@ -681,10 +484,6 @@ public:
 		m_bKDspGohan  = i_bDspGohan;
 	}
 
-
-/* ====
-*/
-
 	////////////////////////////////////////////////////////////////////////////
 	// 部品入力用、リボンバーの部品選択用項目を設定する
 	//		組、分類、部品タイプ、寸法型式
@@ -736,22 +535,6 @@ protected:
 public:
 	int GetComboPlcCd();
 
-//S	/////////////////////////////////////////////////////////////////////////////
-//	// 設計入力種類
-//
-//	void SetSCdBr(
-//						int			i_iSCdBr		// 設計　種類
-//				);
-//	int GetSCdBr();
-//
-//	/////////////////////////////////////////////////////////////////////////////
-//	// 設計入力選択
-//
-//	void SetSSel(
-//						int			i_iSel
-//				);
-//	int	 GetSSel();
-
 	//////////////////////////////////////////////////////////////////////////////
 	//	属性値入力用チェックボックス番号を取得する
 protected:
@@ -788,22 +571,6 @@ protected:
 protected:
 	int MnCalcInpAtMode();
 
-//	/////////////////////////////////////////////////////////////////////////////
-//	//	部品属性入力用コンボボックスとチェックボックスの項目を設定する
-//protected:
-//	void MnsInitComboAttr(
-//						MCCMBATTR	i_icombo1,		// 属性入力用コンボボックス1の属性ID
-//						MCCMBATTR	i_icombo2,		// 属性入力用コンボボックス2の属性ID
-//						MCCMBATTR	i_icombo3,		// 属性入力用コンボボックス3の属性ID
-//						MCCMBATTR	i_icombo4,		// 属性入力用コンボボックス4の属性ID
-//						MCCMBATTR	i_icombo5,		// 属性入力用コンボボックス5の属性ID
-//						MCCMBATTR	i_icombo6,		// 属性入力用コンボボックス6の属性ID
-//						MCCHKATTR	i_icheck1,		// 属性入力用チェックボックス1の属性ID
-//						MCCHKATTR	i_icheck2,		// 属性入力用チェックボックス2の属性ID
-//						MCCHKATTR	i_icheck3,		// 属性入力用チェックボックス3の属性ID
-//						MCCHKATTR	i_icheck4		// 属性入力用チェックボックス4の属性ID
-//				);
-
 	////////////////////////////////////////////////////////////////////////////
 	//	部品属性入力用コンボボックスの設定
 protected:
@@ -814,28 +581,6 @@ protected:
 	//	(部品属性入力用リボンバーの項目設定中の属性値入力モード)
 	//
 public:
-//S	int GetAtMd()
-//	{
-//		return m_iIoPartsAttrMd;
-//	}
-
-//S	/////////////////////////////////////////////////////////////////////////////
-//	//	属性値入力モードに沿った部材属性入力用リボンバーの項目を設定する
-//	//	 (コンボボックスとチェックボックスの項目を設定する)
-//	//	
-//protected:
-//	void InitComboAttr(
-//						int		i_iIoPartsAttrMd = MP_AT_NONE	// 属性値入力モード
-//													//  MP_AT_AUTO(-1)		:自動設定
-//													//	MP_AT_NONE(0)		:属性値入力なし
-//													//	MP_AT_HRZ_PARTS(1)	:水平部材入力
-//													//	MP_AT_VRT_PARTS(2)	:垂直部材入力
-//													//	MP_AT_YTPANEL(3)	:床天井パネル入力
-//													//	MP_AT_YANEPANEL(4)	:屋根パネル入力
-//													//	MP_AT_ADJLNG(5)		:部材長さ調整入力
-//													//	MP_AT_YANE(6)		:屋根入力
-//													//	MP_AT_TATEGU(7)		:建具入力
-//				);
 
 	///////////////////////////////////////////////////////////////////////////////
 	//	リボンバーのコンボックスの設定　本体

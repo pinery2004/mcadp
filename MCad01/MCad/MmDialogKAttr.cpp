@@ -9,9 +9,6 @@
 #include "MmWnd.h"
 #include "MmCmdMsg.h"
 
-//S	namespace MC
-//{
-
 /////////////////////////////////////////////////////////////////////////////
 // 部材属性コンボボックスの取得
 CComboBox* CMmDialogKAttr::GetCmbBzaiAttr(
@@ -114,7 +111,6 @@ void CMmDialogKAttr::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_CMBK_ATTR6, m_CmbKAttr6);
 }
 
-
 BEGIN_MESSAGE_MAP(CMmDialogKAttr, CDialog)
 	ON_WM_CLOSE()
 	ON_BN_CLICKED(IDOK, &CMmDialogKAttr::OnBnClickedOk)
@@ -146,8 +142,6 @@ void CMmDialogKAttr::OnClose()
 	}
 }
 
-
-
 void CMmDialogKAttr::PostNcDestroy()
 {
 	if (m_pParent != NULL) {
@@ -157,7 +151,6 @@ void CMmDialogKAttr::PostNcDestroy()
 
 	CDialog::PostNcDestroy();
 }
-
 
 BOOL CMmDialogKAttr::PreTranslateMessage(MSG* pMsg)
 {
@@ -174,7 +167,6 @@ BOOL CMmDialogKAttr::PreTranslateMessage(MSG* pMsg)
 	return CDialog::PreTranslateMessage(pMsg);
 }
 
-
 void CMmDialogKAttr::OnBnClickedOk()
 {
 	if (m_pParent != NULL) {
@@ -184,7 +176,6 @@ void CMmDialogKAttr::OnBnClickedOk()
 	}
 }
 
-
 void CMmDialogKAttr::OnBnClickedCancel()
 {
 	if (m_pParent != NULL) {
@@ -193,7 +184,6 @@ void CMmDialogKAttr::OnBnClickedCancel()
 		OnCancel();
 	}
 }
-
 
 BOOL CMmDialogKAttr::OnInitDialog()
 {
@@ -212,9 +202,6 @@ BOOL CMmDialogKAttr::OnInitDialog()
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 例外 : OCX プロパティ ページは必ず FALSE を返します。
 }
-
-//S	}
-
 
 void CMmDialogKAttr::OnCbnSelchangeCmbkBzi1()
 {

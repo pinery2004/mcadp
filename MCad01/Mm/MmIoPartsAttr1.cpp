@@ -39,9 +39,6 @@ void mmIoPartsAttr::InitComboParts()
 
 	//	部材属性入力用コンポボックスの項目を設定する
 	InitComboAttr();
-
-//	Window::CurWndFocus();
-//	WindowCtrl::MmWndKReDraw();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -118,8 +115,6 @@ void mmIoPartsAttr::SelectComboPartsNmByKmId(
 	if ( !GetDispFlg())	goto EXIT;	
 
 	CComboBox* pCmbBox = GetCmbBzaiNm();
-//S	pCmbBox->ResetContent();
-//	System::GetpMainFrame()->SelectCombo1( i_iKmIdPartsNm);
 	pCmbBox->SetCurSel( i_iKmIdPartsNm);
 	m_iComboKmIdPartsNm = i_iKmIdPartsNm;						// カレント部品名項目番号
 
@@ -129,9 +124,6 @@ void mmIoPartsAttr::SelectComboPartsNmByKmId(
 	mtPlcInp::SetIdPartsSpec( iIdPartsSpec);
 	pPartsSpec = BuzaiCode::MhGetpPartsSpec( iIdPartsSpec);		// 部品仕様
 	mtPlcInp::SetpPartsSpec( pPartsSpec);
-
-//S	int iCdPlc = pPartsSpec->GetPTCdPlc();						// 部品仕様の配置コードで配置コードコンボを選択する
-//	z_mmIA.SelectComboPlcCdByPlcCd( iCdPlc);
 EXIT:;
 }
 
@@ -261,8 +253,6 @@ void mmIoPartsAttr::InitComboPartsMbr()
 
 	iIdPartsSpec = z_mmIA.GetCurPartsNmId();
 	if ( iIdPartsSpec >= 0) {
-//		pCmbBox->>EnableToolTips(0);			NG
-
 		cMTp1 = BuzaiCode::MhGetpPartsSpec( iIdPartsSpec)->GetPTTpMbr()[0];
 
 		nMbr = BuzaiCode::MhGetNoOfMbr();
@@ -299,7 +289,6 @@ void mmIoPartsAttr::SelectComboPartsMbrByKmId(
 {
 	if ( !GetDispFlg())	goto EXIT;
 
-//S	System::GetpMainFrame()->SelectCombo2( i_iKmIdMbr);
 	CComboBox* pCmbBox = GetCmbBzaiMbr();
 	pCmbBox->SetCurSel(	i_iKmIdMbr);
 	m_iComboKmIdMbr = i_iKmIdMbr;
