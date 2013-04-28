@@ -76,13 +76,8 @@ CMmDialogKAttr::~CMmDialogKAttr()
 BOOL CMmDialogKAttr::Create(CWnd * pWnd)
 {
 	m_pParent = pWnd;
-	BOOL bret = CDialog::Create( CMmDialogKAttr::IDD, m_pParent);
-
-
-
-
-
-
+	BOOL bret;
+	bret = CDialog::Create( CMmDialogKAttr::IDD, m_pParent);
 	if (bret == TRUE)
 	{
 		this->ShowWindow( SW_SHOW);
@@ -115,8 +110,6 @@ BEGIN_MESSAGE_MAP(CMmDialogKAttr, CDialog)
 	ON_WM_CLOSE()
 	ON_BN_CLICKED(IDOK, &CMmDialogKAttr::OnBnClickedOk)
 	ON_BN_CLICKED(IDCANCEL, &CMmDialogKAttr::OnBnClickedCancel)
-//S END_MESSAGE_MAP()
-//S BEGIN_MESSAGE_MAP(CMmDialogKAttr, CDialog)
 	ON_CBN_SELCHANGE(IDC_CMBK_BZI1, &CMmDialogKAttr::OnCbnSelchangeCmbkBzi1)
 	ON_CBN_SELCHANGE(IDC_CMBK_BZI2, &CMmDialogKAttr::OnCbnSelchangeCmbkBzi2)
 	ON_CBN_SELCHANGE(IDC_CMBK_ATTR1, &CMmDialogKAttr::OnCbnSelchangeCmbkAttr1)
