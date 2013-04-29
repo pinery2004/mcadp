@@ -513,7 +513,7 @@ int mmIoPartsAttr::MnCalcInpAtMode()
 	iGp = z_mnIA.GetKCdGp();
 	iBr = z_mnIA.GetKCdBr();
 
-	iIdPartsSpec = z_mmIA.GetCurPartsNmId();
+	iIdPartsSpec = z_mnIA.GetCurPartsNmId();
 	pPartsSpec = BuzaiCode::MhGetpPartsSpec( iIdPartsSpec);
 
 	if ( pPartsSpec->IsTategu()) {								// (•”•iŽí—ÞID == Œš‹ï)

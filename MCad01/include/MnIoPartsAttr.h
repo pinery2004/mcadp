@@ -16,7 +16,7 @@ enum	ComboTp {
 	MSET_INPUT_KUBUN_CD,			// カレントの入力点区分を設定し、入力点区分選択用のコンボボックスに表示する
 	MSET_INPUT_MARUME_CD,			// カレントの丸めコードを設定し、コンボボックスに丸めコードを表示する
 	MSET_COMBO_ATTRR,				// 属性値入力用コンボボックスに実数値を表示する
-	MGET_COMBO_ATTRA,				// 属性値入力用コンボボックスの値を取り込む
+	MGET_PARTS_ATTRA,				// 部品仕様,寸法形式と属性値入力用コンボボックスの値を部品配置入力データに取り込む
 	MSET_COMBO_PARTS,				// 部材属性入力用コンボボックスの設定
 	MSET_COMBO_PANELNO,				// カレントのパネル番号選択項目番号を設定し　コンボボックスにパネル番号を表示する
 
@@ -87,12 +87,12 @@ public:
 	// 部品名コンボボックス
 	int		m_nComboIdPartsSpec;					// 表示項目数
 	int		m_iComboIdPartsSpec[MX_CMB_PARTSNM];	// 表示項目対応部品ID
-	int		m_iComboKmIdPartsNm;					// カレント選択項目番号
+	int		m_iComboKmIdPartsNm;					// 部品名カレント選択項目番号
 
 	// 寸法型式選択用コンボボックス
-	int		m_nComboMbrId;							// 表示項目数
-	int		m_iComboMbrId[MX_CMB_CDMEMBER];			// 表示項目対応寸法型式ID
-	int		m_iComboKmIdMbr;						// カレント選択項目番号
+	int		m_nComboPartsMbrId;						// 表示項目数
+	int		m_iComboPartsMbrId[MX_CMB_CDMEMBER];	// 表示項目対応寸法型式ID
+	int		m_iComboKmIdMbr;						// 寸法形式カレント選択項目番号
 
 	///////////////////////////////////////////////////////////////////////////////
 	//	リボンバーの設定と取り込み
@@ -238,7 +238,7 @@ protected:
 	//							＝-1: 該当なし
 	//							≧ 0: 寸法型式ID
 protected:
-	int SelectComboMbrCdByMbrCd(
+	int SelectComboPartsMbrByMbrCd(
 						MCHAR* 		i_sCdMbr		// 寸法型式
 				);
 
@@ -247,7 +247,7 @@ protected:
 	//							＝-1: 該当なし
 	//							≧ 0: 部品ID
 public:
-	int GetComboMbrKmId(
+	int GetComboPartsMbrKmId(
 						MCHAR*		i_sCdMbr		// 寸法型式
 				);
 
@@ -256,7 +256,7 @@ public:
 	//							＝-1: 該当なし
 	//							≧ 0: 寸法型式ID
 public:
-	int GetComboMbrCd(
+	int GetComboPartsMbrCdId(
 						MCHAR* 		i_sCdMbr		// 寸法型式
 				);
 
@@ -266,7 +266,7 @@ public:
 	//							＝-1: 未選択
 	//							≧ 0: 部品ID
 public:
-	int GetComboMbrCdId();
+	int GetCurPartsMbrCdId();
 
 	//////////////////////////////////////////////////////////////////////////////
 	// 属性入力用コンボボックスを取得する
@@ -588,7 +588,12 @@ protected:
 	void SetComboCdBody( void);
 
 	///////////////////////////////////////////////////////////////////////////////
-	//	属性値入力用コンボボックスの値を取り込む
+	//	部品仕様と寸法形式を部品配置入力データに取り込む
+protected:
+	void GetPartsSpec( void);
+
+	///////////////////////////////////////////////////////////////////////////////
+	//	属性値入力用コンボボックスの値を部材配置入力データに取り込む
 protected:
 	void GetComboAttrA( void);
 

@@ -74,30 +74,43 @@
 
 CMFCRibbonComboBox* mmpComboBuzai()
 {
-// ==>
-	CMFCRibbonBar* pRibbonBar = &MC::System::GetpMainFrame()->m_wndRibbonBar;
-	CMFCRibbonCategory* pRibbonCategory = pRibbonBar->GetActiveCategory();
+	CMFCRibbonBar* pRibbonBar;
+	pRibbonBar = &MC::System::GetpMainFrame()->m_wndRibbonBar;
 
-	CString sName = pRibbonCategory->GetName();
+	CMFCRibbonCategory* pRibbonCategory;
+	pRibbonCategory = pRibbonBar->GetActiveCategory();
+
+	CString sName;
+	sName = pRibbonCategory->GetName();
 
 	MCHAR cName[20];
 	Mstrcpy_s( cName, pRibbonCategory->GetName());
 
-	CString sName2 = z_MCadApp.m_pMainFrame->m_wndRibbonBar.GetActiveCategory()->GetName();
+	CString sName2;
+	sName2 = z_MCadApp.m_pMainFrame->m_wndRibbonBar.GetActiveCategory()->GetName();
 
 	TRACE( _T(" カレントカテゴリ = %s %s %s\n"), cName, sName, sName2);
 
 	MCHAR sTest[] = _T("意匠");
 	TRACE( _T(" カレントカテゴリ = %s\n"), sTest);
-// ===
+
 	CArray<CMFCRibbonBaseElement* ,CMFCRibbonBaseElement*> arButtons;
 	MC::System::GetpMainFrame()->m_wndRibbonBar.GetElementsByID( IDC_CMBK_BZI1, arButtons);
-// <==
 
-	return DYNAMIC_DOWNCAST(CMFCRibbonComboBox, MC::System::GetpMainFrame()->m_wndRibbonBar.FindByID(IDC_CMBK_BZI1));
+	CMFCRibbonComboBox* pComboBuzai;
+	int iIdcCmb;
+	int iCCategory;
+	iCCategory = MC::z_mnIA.GetCCategory();
+	if ( iCCategory == MP_SENTAKU_ISYOU) {
+		iIdcCmb = IDC_CMBS_BZI1;
+	} else {
+		iIdcCmb = IDC_CMBK_BZI1;
+	}
+	pComboBuzai = DYNAMIC_DOWNCAST(CMFCRibbonComboBox, MC::System::GetpMainFrame()->m_wndRibbonBar.FindByID(iIdcCmb));
+	return pComboBuzai;
 }
 
-CMFCRibbonComboBox* mmpComboMbr()
+CMFCRibbonComboBox* mmpComboPartsMbr()
 {
 	return DYNAMIC_DOWNCAST(CMFCRibbonComboBox, MC::System::GetpMainFrame()->m_wndRibbonBar.FindByID(IDC_CMBK_BZI2));
 }

@@ -743,7 +743,7 @@ void CMCadApp::OnBnClickedRadioYuka()
 {
 	MC::z_mnIA.SetKCdGp( MP_GP_YUKA);
 	// ダイアログを表示する
-	MC::z_mmIA.MmDialogKAttrInp( z_MCadApp.m_pMainFrame);
+	MC::z_mmIA.MmDialogKAttrDisp( z_MCadApp.m_pMainFrame);
 	// ダイアログの項目を設定する
 	MC::z_mmIA.InitComboParts();
 	MC::z_mnIA.InitComboParts();

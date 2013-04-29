@@ -50,7 +50,7 @@ void MCmdRoofAdd()
 //	z_mnIA.InitComboPartsNm();
 //	z_mnIA.SelectComboPartsNmByPartsNm( Mstr( "âÆç™"));
 //	z_mnIA.InitComboPartsMbr();
-//	z_mnIA.SelectComboMbrCdByMbrCd( Mstr( "204"));
+//	z_mnIA.SelectComboPartsMbrByMbrCd( Mstr( "204"));
 
 	ist1 = z_mnIA.SetRibbonBarEnt( MP_GP_YANE, MP_BR_OTHER, Mstr( "âÆç™"), Mstr( "204"));
 

@@ -32,20 +32,16 @@ void CMmDialogKAttr::MmDialogKAttr()
 
 /////////////////////////////////////////////////////////////////////////////
 //	部材属性ダイアログ表示
-void CMmDialogKAttr::MmDialogKAttrInp(
+void CMmDialogKAttr::MmDialogKAttrDisp(
 						CWnd*		i_pWnd			// (I  ) ウィンドウのインスタンス
 				)
 {
-																				//US	if ( z_pDlgKAttr == NULL)
 	if ( m_bDispFlg)
 	{
-																				//US		z_pDlgKAttr->BringWindowToTop();
 		BringWindowToTop();
 	}
 	else
 	{
-																				//US		z_pDlgKAttr = new CMmDialogKAttr;	
-																				//US		z_pDlgKAttr->Create( pWnd);																				
 		m_bDispFlg = true;	
 		Create( i_pWnd);
 	}
@@ -55,7 +51,6 @@ void CMmDialogKAttr::MmDialogKAttrInp(
 //	部材属性ダイアログ表示　終了
 void CMmDialogKAttr::MmDialogKAttrEnd()
 {
-																				//US	z_pDlgKAttr = NULL;
 	m_bDispFlg = false;
 }
 
@@ -139,7 +134,6 @@ void CMmDialogKAttr::PostNcDestroy()
 {
 	if (m_pParent != NULL) {
 		MmDialogKAttrEnd();
-																			//US		delete	this;
 	}
 
 	CDialog::PostNcDestroy();
@@ -183,6 +177,11 @@ BOOL CMmDialogKAttr::OnInitDialog()
 	CDialog::OnInitDialog();
 
 	// TODO:  ここに初期化を追加してください
+	CRect rect;
+	GetWindowRect(&rect);
+	SetWindowPos(&wndTop, 0, 0, rect.right - rect.left, rect.bottom - rect.top,
+		SWP_SHOWWINDOW);
+
 	m_CmbKbzi1.InsertString( -1, _T("none"));
 	m_CmbKbzi2.InsertString( -1, _T("none"));
 	m_CmbKAttr1.InsertString( -1, _T("none"));
@@ -205,6 +204,7 @@ void CMmDialogKAttr::OnCbnSelchangeCmbkBzi1()
 void CMmDialogKAttr::OnCbnSelchangeCmbkBzi2()
 {
 	// TODO: ここにコントロール通知ハンドラー コードを追加します。
+	int i = 1;
 }
 
 

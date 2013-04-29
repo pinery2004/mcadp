@@ -147,7 +147,7 @@ void MCmdLineW()
 		mtPlcInp::SetpMbr( BuzaiCode::MhGetpMbr( IdMbr));
 		HaitiCmd::MmPresetCmd();
 //E		z_mnIA.GetComboAttrA();
-		z_mnIA.RibbonIO( MGET_COMBO_ATTRA, NULL);
+		z_mnIA.RibbonIO( MGET_PARTS_ATTRA, NULL);									// 部品仕様,寸法形式と属性値入力用コンボボックスの値を部品配置入力データに取り込む
 
 //DDD		mtPlcInp::SetpAux_xxxxxx();
 

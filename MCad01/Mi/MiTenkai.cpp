@@ -117,7 +117,7 @@ void JTTenkai::CreJTTArea()
 
 	ist1 = z_mnIA.SetRibbonBarEnt( MP_GP_KABE, MP_BR_OTHER, Mstr( "住戸区画"));
 //E	z_mnIA.GetComboAttrA();
-	z_mnIA.RibbonIO( MGET_COMBO_ATTRA, NULL);
+	z_mnIA.RibbonIO( MGET_PARTS_ATTRA, NULL);					// 部品仕様,寸法形式と属性値入力用コンボボックスの値を部品配置入力データに取り込む
 
 	MgPoint2	ptJuko[2] = { MgPoint2( 0., 0.), MgPoint2( 0., 0.)};
 	MgMinMaxR2	mm = MgMinMaxR2( MREALMAX, MREALMAX, MREALMIN, MREALMIN);
@@ -144,7 +144,7 @@ void JTTenkai::CreJTTArea()
 
 	ist1 = z_mnIA.SetRibbonBarEnt( MP_GP_KABE, MP_BR_OTHER, Mstr( "住棟展開"));
 //E	z_mnIA.GetComboAttrA();
-	z_mnIA.RibbonIO( MGET_COMBO_ATTRA, NULL);
+	z_mnIA.RibbonIO( MGET_PARTS_ATTRA, NULL);							// 部品仕様,寸法形式と属性値入力用コンボボックスの値を部品配置入力データに取り込む
 
 	pg1.m_n = 0;
 	pg1 += mm.min;
@@ -159,7 +159,7 @@ void JTTenkai::CreJTTArea()
 
 	Ln1.p[0] = MgPoint3C( pg1.m_p[0]);
 	Ln1.p[1] = MgPoint3C( pg1.m_p[1]);
-	HaitiCmd::MmPartsPlc( Ln1.p, MgVect3( 0., 0., 1.), &pg1);				// 住棟展開（領域型）の部品配置
+	HaitiCmd::MmPartsPlc( Ln1.p, MgVect3( 0., 0., 1.), &pg1);			// 住棟展開（領域型）の部品配置
 
 	z_mnIA.SetInpKai( 1);
 	mtPlcInp::SetInpKai( 1);
@@ -169,10 +169,10 @@ void JTTenkai::CreJTTArea()
 	nGrid[3] = MINT(mm.max.x / mcs::GetReal( MM_REAL_PITCH) + 3.99);							// 東
 	nGrid[0] = MINT(mm.max.y / mcs::GetReal( MM_REAL_PITCH) + 1.99 + z_TenkaiPara.nJuko);		// 北
 
-	WindowCtrl::MmGridNumSet( nGrid);										// 初期設定
-	WindowCtrl::MmGridNumXqt();												// グリッド数変更表示
+	WindowCtrl::MmGridNumSet( nGrid);									// 初期設定
+	WindowCtrl::MmGridNumXqt();											// グリッド数変更表示
 
-//DDD	MmWndKReDraw();											// MmGridNumXqtで既に表示済み
+//DDD	MmWndKReDraw();													// MmGridNumXqtで既に表示済み
 }
 
 /////////////////////////////////////////////////////////////////////////////

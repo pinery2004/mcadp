@@ -118,7 +118,8 @@ void mnIoPartsAttr::SetComboCdBody( void)
 	case MSET_INPUT_KUBUN_CD:
 		SelectComboInpKbnByInpKbnCd( m_iCdArg1);
 		break;
-	case MGET_COMBO_ATTRA:
+	case MGET_PARTS_ATTRA:
+		GetPartsSpec();
 		GetComboAttrA();
 		break;
 	}

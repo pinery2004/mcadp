@@ -44,7 +44,7 @@ MINT mnIoPartsAttr::SetRibbonBar(					// ステイタス 0:正常 -1:エラー
 
 	z_mnIA.InitComboPartsMbr();									// 部品に対応する寸法型式を選択可能項目として設定する
 	if ( i_crbMbr) {
-        ist = z_mnIA.SelectComboMbrCdByMbrCd( i_crbMbr);
+        ist = z_mnIA.SelectComboPartsMbrByMbrCd( i_crbMbr);
 		if ( ist < 0)
 			MQUIT;
 		if ( i_irbKumi == MP_GP_YANE) {
@@ -52,8 +52,8 @@ MINT mnIoPartsAttr::SetRibbonBar(					// ステイタス 0:正常 -1:エラー
 		} else {
 			iAttr = MP_AT_AUTO;
 		}
-//S		z_mnIA.InitComboAttr( iAttr);								// 属性入力用コンボボックスを初期化する
-		z_mmIA.InitComboAttr( iAttr);								// 属性入力用コンボボックスを初期化する
+//S		z_mnIA.InitComboAttr( iAttr);							// 属性入力用コンボボックスを初期化する
+		z_mmIA.InitComboAttr( iAttr);							// 属性入力用コンボボックスを初期化する
 	}
 	WindowCtrl::MmWndKReDraw();
 

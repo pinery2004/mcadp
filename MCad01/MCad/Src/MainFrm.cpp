@@ -39,8 +39,6 @@
 
 void	MmMainFrame( CMainFrame *pMainFrame);
 
-//S CMainFrame *z_pMainFrame;										// メインフレームポインタ(Global) 
-
 // CMainFrame
 
 IMPLEMENT_DYNAMIC(CMainFrame, CMDIFrameWndEx)
@@ -95,7 +93,8 @@ LRESULT CMainFrame::OnRibbonIO( UINT wParam, LONG lParam)
 	case MSET_COMBO_ATTRR:
 		MC::z_mnIA.SetComboAttrR( MC_CMB_HAIZ, MC::z_mnIA.m_rCdArg2);
 		break;
-	case MGET_COMBO_ATTRA:
+	case MGET_PARTS_ATTRA:
+		MC::z_mnIA.GetPartsSpec();
 		MC::z_mmIA.GetComboAttrA();
 		break;
 	case MSET_COMBO_PARTS:
@@ -142,11 +141,11 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	// タブ型式のウィンドウ表示
 	if (TAB_WINDOW) {
 		CMDITabInfo mdiTabParams;
-		mdiTabParams.m_style = CMFCTabCtrl::STYLE_3D_ONENOTE; // 使用可能なその他の視覚スタイル...
-		mdiTabParams.m_bActiveTabCloseButton = TRUE;      // タブ領域の右部に [閉じる] ボタンを配置するには、FALSE に設定します
-		mdiTabParams.m_bTabIcons = FALSE;    // MDI タブでドキュメント アイコンを有効にするには、TRUE に設定します
-		mdiTabParams.m_bAutoColor = TRUE;    // MDI タブの自動色設定を無効にするには、FALSE に設定します
-		mdiTabParams.m_bDocumentMenu = TRUE; // タブ領域の右端にあるドキュメント メニューを有効にします
+		mdiTabParams.m_style = CMFCTabCtrl::STYLE_3D_ONENOTE;	// 使用可能なその他の視覚スタイル...
+		mdiTabParams.m_bActiveTabCloseButton = TRUE;			// タブ領域の右部に [閉じる] ボタンを配置するには、FALSE に設定します
+		mdiTabParams.m_bTabIcons = FALSE;						// MDI タブでドキュメント アイコンを有効にするには、TRUE に設定します
+		mdiTabParams.m_bAutoColor = TRUE;						// MDI タブの自動色設定を無効にするには、FALSE に設定します
+		mdiTabParams.m_bDocumentMenu = TRUE;					// タブ領域の右端にあるドキュメント メニューを有効にします
 		EnableMDITabbedGroups(TRUE, mdiTabParams);
 	}
 
@@ -218,25 +217,25 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 	cs.cx = min( GetSystemMetrics( SM_CXMAXIMIZED), 1280);
 	cs.cy = min( GetSystemMetrics( SM_CYMAXIMIZED), 1060);
 
-	int i11 = ::GetSystemMetrics( SM_CXBORDER);				// 1
-	int i12 = ::GetSystemMetrics( SM_CYBORDER);				// 1
-	int i13 = ::GetSystemMetrics( SM_CXEDGE);				// 2
-	int i14 = ::GetSystemMetrics( SM_CYEDGE);				// 2
-	int i15 = ::GetSystemMetrics( SM_CXFIXEDFRAME);			// 3
-	int i16 = ::GetSystemMetrics( SM_CYFIXEDFRAME);			// 3
-	int i17 = ::GetSystemMetrics( SM_CXFULLSCREEN);			// 1280
-	int i18 = ::GetSystemMetrics( SM_CYFULLSCREEN);			// 968
-	int i19 = ::GetSystemMetrics( SM_CXMAXIMIZED);			// 1288
-	int i20 = ::GetSystemMetrics( SM_CYMAXIMIZED);			// 1002
-	int i21 = ::GetSystemMetrics( SM_CXMAXTRACK);			// 1292
-	int i22 = ::GetSystemMetrics( SM_CYMAXTRACK);			// 1036
-	int i23 = ::GetSystemMetrics( SM_CXSCREEN);				// 1280
-	int i24 = ::GetSystemMetrics( SM_CYSCREEN);				// 1024
-	int i25 = ::GetSystemMetrics( SM_CXSIZEFRAME);			// 4
-	int i26 = ::GetSystemMetrics( SM_CYSIZEFRAME);			// 4
-	int i27 = ::GetSystemMetrics( SM_CYMENU);				// 20
-	int i28 = ::GetSystemMetrics( SM_CYCAPTION);			// 26
-	int i29 = ::GetSystemMetrics( SM_CYSMCAPTION);			// 18
+	int i11 = ::GetSystemMetrics( SM_CXBORDER);					// 1
+	int i12 = ::GetSystemMetrics( SM_CYBORDER);					// 1
+	int i13 = ::GetSystemMetrics( SM_CXEDGE);					// 2
+	int i14 = ::GetSystemMetrics( SM_CYEDGE);					// 2
+	int i15 = ::GetSystemMetrics( SM_CXFIXEDFRAME);				// 3
+	int i16 = ::GetSystemMetrics( SM_CYFIXEDFRAME);				// 3
+	int i17 = ::GetSystemMetrics( SM_CXFULLSCREEN);				// 1920
+	int i18 = ::GetSystemMetrics( SM_CYFULLSCREEN);				// 1058
+	int i19 = ::GetSystemMetrics( SM_CXMAXIMIZED);				// 1936
+	int i20 = ::GetSystemMetrics( SM_CYMAXIMIZED);				// 1096
+	int i21 = ::GetSystemMetrics( SM_CXMAXTRACK);				// 3852
+	int i22 = ::GetSystemMetrics( SM_CYMAXTRACK);				// 1092
+	int i23 = ::GetSystemMetrics( SM_CXSCREEN);					// 1920
+	int i24 = ::GetSystemMetrics( SM_CYSCREEN);					// 1080
+	int i25 = ::GetSystemMetrics( SM_CXSIZEFRAME);				// 8
+	int i26 = ::GetSystemMetrics( SM_CYSIZEFRAME);				// 8
+	int i27 = ::GetSystemMetrics( SM_CYMENU);					// 21
+	int i28 = ::GetSystemMetrics( SM_CYCAPTION);				// 22
+	int i29 = ::GetSystemMetrics( SM_CYSMCAPTION);				// 21
 
 	return TRUE;
 }
@@ -373,7 +372,6 @@ CMDIChildWnd* CMainFrame::OpenView(CDocTemplate *pTemplate)
 void CMainFrame::SelectCombo1( MINT i_iCombo1)
 {
 	m_iCombo1 = i_iCombo1;
-//U	((CComboBox*)(m_wndDlgBar3.GetDlgItem(IDC_CMBK_BZI1)))->SetCurSel( m_iCombo1);
 	CMFCRibbonComboBox* pComboBuzai = mmpComboBuzai();
 	pComboBuzai->SelectItem( i_iCombo1);
 }
@@ -381,16 +379,14 @@ void CMainFrame::SelectCombo1( MINT i_iCombo1)
 void CMainFrame::SelectCombo2( MINT i_iCombo2)
 {
 	m_iCombo2 = i_iCombo2;
-//U	((CComboBox*)(m_wndDlgBar3.GetDlgItem(IDC_CMBK_BZI2)))->SetCurSel( m_iCombo2);
-	CMFCRibbonComboBox* pComboMbr = mmpComboMbr();
-	pComboMbr->SelectItem( i_iCombo2);
+	CMFCRibbonComboBox* pComboPartsMbr = mmpComboPartsMbr();
+	pComboPartsMbr->SelectItem( i_iCombo2);
 }
 
 
 void CMainFrame::SelectComboInp1( MINT i_iCombo11)
 {
 	m_iComboInp1 = i_iCombo11;
-//U	((CComboBox*)(m_wndDlgBar1.GetDlgItem(IDC_CMB_Inp1)))->SetCurSel( m_iComboInp1);
 	CMFCRibbonComboBox* pComboInpTp = mmpComboInpTp();
 	pComboInpTp->SelectItem( i_iCombo11);
 }
@@ -398,13 +394,11 @@ void CMainFrame::SelectComboInp1( MINT i_iCombo11)
 void CMainFrame::SelectComboInp2( MINT iCombo12)
 {
 	m_iComboInp2 = iCombo12;
-//U	((CComboBox*)(m_wndDlgBar1.GetDlgItem(IDC_CMB_Inp2)))->SetCurSel( m_iComboInp2);
 }
 
 void CMainFrame::SelectComboInp3( MINT iCombo13)
 {
 	m_iComboInp3 = iCombo13;
-//U	((CComboBox*)(m_wndDlgBar1.GetDlgItem(IDC_CMB_Inp3)))->SetCurSel( m_iComboInp3);
 }
 
 
@@ -417,39 +411,42 @@ void CMainFrame::OnDummy(UINT /*id*/)
 // PARTS リボンバー　部材名
 void CMainFrame::OnCbnSelchangeCombo1()
 {
-//E	m_iCombo1 = ((CComboBox*)(m_wndDlgBar3.GetDlgItem(IDC_CMBK_BZI1)))->GetCurSel();	// 部品ID
-	CMFCRibbonComboBox* pCmbBox = mmpComboBuzai();
-	m_iCombo1 = pCmbBox->GetCurSel();											// 部品ID
-
-	MC::z_mmIA.SelectComboPartsNmByKmId( m_iCombo1);
-	MC::z_mmIA.InitComboPartsMbr();
+	CMFCRibbonComboBox* pCmbBox;
+	pCmbBox = mmpComboBuzai();
+	m_iCombo1 = pCmbBox->GetCurSel();							// 選択された部品ID
 
 	MC::z_mnIA.SelectComboPartsNmByKmId( m_iCombo1);
 	MC::z_mnIA.InitComboPartsMbr();
 
-	MC::Window::CurWndFocus();
+	MC::z_mmIA.MmDialogKAttrDisp( this);						// 部材属性ダイアログ表示
+	MC::z_mmIA.InitComboParts();								// 全項目設定
+	MC::z_mmIA.SelectComboPartsNmByKmId( m_iCombo1);
+//S	MC::z_mmIA.InitComboPartsMbr();
+
+//S	MC::Window::CurWndFocus();
 	MC::mhPartsSpec* pPartsSpec	= MC::BuzaiCode::MhGetpPartsSpec( MC::z_mnIA.GetCurPartsNmId());
 	if ( pPartsSpec->GetPTCdBr() >= MP_BR_SENBUN || MC::z_mnIA.GetMode() == MP_MD_DELETE)
-		MC::WindowCtrl::MmWndKCmdXqt( IDC_PARTSCREATE);							//	部材入力コマンド
+		MC::WindowCtrl::MmWndKCmdXqt( IDC_PARTSCREATE);			//	部材入力コマンド
 	else 
-		MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
+		MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);			//	コマンドキャンセル
 }
 
 
 // PARTS リボンバー　寸法型式
 void CMainFrame::OnCbnSelchangeCombo2()
 {
-	MC::z_mmIA.MmDialogKAttrInp( this);
-
 	CMFCRibbonComboBox* pCmbBox;
-	pCmbBox = mmpComboMbr();
-	m_iCombo2 = pCmbBox->GetCurSel();											// 寸法型式ID
+	pCmbBox = mmpComboPartsMbr();
+	m_iCombo2 = pCmbBox->GetCurSel();							// 選択された寸法型式ID
 
-	MC::z_mmIA.SelectComboPartsMbrByKmId( m_iCombo2);
+	MC::z_mmIA.MmDialogKAttrDisp( this);						// 部材属性ダイアログ表示
+	MC::z_mmIA.InitComboParts();								// 全項目設定
+	MC::z_mmIA.SelectComboPartsNmByKmId(m_iCombo1);				// 部材名を設定
+	MC::z_mmIA.SelectComboPartsMbrByKmId( m_iCombo2);			// 寸法形式を設定
 
 	MC::z_mnIA.SelectComboPartsMbrByKmId( m_iCombo2);
-	MC::Window::CurWndFocus();
-	MC::WindowCtrl::MmWndKCmdXqt( IDC_PARTSCREATE);								//	部品入力
+//S	MC::Window::CurWndFocus();
+	MC::WindowCtrl::MmWndKCmdXqt( IDC_PARTSCREATE);				//	部品入力
 }
 
 // INPUT リボンバー　入力点区分
@@ -467,15 +464,11 @@ void CMainFrame::OnCbnSelchangeCombo12()
 {
 	CMFCRibbonComboBox* pCmbBox;
 	pCmbBox = mmpComboMarume();
-	m_iComboInp2 = pCmbBox->GetCurSel();										// 丸めコード
+	m_iComboInp2 = pCmbBox->GetCurSel();						// 丸めコード
 	MC::z_mnIA.SelectComboMarumeByMarumeCd( m_iComboInp2);
 	MC::Window::CurWndFocus();
 }
 
-//void CMainFrame::OnCbnSelchangeCombo13()
-//{
-//	// TODO: ここにコマンド ハンドラー コードを追加します。
-//}
 // INPUT リボンバー　配置コード
 void CMainFrame::OnCbnSelchangeCombo13()
 {

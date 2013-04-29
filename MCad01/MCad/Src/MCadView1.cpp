@@ -81,7 +81,7 @@ BEGIN_MESSAGE_MAP(CMCadView1, CView)
     ON_MESSAGE(WM_MYMESSAGEOPTION, OnMyMessageOpt)					// 1
     ON_MESSAGE(WM_MYMESSAGEHIST, OnMyMessageHist)					// 1
 	ON_MESSAGE(WM_MYMESSAGETENKAI, OnMyMessageTenkai)				// 1
-	ON_MESSAGE(WM_MYMESSAGEKATTR, OnMyMessageKAttr)				// 1
+	ON_MESSAGE(WM_MYMESSAGEKATTR, OnMyMessageKAttr)					// 1
 	
 END_MESSAGE_MAP()
 
@@ -102,14 +102,11 @@ BOOL CMCadView1::PreCreateWindow(CREATESTRUCT& cs)
 	// TODO: この位置で CREATESTRUCT cs を修正して Window クラスまたはスタイルを
 	//  修正してください。
 
-//	return CView::PreCreateWindow(cs);
 	if (!CView::PreCreateWindow(cs))
 		return false;
 
 	cs.dwExStyle |= WS_EX_CLIENTEDGE;
 	cs.style &= ~WS_BORDER | WS_MAXIMIZE;
-//	cs.lpszClass = AfxRegisterWndClass(CS_HREDRAW|CS_VREDRAW|CS_DBLCLKS, 
-//		::LoadCursor(NULL, IDC_ARROW), reinterpret_cast<HBRUSH>(COLOR_WINDOW+1), NULL);
 	cs.lpszClass = AfxRegisterWndClass(CS_HREDRAW|CS_VREDRAW|CS_DBLCLKS,
 		NULL,reinterpret_cast<HBRUSH>(COLOR_WINDOW+1),NULL); 
 
@@ -297,7 +294,7 @@ LRESULT CMCadView1::OnMyMessageTenkai(WPARAM wParam, LPARAM lParam)
 
 LRESULT CMCadView1::OnMyMessageKAttr(WPARAM wParam, LPARAM lParam)
 {
-	MC::z_mmIA.MmDialogKAttrInp( this);
+	MC::z_mmIA.MmDialogKAttrDisp( this);
 	return 0;
 }	
 

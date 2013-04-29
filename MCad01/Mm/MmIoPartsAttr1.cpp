@@ -184,49 +184,49 @@ int mmIoPartsAttr::GetComboPartsNmKmIdFromPartsNm( MCHAR* i_sNmParts1)
 	return iKmIdPartsNm;
 }
 
-///////////////////////////////////////////////////////////////////////////////
-//	部品名から部品IDを取得する
-//							＝-1: 未選択
-//							≧ 0: 部品ID
-
-int mmIoPartsAttr::GetComboPartsNmId(
-						MCHAR* i_sNmParts1		// 部品名
-				)
-{
-	int			ist;
-	int			ic1;
-	mhPartsSpec	*pPartsSpec;
-	int		nPartsNm;
-
-	nPartsNm = BuzaiCode::MhGetNoOfPartsSpec();
-	for ( ic1=0; ic1<nPartsNm; ic1++) {
-		pPartsSpec = BuzaiCode::MhGetpPartsSpec( ic1);
-		if ( Mstrcmp( pPartsSpec->GetPTNmParts1(), i_sNmParts1) == 0)
-			break;
-	}
-	if ( ic1 < nPartsNm)
-		ist = ic1;
-	else
-		ist = -1;
-	return ist;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-//	カレントの部品IDを取得する
-//							＝-1: 該当なし
-//							≧ 0: 部品ID
-
-int mmIoPartsAttr::GetCurPartsNmId()
-{
-	int iIdPartsSpec;
-
-	if ( m_iComboKmIdPartsNm >= 0 && m_iComboKmIdPartsNm < m_nComboIdPartsSpec) {
-		iIdPartsSpec = m_iComboIdPartsSpec[m_iComboKmIdPartsNm];
-	} else {
-		iIdPartsSpec = -1;
-	}
-	return iIdPartsSpec;
-}
+/////////////////////////////////////////////////////////////////////////////////
+////	部品名から部品IDを取得する
+////							＝-1: 未選択
+////							≧ 0: 部品ID
+//
+//int mmIoPartsAttr::GetComboPartsNmId(
+//						MCHAR* i_sNmParts1		// 部品名
+//				)
+//{
+//	int			ist;
+//	int			ic1;
+//	mhPartsSpec	*pPartsSpec;
+//	int		nPartsNm;
+//
+//	nPartsNm = BuzaiCode::MhGetNoOfPartsSpec();
+//	for ( ic1=0; ic1<nPartsNm; ic1++) {
+//		pPartsSpec = BuzaiCode::MhGetpPartsSpec( ic1);
+//		if ( Mstrcmp( pPartsSpec->GetPTNmParts1(), i_sNmParts1) == 0)
+//			break;
+//	}
+//	if ( ic1 < nPartsNm)
+//		ist = ic1;
+//	else
+//		ist = -1;
+//	return ist;
+//}
+//
+/////////////////////////////////////////////////////////////////////////////////
+////	カレントの部品IDを取得する
+////							＝-1: 該当なし
+////							≧ 0: 部品ID
+//
+//int mmIoPartsAttr::GetCurPartsNmId()
+//{
+//	int iIdPartsSpec;
+//
+//	if ( m_iComboKmIdPartsNm >= 0 && m_iComboKmIdPartsNm < m_nComboIdPartsSpec) {
+//		iIdPartsSpec = m_iComboIdPartsSpec[m_iComboKmIdPartsNm];
+//	} else {
+//		iIdPartsSpec = -1;
+//	}
+//	return iIdPartsSpec;
+//}
 
 ///////////////////////////////////////////////////////////////////////////////
 //	寸法型式選択用コンポボックスに寸法型式の項目(一覧)を設定し
@@ -251,7 +251,7 @@ void mmIoPartsAttr::InitComboPartsMbr()
 	CComboBox* pCmbBox = GetCmbBzaiMbr();
 	pCmbBox->ResetContent();
 
-	iIdPartsSpec = z_mmIA.GetCurPartsNmId();
+	iIdPartsSpec = z_mnIA.GetCurPartsNmId();
 	if ( iIdPartsSpec >= 0) {
 		cMTp1 = BuzaiCode::MhGetpPartsSpec( iIdPartsSpec)->GetPTTpMbr()[0];
 
@@ -265,7 +265,7 @@ void mmIoPartsAttr::InitComboPartsMbr()
 			if ( cMTp2 == 0) continue;							// 一致しない場合次の寸法型式に移る
 
 			ASSERT( ip < MX_CMB_CDMEMBER - 1);					// 寸法型式選択コンボボックス項目　オーバフロー　<ERROR>
-			m_iComboMbrId[ip] = ic1;
+			m_iComboPartsMbrId[ip] = ic1;
 			pCmbBox->InsertString( -1, pMbr->GetMbrCode());
 			ip++;
 		}
@@ -274,7 +274,7 @@ void mmIoPartsAttr::InitComboPartsMbr()
 		pCmbBox->InsertString( -1, Mstr( "none"));
 	}
 EXIT:
-	m_nComboMbrId = ip;
+	m_nComboPartsMbrId = ip;
 	m_iComboKmIdMbr = -1;
 }
 
@@ -296,9 +296,9 @@ void mmIoPartsAttr::SelectComboPartsMbrByKmId(
 	// 部品配置入力データへ設定
 	int iMbrId;
 	MhMbr* pMbr;
-	iMbrId = m_iComboMbrId[i_iKmIdMbr];					// 寸法形式ID
+	iMbrId = m_iComboPartsMbrId[i_iKmIdMbr];					// 寸法形式ID
 	mtPlcInp::SetIdMbr( iMbrId); 
-	pMbr = BuzaiCode::MhGetpMbr( iMbrId);				// 寸法形式仕様
+	pMbr = BuzaiCode::MhGetpMbr( iMbrId);						// 寸法形式仕様
 	mtPlcInp::SetpMbr( pMbr);
 EXIT:;
 }
@@ -309,88 +309,88 @@ EXIT:;
 //							＝-1: 該当なし
 //							≧ 0: 寸法型式ID
 
-int mmIoPartsAttr::SelectComboMbrCdByMbrCd( MCHAR* sCdMbr)
+int mmIoPartsAttr::SelectComboPartsMbrByMbrCd( MCHAR* sCdMbr)
 {
 	int			iMbrId = -1;
 	int			iKmIdMbr;
 
-	iKmIdMbr = z_mmIA.GetComboMbrKmId( sCdMbr);
+	iKmIdMbr = z_mnIA.GetComboPartsMbrKmId( sCdMbr);
 	if ( iKmIdMbr < 0) {
 		Msg::ErrorMsg( sCdMbr, MC_ERR_NOTSET_MEMBER_TABLE);		// "が寸法型式テーブルに未設定です．"
 		MQUIT;
 	}
 	z_mmIA.SelectComboPartsMbrByKmId( iKmIdMbr);
 
-	iMbrId = m_iComboMbrId[iKmIdMbr];
+	iMbrId = m_iComboPartsMbrId[iKmIdMbr];
 exit:
 	return iMbrId;
 }
 
-///////////////////////////////////////////////////////////////////////////////
-//	寸法形式から寸法型式コンボボックスの寸法型式項目番号を取得する
-//							＝-1: 該当なし
-//							≧ 0: 部品ID
-
-int mmIoPartsAttr::GetComboMbrKmId( MCHAR* sCdMbr)
-{
-	int		ist;
-	int		ic1;
-	int		iMbrId;
-	MhMbr	*pMbr;
-	
-	for ( ic1=0; ic1<m_nComboMbrId; ic1++) {
-		iMbrId = m_iComboMbrId[ic1];
-		pMbr = BuzaiCode::MhGetpMbr( iMbrId);
-		if ( Mstrcmp( pMbr->GetMbrCode(), sCdMbr) == 0)
-			break;
-	}
-	if ( ic1 < m_nComboMbrId)
-		ist = ic1;
-	else
-		ist = -1;
-	return ist;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-//	寸法形式から寸法型式IDを取得する
-//							＝-1: 該当なし
-//							≧ 0: 寸法型式ID
-
-static int GetComboMbrCdId( MCHAR* sCdMbr)
-{
-	int		ist;
-	int		ic1;
-	MhMbr	*pMbr;
-	int		nMbr;
-
-	nMbr = BuzaiCode::MhGetNoOfMbr();
-	for ( ic1=0; ic1<nMbr; ic1++) {
-		pMbr = BuzaiCode::MhGetpMbr( ic1);
-		if ( Mstrcmp( pMbr->GetMbrCode(), sCdMbr) == 0)
-			break;
-	}
-	if ( ic1 < nMbr)
-		ist = ic1;
-	else
-		ist = -1;
-	return ist;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-//	カレントの寸法型式IDを取得する
-//							＝-1: 未選択
-//							≧ 0: 寸法型式ID
-
-int mmIoPartsAttr::GetComboMbrCdId()
-{
-	int		iMbrId;
-
-	if ( m_iComboKmIdMbr >= 0 && m_iComboKmIdMbr < m_nComboMbrId) {
-		iMbrId = m_iComboMbrId[m_iComboKmIdMbr];
-	} else {
-		iMbrId = -1;
-	}
-	return iMbrId;
-}
+/////////////////////////////////////////////////////////////////////////////////
+////	寸法形式から寸法型式コンボボックスの寸法型式項目番号を取得する
+////							＝-1: 該当なし
+////							≧ 0: 部品ID
+//
+//int mmIoPartsAttr::GetComboPartsMbrKmId( MCHAR* sCdMbr)
+//{
+//	int		ist;
+//	int		ic1;
+//	int		iMbrId;
+//	MhMbr	*pMbr;
+//	
+//	for ( ic1=0; ic1<m_nComboPartsMbrId; ic1++) {
+//		iMbrId = m_iComboPartsMbrId[ic1];
+//		pMbr = BuzaiCode::MhGetpMbr( iMbrId);
+//		if ( Mstrcmp( pMbr->GetMbrCode(), sCdMbr) == 0)
+//			break;
+//	}
+//	if ( ic1 < m_nComboPartsMbrId)
+//		ist = ic1;
+//	else
+//		ist = -1;
+//	return ist;
+//}
+//
+/////////////////////////////////////////////////////////////////////////////////
+////	寸法形式から寸法型式IDを取得する
+////							＝-1: 該当なし
+////							≧ 0: 寸法型式ID
+//
+//static int GetComboPartsMbrCdId( MCHAR* sCdMbr)
+//{
+//	int		ist;
+//	int		ic1;
+//	MhMbr	*pMbr;
+//	int		nMbr;
+//
+//	nMbr = BuzaiCode::MhGetNoOfMbr();
+//	for ( ic1=0; ic1<nMbr; ic1++) {
+//		pMbr = BuzaiCode::MhGetpMbr( ic1);
+//		if ( Mstrcmp( pMbr->GetMbrCode(), sCdMbr) == 0)
+//			break;
+//	}
+//	if ( ic1 < nMbr)
+//		ist = ic1;
+//	else
+//		ist = -1;
+//	return ist;
+//}
+//
+/////////////////////////////////////////////////////////////////////////////////
+////	カレントの寸法型式IDを取得する
+////							＝-1: 未選択
+////							≧ 0: 寸法型式ID
+//
+//int mmIoPartsAttr::GetComboPartsMbrCdId()
+//{
+//	int		iMbrId;
+//
+//	if ( m_iComboKmIdMbr >= 0 && m_iComboKmIdMbr < m_nComboPartsMbrId) {
+//		iMbrId = m_iComboPartsMbrId[m_iComboKmIdMbr];
+//	} else {
+//		iMbrId = -1;
+//	}
+//	return iMbrId;
+//}
 
 } // namespace MC

@@ -94,7 +94,7 @@ public:
 //	void SeelectComboPanelNo( MINT iComboPanelNo);
 
 	friend CMFCRibbonComboBox* mmpComboBuzai();
-	friend CMFCRibbonComboBox* mmpComboMbr();
+	friend CMFCRibbonComboBox* mmpComboPartsMbr();
 	friend CMFCRibbonComboBox* mmpComboInpTp();
 	friend CMFCRibbonComboBox* mmpComboMarume();
 	friend CMFCRibbonComboBox* mmpComboPlcCd();

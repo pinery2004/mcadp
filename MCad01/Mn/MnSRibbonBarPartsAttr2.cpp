@@ -139,28 +139,96 @@ static MREAL z_rKerabanoDe[] = { 650.0, 455.0, 330.0, 44.5, 0.};
 #define	ISZKERABANODE	sizeof(z_rKerabanoDe)/sizeof(MREAL)
 #define	INITKERABANODE	650.0f
 
-////////////////////////////////////////////////////////////////////////////
-//	部材属性入力用コンボボックスの設定
+///////////////////////////////////////////////////////////////////////////////
+//	属性値入力用コンボボックスの値を部品配置入力データに取り込む
 
-void mnIoPartsAttr::InitComboParts()
+void mnIoPartsAttr::GetComboAttrA( void)
 {
-	//　部品名コンポボックスの項目を設定する
-	InitComboPartsNm();
+	int		ist;
 
-	//	寸法型式選択用コンポボックスの項目を設定する
-	InitComboPartsMbr();
+	MREAL	rComboAttr1;
+	MREAL	rComboAttr2;
+	MREAL	rComboAttr3;
+	MREAL	rComboAttr4;
+	MREAL	rComboAttr5;
+	MREAL	rComboAttr6;
+	int		iMode;
 
-	//	パネル番号選択用コンポボックスの項目を設定する
-	InitComboPanelNo();
+	iMode = z_mmIA.GetAtMd();						// 属性値入力モード
 
-//S	//	部材属性入力用コンポボックスの項目を設定する
-//	InitComboAttr();
+	switch ( iMode)
+	{
+	case MP_AT_YTPANEL:
+	case MP_AT_YANEPANEL:
 
-	Window::CurWndFocus();
-	WindowCtrl::MmWndKReDraw();
+		if ( iMode == MP_AT_YTPANEL) {							// ***** 床・天井パネル *****
+			z_mnIA.GetComboAttrR( MC_CMB_LFH1, &rComboAttr1);		// 　左巾補正値　→　長さ補正値1
+			z_mnIA.GetComboAttrR( MC_CMB_RTH1, &rComboAttr2);		// 　右巾補正値　→　長さ補正値2
+			z_mnIA.GetComboAttrR( MC_CMB_FHS1, &rComboAttr3);		// 　手前側補正値　→　手前側補正値
 
-	//	部材属性入力ダイアログ
-	z_mmIA.InitComboParts();
+		} else if ( iMode == MP_AT_YANEPANEL) {					// ***** 屋根パネル *****
+			z_mnIA.GetComboAttrR( MC_CMB_LFH2, &rComboAttr1);		// 　左巾補正値　→　長さ補正値1
+			z_mnIA.GetComboAttrR( MC_CMB_RTH2, &rComboAttr2);		// 　右巾補正値　→　長さ補正値2
+			z_mnIA.GetComboAttrR( MC_CMB_FHS2, &rComboAttr3);		// 　軒の出　→　手前側補正値
+		}
+
+		mtPlcInp::SetLenHosei( 0, rComboAttr1);					// →　長さ補正値1
+		mtPlcInp::SetLenHosei( 1, rComboAttr2);					// →　長さ補正値2
+		mtPlcInp::SetMaeHosei( rComboAttr3);					// →　手前側補正値
+
+		z_mnIA.GetComboAttrR( MC_CMB_OKYK, &rComboAttr4);
+		mtPlcInp::SetOku( rComboAttr4);							// 奥行き　→　奥行き
+
+		z_mnIA.GetComboAttrR( MC_CMB_OHS2, &rComboAttr5);
+		mtPlcInp::SetOkuHosei( rComboAttr5);					// 奥行き補正値　→　奥行き補正値　
+
+		z_mnIA.GetComboAttrR( MC_CMB_TRTH, &rComboAttr5);
+		mtPlcInp::SetHgt( 0, rComboAttr5);						// 取り付け高さ　→　取り付け高さ 
+		break;
+
+	case MP_AT_HRZ_PARTS:
+	case MP_AT_VRT_PARTS:
+	case MP_AT_TATEGU:
+																// ***** 横置き部材・縦置き部材・建具 *****
+		z_mnIA.GetComboAttrR( MC_CMB_LHS1, &rComboAttr1);
+		mtPlcInp::SetLenHosei( 0, rComboAttr1);					// 長さ補正値1 　→　長さ補正値1
+
+		z_mnIA.GetComboAttrR( MC_CMB_LHS2, &rComboAttr2);
+		mtPlcInp::SetLenHosei( 1, rComboAttr2);					// 長さ補正値2 　→　長さ補正値2
+
+		z_mnIA.GetComboAttrR( MC_CMB_ZJSZ, &rComboAttr3);
+		mtPlcInp::SetSinZure( rComboAttr3);						// 材軸芯ずれ量　→　材軸芯ずれ量
+
+		z_mnIA.GetComboAttrR( MC_CMB_HAIZ, &rComboAttr4);
+		mtPlcInp::SetPlcZure( rComboAttr4);						// 配置点ずれ量　→　配置点ずれ量
+
+		ist = z_mnIA.GetComboAttrR( MC_CMB_TRTH, &rComboAttr5);	// 取り付け高さ　→　高さ1
+		if ( ist == 0)
+			ist = z_mnIA.GetComboAttrR( MC_CMB_LWRH, &rComboAttr5);	// 下端高さ　→　高さ1
+
+		mtPlcInp::SetHgt( 0, rComboAttr5);						// →　高さ1
+		mtTateguInp::SetHeight( rComboAttr5);					// →　建具高さ
+
+		ist = z_mnIA.GetComboAttrR( MC_CMB_KROH, &rComboAttr6);	// 建具ROH　→　高さ2
+		if ( ist ==0)
+			ist = z_mnIA.GetComboAttrR( MC_CMB_UPRH, &rComboAttr6);	// 上端高さ　→　高さ2
+
+		mtPlcInp::SetHgt( 1, rComboAttr6);						// →　高さ2
+		mtTateguInp::SetROH( rComboAttr6);						// →　建具ROH
+
+//		iIdPartsSpec = z_mnIA.GetCurPartsNmId();					// カレントの部品ID
+//		pPartsSpec = BuzaiCode::MhGetpPartsSpec( iIdPartsSpec);	// 部品種類レコード
+//		if ( pPartsSpec->IsTategu()) {							// 建具 (部材コード = 建具)
+//		}
+		break;
+
+	case MP_AT_ADJLNG:											// ***** 部材長さ調整入力 *****
+	case MP_AT_YANE:											// ***** 屋根入力 *****
+
+		ASSERT(false);											// エラー
+		break;
+	}
+
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -371,7 +439,7 @@ void mnIoPartsAttr::InitComboAttrI(
 ///////////////////////////////////////////////////////////////////////////////
 //	属性値入力用コンボボックスの整数値を取得する
 //
-int mnIoPartsAttr::GetComboAttrICbn(				// 整数値　または　0(未設定)
+int mnIoPartsAttr::GetComboAttrICbn(			// 整数値　または　0(未設定)
 						int		i_iAttr			// コンボボックス番号
 					)
 {
@@ -413,98 +481,6 @@ int mnIoPartsAttr::GetComboAttrI(					// ステイタス0(未設定) 1(設定)
 		ist = 0;
 	}
 	return ist;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-//	属性値入力用コンボボックスの値を取り込む
-
-void mnIoPartsAttr::GetComboAttrA( void)
-{
-	int		ist;
-
-	MREAL	rComboAttr1;
-	MREAL	rComboAttr2;
-	MREAL	rComboAttr3;
-	MREAL	rComboAttr4;
-	MREAL	rComboAttr5;
-	MREAL	rComboAttr6;
-	int		iMode;
-
-	iMode = z_mmIA.GetAtMd();						// 属性値入力モード
-
-	switch ( iMode)
-	{
-	case MP_AT_YTPANEL:
-	case MP_AT_YANEPANEL:
-
-		if ( iMode == MP_AT_YTPANEL) {							// ***** 床・天井パネル *****
-			z_mnIA.GetComboAttrR( MC_CMB_LFH1, &rComboAttr1);		// 　左巾補正値　→　長さ補正値1
-			z_mnIA.GetComboAttrR( MC_CMB_RTH1, &rComboAttr2);		// 　右巾補正値　→　長さ補正値2
-			z_mnIA.GetComboAttrR( MC_CMB_FHS1, &rComboAttr3);		// 　手前側補正値　→　手前側補正値
-
-		} else if ( iMode == MP_AT_YANEPANEL) {					// ***** 屋根パネル *****
-			z_mnIA.GetComboAttrR( MC_CMB_LFH2, &rComboAttr1);		// 　左巾補正値　→　長さ補正値1
-			z_mnIA.GetComboAttrR( MC_CMB_RTH2, &rComboAttr2);		// 　右巾補正値　→　長さ補正値2
-			z_mnIA.GetComboAttrR( MC_CMB_FHS2, &rComboAttr3);		// 　軒の出　→　手前側補正値
-		}
-
-		mtPlcInp::SetLenHosei( 0, rComboAttr1);					// →　長さ補正値1
-		mtPlcInp::SetLenHosei( 1, rComboAttr2);					// →　長さ補正値2
-		mtPlcInp::SetMaeHosei( rComboAttr3);					// →　手前側補正値
-
-		z_mnIA.GetComboAttrR( MC_CMB_OKYK, &rComboAttr4);
-		mtPlcInp::SetOku( rComboAttr4);							// 奥行き　→　奥行き
-
-		z_mnIA.GetComboAttrR( MC_CMB_OHS2, &rComboAttr5);
-		mtPlcInp::SetOkuHosei( rComboAttr5);					// 奥行き補正値　→　奥行き補正値　
-
-		z_mnIA.GetComboAttrR( MC_CMB_TRTH, &rComboAttr5);
-		mtPlcInp::SetHgt( 0, rComboAttr5);						// 取り付け高さ　→　取り付け高さ 
-		break;
-
-	case MP_AT_HRZ_PARTS:
-	case MP_AT_VRT_PARTS:
-	case MP_AT_TATEGU:
-																// ***** 横置き部材・縦置き部材・建具 *****
-		z_mnIA.GetComboAttrR( MC_CMB_LHS1, &rComboAttr1);
-		mtPlcInp::SetLenHosei( 0, rComboAttr1);					// 長さ補正値1 　→　長さ補正値1
-
-		z_mnIA.GetComboAttrR( MC_CMB_LHS2, &rComboAttr2);
-		mtPlcInp::SetLenHosei( 1, rComboAttr2);					// 長さ補正値2 　→　長さ補正値2
-
-		z_mnIA.GetComboAttrR( MC_CMB_ZJSZ, &rComboAttr3);
-		mtPlcInp::SetSinZure( rComboAttr3);						// 材軸芯ずれ量　→　材軸芯ずれ量
-
-		z_mnIA.GetComboAttrR( MC_CMB_HAIZ, &rComboAttr4);
-		mtPlcInp::SetPlcZure( rComboAttr4);						// 配置点ずれ量　→　配置点ずれ量
-
-		ist = z_mnIA.GetComboAttrR( MC_CMB_TRTH, &rComboAttr5);	// 取り付け高さ　→　高さ1
-		if ( ist == 0)
-			ist = z_mnIA.GetComboAttrR( MC_CMB_LWRH, &rComboAttr5);	// 下端高さ　→　高さ1
-
-		mtPlcInp::SetHgt( 0, rComboAttr5);						// →　高さ1
-		mtTateguInp::SetHeight( rComboAttr5);					// →　建具高さ
-
-		ist = z_mnIA.GetComboAttrR( MC_CMB_KROH, &rComboAttr6);	// 建具ROH　→　高さ2
-		if ( ist ==0)
-			ist = z_mnIA.GetComboAttrR( MC_CMB_UPRH, &rComboAttr6);	// 上端高さ　→　高さ2
-
-		mtPlcInp::SetHgt( 1, rComboAttr6);						// →　高さ2
-		mtTateguInp::SetROH( rComboAttr6);						// →　建具ROH
-
-//		iIdPartsSpec = z_mnIA.GetCurPartsNmId();					// カレントの部品ID
-//		pPartsSpec = BuzaiCode::MhGetpPartsSpec( iIdPartsSpec);	// 部品種類レコード
-//		if ( pPartsSpec->IsTategu()) {							// 建具 (部材コード = 建具)
-//		}
-		break;
-
-	case MP_AT_ADJLNG:											// ***** 部材長さ調整入力 *****
-	case MP_AT_YANE:											// ***** 屋根入力 *****
-
-		ASSERT(false);											// エラー
-		break;
-	}
-
 }
 
 //////////////////////////////////////////////////////////////////////////////

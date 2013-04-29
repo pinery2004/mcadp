@@ -26,7 +26,7 @@ public:
 	void MmDialogKAttr();
 
 	//	部材属性ダイアログ表示
-	void MmDialogKAttrInp(
+	void MmDialogKAttrDisp(
 					CWnd*		i_pWnd				// ウィンドウのインスタンス
 				);
 
