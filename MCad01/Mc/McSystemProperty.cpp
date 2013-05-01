@@ -100,9 +100,8 @@ void	mcs::Init()
 		}
 	}
 //N	m_Path[MM_PATH_ROOT_FLDR]		= s_cRootDir;								// 実行モジュールの(ルート)ディレクトリ
-//N	m_Path[MM_PATH_PARTS_FLDR]		= Mstr( "E:\\MCAD_32\\テーブル\\部材\\");	// 構造部品テーブル
-//E	m_Path[MM_PATH_SYS_ENV_FLDR]	= Mstr( "E:\\MCAD_32\\マスタ");				// システム環境ディレクトリ
-	m_Path[MM_PATH_SYS_ENV_FLDR]	= Mstr( "E:\\MCAD_32\\マスタ_DBG");			// システム環境ディレクトリ
+//N	m_Path[MM_PATH_PARTS_FLDR]		= Mstr( "D:\\MCAD_32\\テーブル\\部材\\");	// 構造部品テーブル
+	m_Path[MM_PATH_SYS_ENV_FLDR]	= Mstr( "D:\\MCAD_32\\マスタ");				// システム環境ディレクトリ
 
 	m_Stnd[0][MM_STNDH_KISO]		= 400.f;			// Kiso
 	m_Stnd[0][MM_STNDH_LOWER]		= 645.f;			// Kiso + 245.f (90 + 140 + 15)

@@ -16,10 +16,6 @@
 #define	DLL_EXPORT_TRACE_DO
 #include "MlLog.h"
 
-//MCHAR	mlLog::m_Str[1000] = { Mstr( "INIT")};
-//FILE*	mlLog::m_File;
-//MINT	mlLog::m_iCtl;
-
 #define	PRINT_CNT_P_L		10					// ÇPçsÇ†ÇΩÇËÇÃàÛç¸êî
 
 namespace MC

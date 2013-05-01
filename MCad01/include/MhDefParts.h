@@ -141,7 +141,7 @@ enum MPBUNRUI {
 	MP_BR_KUKAKU,								// "‹æ‰æ"
 	MP_BR_KAIKO,								// "ŠJŒû"
 	MP_BR_CYUKI,								// "’‹L"
-	MP_BR_OTHER = 10							// "‚»‚Ì‘¼"
+	MP_BR_OTHER									// "‚»‚Ì‘¼"
 };
 
 // ‘I‘ð

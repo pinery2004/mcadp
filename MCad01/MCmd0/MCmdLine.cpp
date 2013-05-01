@@ -343,7 +343,7 @@ void MCmdStructFloor()
 
 //S	z_mnIA.SetKCdGp( MP_GP_YUKA);
 //E	z_mnIA.InitComboParts();
-	z_mnIA.RibbonIO( MSET_COMBO_PARTS);		// 部品選択用のコンボボックスに表示する
+//U	z_mnIA.RibbonIO( MSET_COMBO_PARTS);		// 部品選択用のコンボボックスに表示する
 	ist1 = z_mnIA.SetRibbonBarEnt( MP_GP_YUKA, MP_BR_BUZAI, Mstr( "床根太"), Mstr( "210"));
 	if ( ist1 == 0)
 		MCmdLine( pWnd);

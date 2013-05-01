@@ -120,7 +120,7 @@ void mnIoPartsAttr::SetComboCdBody( void)
 		break;
 	case MGET_PARTS_ATTRA:
 		GetPartsSpec();
-		GetComboAttrA();
+//S		GetComboAttrA();
 		break;
 	}
 }

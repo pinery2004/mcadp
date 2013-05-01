@@ -18,6 +18,7 @@
 #include "MhInpPlcParts.h"
 #include "MhLib.h"
 #include "MmPrompt.h"
+#include "MmWnd.h"
 
 namespace MC
 {
@@ -37,6 +38,9 @@ void mnIoPartsAttr::InitComboParts()
 
 	//	部材属性入力ダイアログ
 	z_mmIA.InitComboParts();
+
+	Window::CurWndFocus();
+	WindowCtrl::MmWndKReDraw();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -55,15 +59,18 @@ void mnIoPartsAttr::GetPartsSpec( void)
 	pPartsSpec = BuzaiCode::MhGetpPartsSpec( iIdPartsSpec);		// 部品仕様
 	mtPlcInp::SetpPartsSpec( pPartsSpec);
 
-	if ( m_iComboKmIdMbr < 0)
-		mlLog::LogOutT( MC_LOG_ERROR, Mstr( "寸法形式モードエラー: %d\n"), m_iComboKmIdMbr);
-
-	// 寸法型式を部品配置入力データへ設定
-	int	 iMbrId;
-	iMbrId = m_iComboPartsMbrId[m_iComboKmIdMbr];				// 寸法形式ID
-	mtPlcInp::SetIdMbr( iMbrId); 
-	MhMbr *pMbr = BuzaiCode::MhGetpMbr( iMbrId);				// 寸法形式仕様
-	mtPlcInp::SetpMbr( pMbr);
+	if ( m_iComboKmIdMbr >= 0) {
+		// 寸法型式を部品配置入力データへ設定
+		int	 iMbrId;
+		iMbrId = m_iComboPartsMbrId[m_iComboKmIdMbr];			// 寸法形式ID
+		mtPlcInp::SetIdMbr( iMbrId); 
+		MhMbr *pMbr = BuzaiCode::MhGetpMbr( iMbrId);			// 寸法形式仕様
+		mtPlcInp::SetpMbr( pMbr);
+	} else {
+		mtPlcInp::SetIdMbr( -1); 
+		MhMbr *pMbr = 0;										// 寸法形式仕様
+		mtPlcInp::SetpMbr( pMbr);
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -88,6 +95,7 @@ void mnIoPartsAttr::InitComboPartsNm()
 
 	CMFCRibbonComboBox* pCmbBox = mmpComboBuzai();
 	pCmbBox->RemoveAllItems();
+	pCmbBox->SetEditText(_T(" "));
 
 	int		nPartsNm;
 	nPartsNm = BuzaiCode::MhGetNoOfPartsSpec();
@@ -139,7 +147,9 @@ void mnIoPartsAttr::SelectComboPartsNmByKmId(
 	pPartsSpec = BuzaiCode::MhGetpPartsSpec( iIdPartsSpec);		// 部品仕様
 	int iCdPlc;
 	iCdPlc = pPartsSpec->GetPTCdPlc();							// 配置コードコンボを選択する
-	z_mnIA.SelectComboPlcCdByPlcCd( iCdPlc);
+//E	z_mnIA.SelectComboPlcCdByPlcCd( iCdPlc);
+	z_mnIA.RibbonIO( MSET_INPUT_PLACE_CD, iCdPlc);
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -256,6 +266,7 @@ void mnIoPartsAttr::InitComboPartsMbr()
 
 	CMFCRibbonComboBox* pCmbBox = mmpComboPartsMbr();
 	pCmbBox->RemoveAllItems();
+	pCmbBox->SetEditText(_T(" "));
 
 	int		iIdPartsSpec;
 	iIdPartsSpec = z_mnIA.GetCurPartsNmId();

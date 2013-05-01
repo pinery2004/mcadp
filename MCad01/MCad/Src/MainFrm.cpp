@@ -25,7 +25,6 @@
 #include "MtMCadApi.h"
 #include "MhGp.h"
 #include "MhPartsSpec.h"
-//#include "MhPlcPartsLib.h"
 #include "MnIoPartsAttr.h"
 #include "MmCmdMsg.h"
 #include "MgLine.h"
@@ -54,12 +53,6 @@ BEGIN_MESSAGE_MAP(CMainFrame, CMDIFrameWndEx)
 	ON_COMMAND(IDC_CMB_Inp2, &CMainFrame::OnCbnSelchangeCombo12)
 	ON_COMMAND(IDC_CMB_Inp3, &CMainFrame::OnCbnSelchangeCombo13)
 	ON_COMMAND(IDC_COMBOPANELNO, &CMainFrame::OnCbnSelchangeComboPanelNo)
-	ON_COMMAND(IDC_CMBK_ATTR1, &CMainFrame::OnCbnSelchangeComboAttr1)
-	ON_COMMAND(IDC_CMBK_ATTR2, &CMainFrame::OnCbnSelchangeComboAttr2)
-	ON_COMMAND(IDC_CMBK_ATTR3, &CMainFrame::OnCbnSelchangeComboAttr3)
-	ON_COMMAND(IDC_CMBK_ATTR4, &CMainFrame::OnCbnSelchangeComboAttr4)
-	ON_COMMAND(IDC_CMBK_ATTR5, &CMainFrame::OnCbnSelchangeComboAttr5)
-	ON_COMMAND(IDC_CMBK_ATTR6, &CMainFrame::OnCbnSelchangeComboAttr6)
 	ON_COMMAND_RANGE(IDC_RIBBON_A, IDC_RIBBON_Z, OnDummy)
 	ON_COMMAND(IDC_VIEW1OPEN, &CMainFrame::OnView1open)
 	ON_COMMAND(IDC_VIEW2OPEN, &CMainFrame::OnView2open)
@@ -90,9 +83,12 @@ LRESULT CMainFrame::OnRibbonIO( UINT wParam, LONG lParam)
 	case MSET_INPUT_MARUME_CD:
 		MC::z_mnIA.SelectComboMarumeByMarumeCd( MC::z_mnIA.m_iCdArg1);
 		break;
-	case MSET_COMBO_ATTRR:
-		MC::z_mnIA.SetComboAttrR( MC_CMB_HAIZ, MC::z_mnIA.m_rCdArg2);
+	case MSET_INPUT_PLACE_CD:
+		MC::z_mnIA.SelectComboPlcCdByPlcCd( MC::z_mnIA.m_iCdArg1);
 		break;
+//	case MSET_COMBO_ATTRR:
+//		MC::z_mnIA.SetComboAttrR( MC_CMB_HAIZ, MC::z_mnIA.m_rCdArg2);
+//		break;
 	case MGET_PARTS_ATTRA:
 		MC::z_mnIA.GetPartsSpec();
 		MC::z_mmIA.GetComboAttrA();
@@ -104,7 +100,6 @@ LRESULT CMainFrame::OnRibbonIO( UINT wParam, LONG lParam)
 		MC::z_mnIA.SetComboPanelNo( MC::z_mnIA.m_iCdArg1);
 		break;
 	case MINIT_COMBO_ATTR:
-//S		MC::z_mnIA.InitComboAttr( MC::z_mnIA.m_iCdArg1);
 		MC::z_mmIA.InitComboAttr( MC::z_mnIA.m_iCdArg1);
 		break;
 	}
@@ -391,14 +386,18 @@ void CMainFrame::SelectComboInp1( MINT i_iCombo11)
 	pComboInpTp->SelectItem( i_iCombo11);
 }
 
-void CMainFrame::SelectComboInp2( MINT iCombo12)
+void CMainFrame::SelectComboInp2( MINT i_iCombo12)
 {
-	m_iComboInp2 = iCombo12;
+	m_iComboInp2 = i_iCombo12;
+	CMFCRibbonComboBox* pComboInpTp = mmpComboMarume();
+	pComboInpTp->SelectItem( i_iCombo12);
 }
 
-void CMainFrame::SelectComboInp3( MINT iCombo13)
+void CMainFrame::SelectComboInp3( MINT i_iCombo13)
 {
-	m_iComboInp3 = iCombo13;
+	m_iComboInp3 = i_iCombo13;
+	CMFCRibbonComboBox* pComboInpTp = mmpComboPlcCd();
+	pComboInpTp->SelectItem( i_iCombo13);
 }
 
 
@@ -411,6 +410,8 @@ void CMainFrame::OnDummy(UINT /*id*/)
 // PARTS リボンバー　部材名
 void CMainFrame::OnCbnSelchangeCombo1()
 {
+	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
+
 	CMFCRibbonComboBox* pCmbBox;
 	pCmbBox = mmpComboBuzai();
 	m_iCombo1 = pCmbBox->GetCurSel();							// 選択された部品ID
@@ -421,10 +422,9 @@ void CMainFrame::OnCbnSelchangeCombo1()
 	MC::z_mmIA.MmDialogKAttrDisp( this);						// 部材属性ダイアログ表示
 	MC::z_mmIA.InitComboParts();								// 全項目設定
 	MC::z_mmIA.SelectComboPartsNmByKmId( m_iCombo1);
-//S	MC::z_mmIA.InitComboPartsMbr();
 
-//S	MC::Window::CurWndFocus();
-	MC::mhPartsSpec* pPartsSpec	= MC::BuzaiCode::MhGetpPartsSpec( MC::z_mnIA.GetCurPartsNmId());
+	MC::mhPartsSpec* pPartsSpec;
+	pPartsSpec = MC::BuzaiCode::MhGetpPartsSpec( MC::z_mnIA.GetCurPartsNmId());
 	if ( pPartsSpec->GetPTCdBr() >= MP_BR_SENBUN || MC::z_mnIA.GetMode() == MP_MD_DELETE)
 		MC::WindowCtrl::MmWndKCmdXqt( IDC_PARTSCREATE);			//	部材入力コマンド
 	else 
@@ -435,6 +435,8 @@ void CMainFrame::OnCbnSelchangeCombo1()
 // PARTS リボンバー　寸法型式
 void CMainFrame::OnCbnSelchangeCombo2()
 {
+	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
+
 	CMFCRibbonComboBox* pCmbBox;
 	pCmbBox = mmpComboPartsMbr();
 	m_iCombo2 = pCmbBox->GetCurSel();							// 選択された寸法型式ID
@@ -482,43 +484,9 @@ void CMainFrame::OnCbnSelchangeCombo13()
 // PANEL リボンバー　パネル番号
 void CMainFrame::OnCbnSelchangeComboPanelNo()
 {
+	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
+
 	int ic1 = 1;
-}
-
-// ATTR リボンバー　長さ補正値1
-void CMainFrame::OnCbnSelchangeComboAttr1()
-{
-	// TODO: ここにコマンド ハンドラー コードを追加します。
-}
-
-// ATTR リボンバー　長さ補正値2
-void CMainFrame::OnCbnSelchangeComboAttr2()
-{
-	// TODO: ここにコマンド ハンドラー コードを追加します。
-}
-
-// ATTR リボンバー　材軸芯ずれ量
-void CMainFrame::OnCbnSelchangeComboAttr3()
-{
-	// TODO: ここにコマンド ハンドラー コードを追加します。
-}
-
-// ATTR リボンバー　配置点ずれ量
-void CMainFrame::OnCbnSelchangeComboAttr4()
-{
-	// TODO: ここにコマンド ハンドラー コードを追加します。
-}
-
-// ATTR リボンバー　取り付け高さ
-void CMainFrame::OnCbnSelchangeComboAttr5()
-{
-	// TODO: ここにコマンド ハンドラー コードを追加します。
-}
-
-// ATTR リボンバー　開口部高さ(ROH)
-void CMainFrame::OnCbnSelchangeComboAttr6()
-{
-	// TODO: ここにコマンド ハンドラー コードを追加します。
 }
 
 void CMainFrame::OnView1open()

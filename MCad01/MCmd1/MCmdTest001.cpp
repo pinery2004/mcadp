@@ -32,7 +32,7 @@ void Test001_SelectFile()
 {
 
 
-	MCHAR FilePathI[] = Mstr( "C:\\temp\\*.txt");
+	MCHAR FilePathI[] = Mstr( "D:\\temp\\*.txt");
 //	MCHAR FilePathO[MAX_PATH];
 
 	MmWndInfo* pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
@@ -57,8 +57,8 @@ void Test001_SelectFile()
 
 	//	フォルダ選択ダイアログを表示する
 	//
-	MCHAR FolderPath[MAX_PATH] = Mstr( "C:\\Temp");
-	MsForFolderDlg( hWnd, Mstr( "テスト用フォルダの選択"), Mstr( "C:\\Temp"), FolderPath, MAX_PATH);
+	MCHAR FolderPath[MAX_PATH] = Mstr( "D:\\Temp");
+	MsForFolderDlg( hWnd, Mstr( "テスト用フォルダの選択"), Mstr( "D:\\Temp"), FolderPath, MAX_PATH);
 	MessageBox( hWnd, FolderPath, Mstr( "Folder Name"), MB_OK | MB_TOPMOST);
 }
 
@@ -441,11 +441,11 @@ void MCmdTest001()
 	//Test001_SelectFile();
 
 	//	ＤＢモジュールテスト
-//	Test001_SelectFile();
-	//Test002_DBModule();
-	//Test003_DBModule();
-	//Test004_DBModule();
-	//Test005_DBModule();
+	Test001_SelectFile();
+	Test002_DBModule();
+	Test003_DBModule();
+	Test004_DBModule();
+	Test005_DBModule();
 	Test006_DBModule();
 }
 

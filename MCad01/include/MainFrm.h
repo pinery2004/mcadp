@@ -76,12 +76,12 @@ public:
 	afx_msg void OnCbnSelchangeCombo12();						// 丸めコード
 	afx_msg void OnCbnSelchangeCombo13();						// 配置コード
 	afx_msg void OnCbnSelchangeComboPanelNo();
-	afx_msg void OnCbnSelchangeComboAttr1();
-	afx_msg void OnCbnSelchangeComboAttr2();
-	afx_msg void OnCbnSelchangeComboAttr3();
-	afx_msg void OnCbnSelchangeComboAttr4();
-	afx_msg void OnCbnSelchangeComboAttr5();
-	afx_msg void OnCbnSelchangeComboAttr6();
+//S	afx_msg void OnCbnSelchangeComboAttr1();
+//	afx_msg void OnCbnSelchangeComboAttr2();
+//	afx_msg void OnCbnSelchangeComboAttr3();
+//	afx_msg void OnCbnSelchangeComboAttr4();
+//	afx_msg void OnCbnSelchangeComboAttr5();
+//	afx_msg void OnCbnSelchangeComboAttr6();
 	afx_msg void OnDummy(UINT id);
 
 	afx_msg LRESULT OnRibbonIO( UINT wParam, LONG lParam);

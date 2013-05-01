@@ -37,22 +37,39 @@ MINT mnIoPartsAttr::SetRibbonBar(					// ステイタス 0:正常 -1:エラー
 
 	z_mnIA.SetKCdGp( i_irbKumi);
 	z_mnIA.SetKCdBr( i_irbBunrui);
+	// ダイアログの項目を設定する
 	z_mnIA.InitComboPartsNm();									// 組、分類に対応する部品を選択可能項目として設定する
 	ist = z_mnIA.SelectComboPartsNmByPartsNm( i_crbPartsSpec);
 	if ( ist < 0)
 		MQUIT;
+	if ( z_mnIA.GetCCategory() == MP_SENTAKU_KOUZOU) {
+		z_mmIA.MmDialogKAttrDisp( z_MCadApp.m_pMainFrame);
+//S		z_mmIA.InitComboParts();
+		z_mmIA.InitComboPartsNm();
+		ist = z_mmIA.SelectComboPartsNmByPartsNm( i_crbPartsSpec);
+		if ( ist < 0)
+			MQUIT;
+	}
 
 	z_mnIA.InitComboPartsMbr();									// 部品に対応する寸法型式を選択可能項目として設定する
-	if ( i_crbMbr) {
+	if ( z_mnIA.GetCCategory() == MP_SENTAKU_KOUZOU) {
+		z_mmIA.InitComboPartsMbr();									// 部品に対応する寸法型式を選択可能項目として設定する
+	}
+	if ( i_crbMbr >= 0) {
         ist = z_mnIA.SelectComboPartsMbrByMbrCd( i_crbMbr);
 		if ( ist < 0)
 			MQUIT;
+		if ( z_mnIA.GetCCategory() == MP_SENTAKU_KOUZOU) {
+			ist = z_mmIA.SelectComboPartsMbrByMbrCd( i_crbMbr);
+			if ( ist < 0)
+				MQUIT;
+		}
+
 		if ( i_irbKumi == MP_GP_YANE) {
 			iAttr = MP_AT_YANE;
 		} else {
 			iAttr = MP_AT_AUTO;
 		}
-//S		z_mnIA.InitComboAttr( iAttr);							// 属性入力用コンボボックスを初期化する
 		z_mmIA.InitComboAttr( iAttr);							// 属性入力用コンボボックスを初期化する
 	}
 	WindowCtrl::MmWndKReDraw();

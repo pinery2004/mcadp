@@ -66,11 +66,13 @@ public:
 	///////////////////////////////////////////////////////////////////////////////
 	//	部品名コンポボックスの項目を設定する
 protected:
+public:
 	void InitComboPartsNm();
 
 	///////////////////////////////////////////////////////////////////////////////
 	//	部品名コンポボックスを部品名項目番号で選択する
 protected:
+public:
 	void SelectComboPartsNmByKmId(
 						int		i_iKmIdPartsNm	// 部品名項目番号
 				);
@@ -80,6 +82,7 @@ protected:
 	//							＝-1: 該当なし
 	//							≧ 0: 部品ID
 protected:
+public:
 	int SelectComboPartsNmByPartsNm(
 						MCHAR* 		i_sNmParts1		// 部品名
 				);
@@ -115,11 +118,13 @@ public:
 	///////////////////////////////////////////////////////////////////////////////
 	//	寸法型式選択用コンポボックスの項目を設定する
 protected:
+public:
 	void InitComboPartsMbr();
 
 	///////////////////////////////////////////////////////////////////////////////
 	//	寸法型式コンボボックスを寸法形式項目番号で選択する
 protected:
+public:
 	void SelectComboPartsMbrByKmId(
 						int			i_iKmIdMbr		// 寸法型式項目番号
 				);
@@ -129,6 +134,7 @@ protected:
 	//							＝-1: 該当なし
 	//							≧ 0: 寸法型式ID
 protected:
+public:
 	int SelectComboPartsMbrByMbrCd(
 						MCHAR* 		i_sCdMbr		// 寸法型式
 				);

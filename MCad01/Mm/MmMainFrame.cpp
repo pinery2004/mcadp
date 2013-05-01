@@ -76,7 +76,7 @@ CMFCRibbonComboBox* mmpComboBuzai()
 {
 	CMFCRibbonBar* pRibbonBar;
 	pRibbonBar = &MC::System::GetpMainFrame()->m_wndRibbonBar;
-
+//---> Debug—p
 	CMFCRibbonCategory* pRibbonCategory;
 	pRibbonCategory = pRibbonBar->GetActiveCategory();
 
@@ -96,8 +96,7 @@ CMFCRibbonComboBox* mmpComboBuzai()
 
 	CArray<CMFCRibbonBaseElement* ,CMFCRibbonBaseElement*> arButtons;
 	MC::System::GetpMainFrame()->m_wndRibbonBar.GetElementsByID( IDC_CMBK_BZI1, arButtons);
-
-	CMFCRibbonComboBox* pComboBuzai;
+//<----
 	int iIdcCmb;
 	int iCCategory;
 	iCCategory = MC::z_mnIA.GetCCategory();
@@ -106,13 +105,27 @@ CMFCRibbonComboBox* mmpComboBuzai()
 	} else {
 		iIdcCmb = IDC_CMBK_BZI1;
 	}
-	pComboBuzai = DYNAMIC_DOWNCAST(CMFCRibbonComboBox, MC::System::GetpMainFrame()->m_wndRibbonBar.FindByID(iIdcCmb));
+	CMFCRibbonComboBox* pComboBuzai;
+	pComboBuzai = DYNAMIC_DOWNCAST(CMFCRibbonComboBox, pRibbonBar->FindByID(iIdcCmb));
 	return pComboBuzai;
 }
 
 CMFCRibbonComboBox* mmpComboPartsMbr()
 {
-	return DYNAMIC_DOWNCAST(CMFCRibbonComboBox, MC::System::GetpMainFrame()->m_wndRibbonBar.FindByID(IDC_CMBK_BZI2));
+	CMFCRibbonBar* pRibbonBar;
+	pRibbonBar = &MC::System::GetpMainFrame()->m_wndRibbonBar;
+	int iIdcCmb;
+	int iCCategory;
+	iCCategory = MC::z_mnIA.GetCCategory();
+	if ( iCCategory == MP_SENTAKU_ISYOU) {
+		iIdcCmb = IDC_CMBS_BZI2;
+	} else {
+		iIdcCmb = IDC_CMBK_BZI2;
+	}
+	CMFCRibbonComboBox* pComboPartsMbr;
+	pComboPartsMbr = DYNAMIC_DOWNCAST(CMFCRibbonComboBox, pRibbonBar->FindByID(iIdcCmb));
+	return pComboPartsMbr;
+	//	DYNAMIC_DOWNCAST(CMFCRibbonComboBox, MC::System::GetpMainFrame()->m_wndRibbonBar.FindByID(IDC_CMBK_BZI2));
 }
 
 CMFCRibbonComboBox* mmpComboInpTp()

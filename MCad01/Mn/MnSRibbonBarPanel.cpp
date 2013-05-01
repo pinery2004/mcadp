@@ -40,6 +40,7 @@ void mnIoPartsAttr::InitComboPanelNo()
 
 	CMFCRibbonComboBox* pCmbBox = mmpComboPanelNo();
 	pCmbBox->RemoveAllItems();
+	pCmbBox->SetEditText(_T(" "));
 
 //	‘Sƒpƒlƒ‹”Ô†İ’è
 	for ( ic=0; ic<10; ic++) {

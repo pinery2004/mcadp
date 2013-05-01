@@ -101,8 +101,6 @@ void mnIoPartsAttr::SelectComboPlcCdByPlcCd(
 					)
 {
 	System::GetpMainFrame()->SelectComboInp3( iCdPlc);
-//	((CComboBox*)(m_wndDlgBar1.GetDlgItem(IDC_CMB_Inp3)))->SetCurSel( m_iComboInp3);
-// 	System::GetpMainFrame()->((CComboBox*)(m_wndDlgBar1.GetDlgItem(IDC_CMB_Inp3)))->SetCurSel( iCdPlc);
 	z_iComboPlcCd = iCdPlc;
 }
 

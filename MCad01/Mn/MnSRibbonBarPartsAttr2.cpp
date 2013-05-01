@@ -139,349 +139,349 @@ static MREAL z_rKerabanoDe[] = { 650.0, 455.0, 330.0, 44.5, 0.};
 #define	ISZKERABANODE	sizeof(z_rKerabanoDe)/sizeof(MREAL)
 #define	INITKERABANODE	650.0f
 
-///////////////////////////////////////////////////////////////////////////////
-//	属性値入力用コンボボックスの値を部品配置入力データに取り込む
-
-void mnIoPartsAttr::GetComboAttrA( void)
-{
-	int		ist;
-
-	MREAL	rComboAttr1;
-	MREAL	rComboAttr2;
-	MREAL	rComboAttr3;
-	MREAL	rComboAttr4;
-	MREAL	rComboAttr5;
-	MREAL	rComboAttr6;
-	int		iMode;
-
-	iMode = z_mmIA.GetAtMd();						// 属性値入力モード
-
-	switch ( iMode)
-	{
-	case MP_AT_YTPANEL:
-	case MP_AT_YANEPANEL:
-
-		if ( iMode == MP_AT_YTPANEL) {							// ***** 床・天井パネル *****
-			z_mnIA.GetComboAttrR( MC_CMB_LFH1, &rComboAttr1);		// 　左巾補正値　→　長さ補正値1
-			z_mnIA.GetComboAttrR( MC_CMB_RTH1, &rComboAttr2);		// 　右巾補正値　→　長さ補正値2
-			z_mnIA.GetComboAttrR( MC_CMB_FHS1, &rComboAttr3);		// 　手前側補正値　→　手前側補正値
-
-		} else if ( iMode == MP_AT_YANEPANEL) {					// ***** 屋根パネル *****
-			z_mnIA.GetComboAttrR( MC_CMB_LFH2, &rComboAttr1);		// 　左巾補正値　→　長さ補正値1
-			z_mnIA.GetComboAttrR( MC_CMB_RTH2, &rComboAttr2);		// 　右巾補正値　→　長さ補正値2
-			z_mnIA.GetComboAttrR( MC_CMB_FHS2, &rComboAttr3);		// 　軒の出　→　手前側補正値
-		}
-
-		mtPlcInp::SetLenHosei( 0, rComboAttr1);					// →　長さ補正値1
-		mtPlcInp::SetLenHosei( 1, rComboAttr2);					// →　長さ補正値2
-		mtPlcInp::SetMaeHosei( rComboAttr3);					// →　手前側補正値
-
-		z_mnIA.GetComboAttrR( MC_CMB_OKYK, &rComboAttr4);
-		mtPlcInp::SetOku( rComboAttr4);							// 奥行き　→　奥行き
-
-		z_mnIA.GetComboAttrR( MC_CMB_OHS2, &rComboAttr5);
-		mtPlcInp::SetOkuHosei( rComboAttr5);					// 奥行き補正値　→　奥行き補正値　
-
-		z_mnIA.GetComboAttrR( MC_CMB_TRTH, &rComboAttr5);
-		mtPlcInp::SetHgt( 0, rComboAttr5);						// 取り付け高さ　→　取り付け高さ 
-		break;
-
-	case MP_AT_HRZ_PARTS:
-	case MP_AT_VRT_PARTS:
-	case MP_AT_TATEGU:
-																// ***** 横置き部材・縦置き部材・建具 *****
-		z_mnIA.GetComboAttrR( MC_CMB_LHS1, &rComboAttr1);
-		mtPlcInp::SetLenHosei( 0, rComboAttr1);					// 長さ補正値1 　→　長さ補正値1
-
-		z_mnIA.GetComboAttrR( MC_CMB_LHS2, &rComboAttr2);
-		mtPlcInp::SetLenHosei( 1, rComboAttr2);					// 長さ補正値2 　→　長さ補正値2
-
-		z_mnIA.GetComboAttrR( MC_CMB_ZJSZ, &rComboAttr3);
-		mtPlcInp::SetSinZure( rComboAttr3);						// 材軸芯ずれ量　→　材軸芯ずれ量
-
-		z_mnIA.GetComboAttrR( MC_CMB_HAIZ, &rComboAttr4);
-		mtPlcInp::SetPlcZure( rComboAttr4);						// 配置点ずれ量　→　配置点ずれ量
-
-		ist = z_mnIA.GetComboAttrR( MC_CMB_TRTH, &rComboAttr5);	// 取り付け高さ　→　高さ1
-		if ( ist == 0)
-			ist = z_mnIA.GetComboAttrR( MC_CMB_LWRH, &rComboAttr5);	// 下端高さ　→　高さ1
-
-		mtPlcInp::SetHgt( 0, rComboAttr5);						// →　高さ1
-		mtTateguInp::SetHeight( rComboAttr5);					// →　建具高さ
-
-		ist = z_mnIA.GetComboAttrR( MC_CMB_KROH, &rComboAttr6);	// 建具ROH　→　高さ2
-		if ( ist ==0)
-			ist = z_mnIA.GetComboAttrR( MC_CMB_UPRH, &rComboAttr6);	// 上端高さ　→　高さ2
-
-		mtPlcInp::SetHgt( 1, rComboAttr6);						// →　高さ2
-		mtTateguInp::SetROH( rComboAttr6);						// →　建具ROH
-
-//		iIdPartsSpec = z_mnIA.GetCurPartsNmId();					// カレントの部品ID
-//		pPartsSpec = BuzaiCode::MhGetpPartsSpec( iIdPartsSpec);	// 部品種類レコード
-//		if ( pPartsSpec->IsTategu()) {							// 建具 (部材コード = 建具)
+//S	///////////////////////////////////////////////////////////////////////////////
+////	属性値入力用コンボボックスの値を部品配置入力データに取り込む
+//
+//void mnIoPartsAttr::GetComboAttrA( void)
+//{
+//	int		ist;
+//
+//	MREAL	rComboAttr1;
+//	MREAL	rComboAttr2;
+//	MREAL	rComboAttr3;
+//	MREAL	rComboAttr4;
+//	MREAL	rComboAttr5;
+//	MREAL	rComboAttr6;
+//	int		iMode;
+//
+//	iMode = z_mmIA.GetAtMd();						// 属性値入力モード
+//
+//	switch ( iMode)
+//	{
+//	case MP_AT_YTPANEL:
+//	case MP_AT_YANEPANEL:
+//
+//S		if ( iMode == MP_AT_YTPANEL) {							// ***** 床・天井パネル *****
+//			z_mnIA.GetComboAttrR( MC_CMB_LFH1, &rComboAttr1);		// 　左巾補正値　→　長さ補正値1
+//			z_mnIA.GetComboAttrR( MC_CMB_RTH1, &rComboAttr2);		// 　右巾補正値　→　長さ補正値2
+//			z_mnIA.GetComboAttrR( MC_CMB_FHS1, &rComboAttr3);		// 　手前側補正値　→　手前側補正値
+//
+//		} else if ( iMode == MP_AT_YANEPANEL) {					// ***** 屋根パネル *****
+//			z_mnIA.GetComboAttrR( MC_CMB_LFH2, &rComboAttr1);		// 　左巾補正値　→　長さ補正値1
+//			z_mnIA.GetComboAttrR( MC_CMB_RTH2, &rComboAttr2);		// 　右巾補正値　→　長さ補正値2
+//			z_mnIA.GetComboAttrR( MC_CMB_FHS2, &rComboAttr3);		// 　軒の出　→　手前側補正値
 //		}
-		break;
-
-	case MP_AT_ADJLNG:											// ***** 部材長さ調整入力 *****
-	case MP_AT_YANE:											// ***** 屋根入力 *****
-
-		ASSERT(false);											// エラー
-		break;
-	}
-
-}
-
-//////////////////////////////////////////////////////////////////////////////
-// 属性入力用コンボボックスを取得する
-CMFCRibbonComboBox* mnIoPartsAttr::MnpComboAttr(
-						int		i_iAttr			// コンボボックス番号
-				)
-{
-	return DYNAMIC_DOWNCAST( CMFCRibbonComboBox, System::GetpMainFrame()->m_wndRibbonBar.FindByID(z_IdcStaticAttr[i_iAttr - 1]));
-}
-
-//////////////////////////////////////////////////////////////////////////////
-//	属性値入力用コンボボックス番号を取得する
-
-int mnIoPartsAttr::GetComboAttrNo(
-						MCCMBATTR	i_iAttr		// 属性ID
-				)
-{
-	int		ic;
-	int		iCmbNo = 0;
-
-	for ( ic=0; ic<MC_SZ_CMBATTR; ic++)
-		if ( i_iAttr == z_Combo_Attr[ic])
-			break;
-	if ( ic < MC_SZ_CMBATTR)
-		iCmbNo = ic + 1;
-	return iCmbNo;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-//	属性値入力用コンボボックスのタイトルを設定する
-void mnIoPartsAttr::SetComboAttrText(
-						int		i_iAttr,		// コンボボックス番号
-						MCHAR*	i_sTitle		// タイトル
-				)
-{
-	CMFCRibbonComboBox *pCmbBox = MnpComboAttr( i_iAttr);
-	pCmbBox->SetText( i_sTitle);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-//	属性値入力用コンボボックスに実数値を表示する
-
-void mnIoPartsAttr::SetComboAttrRCbn(
-						int		i_iAttr,		// コンボボックス番号
-						MREAL	i_rValue		// 表示する実数値
-				)
-{
-	CString	strValue;
-	strValue.Format( Mstr( "%7.1f"), i_rValue);
-
-	CMFCRibbonComboBox *pCmbBox = MnpComboAttr( i_iAttr);
-	pCmbBox->SetToolTipText( strValue);
-}
-
-//////////////////////////////////////////////////////////////////////////////
-//	属性値入力用コンボボックスに実数値を表示する
-
-void mnIoPartsAttr::SetComboAttrR(
-						MCCMBATTR	i_iAttr,	// 属性ID
-						MREAL		i_rValue	// 表示する実数値
-				)
-{
-	int	 iCmbNo;
-	iCmbNo = GetComboAttrNo( i_iAttr);
-	if ( iCmbNo != 0)
-		SetComboAttrRCbn( iCmbNo, i_rValue);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-//	属性値入力用コンポボックスに実数値の項目(一覧)を設定する
-
-void mnIoPartsAttr::InitComboAttrR(
-						int		i_iAttr,		// コンボボックス番号
-						int		nComboAttr,		// 選択属性値の数
-						MREAL	*rComboAttr,	// 選択属性値
-						MREAL	rInitValue		// 初期表示する属性値
-				)
-{
-	int		ist;
-	int		ic1;
-	CString	sKomoku;
-
-	CMFCRibbonComboBox *pCmbBox = MnpComboAttr( i_iAttr);
-
-	pCmbBox->RemoveAllItems();
-
-	// 選択属性値設定
-	for ( ic1=0; ic1<nComboAttr; ic1++) {
-//		if ( MgEqual( rComboAttr[ic1], 9999.0))
-//			sKomoku = "自動";
-		if ( MGeo::Equal( rComboAttr[ic1], MREAL( MC_INT_JIDO)))
-			sKomoku = MC_STR_JIDO;
-		else
-			sKomoku.Format(Mstr( "  %6.1f"), rComboAttr[ic1]);
-		ist = pCmbBox->AddItem( sKomoku);
-	}
-
-	if ( nComboAttr == 0) {
-		pCmbBox->AddItem( Mstr( "none"));
-	} else {
-		SetComboAttrRCbn( i_iAttr, rInitValue);
-	}
-}
-
-///////////////////////////////////////////////////////////////////////////////
-//	属性値入力用コンボボックスの実数値を取得する
 //
-MREAL mnIoPartsAttr::GetComboAttrRCbn(				// 実数値　または　0(未設定)
-						int		i_iAttr			// コンボボックス番号
-				)
-{
-	CString strValue;
-
-	CMFCRibbonComboBox *pCmbBox = MnpComboAttr( i_iAttr);
-	strValue = pCmbBox->GetText();
-
-	return MsGetMREAL( strValue);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-//	属性値入力用コンボボックスの実数値を取得する
-
-int mnIoPartsAttr::GetComboAttrR(					// ステイタス0(未設定) 1(設定)
-						MCCMBATTR	i_iAttr,	// 属性ID
-						MREAL*		o_rValue	// 実数値
-				)
-{
-	int		ist;
-	int		iCmbNo;
-
-	iCmbNo = GetComboAttrNo( i_iAttr);
-
-	if ( iCmbNo != 0) {
-		*o_rValue = GetComboAttrRCbn( iCmbNo);
-		ist = 1;
-	} else {
-		*o_rValue = 0.;
-		ist = 0;
-	}
-	return ist;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-//	属性値入力用コンボボックスに整数値を表示する
-
-void mnIoPartsAttr::SetComboAttrICbn(
-						int		i_iAttr,		// コンボボックス番号
-						int		iValue 			// 表示する整数値
-				)
-{
-	CString	strValue;
-	strValue.Format( Mstr( "%7d"), iValue);
-
-	CMFCRibbonComboBox *pCmbBox = MnpComboAttr( i_iAttr);
-	pCmbBox->SetToolTipText( strValue);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-//	属性値入力用コンボボックスに整数値を表示する
-
-void mnIoPartsAttr::SetComboAttrI(
-						MCCMBATTR	i_iAttr,	// 属性ID
-						int			iValue 		// 表示する整数値
-				)
-{
-	int	 iCmbNo;
-	iCmbNo = GetComboAttrNo( i_iAttr);
-	if ( iCmbNo != 0)
-		SetComboAttrICbn( iCmbNo, iValue);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-//	属性値入力用指定コンポボックスに整数値の項目(一覧)を設定する
-
-void mnIoPartsAttr::InitComboAttrI(
-						int		i_iAttr,		// コンボボックス番号
-						int		nComboAttr,		// 選択属性値の数
-						int		*iCmbAttr,		// 選択属性値
-						int		iInitValue		// 初期表示する属性値
-				)
-{
-	int		ist;
-	int		ic1;
-	CString	sKomoku;
-
-	CMFCRibbonComboBox *pCmbBox = MnpComboAttr( i_iAttr);
-
-	pCmbBox->RemoveAllItems();
-
-	for ( ic1=0; ic1<nComboAttr; ic1++) {
-		if ( iCmbAttr[ic1] == MC_INT_JIDO)
-			sKomoku = MC_STR_JIDO;								// 自動
-		if ( iCmbAttr[ic1] == MC_INT_AREA)
-			sKomoku = MC_STR_AREA;								// 領域
-		else
-			sKomoku.Format(Mstr( "  %6d"), iCmbAttr[ic1]);
-		ist = pCmbBox->AddItem( sKomoku);
-	}
-
-	if ( nComboAttr == 0) {
-		pCmbBox->AddItem( Mstr( "none"));
-	} else {
-		SetComboAttrICbn( i_iAttr, iInitValue);
-	}
-}
-
-///////////////////////////////////////////////////////////////////////////////
-//	属性値入力用コンボボックスの整数値を取得する
+//		mtPlcInp::SetLenHosei( 0, rComboAttr1);					// →　長さ補正値1
+//		mtPlcInp::SetLenHosei( 1, rComboAttr2);					// →　長さ補正値2
+//		mtPlcInp::SetMaeHosei( rComboAttr3);					// →　手前側補正値
 //
-int mnIoPartsAttr::GetComboAttrICbn(			// 整数値　または　0(未設定)
-						int		i_iAttr			// コンボボックス番号
-					)
-{
-	CString strValue;
-	int		iNum;
-
-	CMFCRibbonComboBox *pCmbBox = MnpComboAttr( i_iAttr);
-	strValue = pCmbBox->GetText();
-
-	if ( Mstrcmp( strValue, MC_STR_JIDO) == 0)					// 自動
-		iNum = MC_INT_JIDO;										// 9999
-	else if ( Mstrcmp( strValue, MC_STR_AREA) == 0)				// 領域
-		iNum = MC_INT_AREA;										// 9998
-	else
-		iNum =  MsGetMINT( strValue);
-		
-	return iNum;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-//	属性値入力用コンボボックスの整数値を取得する
-
-int mnIoPartsAttr::GetComboAttrI(					// ステイタス0(未設定) 1(設定)
-						MCCMBATTR	i_iAttr,	// 属性ID
-						int*		o_iValue 	// 表示する整数値
-					)
-{
-	int		ist;
-	int		iCmbNo;
-
-	ist = 0;
-	iCmbNo = GetComboAttrNo( i_iAttr);
-
-	if ( iCmbNo != 0) {
-		*o_iValue = GetComboAttrICbn( iCmbNo);
-		ist = 1;
-	} else {
-		*o_iValue = 0;
-		ist = 0;
-	}
-	return ist;
-}
+//		z_mnIA.GetComboAttrR( MC_CMB_OKYK, &rComboAttr4);
+//		mtPlcInp::SetOku( rComboAttr4);							// 奥行き　→　奥行き
+//
+//		z_mnIA.GetComboAttrR( MC_CMB_OHS2, &rComboAttr5);
+//		mtPlcInp::SetOkuHosei( rComboAttr5);					// 奥行き補正値　→　奥行き補正値　
+//
+//		z_mnIA.GetComboAttrR( MC_CMB_TRTH, &rComboAttr5);
+//		mtPlcInp::SetHgt( 0, rComboAttr5);						// 取り付け高さ　→　取り付け高さ 
+//		break;
+//
+//	case MP_AT_HRZ_PARTS:
+//	case MP_AT_VRT_PARTS:
+//	case MP_AT_TATEGU:
+//																// ***** 横置き部材・縦置き部材・建具 *****
+//		z_mnIA.GetComboAttrR( MC_CMB_LHS1, &rComboAttr1);
+//		mtPlcInp::SetLenHosei( 0, rComboAttr1);					// 長さ補正値1 　→　長さ補正値1
+//
+//		z_mnIA.GetComboAttrR( MC_CMB_LHS2, &rComboAttr2);
+//		mtPlcInp::SetLenHosei( 1, rComboAttr2);					// 長さ補正値2 　→　長さ補正値2
+//
+//		z_mnIA.GetComboAttrR( MC_CMB_ZJSZ, &rComboAttr3);
+//		mtPlcInp::SetSinZure( rComboAttr3);						// 材軸芯ずれ量　→　材軸芯ずれ量
+//
+//		z_mnIA.GetComboAttrR( MC_CMB_HAIZ, &rComboAttr4);
+//		mtPlcInp::SetPlcZure( rComboAttr4);						// 配置点ずれ量　→　配置点ずれ量
+//
+//		ist = z_mnIA.GetComboAttrR( MC_CMB_TRTH, &rComboAttr5);	// 取り付け高さ　→　高さ1
+//		if ( ist == 0)
+//			ist = z_mnIA.GetComboAttrR( MC_CMB_LWRH, &rComboAttr5);	// 下端高さ　→　高さ1
+//
+//		mtPlcInp::SetHgt( 0, rComboAttr5);						// →　高さ1
+//		mtTateguInp::SetHeight( rComboAttr5);					// →　建具高さ
+//
+//		ist = z_mnIA.GetComboAttrR( MC_CMB_KROH, &rComboAttr6);	// 建具ROH　→　高さ2
+//		if ( ist ==0)
+//			ist = z_mnIA.GetComboAttrR( MC_CMB_UPRH, &rComboAttr6);	// 上端高さ　→　高さ2
+//
+//		mtPlcInp::SetHgt( 1, rComboAttr6);						// →　高さ2
+//		mtTateguInp::SetROH( rComboAttr6);						// →　建具ROH
+//
+////		iIdPartsSpec = z_mnIA.GetCurPartsNmId();					// カレントの部品ID
+////		pPartsSpec = BuzaiCode::MhGetpPartsSpec( iIdPartsSpec);	// 部品種類レコード
+////		if ( pPartsSpec->IsTategu()) {							// 建具 (部材コード = 建具)
+////		}
+//		break;
+//
+//	case MP_AT_ADJLNG:											// ***** 部材長さ調整入力 *****
+//	case MP_AT_YANE:											// ***** 屋根入力 *****
+//
+//		ASSERT(false);											// エラー
+//		break;
+//	}
+//
+//}
+//
+////////////////////////////////////////////////////////////////////////////////
+//// 属性入力用コンボボックスを取得する
+//CMFCRibbonComboBox* mnIoPartsAttr::MnpComboAttr(
+//						int		i_iAttr			// コンボボックス番号
+//				)
+//{
+//	return DYNAMIC_DOWNCAST( CMFCRibbonComboBox, System::GetpMainFrame()->m_wndRibbonBar.FindByID(z_IdcStaticAttr[i_iAttr - 1]));
+//}
+//
+////////////////////////////////////////////////////////////////////////////////
+////	属性値入力用コンボボックス番号を取得する
+//
+//int mnIoPartsAttr::GetComboAttrNo(
+//						MCCMBATTR	i_iAttr		// 属性ID
+//				)
+//{
+//	int		ic;
+//	int		iCmbNo = 0;
+//
+//	for ( ic=0; ic<MC_SZ_CMBATTR; ic++)
+//		if ( i_iAttr == z_Combo_Attr[ic])
+//			break;
+//	if ( ic < MC_SZ_CMBATTR)
+//		iCmbNo = ic + 1;
+//	return iCmbNo;
+//}
+//
+/////////////////////////////////////////////////////////////////////////////////
+////	属性値入力用コンボボックスのタイトルを設定する
+//void mnIoPartsAttr::SetComboAttrText(
+//						int		i_iAttr,		// コンボボックス番号
+//						MCHAR*	i_sTitle		// タイトル
+//				)
+//{
+//	CMFCRibbonComboBox *pCmbBox = MnpComboAttr( i_iAttr);
+//	pCmbBox->SetText( i_sTitle);
+//}
+//
+/////////////////////////////////////////////////////////////////////////////////
+////	属性値入力用コンボボックスに実数値を表示する
+//
+//void mnIoPartsAttr::SetComboAttrRCbn(
+//						int		i_iAttr,		// コンボボックス番号
+//						MREAL	i_rValue		// 表示する実数値
+//				)
+//{
+//	CString	strValue;
+//	strValue.Format( Mstr( "%7.1f"), i_rValue);
+//
+//	CMFCRibbonComboBox *pCmbBox = MnpComboAttr( i_iAttr);
+//	pCmbBox->SetToolTipText( strValue);
+//}
+//
+////////////////////////////////////////////////////////////////////////////////
+////	属性値入力用コンボボックスに実数値を表示する
+//
+//void mnIoPartsAttr::SetComboAttrR(
+//						MCCMBATTR	i_iAttr,	// 属性ID
+//						MREAL		i_rValue	// 表示する実数値
+//				)
+//{
+//	int	 iCmbNo;
+//	iCmbNo = GetComboAttrNo( i_iAttr);
+//	if ( iCmbNo != 0)
+//		SetComboAttrRCbn( iCmbNo, i_rValue);
+//}
+//
+/////////////////////////////////////////////////////////////////////////////////
+////	属性値入力用コンポボックスに実数値の項目(一覧)を設定する
+//
+//void mnIoPartsAttr::InitComboAttrR(
+//						int		i_iAttr,		// コンボボックス番号
+//						int		nComboAttr,		// 選択属性値の数
+//						MREAL	*rComboAttr,	// 選択属性値
+//						MREAL	rInitValue		// 初期表示する属性値
+//				)
+//{
+//	int		ist;
+//	int		ic1;
+//	CString	sKomoku;
+//
+//	CMFCRibbonComboBox *pCmbBox = MnpComboAttr( i_iAttr);
+//
+//	pCmbBox->RemoveAllItems();
+//
+//	// 選択属性値設定
+//	for ( ic1=0; ic1<nComboAttr; ic1++) {
+////		if ( MgEqual( rComboAttr[ic1], 9999.0))
+////			sKomoku = "自動";
+//		if ( MGeo::Equal( rComboAttr[ic1], MREAL( MC_INT_JIDO)))
+//			sKomoku = MC_STR_JIDO;
+//		else
+//			sKomoku.Format(Mstr( "  %6.1f"), rComboAttr[ic1]);
+//		ist = pCmbBox->AddItem( sKomoku);
+//	}
+//
+//	if ( nComboAttr == 0) {
+//		pCmbBox->AddItem( Mstr( "none"));
+//	} else {
+//		SetComboAttrRCbn( i_iAttr, rInitValue);
+//	}
+//}
+//
+/////////////////////////////////////////////////////////////////////////////////
+////	属性値入力用コンボボックスの実数値を取得する
+////
+//MREAL mnIoPartsAttr::GetComboAttrRCbn(				// 実数値　または　0(未設定)
+//						int		i_iAttr			// コンボボックス番号
+//				)
+//{
+//	CString strValue;
+//
+//	CMFCRibbonComboBox *pCmbBox = MnpComboAttr( i_iAttr);
+//	strValue = pCmbBox->GetText();
+//
+//	return MsGetMREAL( strValue);
+//}
+//
+/////////////////////////////////////////////////////////////////////////////////
+////	属性値入力用コンボボックスの実数値を取得する
+//
+//int mnIoPartsAttr::GetComboAttrR(					// ステイタス0(未設定) 1(設定)
+//						MCCMBATTR	i_iAttr,	// 属性ID
+//						MREAL*		o_rValue	// 実数値
+//				)
+//{
+//	int		ist;
+//	int		iCmbNo;
+//
+//	iCmbNo = GetComboAttrNo( i_iAttr);
+//
+//	if ( iCmbNo != 0) {
+//		*o_rValue = GetComboAttrRCbn( iCmbNo);
+//		ist = 1;
+//	} else {
+//		*o_rValue = 0.;
+//		ist = 0;
+//	}
+//	return ist;
+//}
+//
+/////////////////////////////////////////////////////////////////////////////////
+////	属性値入力用コンボボックスに整数値を表示する
+//
+//void mnIoPartsAttr::SetComboAttrICbn(
+//						int		i_iAttr,		// コンボボックス番号
+//						int		iValue 			// 表示する整数値
+//				)
+//{
+//	CString	strValue;
+//	strValue.Format( Mstr( "%7d"), iValue);
+//
+//	CMFCRibbonComboBox *pCmbBox = MnpComboAttr( i_iAttr);
+//	pCmbBox->SetToolTipText( strValue);
+//}
+//
+/////////////////////////////////////////////////////////////////////////////////
+////	属性値入力用コンボボックスに整数値を表示する
+//
+//void mnIoPartsAttr::SetComboAttrI(
+//						MCCMBATTR	i_iAttr,	// 属性ID
+//						int			iValue 		// 表示する整数値
+//				)
+//{
+//	int	 iCmbNo;
+//	iCmbNo = GetComboAttrNo( i_iAttr);
+//	if ( iCmbNo != 0)
+//		SetComboAttrICbn( iCmbNo, iValue);
+//}
+//
+/////////////////////////////////////////////////////////////////////////////////
+////	属性値入力用指定コンポボックスに整数値の項目(一覧)を設定する
+//
+//void mnIoPartsAttr::InitComboAttrI(
+//						int		i_iAttr,		// コンボボックス番号
+//						int		nComboAttr,		// 選択属性値の数
+//						int		*iCmbAttr,		// 選択属性値
+//						int		iInitValue		// 初期表示する属性値
+//				)
+//{
+//	int		ist;
+//	int		ic1;
+//	CString	sKomoku;
+//
+//	CMFCRibbonComboBox *pCmbBox = MnpComboAttr( i_iAttr);
+//
+//	pCmbBox->RemoveAllItems();
+//
+//	for ( ic1=0; ic1<nComboAttr; ic1++) {
+//		if ( iCmbAttr[ic1] == MC_INT_JIDO)
+//			sKomoku = MC_STR_JIDO;								// 自動
+//		if ( iCmbAttr[ic1] == MC_INT_AREA)
+//			sKomoku = MC_STR_AREA;								// 領域
+//		else
+//			sKomoku.Format(Mstr( "  %6d"), iCmbAttr[ic1]);
+//		ist = pCmbBox->AddItem( sKomoku);
+//	}
+//
+//	if ( nComboAttr == 0) {
+//		pCmbBox->AddItem( Mstr( "none"));
+//	} else {
+//		SetComboAttrICbn( i_iAttr, iInitValue);
+//	}
+//}
+//
+/////////////////////////////////////////////////////////////////////////////////
+////	属性値入力用コンボボックスの整数値を取得する
+////
+//int mnIoPartsAttr::GetComboAttrICbn(			// 整数値　または　0(未設定)
+//						int		i_iAttr			// コンボボックス番号
+//					)
+//{
+//	CString strValue;
+//	int		iNum;
+//
+//	CMFCRibbonComboBox *pCmbBox = MnpComboAttr( i_iAttr);
+//	strValue = pCmbBox->GetText();
+//
+//	if ( Mstrcmp( strValue, MC_STR_JIDO) == 0)					// 自動
+//		iNum = MC_INT_JIDO;										// 9999
+//	else if ( Mstrcmp( strValue, MC_STR_AREA) == 0)				// 領域
+//		iNum = MC_INT_AREA;										// 9998
+//	else
+//		iNum =  MsGetMINT( strValue);
+//		
+//	return iNum;
+//}
+//
+/////////////////////////////////////////////////////////////////////////////////
+////	属性値入力用コンボボックスの整数値を取得する
+//
+//int mnIoPartsAttr::GetComboAttrI(					// ステイタス0(未設定) 1(設定)
+//						MCCMBATTR	i_iAttr,	// 属性ID
+//						int*		o_iValue 	// 表示する整数値
+//					)
+//{
+//	int		ist;
+//	int		iCmbNo;
+//
+//	ist = 0;
+//	iCmbNo = GetComboAttrNo( i_iAttr);
+//
+//	if ( iCmbNo != 0) {
+//		*o_iValue = GetComboAttrICbn( iCmbNo);
+//		ist = 1;
+//	} else {
+//		*o_iValue = 0;
+//		ist = 0;
+//	}
+//	return ist;
+//}
 
 //////////////////////////////////////////////////////////////////////////////
 //	属性値入力用チェックボックス番号を取得する
@@ -506,14 +506,15 @@ int mnIoPartsAttr::GetCheckAttrNo(
 ///////////////////////////////////////////////////////////////////////////////
 //	属性値入力用チェックボックスのタイトルを設定する
 void mnIoPartsAttr::SetCheckAttrText(
-						int		i_iAttr,		// チェックボックス番号
+						int		i_iChkNo,		// チェックボックス番号
 						MCHAR*	i_sTitle		// タイトル　または　NULL:チェックボックスを表示しない
 				)
 {
-	CMFCRibbonComboBox *pCmbBox = MnpComboAttr( i_iAttr);
+	CMFCRibbonCheckBox* pCheckBox;
+	pCheckBox = DYNAMIC_DOWNCAST( CMFCRibbonCheckBox, System::GetpMainFrame()->m_wndRibbonBar.FindByID(z_IdcCheckAttr[i_iChkNo - 1]));
 
 	if ( i_sTitle) {
-		pCmbBox->SetToolTipText( i_sTitle);
+		pCheckBox->SetToolTipText( i_sTitle);
 	}
 }
 
@@ -530,7 +531,7 @@ void mnIoPartsAttr::SetCheckAttrCkb(
 //U	pCheckAttr->SetCheck( i_iCheckAttr);
 	CMFCRibbonCheckBox* pCheckBox;
 	pCheckBox = DYNAMIC_DOWNCAST( CMFCRibbonCheckBox, System::GetpMainFrame()->m_wndRibbonBar.FindByID(z_IdcCheckAttr[i_iChkNo - 1]));
-//	pCheckBox->set
+	pCheckBox->SetData( i_iCheckAttr);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
