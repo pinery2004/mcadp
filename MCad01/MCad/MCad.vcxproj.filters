@@ -746,6 +746,9 @@
     <ClInclude Include="..\include\MhInpPlcParts.h">
       <Filter>Mh\hdr</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\MoGlLib.h">
+      <Filter>Mo\hdr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1278,6 +1281,9 @@
     </ClCompile>
     <ClCompile Include="..\Mn\MnSRibbonBarPartsAttr2.cpp">
       <Filter>Mn\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Mo\MoGlLib.cpp">
+      <Filter>Mo\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

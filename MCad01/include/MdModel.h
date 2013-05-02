@@ -86,24 +86,24 @@ public:
 class DLL_EXPORT MdModel
 {
 public:
-	MCHAR		m_cMdlNm[MDMSZ_NMMODEL];	// モデル名
-	MDGRPSET	m_GrpBf;					// グループセット
-	MDSCMSET	m_ScmBf;					// スキーマセット
-	MDLYRSET	m_LyrBf;					// レイヤーセット
-	MDBRISET	m_BriBf;					// 分類セット
-	MDENTSET	m_EntBf;					// エンティティセット
-	MDPTSSET	m_PartsBf;					// 部品セット
-	MDWINSET	m_WinBf;					// ウィンドウセット
+	MCHAR		m_cMdlNm[MDMSZ_NMMODEL];		// モデル名
+	MDGRPSET	m_GrpBf;						// グループセット
+	MDSCMSET	m_ScmBf;						// スキーマセット
+	MDLYRSET	m_LyrBf;						// レイヤーセット
+	MDBRISET	m_BriBf;						// 分類セット
+	MDENTSET	m_EntBf;						// エンティティセット
+	MDPTSSET	m_PartsBf;						// 部品セット
+	MDWINSET	m_WinBf;						// ウィンドウセット
 
-	MgMat3E		m_MBaseTrans;				// 基準座標変換マトリックス
-	MgMat3E		m_MCurTrans;				// カレント座標変換マトリックス
+	MgMat3E		m_MBaseTrans;					// 基準座標変換マトリックス
+	MgMat3E		m_MCurTrans;					// カレント座標変換マトリックス
 
-	MDID		m_idCurGrp;					// カレントグループID
-	MDID		m_idCurWin;					// カレントウィンドウID
-	MINT		m_itpCurWin;				// カレントウィンドウタイプ ( 0:３Ｄ、1：図面)
-	MDID		m_idCurLyr;					// カレントレイヤーID
-	MDID		m_idCurScm;					// カレントスキーマID
-	MINT		m_mdTenkai[28];				// ポリゴン展開処理モード
+	MDID		m_idCurGrp;						// カレントグループID
+	MDID		m_idCurWin;						// カレントウィンドウID
+	MINT		m_itpCurWin;					// カレントウィンドウタイプ ( 0:３Ｄ、1：図面)
+	MDID		m_idCurLyr;						// カレントレイヤーID
+	MDID		m_idCurScm;						// カレントスキーマID
+	MINT		m_mdTenkai[28];					// ポリゴン展開処理モード
 												//	 0: openGL対応、1:生成構造,球等図形情報をそのまま返す											
 												//	 1: 面ベクトル付加　0:無し 1:付加(default)
 												//	 2: 滑度　0:不変(線分) 1:変(円)  2:変えない(立体等)
@@ -135,16 +135,15 @@ public:
 												//	25:  true font の間隔の制御
 												//	26:  テクスチャ対応図形出力の制御　0:off　1:出力する
 												//	27: あ！動く図面新設モード  0:default 1:変形操作中　2005/07/13
-												//  
-												//  
-	MREAL	m_rmdTenkai[7];				// ポリゴン展開処理パラメータ		
-										// 100: 粗さ度合いを考慮後の単位長さ　agupzm = agupix*ax[7];　内部データ
-										// 101: ピクセルの大きさ
-										// 102: 未使用
-										// 103: 未使用
-										// 104: 未使用
-										// 105: 基本粗さ度合い
-										// 106: 内部データ　分割数の最小値を決めるときに使用
+
+	MREAL	m_rmdTenkai[7];						// ポリゴン展開処理パラメータ		
+												// 100: 粗さ度合いを考慮後の単位長さ　agupzm = agupix*ax[7];　内部データ
+												// 101: ピクセルの大きさ
+												// 102: 未使用
+												// 103: 未使用
+												// 104: 未使用
+												// 105: 基本粗さ度合い
+												// 106: 内部データ　分割数の最小値を決めるときに使用
 public:
 	MdModel();
 	~MdModel();
@@ -153,27 +152,5 @@ public:
 	void Print( MCHAR* s);
 };
 
-//	トレース
-inline void MdModel::Print( MCHAR* s)
-{
-	MBLOGPRINTS( s);
-	mlLog::Print( Mstr( "◇グループセット	"), MDC_NONE_ID);
-	m_ScmBf.Print( Mstr( "◇スキーマセット	"), MDC_NONE_ID);
-	m_LyrBf.Print( Mstr( "◇レイヤーセット	"), MDC_NONE_ID);
-	m_BriBf.Print( Mstr( "◇分類セット		"), MDC_NONE_ID);
-	m_EntBf.Print( Mstr( "◇エンティティセット"), MDC_NONE_ID);
-	m_PartsBf.Print( Mstr( "◇部品セット		"), MDC_NONE_ID);
-	m_WinBf.Print( Mstr( "◇ウィンドウセット	"), MDC_NONE_ID);
-
-	MBLOGPRINTS( Mstr( "◇カレント"));
-	MBLOGPRINTI( Mstr( "	カレントグループID		"), m_idCurGrp);
-	MBLOGPRINTI( Mstr( "	カレントウィンドウID	"), m_idCurWin);
-	MBLOGPRINTI( Mstr( "	カレントウィンドウタイプ ( 0:３Ｄ、1：図面)"), m_itpCurWin);
-	MBLOGPRINTI( Mstr( "	カレントレイヤーID		"), m_idCurLyr);
-	MBLOGPRINTI( Mstr( "	カレントスキーマID		"), m_idCurScm);
-	MBLOGPRINTI( Mstr( "	ポリゴン展開処理モード	"), m_itpCurWin);
-	MBLOGPRINTIN( Mstr( "	ポリゴン展開処理モード	"), m_mdTenkai, 28);
-	MBLOGPRINTFN( Mstr( "	ポリゴン展開処理パラメータ"), m_rmdTenkai, 7);
-}
 
 } // namespace MC

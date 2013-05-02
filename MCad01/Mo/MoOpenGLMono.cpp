@@ -21,7 +21,7 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
-#include "GlLib.h"
+#include "MoGlLib.h"
 
 #include "MoOpengl.h"
 #include "MoDispList.h"

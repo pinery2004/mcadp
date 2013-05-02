@@ -41,7 +41,7 @@
 #include <GL/gl.h>						//ADD
 #include <GL/glu.h>						//ADD
 #include <GL/glut.h>					//ADD
-#include "GlLib.h"						//ADD
+#include "MoGlLib.h"						//ADD
 
 #define		MP_PANEL_LINE			1
 #define		MP_PANEL_RECTANGULAR	2
@@ -554,6 +554,7 @@ MINT MdlDispList::DrawIeMdl1(
 			MdlDispList::DrawOukaZai( pPlcEn, PtCtr, rB);
 		}
 	}
+
 	// 図形情報のディスプレイリストを作成する
 	DispList::DrawAllEnt( PtCtr, rB);
 #endif

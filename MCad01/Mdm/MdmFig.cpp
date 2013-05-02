@@ -91,7 +91,7 @@ inline_nu MINT	MDFIG::GetN() const							// 図形情報サイズ
 	return ( m_pPmtl ? m_pPmtl->GetN(): 0);
 }
 
-inline_nu MDPMTL* MDFIG::GetpPmtl()								// 図形情報
+inline_nu MDPMTL* MDFIG::GetpPmtl()							// 図形情報
 { 
 	return m_pPmtl;
 }  
@@ -108,7 +108,7 @@ inline_nu void	MDFIG::SetN( MINT i_n)						// 図形情報サイズ
 	m_pPmtl->SetN( i_n);
 }
 
-inline_nu void	MDFIG::SetpPmtl( MDPMTL* i_pPmtl)				// 図形情報
+inline_nu void	MDFIG::SetpPmtl( MDPMTL* i_pPmtl)			// 図形情報
 {
 	m_pPmtl = i_pPmtl;
 }
@@ -163,7 +163,7 @@ inline_nu void	MDFIG::SetPmtDm( MDID i_idl, MINT i_idm)	// 図形要素の次元
 	return ( GetpPmt( i_idl)->SetDm( i_idm));
 }
 
-//inline_nu void	MDFIG::SetPmtTp( MDID i_idl, MINT i_itp)	// 図形要素のタイプ
+//inline_nu void	MDFIG::SetPmtTp( MDID i_idl, MINT i_itp)// 図形要素のタイプ
 //{
 //	return ( GetpPmt( i_idl)->SetTp( i_itp));
 //}
@@ -349,7 +349,7 @@ inline_nu void MDFIG::Print(MCHAR* i_s)
 {
 #ifdef _DEBUG
 	if ( m_pPmtl) {
-		Msprintf_s( mlLog::m_Str, Mstr( "\t\t\t%s < MDFIG > 整数型データセット，サイズ =%d，データ数 = %d\n"),
+		Msprintf_s( mlLog::m_Str, Mstr( "\t\t\t%s < MDFIG > 整数型データセット，バッファサイズ =%d，データサイズ = %d\n"),
 										i_s, m_pPmtl->m_sz, m_pPmtl->m_n);
 		MBLOGPRBF;
 		if ( m_pPmtl->m_n > 103) 

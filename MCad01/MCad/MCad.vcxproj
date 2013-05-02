@@ -238,6 +238,7 @@
     <ClInclude Include="..\include\MmWindow.h" />
     <ClInclude Include="..\include\MmWnd.h" />
     <ClInclude Include="..\include\MoDispList.h" />
+    <ClInclude Include="..\include\MoGlLib.h" />
     <ClInclude Include="..\include\MoMaterial.h" />
     <ClInclude Include="..\include\MoMdlDispList.h" />
     <ClInclude Include="..\include\MoOpengl.h" />
@@ -418,6 +419,7 @@
     <ClCompile Include="..\Mn\MnSRibbonBarPartsAttr1.cpp" />
     <ClCompile Include="..\Mo\MoDispList.cpp" />
     <ClCompile Include="..\Mo\MoDispModel.cpp" />
+    <ClCompile Include="..\Mo\MoGlLib.cpp" />
     <ClCompile Include="..\Mo\MoMakeDisplayList.cpp" />
     <ClCompile Include="..\Mo\MoOpenGLMono.cpp" />
     <ClCompile Include="..\Mo\MoOpenGLSet.cpp" />

@@ -71,7 +71,7 @@ int mlLog::Wait( MCHAR* str)
 #ifdef _DEBUG
 	int ii;
 	if( m_iCtl != 0) {
-		Mprintf( Mstr( "%s --- Keyin dumy number >"), str);
+		TRACE( Mstr( "%s --- Keyin dumy number >"), str);
 		Mscanf_s( Mstr( "%d"), &ii);
 	}
 	else ii = 0;
@@ -93,6 +93,7 @@ void mlLog::PrintCR( )
 #ifdef _DEBUG
 	if( m_iCtl != 0) {
 		Mfprintf( m_File, Mstr( "\n"));
+		TRACE( Mstr( "\n"));
 	}
 #endif
 }
@@ -102,6 +103,7 @@ void mlLog::Print( MCHAR* str)
 #ifdef _DEBUG
 	if( m_iCtl != 0) {
 		Mfprintf( m_File, Mstr( "%s\n"), str);
+		TRACE( Mstr( "%s\n"), str);
 	}
 #endif
 }
@@ -111,6 +113,7 @@ void mlLog::Print( MCHAR* str, const MCHAR* s1)
 #ifdef _DEBUG
 	if( m_iCtl != 0) {
 		Mfprintf( m_File, Mstr( "%s	= %s\n"), str, s1);
+		TRACE( Mstr( "%s	= %s\n"), str, s1);
 	}
 #endif
 }
@@ -120,6 +123,7 @@ void mlLog::Print( MCHAR* str, MINT i1)
 #ifdef _DEBUG
 	if( m_iCtl != 0) {
 		Mfprintf( m_File, Mstr( "%s	= %d\n"), str, i1);
+		TRACE( Mstr( "%s	= %d\n"), str, i1);
 	}
 #endif
 }
@@ -130,16 +134,21 @@ void mlLog::Print( MCHAR* str, MINT *i1, int ni1)
 	if( m_iCtl != 0) {
 		if ( ni1 != 0) {
 			Mfprintf( m_File, Mstr( "%s	="), str);
+			TRACE( Mstr( "%s	="), str);
 			int	iCr = PRINT_CNT_P_L;
 			for ( int i=0; i<ni1; i++) {
 				Mfprintf( m_File, Mstr( " %d"), i1[i]);
+				TRACE( Mstr( " %d"), i1[i]);
 				if ( --iCr == 0) {
 					Mfprintf( m_File, Mstr( "\n\t\t\t"));
+					TRACE( Mstr( "\n\t\t\t"));
 					iCr = PRINT_CNT_P_L;
 				}
 			}
-			if ( iCr != 0)
+			if ( iCr != 0) {
 				Mfprintf( m_File, Mstr( "\n"));
+				TRACE( Mstr( "\n"));
+			}
 		}
 	}
 #endif
@@ -150,6 +159,7 @@ void mlLog::Print( MCHAR* str, MUBYTE i1)
 #ifdef _DEBUG
 	if( m_iCtl != 0) {
 		Mfprintf( m_File, Mstr( "%s	= %d\n"), str, i1);
+		TRACE( Mstr( "%s	= %d\n"), str, i1);
 	}
 #endif
 }
@@ -159,15 +169,19 @@ void mlLog::Print( MCHAR* str, MUBYTE *i1, int ni1)
 #ifdef _DEBUG
 	if( m_iCtl != 0) {
 		Mfprintf( m_File, Mstr( "%s	="), str);
+		TRACE( Mstr( "%s	="), str);
 		int	iCr = PRINT_CNT_P_L;
 		for ( int i=0; i<ni1; i++) {
 			if ( --iCr == 0) {
 				Mfprintf( m_File, Mstr( "\n\t\t\t"));
+				TRACE( Mstr( "\n\t\t\t"));
 				iCr = PRINT_CNT_P_L;
 			}
 		}
-		if ( iCr != 0)
+		if ( iCr != 0) {
 			Mfprintf( m_File, Mstr( "\n"));
+			TRACE( Mstr( "\n"));
+		}
 	}
 #endif
 }
@@ -177,6 +191,7 @@ void mlLog::Print( MCHAR* str, MREAL f1)
 #ifdef _DEBUG
 	if( m_iCtl != 0) {
 		Mfprintf( m_File, Mstr( "%s	= %f\n"), str, f1);
+		TRACE( Mstr( "%s	= %f\n"), str, f1);
 	}
 #endif
 }
@@ -186,16 +201,21 @@ void mlLog::Print( MCHAR* str, MREAL *f1, int nf1)
 #ifdef _DEBUG
 	if( m_iCtl != 0) {
 		Mfprintf( m_File, Mstr( "%s	="), str);
+		TRACE( Mstr( "%s	="), str);
 		int	iCr = PRINT_CNT_P_L;
 		for ( int i=0; i<nf1; i++) {
 			Mfprintf( m_File, Mstr( " %f"), f1[i]);
+			TRACE( Mstr( " %f"), f1[i]);
 			if ( --iCr == 0) {
 				Mfprintf( m_File, Mstr( "\n\t\t\t"));
+				TRACE( Mstr( "\n\t\t\t"));
 				iCr = PRINT_CNT_P_L;
 			}
 		}
-		if ( iCr != 0)
+		if ( iCr != 0) {
 			Mfprintf( m_File, Mstr( "\n"));
+			TRACE( Mstr( "\n"));
+		}
 	}
 #endif
 }
@@ -254,6 +274,7 @@ void mlLog::Trace( MCHAR* str)
 #ifdef _DEBUG
 	if( m_iCtl != 0) {
 		Mfprintf( m_File, Mstr( "%s"), str);
+		TRACE( Mstr( "%s"), str);
 	}
 #endif
 }
@@ -263,6 +284,7 @@ void mlLog::Trace( )
 #ifdef _DEBUG
 	if( m_iCtl != 0) {
 		Mfprintf( m_File, Mstr( "%s"), m_Str);
+		TRACE( Mstr( "%s"), m_Str);
 	}
 #endif
 }

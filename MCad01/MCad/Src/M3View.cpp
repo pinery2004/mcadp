@@ -11,7 +11,7 @@
 
 #include < GL/gl.h >
 #include < GL/glu.h >
-#include "GlLib.h"
+#include "MoGlLib.h"
 
 #include "MgLib.h"
 #include "MhInpPlcParts.h"
@@ -65,7 +65,7 @@ M3View::M3View() : m_hRC(0)
 void M3View::OnPaint()
 {
 #if(Disp3DBox)		// 11/10/
-	GlLib::DrawGLobject1( m_iFWire, m_rScl, m_rRotX, m_rRotY, m_rRotZ,
+	MoGlLib::DrawGLobject1( m_iFWire, m_rScl, m_rRotX, m_rRotY, m_rRotZ,
 								    m_rMovX, m_rMovY, m_rMovZ);
 #else
 	MsRenderScene1( m_iFWire, m_rScl, m_rRotX, m_rRotY, m_rRotZ,

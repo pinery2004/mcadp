@@ -33,7 +33,7 @@ void Test001_SelectFile()
 
 
 	MCHAR FilePathI[] = Mstr( "D:\\temp\\*.txt");
-//	MCHAR FilePathO[MAX_PATH];
+	MCHAR FilePathO[MAX_PATH];
 
 	MmWndInfo* pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
 	CWnd* pWnd = pWndInfo->m_pWnd;
@@ -42,17 +42,17 @@ void Test001_SelectFile()
 	if ( pWnd != NULL ) hWnd = pWnd->GetSafeHwnd();
 	else hWnd = NULL;
 
-	////	読み込み用ファイル選択ダイアログを表示する
-	////
-	//MsLoadFileDlg( pWnd, FilePathI, FilePathO, NULL);
+	//	読み込み用ファイル選択ダイアログを表示する
+	//
+	MsLoadFileDlg( pWnd, FilePathI, FilePathO, MAX_PATH, NULL);
 
-	//pWnd->MessageBox( FilePathO, Mstr( "Load File Name"), MB_OK | MB_TOPMOST);
-	//MessageBox( hWnd, FilePathO, Mstr( "Load File Name"), MB_OK | MB_TOPMOST);
+	pWnd->MessageBox( FilePathO, Mstr( "Load File Name"), MB_OK | MB_TOPMOST);
+	MessageBox( hWnd, FilePathO, Mstr( "Load File Name"), MB_OK | MB_TOPMOST);
 
-	////	保存用ファイル選択ダイアログを表示する
-	////
-	//MsSaveFileDlg( pWnd, FilePathI, FilePathO, NULL);
-	//MessageBox( hWnd, FilePathO, Mstr( "Save File Name"), MB_OK | MB_TOPMOST);
+	//	保存用ファイル選択ダイアログを表示する
+	//
+	MsSaveFileDlg( pWnd, FilePathI, FilePathO, MAX_PATH, NULL);
+	MessageBox( hWnd, FilePathO, Mstr( "Save File Name"), MB_OK | MB_TOPMOST);
 
 
 	//	フォルダ選択ダイアログを表示する
@@ -74,13 +74,13 @@ void Test002_DBModule()
 
 	MdModel* pIeModel = Mdm::GetCurModel();
 
-	iSt = DGrp::CreateGrp( Mstr( "グループ１"), 3000., 250., &idGrp[0], isz);
+	iSt = DGrp::CreateGrp( Mstr( "グループ１"), 3000., 201., &idGrp[0], isz);
 	pIeModel->Print( Mstr( "●家モデル　グループ１"));
-	iSt = DGrp::CreateGrp( Mstr( "グループ２"), 3000., 250., &idGrp[1], isz);
+	iSt = DGrp::CreateGrp( Mstr( "グループ２"), 3000., 202., &idGrp[1], isz);
 	pIeModel->Print( Mstr( "●家モデル　グループ２"));
 	iSt = DGrp::DeleteGrp( idGrp[0]);
 	pIeModel->Print( Mstr( "●家モデル　ＤＥＬグループ１"));
-	iSt = DGrp::CreateGrp( Mstr( "グループ３"), 3000., 250., &idGrp[2], isz);
+	iSt = DGrp::CreateGrp( Mstr( "グループ３"), 3000., 203., &idGrp[2], isz);
 	pIeModel->Print( Mstr( "●家モデル　グループ３"));
 	//iSt = DGrp::CreateGrp( Mstr( "グループ４"), 3000., 250., &idGrp[3], isz);
 	//pIeModel->Print( Mstr( "●家モデル　グループ４"));
@@ -142,9 +142,9 @@ void Test004_DBModule()
 
 	MdModel* pIeModel = Mdm::GetCurModel();
 
-	iSt = DGrp::CreateGrp( Mstr( "グループ１"), 3000., 250., &idGrp[0], isz);
+	iSt = DGrp::CreateGrp( Mstr( "グループ１"), 3000., 204., &idGrp[0], isz);
 	pIeModel->Print( Mstr( "●家モデル　グループ１"));
-	iSt = DGrp::CreateGrp( Mstr( "グループ２"), 3000., 250., &idGrp[1], isz);
+	iSt = DGrp::CreateGrp( Mstr( "グループ２"), 3000., 205., &idGrp[1], isz);
 	pIeModel->Print( Mstr( "●家モデル　グループ２"));
 
 	iSt = DGrp::CreateScm( Mstr( "スキーマ１"), &idScm[0], isz);
@@ -189,9 +189,9 @@ void Test005_DBModule()
 
 	MdModel* pIeModel = Mdm::GetCurModel();
 
-	iSt = DGrp::CreateGrp( Mstr( "グループ１"), 3000., 250., &idGrp[0], isz);
+	iSt = DGrp::CreateGrp( Mstr( "グループ１"), 3000., 206., &idGrp[0], isz);
 	pIeModel->Print( Mstr( "●家モデル　グループ１"));
-	iSt = DGrp::CreateGrp( Mstr( "グループ２"), 3000., 250., &idGrp[1], isz);
+	iSt = DGrp::CreateGrp( Mstr( "グループ２"), 3000., 207., &idGrp[1], isz);
 	pIeModel->Print( Mstr( "●家モデル　グループ２"));
 
 	iSt = DGrp::CreateScm( Mstr( "スキーマ１"), &idScm[0], isz);
@@ -245,9 +245,9 @@ void Test006_DBModule()
 
 	MdModel* pIeModel = Mdm::GetCurModel();
 
-	iSt = DGrp::CreateGrp( Mstr( "グループ１"), 3000., 250., &idGrp[0], isz);
+	iSt = DGrp::CreateGrp( Mstr( "グループ１"), 3000., 208., &idGrp[0], isz);
 	pIeModel->Print( Mstr( "●家モデル　グループ１"));
-	iSt = DGrp::CreateGrp( Mstr( "グループ２"), 3000., 250., &idGrp[1], isz);
+	iSt = DGrp::CreateGrp( Mstr( "グループ２"), 3000., 209., &idGrp[1], isz);
 	pIeModel->Print( Mstr( "●家モデル　グループ２"));
 
 	iSt = DGrp::CreateScm( Mstr( "スキーマ１"), &idScm[0], isz);
@@ -441,7 +441,7 @@ void MCmdTest001()
 	//Test001_SelectFile();
 
 	//	ＤＢモジュールテスト
-	Test001_SelectFile();
+//	Test001_SelectFile();
 	Test002_DBModule();
 	Test003_DBModule();
 	Test004_DBModule();

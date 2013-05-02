@@ -103,7 +103,7 @@ void CMCadView2::OnPaint()
 	// 描画メッセージで CWnd::OnPaint() を呼び出さないでください。
 
 #if( DEBUG1)
-	GlLib::DrawGLobject();
+	MoGlLib::DrawGLobject();
 	SwapBuffers( m_pDC->m_hDC);    // Double buffer
 #else
 
@@ -137,12 +137,12 @@ int CMCadView2::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	m_M3View.OnCreate( m_pDC->m_hDC);
 
 #if( DEBUG1)
-	GlLib::SetDCPixelFormat( m_pDC->m_hDC);						// OpenGL用にPixel Formatを指定
+	MoGlLib::SetDCPixelFormat( m_pDC->m_hDC);						// OpenGL用にPixel Formatを指定
 	m_GLRC = wglCreateContext( m_pDC->m_hDC);					// Rendering contextの生成
 	wglMakeCurrent( m_pDC->m_hDC, m_GLRC);						// 現在のcontext設定
 
-	GlLib::InitializeOpenGL();									//3Dシーンを初期化する関数を用意する
-	GlLib::MakeGLObject();										//3Dオブジェクトを生成する
+	MoGlLib::InitializeOpenGL();									//3Dシーンを初期化する関数を用意する
+	MoGlLib::MakeGLObject();										//3Dオブジェクトを生成する
 #endif
 
 	return 0;
@@ -170,7 +170,7 @@ void CMCadView2::OnSize(UINT nType, int cx, int cy)
 	CView::OnSize(nType, cx, cy);
 
 #if( DEBUG1)
-	GlLib::ViewSetting(cx, cy);
+	MoGlLib::ViewSetting(cx, cy);
 #endif
 
 	m_M3View.OnSize( nType, cx, cy);

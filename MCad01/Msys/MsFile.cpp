@@ -118,7 +118,7 @@ void MsFileDialog::DispFileDlg(
 	MCHAR	sFilters[] = Mstr( "MyType Files (*.txt)|*.txt|All Files (*.*)|*.*||");
 	MCHAR	sDefExt[] = Mstr( "txt");
 	MCHAR	sDefExtI[NCHEXP];
-	MCHAR	sInitFilePath[] = Mstr( "c:\\temp\\*.txt");
+	MCHAR	sInitFilePath[] = Mstr( "D:\\Temp\\*.txt");
 
 	MINT	iLen;
 	MINT	iC;
@@ -126,9 +126,6 @@ void MsFileDialog::DispFileDlg(
 	psFilters = ( ( i_sFilters) ? i_sFilters : sFilters);
 
 	if ( i_sInitFilePath) {
-		psInitFilePath = sInitFilePath;
-		psDefExt = sDefExt;
-	} else {
 		psInitFilePath = i_sInitFilePath;
 
 		iLen = (MINT)Mstrlen( i_sInitFilePath);
@@ -140,6 +137,9 @@ void MsFileDialog::DispFileDlg(
 		} else {
 			psDefExt = NULL;
 		}
+	} else {
+		psInitFilePath = sInitFilePath;
+		psDefExt = sDefExt;
 	}
 
 	MsFileDialog fileDlg( bDialogType, psDefExt, psInitFilePath,
