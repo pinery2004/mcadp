@@ -323,7 +323,7 @@ MINT mdmDEnt::SetFig(
 //
 MINT mdmDEnt::SetPartPlc (
 						MDID		i_idEnt,	// エンティテイID
-						MgMat3E*		i_pmat,		// 配置座標系マトリックス
+						MgMat3DE*		i_pmat,		// 配置座標系マトリックス
 						MDID		i_idB		// 部品ID
 				)
 {
@@ -462,9 +462,9 @@ MINT mdmDEnt::CngLyr(
 	MDID	idGrpF;
 	MDID	idGrpFB;
 	MDID	idGrpT;								// 変更先
-	MgMat3E* pMTransT;							// 変更先グループの座標変換マトリックス
-	MgMat3E	MTransTR;							// 変更先グループの座標逆変換マトリックス
-	MgMat3E	MTrans;								// 変更先グループから変更先グループへの座標変換マトリックス
+	MgMat3DE* pMTransT;							// 変更先グループの座標変換マトリックス
+	MgMat3DE	MTransTR;							// 変更先グループの座標逆変換マトリックス
+	MgMat3DE	MTrans;								// 変更先グループから変更先グループへの座標変換マトリックス
 	MdModel* pCurMdl = Mdm::GetCurModel();
 
 	// 変更先のレイヤーが属するグループの座標逆変換マトリックスを求める
@@ -543,7 +543,7 @@ MINT mdmDEnt::CpyEnt(
 //
 MINT mdmDEnt::GetEntInBox(
 						MDID		i_idWin,	// ウィンドウID
-						MgMinMaxR3&	i_rMnmx,	// box座標値（最小・最大点）
+						MgMinMaxR3D&	i_rMnmx,	// box座標値（最小・最大点）
 						MDIDSET*	o_pGidEnt	// エンティティ-IDセット
 				)
 {
@@ -554,7 +554,7 @@ MINT mdmDEnt::GetEntInBox(
 	MINT	iCe;
 	MDID	idEnt;
 
-	MgMinMaxR3	rMnMxEnt;
+	MgMinMaxR3D	rMnMxEnt;
 
 	o_pGidEnt->m_n = 0;
 	DLyr::GetLyrIdAll( &GidLyr);

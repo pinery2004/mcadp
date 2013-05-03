@@ -41,7 +41,7 @@
 #include <GL/gl.h>						//ADD
 #include <GL/glu.h>						//ADD
 #include <GL/glut.h>					//ADD
-#include "MoGlLib.h"						//ADD
+#include "MoGlLib.h"					//ADD
 
 #define		MP_PANEL_LINE			1
 #define		MP_PANEL_RECTANGULAR	2
@@ -52,19 +52,19 @@ namespace MC
 ////////////////////////////////////////////////////////////////////////////
 //	【機能】家モデルのMINMAXを取得する
 //
-	void MdlDispList::MhGetMinMaxMdl( MgMinMaxR3	*prMmMdl)
+	void MdlDispList::MhGetMinMaxMdl( MgMinMaxR3D	*prMmMdl)
 {
 	mhPlcParts*		pPlcEn;
 	MPOSITION		posH;
-	MgMinMaxR3		rMmMdl;
+	MgMinMaxR3D		rMmMdl;
 	MINT			maxKai;
 	MhRoofInfo*		pRoofEn;
 	MPOSITION		posR;
-	MgLine3			LnPlc;
+	MgLine3D			LnPlc;
 
 	MREAL			rRoofZ;
 	MINT			ic1, ic2;
-	MgPoint3		Py1;
+	MgPoint3D		Py1;
 
 
 	// 家モデルのMINMAXを取得する
@@ -105,7 +105,7 @@ namespace MC
 //			
 void MdlDispList::DrawKabe(
 						mhPlcParts	*i_pPlcEn,		// 壁
-				const	MgPoint3	&PtCtr,			// 構造家モデルの中心
+				const	MgPoint3D	&PtCtr,			// 構造家モデルの中心
 						MREAL		rB				// ３次元表示倍率
 				)
 {
@@ -113,20 +113,20 @@ void MdlDispList::DrawKabe(
 	MREAL		rZU, rZL;
 	MINT		ic1;
 
-	MgLine3		LnKabe0;
-	MgVect3		vuLnKabe0;
-	MgLine3		LnKabe1, LnKabe2;
-	MgLine3		LnKabe3;
-	MgVect3		vl;
+	MgLine3D		LnKabe0;
+	MgVect3D		vuLnKabe0;
+	MgLine3D		LnKabe1, LnKabe2;
+	MgLine3D		LnKabe3;
+	MgVect3D		vl;
 	MREAL		dl;
 
 	MGPOLYG3( PgW, 4);
 	MGPOLYG3( PgR, 4);
 	MGPOLYG3( PgL, 4);
-	MgGPolyg3	GPgR;
-	MgGPolyg3	GPgL;
+	MgGPolyg3D	GPgR;
+	MgGPolyg3D	GPgL;
 
-	rZU = mcs::GetStnd( i_pPlcEn->GetPIKai(), MM_STNDH_CEILING);	// 天井基準
+	rZU = mcs::GetStnd( i_pPlcEn->GetPIKai(), MM_STNDH_CEILING);// 天井基準
 	rZL = mcs::GetStnd( i_pPlcEn->GetPIKai(), MM_STNDH_LOWER);	// 下基準
 	LnKabe0 = i_pPlcEn->GetPIPlcIti();
 	vuLnKabe0 = LnKabe0.Vu();
@@ -135,18 +135,18 @@ void MdlDispList::DrawKabe(
 
 	// 右側壁面
 	PgW.m_n = 4;
-	PgW[0] = MgPoint3C( MgPoint2C( LnKabe1.p[0]), rZL);
-	PgW[1] = MgPoint3C( MgPoint2C( LnKabe1.p[1]), rZL);
-	PgW[2] = MgPoint3C( MgPoint2C( LnKabe1.p[1]), rZU);
-	PgW[3] = MgPoint3C( MgPoint2C( LnKabe1.p[0]), rZU);
+	PgW[0] = MgPoint3DC( MgPoint2DC( LnKabe1.p[0]), rZL);
+	PgW[1] = MgPoint3DC( MgPoint2DC( LnKabe1.p[1]), rZL);
+	PgW[2] = MgPoint3DC( MgPoint2DC( LnKabe1.p[1]), rZU);
+	PgW[3] = MgPoint3DC( MgPoint2DC( LnKabe1.p[0]), rZU);
 	GPgR += PgW;
 
 	// 左側壁面
 	PgW.m_n = 4;
-	PgW[0] = MgPoint3C( MgPoint2C( LnKabe2.p[0]), rZL);
-	PgW[1] = MgPoint3C( MgPoint2C( LnKabe2.p[1]), rZL);
-	PgW[2] = MgPoint3C( MgPoint2C( LnKabe2.p[1]), rZU);
-	PgW[3] = MgPoint3C( MgPoint2C( LnKabe2.p[0]), rZU);
+	PgW[0] = MgPoint3DC( MgPoint2DC( LnKabe2.p[0]), rZL);
+	PgW[1] = MgPoint3DC( MgPoint2DC( LnKabe2.p[1]), rZL);
+	PgW[2] = MgPoint3DC( MgPoint2DC( LnKabe2.p[1]), rZU);
+	PgW[3] = MgPoint3DC( MgPoint2DC( LnKabe2.p[0]), rZU);
 	GPgL += PgW;
 
 	// 建具の開口と重なり有りなら開口を追加する
@@ -165,7 +165,7 @@ void MdlDispList::DrawKabe(
 				pAuxTategu = (MhTateguInfo*)pPlcTEn->GetPIAuxTategu();
 				if ( MGeo::GE( pAuxTategu->GetHeight(), rZU) ||
 					 MGeo::LE( pAuxTategu->GetHeight() - pAuxTategu->GetROH(),  0.) ||
-					 MGeo::Abs( ist1) == 2) {						// 壁と建具が部分的に重なる
+					 MGeo::Abs( ist1) == 2) {					// 壁と建具が部分的に重なる
 					 PgR.Rev();
 					 PgL.Rev();
 					 MGeo::MergeGPgPgtoGPg3( MC_DIFF, GPgR, PgR, &GPgR);		// (  O) 穴付き多角形3
@@ -216,18 +216,18 @@ void MdlDispList::DrawKabe(
 //			
 void MdlDispList::DrawYane1(
 						MhRoofInfo	*pRoofEn,		// 横置部材
-				const	MgPoint3	&PtCtr,			// 構造家モデルの中心
+				const	MgPoint3D	&PtCtr,			// 構造家モデルの中心
 						MREAL		rB				// ３次元表示倍率
 				)
 {
 	MINT			ist1;
 	MINT			ic0, ic1, ic2;
 	MINT			ic0b;
-	MgVect3			VtU, VtL;
-	MgLine3			LnU, LnL;
-	MgLine3			LncU, LncL;
+	MgVect3D			VtU, VtL;
+	MgLine3D			LnU, LnL;
+	MgLine3D			LncU, LncL;
 	MREAL			rZ;
-	MgGPolyg3		GPg2(10);
+	MgGPolyg3D		GPg2(10);
 	MGPOLYG3( Pg3U, 3);
 	MGPOLYG3( Pg3L, 3);
 	MhRfm			*pRfm2;
@@ -241,8 +241,8 @@ void MdlDispList::DrawYane1(
 			// 屋根面
 			MREAL	rYaneHHosei = 130.f / pRfm2->m_Pln.v.z;
 
-			VtU = MgVect3( 0., 0., rYaneHHosei);
-			VtL = MgVect3( 0., 0., 0.);
+			VtU = MgVect3D( 0., 0., rYaneHHosei);
+			VtL = MgVect3D( 0., 0., 0.);
 			
 //			DispList::SetMaterial( 0, 0);
 		}
@@ -256,8 +256,8 @@ void MdlDispList::DrawYane1(
 		}
 		for ( ic0b=pRfm2->m_Pg.m_n-1,ic0=0; ic0<pRfm2->m_Pg.m_n; ic0b=ic0,ic0++) {
 			if ( pRfm2->m_cdPg.m_i[ic0] == MHRL_NOKI || pRfm2->m_cdPg.m_i[ic0] == MHRL_KERABA) {
-				LnU = MgLine3( pRfm2->m_Pg.m_P[ic0b], pRfm2->m_Pg.m_P[ic0]) + VtU;
-				LnL = MgLine3( pRfm2->m_Pg.m_P[ic0b], pRfm2->m_Pg.m_P[ic0]) + VtL;
+				LnU = MgLine3D( pRfm2->m_Pg.m_P[ic0b], pRfm2->m_Pg.m_P[ic0]) + VtU;
+				LnL = MgLine3D( pRfm2->m_Pg.m_P[ic0b], pRfm2->m_Pg.m_P[ic0]) + VtL;
 				LncU = DPtoDSP( LnU, rZ, PtCtr, rB);
 				LncL = DPtoDSP( LnL, rZ, PtCtr, rB);
 				DispList::DspQuads( LncL, LncU);
@@ -271,18 +271,18 @@ void MdlDispList::DrawYane1(
 //			
 void MdlDispList::DrawYagiri(
 						MhRoofInfo	*pRoofEn,		// 横置部材
-				const	MgPoint3	&PtCtr,			// 構造家モデルの中心
+				const	MgPoint3D	&PtCtr,			// 構造家モデルの中心
 						MREAL		rB				// ３次元表示倍率
 				)
 {
 	MINT			ist1;
 	MINT			ic0, ic1, ic2;
 	MINT			ic0b;
-	MgVect3			VtU, VtL;
-	MgLine3			LnU, LnL;
-	MgLine3			LncU, LncL;
+	MgVect3D			VtU, VtL;
+	MgLine3D			LnU, LnL;
+	MgLine3D			LncU, LncL;
 	MREAL			rZ;
-	MgGPolyg3		GPg2(10);
+	MgGPolyg3D		GPg2(10);
 	MGPOLYG3( Pg3U, 3);
 	MGPOLYG3( Pg3L, 3);
 	MhRfm			*pRfm2;
@@ -309,8 +309,8 @@ void MdlDispList::DrawYagiri(
 		}
 		for ( ic0b=pRfm2->m_Pg.m_n-1,ic0=0; ic0<pRfm2->m_Pg.m_n; ic0b=ic0,ic0++) {
 			if ( pRfm2->m_cdPg.m_i[ic0] == MHRL_NOKI || pRfm2->m_cdPg.m_i[ic0] == MHRL_KERABA) {
-				LnU = MgLine3( pRfm2->m_Pg.m_P[ic0b], pRfm2->m_Pg.m_P[ic0]) + VtU;
-				LnL = MgLine3( pRfm2->m_Pg.m_P[ic0b], pRfm2->m_Pg.m_P[ic0]) + VtL;
+				LnU = MgLine3D( pRfm2->m_Pg.m_P[ic0b], pRfm2->m_Pg.m_P[ic0]) + VtU;
+				LnL = MgLine3D( pRfm2->m_Pg.m_P[ic0b], pRfm2->m_Pg.m_P[ic0]) + VtL;
 				LncU = DPtoDSP( LnU, rZ, PtCtr, rB);
 				LncL = DPtoDSP( LnL, rZ, PtCtr, rB);
 				DispList::DspQuads( LncL, LncU);
@@ -324,18 +324,18 @@ void MdlDispList::DrawYagiri(
 //			
 void MdlDispList::DrawYane2(
 						MhRoofInfo	*pRoofEn,		// 横置部材
-				const	MgPoint3	&PtCtr,			// 構造家モデルの中心
+				const	MgPoint3D	&PtCtr,			// 構造家モデルの中心
 						MREAL		rB				// ３次元表示倍率
 				)
 {
 	MINT			ist1;
 	MINT			ic0, ic1, ic2;
 	MINT			ic0b;
-	MgVect3			VtU, VtL;
-	MgLine3			LnU, LnL;
-	MgLine3			LncU, LncL;
+	MgVect3D			VtU, VtL;
+	MgLine3D			LnU, LnL;
+	MgLine3D			LncU, LncL;
 	MREAL			rZ;
-	MgGPolyg3		GPg2(10);
+	MgGPolyg3D		GPg2(10);
 	MGPOLYG3( Pg3U, 3);
 	MGPOLYG3( Pg3L, 3);
 	MhRfm			*pRfm2;
@@ -348,8 +348,8 @@ void MdlDispList::DrawYane2(
 			VtL = -VtU;
 		} else {
 			// 屋根面
-			VtU = MgVect3( 0., 0., 120.);
-			VtL = MgVect3( 0., 0., 0.);
+			VtU = MgVect3D( 0., 0., 120.);
+			VtL = MgVect3D( 0., 0., 0.);
 		}
 		ist1 = MGeo::DivideTriPg3( pRfm2->m_Pg, pRfm2->m_Pln.v, &GPg2);
 		rZ = mcs::GetStnd( pRoofEn->GetInpKai(), MM_STNDH_ROOF);
@@ -361,8 +361,8 @@ void MdlDispList::DrawYane2(
 		}
 		for ( ic0b=pRfm2->m_Pg.m_n-1,ic0=0; ic0<pRfm2->m_Pg.m_n; ic0b=ic0,ic0++) {
 			if ( pRfm2->m_cdPg.m_i[ic0] == MHRL_NOKI || pRfm2->m_cdPg.m_i[ic0] == MHRL_KERABA) {
-				LnU = MgLine3( pRfm2->m_Pg.m_P[ic0b], pRfm2->m_Pg.m_P[ic0]) + VtU;
-				LnL = MgLine3( pRfm2->m_Pg.m_P[ic0b], pRfm2->m_Pg.m_P[ic0]) + VtL;
+				LnU = MgLine3D( pRfm2->m_Pg.m_P[ic0b], pRfm2->m_Pg.m_P[ic0]) + VtU;
+				LnL = MgLine3D( pRfm2->m_Pg.m_P[ic0b], pRfm2->m_Pg.m_P[ic0]) + VtL;
 				LncU = DPtoDSP( LnU, rZ, PtCtr, rB);
 				LncL = DPtoDSP( LnL, rZ, PtCtr, rB);
 				DispList::DspQuads( LncL, LncU);
@@ -377,16 +377,16 @@ void MdlDispList::DrawYane2(
 //
 void MdlDispList::MhGetBCtr(
 						MREAL		*rB,			// 表示倍率
-						MgPoint3	*PtCtr			// 中心座標
+						MgPoint3D	*PtCtr			// 中心座標
 				)
 {
-	MgMinMaxR3		rMmMdl;
-	MgMinMaxR2		rmmmdl;
+	MgMinMaxR3D		rMmMdl;
+	MgMinMaxR2D		rmmmdl;
 	MREAL			rW;
 	MREAL			rWh;
 
 //	MmWndInfo*		pWndInfo;						// カレントウィンドウを取得する
-	MgPoint3		pW;
+	MgPoint3D		pW;
 
 	// 家モデルのMINMAXを取得する
 	MhGetMinMaxMdl( &rMmMdl);
@@ -408,7 +408,7 @@ void MdlDispList::MhGetBCtr(
 //	
 int MdlDispList::DrawIeMdl(
 						MREAL		rB,				// 表示倍率
-				const	MgPoint3	&PtCtr			// 中心座標
+				const	MgPoint3D	&PtCtr			// 中心座標
 				)
 {
 	MdlDispList::DrawIeMdl1( rB, PtCtr);
@@ -505,7 +505,7 @@ GLint MsDrawBox(GLdouble d, GLdouble w, GLdouble h)
 //	
 MINT MdlDispList::DrawIeMdl1(
 						MREAL		rB,				// 表示倍率
-				const	MgPoint3	&PtCtr			// 中心座標
+				const	MgPoint3D	&PtCtr			// 中心座標
 				)
 {
 	if (  MdlDispList::OpenDL( 1))
@@ -567,7 +567,7 @@ MINT MdlDispList::DrawIeMdl1(
 //
 int MdlDispList::DrawIeMdl2(
 						MREAL		rB,				// 表示倍率
-				const	MgPoint3	&PtCtr			// 中心座標
+				const	MgPoint3D	&PtCtr			// 中心座標
 				)
 {
 	mhPlcParts*	pPlcEn;
@@ -614,7 +614,7 @@ int MdlDispList::DrawIeMdl2(
 //
 int MdlDispList::DrawIeMdl3(
 						MREAL		rB,				// 表示倍率
-				const	MgPoint3	&PtCtr			// 中心座標
+				const	MgPoint3D	&PtCtr			// 中心座標
 				)
 {
 

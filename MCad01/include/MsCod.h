@@ -46,20 +46,20 @@ namespace MC
 class DLL_EXPORT msCod
 {
 protected:
-	MgMinMaxI2		m_iMinMaxD;					// 表示座標( Min/Max)
-	MgMinMaxI2		m_iMinMaxL;					// 論理座標( Min/Max)
+	MgMinMaxI2D		m_iMinMaxD;					// 表示座標( Min/Max)
+	MgMinMaxI2D		m_iMinMaxL;					// 論理座標( Min/Max)
 												// ***** 注意 *****
 												// 本システム内部では全てのMAPMODEでY方向の上の座標>下の座標に変換
 												// ( 例　MM_TEXTの場合はY座標×( -1))した値を使用している
 												// 従って、図形を描くには、論理Y座標×m_iUPY　の値を使用する事
 
 	MINT			m_iUpY;						// オリジナル論理座標のY方向( 1:上>下, -1:上<下)				
-	MgMinMaxR2		m_rMinMaxRI;				// 実座標( Min/Max)初期値
-	MgMinMaxR2		m_rMinMaxRS[MT_SZMINMAXRS];	// 実座標
+	MgMinMaxR2D		m_rMinMaxRI;				// 実座標( Min/Max)初期値
+	MgMinMaxR2D		m_rMinMaxRS[MT_SZMINMAXRS];	// 実座標
 	CPoint			m_ptCurMouseL;				// カレントのマウス位置（論理座標）
-	MgMat3E			m_mat;						// 座標変換マトリックス
+	MgMat3DE			m_mat;						// 座標変換マトリックス
 	MREAL			m_sclRPtoLP;				// RPtoLPの座標変換倍率
-	MgVect2			m_vsclLPtoDP;				// LPtoDPの座標変換倍率( x,y)
+	MgVect2D			m_vsclLPtoDP;				// LPtoDPの座標変換倍率( x,y)
 	CDC*			m_pDC;						// 表示　デバイスコンテキスト
 	MINT			m_iMapMode;					// マップモード
 //	線
@@ -74,8 +74,8 @@ static	MREAL		z_fTextHeight;				// 文字高さ				( 単位　MT_FIXEDSIZE:ポイント, MT
 static	MINT		z_iTextPosUL;				// 文字列上下方向基準位置( TA_TOP( 1:上,2:中),TA_BASELINE( 3:下))
 static	MINT		z_iTextPosLR;				// 文字列左右方向基準位置( TA_LEFT( 1:左),TA_CENTER( 2:中),TA_RIGHT( 3:右))
 static	DWORD		z_rgbText;					// 文字色( RGB)
-static	MgVect2		z_vTextDirect;				// 文字列表示方向		単位ベクトル
-static	MgVect2		z_pTextOffset;				// 文字位置オフセット	( 単位　MT_FIXEDSIZE:ポイント, MT_FREESIZE:mm)
+static	MgVect2D		z_vTextDirect;				// 文字列表示方向		単位ベクトル
+static	MgVect2D		z_pTextOffset;				// 文字位置オフセット	( 単位　MT_FIXEDSIZE:ポイント, MT_FREESIZE:mm)
 static	bool		z_bFixedTextSize;			// 表示文字サイズ固定フラグ
 //
 public:
@@ -151,7 +151,7 @@ public:
 						{ return m_iUpY;}
 /////////////////////////////////////////////////////////////////////////////
 //  表示座標MinMaxを設定する( Y座標 *= ( -1))
-	void	SetMinMaxD( MgMinMaxI2 iMinMaxD)
+	void	SetMinMaxD( MgMinMaxI2D iMinMaxD)
 						{ m_iMinMaxD = iMinMaxD;}
 /////////////////////////////////////////////////////////////////////////////
 //  表示座標MinMaxを設定する
@@ -163,7 +163,7 @@ public:
 // 070907						  m_iMinMaxD.max.y = iMaxY;}
 /////////////////////////////////////////////////////////////////////////////
 //  表示座標MinMaxを得る
-	MgMinMaxI2 GetMinMaxD( )
+	MgMinMaxI2D GetMinMaxD( )
 						{ return m_iMinMaxD;}
 /////////////////////////////////////////////////////////////////////////////
 //  表示座標MinMaxを得る
@@ -175,7 +175,7 @@ public:
 // 070907						  *iMaxY = m_iMinMaxD.max.y;}
 /////////////////////////////////////////////////////////////////////////////
 //  論理座標MinMaxを設定する
-	void	SetMinMaxL( MgMinMaxI2 iMinMaxL)
+	void	SetMinMaxL( MgMinMaxI2D iMinMaxL)
 						{ m_iMinMaxL = iMinMaxL;}
 /////////////////////////////////////////////////////////////////////////////
 //  論理座標MinMaxを設定する
@@ -187,7 +187,7 @@ public:
 // 070907						  m_iMinMaxL.max.y = iMaxY;}
 /////////////////////////////////////////////////////////////////////////////
 //  論理座標MinMaxを得る
-	MgMinMaxI2 GetMinMaxL( )
+	MgMinMaxI2D GetMinMaxL( )
 						{ return m_iMinMaxL;}
 /////////////////////////////////////////////////////////////////////////////
 //  論理座標MinMaxを得る
@@ -199,11 +199,11 @@ public:
 // 070907						  *iMaxY = m_iMinMaxL.max.y;}
 /////////////////////////////////////////////////////////////////////////////
 //  実座標MinMax初期値を設定する
-	void	SetMinMaxRI( MgMinMaxR2& rMinMaxRI)
+	void	SetMinMaxRI( MgMinMaxR2D& rMinMaxRI)
 						{ m_rMinMaxRI = rMinMaxRI;}
 /////////////////////////////////////////////////////////////////////////////
 //  実座標MinMax初期値を得る
-	MgMinMaxR2 GetMinMaxRI( )
+	MgMinMaxR2D GetMinMaxRI( )
 						{ return m_rMinMaxRI;}
 /////////////////////////////////////////////////////////////////////////////
 //  実座標MinMax初期値を実座標MinMaxに設定する
@@ -212,22 +212,22 @@ public:
 							m_rMinMaxRS[0] = m_rMinMaxRS[1] = m_rMinMaxRI;}
 /////////////////////////////////////////////////////////////////////////////
 //  カレントの実座標MinMaxを設定する
-	void	SetMinMaxRS( MgMinMaxR2& rMinMaxRS)
+	void	SetMinMaxRS( MgMinMaxR2D& rMinMaxRS)
 						{
 							m_rMinMaxRS[0] = rMinMaxRS;}
 /////////////////////////////////////////////////////////////////////////////
 //  カレントの実座標MinMaxを得る
-	MgMinMaxR2 GetMinMaxRS( )
+	MgMinMaxR2D GetMinMaxRS( )
 						{ return m_rMinMaxRS[0];}
 /////////////////////////////////////////////////////////////////////////////
 //  実座標MinMaxを先頭( カレント)に追加する（ｐｕｓｈ）
-//D	void	PushMinMaxRS( MgMinMaxR2& rMinMaxRS)
+//D	void	PushMinMaxRS( MgMinMaxR2D& rMinMaxRS)
 //D						{ m_rMinMaxRS[1] = m_rMinMaxRS[0];
 //D						  m_rMinMaxRS[0] = rMinMaxRS;}
 /////////////////////////////////////////////////////////////////////////////
 //  先頭( カレント)の実座標MinMaxを取り出す（ＰＯＰ）
-//D	MgMinMaxR2 PopMinMaxRS( )
-//D						{ MgMinMaxR2 rMinMax;
+//D	MgMinMaxR2D PopMinMaxRS( )
+//D						{ MgMinMaxR2D rMinMax;
 //D						  rMinMax = m_rMinMaxRS[0];
 //D						  m_rMinMaxRS[0] = m_rMinMaxRS[1];
 //D						  m_rMinMaxRS[1] = rMinMax;
@@ -250,13 +250,13 @@ public:
 
 /////////////////////////////////////////////////////////////////////////////
 //  現在のマウス位置を得る
-	MgPoint2 GetCurMousePtR( )
+	MgPoint2D GetCurMousePtR( )
 						{ return LPtoRP( m_ptCurMouseL);}
 
 /////////////////////////////////////////////////////////////////////////////
 //  座標変換する　実座標　→　論理座標
 	MINT	RPtoLP( MREAL rRP);
-	CPoint	RPtoLP( MgPoint2 pRP);
+	CPoint	RPtoLP( MgPoint2D pRP);
 
 /////////////////////////////////////////////////////////////////////////////
 //  座標変換する　論理座標　→　表示座標
@@ -266,7 +266,7 @@ public:
 /////////////////////////////////////////////////////////////////////////////
 //  座標変換する　実座標　→　表示座標
 	MINT	RPtoDP( MREAL   rRP);
-	CPoint	RPtoDP( MgPoint2 pRP);
+	CPoint	RPtoDP( MgPoint2D pRP);
 
 /////////////////////////////////////////////////////////////////////////////
 //  座標変換する　表示座標　→　論理座標
@@ -276,12 +276,12 @@ public:
 /////////////////////////////////////////////////////////////////////////////
 //  座標変換する　論理座標　→　実座標
 	MREAL		LPtoRP( MINT i);
-	MgPoint2	LPtoRP( const CPoint& p);
+	MgPoint2D	LPtoRP( const CPoint& p);
 
 /////////////////////////////////////////////////////////////////////////////
 //  座標変換する　表示座標　→　実座標
 	MREAL		DPtoRP( MINT   iDP);
-	MgPoint2	DPtoRP( const CPoint& pDP);
+	MgPoint2D	DPtoRP( const CPoint& pDP);
 	
 /////////////////////////////////////////////////////////////////////////////
 //  線属性　線種、線幅、線色を設定する
@@ -317,8 +317,8 @@ public:
 						MINT		iPosUL			= MT_LOWER,
 						MINT		iPosLR			= MT_LEFT,
 						DWORD		rgbText			= RGB( 0, 0, 0),
-						MgVect2&	vDirect			= MgVect2( 1., 0.),
-						MgVect2&	pOffset			= MgVect2( 0., 0.),
+						MgVect2D&	vDirect			= MgVect2D( 1., 0.),
+						MgVect2D&	pOffset			= MgVect2D( 0., 0.),
 						bool		bFixedTextSize	= TRUE
 						);
 
@@ -340,11 +340,11 @@ public:
 
 /////////////////////////////////////////////////////////////////////////////
 //  	文字方向を設定する
-	void	SetTextDirect( MgVect2& vDirect = MgVect2( 1., 0.));
+	void	SetTextDirect( MgVect2D& vDirect = MgVect2D( 1., 0.));
 
 /////////////////////////////////////////////////////////////////////////////
 //  	オフセットを設定する
-	void	SetTextOffset( MgVect2& pOffset = MgVect2( 0., 0.));
+	void	SetTextOffset( MgVect2D& pOffset = MgVect2D( 0., 0.));
 
 /////////////////////////////////////////////////////////////////////////////
 //  	文字サイズ固定フラグを設定する
@@ -352,41 +352,41 @@ public:
 
 /////////////////////////////////////////////////////////////////////////////
 //  文字列を表示する
-	void	Text( const MgPoint2 &pa1, MCHAR* str);
+	void	Text( const MgPoint2D &pa1, MCHAR* str);
 
 /////////////////////////////////////////////////////////////////////////////
 //  線分を表示する
-	void	Line( const MgLine2 &ln1)
+	void	Line( const MgLine2D &ln1)
 						{ Line( ln1.p[0], ln1.p[1]);}
 
 /////////////////////////////////////////////////////////////////////////////
 //  線分を表示する
-	void	Line( const MgPoint2 &pa1, const MgPoint2 &pa2);
+	void	Line( const MgPoint2D &pa1, const MgPoint2D &pa2);
 
 /////////////////////////////////////////////////////////////////////////////
 //  長方形を表示する
-	void	Rect( const MgPoint2 &pa1, const MgPoint2 &pa2);
+	void	Rect( const MgPoint2D &pa1, const MgPoint2D &pa2);
 
 /////////////////////////////////////////////////////////////////////////////
 //  長方形を表示する
-	void	Rect( const MgRect2 &rt1)
+	void	Rect( const MgRect2D &rt1)
 						{ Rect( rt1.p[0], rt1.p[1]);}
 
 /////////////////////////////////////////////////////////////////////////////
 //  長方形を表示する
-//C	void	Rect( const MgPoint2 &pa1, const MgPoint2 &pa2);
+//C	void	Rect( const MgPoint2D &pa1, const MgPoint2D &pa2);
 
 /////////////////////////////////////////////////////////////////////////////
 //  折れ線を表示する
-	void	Polyline( MgPoint2 *pb, int inpb);
+	void	Polyline( MgPoint2D *pb, int inpb);
 
 /////////////////////////////////////////////////////////////////////////////
 //  多角形を表示する
-	void	Polygon( MgPoint2 *pb, int inpb);
+	void	Polygon( MgPoint2D *pb, int inpb);
 
 /////////////////////////////////////////////////////////////////////////////
 //  円弧を表示する
-	void	Arc1( const MgPoint2 &pac, MREAL rh, MREAL a1, MREAL a2);
+	void	Arc1( const MgPoint2D &pac, MREAL rh, MREAL a1, MREAL a2);
 
 };
 /*
@@ -404,9 +404,9 @@ public:
 
 /////////////////////////////////////////////////////////////////////////////
 //  座標変換する　実座標　→　論理座標
-inline CPoint msCod::RPtoLP( MgPoint2 p)
+inline CPoint msCod::RPtoLP( MgPoint2D p)
 {
-	MgPoint2 p1 = p * m_mat;
+	MgPoint2D p1 = p * m_mat;
 	return MgCPointC( p1);
 }
 
@@ -437,10 +437,10 @@ inline MINT	msCod::LPtoDP(
 /////////////////////////////////////////////////////////////////////////////
 //  座標変換する　実座標　→　表示座標
 inline CPoint msCod::RPtoDP( 
-				MgPoint2	pRP
+				MgPoint2D	pRP
 				)
 {
-	MgPoint2 pLP = pRP * m_mat; 
+	MgPoint2D pLP = pRP * m_mat; 
 	return CPoint( MINT( pLP.x * m_vsclLPtoDP.x),
 				   MINT( pLP.y * m_vsclLPtoDP.y));
 }
@@ -471,11 +471,11 @@ inline MINT	msCod::DPtoLP(
 
 /////////////////////////////////////////////////////////////////////////////
 //  座標変換する　論理座標　→　実座標
-inline MgPoint2 msCod::LPtoRP( 
+inline MgPoint2D msCod::LPtoRP( 
 				const CPoint&		p
 				)
 {
-	MgPoint2 MbP2_t1= p;
+	MgPoint2D MbP2_t1= p;
 	return MbP2_t1 * MGeo::Mat3Inv( m_mat);
 }
 
@@ -495,11 +495,11 @@ inline MREAL msCod::DPtoRP(
 	return ( iDP / ( m_sclRPtoLP * m_vsclLPtoDP.x));
 }
 
-inline MgPoint2 msCod::DPtoRP( 
+inline MgPoint2D msCod::DPtoRP( 
 				const CPoint&		pDP
 				)
 {
-	MgPoint2 pLP = MgPoint2( pDP.x / m_vsclLPtoDP.x,
+	MgPoint2D pLP = MgPoint2D( pDP.x / m_vsclLPtoDP.x,
 							 pDP.y / m_vsclLPtoDP.y);
 	return pLP * MGeo::Mat3Inv( m_mat);
 }

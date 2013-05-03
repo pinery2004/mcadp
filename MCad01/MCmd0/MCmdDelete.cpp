@@ -19,11 +19,11 @@ void MCmdLineDelete()
 {
 	MINT			ist1;
 	MINT			irt;
-	MgPoint2		pt1, pt2;
-	MgPoint2		ptK[2];
-	MgPoint2		ptW[2];
-	MgLine2			Ln1;
-	MgPolyg2		pg1(20);
+	MgPoint2D		pt1, pt2;
+	MgPoint2D		ptK[2];
+	MgPoint2D		ptW[2];
+	MgLine2D			Ln1;
+	MgPolyg2D		pg1(20);
 	MINT			iIdPartsSpec, iIdPartsSpecB;
 	MINT			iKaiC;
 	MINT			iGpC, iGpB;
@@ -63,13 +63,13 @@ void MCmdLineDelete()
 			if ( !MmChkValidParts( pPlcEn))						// オプションと履歴のチェック
 				continue;
 
-			ptW[0] = *(MgPoint2*)&(pPlcEn->GetPIPlcIti( 0));
-			ptW[1] = *(MgPoint2*)&(pPlcEn->GetPIPlcIti( 1));
+			ptW[0] = *(MgPoint2D*)&(pPlcEn->GetPIPlcIti( 0));
+			ptW[1] = *(MgPoint2D*)&(pPlcEn->GetPIPlcIti( 1));
 
-			MgVect2	VtW = ptW[1] - ptW[0];
-			MgVect2	VtUtW = MGeo::UnitizeV2( VtW);
-			MgVect2	VtWidthR = (pPlcEn->GetMbWidthR() + pPlcEn->GetPISinZure()) * VtUtW.RotR90(); 
-			MgVect2	VtWidth = pPlcEn->GetMbWidth() * VtUtW.RotL90(); 
+			MgVect2D	VtW = ptW[1] - ptW[0];
+			MgVect2D	VtUtW = MGeo::UnitizeV2( VtW);
+			MgVect2D	VtWidthR = (pPlcEn->GetMbWidthR() + pPlcEn->GetPISinZure()) * VtUtW.RotR90(); 
+			MgVect2D	VtWidth = pPlcEn->GetMbWidth() * VtUtW.RotL90(); 
 			pg1.m_n = 0;
 			pg1 += (ptW[0] - pPlcEn->GetPILenHosei( 0) * VtUtW + VtWidthR);
 			pg1 += (ptW[1] + pPlcEn->GetPILenHosei( 1) * VtUtW + VtWidthR);
@@ -98,18 +98,18 @@ void MCmdLineDelete()
 void MCmdRoofDelete()
 {
 	MINT			irt;
-	MgPoint2		pt1, pt2;
-	MgPoint2		ptK[2];
-	MgPoint2		ptW[2];
-	MgPoint3		Py1;
-	MgLine2			Ln1;
-	MgPolyg2		pg1(20);
+	MgPoint2D		pt1, pt2;
+	MgPoint2D		ptK[2];
+	MgPoint2D		ptW[2];
+	MgPoint3D		Py1;
+	MgLine2D			Ln1;
+	MgPolyg2D		pg1(20);
 	MINT			ic1, ic2;
 	MhRoofInfo*		pRoofEn;
 	MPOSITION		pos1;
 	Window::CurWndFocus();
-	MgMinMaxR3		rMmMdl;
-	MgMinMaxR2		rmmMdl;
+	MgMinMaxR3D		rMmMdl;
+	MgMinMaxR2D		rmmMdl;
 	Msg::ClearErrorMsg();
 	Msg::OperationMsg( MC_OPRT_DEL_ROOF);							// ステイタスバーの操作表示部へ"屋根削除"を表示
 
@@ -135,7 +135,7 @@ void MCmdRoofDelete()
 					rMmMdl.Ins3( Py1);
 				}
 			}
-			rmmMdl = MgMinMaxR2( MgPoint2C( rMmMdl.min), MgPoint2C( rMmMdl.max));
+			rmmMdl = MgMinMaxR2D( MgPoint2DC( rMmMdl.min), MgPoint2DC( rMmMdl.max));
 			if ( MGeo::ChkPt2InMMR2( pt1, rmmMdl))
 				break;
 		}

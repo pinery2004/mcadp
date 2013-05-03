@@ -159,7 +159,7 @@ MINT MtCmdThread( void)
 	MINT	ist = 0;
 	MINT	irt;
 	MCHAR	fs1[MC_MCADBUF], fs2[MC_MCADBUF];
-	MgPoint2	pt1;
+	MgPoint2D	pt1;
 	
 	MFOREVER {
 		irt = MtAskForPoint( &pt1);								// 入力イベントに対応したコマンド名取得

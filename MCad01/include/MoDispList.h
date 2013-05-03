@@ -41,7 +41,7 @@ public:
 	//	【機能】全表示エンティティのディスプレイリストを作成する
 	//
 	static MINT DrawAllEnt(							//
-					const	MgPoint3&	PtCtr,		// 構造家モデルの中心
+					const	MgPoint3D&	PtCtr,		// 構造家モデルの中心
 							MREAL		rB			// ３次元表示倍率
 					);
 
@@ -49,7 +49,7 @@ public:
 	//	【機能】図形のディスプレイリストを作成する
 	static MINT	DrawFig(
 					class	MDFIG&		Fig,		// 図形
-					const	MgPoint3	&PtCtr,		// 構造家モデルの中心
+					const	MgPoint3D	&PtCtr,		// 構造家モデルの中心
 							MREAL		rB			// ３次元表示倍率
 					);
 
@@ -58,8 +58,8 @@ public:
 	//	【機能】点のディスプレイリストを作成する		(実座標)
 	//			
 	static void DrawPoint(
-					const	MgPoint3	&i_Pt,		// 点						(実座標)
-					const	MgPoint3	&i_PtCtr,	// 構造家モデルの中心
+					const	MgPoint3D	&i_Pt,		// 点						(実座標)
+					const	MgPoint3D	&i_PtCtr,	// 構造家モデルの中心
 							MREAL		i_rB		// ３次元表示倍率
 					);
 
@@ -67,8 +67,8 @@ public:
 	//	【機能】線分のディスプレイリストを作成する		(実座標)
 	//			
 	static void DrawLine( 
-					const	MgLine3		&Ln,		// 三角形					(実座標)
-					const	MgPoint3	&PtCtr,		// 構造家モデルの中心
+					const	MgLine3D		&Ln,		// 三角形					(実座標)
+					const	MgPoint3D	&PtCtr,		// 構造家モデルの中心
 							MREAL		rB			// ３次元表示倍率
 					);
 
@@ -78,8 +78,8 @@ public:
 	//				(隙間を埋める為に若干大きめに作成する）（要検討）
 	//			
 	static void DspTriangles( 
-					const	MgPolyg3	&PGTri,			// 三角形				(論理座標)
-					const	MgVect3		&VuUp			// ３角形平面の法線ベクトル
+					const	MgPolyg3D	&PGTri,			// 三角形				(論理座標)
+					const	MgVect3D		&VuUp			// ３角形平面の法線ベクトル
 					);
 
 	////////////////////////////////////////////////////////////////////////////
@@ -87,16 +87,16 @@ public:
 	//				(底辺と上辺より作成)
 	//			
 	static void DspQuads( 
-					const	MgLine3		&LnLf,			// 底辺（右辺）			(論理座標)
-					const	MgLine3		&LnRt			// 上辺（左辺）			(論理座標)
+					const	MgLine3D		&LnLf,			// 底辺（右辺）			(論理座標)
+					const	MgLine3D		&LnRt			// 上辺（左辺）			(論理座標)
 					);
 
 	////////////////////////////////////////////////////////////////////////////
 	//	【機能】穴付き多角形のディスプレイリストを作成する	(実座標)
 	//			
 	static void DrawPolygon(
-					const	MgGPolyg3	&GPgR,			// 穴付き多角形			(実座標)
-					const	MgPoint3	&PtCtr,			// 構造家モデルの中心	(実座標)
+					const	MgGPolyg3D	&GPgR,			// 穴付き多角形			(実座標)
+					const	MgPoint3D	&PtCtr,			// 構造家モデルの中心	(実座標)
 							MREAL		rB				// ３次元表示倍率
 					);
 
@@ -104,10 +104,10 @@ public:
 	//	【機能】直方体のディスプレイリストを作成する	(論理座標)
 	//			
 	static void DspRectangular( 
-							MgPoint3	PT[2][2][2],	// 直方体の頂点座標		(論理座標)
-					const	MgVect3		&VuLng,			// 始点から終点方向の単位ベクトル
-					const	MgVect3		&VuRt,			// 右方向の単位ベクトル
-					const	MgVect3		&VuUp			// 上方向の単位ベクトル
+							MgPoint3D	PT[2][2][2],	// 直方体の頂点座標		(論理座標)
+					const	MgVect3D		&VuLng,			// 始点から終点方向の単位ベクトル
+					const	MgVect3D		&VuRt,			// 右方向の単位ベクトル
+					const	MgVect3D		&VuUp			// 上方向の単位ベクトル
 					);
 
 	////////////////////////////////////////////////////////////////////////////
@@ -166,14 +166,14 @@ public:
 ////////////////////////////////////////////////////////////////////////////
 //	【機能】実座標系の点座標を３次元表示座標(論理座標)に変換する
 
-inline MgPoint3 DPtoDSP(						//							(論理座標)
-				const	MgPoint3	&i_Pt,		// 相対実座標系の点座標		(実座標)
+inline MgPoint3D DPtoDSP(						//							(論理座標)
+				const	MgPoint3D	&i_Pt,		// 相対実座標系の点座標		(実座標)
 				const	MREAL		&i_rZ,		// 基準高さ					(実座標)
-				const	MgPoint3	&i_PtCtr,	// 実座標の中心座標			(実座標)
+				const	MgPoint3D	&i_PtCtr,	// 実座標の中心座標			(実座標)
 						MREAL		i_rB		// 実座標から３次元表示座標に変換の倍率
 				)
 {
-	return MgPoint3( ( i_Pt.x - i_PtCtr.x) * i_rB, 
+	return MgPoint3D( ( i_Pt.x - i_PtCtr.x) * i_rB, 
 					 ( i_Pt.y - i_PtCtr.y) * i_rB,
 					 ( i_Pt.z + i_rZ - i_PtCtr.z) * i_rB
 				);
@@ -182,17 +182,17 @@ inline MgPoint3 DPtoDSP(						//							(論理座標)
 ////////////////////////////////////////////////////////////////////////////
 //	【機能】実座標系の線分座標を３次元表示座標(論理座標)に変換する
 
-inline MgLine3 DPtoDSP(							//											(論理座標)
-				const	MgLine3		&i_Ln,		// 相対実座標系の線分座標					(実座標)
+inline MgLine3D DPtoDSP(							//											(論理座標)
+				const	MgLine3D		&i_Ln,		// 相対実座標系の線分座標					(実座標)
 				const	MREAL		&i_rZ,		// 基準高さ									(実座標)
-				const	MgPoint3	&i_PtCtr,	// 実座標の中心座標							(実座標)
+				const	MgPoint3D	&i_PtCtr,	// 実座標の中心座標							(実座標)
 						MREAL		i_rB		// 実座標から３次元表示座標に変換の倍率
 				)
 {
-	return MgLine3( 
-			MgPoint3( ( i_Ln.p[0].x - i_PtCtr.x) * i_rB, ( i_Ln.p[0].y - i_PtCtr.y) * i_rB,
+	return MgLine3D( 
+			MgPoint3D( ( i_Ln.p[0].x - i_PtCtr.x) * i_rB, ( i_Ln.p[0].y - i_PtCtr.y) * i_rB,
 					  ( i_Ln.p[0].z + i_rZ - i_PtCtr.z) * i_rB),
-			MgPoint3( ( i_Ln.p[1].x - i_PtCtr.x) * i_rB, ( i_Ln.p[1].y - i_PtCtr.y) * i_rB,
+			MgPoint3D( ( i_Ln.p[1].x - i_PtCtr.x) * i_rB, ( i_Ln.p[1].y - i_PtCtr.y) * i_rB,
 					  ( i_Ln.p[1].z + i_rZ - i_PtCtr.z) * i_rB) 
 				);
 }
@@ -201,12 +201,12 @@ inline MgLine3 DPtoDSP(							//											(論理座標)
 //	【機能】実座標系の屋根面３角形座標を３次元表示座標に変換する
 //
 inline void DPtoDSP3(
-				const	MgPolyg3	&i_PgI,		// 屋根面３角形（基準高さからの相対高さ）	(実座標)
+				const	MgPolyg3D	&i_PgI,		// 屋根面３角形（基準高さからの相対高さ）	(実座標)
 				const	MREAL		&i_rZ,		// 基準高さ									(実座標)
-				const	MgVect3		&i_VtR,		// 屋根基準面から屋根面への移動ベクトル		(実座標)
-				const	MgPoint3	&i_PtCtr,	// 実座標の中心座標							(実座標)
+				const	MgVect3D		&i_VtR,		// 屋根基準面から屋根面への移動ベクトル		(実座標)
+				const	MgPoint3D	&i_PtCtr,	// 実座標の中心座標							(実座標)
 						MREAL		i_rB,		// 実座標から３次元表示座標に変換の倍率
-						MgPolyg3*	o_pPgO		// ３次元表示上面							(論理座標)
+						MgPolyg3D*	o_pPgO		// ３次元表示上面							(論理座標)
 				)
 {
 	MINT	ic0;
@@ -219,12 +219,12 @@ inline void DPtoDSP3(
 }
 
 inline void DPtoDSP3R(
-				const	MgPolyg3	&i_PgI,		// 屋根面３角形（基準高さからの相対高さ）	(実座標)
+				const	MgPolyg3D	&i_PgI,		// 屋根面３角形（基準高さからの相対高さ）	(実座標)
 				const	MREAL		&i_rZ,		// 基準高さ									(実座標)
-				const	MgVect3		&i_VtR,		// 屋根基準面から屋根面への移動ベクトル		(実座標)
-				const	MgPoint3	&i_PtCtr,		// 実座標の中心座標							(実座標)
+				const	MgVect3D		&i_VtR,		// 屋根基準面から屋根面への移動ベクトル		(実座標)
+				const	MgPoint3D	&i_PtCtr,		// 実座標の中心座標							(実座標)
 						MREAL		i_rB,			// 実座標から３次元表示座標に変換の倍率
-						MgPolyg3*	o_pPgO		// ３次元表示下面(裏方向)					(論理座標)
+						MgPolyg3D*	o_pPgO		// ３次元表示下面(裏方向)					(論理座標)
 				)
 {
 	MINT	ic0, ic1;

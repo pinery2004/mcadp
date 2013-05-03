@@ -161,12 +161,12 @@ inline T MAX( T& t1, T& t2)
 //
 //	例	MGPOLYG( dd, MX_PNT1);
 //			↓
-//		MgPoint2	MPB_dd[MX_PNT1];
-//		MgPolyg2	dd;
+//		MgPoint2D	MPB_dd[MX_PNT1];
+//		MgPolyg2D	dd;
 //		dd.sz = MX_PNT1;
 //		dd.p = MPB_dd;
 //
-#define		MGPOLYG2( P, M)	MgPoint2 MPB_ ## P[M]; MgPolyg2 P; P.m_isz = M; P.m_p = MPB_ ## P;
+#define		MGPOLYG2( P, M)	MgPoint2D MPB_ ## P[M]; MgPolyg2D P; P.m_isz = M; P.m_p = MPB_ ## P;
 //
 //	定数で指定したサイズの点データ配列を持つ多角形を作成する
 //
@@ -174,12 +174,12 @@ inline T MAX( T& t1, T& t2)
 //
 //	例	MGPOLYG3( dd, MX_PNT1);
 //			↓
-//		MgPoint3	MPB_dd[MX_PNT1];
-//		MgPolyg3	dd;
+//		MgPoint3D	MPB_dd[MX_PNT1];
+//		MgPolyg3D	dd;
 //		dd.sz = MX_PNT1;
 //		dd.p = MPB_dd;
 //
-#define		MGPOLYG3( P, M)	MgPoint3 MPB_ ## P[M]; MgPolyg3 P; P.m_isz = M; P.m_P = MPB_ ## P;
+#define		MGPOLYG3( P, M)	MgPoint3D MPB_ ## P[M]; MgPolyg3D P; P.m_isz = M; P.m_P = MPB_ ## P;
 //
 //	定数で指定したサイズの点データ配列を持つ多角形の配列を持つ多角形群を作成する
 //
@@ -187,11 +187,11 @@ inline T MAX( T& t1, T& t2)
 //
 //	例	MGGPOLYG2( dd, MX_PNT1, 20, 10);
 //			↓
-//		MgPolyg2	MPGB_dd[3];
-//		MgPoint2	MPB1_dd[MX_PNT1];
-//		MgPoint2	MPB2_dd[20];
-//		MgPoint2	MPB3_dd[10];
-//		MgGPolyg2	dd;
+//		MgPolyg2D	MPGB_dd[3];
+//		MgPoint2D	MPB1_dd[MX_PNT1];
+//		MgPoint2D	MPB2_dd[20];
+//		MgPoint2D	MPB3_dd[10];
+//		MgGPolyg2D	dd;
 //		dd.sz = 3;
 //		dd.pg = MPGB_dd;
 //		dd.pg[0].sz = MX_PNT1;
@@ -202,9 +202,9 @@ inline T MAX( T& t1, T& t2)
 //		dd.pg[2].p = MPB3_dd;
 //
 #define		MGGPOLYG2( P, M1, M2, M3)\
-								MgPolyg2 MPGB_ ## P[3]; MgPoint2 MPB1_ ## P[M1];\
-								MgPoint2 MPB2_ ## P[M2]; MgPoint2 MPB3_ ## P[M3];\
-								MgGPolyg2 P; P.m_isz = 3; P.m_pg = MPGB_ ## P;\
+								MgPolyg2D MPGB_ ## P[3]; MgPoint2D MPB1_ ## P[M1];\
+								MgPoint2D MPB2_ ## P[M2]; MgPoint2D MPB3_ ## P[M3];\
+								MgGPolyg2D P; P.m_isz = 3; P.m_pg = MPGB_ ## P;\
 								P.m_pg[0].m_isz = M1; P.m_pg[0].m_p = MPB1_ ## P;\
 								P.m_pg[1].m_isz = M2; P.m_pg[1].m_p = MPB2_ ## P;\
 								P.m_pg[2].m_isz = M3; P.m_pg[2].m_p = MPB3_ ## P;
@@ -213,11 +213,11 @@ inline T MAX( T& t1, T& t2)
 //
 //	例	MBMALCPOLYG( dd, GPt2->n, MX_PNT1);
 //			↓
-//		MgPoint2	MPB_dd[MX_PNT1];
-//		MgPolyg2	dd;
+//		MgPoint2D	MPB_dd[MX_PNT1];
+//		MgPolyg2D	dd;
 //		if (GPt2->n > MX_PNT1) {
 //			dd.sz = GPt2->n;
-//			dd.p = (MgPoint2 *)new char[sizeof( MgPoint2) * GPt2->n];
+//			dd.p = (MgPoint2D *)new char[sizeof( MgPoint2D) * GPt2->n];
 //					MBCHECK_POINTER( dd.p);
 //		} else {
 //			dd.sz = MX_PNT1;
@@ -225,19 +225,19 @@ inline T MAX( T& t1, T& t2)
 //		}
 //
 #define		MBMALCPOLYG2( P, S, M)\
-								 MgPoint2 MLB_ ## P[M]; MgPolyg2 P;\
-								 if (S > M) {P.m_isz = S; P.m_p = (MgPoint2 *)new char[S * sizeof(MgPoint2)]; MBCHECK_POINTER( P.m_p);}\
+								 MgPoint2D MLB_ ## P[M]; MgPolyg2D P;\
+								 if (S > M) {P.m_isz = S; P.m_p = (MgPoint2D *)new char[S * sizeof(MgPoint2D)]; MBCHECK_POINTER( P.m_p);}\
 								 else {P.sz = M; P.m_p = MLB_ ## P;}
 //
 //	MBMALCPOLYG3( 線分群名, 確保要求サイズ(変数), 初期配列サイズ(定数)); 
 //
 //	例	MBMALCPOLYG3( dd, GPt2->n, MX_PNT1);
 //			↓
-//		MgPoint3	MPB_dd[MX_PNT1];
-//		MgPolyg3	dd;
+//		MgPoint3D	MPB_dd[MX_PNT1];
+//		MgPolyg3D	dd;
 //		if (GPt2->n > MX_PNT1) {
 //			dd.sz = GPt2->n;
-//			dd.p = (MgPoint3 *)new char[GPt2->n * sizeof( MgPoint3)];
+//			dd.p = (MgPoint3D *)new char[GPt2->n * sizeof( MgPoint3D)];
 //					MBCHECK_POINTER( dd.p);
 //		} else {
 //			dd.sz = MX_PNT1;
@@ -245,8 +245,8 @@ inline T MAX( T& t1, T& t2)
 //		}
 //
 #define		MBMALCPOLYG3( P, S, M)\
-								MgPoint3 MLB_ ## P[M]; MgPolyg3 P;\
-								if (S > M) {P.m_isz = S; P.m_p = (MgPoint3 *)new char[S * sizeof(MgPoint3)]; MBCHECK_POINTER( P.m_p);}\
+								MgPoint3D MLB_ ## P[M]; MgPolyg3D P;\
+								if (S > M) {P.m_isz = S; P.m_p = (MgPoint3D *)new char[S * sizeof(MgPoint3D)]; MBCHECK_POINTER( P.m_p);}\
 								else {P.m_isz = M; P.m_p = MLB_ ## P;}
 //
 //	定数で指定したサイズの点データ配列を持つ多角形の配列を持つ多角形群を作成する
@@ -255,11 +255,11 @@ inline T MAX( T& t1, T& t2)
 //
 //	例	MGGPOLYG3( dd, MX_PNT1, 20, 10);
 //			↓
-//		MgPolyg3	MPGB_dd[3];
-//		MgPoint3	MPB1_dd[MX_PNT1];
-//		MgPoint3	MPB2_dd[20];
-//		MgPoint3	MPB3_dd[10];
-//		MgGPolyg3	dd;
+//		MgPolyg3D	MPGB_dd[3];
+//		MgPoint3D	MPB1_dd[MX_PNT1];
+//		MgPoint3D	MPB2_dd[20];
+//		MgPoint3D	MPB3_dd[10];
+//		MgGPolyg3D	dd;
 //		dd.sz = 3;
 //		dd.pg = MPGB_dd;
 //		dd.pg[0].sz = MX_PNT1;
@@ -270,9 +270,9 @@ inline T MAX( T& t1, T& t2)
 //		dd.pg[2].p = MPB3_dd;
 //
 #define		MGGPOLYG3( P, M1, M2, M3)\
-								MgPolyg3 MPGB_ ## P[3]; MgPoint3 MPB1_ ## P[M1];\
-								MgPoint3 MPB2_ ## P[M2]; MgPoint3 MPB3_ ## P[M3];\
-								MgGPolyg2 P; P.m_isz = 3; P.m_pg = MPGB_ ## P;\
+								MgPolyg3D MPGB_ ## P[3]; MgPoint3D MPB1_ ## P[M1];\
+								MgPoint3D MPB2_ ## P[M2]; MgPoint3D MPB3_ ## P[M3];\
+								MgGPolyg2D P; P.m_isz = 3; P.m_pg = MPGB_ ## P;\
 								P.m_pg[0].m_isz = M1; P.m_pg[0].p = MPB1_ ## P;\
 								P.m_pg[1].m_isz = M2; P.m_pg[1].p = MPB2_ ## P;\
 								P.m_pg[2].m_isz = M3; P.m_pg[2].p = MPB3_ ## P;
@@ -283,26 +283,26 @@ inline T MAX( T& t1, T& t2)
 //
 //	例	MGGLINE2( dd, MX_PNT1);
 //			↓
-//		MgLine2		MLB_dd[MX_PNT1];
-//		MgGLine2		dd;
+//		MgLine2D		MLB_dd[MX_PNT1];
+//		MgGLine2D		dd;
 //		dd.sz = MX_PNT1;
 //		dd.ln = MLB_dd;
 //
-#define		MGGLINE2( P, M)	MgLine2 MLB_ ## P[M]; MgGLine2 P; P.m_isz = M; P.m_ln = MLB_ ## P;
+#define		MGGLINE2( P, M)	MgLine2D MLB_ ## P[M]; MgGLine2D P; P.m_isz = M; P.m_ln = MLB_ ## P;
 //
 //
 //	定数で指定したサイズの線分データ配列を持つ線分群を作成する
 //
-//	MgGLine3( 線分群名, 配列サイズ(定数)); 
+//	MgGLine3D( 線分群名, 配列サイズ(定数)); 
 //
-//	例	MgGLine3( dd, MX_PNT1);
+//	例	MgGLine3D( dd, MX_PNT1);
 //			↓
-//		MgLine3		MLB_dd[MX_PNT1];
-//		MgGLine3	dd;
+//		MgLine3D		MLB_dd[MX_PNT1];
+//		MgGLine3D	dd;
 //		dd.sz = MX_PNT1;
 //		dd.ln = MLB_dd;
 //
-#define		MGGLINE3( P, M)	MgLine3 MLB_ ## P[M]; MgGLine3 P; P.m_isz = M; P.m_ln = MLB_ ## P;
+#define		MGGLINE3( P, M)	MgLine3D MLB_ ## P[M]; MgGLine3D P; P.m_isz = M; P.m_ln = MLB_ ## P;
 //
 //	定数で指定したサイズの線分データ配列を線分群を作成する
 //		初期に定数で指定したサイズの配列を定義しているが変数で指定したサイズの方が大きい場合にmallocで作成する。
@@ -312,11 +312,11 @@ inline T MAX( T& t1, T& t2)
 //
 //	例	MBMALCGLINE2( dd, GPt2->n, MX_PNT1);
 //			↓
-//		MgLine2		MLB_dd[MX_PNT1];
-//		MgGLine2		dd;
+//		MgLine2D		MLB_dd[MX_PNT1];
+//		MgGLine2D		dd;
 //		if (GPt2->n > MX_PNT1) {
 //			dd.sz = GPt2->n;
-//			dd.ln = (MgLine2 *)new char[GPt2->n * sizeof( MgLine2)];
+//			dd.ln = (MgLine2D *)new char[GPt2->n * sizeof( MgLine2D)];
 //					MBCHECK_POINTER( dd.ln);
 //		} else {
 //			dd.sz = MX_PNT1;
@@ -324,8 +324,8 @@ inline T MAX( T& t1, T& t2)
 //		}
 //
 #define		MBMALCGLINE2( P, S, M)\
-								 MgLine2 MLB_ ## P[M]; MgGLine2 P;\
-								 if (S > M) {P.m_isz = S; P.m_ln = (MgLine2 *)new char[S * sizeof(MgLine2)]; MBCHECK_POINTER( P.m_ln);}\
+								 MgLine2D MLB_ ## P[M]; MgGLine2D P;\
+								 if (S > M) {P.m_isz = S; P.m_ln = (MgLine2D *)new char[S * sizeof(MgLine2D)]; MBCHECK_POINTER( P.m_ln);}\
 								 else {P.m_isz = M; P.m_ln = MLB_ ## P;}
 //
 //	定数で指定したサイズの線分データ配列を線分群を作成する
@@ -336,11 +336,11 @@ inline T MAX( T& t1, T& t2)
 //
 //	例	MBMALCGLINE3( dd, GPt2->n, MX_PNT1);
 //			↓
-//		MgLine3		MLB_dd[MX_PNT1];
-//		MgGLine3	dd;
+//		MgLine3D		MLB_dd[MX_PNT1];
+//		MgGLine3D	dd;
 //		if (GPt2->n > MX_PNT1) {
 //			dd.sz = GPt2->n;
-//			dd.ln = (MgLine3 *)new char[GPt2->n * sizeof( MgLine3)];
+//			dd.ln = (MgLine3D *)new char[GPt2->n * sizeof( MgLine3D)];
 //					MBCHECK_POINTER( dd.ln);
 //		} else {
 //			dd.sz = MX_PNT1;
@@ -348,8 +348,8 @@ inline T MAX( T& t1, T& t2)
 //		}
 //
 #define		MBMALCGLINE3( P, S, M)\
-								 MgLine3 MLB_ ## P[M]; MgGLine3 P;\
-								 if (S > M) {P.m_isz = S; P.m_ln = (MgLine3 *)new char[S * sizeof(MgLine3)]; MBCHECK_POINTER( P.m_ln);}\
+								 MgLine3D MLB_ ## P[M]; MgGLine3D P;\
+								 if (S > M) {P.m_isz = S; P.m_ln = (MgLine3D *)new char[S * sizeof(MgLine3D)]; MBCHECK_POINTER( P.m_ln);}\
 								 else {P.m_isz = M; P.m_ln = MLB_ ## P;}
 //
 //
@@ -400,7 +400,7 @@ inline T MAX( T& t1, T& t2)
 //
 #define		MBMALCGINT( P, S, M)\
 								 MINT MIB_ ## P[M]; MgGInt P;\
-								 if (S > M) {P.sz = S; P.m_i = (MgPoint2 *)new char[S * sizeof(MgPoint2)]; MBCHECK_POINTER( P.m_i);}\
+								 if (S > M) {P.sz = S; P.m_i = (MgPoint2D *)new char[S * sizeof(MgPoint2D)]; MBCHECK_POINTER( P.m_i);}\
 								 else {P.m_isz = M; P.m_i = MIB_ ## P;}
 //
 //
@@ -416,7 +416,7 @@ inline T MAX( T& t1, T& t2)
 //		MgGReal	dd;
 //		if (GFlt->n > MX_FLT1) {
 //			dd.sz = GFlt->n;
-//			dd.p = (MgPoint3 *)new char[GPt2->n * sizeof( MgPoint3)];
+//			dd.p = (MgPoint3D *)new char[GPt2->n * sizeof( MgPoint3D)];
 //					MBCHECK_POINTER( dd.p);
 //		} else {
 //			dd.sz = MX_FLT1;
@@ -436,25 +436,25 @@ inline T MAX( T& t1, T& t2)
 //
 //	例	MGGPOINT2( dd, MX_PNT1);
 //			↓
-//		MgPoint2	MPB_dd[MX_PNT1];
-//		MgGPoint2	dd;
+//		MgPoint2D	MPB_dd[MX_PNT1];
+//		MgGPoint2D	dd;
 //		dd.sz = MX_PNT1;
 //		dd.p = MPB_dd;
 //
-#define		MGGPOINT2( P, M)	MgPoint2 MPB_ ## P[M]; MgGPoint2 P; P.m_isz = M; P.m_p = MPB_ ## P;
+#define		MGGPOINT2( P, M)	MgPoint2D MPB_ ## P[M]; MgGPoint2D P; P.m_isz = M; P.m_p = MPB_ ## P;
 //
 //	定数で指定したサイズの点データ配列を持つ点群を作成する
 //
-//	MgGPoint3( 点群名, 配列サイズ(定数)); 
+//	MgGPoint3D( 点群名, 配列サイズ(定数)); 
 //
-//	例	MgGPoint3( dd, MX_PNT1);
+//	例	MgGPoint3D( dd, MX_PNT1);
 //			↓
-//		MgPoint3	MPB_dd[MX_PNT1];
-//		MgGPoint3	dd;
+//		MgPoint3D	MPB_dd[MX_PNT1];
+//		MgGPoint3D	dd;
 //		dd.sz = MX_PNT1;
 //		dd.p = MPB_dd;
 //
-#define		MGGPOINT3( P, M)	MgPoint3 MPB_ ## P[M]; MgGPoint3 P; P.m_isz = M; P.m_p = MPB_ ## P;
+#define		MGGPOINT3( P, M)	MgPoint3D MPB_ ## P[M]; MgGPoint3D P; P.m_isz = M; P.m_p = MPB_ ## P;
 //
 //	定数で指定したサイズの点データ配列を持つ点群を作成する
 //		初期に定数で指定したサイズの配列を定義しているが変数で指定したサイズの方が大きい場合にmallocで作成する。
@@ -464,11 +464,11 @@ inline T MAX( T& t1, T& t2)
 //
 //	例	MBMALCGPOINT2( dd, GPt2->n, MX_PNT1);
 //			↓
-//		MgPoint2	MPB_dd[MX_PNT1];
-//		MgGPoint2	dd;
+//		MgPoint2D	MPB_dd[MX_PNT1];
+//		MgGPoint2D	dd;
 //		if (GPt2->n > MX_PNT1) {
 //			dd.sz = GPt2->n;
-//			dd.p = (MgPoint2 *)new char[GPt2->n * sizeof( MgPoint2)];
+//			dd.p = (MgPoint2D *)new char[GPt2->n * sizeof( MgPoint2D)];
 //					MBCHECK_POINTER( dd.p);
 //		} else {
 //			dd.sz = MX_PNT1;
@@ -476,8 +476,8 @@ inline T MAX( T& t1, T& t2)
 //		}
 //
 #define		MBMALCGPOINT2( P, S, M)\
-								 MgPoint2 MLB_ ## P[M]; MgGPoint2 P;\
-								 if (S > M) {P.m_isz = S; P.m_p = (MgPoint2 *)new char[S * sizeof(MgPoint2)]; MBCHECK_POINTER( P.m_p);}\
+								 MgPoint2D MLB_ ## P[M]; MgGPoint2D P;\
+								 if (S > M) {P.m_isz = S; P.m_p = (MgPoint2D *)new char[S * sizeof(MgPoint2D)]; MBCHECK_POINTER( P.m_p);}\
 								 else {P.m_isz = M; P.m_p = MLB_ ## P;}
 //
 //
@@ -489,11 +489,11 @@ inline T MAX( T& t1, T& t2)
 //
 //	例	MBMALCGPOINT3( dd, GPt2->n, MX_PNT1);
 //			↓
-//		MgPoint3	MPB_dd[MX_PNT1];
-//		MgGPoint3	dd;
+//		MgPoint3D	MPB_dd[MX_PNT1];
+//		MgGPoint3D	dd;
 //		if (GPt2->n > MX_PNT1) {
 //			dd.sz = GPt2->n;
-//			dd.p = (MgPoint3 *)new char[GPt2->n * sizeof( MgPoint3)];
+//			dd.p = (MgPoint3D *)new char[GPt2->n * sizeof( MgPoint3D)];
 //					MBCHECK_POINTER( dd.p);
 //		} else {
 //			dd.sz = MX_PNT1;
@@ -501,8 +501,8 @@ inline T MAX( T& t1, T& t2)
 //		}
 //
 #define		MBMALCGPOINT3( P, S, M)\
-								 MgPoint3 MLB_ ## P[M]; MgGPoint3 P;\
-								 if (S > M) {P.m_isz = S; P.m_p = (MgPoint3 *)new char[S * sizeof(MgPoint3)]; MBCHECK_POINTER( P.m_p);}\
+								 MgPoint3D MLB_ ## P[M]; MgGPoint3D P;\
+								 if (S > M) {P.m_isz = S; P.m_p = (MgPoint3D *)new char[S * sizeof(MgPoint3D)]; MBCHECK_POINTER( P.m_p);}\
 								 else {P.m_isz = M; P.m_p = MLB_ ## P;}
 
 /////////////////////////////////////////////////////////////////////////////

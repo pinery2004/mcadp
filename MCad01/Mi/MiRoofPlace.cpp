@@ -51,10 +51,10 @@ namespace MC
 
 /////////////////////////////////////////////////////////////////////////////
 //	屋根を配置する
-MINT mhHaitiIn::RoofPlc(									// (  O) ステイタス	0: 正常、-1: 屋根配置エラー
-				const	MgPolyg2	&pgJim,			// (I  ) 地廻り区画
+MINT mhHaitiIn::RoofPlc(							// (  O) ステイタス	0: 正常、-1: 屋根配置エラー
+				const	MgPolyg2D	&pgJim,			// (I  ) 地廻り区画
 				const	MgGInt		&GifInp,		// (I  ) 地廻り線種類(仮想キー(nflag)  MK_SHIFT(004): シフトキー)
-				const	MgPoint2	&pth			// (I  ) 方向点
+				const	MgPoint2D	&pth			// (I  ) 方向点
 				)
 {
 	MINT	ist = -1;
@@ -98,12 +98,12 @@ void WindowCtrl::MmWndKDrawRoof(
 	MhRoofInfo	*pRoofEn;
 //	MUINT		*pOpt;
 
-	MgLine2		LnRoof;
-	MgPoint2	PtRoofN;
-	MgPoint2	PtW[2];
-	MgPoint2	PtK[4];
-	MgVect2		vPtH;
-	MgVect2		vOffset = MgVect2( 0., 20.);
+	MgLine2D		LnRoof;
+	MgPoint2D	PtRoofN;
+	MgPoint2D	PtW[2];
+	MgPoint2D	PtK[4];
+	MgVect2D		vPtH;
+	MgVect2D		vOffset = MgVect2D( 0., 20.);
 
 	DWORD		RoofLineColor;
 	DWORD		RoofTextColor;
@@ -116,7 +116,7 @@ void WindowCtrl::MmWndKDrawRoof(
 
 	RoofTextColor = mcs::GetColor( MM_COLOR_GRID_TEXT);
 	pCod->SetTextAttr( Mstr( "ＭＳ ゴシック"), 100.f, MT_LOWER, MT_CENTER, RoofTextColor,
-					   MgVect2( 1., 0.), vOffset, MT_FREESIZE);
+					   MgVect2D( 1., 0.), vOffset, MT_FREESIZE);
 
 	ign = 0;
 	for ( pRoofEn = HaitiDb::MdGetHeadRoof( &pos1); pRoofEn!=0;
@@ -131,7 +131,7 @@ void WindowCtrl::MmWndKDrawRoof(
 		pCod->SetLineAttr( MPS_SOLID, 1, RoofLineColor);
 		if ( pRoofEn->GetpZukei()) {
 			for ( ic=0; ic<pRoofEn->GetpZukei()->m_isNZukei; ic++) {
-				pCod->Line( MgLine2C( pRoofEn->GetpZukei()->m_lnZukei[ic]));
+				pCod->Line( MgLine2DC( pRoofEn->GetpZukei()->m_lnZukei[ic]));
 			}
 		}
 
@@ -143,12 +143,12 @@ static MPOSITION	z_RoofPos;
 /////////////////////////////////////////////////////////////////////////////
 //	屋根面を検索する
 //	返値 =NULL: 該当屋根面なし !=NULL: 該当屋根面数
-MhRfm*	mhHaitiIn::SrchRfm(									// (  O) 屋根面　または　NULL
+MhRfm*	mhHaitiIn::SrchRfm(							// (  O) 屋根面　または　NULL
 						MINT		imode,			// 検索モード　指示点に該当する屋根面が複数ある場合の優先選択条件
 													//				MC_PRI_MIN_AREA(0):	 面積が小を優先
 													//				MC_PRI_MIN_HIGHT(1): 高さが小を優先
 													//				MC_PRI_MAX_HIGHT(2) | その他: 高さが大を優先	
-				const	MgPoint2	&pt1			// 指示点
+				const	MgPoint2D	&pt1			// 指示点
 				)
 {
 	MINT		ist1;
@@ -160,7 +160,7 @@ MhRfm*	mhHaitiIn::SrchRfm(									// (  O) 屋根面　または　NULL
 
 	MREAL		rArea;
 
-	MgPolyg2	pgRfm;
+	MgPolyg2D	pgRfm;
 	MhRfm		*pRfm = 0;
 	MREAL		rHight;
 

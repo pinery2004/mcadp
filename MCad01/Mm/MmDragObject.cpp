@@ -39,7 +39,7 @@ static	CPoint			z_ptLDragging[MAXDRAGGING];				// 現在表示中のポリライン頂点の論
 static	MmWndInfo* 		z_pRDragWndInfo = NULL;
 static	MINT			z_modeR = NULL;							// 入力図形種類
 static	MINT			z_nRDragging;							// 入力済ポリライン頂点数
-static	MgPoint2		z_ptRDragging[MAXDRAGGING];				// 入力済ポリライン頂点の座標
+static	MgPoint2D		z_ptRDragging[MAXDRAGGING];				// 入力済ポリライン頂点の座標
 
 static	CPoint			z_ptLDragMouth;
 
@@ -85,7 +85,7 @@ void Window::EraseDragging()
 
 void Window::DrawDragging(
 						MmWndInfo*	pWndInfo,		// (I  ) ウィンドウ管理情報
-						MgPoint2	ptMouthR		// (I  ) マウス位置実座標
+						MgPoint2D	ptMouthR		// (I  ) マウス位置実座標
 				)
 {
 	if ( Window::GetDragMode() && !z_fDrawDragging) {
@@ -116,12 +116,12 @@ void Window::ReDrawDragging()
 MINT Window::DragObject(
 						MINT		mode,			// (I  ) ドラッギング入力モード
 				const	void*		pFg,			// (I  ) ドラッギング入力済み座標
-						MgPoint2*	ptGet			// (  O) マウス位置実座標
+						MgPoint2D*	ptGet			// (  O) マウス位置実座標
 				)
 {
 	MINT		irt;
-	MgPoint2*	pPtSt;
-	MgPolyg2*	pPg;
+	MgPoint2D*	pPtSt;
+	MgPolyg2D*	pPg;
 	MINT		ic;
 
 	// 入力済座標と点数を設定する
@@ -129,30 +129,30 @@ MINT Window::DragObject(
 
 	switch( z_modeR) {
 		case MC_RBND_LINE:										// Line
-			pPtSt = (MgPoint2*)pFg;
+			pPtSt = (MgPoint2D*)pFg;
 			z_ptRDragging[0] = pPtSt[0];
 			z_nRDragging = 1;
 			break;
 		case MC_RBND_RECT:										// Rectangle
-			pPtSt = (MgPoint2*)pFg;
+			pPtSt = (MgPoint2D*)pFg;
 			z_ptRDragging[0] = pPtSt[0];
 			z_nRDragging = 1;
 			break;
 		case MC_RBND_POLYGON:									// Polygon
-			pPg = (MgPolyg2*)pFg;
+			pPg = (MgPolyg2D*)pFg;
 			for ( ic=0; ic<pPg->m_n; ic++) {
 				z_ptRDragging[ic] = pPg->m_p[ic];
 			}
 			z_nRDragging = pPg->m_n;
 			break;
 		case MC_RBND_PARALOG:									// Parallelogram
-			pPtSt = (MgPoint2*)pFg;
+			pPtSt = (MgPoint2D*)pFg;
 			z_ptRDragging[0] = pPtSt[0];
 			z_ptRDragging[1] = pPtSt[1];
 			z_nRDragging = 1;
 			break;
 	}
-	z_pRDragWndInfo = WindowCtrl::MmWndKGetCurWnd();						// ラバーバンド図形表示先カレントウィンドウを設定する
+	z_pRDragWndInfo = WindowCtrl::MmWndKGetCurWnd();			// ラバーバンド図形表示先カレントウィンドウを設定する
 	z_fDragMode = true;											// ラバーバンド図形表示モード開始
 
 	Window::EraseDragging();
@@ -170,13 +170,13 @@ MINT Window::DragObject(
 MINT Window::DispDragging(
 						MINT		ictl,			// (I  ) 表示制御 1 : 表示、0 : 再表示、-1 : 消去
 						MmWndInfo*	pWndInfo,		// (I  ) ウィンドウ管理情報 または NULL
-						MgPoint2*	pptRMouth		// (I  ) マウス位置実座標 または NULL
+						MgPoint2D*	pptRMouth		// (I  ) マウス位置実座標 または NULL
 				)
 {
 	MINT		ic;
 	MINT		iUpL;											// ＸＹ表示バランス
 	CPoint		rev( MCREVOVRP, MCREVOVRP);						// ドラッグ表示線分とグリッド線との重なり補正
-	MgVect2 	v1, v2;
+	MgVect2D 	v1, v2;
 
 	if ( ictl == 1) {
 		z_pLDragWndInfo = pWndInfo;
@@ -231,9 +231,9 @@ MINT Window::DispDragging(
 				z_nLDragging = 5;
 
 				// 形状が一直線に近い場合は線分２本に間引く
-				v1 = MgVect2C( z_ptLDragging[1] - z_ptLDragging[0]); 
+				v1 = MgVect2DC( z_ptLDragging[1] - z_ptLDragging[0]); 
 				v1.SetUnitize();
-				v2 = MgVect2C( z_ptLDragging[2] - z_ptLDragging[1]);
+				v2 = MgVect2DC( z_ptLDragging[2] - z_ptLDragging[1]);
 				v2.SetUnitize();
 				if ( MGeo::Abs(v1 ^ v2) < 0.05) {
 					if ( (v1 * v2) < 0) {

@@ -95,8 +95,8 @@ public:
 	MDPTSSET	m_PartsBf;						// 部品セット
 	MDWINSET	m_WinBf;						// ウィンドウセット
 
-	MgMat3E		m_MBaseTrans;					// 基準座標変換マトリックス
-	MgMat3E		m_MCurTrans;					// カレント座標変換マトリックス
+	MgMat3DE		m_MBaseTrans;					// 基準座標変換マトリックス
+	MgMat3DE		m_MCurTrans;					// カレント座標変換マトリックス
 
 	MDID		m_idCurGrp;						// カレントグループID
 	MDID		m_idCurWin;						// カレントウィンドウID

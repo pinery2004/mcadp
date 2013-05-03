@@ -38,13 +38,13 @@ struct MtPrcEvent: public MOBJECT{
 	void SetPoint( MREAL* rPt)
 						{ m_resval.rpoint[0] = rPt[0]; m_resval.rpoint[1] = rPt[1];}
 
-	void SetPoint( MgPoint2* Pt)
+	void SetPoint( MgPoint2D* Pt)
 						{ m_resval.rpoint[0] = Pt->x; m_resval.rpoint[1] = Pt->y;}
 
 	void GetPoint( MREAL* rPt)
 						{ rPt[0] = m_resval.rpoint[0]; rPt[1] = m_resval.rpoint[1];}
 
-	void GetPoint( MgPoint2* Pt)
+	void GetPoint( MgPoint2D* Pt)
 						{ Pt->x = m_resval.rpoint[0]; Pt->y = m_resval.rpoint[1];}
 	void Free( void);
 };

@@ -29,27 +29,27 @@ class MmDrag
 {
 	public:
 		MmDrag() {};
-		MmDrag(MmWndInfo* pWndInfo, MgPoint2 ptStart);
+		MmDrag(MmWndInfo* pWndInfo, MgPoint2D ptStart);
 		~MmDrag(void);
 
 		void SetMotion( MmDragType Motion)
 						{ m_Motion = Motion;}
 		MmDragType GetMotion()
 						{ return m_Motion;}
-		void SetLastPt( MgPoint2 ptLatest)
+		void SetLastPt( MgPoint2D ptLatest)
 						{ m_ptLast = ptLatest;}
-//		MgPoint2 GetLastPt()
+//		MgPoint2D GetLastPt()
 //						{ return m_ptLast;}
-		void SetStartPt( MgPoint2 ptLatest)
+		void SetStartPt( MgPoint2D ptLatest)
 						{ m_ptStart = ptLatest;};
-		MgPoint2 GetStartPt()
+		MgPoint2D GetStartPt()
 						{ return m_ptStart;};
-		virtual bool Continue( MmWndInfo* pWndInfo, MgPoint2 ptLatest);
+		virtual bool Continue( MmWndInfo* pWndInfo, MgPoint2D ptLatest);
 
 	protected:
 		MmWndInfo*		m_pWndInfo;
-		MgPoint2		m_ptStart;
-		MgPoint2		m_ptLast;
+		MgPoint2D		m_ptStart;
+		MgPoint2D		m_ptLast;
 		MINT			m_iPrevCursorMode;
 
 		void			RedrawAfter( MmWndInfo* pWndInfo);
@@ -62,9 +62,9 @@ class MmDrag
 class MmDragZoom : public MmDrag
 {
 	public:
-		MmDragZoom( MmWndInfo* pWndInfo, MgPoint2 ptStart);
+		MmDragZoom( MmWndInfo* pWndInfo, MgPoint2D ptStart);
 
-		bool Continue( MmWndInfo* pWndInfo, MgPoint2 ptLatest);
+		bool Continue( MmWndInfo* pWndInfo, MgPoint2D ptLatest);
 
 };
 	
@@ -72,9 +72,9 @@ class MmDragZoom : public MmDrag
 class MmDragPan : public MmDrag
 {
 	public:
-		MmDragPan( MmWndInfo* pWndInfo, MgPoint2 ptStart);
+		MmDragPan( MmWndInfo* pWndInfo, MgPoint2D ptStart);
 
-		bool Continue( MmWndInfo* pWndInfo, MgPoint2 ptLatest);
+		bool Continue( MmWndInfo* pWndInfo, MgPoint2D ptLatest);
 };
 
 // _MmDrag_H

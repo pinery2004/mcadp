@@ -30,7 +30,7 @@ class	mhPlcParts: public MOBJECT
 	friend	class	MdPartsQueue;
 	friend	void	MdPartsModify( mhPlcParts *pPlcEnR, mhPlcParts* *ppPlcEnM);
 	friend	void	MdPartsDelete( MPOSITION pPosition);
-	friend	void	MmPartsPlc( const MgPoint3 *Pt, const MgVect3 vUpPlc, const MgPolyg2 *pPg);
+	friend	void	MmPartsPlc( const MgPoint3D *Pt, const MgVect3D vUpPlc, const MgPolyg2D *pPg);
 	friend	void	MmWndKDrawParts( class MmWndInfo* pWndInfo);
 	friend	void	IeModel::MhNormKabe( MINT nProc);
 	friend	void	MhNormKiso( MINT nProc);
@@ -55,14 +55,14 @@ public:
 	MSHORT				m_isMbrId;				// 寸法型式ID
 	mhPartsSpec*			m_pPartsSpec;		// 部品種類
 	MhMbr*				m_pMbr;					// 寸法型式
-	MgLine3				m_lnPlc;				// p[0]: 始点 | 配置点
+	MgLine3D				m_lnPlc;				// p[0]: 始点 | 配置点
 												// p[1]: 終点 | 配置方向点
-	MgVect3				m_vUpPlc;				// 配置上方向(配置点の上側方向)
+	MgVect3D				m_vUpPlc;				// 配置上方向(配置点の上側方向)
 	MREAL				m_rSinZure;				// 材軸芯ずれ量		>0:右側、<0:左側
 	MREAL				m_rPlcZure;				// 配置点ずれ量		>0:前、　<0:後
 	MREAL				m_rLngHosei[2];			// 長さ補正値（始点側、終点側）
 	MREAL				m_rHgt[2];				// 高さ（取り付け高さ、高さ）
-	MgPoint2			m_ptCmnt1;				// 注記表示位置
+	MgPoint2D			m_ptCmnt1;				// 注記表示位置
 	union	{									// 補助属性
 		class MhAuxAttr*	m_pAuxAttr;			// 補助属性総称
 		class MhTateguInfo*	m_pAuxTategu;		// 建具
@@ -132,13 +132,13 @@ public:
 								m_pPartsSpec = pPartsSpec;}			
 	void	SetPIMbr( MhMbr* pMbr)	{							// 寸法型式							
 								m_pMbr = pMbr;}				
-	void 	SetPIPlcIti( MgLine3 lnPlc)	{						// 配置位置（始点・終点）
+	void 	SetPIPlcIti( MgLine3D lnPlc)	{						// 配置位置（始点・終点）
 								m_lnPlc = lnPlc;}				// p[0]: 始点 | 配置点
 																// p[1]: 終点 | 配置方向点
-	void 	SetPIPlcIti( MINT iti, MgPoint3 ptPlc)	{			// 配置位置（始点・終点） 
+	void 	SetPIPlcIti( MINT iti, MgPoint3D ptPlc)	{			// 配置位置（始点・終点） 
 								m_lnPlc.p[iti] = ptPlc;}		// p[0]: 始点 | 配置点
 																// p[1]: 終点 | 配置方向点
-	void 	SetPIUpPlc( MgVect3 vUpPlc)	{						// 配置上方向
+	void 	SetPIUpPlc( MgVect3D vUpPlc)	{						// 配置上方向
 								m_vUpPlc = vUpPlc;}			
 	void	SetPISinZure ( MREAL rSinZure)	{					// 材軸芯ずれ量　	>0:右側、<0:左側
 								m_rSinZure = rSinZure;}		
@@ -148,7 +148,7 @@ public:
 								m_rLngHosei[iti] = rLngHosei;}
 	void	SetPIHgt( MINT iti, MREAL rHgt)	{					// 高さ（取り付け高さ(0)、高さ(1)）
 								m_rHgt[iti] = rHgt;}			
-	void	SetPICmntPt( MgPoint2	ptCmnt)	{					// 注記表示位置
+	void	SetPICmntPt( MgPoint2D	ptCmnt)	{					// 注記表示位置
 								m_ptCmnt1 = ptCmnt;}			
 	void	SetPIAuxAttr( class MhAuxAttr* pAuxAttr)	{		// 補助属性　総称
 								m_pAuxAttr = pAuxAttr;}		
@@ -194,13 +194,13 @@ public:
 								return m_pPartsSpec;}			// 部品種類
 	MhMbr*		GetPIMbr()		{	
 								return m_pMbr;}					// 寸法型式
-	MgLine3 	GetPIPlcIti()	{
+	MgLine3D 	GetPIPlcIti()	{
 								return m_lnPlc;}				// p[0]: 始点 | 配置点
 																// p[1]: 終点 | 配置方向点
-	MgPoint3 	GetPIPlcIti( MINT iti)	{ 
+	MgPoint3D 	GetPIPlcIti( MINT iti)	{ 
 								return m_lnPlc.p[iti];}			// p[0]: 始点 | 配置点
 																// p[1]: 終点 | 配置方向点
-	MgVect3 	GetPIUpPlc()	{
+	MgVect3D 	GetPIUpPlc()	{
 								return m_vUpPlc;}				// 配置上方向
 	MREAL		GetPISinZure ()	{
 								return m_rSinZure;}				// 材軸芯ずれ量　	>0:右側、<0:左側
@@ -214,7 +214,7 @@ public:
 								return m_rHgt;}					// 高さ（取り付け高さ(0)、高さ(1)）
 	MREAL		GetPIHgt( MINT iti)	{
 								return m_rHgt[iti];}			// 高さ（取り付け高さ(0)、高さ(1)）
-	MgPoint2	GetPICmntPt()	{
+	MgPoint2D	GetPICmntPt()	{
 								return m_ptCmnt1;}				// 注記表示位置
 	class MhAuxAttr*	GetPIAuxAttr()	{
 								return m_pAuxAttr;}				// 補助属性　総称

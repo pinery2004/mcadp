@@ -110,7 +110,7 @@ void DispList::MsOnSize(UINT nType, int cx, int cy)
 	glTranslated (0.0f, 0.0f, -5.0f);							// 視体積の中に入るよう移動する
 	
 	DispList::SetLightModel1();									// 光源のパラメータの設定1
-	DispList::SetLight();											// 光源の設定1
+	DispList::SetLight();										// 光源の設定1
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -330,10 +330,10 @@ void DispList::SetMaterial(
 //	【機能】直方体のディスプレイリストを作成する (MakeDisplaylist)
 //			
 void DispList::DspRectangular( 
-						MgPoint3	PT[2][2][2],	// 直方体の頂点座標		(論理座標)
-				const	MgVect3		&VuLng,			// 始点から終点方向の単位ベクトル
-				const	MgVect3		&VuRt,			// 右方向の単位ベクトル
-				const	MgVect3		&VuUp			// 上方向の単位ベクトル
+						MgPoint3D	PT[2][2][2],	// 直方体の頂点座標		(論理座標)
+				const	MgVect3D	&VuLng,			// 始点から終点方向の単位ベクトル
+				const	MgVect3D	&VuRt,			// 右方向の単位ベクトル
+				const	MgVect3D	&VuUp			// 上方向の単位ベクトル
 				)
 {
 	glBegin( GL_QUADS);
@@ -390,14 +390,14 @@ void DispList::DspRectangular(
 //				(隙間を埋める為に若干大きめに作成する）（要検討）
 //			
 void DispList::DspTriangles( 
-				const	MgPolyg3	&PGTri,			// 三角形		(論理座標)
-				const	MgVect3		&VuUp			// ３角形平面の法線ベクトル
+				const	MgPolyg3D	&PGTri,			// 三角形		(論理座標)
+				const	MgVect3D	&VuUp			// ３角形平面の法線ベクトル
 				)
 {
 //#define TRIANGLE_HOSEI 1
 #ifdef TRIANGLE_HOSEI
-	MgPoint3	Pc;
-	MgPoint3	Pc0, Pc1, Pc2;
+	MgPoint3D	Pc;
+	MgPoint3D	Pc0, Pc1, Pc2;
 
 	Pc = (PGTri.p[0] + PGTri.p[1] + PGTri.p[2]) / 3.;
 	Pc0 = (PGTri.p[0] - Pc) * 0.0005;
@@ -408,7 +408,7 @@ void DispList::DspTriangles(
 	PGTri.p[2] += Pc2;
 #endif
 	glBegin( GL_TRIANGLES);
-		glNormal3r( VuUp.x, VuUp.y, VuUp.z);					// 面の法線ベクトル
+		glNormal3r( VuUp.x, VuUp.y, VuUp.z);			// 面の法線ベクトル
 		glVertex3r( PGTri.m_P[0].x, PGTri.m_P[0].y, PGTri.m_P[0].z);
 		glVertex3r( PGTri.m_P[1].x, PGTri.m_P[1].y, PGTri.m_P[1].z);
 		glVertex3r( PGTri.m_P[2].x, PGTri.m_P[2].y, PGTri.m_P[2].z);
@@ -419,12 +419,12 @@ void DispList::DspTriangles(
 //	【機能】点のディスプレイリストを作成する
 //			
 void DispList::DrawPoint(
-				const	MgPoint3	&i_Pt,				// 点		(実座標)
-				const	MgPoint3	&i_PtCtr,			// 構造家モデルの中心
+				const	MgPoint3D	&i_Pt,				// 点		(実座標)
+				const	MgPoint3D	&i_PtCtr,			// 構造家モデルの中心
 						MREAL		i_rB				// ３次元表示倍率
 				)
 {
-	MgPoint3	Pt;
+	MgPoint3D	Pt;
 
 	Pt = DPtoDSP( i_Pt, 0., i_PtCtr, i_rB);
 
@@ -441,12 +441,12 @@ void DispList::DrawPoint(
 //	【機能】線分のディスプレイリストを作成する
 //			
 void DispList::DrawLine(
-				const	MgLine3		&i_Ln,				// 線分		(実座標)
-				const	MgPoint3	&i_PtCtr,			// 構造家モデルの中心
+				const	MgLine3D	&i_Ln,				// 線分		(実座標)
+				const	MgPoint3D	&i_PtCtr,			// 構造家モデルの中心
 						MREAL		i_rB				// ３次元表示倍率
 				)
 {
-	MgLine3	Ln;
+	MgLine3D	Ln;
 
 	Ln = DPtoDSP( i_Ln, 0., i_PtCtr, i_rB);
 
@@ -465,12 +465,12 @@ void DispList::DrawLine(
 //				(底辺と上辺より作成)
 //			
 void DispList::DspQuads( 
-				const	MgLine3		&LnLf,			// 底辺（右辺）(論理座標)
-				const	MgLine3		&LnRt			// 上辺（左辺）(論理座標)
+				const	MgLine3D		&LnLf,			// 底辺（右辺）(論理座標)
+				const	MgLine3D		&LnRt			// 上辺（左辺）(論理座標)
 				)
 {
-	MgVect3		VtLng, VtLf;						// 部材の長さ方向ベクトル、左方向ベクトル
-	MgVect3		VuLng, VuUp;						// 部材の長さ方向単位ベクトル、上向単位ベクトル
+	MgVect3D		VtLng, VtLf;						// 部材の長さ方向ベクトル、左方向ベクトル
+	MgVect3D		VuLng, VuUp;						// 部材の長さ方向単位ベクトル、上向単位ベクトル
 	
 	VtLng = LnLf.p[1] - LnLf.p[0];
 	VtLf = LnRt.p[0] - LnLf.p[0];
@@ -490,17 +490,17 @@ void DispList::DspQuads(
 //	【機能】穴付き多角形のディスプレイリストを作成する
 //			
 void DispList::DrawPolygon(
-				const	MgGPolyg3	&GPgR,			// 穴付き多角形	(実座標)
-				const	MgPoint3	&PtCtr,			// 構造家モデルの中心
+				const	MgGPolyg3D	&GPgR,			// 穴付き多角形	(実座標)
+				const	MgPoint3D	&PtCtr,			// 構造家モデルの中心
 						MREAL		rB				// ３次元表示倍率
 				)
 {
 	MINT			ist1;
 	MINT			ic2;
-	MgVect3			V1, V2;
-	MgVect3			VuRt;
+	MgVect3D			V1, V2;
+	MgVect3D			VuRt;
 	MGPOLYG3( PgW, 100);
-	MgGPolyg3		GPgW(30);
+	MgGPolyg3D		GPgW(30);
 	MGPOLYG3( zPg3, 3);
 
 	V1 = GPgR.m_Pg[0].m_P[1] - GPgR.m_Pg[0].m_P[0];
@@ -519,7 +519,7 @@ void DispList::DrawPolygon(
 	GPgW.Print( Mstr( "GPgW"));
 
 	for ( ic2=0; ic2<GPgW.m_n; ic2++) {
-		DPtoDSP3( GPgW.m_Pg[ic2], 0., MgVect3( 0., 0., 0.), PtCtr, rB, &zPg3);		// 本関数の引数の数は要検討	
+		DPtoDSP3( GPgW.m_Pg[ic2], 0., MgVect3D( 0., 0., 0.), PtCtr, rB, &zPg3);		// 本関数の引数の数は要検討	
 		DspTriangles( zPg3, VuRt);
 	}
 }

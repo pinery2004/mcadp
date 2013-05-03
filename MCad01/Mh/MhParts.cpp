@@ -55,8 +55,8 @@ void mhPlcParts::Copy( const mhPlcParts &Ent)
 
 	*this = Ent;
 	if ( Ent.m_pZukei) {
-//		szZukei = sizeof( *Ent.m_pZukei) + sizeof( MgLine3) * (Ent.m_pZukei->m_isNZukei - 1);
-		szZukei = sizeof( MhZukei) + sizeof( MgLine3) * (Ent.m_pZukei->m_isNZukei - 1);
+//		szZukei = sizeof( *Ent.m_pZukei) + sizeof( MgLine3D) * (Ent.m_pZukei->m_isNZukei - 1);
+		szZukei = sizeof( MhZukei) + sizeof( MgLine3D) * (Ent.m_pZukei->m_isNZukei - 1);
 		pZukei = (MhZukei*)new char[szZukei];
 		memcpy( pZukei, Ent.m_pZukei, szZukei);
 		m_pZukei = pZukei;
@@ -477,17 +477,17 @@ MINT	BuzaiCode::MhGetIdMbr(
 // 部材の２次元芯線を取得する
 void	BuzaiCode::MhBziSin(
 						mhPlcParts	*pBziInfo,	// (I  ) 部材
-						MgLine2		*plnBziSin	// (  O) 部材の芯線
+						MgLine2D		*plnBziSin	// (  O) 部材の芯線
 				)
 {
-	MgLine2		LnParts;
-	MgPoint2	ptW[2];
-	MgVect2		VtW, VtUtW;
-	MgVect2		VtSZ;							// 芯ずれ
-	MgPoint2	ptS[2];
+	MgLine2D		LnParts;
+	MgPoint2D	ptW[2];
+	MgVect2D		VtW, VtUtW;
+	MgVect2D		VtSZ;							// 芯ずれ
+	MgPoint2D	ptS[2];
 	
-	ptW[0] = *(MgPoint2*)&(pBziInfo->GetPIPlcIti( 0));
-	ptW[1] = *(MgPoint2*)&(pBziInfo->GetPIPlcIti( 1));
+	ptW[0] = *(MgPoint2D*)&(pBziInfo->GetPIPlcIti( 0));
+	ptW[1] = *(MgPoint2D*)&(pBziInfo->GetPIPlcIti( 1));
 
 	// 部材の形を求め検索する
 	VtW = ptW[1] - ptW[0];													// 芯線
@@ -497,7 +497,7 @@ void	BuzaiCode::MhBziSin(
 	VtSZ = pBziInfo->GetPISinZure() * VtUtW.RotR90();
 	ptS[0] = ptW[0] - pBziInfo->GetPILenHosei( 0) * VtUtW + VtSZ;
 	ptS[1] = ptW[1] + pBziInfo->GetPILenHosei( 1) * VtUtW + VtSZ;
-	*plnBziSin = MgLine2( ptS[0], ptS[1]);
+	*plnBziSin = MgLine2D( ptS[0], ptS[1]);
 }
 
 // 配置データ　トレース
@@ -553,7 +553,7 @@ MINT	MhSenBuzai::MhOn(										// (  O) ステイタス
 												//	MC_INT      (1)	交差あり
 				const	MhSenBuzai	&Bz1,		// (I  ) 線部材1
 				const	MhSenBuzai	&Bz2,		// (I  ) 線部材2
-						MgPoint3	*Po,		// (  O) 交点
+						MgPoint3D	*Po,		// (  O) 交点
 						MINT		*ist1,		// (  O) 補助ステイタス1
 												// 			MC_LEFT:	線部材1は線部材2の左側にあり	（交差なし）
 												// 			MC_RIGHT:	線部材1は線部材2の右側にあり	（交差なし）
@@ -567,10 +567,10 @@ MINT	MhSenBuzai::MhOn(										// (  O) ステイタス
 {
 	MINT		ist;
 	
-	MgPoint3	PtInt;
+	MgPoint3D	PtInt;
 	MREAL		s1, s2;							// 長さ調整指示点と部材1の部材2に対する左右位置
 
-	MgVect3	VtUtZ( 0., 0., 1.);
+	MgVect3D	VtUtZ( 0., 0., 1.);
 
 	ist = MGeo::Intr2Ln3( Bz1.Ln, Bz2.Ln, Po);					// 交点
 	if ( !MF_CHECK_OR( ist, (MC_INT | MC_NINT))) {

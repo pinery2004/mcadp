@@ -28,7 +28,7 @@ static	MINT	MT_znflag;
 // (Command_3) 対象となるイベント　( 入力、 コマンド、システムストップ) があるまで待つ
 //
 MINT	MtAskForPoint(
-						MgPoint2*		o_ptResultPoint		// where
+						MgPoint2D*		o_ptResultPoint		// where
 					 )
 {
 	MINT		ist = 0;

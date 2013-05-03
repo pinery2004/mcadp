@@ -25,9 +25,9 @@ namespace MC
 //		共通　形状演算
 //
 ////	------------- Ｓ値の算出　------------------
-//MREAL MGeo::SVal2ULn3(								// (  O) Ｓ値(２直線の方向ベクトルからなる平行６面体の体積）
-//			    const	MgULine3&	ULn1,		// (I  ) 直線1
-//				const	MgULine3&	ULn2		// (I  ) 直線2
+//MREAL MGeo::SVal2ULn3(						// (  O) Ｓ値(２直線の方向ベクトルからなる平行６面体の体積）
+//			    const	MgULine3D&	ULn1,		// (I  ) 直線1
+//				const	MgULine3D&	ULn2		// (I  ) 直線2
 //		)
 //{
 ////		( (ULn1.p.x*ULn1.v.y-ULn1.p.y*ULn1.v.x) * (ULn2.p.z*ULn2.v.w-ULn2.p.w*ULn2.v.z)
@@ -47,9 +47,9 @@ namespace MC
 //}
 
 ////
-//MREAL MGeo::SValULnLn3(							// (  O) Ｓ値(直線の方向ベクトルと線分からなる平行６面体の体積）
-//			    const	MgULine3&	ULn1,		// (I  ) 直線1
-//				const	MgLine3&	Ln2			// (I  ) 線分2
+//MREAL MGeo::SValULnLn3(						// (  O) Ｓ値(直線の方向ベクトルと線分からなる平行６面体の体積）
+//			    const	MgULine3D&	ULn1,		// (I  ) 直線1
+//				const	MgLine3D&	Ln2			// (I  ) 線分2
 //		)
 //{
 ////		( (ULn1.p.x*ULn1.v.y-ULn1.p.y*ULn1.v.x) * (Ln2.p[0].z*Ln2.p[1].w-Ln2.p[0].w*Ln2.p[1].z)
@@ -69,9 +69,9 @@ namespace MC
 //}
 
 ////
-//MREAL MGeo::SVal2Ln3(								// (  O) Ｓ値(2線分からなる平行６面体の体積）
-//			    const	MgLine3&	Ln1,		// (I  ) 線分1
-//				const	MgLine3&	Ln2			// (I  ) 線分2
+//MREAL MGeo::SVal2Ln3(							// (  O) Ｓ値(2線分からなる平行６面体の体積）
+//			    const	MgLine3D&	Ln1,		// (I  ) 線分1
+//				const	MgLine3D&	Ln2			// (I  ) 線分2
 //		)
 //{
 ////		( (Ln1.p[0].x*Ln1.v.y-Ln1.p[0].y*Ln1.v.x) * (Ln2.p[0].z*Ln2.p[1].w-Ln2.p[0].w*Ln2.p[1].z)
@@ -91,10 +91,10 @@ namespace MC
 //}
 
 ////
-//void MGeo::SValLnULnS3(							//
-//				const	MgLine3&	Ln1,		// (I  ) 線分1
-//			    const	MgULine3&	ULn2,		// (I  ) 直線2
-//				const	MgVect3&	vso,		// (I  ) 線分1と直線2がある平面の法線ベクトル
+//void MGeo::SValLnULnS3(						//
+//				const	MgLine3D&	Ln1,		// (I  ) 線分1
+//			    const	MgULine3D&	ULn2,		// (I  ) 直線2
+//				const	MgVect3D&	vso,		// (I  ) 線分1と直線2がある平面の法線ベクトル
 //						MREAL* ss,				// (  O) 線分１の始点側Ｓ値
 //												//		(直線2の方向ベクトルと平面の法線ベクトルと
 //												//		 線分1の始点で出来る平行６面体の体積)
@@ -103,7 +103,7 @@ namespace MC
 //												//		 線分1の終点で出来る平行６面体の体積)
 //		)
 //{
-//	MgVect3		N;								//	直線２と垂直ベクトルからなる平面の係数
+//	MgVect3D		N;							//	直線２と垂直ベクトルからなる平面の係数
 //	MREAL		d;								//	基準点から直線1の始点までの同平面に垂直距離
 ////
 //	N = ULn2.v ^ vso;
@@ -113,21 +113,21 @@ namespace MC
 //}
 
 ////
-//void MGeo::SVal2LnS3(						//
-//			    const MgLine3& Ln1,		// (I  ) 線分1
-//				const MgLine3& Ln2,		// (I  ) 線分2
-//				const MgVect3& vso,		// (I  ) 線分1と線分2がある平面の法線ベクトル
-//				MREAL* ss,				// (I  ) 線分１の始点側Ｓ値
-//										//		(線分2と平面の法線ベクトルと線分1の始点で
-//										//		 出来る平行６面体の体積)
-//				MREAL* se				// (I  ) 線分１の終点側Ｓ値
-//										//		(直線2と平面の法線ベクトルと線分1の終点で
-//										//		 出来る平行６面体の体積)
+//void MGeo::SVal2LnS3(							//
+//			    const MgLine3D& Ln1,			// (I  ) 線分1
+//				const MgLine3D& Ln2,			// (I  ) 線分2
+//				const MgVect3D& vso,			// (I  ) 線分1と線分2がある平面の法線ベクトル
+//				MREAL* ss,						// (I  ) 線分１の始点側Ｓ値
+//												//		(線分2と平面の法線ベクトルと線分1の始点で
+//												//		 出来る平行６面体の体積)
+//				MREAL* se						// (I  ) 線分１の終点側Ｓ値
+//												//		(直線2と平面の法線ベクトルと線分1の終点で
+//												//		 出来る平行６面体の体積)
 //		)
 //{
-//	MgVect3		N;						//	直線２と垂直ベクトルからなる平面の係数
-//	MREAL		d;						//	基準点から直線1の始点までの同平面に垂直距離
-//	MgVect3		vd;						//	線分２のベクトル
+//	MgVect3D	N;								//	直線２と垂直ベクトルからなる平面の係数
+//	MREAL		d;								//	基準点から直線1の始点までの同平面に垂直距離
+//	MgVect3D	vd;								//	線分２のベクトル
 ////
 //	vd = Ln2.p[1] - Ln2.p[0];
 //	N = vd ^ vso;

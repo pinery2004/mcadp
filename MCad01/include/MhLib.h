@@ -1,7 +1,7 @@
 #pragma once
 
 #include "MsDefConst.h"
-class MgLine2;
+class MgLine2D;
 
 #define	TRACE_IO		0			// Read / Write トレース　フラグ　( 0 | 1)		標準値(0)
 #define DEBUG1			0			// 
@@ -549,7 +549,7 @@ public:
 	// 部材の２次元芯線を取得する
 	static void	BuzaiCode::MhBziSin(
 							mhPlcParts	*pBziInfo1,					// (I  ) 部材
-							MgLine2		*lnBziSin1					// (  O) 部材の芯線
+							MgLine2D		*lnBziSin1					// (  O) 部材の芯線
 					);
 
 	// 全配置内容をトレース

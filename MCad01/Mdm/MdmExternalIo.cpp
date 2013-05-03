@@ -120,13 +120,13 @@ MINT	MdeSetDxfInParamLong(
 //
 //		※　ival値について
 //		mode＝1
-//			i_PtVal : MgPoint3	相対座標値を格納
+//			i_PtVal : MgPoint3D	相対座標値を格納
 //		DXF内の座標値にop[3]を足し算した結果で、取り込まれることになる。
 //
 MINT	MdeSetDxfInParamDoubleP(
 						MINT		i_mdPar,		// パラメータの種類
 													//	1:入力時単位の設定
-						MgPoint3	i_PtVal			// パラメータ値（modeによって異なる）
+						MgPoint3D	i_PtVal			// パラメータ値（modeによって異なる）
 				)
 {
 	return 0;

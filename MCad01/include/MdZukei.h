@@ -118,22 +118,22 @@ inline void	MgByteCpy( void* out_ppt, size_t i_szpt, const void* in_ppt, size_t 
 	memcpy_s( out_ppt, i_szpt, in_ppt, i_npt);
 }
 
-inline void	MgPt3Cpy( MgPoint3* out_pPt, MINT i_szPt, const MgPoint3* in_pPt, MINT i_nPt)
+inline void	MgPt3Cpy( MgPoint3D* out_pPt, MINT i_szPt, const MgPoint3D* in_pPt, MINT i_nPt)
 {
 //	MINT	iC;
 	ASSERT( i_nPt <= i_szPt);
 //	for ( iC=0; iC<i_nPt; iC++)
 //		out_pPt[iC] = in_pPt[iC];
-	memcpy( out_pPt, in_pPt, i_nPt * sizeof( MgPoint3));
+	memcpy( out_pPt, in_pPt, i_nPt * sizeof( MgPoint3D));
 }
 
-inline void	MgPt2Cpy( MgPoint2* out_ppt, MINT i_szpt, const MgPoint2* in_ppt, MINT i_npt)
+inline void	MgPt2Cpy( MgPoint2D* out_ppt, MINT i_szpt, const MgPoint2D* in_ppt, MINT i_npt)
 {
 //	MINT	iC;
 	ASSERT( i_npt <= i_szpt);
 //	for ( iC=0; iC<i_npt; iC++)
 //		out_ppt[iC] = in_ppt[iC];
-	memcpy( out_ppt, in_ppt, i_npt * sizeof( MgPoint2));
+	memcpy( out_ppt, in_ppt, i_npt * sizeof( MgPoint2D));
 }
 
 } // namespace MC

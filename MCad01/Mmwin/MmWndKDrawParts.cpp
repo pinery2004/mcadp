@@ -61,19 +61,19 @@ void WindowCtrl::MmWndKDrawParts(
 //	MsBitSet	*pOptv1, *pOptv2;
 //	MsBitSet	*pOptv;
 //	MsBitSet*	pHstv;
-	MgLine2		LnParts;
-	MgPoint2	ptPartsN;
-	MgPoint2	ptW[2];
-	MgPoint2	ptH;
-	MgPoint2	ptK[4];
-	MgVect2		vptH;
-	MgVect2		vOffset = MgVect2( 0., 20.);
+	MgLine2D		LnParts;
+	MgPoint2D	ptPartsN;
+	MgPoint2D	ptW[2];
+	MgPoint2D	ptH;
+	MgPoint2D	ptK[4];
+	MgVect2D		vptH;
+	MgVect2D		vOffset = MgVect2D( 0., 20.);
 	
 	DWORD		PartsTextColor;
 
 	PartsTextColor = mcs::GetColor( MM_COLOR_GRID_TEXT);
 	pCod->SetTextAttr( Mstr( "ＭＳ ゴシック"), 100.f, MT_CENTER, MT_CENTER,
-					   PartsTextColor, MgVect2( 1., 0.), vOffset, MT_FREESIZE);
+					   PartsTextColor, MgVect2D( 1., 0.), vOffset, MT_FREESIZE);
 
 	// パネルを表示する
 	z_ign = 0;
@@ -97,7 +97,7 @@ void WindowCtrl::MmWndKDrawParts(
 
 	PartsTextColor = mcs::GetColor( MM_COLOR_GRID_TEXT);
 	pCod->SetTextAttr( Mstr( "ＭＳ ゴシック"), 100.f, MT_LOWER, MT_CENTER,
-					   PartsTextColor, MgVect2( 1., 0.), vOffset, MT_FREESIZE);
+					   PartsTextColor, MgVect2D( 1., 0.), vOffset, MT_FREESIZE);
 
 	// 部材形状を表示する
 	MINT iDB = 0;												// Debug Trace用
@@ -150,10 +150,10 @@ void WindowCtrl::MmWndKDrawParts(
 				DrawPart( pCod, iGpC, pPlcEn);					// 部材形状を表示
 			} else {
 				pCod->SetLineAttr( MPS_DASHDOT, 1, PartsLineColor);		// 一点鎖線の線分を表示
-				ptW[0] = MgPoint2C( pPlcEn->GetPIPlcIti( 0));
-				ptW[1] = MgPoint2C( pPlcEn->GetPIPlcIti( 1));
-				pCod->Line( MgLine2( ptW[0], ptW[1]));
-//				pCod->Line( MgLine2( ptW[0], ptW[1]));
+				ptW[0] = MgPoint2DC( pPlcEn->GetPIPlcIti( 0));
+				ptW[1] = MgPoint2DC( pPlcEn->GetPIPlcIti( 1));
+				pCod->Line( MgLine2D( ptW[0], ptW[1]));
+//				pCod->Line( MgLine2D( ptW[0], ptW[1]));
 			}
 		}
 	}
@@ -169,17 +169,17 @@ void DrawPart(
 						mhPlcParts	*pPlcEn
 				)
 {
-	MgLine2		LnParts;
-	MgPoint2	ptPartsN;
+	MgLine2D		LnParts;
+	MgPoint2D	ptPartsN;
 	MINT		iKeijoF;
 	MREAL		rWidthR, rWidth;
-	MgVect2		VtWidthR, VtWidth;
-	MgPoint2	ptW[2];
-	MgVect2		VtW, VtUtW;
-	MgPoint2	ptH;
-	MgPoint2	ptK[4];
-	MgVect2		vptH;
-	MgVect2		vOffset = MgVect2( 0., 20.);
+	MgVect2D		VtWidthR, VtWidth;
+	MgPoint2D	ptW[2];
+	MgVect2D		VtW, VtUtW;
+	MgPoint2D	ptH;
+	MgPoint2D	ptK[4];
+	MgVect2D		vptH;
+	MgVect2D		vOffset = MgVect2D( 0., 20.);
 	
 	MhZukei		*pZukei;
 
@@ -189,8 +189,8 @@ void DrawPart(
 
 	MINT		ic;
 
-	ptW[0] = *(MgPoint2*)&(pPlcEn->GetPIPlcIti( 0));
-	ptW[1] = *(MgPoint2*)&(pPlcEn->GetPIPlcIti( 1));
+	ptW[0] = *(MgPoint2D*)&(pPlcEn->GetPIPlcIti( 0));
+	ptW[1] = *(MgPoint2D*)&(pPlcEn->GetPIPlcIti( 1));
 
 	// 部材の形を表示
 	VtW = ptW[1] - ptW[0];										// 芯線
@@ -263,7 +263,7 @@ void DrawPart(
 	pZukei = pPlcEn->GetPIZukei();
 	if ( pZukei) {												// 図形データ有りの場合は、それを表示
 		for ( ic=0; ic<pZukei->m_isNZukei; ic++) {
-			pCod->Line( MgLine2C( pZukei->m_lnZukei[ic]));
+			pCod->Line( MgLine2DC( pZukei->m_lnZukei[ic]));
 		}
 	
 	} else {													// 図形データなしの場合は求めた形状を表示
@@ -274,11 +274,11 @@ void DrawPart(
 
 	// パネルの場合はパネル番号を表示
 	if ( iKeijoF == 2) {										// パネル
-		MgPoint2 ptCenter = (ptK[0] + ptK[2]) / 2.f;
-		MgVect2  vtL1 = ptK[2] - ptK[0];
-		MgVect2  vtutL1 = MGeo::UnitizeV2( vtL1);
-		MgVect2  vtL2 = ptK[3] - ptK[1];
-		MgVect2  vtutL2 = MGeo::UnitizeV2( vtL2);
+		MgPoint2D ptCenter = (ptK[0] + ptK[2]) / 2.f;
+		MgVect2D  vtL1 = ptK[2] - ptK[0];
+		MgVect2D  vtutL1 = MGeo::UnitizeV2( vtL1);
+		MgVect2D  vtL2 = ptK[3] - ptK[1];
+		MgVect2D  vtutL2 = MGeo::UnitizeV2( vtL2);
 
 		pCod->Arc1( ptCenter, MC_PNLNO_HANKEI, 0., 0.);
 
@@ -290,9 +290,9 @@ void DrawPart(
 		Msprintf_s( SGN, Mstr( "%d"), pPlcEn->GetPIPanelNo());
 //		Msprintf_s( SGN, Mstr( "%d"), 172);
 		pCod->SetTextHeight( 130);
-//		pCod->SetTextDirect( MgVect2( 1., 0));
-		pCod->SetTextDirect( MgVect2( 1., 0.));
-		pCod->Text( ptCenter + MgVect2( 0., -20.), SGN);
+//		pCod->SetTextDirect( MgVect2D( 1., 0));
+		pCod->SetTextDirect( MgVect2D( 1., 0.));
+		pCod->Text( ptCenter + MgVect2D( 0., -20.), SGN);
 	}
 
 	// 壁枠組以外は部材注記を表示

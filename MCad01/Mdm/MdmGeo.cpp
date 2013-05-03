@@ -29,8 +29,8 @@ namespace MC
 ////		ベクトルを半時計回りに90度回転したベクトルを求める
 ////
 //void MdmGeo::Vec2DRotateL90 (
-//					MgVect2&		vec1,		// 
-//					MgVect2*		vec2		// 
+//					MgVect2D&		vec1,		// 
+//					MgVect2D*		vec2		// 
 //				)
 //{
 //}

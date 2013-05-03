@@ -64,12 +64,12 @@ MCHAR* GetGlobalName( MINT nCmdIndex)
 MINT MtSendMessage(
 				MINT		message,							// メッセージ
 				MINT		nFlags,								// 種類フラグ
-				MgPoint2	*pPtMR								// マウス実座標 または NULL
+				MgPoint2D	*pPtMR								// マウス実座標 または NULL
 				)
 {
-	MgPoint2*	pPtR;
-	MgPoint2	PtZ = MgPoint2( 0., 0.);
-//	MgVect2	PtZ = MgVect2( 0., 0.);
+	MgPoint2D*	pPtR;
+	MgPoint2D	PtZ = MgPoint2D( 0., 0.);
+//	MgVect2D	PtZ = MgVect2D( 0., 0.);
 
 #ifdef	MS_CMDMENU_STR_TYPE
 	MCHAR* pcMenuStr;

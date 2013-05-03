@@ -11,7 +11,7 @@
 
 #include "MgLine.h"
 
-class MgPolyg3;
+class MgPolyg3D;
 
 										// 多角形の平面と点の位置関係
 //#define	MC_UPPER	010				// 点が平面の上側	
@@ -49,35 +49,35 @@ namespace MC
 //		３次元平面
 //		( ax + by + cz + d = 0)
 //
-class DLL_EXPORT_PLANE MgPlane3
+class DLL_EXPORT_PLANE MgPlane3D
 {
 public:
-	MgVect3	v;													// 平面の方程式の係数 a, b, c
-	MREAL	d;													// 定数 d
-//
-public:
-	MgPlane3() 			{}
+	MgVect3D	v;												// 平面の方程式の係数 a, b, c
+	MREAL		d;												// 定数 d
 
-	MgPlane3( MREAL pla, MREAL plb, MREAL plc, MREAL pld)
+public:
+	MgPlane3D() 			{}
+
+	MgPlane3D( MREAL pla, MREAL plb, MREAL plc, MREAL pld)
 						{ v.x = pla;	v.y = plb;
 						  v.z = plc;	d = pld;}
-	MgPlane3( const MgVect3& v1, MREAL d1)
+	MgPlane3D( const MgVect3D& v1, MREAL d1)
 						{ v.x = v1.x;	v.y = v1.y;
 						  v.z = v1.z;	d = d1;}
 
-	MgPlane3 SetNorm( MREAL i_Tol = g_gTol.D);					// 係数を正規化する	(a,b,cを単位ベクトルに変換する)
+	MgPlane3D SetNorm( MREAL i_Tol = g_gTol.D);					// 係数を正規化する	(a,b,cを単位ベクトルに変換する)
 
-	MgPlane3 Norm( MREAL i_Tol = g_gTol.D);					// 係数を正規化した平面を得る
+	MgPlane3D Norm( MREAL i_Tol = g_gTol.D);					// 係数を正規化した平面を得る
 																//		(a,b,cを単位ベクトルに変換した値を求める)
 	void SetHorizontal()
 						{ v.x = 0.;		v.y = 0.;
 						  v.z = 1.;		d = 0.;}
-	MREAL GetZ( const MgPoint2 p1, MREAL i_Tol = g_gTol.D) const	// ２次元座標の位置のＺ座標を求める
+	MREAL GetZ( const MgPoint2D p1, MREAL i_Tol = g_gTol.D) const	// ２次元座標の位置のＺ座標を求める
 						{ if ( MgTol::MgZero( v.z, i_Tol)) return 0.f;
 						  else return - (v.x * p1.x + v.y * p1.y + d) / v.z;}
-	bool operator == ( const MgPlane3& pl) const;				// b = (Pl1 == Pl2) 判定
+	bool operator == ( const MgPlane3D& pl) const;				// b = (Pl1 == Pl2) 判定
 
-	bool operator != ( const MgPlane3& pl) const				// b = (Pl1 != Pl2) 判定
+	bool operator != ( const MgPlane3D& pl) const				// b = (Pl1 != Pl2) 判定
 						{ return !(*this == pl);}
 
 	void Print(MCHAR* s);										// トレース

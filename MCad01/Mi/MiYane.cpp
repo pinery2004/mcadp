@@ -52,8 +52,8 @@ namespace MC
 //
 void mhInput::MmGetMarumeYaneLine(
 						MINT		iKai,			// 検索階
-				const	MgPoint2	&Pi,			// 入力座標
-						MgGLine2	*pGLn			// 対象屋根構成線
+				const	MgPoint2D	&Pi,			// 入力座標
+						MgGLine2D	*pGLn			// 対象屋根構成線
 				)
 {
 	MINT		ist1;
@@ -61,8 +61,8 @@ void mhInput::MmGetMarumeYaneLine(
 	MREAL		rTol;
 	MINT		ic1, ic2, ic2b;
 	MhRoofInfo*	pRoofEn;
-	MgPoint3	Py1;
-	MgLine2		Ln1;
+	MgPoint3D	Py1;
+	MgLine2D		Ln1;
 
 	iCdMarume = z_mnIA.GetComboMarumeCd();
 	if ( iCdMarume == 0)
@@ -82,8 +82,8 @@ void mhInput::MmGetMarumeYaneLine(
 				continue;
 			ic2b = pRoofEn->GetpGRfm()->m_st[ic1].m_Pg.m_n - 1;
 			for ( ic2=0; ic2<pRoofEn->GetpGRfm()->m_st[ic1].m_Pg.m_n; ic2b=ic2,ic2++) {
-				Ln1 = MgLine2( MgPoint2C( pRoofEn->GetpGRfm()->m_st[ic1].m_Pg.m_P[ic2b]),
-							   MgPoint2C( pRoofEn->GetpGRfm()->m_st[ic1].m_Pg.m_P[ic2]));
+				Ln1 = MgLine2D( MgPoint2DC( pRoofEn->GetpGRfm()->m_st[ic1].m_Pg.m_P[ic2b]),
+							   MgPoint2DC( pRoofEn->GetpGRfm()->m_st[ic1].m_Pg.m_P[ic2]));
 				if ( MGeo::ChkPt2OnLn2WS( Pi, Ln1, &ist1, rTol))
 					(*pGLn) += Ln1;
 			}

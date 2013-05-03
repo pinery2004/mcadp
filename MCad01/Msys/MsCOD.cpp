@@ -38,8 +38,8 @@ MREAL		msCod::z_fTextHeight	= 10.;							// 文字高さ				(単位　MT_FIXEDSIZE:ポイ
 MINT		msCod::z_iTextPosUL		= 3;							// 文字列上下方向基準位置(TA_TOP(1:上,2:中),TA_BOTTOM(3:下),TA_BASELINE(4:ベース))
 MINT		msCod::z_iTextPosLR		= 1;							// 文字列左右方向基準位置(TA_LEFT(1:左),TA_CENTER(2:中),TA_RIGHT(3:右))
 DWORD		msCod::z_rgbText		= RGB( 200, 128, 100);			// 色(RGB)
-MgVect2		msCod::z_vTextDirect	= MgVect2( 1.f, 0.);			// 文字列表示方向
-MgVect2		msCod::z_pTextOffset	= MgVect2( 0., 0.);				// 文字位置オフセット	(単位　MT_FIXEDSIZE:ポイント, MT_FREESIZE:mm)
+MgVect2D		msCod::z_vTextDirect	= MgVect2D( 1.f, 0.);			// 文字列表示方向
+MgVect2D		msCod::z_pTextOffset	= MgVect2D( 0., 0.);				// 文字位置オフセット	(単位　MT_FIXEDSIZE:ポイント, MT_FREESIZE:mm)
 bool		msCod::z_bFixedTextSize	= TRUE;							// 文字列固定サイズフラグ
 
 /////////////////////////////////////////////////////////////////////////////
@@ -315,8 +315,8 @@ void msCod::SetTextAttr(
 																//			MT_CENTER	: 中
 																//			MT_RIGHT	: 右
 						DWORD		rgbText,					// 文字色	RGB
-						MgVect2&	vDirect,					// 文字表示方向	(dx, dy)	(長さ自由)
-						MgVect2&	pOffset,					// 文字表示位置オフセット (x, y)
+						MgVect2D&	vDirect,					// 文字表示方向	(dx, dy)	(長さ自由)
+						MgVect2D&	pOffset,					// 文字表示位置オフセット (x, y)
 																//			文字線幅固定モードの場合はドット数、
 																//			文字線幅自由モードの場合は(1/10)mm
 						bool		bFixedTextSize				// 文字線幅固定モード
@@ -393,7 +393,7 @@ void msCod::SetTextColor(
 /////////////////////////////////////////////////////////////////////////////
 //  	文字方向を設定する
 void msCod::SetTextDirect(
-						MgVect2&	vDirect						// 文字表示方向	(dx, dy)	(長さ自由)
+						MgVect2D&	vDirect						// 文字表示方向	(dx, dy)	(長さ自由)
 				)
 {
 	z_vTextDirect = vDirect.Unitize();
@@ -402,7 +402,7 @@ void msCod::SetTextDirect(
 /////////////////////////////////////////////////////////////////////////////
 //  	オフセットを設定する
 void msCod::SetTextOffset(
-						MgVect2&	pOffset						// 文字表示位置オフセット (x, y)
+						MgVect2D&	pOffset						// 文字表示位置オフセット (x, y)
 																//			文字線幅固定モードの場合はドット数、
 																//			文字線幅自由モードの場合はmm
 				)
@@ -423,18 +423,18 @@ void msCod::SetFixedTextSize(
 /////////////////////////////////////////////////////////////////////////////
 //  文字列を表示する
 void msCod::Text(
-						const	MgPoint2	&pa1,
+						const	MgPoint2D	&pa1,
 								MCHAR*		str
 				)
 {
-	MgPoint2	p1r;											// 表示位置
+	MgPoint2D	p1r;											// 表示位置
 	CPoint		p1s;											// 表示位置
 	MREAL		fAngle;											// 表示角度（度）
 	MINT		iAngle;											// 表示角度（度） × 10
 	MINT		iTextPosLR;
 	MINT		iTextPosUL;
-	MgVect2		vDirect;										// 表示方向（単位ベクトル）
-	MgVect2		vOffset;										// 表示オフセット
+	MgVect2D		vDirect;										// 表示方向（単位ベクトル）
+	MgVect2D		vOffset;										// 表示オフセット
 
 //	MINT		TAUD[] = { TA_TOP, TA_TOP, TA_BOTTOM};			// 上下文字基準位置変換テーブル　TA_BASELINEは未使用
 	MINT		TAUD[] = { TA_TOP, TA_TOP, TA_BASELINE};		// 上下文字基準位置変換テーブル　TA_BOTTOMは未使用
@@ -473,7 +473,7 @@ void msCod::Text(
 		vOffset /= (m_sclRPtoLP * m_vsclLPtoDP.x);				// x方向とy方向とでずれが異なったためm_vsclLPtoDP.yは不使用
 	} else {
 		iTextHeight = MINT( z_fTextHeight * m_sclRPtoLP * 10 *
-			(MGeo::Abs( MgVect2( abs(m_vsclLPtoDP.y * vDirect.x),
+			(MGeo::Abs( MgVect2D( abs(m_vsclLPtoDP.y * vDirect.x),
 									    abs(m_vsclLPtoDP.x * vDirect.y)))));
 //		vOffset *= (m_sclRPtoLP * m_vsclLPtoDP.x);				// x方向とy方向とでずれが異なったためm_vsclLPtoDP.yは不使用
 		if (z_iTextPosUL == 2) 
@@ -509,7 +509,7 @@ void msCod::Text(
 /////////////////////////////////////////////////////////////////////////////
 //  線分を表示する	( "MsCod.h" で 定義済み )
 //void msCod::Line(
-//				const	MgLine2		&ln1
+//				const	MgLine2D		&ln1
 //				)
 //{
 //	Line( ln1.p[0], ln1.p[1]);
@@ -518,15 +518,15 @@ void msCod::Text(
 /////////////////////////////////////////////////////////////////////////////
 //  線分を表示する
 void msCod::Line(
-				const	MgPoint2	&pa1,
-				const	MgPoint2	&pa2
+				const	MgPoint2D	&pa1,
+				const	MgPoint2D	&pa2
 				)
 {
 	CPoint		p1, p2;
 	MINT		iPenStyle;
 	CPen		Pen;
 	CGdiObject* pBackup;
-//	MgVect2		vDirect = pa2 - pa1;
+//	MgVect2D		vDirect = pa2 - pa1;
 	MINT		iLineWidth;										// 線幅
 
 	p1 = RPtoLP( pa1);
@@ -567,10 +567,10 @@ void msCod::Line(
 /////////////////////////////////////////////////////////////////////////////
 //  長方形を表示する ( "MsCod.h" で 定義済み )
 //void msCod::Rect(
-//				const	MgRect2		&rt1
+//				const	MgRect2D		&rt1
 //				)
 //{
-//	MgPoint2		p1, p2;
+//	MgPoint2D		p1, p2;
 //	MINT		iPenStyle;
 //	CPen		Pen;
 //	CGdiObject* pBackup;
@@ -597,8 +597,8 @@ void msCod::Line(
 /////////////////////////////////////////////////////////////////////////////
 //  長方形を表示する
 void msCod::Rect(
-				const	MgPoint2	&pa1,
-				const	MgPoint2	&pa2
+				const	MgPoint2D	&pa1,
+				const	MgPoint2D	&pa2
 				)
 {
 	CPoint		p1, p2;
@@ -629,7 +629,7 @@ void msCod::Rect(
 /////////////////////////////////////////////////////////////////////////////
 //  折れ線を表示する
 void msCod::Polyline(
-						MgPoint2*	pb,
+						MgPoint2D*	pb,
 						MINT		inpb
 				)
 {
@@ -665,7 +665,7 @@ void msCod::Polyline(
 /////////////////////////////////////////////////////////////////////////////
 //  多角形を表示する
 void msCod::Polygon(
-						MgPoint2*	pb,
+						MgPoint2D*	pb,
 						int			inpb
 				)
 {
@@ -715,7 +715,7 @@ void msCod::Polygon(
 /////////////////////////////////////////////////////////////////////////////
 //  円弧を表示する
 void msCod::Arc1(
-				const MgPoint2	&pac,
+				const MgPoint2D	&pac,
 				MREAL			rh,
 				MREAL			a1,
 				MREAL			a2

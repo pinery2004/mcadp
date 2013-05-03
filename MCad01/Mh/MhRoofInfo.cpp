@@ -86,7 +86,7 @@ MINT MhRoofInfo::Load(							//
 																				//	MhRoofInfo*		pRoofEn;
 	MhJim*		pJim1;
 	MhRfm*		pRfm;
-	MgPoint3*	pPt;
+	MgPoint3D*	pPt;
 	MINT*		piCd;
 
 	bool		fPlcSzChk = true;
@@ -94,7 +94,7 @@ MINT MhRoofInfo::Load(							//
 
 	bool		bEor = false;
 
-	MgVect3		vLnPlc;
+	MgVect3D		vLnPlc;
 
 //	屋根レコード
 	this->InitAllAtr( 0);										// 子のサイズとレコード数をクリア
@@ -168,10 +168,10 @@ MINT MhRoofInfo::Load(							//
 				MBFREE( pRfm);
 				break;
 			case MDR_OLD_ATRCD_RFM_PG_PT:							// 屋根面構成点 
-				ASSERT( iSize == sizeof(MgPoint3) * pRfm->m_Pg.m_n);
-				pPt = (MgPoint3*)pEnt;
+				ASSERT( iSize == sizeof(MgPoint3D) * pRfm->m_Pg.m_n);
+				pPt = (MgPoint3D*)pEnt;
 				pRfm->m_Pg.m_P = pPt;
-				pRfm->m_Pg.m_P = (MgPoint3*)pEnt;
+				pRfm->m_Pg.m_P = (MgPoint3D*)pEnt;
 				break;
 			case MDR_OLD_ATRCD_RFM_ICD_I:							// 屋根面コード
 				ASSERT( iSize == SZMINT() * pRfm->m_cdPg.m_n);
@@ -198,12 +198,12 @@ MINT MhJim::Save(								//
 	MINT		iDumy = 0;
 
 	i_phMdl->WriteItemI( MDW_ATRCD_JIM_ST, &iDumy);
-	i_phMdl->WriteItemR( MDW_ATRCD_JIM_P, (MFLOAT*)&m_p, SZMgPoint2());
+	i_phMdl->WriteItemR( MDW_ATRCD_JIM_P, (MFLOAT*)&m_p, SZMgPoint2D());
 	i_phMdl->WriteItemI( MDW_ATRCD_JIM_ICD, &m_icd, SZMINT());
 	i_phMdl->WriteItemI( MDW_ATRCD_JIM_IFINP, &m_ifInp, SZMINT());
 	i_phMdl->WriteItemR( MDW_ATRCD_JIM_RKB, &m_rKb, SZMREAL());
 	i_phMdl->WriteItemI( MDW_ATRCD_JIM_IRFM, &m_iRfm, SZMINT());
-	i_phMdl->WriteItemR( MDW_ATRCD_JIM_LNR, (MFLOAT*)&m_LnR, SZMgLine3());
+	i_phMdl->WriteItemR( MDW_ATRCD_JIM_LNR, (MFLOAT*)&m_LnR, SZMgLine3D());
 	i_phMdl->WriteItemI( MDW_ATRCD_JIM_ILNRCD, &m_icdLnR, SZMINT());
 	i_phMdl->WriteItemI( MDW_ATRCD_JIM_EOR, &iDumy);
 
@@ -247,8 +247,8 @@ MINT MhJim::Load(								//
 				bEor = true;
 				break;
 			case MDR_ATRCD_JIM_P:								// 地廻り線右端の頂点
-				ASSERT( iSize == SZMgPoint2());
-				memcpy( &m_p, pEnt, SZMgPoint2());
+				ASSERT( iSize == SZMgPoint2D());
+				memcpy( &m_p, pEnt, SZMgPoint2D());
 				break;
 			case MDR_ATRCD_JIM_ICD:								// 地廻り線コード
 				ASSERT( iSize == SZMINT());
@@ -267,8 +267,8 @@ MINT MhJim::Load(								//
 				m_iRfm = *(MINT*)pEnt;
 				break;
 			case MDR_ATRCD_JIM_LNR:								// 右側屋根構成線（延長） 
-				ASSERT( iSize == SZMgLine3());
-				memcpy( &m_LnR, pEnt, SZMgLine3());
+				ASSERT( iSize == SZMgLine3D());
+				memcpy( &m_LnR, pEnt, SZMgLine3D());
 				break;
 			case MDR_ATRCD_JIM_ILNRCD:							// 右側屋根構成線コード
 				ASSERT( iSize == SZMINT());
@@ -292,7 +292,7 @@ MINT MgKs1::Save(								//
 	MINT		iDumy = 0;
 
 	i_phMdl->WriteItemI( MDW_ATRCD_KSI_ST, &iDumy);
-	i_phMdl->WriteItemR( MDW_ATRCD_KSI_LN, (MREAL*)&m_Ln, SZMgLine3());
+	i_phMdl->WriteItemR( MDW_ATRCD_KSI_LN, (MREAL*)&m_Ln, SZMgLine3D());
 	i_phMdl->WriteItemI( MDW_ATRCD_KSI_TPLN, (MINT*)&m_itpLn, SZMINT());
 	i_phMdl->WriteItemI( MDW_ATRCD_KSI_CD, (MINT*)&m_iCd, SZMINT());
 	i_phMdl->WriteItemI( MDW_ATRCD_KSI_FPROC, &m_ifProc, SZMINT());
@@ -339,8 +339,8 @@ MINT MgKs1::Load(								//
 				bEor = true;
 				break;
 			case MDR_ATRCD_KSI_LN:								// 構成線分
-				ASSERT( iSize == SZMgLine3());
-				memcpy( &m_Ln, pEnt, SZMgLine3());
+				ASSERT( iSize == SZMgLine3D());
+				memcpy( &m_Ln, pEnt, SZMgLine3D());
 				break;
 			case MDR_ATRCD_KSI_TPLN:							// 線分タイプ(0: 半直線　1:線分)
 				ASSERT( iSize == SZMINT());
@@ -379,7 +379,7 @@ MINT MhRfm::Save(								//
 
 	i_phMdl->WriteItemI( MDW_ATRCD_RFM_ST, &iDumy);
 	iN = m_Pg.m_n;
-	i_phMdl->WriteItemR( MDW_ATRCD_RFM_PG, (MREAL*)&m_Pg.m_P, iN * SZMgPoint3());
+	i_phMdl->WriteItemR( MDW_ATRCD_RFM_PG, (MREAL*)&m_Pg.m_P, iN * SZMgPoint3D());
 	i_phMdl->WriteItemI( MDW_ATRCD_RFM_ICD, (MINT*)&m_cdPg.m_tp, iN * SZMINT());
 	i_phMdl->WriteItemI( MDW_ATRCD_RFM_ICD, (MINT*)&m_icd, SZMINT());
 	i_phMdl->WriteItemI( MDW_ATRCD_RFM_EOR, &iDumy);
@@ -425,11 +425,11 @@ MINT MhRfm::Load(								//
 				bEor = true;
 				break;
 			case MDR_ATRCD_RFM_PLN:								// 屋根面係数
-				ASSERT( iSize == SZMgPlane3());
-				memcpy( &m_Pln, pEnt, SZMgPlane3());
+				ASSERT( iSize == SZMgPlane3D());
+				memcpy( &m_Pln, pEnt, SZMgPlane3D());
 				break;
 			case MDR_ATRCD_RFM_PG:								// 屋根面形状（屋根構成線）
-				iN = iSize / SZMgPoint3();
+				iN = iSize / SZMgPoint3D();
 				m_Pg.Resize( iN);
 				memcpy( &m_Pg[0], pEnt, iSize);
 				break;

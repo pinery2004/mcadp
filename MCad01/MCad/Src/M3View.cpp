@@ -78,7 +78,7 @@ void M3View::OnPaint()
 int M3View::OnCreate( HDC hdc)
 {
 	MREAL		rB;								// 表示倍率
-	MgPoint3	PtCtr;							// 中心座標
+	MgPoint3D	PtCtr;							// 中心座標
 
 
 	//	OpenGL用にPixcel Formatを指定
@@ -196,18 +196,18 @@ void M3View::OnSize(UINT nType, int cx, int cy)
 
 void M3View::OnMouseMove(
 						MINT		nFlags,		// 1: 移動
-						MgVect3		PtD,
-						MgVect3		RtD,
+						MgVect3D		PtD,
+						MgVect3D		RtD,
 						MREAL		SclD		// 拡大縮小量
 				)
 {
 	// TODO : ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
 
 	CPoint	iPtD;												// マウス移動量	
-	MgVect3	rdMov1;
-	MgVect3	rdMov2;
-	MgMat3E	mTr1, mTr2, mTr3, mTrW, mTrW1, mTrW2;				// 座標変換マトリックス (work)
-	MgVect2	vRx, vRy, vRz;										// Ｘ軸回転角, Ｙ軸回転角, Ｚ軸回転角
+	MgVect3D	rdMov1;
+	MgVect3D	rdMov2;
+	MgMat3DE	mTr1, mTr2, mTr3, mTrW, mTrW1, mTrW2;				// 座標変換マトリックス (work)
+	MgVect2D	vRx, vRy, vRz;										// Ｘ軸回転角, Ｙ軸回転角, Ｚ軸回転角
 
 	if ( nFlags & MK_CONTROL) {
 		rdMov1 = 2.67f * PtD;
@@ -219,15 +219,15 @@ void M3View::OnMouseMove(
 		m_rMovZ += rdMov2.z;
 		
 	} else if ( nFlags & MK_LBUTTON) {
-		vRx = MgVect2( 1., - RtD.y * 3).Unitize();				// Ｘ軸回転角　(正方向:	Ｘ軸に対して左回転)
+		vRx = MgVect2D( 1., - RtD.y * 3).Unitize();				// Ｘ軸回転角　(正方向:	Ｘ軸に対して左回転)
 		mTr1 = MGeo::Mat3RotRevXV( vRx);						//					   (Ｘ軸から見て右回転)
 		mTrW1 = mTr1 * m_mTrans;
 
-		vRy = MgVect2( 1., RtD.x * 3).Unitize();				// Ｙ軸回転角　(正方向:	Ｙ軸に対して右回転)
+		vRy = MgVect2D( 1., RtD.x * 3).Unitize();				// Ｙ軸回転角　(正方向:	Ｙ軸に対して右回転)
 		mTr2 = MGeo::Mat3RotRevYV( vRy);						//					   (Ｙ軸から見て左回転)
 		mTrW2 = mTr2 * mTrW1;
 
-		vRz = MgVect2( 1., RtD.z * 3).Unitize();				// 下は (正方向:Ｚ軸に対して右回転)
+		vRz = MgVect2D( 1., RtD.z * 3).Unitize();				// 下は (正方向:Ｚ軸に対して右回転)
 		mTr3 = MGeo::Mat3RotRevZV( vRz);						//			   (Ｚ軸から見て左回転)
 		mTrW = mTr3 * mTrW2;
 		m_mTrans = mTrW;
@@ -237,7 +237,7 @@ void M3View::OnMouseMove(
 																// Ｚ軸回転角　画面中央より
 																// 上は (正方向:Ｚ軸に対して左回転) で、
 																//			   (Ｚ軸から見て右回転)
-		vRz = MgVect2( 1., RtD.z * 3).Unitize();				// 下は (正方向:Ｚ軸に対して右回転)
+		vRz = MgVect2D( 1., RtD.z * 3).Unitize();				// 下は (正方向:Ｚ軸に対して右回転)
 																//			   (Ｚ軸から見て左回転)
 		mTr1 = MGeo::Mat3RotRevZV( vRz);
 		mTrW = mTr1 * m_mTrans;

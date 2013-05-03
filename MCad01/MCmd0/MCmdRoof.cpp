@@ -21,7 +21,7 @@ void MCmdRoofAdd();
 void MCmdRoofDelete();
 
 static void	MmPackAreaI(
-						MgPolyg2*	pPg1,			// (I O) 地廻り区画
+						MgPolyg2D*	pPg1,			// (I O) 地廻り区画
 						MgGInt*		pGifInp			// (I O) 地廻り線種類(仮想キー(nflag)  MK_SHIFT(004): シフトキー)
 				);
 
@@ -38,9 +38,9 @@ void MCmdRoof()
 void MCmdRoofAdd()
 {
 	MINT		ist1;
-	MgPoint2	pt1, pt2, pth;
-	MgLine2		Ln1;
-	MgPolyg2	pgJim(20);
+	MgPoint2D	pt1, pt2, pth;
+	MgLine2D		Ln1;
+	MgPolyg2D	pgJim(20);
 	MgGInt		GifInp(20);
 
 	Msg::ClearErrorMsg();
@@ -89,21 +89,21 @@ void MCmdRoofAdd()
 //	地廻り種類が同一の地廻り区画の線分が直進して並んでいるものを１つにまとめる
 
 static void	MmPackAreaI(
-						MgPolyg2*	pPg1,			// (I O) 地廻り区画
+						MgPolyg2D*	pPg1,			// (I O) 地廻り区画
 						MgGInt*		pGifInp			// (I O) 地廻り線種類(仮想キー(nflag)  MK_SHIFT(004): シフトキー)
 				)
 {
 	MINT	ist1;
 	MINT	icb, icc;
 	MINT	ic0, ic1, ic2;
-	MgLine2	ln1;
+	MgLine2D	ln1;
 	bool	fmabiki = false;
 
 	ic0 = 0;
 	icb = pPg1->m_n - 1;
 	ic1 = 0;
 	for ( ic2=1; ic2<=pPg1->m_n; ic2++) {
-		ln1 = MgLine2( pPg1->m_p[icb], pPg1->m_p[ic1]);
+		ln1 = MgLine2D( pPg1->m_p[icb], pPg1->m_p[ic1]);
 		if ( ic2 == pPg1->m_n)
 			icc = 0;
 		else

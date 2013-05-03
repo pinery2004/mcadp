@@ -30,7 +30,7 @@ void MCmdLineDelete();
 void MCmdWait()
 {
 	MINT		irt;
-	MgPoint2	pt1;
+	MgPoint2D	pt1;
 
 	Msg::OperationMsg( MC_OPRT_WAIT);							// ステイタスバーの操作表示部へ"操作待ち"を表示
 
@@ -68,14 +68,14 @@ void MCmdLineAdd()
 {
 	MINT		ist;
 	MINT		irt;
-	MgPoint2	pt1, pt2, pt1_org;
-	MgPoint3	PtMltBziAr;
-	MgPoint2	ptln1[3], ptln1_org[3], ptln1_chk[2];
-	MgLine3		Ln1;
-	MgVect2		vln;
-	MgVect3		vUp;
-	MgLine2		ln1;
-	MgPolyg2	pg1(20);
+	MgPoint2D	pt1, pt2, pt1_org;
+	MgPoint3D	PtMltBziAr;
+	MgPoint2D	ptln1[3], ptln1_org[3], ptln1_chk[2];
+	MgLine3D		Ln1;
+	MgVect2D		vln;
+	MgVect3D		vUp;
+	MgLine2D		ln1;
+	MgPolyg2D	pg1(20);
 	MINT		iIdPartsSpec;
 	mhPartsSpec*	pPartsSpec;
 	bool		bFirst = TRUE;
@@ -83,11 +83,11 @@ void MCmdLineAdd()
 
 	MhRfm	*pRfm1, *pRfm2;
 
-	MgPlane3	plnYane;
+	MgPlane3D	plnYane;
 
 	MREAL rIntrv;												// 間隔
-	MgVect3 VtArea;
-	MgVect3 VtBziIntrv;
+	MgVect3D VtArea;
+	MgVect3D VtBziIntrv;
 
 	MINT iNum;
 	MINT ic1;
@@ -152,15 +152,15 @@ void MCmdLineAdd()
 		//
 		if ( pPartsSpec->GetPTCdInpKb() == MP_INPKB_AREA) {
 			// 領域(区画)配置、１点目と２点目を始点終点として配置する
-			Ln1.p[0] = MgPoint3C( pg1.m_p[0]);
-			Ln1.p[1] = MgPoint3C( pg1.m_p[1]);
+			Ln1.p[0] = MgPoint3DC( pg1.m_p[0]);
+			Ln1.p[1] = MgPoint3DC( pg1.m_p[1]);
 			z_mnIA.RibbonIO( MGET_PARTS_ATTRA, NULL);			//		部品仕様,寸法形式と属性値入力用コンボボックスの値を部品配置入力データに取り込む
-			HaitiCmd::MmPartsPlc( Ln1.p, MgVect3( 0., 0., 1.), &pg1);	// 領域型の部品配置
+			HaitiCmd::MmPartsPlc( Ln1.p, MgVect3D( 0., 0., 1.), &pg1);	// 領域型の部品配置
 			
 		} else {												// その他
 			// 部材配置
 			ist = z_mmIA.GetComboAttrI( MC_CMB_HONS, &iNum);	// 複数部材の配置本数
-			vUp = MgVect3( 0., 0., 1.);
+			vUp = MgVect3D( 0., 0., 1.);
 			
 			if ( pPartsSpec->GetPTCdIzon() >= MP_IZNCD_YANEMENNARI) {
 				// 屋根面なりの場合は対象屋根面に沿った高さを設定し、部材の上方向を屋根面に垂直方向に設定する
@@ -181,26 +181,26 @@ void MCmdLineAdd()
 					} else if ( pRfm2) {						//
 						plnYane = pRfm2->m_Pln;					//	入力点の２点目のみ屋根面上の場合は、その屋根面なりにZ座標を求める
 					} else {
-						plnYane = MgPlane3( MgVect3( 0., 0., 1.), 0.);	//	入力点が屋根面上でない場合の仮想屋根面(Z=0.)
+						plnYane = MgPlane3D( MgVect3D( 0., 0., 1.), 0.);	//	入力点が屋根面上でない場合の仮想屋根面(Z=0.)
 					}
 				}
-				Ln1 = MgLine3( MgPoint3C( ptln1[0], plnYane.GetZ( ptln1[0])),
-							   MgPoint3C( ptln1[1], plnYane.GetZ( ptln1[1])));
+				Ln1 = MgLine3D( MgPoint3DC( ptln1[0], plnYane.GetZ( ptln1[0])),
+							   MgPoint3DC( ptln1[1], plnYane.GetZ( ptln1[1])));
 				if ( iNum == MC_INT_AREA)						//		本数を領域で指定する複数部材配置タイプか
-					PtMltBziAr = MgPoint3C( ptln1[2], plnYane.GetZ( ptln1[2]));
+					PtMltBziAr = MgPoint3DC( ptln1[2], plnYane.GetZ( ptln1[2]));
 
 				MREAL rYHHosei = MC_YANE_TAKASA_HOSEI;
 				if ( !MGeo::Zero( plnYane.v.z) ) 
 					rYHHosei /= plnYane.v.z;
-				Ln1.p[0] += MgPoint3( 0., 0., rYHHosei);
-				Ln1.p[1] += MgPoint3( 0., 0., rYHHosei);
-				PtMltBziAr += MgPoint3( 0., 0., rYHHosei);
+				Ln1.p[0] += MgPoint3D( 0., 0., rYHHosei);
+				Ln1.p[1] += MgPoint3D( 0., 0., rYHHosei);
+				PtMltBziAr += MgPoint3D( 0., 0., rYHHosei);
 				if ( pPartsSpec->GetPTCdIzon() == MP_IZNCD_YANEMENNARIENCYOKU)
 					vUp = plnYane.v;
 			} else {
 				// その他の場合(屋根面なりでない場合)
-				Ln1 = MgLine3C( MgLine2(ptln1));				//			Z座標=0
-				PtMltBziAr = MgPoint3C( ptln1[2]);
+				Ln1 = MgLine3DC( MgLine2D(ptln1));				//			Z座標=0
+				PtMltBziAr = MgPoint3DC( ptln1[2]);
 			}
 			
 			// 配置本数と方向付き間隔を求める
@@ -213,13 +213,13 @@ void MCmdLineAdd()
 				if ( iNum > 1)
 					VtBziIntrv = rIntrv * MGeo::UnitizeV3( VtArea);
 				else
-				VtBziIntrv = MgVect3( 1., 0., 0.);				//			dumy
+				VtBziIntrv = MgVect3D( 1., 0., 0.);				//			dumy
 					
 			} else {											//			本数指定による複数部材の配置
-				MgVect2 vtutBzi = MGeo::UnitizeV2( MgVect2C( Ln1.p[1] - Ln1.p[0]));
+				MgVect2D vtutBzi = MGeo::UnitizeV2( MgVect2DC( Ln1.p[1] - Ln1.p[0]));
 				if ( pPartsSpec->GetPTCdInpKb() != MP_INPKB_DIR1PT)	//			方向１点の場合は方向に向かって複数配置する
 					vtutBzi.SetRotR90();						//			長さ２点の場合は右側方向に複数配置する
-				VtBziIntrv = rIntrv * MgVect3C( vtutBzi);
+				VtBziIntrv = rIntrv * MgVect3DC( vtutBzi);
 				
 			}
 			// Undoをきる

@@ -34,11 +34,11 @@ void MCmdMdPanelNo()
 {
 	MINT		irt;
 	MINT		ic1, ic2;
-	MgPoint2	pt1;
+	MgPoint2D	pt1;
 	bool		bFirst = TRUE;
 
 	MINT		iBuzaiCd;
-	MgPolyg2	pgHitBzi;
+	MgPolyg2D	pgHitBzi;
 	
 	mhPlcParts* pPtInfo[MMAX_NPANEL];							// パネル配置情報
 	mhPlcParts* pPtInfo1;

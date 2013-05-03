@@ -228,7 +228,7 @@ MINT	MddGetBoxDpr (
 						MDID		i_idWin,	// ウィンドウＩＤ
 						MDID		i_idLyr,	// レイヤーKer
 						MDFIG*		o_pFig,		// 図形Dpr
-						MgRect3*	o_pRect		// BOX（左下点、右上点）
+						MgRect3D*	o_pRect		// BOX（左下点、右上点）
 												// （指定されたウィンドウの視点座標系での座標値）
 				)
 {
@@ -243,7 +243,7 @@ MINT	MddGetBoxDpr (
 //
 MINT	MddGetBoxAllDpr (
 						MDID		i_idWin,	// ウィンドウＩＤ
-						MgRect3*	o_pRect		// BOX（左下点、右上点）
+						MgRect3D*	o_pRect		// BOX（左下点、右上点）
 												// （指定されたウィンドウの視点座標系での座標値）
 				)
 {

@@ -46,7 +46,7 @@ namespace MC
 ////
 //MINT	MdzSetPartPlc (
 //						MDID		i_idEnt,	// エンティテイID
-//						MgMat3E*		i_pmat,		// 配置座標系マトリックス
+//						MgMat3DE*		i_pmat,		// 配置座標系マトリックス
 //						MDID		i_idB		// 部品ID
 //				)
 //{
@@ -79,7 +79,7 @@ namespace MC
 //		図形情報の座標変換
 //
 MINT DZukei::MdzTrans (
-						MgMat3E&	i_Mat,		// 配置座標系マトリックス
+						MgMat3DE&	i_Mat,		// 配置座標系マトリックス
 						MDFIG&		i_stFig,	// 図形情報
 						MDFIG*		o_stFig		// 座標変換後図形情報
 				)
@@ -91,7 +91,7 @@ MINT DZukei::MdzTrans (
 //		図形情報の移動
 //
 MINT DZukei::MdzMove (
-						MgVect3&	i_VMv,		// 移動ベクトル
+						MgVect3D&	i_VMv,		// 移動ベクトル
 						MDFIG&		i_stFig,	// 図形情報
 						MDFIG*		o_stFig		// 座標変換後図形情報
 				)
@@ -117,7 +117,7 @@ MINT DZukei::MdzMirror (
 //		指定された原点を基点に指定の拡大率で図形を拡大／縮小する。
 //
 MINT DZukei::MdzExpansion (
-						MgPoint3&	i_ptOrg,	// 原点
+						MgPoint3D&	i_ptOrg,	// 原点
 						MREAL		i_rScl,		// 拡大率
 						MDFIG&		i_stFig,	// 図形情報
 						MDFIG*		o_stFig		// 座標変換後図形情報
@@ -195,7 +195,7 @@ MINT	MdzSetAtrMode (
 //
 MINT	MdzGetBox (
 						MDFIG&		i_pFig,		//	図形情報バッファ
-						MgRect3*	o_prect		//  BOX図形情報バッファ
+						MgRect3D*	o_prect		//  BOX図形情報バッファ
 												//	(最小点から最大点までの線分の図形情報)
 				)
 {

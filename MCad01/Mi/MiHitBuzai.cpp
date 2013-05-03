@@ -48,17 +48,17 @@ static	bool			z_fDrawHitBzi = FALSE;
 
 static void PartsShape(
 						mhPlcParts	*pPlcEn,
-						MgPolyg2*	pgPartsShape
+						MgPolyg2D*	pgPartsShape
 				);
 
-static	MgPoint2 z_ptBziFig[20];
-static	MgPolyg2 z_pgBziFig( 20, z_ptBziFig);
+static	MgPoint2D z_ptBziFig[20];
+static	MgPolyg2D z_pgBziFig( 20, z_ptBziFig);
 
 ////////////////////////////////////////////////////////////////////////////
 //	カレント選択の部材形状を設定する
 
 void Window::SetCurBziFig(
-						 MgPolyg2*	ppgBziFig		// (I  ) カレント選択の部材形状
+						 MgPolyg2D*	ppgBziFig		// (I  ) カレント選択の部材形状
 				)
 {
 	z_pgBziFig = *ppgBziFig;
@@ -76,7 +76,7 @@ void Window::ClrCurBziFig()
 //	カレント選択の部材形状を返す
 //	返値　カレント選択の部材形状
 
-MgPolyg2* Window::GetCurBziFig()
+MgPolyg2D* Window::GetCurBziFig()
 {
 	return &z_pgBziFig;
 }
@@ -110,7 +110,7 @@ void WindowCtrl::MmWndKDrawTemp(
 				)
 {
 	// 屋根面の選択状況を表示する
-	MgPolyg2	pgRfm(20);
+	MgPolyg2D	pgRfm(20);
 
 	MhRfm *pRfm = mhHaitiIn::GetCurRfm();
 	if ( pRfm) {
@@ -124,7 +124,7 @@ void WindowCtrl::MmWndKDrawTemp(
 		pCod->Polygon( pgRfm.m_p, pgRfm.m_n);
 	}
 
-	MgPolyg2 *ppgBziFig = Window::GetCurBziFig();
+	MgPolyg2D *ppgBziFig = Window::GetCurBziFig();
 	if ( ppgBziFig->m_n != 0) {
 
 		CClientDC	dc( pWndInfo->GetWnd());
@@ -163,7 +163,7 @@ void Window::EraseHitBzi()
 
 void Window::DrawHitBzi(
 						MmWndInfo*	pWndInfo,		// (I  ) ウィンドウ管理情報
-						MgPolyg2*	pgHitBzi		// (I  ) ヒット部材の形状
+						MgPolyg2D*	pgHitBzi		// (I  ) ヒット部材の形状
 				)
 {
 	// 既表示ヒット部材を消去
@@ -187,7 +187,7 @@ void Window::ReDispHitBzi()
 }
 
 static	MmWndInfo* 		z_pHitBziWndInfo = NULL;					// ラバーバンド入力表示用カレントウィンドウ
-static	MgPolyg2		z_pgHitBzi(10);
+static	MgPolyg2D		z_pgHitBzi(10);
 
 /////////////////////////////////////////////////////////////////////////////
 //	ヒット部材の形状を表示/再表示/消去する
@@ -203,7 +203,7 @@ void Window::ResetDispHitBzi()
 MINT Window::DispHitBzi(
 						MINT		ictl,			// (I  ) 表示制御 1 : 表示、0 : 再表示、-1 : 消去
 						MmWndInfo*	pWndInfo,		// (I  ) ウィンドウ管理情報(表示制御 == 1) または NULL(表示制御 <= 0)
-						MgPolyg2*	pgHitBzi		// (I  ) ヒット部材の形状(表示制御 == 1) または NULL(表示制御 <= 0)
+						MgPolyg2D*	pgHitBzi		// (I  ) ヒット部材の形状(表示制御 == 1) または NULL(表示制御 <= 0)
 				)
 {
 	MINT		ic1;

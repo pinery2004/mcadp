@@ -23,11 +23,11 @@ namespace MC
 	MINT		irt;
 	MINT		ist1;
 	MINT		ic1;
-	MgPoint2	pt1, pt2, pt2m;
-	MgPoint3	Pt1, Pt2, Pt2m;
-	MgLine2		ln1;
-	MgLine3		Ln1;
-	MgPolyg2	Pg1(20);
+	MgPoint2D	pt1, pt2, pt2m;
+	MgPoint3D	Pt1, Pt2, Pt2m;
+	MgLine2D		ln1;
+	MgLine3D		Ln1;
+	MgPolyg2D	Pg1(20);
 //	MINT		iIdPartsSpec;
 //	mhPartsSpec*	pPartsSpec;
 	bool		bFirst = TRUE;
@@ -36,7 +36,7 @@ namespace MC
 	MINT		iCrsC;
 
 	MINT		iBuzaiCd;
-	MgPolyg2	pgHitBzi;
+	MgPolyg2D	pgHitBzi;
 	mhPlcParts* pBziInfo1;
 	mhPlcParts* pBziInfo2;
 	mhPlcParts* pbTchBziI[MSZ_CROSS_BZI];
@@ -88,7 +88,7 @@ namespace MC
 		if ( pBziInfo1 == pBziInfo2)								// 長さ調整側部材と長さ調整先部材と同一部材を選択の場合は座標指示とみなす
 			pBziInfo2 = NULL;
 
-		Pt1 = MgPoint3C( pt1);
+		Pt1 = MgPoint3DC( pt1);
 
 		Window::DrawHitBzi( pWndInfo, &pgHitBzi);					//	ヒット部材（長さ調整先部材）を表示する
 																	//	（既表示ヒット部材を消去後に、ヒット部材を表示する）
@@ -101,12 +101,12 @@ namespace MC
 			ist1 = mhHaitiIn::MhAdjBzL( iKati, pBziInfo1, Pt1, pBziInfo2);	// 長さ調整
 		} else {
 			mhInput::Marume( pt2, &pt2m);
-			Pt2m = MgPoint3C( pt2m);
+			Pt2m = MgPoint3DC( pt2m);
 			mhHaitiIn::MhAdjBzL( pBziInfo1, Pt1, Pt2m);
 		}
 
 		if ( ist1 == MC_PARALLEL) {
-			Pt2 = MgPoint3C( pt2);
+			Pt2 = MgPoint3DC( pt2);
 			mhHaitiIn::MhAdjBzL( pBziInfo1, Pt1, pBziInfo2, Pt2);		// 調整側部材と調整先部材が平行時の調整
 		}
 			
@@ -116,8 +116,8 @@ namespace MC
 		mhHaitiIn::MhChngCrossBuzai( pbTchBziI, pbCrsBziI, pbTchBziO, pbCrsBziO, 
 								   pbFRtoTCBzi, pbTCtoFRBzi, pbTCtoTCBzi);
 		if ( iCrsC == 1) {
-			MgLine3 	LnBzi;
-			MgPoint3	Pt0;
+			MgLine3D 	LnBzi;
+			MgPoint3D	Pt0;
 			// 離れている → 接触　または　交差
 				// 長さ調整　または　分割
 			for ( ic1=0; pbFRtoTCBzi[ic1]; ic1++) {

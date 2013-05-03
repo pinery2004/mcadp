@@ -34,57 +34,57 @@ void BrkPoint()
 }
 void Test000_Geo()
 {
-	MgVect2 v22 = MgVect2( 1., 2.);
-	MgVect2 v23 = v22.RotR90();
+	MgVect2D v22 = MgVect2D( 1., 2.);
+	MgVect2D v23 = v22.RotR90();
 	v22.Print( Mstr("v22"));
 	v23.Print( Mstr("v23"));
 	v22 = v22.RotR90();
 	v22.Print( Mstr("v22"));
 	v23.SetRotR90();
 	v23.Print( Mstr("v23"));
-	MgVect2 v24;
-	v24 = v22.Rot( MgVect2( 1., 1.).Unitize());
+	MgVect2D v24;
+	v24 = v22.Rot( MgVect2D( 1., 1.).Unitize());
 	v24.Print( Mstr("v24(v22.Rot(1.,1.))"));
 	v22.SetRot( (MREAL)MC_PIE/4);
 	v22.Print( Mstr("v22.SetRot(MC_PIE/4)"));
 
-	MgPoint2 pt22 = MgPoint2( 1., 2.);
-	MgPoint2 pt23 = pt22.RotR90();
+	MgPoint2D pt22 = MgPoint2D( 1., 2.);
+	MgPoint2D pt23 = pt22.RotR90();
 	pt22.Print( Mstr("pt22"));
 	pt23.Print( Mstr("pt23"));
 	pt22 = pt22.RotR90();
 	pt22.Print( Mstr("pt22"));
 	pt23.SetRotR90();
 	pt23.Print( Mstr("pt23"));
-	MgPoint2 pt24;
+	MgPoint2D pt24;
 	pt24 = pt22.Rot( (MREAL)MC_PIE/4);
 	pt24.Print( Mstr("pt24(pt22.Rot(MC_PIE/4))"));
 	pt22.SetRot( (MREAL)MC_PIE/4);
 	pt22.Print( Mstr("pt22.SetRot(MC_PIE/4)"));
 
-	MgVect3 v32 = MgVect3( 1., 2., 3.);
-	MgVect3 v33 = v32.RotR90();
+	MgVect3D v32 = MgVect3D( 1., 2., 3.);
+	MgVect3D v33 = v32.RotR90();
 	v32.Print( Mstr("v32"));
 	v33.Print( Mstr("v33"));
 	v32 = v32.RotR90();
 	v32.Print( Mstr("v32"));
 	v33.SetRotR90();
 	v33.Print( Mstr("v33"));
-	MgVect3 v34;
-	v34 = v32.Rot( MgVect2( 1., 1.).Unitize());
+	MgVect3D v34;
+	v34 = v32.Rot( MgVect2D( 1., 1.).Unitize());
 	v34.Print( Mstr("v34(v32.Rot(1.,1.))"));
 	v32.SetRot( (MREAL)MC_PIE/4);
 	v32.Print( Mstr("v22.SetRot(MC_PIE/4)"));
 
-	MgPoint3 pt32 = MgPoint3( 1., 2., 3.);
-	MgPoint3 pt33 = pt32.RotR90();
+	MgPoint3D pt32 = MgPoint3D( 1., 2., 3.);
+	MgPoint3D pt33 = pt32.RotR90();
 	pt32.Print( Mstr("pt32"));
 	pt33.Print( Mstr("pt33"));
 	pt32 = pt32.RotR90();
 	pt32.Print( Mstr("pt32"));
 	pt33.SetRotR90();
 	pt33.Print( Mstr("pt33"));
-	MgPoint3 pt34;
+	MgPoint3D pt34;
 	pt34 = pt32.Rot( (MREAL)MC_PIE/4);
 	pt34.Print( Mstr("pt34(pt32.Rot(MC_PIE/4))"));
 	pt32.SetRot( (MREAL)MC_PIE/4);
@@ -364,9 +364,9 @@ void Test006_DBModule()
 	DLyr::SetLyrDispMode( 1, idLyr[1], 3);
 
 	// エンティティに図形を設定する
-	MgPoint3 Pt0( 0., 0., 0.);
-	MgPoint3 Pt1( 1000., 0., 0.);
-	MgPoint3 Pt2( 1000., 1000., 0.);
+	MgPoint3D Pt0( 0., 0., 0.);
+	MgPoint3D Pt1( 1000., 0., 0.);
+	MgPoint3D Pt2( 1000., 1000., 0.);
 
 	
 	//// テクスチャ
@@ -380,21 +380,21 @@ void Test006_DBModule()
 	
 	// 線分１
 	MDFIG stFig1( 10);
-	stFig1.Line3( MgLine3( Pt0, Pt1));
+	stFig1.Line3( MgLine3D( Pt0, Pt1));
 	mdmDEnt::SetFig( idEnt[0], stFig1); 
 
 	// 線分２
 	MDFIG stFig2( 12);
-	stFig2.Line3( MgLine3( Pt0, Pt1));
+	stFig2.Line3( MgLine3D( Pt0, Pt1));
 	mdmDEnt::SetFig( idEnt[2], stFig2); 
 
 	// ポリゴン
-	MgPolyg3 Pg1(10);
+	MgPolyg3D Pg1(10);
 
-	Pg1 += MgPoint3( 0., 0., -1000.);
-	Pg1 += MgPoint3( 0., 2000., -1000.);
-	Pg1 += MgPoint3( 2000., 2000., -1000.);
-	Pg1 += MgPoint3( 2000., 0., -1000.);
+	Pg1 += MgPoint3D( 0., 0., -1000.);
+	Pg1 += MgPoint3D( 0., 2000., -1000.);
+	Pg1 += MgPoint3D( 2000., 2000., -1000.);
+	Pg1 += MgPoint3D( 2000., 0., -1000.);
 
 	MDFIG stFig3( 20);
 	stFig3.Polyg3( Pg1);
@@ -402,26 +402,26 @@ void Test006_DBModule()
 	
 	// 点
 	MDFIG stFig4( 10);
-	stFig4.Point3( MgPoint3( 1000., 1000., -1000.));
+	stFig4.Point3( MgPoint3D( 1000., 1000., -1000.));
 	mdmDEnt::SetFig( idEnt[4], stFig4);
 
 	// 直線
 	MDFIG stFig5( 10);
-	stFig5.ULine3( MgULine3( MgPoint3( 3000., 3000., -2000.), MgVect3( 1., 0., 0.)));
+	stFig5.ULine3( MgULine3D( MgPoint3D( 3000., 3000., -2000.), MgVect3D( 1., 0., 0.)));
 	mdmDEnt::SetFig( idEnt[5], stFig5);
 
 	// 半直線
 	MDFIG stFig6( 10);
-	stFig6.HLine3( MgHLine3( MgPoint3( 2000., 2000., -1500.), MgVect3( 0., 1., 0.)));
+	stFig6.HLine3( MgHLine3D( MgPoint3D( 2000., 2000., -1500.), MgVect3D( 0., 1., 0.)));
 	mdmDEnt::SetFig( idEnt[6], stFig6);
 
 	// ポリライン
-	MgPolyl3 Pl1(10);
+	MgPolyl3D Pl1(10);
 
-	Pl1 += MgPoint3( 0., 0., -2000.);
-	Pl1 += MgPoint3( 0., 2000., -2000.);
-	Pl1 += MgPoint3( 2000., 2000., -2000.);
-	Pl1 += MgPoint3( 2000., 0., -2000.);
+	Pl1 += MgPoint3D( 0., 0., -2000.);
+	Pl1 += MgPoint3D( 0., 2000., -2000.);
+	Pl1 += MgPoint3D( 2000., 2000., -2000.);
+	Pl1 += MgPoint3D( 2000., 0., -2000.);
 
 	MDFIG stFig7( 20);
 	stFig7.Polyl3( Pl1);
@@ -429,16 +429,16 @@ void Test006_DBModule()
 
 	// 平面
 	MDFIG stFig8( 10);
-	stFig8.Plane3( MgPlane3( MgVect3( 0., 1., 0.), -6000.));
+	stFig8.Plane3( MgPlane3D( MgVect3D( 0., 1., 0.), -6000.));
 	mdmDEnt::SetFig( idEnt[8], stFig8);
 
 	// ポリゴン
-	MgPolyg3 Pg2(10);
+	MgPolyg3D Pg2(10);
 
-	Pg2 += MgPoint3( 0., 0., -3000.);
-	Pg2 += MgPoint3( 0., 2000., -3000.);
-	Pg2 += MgPoint3( 2000., 2000., -3000.);
-	Pg2 += MgPoint3( 2000., 0., -3000.);
+	Pg2 += MgPoint3D( 0., 0., -3000.);
+	Pg2 += MgPoint3D( 0., 2000., -3000.);
+	Pg2 += MgPoint3D( 2000., 2000., -3000.);
+	Pg2 += MgPoint3D( 2000., 0., -3000.);
 
 	MDFIG stFig9( 20);
 	stFig9.Polyg3( Pg1);
@@ -446,18 +446,18 @@ void Test006_DBModule()
 
 	// 円
 	MDFIG stFig10( 10);
-	stFig10.Cir3( MgCir3( MgPoint3( 5000., 5000., -1000.), MgVect3( 0., 1., 0.), 2000.));
+	stFig10.Cir3( MgCir3D( MgPoint3D( 5000., 5000., -1000.), MgVect3D( 0., 1., 0.), 2000.));
 	mdmDEnt::SetFig( idEnt[10], stFig10);
 
 	// 円弧
 	MDFIG stFig11( 15);
-	stFig11.Arc3( MgArc3( MgPoint3( 2000., 0., -1500.), MgPoint3( 0., 2000., -1500.),
-						  MgPoint3( 0., 0., -1500.), MgVect3( 0., 1., 0.), 1500.));
+	stFig11.Arc3( MgArc3D( MgPoint3D( 2000., 0., -1500.), MgPoint3D( 0., 2000., -1500.),
+						  MgPoint3D( 0., 0., -1500.), MgVect3D( 0., 1., 0.), 1500.));
 	mdmDEnt::SetFig( idEnt[11], stFig11);
 
 	// 無限平面
 	MDFIG stFig12( 10);
-	stFig12.IPlane3( MgPlane3( MgVect3( 0., 1., 0.), -6000.));
+	stFig12.IPlane3( MgPlane3D( MgVect3D( 0., 1., 0.), -6000.));
 	mdmDEnt::SetFig( idEnt[12], stFig12);
 
 	//// テクスチャ
@@ -477,15 +477,15 @@ void Test006_DBModule()
 	stFig13.zMaterialRGBA( MC_DIFFUSE, FLOAT3( 1.f, 0.5f, 0.3f), 0.7f);	// A 透過率	( 0. ～ 1.)
 	stFig13.zMaterialShininess( 100.0f);						// 鏡面光係数 ( 0. ～ 128.)
 	stFig13.zTexture( 5);										// テクスチャＩＤ
-//S	MgMat3E mat3( 1., 0., 0., 1.,
+//S	MgMat3DE mat3( 1., 0., 0., 1.,
 //				  0., 1., 0., 1.,
 //				  0., 1., 1., 1.,
 //				  100., 200., 300., 1.);
-	MgMat3E mat3( 1., 0., 0.,
+	MgMat3DE mat3( 1., 0., 0.,
 				  0., 1., 0.,
 				  0., 0., 1.,
 				  100., 200., 300.);
-	stFig13.zTextureCoordinate( 0, 1, &MgVect2( 1., 0.), &mat3);// 配置マトリックス
+	stFig13.zTextureCoordinate( 0, 1, &MgVect2D( 1., 0.), &mat3);// 配置マトリックス
 	stFig13.zTextureParam( 1, 1, 2, 3, 4,						// 拡大／縮小フィルタ
 		MREAL3( 1., 0.5, 0.3f), MREAL3( 0.2f, 0.3f, 0.4f));		// 境界線色2		
 	stFig13.zShininess( 101.);									// 鏡面反射率 ( 0. ～ 1.)

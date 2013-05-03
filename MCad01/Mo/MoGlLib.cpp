@@ -105,22 +105,22 @@ int MoGlLib::SetDCPixelFormat( HDC hdc)
     static PIXELFORMATDESCRIPTOR pfd = {
         sizeof (PIXELFORMATDESCRIPTOR), 		// Specifies the size of this data structure
         1,                                          			// Specifies the version of this data structure
-        PFD_DRAW_TO_WINDOW |                        // ピクセルバッファのビットフラグの設定
+        PFD_DRAW_TO_WINDOW |					// ピクセルバッファのビットフラグの設定
         PFD_SUPPORT_OPENGL |
         PFD_DOUBLEBUFFER,
-        PFD_TYPE_RGBA,                        // RGBA pixel values
-        32,                                   // 32-bitカラーと指定
-        0, 0, 0, 0, 0, 0,                     // Specifies the number of red bitplanes in each RGBA color buffer
-        0, 0,                                 // Specifies the number of alpha bitplanes in each RGBA color buffer
-        0, 0, 0, 0, 0,                        // Specifies the total number of bitplanes in the accumulation buffer
-        32,                                   // Specifies the depth(bit) of the depth (z-axis) buffer
-        32,                                   // Specifies the depth of the stencil buffer
-        0,                                    // Specifies the number of auxiliary buffers
-        PFD_MAIN_PLANE,                       // Layer type　Ignored...
-        0,                                    // Specifies the number of overlay and underlay planes
-        0,                                    // Ignored
-		0,                                    // Specifies the transparent color or index of an underlay plane
-        0                                     // Ignored
+        PFD_TYPE_RGBA,							// RGBA pixel values
+        32,										// 32-bitカラーと指定
+        0, 0, 0, 0, 0, 0,						// Specifies the number of red bitplanes in each RGBA color buffer
+        0, 0,									// Specifies the number of alpha bitplanes in each RGBA color buffer
+        0, 0, 0, 0, 0,							// Specifies the total number of bitplanes in the accumulation buffer
+        32,										// Specifies the depth(bit) of the depth (z-axis) buffer
+        32,										// Specifies the depth of the stencil buffer
+        0,										// Specifies the number of auxiliary buffers
+        PFD_MAIN_PLANE,							// Layer type　Ignored...
+        0,										// Specifies the number of overlay and underlay planes
+        0,										// Ignored
+		0,										// Specifies the transparent color or index of an underlay plane
+        0										// Ignored
     };
 
     int nPixelFormat;

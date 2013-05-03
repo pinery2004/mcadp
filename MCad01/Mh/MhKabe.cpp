@@ -55,14 +55,14 @@ void IeModel::MhNormKabe(
 	mhPlcParts	HaiKabeI;										// 追加壁
 
 	MINT		ic1, ic2, icst, ics;
-	MgPoint3	po, p0, p1;
-	MgLine3		lnKabe1;
+	MgPoint3D	po, p0, p1;
+	MgLine3D		lnKabe1;
 	MINT		ist, istr, istl;
 	MINT		ist1, ist2;
 	MINT		ist1s2, ist1e2, ist2s1, ist2e1;
 
 	MINT		nZukei;											// 図形線分の本数
-	MgLine3		lnZukei[6];										// 図形線分
+	MgLine3D		lnZukei[6];										// 図形線分
 	MINT		szZukei;										// 図形線分データサイズ
 	MINT		idivdel;										// 分割削除フラグ 0: 無分割、1: 分割、2: 削除 
 
@@ -96,8 +96,8 @@ void IeModel::MhNormKabe(
 		for ( ic2=ics; ic2<nHaiKabe; ic2++) {										// 壁2
 			if ( ic1 == ic2 || fPlc[ic2] < 0)
 				continue;															// 同一壁と削除壁は比較対象外
-			if ( !MGeo::ChkMMR2OnMMR2( MgMinMaxR2( MgLine2C( pHaiKabe[ic1]->m_lnPlc)),
-								   MgMinMaxR2( MgLine2C(pHaiKabe[ic2]->m_lnPlc))))
+			if ( !MGeo::ChkMMR2OnMMR2( MgMinMaxR2D( MgLine2DC( pHaiKabe[ic1]->m_lnPlc)),
+								   MgMinMaxR2D( MgLine2DC(pHaiKabe[ic2]->m_lnPlc))))
 				continue;															// MinMaxの重なりなしの場合は比較対象外
 			if ( MGeo::Parallel( pHaiKabe[ic1]->m_lnPlc, pHaiKabe[ic2]->m_lnPlc)) {	// 平行
 				ist = MGeo::ChkPt3OnLn3WS( pHaiKabe[ic2]->m_lnPlc.p[0], pHaiKabe[ic1]->m_lnPlc, &ist2s1);	// 壁2の始点が壁1のどこに乗っているか調べる
@@ -184,8 +184,8 @@ void IeModel::MhNormKabe(
 		for ( ic2=0; ic2<nHaiKabe; ic2++) {
 			if ( ic1 == ic2 || fPlc[ic2] < 0)
 				continue;															// 同一壁と削除壁は比較対象外
-			if ( !MGeo::ChkMMR2OnMMR2( MgMinMaxR2( MgLine2C( pHaiKabe[ic1]->m_lnPlc)),
-					   MgMinMaxR2( MgLine2C( pHaiKabe[ic2]->m_lnPlc))))
+			if ( !MGeo::ChkMMR2OnMMR2( MgMinMaxR2D( MgLine2DC( pHaiKabe[ic1]->m_lnPlc)),
+					   MgMinMaxR2D( MgLine2DC( pHaiKabe[ic2]->m_lnPlc))))
 				continue;															// MinMaxの重なりなしの場合は比較対象外
 			if ( MGeo::Parallel( pHaiKabe[ic1]->m_lnPlc, pHaiKabe[ic2]->m_lnPlc)) {	// 平行
 				ist = MGeo::ChkPt3OnLn3WS( pHaiKabe[ic2]->m_lnPlc.p[0], pHaiKabe[ic1]->m_lnPlc, &ist2s1);	// 壁2の始点が壁1のどこに乗っているか調べる
@@ -246,15 +246,15 @@ void IeModel::MhNormKabe(
 	}
 
 	//	壁の仮の図形作成
-	szZukei = sizeof(MhZukei) + sizeof(MgLine3);									// 線分２本分の図形データサイズ
+	szZukei = sizeof(MhZukei) + sizeof(MgLine3D);									// 線分２本分の図形データサイズ
 
 	for ( ic1=0; ic1<nHaiKabe; ic1++) {
 		if ( fPlc[ic1] < 0 || (fPlc[ic1] != 2 && ic1 < icst))
 			continue;																// 削除壁または追加修正以外の壁で追加修正壁と無交差は対象外
 		lnKabe1 = pHaiKabe[ic1]->m_lnPlc;											// 結合線分算出用
-//		MgVect3	vtutLn1 = MGeo::UnitizeV3( MgVect3C( lnKabe1));
-		MgVect3	vw = MgVect3C( lnKabe1);
-		MgVect3	vtutLn1 = MGeo::UnitizeV3( vw);
+//		MgVect3D	vtutLn1 = MGeo::UnitizeV3( MgVect3DC( lnKabe1));
+		MgVect3D	vw = MgVect3DC( lnKabe1);
+		MgVect3D	vtutLn1 = MGeo::UnitizeV3( vw);
 		lnKabe1.p[0] = lnKabe1.p[0] - vtutLn1 * EXPKABELN;
 		lnKabe1.p[1] = lnKabe1.p[1] + vtutLn1 * EXPKABELN;
 
@@ -282,8 +282,8 @@ void IeModel::MhNormKabe(
 			if ( ic1 == ic2 || fPlc[ic2] < 0)
 				continue;															// 同一壁と削除壁は比較対象外
 
-			if ( !MGeo::ChkMMR2OnMMR2( MgMinMaxR2( MgLine2C( pHaiKabe[ic1]->m_lnPlc)),
-							MgMinMaxR2( MgLine2C( pHaiKabe[ic2]->m_lnPlc))))
+			if ( !MGeo::ChkMMR2OnMMR2( MgMinMaxR2D( MgLine2DC( pHaiKabe[ic1]->m_lnPlc)),
+							MgMinMaxR2D( MgLine2DC( pHaiKabe[ic2]->m_lnPlc))))
 				continue;															// MinMaxの重なりなしの場合は比較対象外
 			if ( MGeo::Parallel( pHaiKabe[ic1]->m_lnPlc, pHaiKabe[ic2]->m_lnPlc)) {	// 平行
 				ist = MGeo::ChkPt3OnLn3WS( pHaiKabe[ic2]->m_lnPlc.p[0], pHaiKabe[ic1]->m_lnPlc, &ist2s1);	// 壁2の始点が壁1のどこに乗っているか調べる
@@ -316,9 +316,9 @@ void IeModel::MhNormKabe(
 					ASSERT( FALSE);													// 		交差点で分割済みなので処理エラー　<ERROR>
 
 				// 交差壁の図形作成
-                MgVect3 vtutLn2 = MGeo::UnitizeV3( MgVect3C( pHaiKabe[ic2]->m_lnPlc));
-				MgULine3 ULnR = MgULine3( pHaiKabe[ic2]->m_pZukei->m_lnZukei[0].p[0], vtutLn2);
-				MgULine3 ULnL = MgULine3( pHaiKabe[ic2]->m_pZukei->m_lnZukei[1].p[0], vtutLn2);
+                MgVect3D vtutLn2 = MGeo::UnitizeV3( MgVect3DC( pHaiKabe[ic2]->m_lnPlc));
+				MgULine3D ULnR = MgULine3D( pHaiKabe[ic2]->m_pZukei->m_lnZukei[0].p[0], vtutLn2);
+				MgULine3D ULnL = MgULine3D( pHaiKabe[ic2]->m_pZukei->m_lnZukei[1].p[0], vtutLn2);
 
 				if ( ( ist1 & (MC_ON_PS | MC_ON_PE)) == ( ist2 & (MC_ON_PS | MC_ON_PE))) {	// 壁の向きが対向
 					istr = MGeo::IntrLnULn3( lnZukei[0], ULnL, &p0);
@@ -340,7 +340,7 @@ void IeModel::MhNormKabe(
 		}
 
 		if ( iPlcCn[0] == -2 || iPlcCn[1] == -2) {
-			MgVect3	vtutLn1 = MGeo::UnitizeV3( MgVect3C( lnKabe1));
+			MgVect3D	vtutLn1 = MGeo::UnitizeV3( MgVect3DC( lnKabe1));
 			lnKabe1.p[0] = lnKabe1.p[0] - vtutLn1 * 44.5;
 			lnKabe1.p[1] = lnKabe1.p[1] + vtutLn1 * 44.5;
 
@@ -361,7 +361,7 @@ void IeModel::MhNormKabe(
 		}
 
 		if ( nZukei > pHaiKabe[ic1]->m_pZukei->m_isNZukei) {
-			szZukei = sizeof(MhZukei) + sizeof(MgLine3) * (nZukei - 1);				// 線分nZukei本分の図形データサイズ
+			szZukei = sizeof(MhZukei) + sizeof(MgLine3D) * (nZukei - 1);				// 線分nZukei本分の図形データサイズ
 			MBFREE(pHaiKabe[ic1]->m_pZukei);
 			pHaiKabe[ic1]->m_pZukei = (MhZukei*)new char[szZukei];					// 図形線分
 			pHaiKabe[ic1]->m_pZukei->m_pNext = NULL;

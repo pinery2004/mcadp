@@ -24,7 +24,7 @@ public:
 	MCHAR*		m_psName;						// グループ名
 	MREAL		m_rKt;							// 階高さ
 	MREAL		m_rFl;							// 床高さ
-	MgMat3E		m_MTrans;						// 座標変換マトリックス
+	MgMat3DE		m_MTrans;						// 座標変換マトリックス
 	MDIDSET		m_GidC;							// 子IDセット
 	
 public:

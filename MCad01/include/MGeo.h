@@ -201,8 +201,8 @@ MgSVal2Ln3
 MgSValLnULnS3
 MgSVal2LnS3
 
-MgPlane3CPPt
-MgPlane3C3Pt
-MgPlane3CPg
-MgPlane3C2Pt2F
-MgPlane3CLn2F
+MgPlane3DCPPt
+MgPlane3DC3Pt
+MgPlane3DCPg
+MgPlane3DC2Pt2F
+MgPlane3DCLn2F

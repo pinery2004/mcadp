@@ -87,10 +87,10 @@ public:
 	//	返値 検索結果　または　null:ヒットなし
 	static mhPlcParts* SrchBuzai(
 					class	MmWndInfo*	i_pWndInfo,		// ウィンドウ管理情報
-					class	MgPoint2&	i_ptMouthR,		// 検索指示座標
+					class	MgPoint2D&	i_ptMouthR,		// 検索指示座標
 							MINT		i_iCdBuzai,		// 部材コード　または　NULL(全)
 														// MP_BZICD_PANEL(全パネル)
-					class	MgPolyg2*	o_ppgPartsShape	// 検出多角形　または　NULL
+					class	MgPolyg2D*	o_ppgPartsShape	// 検出多角形　または　NULL
 					);
 
 
@@ -98,7 +98,7 @@ public:
 	//  配置部品の形状を求める
 	static void PartsShape(
 					class	mhPlcParts*	i_pWndInfo,		// ウィンドウ管理情報
-					class	MgPolyg2*	o_pgPartsShape	// 部材の形状
+					class	MgPolyg2D*	o_pgPartsShape	// 部材の形状
 					);
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -114,7 +114,7 @@ public:
 	static void mhHaitiIn::MhModBzPH(
 							MINT		iCdInpKbCd,		// (I  ) 入力点区分コード
 							MINT		iMov,			// (I  ) 修正側　(0:始点、1:終点)
-					const	MgPoint3	&PtInt,			// (I  ) 配置点
+					const	MgPoint3D	&PtInt,			// (I  ) 配置点
 							MREAL		rLH,			// (I  ) 長さ補整値
 							mhPlcParts	*pPlcEnR		// (I O) 長さ調整部材
 					);
@@ -128,7 +128,7 @@ public:
 														//	MC_INT      (1)	交差あり
 							MINT		iKati,			// (I  ) 勝ち負けフラグ(1:勝ち、0:負け)
 							mhPlcParts*	pPlcEn1,		// (I O) 長さ調整部材1
-					const	MgPoint3	&Pt1,			// (I  ) 部材1の長さ調整する側を示す最寄の点
+					const	MgPoint3D	&Pt1,			// (I  ) 部材1の長さ調整する側を示す最寄の点
 							mhPlcParts*	pPlcEn2		// (I  ) 長さ調整先を示す部材2
 					);
 
@@ -140,17 +140,17 @@ public:
 														//	MC_NINT	    (0)	交差なし
 														//	MC_INT      (1)	交差あり
 							mhPlcParts*	pPlcEn1,		// (I O) 長さ調整部材1
-					const	MgPoint3	&Pt1,			// (I  ) 部材1の長さ調整する側を示す最寄の点
+					const	MgPoint3D	&Pt1,			// (I  ) 部材1の長さ調整する側を示す最寄の点
 							mhPlcParts*	pPlcEn2,		// (I  ) 長さ調整先を示す部材2
-					const	MgPoint3	&Pt2			// (I  ) 部材2の長さ調整先を示す最寄の点
+					const	MgPoint3D	&Pt2			// (I  ) 部材2の長さ調整先を示す最寄の点
 					);
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	調整先が点座標で示された部材の長さ調整
 	static void MhAdjBzL(
 							mhPlcParts*	pPlcEn1,	// 長さ調整部材1
-					const	MgPoint3	&Pt1,		// 部材1の長さ調整する側を示す最寄の点1
-					const	MgPoint3	&Pt2		// 長さ調整先を示す点2
+					const	MgPoint3D	&Pt1,		// 部材1の長さ調整する側を示す最寄の点1
+					const	MgPoint3D	&Pt2		// 長さ調整先を示す点2
 					);
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -182,9 +182,9 @@ public:
 	//	屋根を配置する
 
 	static MINT RoofPlc(								// ステイタス	0: 正常、-1: 屋根配置エラー
-			const	class	MgPolyg2&	i_pgJim,		// 地廻り区画
+			const	class	MgPolyg2D&	i_pgJim,		// 地廻り区画
 			const	class	MgGInt&		i_GifInp,		// 地廻り線種類(仮想キー(nflag)  MK_SHIFT(004): シフトキー)
-			const	class	MgPoint2&	i_pth			// 方向点
+			const	class	MgPoint2D&	i_pth			// 方向点
 					);
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -195,7 +195,7 @@ public:
 														//				MC_PRI_MIN_AREA(0):	 面積が小を優先
 														//				MC_PRI_MIN_HIGHT(1): 高さが小を優先
 														//				MC_PRI_MAX_HIGHT(2) | その他: 高さが大を優先	
-					const	MgPoint2&	i_pt1			// 指示点
+					const	MgPoint2D&	i_pt1			// 指示点
 					);
 
 	////////////////////////////////////////////////////////////////////////////
@@ -246,37 +246,37 @@ public:
 														//			　1: 連続長さ２点の終点入力
 														//					始点は前回入力(pLn)の終点とする
 														//			　2: 方向１点入力
-					class	MgPoint2*	o_pptln,		// 入力丸め座標（長さ２点座標 ＋　複数部材の領域をあらわす３点目）
-					class	MgPoint2*	o_pptln_org		// 入力オリジナル座標（長さ２点座標 ＋　複数部材の領域をあらわす３点目） 
+					class	MgPoint2D*	o_pptln,		// 入力丸め座標（長さ２点座標 ＋　複数部材の領域をあらわす３点目）
+					class	MgPoint2D*	o_pptln_org		// 入力オリジナル座標（長さ２点座標 ＋　複数部材の領域をあらわす３点目） 
 					);
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	１点入力
 
 	static MINT Get1Pt(
-					class	MgPoint2*	o_ppt1,			// 入力丸め座標（点）
-					class	MgPoint2*	o_ppt1_org		// 入力オリジナル座標（点）
+					class	MgPoint2D*	o_ppt1,			// 入力丸め座標（点）
+					class	MgPoint2D*	o_ppt1_org		// 入力オリジナル座標（点）
 					);
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	連続した長さ２点入力用の２点目の入力(外壁入力用)
 
 	static MINT GetLenEPt(
-					class	MgLine2*	o_pLn
+					class	MgLine2D*	o_pLn
 					);
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	長方形区画入力
 
 	static MINT GetRect2Pt(
-					class	MgLine2*	o_pLn
+					class	MgLine2D*	o_pLn
 					);
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	区画入力
 
 	static MINT GetArea(
-					class	MgPolyg2*	o_pPg1
+					class	MgPolyg2D*	o_pPg1
 					);
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -284,7 +284,7 @@ public:
 	//	各辺に　シフトキー有無のフラグ付き
 
 	static MINT GetAreaI(
-					class	MgPolyg2*	pPg1,			// (  O) 地廻り区画
+					class	MgPolyg2D*	pPg1,			// (  O) 地廻り区画
 					class	MgGInt*		pGifInp			// (  O) 地廻り線種類(仮想キー(nflag)  MK_SHIFT(004): シフトキー)
 				);
 
@@ -293,8 +293,8 @@ public:
 
 	static void GetMarumeKabeLine(
 							MINT		i_iKai,			// 検索階
-			const	class	MgPoint2&	i_pti,			// 入力座標
-					class	MgGLine2*	o_pGLn			// 対象壁芯
+			const	class	MgPoint2D&	i_pti,			// 入力座標
+					class	MgGLine2D*	o_pGLn			// 対象壁芯
 					);
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -302,15 +302,15 @@ public:
 	//
 	static void MmGetMarumeYaneLine(
 							MINT		iKai,			// 検索階
-			const	class	MgPoint2	&Pi,			// 入力座標
-					class	MgGLine2*	pGLn			// 対象屋根構成線
+			const	class	MgPoint2D	&Pi,			// 入力座標
+					class	MgGLine2D*	pGLn			// 対象屋根構成線
 					);
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	丸め
 	static void	Marume(									// 座標値を丸める
-			const	class	MgPoint2&	Pi,				// 入力座標
-					class	MgPoint2*	pPo				// 丸め後の座標
+			const	class	MgPoint2D&	Pi,				// 入力座標
+					class	MgPoint2D*	pPo				// 丸め後の座標
 				);
 
 };

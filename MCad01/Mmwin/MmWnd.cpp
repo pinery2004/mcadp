@@ -125,9 +125,9 @@ MmWndInfo::MmWndInfo(
 	m_pOldMemBmp	= NULL;										// 保存用ウィンドウイメージビットマップ
 	m_pMemDC		= NULL;										// ウィンドウイメージメモリＤＣ
 
-	SetMinMaxD( MgMinMaxI2( 0, 0, 100, 100));					//	表示座標(Min/Max)
+	SetMinMaxD( MgMinMaxI2D( 0, 0, 100, 100));					//	表示座標(Min/Max)
 
-	SetMinMaxRS( MgMinMaxR2( 0, 0, 100., 100.));				//	実座標(Min/Max)スタック
+	SetMinMaxRS( MgMinMaxR2D( 0, 0, 100., 100.));				//	実座標(Min/Max)スタック
 	SetMat();
 }
 

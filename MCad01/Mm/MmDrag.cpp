@@ -36,7 +36,7 @@ namespace MC
 // MmDrag
 //
 
-MmDrag::MmDrag( MmWndInfo* pWndInfo, MgPoint2 ptStart)
+MmDrag::MmDrag( MmWndInfo* pWndInfo, MgPoint2D ptStart)
 {
 	m_pWndInfo = pWndInfo;
 
@@ -53,7 +53,7 @@ MmDrag::~MmDrag(void)
 }
 
 bool
-MmDrag::Continue( MmWndInfo* pWndInfo, MgPoint2 ptLatest)
+MmDrag::Continue( MmWndInfo* pWndInfo, MgPoint2D ptLatest)
 {
 	return true;
 }	
@@ -69,22 +69,22 @@ MmDrag::RedrawAfter( MmWndInfo* pWndInfo)
 //
 // MmDragZoom
 //
-MmDragZoom::MmDragZoom( MmWndInfo* pWndInfo, MgPoint2 ptStart) : MmDrag( pWndInfo, ptStart)
+MmDragZoom::MmDragZoom( MmWndInfo* pWndInfo, MgPoint2D ptStart) : MmDrag( pWndInfo, ptStart)
 {
 	m_iPrevCursorMode = pWndInfo->SetCursor( IDC_ZOOM);
 	m_Motion = ZOOM;
 }
 
 bool
-MmDragZoom::Continue( MmWndInfo* pWndInfo, MgPoint2 ptLatest)
+MmDragZoom::Continue( MmWndInfo* pWndInfo, MgPoint2D ptLatest)
 {
 	if ( m_Motion != ZOOM) return true;
 
 	if( MmDrag::Continue( pWndInfo, ptLatest))
 	{
-		MgMinMaxR2	rMinMaxR = pWndInfo->GetMinMaxRS();
-		MgMinMaxR2	rRelMinMaxR = rMinMaxR - (MgVect2&)m_ptStart;
-		MgMinMaxI2	iMinMaxL = pWndInfo->GetMinMaxL();
+		MgMinMaxR2D	rMinMaxR = pWndInfo->GetMinMaxRS();
+		MgMinMaxR2D	rRelMinMaxR = rMinMaxR - (MgVect2D&)m_ptStart;
+		MgMinMaxI2D	iMinMaxL = pWndInfo->GetMinMaxL();
 		MINT		iHWndLy = iMinMaxL.GetHgt();		
 
 		CPoint		ptLatestL = pWndInfo->RPtoLP( ptLatest);					// ˜_—À•W‚Ö•ÏŠ·
@@ -98,7 +98,7 @@ MmDragZoom::Continue( MmWndInfo* pWndInfo, MgPoint2 ptLatest)
 		else
 			rRelMinMaxR *= (1 + (5.0f * (- DeltaY)));
 		
-		rMinMaxR = rRelMinMaxR + (MgVect2&)m_ptStart;
+		rMinMaxR = rRelMinMaxR + (MgVect2D&)m_ptStart;
 		pWndInfo->SetMinMaxRS( rMinMaxR);
 		pWndInfo->SetMat();
 
@@ -116,22 +116,22 @@ MmDragZoom::Continue( MmWndInfo* pWndInfo, MgPoint2 ptLatest)
 //
 // MmDragPan
 //
-MmDragPan::MmDragPan( MmWndInfo* pWndInfo, MgPoint2 ptStart) : MmDrag( pWndInfo, ptStart)
+MmDragPan::MmDragPan( MmWndInfo* pWndInfo, MgPoint2D ptStart) : MmDrag( pWndInfo, ptStart)
 {
 	m_iPrevCursorMode = pWndInfo->SetCursor(IDC_GRAB);
 	m_Motion = PAN;
 }
 
 bool
-MmDragPan::Continue( MmWndInfo* pWndInfo, MgPoint2 ptLatest)
+MmDragPan::Continue( MmWndInfo* pWndInfo, MgPoint2D ptLatest)
 {
 	if( MmDrag::Continue( pWndInfo, ptLatest))
 	{
-		MgVect2	PtPan;
+		MgVect2D	PtPan;
 
 		PtPan = m_ptLast - ptLatest;
 
-		MgMinMaxR2	rMinMaxR = pWndInfo->GetMinMaxRS();
+		MgMinMaxR2D	rMinMaxR = pWndInfo->GetMinMaxRS();
 		rMinMaxR += PtPan;
 		pWndInfo->SetMinMaxRS( rMinMaxR);
 		pWndInfo->SetMat();

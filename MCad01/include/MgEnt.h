@@ -18,13 +18,13 @@
 typedef struct	_mgeprm2	{
 	MSHORT		Type;						// タイプ
 	MSHORT		Size;						// サイズ	( byte )
-	MgPoint2	p[MPRM_SZPT];				// 座標値	( x, y )
+	MgPoint2D	p[MPRM_SZPT];				// 座標値	( x, y )
 }	MgePrm2;
 
 typedef struct	_mgeprm3	{
 	MSHORT		Type;						// タイプ
 	MSHORT		Size;						// サイズ	( byte )
-	MgPoint3	P[MPRM_SZPT];				// 座標値	( x, y )
+	MgPoint3D	P[MPRM_SZPT];				// 座標値	( x, y )
 }	MgePrm3;
 
 //
@@ -33,7 +33,7 @@ typedef struct	_mgeprm3	{
 typedef struct	_mgepnt2	{
 	MSHORT		Type;						// タイプ	( = MPT_DOT )
 	MSHORT		Size;						// サイズ	( byte )
-	MgPoint2	p;							// 座標値	( x, y )
+	MgPoint2D	p;							// 座標値	( x, y )
 }	MgePnt2;
 
 //
@@ -42,7 +42,7 @@ typedef struct	_mgepnt2	{
 typedef struct	_mgepnt3	{
 	MSHORT		Type;						// タイプ	( = MPT_DOT )
 	MSHORT		Size;						// サイズ	( byte )
-	MgPoint3	P;							// 座標値	( x, y, z )
+	MgPoint3D	P;							// 座標値	( x, y, z )
 }	MgePnt3;
 
 //
@@ -51,8 +51,8 @@ typedef struct	_mgepnt3	{
 typedef struct	_mgeuline2	{
 	MSHORT		Type;						// タイプ	( = MPT_ULINE )
 	MSHORT		Size;						// サイズ	( byte )
-	MgPoint2	p;							// 点				( x, y )
-	MgVect2		v;							// 方向ベクトル	( x, y )
+	MgPoint2D	p;							// 点				( x, y )
+	MgVect2D		v;							// 方向ベクトル	( x, y )
 }	MgeULine2;
 
 //
@@ -61,8 +61,8 @@ typedef struct	_mgeuline2	{
 typedef struct	_mgeuline3	{
 	MSHORT		Type;						// タイプ	( = MPT_ULINE )
 	MSHORT		Size;						// サイズ	( byte )
-	MgPoint3	P;							// 点				( x, y, z )
-	MgVect3		V;							// 方向ベクトル	( x, y, z )
+	MgPoint3D	P;							// 点				( x, y, z )
+	MgVect3D	V;							// 方向ベクトル	( x, y, z )
 }	MgeULine3;
 
 //
@@ -71,7 +71,7 @@ typedef struct	_mgeuline3	{
 typedef struct	_mgeline2	{
 	MSHORT		Type;						// タイプ	( = MPT_LINE )
 	MSHORT		Size;						// サイズ	( byte )
-	MgPoint2	p[2];						// 始点、終点座標値	( x, y )
+	MgPoint2D	p[2];						// 始点、終点座標値	( x, y )
 }	MgeLine2;
 
 //
@@ -80,7 +80,7 @@ typedef struct	_mgeline2	{
 typedef struct	_mgeline3	{
 	MSHORT		Type;						// タイプ	( = MPT_LINE )
 	MSHORT		Size;						// サイズ	( byte )
-	MgPoint3	P[2];						// 始点、終点座標値	( x, y, z )
+	MgPoint3D	P[2];						// 始点、終点座標値	( x, y, z )
 }	MgeLine3;
 
 //
@@ -89,7 +89,7 @@ typedef struct	_mgeline3	{
 typedef struct	_mgepolyline2	{
 	MSHORT		Type;						// タイプ	( = MPT_PLYL )
 	MSHORT		Size;						// サイズ	( byte )
-	MgPoint2	p[MPRM_SZPT];				// 構成点座標値	( x, y )
+	MgPoint2D	p[MPRM_SZPT];				// 構成点座標値	( x, y )
 }	MgePlyLine2;
 
 //
@@ -98,7 +98,7 @@ typedef struct	_mgepolyline2	{
 typedef struct	_mgepolyline3	{
 	MSHORT		Type;						// タイプ	( = MPT_PLYL )
 	MSHORT		Size;						// サイズ	( byte )
-	MgPoint3	P[MPRM_SZPT];				// 構成点座標値	( x, y, z )
+	MgPoint3D	P[MPRM_SZPT];				// 構成点座標値	( x, y, z )
 }	MgePlyLine3;
 
 //
@@ -107,7 +107,7 @@ typedef struct	_mgepolyline3	{
 typedef struct	_mgepolygon2	{
 	MSHORT		Type;						// タイプ	( = MPT_PLYG )
 	MSHORT		Size;						// サイズ	( byte )
-	MgPoint2	p[MPRM_SZPT];				// 構成点座標値	( x, y )
+	MgPoint2D	p[MPRM_SZPT];				// 構成点座標値	( x, y )
 }	MgePlygon2;
 
 //
@@ -116,7 +116,7 @@ typedef struct	_mgepolygon2	{
 typedef struct	_mgepolygon3	{
 	MSHORT		Type;						// タイプ	( = MPT_PLYG )
 	MSHORT		Size;						// サイズ	( byte )
-	MgPoint3	P[MPRM_SZPT];				// 構成点座標値	( x, y, z )
+	MgPoint3D	P[MPRM_SZPT];				// 構成点座標値	( x, y, z )
 }	MgePlygon3;
 
 //
@@ -143,7 +143,7 @@ typedef struct	_mgegpolygon3	{
 typedef struct	_mgecircle2	{
 	MSHORT		Type;						// タイプ	( = MPT_CIR )
 	MSHORT		Size;						// サイズ	( byte )
-	MgPoint2	pc;							// 中心点座標値	( x, y )
+	MgPoint2D	pc;							// 中心点座標値	( x, y )
 	MREAL		r;							// 半径
 }	MgeCircle2;
 
@@ -153,8 +153,8 @@ typedef struct	_mgecircle2	{
 typedef struct	_mgecircle2	{
 	MSHORT		Type;						// タイプ	( = MPT_CIR )
 	MSHORT		Size;						// サイズ	( byte )
-	MgPoint3	Pc;							// 中心点座標値	( x, y, z )
-	MgVect3		V;							// 法線単位ベクトル	( x, y, z )
+	MgPoint3D	Pc;							// 中心点座標値	( x, y, z )
+	MgVect3D	V;							// 法線単位ベクトル	( x, y, z )
 	MREAL		R;							// 半径
 }	MgeCircle2;
 
@@ -164,8 +164,8 @@ typedef struct	_mgecircle2	{
 typedef struct	_mgearc2	{
 	MSHORT		Type;						// タイプ	( = MPT_ARC )
 	MSHORT		Size;						// サイズ	( byte )
-	MgPoint2	pt[2];						// 始点、終点値	( x, y )
-	MgPoint2	pc;							// 中心点座標値	( x, y )
+	MgPoint2D	pt[2];						// 始点、終点値	( x, y )
+	MgPoint2D	pc;							// 中心点座標値	( x, y )
 	MREAL		r;							// 半径
 }	MgeArc2;
 
@@ -175,9 +175,9 @@ typedef struct	_mgearc2	{
 typedef struct	_mgearc3	{
 	MSHORT		Type;						// タイプ	( = MPT_ARC )
 	MSHORT		Size;						// サイズ	( byte )
-	MgPoint3	Pt[2];						// 始点、終点値	( x, y, z )
-	MgPoint3	Pc;							// 中心点座標値	( x, y, z )
-	MgVect3		V;							// 法線単位ベクトル	( x, y, z )
+	MgPoint3D	Pt[2];						// 始点、終点値	( x, y, z )
+	MgPoint3D	Pc;							// 中心点座標値	( x, y, z )
+	MgVect3D	V;							// 法線単位ベクトル	( x, y, z )
 	MREAL		r;							// 半径
 }	MgeArc3;
 
@@ -187,8 +187,8 @@ typedef struct	_mgearc3	{
 typedef struct	_mgeeps2	{
 	MSHORT		Type;						// タイプ	( = MPT_EPS )
 	MSHORT		Size;						// サイズ	( byte )
-	MgPoint2	pc;							// 中心点座標値	( x, y )
-	MgPoint2	pf;							// 焦点座標値		( x, y )
+	MgPoint2D	pc;							// 中心点座標値	( x, y )
+	MgPoint2D	pf;							// 焦点座標値		( x, y )
 	MREAL		rl;							// 長径
 }	MgeEps2;
 
@@ -198,9 +198,9 @@ typedef struct	_mgeeps2	{
 typedef struct	_mgeeps3	{
 	MSHORT		Type;						// タイプ	( = MPT_EPS )
 	MSHORT		Size;						// サイズ	( byte )
-	MgPoint3	Pc;							// 中心点座標値	( x, y, z )
-	MgPoint3	Pf;							// 焦点座標値		( x, y, z )
-	MgVect3		V;							// 法線単位ベクトル	( x, y, z )
+	MgPoint3D	Pc;							// 中心点座標値	( x, y, z )
+	MgPoint3D	Pf;							// 焦点座標値		( x, y, z )
+	MgVect3D	V;							// 法線単位ベクトル	( x, y, z )
 	MREAL		rl;							// 長径
 }	MgeEps3;
 
@@ -210,9 +210,9 @@ typedef struct	_mgeeps3	{
 typedef struct	_mgeeps2	{
 	MSHORT		Type;						// タイプ	( = MPT_EPS )
 	MSHORT		Size;						// サイズ	( byte )
-	MgPoint2	pt[2];						// 始点、終点値	( x, y )
-	MgPoint2	pc;							// 中心点座標値	( x, y )
-	MgPoint2	pf;							// 焦点座標値		( x, y )
+	MgPoint2D	pt[2];						// 始点、終点値	( x, y )
+	MgPoint2D	pc;							// 中心点座標値	( x, y )
+	MgPoint2D	pf;							// 焦点座標値		( x, y )
 	MREAL		rl;							// 長径
 }	MgeEps2;
 
@@ -222,10 +222,10 @@ typedef struct	_mgeeps2	{
 typedef struct	_mgeeps3	{
 	MSHORT		Type;						// タイプ	( = MPT_EPS )
 	MSHORT		Size;						// サイズ	( byte )
-	MgPoint3	Pt[2];						// 始点、終点値	( x, y, z )
-	MgPoint3	Pc;							// 中心点座標値	( x, y, z )
-	MgPoint3	Pf;							// 焦点座標値		( x, y, z )
-	MgVect3		V;							// 法線単位ベクトル	( x, y, z )
+	MgPoint3D	Pt[2];						// 始点、終点値	( x, y, z )
+	MgPoint3D	Pc;							// 中心点座標値	( x, y, z )
+	MgPoint3D	Pf;							// 焦点座標値		( x, y, z )
+	MgVect3D	V;							// 法線単位ベクトル	( x, y, z )
 	MREAL		rl;							// 長径
 }	MgeEps3;
 
@@ -235,7 +235,7 @@ typedef struct	_mgeeps3	{
 typedef struct	_mgepln3	{
 	MSHORT		Type;						// タイプ	( = MPT_PLN )
 	MSHORT		Size;						// サイズ	( byte )
-	MgVect3		V;							// 法線ベクトル	( a, b, c )
+	MgVect3D	V;							// 法線ベクトル	( a, b, c )
 	MREAL		d;							// d = - (中心から平面までの平面表方向の距離)
 }	MgePln3;
 
@@ -245,7 +245,7 @@ typedef struct	_mgepln3	{
 typedef struct	_mgeplna3	{
 	MSHORT		Type;						// タイプ	( = MPT_PLNA )
 	MSHORT		Size;						// サイズ	( byte )
-	MgPoint3	P;							// 中心点座標値	( x, y, z )
+	MgPoint3D	P;							// 中心点座標値	( x, y, z )
 	MREAL		d;							// - (中心から平面までの平面表方向の距離)
 	MgePrm3		Prm;						// 図形要素
 }	MgePlna3;

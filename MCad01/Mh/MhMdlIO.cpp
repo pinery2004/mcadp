@@ -72,7 +72,7 @@ MINT IeModel::MhMdlLoad(										//
 	bool		fPlcSzChk = true;
 	bool		fRoofSzChk = true;
 
-	MgVect3		vLnPlc;
+	MgVect3D		vLnPlc;
 
 	MDID		idEnt[3000];
 	MINT		isz = 1;

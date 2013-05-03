@@ -25,10 +25,10 @@ namespace MC
 //		‚QŸŒ³’¼ü‚Ì•ûŒü‚ğ’PˆÊƒxƒNƒgƒ‹‚É³‹K‰»‚·‚é
 //
 /*
-MgULine2 MgULine2::SetNorm()
+MgULine2D MgULine2D::SetNorm()
 {
 	MREAL	dv = MgAbs( v);
-		MGCHECK_ZEROVECTOR( dv, Mstr( "MgULine2 SetNorm"));
+		MGCHECK_ZEROVECTOR( dv, Mstr( "MgULine2D SetNorm"));
 	MREAL	dd = 1.f / dv;
 	v.x *= dd;
 	v.y *= dd;
@@ -40,11 +40,11 @@ MgULine2 MgULine2::SetNorm()
 //		‚QŸŒ³’¼ü‚Ì•ûŒü‚ğ’PˆÊƒxƒNƒgƒ‹‚É³‹K‰»‚·‚é
 //
 /*
-MgULine2 MgULine2::Norm()
+MgULine2D MgULine2D::Norm()
 {
-	MgULine2 uln;
+	MgULine2D uln;
 	MREAL	dv = MgAbs( v);
-		MGCHECK_ZEROVECTOR( dv, Mstr( "MgULine2 Norm"));
+		MGCHECK_ZEROVECTOR( dv, Mstr( "MgULine2D Norm"));
 	MREAL	dd = 1.f / dv;
 	uln.p = p;
 	uln.v.x = v.x * dd;
@@ -56,7 +56,7 @@ MgULine2 MgULine2::Norm()
 //======================( ‚QŸŒ³ )==============================
 //		‚QŸŒ³’¼ü“¯m‚ª“™‚µ‚¢‚©’²‚×‚é
 //
-bool MgULine2::operator == ( const MgULine2& ULn1) const							// b = (uln == ULn1) ”»’è
+bool MgULine2D::operator == ( const MgULine2D& ULn1) const							// b = (uln == ULn1) ”»’è
 {
 	MINT	ist;
 	return ( MGeo::ChkPt2OnULn2WS( p, ULn1, &ist) &&
@@ -66,10 +66,10 @@ bool MgULine2::operator == ( const MgULine2& ULn1) const							// b = (uln == UL
 //======================( ‚QŸŒ³ )==============================
 //		‚QŸŒ³’¼ü‚ğƒgƒŒ[ƒX‚·‚é
 //
-void MgULine2::Print( MCHAR* s)
+void MgULine2D::Print( MCHAR* s)
 {
 #ifdef LOGOUT
-	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgULine2	: (%7.1f,%7.1f), (%7.1f,%7.1f)\n"),
+	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgULine2D	: (%7.1f,%7.1f), (%7.1f,%7.1f)\n"),
 								 s, p.x, p.y, v.x, v.y);
 	MBLOGPRBF;
 #endif
@@ -79,10 +79,10 @@ void MgULine2::Print( MCHAR* s)
 //		‚QŸŒ³”¼’¼ü‚Ì•ûŒü‚ğ’PˆÊƒxƒNƒgƒ‹‚É³‹K‰»‚·‚é
 //
 /*
-MgHLine2 MgHLine2::SetNorm()
+MgHLine2D MgHLine2D::SetNorm()
 {
 	MREAL	dv = MgAbs( v);
-		MGCHECK_ZEROVECTOR( dv, Mstr( "MgHLine2 SetNorm"));
+		MGCHECK_ZEROVECTOR( dv, Mstr( "MgHLine2D SetNorm"));
 	MREAL	dd = 1.f / dv;
 	v.x *= dd;
 	v.y *= dd;
@@ -94,11 +94,11 @@ MgHLine2 MgHLine2::SetNorm()
 //		‚QŸŒ³”¼’¼ü‚Ì•ûŒü‚ğ’PˆÊƒxƒNƒgƒ‹‚É³‹K‰»‚·‚é
 //
 /*
-MgHLine2 MgHLine2::Norm()
+MgHLine2D MgHLine2D::Norm()
 {
-	MgHLine2 uln;
+	MgHLine2D uln;
 	MREAL	dv = MgAbs( v);
-		MGCHECK_ZEROVECTOR( dv, Mstr( "MgHLine2 Norm"));
+		MGCHECK_ZEROVECTOR( dv, Mstr( "MgHLine2D Norm"));
 	MREAL	dd = 1.f / dv;
 	uln.p = p;
 	uln.v.x = v.x * dd;
@@ -110,7 +110,7 @@ MgHLine2 MgHLine2::Norm()
 //======================( ‚QŸŒ³ )==============================
 //		‚QŸŒ³”¼’¼ü“¯m‚ª“™‚µ‚¢‚©’²‚×‚é
 //
-bool MgHLine2::operator == ( const MgHLine2 &HLn1) const							// b = (uln == ULn1) ”»’è
+bool MgHLine2D::operator == ( const MgHLine2D &HLn1) const							// b = (uln == ULn1) ”»’è
 {
 	MINT	ist;
 	return ( MGeo::ChkPt2OnHLn2WS( p, HLn1, &ist) &&
@@ -120,10 +120,10 @@ bool MgHLine2::operator == ( const MgHLine2 &HLn1) const							// b = (uln == UL
 //======================( ‚QŸŒ³ )==============================
 //		‚QŸŒ³”¼’¼ü‚ğƒgƒŒ[ƒX‚·‚é
 //
-void MgHLine2::Print( MCHAR* s)
+void MgHLine2D::Print( MCHAR* s)
 {
 #ifdef LOGOUT
-	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgHLine2	: (%7.1f,%7.1f), (%7.1f,%7.1f)\n"),
+	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgHLine2D	: (%7.1f,%7.1f), (%7.1f,%7.1f)\n"),
 									s, p.x, p.y, v.x, v.y);
 	MBLOGPRBF;
 #endif
@@ -132,7 +132,7 @@ void MgHLine2::Print( MCHAR* s)
 //======================( ‚QŸŒ³ )==============================
 //		‚QŸŒ³ü•ª“¯m‚ª“™‚µ‚¢‚©’²‚×‚é (‹t•ûŒü‚àŠÜ‚Ş)
 //
-bool MgLine2::operator == ( const MgLine2& Ln1) const								// b = (ln == Ln1) ”»’è
+bool MgLine2D::operator == ( const MgLine2D& Ln1) const								// b = (ln == Ln1) ”»’è
 { 
 	return (((p[0] == Ln1.p[0]) && (p[1] == Ln1.p[1])) ||
 			((p[0] == Ln1.p[1]) && (p[1] == Ln1.p[0])));
@@ -141,10 +141,10 @@ bool MgLine2::operator == ( const MgLine2& Ln1) const								// b = (ln == Ln1) 
 //======================( ‚QŸŒ³ )==============================
 //		‚QŸŒ³ü•ª‚ğƒgƒŒ[ƒX‚·‚é
 //
-void MgLine2::Print( MCHAR* s)
+void MgLine2D::Print( MCHAR* s)
 {
 #ifdef LOGOUT
-	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgLine2		: (%7.1f,%7.1f), (%7.1f,%7.1f)\n"),
+	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgLine2D		: (%7.1f,%7.1f), (%7.1f,%7.1f)\n"),
 									 s, p[0].x, p[0].y, p[1].x, p[1].y);
 	MBLOGPRBF;
 #endif
@@ -154,10 +154,10 @@ void MgLine2::Print( MCHAR* s)
 //		’¼ü‚Ì•ûŒü‚ğ’PˆÊƒxƒNƒgƒ‹‚É³‹K‰»‚·‚é
 //
 /*
-MgULine3 MgULine3::Norm()
+MgULine3D MgULine3D::Norm()
 {
 	MREAL	d1 = MgAbs( v);
-		MGCHECK_ZEROVECTOR( d1, Mstr( "MgULine3 Norm"));
+		MGCHECK_ZEROVECTOR( d1, Mstr( "MgULine3D Norm"));
 	MREAL	d2 = 1.f / d1;
 	v.x *= d2;
 	v.y *= d2;
@@ -169,7 +169,7 @@ MgULine3 MgULine3::Norm()
 //======================( ‚RŸŒ³ )==============================
 //		‚RŸŒ³’¼ü“¯m‚ª“™‚µ‚¢‚©’²‚×‚é
 //
-bool MgULine3::operator == ( const MgULine3& ULn1) const							// b = (uln == ULn1) ”»’è
+bool MgULine3D::operator == ( const MgULine3D& ULn1) const							// b = (uln == ULn1) ”»’è
 {
 	return ( MGeo::ChkPt3OnULn3( p, ULn1) &&
 			( MGeo::EqualV( v,  ULn1.v) || MGeo::EqualV( v, -ULn1.v)));
@@ -178,10 +178,10 @@ bool MgULine3::operator == ( const MgULine3& ULn1) const							// b = (uln == UL
 //======================( ‚RŸŒ³ )==============================
 //		‚RŸŒ³’¼ü‚ğƒgƒŒ[ƒX‚·‚é
 //
-void MgULine3::Print( MCHAR* s)
+void MgULine3D::Print( MCHAR* s)
 {
 #ifdef LOGOUT
-	Msprintf_s( mlLog::m_Str, Mstr( "%s 	MgULine3	: (%7.1f,%7.1f,%7.1f), (%7.1f,%7.1f,%7.1f)\n"),
+	Msprintf_s( mlLog::m_Str, Mstr( "%s 	MgULine3D	: (%7.1f,%7.1f,%7.1f), (%7.1f,%7.1f,%7.1f)\n"),
 									s, p.x, p.y, p.z, v.x, v.y, v.z);
 	MBLOGPRBF;
 #endif
@@ -191,10 +191,10 @@ void MgULine3::Print( MCHAR* s)
 //		”¼’¼ü‚Ì•ûŒü‚ğ’PˆÊƒxƒNƒgƒ‹‚É³‹K‰»‚·‚é
 //
 /*
-MgHLine3 MgHLine3::Norm()
+MgHLine3D MgHLine3D::Norm()
 {
 	MREAL	d1 = MgAbs( v);
-		MGCHECK_ZEROVECTOR( d1, Mstr( "MgHLine3 Norm"));
+		MGCHECK_ZEROVECTOR( d1, Mstr( "MgHLine3D Norm"));
 	MREAL	d2 = 1.f / d1;
 	v.x *= d2;
 	v.y *= d2;
@@ -206,7 +206,7 @@ MgHLine3 MgHLine3::Norm()
 //======================( ‚RŸŒ³ )==============================
 //		‚RŸŒ³”¼’¼ü“¯m‚ª“™‚µ‚¢‚©’²‚×‚é
 //
-bool MgHLine3::operator == ( const MgHLine3 &HLn1) const							// b = (uln == ULn1) ”»’è
+bool MgHLine3D::operator == ( const MgHLine3D &HLn1) const							// b = (uln == ULn1) ”»’è
 {
 	return ( MGeo::ChkPt3OnHLn3( p, HLn1) &&
 			( MGeo::EqualV( v,  HLn1.v)));
@@ -215,10 +215,10 @@ bool MgHLine3::operator == ( const MgHLine3 &HLn1) const							// b = (uln == UL
 //======================( ‚RŸŒ³ )==============================
 //		‚RŸŒ³”¼’¼ü‚ğƒgƒŒ[ƒX‚·‚é
 //
-void MgHLine3::Print( MCHAR* s)
+void MgHLine3D::Print( MCHAR* s)
 {
 #ifdef LOGOUT
-	Msprintf_s( mlLog::m_Str, Mstr( "%s 	MgHLine3	: (%7.1f,%7.1f,%7.1f), (%7.1f,%7.1f,%7.1f)\n"),
+	Msprintf_s( mlLog::m_Str, Mstr( "%s 	MgHLine3D	: (%7.1f,%7.1f,%7.1f), (%7.1f,%7.1f,%7.1f)\n"),
 									s, p.x, p.y, p.z, v.x, v.y, v.z);
 	MBLOGPRBF;
 #endif
@@ -227,7 +227,7 @@ void MgHLine3::Print( MCHAR* s)
 //======================( ‚RŸŒ³ )==============================
 //		‚RŸŒ³ü•ª“¯m‚ª“™‚µ‚¢‚©’²‚×‚é
 //
-bool MgLine3::operator == ( const MgLine3& Ln1) const							// b = (ln == Ln1) ”»’è
+bool MgLine3D::operator == ( const MgLine3D& Ln1) const							// b = (ln == Ln1) ”»’è
 {
 	return (((p[0] == Ln1.p[0]) && (p[1] == Ln1.p[1])) ||
 			((p[0] == Ln1.p[1]) && (p[1] == Ln1.p[0])));
@@ -236,10 +236,10 @@ bool MgLine3::operator == ( const MgLine3& Ln1) const							// b = (ln == Ln1) ”
 //======================( ‚RŸŒ³ )==============================
 //		‚RŸŒ³ü•ª‚ğƒgƒŒ[ƒX‚·‚é
 //
-void MgLine3::Print( MCHAR* s)
+void MgLine3D::Print( MCHAR* s)
 {
 #ifdef LOGOUT
-	Msprintf_s( mlLog::m_Str, Mstr( "%s 	MgLine3 	: (%7.1f,%7.1f,%7.1f), (%7.1f,%7.1f,%7.1f)\n"),
+	Msprintf_s( mlLog::m_Str, Mstr( "%s 	MgLine3D 	: (%7.1f,%7.1f,%7.1f), (%7.1f,%7.1f,%7.1f)\n"),
 									 s, p[0].x, p[0].y, p[0].z, p[1].x, p[1].y, p[1].z);
 	MBLOGPRBF;
 #endif

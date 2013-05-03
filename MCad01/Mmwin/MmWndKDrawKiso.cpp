@@ -50,11 +50,11 @@ namespace MC
 	mhPlcParts	*pPlcEn;
 //	MsBitSet	*pOptv;
 //	MsBitSet*	pHstv;
-	MgPoint2	ptW[2];
+	MgPoint2D	ptW[2];
 	DWORD		PartsLineColor;
 
 	MREAL		rKisoSinZ = pCod->LPtoRP( MINT( pCod->DPtoLP(1)));
-	MgVect2		vKisoSinZ = MgVect2( rKisoSinZ, rKisoSinZ);
+	MgVect2D		vKisoSinZ = MgVect2D( rKisoSinZ, rKisoSinZ);
 
 	// ‚PŠK‚Ì“y‘ä‚É‚ÍAŠî‘bcü‚ð•\Ž¦‚·‚é
 
@@ -68,12 +68,12 @@ namespace MC
 			if ( !MmChkValidParts( pPlcEn))							// ƒIƒvƒVƒ‡ƒ“‚Æ—š—ð‚Ìƒ`ƒFƒbƒN
 				continue;
 
-				ptW[0] = (*(MgPoint2*)&(pPlcEn->GetPIPlcIti( 0))) + vKisoSinZ;
-				ptW[1] = (*(MgPoint2*)&(pPlcEn->GetPIPlcIti( 1))) + vKisoSinZ;
+				ptW[0] = (*(MgPoint2D*)&(pPlcEn->GetPIPlcIti( 0))) + vKisoSinZ;
+				ptW[1] = (*(MgPoint2D*)&(pPlcEn->GetPIPlcIti( 1))) + vKisoSinZ;
 
 				PartsLineColor = mcs::GetColor( MM_COLOR_KISOSIN);
 				pCod->SetLineAttr( MPS_DASHDOT, 1, PartsLineColor);
-				pCod->Line( MgLine2( ptW[0], ptW[1]));
+				pCod->Line( MgLine2D( ptW[0], ptW[1]));
 			}
 		}
 	}

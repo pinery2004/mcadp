@@ -43,7 +43,7 @@ public:
 	//	
 	static int DrawIeMdl(
 							MREAL		rB,				// 表示倍率
-					const	MgPoint3	&PtCtr			// 中心座標
+					const	MgPoint3D	&PtCtr			// 中心座標
 					);
 
 	////////////////////////////////////////////////////////////////////////////
@@ -51,7 +51,7 @@ public:
 	//	
 	static int DrawIeMdl1(
 							MREAL		rB,				// 表示倍率
-					const	MgPoint3	&PtCtr			// 中心座標
+					const	MgPoint3D	&PtCtr			// 中心座標
 					);
 
 	////////////////////////////////////////////////////////////////////////////
@@ -59,7 +59,7 @@ public:
 	//
 	static int DrawIeMdl2(
 							MREAL		rB,				// 表示倍率
-					const	MgPoint3	&PtCtr			// 中心座標
+					const	MgPoint3D	&PtCtr			// 中心座標
 					);
 
 	////////////////////////////////////////////////////////////////////////////
@@ -67,7 +67,7 @@ public:
 	//
 	static int DrawIeMdl3(
 							MREAL		rB,				// 表示倍率
-					const	MgPoint3	&PtCtr			// 中心座標
+					const	MgPoint3D	&PtCtr			// 中心座標
 					);
 
 	////////////////////////////////////////////////////////////////////////////
@@ -75,7 +75,7 @@ public:
 	//			
 	static void DrawYane1(
 							MhRoofInfo	*pRoofEn,		// 横置部材
-					const	MgPoint3	&PtCtr,			// 構造家モデルの中心
+					const	MgPoint3D	&PtCtr,			// 構造家モデルの中心
 							MREAL		rB				// ３次元表示倍率
 					);
 
@@ -84,7 +84,7 @@ public:
 	//			
 	static void DrawYane2(
 							MhRoofInfo	*pRoofEn,		// 横置部材
-					const	MgPoint3	&PtCtr,			// 構造家モデルの中心
+					const	MgPoint3D	&PtCtr,			// 構造家モデルの中心
 							MREAL		rB				// ３次元表示倍率
 					);
 
@@ -93,7 +93,7 @@ public:
 	//			
 	static void DrawYagiri(
 							MhRoofInfo	*pRoofEn,		// 横置部材
-					const	MgPoint3	&PtCtr,			// 構造家モデルの中心
+					const	MgPoint3D	&PtCtr,			// 構造家モデルの中心
 							MREAL		rB				// ３次元表示倍率
 					);
 			
@@ -102,7 +102,7 @@ public:
 	//			
 	static void DrawKabe(
 							mhPlcParts	*i_pPlcEn,		// 壁
-					const	MgPoint3	&PtCtr,			// 構造家モデルの中心
+					const	MgPoint3D	&PtCtr,			// 構造家モデルの中心
 							MREAL		rB				// ３次元表示倍率
 					);
 
@@ -121,7 +121,7 @@ public:
 	//
 	static MINT MakeDispListMat0(
 							MREAL		rB,				// 表示倍率
-					const	MgPoint3	&PtCtr			// 中心座標
+					const	MgPoint3D	&PtCtr			// 中心座標
 					);
 
 	////////////////////////////////////////////////////////////////////////////
@@ -129,7 +129,7 @@ public:
 	//
 	static MINT MakeDispListMat1(
 							MREAL		rB,				// 表示倍率
-					const	MgPoint3	&PtCtr			// 中心座標
+					const	MgPoint3D	&PtCtr			// 中心座標
 					);
 
 	////////////////////////////////////////////////////////////////////////////
@@ -137,7 +137,7 @@ public:
 	//
 	static MINT MakeDispListMat2(
 							MREAL		rB,				// 表示倍率
-					const	MgPoint3	&PtCtr			// 中心座標
+					const	MgPoint3D	&PtCtr			// 中心座標
 					);
 
 	////////////////////////////////////////////////////////////////////////////
@@ -146,7 +146,7 @@ public:
 	static void DrawTategu(
 							mhPlcParts	*i_pPlcEn,		// 壁またはNULL
 							mhPlcParts	*pPlcTEn,		// 建具
-					const	MgPoint3	&PtCtr,			// 構造家モデルの中心
+					const	MgPoint3D	&PtCtr,			// 構造家モデルの中心
 							MREAL		rB				// ３次元表示倍率
 					);
 
@@ -155,7 +155,7 @@ public:
 	//			
 	static void DrawTatewaku( 
 							mhPlcParts	*i_pPlcEn,
-					const	MgPoint3	&PtCtr,
+					const	MgPoint3D	&PtCtr,
 							MREAL		rB
 					);
 
@@ -164,7 +164,7 @@ public:
 	//			
 	static void DrawKaiko( 
 							mhPlcParts *i_pPlcEn,
-					const	MgPoint3	&PtCtr,
+					const	MgPoint3D	&PtCtr,
 							MREAL		rB
 					);
 
@@ -173,7 +173,7 @@ public:
 	//			
 	static void DrawOukaZai( 
 							mhPlcParts	*i_pPlcEn,
-					const	MgPoint3	&PtCtr,
+					const	MgPoint3D	&PtCtr,
 							MREAL		rB
 					);
 
@@ -182,7 +182,7 @@ public:
 	//			
 	static void DrawPanel( 
 							mhPlcParts *i_pPlcEn,
-					const	MgPoint3	&PtCtr,
+					const	MgPoint3D	&PtCtr,
 							MREAL		rB,
 							MINT		iMode			// 表示モード 1:パネル上部線分 2:パネル形状直方体 3:線分+パネル形状
 					);
@@ -192,7 +192,7 @@ public:
 	//			
 	static void DrawKiso(
 							mhPlcParts	*i_pPlcEn,		// 基礎
-					const	MgPoint3	&PtCtr,			// 構造家モデルの中心
+					const	MgPoint3D	&PtCtr,			// 構造家モデルの中心
 							MREAL		rB				// ３次元表示倍率
 					);
 
@@ -202,13 +202,13 @@ public:
 	//
 	static void MhGetBCtr(
 							MREAL		*rB,			// 表示倍率
-							MgPoint3	*PtCtr			// 中心座標
+							MgPoint3D	*PtCtr			// 中心座標
 					);
 
 	////////////////////////////////////////////////////////////////////////////
 	//	【機能】家モデルのMINMAXを取得する
 	//
-	static void MhGetMinMaxMdl( MgMinMaxR3	*prMmMdl);
+	static void MhGetMinMaxMdl( MgMinMaxR3D	*prMmMdl);
 
 	////////////////////////////////////////////////////////////////////////////
 	//	【機能】建具の穴の多角形を求める
@@ -216,8 +216,8 @@ public:
 	static void TateguHole(
 							mhPlcParts	*i_pPlcEn,		// 壁またはNULL
 							mhPlcParts	*pPlcTEn,		// 建具
-							MgPolyg3	*PgR,			// 壁右面開口
-							MgPolyg3	*PgL			// 壁左面開口
+							MgPolyg3D	*PgR,			// 壁右面開口
+							MgPolyg3D	*PgL			// 壁左面開口
 					);
 };
 

@@ -317,23 +317,23 @@ inline_nu void	MDPMT::zTextureCoordinate(
 												//					  MC_2:環境マップ用)
 						MINT		i_iMdCdn,	// 座標生成モードB	( MC_PLANE:0		面からベクトルを生成、
 												//					  MC_1:指定したベクトル)
-				const	MgVect2* 	i_pvszimg,	// イメージ寸法	(mm)( 横、縦) 
-				const	MgMat3E*		i_pmatH		// 配置マトリックス
+				const	MgVect2D* 	i_pvszimg,	// イメージ寸法	(mm)( 横、縦) 
+				const	MgMat3DE*		i_pmatH		// 配置マトリックス
 				)
 { 
 	SetHd( MZAT_TXTRC, 0, ((i_iMdCdn == 0) ? MZWD_TXTRC_S:MZWD_TXTRC_L) );
 	(MHALF&)m_dt[0] = MHALF( i_iMdCre, i_iMdCdn);
 	if ( i_pvszimg)
-		(MgVect2&)m_dt[1] = *i_pvszimg;
+		(MgVect2D&)m_dt[1] = *i_pvszimg;
 	if ( i_pmatH)
-		(MgMat3E&)m_dt[3] = *i_pmatH;
+		(MgMat3DE&)m_dt[3] = *i_pmatH;
 }
 
 inline_nu void	MDFIG::zTextureCoordinate(
 						MINT		i_iMdCre,	// 座標生成モードA	( 0:EYE_PLANE、1:OBJECT_PLANE、2:環境マップ用)
 						MINT		i_iMdCdn,	// 座標生成モードB	( 0:面からベクトルを生成、1:指定したベクトル)
-				const	MgVect2* 	i_pvszimg,	// イメージ寸法	(mm)( 横、縦) 
-				const	MgMat3E*		i_pmatH		// 配置マトリックス
+				const	MgVect2D* 	i_pvszimg,	// イメージ寸法	(mm)( 横、縦) 
+				const	MgMat3DE*		i_pmatH		// 配置マトリックス
 				)
 { 
 	GetpPmt( m_pPmtl->m_n)->zTextureCoordinate( i_iMdCre, i_iMdCdn, i_pvszimg, i_pmatH);
@@ -430,14 +430,14 @@ inline_nu void	MDFIG::zPovRay(
 // ==================== 図形要素 ==========================
 // 点
 inline_nu void	MDPMT::Point3(
-				const	MgPoint3& i_Pt)			// 点データ
+				const	MgPoint3D& i_Pt)			// 点データ
 {
-	SetHd( MZCD_PNT, MZTP_3D, WSZMgPoint3());
-	(MgPoint3&)m_dt[0] = i_Pt;
+	SetHd( MZCD_PNT, MZTP_3D, WSZMgPoint3D());
+	(MgPoint3D&)m_dt[0] = i_Pt;
 }
 
 inline_nu void MDFIG::Point3(
-				const	MgPoint3& i_Pt)			// 点データ
+				const	MgPoint3D& i_Pt)			// 点データ
 {
 	GetpPmt( m_pPmtl->m_n)->Point3( i_Pt);
 	IncrN( MZWD_PNT_3D + 1);
@@ -445,14 +445,14 @@ inline_nu void MDFIG::Point3(
 
 // 線分（3次元）
 inline_nu void MDPMT::Line3(
-				const	MgLine3& i_Ln)			// 線分データ
+				const	MgLine3D& i_Ln)			// 線分データ
 {
 	SetHd( MZCD_LINE, MZTP_3D, MZWD_LINE_3D);
-	(MgLine3&)m_dt[0] = i_Ln;
+	(MgLine3D&)m_dt[0] = i_Ln;
 }
 
 inline_nu void MDFIG::Line3(
-				const	MgLine3& i_Ln)			// 線分データ
+				const	MgLine3D& i_Ln)			// 線分データ
 {
 	GetpPmt( m_pPmtl->m_n)->Line3( i_Ln);
 	IncrN( MZWD_LINE_3D + 1);
@@ -460,14 +460,14 @@ inline_nu void MDFIG::Line3(
 
 // 直線（3次元）
 inline_nu void MDPMT::ULine3(
-				const	MgULine3& i_uLn)		// 直線データ
+				const	MgULine3D& i_uLn)		// 直線データ
 {
 	SetHd( MZCD_ULINE, MZTP_3D, MZWD_ULINE_3D);
-	(MgULine3&)m_dt[0] = i_uLn;
+	(MgULine3D&)m_dt[0] = i_uLn;
 }
 
 inline_nu void MDFIG::ULine3(
-				const	MgULine3& i_uLn)		// 直線データ
+				const	MgULine3D& i_uLn)		// 直線データ
 {
 	GetpPmt( m_pPmtl->m_n)->ULine3( i_uLn);
 	IncrN( MZWD_ULINE_3D + 1);
@@ -475,14 +475,14 @@ inline_nu void MDFIG::ULine3(
 
 // 半直線（3次元）
 inline_nu void MDPMT::HLine3(
-				const	MgHLine3&	i_hLn)		// 半直線データ（3次元）
+				const	MgHLine3D&	i_hLn)		// 半直線データ（3次元）
 {
 	SetHd( MZCD_HLINE, MZTP_3D, MZWD_HLINE_3D);
-	(MgHLine3&)m_dt[0] = i_hLn;
+	(MgHLine3D&)m_dt[0] = i_hLn;
 }
 
 inline_nu void MDFIG::HLine3(
-				const	MgHLine3&	i_hLn)		// 半直線データ（3次元）
+				const	MgHLine3D&	i_hLn)		// 半直線データ（3次元）
 {
 	GetpPmt( m_pPmtl->m_n)->HLine3( i_hLn);
 	IncrN( MZWD_HLINE_3D + 1);
@@ -490,14 +490,14 @@ inline_nu void MDFIG::HLine3(
 
 // 折れ線（3次元）
 inline_nu void MDPMT::Polyl3(
-				const	MgPolyl3& i_Ply)		// 折れ線（3次元）
+				const	MgPolyl3D& i_Ply)		// 折れ線（3次元）
 {
 	SetHd( MZCD_PLY, MZTP_3D, i_Ply.m_n * 3);
-	MgPt3Cpy( (MgPoint3*)m_dt, i_Ply.m_n, i_Ply.m_p, i_Ply.m_n);
+	MgPt3Cpy( (MgPoint3D*)m_dt, i_Ply.m_n, i_Ply.m_p, i_Ply.m_n);
 }
 
 inline_nu void MDFIG::Polyl3(
-				const	MgPolyl3& i_Ply)		// 折れ線（3次元）
+				const	MgPolyl3D& i_Ply)		// 折れ線（3次元）
 {
 	GetpPmt( m_pPmtl->m_n)->Polyl3( i_Ply);
 	IncrN( i_Ply.m_n * 3 + 1);
@@ -505,14 +505,14 @@ inline_nu void MDFIG::Polyl3(
 
 // 多角形（3次元）
 inline_nu void MDPMT::Polyg3(
-				const	MgPolyg3& i_Pgn)		// 多角形（3次元）
+				const	MgPolyg3D& i_Pgn)		// 多角形（3次元）
 {
 	SetHd( MZCD_PGN, MZTP_3D, i_Pgn.m_n * 3);
-	MgPt3Cpy( (MgPoint3*)m_dt, i_Pgn.m_n, i_Pgn.m_P, i_Pgn.m_n);
+	MgPt3Cpy( (MgPoint3D*)m_dt, i_Pgn.m_n, i_Pgn.m_P, i_Pgn.m_n);
 }
 
 inline_nu void MDFIG::Polyg3(
-				const	MgPolyg3& i_Pgn)		// 多角形（3次元）
+				const	MgPolyg3D& i_Pgn)		// 多角形（3次元）
 {
 	GetpPmt( m_pPmtl->m_n)->Polyg3( i_Pgn);
 	IncrN( i_Pgn.m_n * 3 + 1);
@@ -520,34 +520,34 @@ inline_nu void MDFIG::Polyg3(
 
 // 円（3次元）
 inline_nu void MDPMT::Cir3(
-				const	MgCir3& i_Cir)			// 円（3次元）
+				const	MgCir3D& i_Cir)			// 円（3次元）
 {
 	SetHd( MZCD_CIR, MZTP_3D, MZWD_CIR_3D);
-	(MgCir3&)m_dt = i_Cir;
+	(MgCir3D&)m_dt = i_Cir;
 }
 
 inline_nu void MDFIG::Cir3(
-				const	MgCir3& i_Cir)			// 円（3次元）
+				const	MgCir3D& i_Cir)			// 円（3次元）
 {
 	GetpPmt( m_pPmtl->m_n)->Cir3( i_Cir);
 	IncrN( MZWD_CIR_3D + 1);
 }
 
 // 円弧（3次元）
-//inline_nu MDZArc3::MDZArc3( MgArc3& i_Arc)
+//inline_nu MDZArc3::MDZArc3( MgArc3D& i_Arc)
 //{
-//	SetHd( MZCD_ARC, MZTP_3D, WSZMgArc3());
+//	SetHd( MZCD_ARC, MZTP_3D, WSZMgArc3D());
 //	m_Arc = i_Arc;
 //}
 inline_nu void MDPMT::Arc3(
-				const	MgArc3& i_Arc)			// 円弧（3次元）
+				const	MgArc3D& i_Arc)			// 円弧（3次元）
 {
 	SetHd( MZCD_ARC, MZTP_3D, MZWD_ARC_3D);
-	(MgArc3&)m_dt = i_Arc;
+	(MgArc3D&)m_dt = i_Arc;
 }
 
 inline_nu void MDFIG::Arc3(
-				const	MgArc3& i_Arc)			// 円弧（3次元）
+				const	MgArc3D& i_Arc)			// 円弧（3次元）
 {
 	GetpPmt( m_pPmtl->m_n)->Arc3( i_Arc);
 	IncrN( MZWD_ARC_3D + 1);
@@ -570,14 +570,14 @@ inline_nu void MDFIG::Arc3(
 
 // 面分（3次元）
 inline_nu void MDPMT::Plane3(
-				const	MgPlane3& i_Pln)			// 面分データ
+				const	MgPlane3D& i_Pln)			// 面分データ
 {
 	SetHd( MZCD_PLN, MZTP_3D, MZWD_PLN_3D);
-	(MgPlane3&)m_dt[0] = i_Pln;
+	(MgPlane3D&)m_dt[0] = i_Pln;
 }
 
 inline_nu void MDFIG::Plane3(
-				const	MgPlane3& i_Pln)			// 面分データ
+				const	MgPlane3D& i_Pln)			// 面分データ
 {
 	GetpPmt(  m_pPmtl->m_n)->Plane3( i_Pln);
 	IncrN( MZWD_PLN_3D + 1);
@@ -585,14 +585,14 @@ inline_nu void MDFIG::Plane3(
 
 // 無限平面（3次元）
 inline_nu void MDPMT::IPlane3(
-				const	MgPlane3& i_iPln)			// 無限平面データ
+				const	MgPlane3D& i_iPln)			// 無限平面データ
 {
 	SetHd( MZCD_IPLN, MZTP_3D, MZWD_IPLN_3D);
-	(MgPlane3&)m_dt[0] = i_iPln;
+	(MgPlane3D&)m_dt[0] = i_iPln;
 }
 
 inline_nu void MDFIG::IPlane3(
-				const	MgPlane3& i_iPln)			// 無限平面データ
+				const	MgPlane3D& i_iPln)			// 無限平面データ
 {
 	GetpPmt( m_pPmtl->m_n)->IPlane3( i_iPln);
 	IncrN( MZWD_IPLN_3D + 1);

@@ -264,7 +264,7 @@ MINT DGrp::GetGrpIdAll (
 //
 MINT	MdlGetGrpCoord (
 						MDID		i_idGrp,
-						MgMat3E*		o_mTrans	// 座標変換マトリックス
+						MgMat3DE*		o_mTrans	// 座標変換マトリックス
 				)
 {
 	MdModel* pCurMdl = Mdm::GetCurModel();
@@ -280,7 +280,7 @@ MINT	MdlGetGrpCoord (
 //
 //		データベースをオープンすると、基準座標変換マトリックスは必ず１つ存在する。
 //
-MgMat3E	MdlGetBaseCoord ( )						// 基準座標変換マトリックス
+MgMat3DE	MdlGetBaseCoord ( )						// 基準座標変換マトリックス
 {
 	MdModel* pCurMdl = Mdm::GetCurModel();
 
@@ -296,7 +296,7 @@ MgMat3E	MdlGetBaseCoord ( )						// 基準座標変換マトリックス
 //		そのグループの座標系がカレント座標系になる。
 //		Inp:Point等で得られる座標値はカレント座標系上の座標値となる。
 //
-MgMat3E	MdlGetCurCoord ( )						// カレント座標変換マトリックス
+MgMat3DE	MdlGetCurCoord ( )						// カレント座標変換マトリックス
 {
 	MdModel* pCurMdl = Mdm::GetCurModel();
 
@@ -314,11 +314,11 @@ MgMat3E	MdlGetCurCoord ( )						// カレント座標変換マトリックス
 //		カレント座標系を一時的に変更する場合は、事前にGetCurCoordで
 //		元のカレント座標系を問い合わせておき、処理終了時に元に戻すこと。
 //
-MgMat3E DLyr::SetCurCoord (
-						MgMat3E&		i_MTransr	// 座標変換マトリックス
+MgMat3DE DLyr::SetCurCoord (
+						MgMat3DE&		i_MTransr	// 座標変換マトリックス
 				)
 {
-	MgMat3E	MTrans;
+	MgMat3DE	MTrans;
 	MdModel* pCurMdl = Mdm::GetCurModel();
 
 	MTrans = pCurMdl->m_MCurTrans;

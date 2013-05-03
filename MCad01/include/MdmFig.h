@@ -383,8 +383,8 @@ public:
 	void zTextureCoordinate(
 						MINT		i_iMdCA,
 						MINT		i_iMdCB = 0,
-				const	MgVect2*	i_vszimg = 0,
-				const	MgMat3E*		i_matH = 0);		// テクスチャ座標
+				const	MgVect2D*	i_vszimg = 0,
+				const	MgMat3DE*		i_matH = 0);		// テクスチャ座標
 	void zTextureParam( MINT i_iTp, MINT i_iPxLap,
 					    MINT i_iPyLap, MINT i_iFltEx,
 					    MINT i_iFltRd, MREAL3& i_fColBlc1,
@@ -392,18 +392,18 @@ public:
 	void zShininess( MREAL i_fShns);						// 鏡面反射率 ( 0. ～ 1.)
 	void zPovRay( MCHAR* i_sStr);							// PovRay出力属性
 
-	void Point3( const MgPoint3&	i_Pt);
-	void Line3( const MgLine3&		i_Ln);
-	void ULine3( const MgULine3&	i_uLn);
-	void HLine3( const MgHLine3&	i_hLn);
-	void Polyl3( const MgPolyl3&	i_Ply);
-	void Polyg3( const MgPolyg3&	i_Pgn);
-	void Cir3( const MgCir3&		i_Cir);
-	void Arc3( const MgArc3&		i_Arc);
+	void Point3( const MgPoint3D&	i_Pt);
+	void Line3( const MgLine3D&		i_Ln);
+	void ULine3( const MgULine3D&	i_uLn);
+	void HLine3( const MgHLine3D&	i_hLn);
+	void Polyl3( const MgPolyl3D&	i_Ply);
+	void Polyg3( const MgPolyg3D&	i_Pgn);
+	void Cir3( const MgCir3D&		i_Cir);
+	void Arc3( const MgArc3D&		i_Arc);
 //U	void Elps3( const MgElps3&		i_Elps);
 //U	void Ela3( const MgEla3&		i_Ela);
-	void Plane3( const MgPlane3&	i_Pln);
-	void IPlane3( const MgPlane3&	i_iPln);
+	void Plane3( const MgPlane3D&	i_Pln);
+	void IPlane3( const MgPlane3D&	i_iPln);
 //U	void Cyl3( const MgCly3&		i_Cly);
 //U	void SLine3( const MgSLine3&	i_sLn);
 };
@@ -418,7 +418,7 @@ class DLL_EXPORT_FIG MDPMTL
 	friend class MDFIG;
 	MUSHORT		m_sz;							// バッファサイズ
 	MUSHORT		m_n;							// データサイズ(ヘッダ部を除く)
-//	MgMinMaxR3	m_Mmx;
+//	MgMinMaxR3D	m_Mmx;
 
 	union {
 		MDPMTDT	m_dt[MP_SZ_MDFIG];				// 図形情報(図形要素郡)
@@ -539,8 +539,8 @@ public:
 	void zTextureCoordinate(
 						MINT		i_iMdCA,
 						MINT		i_iMdCB, 
-				const	MgVect2*	i_vszimg,
-				const	MgMat3E*		i_matH);			// テクスチャ座標
+				const	MgVect2D*	i_vszimg,
+				const	MgMat3DE*		i_matH);			// テクスチャ座標
 	void zTextureParam( MINT i_iTp, MINT i_iPxLap,
 						MINT i_iPyLap, MINT i_iFltEx,
 						MINT i_iFltRd, MREAL3& i_fColBlc1,
@@ -549,18 +549,18 @@ public:
 	void zPovRay( MCHAR* i_sStr);							// PovRay出力属性 文字列
 
 	// 図形要素
-	void Point3( const MgPoint3&	i_Pt);
-	void Line3( const MgLine3&		i_Ln);
-	void ULine3( const MgULine3&	i_uLn);
-	void HLine3( const MgHLine3&	i_hLn);
-	void Polyl3( const MgPolyl3&	i_Ply);
-	void Polyg3( const MgPolyg3&	i_Pgn);
-	void Cir3( const MgCir3&		i_Cir);
-	void Arc3( const MgArc3&		i_Arc);
+	void Point3( const MgPoint3D&	i_Pt);
+	void Line3( const MgLine3D&		i_Ln);
+	void ULine3( const MgULine3D&	i_uLn);
+	void HLine3( const MgHLine3D&	i_hLn);
+	void Polyl3( const MgPolyl3D&	i_Ply);
+	void Polyg3( const MgPolyg3D&	i_Pgn);
+	void Cir3( const MgCir3D&		i_Cir);
+	void Arc3( const MgArc3D&		i_Arc);
 //U	void Elps3( const MgElps3&		i_Elps);
 //U	void Ela3( const MgEla3&		i_Ela);
-	void Plane3( const MgPlane3&	i_Pln);
-	void IPlane3( const MgPlane3&	i_iPln);
+	void Plane3( const MgPlane3D&	i_Pln);
+	void IPlane3( const MgPlane3D&	i_iPln);
 //U	void Cyl3( const MgCly3&		i_Cly);
 //U	void SLine3( const MgSLine3&	i_sLn);
 

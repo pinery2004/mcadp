@@ -38,11 +38,11 @@
 namespace MC
 {
 
-//static	CMmDialogTenkai* z_pDlgTenkai = NULL;		// モードレスバージョンダイアログの表示用
+//static	CMmDialogTenkai* z_pDlgTenkai = NULL;	// モードレスバージョンダイアログの表示用
 JTTenkaiPr 	JTTenkai::z_TenkaiPara;				// 住棟展開パラメータ
-MgMat2E		JTTenkai::z_matTenkai[MX_NJUKO];	// 住棟展開マトリックス
-MgMat2E		JTTenkai::z_matRTenkai[MX_NJUKO];	// 住棟展開逆マトリックス
-MgMinMaxR2	JTTenkai::z_mmTenkai[MX_NJUKO];		// 住戸領域ＭｉｎＭａｘ
+MgMat2DE	JTTenkai::z_matTenkai[MX_NJUKO];	// 住棟展開マトリックス
+MgMat2DE	JTTenkai::z_matRTenkai[MX_NJUKO];	// 住棟展開逆マトリックス
+MgMinMaxR2D	JTTenkai::z_mmTenkai[MX_NJUKO];		// 住戸領域ＭｉｎＭａｘ
 MINT		JTTenkai::z_iJuko;					// 選択住戸
 MUINT		JTTenkai::z_iTenkai[MX_NJUKO];		// 住棟展開制御
 /*
@@ -77,7 +77,7 @@ void JTTenkai::InitJTT()
 /////////////////////////////////////////////////////////////////////////////
 //	住棟展開設定入力
 void JTTenkai::InpJTT(
-						CWnd*		pWnd			// (I  ) ウィンドウのインスタンス
+						CWnd*		pWnd		// (I  ) ウィンドウのインスタンス
 				)
 {
 	if ( z_pDlgTenkai) {
@@ -99,10 +99,10 @@ void JTTenkai::EndJTT()
 void JTTenkai::CreJTTArea()
 {
 	MINT	ist1;
-	MgLine3 Ln1;
+	MgLine3D Ln1;
 	mhPlcParts*	pHaiTenkai[MX_NJUKO];							// 住棟展開データ
 	MPOSITION	pPlcPos[MX_NJUKO];								// 住戸住棟展開データレコード位置
-	MgPolyg2	pg1(4);
+	MgPolyg2D	pg1(4);
 
 	ist1 = mhHaitiIn::GetParts( 0, MP_GP_KABE, Mstr( "住棟展開"), NULL, 3, pHaiTenkai, pPlcPos);
 	ASSERT( ist1 >= 0);											// 住棟展開データ　オーバフロー　<ERROR>
@@ -119,28 +119,28 @@ void JTTenkai::CreJTTArea()
 //E	z_mnIA.GetComboAttrA();
 	z_mnIA.RibbonIO( MGET_PARTS_ATTRA, NULL);					// 部品仕様,寸法形式と属性値入力用コンボボックスの値を部品配置入力データに取り込む
 
-	MgPoint2	ptJuko[2] = { MgPoint2( 0., 0.), MgPoint2( 0., 0.)};
-	MgMinMaxR2	mm = MgMinMaxR2( MREALMAX, MREALMAX, MREALMIN, MREALMIN);
+	MgPoint2D	ptJuko[2] = { MgPoint2D( 0., 0.), MgPoint2D( 0., 0.)};
+	MgMinMaxR2D	mm = MgMinMaxR2D( MREALMAX, MREALMAX, MREALMIN, MREALMIN);
 
 	for (MINT ic=0; ic<z_TenkaiPara.nJuko; ic++) {
 		pg1.m_n = 0;
-		ptJuko[0] = MgPoint2( ptJuko[1].x, z_TenkaiPara.rMDJuko[ic]);
-		ptJuko[1] = MgPoint2( ptJuko[0].x + z_TenkaiPara.rWJuko[ic], 
+		ptJuko[0] = MgPoint2D( ptJuko[1].x, z_TenkaiPara.rMDJuko[ic]);
+		ptJuko[1] = MgPoint2D( ptJuko[0].x + z_TenkaiPara.rWJuko[ic], 
 							  z_TenkaiPara.rMDJuko[ic] + z_TenkaiPara.rDJuko[ic]);
 
 		pg1 += ptJuko[0];
-		pg1 += MgPoint2( ptJuko[1].x, ptJuko[0].y);
+		pg1 += MgPoint2D( ptJuko[1].x, ptJuko[0].y);
 		pg1 += ptJuko[1];
-		pg1 += MgPoint2( ptJuko[0].x, ptJuko[1].y);
+		pg1 += MgPoint2D( ptJuko[0].x, ptJuko[1].y);
 
-		Ln1.p[0] = MgPoint3C( pg1.m_p[0]);
-		Ln1.p[1] = MgPoint3C( pg1.m_p[1]);
-		HaitiCmd::MmPartsPlc( Ln1.p, MgVect3( 0., 0., 1.), &pg1);		// 住戸区画（領域型）の部品配置
+		Ln1.p[0] = MgPoint3DC( pg1.m_p[0]);
+		Ln1.p[1] = MgPoint3DC( pg1.m_p[1]);
+		HaitiCmd::MmPartsPlc( Ln1.p, MgVect3D( 0., 0., 1.), &pg1);		// 住戸区画（領域型）の部品配置
 
 		mm.Ins2( ptJuko[0]);
 		mm.Ins2( ptJuko[1]);
 	}
-	mm.Ins2( MgPoint2( 0., 0.));
+	mm.Ins2( MgPoint2D( 0., 0.));
 
 	ist1 = z_mnIA.SetRibbonBarEnt( MP_GP_KABE, MP_BR_OTHER, Mstr( "住棟展開"));
 //E	z_mnIA.GetComboAttrA();
@@ -148,18 +148,18 @@ void JTTenkai::CreJTTArea()
 
 	pg1.m_n = 0;
 	pg1 += mm.min;
-	pg1 += MgPoint2( mm.max.x, mm.min.y);
+	pg1 += MgPoint2D( mm.max.x, mm.min.y);
 	pg1 += mm.max;
-	pg1 += MgPoint2( mm.min.x, mm.max.y);
+	pg1 += MgPoint2D( mm.min.x, mm.max.y);
 
 	JTTenkaiPr* pAuxTenkai = (JTTenkaiPr*)new char[sizeof( JTTenkaiPr)];
 	*pAuxTenkai = z_TenkaiPara;
 //	mhPlcParts* pInfo = &g_hInpPIAttr;
 	mtPlcInp::SetpAuxTenkai( pAuxTenkai);
 
-	Ln1.p[0] = MgPoint3C( pg1.m_p[0]);
-	Ln1.p[1] = MgPoint3C( pg1.m_p[1]);
-	HaitiCmd::MmPartsPlc( Ln1.p, MgVect3( 0., 0., 1.), &pg1);			// 住棟展開（領域型）の部品配置
+	Ln1.p[0] = MgPoint3DC( pg1.m_p[0]);
+	Ln1.p[1] = MgPoint3DC( pg1.m_p[1]);
+	HaitiCmd::MmPartsPlc( Ln1.p, MgVect3D( 0., 0., 1.), &pg1);			// 住棟展開（領域型）の部品配置
 
 	z_mnIA.SetInpKai( 1);
 	mtPlcInp::SetInpKai( 1);
@@ -180,16 +180,16 @@ void JTTenkai::CreJTTArea()
 void JTTenkai::SetJTTMAT()
 {
 	MINT	ic;
-	MgMat2E matSt;
+	MgMat2DE matSt;
 
 	matSt.SetUnit();
 
 	for ( ic=0; ic<z_TenkaiPara.nJuko; ic++) {
 		z_matTenkai[ic] = matSt;
-		z_mmTenkai[ic].min = MgPoint2( matSt.m[2][0], z_TenkaiPara.rMDJuko[ic]);
+		z_mmTenkai[ic].min = MgPoint2D( matSt.m[2][0], z_TenkaiPara.rMDJuko[ic]);
 
 		matSt.m[2][0] += z_TenkaiPara.rWJuko[ic];
-		z_mmTenkai[ic].max = MgPoint2( matSt.m[2][0], z_mmTenkai[ic].min.y + z_TenkaiPara.rDJuko[ic]);
+		z_mmTenkai[ic].max = MgPoint2D( matSt.m[2][0], z_mmTenkai[ic].min.y + z_TenkaiPara.rDJuko[ic]);
 
 		if ( z_TenkaiPara.ifH[ic]) {
 			z_matTenkai[ic].m[0][0] = -1.;

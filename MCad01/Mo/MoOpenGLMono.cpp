@@ -54,26 +54,26 @@ static	GLuint	z_DispListMat[10];			// マテリアルディスプレイリスト
 //			
 void Panelfig( 
 						mhPlcParts	*i_pPlcEn,		// パネル
-				const	MgPoint3	&PtCtr,
+				const	MgPoint3D	&PtCtr,
 						MREAL		rB,
-						MgPoint3	PT[2][2][2],	// 頂点座標
-						MgVect3		*VuW,			// 巾方向
-						MgVect3		*VuF,			// 手前方向
-						MgVect3		*VuU			// 上方向
+						MgPoint3D	PT[2][2][2],	// 頂点座標
+						MgVect3D	*VuW,			// 巾方向
+						MgVect3D	*VuF,			// 手前方向
+						MgVect3D	*VuU			// 上方向
 				)
 {
 	MSTNDH		iCdHgt;								// 取り付け高さコード
 	MINT		iULCd;								// 上下付けコード (0:下付け, 1:上付け)
 	MREAL		rZ;
-	MgLine3		LnPlc;
-	MgLine3		LnBz;
+	MgLine3D	LnPlc;
+	MgLine3D	LnBz;
 	MREAL		rH1, rH2, rTH, rOY;
 
-	MgVect3		VtLng, VtRt, VtUp, VtUph;			// 部材の長さ方向ベクトル、右方向ベクトル、上方向ベクトル、パネルはみ出し部
-	MgVect3		VuLng, VuRt, VuUp;					// 部材の長さ方向単位ベクトル、右方向単位ベクトル、上方向単位ベクトル
-	MgVect3		VtTkH;								// 取り付け高さ
-	MgVect3		VtTH, VtOY;							// 手前側補正値、奥行き
-	MgVect2		vuRt;								// 屋根パネル用奥行き方向２次元ベクトル
+	MgVect3D	VtLng, VtRt, VtUp, VtUph;			// 部材の長さ方向ベクトル、右方向ベクトル、上方向ベクトル、パネルはみ出し部
+	MgVect3D	VuLng, VuRt, VuUp;					// 部材の長さ方向単位ベクトル、右方向単位ベクトル、上方向単位ベクトル
+	MgVect3D	VtTkH;								// 取り付け高さ
+	MgVect3D	VtTH, VtOY;							// 手前側補正値、奥行き
+	MgVect2D	vuRt;								// 屋根パネル用奥行き方向２次元ベクトル
 	MREAL		rlXY;								// 屋根パネル用奥行き方向２次元ベクトルのXY平面上長さ
 	
 	iCdHgt = i_pPlcEn->GetPTCdHgt();
@@ -88,7 +88,7 @@ void Panelfig(
 	else {
 		MREAL r1_D = 1.f / sqrt( VuLng.x * VuLng.x + VuLng.y * VuLng.y);
 //		VuRt.Set( VuLng.y * r1_D, - VuLng.x * r1_D, 0.f);
-		VuRt = MgVect3( VuLng.y * r1_D, - VuLng.x * r1_D, 0.f);
+		VuRt = MgVect3D( VuLng.y * r1_D, - VuLng.x * r1_D, 0.f);
 	}
 	VuUp = i_pPlcEn->GetPIUpPlc();
 	VuRt = VuLng ^ VuUp;
@@ -105,7 +105,7 @@ void Panelfig(
 	rOY = ( i_pPlcEn->GetPIMaeHosei() + i_pPlcEn->GetPIOku() +
 		   i_pPlcEn->GetPIOkuHosei()) * rB;						// パネル手前側補正値 + 奥行長 + 奥側補正値
 	if ( i_pPlcEn->IsYanePanel()) {
-		vuRt = MgVect2C( VuRt);
+		vuRt = MgVect2DC( VuRt);
 		rlXY = MGeo::Abs( vuRt);
 		if ( !MGeo::Zero( rlXY)) {
 			rTH /= rlXY;
@@ -126,22 +126,22 @@ void Panelfig(
 	//PT[0][0][1].Set( PT[0][0][0] + VtUp + VtUph);				//
 	//PT[0][1][0].Set( PT[0][0][0] - VtOY);						//
 	//PT[0][1][1].Set( PT[0][0][1] - VtOY);						//
-	//PT[1][0][0].Set( PT[0][0][0] + VtLng);						//
-	//PT[1][0][1].Set( PT[0][0][1] + VtLng);						//
-	//PT[1][1][0].Set( PT[0][1][0] + VtLng);						//
-	//PT[1][1][1].Set( PT[0][1][1] + VtLng);						//
+	//PT[1][0][0].Set( PT[0][0][0] + VtLng);					//
+	//PT[1][0][1].Set( PT[0][0][1] + VtLng);					//
+	//PT[1][1][0].Set( PT[0][1][0] + VtLng);					//
+	//PT[1][1][1].Set( PT[0][1][1] + VtLng);					//
 	if ( iULCd == 0) {
-		PT[0][0][0] = LnBz.p[0] + VtTH;						// 下付け材
+		PT[0][0][0] = LnBz.p[0] + VtTH;							// 下付け材
 	} else {
-		PT[0][0][0] = LnBz.p[0] + VtTH - VtUp;				// 上付け材
+		PT[0][0][0] = LnBz.p[0] + VtTH - VtUp;					// 上付け材
 	}
-	PT[0][0][1] = PT[0][0][0] + VtUp + VtUph;				//
-	PT[0][1][0] = PT[0][0][0] - VtOY;						//
-	PT[0][1][1] = PT[0][0][1] - VtOY;						//
-	PT[1][0][0] = PT[0][0][0] + VtLng;						//
-	PT[1][0][1] = PT[0][0][1] + VtLng;						//
-	PT[1][1][0] = PT[0][1][0] + VtLng;						//
-	PT[1][1][1] = PT[0][1][1] + VtLng;						//
+	PT[0][0][1] = PT[0][0][0] + VtUp + VtUph;					//
+	PT[0][1][0] = PT[0][0][0] - VtOY;							//
+	PT[0][1][1] = PT[0][0][1] - VtOY;							//
+	PT[1][0][0] = PT[0][0][0] + VtLng;							//
+	PT[1][0][1] = PT[0][0][1] + VtLng;							//
+	PT[1][1][0] = PT[0][1][0] + VtLng;							//
+	PT[1][1][1] = PT[0][1][1] + VtLng;							//
 
 //	DispList::Rectangular( PT, VuLng, VuRt, VuUp);
 	*VuW = VuLng;
@@ -154,25 +154,25 @@ void Panelfig(
 //			
 void MdlDispList::DrawPanel( 
 						mhPlcParts*	i_pPlcEn,	// パネル配置情報
-				const	MgPoint3	&i_PtCtr,	//
+				const	MgPoint3D	&i_PtCtr,	//
 						MREAL		i_rB,		//
 						MINT		i_iMode		// 表示モード 1:パネル上部線分 2:パネル形状直方体 3:線分+パネル形状
 				)
 {
 
-	MgPoint3	PT[2][2][2];					// 頂点座標
-	MgVect2		vuRt;							// 屋根パネル用奥行き方向２次元ベクトル
-	MgVect3		VuW, VuF, VuU;					// 部材の長さ方向単位ベクトル、右方向単位ベクトル、上方向単位ベクトル
+	MgPoint3D	PT[2][2][2];					// 頂点座標
+	MgVect2D	vuRt;							// 屋根パネル用奥行き方向２次元ベクトル
+	MgVect3D	VuW, VuF, VuU;					// 部材の長さ方向単位ベクトル、右方向単位ベクトル、上方向単位ベクトル
 
 	Panelfig( i_pPlcEn, i_PtCtr, i_rB, PT, &VuW, &VuF, &VuU);
 	if ( i_iMode & MP_PANEL_RECTANGULAR) {
 		DispList::SetMaterial( 0, 1);
 		DispList::DspRectangular( PT, VuF, VuW, VuU);
 		DispList::SetMaterial( 0, 5);
-//		DispList::Quads( MgLine3( PT[0][1]), MgLine3( PT[0][0]));			
-//		DispList::Quads( MgLine3( PT[1][1]), MgLine3( PT[0][1]));			
-//		DispList::Quads( MgLine3( PT[1][0]), MgLine3( PT[1][1]));			
-//		DispList::Quads( MgLine3( PT[0][0]), MgLine3( PT[1][0]));
+//		DispList::Quads( MgLine3D( PT[0][1]), MgLine3D( PT[0][0]));			
+//		DispList::Quads( MgLine3D( PT[1][1]), MgLine3D( PT[0][1]));			
+//		DispList::Quads( MgLine3D( PT[1][0]), MgLine3D( PT[1][1]));			
+//		DispList::Quads( MgLine3D( PT[0][0]), MgLine3D( PT[1][0]));
 	}
 	if ( i_iMode & MP_PANEL_LINE) {
 //		glColor3f(1.0,0.,0.);
@@ -218,7 +218,7 @@ void MdlDispList::CloseDL()
 //
 MINT MdlDispList::MakeDispListMat0(
 						MREAL		rB,				// 表示倍率
-				const	MgPoint3	&PtCtr			// 中心座標
+				const	MgPoint3D	&PtCtr			// 中心座標
 				)
 {
 	if ( ( z_DispListMat[0] = glGenLists( 1)) == 0)
@@ -226,7 +226,7 @@ MINT MdlDispList::MakeDispListMat0(
 	// ディスプレイリストを作成する
 	glNewList( z_DispListMat[0], GL_COMPILE);
 
-	DispList::SetMaterial( 0, 0);									// 屋根
+	DispList::SetMaterial( 0, 0);								// 屋根
 
 	MdlDispList::CloseDL();
 	return 0;
@@ -237,7 +237,7 @@ MINT MdlDispList::MakeDispListMat0(
 //
 MINT MdlDispList::MakeDispListMat1(
 						MREAL		rB,				// 表示倍率
-				const	MgPoint3	&PtCtr			// 中心座標
+				const	MgPoint3D	&PtCtr			// 中心座標
 				)
 {
 	if ( ( z_DispListMat[1] = glGenLists( 1)) == 0)
@@ -245,7 +245,7 @@ MINT MdlDispList::MakeDispListMat1(
 	// ディスプレイリストを作成する
 	glNewList( z_DispListMat[1], GL_COMPILE);
 
-	DispList::SetMaterial( 0, 1);									// 壁、矢切
+	DispList::SetMaterial( 0, 1);								// 壁、矢切
 
 	MdlDispList::CloseDL();
 	return 0;
@@ -256,7 +256,7 @@ MINT MdlDispList::MakeDispListMat1(
 //
 MINT MdlDispList::MakeDispListMat2(
 						MREAL		rB,				// 表示倍率
-				const	MgPoint3	&PtCtr			// 中心座標
+				const	MgPoint3D	&PtCtr			// 中心座標
 				)
 {
 	if ( ( z_DispListMat[2] = glGenLists( 1)) == 0)
@@ -264,7 +264,7 @@ MINT MdlDispList::MakeDispListMat2(
 	// ディスプレイリストを作成する
 	glNewList( z_DispListMat[2], GL_COMPILE);
 
-	DispList::SetMaterial( 1, 0);									// 屋根、壁　半透明
+	DispList::SetMaterial( 1, 0);								// 屋根、壁　半透明
 
 	MdlDispList::CloseDL();
 	return 0;

@@ -56,14 +56,14 @@ void IeModel::MhNormKiso(
 	mhPlcParts	HaiKisoI;										// 追加基礎
 
 	MINT		ic1, ic2, icst, ics;
-	MgPoint3	po, p0, p1;
-	MgLine3		lnKiso1;
+	MgPoint3D	po, p0, p1;
+	MgLine3D		lnKiso1;
 	MINT		ist, istr, istl;
 	MINT		ist1, ist2;
 	MINT		ist1s2, ist1e2, ist2s1, ist2e1;
 
 	MINT		nZukei;											// 図形線分の本数
-	MgLine3		lnZukei[6];										// 図形線分
+	MgLine3D		lnZukei[6];										// 図形線分
 	MINT		szZukei;										// 図形線分データサイズ
 	MINT		idivdel;										// 分割削除フラグ 0: 無分割、1: 分割、2: 削除 
 
@@ -98,8 +98,8 @@ void IeModel::MhNormKiso(
 		for ( ic2=ics; ic2<nHaiKiso; ic2++) {										// 基礎2
 			if ( ic1 == ic2 || fPlc[ic2] < 0)
 				continue;															// 同一基礎と削除基礎は比較対象外
-			if ( !MGeo::ChkMMR2OnMMR2( MgMinMaxR2( MgLine2C( pHaiKiso[ic1]->m_lnPlc)),
-						    MgMinMaxR2( MgLine2C(pHaiKiso[ic2]->m_lnPlc))))
+			if ( !MGeo::ChkMMR2OnMMR2( MgMinMaxR2D( MgLine2DC( pHaiKiso[ic1]->m_lnPlc)),
+						    MgMinMaxR2D( MgLine2DC(pHaiKiso[ic2]->m_lnPlc))))
 				continue;															// MinMaxの重なりなしの場合は比較対象外
 			if ( MGeo::Parallel( pHaiKiso[ic1]->m_lnPlc, pHaiKiso[ic2]->m_lnPlc)) {	// 平行
 				ist = MGeo::ChkPt3OnLn3WS( pHaiKiso[ic2]->m_lnPlc.p[0], pHaiKiso[ic1]->m_lnPlc, &ist2s1);	// 基礎2の始点が基礎1のどこに乗っているか調べる
@@ -175,8 +175,8 @@ void IeModel::MhNormKiso(
 		for ( ic2=0; ic2<nHaiKiso; ic2++) {
 			if ( ic1 == ic2 || fPlc[ic2] < 0)
 				continue;															// 同一基礎と削除基礎は比較対象外
-			if ( !MGeo::ChkMMR2OnMMR2( MgMinMaxR2( MgLine2C( pHaiKiso[ic1]->m_lnPlc)),
-							MgMinMaxR2( MgLine2C( pHaiKiso[ic2]->m_lnPlc))))
+			if ( !MGeo::ChkMMR2OnMMR2( MgMinMaxR2D( MgLine2DC( pHaiKiso[ic1]->m_lnPlc)),
+							MgMinMaxR2D( MgLine2DC( pHaiKiso[ic2]->m_lnPlc))))
 				continue;															// MinMaxの重なりなしの場合は比較対象外
 			if ( MGeo::Parallel( pHaiKiso[ic1]->m_lnPlc, pHaiKiso[ic2]->m_lnPlc)) {	// 平行
 				ist = MGeo::ChkPt3OnLn3WS( pHaiKiso[ic2]->m_lnPlc.p[0], pHaiKiso[ic1]->m_lnPlc, &ist2s1);	// 基礎2の始点が基礎1のどこに乗っているか調べる
@@ -244,13 +244,13 @@ void IeModel::MhNormKiso(
 	}
 
 	//	基礎の仮の図形作成
-	szZukei = sizeof(MhZukei) + sizeof(MgLine3);									// 線分２本分の図形データサイズ
+	szZukei = sizeof(MhZukei) + sizeof(MgLine3D);									// 線分２本分の図形データサイズ
 
 	for ( ic1=0; ic1<nHaiKiso; ic1++) {
 		if ( fPlc[ic1] < 0 || (fPlc[ic1] != 2 && ic1 < icst))
 			continue;																// 削除基礎または追加修正以外の基礎で追加修正基礎と無交差は対象外
 		lnKiso1 = pHaiKiso[ic1]->m_lnPlc;											// 結合線分算出用
-		MgVect3	vtutLn1 = MGeo::UnitizeV3( MgVect3C( lnKiso1));
+		MgVect3D	vtutLn1 = MGeo::UnitizeV3( MgVect3DC( lnKiso1));
 		lnKiso1.p[0] = lnKiso1.p[0] - vtutLn1 * EXPKISOLN;
 		lnKiso1.p[1] = lnKiso1.p[1] + vtutLn1 * EXPKISOLN;
 
@@ -278,8 +278,8 @@ void IeModel::MhNormKiso(
 			if ( ic1 == ic2 || fPlc[ic2] < 0)
 				continue;															// 同一基礎と削除基礎は比較対象外
 
-			if ( !MGeo::ChkMMR2OnMMR2( MgMinMaxR2( MgLine2C( pHaiKiso[ic1]->m_lnPlc)),
-							MgMinMaxR2( MgLine2C( pHaiKiso[ic2]->m_lnPlc))))
+			if ( !MGeo::ChkMMR2OnMMR2( MgMinMaxR2D( MgLine2DC( pHaiKiso[ic1]->m_lnPlc)),
+							MgMinMaxR2D( MgLine2DC( pHaiKiso[ic2]->m_lnPlc))))
 				continue;															// MinMaxの重なりなしの場合は比較対象外
 			if ( MGeo::Parallel( pHaiKiso[ic1]->m_lnPlc, pHaiKiso[ic2]->m_lnPlc)) {	// 平行
 				ist = MGeo::ChkPt3OnLn3WS( pHaiKiso[ic2]->m_lnPlc.p[0], pHaiKiso[ic1]->m_lnPlc, &ist2s1);	// 基礎2の始点が基礎1のどこに乗っているか調べる
@@ -312,9 +312,9 @@ void IeModel::MhNormKiso(
 					ASSERT( FALSE);													//			交差点で分割済みなので処理エラー　<ERROR>
 
 				// 交差基礎の図形作成
-                MgVect3 vtutLn2 = MGeo::UnitizeV3( MgVect3C( pHaiKiso[ic2]->m_lnPlc));
-				MgULine3 ULnR = MgULine3( pHaiKiso[ic2]->m_pZukei->m_lnZukei[0].p[0], vtutLn2);
-				MgULine3 ULnL = MgULine3( pHaiKiso[ic2]->m_pZukei->m_lnZukei[1].p[0], vtutLn2);
+                MgVect3D vtutLn2 = MGeo::UnitizeV3( MgVect3DC( pHaiKiso[ic2]->m_lnPlc));
+				MgULine3D ULnR = MgULine3D( pHaiKiso[ic2]->m_pZukei->m_lnZukei[0].p[0], vtutLn2);
+				MgULine3D ULnL = MgULine3D( pHaiKiso[ic2]->m_pZukei->m_lnZukei[1].p[0], vtutLn2);
 
 				if ( ( ist1 & (MC_ON_PS | MC_ON_PE)) == ( ist2 & (MC_ON_PS | MC_ON_PE))) {	// 基礎の向きが対向
 					istr = MGeo::IntrLnULn3( lnZukei[0], ULnL, &p0);
@@ -340,7 +340,7 @@ void IeModel::MhNormKiso(
 		}
 
 		if ( iPlcCn[0] == -2 || iPlcCn[1] == -2) {
-			MgVect3	vtutLn1 = MGeo::UnitizeV3( MgVect3C( lnKiso1));
+			MgVect3D	vtutLn1 = MGeo::UnitizeV3( MgVect3DC( lnKiso1));
 			lnKiso1.p[0] = lnKiso1.p[0] - vtutLn1 * 60.0;
 			lnKiso1.p[1] = lnKiso1.p[1] + vtutLn1 * 60.0;
 
@@ -362,7 +362,7 @@ void IeModel::MhNormKiso(
 		}
 
 		if ( nZukei > pHaiKiso[ic1]->m_pZukei->m_isNZukei) {
-			szZukei = sizeof(MhZukei) + sizeof(MgLine3) * (nZukei - 1);				// 線分nZukei本分の図形データサイズ
+			szZukei = sizeof(MhZukei) + sizeof(MgLine3D) * (nZukei - 1);				// 線分nZukei本分の図形データサイズ
 			MBFREE(pHaiKiso[ic1]->m_pZukei);
 			pHaiKiso[ic1]->m_pZukei = (MhZukei*)new char[szZukei];					// 図形線分
 			pHaiKiso[ic1]->m_pZukei->m_pNext = NULL;

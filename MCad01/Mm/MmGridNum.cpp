@@ -54,7 +54,7 @@ void WindowCtrl::MmGridNumSet(
 //	MINT		nGridI[4] = { 16, -3, -3, 17};
 	MINT		ic1;
 
-	pWndInfo = WindowCtrl::MmWndKGetCurWnd();							// カレントウィンドウ取得
+	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウ取得
 	if ( pWndInfo == NULL)
 		MQUIT;
 
@@ -79,7 +79,7 @@ void WindowCtrl::MmGridNumGet(
 {
 	MmWndInfo*	pWndInfo;
 
-	pWndInfo = WindowCtrl::MmWndKGetCurWnd();							// カレントウィンドウ取得
+	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウ取得
 	if ( pWndInfo == NULL) MQUIT;
 
 	pWndInfo->GetGridNum( nGrid);
@@ -92,7 +92,7 @@ void WindowCtrl::MmGridNumXqt()
 {
 	MmWndInfo*	pWndInfo;
 
-	pWndInfo = WindowCtrl::MmWndKGetCurWnd();							// カレントウィンドウ取得
+	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウ取得
 	if ( pWndInfo == NULL)
 		MQUIT;
 
@@ -128,7 +128,7 @@ void WindowCtrl::MmGridNumEnd()
 MmGridNum::MmGridNum()
 {
 	static MINT nGrid[4];
-	MgMinMaxR2	rMinMaxG;
+	MgMinMaxR2D	rMinMaxG;
 
 	nGrid[0] = mcs::GetInt( MM_INT_GRID_N);
 	nGrid[1] = mcs::GetInt( MM_INT_GRID_W);
@@ -136,7 +136,7 @@ MmGridNum::MmGridNum()
 	nGrid[3] = mcs::GetInt( MM_INT_GRID_E);
 
 	m_bFlgDrawG = TRUE;
-	m_PtOriginG = MgPoint2( 0., 0.);
+	m_PtOriginG = MgPoint2D( 0., 0.);
 	m_PichG[0][0] = m_PichG[1][0] = mcs::GetReal( MM_REAL_PITCH);
 	
 	SetGridNum( nGrid);
@@ -226,11 +226,11 @@ void MmGridNum::GetGridNum(
 /////////////////////////////////////////////////////////////////////////////
 //	グリッド表示画面MINMAX算出	（シングルグリッド用）
 //	グリッドMinMaxの領域に周囲の空きを加えた領域を取得する
-MgMinMaxR2 MmGridNum::GetMinMaxGA(
+MgMinMaxR2D MmGridNum::GetMinMaxGA(
 						msCod*		pCod
 				)
 {
-	MgMinMaxR2	rMinMaxG = MgMinMaxR2(0., 0., 1., 1.);
+	MgMinMaxR2D	rMinMaxG = MgMinMaxR2D(0., 0., 1., 1.);
 
 	MREAL		GridHeight;
 	MREAL		GridAki;
@@ -243,8 +243,8 @@ MgMinMaxR2 MmGridNum::GetMinMaxGA(
 
 	pCod->GetWinL( &iStX, &iStY, &iWidth, &iHeight);
 
-	MgVect2		Haba;
-	MgMinMaxR2	Waku;
+	MgVect2D		Haba;
+	MgMinMaxR2D	Waku;
 
 	GridHeight	= mcs::GetReal( MM_REAL_GRID_HEI) * 20.f;	// グリッド文字高さ
 	GridAki		= mcs::GetReal( MM_REAL_GRID_AKI);			// グリッド枠表示空き
@@ -278,11 +278,11 @@ void MmGridNum::DrawGrid(
 	MREAL		GridHeight;
 	MREAL		GridAki;
 
-	MgVect2		Haba;
-	MgVect2		vOffset;
+	MgVect2D		Haba;
+	MgVect2D		vOffset;
 
-	MgLine2		LnGrid;
-	MgPoint2	PtGridN;
+	MgLine2D		LnGrid;
+	MgPoint2D	PtGridN;
 	MINT		ic1, ic2;
 	MINT		ign;
 	DWORD		GridLineColor;
@@ -291,10 +291,10 @@ void MmGridNum::DrawGrid(
 
 	MREAL		rOnePt = pCod->LPtoRP( MINT( pCod->DPtoLP( 1))); 
 
-	MgMinMaxR2	rMinMaxG = pWndInfo->GetMinMaxG();					// グリッド表示領域取得
+	MgMinMaxR2D	rMinMaxG = pWndInfo->GetMinMaxG();					// グリッド表示領域取得
 	
-	MgMinMaxI2	rMinMaxGA = pCod->GetMinMaxL();						// 論理座標MinMax取得
-	MgPoint2	ptGAMin = pCod->LPtoRP( rMinMaxGA.min);				// 表示領域の最小実座標を求める
+	MgMinMaxI2D	rMinMaxGA = pCod->GetMinMaxL();						// 論理座標MinMax取得
+	MgPoint2D	ptGAMin = pCod->LPtoRP( rMinMaxGA.min);				// 表示領域の最小実座標を求める
 
 	GridSpace	= mcs::GetReal( MM_REAL_GRID_SPC);			// グリッド番号表示空き
 	GridHeight	= mcs::GetReal( MM_REAL_GRID_HEI) * 20.f;	// グリッド文字高さ
@@ -316,12 +316,12 @@ void MmGridNum::DrawGrid(
 		// グリッド番号表示空きありの場合は、最小グリッド値より下（-GridSpace）にグリッド番号を表示
 		PtGridN.y = LnGrid.p[0].y;
 		pCod->SetTextAttr( Mstr( "ＭＳ ゴシック"), 10.f, MT_UPPER, MT_CENTER, GridTextColor,
-							   MgVect2( 1., 0.), MgVect2( 0., - GridSpace), MT_FIXEDSIZE);
+							   MgVect2D( 1., 0.), MgVect2D( 0., - GridSpace), MT_FIXEDSIZE);
 	} else {
 		// グリッド番号表示空きなしの場合は、表示エリアの下端より上（GridSpace）にグリッド番号を表示
 		PtGridN.y = ptGAMin.y;
 		pCod->SetTextAttr( Mstr( "ＭＳ ゴシック"), 10.f, MT_LOWER, MT_CENTER, GridTextColor,
-							   MgVect2( 1., 0.), MgVect2( 0., GridSpace), MT_FIXEDSIZE);
+							   MgVect2D( 1., 0.), MgVect2D( 0., GridSpace), MT_FIXEDSIZE);
 	}
 
 	ign = m_iMinG[0];
@@ -357,12 +357,12 @@ void MmGridNum::DrawGrid(
 		// グリッド番号表示空きありの場合は、最小グリッド値より左（-GridSpace）にグリッド番号を表示
 		PtGridN.x = LnGrid.p[0].x;
 		pCod->SetTextAttr( Mstr( "ＭＳ ゴシック"), 10.f, MT_CENTER, MT_RIGHT, GridTextColor,
-							   MgVect2( 1., 0.), MgVect2( - GridSpace, 0.), MT_FIXEDSIZE);
+							   MgVect2D( 1., 0.), MgVect2D( - GridSpace, 0.), MT_FIXEDSIZE);
 	} else {
 		// グリッド番号表示空きなしの場合は、表示エリアの左端より右（GridSpace）にグリッド番号を表示
 		PtGridN.x = ptGAMin.x;
 		pCod->SetTextAttr( Mstr( "ＭＳ ゴシック"), 10.f, MT_CENTER, MT_LEFT, GridTextColor,
-							   MgVect2( 1., 0.), MgVect2( GridSpace, 0.), MT_FIXEDSIZE);
+							   MgVect2D( 1., 0.), MgVect2D( GridSpace, 0.), MT_FIXEDSIZE);
 	}
 
 	ign = m_iMinG[1];
@@ -394,22 +394,22 @@ void MmGridNum::DrawGrid(
 /////////////////////////////////////////////////////////////////////////////////
 //////	丸め
 ////void MmGridNum::Marume(
-////				const	MgPoint2	&Pi,
-////						MgPoint2*	pPo
+////				const	MgPoint2D	&Pi,
+////						MgPoint2D*	pPo
 ////				)
 ////{
 ////	MINT		ist;
-////	MgVect2		vtDis;
+////	MgVect2D		vtDis;
 ////	MREAL		rDis_2;
 ////	MINT		ic1, ic2;
 ////
 ////	MREAL		rDisMin_2;
-////	MgPoint2	Po, P0;
+////	MgPoint2D	Po, P0;
 ////
 ////	MINT		iCdPlc;										// 配置コード
-////	MINT		iCdMarume;										// グリッド丸め分割値
-////	MgPoint2	PtGrid;
-////	MgLine2		Lnm[2];
+////	MINT		iCdMarume;									// グリッド丸め分割値
+////	MgPoint2D	PtGrid;
+////	MgLine2D		Lnm[2];
 ////	MGGLINE2( GLnk, 10);
 ////
 ////	MINT iKai = z_mn.GetInpKai();
@@ -507,15 +507,15 @@ void MmGridNum::DrawGrid(
 //	グリッド丸め線を取得する
 void MmGridNum::GetMarumeGridLine(
 						MINT		iCdMarume,
-				const	MgPoint2	&Pi,
-						MgLine2		*pLn
+				const	MgPoint2D	&Pi,
+						MgLine2D		*pLn
 				)
 {
-	MgPoint2	PtGrid;
+	MgPoint2D	PtGrid;
 	MREAL		rMarumeGridP;
 	MREAL		rDistMrmGrd, rDist;
 	MINT		ic1, ic2, ic3;
-	MgPoint2	Po;
+	MgPoint2D	Po;
 
 	// 丸め有りの場合は、入力位置を丸めて返す
 	// 縦のグリッド丸め	
@@ -539,7 +539,7 @@ void MmGridNum::GetMarumeGridLine(
 		rDistMrmGrd = rDist;
 		Po.x = PtGrid.x;
 	}
-	pLn[0] = MgLine2( MgPoint2( Po.x, m_rMinMaxG.min.y), MgPoint2( Po.x, m_rMinMaxG.max.y));
+	pLn[0] = MgLine2D( MgPoint2D( Po.x, m_rMinMaxG.min.y), MgPoint2D( Po.x, m_rMinMaxG.max.y));
 
 	// 横のグリッド丸め	
 	rDistMrmGrd = MREALMAX;
@@ -562,7 +562,7 @@ void MmGridNum::GetMarumeGridLine(
 		rDistMrmGrd = rDist;
 		Po.y = PtGrid.y;
 	}
-	pLn[1] = MgLine2( MgPoint2( m_rMinMaxG.min.x, Po.y), MgPoint2( m_rMinMaxG.max.x, Po.y));
+	pLn[1] = MgLine2D( MgPoint2D( m_rMinMaxG.min.x, Po.y), MgPoint2D( m_rMinMaxG.max.x, Po.y));
 }
 
 } // namespace MC

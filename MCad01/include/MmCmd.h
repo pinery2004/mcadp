@@ -25,7 +25,7 @@
 namespace MC
 {
 
-class MgPolyg2;
+class MgPolyg2D;
 class MgGInt;
 
 class DLL_EXPORT HaitiCmd
@@ -52,17 +52,17 @@ static void MmPartsEditEnd();
 /////////////////////////////////////////////////////////////////////////////
 //	部品を配置する
 static void MmPartsPlc(
-				const	MgPoint3	*Pt,			// (I  ) 配置点、配置方向点
-				const	MgVect3		vUp = MgVect3( 0., 0., 1.),	// (I  ) 左方向
-				const	MgPolyg2	*pPg = NULL		// (I  ) 図形用の区画　または NULL
+				const	MgPoint3D	*Pt,			// (I  ) 配置点、配置方向点
+				const	MgVect3D		vUp = MgVect3D( 0., 0., 1.),	// (I  ) 左方向
+				const	MgPolyg2D	*pPg = NULL		// (I  ) 図形用の区画　または NULL
 				);
 
 /////////////////////////////////////////////////////////////////////////////
 //	屋根を配置する
 static MINT RoofPlc(										// (  O) ステイタス	0: 正常、-1: 屋根作成エラー
-				const	MgPolyg2	&Pg,			// (I  ) 地廻り区画
+				const	MgPolyg2D	&Pg,			// (I  ) 地廻り区画
 				const	MgGInt		&GifInp,		// (I  ) 入力フラグ(1:寄棟 5:切妻)
-				const	MgPoint2	&Pth			// (I  ) 方向点
+				const	MgPoint2D	&Pth			// (I  ) 方向点
 				);
 
 /////////////////////////////////////////////////////////////////////////////

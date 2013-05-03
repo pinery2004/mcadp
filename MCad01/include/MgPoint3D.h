@@ -15,11 +15,11 @@
 namespace MC
 {
 
-class MgVect2;
-class MgVect3;
-class MgPoint2;
-class MgPoint3;
-class MgPlane3;
+class MgVect2D;
+class MgVect3D;
+class MgPoint2D;
+class MgPoint3D;
+class MgPlane3D;
 
 //#include "mdPlex.h"
 
@@ -48,7 +48,7 @@ class MgPlane3;
 //======================( ３次元 )==============================
 //		３次元の点
 //
-class DLL_EXPORT_POINT MgPoint3
+class DLL_EXPORT_POINT MgPoint3D
 {
 public:
 	union{
@@ -60,91 +60,91 @@ public:
 
 public:
 // コンストラクタ
-	MgPoint3()			{}
+	MgPoint3D()			{}
 
 	// コピーコンストラクタ
-	MgPoint3( MREAL x1, MREAL y2, MREAL z3)
+	MgPoint3D( MREAL x1, MREAL y2, MREAL z3)
 						{ x = x1; y = y2; z = z3;}
-	MgPoint3( MgPoint2 v1, MREAL z3)
+	MgPoint3D( MgPoint2D v1, MREAL z3)
 						{ x = v1.x; y = v1.y; z = z3;}
-	MgPoint3( const MgPoint2& v1, const MgPlane3& Pln3);						// ２次元→３次元
+	MgPoint3D( const MgPoint2D& v1, const MgPlane3D& Pln3);						// ２次元→３次元
 
-//	MgPoint3( const MgVect3& v1);
+//	MgPoint3D( const MgVect3D& v1);
 
 	// 演算
-//	MgPoint3 Unitize( MREAL i_tol = MgTol_Dt::D) const;							// 単位ベクトルを求める
+//	MgPoint3D Unitize( MREAL i_tol = MgTol_Dt::D) const;						// 単位ベクトルを求める
 
-	MgPoint3 RotR90() const														// Z軸を中心軸として右に９０度回転した点の位置を求める
-						{ return MgPoint3( y, -x, z);}
-	MgPoint3 RotL90() const														// Z軸を中心軸として左に９０度回転した点の位置を求める
-						{ return MgPoint3( -y, x, z);}
-	MgPoint3 Rot180() const														// Z軸を中心軸として１８０度回転した点の位置を求める
-						{ return MgPoint3( -x, -y, z);}
-	MgPoint3 Rot( const MgVect2& v) const;										// Z軸を中心軸として単位ベクトル方向に回転した点の位置を求める
+	MgPoint3D RotR90() const													// Z軸を中心軸として右に９０度回転した点の位置を求める
+						{ return MgPoint3D( y, -x, z);}
+	MgPoint3D RotL90() const													// Z軸を中心軸として左に９０度回転した点の位置を求める
+						{ return MgPoint3D( -y, x, z);}
+	MgPoint3D Rot180() const													// Z軸を中心軸として１８０度回転した点の位置を求める
+						{ return MgPoint3D( -x, -y, z);}
+	MgPoint3D Rot( const MgVect2D& v) const;									// Z軸を中心軸として単位ベクトル方向に回転した点の位置を求める
 
-	MgPoint3 Rot( MREAL ang) const;												// Z軸を中心軸として指定角度で左回転した点の位置を求める
+	MgPoint3D Rot( MREAL ang) const;											// Z軸を中心軸として指定角度で左回転した点の位置を求める
 
 
 	// 変換
-	MgPoint3 Set( const MgPoint2& v1, const MgPlane3& Pln3);					// ２次元→３次元
+	MgPoint3D Set( const MgPoint2D& v1, const MgPlane3D& Pln3);					// ２次元→３次元
 
-	MgPoint3 SetUnit()
+	MgPoint3D SetUnit()
 						{ x = 1; y = 0; z = 0; return *this;}					// (1., 0., 0.)に変更する
-//	MgPoint3 SetUnitize( MREAL i_tol = MgTol_Dt::D);							// 単位ベクトルに変換する
+//	MgPoint3D SetUnitize( MREAL i_tol = MgTol_Dt::D);							// 単位ベクトルに変換する
 
-	MgPoint3& operator = ( const MREAL* pt)
+	MgPoint3D& operator = ( const MREAL* pt)
 						{ x = pt[0]; y = pt[1]; z = pt[2]; return *this;}
-	MgPoint3 SetRotR90()														// Z軸を中心軸として右に９０度回転する
+	MgPoint3D SetRotR90()														// Z軸を中心軸として右に９０度回転する
 						{ MREAL xs = x; x = y; y = -xs; return *this;}
-	MgPoint3 SetRotL90()														// Z軸を中心軸として左に９０度回転する
+	MgPoint3D SetRotL90()														// Z軸を中心軸として左に９０度回転する
 						{ MREAL xs = x; x = -y; y = xs; return *this;}
-	MgPoint3 SetRot180()														// Z軸を中心軸として１８０度回転する
+	MgPoint3D SetRot180()														// Z軸を中心軸として１８０度回転する
 						{ x = -x; y = -y; return *this;}
-	MgPoint3 SetRot( const MgVect2& v);											// Z軸を中心軸として単位ベクトル方向に回転する
+	MgPoint3D SetRot( const MgVect2D& v);										// Z軸を中心軸として単位ベクトル方向に回転する
 
-	MgPoint3 SetRot( MREAL ang);												// Z軸を中心軸として指定角度で左回転する
+	MgPoint3D SetRot( MREAL ang);												// Z軸を中心軸として指定角度で左回転する
 
 
 	// 属性値の取得
 	void	Get( MREAL* rP) const
 						{ rP[0] = x; rP[1] = y; rP[2] = z;}
-	MgPoint2	To2D() const	{ return MgPoint2( x, y);}						// 3D Point → 2D Point
+	MgPoint2D	To2D() const	{ return MgPoint2D( x, y);}						// 3D Point → 2D Point
 
 	// 演算オペレータ
-	MgPoint3 operator + ( const MgPoint3& v) const;								// P1 = P2 + p3
-	MgPoint3 operator + ( const MgVect3& v) const;								// P1 = P2 + p3
+	MgPoint3D operator + ( const MgPoint3D& v) const;							// P1 = P2 + p3
+	MgPoint3D operator + ( const MgVect3D& v) const;							// P1 = P2 + p3
 
-	MgVect3 operator - ( const MgPoint3& p) const;								// P1 = P2 - P3
-	MgPoint3 operator - ( const MgVect3& p) const;								// P1 = P2 - P3
+	MgVect3D operator - ( const MgPoint3D& p) const;							// P1 = P2 - P3
+	MgPoint3D operator - ( const MgVect3D& p) const;							// P1 = P2 - P3
 
-	friend	MgPoint3 operator - ( const MgPoint3& v)							// P1 = - P2
-				 		{ MgPoint3 Vto; Vto.x =-v.x; Vto.y = -v.y;
+	friend	MgPoint3D operator - ( const MgPoint3D& v)							// P1 = - P2
+				 		{ MgPoint3D Vto; Vto.x =-v.x; Vto.y = -v.y;
 						  Vto.z = -v.z; return Vto;}
-	MgPoint3 operator += ( const MgPoint3& v);									// P1 += P2
-	MgPoint3 operator += ( const MgVect3& v);									// P1 += P2
+	MgPoint3D operator += ( const MgPoint3D& v);								// P1 += P2
+	MgPoint3D operator += ( const MgVect3D& v);									// P1 += P2
 
-	MgPoint3 operator -= ( const MgPoint3& v);									// P1 -= P2
-	MgPoint3 operator -= ( const MgVect3& v);									// P1 -= P2
+	MgPoint3D operator -= ( const MgPoint3D& v);								// P1 -= P2
+	MgPoint3D operator -= ( const MgVect3D& v);									// P1 -= P2
 
-	friend	MgPoint3 operator * ( MREAL r, const MgPoint3& v)					// P1 = r * P2
-				 		{ MgPoint3 Vto; Vto.x =r * v.x; Vto.y = r * v.y;
+	friend	MgPoint3D operator * ( MREAL r, const MgPoint3D& v)					// P1 = r * P2
+				 		{ MgPoint3D Vto; Vto.x =r * v.x; Vto.y = r * v.y;
 						  Vto.z = r * v.z; return Vto;}
-	MgPoint3 operator * (  MREAL r)	const;										// P1 = P2 * r
+	MgPoint3D operator * (  MREAL r)	const;									// P1 = P2 * r
 
-	MgPoint3 operator / (  MREAL r) const;										// P1 = P2 / r
+	MgPoint3D operator / (  MREAL r) const;										// P1 = P2 / r
 
-	MgPoint3 operator *= ( MREAL r);											// P1 *= r
+	MgPoint3D operator *= ( MREAL r);											// P1 *= r
 
-	MgPoint3 operator /= ( MREAL r);											// P1 /= r
+	MgPoint3D operator /= ( MREAL r);											// P1 /= r
 
-	MREAL operator * ( const MgPoint3& v) const;								// r = P1 * P2 (内積 cos)
-	MREAL operator * ( const MgVect3& v) const;									// r = P1 * P2 (内積 cos)
+	MREAL operator * ( const MgPoint3D& v) const;								// r = P1 * P2 (内積 cos)
+	MREAL operator * ( const MgVect3D& v) const;								// r = P1 * P2 (内積 cos)
 
-	MgVect3 operator ^ ( const MgPoint3& v) const;								// P1 = P2 ^ P3 (外積 sin)
+	MgVect3D operator ^ ( const MgPoint3D& v) const;							// P1 = P2 ^ P3 (外積 sin)
 
-	bool operator == ( const MgPoint3& v) const;								// b = (P1 == P2) 判定
+	bool operator == ( const MgPoint3D& v) const;								// b = (P1 == P2) 判定
 
-	bool operator != ( const MgPoint3& v) const;								// b = (P1 != P2) 判定
+	bool operator != ( const MgPoint3D& v) const;								// b = (P1 != P2) 判定
 
 	// トレース
 	void	Print(MCHAR* s) const;
@@ -154,7 +154,7 @@ public:
 //======================( ３次元 )==============================
 //		３次元の点（ベクトル）
 //
-class DLL_EXPORT_POINT MgVect3
+class DLL_EXPORT_POINT MgVect3D
 {
 public:
 	union{
@@ -166,14 +166,14 @@ public:
 
 public:
 // コンストラクタ/デストラクタ
-	MgVect3()			{}
+	MgVect3D()			{}
 
 	// コピーコンストラクタ
-	MgVect3( MREAL x1, MREAL y2, MREAL z3)
+	MgVect3D( MREAL x1, MREAL y2, MREAL z3)
 						{ x = x1; y = y2; z = z3;}
-	MgVect3( MgVect2 v1, MREAL z3)
+	MgVect3D( MgVect2D v1, MREAL z3)
 						{ x = v1.x; y = v1.y; z = z3;}
-//	MgVect3( const MgPoint3& v1);
+//	MgVect3D( const MgPoint3D& v1);
 
 
 	// 属性値の設定
@@ -183,84 +183,84 @@ public:
 						{ rP[0] = x; rP[1] = y; rP[2] = z;}
 
 	// 演算
-	MgVect2	To2D() const	{ return MgVect2( x, y);}							// 3D Point → 2D Point
+	MgVect2D	To2D() const	{ return MgVect2D( x, y);}						// 3D Point → 2D Point
 
-	MgVect3 Unitize( MREAL i_tol = MgTol_Dt::D) const;							// 単位ベクトルを求める
+	MgVect3D Unitize( MREAL i_tol = MgTol_Dt::D) const;							// 単位ベクトルを求める
 
-	MgVect3 RotR90() const														// Z軸を中心軸として右に９０度回転したベクトルを求める
-						{ return MgVect3( y, -x, z);}
+	MgVect3D RotR90() const														// Z軸を中心軸として右に９０度回転したベクトルを求める
+						{ return MgVect3D( y, -x, z);}
 
-	MgVect3 RotL90() const														// Z軸を中心軸として左に９０度回転したベクトルを求める
-						{ return MgVect3( -y, x, z);}
+	MgVect3D RotL90() const														// Z軸を中心軸として左に９０度回転したベクトルを求める
+						{ return MgVect3D( -y, x, z);}
 
-	MgVect3 Rot180() const														// Z軸を中心軸として１８０度回転したベクトルを求める
-						{ return MgVect3( -x, -y, z);}
+	MgVect3D Rot180() const														// Z軸を中心軸として１８０度回転したベクトルを求める
+						{ return MgVect3D( -x, -y, z);}
 
-	MgVect3 Rot( const MgVect2& v) const;										// Z軸を中心軸として単位ベクトル方向に回転したベクトルを求める
+	MgVect3D Rot( const MgVect2D& v) const;										// Z軸を中心軸として単位ベクトル方向に回転したベクトルを求める
 
-	MgVect3 Rot( MREAL ang) const;												// Z軸を中心軸として指定角度で左回転した点の位置を求める
+	MgVect3D Rot( MREAL ang) const;												// Z軸を中心軸として指定角度で左回転した点の位置を求める
 
 	// 変換
-//	MgVect3 Set( const MgPoint2& v1, const MgPlane3& Pln3);						// ２次元→３次元
+//	MgVect3D Set( const MgPoint2D& v1, const MgPlane3D& Pln3);					// ２次元→３次元
 
-	MgVect3 SetUnit()
+	MgVect3D SetUnit()
 						{ x = 1; y = 0; z = 0; return *this;}					// (1., 0., 0.)に変更する
-	MgVect3 SetUnitize( MREAL i_tol = MgTol_Dt::D);								// 単位ベクトルに変換する
+	MgVect3D SetUnitize( MREAL i_tol = MgTol_Dt::D);							// 単位ベクトルに変換する
 
-	MgVect3& operator = ( const MREAL* pt)
+	MgVect3D& operator = ( const MREAL* pt)
 						{ x = pt[0]; y = pt[1]; z = pt[2]; return *this;}
-	MgVect3 Set( const MgPoint2& v1, const MgPlane3& Pln3);						// ２次元→３次元
+	MgVect3D Set( const MgPoint2D& v1, const MgPlane3D& Pln3);					// ２次元→３次元
 
-	MgVect3 SetRotR90()															// Z軸を中心軸として右に９０度回転する
+	MgVect3D SetRotR90()														// Z軸を中心軸として右に９０度回転する
 						{ MREAL xs = x; x = y; y = -xs; return *this;}
-	MgVect3 SetRotL90()															// Z軸を中心軸として左に９０度回転する
+	MgVect3D SetRotL90()														// Z軸を中心軸として左に９０度回転する
 						{ MREAL xs = x; x = -y; y = xs; return *this;}
-	MgVect3 SetRot180()															// Z軸を中心軸として１８０度回転する
+	MgVect3D SetRot180()														// Z軸を中心軸として１８０度回転する
 						{ x = -x; y = -y; return *this;}
-	MgVect3 SetRot( const MgVect2& v);											// Z軸を中心軸として単位ベクトル方向に回転する
+	MgVect3D SetRot( const MgVect2D& v);										// Z軸を中心軸として単位ベクトル方向に回転する
 
-	MgVect3 SetRot( MREAL ang);													// Z軸を中心軸として指定角度で左回転する
+	MgVect3D SetRot( MREAL ang);												// Z軸を中心軸として指定角度で左回転する
 
 	// 演算オペレータ
-	MgVect3 operator + ( const MgVect3& v) const;								// P1 = P2 + p3
+	MgVect3D operator + ( const MgVect3D& v) const;								// P1 = P2 + p3
 
-	MgVect3 operator - ( const MgVect3& p) const;								// P1 = P2 - P3
+	MgVect3D operator - ( const MgVect3D& p) const;								// P1 = P2 - P3
 
-	friend	MgVect3 operator - ( const MgVect3& v)								// P1 = - P2
-				 		{ MgVect3 Vto; Vto.x =-v.x; Vto.y = -v.y;
+	friend	MgVect3D operator - ( const MgVect3D& v)							// P1 = - P2
+				 		{ MgVect3D Vto; Vto.x =-v.x; Vto.y = -v.y;
 						  Vto.z = -v.z; return Vto;}
-	MgVect3 operator += ( const MgVect3& v);									// P1 += P2
+	MgVect3D operator += ( const MgVect3D& v);									// P1 += P2
 
-	MgVect3 operator -= ( const MgVect3& v);									// P1 -= P2
+	MgVect3D operator -= ( const MgVect3D& v);									// P1 -= P2
 
-	friend	MgVect3 operator * ( MREAL r, const MgVect3& v)						// P1 = r * P2
-				 		{ MgVect3 Vto; Vto.x =r * v.x; Vto.y = r * v.y;
+	friend	MgVect3D operator * ( MREAL r, const MgVect3D& v)					// P1 = r * P2
+				 		{ MgVect3D Vto; Vto.x =r * v.x; Vto.y = r * v.y;
 						  Vto.z = r * v.z; return Vto;}
-	MgVect3 operator * (  MREAL r)	const;										// P1 = P2 * r
+	MgVect3D operator * (  MREAL r)	const;										// P1 = P2 * r
 
-	MgVect3 operator / (  MREAL r) const;										// P1 = P2 / r
+	MgVect3D operator / (  MREAL r) const;										// P1 = P2 / r
 
-	MgVect3 operator *= ( MREAL r);												// P1 *= r
+	MgVect3D operator *= ( MREAL r);											// P1 *= r
 
-	MgVect3 operator /= ( MREAL r);												// P1 /= r
+	MgVect3D operator /= ( MREAL r);											// P1 /= r
 
-	MREAL operator * ( const MgVect3& v) const;									// r = P1 * P2 (内積 cos)
-	MREAL operator * ( const MgPoint3& v) const;								// r = P1 * P2 (内積 cos)
+	MREAL operator * ( const MgVect3D& v) const;								// r = P1 * P2 (内積 cos)
+	MREAL operator * ( const MgPoint3D& v) const;								// r = P1 * P2 (内積 cos)
 
-	MgVect3 operator ^ ( const MgVect3& v) const;								// P1 = P2 ^ P3 (外積 sin)
+	MgVect3D operator ^ ( const MgVect3D& v) const;								// P1 = P2 ^ P3 (外積 sin)
 
-	bool operator == ( const MgVect3& v) const;									// b = (P1 == P2) 判定
+	bool operator == ( const MgVect3D& v) const;								// b = (P1 == P2) 判定
 
-	bool operator != ( const MgVect3& v) const;									// b = (P1 != P2) 判定
+	bool operator != ( const MgVect3D& v) const;								// b = (P1 != P2) 判定
 
 	// トレース
 	void	Print(MCHAR* s) const;
 };
 
 // サイズ
-inline MINT SZMgPoint3( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgPoint3));}
-inline MINT SZMgVect3( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgVect3));}
-inline MINT WSZMgPoint3( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgPoint3) / SZMINT());}
-inline MINT WSZMgVect3( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgVect3) / SZMINT());}
+inline MINT SZMgPoint3D( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgPoint3D));}
+inline MINT SZMgVect3D( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgVect3D));}
+inline MINT WSZMgPoint3D( MINT i_sz = 1){ return  ( i_sz * (MINT)sizeof( MgPoint3D) / SZMINT());}
+inline MINT WSZMgVect3D( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgVect3D) / SZMINT());}
 
 } // namespace MC

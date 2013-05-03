@@ -92,7 +92,7 @@ public:
 
 	static void DrawDragging(
 					class	MmWndInfo*	i_pWndInfo,	// ウィンドウ管理情報
-					class	MgPoint2	i_ptMouthR	// マウス位置実座標
+					class	MgPoint2D	i_ptMouthR	// マウス位置実座標
 					);
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -109,7 +109,7 @@ public:
 	static MINT DragObject(
 							MINT		i_iMode,	// ドラッギング入力モード
 					const	void*		i_pFg,		// ドラッギング入力済み座標
-					class	MgPoint2*	o_ptGet		// マウス位置実座標
+					class	MgPoint2D*	o_ptGet		// マウス位置実座標
 					);
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -118,7 +118,7 @@ public:
 	static MINT DispDragging(
 							MINT		i_ictl,		// 表示制御 1 : 表示、0 : 再表示、-1 : 消去
 					class	MmWndInfo*	i_pWndInfo,	// ウィンドウ管理情報
-					class	MgPoint2*	i_pptMouthR	// マウス位置実座標
+					class	MgPoint2D*	i_pptMouthR	// マウス位置実座標
 					);
 
 	////////////////////////////////////////////////////////////////////////////
@@ -130,13 +130,13 @@ public:
 	//	カレント選択の部材形状を設定する
 
 	static void SetCurBziFig(
-					class	 MgPolyg2*	i_ppgBziFig	// カレント選択の部材形状
+					class	 MgPolyg2D*	i_ppgBziFig	// カレント選択の部材形状
 					);
 
 	////////////////////////////////////////////////////////////////////////////
 	//	カレント選択の部材形状を返す
 
-	static MgPolyg2* GetCurBziFig();
+	static MgPolyg2D* GetCurBziFig();
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	新規ウィンドウ作成時のヒット部材表示の初期化
@@ -153,7 +153,7 @@ public:
 
 	static void DrawHitBzi(
 					class	MmWndInfo*	i_pWndInfo,	// ウィンドウ管理情報
-					class	MgPolyg2*	i_pgHitBzi	// ヒット部材の形状
+					class	MgPolyg2D*	i_pgHitBzi	// ヒット部材の形状
 					);
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -172,7 +172,7 @@ public:
 	static MINT DispHitBzi(
 							MINT		i_ictl,		// 表示制御 1 : 表示、0 : 再表示、-1 : 消去
 					class	MmWndInfo*	i_pWndInfo,	// ウィンドウ管理情報(表示制御 == 1) または NULL(表示制御 <= 0)
-					class	MgPolyg2*	i_pgHitBzi	// ヒット部材の形状(表示制御 == 1) または NULL(表示制御 <= 0)
+					class	MgPolyg2D*	i_pgHitBzi	// ヒット部材の形状(表示制御 == 1) または NULL(表示制御 <= 0)
 					);
 
 	/////////////////////////////////////////////////////////////////////////////

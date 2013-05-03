@@ -214,7 +214,7 @@ public:
 	MUSHORT		nlnk;						// User links
 	MUSHORT		plnk;
 //	union _z{
-//		MgLine2	Ln;							// ü•ª
+//		MgLine2D	Ln;						// ü•ª
 //		MgArc	Arc;						// ‰~ŒÊ
 //		MgCir	Cir;						// ‰~
 //	} Z;
@@ -233,7 +233,7 @@ public:
 class DLL_EXPORT_CNCT MgVertexNode
 {
 public:
-	MgPoint3	Pt;							// “_
+	MgPoint3D	Pt;							// “_
 // «
 	MREAL		XWC;						// World Locus
 	MREAL		YWC;						// 

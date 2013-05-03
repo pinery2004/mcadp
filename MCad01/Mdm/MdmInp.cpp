@@ -43,7 +43,7 @@ namespace MC
 MINT	MdiPoint (
 						MDID*		o_pidWin,	// ウィンドウＩＤ
 						MINT*		o_piEvent,	// イベント
-						MgPoint3*	o_ptInp		// 入力した点の座標値（カレント座標系）
+						MgPoint3D*	o_ptInp		// 入力した点の座標値（カレント座標系）
 				)
 {
 	return 0;
@@ -66,7 +66,7 @@ MINT	MdiPoint (
 MINT	MdiPointSnap (
 						MDID*		o_pidWin,	// ウィンドウＩＤ
 						MINT*		o_piEvent,	// イベント
-						MgPoint3*	o_ptInp		// 入力した点の座標値（カレント座標系）
+						MgPoint3D*	o_ptInp		// 入力した点の座標値（カレント座標系）
 				)
 {
 	return 0;
@@ -88,7 +88,7 @@ MINT	MdiPointSnap (
 MINT	MdiPointPick (
 						MDID*		o_pidWin,	// ウィンドウＩＤ
 						MINT*		o_piEvent,	// イベント
-						MgPoint3*	o_ptInp,	// 入力した点の座標値（カレント座標系）
+						MgPoint3D*	o_ptInp,	// 入力した点の座標値（カレント座標系）
 						MDIDSET*	o_pGid		// ピックした図形プリミティブDPRセット
 				)
 {
@@ -112,7 +112,7 @@ MINT	MdiPointPick (
 MINT	MdiPointPickSnap (
 						MDID*		o_pidWin,	// ウィンドウＩＤ
 						MINT*		o_piEvent,	// イベント
-						MgPoint3*	o_ptInp,	// 入力した点の座標値（カレント座標系）
+						MgPoint3D*	o_ptInp,	// 入力した点の座標値（カレント座標系）
 						MDIDSET*	o_pGid		// ピックした図形プリミティブDPRセット
 				)
 {
@@ -223,7 +223,7 @@ MINT	MdiGetSnap (
 MINT	MdiGetSnapPlane (
 						MDID		i_idWin,	// ウィンドウＩＤ
 						MDID		i_idDpr,	// 図形プリミティブDPR-ID
-						MgPoint3	i_pt,		// 点	
+						MgPoint3D	i_pt,		// 点	
 						MDFIG*		o_pFig		// 面図形情報
 				)
 {
@@ -643,7 +643,7 @@ MINT	MdiGetRubberbandMode (
 												//	1:線分
 												//	2:box （作業面）
 												//	3:box （視平面）
-						MgGPoint3*	o_pGpt		// ラバーバンド始点セット
+						MgGPoint3D*	o_pGpt		// ラバーバンド始点セット
 				)
 {
 	return 0;
@@ -665,7 +665,7 @@ MINT	MdiSetRubberbandMode (
 												//	1:線分
 												//	2:box （作業面）
 												//	3:box （視平面）
-						MgGPoint3	i_Gpt		// ラバーバンド始点セット
+						MgGPoint3D	i_Gpt		// ラバーバンド始点セット
 				)
 {
 	return 0;
@@ -683,7 +683,7 @@ MINT	MdiSetRubberbandMode (
 //
 MINT	MdiCheckSamePoint (
 						MINT		i_mdRvrb,	// ウィンドウＩＤ
-						MgPoint3	i_pt[2],	// カレント座標値２点
+						MgPoint3D	i_pt[2],	// カレント座標値２点
 						MREAL		i_rTol,		// 範囲(画面上でのmmサイズ)
 						MINT		i_iCond		// コンディション
 												//	0:同一点

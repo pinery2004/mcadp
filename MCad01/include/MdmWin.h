@@ -19,9 +19,9 @@ public:
 	MINT		m_itpWin;						// ウィンドウタイプ ( 0:３Ｄ、1：図面)　　// 次元
 	MINT		m_iProj;						// 透視方法			透視投影と平行投影
 	MDID		m_idFn;							// 機能番号
-	MgPoint3	m_ViewPt;						// 視点／注視点（含む履歴）
+	MgPoint3D	m_ViewPt;						// 視点／注視点（含む履歴）
 	MREAL		m_rZClip[2];					// Zクリッピング値
-	MgPoint2	m_Size[2];						// サイズ
+	MgPoint2D	m_Size[2];						// サイズ
 	MREAL		m_Scale;						// 縮尺etc
 	// 物の表示／非表示　制御
 

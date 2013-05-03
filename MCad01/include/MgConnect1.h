@@ -48,46 +48,46 @@ inline MUSHORT MgEdgeNode::vccwf( MUSHORT f0)
 }
 
 // ワールドノードへのポインタを得る
-inline MgWorldNode* MgNode::WRLD()			// (  O) ワールドノードへのポインタ
+inline MgWorldNode* MgNode::WRLD()				// (  O) ワールドノードへのポインタ
 {
 	return ( (MgWorldNode *)m_Node);
 }
 
 // 空ノードＩＤから空ノードへのポインタを得る
-inline MgEmptyNode* MgNode::EMPT(			// (  O) 空ノードへのポインタ
-						MINT	iM1			// (I  ) 空ノードＩＤ(配列番号)
+inline MgEmptyNode* MgNode::EMPT(				// (  O) 空ノードへのポインタ
+						MINT	iM1				// (I  ) 空ノードＩＤ(配列番号)
 				)	
 {
 	return ( (MgEmptyNode *)&m_Node[iM1 * MSZNODE]);
 }
 
 // ソリッドノードＩＤからソリッドノードへのポインタを得る
-inline MgSolidNode* MgNode::SOLD(			// (  O) ソリッドノードへのポインタ
-						MINT	iB1			// (I  ) ソリッドノードＩＤ(配列番号)
+inline MgSolidNode* MgNode::SOLD(				// (  O) ソリッドノードへのポインタ
+						MINT	iB1				// (I  ) ソリッドノードＩＤ(配列番号)
 				)
 {
 	return ( (MgSolidNode *)&m_Node[iB1 * MSZNODE]);
 }
 
 // 稜線ノードＩＤから稜線ノードへのポインタを得る
-inline MgEdgeNode* MgNode::EDGE(			// (  O) 稜線ノードへのポインタ
-						MINT	iE1			// (I  ) 稜線ノードＩＤ(配列番号)
+inline MgEdgeNode* MgNode::EDGE(				// (  O) 稜線ノードへのポインタ
+						MINT	iE1				// (I  ) 稜線ノードＩＤ(配列番号)
 				)
 {
 	return ( (MgEdgeNode *)&m_Node[iE1 * MSZNODE]);
 }
 
 // 面ノードＩＤから面ノードへのポインタを得る
-inline MgFaceNode* MgNode::FACE(			// (  O) 面ノードへのポインタ
-						MINT	iF1			// (I  ) 面ノードＩＤ(配列番号)
+inline MgFaceNode* MgNode::FACE(				// (  O) 面ノードへのポインタ
+						MINT	iF1				// (I  ) 面ノードＩＤ(配列番号)
 				)
 {
 	return ( (MgFaceNode *)&m_Node[iF1 * MSZNODE]);
 }
 
 // 頂点ノードＩＤから頂点ノードへのポインタを得る
-inline MgVertexNode* MgNode::VRTX(			// (  O) 頂点ノードへのポインタ
-						MINT	iV1			// (I  ) 頂点ノードＩＤ(配列番号)
+inline MgVertexNode* MgNode::VRTX(				// (  O) 頂点ノードへのポインタ
+						MINT	iV1				// (I  ) 頂点ノードＩＤ(配列番号)
 				)
 {
 	return ( (MgVertexNode *)&m_Node[iV1 * MSZNODE]);
@@ -95,7 +95,7 @@ inline MgVertexNode* MgNode::VRTX(			// (  O) 頂点ノードへのポインタ
 
 // ノードをゼロクリアする
 inline void MgNode::CLR(
-						MINT	iN1			// (I  ) ノードＩＤ(配列番号)
+						MINT	iN1				// (I  ) ノードＩＤ(配列番号)
 				)
 {
 	memset( &m_Node[iN1], 0, MSZNODE * sizeof(MINT));
@@ -103,14 +103,14 @@ inline void MgNode::CLR(
 
 // ノードをゼロクリアする
 inline void MgNode::CLR(
-						void*	pN1			// (I  ) ノードへのポインタ
+						void*	pN1				// (I  ) ノードへのポインタ
 				)
 {
 	memset( pN1, 0, MSZNODE * sizeof(MINT));
 }
 
 //	空ノードを生成する
-inline MINT MgNode::mkm()					// (  O) 空きノードＩＤ(配列番号)
+inline MINT MgNode::mkm()						// (  O) 空きノードＩＤ(配列番号)
 {
 	// 自由領域の先頭ノードを使用可能なノードとする
 	MINT iM1 = WRLD()->nlnk;
@@ -138,8 +138,8 @@ inline MINT MgNode::mks()					// (  O) ソリッドノードＩＤ(配列番号)
 }
 
 //	新しい面分のノードを生成し、面分のリング中に含める(リンクの最終に付ける)
-inline MINT MgNode::mkf(					// (  O) 面分ノードＩＤ(配列番号)
-						MINT	iS1			// (I  ) ソリッドノードＩＤ(配列番号)
+inline MINT MgNode::mkf(						// (  O) 面分ノードＩＤ(配列番号)
+						MINT	iS1				// (I  ) ソリッドノードＩＤ(配列番号)
 				)
 {
 	// 使用可能なノードを面分のノードとする
@@ -155,8 +155,8 @@ inline MINT MgNode::mkf(					// (  O) 面分ノードＩＤ(配列番号)
 }
 
 //	新しい稜線のノードを生成し、稜線のリング中に含める(リンクの最終に付ける)
-inline MINT MgNode::mke(					// (  O) 稜線ノードＩＤ(配列番号)
-						MINT	iS1			// (I  ) ソリッドノードＩＤ(配列番号)
+inline MINT MgNode::mke(						// (  O) 稜線ノードＩＤ(配列番号)
+						MINT	iS1				// (I  ) ソリッドノードＩＤ(配列番号)
 				)
 {
 	// 使用可能なノードを稜線のノードとする

@@ -57,7 +57,7 @@ MINT ViewInp::LButtonDown(
 
 	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKFindWnd( pWnd);
 
-	MgPoint2	ptMouthR = pWndInfo->DPtoRP( ptMouthD);			// 実座標へ変換
+	MgPoint2D	ptMouthR = pWndInfo->DPtoRP( ptMouthD);			// 実座標へ変換
 
 	// ドラッギングズーム操作
 	if ( CONTROL_FLAGS(nFlags)) {								// コントロールキー
@@ -104,7 +104,7 @@ MINT ViewInp::LButtonUp(
 	}
 
 	// コマンドキュー		add 070907
-	MgPoint2	ptMouthR = pWndInfo->DPtoRP( ptMouthD);			// 実座標へ変換
+	MgPoint2D	ptMouthR = pWndInfo->DPtoRP( ptMouthD);			// 実座標へ変換
 	MtSendMessage( WM_LBUTTONUP, nFlags, &ptMouthR);
 	return ist;
 }
@@ -122,7 +122,7 @@ MINT ViewInp::RButtonDown(
 
 	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKFindWnd( pWnd);
 
-	MgPoint2	ptMouthR = pWndInfo->DPtoRP( ptMouthD);			// 実座標へ変換
+	MgPoint2D	ptMouthR = pWndInfo->DPtoRP( ptMouthD);			// 実座標へ変換
 
 	// ドラッギング移動操作開始
 	pWndInfo->DeleteDrag();
@@ -153,7 +153,7 @@ MINT ViewInp::RButtonUp(
 	pWndInfo->DeleteDrag();
 
 	// コマンドキュー		add 070907
-	MgPoint2	ptMouthR = pWndInfo->DPtoRP( ptMouthD);			// 実座標へ変換
+	MgPoint2D	ptMouthR = pWndInfo->DPtoRP( ptMouthD);			// 実座標へ変換
 	MtSendMessage( WM_RBUTTONUP, nFlags, &ptMouthR);
 	return ist;
 }
@@ -170,7 +170,7 @@ MINT ViewInp::LButtonDblClk(
 
 	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKFindWnd( pWnd);
 
-	MgPoint2	ptMouthR = pWndInfo->DPtoRP( ptMouthD);			// 実座標へ変換
+	MgPoint2D	ptMouthR = pWndInfo->DPtoRP( ptMouthD);			// 実座標へ変換
 
 	// コマンドキュー
 	MtSendMessage( WM_LBUTTONDBLCLK, nFlags, &ptMouthR);
@@ -189,7 +189,7 @@ MINT ViewInp::RButtonDblClk(
 
 	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKFindWnd( pWnd);
 
-	MgPoint2	ptMouthR = pWndInfo->DPtoRP( ptMouthD);			// 実座標へ変換
+	MgPoint2D	ptMouthR = pWndInfo->DPtoRP( ptMouthD);			// 実座標へ変換
 
 	// コマンドキュー
 	MtSendMessage( WM_RBUTTONDBLCLK, nFlags, &ptMouthR);
@@ -208,7 +208,7 @@ MINT ViewInp::MButtonDblClk(
 
 	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKFindWnd( pWnd);
 
-	MgPoint2	ptMouthR = pWndInfo->DPtoRP( ptMouthD);			// 実座標へ変換
+	MgPoint2D	ptMouthR = pWndInfo->DPtoRP( ptMouthD);			// 実座標へ変換
 
 	// コマンドキュー
 	MtSendMessage( WM_MBUTTONDBLCLK, nFlags, &ptMouthR);
@@ -256,8 +256,8 @@ MINT ViewInp::MouseMove(
 	MINT		ist = 0;
 //E	MCHAR		strPtMouthR[20];
 	CPoint		ptMouthL;
-	MgPoint2	ptMouthR;
-	MgPolyg2	pgHitBzi;
+	MgPoint2D	ptMouthR;
+	MgPolyg2D	pgHitBzi;
 
 	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKFindWnd( pWnd);
 
@@ -317,7 +317,7 @@ MINT ViewInp::MButtonDown(
 
 // 070907	MINT iOldMM = pWndInfo->SetMapMode( NULL);
 	
-	MgPoint2	ptMouthR = pWndInfo->DPtoRP( ptMouthD);			// 実座標へ変換
+	MgPoint2D	ptMouthR = pWndInfo->DPtoRP( ptMouthD);			// 実座標へ変換
 
 	// ドラッギング移動操作
 	pWndInfo->DeleteDrag();
@@ -346,7 +346,7 @@ MINT ViewInp::MButtonUp(
 	pWndInfo->DeleteDrag();
 
 	// コマンドキュー		add 070907
-	MgPoint2	ptMouthR = pWndInfo->DPtoRP( ptMouthD);			// 実座標へ変換
+	MgPoint2D	ptMouthR = pWndInfo->DPtoRP( ptMouthD);			// 実座標へ変換
 	MtSendMessage( WM_MBUTTONUP, nFlags, &ptMouthR);
 	return ist;
 }
@@ -364,22 +364,22 @@ MINT ViewInp::MouseWheel(
 
 	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKFindWnd( pWnd);
 
-	MgPoint2	ptMouthR = pWndInfo->DPtoRP( ptMouthD);			// 実座標へ変換
+	MgPoint2D	ptMouthR = pWndInfo->DPtoRP( ptMouthD);			// 実座標へ変換
 
 	// ドラッギングズーム操作開始
 	pWndInfo->DeleteDrag();
 	pWndInfo->SetDrag( new MmDragZoom( pWndInfo, ptMouthR));
 
 	// ドラッギングズーム操作
-	MgMinMaxR2 rMinMaxR = pWndInfo->GetMinMaxRS();
+	MgMinMaxR2D rMinMaxR = pWndInfo->GetMinMaxRS();
 	MREAL dHeight = rMinMaxR.GetHgt() / 10;
 	if ( zDelta < 0)
 		dHeight = - dHeight;
 
-//	ptMouthR += MgVect2( 0., dHeight);
+//	ptMouthR += MgVect2D( 0., dHeight);
 //	pWndInfo->GetDrag()->Continue( pWndInfo, ptMouthR);
 	// change 070907
-	MgPoint2	ptMouthRW = ptMouthR + MgVect2( 0., dHeight);
+	MgPoint2D	ptMouthRW = ptMouthR + MgVect2D( 0., dHeight);
 	pWndInfo->GetDrag()->Continue( pWndInfo, ptMouthRW);
 
 	// ドラッギング移動操作終了
@@ -428,7 +428,7 @@ MINT ViewInp::Char(
 	// コマンドキュー
 	iChar[0] = nChar;											// Virtual-Key Cords 
 	iChar[1] = nRepCnt;
-	MtSendMessage( WM_CHAR, nFlags, (MgPoint2 *)iChar);
+	MtSendMessage( WM_CHAR, nFlags, (MgPoint2D *)iChar);
 	return ist;
 }
 
@@ -454,7 +454,7 @@ MINT ViewInp::KeyUp(
 	// コマンドキュー		add 070907
 	iChar[0] = nChar;											// Virtual-Key Cords 
 	iChar[1] = nRepCnt;
-	MtSendMessage( WM_KEYUP, nFlags, (MgPoint2 *)iChar);
+	MtSendMessage( WM_KEYUP, nFlags, (MgPoint2D *)iChar);
 	return ist;
 }
 
@@ -473,7 +473,7 @@ MINT ViewInp::KeyDown(
 	// コマンドキュー		add 070907
 	iChar[0] = nChar;											// Virtual-Key Cords 
 	iChar[1] = nRepCnt;
-	MtSendMessage( WM_KEYDOWN, nFlags, (MgPoint2 *)iChar);
+	MtSendMessage( WM_KEYDOWN, nFlags, (MgPoint2D *)iChar);
 	return ist;
 }
 

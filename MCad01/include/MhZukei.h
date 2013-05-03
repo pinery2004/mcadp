@@ -33,7 +33,7 @@ public:
 																//	MHZK_GPOINT	: ポリゴン(点群)
 	MSHORT				m_isNZukei;								// 図形線分数
 	MhZukei*			m_pNext;								// 追加図形線分
-	MgLine3				m_lnZukei[1];
+	MgLine3D				m_lnZukei[1];
 
 	MINT	Load(												// ＤＢより１レコード読み込み
 						MhMdlIO*	i_phMdl						// 読み込みファイル　ハンドル

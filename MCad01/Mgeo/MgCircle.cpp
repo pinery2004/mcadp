@@ -24,10 +24,10 @@ namespace MC
 //======================( ÇQéüå≥ )==============================
 //		ÇQéüå≥â~ÇÉgÉåÅ[ÉXÇ∑ÇÈ
 //
-void MgCir2::Print(MCHAR* s)
+void MgCir2D::Print(MCHAR* s)
 {
 #ifdef LOGOUT
-	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgCir2	: (%7.1f,%7.1f), %7.1f\n"),
+	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgCir2D	: (%7.1f,%7.1f), %7.1f\n"),
 								 s, pc.x, pc.y, r);
 	MBLOGPRBF;
 #endif
@@ -36,10 +36,10 @@ void MgCir2::Print(MCHAR* s)
 //======================( ÇRéüå≥ )==============================
 //		ÇRéüå≥â~ÇÉgÉåÅ[ÉXÇ∑ÇÈ
 //
-void MgCir3::Print(MCHAR* s)
+void MgCir3D::Print(MCHAR* s)
 {
 #ifdef LOGOUT
-	Msprintf_s( mlLog::m_Str, Mstr( "%s 	MgCir3 	: (%7.1f,%7.1f,%7.1f), (%7.1f,%7.1f,%7.1f), %7.1f\n"),
+	Msprintf_s( mlLog::m_Str, Mstr( "%s 	MgCir3D 	: (%7.1f,%7.1f,%7.1f), (%7.1f,%7.1f,%7.1f), %7.1f\n"),
 								 s, Pc.x, Pc.y, Pc.z, V.x, V.y, V.z, r);
 	MBLOGPRBF;
 #endif

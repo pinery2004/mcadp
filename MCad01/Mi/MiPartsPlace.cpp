@@ -53,15 +53,15 @@ namespace MC
 /////////////////////////////////////////////////////////////////////////////
 //	部品を１本配置する
 void HaitiCmd::MmPartsPlc(
-				const	MgPoint3	*Pt,		// (I  ) 配置点、配置方向点
-				const	MgVect3		vUpPlc,		// (I  ) 配置上方向
-				const	MgPolyg2	*ppg		// (I  ) 図形用の区画　または NULL
+				const	MgPoint3D	*Pt,		// (I  ) 配置点、配置方向点
+				const	MgVect3D	vUpPlc,		// (I  ) 配置上方向
+				const	MgPolyg2D	*ppg		// (I  ) 図形用の区画　または NULL
 				)
 {
 	mhPlcParts	PlcEn;
 	MhZukei*	pZukei;
 	MINT		szZukei;
-	MgVect3		vBz = Pt[1] - Pt[0];
+	MgVect3D		vBz = Pt[1] - Pt[0];
 	MREAL		rBzLng_2 = vBz * vBz;
 	if ( rBzLng_2 < MMIN_BZILEN_2) {
 		//	部材長さ不足エラー表示 **************************************
@@ -121,7 +121,7 @@ void HaitiCmd::MmPartsPlc(
 		MINT nLine = ppg->m_n;
 		if ( ppg->m_n == 2) nLine--;								// 2点の場合は直線1本
 
-		szZukei = sizeof(MhZukei) + sizeof(MgLine3) * (nLine - 1);	// 線分[nLine]本分の図形データサイズ
+		szZukei = sizeof(MhZukei) + sizeof(MgLine3D) * (nLine - 1);	// 線分[nLine]本分の図形データサイズ
 		pZukei = (MhZukei*)new char[szZukei];
 
 		pZukei->m_ibObj = MHZK_DISP;								// 図形表示用
@@ -132,11 +132,11 @@ void HaitiCmd::MmPartsPlc(
 		for (MINT ic1=0; ic1<nLine; ic1++) {
 			MINT ic2 = ic1 + 1;
 			if ( ic2 == nLine) ic2 = 0;
-			pZukei->m_lnZukei[ic1] = MgLine3( MgPoint3C( ppg->m_p[ic1]), MgPoint3C( ppg->m_p[ic2]));
+			pZukei->m_lnZukei[ic1] = MgLine3D( MgPoint3DC( ppg->m_p[ic1]), MgPoint3DC( ppg->m_p[ic2]));
 		}
 		PlcEn.m_pZukei = pZukei;
 		//
-		szZukei = sizeof(MhZukei) - sizeof(MgLine3) + sizeof(MgPoint3) * (ppg->m_n);	// 点[ppg->n]個分の図形データサイズ
+		szZukei = sizeof(MhZukei) - sizeof(MgLine3D) + sizeof(MgPoint3D) * (ppg->m_n);	// 点[ppg->n]個分の図形データサイズ
 		pZukei = (MhZukei*)new char[szZukei];
 
 		pZukei->m_ibObj = MHZK_AREA;								// 図形領域判定用
@@ -144,7 +144,7 @@ void HaitiCmd::MmPartsPlc(
 
 		pZukei->m_pNext = NULL;
 		pZukei->m_isNZukei = ppg->m_n;
-		MgPoint2* ppt = (MgPoint2*)&pZukei->m_lnZukei[0];
+		MgPoint2D* ppt = (MgPoint2D*)&pZukei->m_lnZukei[0];
 		for (MINT ic1=0; ic1<ppg->m_n; ic1++) {
 			ppt[ic1] = ppg->m_p[ic1];
 		}
@@ -160,7 +160,7 @@ exit:;
 //	返値 =-1: オーバーフロー, ≧0: 選択部品配置数
 MINT mhHaitiIn::GetParts(
 						MINT		iKai,			// (I  ) 階
-						MINT		iIdPartsSpec,		// (I  ) 部品ID
+						MINT		iIdPartsSpec,	// (I  ) 部品ID
 				const	MCHAR*		cGeneralName,	// (I  ) 総称 または NULL
 				const	MCHAR*		cNmParts1,		// (I  ) 操作用部材名 または NULL
 						MINT		szPlcEn,		// (I  ) 部品配置最大数
@@ -201,9 +201,9 @@ MINT mhHaitiIn::GetParts(
 //	返値 true : 対象部品配置, false : 対象外部品配置
 bool mhHaitiIn::ChkParts(
 						MINT		iKai,			// (I  ) 階 または NULL
-						MINT		iIdPartsSpec,		// (I  ) 部品ID または NULL
+						MINT		iIdPartsSpec,	// (I  ) 部品ID または NULL
 				const	MCHAR*		cGeneralName,	// (I  ) 総称 または NULL
-				const	MCHAR*		cNmParts1,	// (I  ) 操作用部材名 または NULL
+				const	MCHAR*		cNmParts1,		// (I  ) 操作用部材名 または NULL
 						mhPlcParts	*pPlcEn1		// (I  ) 調査部品配置
 				)
 {
@@ -228,11 +228,11 @@ exit:
 //  部材配置を検索する
 //	返値 検索結果　または　null:ヒットなし
 mhPlcParts* mhHaitiIn::SrchBuzai(
-						MmWndInfo*	pWndInfo,	// (I  ) ウィンドウ管理情報
-						MgPoint2&	ptMouthR,	// (I  ) 検索指示座標
-						MINT		iCdBuzai,	// (I  ) 部材コード　または　NULL(全)
-												//       MP_BZICD_PANEL(全パネル)
-						MgPolyg2*	ppgPartsShape	// (  O) 検出多角形　または　NULL
+						MmWndInfo*	pWndInfo,		// (I  ) ウィンドウ管理情報
+						MgPoint2D&	ptMouthR,		// (I  ) 検索指示座標
+						MINT		iCdBuzai,		// (I  ) 部材コード　または　NULL(全)
+													//       MP_BZICD_PANEL(全パネル)
+						MgPolyg2D*	ppgPartsShape	// (  O) 検出多角形　または　NULL
 				)
 {
 	MINT		ist1;
@@ -243,7 +243,7 @@ mhPlcParts* mhHaitiIn::SrchBuzai(
 //	MsBitSet*	pHstv;							// 履歴管理対応
 	mhPlcParts	*pHitBziEn[MC_HITBZI_SZ];
 	MREAL		rAHitBziEn[MC_HITBZI_SZ];
-	MgPolyg2	pgHitBzi;
+	MgPolyg2D	pgHitBzi;
 	MREAL		rArea;
 
 	MINT		nHitBziEn = 0;
@@ -276,9 +276,9 @@ mhPlcParts* mhHaitiIn::SrchBuzai(
 				continue;										// 異なる部材コードの部材は検索しない
 		} 
 
-		mhHaitiIn::PartsShape( pPlcEn,	&pgHitBzi);					// 部材形状を求める
+		mhHaitiIn::PartsShape( pPlcEn,	&pgHitBzi);				// 部材形状を求める
 		// 部材形状のMIN/MAXを求める
-		MgMinMaxR2 rMinMax;
+		MgMinMaxR2D rMinMax;
 		rMinMax.SetInit();
 		for ( ic1=0; ic1<pgHitBzi.m_n; ic1++) 
 			rMinMax.Ins2( pgHitBzi.m_p[ic1]);
@@ -319,15 +319,15 @@ void mhHaitiIn::MmSrchCrossBuzai(
 	MINT		ic1;
 	MINT		iTch = 0;
 	MINT		iCrs = 0;
-	MgLine2		lnBziSin1;
-	MgPolyg2	pgBzi1;
+	MgLine2D		lnBziSin1;
+	MgPolyg2D	pgBzi1;
 	MPOSITION	pos1;
 	mhPlcParts	*pPlcEn;
-	MgLine2		lnBziSin2;
-	MgPolyg2	pgBzi2;
+	MgLine2D		lnBziSin2;
+	MgPolyg2D	pgBzi2;
 	MINT		nT;
 	MINT		iIntr;
-	MgPoint2	po;
+	MgPoint2D	po;
 
 	MINT		nBzi2En = 0;
 	MINT		iHitEnMin = 0;
@@ -340,9 +340,9 @@ void mhHaitiIn::MmSrchCrossBuzai(
 	MINT		iBuzaiType = iCdBuzai / MP_BZICD_TYPE;
 	if ( iCdBuzai - iBuzaiType * MP_BZICD_TYPE) iBuzaiType = -1;
 
-	mhHaitiIn::PartsShape( pBziInfo1, &pgBzi1);						// 長さ調整部材の部材形状を求める
+	mhHaitiIn::PartsShape( pBziInfo1, &pgBzi1);					// 長さ調整部材の部材形状を求める
 	// 長さ調整部材の部材形状のMIN/MAXを求める
-	MgMinMaxR2 rMinMax1;
+	MgMinMaxR2D rMinMax1;
 	rMinMax1.SetInit();											// 部材形状のMIN/MAXを求める
 	for ( ic1=0; ic1<pgBzi1.m_n; ic1++) 
 		rMinMax1.Ins2( pgBzi1.m_p[ic1]);
@@ -362,7 +362,7 @@ void mhHaitiIn::MmSrchCrossBuzai(
 		if ( !MmChkValidParts( pPlcEn))							// オプションと履歴のチェック
 			continue;
 
-		if ( iCdBuzai) {											// 検索対象の部材コードが指定されている場合はチェックする
+		if ( iCdBuzai) {										// 検索対象の部材コードが指定されている場合はチェックする
 			if ( (pPlcEn->GetPTCdBuzai() / MP_BZICD_TYPE == iBuzaiType) ||
 				(pPlcEn->GetPTCdBuzai() == iCdBuzai))
 				;
@@ -370,9 +370,9 @@ void mhHaitiIn::MmSrchCrossBuzai(
 				continue;										// 異なる部材コードの部材は検索しない
 		} 
 
-		mhHaitiIn::PartsShape( pPlcEn,	&pgBzi2);					// 検索部材の部材形状を求める
+		mhHaitiIn::PartsShape( pPlcEn,	&pgBzi2);				// 検索部材の部材形状を求める
 		// 検索部材の部材形状のMIN/MAXを求める
-		MgMinMaxR2 rMinMax2;
+		MgMinMaxR2D rMinMax2;
 		rMinMax2.SetInit();										// 部材形状のMIN/MAXを求める
 		for ( ic1=0; ic1<pgBzi2.m_n; ic1++)
 			rMinMax2.Ins2( pgBzi2.m_p[ic1]);
@@ -388,9 +388,9 @@ void mhHaitiIn::MmSrchCrossBuzai(
 						nT++;
 				}
 				if ( nT >= 1) {
-//					MgVect2 vt0 = lnBziSin2.p[1] - lnBziSin2.p[0];
-//					MgVect2 vt1 = lnBziSin1.p[0] - lnBziSin2.p[0];
-//					MgVect2 vt2 = lnBziSin1.p[1] - lnBziSin2.p[0];
+//					MgVect2D vt0 = lnBziSin2.p[1] - lnBziSin2.p[0];
+//					MgVect2D vt1 = lnBziSin1.p[0] - lnBziSin2.p[0];
+//					MgVect2D vt2 = lnBziSin1.p[1] - lnBziSin2.p[0];
 //					if ( MgLE( (vt1 ^ vt0) * (vt2 ^ vt0), 0)) 
 						pbTchBzi[iTch++] = pPlcEn;
 				} else if ( MF_CHECK_OR( iIntr, (MC_INT | MC_CONNECTION))) {
@@ -407,28 +407,28 @@ void mhHaitiIn::MmSrchCrossBuzai(
 //  部材の形状を求める
 void mhHaitiIn::PartsShape(
 						mhPlcParts	*pPlcEn,	// 部材配置レコード
-						MgPolyg2*	pgPartsShape	// 部材形状
+						MgPolyg2D*	pgPartsShape	// 部材形状
 				)
 {
 	MINT		iKaiC   = z_mnIA.GetInpKai();					// 階  	(1,2,3)
 	MINT		iGpC = z_mnIA.GetKCdGp();						// 構成
 
-	MgLine2		LnParts;
-	MgPoint2	ptPartsN;
+	MgLine2D		LnParts;
+	MgPoint2D	ptPartsN;
 	MINT		iKeijoF;
 	MREAL		rWidthR, rWidth;
-	MgVect2		VtWidthR, VtWidth;
-	MgPoint2	ptW[2];
-	MgVect2		VtW, VtUtW;
-	MgPoint2	ptH;
-	MgPoint2	ptK[4];
-	MgVect2		vptH;
-	MgVect2		vOffset = MgVect2( 0., 20.);
+	MgVect2D		VtWidthR, VtWidth;
+	MgPoint2D	ptW[2];
+	MgVect2D		VtW, VtUtW;
+	MgPoint2D	ptH;
+	MgPoint2D	ptK[4];
+	MgVect2D		vptH;
+	MgVect2D		vOffset = MgVect2D( 0., 20.);
 	
 	MINT		ic1;
 
-	ptW[0] = *(MgPoint2*)&(pPlcEn->GetPIPlcIti( 0));
-	ptW[1] = *(MgPoint2*)&(pPlcEn->GetPIPlcIti( 1));
+	ptW[0] = *(MgPoint2D*)&(pPlcEn->GetPIPlcIti( 0));
+	ptW[1] = *(MgPoint2D*)&(pPlcEn->GetPIPlcIti( 1));
 
 	// 部材の形を求め検索する
 	VtW = ptW[1] - ptW[0];										// 芯線
@@ -479,7 +479,7 @@ void mhHaitiIn::PartsShape(
 //		pZukei = pPlcEn->m_pZukei;
 //		if ( pZukei) {											// 図形データ有りの場合は、それより検索
 //			for ( ic=0; ic<pZukei->m_nZukei; ic++) {
-//				pCod->Line( MgLine2C( pZukei->m_lnZukei[ic]));
+//				pCod->Line( MgLine2DC( pZukei->m_lnZukei[ic]));
 //			}
 //		} else {												// 図形データなしの場合は求めた形状より検索
 	pgPartsShape->m_n = 0;
@@ -498,7 +498,7 @@ void mhHaitiIn::PartsShape(
 void mhHaitiIn::MhModBzPH(
 						MINT		iCdInpKbCd,		// (I  ) 入力点区分コード
 						MINT		iMov,			// (I  ) 修正側　(0:始点、1:終点)
-				const	MgPoint3	&PtInt,			// (I  ) 配置点
+				const	MgPoint3D	&PtInt,			// (I  ) 配置点
 						MREAL		rLH,			// (I  ) 長さ補整値
 						mhPlcParts	*pPlcEnR		// (I O) 長さ調整部材
 				)
@@ -529,14 +529,14 @@ void mhHaitiIn::MhModBzPH(
 
 /////////////////////////////////////////////////////////////////////////////
 //	調整先が部材で示された部材の長さ調整
-MINT mhHaitiIn::MhAdjBzL(										// (  O) ステイタス　
+MINT mhHaitiIn::MhAdjBzL(							// (  O) ステイタス　
 													//	MC_PARALLEL (-1) 交差なし（平行）
 													//	MC_TWIST    (-2) 交差なし（ねじれ）
 													//	MC_NINT	    (0)	交差なし
 													//	MC_INT      (1)	交差あり長さ調整
 						MINT		iKati,			// (I  ) 勝ち負けフラグ(1:勝ち、0:負け)
 						mhPlcParts *pPlcEn1,			// (I O) 長さ調整部材1
-				const	MgPoint3	&Pt1,			// (I  ) 長さ調整指示点（部材1の残す側を示す最寄の点）
+				const	MgPoint3D	&Pt1,			// (I  ) 長さ調整指示点（部材1の残す側を示す最寄の点）
 						mhPlcParts *pPlcEn2			// (I  ) 長さ調整先を示す部材2
 				)
 {
@@ -544,20 +544,20 @@ MINT mhHaitiIn::MhAdjBzL(										// (  O) ステイタス　
 	MINT		ist1, ist2;
 	
 	MhSenBuzai	Bz1, Bz2;
-	MgPoint3	PtInt;
+	MgPoint3D	PtInt;
 	MREAL		s0, s1, s2;							// 長さ調整指示点と部材1の部材2に対する左右位置
 	MINT		iMov;								// 部材1のカット端 0:配置点側 1:配置方向店側
-	MgPoint3	PtC;
-	MgULine3	ULnBz1;								// 
-	MgULine3	ULnBz2;
-	MgPoint3	PtI[2];
+	MgPoint3D	PtC;
+	MgULine3D	ULnBz1;								// 
+	MgULine3D	ULnBz2;
+	MgPoint3D	PtI[2];
 	MREAL		rLH;
 	MREAL		rLnWH;
 
 //	if ( pPlcEn1 == pPlcEn2)									// 長さ調整部材と調整先の部材が同じ場合は
 //		return;													// 長さ調整対象外
 
-	MgVect3	VtUtZ( 0., 0., 1.);
+	MgVect3D	VtUtZ( 0., 0., 1.);
 
 	Bz1 = *pPlcEn1;
 	Bz2 = *pPlcEn2;
@@ -612,7 +612,7 @@ MINT mhHaitiIn::MhAdjBzL(										// (  O) ステイタス　
 	if ( Bz1.Ln.p[1 - iMov] == PtInt) {
 		rLnWH = Bz1.rLH[1 - iMov] + rLH;
 		if ( !MGeo::Zero( rLnWH))
-			MhModBzPH( MP_INPKB_1PT, iMov, (MgPoint3&)Bz1.vtUt, rLH, pPlcEn1);	// 長さ調整
+			MhModBzPH( MP_INPKB_1PT, iMov, (MgPoint3D&)Bz1.vtUt, rLH, pPlcEn1);	// 長さ調整
 	} else {
 		MhModBzPH( MP_INPKB_LEN2PT, iMov, PtInt, rLH, pPlcEn1);	// 長さ調整
 	}
@@ -622,15 +622,15 @@ exit:
 
 /////////////////////////////////////////////////////////////////////////////
 //	調整先が平行部材で示された部材の長さ調整
-void mhHaitiIn::MhAdjBzL(										// (  O) ステイタス　
+void mhHaitiIn::MhAdjBzL(							// (  O) ステイタス　
 													//	MC_PARALLEL (-1) 交差なし（平行）
 													//	MC_TWIST    (-2) 交差なし（ねじれ）
 													//	MC_NINT	    (0)	交差なし
 													//	MC_INT      (1)	交差あり
-						mhPlcParts *pPlcEn1,			// (I O) 長さ調整部材1
-				const	MgPoint3	&Pt1,			// (I  ) 部材1の長さ調整する側を示す最寄の点
-						mhPlcParts *pPlcEn2,			// (I  ) 長さ調整先を示す部材2
-				const	MgPoint3	&Pt2			// (I  ) 部材2の長さ調整先を示す最寄の点
+						mhPlcParts *pPlcEn1,		// (I O) 長さ調整部材1
+				const	MgPoint3D	&Pt1,			// (I  ) 部材1の長さ調整する側を示す最寄の点
+						mhPlcParts *pPlcEn2,		// (I  ) 長さ調整先を示す部材2
+				const	MgPoint3D	&Pt2			// (I  ) 部材2の長さ調整先を示す最寄の点
 				)
 {
 	MhSenBuzai	Bz1, Bz2;
@@ -650,8 +650,8 @@ void mhHaitiIn::MhAdjBzL(										// (  O) ステイタス　
 	MREAL		rLnWH;
 	MINT		iMov;
 
-	MgPoint3	PtIntWH;
-	MgPoint3	PtInt;
+	MgPoint3D	PtIntWH;
+	MgPoint3D	PtInt;
 	MREAL		s1, s2;
 
 	// 部材1の残す方の位置が部材２指定端部の前後ろどちらにあるか判定し、カット直線を求める
@@ -693,7 +693,7 @@ void mhHaitiIn::MhAdjBzL(										// (  O) ステイタス　
 	if (Bz1.Ln.p[1 - iMov] == PtInt) {
 		rLnWH = Bz1.rLH[1 - iMov] + rLH;
 		if ( !MGeo::Zero( rLnWH))
-			MhModBzPH( MP_INPKB_1PT, iMov, (MgPoint3&)Bz1.vtUt, rLH, pPlcEn1);	// 長さ調整
+			MhModBzPH( MP_INPKB_1PT, iMov, (MgPoint3D&)Bz1.vtUt, rLH, pPlcEn1);	// 長さ調整
 	} else {
 		MhModBzPH( MP_INPKB_LEN2PT, iMov, PtInt, rLH, pPlcEn1);		// 長さ調整
 	}
@@ -702,9 +702,9 @@ void mhHaitiIn::MhAdjBzL(										// (  O) ステイタス　
 /////////////////////////////////////////////////////////////////////////////
 //	調整先が点座標で示された部材の長さ調整を行う
 void mhHaitiIn::MhAdjBzL(
-						mhPlcParts *pPlcEn1,			// 長さ調整部材1
-				const	MgPoint3	&Pt1,			// 部材1の長さ調整する側を示す最寄の点1
-				const	MgPoint3	&Pt2			// 長さ調整先を示す点2
+						mhPlcParts *pPlcEn1,		// 長さ調整部材1
+				const	MgPoint3D	&Pt1,			// 部材1の長さ調整する側を示す最寄の点1
+				const	MgPoint3D	&Pt2			// 長さ調整先を示す点2
 				)
 {
 	MINT		ist;
@@ -712,7 +712,7 @@ void mhHaitiIn::MhAdjBzL(
 	MREAL		rLH;
 	MREAL		rLnWH;
 	MINT		iMov;
-	MgPoint3	PtInt;
+	MgPoint3D	PtInt;
 	MREAL		s1, s2;
 
 
@@ -740,7 +740,7 @@ void mhHaitiIn::MhAdjBzL(
 	if ( Bz1.Ln.p[1 - iMov] == PtInt) {
 		rLnWH = Bz1.rLH[1 - iMov] + rLH;
 		if ( !MGeo::Zero( rLnWH))
-			MhModBzPH( MP_INPKB_1PT, iMov, (MgPoint3&)Bz1.vtUt, rLH, pPlcEn1);	// 長さ調整
+			MhModBzPH( MP_INPKB_1PT, iMov, (MgPoint3D&)Bz1.vtUt, rLH, pPlcEn1);	// 長さ調整
 	} else {
 		MhModBzPH( MP_INPKB_LEN2PT, iMov, PtInt, rLH, pPlcEn1);		// 長さ調整
 	}

@@ -88,15 +88,15 @@ MINT mhPlcParts::Save(							//
 	i_phMdl->WriteItemI( MDW_ATRCD_HAITIEN_IPARTSTPCD, &iCdBuzaiW);
 																				// p[0]: 始点 | 配置点
 																				// p[1]: 終点 | 配置方向点
-	i_phMdl->WriteItemR( MDW_ATRCD_HAITIEN_LNHAITI, (MREAL*)&m_lnPlc, sizeof(MgLine3));
-	i_phMdl->WriteItemR( MDW_ATRCD_HAITIEN_PTUPHAITI, (MREAL*)&m_vUpPlc, sizeof(MgPoint3));
+	i_phMdl->WriteItemR( MDW_ATRCD_HAITIEN_LNHAITI, (MREAL*)&m_lnPlc, sizeof(MgLine3D));
+	i_phMdl->WriteItemR( MDW_ATRCD_HAITIEN_PTUPHAITI, (MREAL*)&m_vUpPlc, sizeof(MgPoint3D));
 																				// 配置上方向点
 	i_phMdl->WriteItemR( MDW_ATRCD_HAITIEN_RSINZURE, &m_rSinZure);				// 材軸芯ずれ量　	>0:右側、<0:左側
 	i_phMdl->WriteItemR( MDW_ATRCD_HAITIEN_RHAITIZURE, &m_rPlcZure);			// 配置点ずれ量		>0:前、　<0:後
 	i_phMdl->WriteItemR( MDW_ATRCD_HAITIEN_RNAGASAHOSEI, m_rLngHosei, 2*sizeof(MREAL));
 																				// 長さ補正値（始点側、終点側）
 	i_phMdl->WriteItemR( MDW_ATRCD_HAITIEN_RTAKASA, m_rHgt, 2*sizeof(MREAL));	// 高さ（取り付け高さ、高さ）
-	i_phMdl->WriteItemR( MDW_ATRCD_HAITIEN_PTCMNT1, (MREAL*)&m_ptCmnt1, sizeof(MgPoint2));
+	i_phMdl->WriteItemR( MDW_ATRCD_HAITIEN_PTCMNT1, (MREAL*)&m_ptCmnt1, sizeof(MgPoint2D));
 																				// 注記表示位置
 	MCHAR	cMemBerCode[16];
 	Mstrcpy_s( cMemBerCode, GetMbCdMbrW());										// 寸法型式 (書き込み用　通常m_cCodeと同じ VerUp時に変更した内容が入る)
@@ -153,7 +153,7 @@ MINT mhPlcParts::Load(							//
 	bool		fPlcSzChk = true;
 	bool		fRoofSzChk = true;
 
-	MgVect3		vLnPlc;
+	MgVect3D		vLnPlc;
 	
 	bool		bEor = false;
 
@@ -212,16 +212,16 @@ MINT mhPlcParts::Load(							//
 				MBFREE( pcMbr);
 				break;
 			case MDR_ATRCD_HAITIEN_LNHAITI:										// 配置点、配置方向点
-				ASSERT( iSize == sizeof(MgLine3));
-				m_lnPlc = *(MgLine3*)pEnt;
+				ASSERT( iSize == sizeof(MgLine3D));
+				m_lnPlc = *(MgLine3D*)pEnt;
 				vLnPlc = m_lnPlc.p[1] - m_lnPlc.p[0];
 				vLnPlc.SetUnitize();
-				m_vUpPlc = vLnPlc ^ MgVect3( 0., 0., 1.);
+				m_vUpPlc = vLnPlc ^ MgVect3D( 0., 0., 1.);
 				MBFREE( pEnt);
 				break;
 			case MDR_ATRCD_HAITIEN_PTUPHAITI:									// 上方向
-				ASSERT( iSize == sizeof(MgPoint3));
-				m_vUpPlc = *(MgVect3*)pEnt;
+				ASSERT( iSize == sizeof(MgPoint3D));
+				m_vUpPlc = *(MgVect3D*)pEnt;
 				MBFREE( pEnt);
 				break;
 			case MDR_ATRCD_HAITIEN_RSINZURE:									// 材軸芯ずれ量
@@ -296,7 +296,7 @@ MINT mhPlcParts::Load(							//
 				break;
 			case MDR_ATRCD_HAITIEN_ZUKEI:
 				*ppZukei = (MhZukei*)pEnt;
-				iSzZukei = sizeof( MhZukei) + sizeof( MgLine3) * ( (*ppZukei)->m_isNZukei - 1);
+				iSzZukei = sizeof( MhZukei) + sizeof( MgLine3D) * ( (*ppZukei)->m_isNZukei - 1);
 				ASSERT( iSize == iSzZukei);
 				SetPIZukei( *ppZukei);
 				GetPIZukei()->m_pNext = 0;
@@ -312,7 +312,7 @@ MINT mhPlcParts::Load(							//
 				ASSERT( iSize == sizeof( MSHORT));
 				iNZukei = *( MSHORT*)pEnt;
 				MBFREE( pEnt);
-				iSzZukei = sizeof( MhZukei) + sizeof( MgLine3) * ( iNZukei - 1);
+				iSzZukei = sizeof( MhZukei) + sizeof( MgLine3D) * ( iNZukei - 1);
 				*ppZukei = (MhZukei*)new char[iSzZukei];
 				(*ppZukei)->m_isNZukei = iNZukei;
 				MBFREE( pEnt);
@@ -376,7 +376,7 @@ MINT MhZukei::Save(
 	i_phMdl->WriteItemIB( MDW_ATRCD_HAITIEN_ZUKEI_OBJ, &ibObj);					// 使用目的
 	MUBYTE	ibTp = m_ibTp;
 	i_phMdl->WriteItemIB( MDW_ATRCD_HAITIEN_ZUKEI_TP, &ibTp);					// 図形データタイプ
-	iSzZukei = m_isNZukei * sizeof( MgLine3);
+	iSzZukei = m_isNZukei * sizeof( MgLine3D);
 	i_phMdl->WriteItems( MDW_ATRCD_HAITIEN_ZUKEI_ST, m_lnZukei, iSzZukei);
 
 	i_phMdl->WriteItemI( MDW_ATRCD_HAITIEN_ZUKEI_EOR, &iDumy);					// 図形情報終了
@@ -431,7 +431,7 @@ MINT MhZukei::Load(								//
 				MBFREE( pEnt);
 				break;
 			case MDW_ATRCD_HAITIEN_ZUKEI_BUF:									// 図形(線分)
-				ASSERT( iSize == m_isNZukei * sizeof( MgLine3));
+				ASSERT( iSize == m_isNZukei * sizeof( MgLine3D));
 				memcpy( m_lnZukei, pEnt, iSize);
 				MBFREE( pEnt);
 				break;

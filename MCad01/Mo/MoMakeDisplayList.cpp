@@ -40,8 +40,8 @@ namespace MC
 	void MdlDispList::TateguHole(
 						mhPlcParts	*i_pPlcEn,		// 壁またはNULL
 						mhPlcParts	*pPlcTEn,		// 建具
-						MgPolyg3	*PgR,			// 壁右面開口
-						MgPolyg3	*PgL			// 壁左面開口
+						MgPolyg3D	*PgR,			// 壁右面開口
+						MgPolyg3D	*PgL			// 壁左面開口
 				)
 {
 	MGPOLYG3( PgW, 4);
@@ -50,17 +50,17 @@ namespace MC
 
 	MREAL		rZU, rZL;
 
-	MgPoint2	ptW[2];
-	MgLine2		lnK[2];
-	MgLine3		LnK[2];
-	MgLine3		LnKL[2];
-	MgLine3		LnKR[2];
-	MgVect2		vtW;
-	MgVect2		vuW;
-	MgVect2		vtWidthR;
-	MgVect2		vtWidth;
+	MgPoint2D	ptW[2];
+	MgLine2D		lnK[2];
+	MgLine3D		LnK[2];
+	MgLine3D		LnKL[2];
+	MgLine3D		LnKR[2];
+	MgVect2D		vtW;
+	MgVect2D		vuW;
+	MgVect2D		vtWidthR;
+	MgVect2D		vtWidth;
 	MINT		iRev;
-	MgVect3		V1, V2;
+	MgVect3D		V1, V2;
 	MREAL		cc;
 
 	// 開口の上端高さと下端高さを求める
@@ -68,8 +68,8 @@ namespace MC
 	rZU = mcs::GetStnd( pPlcTEn->GetPIKai(), MM_STNDH_LOWER) + pAuxTategu->GetHeight();
 	rZL = rZU - pAuxTategu->GetROH();
 
-	ptW[0] = (MgPoint2&)pPlcTEn->GetPIPlcIti( 0);
-	ptW[1] = (MgPoint2&)pPlcTEn->GetPIPlcIti( 1);
+	ptW[0] = (MgPoint2D&)pPlcTEn->GetPIPlcIti( 0);
+	ptW[1] = (MgPoint2D&)pPlcTEn->GetPIPlcIti( 1);
 	vtW = ptW[1] - ptW[0];
 	vuW = MGeo::UnitizeV2( vtW);
 	vtWidthR = pPlcTEn->GetMbWidthR() * vuW.RotR90(); 
@@ -98,17 +98,17 @@ namespace MC
 
 	// 右側開口多角形を求める
 	PgR->m_n = 4;
-	PgR->m_P[3] = MgPoint3C( lnK[0].p[1], rZL);
-	PgR->m_P[2] = MgPoint3C( lnK[0].p[1], rZU);
-	PgR->m_P[1] = MgPoint3C( lnK[0].p[0], rZU);
-	PgR->m_P[0] = MgPoint3C( lnK[0].p[0], rZL);
+	PgR->m_P[3] = MgPoint3DC( lnK[0].p[1], rZL);
+	PgR->m_P[2] = MgPoint3DC( lnK[0].p[1], rZU);
+	PgR->m_P[1] = MgPoint3DC( lnK[0].p[0], rZU);
+	PgR->m_P[0] = MgPoint3DC( lnK[0].p[0], rZL);
 
 	// 左側開口多角形を求める
 	PgL->m_n = 4;
-	PgL->m_P[0] = MgPoint3C( lnK[1].p[1], rZL);
-	PgL->m_P[1] = MgPoint3C( lnK[1].p[1], rZU);
-	PgL->m_P[2] = MgPoint3C( lnK[1].p[0], rZU);
-	PgL->m_P[3] = MgPoint3C( lnK[1].p[0], rZL);
+	PgL->m_P[0] = MgPoint3DC( lnK[1].p[1], rZL);
+	PgL->m_P[1] = MgPoint3DC( lnK[1].p[1], rZU);
+	PgL->m_P[2] = MgPoint3DC( lnK[1].p[0], rZU);
+	PgL->m_P[3] = MgPoint3DC( lnK[1].p[0], rZL);
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -122,20 +122,20 @@ namespace MC
 void MdlDispList::DrawTategu(
 						mhPlcParts	*i_pPlcEn,		// 壁またはNULL
 						mhPlcParts	*pPlcTEn,		// 建具
-				const	MgPoint3	&PtCtr,			// 構造家モデルの中心
+				const	MgPoint3D	&PtCtr,			// 構造家モデルの中心
 						MREAL		rB				// ３次元表示倍率
 				)
 {
 	MGPOLYG3( PgR, 4);
 	MGPOLYG3( PgL, 4);
 	MINT	ic1b, ic1;
-	MgLine3	LnKR, LnKL;
+	MgLine3D	LnKR, LnKL;
 
 	TateguHole( i_pPlcEn, pPlcTEn, &PgR, &PgL);
 
 	for ( ic1b=0,ic1=PgR.m_n - 1; ic1>=0; ic1b=ic1,ic1--) {
-		LnKR = MgLine3( PgR[ic1b], PgR[ic1]);
-		LnKL = MgLine3( PgL[3 - ic1b], PgL[3 - ic1]);
+		LnKR = MgLine3D( PgR[ic1b], PgR[ic1]);
+		LnKL = MgLine3D( PgL[3 - ic1b], PgL[3 - ic1]);
 		DispList::DspQuads( DPtoDSP( LnKR, 0., PtCtr, rB), DPtoDSP( LnKL, 0., PtCtr, rB));
 	}
 }
@@ -145,27 +145,27 @@ void MdlDispList::DrawTategu(
 //			
 void MdlDispList::DrawKiso(
 						mhPlcParts	*i_pPlcEn,		// 基礎
-				const	MgPoint3	&PtCtr,			// 構造家モデルの中心
+				const	MgPoint3D	&PtCtr,			// 構造家モデルの中心
 						MREAL		rB				// ３次元表示倍率
 				)
 {
 	MREAL		rZU, rZL;
 	MINT		ic1;
 
-	MgLine3		LnKiso0;
-	MgVect3		vuLnKiso0;
-	MgLine3		LnKiso1, LnKiso2;
-	MgLine3		LnKiso3;
+	MgLine3D		LnKiso0;
+	MgVect3D		vuLnKiso0;
+	MgLine3D		LnKiso1, LnKiso2;
+	MgLine3D		LnKiso3;
 	MREAL		dl;
 
 	MGPOLYG3( PgW, 4);
 	MGPOLYG3( PgR, 4);
 	MGPOLYG3( PgL, 4);
-	MgGPolyg3	GPgR;
-	MgGPolyg3	GPgL;
+	MgGPolyg3D	GPgR;
+	MgGPolyg3D	GPgL;
 
-	rZU = mcs::GetStnd( i_pPlcEn->GetPIKai(), MM_STNDH_KISO);			// 基礎基準
-	rZL = 0.;																	// グランド
+	rZU = mcs::GetStnd( i_pPlcEn->GetPIKai(), MM_STNDH_KISO);	// 基礎基準
+	rZL = 0.;													// グランド
 	LnKiso0 = i_pPlcEn->GetPIPlcIti();
 	vuLnKiso0 = LnKiso0.Vu();
 	LnKiso1 = i_pPlcEn->GetPIZukei()->m_lnZukei[0];				// 右側基礎面線分
@@ -173,18 +173,18 @@ void MdlDispList::DrawKiso(
 
 	// 右側基礎面
 	PgW.m_n = 4;
-	PgW[0] = MgPoint3C( MgPoint2C( LnKiso1.p[0]), rZL);
-	PgW[1] = MgPoint3C( MgPoint2C( LnKiso1.p[1]), rZL);
-	PgW[2] = MgPoint3C( MgPoint2C( LnKiso1.p[1]), rZU);
-	PgW[3] = MgPoint3C( MgPoint2C( LnKiso1.p[0]), rZU);
+	PgW[0] = MgPoint3DC( MgPoint2DC( LnKiso1.p[0]), rZL);
+	PgW[1] = MgPoint3DC( MgPoint2DC( LnKiso1.p[1]), rZL);
+	PgW[2] = MgPoint3DC( MgPoint2DC( LnKiso1.p[1]), rZU);
+	PgW[3] = MgPoint3DC( MgPoint2DC( LnKiso1.p[0]), rZU);
 	GPgR += PgW;
 
 	// 左側基礎面
 	PgW.m_n = 4;
-	PgW[0] = MgPoint3C( MgPoint2C( LnKiso2.p[0]), rZL);
-	PgW[1] = MgPoint3C( MgPoint2C( LnKiso2.p[1]), rZL);
-	PgW[2] = MgPoint3C( MgPoint2C( LnKiso2.p[1]), rZU);
-	PgW[3] = MgPoint3C( MgPoint2C( LnKiso2.p[0]), rZU);
+	PgW[0] = MgPoint3DC( MgPoint2DC( LnKiso2.p[0]), rZL);
+	PgW[1] = MgPoint3DC( MgPoint2DC( LnKiso2.p[1]), rZL);
+	PgW[2] = MgPoint3DC( MgPoint2DC( LnKiso2.p[1]), rZU);
+	PgW[3] = MgPoint3DC( MgPoint2DC( LnKiso2.p[0]), rZU);
 	GPgL += PgW;
 
 	DispList::DrawPolygon( GPgR, PtCtr, rB);
@@ -235,21 +235,21 @@ void MdlDispList::DrawKiso(
 //			
 void MdlDispList::DrawTatewaku( 
 						mhPlcParts	*i_pPlcEn,
-				const	MgPoint3	&PtCtr,
+				const	MgPoint3D	&PtCtr,
 						MREAL		rB
 				)
 {
 	MREAL		rZ1, rZ2;
-	MgLine3		LnPlc;
-	MgLine3		LnBz;
+	MgLine3D		LnPlc;
+	MgLine3D		LnBz;
 	MREAL		rW1, rH1;
 
-	MgVect3		VtHoko, VtRt, VtUp;					// 部材の配置方向ベクトル、右方向ベクトル、上方向ベクトル
-	MgVect3		VuHoko, VuRt, VuUp;					// 部材の配置方向単位ベクトル、右方向単位ベクトル、上方向単位ベクトル
-	MgVect3		VtHzSz;								// 配置点ずれ + 材軸芯ずれ
+	MgVect3D		VtHoko, VtRt, VtUp;					// 部材の配置方向ベクトル、右方向ベクトル、上方向ベクトル
+	MgVect3D		VuHoko, VuRt, VuUp;					// 部材の配置方向単位ベクトル、右方向単位ベクトル、上方向単位ベクトル
+	MgVect3D		VtHzSz;								// 配置点ずれ + 材軸芯ずれ
 	MREAL		rHgt1, rHgt2;
 
-	MgPoint3	PT[2][2][2];						// 頂点座標
+	MgPoint3D	PT[2][2][2];						// 頂点座標
 
 	rZ1 = mcs::GetStnd( i_pPlcEn->GetPIKai(), MM_STNDH_LOWER);
 	rZ2 = mcs::GetStnd( i_pPlcEn->GetPIKai(), MM_STNDH_CEILING);
@@ -264,14 +264,14 @@ void MdlDispList::DrawTatewaku(
 			 i_pPlcEn->GetPISinZure() * VuHoko.RotR90();
 	
 	rHgt1 = i_pPlcEn->GetPIHgt( 0);												// 下端高さ
-	LnPlc.p[0] = MgPoint3C( MgPoint2C( LnPlc.p[0] + VtHzSz), rHgt1);
+	LnPlc.p[0] = MgPoint3DC( MgPoint2DC( LnPlc.p[0] + VtHzSz), rHgt1);
 	rHgt2 = i_pPlcEn->GetPIHgt( 1);												// 上端高さ
 	if ( MGeo::LE( rHgt2, 0.)) {
 		rHgt2 = rZ2 - rZ1 + rHgt2;
 	} else {
 		rHgt2 = rHgt2;
 	}
-	LnPlc.p[1] = MgPoint3C( MgPoint2C( LnPlc.p[0]), rHgt2);
+	LnPlc.p[1] = MgPoint3DC( MgPoint2DC( LnPlc.p[0]), rHgt2);
 
 	LnBz = DPtoDSP( LnPlc, rZ1, PtCtr, rB);
 	rW1 = (i_pPlcEn->GetMbTWidth() - 0.2f) * rB;
@@ -285,10 +285,10 @@ void MdlDispList::DrawTatewaku(
 	//PT[0][0][1].Set( PT[0][0][0] + VtUp);						//
 	//PT[0][1][0].Set( PT[0][0][0] - VtRt);						//
 	//PT[0][1][1].Set( PT[0][0][1] - VtRt);						//
-	//PT[1][0][0].Set( PT[0][0][0] + VtHoko);						//
-	//PT[1][0][1].Set( PT[0][0][1] + VtHoko);						//
-	//PT[1][1][0].Set( PT[0][1][0] + VtHoko);						//
-	//PT[1][1][1].Set( PT[0][1][1] + VtHoko);						//
+	//PT[1][0][0].Set( PT[0][0][0] + VtHoko);					//
+	//PT[1][0][1].Set( PT[0][0][1] + VtHoko);					//
+	//PT[1][1][0].Set( PT[0][1][0] + VtHoko);					//
+	//PT[1][1][1].Set( PT[0][1][1] + VtHoko);					//
 	PT[0][0][0] = LnBz.p[0] + VtRt * 0.5;						// 下付け材
 	PT[0][0][1] = PT[0][0][0] + VtUp;							//
 	PT[0][1][0] = PT[0][0][0] - VtRt;							//
@@ -306,22 +306,22 @@ void MdlDispList::DrawTatewaku(
 //			
 void MdlDispList::DrawOukaZai( 
 						mhPlcParts	*i_pPlcEn,
-				const	MgPoint3	&PtCtr,
+				const	MgPoint3D	&PtCtr,
 						MREAL		rB
 				)
 {
 	MSTNDH		iCdHgt;
-	MINT		iULCd;								// 上下付けコード (0:下付け, 1:上付け)
+	MINT		iULCd;							// 上下付けコード (0:下付け, 1:上付け)
 	MREAL		rZ;
-	MgLine3		LnPlc;
-	MgLine3		LnBz;
+	MgLine3D	LnPlc;
+	MgLine3D	LnBz;
 	MREAL		rW1, rH1;
 
-	MgVect3		VtLng, VtRt, VtUp;					// 部材の長さ方向ベクトル、右方向ベクトル、上方向ベクトル
-	MgVect3		VuLng, VuRt, VuUp;					// 部材の長さ方向単位ベクトル、右方向単位ベクトル、上方向単位ベクトル
-	MgVect3		VtTkSz;								// 取り付け高さ + 材軸芯ずれ
+	MgVect3D	VtLng, VtRt, VtUp;				// 部材の長さ方向ベクトル、右方向ベクトル、上方向ベクトル
+	MgVect3D	VuLng, VuRt, VuUp;				// 部材の長さ方向単位ベクトル、右方向単位ベクトル、上方向単位ベクトル
+	MgVect3D	VtTkSz;							// 取り付け高さ + 材軸芯ずれ
 
-	MgPoint3	PT[2][2][2];						// 頂点座標
+	MgPoint3D	PT[2][2][2];					// 頂点座標
 
 	iCdHgt = i_pPlcEn->GetPTCdHgt();
 	iULCd = i_pPlcEn->GetPTCdToritk();
@@ -354,10 +354,10 @@ void MdlDispList::DrawOukaZai(
 	//PT[0][0][1].Set( PT[0][0][0] + VtUp);						//
 	//PT[0][1][0].Set( PT[0][0][0] - VtRt);						//
 	//PT[0][1][1].Set( PT[0][0][1] - VtRt);						//
-	//PT[1][0][0].Set( PT[0][0][0] + VtLng);						//
-	//PT[1][0][1].Set( PT[0][0][1] + VtLng);						//
-	//PT[1][1][0].Set( PT[0][1][0] + VtLng);						//
-	//PT[1][1][1].Set( PT[0][1][1] + VtLng);						//
+	//PT[1][0][0].Set( PT[0][0][0] + VtLng);					//
+	//PT[1][0][1].Set( PT[0][0][1] + VtLng);					//
+	//PT[1][1][0].Set( PT[0][1][0] + VtLng);					//
+	//PT[1][1][1].Set( PT[0][1][1] + VtLng);					//
 	if ( iULCd == 0) 
 		PT[0][0][0] = LnBz.p[0] + VtRt * 0.5;					// 下付け材
 	else
@@ -379,24 +379,24 @@ void MdlDispList::DrawOukaZai(
 //			
 void MdlDispList::DrawKaiko( 
 						mhPlcParts *i_pPlcEn,
-				const	MgPoint3	&PtCtr,
+				const	MgPoint3D	&PtCtr,
 						MREAL		rB
 				)
 {
 	MSTNDH		iCdHgt;
-	MINT		iULCd;								// 上下付けコード (0:下付け, 1:上付け)
+	MINT		iULCd;							// 上下付けコード (0:下付け, 1:上付け)
 	MREAL		rZ;
-	MgLine3		LnPlc;
-	MgLine3		LnBz;
+	MgLine3D	LnPlc;
+	MgLine3D	LnBz;
 	MREAL		rH1, rTH, rOY;
 
-	MgVect3		VtLng, VtRt, VtUp;					// 部材の長さ方向ベクトル、右方向ベクトル、上方向ベクトル
-	MgVect3		VuLng, VuRt, VuUp;					// 部材の長さ方向単位ベクトル、右方向単位ベクトル、上方向単位ベクトル
-	MgVect3		VtTkH;								// 取り付け高さ
-	MgVect3		VtTH, VtOY;							// 手前側補正値、奥行き
-	MgPoint3	PT[2][2][2];						// 頂点座標
-	MgVect2		vuRt;								// 屋根パネル用奥行き方向２次元ベクトル
-	MREAL		rlXY;								// 屋根パネル用奥行き方向２次元ベクトルのXY平面上長さ
+	MgVect3D	VtLng, VtRt, VtUp;				// 部材の長さ方向ベクトル、右方向ベクトル、上方向ベクトル
+	MgVect3D	VuLng, VuRt, VuUp;				// 部材の長さ方向単位ベクトル、右方向単位ベクトル、上方向単位ベクトル
+	MgVect3D	VtTkH;							// 取り付け高さ
+	MgVect3D	VtTH, VtOY;						// 手前側補正値、奥行き
+	MgPoint3D	PT[2][2][2];					// 頂点座標
+	MgVect2D	vuRt;							// 屋根パネル用奥行き方向２次元ベクトル
+	MREAL		rlXY;							// 屋根パネル用奥行き方向２次元ベクトルのXY平面上長さ
 	
 	iCdHgt = (MSTNDH)i_pPlcEn->GetPICdHgt();
 	iULCd = i_pPlcEn->GetPTCdToritk();
@@ -410,7 +410,7 @@ void MdlDispList::DrawKaiko(
 	else {
 		MREAL r1_D = 1.f / sqrt( VuLng.x * VuLng.x + VuLng.y * VuLng.y);
 //		VuRt.Set( VuLng.y * r1_D, - VuLng.x * r1_D, 0.f);
-		VuRt = MgVect3( VuLng.y * r1_D, - VuLng.x * r1_D, 0.f);
+		VuRt = MgVect3D( VuLng.y * r1_D, - VuLng.x * r1_D, 0.f);
 	}
 	VuUp = i_pPlcEn->GetPIUpPlc();
 	VuRt = VuLng ^ VuUp;
@@ -426,7 +426,7 @@ void MdlDispList::DrawKaiko(
 	rOY = (i_pPlcEn->GetPIMaeHosei() + i_pPlcEn->GetPIOku() +
 		   i_pPlcEn->GetPIOkuHosei()) * rB;						// パネル手前側補正値 + 奥行長 + 奥側補正値
 	if ( i_pPlcEn->IsYanePanel()) {
-		vuRt = MgVect2C( VuRt);
+		vuRt = MgVect2DC( VuRt);
 		rlXY = MGeo::Abs( vuRt);
 		if ( !MGeo::Zero( rlXY)) {
 			rTH /= rlXY;
@@ -447,10 +447,10 @@ void MdlDispList::DrawKaiko(
 	//PT[0][0][1].Set( PT[0][0][0] + VtUp);						//
 	//PT[0][1][0].Set( PT[0][0][0] - VtOY);						//
 	//PT[0][1][1].Set( PT[0][0][1] - VtOY);						//
-	//PT[1][0][0].Set( PT[0][0][0] + VtLng);						//
-	//PT[1][0][1].Set( PT[0][0][1] + VtLng);						//
-	//PT[1][1][0].Set( PT[0][1][0] + VtLng);						//
-	//PT[1][1][1].Set( PT[0][1][1] + VtLng);						//
+	//PT[1][0][0].Set( PT[0][0][0] + VtLng);					//
+	//PT[1][0][1].Set( PT[0][0][1] + VtLng);					//
+	//PT[1][1][0].Set( PT[0][1][0] + VtLng);					//
+	//PT[1][1][1].Set( PT[0][1][1] + VtLng);					//
 	if ( iULCd == 0) 
 		PT[0][0][0] = LnBz.p[0] + VtTH;							// 下付け材
 	else

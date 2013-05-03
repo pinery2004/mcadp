@@ -22,39 +22,39 @@ namespace MC
 {
 
 //
-//static MgMinMaxI2	McMinMaxIN	= MgMinMaxI2( 0, 0, 1, 1);
-//static MgMinMaxR2	McMinMaxRN	= MgMinMaxR2( 0.0f, 0.0f, 1.0f, 1.0f);
-//static MgMinMaxR3 McMinMaxR3N = MgMinMaxR3( 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);
-//static MgRect2	McRectN		= MgRect2( 0.0f, 0.0f, 1.0f, 1.0f);
-//static MgRect3	McRect3N	= MgRect3( 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);
+//static MgMinMaxI2D	McMinMaxIN	= MgMinMaxI2D( 0, 0, 1, 1);
+//static MgMinMaxR2D	McMinMaxRN	= MgMinMaxR2D( 0.0f, 0.0f, 1.0f, 1.0f);
+//static MgMinMaxR3D McMinMaxR3N = MgMinMaxR3D( 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);
+//static MgRect2D	McRectN		= MgRect2D( 0.0f, 0.0f, 1.0f, 1.0f);
+//static MgRect3D	McRect3N	= MgRect3D( 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);
 //
 //======================( ÇQéüå≥ )==============================
 //		ÇlÇhÇmÅ^ÇlÇ`ÇwÇ…íPà í∑ï˚å`Çê›íËÇ∑ÇÈ
 //
-void MgMinMaxI2::SetUnit()	{ *this = MgMinMaxI2( 0, 0, 1, 1);}
-void MgMinMaxI2::SetInit()	{ *this = MgMinMaxI2( INT_MAX, INT_MAX, INT_MIN, INT_MIN);}
+void MgMinMaxI2D::SetUnit()	{ *this = MgMinMaxI2D( 0, 0, 1, 1);}
+void MgMinMaxI2D::SetInit()	{ *this = MgMinMaxI2D( INT_MAX, INT_MAX, INT_MIN, INT_MIN);}
 //
-void MgMinMaxR2::SetUnit()	{ *this = MgMinMaxR2( 0.0f, 0.0f, 1.0f, 1.0f);}
-void MgMinMaxR2::SetInit()	{ *this = MgMinMaxR2( MREALMAX, MREALMAX, MREALMIN, MREALMIN);}
+void MgMinMaxR2D::SetUnit()	{ *this = MgMinMaxR2D( 0.0f, 0.0f, 1.0f, 1.0f);}
+void MgMinMaxR2D::SetInit()	{ *this = MgMinMaxR2D( MREALMAX, MREALMAX, MREALMIN, MREALMIN);}
 //
 //======================( ÇRéüå≥ )==============================
 //		ÇlÇhÇmÅ^ÇlÇ`ÇwÇ…íPà íºï˚ëÃÇê›íËÇ∑ÇÈ
 //
-void MgMinMaxR3::SetUnit()	{ *this = MgMinMaxR3( 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);}
-void MgMinMaxR3::SetInit()	{ *this = MgMinMaxR3( MREALMAX, MREALMAX, MREALMAX, MREALMIN, MREALMIN, MREALMIN);}
+void MgMinMaxR3D::SetUnit()	{ *this = MgMinMaxR3D( 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);}
+void MgMinMaxR3D::SetInit()	{ *this = MgMinMaxR3D( MREALMAX, MREALMAX, MREALMAX, MREALMIN, MREALMIN, MREALMIN);}
 //
 //======================( ÇQéüå≥ )==============================
 //		íPà í∑ï˚å`Çê›íËÇ∑ÇÈ
 //
-void MgRect2::SetUnit()		{ *this = MgRect2( 0.0f, 0.0f, 1.0f, 1.0f);}
+void MgRect2D::SetUnit()		{ *this = MgRect2D( 0.0f, 0.0f, 1.0f, 1.0f);}
 //
 //======================( ÇQéüå≥ )==============================
 //		í∑ï˚å`ÇÉgÉåÅ[ÉXÇ∑ÇÈ
 //
-void MgRect2::Print(MCHAR* s)														// print
+void MgRect2D::Print(MCHAR* s)														// print
 {
 //#ifdef LOGOUT
-//	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgRect2	= %f, %f, %f, %f\n"),
+//	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgRect2D	= %f, %f, %f, %f\n"),
 //							s, p[0].x, p[0].y, p[1].x, p[1].y);
 //	MBLOGPRBF;
 //	mlLog::Trace( mlLog::m_Str);
@@ -64,15 +64,15 @@ void MgRect2::Print(MCHAR* s)														// print
 //======================( ÇRéüå≥ )==============================
 //		íPà íºï˚ëÃÇê›íËÇ∑ÇÈ
 //
-void MgRect3::SetUnit()		{ *this = MgRect3( 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);}
+void MgRect3D::SetUnit()		{ *this = MgRect3D( 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);}
 //
 //======================( ÇRéüå≥ )==============================
 //		íºï˚ëÃÇÉgÉåÅ[ÉXÇ∑ÇÈ
 //
-void MgRect3::Print(MCHAR* s)														// print
+void MgRect3D::Print(MCHAR* s)														// print
 {
 //#ifdef LOGOUT
-//	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgRect2	= %f, %f, %f, %f, %f, %f\n"),
+//	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgRect2D	= %f, %f, %f, %f, %f, %f\n"),
 //							s, p[0].x, p[0].y, p[0].z, 
 //							   p[1].x, p[1].y, p[1].z);
 //	MBLOGPRBF;

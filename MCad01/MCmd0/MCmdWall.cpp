@@ -91,10 +91,10 @@ void MCmdNaiTate()
 void MCmdLineW()
 {
 	MINT		irt;
-	MgPoint2	pt1, pt2;
-	MgPoint2	ptln1[3], ptln1_org[3];
-	MgLine3		Ln1;
-	MgPolyg2	pg1(20);
+	MgPoint2D	pt1, pt2;
+	MgPoint2D	ptln1[3], ptln1_org[3];
+	MgLine3D		Ln1;
+	MgPolyg2D	pg1(20);
 	MINT		iIdPartsSpec;
 	mhPartsSpec*	pPartsSpec;
 
@@ -124,7 +124,7 @@ void MCmdLineW()
 	MFOREVER {
 		iMode = 0;
 		irt = mhInput::GetLen2Pt( iMode, ptln1, ptln1_org);
-		Ln1 = MgLine3C( MgLine2( ptln1));
+		Ln1 = MgLine3DC( MgLine2D( ptln1));
 
 		if ( irt == MTRT_SYSTEMSTOP || irt == MTRT_CAN)
 			break;

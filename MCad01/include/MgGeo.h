@@ -55,7 +55,7 @@ public:
 						{return (x < tol && x > -tol);}
 	static bool Equal(MREAL x, MREAL y, MREAL tol = MGPTOL->D)
 						{return (x - y < tol && y - x < tol);}
-	static bool EQ(MREAL x, MREAL y, MREAL tol = MGPTOL->D)					// MgEqual‚Æ“¯‚¶
+	static bool EQ(MREAL x, MREAL y, MREAL tol = MGPTOL->D)							// MgEqual‚Æ“¯‚¶
 						{return (x - y < tol && y - x < tol);}
 	static bool LT(MREAL x, MREAL y, MREAL tol = MGPTOL->D)
 						{return (x < y - tol);}
@@ -67,145 +67,145 @@ public:
 						{return (x >= y - tol);}
 
 	//======================( ‚QŸŒ³ )==============================
-	// MgVect2, MgPoint2
+	// MgVect2D, MgPoint2D
 
-	static MREAL Abs_2( const MgVect2& v)											// ƒxƒNƒgƒ‹‚Ì’·‚³‚Ì‚Qæ	Abs**2
+	static MREAL Abs_2( const MgVect2D& v)											// ƒxƒNƒgƒ‹‚Ì’·‚³‚Ì‚Qæ	Abs**2
 				 		{ return ( v.x*v.x+v.y*v.y);}
-	static MREAL Abs( const MgVect2& v)												// ƒxƒNƒgƒ‹‚Ì’·‚³		ABS
+	static MREAL Abs( const MgVect2D& v)											// ƒxƒNƒgƒ‹‚Ì’·‚³		ABS
 				 		{ return (MREAL)sqrt( v.x*v.x+v.y*v.y);}
-	static MREAL Dist_2( const MgPoint2& P1, const MgPoint2& P2)					// ‚Q“_ŠÔ‚Ì‹——£‚Ì‚Qæ MgDist**2
+	static MREAL Dist_2( const MgPoint2D& P1, const MgPoint2D& P2)					// ‚Q“_ŠÔ‚Ì‹——£‚Ì‚Qæ MgDist**2
 						{ return ( (P2.x-P1.x)*(P2.x-P1.x)+
 								   (P2.y-P1.y)*(P2.y-P1.y));}
-	static MREAL Dist( const MgPoint2& P1, const MgPoint2& P2)						// ‚Q“_ŠÔ‚Ì‹——£
+	static MREAL Dist( const MgPoint2D& P1, const MgPoint2D& P2)					// ‚Q“_ŠÔ‚Ì‹——£
 						{ return (MREAL)sqrt( (P2.x-P1.x)*(P2.x-P1.x)+
 											   (P2.y-P1.y)*(P2.y-P1.y));}
-	static bool Zero( const MgVect2& v1)											// P1 == (0.,0.)	”»’è
+	static bool Zero( const MgVect2D& v1)											// P1 == (0.,0.)	”»’è
 						{ return Abs_2( v1) <= g_gTol.D_2;}
-	static bool Zero( const MgVect2& v1, MREAL tol)									// P1 == (0.,0.)	Œë·w’è‚Ì”»’è
+	static bool Zero( const MgVect2D& v1, MREAL tol)								// P1 == (0.,0.)	Œë·w’è‚Ì”»’è
 						{ return Abs_2( v1) <= tol * tol;}
-	static bool Equal( const MgVect2& v1, const MgVect2& v2)						// P1 == P2 		”»’è
-				 		{ MgVect2 vt = v2 - v1; return Abs_2( vt) <= g_gTol.D_2;}
-	static bool EqualV( const MgVect2& v1, const MgVect2& v2)						// V1 == V2 		ƒxƒNƒgƒ‹Œ^®‚ÌŠp“x‚Ì“™†”»’è
-				 		{ MgVect2 vt = v2 - v1; return Abs_2( vt) <= g_gTol.A_2;}
-	static bool Equal( const MgVect2& v1, const MgVect2& v2, MREAL tol)				// P1 == P2			Œë·w’è‚Ì”»’è
-				 		{ MgVect2 vt = v2 - v1; return Abs_2( vt) <= tol * tol;}
-	static bool Parallel( const MgVect2& v1, const MgVect2& v2)						// V1‚ÆV2‚ª•½s‚Å‚ ‚é‚©‚ğŠm”F
+	static bool Equal( const MgVect2D& v1, const MgVect2D& v2)						// P1 == P2 		”»’è
+				 		{ MgVect2D vt = v2 - v1; return Abs_2( vt) <= g_gTol.D_2;}
+	static bool EqualV( const MgVect2D& v1, const MgVect2D& v2)						// V1 == V2 		ƒxƒNƒgƒ‹Œ^®‚ÌŠp“x‚Ì“™†”»’è
+				 		{ MgVect2D vt = v2 - v1; return Abs_2( vt) <= g_gTol.A_2;}
+	static bool Equal( const MgVect2D& v1, const MgVect2D& v2, MREAL tol)			// P1 == P2			Œë·w’è‚Ì”»’è
+				 		{ MgVect2D vt = v2 - v1; return Abs_2( vt) <= tol * tol;}
+	static bool Parallel( const MgVect2D& v1, const MgVect2D& v2)					// V1‚ÆV2‚ª•½s‚Å‚ ‚é‚©‚ğŠm”F
 				 		{ MREAL ro = v1 ^ v2; MREAL ri = v1 * v2;
 						  if( ro < 0) ro = - ro; if(ri < 0) ri = -ri;
 						  return (ro <= ri * g_gTol.A);}
-	static bool Parallel( const MgVect2& v1, const MgVect2& v2, MREAL* so, MREAL* si)	// V1‚ÆV2‚ª•½s‚Å‚ ‚é‚©‚ğŠm”F‚µAŠOÏ‚Æ“àÏ‚ğo—Í
+	static bool Parallel( const MgVect2D& v1, const MgVect2D& v2, MREAL* so, MREAL* si)	// V1‚ÆV2‚ª•½s‚Å‚ ‚é‚©‚ğŠm”F‚µAŠOÏ‚Æ“àÏ‚ğo—Í
 				 		{ MREAL ro = v1 ^ v2; MREAL ri = v1 * v2;
 				 		  *so = ro; *si = ri;
 						  if (ro < 0) ro = - ro; if (ri < 0) ri = -ri;
 						  return (ro <= ri * g_gTol.A);}
-	static void SVal( const MgPoint2& ps, const MgPoint2& pe, const MgPoint2& p1, const MgVect2& v1,
+	static void SVal( const MgPoint2D& ps, const MgPoint2D& pe, const MgPoint2D& p1, const MgVect2D& v1,
 						MREAL* ss, MREAL* se)
 																					// ’¼ü(p1,v1)‚Æü•ª(ps, pe)‚ÌŒğ“_‚ğ‹‚ß‚é‚Ì‚Ég—p‰Â”\
 																					// ss = ’¼ü(p1,v1)‚©‚ç“_ps‚Ö‚Ì‚’¼‹——£
 																					// se = ’¼ü(p1,v1)‚©‚ç“_pe‚Ö‚Ì‚’¼‹——£
 						{ *ss = (v1 ^ (ps - p1));									// ü•ª2‚Ìn“_‘¤S
 						  *se = (v1 ^ (pe - p1));}									// ü•ª2‚ÌI“_‘¤S
-	static MgVect2 UnitizeV2( const MgVect2& v1, MREAL i_Tol = g_gTol.D	);			// ’·‚³‚P‚É³‹K‰»‚·‚é
+	static MgVect2D UnitizeV2( const MgVect2D& v1, MREAL i_Tol = g_gTol.D	);		// ’·‚³‚P‚É³‹K‰»‚·‚é
 
-	static MgVect2 RotL90( const MgVect2& v1)										// ¶90K‰ñ“]
-						{ return	MgVect2( -v1.y, v1.x);}
-	static MgVect2 Rot180( const MgVect2& v1)										// 180K‰ñ“]
-						{ return	MgVect2( -v1.x, -v1.y);}
-	static MgVect2 RotR90( const MgVect2& v1)										// ‰E90K‰ñ“]
-						{ return	MgVect2( v1.y, -v1.x);}
+	static MgVect2D RotL90( const MgVect2D& v1)										// ¶90K‰ñ“]
+						{ return	MgVect2D( -v1.y, v1.x);}
+	static MgVect2D Rot180( const MgVect2D& v1)										// 180K‰ñ“]
+						{ return	MgVect2D( -v1.x, -v1.y);}
+	static MgVect2D RotR90( const MgVect2D& v1)										// ‰E90K‰ñ“]
+						{ return	MgVect2D( v1.y, -v1.x);}
 
 	//======================( ‚RŸŒ³ )==============================
-	// MgVect3, MgPoint3
+	// MgVect3D, MgPoint3D
 
-	static MREAL Abs_2( const MgVect3& v)											// ƒxƒNƒgƒ‹‚Ì’·‚³‚Ì‚Qæ	MgAbs**2
+	static MREAL Abs_2( const MgVect3D& v)											// ƒxƒNƒgƒ‹‚Ì’·‚³‚Ì‚Qæ	MgAbs**2
 				 		{ return v.x*v.x+v.y*v.y+v.z*v.z;}
-	static MREAL Abs( const MgVect3& v)												// ƒxƒNƒgƒ‹‚Ì’·‚³		MGABS
+	static MREAL Abs( const MgVect3D& v)											// ƒxƒNƒgƒ‹‚Ì’·‚³		MGABS
 				 		{ return (MREAL)sqrt(v.x*v.x+v.y*v.y+v.z*v.z);}
-	static MREAL Dist_2( const MgPoint3& P1, const MgPoint3& P2)					// ‚Q“_ŠÔ‚Ì‹——£‚Ì‚Qæ MgDist**2
+	static MREAL Dist_2( const MgPoint3D& P1, const MgPoint3D& P2)					// ‚Q“_ŠÔ‚Ì‹——£‚Ì‚Qæ MgDist**2
 						{ return ( (P2.x-P1.x)*(P2.x-P1.x)+
 								   (P2.y-P1.y)*(P2.y-P1.y)+
 								   (P2.z-P1.z)*(P2.z-P1.z));}
-	static MREAL Dist( const MgPoint3& P1, const MgPoint3& P2)						// ‚Q“_ŠÔ‚Ì‹——£
+	static MREAL Dist( const MgPoint3D& P1, const MgPoint3D& P2)					// ‚Q“_ŠÔ‚Ì‹——£
 						{ return (MREAL)sqrt( (P2.x-P1.x)*(P2.x-P1.x)+
 											   (P2.y-P1.y)*(P2.y-P1.y)+
 											   (P2.z-P1.z)*(P2.z-P1.z));}
-	static bool Zero( const MgVect3& v1)											// P1 == (0.,0.,0.)	”»’è
+	static bool Zero( const MgVect3D& v1)											// P1 == (0.,0.,0.)	”»’è
 						{ return Abs_2(v1) <= g_gTol.D_2;}
-	static bool Zero( const MgVect3& v1, MREAL tol)									// P1 == (0.,0.,0.)	Œë·w’è‚Ì”»’è
+	static bool Zero( const MgVect3D& v1, MREAL tol)								// P1 == (0.,0.,0.)	Œë·w’è‚Ì”»’è
 						{ return Abs_2(v1) <= tol * tol;}
-	static bool Equal( const MgVect3& v1, const MgVect3& v2)						// P1 == P2 		”»’è== ”»’è
-				 		{ MgVect3 vt = v2 - v1; return Abs_2(vt) <= g_gTol.D_2;}  
-	static bool EqualV( const MgVect3& v1, const MgVect3& v2)						// V1 == V2 		ƒxƒNƒgƒ‹Œ^®‚ÌŠp“x‚Ì“™†”»’è
-				 		{ MgVect3 vt = v2 - v1; return Abs_2(vt) <= g_gTol.A_2;}  
-	static bool Equal( const MgVect3& v1, const MgVect3& v2, MREAL tol)				// P1 == P2			Œë·w’è‚Ì”»’è== ”»’è
-				 		{ MgVect3 vt = v2 - v1; return Abs_2(vt) <= tol * tol;}  
-	static bool Parallel( const MgVect3& v1, const MgVect3& v2)						// V1‚ÆV2‚ª•½s‚Å‚ ‚é‚©‚ğŠm”F
-				 		{ MgVect3 vo = v1 ^ v2; MREAL fi = v1 * v2;
+	static bool Equal( const MgVect3D& v1, const MgVect3D& v2)						// P1 == P2 		”»’è== ”»’è
+				 		{ MgVect3D vt = v2 - v1; return Abs_2(vt) <= g_gTol.D_2;}  
+	static bool EqualV( const MgVect3D& v1, const MgVect3D& v2)						// V1 == V2 		ƒxƒNƒgƒ‹Œ^®‚ÌŠp“x‚Ì“™†”»’è
+				 		{ MgVect3D vt = v2 - v1; return Abs_2(vt) <= g_gTol.A_2;}  
+	static bool Equal( const MgVect3D& v1, const MgVect3D& v2, MREAL tol)			// P1 == P2			Œë·w’è‚Ì”»’è== ”»’è
+				 		{ MgVect3D vt = v2 - v1; return Abs_2(vt) <= tol * tol;}  
+	static bool Parallel( const MgVect3D& v1, const MgVect3D& v2)					// V1‚ÆV2‚ª•½s‚Å‚ ‚é‚©‚ğŠm”F
+				 		{ MgVect3D vo = v1 ^ v2; MREAL fi = v1 * v2;
 						  return ( Abs_2(vo) <= fi * fi * g_gTol.A_2);}
-	static bool Parallel( const MgVect3& v1, const MgVect3& v2, MgVect3 *pso, MREAL* si)	// V1‚ÆV2‚ª•½s‚Å‚ ‚é‚©‚ğŠm”F‚µAŠOÏ‚Æ“àÏ‚ğo—Í
-				 		{ MgVect3 vo = v1 ^ v2; MREAL fi = v1 * v2;
+	static bool Parallel( const MgVect3D& v1, const MgVect3D& v2, MgVect3D *pso, MREAL* si)	// V1‚ÆV2‚ª•½s‚Å‚ ‚é‚©‚ğŠm”F‚µAŠOÏ‚Æ“àÏ‚ğo—Í
+				 		{ MgVect3D vo = v1 ^ v2; MREAL fi = v1 * v2;
 				 		  *pso = vo; *si = fi;
 						  return ( Abs_2(vo) <= fi * fi * g_gTol.A_2);}
-	static MgVect3 UnitizeV3( const MgVect3& V1, MREAL i_Tol = g_gTol.D);			// ’PˆÊƒxƒNƒgƒ‹‚ğ‹‚ß‚é
-	static MgVect3 TaniV3( const MgVect3& V1, MREAL i_Tol = g_gTol.D);
+	static MgVect3D UnitizeV3( const MgVect3D& V1, MREAL i_Tol = g_gTol.D);			// ’PˆÊƒxƒNƒgƒ‹‚ğ‹‚ß‚é
+	static MgVect3D TaniV3( const MgVect3D& V1, MREAL i_Tol = g_gTol.D);
 
-	static MgVect3 RotL90( const MgVect3& v1)										// ¶90K‰ñ“]
-						{ return	MgVect3( -v1.y, v1.x, v1.z);}
-	static MgVect3 Rot180( const MgVect3& v1)										// 180K‰ñ“]
-						{ return	MgVect3( -v1.x, -v1.y, v1.z);}
-	static MgVect3 RotR90( const MgVect3& v1)										// ‰E90K‰ñ“]
-						{ return	MgVect3( v1.y, -v1.x, v1.z);}
+	static MgVect3D RotL90( const MgVect3D& v1)										// ¶90K‰ñ“]
+						{ return	MgVect3D( -v1.y, v1.x, v1.z);}
+	static MgVect3D Rot180( const MgVect3D& v1)										// 180K‰ñ“]
+						{ return	MgVect3D( -v1.x, -v1.y, v1.z);}
+	static MgVect3D RotR90( const MgVect3D& v1)										// ‰E90K‰ñ“]
+						{ return	MgVect3D( v1.y, -v1.x, v1.z);}
 
-#ifdef _MgPoint3A
+#ifdef _MgPoint3DA
 	//
 	//======================( ‚QŸŒ³ )==============================
-	static MgPoint2a Norma( const MgPoint2& p);
+	static MgPoint2Da Norma( const MgPoint2D& p);
 #endif
 	
 	////
 	////======================( ‚RŸŒ³ )==============================
 	////		ƒxƒNƒgƒ‹‚Ì’PˆÊƒxƒNƒgƒ‹‚ğ‹‚ß‚é
 	////
-	//static MgVect3 MgUnitizeV3( const MgVect3& v, MREAL i_Tol = g_gTol.D);		//	(  O) ’PˆÊƒxƒNƒgƒ‹
+	//static MgVect3D MgUnitizeV3( const MgVect3D& v, MREAL i_Tol = g_gTol.D);		//	(  O) ’PˆÊƒxƒNƒgƒ‹
 
-#ifdef _MgPoint3A
+#ifdef _MgPoint3DA
 
-	static MgPoint3a Norma( const MgPoint3& p);
+	static MgPoint3Da Norma( const MgPoint3D& p);
 #endif
 	
 	// ---------------------( ‚QŸŒ³ )------------------------------
 	//
 	//	‚QŸŒ³’¼ü
 	//
-	static MgULine2 Rev( const MgULine2& ULn1)										// ’¼ü”½“]
-						{ return MgULine2C( ULn1.p, - ULn1.v);}
+	static MgULine2D Rev( const MgULine2D& ULn1)									// ’¼ü”½“]
+						{ return MgULine2DC( ULn1.p, - ULn1.v);}
 	//	‚QŸŒ³ü•ª
 	//
-	static MgLine2 Rev( const MgLine2& Ln1)											// ü•ª ”½“]
-						{ return MgLine2( Ln1.p[1], Ln1.p[0]);}
+	static MgLine2D Rev( const MgLine2D& Ln1)										// ü•ª ”½“]
+						{ return MgLine2D( Ln1.p[1], Ln1.p[0]);}
 
-	static bool Parallel( const MgLine2& Ln1, const MgLine2& Ln2)					// Ln1‚ÆLn2‚ª•½s‚Å‚ ‚é‚©‚ğŠm”F
-				 		{ MgVect2 v1 = MgVect2C(Ln1); MgVect2 v2 = MgVect2C(Ln2);
+	static bool Parallel( const MgLine2D& Ln1, const MgLine2D& Ln2)					// Ln1‚ÆLn2‚ª•½s‚Å‚ ‚é‚©‚ğŠm”F
+				 		{ MgVect2D v1 = MgVect2DC(Ln1); MgVect2D v2 = MgVect2DC(Ln2);
 						  return Parallel( v1, v2);}
-	static bool Parallel( const MgLine2& Ln1, const MgLine2& Ln2, MREAL* so, MREAL* si)	// Ln1‚ÆLn2‚ª•½s‚Å‚ ‚é‚©‚ğŠm”F‚µAŠOÏ‚Æ“àÏ‚ğo—Í
-				 		{ MgVect2 v1 = MgVect2C(Ln1); MgVect2 v2 = MgVect2C(Ln2);
+	static bool Parallel( const MgLine2D& Ln1, const MgLine2D& Ln2, MREAL* so, MREAL* si)	// Ln1‚ÆLn2‚ª•½s‚Å‚ ‚é‚©‚ğŠm”F‚µAŠOÏ‚Æ“àÏ‚ğo—Í
+				 		{ MgVect2D v1 = MgVect2DC(Ln1); MgVect2D v2 = MgVect2DC(Ln2);
 						  return Parallel( v1, v2, so, si);}
 
 	// ---------------------( ‚RŸŒ³ )------------------------------
 	//
 	//	‚RŸŒ³’¼ü
 	//
-	static MgULine3 Rev( const MgULine3& ULn1)										// ’¼ü”½“]
-						{ return MgULine3(ULn1.p, - ULn1.v);}
+	static MgULine3D Rev( const MgULine3D& ULn1)									// ’¼ü”½“]
+						{ return MgULine3D(ULn1.p, - ULn1.v);}
 
-	static MgLine3 Rev( const MgLine3& Ln1)											// ü•ª ”½“]
-						{ return MgLine3( Ln1.p[1], Ln1.p[0]);}
+	static MgLine3D Rev( const MgLine3D& Ln1)										// ü•ª ”½“]
+						{ return MgLine3D( Ln1.p[1], Ln1.p[0]);}
 
-	static bool Parallel( const MgLine3& Ln1, const MgLine3& Ln2)					// Ln1‚ÆLn2‚ª•½s‚Å‚ ‚é‚©‚ğŠm”F
-				 		{ MgVect3 v1 = MgVect3C(Ln1); MgVect3 v2 = MgVect3C(Ln2);
+	static bool Parallel( const MgLine3D& Ln1, const MgLine3D& Ln2)					// Ln1‚ÆLn2‚ª•½s‚Å‚ ‚é‚©‚ğŠm”F
+				 		{ MgVect3D v1 = MgVect3DC(Ln1); MgVect3D v2 = MgVect3DC(Ln2);
 						  return Parallel( v1, v2);}
-	static bool Parallel( const MgLine3& Ln1, const MgLine3& Ln2, MgVect3 *pso, MREAL* si)	// Ln1‚ÆLn2‚ª•½s‚Å‚ ‚é‚©‚ğŠm”F‚µAŠOÏ‚Æ“àÏ‚ğo—Í
-				 		{ MgVect3 v1 = MgVect3C(Ln1); MgVect3 v2 = MgVect3C(Ln2);
+	static bool Parallel( const MgLine3D& Ln1, const MgLine3D& Ln2, MgVect3D *pso, MREAL* si)	// Ln1‚ÆLn2‚ª•½s‚Å‚ ‚é‚©‚ğŠm”F‚µAŠOÏ‚Æ“àÏ‚ğo—Í
+				 		{ MgVect3D v1 = MgVect3DC(Ln1); MgVect3D v2 = MgVect3DC(Ln2);
 						  return Parallel( v1, v2, pso, si);}
 
 
@@ -213,33 +213,33 @@ public:
 	//
 	//	‚QŸŒ³‰~ŒÊ
 	//
-	static bool Parallel( const MgArc2 &arc1, const MgArc2 &arc2)					// arc1‚Æarc2‚ª•½s‚Å‚ ‚é‚©‚ğŠm”F
+	static bool Parallel( const MgArc2D& arc1, const MgArc2D& arc2)					// arc1‚Æarc2‚ª•½s‚Å‚ ‚é‚©‚ğŠm”F
 				 		{ return ( arc1.pc == arc2.pc);}
 
-	static MINT Arc2Div( const MgArc2 &arc1, MINT n, const MgGPoint2 *gpto);		// ‰~ŒÊ‚ğn“™•ª‚·‚é
+	static MINT Arc2Div( const MgArc2D& arc1, MINT n, const MgGPoint2D *gpto);		// ‰~ŒÊ‚ğn“™•ª‚·‚é
 
 	// ---------------------( ‚RŸŒ³ )------------------------------
 	//
 	//	‚RŸŒ³‰~ŒÊ
 	//
-	static bool Parallel( const MgArc3 &Arc1, const MgArc3 &Arc2)					// Arc1‚ÆArc2‚ª•½s‚Å‚ ‚é‚©‚ğŠm”F
+	static bool Parallel( const MgArc3D& Arc1, const MgArc3D& Arc2)					// Arc1‚ÆArc2‚ª•½s‚Å‚ ‚é‚©‚ğŠm”F
 				 		{ return ( Arc1.Pc == Arc2.Pc) &&
 								   Parallel( Arc1.V, Arc2.V);}
 
-	static MINT Arc3Div( const MgArc3 &arc1, MINT n, const MgGPoint3 *gPto);		// ‰~ŒÊ‚ğn“™•ª‚·‚é
+	static MINT Arc3Div( const MgArc3D& arc1, MINT n, const MgGPoint3D *gPto);		// ‰~ŒÊ‚ğn“™•ª‚·‚é
 
 	// ---------------------( ‚QŸŒ³ )------------------------------
 	//
 	//	‚QŸŒ³‰~
 	//
-	static bool Parallel( const MgCir2 &cir1, const MgCir2 &cir2)					// cir1‚Æcir2‚ª•½s‚Å‚ ‚é‚©‚ğŠm”F
+	static bool Parallel( const MgCir2D& cir1, const MgCir2D& cir2)					// cir1‚Æcir2‚ª•½s‚Å‚ ‚é‚©‚ğŠm”F
 				 		{ return ( cir1.pc == cir2.pc);}
 
 	// ---------------------( ‚RŸŒ³ )------------------------------
 	//
 	//	‚RŸŒ³‰~
 	//
-	static bool Parallel( const MgCir3 &Cir1, const MgCir3 &Cir2)					// Cir1‚ÆCir2‚ª•½s‚Å‚ ‚é‚©‚ğŠm”F
+	static bool Parallel( const MgCir3D& Cir1, const MgCir3D& Cir2)					// Cir1‚ÆCir2‚ª•½s‚Å‚ ‚é‚©‚ğŠm”F
 				 		{ return ( Cir1.Pc == Cir2.Pc) &&
 								   Parallel( Cir1.V, Cir2.V);}
 
@@ -252,7 +252,7 @@ public:
 	//
 	static MREAL GetAngleVH2(						// (  O) ¶‰ñ“]Šp“x@i“xj
 													//		ƒxƒNƒgƒ‹‚Ì’·‚³‚ªg_gTol.D–¢–‚Ìê‡‚Í0“x‚ğ•Ô‚·
-					const	MgVect2&	v1			// (I  ) ƒxƒNƒgƒ‹
+					const	MgVect2D&	i_v1		// (I  ) ƒxƒNƒgƒ‹
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -260,8 +260,8 @@ public:
 	//
 	static MREAL GetAngle2PtH2(						// (  O) ¶‰ñ“]Šp“x@i“xj
 													//		n“_AI“_ŠÔ‚Ì‹——£‚ªg_gTol.D–¢–‚Ìê‡‚Í0“x‚ğ•Ô‚·
-					const	MgPoint2&	p1,			// (I  ) n“_
-					const	MgPoint2&	p2			// (I  ) I“_
+					const	MgPoint2D&	i_p1,		// (I  ) n“_
+					const	MgPoint2D&	i_p2		// (I  ) I“_
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -269,8 +269,8 @@ public:
 	//
 	static MREAL GetAngle2V2(						// (  O) ¶‰ñ“]Šp“x@i“xj
 													//		ƒxƒNƒgƒ‹‚Ì’·‚³‚ªg_gTol.D–¢–‚Ìê‡‚Í0“x‚ğ•Ô‚·
-					const	MgVect2&	v1,			// (I  ) ƒxƒNƒgƒ‹1
-					const	MgVect2&	v2			// (I  ) ƒxƒNƒgƒ‹2
+					const	MgVect2D&	i_v1,		// (I  ) ƒxƒNƒgƒ‹1
+					const	MgVect2D&	i_v2		// (I  ) ƒxƒNƒgƒ‹2
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -278,9 +278,9 @@ public:
 	//
 	static MREAL GetAngle3Pt2(						// (  O) ¶‰ñ“]Šp“x@i“xj
 													//		2“_ŠÔ‚Ì‹——£‚ªg_gTol.D–¢–‚Ìê‡‚Í0“x‚ğ•Ô‚·
-					const	MgPoint2&	p1,			// (I  ) “_1
-					const	MgPoint2&	p2,			// (I  ) “_2
-					const	MgPoint2&	p3			// (I  ) “_3
+					const	MgPoint2D&	i_p1,		// (I  ) “_1
+					const	MgPoint2D&	i_p2,		// (I  ) “_2
+					const	MgPoint2D&	i_p3		// (I  ) “_3
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -288,8 +288,8 @@ public:
 	//
 	static MREAL GetAngle2ULn2(						// (  O) ¶‰ñ“]Šp“x@i“xj
 													//		2“_ŠÔ‚Ì‹——£‚ªg_gTol.D–¢–‚Ìê‡‚Í0“x‚ğ•Ô‚·
-					const	MgULine2&	ULn1,		// (I  ) ü•ª1
-					const	MgULine2&	ULn2		// (I  ) ü•ª2
+					const	MgULine2D&	i_ULn1,		// (I  ) ü•ª1
+					const	MgULine2D&	i_ULn2		// (I  ) ü•ª2
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -297,15 +297,15 @@ public:
 	//
 	static MREAL GetAngleULnLn2(					// (  O) ¶‰ñ“]Šp“x@i“xj
 													//		2“_ŠÔ‚Ì‹——£‚ªg_gTol.D–¢–‚Ìê‡‚Í0“x‚ğ•Ô‚·
-					const	MgULine2&	ULn1,		// (I  ) ’¼ü1
-					const	MgLine2&	Ln2			// (I  ) ü•ª2
+					const	MgULine2D&	i_ULn1,		// (I  ) ’¼ü1
+					const	MgLine2D&	i_Ln2		// (I  ) ü•ª2
 			);
 
 	//	-------------------------------------------------------
 	static MREAL GetAngleLnULn2(					// (  O) ¶‰ñ“]Šp“x@i“xj
 													//		2“_ŠÔ‚Ì‹——£‚ªg_gTol.D–¢–‚Ìê‡‚Í0“x‚ğ•Ô‚·
-					const	MgLine2&	Ln1,		// (I  ) ü•ª1
-					const	MgULine2&	ULn2		// (I  ) ’¼ü2
+					const	MgLine2D&	i_Ln1,		// (I  ) ü•ª1
+					const	MgULine2D&	i_ULn2		// (I  ) ’¼ü2
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -313,8 +313,8 @@ public:
 	//
 	static MREAL GetAngle2Ln2(						// (  O) ¶‰ñ“]Šp“x@i“xj
 													//		2“_ŠÔ‚Ì‹——£‚ªg_gTol.D–¢–‚Ìê‡‚Í0“x‚ğ•Ô‚·
-					const	MgLine2&	Ln1,		// (I  ) ü•ª1
-					const	MgLine2&	Ln2			// (I  ) ü•ª2
+					const	MgLine2D&	i_Ln1,		// (I  ) ü•ª1
+					const	MgLine2D&	i_Ln2		// (I  ) ü•ª2
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -322,9 +322,9 @@ public:
 	//
 	static MREAL GetAngle2V3(						// (  O) ¶‰ñ“]Šp“x@i“xj
 													//		ƒxƒNƒgƒ‹‚Ì’·‚³‚ªg_gTol.D–¢–‚Ìê‡‚Í0“x‚ğ•Ô‚·
-					const	MgVect3&	v1,			// (I  ) ƒxƒNƒgƒ‹1
-					const	MgVect3&	v2,			// (I  ) ƒxƒNƒgƒ‹2
-					const	MgVect3&	vn			// (I  ) ‚QƒxƒNƒgƒ‹‚É’¼Œğ‚·‚é’PˆÊƒxƒNƒgƒ‹
+					const	MgVect3D&	i_v1,		// (I  ) ƒxƒNƒgƒ‹1
+					const	MgVect3D&	i_v2,		// (I  ) ƒxƒNƒgƒ‹2
+					const	MgVect3D&	i_vn		// (I  ) ‚QƒxƒNƒgƒ‹‚É’¼Œğ‚·‚é’PˆÊƒxƒNƒgƒ‹
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -332,10 +332,10 @@ public:
 	//
 	static MREAL GetAngle3Pt3(						// (  O) ¶‰ñ“]Šp“x@i“xj
 													//		2“_ŠÔ‚Ì‹——£‚ªg_gTol.D–¢–‚Ìê‡‚Í0“x‚ğ•Ô‚·
-					const	MgPoint3&	p1,			// (I  ) “_1
-					const	MgPoint3&	p2,			// (I  ) “_2
-					const	MgPoint3&	p3,			// (I  ) “_3
-					const	MgVect3&	vn			// (I  ) “_1,“_,2“_3‚ğ’Ê‚é•½–Ê‚É’¼Œğ‚·‚é’PˆÊƒxƒNƒgƒ‹
+					const	MgPoint3D&	i_p1,		// (I  ) “_1
+					const	MgPoint3D&	i_p2,		// (I  ) “_2
+					const	MgPoint3D&	i_p3,		// (I  ) “_3
+					const	MgVect3D&	i_vn		// (I  ) “_1,“_,2“_3‚ğ’Ê‚é•½–Ê‚É’¼Œğ‚·‚é’PˆÊƒxƒNƒgƒ‹
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -343,9 +343,9 @@ public:
 	//
 	static MREAL GetAngle2ULn3(						// (  O) ¶‰ñ“]Šp“x@i“xj
 													//		2“_ŠÔ‚Ì‹——£‚ªg_gTol.D–¢–‚Ìê‡‚Í0“x‚ğ•Ô‚·
-					const	MgULine3&	ULn1,		// (I  ) ’¼ü1
-					const	MgULine3&	ULn2,		// (I  ) ’¼ü2
-					const	MgVect3&	vn			// (I  ) ‚Q’¼ü‚É’¼Œğ‚·‚é’PˆÊƒxƒNƒgƒ‹
+					const	MgULine3D&	i_ULn1,		// (I  ) ’¼ü1
+					const	MgULine3D&	i_ULn2,		// (I  ) ’¼ü2
+					const	MgVect3D&	i_vn		// (I  ) ‚Q’¼ü‚É’¼Œğ‚·‚é’PˆÊƒxƒNƒgƒ‹
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -353,17 +353,17 @@ public:
 	//
 	static MREAL GetAngleULnLn3(					// (  O) ¶‰ñ“]Šp“x@i“xj
 													//		2“_ŠÔ‚Ì‹——£‚ªg_gTol.D–¢–‚Ìê‡‚Í0“x‚ğ•Ô‚·
-					const	MgULine3&	ULn1,		// (I  ) ’¼ü1
-					const	MgLine3&	Ln2,		// (I  ) ü•ª2
-					const	MgVect3&	vn			// (I  ) ’¼ü‚Æü•ª‚É’¼Œğ‚·‚é’PˆÊƒxƒNƒgƒ‹
+					const	MgULine3D&	i_ULn1,		// (I  ) ’¼ü1
+					const	MgLine3D&	i_Ln2,		// (I  ) ü•ª2
+					const	MgVect3D&	i_vn		// (I  ) ’¼ü‚Æü•ª‚É’¼Œğ‚·‚é’PˆÊƒxƒNƒgƒ‹
 			);
 
 	//	-------------------------------------------------------
 	static MREAL GetAngleLnULn3(					// (  O) ¶‰ñ“]Šp“x@i“xj
 													//		2“_ŠÔ‚Ì‹——£‚ªg_gTol.D–¢–‚Ìê‡‚Í0“x‚ğ•Ô‚·
-					const	MgLine3&	Ln1,		// (I  ) ü•ª1
-					const	MgULine3&	ULn2,		// (I  ) ’¼ü2
-					const	MgVect3&	vn			// (I  ) ü•ª‚Æ’¼ü‚É’¼Œğ‚·‚é’PˆÊƒxƒNƒgƒ‹
+					const	MgLine3D&	i_Ln1,		// (I  ) ü•ª1
+					const	MgULine3D&	i_ULn2,		// (I  ) ’¼ü2
+					const	MgVect3D&	i_vn		// (I  ) ü•ª‚Æ’¼ü‚É’¼Œğ‚·‚é’PˆÊƒxƒNƒgƒ‹
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -371,9 +371,9 @@ public:
 	//
 	static MREAL GetAngle2Ln3(						// (  O) ¶‰ñ“]Šp“x@i“xj
 													//		2“_ŠÔ‚Ì‹——£‚ªg_gTol.D–¢–‚Ìê‡‚Í0“x‚ğ•Ô‚·
-					const	MgLine3&	Ln1,		// (I  ) ü•ª1
-					const	MgLine3&	Ln2,		// (I  ) ü•ª2
-					const	MgVect3&	vn			// (I  ) ‚Qü•ª‚É’¼s‚·‚é’PˆÊƒxƒNƒgƒ‹
+					const	MgLine3D&	i_Ln1,		// (I  ) ü•ª1
+					const	MgLine3D&	i_Ln2,		// (I  ) ü•ª2
+					const	MgVect3D&	i_vn		// (I  ) ‚Qü•ª‚É’¼s‚·‚é’PˆÊƒxƒNƒgƒ‹
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -385,8 +385,8 @@ public:
 	//
 	static MREAL GetAngleVPln3(						// (  O) ¶‰ñ“]Šp“x@i“xj
 													//		2“_ŠÔ‚Ì‹——£‚ªg_gTol.D–¢–‚Ìê‡‚Í0“x‚ğ•Ô‚·
-					const	MgVect3&	v1,			// (I  ) ƒxƒNƒgƒ‹1
-					const	MgPlane3&	Pln2		// (I  ) •½–Ê2
+					const	MgVect3D&	i_v1,		// (I  ) ƒxƒNƒgƒ‹1
+					const	MgPlane3D&	i_Pln2		// (I  ) •½–Ê2
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -394,8 +394,8 @@ public:
 	//
 	static MREAL GetAngleULnPln3(					// (  O) ¶‰ñ“]Šp“x@i“xj
 													//		2“_ŠÔ‚Ì‹——£‚ªg_gTol.D–¢–‚Ìê‡‚Í0“x‚ğ•Ô‚·
-					const	MgULine3&	ULn1,		// (I  ) ’¼ü1
-					const	MgPlane3&	Pln2		// (I  ) •½–Ê2
+					const	MgULine3D&	i_ULn1,		// (I  ) ’¼ü1
+					const	MgPlane3D&	i_Pln2		// (I  ) •½–Ê2
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -403,8 +403,8 @@ public:
 	//
 	static MREAL GetAngleLnPln3(					// (  O) ¶‰ñ“]Šp“x@i“xj
 													//		2“_ŠÔ‚Ì‹——£‚ªg_gTol.D–¢–‚Ìê‡‚Í0“x‚ğ•Ô‚·
-					const	MgLine3&	Ln1,		// (I  ) ü•ª1
-					const	MgPlane3&	Pln2		// (I  ) •½–Ê2
+					const	MgLine3D&	i_Ln1,		// (I  ) ü•ª1
+					const	MgPlane3D&	i_Pln2		// (I  ) •½–Ê2
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -415,36 +415,36 @@ public:
 	//	‚Q’¼üŠÔ‚ÌŠp‚Ì2“™•ªü‚ğ‹‚ß‚é
 	//
 	static void Bisector2ULn2(						// (  O) ƒXƒe[ƒ^ƒX
-					const	MgULine2&	ULn1,		// (I  ) ’¼ü1
-					const	MgULine2&	ULn2,		// (I  ) ’¼ü2
-							MgULine2*	ULn3		// (  O) ’¼ü3
+					const	MgULine2D&	i_ULn1,		// (I  ) ’¼ü1
+					const	MgULine2D&	i_ULn2,		// (I  ) ’¼ü2
+							MgULine2D*	o_pULn3		// (  O) ’¼ü3
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	’¼ü‚Æü•ªŠÔ‚ÌŠp‚Ì2“™•ªü‚ğ‹‚ß‚é
 	//
 	static void BisectorULnLn2(						// (  O) ƒXƒe[ƒ^ƒX
-					const	MgULine2&	ULn1,		// (I  ) ’¼ü1
-					const	MgLine2&	Ln2,		// (I  ) ü•ª2
-							MgULine2*	ULn3		// (  O) ’¼ü3
+					const	MgULine2D&	i_ULn1,		// (I  ) ’¼ü1
+					const	MgLine2D&	i_Ln2,		// (I  ) ü•ª2
+							MgULine2D*	o_pULn3		// (  O) ’¼ü3
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	ü•ª‚Æ’¼üŠÔ‚ÌŠp‚Ì2“™•ªü‚ğ‹‚ß‚é
 	//
 	static void BisectorLnULn2(						// (  O) ƒXƒe[ƒ^ƒX
-					const	MgLine2&	Ln1,		// (I  ) ü•ª1
-					const	MgULine2&	ULn2,		// (I  ) ’¼ü2
-							MgULine2*	ULn3		// (  O) ’¼ü3
+					const	MgLine2D&	i_Ln1,		// (I  ) ü•ª1
+					const	MgULine2D&	i_ULn2,		// (I  ) ’¼ü2
+							MgULine2D*	o_pULn3		// (  O) ’¼ü3
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	ü•ª‚Æü•ªŠÔ‚ÌŠp‚Ì2“™•ªü‚ğ‹‚ß‚é
 	//
 	static void Bisector2Ln2(						// (  O) ƒXƒe[ƒ^ƒX
-					const	MgLine2&	Ln1,		// (I  ) ü•ª1
-					const	MgLine2&	Ln2,		// (I  ) ü•ª2
-							MgULine2*	ULn3		// (  O) ’¼ü3
+					const	MgLine2D&	i_Ln1,		// (I  ) ü•ª1
+					const	MgLine2D&	i_Ln2,		// (I  ) ü•ª2
+							MgULine2D*	o_pULn3		// (  O) ’¼ü3
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -454,36 +454,36 @@ public:
 	//	‚Q’¼üŠÔ‚ÌŠp‚Ì2“™•ªü‚ğ‹‚ß‚é
 	//
 	static void Bisector2ULn3(						// (  O) ƒXƒe[ƒ^ƒX
-					const	MgULine3&	ULn1,		// (I  ) ’¼ü1
-					const	MgULine3&	ULn2,		// (I  ) ’¼ü2
-							MgULine3*	ULn3		// (  O) ’¼ü3
+					const	MgULine3D&	i_ULn1,		// (I  ) ’¼ü1
+					const	MgULine3D&	i_ULn2,		// (I  ) ’¼ü2
+							MgULine3D*	o_pULn3		// (  O) ’¼ü3
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	’¼ü‚Æü•ªŠÔ‚ÌŠp‚Ì2“™•ªü‚ğ‹‚ß‚é
 	//
 	static void BisectorULnLn3(						// (  O) ƒXƒe[ƒ^ƒX
-					const	MgULine3&	ULn1,		// (I  ) ’¼ü1
-					const	MgLine3&	Ln2,		// (I  ) ü•ª2
-							MgULine3*	ULn3		// (  O) ’¼ü3
+					const	MgULine3D&	i_ULn1,		// (I  ) ’¼ü1
+					const	MgLine3D&	i_Ln2,		// (I  ) ü•ª2
+							MgULine3D*	o_pULn3		// (  O) ’¼ü3
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	ü•ª‚Æ’¼üŠÔ‚ÌŠp‚Ì2“™•ªü‚ğ‹‚ß‚é
 	//
 	static void BisectorLnULn3(						//
-					const	MgLine3&	Ln1,		// (I  ) ü•ª1
-					const	MgULine3&	ULn2,		// (I  ) ’¼ü2
-							MgULine3*	ULn3		// (  O) ’¼ü3
+					const	MgLine3D&	i_Ln1,		// (I  ) ü•ª1
+					const	MgULine3D&	i_ULn2,		// (I  ) ’¼ü2
+							MgULine3D*	o_pULn3		// (  O) ’¼ü3
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	ü•ª‚Æü•ªŠÔ‚ÌŠp‚Ì2“™•ªü‚ğ‹‚ß‚é
 	//
 	static void Bisector2Ln3(						//
-					const	MgLine3&	Ln1,		// (I  ) ü•ª1
-					const	MgLine3&	Ln2,		// (I  ) ü•ª2
-							MgULine3*	ULn3		// (  O) ’¼ü3
+					const	MgLine3D&	i_Ln1,		// (I  ) ü•ª1
+					const	MgLine3D&	i_Ln2,		// (I  ) ü•ª2
+							MgULine3D*	o_pULn3		// (  O) ’¼ü3
 			);
 
 	//
@@ -493,73 +493,73 @@ public:
 	//======================( ‚QŸŒ³ )==============================
 	//		Œ´“_‚ğ’†S‚É‰ñ“]‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
-	static MgMat2E Mat2Rot( MREAL dg)
+	static MgMat2DE Mat2Rot( MREAL dg)
 	{
 		MREAL	rd = MGRADIAN( dg);
-		return Mat2RotV( MgVect2( MREAL( cos( rd)), MREAL( sin( rd))));
+		return Mat2RotV( MgVect2D( MREAL( cos( rd)), MREAL( sin( rd))));
 	}
 
 	//======================( ‚QŸŒ³ )==============================
 	//		Œ´“_‚ğ’†S‚É‹t‰ñ“]‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
-	static MgMat2E Mat2RotRev( MREAL dg)
+	static MgMat2DE Mat2RotRev( MREAL dg)
 	{
 		MREAL	rd = MGRADIAN( dg);
-		return Mat2RotRevV( MgVect2( MREAL( cos( rd)), MREAL( sin( rd))));
+		return Mat2RotRevV( MgVect2D( MREAL( cos( rd)), MREAL( sin( rd))));
 	}
 
 	//======================( ‚RŸŒ³ )==============================
 	//		‚w‚x•½–Ê‚ÅŒ´“_‚ğ’†S‚É‰ñ“]‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
-	static MgMat3E Mat3RotZ( MREAL dg)
+	static MgMat3DE Mat3RotZ( MREAL dg)
 	{
 		MREAL	rd = MGRADIAN( dg);
-		return Mat3RotZV( MgVect2( MREAL( cos( rd)), MREAL( sin( rd))));
+		return Mat3RotZV( MgVect2D( MREAL( cos( rd)), MREAL( sin( rd))));
 	}
 
 	//======================( ‚RŸŒ³ )==============================
 	//		‚w‚x•½–Ê‚ÅŒ´“_‚ğ’†S‚É‹t‰ñ“]‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
-	static MgMat3E Mat3RotRevZ( MREAL dg)
+	static MgMat3DE Mat3RotRevZ( MREAL dg)
 	{
 		MREAL	rd = MGRADIAN( dg);
-		return Mat3RotRevZV( MgVect2( MREAL( cos( rd)), MREAL( sin( rd))));
+		return Mat3RotRevZV( MgVect2D( MREAL( cos( rd)), MREAL( sin( rd))));
 	}
 
 	//======================( ‚RŸŒ³ )==============================
 	//		‚x‚y•½–Ê‚ÅŒ´“_‚ğ’†S‚É‰ñ“]‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
-	static MgMat3E Mat3RotTX( MREAL dg)
+	static MgMat3DE Mat3RotTX( MREAL dg)
 	{
 		MREAL	rd = MGRADIAN( dg);
-		return  Mat3RotTXV( MgVect2( MREAL( cos( rd)), MREAL( sin( rd))));
+		return  Mat3RotTXV( MgVect2D( MREAL( cos( rd)), MREAL( sin( rd))));
 	}
 
 	//======================( ‚RŸŒ³ )==============================
 	//		‚x‚y•½–Ê‚ÅŒ´“_‚ğ’†S‚É‹t‰ñ“]‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
-	static MgMat3E Mat3RotRevX( MREAL dg)
+	static MgMat3DE Mat3RotRevX( MREAL dg)
 	{
 		MREAL	rd = MGRADIAN( dg);
-		return Mat3RotRevXV( MgVect2( MREAL( cos( rd)), MREAL( sin( rd))));
+		return Mat3RotRevXV( MgVect2D( MREAL( cos( rd)), MREAL( sin( rd))));
 	}
 
 	//======================( ‚RŸŒ³ )==============================
 	//		‚y‚w•½–Ê‚ÅŒ´“_‚ğ’†S‚É‰ñ“]‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
-	static MgMat3E Mat3RotY( MREAL dg)
+	static MgMat3DE Mat3RotY( MREAL dg)
 	{
 		MREAL	rd = MGRADIAN( dg);
-		return Mat3RotYV( MgVect2( MREAL( cos( rd)), MREAL( sin( rd))));
+		return Mat3RotYV( MgVect2D( MREAL( cos( rd)), MREAL( sin( rd))));
 	}
 
 	//======================( ‚RŸŒ³ )==============================
 	//		‚y‚w•½–Ê‚ÅŒ´“_‚ğ’†S‚É‰ñ“]‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
-	static MgMat3E Mat3RotRevY( MREAL dg)
+	static MgMat3DE Mat3RotRevY( MREAL dg)
 	{
 		MREAL	rd = MGRADIAN( dg);
-		return Mat3RotRevYV( MgVect2( MREAL( cos( rd)), MREAL( sin( rd))));
+		return Mat3RotRevYV( MgVect2D( MREAL( cos( rd)), MREAL( sin( rd))));
 	}
 
 	//===========================================================================
@@ -567,13 +567,13 @@ public:
 	//	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Ì‰ÁZ
 	//
 	//	g—p–@
-	//		MgMat3E = MgMat2E1 + MgMat2E2;
+	//		MgMat3DE = MgMat2DE1 + MgMat2DE2;
 	//
 	//	| m11 m12 m13 |     | n11 n12 n13 |
 	//	| m21 m22 m23 |  +  | n21 n22 n23 |
 	//	| m31 m32 m33 |     | n31 n32 n33 |
 	//
-	static MgMat2E MatPlus2( const MgMat2E& i_tm, const MgMat2E& i_tn);
+	static MgMat2DE MatPlus2( const MgMat2DE& i_tm, const MgMat2DE& i_tn);
 
 	//
 	//===========================================================================
@@ -581,26 +581,26 @@ public:
 	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Ì‰ÁZ
 	//
 	//	g—p–@
-	//		MgMat2E1 += MgMat2E2;
+	//		MgMat2DE1 += MgMat2DE2;
 	//
 	//	| m11 m12 m13 |     | m11 m12 m13 |     | n11 n12 n13 |
 	//	| m21 m22 m23 |  =  | m21 m22 m23 |  +  | n21 n22 n23 |
 	//	| m31 m32 m33 |     | m31 m32 m33 |     | n31 n32 n33 |
 	//
-	static MgMat2E MatPlusEqual2( MgMat2E& io_tm, const MgMat2E& i_tn);
+	static MgMat2DE MatPlusEqual2( MgMat2DE& io_tm, const MgMat2DE& i_tn);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		•‰‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
 	//	g—p–@
-	//		MgMat2E2 = - MgMat2E1;
+	//		MgMat2DE2 = - MgMat2DE1;
 	//
 	//	  | m11 m12 m13 |
 	//	- | m21 m22 m23 |
 	//	  | m31 m32 m33 |
 	//
-	static MgMat2E MatSingleMinus2( const MgMat2E& m1);
+	static MgMat2DE MatSingleMinus2( const MgMat2DE& m1);
 
 	//
 	//===========================================================================
@@ -608,39 +608,39 @@ public:
 	//		•‰‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
 	//	g—p–@
-	//		MgMat2E2 = - MgMat2E1;
+	//		MgMat2DE2 = - MgMat2DE1;
 	//
 	//	  | m11 m12 m13 |
 	//	- | m21 m22 m23 |
 	//	  | m31 m32 m33 |
 	//
-	static MgMat2E MatMinusSingle2( const MgMat2E& i_tm);
+	static MgMat2DE MatMinusSingle2( const MgMat2DE& i_tm);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ÌˆøZ
 	//
 	//	g—p–@
-	//		MgMat3E = MgMat2E1 - MgMat2E2;
+	//		MgMat3DE = MgMat2DE1 - MgMat2DE2;
 	//
 	//	  | m11 m12 m13 |     | n11 n12 n13 |
 	//	  | m21 m22 m23 |  -  | n21 n22 n23 |
 	//	  | m31 m32 m33 |     | n31 n32 n33 |
 	//
-	static MgMat2E MatMinus2( const MgMat2E& i_tm, const MgMat2E& i_tn);
+	static MgMat2DE MatMinus2( const MgMat2DE& i_tm, const MgMat2DE& i_tn);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ÌˆøZ
 	//
 	//	g—p–@
-	//		MgMat2E1 -= MgMat2E2;
+	//		MgMat2DE1 -= MgMat2DE2;
 	//
 	//	| m11 m12 m13 |    | m11 m12 m13 |     | n11 n12 n13 |
 	//	| m21 m22 m23 |  = | m21 m22 m23 |  -  | n21 n22 n23 |
 	//	| m31 m32 m33 |    | m31 m32 m33 |     | n31 n32 n33 |
 	//
-	static MgMat2E MatMinusEqual2( MgMat2E& io_tm, const MgMat2E& i_tn);
+	static MgMat2DE MatMinusEqual2( MgMat2DE& io_tm, const MgMat2DE& i_tn);
 
 	//===========================================================================
 	//	ˆ—“à—e
@@ -648,13 +648,13 @@ public:
 	//	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚é•ÏŠ·Œã‚ÉA‚³‚ç‚ÉÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚é•ÏŠ·‚·‚éƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
 	//	g—p–@
-	//		MgMat3E = MgMat2E1 * MgMat2E2;
+	//		MgMat3DE = MgMat2DE1 * MgMat2DE2;
 	//
 	//	| m11 m12 m13 |     | n11 n12 n13 |
 	//	| m21 m22 m23 |  X  | n21 n22 n23 |
 	//	| m31 m32 m33 |     | n31 n32 n33 |
 	//
-	static MgMat2E MatMult2( const MgMat2E& i_tm, const MgMat2E& i_tn);
+	static MgMat2DE MatMult2( const MgMat2DE& i_tm, const MgMat2DE& i_tn);
 
 	//===========================================================================
 	//	ˆ—“à—e
@@ -662,65 +662,65 @@ public:
 	//	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚é•ÏŠ·Œã‚ÉA‚³‚ç‚ÉÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚é•ÏŠ·‚·‚éƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
 	//	g—p–@
-	//		MgMat2E2 *= MgMat2E1;
+	//		MgMat2DE2 *= MgMat2DE1;
 	//
 	//	| m11 m12 m13 |     | m11 m12 m13 |     | n11 n12 n13 |
 	//	| m21 m22 m23 |  =  | m21 m22 m23 |  X  | n21 n22 n23 |
 	//	| m31 m32 m33 |     | m31 m32 m33 |     | n31 n32 n33 |
 	//
-	static MgMat2E MatMultEqual2( MgMat2E& io_tm, const MgMat2E& i_tn);
+	static MgMat2DE MatMultEqual2( MgMat2DE& io_tm, const MgMat2DE& i_tn);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
-	//		MgPoint2po = MgPoint2p * MgMat2Etm;
+	//		MgPoint2Dpo = MgPoint2Dp * MgMat2DEtm;
 	//
 	//					   | m11 m12 m13 |
 	//	| px  py  1  |  X  | m21 m22 m23 |
 	//					   | m31 m32 m33 |     
 	//
-	static MgVect2 MatMultPt22( const MgVect2& i_pt, const MgMat2E& i_tm);
+	static MgVect2D MatMultPt22( const MgVect2D& i_pt, const MgMat2DE& i_tm);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
-	//		MgPoint2p *= MgMat2Em;
+	//		MgPoint2Dp *= MgMat2DEm;
 	//
 	//										  | m11 m12 m13 |
 	//	| px  py  1  |  =  | px  py  1  |  X  | m21 m22 m23 |
 	//				   						  | m31 m32 m33 |
 	//
-	static MgVect2 MatMultEqualPt22( MgVect2& io_pt, const MgMat2E& i_tm);
+	static MgVect2D MatMultEqualPt22( MgVect2D& io_pt, const MgMat2DE& i_tm);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
-	//		MgULine2 = MgULine2*  MgMat2E;
+	//		MgULine2D = MgULine2D*  MgMat2DE;
 	//
 	//	| px  py  1  |     | m11 m12 m13 |
 	//	| vx  vy  0  |  X  | m21 m22 m23 |
 	//					   | m31 m32 m33 |
 	//
-	static MgULine2 MatMultULn22( const MgULine2& i_uln, const MgMat2E& i_tm);
+	static MgULine2D MatMultULn22( const MgULine2D& i_uln, const MgMat2DE& i_tm);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
-	//		MgULine2 *= MgMat2E;
+	//		MgULine2D *= MgMat2DE;
 	//
 	//	| px  py  1  |     | px  py  1  |     | m11 m12 m13 |
 	//	| vx  vy  0  |  =  | vx  vy  1  |  X  | m21 m22 m23 |
 	//			             				  | m31 m32 m33 |
 	//
-	static MgULine2 MatMultEqualULn22( MgULine2& io_uln, const MgMat2E& i_tm);
+	static MgULine2D MatMultEqualULn22( MgULine2D& io_uln, const MgMat2DE& i_tm);
 
 	//===============( ‚QŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Å‚RŸŒ³À•Wˆ— )==============
 	//
@@ -729,21 +729,21 @@ public:
 	//	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
-	//		MgVect32 = MgVect31 * MgMat2E1;
+	//		MgVect3D2 = MgVect3D1 * MgMat2DE1;
 	//
 	//						  | m11 m12 0 m13 |     
 	//	| px  py  pz  1 |  X  | m21 m22 0 m23 |
 	//						  |  0   0  1  0  |
 	//						  | m31 m32 0 m33 |
 	//
-	static MgVect3 MatMultPt32( const MgVect3& i_Pt, const MgMat2E& i_tm);
+	static MgVect3D MatMultPt32( const MgVect3D& i_Pt, const MgMat2DE& i_tm);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
-	//		MgVect3 *= MgMat2E;
+	//		MgVect3D *= MgMat2DE;
 	//
 	//						 						| m11 m12 0 m13 |
 	//	| px  py  pz  1 |  =  | px  py  pz  1 |  X  | m21 m22 0 m23 |
@@ -751,49 +751,49 @@ public:
 	//			   									| m31 m32 0 m33 |
 	
 	
-	static MgVect3 MatMultEqualPt32( MgVect3& io_Pt, const MgMat2E& i_tm);
+	static MgVect3D MatMultEqualPt32( MgVect3D& io_Pt, const MgMat2DE& i_tm);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
-	//		MgULine2 = MgULine2 * MgMat2E;
+	//		MgULine2D = MgULine2D * MgMat2DE;
 	//
 	//	| px  py  pz  1 |	  | m11 m12 0 m13 |
 	//	| vx  vy  vz  1 |  X  | m21 m22 0 m23 |
 	//						  |  0   0  1  0  |
 	//			   			  | m31 m32 0 m33 |
 	//
-	static MgULine3 MultULn32( const MgULine3& ULn1, const MgMat2E& m2);
+	static MgULine3D MultULn32( const MgULine3D& ULn1, const MgMat2DE& m2);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
-	//		MgULine2 = MgULine2 * MgMat2E;
+	//		MgULine2D = MgULine2D * MgMat2DE;
 	//
 	//	| px  py  pz  1 |	  | m11 m12 0 m13 |
 	//	| vx  vy  vz  1 |  X  | m21 m22 0 m23 |
 	//						  |  0   0  1  0  |
 	//						  | m31 m32 0 m33 |
 	//
-	static MgULine3 MatMultULn32( const MgULine3& i_ULn, const MgMat2E& i_tm);
+	static MgULine3D MatMultULn32( const MgULine3D& i_ULn, const MgMat2DE& i_tm);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
-	//		MgULine2 *= MgMat2E;
+	//		MgULine2D *= MgMat2DE;
 	//
 	//	| px  py  pz  1 |     | px  py  pz  1 |		| m11 m12 0 m13 |
 	//	| vx  vy  vz  1 |  =  | vx  vy  vz  1 |  X  | m21 m22 0 m23 |
 	//												|  0   0  1  0  |
 	//				 				   				| m31 m32 0 m33 |
 	//
-	static MgULine3 MatMultEqualULn32( MgULine3& io_ULn, const MgMat2E& i_tm);
+	static MgULine3D MatMultEqualULn32( MgULine3D& io_ULn, const MgMat2DE& i_tm);
 
 	//===========================================================================
 	//
@@ -804,441 +804,441 @@ public:
 	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Ì‰ÁZ
 	//
 	//	g—p–@
-	//		MgMat3E_3 = MgMat3E_1 + MgMat3E_2;
+	//		MgMat3DE_3 = MgMat3DE_1 + MgMat3DE_2;
 	//
 	//	| m11 m12 m13 m14 |     | n11 n12 n13 n14 |
 	//	| m21 m22 m23 m24 |  +  | n21 n22 n23 n24 |
 	//	| m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 	//	| m41 m42 m43 m44 |     | n41 n42 n43 n44 |    
 	//
-	static MgMat3E MatPlus3( const MgMat3E& i_Tm, const MgMat3E& i_Tn);
+	static MgMat3DE MatPlus3( const MgMat3DE& i_Tm, const MgMat3DE& i_Tn);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Ì‰ÁZ
 	//
 	//	g—p–@
-	//		MgMat3E += MgMat3E;
+	//		MgMat3DE += MgMat3DE;
 	//
 	//	| m11 m12 m13 m14 |		| m11 m12 m13 m14 |     | n11 n12 n13 n14 |
 	//	| m21 m22 m23 m24 |  =  | m21 m22 m23 m24 |  +  | n21 n22 n23 n24 |
 	//	| m31 m32 m33 m34 |     | m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 	//	| m41 m42 m43 m44 |     | m41 m42 m43 m44 |     | n41 n42 n43 n44 |     
 	//
-	static MgMat3E MatPlusEqual3( MgMat3E& io_Tm, const MgMat3E& i_Tn);
+	static MgMat3DE MatPlusEqual3( MgMat3DE& io_Tm, const MgMat3DE& i_Tn);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		•‰‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
 	//	g—p–@
-	//		MgMat3E_2 = - MgMat3E_1;
+	//		MgMat3DE_2 = - MgMat3DE_1;
 	//
 	//	  | m11 m12 m13 m14 |
 	//	- | m21 m22 m23 m24 |
 	//	  | m31 m32 m33 m34 |
 	//	  | m41 m42 m43 m44 |     
 	//
-	static MgMat3E MatSingleMinus3( const MgMat3E& i_Tm);
+	static MgMat3DE MatSingleMinus3( const MgMat3DE& i_Tm);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ÌˆøZ
 	//
 	//	g—p–@
-	//		MgMat3E_3 = MgMat3E_1 - MgMat3E_2;
+	//		MgMat3DE_3 = MgMat3DE_1 - MgMat3DE_2;
 	//
 	//	  | m11 m12 m13 m14 |     | n11 n12 n13 n14 |
 	//	  | m21 m22 m23 m24 |  -  | n21 n22 n23 n24 |
 	//	  | m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 	//	  | m41 m42 m43 m44 |     | n41 n42 n43 n44 |    
 	//
-	static MgMat3E MatMinus3( const MgMat3E& i_Tm, const MgMat3E& i_Tn);
+	static MgMat3DE MatMinus3( const MgMat3DE& i_Tm, const MgMat3DE& i_Tn);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ÌˆøZ
 	//
 	//	g—p–@
-	//		MgMat3E -= MgMat3E;
+	//		MgMat3DE -= MgMat3DE;
 	//
 	//	| m11 m12 m13 m14 |		| m11 m12 m13 m14 |     | n11 n12 n13 n14 |
 	//	| m21 m22 m23 m24 |  =  | m21 m22 m23 m24 |  -  | n21 n22 n23 n24 |
 	//	| m31 m32 m33 m34 |     | m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 	//	| m41 m42 m43 m44 |     | m41 m42 m43 m44 |     | n41 n42 n43 n44 |     
 	//
-	static MgMat3E MatMinusEqual3( MgMat3E& io_Tm, const MgMat3E& i_Tn);
+	static MgMat3DE MatMinusEqual3( MgMat3DE& io_Tm, const MgMat3DE& i_Tn);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Ì‚©‚¯Z
 	//
 	//	g—p–@
-	//		MgMat3E_3 = MgMat3E_1 * MgMat3E_2;
+	//		MgMat3DE_3 = MgMat3DE_1 * MgMat3DE_2;
 	//
 	//	| m11 m12 m13 m14 |     | n11 n12 n13 n14 |
 	//	| m21 m22 m23 m24 |  X  | n21 n22 n23 n24 |
 	//	| m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 	//	| m41 m42 m43 m44 |     | n41 n42 n43 n44 |    
 	//
-	static MgMat3E MatMult3( const MgMat3E& i_Tm, const MgMat3E& i_Tn);
+	static MgMat3DE MatMult3( const MgMat3DE& i_Tm, const MgMat3DE& i_Tn);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Ì‚©‚¯Z
 	//
 	//	g—p–@
-	//		MgMat3E *= MgMat3E;
+	//		MgMat3DE *= MgMat3DE;
 	//
 	//	| m11 m12 m13 m14 |     | m11 m12 m13 m14 |     | n11 n12 n13 n14 |
 	//	| m21 m22 m23 m24 |  =  | m21 m22 m23 m24 |  X  | n21 n22 n23 n24 |
 	//	| m31 m32 m33 m34 |     | m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 	//	| m41 m42 m43 m44 |     | m41 m42 m43 m44 |     | n41 n42 n43 n44 |     
 	//
-	static MgMat3E MatMultEqual3( MgMat3E& io_Tm, const MgMat3E& i_Tn);
+	static MgMat3DE MatMultEqual3( MgMat3DE& io_Tm, const MgMat3DE& i_Tn);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚QŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
-	//		MgMat3E_2 = MgVect2 * MgMat3E_1;
+	//		MgMat3DE_2 = MgVect2D * MgMat3DE_1;
 	//
 	//						    | m11 m12 m13 m14 |
 	//	| px  py  0   1   |  X  | m21 m22 m23 m24 |
 	//						    | m31 m32 m33 m34 |
 	//						    | m41 m42 m43 m44 |
 	//
-	static MgVect2 MatMultPt23( const MgVect2& i_Pt, const MgMat3E& i_Tm);
+	static MgVect2D MatMultPt23( const MgVect2D& i_Pt, const MgMat3DE& i_Tm);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚QŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
-	//		MgVect2 *= MgMat3E;
+	//		MgVect2D *= MgMat3DE;
 	//
 	//						     					    | m11 m12 m13 m14 |
 	//	| px  py  0   1   |  =  | px  py  0   1   |  X  | m21 m22 m23 m24 |
 	//	           									    | m31 m32 m33 m34 |
 	//	           									    | m41 m42 m43 m44 |
 	//
-	static MgVect2 MatMultEqualPt23( MgVect2& io_Pt, const MgMat3E& i_Tm);
+	static MgVect2D MatMultEqualPt23( MgVect2D& io_Pt, const MgMat3DE& i_Tm);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
-	//		MgVect3_2 = MgVect3_1 * MgMat3E;
+	//		MgVect3D_2 = MgVect3D_1 * MgMat3DE;
 	//
 	//	 					    | m11 m12 m13 m14 |
 	//	| px  py  pz  1   |  X  | m21 m22 m23 m24 |
 	//						    | m31 m32 m33 m34 |
 	//						    | m41 m42 m43 m44 |
 	//
-	static MgVect3 MatMultPt33( const MgVect3& i_Pt, const MgMat3E& i_Tm);
+	static MgVect3D MatMultPt33( const MgVect3D& i_Pt, const MgMat3DE& i_Tm);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
-	//		MgVect3 *= MgMat3E;
+	//		MgVect3D *= MgMat3DE;
 	//
 	//							 					    | m11 m12 m13 m14 |
 	//	| px  py  pz  1   |  =  | px  py  pz  1   |  X  | m21 m22 m23 m24 |
 	//												    | m31 m32 m33 m34 |
 	//												    | m41 m42 m43 m44 |
 	//
-	static MgVect3 MatMultEqualPt33( MgVect3& io_Pt, const MgMat3E& i_Tm);
+	static MgVect3D MatMultEqualPt33( MgVect3D& io_Pt, const MgMat3DE& i_Tm);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
-	//		MgULine3_2 = MgULine3_1 * MgMat3E;
+	//		MgULine3D_2 = MgULine3D_1 * MgMat3DE;
 	//
 	//	| px  py  pz  1   |     | m11 m12 m13 m14 |
 	//	| vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
 	//							| m31 m32 m33 m34 |
 	//							| m41 m42 m43 m44 |
 	//
-	static MgULine3 MatMultULn33( const MgULine3& i_ULn, const MgMat3E& i_Tm);
+	static MgULine3D MatMultULn33( const MgULine3D& i_ULn, const MgMat3DE& i_Tm);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
-	//		MgVect3 *= MgMat3E;
+	//		MgVect3D *= MgMat3DE;
 	//
 	//	| px  py  pz  1   |     | px  py  pz  1   |     | m11 m12 m13 m14 |
 	//	| vx  vy  vz  0   |  =  | vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
 	//													| m31 m32 m33 m34 |
 	//													| m41 m42 m43 m44 |
 	//
-	static MgULine3 MatMultEqualULn33( MgULine3& io_ULn, const MgMat3E& i_Tm);
+	static MgULine3D MatMultEqualULn33( MgULine3D& io_ULn, const MgMat3DE& i_Tm);
 
 	//======================( ‚QŸŒ³ )==============================
 	//	ˆ—“à—e
 	//		Œ´“_‚ğ’†S‚É‰ñ“]‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
 	//	g—p–@
-	//		MgMat2E = MgMat2ERotV(MgVect2);
+	//		MgMat2DE = MgMat2DERotV(MgVect2D);
 	//
-	//		( MgVect2: ’PˆÊƒxƒNƒgƒ‹)
+	//		( MgVect2D: ’PˆÊƒxƒNƒgƒ‹)
 	//
 	//	|  cos  sin  0. |
 	//	| -sin  cos  0. |
 	//	|   0.   0.  1. |
 	//
-	static MgMat2E Mat2RotV( const MgVect2& v);
+	static MgMat2DE Mat2RotV( const MgVect2D& v);
 
 	//======================( ‚QŸŒ³ )==============================
 	//	ˆ—“à—e
 	//		Œ´“_‚ğ’†S‚É‹t‰ñ“]‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
 	//	g—p–@
-	//		MgMat2E = MgMat2ERotRevV(MgVect2);
+	//		MgMat2DE = MgMat2DERotRevV(MgVect2D);
 	//
-	//		( MgVect2: ’PˆÊƒxƒNƒgƒ‹)
+	//		( MgVect2D: ’PˆÊƒxƒNƒgƒ‹)
 	//
 	//	| cos -sin  0. |
 	//	| sin  cos  0. |
 	//	|  0.   0.  1. |
 	//
-	static MgMat2E Mat2RotRevV( const MgVect2& v);
+	static MgMat2DE Mat2RotRevV( const MgVect2D& v);
 
 	//======================( ‚RŸŒ³ )==============================
 	//	ˆ—“à—e
 	//		‚w‚x•½–Ê‚ÅŒ´“_‚ğ’†S‚É‰ñ“]‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
 	//	g—p–@
-	//		MgMat3E = MgMat3ERotZV(MgVect2);
+	//		MgMat3DE = MgMat3DERotZV(MgVect2D);
 	//
-	//		( MgVect2: ’PˆÊƒxƒNƒgƒ‹)
+	//		( MgVect2D: ’PˆÊƒxƒNƒgƒ‹)
 	//
 	//	|  cos  sin  0.  0. |
 	//	| -sin  cos  0.  0. |
 	//	|   0.   0.  1.  0. |
 	//	|   0.   0.  0.  1. |
 	//
-	static MgMat3E Mat3RotZV( const MgVect2& v);
+	static MgMat3DE Mat3RotZV( const MgVect2D& v);
 
 	//======================( ‚RŸŒ³ )==============================
 	//	ˆ—“à—e
 	//		‚w‚x•½–Ê‚ÅŒ´“_‚ğ’†S‚É‹t‰ñ“]‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
 	//	g—p–@
-	//		MgMat3E = MgMat3ERotRevZV(MgVect2);
+	//		MgMat3DE = MgMat3DERotRevZV(MgVect2D);
 	//
-	//		( MgVect2: ’PˆÊƒxƒNƒgƒ‹)
+	//		( MgVect2D: ’PˆÊƒxƒNƒgƒ‹)
 	//
 	//	|  cos -sin  0.  0. |
 	//	|  sin  cos  0.  0. |
 	//	|   0.   0.  1.  0. |
 	//	|   0.   0.  0.  1. |
 	//
-	static MgMat3E Mat3RotRevZV( const MgVect2& v);
+	static MgMat3DE Mat3RotRevZV( const MgVect2D& v);
 
 	//======================( ‚RŸŒ³ )==============================
 	//	ˆ—“à—e
 	//		‚x‚y•½–Ê‚ÅŒ´“_‚ğ’†S‚É‰ñ“]‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
 	//	g—p–@
-	//		MgMat3E = MgMat3ERotTXV(MgVect2);
+	//		MgMat3DE = MgMat3DERotTXV(MgVect2D);
 	//
-	//		( MgVect2: ’PˆÊƒxƒNƒgƒ‹)
+	//		( MgVect2D: ’PˆÊƒxƒNƒgƒ‹)
 	//
 	//	|  1.   0.   0.  0. |
 	//	|  0.  cos  sin  0. |
 	//	|  0. -sin  cos  0. |
 	//	|  0.   0.   0.  1. |
 	//
-	static MgMat3E Mat3RotTXV( const MgVect2& v);
+	static MgMat3DE Mat3RotTXV( const MgVect2D& v);
 
 	//======================( ‚RŸŒ³ )==============================
 	//	ˆ—“à—e
 	//		‚x‚y•½–Ê‚ÅŒ´“_‚ğ’†S‚É‹t‰ñ“]‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
 	//	g—p–@
-	//		MgMat3E = MgMat3ERotRevXV(MgVect2);
+	//		MgMat3DE = MgMat3DERotRevXV(MgVect2D);
 	//
-	//		( MgVect2: ’PˆÊƒxƒNƒgƒ‹)
+	//		( MgVect2D: ’PˆÊƒxƒNƒgƒ‹)
 	//
 	//	|  1.   0.   0.  0. |
 	//	|  0.  cos -sin  0. |
 	//	|  0.  sin  cos  0. |
 	//	|  0.   0.   0.  1. |
 	//
-	static MgMat3E Mat3RotRevXV( const MgVect2& v);
+	static MgMat3DE Mat3RotRevXV( const MgVect2D& v);
 
 	//======================( ‚RŸŒ³ )==============================
 	//	ˆ—“à—e
 	//		‚y‚w•½–Ê‚ÅŒ´“_‚ğ’†S‚É‰ñ“]‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
 	//	g—p–@
-	//		MgMat3E = MgMat3ERotYV(MgVect2);
+	//		MgMat3DE = MgMat3DERotYV(MgVect2D);
 	//
-	//		( MgVect2: ’PˆÊƒxƒNƒgƒ‹)
+	//		( MgVect2D: ’PˆÊƒxƒNƒgƒ‹)
 	//
 	//	|  cos   0. -sin   0. |
 	//	|   0.   1.   0.   0. |
 	//	|  sin   0.  cos   0. |
 	//	|   0.   0.   0.   1. |
 	//
-	static MgMat3E Mat3RotYV( const MgVect2& v);
+	static MgMat3DE Mat3RotYV( const MgVect2D& v);
 
 	//======================( ‚RŸŒ³ )==============================
 	//	ˆ—“à—e
 	//		‚y‚w•½–Ê‚ÅŒ´“_‚ğ’†S‚É‹t‰ñ“]‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
 	//	g—p–@
-	//		MgMat3E = MgMat3ERotRevYV(MgVect2);
+	//		MgMat3DE = MgMat3DERotRevYV(MgVect2D);
 	//
-	//		( MgVect2: ’PˆÊƒxƒNƒgƒ‹)
+	//		( MgVect2D: ’PˆÊƒxƒNƒgƒ‹)
 	//
 	//	|  cos   0.  sin   0. |
 	//	|   0.   1.   0.   0. |
 	//	| -sin   0.  cos   0. |
 	//	|   0.   0.   0.   1. |
 	//
-	static MgMat3E Mat3RotRevYV( const MgVect2& v);
+	static MgMat3DE Mat3RotRevYV( const MgVect2D& v);
 
 	//======================( ‚QŸŒ³ )==============================
 	//	ˆ—“à—e
 	//	    ‚wC‚x•ûŒü‚ÉŠg‘å^k¬‚·‚éƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
 	//	g—p–@
-	//		Mgmat_2 = MgMat2EScl(MgVect2_1);
+	//		Mgmat_2 = MgMat2DEScl(MgVect2D_1);
 	//
 	//	| sx  0   0  |
 	//	| 0   xy  0  |
 	//	| 0   0   1  |
 	//
-	static MgMat2E Mat2Scl( const MgVect2& vs);
+	static MgMat2DE Mat2Scl( const MgVect2D& vs);
 
 	//======================( ‚RŸŒ³ )==============================
 	//	ˆ—“à—e
 	//	    ‚wC‚xC‚y•ûŒü‚ÉŠg‘å^k¬‚·‚éƒ}ƒgƒŠƒbƒNƒX‚ğì¬‚·‚é
 	//
 	//	g—p–@
-	//		Mgmat3_2 = MgMat3EScl(MgMat3E_1);
+	//		Mgmat3_2 = MgMat3DEScl(MgMat3DE_1);
 	//
 	//	| sx  0   0   0  |
 	//	| 0   xy  0   0  |
 	//	| 0   0   sz  0  |
 	//	| 0   0   0   1  |
 	//
-	static MgMat3E Mat3Scl( const MgVect3& vs);
+	static MgMat3DE Mat3Scl( const MgVect3D& vs);
 
 	//======================( ‚QŸŒ³ )==============================
 	//	ˆ—“à—e
 	//		•½sˆÚ“®‚Ì•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬‚·‚é
 	//
 	//	g—p–@
-	//		MgMat2E = MgMat2EMov(MgVect2)
+	//		MgMat2DE = MgMat2DEMov(MgVect2D)
 	//
 	//	|  1.  0.  0. |
 	//	|  0.  1.  0. |
 	//	|  v.x v.y 1. |
 	//
-	static MgMat2E Mat2Mov( const MgVect2& v);
-	static MgMat2E Mat2Mov( const MgPoint2& p)
-						{ return Mat2Mov( (MgVect2&)p);}
+	static MgMat2DE Mat2Mov( const MgVect2D& v);
+	static MgMat2DE Mat2Mov( const MgPoint2D& p)
+						{ return Mat2Mov( (MgVect2D&)p);}
 
 	//======================( ‚RŸŒ³ )==============================
 	//	ˆ—“à—e
 	//		•½sˆÚ“®‚Ì•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬‚·‚é
 	//
 	//	g—p–@
-	//		Mgmat3 = MgMat3EMov(MgVect3)
+	//		Mgmat3 = MgMat3DEMov(MgVect3D)
 	//
 	//	| 1.  0.  0.  0. |
 	//	| 0.  1.  0.  0. |
 	//	| 0.  0.  1.  0. |
 	//	| v.x v.y v.z 1. |
 	//
-	static MgMat3E Mat3Mov( const MgVect3& v);
-	static MgMat3E Mat3Mov( const MgPoint3& p)
-						{ return Mat3Mov( (MgVect3&)p);}
+	static MgMat3DE Mat3Mov( const MgVect3D& v);
+	static MgMat3DE Mat3Mov( const MgPoint3D& p)
+						{ return Mat3Mov( (MgVect3D&)p);}
 
 	//======================( ‚QŸŒ³ )==============================
 	//	ˆ—“à—e
 	//		•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Ì‹t•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
 	//	g—p–@
-	//		MgMat2E = MgMat2EInv(MgMat2E);
+	//		MgMat2DE = MgMat2DEInv(MgMat2DE);
 	//
 	//	| m11 m21 m31 |
 	//	| m12 m22 m32 |			i“ü—Ís—ñ‚Í’PˆÊs—ñ‚Å‚ ‚é– ???j
 	//	| m13 m23 m33 |
 	//
-	static MgMat2E Mat2Inv( const MgMat2E& i_tm);
+	static MgMat2DE Mat2Inv( const MgMat2DE& i_tm);
 
 	//======================( ‚RŸŒ³ )==============================
 	//	ˆ—“à—e
 	//	    •ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Ì‹t•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬‚·‚é
 	//
 	//	g—p–@
-	//		Mgmat3_2 = MgMat3EInv(MgMat3E_1);
+	//		Mgmat3_2 = MgMat3DEInv(MgMat3DE_1);
 	//
 	//	| m11 m21 m31 m41 |
 	//	| m12 m22 m32 m42 |     i“ü—Ís—ñ‚Í’PˆÊs—ñ‚Å‚ ‚é– ???j
 	//	| m13 m23 m33 m43 |
 	//	| M14 m24 m34 m44 |
 	//
-	static MgMat3E Mat3Inv( const MgMat3E& i_Tm);
+	static MgMat3DE Mat3Inv( const MgMat3DE& i_Tm);
 
 	//======================( ‚QŸŒ³ )==============================
 	//		’¼ü‚É‘Î‚·‚é‹¾‘œÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
-	static MgMat2E Mat2Mirror(						// (  O) ‹¾‘œ•ÏŠ·s—ñ
-					const	MgMat2E&	i_tm, 			// (I  ) •ÏŠ·s—ñ
-					const	MgULine2& i_uln			// (I  ) ‹¾‰f‚Ì²‚Æ‚·‚é’¼ü
+	static MgMat2DE Mat2Mirror(						// (  O) ‹¾‘œ•ÏŠ·s—ñ
+					const	MgMat2DE&	i_tm, 		// (I  ) •ÏŠ·s—ñ
+					const	MgULine2D&	i_uln		// (I  ) ‹¾‰f‚Ì²‚Æ‚·‚é’¼ü
 			);
 
 	//======================( ‚RŸŒ³ )==============================
 	//		•½–Ê‚É‘Î‚·‚é‹¾‘œÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
-	static MgMat3E Mat3Mirror(						// (  O) ‹¾‘œ•ÏŠ·s—ñ
-					const	MgMat3E&	  i_Tm,	 		// (I  ) •ÏŠ·s—ñ
-					const	MgPlane3& i_Pln			// (I  ) ‹¾‰f‚Ì–Ê‚Æ‚·‚é•½–Ê
+	static MgMat3DE Mat3Mirror(						// (  O) ‹¾‘œ•ÏŠ·s—ñ
+					const	MgMat3DE&  i_Tm,	 	// (I  ) •ÏŠ·s—ñ
+					const	MgPlane3D& i_Pln		// (I  ) ‹¾‰f‚Ì–Ê‚Æ‚·‚é•½–Ê
 			);
 
 	//======================( ‚QŸŒ³ )==============================
 	//		’†S“_‚Æ‰ñ“]Šp‚æ‚èÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
-	static MgMat2E Mat2Rot(							// (  O) •ÏŠ·s—ñ
-					const	MgPoint2&	i_ptc, 		// (I  ) ‰ñ“]‚Ì’†S‚Æ‚È‚é“_
+	static MgMat2DE Mat2Rot(						// (  O) •ÏŠ·s—ñ
+					const	MgPoint2D&	i_ptc, 		// (I  ) ‰ñ“]‚Ì’†S‚Æ‚È‚é“_
 					const	MREAL&		i_ar		// (I  ) ‰ñ“]Šp Degree
 			);
 
 	//======================( ‚RŸŒ³ )==============================
 	//		‰ñ“]²‚Æ‚È‚é’¼ü‚Æ‰ñ“]Šp‚æ‚èÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
-	static MgMat3E Mat3Rot(							// (  O) •ÏŠ·s—ñ
-					const	MgULine3&	i_ULn, 		// (I  ) ‰ñ“]²‚Æ‚È‚é’¼ü
-					const	MREAL		&i_ar		// (I  ) ‰ñ“]Šp(Degree)
+	static MgMat3DE Mat3Rot(						// (  O) •ÏŠ·s—ñ
+					const	MgULine3D&	i_ULn, 		// (I  ) ‰ñ“]²‚Æ‚È‚é’¼ü
+					const	MREAL&		i_ar		// (I  ) ‰ñ“]Šp(Degree)
 			);
 
 	//======================( ‚RŸŒ³ )==============================
 	//		³“ŠÛÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğŒvZ‚·‚é
 	//
-	static MgMat3E Mat3NProj(						// (  O) ³“ŠÛ•ÏŠ·s—ñ
-					const	MgMat3E		&i_Tm,		// (I  ) “ü—ÍÀ•W•ÏŠ·s—ñ
-					const	MgPlane3	&i_Pln		// (I  ) “ŠÛ–Ê
+	static MgMat3DE Mat3NProj(						// (  O) ³“ŠÛ•ÏŠ·s—ñ
+					const	MgMat3DE&	i_Tm,		// (I  ) “ü—ÍÀ•W•ÏŠ·s—ñ
+					const	MgPlane3D&	i_Pln		// (I  ) “ŠÛ–Ê
 			);
 
 	//======================( ‚RŸŒ³ )==============================
 	//		Î“ŠÛÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğŒvZ‚·‚é
 	//
-	static MgMat3E Mat3SProj(						// (  O) Î“ŠÛ•ÏÀ•W•ÏŠ·s—ñ
-					const	MgMat3E		&i_Tm,		// (I  ) “ü—ÍÀ•W•ÏŠ·s—ñ
-					const	MgPlane3	&i_Pln,		// (I  ) “ŠÛ–Ê
-					const	MgVect3&		i_V		// (I  ) “ŠÛ•ûŒü‚ğ¦‚·’PˆÊƒxƒNƒgƒ‹
+	static MgMat3DE Mat3SProj(						// (  O) Î“ŠÛ•ÏÀ•W•ÏŠ·s—ñ
+					const	MgMat3DE&	i_Tm,		// (I  ) “ü—ÍÀ•W•ÏŠ·s—ñ
+					const	MgPlane3D&	i_Pln,		// (I  ) “ŠÛ–Ê
+					const	MgVect3D&	i_V			// (I  ) “ŠÛ•ûŒü‚ğ¦‚·’PˆÊƒxƒNƒgƒ‹
 			);
 
 	//===========================================================================
@@ -1358,60 +1358,60 @@ public:
 	//					|	a			b			c			|
 	
 	static void Mat3PlntoXY(
-					const	MgPlane3	&i_Pln,		// (I  ) •ÏŠ·‘ÎÛ•½–Ê
-					const	MgPoint3&	i_PtOrg,	// (I  ) Œ´“_À•W			
-							MgMat3E*		o_MatXY,	// (  O) Pln to XY•½–Ê ‚R‚cƒ}ƒgƒŠƒbƒNƒX
-							MgMat3E*		o_MatPln	// (  O) XY•½–Ê to Pln ‚R‚cƒ}ƒgƒŠƒbƒNƒX
+					const	MgPlane3D&	i_Pln,		// (I  ) •ÏŠ·‘ÎÛ•½–Ê
+					const	MgPoint3D&	i_PtOrg,	// (I  ) Œ´“_À•W			
+							MgMat3DE*	o_pMatXY,	// (  O) Pln to XY•½–Ê ‚R‚cƒ}ƒgƒŠƒbƒNƒX
+							MgMat3DE*	o_pMatPln	// (  O) XY•½–Ê to Pln ‚R‚cƒ}ƒgƒŠƒbƒNƒX
 					);
 	
 	//===================(‚RŸŒ³ ¨ ‚QŸŒ³)=========================
 	//		‚R‚cÀ•W‚ğ‚Q‚cÀ•W‚Ö•ÏŠ·‚·‚é
 	//
 	static void Point3Dto2D(
-					const	MgPoint3&	i_P,		// (I  ) ‚R‚cÀ•W
-					const	MgMat3E		&i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
-							MgPoint2*	o_P			// (  O) ‚Q‚cÀ•W
+					const	MgPoint3D&	i_P,		// (I  ) ‚R‚cÀ•W
+					const	MgMat3DE&	i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+							MgPoint2D*	o_pP		// (  O) ‚Q‚cÀ•W
 					);
 
 	//===================(‚RŸŒ³ ¨ ‚QŸŒ³)=========================
 	//		‚R‚cü•ª‚ğ‚Q‚cü•ª‚ÖÀ•W•ÏŠ·‚·‚é
 	//
 	static inline void Line3Dto2D(
-					const MgLine3		&Lni,		// (I  ) ‚R‚cü•ª
-					const MgMat3E		&Mat,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
-						  MgLine2		*lno		// (  O) ‚Q‚cü•ª
+					const MgLine3D&		i_Lni,		// (I  ) ‚R‚cü•ª
+					const MgMat3DE&		i_Mat,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+						  MgLine2D*		o_plno		// (  O) ‚Q‚cü•ª
 					)
 	{
-		Point3Dto2D( Lni.p[0], Mat, &lno->p[0]); 
-		Point3Dto2D( Lni.p[1], Mat, &lno->p[1]);
+		Point3Dto2D( i_Lni.p[0], i_Mat, &o_plno->p[0]); 
+		Point3Dto2D( i_Lni.p[1], i_Mat, &o_plno->p[1]);
 	}
 
 	//===================(‚RŸŒ³ ¨ ‚QŸŒ³)=========================
 	//		‚R‚c’¼ü‚ğ‚Q‚c’¼ü‚ÖÀ•W•ÏŠ·‚·‚é
 	//
 	static void ULine3Dto2D(
-					const	MgULine3	&i_ULn,		// (I  ) ‚R‚c’¼ü
-					const	MgMat3E		&i_Mt,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
-						 	MgULine2	*o_uln		// (  O) ‚Q‚c’¼ü
+					const	MgULine3D&	i_ULn,		// (I  ) ‚R‚c’¼ü
+					const	MgMat3DE&	i_Mt,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+						 	MgULine2D*	o_puln		// (  O) ‚Q‚c’¼ü
 					);
 
 	//===================(‚RŸŒ³ ¨ ‚QŸŒ³)=========================
 	//		‚R‚cÀ•W‚ğ‚Q‚cÀ•W‚Ö•ÏŠ·‚·‚é
 	//
-	static MgPoint2 Point3Dto2D2(					// (  O) ‚Q‚cÀ•W
-					const	MgPoint3&	i_P,		// (I  ) ‚R‚cÀ•W
-					const	MgMat3E		&i_Tm		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+	static MgPoint2D Point3Dto2D2(					// (  O) ‚Q‚cÀ•W
+					const	MgPoint3D&	i_P,		// (I  ) ‚R‚cÀ•W
+					const	MgMat3DE&	i_Tm		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
 					);
 
 	//===================(‚RŸŒ³ ¨ ‚QŸŒ³)=========================
 	//		‚R‚cü•ª‚ğ‚Q‚cü•ª‚ÖÀ•W•ÏŠ·‚·‚é
 	//
-	static inline MgLine2 Line3Dto2D2(				// (  O) ‚Q‚cü•ª
-					const MgLine3		&Lni,		// (I  ) ‚R‚cü•ª
-					const MgMat3E		&Mat		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+	static inline MgLine2D Line3Dto2D2(				// (  O) ‚Q‚cü•ª
+					const MgLine3D&		Lni,		// (I  ) ‚R‚cü•ª
+					const MgMat3DE&		Mat			// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
 					)
 	{
-		return MgLine2( 
+		return MgLine2D( 
 					  Point3Dto2D2( Lni.p[0], Mat), 
 					  Point3Dto2D2( Lni.p[1], Mat));
 	}  
@@ -1419,67 +1419,67 @@ public:
 	//===================(‚RŸŒ³ ¨ ‚QŸŒ³)=========================
 	//		‚R‚c’¼ü‚ğ‚Q‚c’¼ü‚ÖÀ•W•ÏŠ·‚·‚é
 	//
-	static MgULine2 ULine3Dto2D2(					// (  O) ‚Q‚c’¼ü
-					const	MgULine3	&i_ULn,		// (I  ) ‚R‚c’¼ü
-					const	MgMat3E		&i_Tm		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+	static MgULine2D ULine3Dto2D2(					// (  O) ‚Q‚c’¼ü
+					const	MgULine3D&	i_ULn,		// (I  ) ‚R‚c’¼ü
+					const	MgMat3DE&	i_Tm		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
 					);
 
 	//===================(‚RŸŒ³ ¨ ‚QŸŒ³)=========================
 	//		‚R‚cÀ•WŒQ‚ğ‚Q‚cÀ•WŒQ‚Ö•ÏŠ·‚·‚é
 	//
 	static void	GPoint3Dto2D(
-					const	MgGPoint3	&i_GP,		// (I  ) ‚R‚cÀ•WŒQ
-					const	MgMat3E		&i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
-							MgGPoint2	*o_GP		// (  O) ‚Q‚cÀ•WŒQ
+					const	MgGPoint3D&	i_GP,		// (I  ) ‚R‚cÀ•WŒQ
+					const	MgMat3DE&	i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+							MgGPoint2D*	o_pGP		// (  O) ‚Q‚cÀ•WŒQ
 					);
 	
 	//===================(‚RŸŒ³ ¨ ‚QŸŒ³)=========================
 	//		‚R‚cÀ•WŒQiƒ|ƒŠƒ‰ƒCƒ“j‚ğ‚Q‚cÀ•WŒQ‚Ö•ÏŠ·‚·‚é
 	//
 	static void	Polyg3Dto2D(
-					const	MgPolyg3&	i_Pg,		// (I  ) ‚R‚cÀ•WŒQ
-					const	MgMat3E		&iTm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
-							MgPolyg2*	o_Pg		// (  O) ‚Q‚cÀ•WŒQ
+					const	MgPolyg3D&	i_Pg,		// (I  ) ‚R‚cÀ•WŒQ
+					const	MgMat3DE&	i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+							MgPolyg2D*	o_pPg		// (  O) ‚Q‚cÀ•WŒQ
 					);
 	
 	//===================(‚RŸŒ³ ¨ ‚QŸŒ³)=========================
 	//		‚R‚cü•ªŒQ‚ğ‚Q‚cü•ªŒQ‚Ö•ÏŠ·‚·‚é
 	//
 	static void	GLine3Dto2D(
-					const	MgGLine3	&i_GLn,		// (I  ) ‚R‚cü•ªŒQ
-					const	MgMat3E		&i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
-							MgGLine2*	o_gln		// (  O) ‚Q‚cü•ªŒQ
+					const	MgGLine3D&	i_GLn,		// (I  ) ‚R‚cü•ªŒQ
+					const	MgMat3DE&	i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+							MgGLine2D*	o_pgln		// (  O) ‚Q‚cü•ªŒQ
 					);
 	
 	//===================(‚RŸŒ³ ¨ ‚QŸŒ³)=========================
 	//		‚R‚c‘½ŠpŒ`ŒQiƒ|ƒŠƒ‰ƒCƒ“ŒQj‚ğ‚Q‚c‘½ŠpŒ`ŒQ‚Ö•ÏŠ·‚·‚é
 	//
 	static void GPolyg3Dto2D(
-					const	MgGPolyg3	&i_GPg,		// (I  ) ‚R‚c‘½ŠpŒ`ŒQ
-					const	MgMat3E		&i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
-						 	MgGPolyg2	*o_gpg		// (  O) ‚Q‚c‘½ŠpŒ`ŒQ
+					const	MgGPolyg3D&	i_GPg,		// (I  ) ‚R‚c‘½ŠpŒ`ŒQ
+					const	MgMat3DE&	i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+						 	MgGPolyg2D*	o_pgpg		// (  O) ‚Q‚c‘½ŠpŒ`ŒQ
 					);
 
 	//===================(‚QŸŒ³ ¨ ‚RŸŒ³)=========================
 	//		‚Q‚cÀ•W‚ğ‚R‚cÀ•W‚Ö•ÏŠ·‚·‚é
 	//
 	static void	Point2Dto3D(
-					const	MgPoint2&	i_pt,		// (I  ) ‚Q‚cÀ•W
-					const	MgMat3E		&i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
-							MgPoint3	*o_Pt		// (  O) ‚R‚cÀ•W
+					const	MgPoint2D&	i_pt,		// (I  ) ‚Q‚cÀ•W
+					const	MgMat3DE&	i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+							MgPoint3D*	o_pPt		// (  O) ‚R‚cÀ•W
 					);
 
 	//===================(‚QŸŒ³ ¨ ‚RŸŒ³)=========================
 	//		‚Q‚cü•ª‚ğ‚R‚cü•ª‚ÖÀ•W•ÏŠ·‚·‚é
 	//
 	static inline void Line2Dto3D(
-					const MgLine2&		lni,		// (I  ) ‚Q‚cü•ª
-					const MgMat3E		&Mat,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
-						  MgLine3		*Lno		// (  O) ‚R‚cü•ª
+					const MgLine2D&		i_lni,		// (I  ) ‚Q‚cü•ª
+					const MgMat3DE&		i_Mat,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+						  MgLine3D*		o_pLno		// (  O) ‚R‚cü•ª
 					)
 	{
-		Point2Dto3D( lni.p[0], Mat, &Lno->p[0]); 
-		Point2Dto3D( lni.p[1], Mat, &Lno->p[1]);
+		Point2Dto3D( i_lni.p[0], i_Mat, &o_pLno->p[0]); 
+		Point2Dto3D( i_lni.p[1], i_Mat, &o_pLno->p[1]);
 	}  
 
 
@@ -1487,28 +1487,28 @@ public:
 	//		‚Q‚c’¼ü‚ğ‚R‚c’¼ü‚ÖÀ•W•ÏŠ·‚·‚é
 	//
 	static void ULine2Dto3D(
-					const	MgULine2	&i_uln,		// (I  ) ‚Q‚c’¼ü
-					const	MgMat3E		&i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
-						 	MgULine3	*o_ULn		// (  O) ‚R‚c’¼ü
+					const	MgULine2D	&i_uln,		// (I  ) ‚Q‚c’¼ü
+					const	MgMat3DE	&i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+						 	MgULine3D	*o_ULn		// (  O) ‚R‚c’¼ü
 					);
 
 	//===================(‚QŸŒ³ ¨ ‚RŸŒ³)=========================
 	//		‚Q‚cÀ•W‚ğ‚R‚cÀ•W‚Ö•ÏŠ·‚·‚é
 	//
-	static MgPoint3 Point2Dto3D3(					// (  O) ‚R‚cÀ•W
-					const	MgPoint2&	i_Pt,		// (I  ) ‚Q‚cÀ•W
-					const	MgMat3E		&i_Tm		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+	static MgPoint3D Point2Dto3D3(					// (  O) ‚R‚cÀ•W
+					const	MgPoint2D&	i_Pt,		// (I  ) ‚Q‚cÀ•W
+					const	MgMat3DE	&i_Tm		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
 					);
 
 	//===================(‚QŸŒ³ ¨ ‚RŸŒ³)=========================
 	//		‚Q‚cü•ª‚ğ‚R‚cü•ª‚ÖÀ•W•ÏŠ·‚·‚é
 	//
-	static MgLine3 Line2Dto3D3(						// (  O) ‚R‚cü•ª
-					const MgLine2&		lni,		// (I  ) ‚Q‚cü•ª
-					const MgMat3E		&Mat		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+	static MgLine3D Line2Dto3D3(					// (  O) ‚R‚cü•ª
+					const MgLine2D&		lni,		// (I  ) ‚Q‚cü•ª
+					const MgMat3DE		&Mat		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
 					)
 	{
-		return MgLine3(
+		return MgLine3D(
 					  Point2Dto3D3( lni.p[0], Mat), 
 					  Point2Dto3D3( lni.p[1], Mat));
 	}  
@@ -1516,45 +1516,45 @@ public:
 	//===================(‚QŸŒ³ ¨ ‚RŸŒ³)=========================
 	//		‚Q‚c’¼ü‚ğ‚R‚c’¼ü‚ÖÀ•W•ÏŠ·‚·‚é
 	//
-	static MgULine3 ULine2Dto3D3(					// (  O) ‚R‚c’¼ü
-					const	MgULine2	&i_uln,		// (I  ) ‚Q‚c’¼ü
-					const	MgMat3E		&i_Tm		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+	static MgULine3D ULine2Dto3D3(					// (  O) ‚R‚c’¼ü
+					const	MgULine2D	&i_uln,		// (I  ) ‚Q‚c’¼ü
+					const	MgMat3DE	&i_Tm		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
 					);
 
 	//===================(‚QŸŒ³ ¨ ‚RŸŒ³)=========================
 	//		‚Q‚cÀ•WŒQ‚ğ‚R‚cÀ•WŒQ‚Ö•ÏŠ·‚·‚é
 	//
 	static void	GPoint2Dto3D(
-					const	MgGPoint2	&i_GPt,		// (I  ) ‚Q‚cÀ•WŒQ
-					const	MgMat3E		&i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
-							MgGPoint3	*o_GPt		// (  O) ‚R‚cÀ•WŒQ
+					const	MgGPoint2D	&i_GPt,		// (I  ) ‚Q‚cÀ•WŒQ
+					const	MgMat3DE	&i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+							MgGPoint3D	*o_GPt		// (  O) ‚R‚cÀ•WŒQ
 					);
 	
 	//===================(‚QŸŒ³ ¨ ‚RŸŒ³)=========================
 	//		‚Q‚cÀ•WŒQiƒ|ƒŠƒ‰ƒCƒ“j‚ğ‚R‚cÀ•WŒQ‚Ö•ÏŠ·‚·‚é
 	//
 	static void	Polyg2Dto3D(
-					const	MgPolyg2&	i_Pg,		// (I  ) ‚Q‚cÀ•WŒQ
-					const	MgMat3E		&i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
-							MgPolyg3*	o_Pg		// (  O) ‚R‚cÀ•WŒQ
+					const	MgPolyg2D&	i_Pg,		// (I  ) ‚Q‚cÀ•WŒQ
+					const	MgMat3DE	&i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+							MgPolyg3D*	o_Pg		// (  O) ‚R‚cÀ•WŒQ
 					);
 	
 	//===================(‚QŸŒ³ ¨ ‚RŸŒ³)=========================
 	//		‚Q‚c’¼üŒQ‚ğ‚R‚c’¼üŒQ‚Ö•ÏŠ·‚·‚é
 	//
 	static void	GLine2Dto3D(
-					const	MgGLine2&	i_gln,		// (I  ) ‚Q‚c’¼üŒQ
-					const	MgMat3E		&i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
-							MgGLine3	*o_GLn		// (  O) ‚R‚c’¼üŒQ
+					const	MgGLine2D&	i_gln,		// (I  ) ‚Q‚c’¼üŒQ
+					const	MgMat3DE	&i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+							MgGLine3D	*o_GLn		// (  O) ‚R‚c’¼üŒQ
 					);
 
 	//===================(‚QŸŒ³ ¨ ‚RŸŒ³)=========================
 	//		‚Q‚c‘½ŠpŒ`ŒQiƒ|ƒŠƒ‰ƒCƒ“ŒQj‚ğ‚R‚c‘½ŠpŒ`ŒQ‚Ö•ÏŠ·‚·‚é
 	//
 	static void GPolyg2Dto3D(
-					const	MgGPolyg2	&i_GPg,		// (I  ) ‚Q‚c‘½ŠpŒ`ŒQ
-					const	MgMat3E		&i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
-						 	MgGPolyg3	*o_GPg		// (  O) ‚R‚c‘½ŠpŒ`ŒQ
+					const	MgGPolyg2D	&i_GPg,		// (I  ) ‚Q‚c‘½ŠpŒ`ŒQ
+					const	MgMat3DE	&i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+						 	MgGPolyg3D	*o_GPg		// (  O) ‚R‚c‘½ŠpŒ`ŒQ
 					);
 
 	//
@@ -1564,73 +1564,73 @@ public:
 	//======================( ‚QŸŒ³ )==============================
 	//		Œ´“_‚ğ’†S‚É‰ñ“]‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
-	static MgMat3 Mat3Rot( MREAL dg)
+	static MgMat3D Mat3Rot( MREAL dg)
 	{
 		MREAL	rd = MGRADIAN( dg);
-		return Mat3RotV( MgVect2( MREAL( cos( rd)), MREAL( sin( rd))));
+		return Mat3RotV( MgVect2D( MREAL( cos( rd)), MREAL( sin( rd))));
 	}
 
 	//======================( ‚QŸŒ³ )==============================
 	//		Œ´“_‚ğ’†S‚É‹t‰ñ“]‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
-	static MgMat3 Mat3RotRev( MREAL dg)
+	static MgMat3D Mat3RotRev( MREAL dg)
 	{
 		MREAL	rd = MGRADIAN( dg);
-		return Mat3RotRevV( MgVect2( MREAL( cos( rd)), MREAL( sin( rd))));
+		return Mat3RotRevV( MgVect2D( MREAL( cos( rd)), MREAL( sin( rd))));
 	}
 
 	//======================( ‚RŸŒ³ )==============================
 	//		‚w‚x•½–Ê‚ÅŒ´“_‚ğ’†S‚É‰ñ“]‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
-	static MgMat4 Mat4RotZ( MREAL dg)
+	static MgMat4D Mat4RotZ( MREAL dg)
 	{
 		MREAL	rd = MGRADIAN( dg);
-		return Mat4RotZV( MgVect2( MREAL( cos( rd)), MREAL( sin( rd))));
+		return Mat4RotZV( MgVect2D( MREAL( cos( rd)), MREAL( sin( rd))));
 	}
 
 	//======================( ‚RŸŒ³ )==============================
 	//		‚w‚x•½–Ê‚ÅŒ´“_‚ğ’†S‚É‹t‰ñ“]‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
-	static MgMat4 Mat4RotRevZ( MREAL dg)
+	static MgMat4D Mat4RotRevZ( MREAL dg)
 	{
 		MREAL	rd = MGRADIAN( dg);
-		return Mat4RotRevZV( MgVect2( MREAL( cos( rd)), MREAL( sin( rd))));
+		return Mat4RotRevZV( MgVect2D( MREAL( cos( rd)), MREAL( sin( rd))));
 	}
 
 	//======================( ‚RŸŒ³ )==============================
 	//		‚x‚y•½–Ê‚ÅŒ´“_‚ğ’†S‚É‰ñ“]‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
-	static MgMat4 Mat4RotTX( MREAL dg)
+	static MgMat4D Mat4RotTX( MREAL dg)
 	{
 		MREAL	rd = MGRADIAN( dg);
-		return  Mat4RotTXV( MgVect2( MREAL( cos( rd)), MREAL( sin( rd))));
+		return  Mat4RotTXV( MgVect2D( MREAL( cos( rd)), MREAL( sin( rd))));
 	}
 
 	//======================( ‚RŸŒ³ )==============================
 	//		‚x‚y•½–Ê‚ÅŒ´“_‚ğ’†S‚É‹t‰ñ“]‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
-	static MgMat4 Mat4RotRevX( MREAL dg)
+	static MgMat4D Mat4RotRevX( MREAL dg)
 	{
 		MREAL	rd = MGRADIAN( dg);
-		return Mat4RotRevXV( MgVect2( MREAL( cos( rd)), MREAL( sin( rd))));
+		return Mat4RotRevXV( MgVect2D( MREAL( cos( rd)), MREAL( sin( rd))));
 	}
 
 	//======================( ‚RŸŒ³ )==============================
 	//		‚y‚w•½–Ê‚ÅŒ´“_‚ğ’†S‚É‰ñ“]‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
-	static MgMat4 Mat4RotY( MREAL dg)
+	static MgMat4D Mat4RotY( MREAL dg)
 	{
 		MREAL	rd = MGRADIAN( dg);
-		return Mat4RotYV( MgVect2( MREAL( cos( rd)), MREAL( sin( rd))));
+		return Mat4RotYV( MgVect2D( MREAL( cos( rd)), MREAL( sin( rd))));
 	}
 
 	//======================( ‚RŸŒ³ )==============================
 	//		‚y‚w•½–Ê‚ÅŒ´“_‚ğ’†S‚É‰ñ“]‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
-	static MgMat4 Mat4RotRevY( MREAL dg)
+	static MgMat4D Mat4RotRevY( MREAL dg)
 	{
 		MREAL	rd = MGRADIAN( dg);
-		return Mat4RotRevYV( MgVect2( MREAL( cos( rd)), MREAL( sin( rd))));
+		return Mat4RotRevYV( MgVect2D( MREAL( cos( rd)), MREAL( sin( rd))));
 	}
 
 	//===========================================================================
@@ -1638,13 +1638,13 @@ public:
 	//	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Ì‰ÁZ
 	//
 	//	g—p–@
-	//		MgMat4 = MgMat31 + MgMat32;
+	//		MgMat4D = MgMat3D1 + MgMat3D2;
 	//
 	//	| m11 m12 m13 |     | n11 n12 n13 |
 	//	| m21 m22 m23 |  +  | n21 n22 n23 |
 	//	| m31 m32 m33 |     | n31 n32 n33 |
 	//
-	static MgMat3 MatPlus2( const MgMat3& i_tm, const MgMat3& i_tn);
+	static MgMat3D MatPlus2( const MgMat3D& i_tm, const MgMat3D& i_tn);
 
 	//
 	//===========================================================================
@@ -1652,26 +1652,26 @@ public:
 	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Ì‰ÁZ
 	//
 	//	g—p–@
-	//		MgMat31 += MgMat32;
+	//		MgMat3D1 += MgMat3D2;
 	//
 	//	| m11 m12 m13 |     | m11 m12 m13 |     | n11 n12 n13 |
 	//	| m21 m22 m23 |  =  | m21 m22 m23 |  +  | n21 n22 n23 |
 	//	| m31 m32 m33 |     | m31 m32 m33 |     | n31 n32 n33 |
 	//
-	static MgMat3 MatPlusEqual2( MgMat3& io_tm, const MgMat3& i_tn);
+	static MgMat3D MatPlusEqual2( MgMat3D& io_tm, const MgMat3D& i_tn);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		•‰‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
 	//	g—p–@
-	//		MgMat32 = - MgMat31;
+	//		MgMat3D2 = - MgMat3D1;
 	//
 	//	  | m11 m12 m13 |
 	//	- | m21 m22 m23 |
 	//	  | m31 m32 m33 |
 	//
-	static MgMat3 MatSingleMinus2( const MgMat3& m1);
+	static MgMat3D MatSingleMinus2( const MgMat3D& m1);
 
 	//
 	//===========================================================================
@@ -1679,39 +1679,39 @@ public:
 	//		•‰‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
 	//	g—p–@
-	//		MgMat32 = - MgMat31;
+	//		MgMat3D2 = - MgMat3D1;
 	//
 	//	  | m11 m12 m13 |
 	//	- | m21 m22 m23 |
 	//	  | m31 m32 m33 |
 	//
-	static MgMat3 MatMinusSingle2( const MgMat3& i_tm);
+	static MgMat3D MatMinusSingle2( const MgMat3D& i_tm);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ÌˆøZ
 	//
 	//	g—p–@
-	//		MgMat4 = MgMat31 - MgMat32;
+	//		MgMat4D = MgMat3D1 - MgMat3D2;
 	//
 	//	  | m11 m12 m13 |     | n11 n12 n13 |
 	//	  | m21 m22 m23 |  -  | n21 n22 n23 |
 	//	  | m31 m32 m33 |     | n31 n32 n33 |
 	//
-	static MgMat3 MatMinus2( const MgMat3& i_tm, const MgMat3& i_tn);
+	static MgMat3D MatMinus2( const MgMat3D& i_tm, const MgMat3D& i_tn);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ÌˆøZ
 	//
 	//	g—p–@
-	//		MgMat31 -= MgMat32;
+	//		MgMat3D1 -= MgMat3D2;
 	//
 	//	| m11 m12 m13 |    | m11 m12 m13 |     | n11 n12 n13 |
 	//	| m21 m22 m23 |  = | m21 m22 m23 |  -  | n21 n22 n23 |
 	//	| m31 m32 m33 |    | m31 m32 m33 |     | n31 n32 n33 |
 	//
-	static MgMat3 MatMinusEqual2( MgMat3& io_tm, const MgMat3& i_tn);
+	static MgMat3D MatMinusEqual2( MgMat3D& io_tm, const MgMat3D& i_tn);
 
 	//===========================================================================
 	//	ˆ—“à—e
@@ -1719,13 +1719,13 @@ public:
 	//	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚é•ÏŠ·Œã‚ÉA‚³‚ç‚ÉÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚é•ÏŠ·‚·‚éƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
 	//	g—p–@
-	//		MgMat4 = MgMat31 * MgMat32;
+	//		MgMat4D = MgMat3D1 * MgMat3D2;
 	//
 	//	| m11 m12 m13 |     | n11 n12 n13 |
 	//	| m21 m22 m23 |  X  | n21 n22 n23 |
 	//	| m31 m32 m33 |     | n31 n32 n33 |
 	//
-	static MgMat3 MatMult2( const MgMat3& i_tm, const MgMat3& i_tn);
+	static MgMat3D MatMult2( const MgMat3D& i_tm, const MgMat3D& i_tn);
 
 	//===========================================================================
 	//	ˆ—“à—e
@@ -1733,65 +1733,65 @@ public:
 	//	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚é•ÏŠ·Œã‚ÉA‚³‚ç‚ÉÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚é•ÏŠ·‚·‚éƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
 	//	g—p–@
-	//		MgMat32 *= MgMat31;
+	//		MgMat3D2 *= MgMat3D1;
 	//
 	//	| m11 m12 m13 |     | m11 m12 m13 |     | n11 n12 n13 |
 	//	| m21 m22 m23 |  =  | m21 m22 m23 |  X  | n21 n22 n23 |
 	//	| m31 m32 m33 |     | m31 m32 m33 |     | n31 n32 n33 |
 	//
-	static MgMat3 MatMultEqual2( MgMat3& io_tm, const MgMat3& i_tn);
+	static MgMat3D MatMultEqual2( MgMat3D& io_tm, const MgMat3D& i_tn);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
-	//		MgPoint2po = MgPoint2p * MgMat3tm;
+	//		MgPoint2Dpo = MgPoint2Dp * MgMat3Dtm;
 	//
 	//					   | m11 m12 m13 |
 	//	| px  py  1  |  X  | m21 m22 m23 |
 	//					   | m31 m32 m33 |     
 	//
-	static MgVect2 MatMultPt22( const MgVect2& i_pt, const MgMat3& i_tm);
+	static MgVect2D MatMultPt22( const MgVect2D& i_pt, const MgMat3D& i_tm);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
-	//		MgPoint2p *= MgMat3m;
+	//		MgPoint2Dp *= MgMat3Dm;
 	//
 	//										  | m11 m12 m13 |
 	//	| px  py  1  |  =  | px  py  1  |  X  | m21 m22 m23 |
 	//				   						  | m31 m32 m33 |
 	//
-	static MgVect2 MatMultEqualPt22( MgVect2& io_pt, const MgMat3& i_tm);
+	static MgVect2D MatMultEqualPt22( MgVect2D& io_pt, const MgMat3D& i_tm);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
-	//		MgULine2 = MgULine2*  MgMat3;
+	//		MgULine2D = MgULine2D*  MgMat3D;
 	//
 	//	| px  py  1  |     | m11 m12 m13 |
 	//	| vx  vy  0  |  X  | m21 m22 m23 |
 	//					   | m31 m32 m33 |
 	//
-	static MgULine2 MatMultULn22( const MgULine2& i_uln, const MgMat3& i_tm);
+	static MgULine2D MatMultULn22( const MgULine2D& i_uln, const MgMat3D& i_tm);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
-	//		MgULine2 *= MgMat3;
+	//		MgULine2D *= MgMat3D;
 	//
 	//	| px  py  1  |     | px  py  1  |     | m11 m12 m13 |
 	//	| vx  vy  0  |  =  | vx  vy  1  |  X  | m21 m22 m23 |
 	//			             				  | m31 m32 m33 |
 	//
-	static MgULine2 MatMultEqualULn22( MgULine2& io_uln, const MgMat3& i_tm);
+	static MgULine2D MatMultEqualULn22( MgULine2D& io_uln, const MgMat3D& i_tm);
 
 	//===============( ‚QŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Å‚RŸŒ³À•Wˆ— )==============
 	//
@@ -1800,21 +1800,21 @@ public:
 	//	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
-	//		MgVect32 = MgVect31 * MgMat31;
+	//		MgVect3D2 = MgVect3D1 * MgMat3D1;
 	//
 	//						  | m11 m12 0 m13 |     
 	//	| px  py  pz  1 |  X  | m21 m22 0 m23 |
 	//						  |  0   0  1  0  |
 	//						  | m31 m32 0 m33 |
 	//
-	static MgVect3 MatMultPt32( const MgVect3& i_Pt, const MgMat3& i_tm);
+	static MgVect3D MatMultPt32( const MgVect3D& i_Pt, const MgMat3D& i_tm);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
-	//		MgVect3 *= MgMat3;
+	//		MgVect3D *= MgMat3D;
 	//
 	//						 						| m11 m12 0 m13 |
 	//	| px  py  pz  1 |  =  | px  py  pz  1 |  X  | m21 m22 0 m23 |
@@ -1822,49 +1822,49 @@ public:
 	//			   									| m31 m32 0 m33 |
 	
 	
-	static MgVect3 MatMultEqualPt32( MgVect3& io_Pt, const MgMat3& i_tm);
+	static MgVect3D MatMultEqualPt32( MgVect3D& io_Pt, const MgMat3D& i_tm);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
-	//		MgULine2 = MgULine2 * MgMat3;
+	//		MgULine2D = MgULine2D * MgMat3D;
 	//
 	//	| px  py  pz  1 |	  | m11 m12 0 m13 |
 	//	| vx  vy  vz  1 |  X  | m21 m22 0 m23 |
 	//						  |  0   0  1  0  |
 	//			   			  | m31 m32 0 m33 |
 	//
-	static MgULine3 MultULn32( const MgULine3& ULn1, const MgMat3& m2);
+	static MgULine3D MultULn32( const MgULine3D& ULn1, const MgMat3D& m2);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
-	//		MgULine2 = MgULine2 * MgMat3;
+	//		MgULine2D = MgULine2D * MgMat3D;
 	//
 	//	| px  py  pz  1 |	  | m11 m12 0 m13 |
 	//	| vx  vy  vz  1 |  X  | m21 m22 0 m23 |
 	//						  |  0   0  1  0  |
 	//						  | m31 m32 0 m33 |
 	//
-	static MgULine3 MatMultULn32( const MgULine3& i_ULn, const MgMat3& i_tm);
+	static MgULine3D MatMultULn32( const MgULine3D& i_ULn, const MgMat3D& i_tm);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
-	//		MgULine2 *= MgMat3;
+	//		MgULine2D *= MgMat3D;
 	//
 	//	| px  py  pz  1 |     | px  py  pz  1 |		| m11 m12 0 m13 |
 	//	| vx  vy  vz  1 |  =  | vx  vy  vz  1 |  X  | m21 m22 0 m23 |
 	//												|  0   0  1  0  |
 	//				 				   				| m31 m32 0 m33 |
 	//
-	static MgULine3 MatMultEqualULn32( MgULine3& io_ULn, const MgMat3& i_tm);
+	static MgULine3D MatMultEqualULn32( MgULine3D& io_ULn, const MgMat3D& i_tm);
 
 	//===========================================================================
 	//
@@ -1875,441 +1875,441 @@ public:
 	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Ì‰ÁZ
 	//
 	//	g—p–@
-	//		MgMat4_3 = MgMat4_1 + MgMat4_2;
+	//		MgMat4D_3 = MgMat4D_1 + MgMat4D_2;
 	//
 	//	| m11 m12 m13 m14 |     | n11 n12 n13 n14 |
 	//	| m21 m22 m23 m24 |  +  | n21 n22 n23 n24 |
 	//	| m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 	//	| m41 m42 m43 m44 |     | n41 n42 n43 n44 |    
 	//
-	static MgMat4 MatPlus3( const MgMat4& i_Tm, const MgMat4& i_Tn);
+	static MgMat4D MatPlus3( const MgMat4D& i_Tm, const MgMat4D& i_Tn);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Ì‰ÁZ
 	//
 	//	g—p–@
-	//		MgMat4 += MgMat4;
+	//		MgMat4D += MgMat4D;
 	//
 	//	| m11 m12 m13 m14 |		| m11 m12 m13 m14 |     | n11 n12 n13 n14 |
 	//	| m21 m22 m23 m24 |  =  | m21 m22 m23 m24 |  +  | n21 n22 n23 n24 |
 	//	| m31 m32 m33 m34 |     | m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 	//	| m41 m42 m43 m44 |     | m41 m42 m43 m44 |     | n41 n42 n43 n44 |     
 	//
-	static MgMat4 MatPlusEqual3( MgMat4& io_Tm, const MgMat4& i_Tn);
+	static MgMat4D MatPlusEqual3( MgMat4D& io_Tm, const MgMat4D& i_Tn);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		•‰‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
 	//	g—p–@
-	//		MgMat4_2 = - MgMat4_1;
+	//		MgMat4D_2 = - MgMat4D_1;
 	//
 	//	  | m11 m12 m13 m14 |
 	//	- | m21 m22 m23 m24 |
 	//	  | m31 m32 m33 m34 |
 	//	  | m41 m42 m43 m44 |     
 	//
-	static MgMat4 MatSingleMinus3( const MgMat4& i_Tm);
+	static MgMat4D MatSingleMinus3( const MgMat4D& i_Tm);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ÌˆøZ
 	//
 	//	g—p–@
-	//		MgMat4_3 = MgMat4_1 - MgMat4_2;
+	//		MgMat4D_3 = MgMat4D_1 - MgMat4D_2;
 	//
 	//	  | m11 m12 m13 m14 |     | n11 n12 n13 n14 |
 	//	  | m21 m22 m23 m24 |  -  | n21 n22 n23 n24 |
 	//	  | m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 	//	  | m41 m42 m43 m44 |     | n41 n42 n43 n44 |    
 	//
-	static MgMat4 MatMinus3( const MgMat4& i_Tm, const MgMat4& i_Tn);
+	static MgMat4D MatMinus3( const MgMat4D& i_Tm, const MgMat4D& i_Tn);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ÌˆøZ
 	//
 	//	g—p–@
-	//		MgMat4 -= MgMat4;
+	//		MgMat4D -= MgMat4D;
 	//
 	//	| m11 m12 m13 m14 |		| m11 m12 m13 m14 |     | n11 n12 n13 n14 |
 	//	| m21 m22 m23 m24 |  =  | m21 m22 m23 m24 |  -  | n21 n22 n23 n24 |
 	//	| m31 m32 m33 m34 |     | m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 	//	| m41 m42 m43 m44 |     | m41 m42 m43 m44 |     | n41 n42 n43 n44 |     
 	//
-	static MgMat4 MatMinusEqual3( MgMat4& io_Tm, const MgMat4& i_Tn);
+	static MgMat4D MatMinusEqual3( MgMat4D& io_Tm, const MgMat4D& i_Tn);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Ì‚©‚¯Z
 	//
 	//	g—p–@
-	//		MgMat4_3 = MgMat4_1 * MgMat4_2;
+	//		MgMat4D_3 = MgMat4D_1 * MgMat4D_2;
 	//
 	//	| m11 m12 m13 m14 |     | n11 n12 n13 n14 |
 	//	| m21 m22 m23 m24 |  X  | n21 n22 n23 n24 |
 	//	| m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 	//	| m41 m42 m43 m44 |     | n41 n42 n43 n44 |    
 	//
-	static MgMat4 MatMult3( const MgMat4& i_Tm, const MgMat4& i_Tn);
+	static MgMat4D MatMult3( const MgMat4D& i_Tm, const MgMat4D& i_Tn);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Ì‚©‚¯Z
 	//
 	//	g—p–@
-	//		MgMat4 *= MgMat4;
+	//		MgMat4D *= MgMat4D;
 	//
 	//	| m11 m12 m13 m14 |     | m11 m12 m13 m14 |     | n11 n12 n13 n14 |
 	//	| m21 m22 m23 m24 |  =  | m21 m22 m23 m24 |  X  | n21 n22 n23 n24 |
 	//	| m31 m32 m33 m34 |     | m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 	//	| m41 m42 m43 m44 |     | m41 m42 m43 m44 |     | n41 n42 n43 n44 |     
 	//
-	static MgMat4 MatMultEqual3( MgMat4& io_Tm, const MgMat4& i_Tn);
+	static MgMat4D MatMultEqual3( MgMat4D& io_Tm, const MgMat4D& i_Tn);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚QŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
-	//		MgMat4_2 = MgVect2 * MgMat4_1;
+	//		MgMat4D_2 = MgVect2D * MgMat4D_1;
 	//
 	//						    | m11 m12 m13 m14 |
 	//	| px  py  0   1   |  X  | m21 m22 m23 m24 |
 	//						    | m31 m32 m33 m34 |
 	//						    | m41 m42 m43 m44 |
 	//
-	static MgVect2 MatMultPt23( const MgVect2& i_Pt, const MgMat4& i_Tm);
+	static MgVect2D MatMultPt23( const MgVect2D& i_Pt, const MgMat4D& i_Tm);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚QŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
-	//		MgVect2 *= MgMat4;
+	//		MgVect2D *= MgMat4D;
 	//
 	//						     					    | m11 m12 m13 m14 |
 	//	| px  py  0   1   |  =  | px  py  0   1   |  X  | m21 m22 m23 m24 |
 	//	           									    | m31 m32 m33 m34 |
 	//	           									    | m41 m42 m43 m44 |
 	//
-	static MgVect2 MatMultEqualPt23( MgVect2& io_Pt, const MgMat4& i_Tm);
+	static MgVect2D MatMultEqualPt23( MgVect2D& io_Pt, const MgMat4D& i_Tm);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
-	//		MgVect3_2 = MgVect3_1 * MgMat4;
+	//		MgVect3D_2 = MgVect3D_1 * MgMat4D;
 	//
 	//	 					    | m11 m12 m13 m14 |
 	//	| px  py  pz  1   |  X  | m21 m22 m23 m24 |
 	//						    | m31 m32 m33 m34 |
 	//						    | m41 m42 m43 m44 |
 	//
-	static MgVect3 MatMultPt33( const MgVect3& i_Pt, const MgMat4& i_Tm);
+	static MgVect3D MatMultPt33( const MgVect3D& i_Pt, const MgMat4D& i_Tm);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
-	//		MgVect3 *= MgMat4;
+	//		MgVect3D *= MgMat4D;
 	//
 	//							 					    | m11 m12 m13 m14 |
 	//	| px  py  pz  1   |  =  | px  py  pz  1   |  X  | m21 m22 m23 m24 |
 	//												    | m31 m32 m33 m34 |
 	//												    | m41 m42 m43 m44 |
 	//
-	static MgVect3 MatMultEqualPt33( MgVect3& io_Pt, const MgMat4& i_Tm);
+	static MgVect3D MatMultEqualPt33( MgVect3D& io_Pt, const MgMat4D& i_Tm);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
-	//		MgULine3_2 = MgULine3_1 * MgMat4;
+	//		MgULine3D_2 = MgULine3D_1 * MgMat4D;
 	//
 	//	| px  py  pz  1   |     | m11 m12 m13 m14 |
 	//	| vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
 	//							| m31 m32 m33 m34 |
 	//							| m41 m42 m43 m44 |
 	//
-	static MgULine3 MatMultULn33( const MgULine3& i_ULn, const MgMat4& i_Tm);
+	static MgULine3D MatMultULn33( const MgULine3D& i_ULn, const MgMat4D& i_Tm);
 
 	//===========================================================================
 	//	ˆ—“à—e
 	//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
-	//		MgVect3 *= MgMat4;
+	//		MgVect3D *= MgMat4D;
 	//
 	//	| px  py  pz  1   |     | px  py  pz  1   |     | m11 m12 m13 m14 |
 	//	| vx  vy  vz  0   |  =  | vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
 	//													| m31 m32 m33 m34 |
 	//													| m41 m42 m43 m44 |
 	//
-	static MgULine3 MatMultEqualULn33( MgULine3& io_ULn, const MgMat4& i_Tm);
+	static MgULine3D MatMultEqualULn33( MgULine3D& io_ULn, const MgMat4D& i_Tm);
 
 	//======================( ‚QŸŒ³ )==============================
 	//	ˆ—“à—e
 	//		Œ´“_‚ğ’†S‚É‰ñ“]‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
 	//	g—p–@
-	//		MgMat3 = MgMat3RotV(MgVect2);
+	//		MgMat3D = MgMat3DRotV(MgVect2D);
 	//
-	//		( MgVect2: ’PˆÊƒxƒNƒgƒ‹)
+	//		( MgVect2D: ’PˆÊƒxƒNƒgƒ‹)
 	//
 	//	|  cos  sin  0. |
 	//	| -sin  cos  0. |
 	//	|   0.   0.  1. |
 	//
-	static MgMat3 Mat3RotV( const MgVect2& v);
+	static MgMat3D Mat3RotV( const MgVect2D& v);
 
 	//======================( ‚QŸŒ³ )==============================
 	//	ˆ—“à—e
 	//		Œ´“_‚ğ’†S‚É‹t‰ñ“]‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
 	//	g—p–@
-	//		MgMat3 = MgMat3RotRevV(MgVect2);
+	//		MgMat3D = MgMat3DRotRevV(MgVect2D);
 	//
-	//		( MgVect2: ’PˆÊƒxƒNƒgƒ‹)
+	//		( MgVect2D: ’PˆÊƒxƒNƒgƒ‹)
 	//
 	//	| cos -sin  0. |
 	//	| sin  cos  0. |
 	//	|  0.   0.  1. |
 	//
-	static MgMat3 Mat3RotRevV( const MgVect2& v);
+	static MgMat3D Mat3RotRevV( const MgVect2D& v);
 
 	//======================( ‚RŸŒ³ )==============================
 	//	ˆ—“à—e
 	//		‚w‚x•½–Ê‚ÅŒ´“_‚ğ’†S‚É‰ñ“]‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
 	//	g—p–@
-	//		MgMat4 = MgMat4RotZV(MgVect2);
+	//		MgMat4D = MgMat4DRotZV(MgVect2D);
 	//
-	//		( MgVect2: ’PˆÊƒxƒNƒgƒ‹)
+	//		( MgVect2D: ’PˆÊƒxƒNƒgƒ‹)
 	//
 	//	|  cos  sin  0.  0. |
 	//	| -sin  cos  0.  0. |
 	//	|   0.   0.  1.  0. |
 	//	|   0.   0.  0.  1. |
 	//
-	static MgMat4 Mat4RotZV( const MgVect2& v);
+	static MgMat4D Mat4RotZV( const MgVect2D& v);
 
 	//======================( ‚RŸŒ³ )==============================
 	//	ˆ—“à—e
 	//		‚w‚x•½–Ê‚ÅŒ´“_‚ğ’†S‚É‹t‰ñ“]‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
 	//	g—p–@
-	//		MgMat4 = MgMat4RotRevZV(MgVect2);
+	//		MgMat4D = MgMat4DRotRevZV(MgVect2D);
 	//
-	//		( MgVect2: ’PˆÊƒxƒNƒgƒ‹)
+	//		( MgVect2D: ’PˆÊƒxƒNƒgƒ‹)
 	//
 	//	|  cos -sin  0.  0. |
 	//	|  sin  cos  0.  0. |
 	//	|   0.   0.  1.  0. |
 	//	|   0.   0.  0.  1. |
 	//
-	static MgMat4 Mat4RotRevZV( const MgVect2& v);
+	static MgMat4D Mat4RotRevZV( const MgVect2D& v);
 
 	//======================( ‚RŸŒ³ )==============================
 	//	ˆ—“à—e
 	//		‚x‚y•½–Ê‚ÅŒ´“_‚ğ’†S‚É‰ñ“]‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
 	//	g—p–@
-	//		MgMat4 = MgMat4RotTXV(MgVect2);
+	//		MgMat4D = MgMat4DRotTXV(MgVect2D);
 	//
-	//		( MgVect2: ’PˆÊƒxƒNƒgƒ‹)
+	//		( MgVect2D: ’PˆÊƒxƒNƒgƒ‹)
 	//
 	//	|  1.   0.   0.  0. |
 	//	|  0.  cos  sin  0. |
 	//	|  0. -sin  cos  0. |
 	//	|  0.   0.   0.  1. |
 	//
-	static MgMat4 Mat4RotTXV( const MgVect2& v);
+	static MgMat4D Mat4RotTXV( const MgVect2D& v);
 
 	//======================( ‚RŸŒ³ )==============================
 	//	ˆ—“à—e
 	//		‚x‚y•½–Ê‚ÅŒ´“_‚ğ’†S‚É‹t‰ñ“]‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
 	//	g—p–@
-	//		MgMat4 = MgMat4RotRevXV(MgVect2);
+	//		MgMat4D = MgMat4DRotRevXV(MgVect2D);
 	//
-	//		( MgVect2: ’PˆÊƒxƒNƒgƒ‹)
+	//		( MgVect2D: ’PˆÊƒxƒNƒgƒ‹)
 	//
 	//	|  1.   0.   0.  0. |
 	//	|  0.  cos -sin  0. |
 	//	|  0.  sin  cos  0. |
 	//	|  0.   0.   0.  1. |
 	//
-	static MgMat4 Mat4RotRevXV( const MgVect2& v);
+	static MgMat4D Mat4RotRevXV( const MgVect2D& v);
 
 	//======================( ‚RŸŒ³ )==============================
 	//	ˆ—“à—e
 	//		‚y‚w•½–Ê‚ÅŒ´“_‚ğ’†S‚É‰ñ“]‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
 	//	g—p–@
-	//		MgMat4 = MgMat4RotYV(MgVect2);
+	//		MgMat4D = MgMat4DRotYV(MgVect2D);
 	//
-	//		( MgVect2: ’PˆÊƒxƒNƒgƒ‹)
+	//		( MgVect2D: ’PˆÊƒxƒNƒgƒ‹)
 	//
 	//	|  cos   0. -sin   0. |
 	//	|   0.   1.   0.   0. |
 	//	|  sin   0.  cos   0. |
 	//	|   0.   0.   0.   1. |
 	//
-	static MgMat4 Mat4RotYV( const MgVect2& v);
+	static MgMat4D Mat4RotYV( const MgVect2D& v);
 
 	//======================( ‚RŸŒ³ )==============================
 	//	ˆ—“à—e
 	//		‚y‚w•½–Ê‚ÅŒ´“_‚ğ’†S‚É‹t‰ñ“]‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
 	//	g—p–@
-	//		MgMat4 = MgMat4RotRevYV(MgVect2);
+	//		MgMat4D = MgMat4DRotRevYV(MgVect2D);
 	//
-	//		( MgVect2: ’PˆÊƒxƒNƒgƒ‹)
+	//		( MgVect2D: ’PˆÊƒxƒNƒgƒ‹)
 	//
 	//	|  cos   0.  sin   0. |
 	//	|   0.   1.   0.   0. |
 	//	| -sin   0.  cos   0. |
 	//	|   0.   0.   0.   1. |
 	//
-	static MgMat4 Mat4RotRevYV( const MgVect2& v);
+	static MgMat4D Mat4RotRevYV( const MgVect2D& v);
 
 	//======================( ‚QŸŒ³ )==============================
 	//	ˆ—“à—e
 	//	    ‚wC‚x•ûŒü‚ÉŠg‘å^k¬‚·‚éƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
 	//	g—p–@
-	//		Mgmat_2 = MgMat3Scl(MgVect2_1);
+	//		Mgmat_2 = MgMat3DScl(MgVect2D_1);
 	//
 	//	| sx  0   0  |
 	//	| 0   xy  0  |
 	//	| 0   0   1  |
 	//
-	static MgMat3 Mat3Scl( const MgVect2& vs);
+	static MgMat3D Mat3Scl( const MgVect2D& vs);
 
 	//======================( ‚RŸŒ³ )==============================
 	//	ˆ—“à—e
 	//	    ‚wC‚xC‚y•ûŒü‚ÉŠg‘å^k¬‚·‚éƒ}ƒgƒŠƒbƒNƒX‚ğì¬‚·‚é
 	//
 	//	g—p–@
-	//		Mgmat3_2 = MgMat4Scl(MgMat4_1);
+	//		Mgmat3_2 = MgMat4DScl(MgMat4D_1);
 	//
 	//	| sx  0   0   0  |
 	//	| 0   xy  0   0  |
 	//	| 0   0   sz  0  |
 	//	| 0   0   0   1  |
 	//
-	static MgMat4 Mat4Scl( const MgVect3& vs);
+	static MgMat4D Mat4Scl( const MgVect3D& vs);
 
 	//======================( ‚QŸŒ³ )==============================
 	//	ˆ—“à—e
 	//		•½sˆÚ“®‚Ì•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬‚·‚é
 	//
 	//	g—p–@
-	//		MgMat3 = MgMat3Mov(MgVect2)
+	//		MgMat3D = MgMat3DMov(MgVect2D)
 	//
 	//	|  1.  0.  0. |
 	//	|  0.  1.  0. |
 	//	|  v.x v.y 1. |
 	//
-	static MgMat3 Mat3Mov( const MgVect2& v);
-	static MgMat3 Mat3Mov( const MgPoint2& p)
-						{ return Mat3Mov( (MgVect2&)p);}
+	static MgMat3D Mat3Mov( const MgVect2D& v);
+	static MgMat3D Mat3Mov( const MgPoint2D& p)
+						{ return Mat3Mov( (MgVect2D&)p);}
 
 	//======================( ‚RŸŒ³ )==============================
 	//	ˆ—“à—e
 	//		•½sˆÚ“®‚Ì•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬‚·‚é
 	//
 	//	g—p–@
-	//		Mgmat3 = MgMat4Mov(MgVect3)
+	//		Mgmat3 = MgMat4DMov(MgVect3D)
 	//
 	//	| 1.  0.  0.  0. |
 	//	| 0.  1.  0.  0. |
 	//	| 0.  0.  1.  0. |
 	//	| v.x v.y v.z 1. |
 	//
-	static MgMat4 Mat4Mov( const MgVect3& v);
-	static MgMat4 Mat4Mov( const MgPoint3& p)
-						{ return Mat4Mov( (MgVect3&)p);}
+	static MgMat4D Mat4Mov( const MgVect3D& v);
+	static MgMat4D Mat4Mov( const MgPoint3D& p)
+						{ return Mat4Mov( (MgVect3D&)p);}
 
 	//======================( ‚QŸŒ³ )==============================
 	//	ˆ—“à—e
 	//		•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Ì‹t•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
 	//	g—p–@
-	//		MgMat3 = MgMat3Inv(MgMat3);
+	//		MgMat3D = MgMat3DInv(MgMat3D);
 	//
 	//	| m11 m21 m31 |
 	//	| m12 m22 m32 |			i“ü—Ís—ñ‚Í’PˆÊs—ñ‚Å‚ ‚é– ???j
 	//	| m13 m23 m33 |
 	//
-	static MgMat3 Mat3Inv( const MgMat3& i_tm);
+	static MgMat3D Mat3Inv( const MgMat3D& i_tm);
 
 	//======================( ‚RŸŒ³ )==============================
 	//	ˆ—“à—e
 	//	    •ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Ì‹t•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬‚·‚é
 	//
 	//	g—p–@
-	//		Mgmat3_2 = MgMat4Inv(MgMat4_1);
+	//		Mgmat3_2 = MgMat4DInv(MgMat4D_1);
 	//
 	//	| m11 m21 m31 m41 |
 	//	| m12 m22 m32 m42 |     i“ü—Ís—ñ‚Í’PˆÊs—ñ‚Å‚ ‚é– ???j
 	//	| m13 m23 m33 m43 |
 	//	| M14 m24 m34 m44 |
 	//
-	static MgMat4 Mat4Inv( const MgMat4& i_Tm);
+	static MgMat4D Mat4Inv( const MgMat4D& i_Tm);
 
 	//======================( ‚QŸŒ³ )==============================
 	//		’¼ü‚É‘Î‚·‚é‹¾‘œÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
-	static MgMat3 Mat3Mirror(						// (  O) ‹¾‘œ•ÏŠ·s—ñ
-					const	MgMat3&	i_tm, 			// (I  ) •ÏŠ·s—ñ
-					const	MgULine2& i_uln			// (I  ) ‹¾‰f‚Ì²‚Æ‚·‚é’¼ü
+	static MgMat3D Mat3Mirror(						// (  O) ‹¾‘œ•ÏŠ·s—ñ
+					const	MgMat3D&	i_tm, 		// (I  ) •ÏŠ·s—ñ
+					const	MgULine2D&	i_uln		// (I  ) ‹¾‰f‚Ì²‚Æ‚·‚é’¼ü
 			);
 
 	//======================( ‚RŸŒ³ )==============================
 	//		•½–Ê‚É‘Î‚·‚é‹¾‘œÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
-	static MgMat4 Mat4Mirror(						// (  O) ‹¾‘œ•ÏŠ·s—ñ
-					const	MgMat4&	  i_Tm,	 		// (I  ) •ÏŠ·s—ñ
-					const	MgPlane3& i_Pln			// (I  ) ‹¾‰f‚Ì–Ê‚Æ‚·‚é•½–Ê
+	static MgMat4D Mat4Mirror(						// (  O) ‹¾‘œ•ÏŠ·s—ñ
+					const	MgMat4D&	i_Tm,		// (I  ) •ÏŠ·s—ñ
+					const	MgPlane3D&	i_Pln		// (I  ) ‹¾‰f‚Ì–Ê‚Æ‚·‚é•½–Ê
 			);
 
 	//======================( ‚QŸŒ³ )==============================
 	//		’†S“_‚Æ‰ñ“]Šp‚æ‚èÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
-	static MgMat3 Mat3Rot(							// (  O) •ÏŠ·s—ñ
-					const	MgPoint2&	i_ptc, 		// (I  ) ‰ñ“]‚Ì’†S‚Æ‚È‚é“_
+	static MgMat3D Mat3Rot(							// (  O) •ÏŠ·s—ñ
+					const	MgPoint2D&	i_ptc, 		// (I  ) ‰ñ“]‚Ì’†S‚Æ‚È‚é“_
 					const	MREAL&		i_ar		// (I  ) ‰ñ“]Šp Degree
 			);
 
 	//======================( ‚RŸŒ³ )==============================
 	//		‰ñ“]²‚Æ‚È‚é’¼ü‚Æ‰ñ“]Šp‚æ‚èÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
-	static MgMat4 Mat4Rot(							// (  O) •ÏŠ·s—ñ
-					const	MgULine3&	i_ULn, 		// (I  ) ‰ñ“]²‚Æ‚È‚é’¼ü
-					const	MREAL		&i_ar		// (I  ) ‰ñ“]Šp(Degree)
+	static MgMat4D Mat4Rot(							// (  O) •ÏŠ·s—ñ
+					const	MgULine3D&	i_ULn, 		// (I  ) ‰ñ“]²‚Æ‚È‚é’¼ü
+					const	MREAL&		i_ar		// (I  ) ‰ñ“]Šp(Degree)
 			);
 
 	//======================( ‚RŸŒ³ )==============================
 	//		³“ŠÛÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğŒvZ‚·‚é
 	//
-	static MgMat4 Mat4NProj(						// (  O) ³“ŠÛ•ÏŠ·s—ñ
-					const	MgMat4		&i_Tm,		// (I  ) “ü—ÍÀ•W•ÏŠ·s—ñ
-					const	MgPlane3	&i_Pln		// (I  ) “ŠÛ–Ê
+	static MgMat4D Mat4NProj(						// (  O) ³“ŠÛ•ÏŠ·s—ñ
+					const	MgMat4D&	i_Tm,		// (I  ) “ü—ÍÀ•W•ÏŠ·s—ñ
+					const	MgPlane3D&	i_Pln		// (I  ) “ŠÛ–Ê
 			);
 
 	//======================( ‚RŸŒ³ )==============================
 	//		Î“ŠÛÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğŒvZ‚·‚é
 	//
-	static MgMat4 Mat4SProj(						// (  O) Î“ŠÛ•ÏÀ•W•ÏŠ·s—ñ
-					const	MgMat4		&i_Tm,		// (I  ) “ü—ÍÀ•W•ÏŠ·s—ñ
-					const	MgPlane3	&i_Pln,		// (I  ) “ŠÛ–Ê
-					const	MgVect3&		i_V		// (I  ) “ŠÛ•ûŒü‚ğ¦‚·’PˆÊƒxƒNƒgƒ‹
+	static MgMat4D Mat4SProj(						// (  O) Î“ŠÛ•ÏÀ•W•ÏŠ·s—ñ
+					const	MgMat4D&	i_Tm,		// (I  ) “ü—ÍÀ•W•ÏŠ·s—ñ
+					const	MgPlane3D&	i_Pln,		// (I  ) “ŠÛ–Ê
+					const	MgVect3D&	i_V			// (I  ) “ŠÛ•ûŒü‚ğ¦‚·’PˆÊƒxƒNƒgƒ‹
 			);
 
 	//===========================================================================
@@ -2429,128 +2429,128 @@ public:
 	//					|	a			b			c			|
 	
 	static void Mat4PlntoXY(
-					const	MgPlane3	&i_Pln,		// (I  ) •ÏŠ·‘ÎÛ•½–Ê
-					const	MgPoint3&	i_PtOrg,	// (I  ) Œ´“_À•W			
-							MgMat4*		o_MatXY,	// (  O) Pln to XY•½–Ê ‚R‚cƒ}ƒgƒŠƒbƒNƒX
-							MgMat4*		o_MatPln	// (  O) XY•½–Ê to Pln ‚R‚cƒ}ƒgƒŠƒbƒNƒX
+					const	MgPlane3D&	i_Pln,		// (I  ) •ÏŠ·‘ÎÛ•½–Ê
+					const	MgPoint3D&	i_PtOrg,	// (I  ) Œ´“_À•W			
+							MgMat4D*	o_MatXY,	// (  O) Pln to XY•½–Ê ‚R‚cƒ}ƒgƒŠƒbƒNƒX
+							MgMat4D*	o_MatPln	// (  O) XY•½–Ê to Pln ‚R‚cƒ}ƒgƒŠƒbƒNƒX
 					);
 	
 	//===================(‚RŸŒ³ ¨ ‚QŸŒ³)=========================
 	//		‚R‚cÀ•W‚ğ‚Q‚cÀ•W‚Ö•ÏŠ·‚·‚é
 	//
 	static void Point3Dto2D(
-					const	MgPoint3&	i_P,		// (I  ) ‚R‚cÀ•W
-					const	MgMat4		&i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
-							MgPoint2*	o_P			// (  O) ‚Q‚cÀ•W
+					const	MgPoint3D&	i_P,		// (I  ) ‚R‚cÀ•W
+					const	MgMat4D&	i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+							MgPoint2D*	o_P			// (  O) ‚Q‚cÀ•W
 					);
 
 	//===================(‚RŸŒ³ ¨ ‚QŸŒ³)=========================
 	//		‚R‚cü•ª‚ğ‚Q‚cü•ª‚ÖÀ•W•ÏŠ·‚·‚é
 	//
 	static inline void Line3Dto2D(
-					const MgLine3		&Lni,		// (I  ) ‚R‚cü•ª
-					const MgMat4		&Mat,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
-						  MgLine2		*lno		// (  O) ‚Q‚cü•ª
+					const MgLine3D&		i_Lni,		// (I  ) ‚R‚cü•ª
+					const MgMat4D&		i_Mat,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+						  MgLine2D*		o_plno		// (  O) ‚Q‚cü•ª
 					)
 	{
-		Point3Dto2D( Lni.p[0], Mat, &lno->p[0]); 
-		Point3Dto2D( Lni.p[1], Mat, &lno->p[1]);
+		Point3Dto2D( i_Lni.p[0], i_Mat, &o_plno->p[0]); 
+		Point3Dto2D( i_Lni.p[1], i_Mat, &o_plno->p[1]);
 	}
 
 	//===================(‚RŸŒ³ ¨ ‚QŸŒ³)=========================
 	//		‚R‚c’¼ü‚ğ‚Q‚c’¼ü‚ÖÀ•W•ÏŠ·‚·‚é
 	//
 	static void ULine3Dto2D(
-					const	MgULine3	&i_ULn,		// (I  ) ‚R‚c’¼ü
-					const	MgMat4		&i_Mt,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
-						 	MgULine2	*o_uln		// (  O) ‚Q‚c’¼ü
+					const	MgULine3D&	i_ULn,		// (I  ) ‚R‚c’¼ü
+					const	MgMat4D&	i_Mt,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+						 	MgULine2D*	o_puln		// (  O) ‚Q‚c’¼ü
 					);
 
 	//===================(‚RŸŒ³ ¨ ‚QŸŒ³)=========================
 	//		‚R‚cÀ•W‚ğ‚Q‚cÀ•W‚Ö•ÏŠ·‚·‚é
 	//
-	static MgPoint2 Point3Dto2D2(					// (  O) ‚Q‚cÀ•W
-					const	MgPoint3&	i_P,		// (I  ) ‚R‚cÀ•W
-					const	MgMat4		&i_Tm		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+	static MgPoint2D Point3Dto2D2(					// (  O) ‚Q‚cÀ•W
+					const	MgPoint3D&	i_P,		// (I  ) ‚R‚cÀ•W
+					const	MgMat4D&	i_Tm		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
 					);
 
 	//===================(‚RŸŒ³ ¨ ‚QŸŒ³)=========================
 	//		‚R‚cü•ª‚ğ‚Q‚cü•ª‚ÖÀ•W•ÏŠ·‚·‚é
 	//
-	static inline MgLine2 Line3Dto2D2(				// (  O) ‚Q‚cü•ª
-					const MgLine3		&Lni,		// (I  ) ‚R‚cü•ª
-					const MgMat4		&Mat		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+	static inline MgLine2D Line3Dto2D2(				// (  O) ‚Q‚cü•ª
+					const MgLine3D&		i_Lni,		// (I  ) ‚R‚cü•ª
+					const MgMat4D&		i_Mat		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
 					)
 	{
-		return MgLine2( 
-					  Point3Dto2D2( Lni.p[0], Mat), 
-					  Point3Dto2D2( Lni.p[1], Mat));
+		return MgLine2D( 
+					  Point3Dto2D2( i_Lni.p[0], i_Mat), 
+					  Point3Dto2D2( i_Lni.p[1], i_Mat));
 	}  
 
 	//===================(‚RŸŒ³ ¨ ‚QŸŒ³)=========================
 	//		‚R‚c’¼ü‚ğ‚Q‚c’¼ü‚ÖÀ•W•ÏŠ·‚·‚é
 	//
-	static MgULine2 ULine3Dto2D2(					// (  O) ‚Q‚c’¼ü
-					const	MgULine3	&i_ULn,		// (I  ) ‚R‚c’¼ü
-					const	MgMat4		&i_Tm		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+	static MgULine2D ULine3Dto2D2(					// (  O) ‚Q‚c’¼ü
+					const	MgULine3D&	i_ULn,		// (I  ) ‚R‚c’¼ü
+					const	MgMat4D&	i_Tm		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
 					);
 
 	//===================(‚RŸŒ³ ¨ ‚QŸŒ³)=========================
 	//		‚R‚cÀ•WŒQ‚ğ‚Q‚cÀ•WŒQ‚Ö•ÏŠ·‚·‚é
 	//
 	static void	GPoint3Dto2D(
-					const	MgGPoint3	&i_GP,		// (I  ) ‚R‚cÀ•WŒQ
-					const	MgMat4		&i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
-							MgGPoint2	*o_GP		// (  O) ‚Q‚cÀ•WŒQ
+					const	MgGPoint3D&	i_GP,		// (I  ) ‚R‚cÀ•WŒQ
+					const	MgMat4D&	i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+							MgGPoint2D*	o_pGP		// (  O) ‚Q‚cÀ•WŒQ
 					);
 	
 	//===================(‚RŸŒ³ ¨ ‚QŸŒ³)=========================
 	//		‚R‚cÀ•WŒQiƒ|ƒŠƒ‰ƒCƒ“j‚ğ‚Q‚cÀ•WŒQ‚Ö•ÏŠ·‚·‚é
 	//
 	static void	Polyg3Dto2D(
-					const	MgPolyg3&	i_Pg,		// (I  ) ‚R‚cÀ•WŒQ
-					const	MgMat4		&iTm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
-							MgPolyg2*	o_Pg		// (  O) ‚Q‚cÀ•WŒQ
+					const	MgPolyg3D&	i_Pg,		// (I  ) ‚R‚cÀ•WŒQ
+					const	MgMat4D&	i_iTm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+							MgPolyg2D*	o_pPg		// (  O) ‚Q‚cÀ•WŒQ
 					);
 	
 	//===================(‚RŸŒ³ ¨ ‚QŸŒ³)=========================
 	//		‚R‚cü•ªŒQ‚ğ‚Q‚cü•ªŒQ‚Ö•ÏŠ·‚·‚é
 	//
 	static void	GLine3Dto2D(
-					const	MgGLine3	&i_GLn,		// (I  ) ‚R‚cü•ªŒQ
-					const	MgMat4		&i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
-							MgGLine2*	o_gln		// (  O) ‚Q‚cü•ªŒQ
+					const	MgGLine3D&	i_GLn,		// (I  ) ‚R‚cü•ªŒQ
+					const	MgMat4D&	i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+							MgGLine2D*	o_pgln		// (  O) ‚Q‚cü•ªŒQ
 					);
 	
 	//===================(‚RŸŒ³ ¨ ‚QŸŒ³)=========================
 	//		‚R‚c‘½ŠpŒ`ŒQiƒ|ƒŠƒ‰ƒCƒ“ŒQj‚ğ‚Q‚c‘½ŠpŒ`ŒQ‚Ö•ÏŠ·‚·‚é
 	//
 	static void GPolyg3Dto2D(
-					const	MgGPolyg3	&i_GPg,		// (I  ) ‚R‚c‘½ŠpŒ`ŒQ
-					const	MgMat4		&i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
-						 	MgGPolyg2	*o_gpg		// (  O) ‚Q‚c‘½ŠpŒ`ŒQ
+					const	MgGPolyg3D&	i_GPg,		// (I  ) ‚R‚c‘½ŠpŒ`ŒQ
+					const	MgMat4D&	i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+						 	MgGPolyg2D*	o_pgpg		// (  O) ‚Q‚c‘½ŠpŒ`ŒQ
 					);
 
 	//===================(‚QŸŒ³ ¨ ‚RŸŒ³)=========================
 	//		‚Q‚cÀ•W‚ğ‚R‚cÀ•W‚Ö•ÏŠ·‚·‚é
 	//
 	static void	Point2Dto3D(
-					const	MgPoint2&	i_pt,		// (I  ) ‚Q‚cÀ•W
-					const	MgMat4		&i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
-							MgPoint3	*o_Pt		// (  O) ‚R‚cÀ•W
+					const	MgPoint2D&	i_pt,		// (I  ) ‚Q‚cÀ•W
+					const	MgMat4D&	i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+							MgPoint3D*	o_pPt		// (  O) ‚R‚cÀ•W
 					);
 
 	//===================(‚QŸŒ³ ¨ ‚RŸŒ³)=========================
 	//		‚Q‚cü•ª‚ğ‚R‚cü•ª‚ÖÀ•W•ÏŠ·‚·‚é
 	//
 	static inline void Line2Dto3D(
-					const MgLine2&		lni,		// (I  ) ‚Q‚cü•ª
-					const MgMat4		&Mat,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
-						  MgLine3		*Lno		// (  O) ‚R‚cü•ª
+					const MgLine2D&		i_lni,		// (I  ) ‚Q‚cü•ª
+					const MgMat4D&		i_Mat,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+						  MgLine3D*		o_pLno		// (  O) ‚R‚cü•ª
 					)
 	{
-		Point2Dto3D( lni.p[0], Mat, &Lno->p[0]); 
-		Point2Dto3D( lni.p[1], Mat, &Lno->p[1]);
+		Point2Dto3D( i_lni.p[0], i_Mat, &o_pLno->p[0]); 
+		Point2Dto3D( i_lni.p[1], i_Mat, &o_pLno->p[1]);
 	}  
 
 
@@ -2558,74 +2558,74 @@ public:
 	//		‚Q‚c’¼ü‚ğ‚R‚c’¼ü‚ÖÀ•W•ÏŠ·‚·‚é
 	//
 	static void ULine2Dto3D(
-					const	MgULine2	&i_uln,		// (I  ) ‚Q‚c’¼ü
-					const	MgMat4		&i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
-						 	MgULine3	*o_ULn		// (  O) ‚R‚c’¼ü
+					const	MgULine2D&	i_uln,		// (I  ) ‚Q‚c’¼ü
+					const	MgMat4D&	i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+						 	MgULine3D*	o_pULn		// (  O) ‚R‚c’¼ü
 					);
 
 	//===================(‚QŸŒ³ ¨ ‚RŸŒ³)=========================
 	//		‚Q‚cÀ•W‚ğ‚R‚cÀ•W‚Ö•ÏŠ·‚·‚é
 	//
-	static MgPoint3 Point2Dto3D3(					// (  O) ‚R‚cÀ•W
-					const	MgPoint2&	i_Pt,		// (I  ) ‚Q‚cÀ•W
-					const	MgMat4		&i_Tm		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+	static MgPoint3D Point2Dto3D3(					// (  O) ‚R‚cÀ•W
+					const	MgPoint2D&	i_Pt,		// (I  ) ‚Q‚cÀ•W
+					const	MgMat4D&	i_Tm		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
 					);
 
 	//===================(‚QŸŒ³ ¨ ‚RŸŒ³)=========================
 	//		‚Q‚cü•ª‚ğ‚R‚cü•ª‚ÖÀ•W•ÏŠ·‚·‚é
 	//
-	static MgLine3 Line2Dto3D3(						// (  O) ‚R‚cü•ª
-					const MgLine2&		lni,		// (I  ) ‚Q‚cü•ª
-					const MgMat4		&Mat		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+	static MgLine3D Line2Dto3D3(					// (  O) ‚R‚cü•ª
+					const MgLine2D&		i_lni,		// (I  ) ‚Q‚cü•ª
+					const MgMat4D&		i_Mat		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
 					)
 	{
-		return MgLine3(
-					  Point2Dto3D3( lni.p[0], Mat), 
-					  Point2Dto3D3( lni.p[1], Mat));
+		return MgLine3D(
+					  Point2Dto3D3( i_lni.p[0], i_Mat), 
+					  Point2Dto3D3( i_lni.p[1], i_Mat));
 	}  
 
 	//===================(‚QŸŒ³ ¨ ‚RŸŒ³)=========================
 	//		‚Q‚c’¼ü‚ğ‚R‚c’¼ü‚ÖÀ•W•ÏŠ·‚·‚é
 	//
-	static MgULine3 ULine2Dto3D3(					// (  O) ‚R‚c’¼ü
-					const	MgULine2	&i_uln,		// (I  ) ‚Q‚c’¼ü
-					const	MgMat4		&i_Tm		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+	static MgULine3D ULine2Dto3D3(					// (  O) ‚R‚c’¼ü
+					const	MgULine2D&	i_uln,		// (I  ) ‚Q‚c’¼ü
+					const	MgMat4D&	i_Tm		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
 					);
 
 	//===================(‚QŸŒ³ ¨ ‚RŸŒ³)=========================
 	//		‚Q‚cÀ•WŒQ‚ğ‚R‚cÀ•WŒQ‚Ö•ÏŠ·‚·‚é
 	//
 	static void	GPoint2Dto3D(
-					const	MgGPoint2	&i_GPt,		// (I  ) ‚Q‚cÀ•WŒQ
-					const	MgMat4		&i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
-							MgGPoint3	*o_GPt		// (  O) ‚R‚cÀ•WŒQ
+					const	MgGPoint2D&	i_GPt,		// (I  ) ‚Q‚cÀ•WŒQ
+					const	MgMat4D&	i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+							MgGPoint3D*	o_pGPt		// (  O) ‚R‚cÀ•WŒQ
 					);
 	
 	//===================(‚QŸŒ³ ¨ ‚RŸŒ³)=========================
 	//		‚Q‚cÀ•WŒQiƒ|ƒŠƒ‰ƒCƒ“j‚ğ‚R‚cÀ•WŒQ‚Ö•ÏŠ·‚·‚é
 	//
 	static void	Polyg2Dto3D(
-					const	MgPolyg2&	i_Pg,		// (I  ) ‚Q‚cÀ•WŒQ
-					const	MgMat4		&i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
-							MgPolyg3*	o_Pg		// (  O) ‚R‚cÀ•WŒQ
+					const	MgPolyg2D&	i_Pg,		// (I  ) ‚Q‚cÀ•WŒQ
+					const	MgMat4D&	i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+							MgPolyg3D*	o_pPg		// (  O) ‚R‚cÀ•WŒQ
 					);
 	
 	//===================(‚QŸŒ³ ¨ ‚RŸŒ³)=========================
 	//		‚Q‚c’¼üŒQ‚ğ‚R‚c’¼üŒQ‚Ö•ÏŠ·‚·‚é
 	//
 	static void	GLine2Dto3D(
-					const	MgGLine2&	i_gln,		// (I  ) ‚Q‚c’¼üŒQ
-					const	MgMat4		&i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
-							MgGLine3	*o_GLn		// (  O) ‚R‚c’¼üŒQ
+					const	MgGLine2D&	i_gln,		// (I  ) ‚Q‚c’¼üŒQ
+					const	MgMat4D&	i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+							MgGLine3D*	o_pGLn		// (  O) ‚R‚c’¼üŒQ
 					);
 
 	//===================(‚QŸŒ³ ¨ ‚RŸŒ³)=========================
 	//		‚Q‚c‘½ŠpŒ`ŒQiƒ|ƒŠƒ‰ƒCƒ“ŒQj‚ğ‚R‚c‘½ŠpŒ`ŒQ‚Ö•ÏŠ·‚·‚é
 	//
 	static void GPolyg2Dto3D(
-					const	MgGPolyg2	&i_GPg,		// (I  ) ‚Q‚c‘½ŠpŒ`ŒQ
-					const	MgMat4		&i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
-						 	MgGPolyg3	*o_GPg		// (  O) ‚R‚c‘½ŠpŒ`ŒQ
+					const	MgGPolyg2D&	i_GPg,		// (I  ) ‚Q‚c‘½ŠpŒ`ŒQ
+					const	MgMat4D&	i_Tm,		// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
+						 	MgGPolyg3D*	o_pGPg		// (  O) ‚R‚c‘½ŠpŒ`ŒQ
 					);
 	//
 	//======================( ‚QŸŒ³C‚RŸŒ³ )==============================
@@ -2635,10 +2635,10 @@ public:
 	//		w’èü•ª‚æ‚èn‚Ü‚èü•ªŒQ‚Ìü•ª‚ğŒ‹‡‚µ‚ÄÅ¬‚Ì‘½ŠpŒ`‚ğì¬‚·‚é
 	//
 	static bool	MakeGPg2FromLn2InGLn2(				// (  O) ƒXƒeƒCƒ^ƒX@true: ³íì¬@false: ì¬•s‰Â
-					const	MgLine2&	Ln1,		// (I  ) w’èü•ª
-							MgGLine2*	GLn2,		// (I  ) Œ‹‡‚·‚éü•ªŒQ
-							MINT*		nHk,		// (I O) Œ‹‡‚·‚éü•ª‚Ì’†‚Ì³‚µ‚¢•ûŒü‚ğ‚Âü•ª”iæ“ª‚æ‚èŠô‚Â‚©‚ğ•\‚·j
-							MgPolyg2*	Pg3			// (  O) —Ìˆæ
+					const	MgLine2D&	i_Ln1,		// (I  ) w’èü•ª
+							MgGLine2D*	io_GLn2,	// (I O) Œ‹‡‚·‚éü•ªŒQ
+							MINT*		io_pnHk,	// (I O) Œ‹‡‚·‚éü•ª‚Ì’†‚Ì³‚µ‚¢•ûŒü‚ğ‚Âü•ª”iæ“ª‚æ‚èŠô‚Â‚©‚ğ•\‚·j
+							MgPolyg2D*	o_pPg3		// (  O) —Ìˆæ
 					);
 	
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -2647,12 +2647,12 @@ public:
 	static MINT DividePgULn2(						// (  O) ƒXƒeƒCƒ^ƒX
 													//			MC_NINT			(0): Œğ·‚È‚µ
 													//			MC_INT			(1): Œğ·‚ ‚è
-							MINT		Sel,		// (I  ) ‘I‘ğğŒ
+							MINT		i_Sel,		// (I  ) ‘I‘ğğŒ
 													//			MC_LEFT			(010): ¶‘¤‚Ì—Ìˆæ
 													//			MC_RIGHT		(040): ‰E‘¤‚Ì—Ìˆæ
-					const	MgPolyg2&	Pg1,		// (I  ) ‘½ŠpŒ`
-					const	MgULine2&	ULn2,		// (I  ) ’¼ü
-							MgGPolyg2*	GPg3		// (  O) ŒŠ•t‚«‘½ŠpŒ`ŒQ
+					const	MgPolyg2D&	i_Pg1,		// (I  ) ‘½ŠpŒ`
+					const	MgULine2D&	i_ULn2,		// (I  ) ’¼ü
+							MgGPolyg2D*	o_pGPg3		// (  O) ŒŠ•t‚«‘½ŠpŒ`ŒQ
 					);
 	
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -2661,12 +2661,12 @@ public:
 	static MINT DivideGPgULn2(						// (  O) ƒXƒeƒCƒ^ƒX
 													//			MC_NINT			(0): Œğ·‚È‚µ
 													//			MC_INT			(1): Œğ·‚ ‚è
-							MINT		Sel,		// (I  ) ‘I‘ğğŒ
+							MINT		i_Sel,		// (I  ) ‘I‘ğğŒ
 													//			MC_LEFT			(010): ¶‘¤‚Ì—Ìˆæ
 													//			MC_RIGHT		(040): ‰E‘¤‚Ì—Ìˆæ
-					const	MgGPolyg2&	GPg1,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`
-					const	MgULine2&	ULn2,		// (I  ) ’¼ü
-							MgGPolyg2*	GPg3		// (  O) ŒŠ•t‚«‘½ŠpŒ`ŒQ
+					const	MgGPolyg2D&	i_GPg1,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`
+					const	MgULine2D&	i_ULn2,		// (I  ) ’¼ü
+							MgGPolyg2D*	o_pGPg3		// (  O) ŒŠ•t‚«‘½ŠpŒ`ŒQ
 					);
 	
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -2679,13 +2679,13 @@ public:
 													//	—á	 (STS == MC_NINT):				Œğ·–³‚µ‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚È‚µ 
 													//		 (STS == (MC_NINT | MC_MATCH)):	Œğ·–³‚µ‚Å‚ ‚é‚ª‘I‘ğğŒ‚É‡‚¤
 													//		 (STS == (MC_INT | MC_MATCH)):	Œğ·‚ ‚è‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚ ‚è
-							MINT		Sel,		// (I  ) ‘I‘ğğŒ
+							MINT		i_Sel,		// (I  ) ‘I‘ğğŒ
 													//			MC_IN_BORDER	(001): “à‘¤
 													//			MC_OUT_BORDER	(004): ŠO‘¤
 													//									
-					const	MgPolyg2&	Pg1,		// (I  ) ‘½ŠpŒ`1
-					const	MgPolyg2&	Pg2,		// (I  ) ‘½ŠpŒ`2
-							MgGPolyg2*	pGPgo		// (  O) ŒŠ•t‚«‘½ŠpŒ`3
+					const	MgPolyg2D&	i_Pg1,		// (I  ) ‘½ŠpŒ`1
+					const	MgPolyg2D&	i_Pg2,		// (I  ) ‘½ŠpŒ`2
+							MgGPolyg2D*	o_ppGPgo	// (  O) ŒŠ•t‚«‘½ŠpŒ`3
 					);
 	
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -2698,12 +2698,12 @@ public:
 													//	—á	 (STS == MC_NINT):				Œğ·–³‚µ‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚È‚µ 
 													//		 (STS == (MC_NINT | MC_MATCH)):	Œğ·–³‚µ‚Å‚ ‚é‚ª‘I‘ğğŒ‚É‡‚¤
 													//		 (STS == (MC_INT | MC_MATCH)):	Œğ·‚ ‚è‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚ ‚è
-							MINT		Sel,		// (I  ) ‘I‘ğğŒ
+							MINT		i_Sel,		// (I  ) ‘I‘ğğŒ
 													//			MC_IN_BORDER	(001): “à‘¤
 													//			MC_OUT_BORDER	(004): ŠO‘¤
-					const	MgGPolyg2&	GPg1,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`1
-					const	MgGPolyg2&	GPg2,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`2
-							MgGPolyg2*	pGPgo		// (  O) ŒŠ•t‚«‘½ŠpŒ`3
+					const	MgGPolyg2D&	i_GPg1,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`1
+					const	MgGPolyg2D&	i_GPg2,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`2
+							MgGPolyg2D*	o_pGPgo		// (  O) ŒŠ•t‚«‘½ŠpŒ`3
 					);
 	
 	// ---------------------( ‚RŸŒ³ )------------------------------
@@ -2716,13 +2716,13 @@ public:
 													//	—á	 (STS == MC_NINT):				Œğ·–³‚µ‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚È‚µ 
 													//		 (STS == (MC_NINT | MC_MATCH)):	Œğ·–³‚µ‚Å‚ ‚é‚ª‘I‘ğğŒ‚É‡‚¤
 													//		 (STS == (MC_INT | MC_MATCH)):	Œğ·‚ ‚è‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚ ‚è
-							MINT		Sel,		// (I  ) ‘I‘ğğŒ
+							MINT		i_Sel,		// (I  ) ‘I‘ğğŒ
 													//			MC_IN_BORDER	(001): “à‘¤
 													//			MC_OUT_BORDER	(004): ŠO‘¤
 													//									
-					const	MgPolyg3&	Pg1,		// (I  ) ‘½ŠpŒ`1
-					const	MgPolyg3&	Pg2,		// (I  ) ‘½ŠpŒ`2
-							MgGPolyg3*	pGPgo		// (  O) ŒŠ•t‚«‘½ŠpŒ`3
+					const	MgPolyg3D&	i_Pg1,		// (I  ) ‘½ŠpŒ`1
+					const	MgPolyg3D&	i_Pg2,		// (I  ) ‘½ŠpŒ`2
+							MgGPolyg3D*	o_pGPgo		// (  O) ŒŠ•t‚«‘½ŠpŒ`3
 					);
 	
 	// ---------------------( ‚RŸŒ³ )------------------------------
@@ -2735,12 +2735,12 @@ public:
 													//	—á	 (STS == MC_NINT):				Œğ·–³‚µ‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚È‚µ 
 													//		 (STS == (MC_NINT | MC_MATCH)):	Œğ·–³‚µ‚Å‚ ‚é‚ª‘I‘ğğŒ‚É‡‚¤
 													//		 (STS == (MC_INT | MC_MATCH)):	Œğ·‚ ‚è‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚ ‚è
-							MINT		Sel,		// (I  ) ‘I‘ğğŒ
+							MINT		i_Sel,		// (I  ) ‘I‘ğğŒ
 													//			MC_IN_BORDER	(001): “à‘¤
 													//			MC_OUT_BORDER	(004): ŠO‘¤
-					const	MgGPolyg3&	GPg1,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`1
-					const	MgGPolyg3&	GPg2,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`2
-							MgGPolyg3*	pGPgo		// (  O) ŒŠ•t‚«‘½ŠpŒ`3
+					const	MgGPolyg3D&	i_GPg1,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`1
+					const	MgGPolyg3D&	i_GPg2,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`2
+							MgGPolyg3D*	o_pGPgo		// (  O) ŒŠ•t‚«‘½ŠpŒ`3
 					);
 	
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -2753,13 +2753,13 @@ public:
 													//	—á	 (STS == MC_NINT):				Œğ·–³‚µ‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚È‚µ 
 													//		 (STS == (MC_NINT | MC_MATCH)):	Œğ·–³‚µ‚Å‚ ‚é‚ª‘I‘ğğŒ‚É‡‚¤
 													//		 (STS == (MC_INT | MC_MATCH)):	Œğ·‚ ‚è‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚ ‚è
-							MINT		Sel,		// (I  ) ‘I‘ğğŒ
+							MINT		i_Sel,		// (I  ) ‘I‘ğğŒ
 													//			MC_OR			(1): ˜a
 													//			MC_DIFF			(2): ·
 													//			MC_AND			(4): Ï
-					const	MgPolyg2&	Pg1,		// (I  ) ‘½ŠpŒ`1
-					const	MgPolyg2&	Pg2,		// (I  ) ‘½ŠpŒ`2
-							MgGPolyg2*	pGPgo		// (  O) ŒŠ•t‚«‘½ŠpŒ`3
+					const	MgPolyg2D&	i_Pg1,		// (I  ) ‘½ŠpŒ`1
+					const	MgPolyg2D&	i_Pg2,		// (I  ) ‘½ŠpŒ`2
+							MgGPolyg2D*	o_pGPgo		// (  O) ŒŠ•t‚«‘½ŠpŒ`3
 					);
 	
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -2772,13 +2772,13 @@ public:
 													//	—á	 (STS == MC_NINT):				Œğ·–³‚µ‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚È‚µ 
 													//		 (STS == (MC_NINT | MC_MATCH)):	Œğ·–³‚µ‚Å‚ ‚é‚ª‘I‘ğğŒ‚É‡‚¤
 													//		 (STS == (MC_INT | MC_MATCH)):	Œğ·‚ ‚è‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚ ‚è
-							MINT		Sel,		// (I  ) ‘I‘ğğŒ
+							MINT		i_Sel,		// (I  ) ‘I‘ğğŒ
 													//			MC_OR			(1): ˜a
 													//			MC_DIFF			(2): ·
 													//			MC_AND			(4): Ï
-					const	MgPolyg2&	Pg1,		// (I  ) ‘½ŠpŒ`1
-					const	MgGPolyg2&	GPg2,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`2
-							MgGPolyg2*	pGPgo		// (  O) ŒŠ•t‚«‘½ŠpŒ`3
+					const	MgPolyg2D&	i_Pg1,		// (I  ) ‘½ŠpŒ`1
+					const	MgGPolyg2D&	i_GPg2,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`2
+							MgGPolyg2D*	o_pGPgo		// (  O) ŒŠ•t‚«‘½ŠpŒ`3
 					);
 	
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -2791,13 +2791,13 @@ public:
 													//	—á	 (STS == MC_NINT):				Œğ·–³‚µ‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚È‚µ 
 													//		 (STS == (MC_NINT | MC_MATCH)):	Œğ·–³‚µ‚Å‚ ‚é‚ª‘I‘ğğŒ‚É‡‚¤
 													//		 (STS == (MC_INT | MC_MATCH)):	Œğ·‚ ‚è‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚ ‚è
-							MINT		Sel,		// (I  ) ‘I‘ğğŒ
+							MINT		i_Sel,		// (I  ) ‘I‘ğğŒ
 													//			MC_OR			(1): ˜a
 													//			MC_DIFF			(2): ·
 													//			MC_AND			(4): Ï
-					const	MgGPolyg2&	GPg1,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`1
-					const	MgPolyg2&	Pg2,		// (I  ) ‘½ŠpŒ`2
-							MgGPolyg2*	pGPgo		// (  O) ŒŠ•t‚«‘½ŠpŒ`3
+					const	MgGPolyg2D&	i_GPg1,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`1
+					const	MgPolyg2D&	i_Pg2,		// (I  ) ‘½ŠpŒ`2
+							MgGPolyg2D*	o_pGPgo		// (  O) ŒŠ•t‚«‘½ŠpŒ`3
 					);
 	
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -2810,13 +2810,13 @@ public:
 													//	—á	 (STS == MC_NINT):				Œğ·–³‚µ‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚È‚µ 
 													//		 (STS == (MC_NINT | MC_MATCH)):	Œğ·–³‚µ‚Å‚ ‚é‚ª‘I‘ğğŒ‚É‡‚¤
 													//		 (STS == (MC_INT | MC_MATCH)):	Œğ·‚ ‚è‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚ ‚è
-							MINT		Sel,		// (I  ) ‘I‘ğğŒ
+							MINT		i_Sel,		// (I  ) ‘I‘ğğŒ
 													//			MC_OR			(1): ˜a
 													//			MC_DIFF			(2): ·
 													//			MC_AND			(4): Ï
-					const	MgGPolyg2&	GPg1,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`1
-					const	MgGPolyg2&	GPg2,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`2
-							MgGPolyg2*	pGPgo		// (  O) ŒŠ•t‚«‘½ŠpŒ`3
+					const	MgGPolyg2D&	i_GPg1,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`1
+					const	MgGPolyg2D&	i_GPg2,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`2
+							MgGPolyg2D*	o_pGPgo		// (  O) ŒŠ•t‚«‘½ŠpŒ`3
 					);
 	
 	// ---------------------( ‚RŸŒ³ )------------------------------
@@ -2829,13 +2829,13 @@ public:
 													//	—á	 (STS == MC_NINT):				Œğ·–³‚µ‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚È‚µ 
 													//		 (STS == (MC_NINT | MC_MATCH)):	Œğ·–³‚µ‚Å‚ ‚é‚ª‘I‘ğğŒ‚É‡‚¤
 													//		 (STS == (MC_INT | MC_MATCH)):	Œğ·‚ ‚è‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚ ‚è
-							MINT		Sel,		// (I  ) ‘I‘ğğŒ
+							MINT		i_Sel,		// (I  ) ‘I‘ğğŒ
 													//			MC_OR			(1): ˜a
 													//			MC_DIFF			(2): ·
 													//			MC_AND			(4): Ï
-					const	MgPolyg3&	Pg1,		// (I  ) ‘½ŠpŒ`1
-					const	MgPolyg3&	Pg2,		// (I  ) ‘½ŠpŒ`2
-							MgGPolyg3*	pGPgo		// (  O) ŒŠ•t‚«‘½ŠpŒ`3
+					const	MgPolyg3D&	i_Pg1,		// (I  ) ‘½ŠpŒ`1
+					const	MgPolyg3D&	i_Pg2,		// (I  ) ‘½ŠpŒ`2
+							MgGPolyg3D*	o_pGPgo		// (  O) ŒŠ•t‚«‘½ŠpŒ`3
 					);
 	
 	// ---------------------( ‚RŸŒ³ )------------------------------
@@ -2848,13 +2848,13 @@ public:
 													//	—á	 (STS == MC_NINT):				Œğ·–³‚µ‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚È‚µ 
 													//		 (STS == (MC_NINT | MC_MATCH)):	Œğ·–³‚µ‚Å‚ ‚é‚ª‘I‘ğğŒ‚É‡‚¤
 													//		 (STS == (MC_INT | MC_MATCH)):	Œğ·‚ ‚è‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚ ‚è
-							MINT		Sel,		// (I  ) ‘I‘ğğŒ
+							MINT		i_Sel,		// (I  ) ‘I‘ğğŒ
 													//			MC_OR			(1): ˜a
 													//			MC_DIFF			(2): ·
 													//			MC_AND			(4): Ï
-					const	MgPolyg3&	Pg1,		// (I  ) ‘½ŠpŒ`1
-					const	MgGPolyg3&	GPg2,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`2
-							MgGPolyg3*	pGPgo		// (  O) ŒŠ•t‚«‘½ŠpŒ`3
+					const	MgPolyg3D&	i_Pg1,		// (I  ) ‘½ŠpŒ`1
+					const	MgGPolyg3D&	i_GPg2,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`2
+							MgGPolyg3D*	o_pGPgo		// (  O) ŒŠ•t‚«‘½ŠpŒ`3
 					);
 	
 	// ---------------------( ‚RŸŒ³ )------------------------------
@@ -2867,13 +2867,13 @@ public:
 													//	—á	 (STS == MC_NINT):				Œğ·–³‚µ‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚È‚µ 
 													//		 (STS == (MC_NINT | MC_MATCH)):	Œğ·–³‚µ‚Å‚ ‚é‚ª‘I‘ğğŒ‚É‡‚¤
 													//		 (STS == (MC_INT | MC_MATCH)):	Œğ·‚ ‚è‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚ ‚è
-							MINT		Sel,		// (I  ) ‘I‘ğğŒ
+							MINT		i_Sel,		// (I  ) ‘I‘ğğŒ
 													//			MC_OR			(1): ˜a
 													//			MC_DIFF			(2): ·
 													//			MC_AND			(4): Ï
-					const	MgGPolyg3&	GPg1,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`1
-					const	MgPolyg3&	Pg2,		// (I  ) ‘½ŠpŒ`2
-							MgGPolyg3*	pGPgo		// (  O) ŒŠ•t‚«‘½ŠpŒ`3
+					const	MgGPolyg3D&	i_GPg1,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`1
+					const	MgPolyg3D&	i_Pg2,		// (I  ) ‘½ŠpŒ`2
+							MgGPolyg3D*	o_pGPgo		// (  O) ŒŠ•t‚«‘½ŠpŒ`3
 					);
 	
 	// ---------------------( ‚RŸŒ³ )------------------------------
@@ -2886,13 +2886,13 @@ public:
 													//	—á	 (STS == MC_NINT):				Œğ·–³‚µ‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚È‚µ 
 													//		 (STS == (MC_NINT | MC_MATCH)):	Œğ·–³‚µ‚Å‚ ‚é‚ª‘I‘ğğŒ‚É‡‚¤
 													//		 (STS == (MC_INT | MC_MATCH)):	Œğ·‚ ‚è‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚ ‚è
-							MINT		Sel,		// (I  ) ‘I‘ğğŒ
+							MINT		i_Sel,		// (I  ) ‘I‘ğğŒ
 													//			MC_OR			(1): ˜a
 													//			MC_DIFF			(2): ·
 													//			MC_AND			(4): Ï
-					const	MgGPolyg3&	GPg1,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`1
-					const	MgGPolyg3&	GPg2,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`2
-							MgGPolyg3*	pGPgo		// (  O) ŒŠ•t‚«‘½ŠpŒ`3
+					const	MgGPolyg3D&	i_GPg1,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`1
+					const	MgGPolyg3D&	i_GPg2,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`2
+							MgGPolyg3D*	o_pGPgo		// (  O) ŒŠ•t‚«‘½ŠpŒ`3
 					);
 	
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -2909,18 +2909,18 @@ public:
 													//	—á	 (STS == MC_NINT):				Œğ·–³‚µ‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚È‚µ 
 													//		 (STS == (MC_NINT | MC_MATCH)):	Œğ·–³‚µ‚Å‚ ‚é‚ª‘I‘ğğŒ‚É‡‚¤
 													//		 (STS == (MC_INT | MC_MATCH)):	Œğ·‚ ‚è‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚ ‚è
-							MINT		Sel1,		// (I  ) ‘I‘ğğŒ1@‘½ŠpŒ`1‚Ìü•ª‚ğc‚·ğŒ
+							MINT		i_Sel1,		// (I  ) ‘I‘ğğŒ1@‘½ŠpŒ`1‚Ìü•ª‚ğc‚·ğŒ
 													//			MC_IN_BORDER	(001):	‘½ŠpŒ`2‚Ì—Ìˆæ‚Ì“à‘¤
 													//			MC_ON_BORDER	(002):  ‘½ŠpŒ`2‚Ì•Óã
 													//			MC_OUT_BORDER	(004):	‘½ŠpŒ`2‚Ì—Ìˆæ‚ÌŠO‘¤
 													//			MC_SAME_DIR		(0100):	•Óã“¯ˆê•ûŒü
 													//			MC_REV_DIR		(0200):	•Óã‹t•ûŒü
-					const	bool		fRev,		// (I  ) ”½“]ƒtƒ‰ƒO	
+					const	bool		i_fRev,		// (I  ) ”½“]ƒtƒ‰ƒO	
 													//		 true: ü•ª‚Ì•ûŒü‚ğ”½“]‚·‚é
-					const	MgPolyg2&	Pg1,		// (I  ) ‘½ŠpŒ`1
-					const	MgPolyg2&	Pg2,		// (I  ) ‘½ŠpŒ`2
-							MgGLine2*	pGLno,		// (I O) ’¼üŒQ
-							MgGPolyg2*	pGPgo		// (I O) ŒŠ•t‚«‘½ŠpŒ`
+					const	MgPolyg2D&	i_Pg1,		// (I  ) ‘½ŠpŒ`1
+					const	MgPolyg2D&	i_Pg2,		// (I  ) ‘½ŠpŒ`2
+							MgGLine2D*	io_pGLno,	// (I O) ’¼üŒQ
+							MgGPolyg2D*	io_pGPgo	// (I O) ŒŠ•t‚«‘½ŠpŒ`
 					);
 	
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -2938,18 +2938,18 @@ public:
 													//	—á	 (STS == MC_NINT):				Œğ·–³‚µ‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚È‚µ 
 													//		 (STS == (MC_NINT | MC_MATCH)):	Œğ·–³‚µ‚Å‚ ‚é‚ª‘I‘ğğŒ‚É‡‚¤
 													//		 (STS == (MC_INT | MC_MATCH)):	Œğ·‚ ‚è‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚ ‚è
-							MINT		Sel1,		// (I  ) ‘I‘ğğŒ1@‘½ŠpŒ`1‚Ìü•ª‚ğc‚·ğŒ
+							MINT		i_Sel1,		// (I  ) ‘I‘ğğŒ1@‘½ŠpŒ`1‚Ìü•ª‚ğc‚·ğŒ
 													//			MC_IN_BORDER	(001): ‘½ŠpŒ`2‚Ì—Ìˆæ‚Ì“à‘¤
 													//			MC_ON_BORDER	(002): ‘½ŠpŒ`2‚Ì•Óã
 													//			MC_OUT_BORDER	(004): ‘½ŠpŒ`2‚Ì—Ìˆæ‚ÌŠO‘¤
 													//			MC_SAME_DIR		(0100):	•Óã“¯ˆê•ûŒü
 													//			MC_REV_DIR		(0200):	•Óã‹t•ûŒü
-					const	bool		fRev,		// (I  ) ”½“]ƒtƒ‰ƒO	
+					const	bool		i_fRev,		// (I  ) ”½“]ƒtƒ‰ƒO	
 													//		 true: ü•ª‚Ì•ûŒü‚ğ”½“]‚·‚é
-					const	MgPolyg2&	Pg1,		// (I  ) ‘½ŠpŒ`1
-					const	MgGPolyg2&	GPg2,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`2
-							MgGLine2*	pGLno,		// (I O) ’¼üŒQ
-							MgGPolyg2*	pGPgo		// (I O) ŒŠ•t‚«‘½ŠpŒ`
+					const	MgPolyg2D&	i_Pg1,		// (I  ) ‘½ŠpŒ`1
+					const	MgGPolyg2D&	i_GPg2,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`2
+							MgGLine2D*	io_pGLno,	// (I O) ’¼üŒQ
+							MgGPolyg2D*	io_pGPgo	// (I O) ŒŠ•t‚«‘½ŠpŒ`
 					);
 	
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -2959,53 +2959,53 @@ public:
 	#define	MX_AREA_BY_PT	20						// ‚P“_‚Ìü‚è‚ÌÅ‘å—Ìˆæ”
 	
 	static void MakeGPg2InGLn2(
-					const	MgGLine2&	GLn1,		// (I  ) ³‚µ‚¢•ûŒü‚ğ‚Âü•ªŒQ
-							MgGPolyg2*	GPg3		// (  O) —ÌˆæŒQ
+					const	MgGLine2D&	i_GLn1,		// (I  ) ³‚µ‚¢•ûŒü‚ğ‚Âü•ªŒQ
+							MgGPolyg2D*	o_GPg3		// (  O) —ÌˆæŒQ
 					);
 	
 	// ---------------------( ‚QŸŒ³ )------------------------------
 	//		GLn1‚Ì•ûŒü‚ğl—¶‚µ‚Ä’¼ü•ªŠ„ü•ªGLn2‚ğ’Ç‰Á‚µ—ÌˆæŒQ‚ğì¬‚·‚é
 	//
 	static void MakeGPg2In2GLn2(
-					const	MgGLine2&	GLn1,		// (I  ) ³‚µ‚¢•ûŒü‚ğ‚Âü•ªŒQ
-					const	MgGLine2&	GLn2,		// (I  ) •s³Šm‚È•ûŒü‚Ìü•ªŒQ
-							MgGPolyg2*	GPg3		// (  O) —ÌˆæŒQ
+					const	MgGLine2D&	i_GLn1,		// (I  ) ³‚µ‚¢•ûŒü‚ğ‚Âü•ªŒQ
+					const	MgGLine2D&	i_GLn2,		// (I  ) •s³Šm‚È•ûŒü‚Ìü•ªŒQ
+							MgGPolyg2D*	o_GPg3		// (  O) —ÌˆæŒQ
 					);
 	
 	// ---------------------( ‚QŸŒ³ )------------------------------
 	//		w’èü•ª‚æ‚èn‚Ü‚èü•ªŒQ‚Ìü•ª‚ğŒğ“_‚Å•ªŠ„Œã‚ÉŒ‹‡‚µ‚ÄÅ¬‚Ì‘½ŠpŒ`‚ğì¬‚·‚é
 	//
 	static bool MakeGPg2FromLn2InGLn2(				// (  O) ƒXƒeƒCƒ^ƒX@true: ³íì¬@false: ì¬•s‰Â
-					const	MgLine2&	Ln1,		// (I  ) w’èü•ª
-					const	MgGLine2&	GLn2,		// (I  ) Œ‹‡‚·‚éü•ªŒQ
-							MgPolyg2*	Pg3			// (  O) —Ìˆæ
+					const	MgLine2D&	i_Ln1,		// (I  ) w’èü•ª
+					const	MgGLine2D&	i_GLn2,		// (I  ) Œ‹‡‚·‚éü•ªŒQ
+							MgPolyg2D*	o_Pg3		// (  O) —Ìˆæ
 					);
 	
 //	// ---------------------( ‚QŸŒ³ )------------------------------
 //	//		w’èü•ª‚æ‚èn‚Ü‚èü•ªŒQ‚Ìü•ª‚ğŒ‹‡‚µ‚ÄÅ¬‚Ì‘½ŠpŒ`‚ğì¬‚·‚é
 //	//
 //	static bool	MgMakeGPg2FromLn2InGLn2(			// (  O) ƒXƒeƒCƒ^ƒX@true: ³íì¬@false: ì¬•s‰Â
-//					const	MgLine2&	Ln1,		// (I  ) w’èü•ª
-//							MgGLine2*	GLn2,		// (I O) Œ‹‡‚·‚éü•ªŒQ
-//							MINT*		nHk,		// (I O) Œ‹‡‚·‚éü•ª‚Ì’†‚Ì³‚µ‚¢•ûŒü‚ğ‚Âü•ª”iæ“ª‚æ‚èŠô‚Â‚©‚ğ•\‚·j
-//							MgPolyg2*	Pg3			// (  O) —Ìˆæ
+//					const	MgLine2D&	i_Ln1,		// (I  ) w’èü•ª
+//							MgGLine2D*	io_pGLn2,	// (I O) Œ‹‡‚·‚éü•ªŒQ
+//							MINT*		io_pnHk,	// (I O) Œ‹‡‚·‚éü•ª‚Ì’†‚Ì³‚µ‚¢•ûŒü‚ğ‚Âü•ª”iæ“ª‚æ‚èŠô‚Â‚©‚ğ•\‚·j
+//							MgPolyg2D*	o_pPg3		// (  O) —Ìˆæ
 //					);
 	
 	// ---------------------( ‚QŸŒ³ )------------------------------
 	//		ŒŠ•t‚«‘½ŠpŒ`‚ğ‘½ŠpŒ`‚ÉŒ‹‡‚·‚é
 	//
 	static void ConnectGPgtoPg2(					//
-					const	MgGPolyg2&	GpgI,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`
-							MgPolyg2*	pgO			// (  O) Œ‹‡Œã‚Ì‘½ŠpŒ`
+					const	MgGPolyg2D&	i_GpgI,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`
+							MgPolyg2D*	o_pgO		// (  O) Œ‹‡Œã‚Ì‘½ŠpŒ`
 					);
 	
 	// ---------------------( ‚RŸŒ³ )------------------------------
 	//		ŒŠ•t‚«‘½ŠpŒ`‚ğ‘½ŠpŒ`‚ÉŒ‹‡‚·‚é
 	//
 	static void ConnectGPgtoPg3(					//
-					const	MgGPolyg3&	GPgI,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`
-					const	MgVect3&	VuH,		// (I  ) –@ü•ûŒü
-							MgPolyg3*	PgO			// (  O) Œ‹‡Œã‚Ì‘½ŠpŒ`
+					const	MgGPolyg3D&	i_GPgI,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`
+					const	MgVect3D&	i_VuH,		// (I  ) –@ü•ûŒü
+							MgPolyg3D*	o_pPgO		// (  O) Œ‹‡Œã‚Ì‘½ŠpŒ`
 					);
 
 	
@@ -3017,8 +3017,8 @@ public:
 	//		‚Q“_ŠÔ‚Ì‹——£‚ğ‹‚ß‚éB
 	//
 	static MREAL Dist2Pt2(							// (  O) ’¼ü‚©‚ç“_‚Ü‚Å‚Ì‹——£ >0:¶‘¤ <0:‰E‘¤
-					const	MgPoint2&	p1,			// (I  ) “_1
-					const	MgPoint2&	p2			// (I  ) “_2
+					const	MgPoint2D&	i_p1,		// (I  ) “_1
+					const	MgPoint2D&	i_p2		// (I  ) “_2
 					);
 
 	//===========================================================================
@@ -3029,8 +3029,8 @@ public:
 	//		‚Q“_ŠÔ‚Ì‹——£‚ğ‹‚ß‚éB
 	//
 	static MREAL Dist2Pt3(							// (  O) ‚Q“_ŠÔ‚Ì‹——£ >0:¶‘¤ <0:‰E‘¤
-					const	MgPoint3&	p1,			// (I  ) “_1
-					const	MgPoint3&	p2			// (I  ) “_2
+					const	MgPoint3D&	i_p1,		// (I  ) “_1
+					const	MgPoint3D&	i_p2		// (I  ) “_2
 					);
 	
 	//===========================================================================
@@ -3041,8 +3041,8 @@ public:
 	//		’¼ü‚©‚ç“_‚Ü‚Å‚Ì³•‰•ûŒü•t‚«‹——£‚ğ‹‚ß‚éB
 	//
 	static MREAL DistPtULn2(						// (  O) ’¼ü‚©‚ç“_‚Ü‚Å‚Ì‹——£ >0:¶‘¤ <0:‰E‘¤
-					const	MgPoint2&	p1,			// (I  ) “_1
-					const	MgULine2&	ULn2		// (I  ) ’¼ü2
+					const	MgPoint2D&	i_p1,		// (I  ) “_1
+					const	MgULine2D&	i_ULn2		// (I  ) ’¼ü2
 					);
 	
 	//	------------------------
@@ -3051,16 +3051,16 @@ public:
 	//
 	static MREAL DistPtLn2(							// (  O) ü•ª‚©‚ç“_‚Ü‚Å‚Ì‹——£ >0:¶‘¤ <0:‰E‘¤
 													//	ü•ª‚Ì’·‚³‚ª0‚Ìê‡‚Í“_‚©‚çü•ª‚Ìn“_‚Ü‚Å‚Ì‹——£
-					const	MgPoint2&	p1,			// (I  ) “_1
-					const	MgLine2&	Ln2			// (I  ) ü•ª2
+					const	MgPoint2D&	i_p1,		// (I  ) “_1
+					const	MgLine2D&	i_Ln2		// (I  ) ü•ª2
 					);
 	
 	// ---------------------( ‚RŸŒ³ )------------------------------
 	//		’¼ü‚©‚ç“_‚Ü‚Å‚Ì‹——£‚ğ‹‚ß‚éB
 	//
 	static MREAL DistPtULn3(						// (  O) ’¼ü‚©‚ç“_‚Ü‚Å‚Ì‹——£
-					const	MgPoint3&	p1,			// (I  ) “_1
-					const	MgULine3&	ULn2		// (I  ) ’¼ü2
+					const	MgPoint3D&	i_p1,		// (I  ) “_1
+					const	MgULine3D&	i_ULn2		// (I  ) ’¼ü2
 					);
 
 	//
@@ -3068,17 +3068,17 @@ public:
 	//
 	static MREAL DistPtLn3(							// (  O) ü•ª‚©‚ç“_‚Ü‚Å‚Ì‹——£
 													//	ü•ª‚Ì’·‚³‚ª0‚Ìê‡‚Í“_‚©‚çü•ª‚Ìn“_‚Ü‚Å‚Ì‹——£
-					const	MgPoint3&	p1,			// (I  ) “_1
-					const	MgLine3	&Ln2			// (I  ) ü•ª2
+					const	MgPoint3D&	i_p1,		// (I  ) “_1
+					const	MgLine3D&	i_Ln2		// (I  ) ü•ª2
 					);
 	
 	// ---------------------( ‚RŸŒ³ )------------------------------
 	//		’¼ü‚©‚ç“_‚Ü‚Å‚Ì³•‰•ûŒü•t‚«‹——£‚ğ‹‚ß‚éB
 	//
 	static MREAL DistPtULnV3(						// (  O) ’¼ü‚©‚ç“_‚Ü‚Å‚Ì‹——£ >0:¶‘¤ <0:‰E‘¤
-					const	MgPoint3&	p1,			// (I  ) “_1
-					const	MgULine3&	ULn2,		// (I  ) ’¼ü2
-					const	MgVect3&	vn			// (I  ) “_‚Æ’¼ü‚É’¼Œğ‚·‚é’PˆÊƒxƒNƒgƒ‹
+					const	MgPoint3D&	i_p1,		// (I  ) “_1
+					const	MgULine3D&	i_ULn2,		// (I  ) ’¼ü2
+					const	MgVect3D&	i_vn		// (I  ) “_‚Æ’¼ü‚É’¼Œğ‚·‚é’PˆÊƒxƒNƒgƒ‹
 					);
 
 	//
@@ -3087,17 +3087,17 @@ public:
 	static MREAL DistPtLnV3(						// (  O) ü•ª‚©‚ç“_‚Ü‚Å‚Ì‹——£ >0:¶‘¤ <0:‰E‘¤
 													//		 ü•ª‚Ì’·‚³‚ª0‚Ìê‡‚Í“_‚©‚çü•ª‚Ìn“_‚Ü‚Å‚Ì‹——£
 													//		 ü•ª‚Ì’·‚³‚ª0‚Ìê‡‚Í“_‚©‚çü•ª‚Ìn“_‚Ü‚Å‚Ì‹——£
-				const	MgPoint3&	p1,				// (I  ) “_1
-				const	MgLine3&	Ln2,			// (I  ) ü•ª2
-				const	MgVect3&	vn				// (I  ) “_‚Æ’¼ü‚É’¼Œğ‚·‚é’PˆÊƒxƒNƒgƒ‹
+				const	MgPoint3D&	i_p1,			// (I  ) “_1
+				const	MgLine3D&	i_Ln2,			// (I  ) ü•ª2
+				const	MgVect3D&	i_vn			// (I  ) “_‚Æ’¼ü‚É’¼Œğ‚·‚é’PˆÊƒxƒNƒgƒ‹
 				);
 	
 	// ---------------------( ‚RŸŒ³ )------------------------------
 	//		•½–Ê‚©‚ç“_‚Ü‚Å‚Ì³•‰•ûŒü•t‚«‹——£‚ğ‹‚ß‚éB
 	//
 	static MREAL DistPtPln3(						// (  O) “_‚©‚ç•½–Ê‚Ü‚Å‚Ì‹——£ >0:•\‘¤i•½–Ê‚Ì’PˆÊƒxƒNƒgƒ‹•ûŒü‘¤j<0:— ‘¤
-					const	MgPoint3&	p1,			// (I  ) “_1
-					const	MgPlane3&	Pln2		// (I  ) •½–Ê2
+					const	MgPoint3D&	i_p1,		// (I  ) “_1
+					const	MgPlane3D&	i_Pln2		// (I  ) •½–Ê2
 					);
 
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -3107,9 +3107,9 @@ public:
 	static MINT Divide2Ln2(							// (  O) ƒXƒeƒCƒ^ƒX
 													//			MC_NINT			(0): •ªŠ„–³‚µ
 													//			MC_INT			(1): •ªŠ„‚ ‚è
-					const	MgLine2&	Ln1, 		// (I  ) •ªŠ„‘ÎÛü•ª
-					const	MgLine2&	Ln2, 		// (I  ) •ªŠ„ü•ª
-							MgGLine2*	GLn3		// (  O) •ªŠ„Œã‚Ìü•ªŒQ
+					const	MgLine2D&	i_Ln1, 		// (I  ) •ªŠ„‘ÎÛü•ª
+					const	MgLine2D&	i_Ln2, 		// (I  ) •ªŠ„ü•ª
+							MgGLine2D*	o_pGLn3		// (  O) •ªŠ„Œã‚Ìü•ªŒQ
 					);
 
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -3119,9 +3119,9 @@ public:
 	static MINT DivideLnULn2(						// (  O) ƒXƒeƒCƒ^ƒX
 													//			MC_NINT			(0): Œğ·‚È‚µ
 													//			MC_INT			(1): Œğ·‚ ‚è
-					const	MgLine2&	Ln1, 		// (I  ) •ªŠ„‘ÎÛü•ª
-					const	MgULine2&	ULn2, 		// (I  ) •ªŠ„’¼ü
-							MgGLine2*	GLn3		// (  O) •ªŠ„Œã‚Ìü•ªŒQ
+					const	MgLine2D&	i_Ln1, 		// (I  ) •ªŠ„‘ÎÛü•ª
+					const	MgULine2D&	i_ULn2,		// (I  ) •ªŠ„’¼ü
+							MgGLine2D*	o_pGLn3		// (  O) •ªŠ„Œã‚Ìü•ªŒQ
 					);
 
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -3146,15 +3146,15 @@ public:
 													//	—á	 (STS == MC_NINT):				Œğ·–³‚µ‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚È‚µ 
 													//		 (STS == (MC_NINT | MC_MATCH)):	Œğ·–³‚µ‚Å‚ ‚é‚ª‘I‘ğğŒ‚É‡‚¤
 													//		 (STS == (MC_INT | MC_MATCH)):	Œğ·‚ ‚è‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚ ‚è
-							MINT		Sel,		// (I  ) ‘I‘ğğŒ
+							MINT		i_Sel,		// (I  ) ‘I‘ğğŒ
 													//			MC_LEFT			(010): ’¼ü‚Ì¶‘¤
 													//			MC_ON_LINE		(020): ’¼üã
 													//			MC_RIGHT		(040): ’¼ü‚Ì‰E‘¤
 													//			MC_SAME_DIR		(0100):	•Óã“¯ˆê•ûŒü
 													//			MC_REV_DIR		(0200):	•Óã‹t•ûŒü
-					const	MgLine2&	Ln1, 		// (I  ) •ªŠ„‘ÎÛü•ª
-					const	MgULine2&	ULn2, 		// (I  ) •ªŠ„’¼ü
-							MgGLine2*	GLn3		// (I O) •ªŠ„Œã‚Ìü•ªŒQ
+					const	MgLine2D&	i_Ln1, 		// (I  ) •ªŠ„‘ÎÛü•ª
+					const	MgULine2D&	i_ULn2,		// (I  ) •ªŠ„’¼ü
+							MgGLine2D*	o_pGLn3		// (I O) •ªŠ„Œã‚Ìü•ªŒQ
 					);
 
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -3164,9 +3164,9 @@ public:
 	static MINT DivideLnGLn2(						// (  O) ƒXƒeƒCƒ^ƒX
 													//			MC_NINT			(0): Œğ·‚È‚µ
 													//			MC_INT			(1): Œğ·‚ ‚è
-					const	MgLine2&	Ln1, 		// (I  ) •ªŠ„‘ÎÛü•ª
-					const	MgGLine2&	GLn2, 		// (I  ) •ªŠ„ü•ªŒQ
-							MgGLine2*	GLn3		// (  O) •ªŠ„Œã‚Ìü•ªŒQ
+					const	MgLine2D&	i_Ln1, 		// (I  ) •ªŠ„‘ÎÛü•ª
+					const	MgGLine2D&	i_GLn2,		// (I  ) •ªŠ„ü•ªŒQ
+							MgGLine2D*	o_pGLn3		// (  O) •ªŠ„Œã‚Ìü•ªŒQ
 					);
 
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -3176,8 +3176,8 @@ public:
 	static MINT DivideGLn2(							// (  O) ƒXƒeƒCƒ^ƒX
 													//			MC_NINT			(0): Œğ·‚È‚µ
 													//			MC_INT			(1): Œğ·‚ ‚è
-					const	MgGLine2&	GLn1, 		// (I  ) ü•ªŒQ
-							MgGLine2*	GLn2		// (  O) •ªŠ„Œã‚Ìü•ªŒQ
+					const	MgGLine2D&	i_GLn1,		// (I  ) ü•ªŒQ
+							MgGLine2D*	o_pGLn2		// (  O) •ªŠ„Œã‚Ìü•ªŒQ
 					);
 
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -3194,13 +3194,13 @@ public:
 													//	—á	 (STS == MC_NINT):				Œğ·–³‚µ‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚È‚µ 
 													//		 (STS == (MC_NINT | MC_MATCH)):	Œğ·–³‚µ‚Å‚ ‚é‚ª‘I‘ğğŒ‚É‡‚¤
 													//		 (STS == (MC_INT | MC_MATCH)):	Œğ·‚ ‚è‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚ ‚è
-							MINT		Sel,		// (I  ) ‘I‘ğğŒ
+							MINT		i_Sel,		// (I  ) ‘I‘ğğŒ
 													//			MC_IN_BORDER	(001): “à‘¤
 													//			MC_ON_BORDER	(002): •Óã
 													//			MC_SAME_DIR		(0100):	•Óã“¯ˆê•ûŒü
-					const	MgULine2&	ULn1,		// (I  ) ’¼ü
-					const	MgPolyg2&	Pg2,		// (I  ) ‘½ŠpŒ`
-							MgGLine2*	GLn3		// (  O) •ªŠ„Œã‚Ìü•ªŒQ
+					const	MgULine2D&	i_ULn1,		// (I  ) ’¼ü
+					const	MgPolyg2D&	i_Pg2,		// (I  ) ‘½ŠpŒ`
+							MgGLine2D*	o_pGLn3		// (  O) •ªŠ„Œã‚Ìü•ªŒQ
 					);
 	
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -3217,13 +3217,13 @@ public:
 													//	—á	 (STS == MC_NINT):				Œğ·–³‚µ‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚È‚µ 
 													//		 (STS == (MC_NINT | MC_MATCH)):	Œğ·–³‚µ‚Å‚ ‚é‚ª‘I‘ğğŒ‚É‡‚¤
 													//		 (STS == (MC_INT | MC_MATCH)):	Œğ·‚ ‚è‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚ ‚è
-							MINT		Sel,		// (I  ) ‘I‘ğğŒ
+							MINT		i_Sel,		// (I  ) ‘I‘ğğŒ
 													//			MC_IN_BORDER	(001): “à‘¤
 													//			MC_ON_BORDER	(002): •Óã
 													//			MC_SAME_DIR		(0100):	•Óã“¯ˆê•ûŒü
-					const	MgULine2&	ULn1,		// (I  ) ’¼ü
-					const	MgPolyg2&	Pg2,		// (I  ) ‘½ŠpŒ`
-							MgGLine2*	GLn3		// (I O) •ªŠ„Œã‚Ìü•ªŒQ
+					const	MgULine2D&	i_ULn1,		// (I  ) ’¼ü
+					const	MgPolyg2D&	i_Pg2,		// (I  ) ‘½ŠpŒ`
+							MgGLine2D*	io_pGLn3	// (I O) •ªŠ„Œã‚Ìü•ªŒQ
 					);
 
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -3241,14 +3241,14 @@ public:
 													//	—á	 (STS == MC_NINT):				Œğ·–³‚µ‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚È‚µ 
 													//		 (STS == (MC_NINT | MC_MATCH)):	Œğ·–³‚µ‚Å‚ ‚é‚ª‘I‘ğğŒ‚É‡‚¤
 													//		 (STS == (MC_INT | MC_MATCH)):	Œğ·‚ ‚è‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚ ‚è
-							MINT		Sel,		// (I  ) ‘I‘ğğŒ
+							MINT		i_Sel,		// (I  ) ‘I‘ğğŒ
 													//			MC_IN_BORDER	(001): “à‘¤
 													//			MC_ON_BORDER	(002): •Óã
 													//			MC_OUT_BORDER	(004): ŠO‘¤
 													//			MC_FOR_POLYGON	(0100): ‘½ŠpŒ`ì¬—p
-					const	MgLine2&	Ln1,		// (I  ) ü•ª
-					const	MgPolyg2&	Pg2,		// (I  ) ‘½ŠpŒ`
-							MgGLine2*	GLn3		// (  O) •ªŠ„Œã‚Ìü•ªŒQ
+					const	MgLine2D&	i_Ln1,		// (I  ) ü•ª
+					const	MgPolyg2D&	i_Pg2,		// (I  ) ‘½ŠpŒ`
+							MgGLine2D*	o_pGLn3		// (  O) •ªŠ„Œã‚Ìü•ªŒQ
 					);
 	
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -3266,15 +3266,15 @@ public:
 													//	—á	 (STS == MC_NINT):				Œğ·–³‚µ‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚È‚µ 
 													//		 (STS == (MC_NINT | MC_MATCH)):	Œğ·–³‚µ‚Å‚ ‚é‚ª‘I‘ğğŒ‚É‡‚¤
 													//		 (STS == (MC_INT | MC_MATCH)):	Œğ·‚ ‚è‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚ ‚è
-							MINT		Sel,		// (I  ) ‘I‘ğğŒ
+							MINT		i_Sel,		// (I  ) ‘I‘ğğŒ
 													//			MC_IN_BORDER	(001): “à‘¤
 													//			MC_ON_BORDER	(002): •Óã
 													//			MC_OUT_BORDER	(004): ŠO‘¤
 													//			MC_SAME_DIR		(0100):	•Óã“¯ˆê•ûŒü
 													//			MC_REV_DIR		(0200):	•Óã‹t•ûŒü
-					const	MgLine2&	Ln1,		// (I  ) ü•ª
-					const	MgPolyg2&	Pg2,		// (I  ) ‘½ŠpŒ`
-							MgGLine2*	GLn3		// (I O) •ªŠ„Œã‚Ìü•ªŒQ
+					const	MgLine2D&	i_Ln1,		// (I  ) ü•ª
+					const	MgPolyg2D&	i_Pg2,		// (I  ) ‘½ŠpŒ`
+							MgGLine2D*	o_pGLn3		// (I O) •ªŠ„Œã‚Ìü•ªŒQ
 					);
 
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -3287,13 +3287,13 @@ public:
 	static MINT DivideULnGPg2(						// (  O) ƒXƒeƒCƒ^ƒX
 													//			MC_NINT			(0): ‘I‘ğğŒ‚É‡‚¤ü•ª‚È‚µ
 													//			MC_INT			(1): ‘I‘ğğŒ‚É‡‚¤ü•ª‚ ‚è
-							MINT		Sel,		// (I  ) ‘I‘ğğŒ
+							MINT		i_Sel,		// (I  ) ‘I‘ğğŒ
 													//			MC_IN_BORDER	(001): “à‘¤
 													//			MC_ON_BORDER	(002): •Óã
 													//			MC_SAME_DIR		(0100):	•Óã“¯ˆê•ûŒü
-					const	MgULine2&	ULn1,		// (I  ) ’¼ü
-					const	MgGPolyg2&	GPg2,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`
-							MgGLine2*	GLn3		// (  O) •ªŠ„Œã‚Ìü•ªŒQ
+					const	MgULine2D&	i_ULn1,		// (I  ) ’¼ü
+					const	MgGPolyg2D&	i_GPg2,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`
+							MgGLine2D*	o_pGLn3		// (  O) •ªŠ„Œã‚Ìü•ªŒQ
 					);
 	
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -3308,13 +3308,13 @@ public:
 													//	—á	 (STS == MC_NINT):				Œğ·–³‚µ‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚È‚µ 
 													//		 (STS == (MC_NINT | MC_MATCH)):	Œğ·–³‚µ‚Å‚ ‚é‚ª‘I‘ğğŒ‚É‡‚¤
 													//		 (STS == (MC_INT | MC_MATCH)):	Œğ·‚ ‚è‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚ ‚è
-							MINT		Sel,		// (I  ) ‘I‘ğğŒ
+							MINT		i_Sel,		// (I  ) ‘I‘ğğŒ
 													//			MC_IN_BORDER	(001): “à‘¤
 													//			MC_ON_BORDER	(002): •Óã
 													//			MC_SAME_DIR		(0100):	•Óã“¯ˆê•ûŒü
-					const	MgULine2&	ULn1,		// (I  ) ’¼ü
-					const	MgGPolyg2&	GPg2,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`
-							MgGLine2*	GLn3		// (I O) •ªŠ„Œã‚Ìü•ªŒQ
+					const	MgULine2D&	i_ULn1,		// (I  ) ’¼ü
+					const	MgGPolyg2D&	i_GPg2,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`
+							MgGLine2D*	o_pGLn3		// (I O) •ªŠ„Œã‚Ìü•ªŒQ
 					);
 
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -3332,15 +3332,15 @@ public:
 													//	—á	 (STS == MC_NINT):				Œğ·–³‚µ‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚È‚µ 
 													//		 (STS == (MC_NINT | MC_MATCH)):	Œğ·–³‚µ‚Å‚ ‚é‚ª‘I‘ğğŒ‚É‡‚¤
 													//		 (STS == (MC_INT | MC_MATCH)):	Œğ·‚ ‚è‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚ ‚è
-							MINT		Sel,		// (I  ) ‘I‘ğğŒ
+							MINT		i_Sel,		// (I  ) ‘I‘ğğŒ
 													//			MC_IN_BORDER	(001): “à‘¤
 													//			MC_ON_BORDER	(002): •Óã
 													//			MC_OUT_BORDER	(004): ŠO‘¤
 													//			MC_SAME_DIR		(0100):	•Óã“¯ˆê•ûŒü
 													//			MC_REV_DIR		(0200):	•Óã‹t•ûŒü
-					const	MgLine2&	Ln1,		// (I  ) ü•ª
-					const	MgGPolyg2&	GPg2,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`
-							MgGLine2*	GLn3		// (  O) •ªŠ„Œã‚Ìü•ªŒQ
+					const	MgLine2D&	i_Ln1,		// (I  ) ü•ª
+					const	MgGPolyg2D&	i_GPg2,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`
+							MgGLine2D*	o_pGLn3		// (  O) •ªŠ„Œã‚Ìü•ªŒQ
 					);
 	
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -3358,22 +3358,22 @@ public:
 													//	—á	 (STS == MC_NINT):				Œğ·–³‚µ‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚È‚µ 
 													//		 (STS == (MC_NINT | MC_MATCH)):	Œğ·–³‚µ‚Å‚ ‚é‚ª‘I‘ğğŒ‚É‡‚¤
 													//		 (STS == (MC_INT | MC_MATCH)):	Œğ·‚ ‚è‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚ ‚è
-							MINT		Sel,		// (I  ) ‘I‘ğğŒ
+							MINT		i_Sel,		// (I  ) ‘I‘ğğŒ
 													//			MC_IN_BORDER	(001): “à‘¤
 													//			MC_ON_BORDER	(002): •Óã
 													//			MC_OUT_BORDER	(004): ŠO‘¤
 													//			MC_SAME_DIR		(0100):	•Óã“¯ˆê•ûŒü
 													//			MC_REV_DIR		(0200):	•Óã‹t•ûŒü
-					const	MgLine2&	Ln1,		// (I  ) ü•ª
-					const	MgGPolyg2&	GPg2,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`
-							MgGLine2*	GLn3		// (I O) •ªŠ„Œã‚Ìü•ªŒQ
+					const	MgLine2D&	i_Ln1,		// (I  ) ü•ª
+					const	MgGPolyg2D&	i_GPg2,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`
+							MgGLine2D*	io_pGLn3	// (I O) •ªŠ„Œã‚Ìü•ªŒQ
 					);
 
 	// ---------------------( ‚QŸŒ³ )------------------------------
 	//		d‚È‚Á‚Ä‚¢‚éü•ª‚ğíœ‚µˆê–{‚É‚·‚é (‹t•ûŒü‚àŠÜ‚Ş)				<—vŒø—¦UP?>
 	//
 	static void MergeGLn2(
-							MgGLine2*	Gln			// (I O) ü•ªŒQ
+							MgGLine2D*	io_pGln		// (I O) ü•ªŒQ
 					);
 	
 	//===========================================================================
@@ -3383,12 +3383,12 @@ public:
 	static MINT DivideULnPg3(						// (  O) ƒXƒeƒCƒ^ƒX
 													//		 MC_NINT		(0): Œğ·‚È‚µ
 													//		 MC_INT			(1): Œğ·‚ ‚è
-							MINT		Sel,		// (I  ) ‘I‘ğğŒ
+							MINT		i_Sel,		// (I  ) ‘I‘ğğŒ
 													//		 MC_IN_BORDER	(001): “à‘¤
 													//		 MC_ON_BORDER	(002): •Óã
-					const	MgULine3&	ULn1,		// (I  ) ’¼ü
-					const	MgPolyg3&	Pg2,		// (I  ) ‘½ŠpŒ`
-							MgGLine3	*GLn3		// (  O) •ªŠ„Œã‚Ìü•ªŒQ
+					const	MgULine3D&	i_ULn1,		// (I  ) ’¼ü
+					const	MgPolyg3D&	i_Pg2,		// (I  ) ‘½ŠpŒ`
+							MgGLine3D*	o_pGLn3		// (  O) •ªŠ„Œã‚Ìü•ªŒQ
 					);
 
 	//---------------------( ‚RŸŒ³ )------------------------------
@@ -3401,12 +3401,12 @@ public:
 													//	—á	 (STS == MC_NINT):				Œğ·–³‚µ‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚È‚µ 
 													//		 (STS == (MC_NINT | MC_MATCH)):	Œğ·–³‚µ‚Å‚ ‚é‚ª‘I‘ğğŒ‚É‡‚¤
 													//		 (STS == (MC_INT | MC_MATCH)):	Œğ·‚ ‚è‚Å‘I‘ğğŒ‚É‡‚¤•”•ª‚ ‚è
-							MINT		Sel,		// (I  ) ‘I‘ğğŒ
+							MINT		i_Sel,		// (I  ) ‘I‘ğğŒ
 													//			MC_IN_BORDER	(001): “à‘¤
 													//			MC_ON_BORDER	(002): •Óã
-					const	MgULine3&	ULn1,		// (I  ) ’¼ü
-					const	MgPolyg3&	Pg2,		// (I  ) ‘½ŠpŒ`
-							MgGLine3	*GLn3		// (I O) •ªŠ„Œã‚Ìü•ªŒQ
+					const	MgULine3D&	i_ULn1,		// (I  ) ’¼ü
+					const	MgPolyg3D&	i_Pg2,		// (I  ) ‘½ŠpŒ`
+							MgGLine3D*	io_pGLn3	// (I O) •ªŠ„Œã‚Ìü•ªŒQ
 					);
 
 	//// ---------------------( ‚QŸŒ³ )------------------------------
@@ -3415,9 +3415,9 @@ public:
 	////		0.: -0K, 0.5: 90K, 1.: 180K, 1.5: -90K, <2.: <360(-)K
 	////
 	//static MREAL AngSSa3Pt2( 
-	//				const	MgPoint2&	p0,
-	//				const	MgPoint2&	p1,
-	//				const	MgPoint2&	p2
+	//				const	MgPoint2D&	i_p0,
+	//				const	MgPoint2D&	i_p1,
+	//				const	MgPoint2D&	i_p2
 	//				)
 	////
 	//// ---------------------( ‚RŸŒ³ )------------------------------
@@ -3426,10 +3426,10 @@ public:
 	////		0.: -0K, 0.5: 90K, 1.: 180K, 1.5: -90K, <2.: <360(-)K
 	////
 	//static MREAL AngSSa3Pt3( 
-	//				const	MgPoint3&	P0,
-	//				const	MgPoint3&	P1,
-	//				const	MgPoint3&	P2,
-	//				const	MgPlane3	&Pln3
+	//				const	MgPoint3D&	i_P0,
+	//				const	MgPoint3D&	i_P1,
+	//				const	MgPoint3D&	i_P2,
+	//				const	MgPlane3D&	i_Pln3
 	//				)
 	////
 	//// ---------------------( ‚QŸŒ³ )------------------------------
@@ -3438,9 +3438,9 @@ public:
 	////		>-1.: >-180K, -0.5: -90K, 0.: -0K, 0.5: 90K, 1.: 180K
 	////
 	//static MREAL AngSSb3Pt2( 
-	//				const	MgPoint2&	p0,
-	//				const	MgPoint2&	p1,
-	//				const	MgPoint2&	p2
+	//				const	MgPoint2D&	i_p0,
+	//				const	MgPoint2D&	i_p1,
+	//				const	MgPoint2D&	i_p2
 	//				)
 	////
 	//// ---------------------( ‚RŸŒ³ )------------------------------
@@ -3449,10 +3449,10 @@ public:
 	////		>-1.: >-180K, -0.5: -90K, 0.: -0K, 0.5: 90K, 1.: 180K
 	////
 	//static MREAL AngSSb3Pt3( 
-	//				const	MgPoint3&	P0,
-	//				const	MgPoint3&	P1,
-	//				const	MgPoint3&	P2,
-	//				const	MgPlane3	&Pln3
+	//				const	MgPoint3D&	i_P0,
+	//				const	MgPoint3D&	i_P1,
+	//				const	MgPoint3D&	i_P2,
+	//				const	MgPlane3D&	i_Pln3
 	//				)
 	//
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -3462,9 +3462,9 @@ public:
 	//			-1: OŠpŒ`“à‚É‘¼‚Ì“ü‹÷“_‚ª‚ ‚è•ªŠ„•s‰Â(‚RŠpŒ`‚Ì•Óã‚Í‘ÎÛŠO)
 	//
 	static MINT ChkDivTriPtPg2( 
-							MgPoint2*	p3,			// ‘I‘ğ‚RŠpŒ`
-					const	MgPolyg2&	Pgw,		// •ªŠ„‘½ŠpŒ`
-					const	MgGInt		&iGIrisumi	// “ü‹÷“_ƒŠƒXƒg
+							MgPoint2D*	i_p3,		// ‘I‘ğ‚RŠpŒ`
+					const	MgPolyg2D&	i_Pgw,		// •ªŠ„‘½ŠpŒ`
+					const	MgGInt&		i_iGIrisumi	// “ü‹÷“_ƒŠƒXƒg
 					);
 	
 	// ---------------------( ‚RŸŒ³ )------------------------------
@@ -3474,10 +3474,10 @@ public:
 	//			-1: OŠpŒ`ã‚Ü‚½‚Í“à‚É‘¼‚Ì“ü‹÷“_‚ª‚ ‚è•ªŠ„•s‰Â(‚RŠpŒ`‚Ì•Óã‚Í‘ÎÛŠO)
 	//
 	static MINT ChkDivTriPtPg3( 
-							MgPoint3	*p3,		// ‘I‘ğ‚RŠpŒ`
-					const	MgPolyg3&	Pgw,		// •ªŠ„‘½ŠpŒ`
-					const	MgGInt		&iGIrisumi,	// “ü‹÷“_ƒŠƒXƒg
-					const	MgVect3&	VuPg1		// ‘½ŠpŒ`‚Ì–@ü•ûŒü
+							MgPoint3D*	i_p3,		// ‘I‘ğ‚RŠpŒ`
+					const	MgPolyg3D&	i_Pgw,		// •ªŠ„‘½ŠpŒ`
+					const	MgGInt&		i_iGIrisumi,// “ü‹÷“_ƒŠƒXƒg
+					const	MgVect3D&	i_VuPg1		// ‘½ŠpŒ`‚Ì–@ü•ûŒü
 					);
 	
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -3486,8 +3486,8 @@ public:
 	static MINT DivideTriPg2(						// (  O) ƒXƒeƒCƒ^ƒX
 													//			MC_NINT			(0): •ªŠ„‚È‚µ
 													//			MC_INT			(1): •ªŠ„‚ ‚è
-					const	MgPolyg2&	Pg1,		// (I  ) ‘½ŠpŒ`
-							MgGPolyg2*	GPg2		// (  O) •ªŠ„Œã‚Ì‚RŠpŒ`ŒQ
+					const	MgPolyg2D&	i_Pg1,		// (I  ) ‘½ŠpŒ`
+							MgGPolyg2D*	o_pGPg2		// (  O) •ªŠ„Œã‚Ì‚RŠpŒ`ŒQ
 					);
 	
 	//
@@ -3497,9 +3497,9 @@ public:
 	static MINT DivideTriPg3(						// (  O) ƒXƒeƒCƒ^ƒX
 													//			MC_NINT			(0): •ªŠ„‚È‚µ
 													//			MC_INT			(1): •ªŠ„‚ ‚è
-					const	MgPolyg3&	Pg1,		// (I  ) ‘½ŠpŒ`
-					const	MgVect3&	VuPg1,		// (I  ) ‘½ŠpŒ`‚Ì–@ü•ûŒü
-							MgGPolyg3*	GPg2		// (  O) •ªŠ„Œã‚Ì‚RŠpŒ`ŒQ
+					const	MgPolyg3D&	i_Pg1,		// (I  ) ‘½ŠpŒ`
+					const	MgVect3D&	i_VuPg1,		// (I  ) ‘½ŠpŒ`‚Ì–@ü•ûŒü
+							MgGPolyg3D*	o_pGPg2		// (  O) •ªŠ„Œã‚Ì‚RŠpŒ`ŒQ
 					);
 	
 	//===========================================================================
@@ -3512,9 +3512,9 @@ public:
 													//	MC_PARALLEL (-1) Œğ·‚È‚µi•½sj
 													//	MC_NINT	    (0)	Œğ·‚È‚µ
 													//	MC_INT      (1)	Œğ·‚ ‚è
-					const	MgULine2&	ULn1,		// (I  ) ’¼ü1
-					const	MgULine2&	ULn2,		// (I  ) ’¼ü2
-							MgPoint2*	po			// (  O) ‚QŸŒ³Œğ“_
+					const	MgULine2D&	i_ULn1,		// (I  ) ’¼ü1
+					const	MgULine2D&	i_ULn2,		// (I  ) ’¼ü2
+							MgPoint2D*	o_ppo		// (  O) ‚QŸŒ³Œğ“_
 					);
 	
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -3525,9 +3525,9 @@ public:
 													//	MC_PARALLEL (-1) Œğ·‚È‚µi•½sj
 													//	MC_NINT	    (0)	Œğ·‚È‚µ
 													//	MC_INT      (1)	Œğ·‚ ‚è
-					const	MgULine2&	ULn1,		// (I  ) ’¼ü1
-					const	MgLine2&	Ln2,		// (I  ) ü•ª2
-							MgPoint2*	po			// (  O) ‚QŸŒ³Œğ“_
+					const	MgULine2D&	i_ULn1,		// (I  ) ’¼ü1
+					const	MgLine2D&	i_Ln2,		// (I  ) ü•ª2
+							MgPoint2D*	o_ppo		// (  O) ‚QŸŒ³Œğ“_
 					);
 	
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -3538,12 +3538,12 @@ public:
 													//	MC_PARALLEL (-1) Œğ·‚È‚µi•½sj
 													//	MC_NINT	    (0)	Œğ·‚È‚µ
 													//	MC_INT      (1)	Œğ·‚ ‚è
-					const	MgLine2&	Ln1,		// (I  ) ü•ª1
-					const	MgULine2&	ULn2,		// (I  ) ’¼ü2
-							MgPoint2*	po			// (  O) ‚QŸŒ³Œğ“_
+					const	MgLine2D&	i_Ln1,		// (I  ) ü•ª1
+					const	MgULine2D&	i_ULn2,		// (I  ) ’¼ü2
+							MgPoint2D*	o_ppo		// (  O) ‚QŸŒ³Œğ“_
 					)
 	{
-		return IntrULnLn2( ULn2, Ln1, po);
+		return IntrULnLn2( i_ULn2, i_Ln1, o_ppo);
 	}
 	
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -3555,10 +3555,10 @@ public:
 													//  MC_CONNECTION(4) Ú‘±	 i•½sj
 													//	MC_NINT	    (0)	Œğ·‚È‚µ
 													//	MC_INT      (1)	Œğ·‚ ‚è
-				const	MgLine2&	Ln1,			// (I  ) ü•ª1
-				const	MgLine2&	Ln2,			// (I  ) ü•ª2
-				MgPoint2			*po				// (  O) ‚QŸŒ³Œğ“_
-				);
+					const	MgLine2D&	i_Ln1,		// (I  ) ü•ª1
+					const	MgLine2D&	i_Ln2,		// (I  ) ü•ª2
+							MgPoint2D*	o_ppo		// (  O) ‚QŸŒ³Œğ“_
+					);
 
 	// ---------------------( ‚QŸŒ³ )------------------------------
 	//	ü•ª‚P‚Æ’¼ü‚Q‚Æ‚ÌŒğ“_‚ğ‹‚ßA“_ŒQ‚É’Ç‰Á‚·‚éB
@@ -3568,9 +3568,9 @@ public:
 													//	MC_PARALLEL (-1) Œğ·‚È‚µi•½sj
 													//	MC_NINT	    (0)	Œğ·‚È‚µ
 													//	MC_INT      (1)	Œğ·‚ ‚è
-					const	MgLine2&	Ln1,		// (I  ) ü•ª1
-					const	MgULine2&	ULn2,		// (I  ) ’¼ü2
-							MgGPoint2	*GPt3		// (I O) Œğ“_‚ğ’Ç‰Á‚·‚é“_ŒQ
+					const	MgLine2D&	i_Ln1,		// (I  ) ü•ª1
+					const	MgULine2D&	i_ULn2,		// (I  ) ’¼ü2
+							MgGPoint2D*	io_pGPt3	// (I O) Œğ“_‚ğ’Ç‰Á‚·‚é“_ŒQ
 													//		 ’Ç‰ÁŒğ“_”(0:Œğ·‚È‚µAü•ª‚Ì’[•”‚ÅŒğ·A‚Ü‚½‚Íd‚È‚é
 													//					1:Œğ·‚ ‚èiü•ª‚Ì’[•”‚Å‚ÌŒğ·‚ÍŠÜ‚Ü‚¸))
 					);
@@ -3584,9 +3584,9 @@ public:
 													//	MC_NINT	    (0)	Œğ·‚È‚µ
 													//	MC_INT      (1)	Œğ·‚ ‚è
 													//  MC_REP	    (2)	Œğ·‚ ‚èid‚È‚èj
-					const	MgLine2&	Ln1,		// (I  ) ü•ª1
-					const	MgLine2&	Ln2,		// (I  ) ü•ª2
-							MgGPoint2	*GPt3		// (I O) Œğ“_‚ğ’Ç‰Á‚·‚éü•ªŒQ
+					const	MgLine2D&	i_Ln1,		// (I  ) ü•ª1
+					const	MgLine2D&	i_Ln2,		// (I  ) ü•ª2
+							MgGPoint2D*	io_pGPt3	// (I O) Œğ“_‚ğ’Ç‰Á‚·‚éü•ªŒQ
 													// 		 ’Ç‰ÁŒğ“_”(0:Œğ·–³‚µ‚Ü‚½‚Íü•ª1‚ªü•ª2‚Ì“à‘¤‚É‚ ‚éd‚È‚è(’[•”“¯m‚Ìd‚È‚èŠÜ‚Ş) |
 													//					1:ü•ª2‚ÆŒğ·iü•ª2‚Ì’[•”‚Å‚ÌŒğ·‚àŠÜ‚Şj‚Ü‚½‚Íˆê•”d‚È‚è(•Ğ’[d‚È‚èŠÜ‚Ş) |
 													//					2:ü•ª2‚ªü•ª1‚Ì“à‘¤‚É‚ ‚éd‚È‚è(’[•”“¯m‚Ìd‚È‚è‚È‚µ)) 
@@ -3600,9 +3600,9 @@ public:
 													//	MC_NINT	    (0)	Œğ·‚È‚µ
 													//	MC_INT      (1)	Œğ·‚ ‚è
 													//  MC_REP	    (2)	Œğ·‚ ‚èid‚È‚èj
-					const	MgULine2&	ULn1,		// (I  ) ’¼ü1
-					const	MgLine2&	Ln2,		// (I  ) ü•ª2
-							MgGPoint2	*GPt3		// (I O) Œğ“_‚ğ’Ç‰Á‚·‚éü•ªŒQ
+					const	MgULine2D&	i_ULn1,		// (I  ) ’¼ü1
+					const	MgLine2D&	i_Ln2,		// (I  ) ü•ª2
+							MgGPoint2D*	io_pGPt3	// (I O) Œğ“_‚ğ’Ç‰Á‚·‚éü•ªŒQ
 													// 		 ’Ç‰ÁŒğ“_”(0:Œğ·–³‚µ |
 													//					1:’¼ü1‚Æü•ª2‚ªŒğ·iü•ª2‚Ì’[•”‚Å‚ÌŒğ·‚àŠÜ‚Şj|
 													//					2:’¼ü1‚Æü•ª2‚ªd‚È‚é 
@@ -3615,9 +3615,9 @@ public:
 													//	MC_PARALLEL (-1) Œğ·‚È‚µi•½sj
 													//	MC_TWIST	(-2) Œğ·‚È‚µi‚Ë‚¶‚êj
 													//	MC_INT      (1)	Œğ·‚ ‚è
-					const	MgULine3&	ULn1,		// (I  ) ’¼ü1
-					const	MgULine3&	ULn2,		// (I  ) ’¼ü2
-							MgPoint3	*po			// (  O) ‚RŸŒ³Œğ“_
+					const	MgULine3D&	i_ULn1,		// (I  ) ’¼ü1
+					const	MgULine3D&	i_ULn2,		// (I  ) ’¼ü2
+							MgPoint3D*	o_ppo			// (  O) ‚RŸŒ³Œğ“_
 					);
 
 	// ---------------------( ‚RŸŒ³ )------------------------------
@@ -3628,9 +3628,9 @@ public:
 													//	MC_TWIST    (-2) Œğ·‚È‚µi‚Ë‚¶‚êj
 													//	MC_NINT	    (0)	Œğ·‚È‚µ
 													//	MC_INT      (1)	Œğ·‚ ‚è
-					const	MgULine3&	ULn1,		// (I  ) ’¼ü1
-					const	MgLine3		&Ln2,		// (I  ) ü•ª2
-							MgPoint3	*po			// (  O) ‚RŸŒ³Œğ“_
+					const	MgULine3D&	i_ULn1,		// (I  ) ’¼ü1
+					const	MgLine3D&	i_Ln2,		// (I  ) ü•ª2
+							MgPoint3D*	o_ppo		// (  O) ‚RŸŒ³Œğ“_
 					);
 	
 	// ---------------------( ‚RŸŒ³ )------------------------------
@@ -3641,12 +3641,12 @@ public:
 													//	MC_TWIST    (-2) Œğ·‚È‚µi‚Ë‚¶‚êj
 													//	MC_NINT	    (0)	Œğ·‚È‚µ
 													//	MC_INT      (1)	Œğ·‚ ‚è
-					const	MgLine3		&Ln1,		// (I  ) ü•ª1
-					const	MgULine3&	ULn2,		// (I  ) ’¼ü2
-							MgPoint3	*po			// (  O) ‚RŸŒ³Œğ“_
+					const	MgLine3D&	i_Ln1,		// (I  ) ü•ª1
+					const	MgULine3D&	i_ULn2,		// (I  ) ’¼ü2
+							MgPoint3D*	o_ppo		// (  O) ‚RŸŒ³Œğ“_
 					)
 	{
-		return IntrULnLn3(ULn2, Ln1, po);
+		return IntrULnLn3( i_ULn2, i_Ln1, o_ppo);
 	}
 	
 	// ---------------------( ‚RŸŒ³ )------------------------------
@@ -3660,9 +3660,9 @@ public:
 													//	MC_TWIST    (-2) Œğ·‚È‚µi‚Ë‚¶‚êj
 													//	MC_NINT	    (0)	Œğ·‚È‚µ
 													//	MC_INT      (1)	Œğ·‚ ‚è
-					const	MgLine3		&Ln1,		// (I  ) ü•ª1
-					const	MgLine3		&Ln2,		// (I  ) ü•ª2
-							MgPoint3	*po			// (  O) ‚RŸŒ³Œğ“_
+					const	MgLine3D&	i_Ln1,		// (I  ) ü•ª1
+					const	MgLine3D&	i_Ln2,		// (I  ) ü•ª2
+							MgPoint3D*	o_ppo		// (  O) ‚RŸŒ³Œğ“_
 					);
 	
 	//===========================================================================
@@ -3675,9 +3675,9 @@ public:
 	static MINT IntrPlnULn3(						// (  O) ƒXƒeƒCƒ^ƒX
 													//	MC_PARALLEL (-1) Œğ·‚È‚µi•½sj
 													//	MC_INT      (1)	Œğ·‚ ‚è
-					const	MgPlane3	&Pln1,		// (I  ) •½–Ê1
-					const	MgULine3&	ULn2,		// (I  ) ’¼ü2
-							MgPoint3	*po			// (  O) ‚RŸŒ³Œğ“_(“_‚Ì•W€Œ`®)
+					const	MgPlane3D&	i_Pln1,		// (I  ) •½–Ê1
+					const	MgULine3D&	i_ULn2,		// (I  ) ’¼ü2
+							MgPoint3D*	o_ppo		// (  O) ‚RŸŒ³Œğ“_(“_‚Ì•W€Œ`®)
 					);
 
 	// ---------------------( ‚RŸŒ³ )------------------------------
@@ -3687,9 +3687,9 @@ public:
 													//	MC_PARALLEL (-1) Œğ·‚È‚µi•½sj
 													//	MC_NINT	    (0)	Œğ·‚È‚µ
 													//	MC_INT      (1)	Œğ·‚ ‚è
-					const	MgPlane3	&Pln1,		// (I  ) •½–Ê1
-					const	MgLine3		&Ln2,		// (I  ) ü•ª2
-							MgPoint3	*po			// (  O) ‚RŸŒ³Œğ“_(“_‚Ì•W€Œ`®)
+					const	MgPlane3D&	i_Pln1,		// (I  ) •½–Ê1
+					const	MgLine3D&	i_Ln2,		// (I  ) ü•ª2
+							MgPoint3D*	o_ppo		// (  O) ‚RŸŒ³Œğ“_(“_‚Ì•W€Œ`®)
 					);
 	
 	// ---------------------( ‚RŸŒ³ )------------------------------
@@ -3698,12 +3698,12 @@ public:
 	static inline MINT IntrULnPln3(					// (  O) ƒXƒeƒCƒ^ƒX
 													//	MC_PARALLEL (-1) Œğ·‚È‚µi•½sj
 													//	MC_INT      (1)	Œğ·‚ ‚è
-					const	MgULine3&	ULn1,		// (I  ) ’¼ü1
-					const	MgPlane3	&Pln2,		// (I  ) •½–Ê2
-							MgPoint3	*po			// (  O) ‚RŸŒ³Œğ“_(“_‚Ì•W€Œ`®)
+					const	MgULine3D&	i_ULn1,		// (I  ) ’¼ü1
+					const	MgPlane3D&	i_Pln2,		// (I  ) •½–Ê2
+							MgPoint3D*	o_ppo		// (  O) ‚RŸŒ³Œğ“_(“_‚Ì•W€Œ`®)
 					)
 	{
-		return IntrPlnULn3(Pln2, ULn1, po);
+		return IntrPlnULn3( i_Pln2, i_ULn1, o_ppo);
 	}
 	
 	// ---------------------( ‚RŸŒ³ )------------------------------
@@ -3713,12 +3713,12 @@ public:
 													//	MC_PARALLEL (-1) Œğ·‚È‚µi•½sj
 													//	MC_NINT	    (0)	Œğ·‚È‚µ
 													//	MC_INT      (1)	Œğ·‚ ‚è
-					const	MgLine3		&Ln1,		// (I  ) ü•ª1
-					const	MgPlane3	&Pln2,		// (I  ) •½–Ê2
-							MgPoint3	*po			// (  O) ‚RŸŒ³Œğ“_(“_‚Ì•W€Œ`®)
+					const	MgLine3D&	i_Ln1,		// (I  ) ü•ª1
+					const	MgPlane3D&	i_Pln2,		// (I  ) •½–Ê2
+							MgPoint3D*	o_ppo		// (  O) ‚RŸŒ³Œğ“_(“_‚Ì•W€Œ`®)
 					)
 	{
-		return IntrPlnLn3(Pln2, Ln1, po);
+		return IntrPlnLn3( i_Pln2, i_Ln1, o_ppo);
 	}
 	
 	//===========================================================================
@@ -3731,9 +3731,9 @@ public:
 	static MINT Intr2Pln3(							// (  O) ƒXƒeƒCƒ^ƒX
 													//	MC_PARALLEL (-1)	Œğ·‚È‚µi•½sj
 													//	MC_INT		(1)		Œğ·‚ ‚è
-					const	MgPlane3	&Pln1,		// (I  ) •½–Ê1
-					const	MgPlane3	&Pln2,		// (I  ) •½–Ê2
-							MgULine3	*ULn3		// (  O) ’¼ü3
+					const	MgPlane3D&	i_Pln1,		// (I  ) •½–Ê1
+					const	MgPlane3D&	i_Pln2,		// (I  ) •½–Ê2
+							MgULine3D*	o_pULn3		// (  O) ’¼ü3
 					);
 
 
@@ -3745,39 +3745,39 @@ public:
 	// ---------------------( ‚QŸŒ³ )------------------------------
 	//		“_‚©‚ç’¼ü‚Ö‚Ì‚ü‚Ì‘«ˆÊ’u‚ğ‹‚ß‚é
 	static inline void PerpULnPt2(
-					const	MgULine2&	ULn1,		// (I  ) ’¼ü1
-					const	MgPoint2&	p2,			// (I  ) “_2
-							MgPoint2*	po			// (  O) “_‚©‚ç’¼ü‚Ö‚Ì‚ü‚Ì‘«
+					const	MgULine2D&	i_ULn1,		// (I  ) ’¼ü1
+					const	MgPoint2D&	i_p2,		// (I  ) “_2
+							MgPoint2D*	o_ppo		// (  O) “_‚©‚ç’¼ü‚Ö‚Ì‚ü‚Ì‘«
 					)
 	{
 		MREAL		pa1;							//	’¼ü1‚Ìn“_‚©‚ç‚ü‚Ì‘«‚Ü‚Å‚Ì‹——£
 	//
-		pa1 = (p2 - ULn1.p) * ULn1.v;				//	cosƒ¦v12v2
-		*po = ULn1.p + ULn1.v * pa1;
+		pa1 = ( i_p2 - i_ULn1.p) * i_ULn1.v;				//	cosƒ¦v12v2
+		*o_ppo = i_ULn1.p + i_ULn1.v * pa1;
 	}
 	
 	// ---------------------( ‚QŸŒ³ )------------------------------
 	//		“_‚©‚çü•ª‚Ö‚Ì‚ü‚Ì‘«ˆÊ’u‚ğ‹‚ß‚é
 	static inline MINT PerpLnPt2(					// (  O) ƒXƒeƒCƒ^ƒX(=MC_ON_LINE	:ü•ªã,
 													//					=0			:ü•ª”ÍˆÍŠO)
-					const	MgLine2&	Ln1,		// (I  ) ü•ª1
-					const	MgPoint2&	p2,			// (I  ) “_2
-							MgPoint2*	po			// (  O) “_‚©‚ç’¼ü‚Ö‚Ì‚ü‚Ì‘«
+					const	MgLine2D&	i_Ln1,		// (I  ) ü•ª1
+					const	MgPoint2D&	i_p2,		// (I  ) “_2
+							MgPoint2D*	o_ppo		// (  O) “_‚©‚ç’¼ü‚Ö‚Ì‚ü‚Ì‘«
 					)
 	{
 		MINT		ist;
-		MgVect2		vd1, vd2;
+		MgVect2D	vd1, vd2;
 		MREAL		ss, se;
-	//
-		vd1 = Ln1.p[1] - Ln1.p[0];
+	
+		vd1 = i_Ln1.p[1] - i_Ln1.p[0];
 		vd2 = RotL90(vd1);
-	//
-		SVal(Ln1.p[0], Ln1.p[1], p2, vd2, &ss, &se);
-	//
-		*po = Ln1.p[0] + (vd1 * (ss / (ss - se)));					//	Œğ“_
-	//
+	
+		SVal( i_Ln1.p[0], i_Ln1.p[1], i_p2, vd2, &ss, &se);
+	
+		*o_ppo = i_Ln1.p[0] + (vd1 * (ss / (ss - se)));					//	Œğ“_
+	
 		if (ss * se < 0 ||											//	ü•ªã
-			*po == Ln1.p[0] || *po == Ln1.p[1]) ist = MC_ON_LINE;
+			*o_ppo == i_Ln1.p[0] || *o_ppo == i_Ln1.p[1]) ist = MC_ON_LINE;
 		else ist =  0;												//	ü•ª‚ÌŠO
 		return ist;
 	}
@@ -3785,89 +3785,90 @@ public:
 	// ---------------------( ‚QŸŒ³ )------------------------------
 	//		“_‚©‚ç’¼ü‚Ö‚Ì‚ü‚Ì‘«ˆÊ’u‚ğ‹‚ß‚é
 	static inline void	MgPerpPtULn2(				// (  O) ƒXƒeƒCƒ^ƒX
-					const	MgPoint2&	p1,			// (I  ) “_1
-					const	MgULine2&	ULn2,		// (I  ) ’¼ü2
-							MgPoint2*	po			// (  O) ‚QŸŒ³Œğ“_(“_‚Ì•W€Œ`®)
+					const	MgPoint2D&	i_p1,		// (I  ) “_1
+					const	MgULine2D&	i_ULn2,		// (I  ) ’¼ü2
+							MgPoint2D*	o_ppo		// (  O) ‚QŸŒ³Œğ“_(“_‚Ì•W€Œ`®)
 			)
 	{
-		PerpULnPt2(ULn2, p1, po);
+		PerpULnPt2( i_ULn2, i_p1, o_ppo);
 	}
 	
 	// ---------------------( ‚QŸŒ³ )------------------------------
 	//		“_‚©‚çü•ª‚Ö‚Ì‚ü‚Ì‘«ˆÊ’u‚ğ‹‚ß‚é
 	static inline MINT PerpPtLn2(					// (  O) ƒXƒeƒCƒ^ƒX(=MC_ON_LINE	:ü•ªã,
 													//					=0			:ü•ª”ÍˆÍŠO)
-					const	MgPoint2&	p1,			// (I  ) “_1
-					const	MgLine2		&Ln2,		// (I  ) ü•ª2
-							MgPoint2*	po			// (  O) ‚QŸŒ³Œğ“_(“_‚Ì•W€Œ`®)
+					const	MgPoint2D&	i_p1,		// (I  ) “_1
+					const	MgLine2D&	i_Ln2,		// (I  ) ü•ª2
+							MgPoint2D*	o_ppo		// (  O) ‚QŸŒ³Œğ“_(“_‚Ì•W€Œ`®)
 			)
 	{
-		return PerpLnPt2(Ln2, p1, po);
+		return PerpLnPt2( i_Ln2, i_p1, o_ppo);
 	}
 	
 	// ---------------------( ‚RŸŒ³ )------------------------------
 	//		“_‚©‚ç’¼ü‚Ö‚Ì‚ü‚Ì‘«ˆÊ’u‚ğ‹‚ß‚é
 	static inline void PerpULnPt3(
-					const	MgULine3&	ULn1,		// (I  ) ’¼ü1
-					const	MgPoint3&	p2,			// (I  ) “_2
-							MgPoint3	*po			// (  O) “_‚©‚ç’¼ü‚Ö‚Ì‚ü‚Ì‘«
+					const	MgULine3D&	i_ULn1,		// (I  ) ’¼ü1
+					const	MgPoint3D&	i_p2,		// (I  ) “_2
+							MgPoint3D*	o_ppo		// (  O) “_‚©‚ç’¼ü‚Ö‚Ì‚ü‚Ì‘«
 					)
 	{
 		MREAL	pa1;								//	’¼ü1‚Ìn“_‚©‚ç‚ü‚Ì‘«‚Ü‚Å‚Ì‹——£
 	//
-		pa1 = (p2 - ULn1.p) * ULn1.v;				//	cosƒ¦v12v2
-		*po = ULn1.p + ULn1.v * pa1;
+		pa1 = ( i_p2 - i_ULn1.p) * i_ULn1.v;					//	cosƒ¦v12v2
+		*o_ppo = i_ULn1.p + i_ULn1.v * pa1;
 	}
 	
 	// ---------------------( ‚RŸŒ³ )------------------------------
 	//		“_‚©‚çü•ª‚Ö‚Ì‚ü‚Ì‘«ˆÊ’u‚ğ‹‚ß‚é
 	static inline MINT	PerpLnPt3(					// (  O) ƒXƒeƒCƒ^ƒX(=MC_ON_LINE	:ü•ªã,
 													//					=0			:ü•ª”ÍˆÍŠO)
-					const	MgLine3		&Ln1,		// (I  ) ü•ª1
-					const	MgPoint3&	p2,			// (I  ) “_2
-							MgPoint3	*po			// (  O) ‚RŸŒ³Œğ“_(“_‚Ì•W€Œ`®)
+					const	MgLine3D&	i_Ln1,		// (I  ) ü•ª1
+					const	MgPoint3D&	i_p2,		// (I  ) “_2
+							MgPoint3D*	o_ppo		// (  O) ‚RŸŒ³Œğ“_(“_‚Ì•W€Œ`®)
 					)
 	{
 		MINT		ist;
-		MgVect3		vd1, vd2;
+		MgVect3D	vd1, vd2;
 		MREAL		ss, se;
 		MREAL		d;
-	//
-		vd1 = Ln1.p[1] - Ln1.p[0];
-	//
-		d  = p2 * vd1;
-		ss = (Ln1.p[0] * vd1) - d;
-		se = (Ln1.p[1] * vd1) - d;
-	//
-		*po = Ln1.p[0] + (vd1 * (ss / (ss - se)));					//	Œğ“_
-	//
+	
+		vd1 = i_Ln1.p[1] - i_Ln1.p[0];
+	
+		d  = i_p2 * vd1;
+		ss = ( i_Ln1.p[0] * vd1) - d;
+		se = ( i_Ln1.p[1] * vd1) - d;
+	
+		*o_ppo = i_Ln1.p[0] + (vd1 * (ss / (ss - se)));				//	Œğ“_
+	
 		if (ss * se < 0 ||											//	ü•ªã
-			*po == Ln1.p[0] || *po == Ln1.p[1]) ist = MC_ON_LINE;
+			*o_ppo == i_Ln1.p[0] || *o_ppo == i_Ln1.p[1])
+			ist = MC_ON_LINE;
 		else ist = 0;												//	ü•ª‚ÌŠO
-	//
+	
 		return ist;
 	}
 
 	// ---------------------( ‚RŸŒ³ )------------------------------
 	//		“_‚©‚çü•ª‚Ö‚Ì‚ü‚Ì‘«ˆÊ’u‚ğ‹‚ß‚é
 	static inline MINT	MgPerpPtLn3(				// (  O) ƒXƒeƒCƒ^ƒX(=MC_ON_LINE	:ü•ªã,
-					const	MgPoint3&	p1,			// (I  ) “_1
-					const	MgLine3		&Ln2,		// (I  ) ’¼ü2
-							MgPoint3	*po			// (  O) ‚RŸŒ³Œğ“_(“_‚Ì•W€Œ`®)
+					const	MgPoint3D&	i_p1,		// (I  ) “_1
+					const	MgLine3D&	i_Ln2,		// (I  ) ’¼ü2
+							MgPoint3D*	o_ppo		// (  O) ‚RŸŒ³Œğ“_(“_‚Ì•W€Œ`®)
 					)
 	{
-		return PerpLnPt3( Ln2, p1, po);
+		return PerpLnPt3( i_Ln2, i_p1, o_ppo);
 	}
 	
 	// ---------------------( ‚RŸŒ³ )------------------------------
 	//		“_‚©‚ç’¼ü‚Ö‚Ì‚ü‚Ì‘«ˆÊ’u‚ğ‹‚ß‚é
 	static inline void	MgPerpPtULn3(
-					const	MgPoint3&	p1,			// (I  ) “_1
-					const	MgULine3&	ULn2,		// (I  ) ü•ª2
-							MgPoint3	*po			// (  O) ‚RŸŒ³Œğ“_(“_‚Ì•W€Œ`®)
+					const	MgPoint3D&	i_p1,		// (I  ) “_1
+					const	MgULine3D&	i_ULn2,		// (I  ) ü•ª2
+							MgPoint3D*	o_ppo		// (  O) ‚RŸŒ³Œğ“_(“_‚Ì•W€Œ`®)
 					)
 	{
-		PerpULnPt3( ULn2, p1, po);
+		PerpULnPt3( i_ULn2, i_p1, o_ppo);
 	}
 	
 	//	-------------------------‚R‚c–ÊE‚o‚n‚h‚m‚s----------------------
@@ -3876,27 +3877,27 @@ public:
 	//		“_‚©‚ç–Ê‚Ö‚Ì‚ü‚Ì‘«ˆÊ’u‚ğ‹‚ß‚é
 	//
 	static inline void PerpPlnPt3(
-					const	MgPlane3	&Pln1,		// (I  ) –Ê1
-					const	MgPoint3&	p2,			// (I  ) “_2
-							MgPoint3	*po			// (  O) “_‚©‚ç’¼ü‚Ö‚Ì‚ü‚Ì‘«
+					const	MgPlane3D&	i_Pln1,		// (I  ) –Ê1
+					const	MgPoint3D&	i_p2,		// (I  ) “_2
+							MgPoint3D*	o_ppo		// (  O) “_‚©‚ç’¼ü‚Ö‚Ì‚ü‚Ì‘«
 					)
 	{
 		MREAL	pa1;								//	“_2‚©‚ç‚ü‚Ì‘«‚Ü‚Å‚Ì‹——£
 	//
-		pa1 = (p2 * Pln1.v) + Pln1.d;
-		*po = p2 - Pln1.v * pa1;
+		pa1 = ( i_p2 * i_Pln1.v) + i_Pln1.d;
+		*o_ppo = i_p2 - i_Pln1.v * pa1;
 	}
 	
 	// ---------------------( ‚RŸŒ³ )------------------------------
 	//		“_‚©‚ç–Ê‚Ö‚Ì‚ü‚Ì‘«ˆÊ’u‚ğ‹‚ß‚é
 	//
 	static inline void PerpPtPln3(
-					const	MgPoint3&	p1,			// (I  ) “_1
-					const	MgPlane3	&Pln2,		// (I  ) –Ê2
-							MgPoint3	*po			// (  O) ‚RŸŒ³Œğ“_(“_‚Ì•W€Œ`®)
+					const	MgPoint3D&	i_p1,		// (I  ) “_1
+					const	MgPlane3D&	i_Pln2,		// (I  ) –Ê2
+							MgPoint3D*	o_ppo		// (  O) ‚RŸŒ³Œğ“_(“_‚Ì•W€Œ`®)
 					)
 	{
-		PerpPlnPt3(Pln2, p1, po);
+		PerpPlnPt3( i_Pln2, i_p1, o_ppo);
 	}
 
 	//===========================================================================
@@ -3905,82 +3906,82 @@ public:
 	// ---------------------( ‚QŸŒ³ )------------------------------
 	//
 	static inline void MovePt2InDirOfVt2(			//
-					const	MgPoint2&	p1,			//  (I  ) ˆÚ“®“_1
-					const	MgVect2&	v2,			//	(I  ) ˆÚ“®•ûŒü‚ğ¦‚·ƒxƒNƒgƒ‹
-							MREAL		dl,			//	(I  ) ˆÚ“®‹——£
-							MgPoint2	*p3,		//	(  O) ˆÚ“®‚³‚ê‚½“_3
+					const	MgPoint2D&	i_p1,		//  (I  ) ˆÚ“®“_1
+					const	MgVect2D&	i_v2,		//	(I  ) ˆÚ“®•ûŒü‚ğ¦‚·ƒxƒNƒgƒ‹
+							MREAL		i_dl,		//	(I  ) ˆÚ“®‹——£
+							MgPoint2D*	o_pp3,		//	(  O) ˆÚ“®‚³‚ê‚½“_3
 							MREAL i_Tol = g_gTol.D	//	(I  ) ‹–—eŒë·
 					)
 	{
-		*p3 = p1 + dl * UnitizeV2( v2, i_Tol);
+		*o_pp3 = i_p1 + i_dl * UnitizeV2( i_v2, i_Tol);
 	}
 
 	//	------------------------
 	static inline void MovePt2AlongULn2(			//
-					const	MgPoint2&	p1,			//  (I  ) ˆÚ“®“_1
-					const	MgULine2&	ULn2,		//	(I  ) ˆÚ“®•ûŒü‚ğ¦‚·’¼ü2
-							MREAL		dl,			//	(I  ) ˆÚ“®‹——£
-							MgPoint2	*p3			//	(  O) ˆÚ“®‚³‚ê‚½“_3
+					const	MgPoint2D&	i_p1,		//  (I  ) ˆÚ“®“_1
+					const	MgULine2D&	i_ULn2,		//	(I  ) ˆÚ“®•ûŒü‚ğ¦‚·’¼ü2
+							MREAL		i_dl,		//	(I  ) ˆÚ“®‹——£
+							MgPoint2D*	o_pp3		//	(  O) ˆÚ“®‚³‚ê‚½“_3
 					)
 	{
-		*p3 = p1 + dl * ULn2.v;
+		*o_pp3 = i_p1 + i_dl * i_ULn2.v;
 	}
 
 	//	------------------------
 	static inline void MovePt2AlongLn2(				//
-					const	MgPoint2&	p1,			//  (I  ) ˆÚ“®“_1
-					const	MgLine2&	Ln2,		//	(I  ) ˆÚ“®•ûŒü‚ğ¦‚·ü•ª2
-							MREAL		dl,			//	(I  ) ˆÚ“®‹——£
-							MgPoint2	*p3,		//	(  O) ˆÚ“®‚³‚ê‚½“_3
+					const	MgPoint2D&	i_p1,		//  (I  ) ˆÚ“®“_1
+					const	MgLine2D&	i_Ln2,		//	(I  ) ˆÚ“®•ûŒü‚ğ¦‚·ü•ª2
+							MREAL		i_dl,		//	(I  ) ˆÚ“®‹——£
+							MgPoint2D*	o_pp3,		//	(  O) ˆÚ“®‚³‚ê‚½“_3
 							MREAL i_Tol = g_gTol.D	//	(I  ) ‹–—eŒë·
 					)
 	{
-		MgVect2	vd, vn;
+		MgVect2D	vd, vn;
 	
-		vd = Ln2.p[1] - Ln2.p[0];
+		vd = i_Ln2.p[1] - i_Ln2.p[0];
 		vn = UnitizeV2( vd, i_Tol);
-		*p3 = p1 + dl * vn;
+		*o_pp3 = i_p1 + i_dl * vn;
 	}
 
 	//
 	// ---------------------( ‚RŸŒ³ )------------------------------
 	//
 	static inline void MovePt3InDirOfVt3(			//
-					const	MgPoint3&	p1,			//  (I  ) ˆÚ“®“_1
-					const	MgVect3&	v2,			//	(I  ) ˆÚ“®•ûŒü‚ğ¦‚·ƒxƒNƒgƒ‹
-							MREAL		dl,			//	(I  ) ˆÚ“®‹——£
-							MgPoint3	*p3,		//	(  O) ˆÚ“®‚³‚ê‚½“_3
+					const	MgPoint3D&	i_p1,		//  (I  ) ˆÚ“®“_1
+					const	MgVect3D&	i_v2,		//	(I  ) ˆÚ“®•ûŒü‚ğ¦‚·ƒxƒNƒgƒ‹
+							MREAL		i_dl,		//	(I  ) ˆÚ“®‹——£
+							MgPoint3D	*o_pp3,		//	(  O) ˆÚ“®‚³‚ê‚½“_3
 							MREAL i_Tol = g_gTol.D	//	(I  ) ‹–—eŒë·
 					)
 	{
-		*p3 = p1 + dl * UnitizeV3( v2, i_Tol);
+		*o_pp3 = i_p1 + i_dl * UnitizeV3( i_v2, i_Tol);
 	}
 
 	//	------------------------
 	static inline void MovePt3AlongULn3(			//	(  O) ƒXƒeƒCƒ^ƒX
-					const	MgPoint3&	p1,			//  (I  ) ˆÚ“®“_1
-					const	MgULine3&	ULn2,		//	(I  ) ˆÚ“®•ûŒü‚ğ¦‚·’¼ü2
-							MREAL		dl,			//	(I  ) ˆÚ“®‹——£
-							MgPoint3	*p3			//	(  O) ˆÚ“®‚³‚ê‚½“_3
+					const	MgPoint3D&	i_p1,		//  (I  ) ˆÚ“®“_1
+					const	MgULine3D&	i_ULn2,		//	(I  ) ˆÚ“®•ûŒü‚ğ¦‚·’¼ü2
+							MREAL		i_dl,		//	(I  ) ˆÚ“®‹——£
+							MgPoint3D*	o_pp3		//	(  O) ˆÚ“®‚³‚ê‚½“_3
 					)
 	{
-		*p3 = p1 + dl * ULn2.v;
+		*o_pp3 = i_p1 + i_dl * i_ULn2.v;
 	}
 
 	//	------------------------
 	static inline void MovePt3AlongLn3(				//	(  O) ƒXƒeƒCƒ^ƒX
-					const	MgPoint3&	p1,			//  (I  ) ˆÚ“®“_1
-					const	MgLine3		&Ln2,		//	(I  ) ˆÚ“®•ûŒü‚ğ¦‚·ü•ª2
-							MREAL		dl,			//	(I  ) ˆÚ“®‹——£
-							MgPoint3	*p3,		//	(  O) ˆÚ“®‚³‚ê‚½“_3
+					const	MgPoint3D&	i_p1,		//  (I  ) ˆÚ“®“_1
+					const	MgLine3D&	i_Ln2,		//	(I  ) ˆÚ“®•ûŒü‚ğ¦‚·ü•ª2
+							MREAL		i_dl,		//	(I  ) ˆÚ“®‹——£
+							MgPoint3D*	o_pp3,		//	(  O) ˆÚ“®‚³‚ê‚½“_3
 							MREAL i_Tol = g_gTol.D	//	(I  ) ‹–—eŒë·
 					)
 	{
-		MgVect3	vd, vn;
+		MgVect3D	vd, vn;
 	
-		vd = Ln2.p[1] - Ln2.p[0];
+		vd = i_Ln2.p[1] - i_Ln2.p[0];
 		vn = UnitizeV3(vd, i_Tol);
-		*p3 = p1 + dl * vn;
+		*o_pp3 = i_p1 + i_dl * vn;
 	}
 
 	//===========================================================================
@@ -3991,62 +3992,62 @@ public:
 	//	’¼ü‚ğƒIƒtƒZƒbƒg‚·‚éB
 	//
 	static inline void OffsetULn2(					//	(  O) ƒXƒeƒCƒ^ƒX (=1)
-					const	MgULine2&	ULn1,		//	(I  ) ’¼ü1
-							MREAL		dl,			//	(I  ) ƒIƒtƒZƒbƒg—Ê
-							MgULine2 	*ULn2		//	(  O) ƒIƒtƒZƒbƒg‚³‚ê‚½’¼ü2
+					const	MgULine2D&	i_ULn1,		//	(I  ) ’¼ü1
+							MREAL		i_dl,		//	(I  ) ƒIƒtƒZƒbƒg—Ê
+							MgULine2D* 	o_pULn2		//	(  O) ƒIƒtƒZƒbƒg‚³‚ê‚½’¼ü2
 					)
 	{
 	
-		ULn2->p = ULn1.p + dl * RotL90(ULn1.v);
-		ULn2->v = ULn1.v;
+		o_pULn2->p = i_ULn1.p + i_dl * RotL90( i_ULn1.v);
+		o_pULn2->v = i_ULn1.v;
 	}
 
 	//	------------------------
 	static inline void OffsetLn2(					//	(  O) ƒXƒeƒCƒ^ƒX
-					const	MgLine2&	Ln1,		//	(I  ) ü•ª1
-							MREAL		dl,			//	(I  ) ƒIƒtƒZƒbƒg—Ê
-							MgLine2		*Ln2,		//	(  O) ƒIƒtƒZƒbƒg‚³‚ê‚½ü•ª2
+					const	MgLine2D&	i_Ln1,		//	(I  ) ü•ª1
+							MREAL		i_dl,		//	(I  ) ƒIƒtƒZƒbƒg—Ê
+							MgLine2D*	o_pLn2,		//	(  O) ƒIƒtƒZƒbƒg‚³‚ê‚½ü•ª2
 							MREAL i_Tol = g_gTol.D	//	(I  ) ‹–—eŒë·
 					)
 	{
-		MgVect2	vd, vn;
-	//
-		vd = Ln1.p[1] - Ln1.p[0];
+		MgVect2D	vd, vn;
+	
+		vd = i_Ln1.p[1] - i_Ln1.p[0];
 		vn = UnitizeV2( vd, i_Tol);
-		Ln2->p[0] = Ln1.p[0] + dl * RotL90(vn);
-		Ln2->p[1] = Ln2->p[0] + vd;
+		o_pLn2->p[0] = i_Ln1.p[0] + i_dl * RotL90(vn);
+		o_pLn2->p[1] = o_pLn2->p[0] + vd;
 	}
 
 	//
 	// ---------------------( ‚RŸŒ³ )------------------------------
 	//
 	static inline void OffsetULn3(					//	(  O) ƒXƒeƒCƒ^ƒX
-					const	MgULine3&	ULn1,		//	(I  ) ’¼ü1
-					const	MgPlane3	&Pln2,		//	(I  ) ’¼ü1‚ªæ‚é•½–Ê2
-							MREAL		dl,			//	(I  ) ƒIƒtƒZƒbƒg—Ê
-							MgULine3	*ULn3		//	(  O) ƒIƒtƒZƒbƒg‚³‚ê‚½’¼ü3
+					const	MgULine3D&	i_ULn1,		//	(I  ) ’¼ü1
+					const	MgPlane3D&	i_Pln2,		//	(I  ) ’¼ü1‚ªæ‚é•½–Ê2
+							MREAL		i_dl,		//	(I  ) ƒIƒtƒZƒbƒg—Ê
+							MgULine3D*	o_pULn3		//	(  O) ƒIƒtƒZƒbƒg‚³‚ê‚½’¼ü3
 					)
 	{
-		ULn3->p = ULn1.p + dl * (Pln2.v ^ ULn1.v);
-		ULn3->v = ULn1.v;
+		o_pULn3->p = i_ULn1.p + i_dl * ( i_Pln2.v ^ i_ULn1.v);
+		o_pULn3->v = i_ULn1.v;
 	}
 
 	//	------------------------
 	static inline void OffsetLn3(					//	(  O) ƒXƒeƒCƒ^ƒX
-					const	MgLine3		&Ln1,		//	(I  ) ü•ª1
-					const	MgPlane3	&Pln2,		//	(I  ) ü•ª1‚ªæ‚é•½–Ê2
-							MREAL		dl,			//	(I  ) ƒIƒtƒZƒbƒg—Ê
-							MgLine3		*Ln3,		//	(  O) ƒIƒtƒZƒbƒg‚³‚ê‚½ü•ª3
+					const	MgLine3D&	i_Ln1,		//	(I  ) ü•ª1
+					const	MgPlane3D&	i_Pln2,		//	(I  ) ü•ª1‚ªæ‚é•½–Ê2
+							MREAL		i_dl,		//	(I  ) ƒIƒtƒZƒbƒg—Ê
+							MgLine3D*	o_pLn3,		//	(  O) ƒIƒtƒZƒbƒg‚³‚ê‚½ü•ª3
 							MREAL i_Tol = g_gTol.D	//	(I  ) ‹–—eŒë·
 					)
 	{
-		MgVect3	vd, vn;
+		MgVect3D	vd, vn;
 		//
-		vd = Ln1.p[1] - Ln1.p[0];
+		vd = i_Ln1.p[1] - i_Ln1.p[0];
 		vn = UnitizeV3( vd, i_Tol);
-		MgVect3 vv = vn ^ Pln2.v;
-		Ln3->p[0] = Ln1.p[0] + dl * (Pln2.v ^ vn);
-		Ln3->p[1] = Ln3->p[0] + vd;
+		MgVect3D vv = vn ^ i_Pln2.v;
+		o_pLn3->p[0] = i_Ln1.p[0] + i_dl * ( i_Pln2.v ^ vn);
+		o_pLn3->p[1] = o_pLn3->p[0] + vd;
 	}
 	
 	//===========================================================================
@@ -4059,13 +4060,13 @@ public:
 	static inline bool On(							// (  O) ƒXƒeƒCƒ^ƒX
 													//			true:	“_ã‚É‚ ‚é
 													//			false:	“_ã‚É‚È‚¢
-					const	MgPoint2&	p1,			// (I  ) “_1
-					const	MgPoint2&	p2,			// (I  ) “_2
+					const	MgPoint2D&	i_p1,		// (I  ) “_1
+					const	MgPoint2D&	i_p2,		// (I  ) “_2
 							MREAL rTol= MGPTOL->D	// (I  ) ƒgƒŒƒ‰ƒ“ƒX
 					)
 	{
 	//	return (p1 == p2);
-		MgVect2	V1 = p2 - p1;
+		MgVect2D	V1 = i_p2 - i_p1;
 		return ( Abs_2( V1) <= rTol * rTol);
 	}
 	
@@ -4078,8 +4079,8 @@ public:
 	static bool	MgChkPt2OnPt2(						// (  O) ƒXƒeƒCƒ^ƒX
 													//		 true:  “_ã‚É‚ ‚é
 													//		 false: “_ã‚É‚È‚¢
-					const	MgPoint2&	p1,			// (I  ) “_1
-					const	MgPoint2&	p2,			// (I  ) “_2
+					const	MgPoint2D&	i_p1,		// (I  ) “_1
+					const	MgPoint2D&	i_p2,		// (I  ) “_2
 							MREAL rTol= MGPTOL->D	// (I  ) ƒgƒŒƒ‰ƒ“ƒX
 					);
 
@@ -4090,13 +4091,13 @@ public:
 	static inline bool ChkPt3OnPt3(					// (  O) ƒXƒeƒCƒ^ƒX
 													//			true:	“_ã‚É‚ ‚é
 													//			false:	“_ã‚É‚È‚¢
-					const	MgPoint3&	p1,			// (I  ) “_1
-					const	MgPoint3&	p2,			// (I  ) “_2
+					const	MgPoint3D&	i_p1,		// (I  ) “_1
+					const	MgPoint3D&	i_p2,		// (I  ) “_2
 							MREAL rTol= MGPTOL->D	// (I  ) ƒgƒŒƒ‰ƒ“ƒX
 					)
 	{
 	//	return (p1 == p2);
-		MgVect3	V1 = p2 - p1;
+		MgVect3D	V1 = i_p2 - i_p1;
 		return ( Abs_2( V1) <= rTol * rTol);
 	}
 	
@@ -4110,9 +4111,9 @@ public:
 	static inline bool ChkPt2OnULn2WS(				// (  O) ƒXƒeƒCƒ^ƒX
 													//		 	true:	’¼üã‚É‚ ‚é
 													//		 	false:	’¼üã‚É‚È‚¢
-					const	MgPoint2&	p1,			// (I  ) “_1
-					const	MgULine2&	ULn2,		// (I  ) ’¼ü2
-							MINT*		ist,		// (  O) •â•ƒXƒeƒCƒ^ƒX
+					const	MgPoint2D&	i_p1,		// (I  ) “_1
+					const	MgULine2D&	i_ULn2,		// (I  ) ’¼ü2
+							MINT*		o_pist,		// (  O) •â•ƒXƒeƒCƒ^ƒX
 													//			MC_RIGHT			(010): “_‚ª’¼ü‚Ì‰E‘¤
 													//			MC_ON_LINE			(020): “_‚ª’¼üã
 													//			MC_LEFT				(040): “_‚ª’¼ü‚Ì¶‘¤
@@ -4120,26 +4121,26 @@ public:
 					)
 	{
 		bool		bst;							// ƒXƒeƒCƒ^ƒX
-		MgVect2		v2s1;							// ’¼ü2‚Ìn“_‚©‚ç“_1‚Ü‚Å‚ÌƒxƒNƒgƒ‹
+		MgVect2D	v2s1;							// ’¼ü2‚Ìn“_‚©‚ç“_1‚Ü‚Å‚ÌƒxƒNƒgƒ‹
 		MREAL		pa1;							// ’¼ü2‚©‚ç“_1‚Ü‚Å‚Ì‰”’¼‹——£
 	//
 	// ’¼ü2‚Ì•ûŒüi’PˆÊƒxƒNƒgƒ‹j‚Æ’¼ü2‚Ìn“_‚©‚ç“_1‚Ü‚Å‚ÌƒxƒNƒgƒ‹‚ÌŠOÏ‚æ‚è‰”’¼‹——£‚ğ‹‚ß‚é
-		v2s1 = p1 - ULn2.p;					
-		pa1 = ULn2.v ^ v2s1;						// ’¼ü2‚Ì•ûŒüi’PˆÊƒxƒNƒgƒ‹j‚Æ’¼ü2‚Ìn“_‚©‚ç“_1‚Ü‚Å‚ÌƒxƒNƒgƒ‹‚ÌŠOÏ
+		v2s1 = i_p1 - i_ULn2.p;					
+		pa1 = i_ULn2.v ^ v2s1;						// ’¼ü2‚Ì•ûŒüi’PˆÊƒxƒNƒgƒ‹j‚Æ’¼ü2‚Ìn“_‚©‚ç“_1‚Ü‚Å‚ÌƒxƒNƒgƒ‹‚ÌŠOÏ
 	//
 	// ‰”’¼‹——£‚ªŒë·“à‚È‚ç’¼üã‚Æ‚İ‚È‚·
 		if ( Zero(pa1, rTol)) {
-			*ist = MC_ON_LINE;
+			*o_pist = MC_ON_LINE;
 			bst = true;
 	//
 	// ‰”’¼‹——£‚ª³‚È‚ç’¼ü‚Ì¶‚Æ‚İ‚È‚·
 		} else if ( pa1 > 0) {
-			*ist = MC_LEFT;
+			*o_pist = MC_LEFT;
 			bst = false;
 	//
 	// ‰”’¼‹——£‚ª•‰‚È‚ç’¼ü‚Ì‰E‚Æ‚İ‚È‚·
 		} else {
-			*ist = MC_RIGHT;
+			*o_pist = MC_RIGHT;
 			bst = false;
 		}
 		return bst;
@@ -4152,9 +4153,9 @@ public:
 	static inline bool ChkPt2OnHLn2WS(				// (  O) ƒXƒeƒCƒ^ƒX
 													//		 	true:	”¼’¼üã‚É‚ ‚é
 													//		 	false:	”¼’¼üã‚É‚È‚¢
-					const	MgPoint2&	p1,			// (I  ) “_1
-					const	MgHLine2	&HLn2,		// (I  ) ”¼’¼ü2
-							MINT*		ist,		// (  O) •â•ƒXƒeƒCƒ^ƒX
+					const	MgPoint2D&	i_p1,		// (I  ) “_1
+					const	MgHLine2D&	i_HLn2,		// (I  ) ”¼’¼ü2
+							MINT*		o_pist,		// (  O) •â•ƒXƒeƒCƒ^ƒX
 													//			MC_RIGHT			(010): “_‚ª”¼’¼ü‚Ì‰E‘¤
 													//			MC_ON_LINE			(020): “_‚ª”¼’¼üã
 													//			MC_LEFT				(040): “_‚ª”¼’¼ü‚Ì¶‘¤
@@ -4162,26 +4163,26 @@ public:
 					)
 	{
 		bool		bst;							// ƒXƒeƒCƒ^ƒX
-		MgVect2		v2s1;							// ”¼’¼ü2‚Ìn“_‚©‚ç“_1‚Ü‚Å‚ÌƒxƒNƒgƒ‹
+		MgVect2D	v2s1;							// ”¼’¼ü2‚Ìn“_‚©‚ç“_1‚Ü‚Å‚ÌƒxƒNƒgƒ‹
 		MREAL		pa1;							// ”¼’¼ü2‚©‚ç“_1‚Ü‚Å‚Ì‰”’¼‹——£
 	//
 	// ”¼’¼ü2‚Ì•ûŒüi’PˆÊƒxƒNƒgƒ‹j‚Æ”¼’¼ü2‚Ìn“_‚©‚ç“_1‚Ü‚Å‚ÌƒxƒNƒgƒ‹‚ÌŠOÏ‚æ‚è‰”’¼‹——£‚ğ‹‚ß‚é
-		v2s1 = p1 - HLn2.p;					
-		pa1 = HLn2.v ^ v2s1;						// ”¼’¼ü2‚Ì•ûŒüi’PˆÊƒxƒNƒgƒ‹j‚Æ”¼’¼ü2‚Ìn“_‚©‚ç“_1‚Ü‚Å‚ÌƒxƒNƒgƒ‹‚ÌŠOÏ
+		v2s1 = i_p1 - i_HLn2.p;					
+		pa1 = i_HLn2.v ^ v2s1;						// ”¼’¼ü2‚Ì•ûŒüi’PˆÊƒxƒNƒgƒ‹j‚Æ”¼’¼ü2‚Ìn“_‚©‚ç“_1‚Ü‚Å‚ÌƒxƒNƒgƒ‹‚ÌŠOÏ
 	//
 	// ‰”’¼‹——£‚ªŒë·“à‚È‚ç’¼üã‚Æ‚İ‚È‚·
 		if ( Zero( pa1, rTol)) {
-			*ist = MC_ON_LINE;
+			*o_pist = MC_ON_LINE;
 			bst = true;
 	//
 	// ‰”’¼‹——£‚ª³‚È‚ç’¼ü‚Ì¶‚Æ‚İ‚È‚·
 		} else if ( pa1 > 0) {
-			*ist = MC_LEFT;
+			*o_pist = MC_LEFT;
 			bst = false;
 	//
 	// ‰”’¼‹——£‚ª•‰‚È‚ç’¼ü‚Ì‰E‚Æ‚İ‚È‚·
 		} else {
-			*ist = MC_RIGHT;
+			*o_pist = MC_RIGHT;
 			bst = false;
 		}
 		return bst;
@@ -4194,9 +4195,9 @@ public:
 	static bool ChkPt2OnLn2WS(						// (  O) ƒXƒeƒCƒ^ƒX
 													//			true:	ü•ªã‚É‚ ‚é
 													//			false:	ü•ªã‚É‚È‚¢
-					const	MgPoint2&	p1,			// (I  ) “_1
-					const	MgLine2&	Ln2,		// (I  ) ü•ª2
-							MINT*		ist,		// (  O) •â•ƒXƒeƒCƒ^ƒX	(ƒXƒeƒCƒ^ƒX1 | ƒXƒeƒCƒ^ƒX2)
+					const	MgPoint2D&	i_p1,		// (I  ) “_1
+					const	MgLine2D&	i_Ln2,		// (I  ) ü•ª2
+							MINT*		o_pist,		// (  O) •â•ƒXƒeƒCƒ^ƒX	(ƒXƒeƒCƒ^ƒX1 | ƒXƒeƒCƒ^ƒX2)
 													//		 ƒXƒeƒCƒ^ƒX1
 													//			MC_RIGHT			(010): “_‚ªü•ª‚Ì‰E‘¤
 													//			MC_ON_LINE			(020): “_‚ªü•ª‰„’·’¼üã
@@ -4216,18 +4217,18 @@ public:
 	static inline bool ChkLn2OnULn2WS(				// (  O) ƒXƒeƒCƒ^ƒX
 													//			true:	’¼üã‚É‚ ‚é
 													//			false:	’¼üã‚É‚È‚¢
-					const	MgLine2&	Ln1,		// (I  ) ü•ª1
-					const	MgULine2&	ULn2,		// (I  ) ’¼ü2
-							MINT*		ist,		// (  O) ƒXƒeƒCƒ^ƒX
+					const	MgLine2D&	i_Ln1,		// (I  ) ü•ª1
+					const	MgULine2D&	i_ULn2,		// (I  ) ’¼ü2
+							MINT*		o_pist,		// (  O) ƒXƒeƒCƒ^ƒX
 													//			MC_RIGHT			(010): “_‚ªü•ª‚Ì‰E‘¤
 													//			MC_ON_LINE			(020): “_‚ª’¼üã
 													//			MC_LEFT				(040): “_‚ªü•ª‚Ì¶‘¤
 							MREAL rTol= MGPTOL->D	// (I  ) ƒgƒŒƒ‰ƒ“ƒX
 					)
 	{
-		MgPoint2 Pt1;
-		Pt1 = ( Ln1.p[0] + Ln1.p[1]) * 0.5;
-		return ChkPt2OnULn2WS( Pt1, ULn2, ist);
+		MgPoint2D Pt1;
+		Pt1 = ( i_Ln1.p[0] + i_Ln1.p[1]) * 0.5;
+		return ChkPt2OnULn2WS( Pt1, i_ULn2, o_pist);
 	}
 	
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -4237,8 +4238,8 @@ public:
 	static bool	ChkLn2OnLn2(						// (  O) ƒXƒeƒCƒ^ƒX
 													//			true:	d‚È‚Á‚Ä‚¢‚é
 													//			false:	d‚È‚Á‚Ä‚¢‚È‚¢
-					const	MgLine2&	Ln1,		// (I  ) ü•ª1
-					const	MgLine2&	Ln2,		// (I  ) ü•ª2
+					const	MgLine2D&	i_Ln1,		// (I  ) ü•ª1
+					const	MgLine2D&	i_Ln2,		// (I  ) ü•ª2
 							MREAL rTol= MGPTOL->D	// (I  ) ƒgƒŒƒ‰ƒ“ƒX
 					);
 	
@@ -4249,16 +4250,16 @@ public:
 	static inline bool ChkPt3OnULn3(				// (  O) ƒXƒeƒCƒ^ƒX
 													//			true:	ü•ªã‚É‚ ‚é
 													//			false:	ü•ªã‚É‚È‚¢
-					const	MgPoint3&	p1,			// (I  ) “_1
-					const	MgULine3&	ULn2,		// (I  ) ’¼ü2
+					const	MgPoint3D&	i_p1,		// (I  ) “_1
+					const	MgULine3D&	i_ULn2,		// (I  ) ’¼ü2
 							MREAL rTol= MGPTOL->D	// (I  ) ƒgƒŒƒ‰ƒ“ƒX
 					)
 	{
-		MgVect3		v21, va1;
+		MgVect3D		v21, va1;
 	//	MREAL		pa_2;							//	’¼ü2‚©‚ç“_1‚Ü‚Å‚Ì‰”’¼‹——£**2
 	//
-		v21 = p1 - ULn2.p;
-		va1 = v21 ^ ULn2.v;
+		v21 = i_p1 - i_ULn2.p;
+		va1 = v21 ^ i_ULn2.v;
 	//	pa_2 = Abs_2(va1);
 	//	return ( pa_2 <= rTol * rTol);
 		return ( Abs_2(va1) <= rTol * rTol);
@@ -4271,18 +4272,18 @@ public:
 	static inline bool ChkPt3OnHLn3(				// (  O) ƒXƒeƒCƒ^ƒX
 													//			true:	ü•ªã‚É‚ ‚é
 													//			false:	ü•ªã‚É‚È‚¢
-					const	MgPoint3&	p1,			// (I  ) “_1
-					const	MgHLine3	&HLn2,		// (I  ) ”¼’¼ü2
+					const	MgPoint3D&	i_p1,		// (I  ) “_1
+					const	MgHLine3D&	i_HLn2,		// (I  ) ”¼’¼ü2
 							MREAL rTol= MGPTOL->D	// (I  ) ƒgƒŒƒ‰ƒ“ƒX
 					)
 	{
-		MgVect3		v21, va1;
+		MgVect3D	v21, va1;
 		MREAL		c1;
 	//	MREAL		pa_2;							//	’¼ü2‚©‚ç“_1‚Ü‚Å‚Ì‰”’¼‹——£**2
 	//
-		v21 = p1 - HLn2.p;
-		va1 = v21 ^ HLn2.v;
-		c1 = v21 * HLn2.v;
+		v21 = i_p1 - i_HLn2.p;
+		va1 = v21 ^ i_HLn2.v;
+		c1 = v21 * i_HLn2.v;
 	//	pa_2 = Abs_2(va1);
 	//	return ( pa_2 <= rTol * rTol);
 		return ( Abs_2(va1) <= rTol * rTol && c1 > -rTol);
@@ -4295,9 +4296,9 @@ public:
 	static bool	ChkPt3OnLn3WS(						// (  O) ƒXƒeƒCƒ^ƒX
 													//			true:	ü•ªã‚É‚ ‚é
 													//			false:	ü•ªã‚É‚È‚¢
-					const	MgPoint3&	p1,			// (I  ) “_1
-					const	MgLine3		&Ln2,		// (I  ) ü•ª2
-							MINT*		ist,		// (  O) •â•ƒXƒeƒCƒ^ƒX	(ƒXƒeƒCƒ^ƒX1 | ƒXƒeƒCƒ^ƒX2)
+					const	MgPoint3D&	i_p1,		// (I  ) “_1
+					const	MgLine3D&	i_Ln2,		// (I  ) ü•ª2
+							MINT*		o_pist,		// (  O) •â•ƒXƒeƒCƒ^ƒX	(ƒXƒeƒCƒ^ƒX1 | ƒXƒeƒCƒ^ƒX2)
 													//		 ƒXƒeƒCƒ^ƒX1
 													//			MC_ON_LINE			(020): “_‚ªü•ª‰„’·’¼üã
 													//		 ƒXƒeƒCƒ^ƒX2
@@ -4314,8 +4315,8 @@ public:
 	static bool	ChkLn3OnLn3(						// (  O) ƒXƒeƒCƒ^ƒX
 													//			true:	d‚È‚Á‚Ä‚¢‚é
 													//			false:	d‚È‚Á‚Ä‚¢‚È‚¢
-					const	MgLine3		&Ln1,		// (I  ) ü•ª1
-					const	MgLine3		&Ln2,		// (I  ) ü•ª2
+					const	MgLine3D&	i_Ln1,		// (I  ) ü•ª1
+					const	MgLine3D&	i_Ln2,		// (I  ) ü•ª2
 							MREAL rTol= MGPTOL->D	// (I  ) ƒgƒŒƒ‰ƒ“ƒX
 					);
 	
@@ -4326,9 +4327,9 @@ public:
 	static bool	ChkLn3OnLn3WS(						// (  O) ƒXƒeƒCƒ^ƒX
 													//			true:	d‚È‚Á‚Ä‚¢‚é
 													//			false:	d‚È‚Á‚Ä‚¢‚È‚¢
-					const	MgLine3		&Ln1,		// (I  ) ü•ª1
-					const	MgLine3		&Ln2,		// (I  ) ü•ª2
-							MINT*		ist,		// (  O) •â•ƒXƒeƒCƒ^ƒX@d‚È‚è‚ ‚è‚Ìê‡‚ÍŸ‚Ì’Ê‚è
+					const	MgLine3D&	i_Ln1,		// (I  ) ü•ª1
+					const	MgLine3D&	i_Ln2,		// (I  ) ü•ª2
+							MINT*		o_pist,		// (  O) •â•ƒXƒeƒCƒ^ƒX@d‚È‚è‚ ‚è‚Ìê‡‚ÍŸ‚Ì’Ê‚è
 													//        -4    -3   -2   -1    0     1    2    3    4 		   	
 													//		|--   |--  |--- | -- | --- |----| ---|  --|   --|           	  	
 													//		|   --|  --| ---|----| --- | -- |--- |--  |--   |                @	
@@ -4338,49 +4339,52 @@ public:
 	// ---------------------( ‚QŸŒ³ )------------------------------
 	//		ƒxƒNƒgƒ‹‚ÆƒxƒNƒgƒ‹‚ª‚’¼‚Å‚ ‚é‚©‚ğŠm”F‚·‚é
 	static inline bool ChkPerp2V2(					// (  O) ƒXƒeƒCƒ^ƒX true: ‚’¼ 
-					const	MgVect2		&v1,		// (I  ) ƒxƒNƒgƒ‹1
-					const	MgVect2		&v2			// (I  ) ƒxƒNƒgƒ‹2
+					const	MgVect2D&	i_v1,		// (I  ) ƒxƒNƒgƒ‹1
+					const	MgVect2D&	i_v2		// (I  ) ƒxƒNƒgƒ‹2
 					)
 	{
-		MREAL fo = v1 ^ v2; MREAL fi = v1 * v2;
+		MREAL fo = i_v1 ^ i_v2; MREAL fi = i_v1 * i_v2;
 		return ( MGABS(fi/fo)  <= MGPTOL->A);
 	}
 
 	// ---------------------( ‚QŸŒ³ )------------------------------
 	//		ƒxƒNƒgƒ‹‚ÆƒxƒNƒgƒ‹‚ª‚’¼‚Å‚ ‚é‚©‚ğŠm”F‚µAŠOÏ‚Æ“àÏ‚ğo—Í‚·‚é
 	static inline bool ChkPerp2VS2(					// (  O) ƒXƒeƒCƒ^ƒX true: ‚’¼
-				const	MgVect2		&v1,			// (I  ) ƒxƒNƒgƒ‹1
-				const	MgVect2		&v2,			// (I  ) ƒxƒNƒgƒ‹2
-						MREAL		*so,			// (  O) ŠOÏ
-						MREAL		*si				// (  O) “àÏ
+					const	MgVect2D&	i_v1,		// (I  ) ƒxƒNƒgƒ‹1
+					const	MgVect2D&	i_v2,		// (I  ) ƒxƒNƒgƒ‹2
+							MREAL*		o_pso,		// (  O) ŠOÏ
+							MREAL*		o_psi		// (  O) “àÏ
 				)
 	{
-		*so = v1 ^ v2; *si = v1 * v2;
-		return ( MGABS( *si / *so) <= MGPTOL->A);
+		*o_pso = i_v1 ^ i_v2;
+		*o_psi = i_v1 * i_v2;
+		return ( MGABS( *o_psi / *o_pso) <= MGPTOL->A);
 	}
 
 	// ---------------------( ‚RŸŒ³ )------------------------------
 	//		ƒxƒNƒgƒ‹‚ÆƒxƒNƒgƒ‹‚ª‚’¼‚Å‚ ‚é‚©‚ğŠm”F‚·‚é
 	static inline bool ChkPerp2V3(					// (  O) ƒXƒeƒCƒ^ƒX true: ‚’¼
-					const	MgVect3&	v1,			// (I  ) ƒxƒNƒgƒ‹1
-					const	MgVect3&	v2			// (I  ) ƒxƒNƒgƒ‹2
+					const	MgVect3D&	i_v1,		// (I  ) ƒxƒNƒgƒ‹1
+					const	MgVect3D&	i_v2		// (I  ) ƒxƒNƒgƒ‹2
 					)
 	{
-		MgVect3 vo = v1 ^ v2; MREAL fi = v1 * v2;
+		MgVect3D vo = i_v1 ^ i_v2;
+		MREAL fi = i_v1 * i_v2;
 		return (fi * fi <= Abs_2(vo) * MGPTOL->A_2);
 	}
 
 	// ---------------------( ‚RŸŒ³ )------------------------------
 	//		ƒxƒNƒgƒ‹‚ÆƒxƒNƒgƒ‹‚ª‚’¼‚Å‚ ‚é‚©‚ğŠm”F‚µAŠOÏ‚Æ“àÏ‚ğo—Í‚·‚é
 	static inline bool ChkPerp2VS3(					// (  O) ƒXƒeƒCƒ^ƒX true: ‚’¼
-					const	MgVect3&	v1,			// (I  ) ƒxƒNƒgƒ‹1
-					const	MgVect3&	v2,			// (I  ) ƒxƒNƒgƒ‹2
-							MgVect3		*pso,		// (  O) ŠOÏ
-							MREAL		*si			// (  O) “àÏ
+					const	MgVect3D&	i_v1,		// (I  ) ƒxƒNƒgƒ‹1
+					const	MgVect3D&	i_v2,		// (I  ) ƒxƒNƒgƒ‹2
+							MgVect3D*	o_ppso,		// (  O) ŠOÏ
+							MREAL*		o_psi		// (  O) “àÏ
 					)
 	{
-		MgVect3 vo = v1 ^ v2; MREAL fi = v1 * v2;
-		*pso = vo; *si = fi;
+		MgVect3D vo = i_v1 ^ i_v2;
+		MREAL fi = i_v1 * i_v2;
+		*o_ppso = vo; *o_psi = fi;
 		return (fi * fi <= Abs_2(vo) * MGPTOL->A_2);
 	}
 	//
@@ -4393,9 +4397,9 @@ public:
 	static inline bool ChkPt2OnPg2WS(				// (  O) ƒXƒeƒCƒ^ƒX
 													//			true:	‘½ŠpŒ`‚Ì“à‘¤‚Ü‚½‚Í•Óã
 													//			false:	‘½ŠpŒ`‚ÌŠO‘¤
-					const	MgPoint2&	Pt,			// (I  ) “_
-					const	MgPolyg2&	Pg,			// (I  ) ‘½ŠpŒ`
-							MINT*		ist,		// (  O) ƒXƒeƒCƒ^ƒX
+					const	MgPoint2D&	i_Pt,		// (I  ) “_
+					const	MgPolyg2D&	i_Pg,		// (I  ) ‘½ŠpŒ`
+							MINT*		o_pist,		// (  O) ƒXƒeƒCƒ^ƒX
 													//			MC_IN_BORDER		(001): “_‚ª‘½ŠpŒ`‚Ì“à‘¤
 													//			MC_ON_BORDER		(002): “_‚ª‘½ŠpŒ`‚Ì•Óã(‚Ü‚½‚Í’¸“_ã)
 													//			MC_OUT_BORDER		(004): “_‚ª‘½ŠpŒ`‚ÌŠO‘¤
@@ -4406,17 +4410,17 @@ public:
 		MINT	ist1;
 		MINT	ict;
 		
-		ist1 = CountPg2AroundPt2( Pt, NULL, Pg, &ict, rTol);
+		ist1 = CountPg2AroundPt2( i_Pt, NULL, i_Pg, &ict, rTol);
 		if ( ist1) {
-			*ist = MC_ON_BORDER;
+			*o_pist = MC_ON_BORDER;
 			bst = true;												// ‘½ŠpŒ`‚Ì•Óã(‚Ü‚½‚Í’¸“_ã)
 		} else {
 			if ( ict) {
-				*ist = MC_IN_BORDER;
+				*o_pist = MC_IN_BORDER;
 				bst = true;											// ‘½ŠpŒ`‚Ì“à‘¤
 			}
 			else {
-				*ist = MC_OUT_BORDER;
+				*o_pist = MC_OUT_BORDER;
 				bst = false;										// ‘½ŠpŒ`‚ÌŠO‘¤
 			}
 		}
@@ -4429,9 +4433,9 @@ public:
 	static inline bool ChkLn2OnPg2WS(				// (  O) ƒXƒeƒCƒ^ƒX
 													//			true:	‘½ŠpŒ`‚Ì“à‘¤‚Ü‚½‚Í•Óã
 													//			false:	‘½ŠpŒ`‚ÌŠO‘¤
-					const	MgLine2&	Ln1,		// (I  ) ü•ª
-					const	MgPolyg2&	Pg2,		// (I  ) ‘½ŠpŒ`
-							MINT*		isth,		// (  O) •â•ƒXƒeƒCƒ^ƒX	(ƒXƒeƒCƒ^ƒX1 | ƒXƒeƒCƒ^ƒX2)
+					const	MgLine2D&	i_Ln1,		// (I  ) ü•ª
+					const	MgPolyg2D&	i_Pg2,		// (I  ) ‘½ŠpŒ`
+							MINT*		o_pisth,	// (  O) •â•ƒXƒeƒCƒ^ƒX	(ƒXƒeƒCƒ^ƒX1 | ƒXƒeƒCƒ^ƒX2)
 													// 		 ƒeƒCƒ^ƒX1
 													//			MC_IN_BORDER		(001):	“_‚ª‘½ŠpŒ`‚Ì“à‘¤
 													//			MC_ON_BORDER		(002):	“_‚ª‘½ŠpŒ`‚Ì•Óã(‚Ü‚½‚Í’¸“_ã)
@@ -4444,25 +4448,25 @@ public:
 					)
 	{
 		bool		bst;
-		MgPoint2	pt1;
-		MgVect2		vt1;
+		MgPoint2D	pt1;
+		MgVect2D		vt1;
 		MINT		ist1;
 		MINT		ict;
 		
-		pt1 = ( Ln1.p[0] + Ln1.p[1]) * 0.5;
-		vt1 = Ln1.p[1] - Ln1.p[0];
+		pt1 = ( i_Ln1.p[0] + i_Ln1.p[1]) * 0.5;
+		vt1 = i_Ln1.p[1] - i_Ln1.p[0];
 		
-		ist1 = CountPg2AroundPt2( pt1, &vt1, Pg2, &ict, rTol);
+		ist1 = CountPg2AroundPt2( pt1, &vt1, i_Pg2, &ict, rTol);
 		if ( ist1) {
-			*isth = MC_ON_BORDER | ist1;
+			*o_pisth = MC_ON_BORDER | ist1;
 			bst = true;												// ‘½ŠpŒ`‚Ì•Óã(‚Ü‚½‚Í’¸“_ã)
 		} else {
 			if ( ict) {
-				*isth = MC_IN_BORDER;
+				*o_pisth = MC_IN_BORDER;
 				bst = true;											// ‘½ŠpŒ`‚Ì“à‘¤
 			}
 			else {
-				*isth = MC_OUT_BORDER;
+				*o_pisth = MC_OUT_BORDER;
 				bst = false;										// ‘½ŠpŒ`‚ÌŠO‘¤
 			}
 		}
@@ -4475,9 +4479,9 @@ public:
 	static bool ChkPt2OnGPg2WS(						// (  O) ƒXƒeƒCƒ^ƒX
 													//			true:	ŒŠ•t‚«‘½ŠpŒ`‚Ì“à‘¤‚Ü‚½‚Í•Óã
 													//			false:	ŒŠ•t‚«‘½ŠpŒ`‚ÌŠO‘¤
-					const	MgPoint2&	Pt,			// (I  ) “_
-					const	MgGPolyg2&	GPg,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`
-							MINT*		ist,		// (  O) ƒXƒeƒCƒ^ƒX
+					const	MgPoint2D&	i_Pt,		// (I  ) “_
+					const	MgGPolyg2D&	i_GPg,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`
+							MINT*		o_pist,		// (  O) ƒXƒeƒCƒ^ƒX
 													//			MC_IN_BORDER		(001): “_‚ªŒŠ•t‚«‘½ŠpŒ`‚Ì“à‘¤
 													//			MC_ON_BORDER		(002): “_‚ªŒŠ•t‚«‘½ŠpŒ`‚Ì•Óã(‚Ü‚½‚Í’¸“_ã)
 													//			MC_OUT_BORDER		(004): “_‚ªŒŠ•t‚«‘½ŠpŒ`‚ÌŠO‘¤
@@ -4490,9 +4494,9 @@ public:
 	static bool ChkLn2OnGPg2WS(						// (  O) ƒXƒeƒCƒ^ƒX
 													//			true:	ŒŠ•t‚«‘½ŠpŒ`‚Ì“à‘¤‚Ü‚½‚Í•Óã
 													//			false:	ŒŠ•t‚«‘½ŠpŒ`‚ÌŠO‘¤
-					const	MgLine2&	Ln1,		// (I  ) ü•ª
-					const	MgGPolyg2&	GPg2,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`
-							MINT*		isth,		// (  O) •â•ƒXƒeƒCƒ^ƒX	(ƒXƒeƒCƒ^ƒX1 | ƒXƒeƒCƒ^ƒX2)
+					const	MgLine2D&	i_Ln1,		// (I  ) ü•ª
+					const	MgGPolyg2D&	i_GPg2,		// (I  ) ŒŠ•t‚«‘½ŠpŒ`
+							MINT*		o_pisth,	// (  O) •â•ƒXƒeƒCƒ^ƒX	(ƒXƒeƒCƒ^ƒX1 | ƒXƒeƒCƒ^ƒX2)
 													// 		 ƒeƒCƒ^ƒX1
 													//			MC_IN_BORDER		(001): “_‚ªŒŠ•t‚«‘½ŠpŒ`‚Ì“à‘¤
 													//			MC_ON_BORDER		(002): “_‚ªŒŠ•t‚«‘½ŠpŒ`‚Ì•Óã(‚Ü‚½‚Í’¸“_ã)
@@ -4507,18 +4511,18 @@ public:
 	// ---------------------( ‚QŸŒ³ )------------------------------
 	// “_‚Æ‘½ŠpŒ`‚ÌˆÊ’uŠÖŒW‚ğ‹‚ß‚é
 	// ‘½ŠpŒ`‚Ì•Ó‚ª“_‚Ìü‚è‚ğ‰ñ‚éü‰ñ”‚ğ‹‚ß‚éiÀ‘Ìˆêü:1@ŒŠˆêü:-1j
-	static MINT	CountPg2AroundPt2(				// (  O) ƒXƒeƒCƒ^ƒX
+	static MINT	CountPg2AroundPt2(					// (  O) ƒXƒeƒCƒ^ƒX
 													//								(000): ‘½ŠpŒ`‚Ì’†‚Ü‚½‚ÍŠO	
 													//			MC_ON_SIDE_SAME		(010): •Óã(“¯ˆê•ûŒü)
 													//			MC_ON_SIDE_REV		(020): •Óã(‹t•ûŒü)
 													//			MC_ON_SIDE			(030): •Óã(ü•ª•ûŒü=NULL: ü•ª•ûŒüw’è–³‚µ)
 													//			MC_ON_TOP			(040): ’¸“_ã
-					const	MgPoint2&	Pt,			// (I  ) “_
-					const	MgVect2		*vst,		// (I  ) ü•ª•ûŒü ‚Ü‚½‚Í NULL
+					const	MgPoint2D&	i_Pt,		// (I  ) “_
+					const	MgVect2D*	i_pvst,		// (I  ) ü•ª•ûŒü ‚Ü‚½‚Í NULL
 													//		 ˆø”‚ªNULL‚Å–³‚¯‚ê‚Î“_‚ª•Óã‚Ìê‡A
 													//		 •Ó‚Ìü•ª•ûŒü‚Æ”äŠr‚·‚é
-					const	MgPolyg2&	Pg,			// (I  ) ‘½ŠpŒ`
-							MINT*		ict,		// (  O) ü‰ñƒJƒEƒ“ƒg
+					const	MgPolyg2D&	i_Pg,		// (I  ) ‘½ŠpŒ`
+							MINT*		o_pict,		// (  O) ü‰ñƒJƒEƒ“ƒg
 													//			>0: ‘½ŠpŒ`‚ªÀ‘Ì‚Ìê‡‚Ìü‰ñ”	(1:1ü)
 													//			=0: ’¸“_A•ÓãA‘½ŠpŒ`‚ÌŠO
 													//			<0: ‘½ŠpŒ`‚ªŒŠ‚Ìê‡‚Ìü‰ñ”	(-1:1ü)	
@@ -4532,9 +4536,9 @@ public:
 	static bool ChkPt3OnPg3WS(						// (  O) ƒXƒeƒCƒ^ƒX
 													//			true:	‘½ŠpŒ`‚Ì“à‘¤‚Ü‚½‚Í•Óã
 													//			false:	‘½ŠpŒ`‚ÌŠO‘¤
-					const	MgPoint3&	Pt,			// (I  ) “_
-					const	MgPolyg3&	Pg,			// (I  ) ‘½ŠpŒ`
-							MINT*		ist,		// (  O) ƒXƒeƒCƒ^ƒX
+					const	MgPoint3D&	i_Pt,		// (I  ) “_
+					const	MgPolyg3D&	i_Pg,		// (I  ) ‘½ŠpŒ`
+							MINT*		o_pist,		// (  O) ƒXƒeƒCƒ^ƒX
 								  					//		 ‘½ŠpŒ`‚Ì•½–Ê‚Æ“_‚ÌˆÊ’uŠÖŒW
 													//			MC_UPPER			(010): “_‚ª•½–Ê‚Ìã‘¤	
 													//			MC_ON_PLANE			(020): “_‚ª•½–Êã
@@ -4555,9 +4559,9 @@ public:
 	static inline bool ChkLn3OnPg3WS(				// (  O) ƒXƒeƒCƒ^ƒX
 													//			true:	‘½ŠpŒ`ã
 													//			false:	‘½ŠpŒ`ŠO
-					const	MgLine3		&Ln1,		// (I  ) ü•ª
-					const	MgPolyg3&	Pg2,		// (I  ) ‘½ŠpŒ`
-							MINT*		ist,		// (  O) •â•ƒXƒeƒCƒ^ƒX
+					const	MgLine3D&	i_Ln1,		// (I  ) ü•ª
+					const	MgPolyg3D&	i_Pg2,		// (I  ) ‘½ŠpŒ`
+							MINT*		o_pist,		// (  O) •â•ƒXƒeƒCƒ^ƒX
 								  					//		 ‘½ŠpŒ`‚Ì•½–Ê‚Æ“_‚ÌˆÊ’uŠÖŒW
 													//			MC_UPPER			(010): “_‚ª•½–Ê‚Ìã‘¤	
 													//			MC_ON_PLANE			(020): “_‚ª•½–Êã
@@ -4569,9 +4573,9 @@ public:
 							MREAL rTol= MGPTOL->D	// (I  ) ƒgƒŒƒ‰ƒ“ƒX
 					)
 	{
-		MgPoint3	Pt1;
-		Pt1 = ( Ln1.p[0] + Ln1.p[1]) * 0.5;
-		return OnPtPg3( Pt1, Pg2, ist);
+		MgPoint3D	Pt1;
+		Pt1 = ( i_Ln1.p[0] + i_Ln1.p[1]) * 0.5;
+		return OnPtPg3( Pt1, i_Pg2, o_pist);
 	}
 
 	*/
@@ -4584,9 +4588,9 @@ public:
 	static inline bool ChkPt3OnPln3WS(				// (  O) ƒXƒeƒCƒ^ƒX
 													//			true:  •½–Êã
 													//			false: •½–ÊŠO
-					const	MgPoint3&	p1,			// (I  ) “_1
-					const	MgPlane3	&Pln2,		// (I  ) •½–Ê2
-							MINT*		ist,		// (  O) •â‘«ƒXƒeƒCƒ^ƒX
+					const	MgPoint3D&	i_p1,		// (I  ) “_1
+					const	MgPlane3D&	i_Pln2,		// (I  ) •½–Ê2
+							MINT*		o_pist,		// (  O) •â‘«ƒXƒeƒCƒ^ƒX
 													//			MC_UPPER			(010): “_‚ª•½–Ê‚Ìã‘¤	
 													//			MC_ON_PLANE			(020): “_‚ª•½–Êã
 													//			MC_LOWER			(040): “_‚ª•½–Ê‚Ì‰º‘¤
@@ -4596,15 +4600,15 @@ public:
 		bool	bst;
 		MREAL	pa1;								//	“_‚©‚ç•½–Ê‚Ü‚Å‚Ì‹——£
 	//
-		pa1 = (Pln2.v * p1) + Pln2.d;
+		pa1 = ( i_Pln2.v * i_p1) + i_Pln2.d;
 		if ( pa1 > rTol) {
-			*ist = MC_UPPER;
+			*o_pist = MC_UPPER;
 			bst = false;
 		} else if ( pa1 < -rTol) {
-			*ist = MC_LOWER;
+			*o_pist = MC_LOWER;
 			bst = false;
 		} else {
-			*ist = MC_ON_PLANE;
+			*o_pist = MC_ON_PLANE;
 			bst = true;
 		}
 		return bst;
@@ -4616,17 +4620,17 @@ public:
 	static inline bool ChkULn3OnPln3(				// (  O) ƒXƒeƒCƒ^ƒX
 													//			true:  •½–Êã
 													//			false: •½–ÊŠO
-					const	MgULine3&	ULn1,		// (I  ) ’¼ü1
-					const	MgPlane3	&Pln2,		// (I  ) •½–Ê2
+					const	MgULine3D&	i_ULn1,		// (I  ) ’¼ü1
+					const	MgPlane3D&	i_Pln2,		// (I  ) •½–Ê2
 							MREAL rTol= MGPTOL->D	// (I  ) ƒgƒŒƒ‰ƒ“ƒX
 					)
 	{
 		int		ist;
-		if ( ChkPt3OnPln3WS(ULn1.p, Pln2, &ist)) {
+		if ( ChkPt3OnPln3WS( i_ULn1.p, i_Pln2, &ist)) {
 	//
 	//	•½s‚Ìƒ`ƒFƒbƒN
 	//
-			if ( ChkPerp2V3(ULn1.v, Pln2.v))
+			if ( ChkPerp2V3( i_ULn1.v, i_Pln2.v))
 				return true;									//	•½–Êã
 		}
 		return false;
@@ -4638,9 +4642,9 @@ public:
 	static inline bool ChkLn3OnPln3WS(				// (  O) ƒXƒeƒCƒ^ƒX
 													//			true:  •½–Êã
 													//			false: •½–ÊŠO
-					const	MgLine3		&Ln1,		// (I  ) ü•ª1
-					const	MgPlane3	&Pln2,		// (I  ) •½–Ê2
-							MINT*		ist,		// (  O) •â‘«ƒXƒeƒCƒ^ƒX
+					const	MgLine3D&	i_Ln1,		// (I  ) ü•ª1
+					const	MgPlane3D&	i_Pln2,		// (I  ) •½–Ê2
+							MINT*		o_pist,		// (  O) •â‘«ƒXƒeƒCƒ^ƒX
 								  					//		 ‘½ŠpŒ`‚Ì•½–Ê‚Æ“_‚ÌˆÊ’uŠÖŒW
 													//			MC_PS_UPPER			(001): n“_‚ª•½–Ê‚Ìã‘¤	
 													//			MC_PS_ON_PLANE		(002): n“_‚ª•½–Êã
@@ -4655,9 +4659,9 @@ public:
 		bool	bs, be;
 		MINT	ists, iste;
 	
-		bs = ChkPt3OnPln3WS(Ln1.p[0], Pln2, &ists);
-		be = ChkPt3OnPln3WS(Ln1.p[1], Pln2, &iste);
-		*ist = (ists * MC_PS_UPPER + iste * MC_PE_UPPER)/ MC_UPPER;
+		bs = ChkPt3OnPln3WS( i_Ln1.p[0], i_Pln2, &ists);
+		be = ChkPt3OnPln3WS( i_Ln1.p[1], i_Pln2, &iste);
+		*o_pist = (ists * MC_PS_UPPER + iste * MC_PE_UPPER)/ MC_UPPER;
 		return (bs && be);
 	}
 	
@@ -4668,15 +4672,15 @@ public:
 	static inline bool	MgChkRct2OnRct2(			// (  O) ƒXƒeƒCƒ^ƒX
 													//		 true   Œğ·‚ ‚è
 													//		 false  Œğ·‚È‚µ
-					const	MgRect2		&rct10,		// (I  ) ‚SŠpŒ`1 (min,max)
-					const	MgRect2		&rct20,		// (I  ) ‚SŠpŒ`2 (min,max)
+					const	MgRect2D&	i_rct10,		// (I  ) ‚SŠpŒ`1 (min,max)
+					const	MgRect2D&	i_rct20,		// (I  ) ‚SŠpŒ`2 (min,max)
 							MREAL rTol= MGPTOL->D	// (I  ) ƒgƒŒƒ‰ƒ“ƒX
 					)
 	{
-		return rct10.p[0].x < rct20.p[1].x + MGPTOL->D &&
-			   rct20.p[0].x < rct10.p[1].x + MGPTOL->D &&
-			   rct10.p[0].y < rct20.p[1].y + MGPTOL->D &&
-			   rct20.p[0].y < rct10.p[1].y + MGPTOL->D;
+		return i_rct10.p[0].x < i_rct20.p[1].x + MGPTOL->D &&
+			   i_rct20.p[0].x < i_rct10.p[1].x + MGPTOL->D &&
+			   i_rct10.p[0].y < i_rct20.p[1].y + MGPTOL->D &&
+			   i_rct20.p[0].y < i_rct10.p[1].y + MGPTOL->D;
 	}
 
 	// ---------------------( ‚RŸŒ³ )------------------------------
@@ -4686,17 +4690,17 @@ public:
 	static inline bool	MgChkRct3OnRct3(			// (  O) ƒXƒeƒCƒ^ƒX
 													//		 true   Œğ·‚ ‚è
 													//		 false  Œğ·‚È‚µ
-					const	MgRect3		&rct10,		// (I  ) ‚SŠpŒ`1 (min,max)
-					const	MgRect3		&rct20,		// (I  ) ‚SŠpŒ`2 (min,max)
+					const	MgRect3D&	i_rct10,	// (I  ) ‚SŠpŒ`1 (min,max)
+					const	MgRect3D&	i_rct20,	// (I  ) ‚SŠpŒ`2 (min,max)
 							MREAL rTol= MGPTOL->D	// (I  ) ƒgƒŒƒ‰ƒ“ƒX
 					)
 	{
-		return rct10.p[0].x < rct20.p[1].x + MGPTOL->D &&
-			   rct20.p[0].x < rct10.p[1].x + MGPTOL->D &&
-			   rct10.p[0].y < rct20.p[1].y + MGPTOL->D &&
-			   rct20.p[0].y < rct10.p[1].y + MGPTOL->D &&
-			   rct10.p[0].z < rct20.p[1].z + MGPTOL->D &&
-			   rct20.p[0].z < rct10.p[1].z + MGPTOL->D;
+		return i_rct10.p[0].x < i_rct20.p[1].x + MGPTOL->D &&
+			   i_rct20.p[0].x < i_rct10.p[1].x + MGPTOL->D &&
+			   i_rct10.p[0].y < i_rct20.p[1].y + MGPTOL->D &&
+			   i_rct20.p[0].y < i_rct10.p[1].y + MGPTOL->D &&
+			   i_rct10.p[0].z < i_rct20.p[1].z + MGPTOL->D &&
+			   i_rct20.p[0].z < i_rct10.p[1].z + MGPTOL->D;
 	}
 	
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -4704,13 +4708,13 @@ public:
 	//		“_‚ª‚l‚h‚m^‚l‚`‚w—Ìˆæ‚ª“à‚É‚ ‚é‚©”Û‚©‚ğƒ`ƒFƒbƒN‚·‚éB
 	//
 	static inline	bool ChkPt2InMMR2(
-					const	MgPoint2&	pt1,		// Point
-					const	MgMinMaxR2	&mx2,		// MIN/MAX
+					const	MgPoint2D&		i_pt1,	// Point
+					const	MgMinMaxR2D&	i_mx2,	// MIN/MAX
 							MREAL rTol= MGPTOL->D	// (I  ) ƒgƒŒƒ‰ƒ“ƒX
 					)
 	{
-		return pt1.x <= mx2.max.x + MGPTOL->D && mx2.min.x < pt1.x + MGPTOL->D &&
-			   pt1.y <= mx2.max.y + MGPTOL->D && mx2.min.y < pt1.y + MGPTOL->D;
+		return i_pt1.x < i_mx2.max.x + MGPTOL->D && i_mx2.min.x - MGPTOL->D < i_pt1.x &&
+			   i_pt1.y < i_mx2.max.y + MGPTOL->D && i_mx2.min.y - MGPTOL->D < i_pt1.y;
 	}
 	
 	// ---------------------( ‚RŸŒ³ )------------------------------
@@ -4718,14 +4722,14 @@ public:
 	//		“_‚ª‚l‚h‚m^‚l‚`‚w—Ìˆæ‚ª“à‚É‚ ‚é‚©”Û‚©‚ğƒ`ƒFƒbƒN‚·‚éB
 	//
 	static inline	bool ChkPt3InMMR3(
-					const	MgPoint3&	pt1,		// Point
-					const	MgMinMaxR3	&mx2,		// MIN/MAX
+					const	MgPoint3D&		i_pt1,	// Point
+					const	MgMinMaxR3D&	i_mx2,	// MIN/MAX
 							MREAL rTol= MGPTOL->D	// (I  ) ƒgƒŒƒ‰ƒ“ƒX
 					)
 	{
-		return pt1.x < mx2.max.x + MGPTOL->D && mx2.min.x < pt1.x + MGPTOL->D &&
-			   pt1.y < mx2.max.y + MGPTOL->D && mx2.min.y < pt1.y + MGPTOL->D &&
-			   pt1.z < mx2.max.z + MGPTOL->D && mx2.min.z < pt1.z + MGPTOL->D;
+		return i_pt1.x < i_mx2.max.x + MGPTOL->D && i_mx2.min.x - MGPTOL->D < i_pt1.x &&
+			   i_pt1.y < i_mx2.max.y + MGPTOL->D && i_mx2.min.y - MGPTOL->D < i_pt1.y &&
+			   i_pt1.z < i_mx2.max.z + MGPTOL->D && i_mx2.min.z - MGPTOL->D < i_pt1.z;
 	}
 
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -4733,13 +4737,13 @@ public:
 	//		‚Q‚Â‚Ì‚l‚h‚m^‚l‚`‚w—Ìˆæ‚ªd‚È‚é‚©”Û‚©‚ğƒ`ƒFƒbƒN‚·‚éB
 	//
 	static inline	bool ChkMMI2OnMMI2(
-					const	MgMinMaxI2	&mx1,		// MIN/MAX
-					const	MgMinMaxI2	&mx2,		// MIN/MAX
+					const	MgMinMaxI2D&	i_mx1,	// MIN/MAX
+					const	MgMinMaxI2D&	i_mx2,	// MIN/MAX
 							MREAL rTol= MGPTOL->D	// (I  ) ƒgƒŒƒ‰ƒ“ƒX
 					)
 	{
-		return mx1.min.x <= mx2.max.x && mx2.min.x <= mx1.max.x &&
-			   mx1.min.y <= mx2.max.y && mx2.min.y <= mx1.max.y;
+		return i_mx1.min.x <= i_mx2.max.x && i_mx2.min.x <= i_mx1.max.x &&
+			   i_mx1.min.y <= i_mx2.max.y && i_mx2.min.y <= i_mx1.max.y;
 	}
 
 	// ---------------------( ‚QŸŒ³ )------------------------------
@@ -4747,13 +4751,13 @@ public:
 	//		‚Q‚Â‚Ì‚l‚h‚m^‚l‚`‚w—Ìˆæ‚ªd‚È‚é‚©”Û‚©‚ğƒ`ƒFƒbƒN‚·‚éB
 	//
 	static inline	bool ChkMMR2OnMMR2(
-					const	MgMinMaxR2	&mx1,		// MIN/MAX
-					const	MgMinMaxR2	&mx2,		// MIN/MAX
+					const	MgMinMaxR2D&	i_mx1,	// MIN/MAX
+					const	MgMinMaxR2D&	i_mx2,	// MIN/MAX
 							MREAL rTol= MGPTOL->D	// (I  ) ƒgƒŒƒ‰ƒ“ƒX
 					)
 	{
-		return mx1.min.x < mx2.max.x + MGPTOL->D && mx2.min.x < mx1.max.x + MGPTOL->D &&
-			   mx1.min.y < mx2.max.y + MGPTOL->D && mx2.min.y < mx1.max.y + MGPTOL->D;
+		return i_mx1.min.x < i_mx2.max.x + MGPTOL->D && i_mx2.min.x < i_mx1.max.x + MGPTOL->D &&
+			   i_mx1.min.y < i_mx2.max.y + MGPTOL->D && i_mx2.min.y < i_mx1.max.y + MGPTOL->D;
 	}
 
 	// ---------------------( ‚RŸŒ³ )------------------------------
@@ -4761,80 +4765,80 @@ public:
 	//		‚Q‚Â‚Ì‚l‚h‚m^‚l‚`‚w—Ìˆæ‚ªd‚È‚é‚©”Û‚©‚ğƒ`ƒFƒbƒN‚·‚éB
 	//
 	static inline	bool ChkMMR3OnMMR3(
-					const	MgMinMaxR3	&mx1,		// MIN/MAX
-					const	MgMinMaxR3	&mx2,		// MIN/MAX
+					const	MgMinMaxR3D&	i_mx1,	// MIN/MAX
+					const	MgMinMaxR3D&	i_mx2,	// MIN/MAX
 							MREAL rTol= MGPTOL->D	// (I  ) ƒgƒŒƒ‰ƒ“ƒX
 					)
 	{
-		return mx1.min.x < mx2.max.x + MGPTOL->D && mx2.min.x < mx1.max.x + MGPTOL->D &&
-			   mx1.min.y < mx2.max.y + MGPTOL->D && mx2.min.y < mx1.max.y + MGPTOL->D &&
-			   mx1.min.z < mx2.max.z + MGPTOL->D && mx2.min.z < mx1.max.z + MGPTOL->D;
+		return i_mx1.min.x < i_mx2.max.x + MGPTOL->D && i_mx2.min.x < i_mx1.max.x + MGPTOL->D &&
+			   i_mx1.min.y < i_mx2.max.y + MGPTOL->D && i_mx2.min.y < i_mx1.max.y + MGPTOL->D &&
+			   i_mx1.min.z < i_mx2.max.z + MGPTOL->D && i_mx2.min.z < i_mx1.max.z + MGPTOL->D;
 	}
 
 	// ---------------------( ‚QŸŒ³ )------------------------------
 	// P1‚ğŒ´“_‚Æ‚µ‚½P2‚ÌˆÊ’u‚ÌÛŒÀ‚ğ‹‚ß‚é
 	//
 	static inline MINT Quadrant	(					// (  O) 1`4: ÛŒÀ
-					const	MgPoint2&	p1,			// (I  ) P1
-					const	MgPoint2&	p2			// (I  ) P2
+					const	MgPoint2D&	i_p1,		// (I  ) P1
+					const	MgPoint2D&	i_p2		// (I  ) P2
 					)
 	{
-		return ((p2.x > p1.x) ? ((p2.y > p1.y) ? 1 : 4) : ((p2.y > p1.y) ? 2 : 3));
+		return ( ( i_p2.x > i_p1.x) ? ( ( i_p2.y > i_p1.y) ? 1 : 4) : ( ( i_p2.y > i_p1.y) ? 2 : 3));
 	}
 		
 	// ---------------------( ‚QŸŒ³ )------------------------------
 	//		“_—ñ‚ğ•À‚×•ûŒü‚É]‚Á‚½À•W‡‚É•À‚×‚éi“¯ˆê“_‚ÍŠÔˆø‚­j
 	//
 	static void	SortVGPt2(
-					const	MgVect2&	v1,			// (I  ) “_—ñ‚Ì•À‚×•ûŒü
-							MgGPoint2*	GPt2		// (I O) •À‚×‚é“_—ñ
+					const	MgVect2D&	i_v1,		// (I  ) “_—ñ‚Ì•À‚×•ûŒü
+							MgGPoint2D*	io_pGPt2	// (I O) •À‚×‚é“_—ñ
 					);
 
 	// ---------------------( ‚QŸŒ³ )------------------------------
 	//		“_—ñ‚ğü•ª‚Ìn“_‚©‚çI“_‚ÉŒü‚©‚¤•ûŒü‚É]‚Á‚½À•W‡‚É•À‚×‚éi“¯ˆê“_‚ÍŠÔˆø‚­j
 	//
 	static inline void	SortLnGPt2(
-					const	MgLine2&	Ln1,		// (I  ) “_—ñ‚Ì•À‚×•ûŒü‚ğ¦‚·ü•ª
-							MgGPoint2*	GPt2		// (I O) •À‚×‚é“_—ñ
+					const	MgLine2D&	i_Ln1,		// (I  ) “_—ñ‚Ì•À‚×•ûŒü‚ğ¦‚·ü•ª
+							MgGPoint2D*	io_pGPt2	// (I O) •À‚×‚é“_—ñ
 					)
 	{
-		MgVect2		v1;
-		v1 = Ln1.p[1] - Ln1.p[0];
-		SortVGPt2( v1, GPt2);
+		MgVect2D		v1;
+		v1 = i_Ln1.p[1] - i_Ln1.p[0];
+		SortVGPt2( v1, io_pGPt2);
 	}
 
 	//// ---------------------( ‚RŸŒ³ )------------------------------
 	////		“_—ñ‚ğ•À‚×•ûŒü‚É]‚Á‚½À•W‡‚É•À‚×‚éi“¯ˆê“_‚ÍŠÔˆø‚­j
 	////
 	//static void	MgSortVGPt3(
-	//				const	MgVect3&	V1,			// (I  ) “_—ñ‚Ì•À‚×•ûŒü
-	//						MgGPoint3	*GPt2		// (I O) •À‚×‚é“_—ñ
+	//				const	MgVect3D&	i_V1,		// (I  ) “_—ñ‚Ì•À‚×•ûŒü
+	//						MgGPoint3D*	io_pGPt2	// (I O) •À‚×‚é“_—ñ
 	//				);
 
 	//// ---------------------( ‚RŸŒ³ )------------------------------
 	////		“_—ñ‚ğü•ª‚Ìn“_‚©‚çI“_‚ÉŒü‚©‚¤•ûŒü‚É]‚Á‚½À•W‡‚É•À‚×‚éi“¯ˆê“_‚ÍŠÔˆø‚­j
 	////
 	//static inline void	MgSortLnGPt3(
-	//				const	MgLine3		&Ln1,		// (I  ) “_—ñ‚Ì•À‚×•ûŒü‚ğ¦‚·ü•ª
-	//						MgGPoint3	*GPt2		// (I O) •À‚×‚é“_—ñ
+	//				const	MgLine3D&	i_Ln1,		// (I  ) “_—ñ‚Ì•À‚×•ûŒü‚ğ¦‚·ü•ª
+	//						MgGPoint3D*	io_pGPt2	// (I O) •À‚×‚é“_—ñ
 	//				)
 	//	{
-	//		MgVect3		V1;
-	//		V1 = Ln1.p[1] - Ln1.p[0];
-	//		MgSortVGPt3( V1, GPt2);
+	//		MgVect3D		V1;
+	//		V1 = i_Ln1.p[1] - i_Ln1.p[0];
+	//		MgSortVGPt3( V1, io_pGPt2);
 	//	}
 
 	//===========================================================================
 	//	ü•ªŒQ‚ğ³‹K‰»‚·‚éBiü•ª‚Ì‹t•ûŒü‚Ìd‚È‚è‚ğœ‹‚·‚éj
 	//
 	static inline void Norm(						//
-					const	MgGLine2&	GLn1,		// (I  ) ü•ª
-					const	MgGLine2*	GLn2		// (  O) d‚È‚è‚ğœ‹Œã‚Ìü•ª
+					const	MgGLine2D&	i_GLn1,		// (I  ) ü•ª
+							MgGLine2D*	o_pGLn2		// (  O) d‚È‚è‚ğœ‹Œã‚Ìü•ª
 					)
 	{
-		MgLine2		work[MX_LIN1+1];				// ü•ª‚Ì”—p‚ÌƒGƒŠƒA‚ğ’Ç‰Á‚µ‚½ì‹ÆƒGƒŠƒA‚ğŠm•Û‚·‚é
-		MgGLine2	*GLn = (MgGLine2*)work;
-		DivideGLn2( GLn1, GLn);						// ü•ª‚ğŒğ“_‚Å•ªŠ„‚·‚é
+		MgLine2D	work[MX_LIN1+1];				// ü•ª‚Ì”—p‚ÌƒGƒŠƒA‚ğ’Ç‰Á‚µ‚½ì‹ÆƒGƒŠƒA‚ğŠm•Û‚·‚é
+		MgGLine2D	*GLn = (MgGLine2D*)work;
+		DivideGLn2( i_GLn1, o_pGLn2);				// ü•ª‚ğŒğ“_‚Å•ªŠ„‚·‚é
 	//	ThinOut( *GLn, GLn2);						// ‰•œü•ª‚ÆŠJ•ú’[‚ğ‚Âü•ª‚ğŠÔˆø‚­
 	}
 	
@@ -4847,8 +4851,8 @@ public:
 	//		’¼ü‚Æ“_‚ÌˆÊ’uŠÖŒW‚ğ•\‚·‚r’l
 	//
 	static inline MREAL SVal2ULn3(					// (  O) ‚r’l(‚Q’¼ü‚Ì•ûŒüƒxƒNƒgƒ‹‚©‚ç‚È‚é•½s‚U–Ê‘Ì‚Ì‘ÌÏj
-				    const	MgULine3&	ULn1,		// (I  ) ’¼ü1
-					const	MgULine3&	ULn2		// (I  ) ’¼ü2
+				    const	MgULine3D&	i_ULn1,		// (I  ) ’¼ü1
+					const	MgULine3D&	i_ULn2		// (I  ) ’¼ü2
 					)
 	{
 	//		( (ULn1.p.x*ULn1.v.y-ULn1.p.y*ULn1.v.x) * (ULn2.p.z*ULn2.v.w-ULn2.p.w*ULn2.v.z)
@@ -4858,20 +4862,20 @@ public:
 	//		- (ULn1.p.y*ULn1.v.w-ULn1.p.w*ULn1.v.y) * (ULn2.p.x*ULn2.v.z-ULn2.p.z*ULn2.v.x)
 	//		+ (ULn1.p.z*ULn1.v.w-ULn1.p.w*ULn1.v.z) * (ULn2.p.x*ULn2.v.y-ULn2.p.y*ULn2.v.x))
 	//
-		return	( ( ULn1.p.x*ULn1.v.y-ULn1.p.y*ULn1.v.x) * ( -ULn2.v.z)
-				- ( ULn1.p.x*ULn1.v.z-ULn1.p.z*ULn1.v.x) * ( -ULn2.v.y)
-				+ ( -ULn1.v.x) * ( ULn2.p.y*ULn2.v.z-ULn2.p.z*ULn2.v.y)
-				+ ( ULn1.p.y*ULn1.v.z-ULn1.p.z*ULn1.v.y) * ( -ULn2.v.x)
-				- ( -ULn1.v.y) * ( ULn2.p.x*ULn2.v.z-ULn2.p.z*ULn2.v.x)
-				+ ( -ULn1.v.z) * ( ULn2.p.x*ULn2.v.y-ULn2.p.y*ULn2.v.x));
+		return	( ( i_ULn1.p.x * i_ULn1.v.y - i_ULn1.p.y * i_ULn1.v.x) * ( -i_ULn2.v.z)
+				- ( i_ULn1.p.x * i_ULn1.v.z - i_ULn1.p.z * i_ULn1.v.x) * ( -i_ULn2.v.y)
+				+ ( -i_ULn1.v.x) * ( i_ULn2.p.y * i_ULn2.v.z - i_ULn2.p.z * i_ULn2.v.y)
+				+ ( i_ULn1.p.y * i_ULn1.v.z - i_ULn1.p.z * i_ULn1.v.y) * ( -i_ULn2.v.x)
+				- ( -i_ULn1.v.y) * ( i_ULn2.p.x * i_ULn2.v.z - i_ULn2.p.z * i_ULn2.v.x)
+				+ ( -i_ULn1.v.z) * ( i_ULn2.p.x * i_ULn2.v.y - i_ULn2.p.y * i_ULn2.v.x));
 	}
 
 	// ---------------------( ‚RŸŒ³ )------------------------------
 	//		’¼ü‚Æ“_‚ÌˆÊ’uŠÖŒW‚ğ•\‚·‚r’l
 	//
-	static inline MREAL SValULnLn3(				// (  O) ‚r’l(’¼ü‚Ì•ûŒüƒxƒNƒgƒ‹‚Æü•ª‚©‚ç‚È‚é•½s‚U–Ê‘Ì‚Ì‘ÌÏj
-				    const	MgULine3&	ULn1,		// (I  ) ’¼ü1
-					const	MgLine3&	Ln2			// (I  ) ü•ª2
+	static inline MREAL SValULnLn3(					// (  O) ‚r’l(’¼ü‚Ì•ûŒüƒxƒNƒgƒ‹‚Æü•ª‚©‚ç‚È‚é•½s‚U–Ê‘Ì‚Ì‘ÌÏj
+				    const	MgULine3D&	i_ULn1,		// (I  ) ’¼ü1
+					const	MgLine3D&	i_Ln2		// (I  ) ü•ª2
 					)
 	{
 	//		( (ULn1.p.x*ULn1.v.y-ULn1.p.y*ULn1.v.x) * (Ln2.p[0].z*Ln2.p[1].w-Ln2.p[0].w*Ln2.p[1].z)
@@ -4882,20 +4886,20 @@ public:
 	//		+ (ULn1.p.z*ULn1.v.w-ULn1.p.w*ULn1.v.z) * (Ln2.p[0].x*Ln2.p[1].y-Ln2.p[0].y*Ln2.p[1].x))
 	//
 		return
-		(	  (ULn1.p.x*ULn1.v.y-ULn1.p.y*ULn1.v.x) * (Ln2.p[0].z-Ln2.p[1].z)
-			- (ULn1.p.x*ULn1.v.z-ULn1.p.z*ULn1.v.x) * (Ln2.p[0].y-Ln2.p[1].y)
-			+ (-ULn1.v.x) * (Ln2.p[0].y*Ln2.p[1].z-Ln2.p[0].z*Ln2.p[1].y)
-			+ (ULn1.p.y*ULn1.v.z-ULn1.p.z*ULn1.v.y) * (Ln2.p[0].x-Ln2.p[1].x)
-			- (-ULn1.v.y) * (Ln2.p[0].x*Ln2.p[1].z-Ln2.p[0].z*Ln2.p[1].x)
-			+ (-ULn1.v.z) * (Ln2.p[0].x*Ln2.p[1].y-Ln2.p[0].y*Ln2.p[1].x));
+		(	  ( i_ULn1.p.x * i_ULn1.v.y - i_ULn1.p.y * i_ULn1.v.x) * ( i_Ln2.p[0].z - i_Ln2.p[1].z)
+			- ( i_ULn1.p.x * i_ULn1.v.z - i_ULn1.p.z * i_ULn1.v.x) * ( i_Ln2.p[0].y - i_Ln2.p[1].y)
+			+ ( -i_ULn1.v.x) * ( i_Ln2.p[0].y * i_Ln2.p[1].z - i_Ln2.p[0].z * i_Ln2.p[1].y)
+			+ ( i_ULn1.p.y * i_ULn1.v.z - i_ULn1.p.z * i_ULn1.v.y) * ( i_Ln2.p[0].x - i_Ln2.p[1].x)
+			- ( -i_ULn1.v.y) * ( i_Ln2.p[0].x * i_Ln2.p[1].z - i_Ln2.p[0].z * i_Ln2.p[1].x)
+			+ ( -i_ULn1.v.z) * ( i_Ln2.p[0].x * i_Ln2.p[1].y - i_Ln2.p[0].y * i_Ln2.p[1].x));
 	}
 
 	// ---------------------( ‚RŸŒ³ )------------------------------
 	//		’¼ü‚Æ“_‚ÌˆÊ’uŠÖŒW‚ğ•\‚·‚r’l
 	//
 	static inline MREAL SVal2Ln3(					// (  O) ‚r’l(2ü•ª‚©‚ç‚È‚é•½s‚U–Ê‘Ì‚Ì‘ÌÏj
-				    const	MgLine3&	Ln1,		// (I  ) ü•ª1
-					const	MgLine3&	Ln2			// (I  ) ü•ª2
+				    const	MgLine3D&	i_Ln1,		// (I  ) ü•ª1
+					const	MgLine3D&	i_Ln2		// (I  ) ü•ª2
 					)
 	{
 	//		( (Ln1.p[0].x*Ln1.v.y-Ln1.p[0].y*Ln1.v.x) * (Ln2.p[0].z*Ln2.p[1].w-Ln2.p[0].w*Ln2.p[1].z)
@@ -4906,62 +4910,62 @@ public:
 	//		+ (Ln1.p[0].z*Ln1.v.w-Ln1.p[0].w*Ln1.v.z) * (Ln2.p[0].x*Ln2.p[1].y-Ln2.p[0].y*Ln2.p[1].x))
 	//
 		return
-		(	  (Ln1.p[0].x*Ln1.p[1].y-Ln1.p[0].y*Ln1.p[1].x) * (Ln2.p[0].z-Ln2.p[1].z)
-			- (Ln1.p[0].x*Ln1.p[1].z-Ln1.p[0].z*Ln1.p[1].x) * (Ln2.p[0].y-Ln2.p[1].y)
-			+ (Ln1.p[0].x-Ln1.p[1].x) * (Ln2.p[0].y*Ln2.p[1].z-Ln2.p[0].z*Ln2.p[1].y)
-			+ (Ln1.p[0].y*Ln1.p[1].z-Ln1.p[0].z*Ln1.p[1].y) * (Ln2.p[0].x-Ln2.p[1].x)
-			- (Ln1.p[0].y-Ln1.p[1].y) * (Ln2.p[0].x*Ln2.p[1].z-Ln2.p[0].z*Ln2.p[1].x)
-			+ (Ln1.p[0].z-Ln1.p[1].z) * (Ln2.p[0].x*Ln2.p[1].y-Ln2.p[0].y*Ln2.p[1].x));
+		(	  ( i_Ln1.p[0].x * i_Ln1.p[1].y - i_Ln1.p[0].y * i_Ln1.p[1].x) * ( i_Ln2.p[0].z - i_Ln2.p[1].z)
+			- ( i_Ln1.p[0].x * i_Ln1.p[1].z - i_Ln1.p[0].z * i_Ln1.p[1].x) * ( i_Ln2.p[0].y - i_Ln2.p[1].y)
+			+ ( i_Ln1.p[0].x - i_Ln1.p[1].x) * ( i_Ln2.p[0].y * i_Ln2.p[1].z - i_Ln2.p[0].z * i_Ln2.p[1].y)
+			+ ( i_Ln1.p[0].y * i_Ln1.p[1].z - i_Ln1.p[0].z * i_Ln1.p[1].y) * ( i_Ln2.p[0].x - i_Ln2.p[1].x)
+			- ( i_Ln1.p[0].y - i_Ln1.p[1].y) * ( i_Ln2.p[0].x * i_Ln2.p[1].z - i_Ln2.p[0].z * i_Ln2.p[1].x)
+			+ ( i_Ln1.p[0].z - i_Ln1.p[1].z) * ( i_Ln2.p[0].x * i_Ln2.p[1].y - i_Ln2.p[0].y * i_Ln2.p[1].x));
 	}
 
 	// ---------------------( ‚RŸŒ³ )------------------------------
 	//		’¼ü‚Æ“_‚ÌˆÊ’uŠÖŒW‚ğ•\‚·‚r’l
 	//
 	static inline void SValLnULnS3(					//
-					const	MgLine3&	Ln1,		// (I  ) ü•ª1
-				    const	MgULine3&	ULn2,		// (I  ) ’¼ü2
-					const	MgVect3&	vso,		// (I  ) ü•ª1‚Æ’¼ü2‚ª‚ ‚é•½–Ê‚Ì–@üƒxƒNƒgƒ‹
-							MREAL*		ss,			// (  O) ü•ª‚P‚Ìn“_‘¤‚r’l
+					const	MgLine3D&	i_Ln1,		// (I  ) ü•ª1
+				    const	MgULine3D&	i_ULn2,		// (I  ) ’¼ü2
+					const	MgVect3D&	i_vso,		// (I  ) ü•ª1‚Æ’¼ü2‚ª‚ ‚é•½–Ê‚Ì–@üƒxƒNƒgƒ‹
+							MREAL*		o_pss,		// (  O) ü•ª‚P‚Ìn“_‘¤‚r’l
 													//		(’¼ü2‚Ì•ûŒüƒxƒNƒgƒ‹‚Æ•½–Ê‚Ì–@üƒxƒNƒgƒ‹‚Æ
 													//		 ü•ª1‚Ìn“_‚Åo—ˆ‚é•½s‚U–Ê‘Ì‚Ì‘ÌÏ)
-							MREAL*		se			// (  O) ü•ª‚P‚ÌI“_‘¤‚r’l
+							MREAL*		o_pse		// (  O) ü•ª‚P‚ÌI“_‘¤‚r’l
 													//		(’¼ü2‚Ì•ûŒüƒxƒNƒgƒ‹‚Æ•½–Ê‚Ì–@üƒxƒNƒgƒ‹‚Æ
 													//		 ü•ª1‚ÌI“_‚Åo—ˆ‚é•½s‚U–Ê‘Ì‚Ì‘ÌÏ)
 					)
 	{
-		MgVect3		N;								//	’¼ü‚Q‚Æ‚’¼ƒxƒNƒgƒ‹‚©‚ç‚È‚é•½–Ê‚ÌŒW”
+		MgVect3D	N;								//	’¼ü‚Q‚Æ‚’¼ƒxƒNƒgƒ‹‚©‚ç‚È‚é•½–Ê‚ÌŒW”
 		MREAL		d;								//	Šî€“_‚©‚ç’¼ü1‚Ìn“_‚Ü‚Å‚Ì“¯•½–Ê‚É‚’¼‹——£
 	//
-		N = ULn2.v ^ vso;
-		d =  ULn2.p * N;
-		*ss = (Ln1.p[0] * N) - d;
-		*se = (Ln1.p[1] * N) - d;
+		N = i_ULn2.v ^ i_vso;
+		d =  i_ULn2.p * N;
+		*o_pss = ( i_Ln1.p[0] * N) - d;
+		*o_pse = ( i_Ln1.p[1] * N) - d;
 	}
 
 	// ---------------------( ‚RŸŒ³ )------------------------------
 	//		’¼ü‚Æ“_‚ÌˆÊ’uŠÖŒW‚ğ•\‚·‚r’l
 	//
 	static inline void SVal2LnS3(					// (  O) ƒXƒeƒCƒ^ƒX
-				    const	MgLine3&	Ln1,		// (I  ) ü•ª1
-					const	MgLine3&	Ln2,		// (I  ) ü•ª2
-					const	MgVect3&	vso,		// (I  ) ü•ª1‚Æü•ª2‚ª‚ ‚é•½–Ê‚Ì–@üƒxƒNƒgƒ‹
-							MREAL*		ss,			// (I  ) ü•ª‚P‚Ìn“_‘¤‚r’l
+				    const	MgLine3D&	i_Ln1,		// (I  ) ü•ª1
+					const	MgLine3D&	i_Ln2,		// (I  ) ü•ª2
+					const	MgVect3D&	i_vso,		// (I  ) ü•ª1‚Æü•ª2‚ª‚ ‚é•½–Ê‚Ì–@üƒxƒNƒgƒ‹
+							MREAL*		o_pss,		// (  O) ü•ª‚P‚Ìn“_‘¤‚r’l
 													//		(ü•ª2‚Æ•½–Ê‚Ì–@üƒxƒNƒgƒ‹‚Æü•ª1‚Ìn“_‚Å
 													//		 o—ˆ‚é•½s‚U–Ê‘Ì‚Ì‘ÌÏ)
-							MREAL*		se			// (I  ) ü•ª‚P‚ÌI“_‘¤‚r’l
+							MREAL*		o_pse		// (  O) ü•ª‚P‚ÌI“_‘¤‚r’l
 													//		(’¼ü2‚Æ•½–Ê‚Ì–@üƒxƒNƒgƒ‹‚Æü•ª1‚ÌI“_‚Å
 													//		 o—ˆ‚é•½s‚U–Ê‘Ì‚Ì‘ÌÏ)
 			)
 	{
-		MgVect3		N;								//	’¼ü‚Q‚Æ‚’¼ƒxƒNƒgƒ‹‚©‚ç‚È‚é•½–Ê‚ÌŒW”
+		MgVect3D	N;								//	’¼ü‚Q‚Æ‚’¼ƒxƒNƒgƒ‹‚©‚ç‚È‚é•½–Ê‚ÌŒW”
 		MREAL		d;								//	Šî€“_‚©‚ç’¼ü1‚Ìn“_‚Ü‚Å‚Ì“¯•½–Ê‚É‚’¼‹——£
-		MgVect3		vd;								//	ü•ª‚Q‚ÌƒxƒNƒgƒ‹
+		MgVect3D	vd;								//	ü•ª‚Q‚ÌƒxƒNƒgƒ‹
 	//
-		vd = Ln2.p[1] - Ln2.p[0];
-		N = vd ^ vso;
-		d =  Ln2.p[0] * N;
-		*ss = (Ln1.p[0] * N) - d;
-		*se = (Ln1.p[1] * N) - d;
+		vd = i_Ln2.p[1] - i_Ln2.p[0];
+		N = vd ^ i_vso;
+		d =  i_Ln2.p[0] * N;
+		*o_pss = ( i_Ln1.p[0] * N) - d;
+		*o_pse = ( i_Ln1.p[1] * N) - d;
 	}
 
 		
@@ -4970,25 +4974,25 @@ public:
 	//		•½–Ê Œ`ó‰‰Z
 	//
 
-	static MgPlane3 Plane3CPPt( const MgPoint3 *pt);							// ‚R“_‚æ‚è•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”‚ğ‹‚ß‚éi³‹K‰»j
+	static MgPlane3D Plane3CPPt( const MgPoint3D *pt);							// ‚R“_‚æ‚è•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”‚ğ‹‚ß‚éi³‹K‰»j
 
-	static MgPlane3 Plane3C3Pt( const MgPoint3& p0, const MgPoint3& p1,			// ‚R“_‚æ‚è•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”‚ğ‹‚ß‚éi³‹K‰»j
-					   const MgPoint3& p2);
+	static MgPlane3D Plane3C3Pt( const MgPoint3D& p0, const MgPoint3D& p1,		// ‚R“_‚æ‚è•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”‚ğ‹‚ß‚éi³‹K‰»j
+					   const MgPoint3D& p2);
 
-	static MgPlane3 Plane3CPg( const MgPolyg3 &pg);								// ‘½ŠpŒ`‚æ‚è•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”‚ğ‹‚ß‚éi³‹K‰»j
+	static MgPlane3D Plane3CPg( const MgPolyg3D &pg);							// ‘½ŠpŒ`‚æ‚è•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”‚ğ‹‚ß‚éi³‹K‰»j
 
-	static MgPlane3 Plane3C2Pt2F( const MgPoint2& p1, const MgPoint2& p2,		// n“_‚ÆI“_‚Ì‚Q“_‚ÆŒù”z‚æ‚è•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”‚ğ‹‚ß‚éi³‹K‰»j
+	static MgPlane3D Plane3C2Pt2F( const MgPoint2D& p1, const MgPoint2D& p2,	// n“_‚ÆI“_‚Ì‚Q“_‚ÆŒù”z‚æ‚è•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”‚ğ‹‚ß‚éi³‹K‰»j
 						 MREAL rkb, MREAL z);
 
-	static MgPlane3 Plane3CLn2F( const MgLine2& ln1,							// ü•ª‚ÆŒù”z‚æ‚è•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”‚ğ‹‚ß‚éi³‹K‰»j
+	static MgPlane3D Plane3CLn2F( const MgLine2D& ln1,							// ü•ª‚ÆŒù”z‚æ‚è•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”‚ğ‹‚ß‚éi³‹K‰»j
 						MREAL rkb, MREAL z = 0.);
 
 	//===========================================================================
 	//		•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”‚ğ³‹K‰»‚µ‚½•½–Ê‚ğ‹‚ß‚é
 	//		ax+by+cz+d=0	(a*a+b*b+c*c=1.0)
 	//
-	static MgPlane3 NormPln(						// (  O) ³‹K‰»Œã‚Ì‚RŸŒ³•½–Ê
-				const	MgPlane3	&pl,			// (I  ) ‚RŸŒ³•½–Ê
+	static MgPlane3D NormPln(						// (  O) ³‹K‰»Œã‚Ì‚RŸŒ³•½–Ê
+				const	MgPlane3D&	i_pl,			// (I  ) ‚RŸŒ³•½–Ê
 						MREAL i_Tol = g_gTol.D);	// (I  ) ‹–—eŒë·
 
 
@@ -5000,79 +5004,79 @@ public:
 	////
 	////	ax+by+cz+d=0
 	////
-	//static inline MgPlane3 Plane3CPPt(			// (  O) •½–Ê®
-	//				const	MgPoint3*	pt,			// (I  ) ‚R“_À•W
+	//static inline MgPlane3D Plane3CPPt(			// (  O) •½–Ê®
+	//				const	MgPoint3D*	i_pt,		// (I  ) ‚R“_À•W
 	//						MREAL i_Tol = g_gTol.D	// (I  ) ‹–—eŒë·
 	//				)
 	//{
-	//	MgPlane3	Plno;
-	//	MgVect3		v1, v2;
+	//	MgPlane3D	Plno;
+	//	MgVect3D	v1, v2;
 	//
-	//	v1 = pt[1] - pt[0];
-	//	v2 = pt[2] - pt[0];
+	//	v1 = i_pt[1] - i_pt[0];
+	//	v2 = i_pt[2] - i_pt[0];
 	//
 	//	Plno.v = UnitizeV3( v1 ^ v2, i_Tol);
-	//	Plno.d = -(Plno.v * pt[0]);
+	//	Plno.d = -( Plno.v * i_pt[0]);
 	//	return Plno;
 	//}
 
 	////===========================================================================
 	////		‚R“_‚æ‚è•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”‚ğ‹‚ß‚éi³‹K‰»j
 	////
-	//static inline MgPlane3 Plane3C3Pt(			// (  O) •½–Ê®
-	//				const	MgPoint3&	p0,			// (I  ) “_‚P
-	//				const	MgPoint3&	p1,			// (I  ) “_‚Q
-	//				const	MgPoint3&	p2,			// (I  ) “_‚R
+	//static inline MgPlane3D Plane3C3Pt(			// (  O) •½–Ê®
+	//				const	MgPoint3D&	i_p0,		// (I  ) “_‚P
+	//				const	MgPoint3D&	i_p1,		// (I  ) “_‚Q
+	//				const	MgPoint3D&	i_p2,		// (I  ) “_‚R
 	//						MREAL i_Tol = g_gTol.D	// (I  ) ‹–—eŒë·
 	//				)
 	//{
-	//	MgPlane3	Plno;
-	//	MgVect3		v1, v2;
+	//	MgPlane3D	Plno;
+	//	MgVect3D	v1, v2;
 	//
-	//	v1 = p1 - p0;
-	//	v2 = p2 - p0;
+	//	v1 = i_p1 - i_p0;
+	//	v2 = i_p2 - i_p0;
 	//
 	//	Plno.v = UnitizeV3( v1 ^ v2, i_Tol);
-	//	Plno.d = -(Plno.v * p0);
+	//	Plno.d = -(Plno.v * i_p0);
 	//	return Plno;
 	//}
 	
 	////===========================================================================
 	////		‘½ŠpŒ`‚æ‚è•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”‚ğ‹‚ß‚éi³‹K‰»j
 	////													pkm	–ÊÏ‚Ìâ‘Î’l‚Ì‡Œv‚Å‹‚ß•ûŒü‚ÍÀ–ÊÏ‚Å‹‚ß‚é•û‚ª—Ç‚¢‚© pkm
-	//static MgPlane3 Plane3CPg(					// (  O) •½–Ê®
-	//				const	MgPolyg3&	pg			// (I  ) ‘½ŠpŒ`
+	//static MgPlane3D Plane3CPg(					// (  O) •½–Ê®
+	//				const	MgPolyg3D&	i_pg		// (I  ) ‘½ŠpŒ`
 	//				);
 	
 	////===========================================================================
 	////		‚QŸŒ³n“_‚Æ‚QŸŒ³I“_‚Ì‚Q“_AŒù”z‚Æ‚yÀ•W‚æ‚è•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”‚ğ‹‚ß‚éi³‹K‰»j
 	////
-	//static MgPlane3 Plane3C2Pt2F(
-	//				const	MgPoint2&	p1,			// (I  ) ‚QŸŒ³n“_
-	//				const	MgPoint2&	p2,			// (I  ) ‚QŸŒ³I“_
-	//						MREAL		rkb,		// (I  ) Œù”z	(n“_‚©‚çI“_‚ÉŒü‚©‚¢¶•ûŒü=0 tan)
-	//						MREAL		z			// (I  ) ‚yÀ•W
+	//static MgPlane3D Plane3C2Pt2F(
+	//				const	MgPoint2D&	i_p1,		// (I  ) ‚QŸŒ³n“_
+	//				const	MgPoint2D&	i_p2,		// (I  ) ‚QŸŒ³I“_
+	//						MREAL		i_rkb,		// (I  ) Œù”z	(n“_‚©‚çI“_‚ÉŒü‚©‚¢¶•ûŒü=0 tan)
+	//						MREAL		i_z			// (I  ) ‚yÀ•W
 	//				);
 	
 	////===========================================================================
 	////		‚QŸŒ³ü•ªAŒù”z‚Æ‚yÀ•W‚æ‚è•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”‚ğ‹‚ß‚éi³‹K‰»j
 	////
-	//static MgPlane3 Plane3CLn2F(
-	//				const	MgLine2&	ln1,		// (I  ) ‚QŸŒ³ü•ª
-	//						MREAL		rkb,		// (I  ) Œù”z	(ü•ª‚Ìn“_‚©‚çI“_‚ÉŒü‚©‚¢¶•ûŒü=0 tan)
-	//						MREAL		z			// (I  ) ‚yÀ•W
+	//static MgPlane3D Plane3CLn2F(
+	//				const	MgLine2D&	i_ln1,		// (I  ) ‚QŸŒ³ü•ª
+	//						MREAL		i_rkb,		// (I  ) Œù”z	(ü•ª‚Ìn“_‚©‚çI“_‚ÉŒü‚©‚¢¶•ûŒü=0 tan)
+	//						MREAL		i_z			// (I  ) ‚yÀ•W
 	//				);
 	
 	////===========================================================================
 	////		•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”‚ğ³‹K‰»‚µ‚½(ŒW”a,b,c‚ğ’PˆÊƒxƒNƒgƒ‹‚É•ÏŠ·‚µ‚½)•½–Ê‚ğ‹‚ß‚é
 	////
-	//static MgPlane3 NormPln(
-	//				const	MgPlane3&	i_pl,
+	//static MgPlane3D NormPln(
+	//				const	MgPlane3D&	i_pl,
 	//						MREAL		i_Tol
 	//				)
 	//{
 	//	MREAL	d1 = Abs( i_pl.v);
-	//		MBCHECK_ZEROVECT( d1, MBCstr( "MgPlane3 Norm"), i_Tol);
+	//		MBCHECK_ZEROVECT( d1, MBCstr( "MgPlane3D Norm"), i_Tol);
 	//	MREAL	d2 = 1.f / d1;
 	//	return Plane3( i_pl.v.x * d2, i_pl.v.y * d2, i_pl.v.z * d2, i_pl.d * d2);
 	//}
@@ -5090,13 +5094,13 @@ public:
 //	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Ì‰ÁZ
 //
 //	g—p–@
-//		MgMat3E = MgMat2E1 + MgMat2E2;
+//		MgMat3DE = MgMat2DE1 + MgMat2DE2;
 //
 //	| m11 m12 m13 |     | n11 n12 n13 |
 //	| m21 m22 m23 |  +  | n21 n22 n23 |
 //	| m31 m32 m33 |     | n31 n32 n33 |
 //
-inline MgMat2E operator + ( const MgMat2E& i_tm, const MgMat2E& i_tn)			// +
+inline MgMat2DE operator + ( const MgMat2DE& i_tm, const MgMat2DE& i_tn)			// +
 {
 	return MGeo::MatPlus2( i_tm, i_tn);
 }
@@ -5106,13 +5110,13 @@ inline MgMat2E operator + ( const MgMat2E& i_tm, const MgMat2E& i_tn)			// +
 //		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Ì‰ÁZ
 //
 //	g—p–@
-//		MgMat2E1 += MgMat2E2;
+//		MgMat2DE1 += MgMat2DE2;
 //
 //	| m11 m12 m13 |     | m11 m12 m13 |     | n11 n12 n13 |
 //	| m21 m22 m23 |  =  | m21 m22 m23 |  +  | n21 n22 n23 |
 //	| m31 m32 m33 |     | m31 m32 m33 |     | n31 n32 n33 |
 //
-inline	MgMat2E operator += ( MgMat2E& io_tm, const MgMat2E& i_tn)				// +=
+inline	MgMat2DE operator += ( MgMat2DE& io_tm, const MgMat2DE& i_tn)				// +=
 {
 	return MGeo::MatPlusEqual2( io_tm, i_tn);
 }
@@ -5122,13 +5126,13 @@ inline	MgMat2E operator += ( MgMat2E& io_tm, const MgMat2E& i_tn)				// +=
 //		•‰‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 //
 //	g—p–@
-//		MgMat2E2 = - MgMat2E1;
+//		MgMat2DE2 = - MgMat2DE1;
 //
 //	  | m11 m12 m13 |
 //	- | m21 m22 m23 |
 //	  | m31 m32 m33 |
 //
-inline	MgMat2E operator - ( const MgMat2E& i_tm)								// -
+inline	MgMat2DE operator - ( const MgMat2DE& i_tm)								// -
 {
 	return MGeo::MatSingleMinus2( i_tm);
 }
@@ -5138,13 +5142,13 @@ inline	MgMat2E operator - ( const MgMat2E& i_tm)								// -
 //		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ÌˆøZ
 //
 //	g—p–@
-//		MgMat3E = MgMat2E1 - MgMat2E2;
+//		MgMat3DE = MgMat2DE1 - MgMat2DE2;
 //
 //	  | m11 m12 m13 |     | n11 n12 n13 |
 //	  | m21 m22 m23 |  -  | n21 n22 n23 |
 //	  | m31 m32 m33 |     | n31 n32 n33 |
 //
-inline	MgMat2E operator - ( const MgMat2E& i_tm, const MgMat2E& i_tn)			// -
+inline	MgMat2DE operator - ( const MgMat2DE& i_tm, const MgMat2DE& i_tn)			// -
 {
 	return MGeo::MatMinus2( i_tm, i_tn);
 }
@@ -5154,13 +5158,13 @@ inline	MgMat2E operator - ( const MgMat2E& i_tm, const MgMat2E& i_tn)			// -
 //	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ÌˆøZ
 //
 //	g—p–@
-//		MgMat2E1 -= MgMat2E2;
+//		MgMat2DE1 -= MgMat2DE2;
 //
 //	| m11 m12 m13 |    | m11 m12 m13 |     | n11 n12 n13 |
 //	| m21 m22 m23 |  = | m21 m22 m23 |  -  | n21 n22 n23 |
 //	| m31 m32 m33 |    | m31 m32 m33 |     | n31 n32 n33 |
 //
-inline	MgMat2E operator -= ( MgMat2E& io_tm, const MgMat2E& i_tn)				// -=
+inline	MgMat2DE operator -= ( MgMat2DE& io_tm, const MgMat2DE& i_tn)				// -=
 {
 	return MGeo::MatMinusEqual2( io_tm, i_tn);
 }
@@ -5171,13 +5175,13 @@ inline	MgMat2E operator -= ( MgMat2E& io_tm, const MgMat2E& i_tn)				// -=
 //	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚é•ÏŠ·Œã‚ÉA‚³‚ç‚ÉÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚é•ÏŠ·‚·‚éƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 //
 //	g—p–@
-//		MgMat3E = MgMat2E1 * MgMat2E2;
+//		MgMat3DE = MgMat2DE1 * MgMat2DE2;
 //
 //	| m11 m12 m13 |     | n11 n12 n13 |
 //	| m21 m22 m23 |  X  | n21 n22 n23 |
 //	| m31 m32 m33 |     | n31 n32 n33 |
 //
-inline	MgMat2E operator * ( const MgMat2E& i_tm, const MgMat2E& i_tn)			// *
+inline	MgMat2DE operator * ( const MgMat2DE& i_tm, const MgMat2DE& i_tn)			// *
 {
 	return MGeo::MatMult2( i_tm, i_tn);
 }
@@ -5188,13 +5192,13 @@ inline	MgMat2E operator * ( const MgMat2E& i_tm, const MgMat2E& i_tn)			// *
 //	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚é•ÏŠ·Œã‚ÉA‚³‚ç‚ÉÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚é•ÏŠ·‚·‚éƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 //
 //	g—p–@
-//		MgMat2E2 *= MgMat2E1;
+//		MgMat2DE2 *= MgMat2DE1;
 //
 //	| m11 m12 m13 |     | m11 m12 m13 |     | n11 n12 n13 |
 //	| m21 m22 m23 |  =  | m21 m22 m23 |  X  | n21 n22 n23 |
 //	| m31 m32 m33 |     | m31 m32 m33 |     | n31 n32 n33 |
 //
-inline	MgMat2E operator *= ( MgMat2E& io_tm, const MgMat2E& i_tn)				// *=
+inline	MgMat2DE operator *= ( MgMat2DE& io_tm, const MgMat2DE& i_tn)				// *=
 {
 	return MGeo::MatMultEqual2( io_tm, i_tn);
 }
@@ -5204,13 +5208,13 @@ inline	MgMat2E operator *= ( MgMat2E& io_tm, const MgMat2E& i_tn)				// *=
 //	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgVect2 = MgVect2 * MgMat2E;
+//		MgVect2D = MgVect2D * MgMat2DE;
 //
 //					   | m11 m12 m13 |
 //	| px  py  1  |  X  | m21 m22 m23 |
 //					   | m31 m32 m33 |     
 //
-inline	MgVect2 operator * ( const MgVect2& i_pt, const MgMat2E& i_tm)		// *	À•W•ÏŠ·
+inline	MgVect2D operator * ( const MgVect2D& i_pt, const MgMat2DE& i_tm)		// *	À•W•ÏŠ·
 {
 	return MGeo::MatMultPt22( i_pt, i_tm);
 }
@@ -5220,13 +5224,13 @@ inline	MgVect2 operator * ( const MgVect2& i_pt, const MgMat2E& i_tm)		// *	À•W
 //		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgVect2 *= MgMat2E;
+//		MgVect2D *= MgMat2DE;
 //
 //										  | m11 m12 m13 |
 //	| px  py  1  |  =  | px  py  1  |  X  | m21 m22 m23 |
 //				   						  | m31 m32 m33 |
 //
-inline	MgVect2 operator *= ( MgVect2& io_pt, const MgMat2E& i_tm)			// *=	À•W•ÏŠ·
+inline	MgVect2D operator *= ( MgVect2D& io_pt, const MgMat2DE& i_tm)			// *=	À•W•ÏŠ·
 {
 	return MGeo::MatMultEqualPt22( io_pt, i_tm);
 }
@@ -5236,13 +5240,13 @@ inline	MgVect2 operator *= ( MgVect2& io_pt, const MgMat2E& i_tm)			// *=	À•W•Ï
 //		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgULine2 = MgULine2*  MgMat2E;
+//		MgULine2D = MgULine2D*  MgMat2DE;
 //
 //	| px  py  1  |     | m11 m12 m13 |
 //	| vx  vy  0  |  X  | m21 m22 m23 |
 //					   | m31 m32 m33 |
 //
-inline	MgULine2 operator * ( const MgULine2& i_uln, const MgMat2E& i_tm)	// *	À•W•ÏŠ·
+inline	MgULine2D operator * ( const MgULine2D& i_uln, const MgMat2DE& i_tm)	// *	À•W•ÏŠ·
 {
 	return MGeo::MatMultULn22( i_uln, i_tm);
 }
@@ -5252,13 +5256,13 @@ inline	MgULine2 operator * ( const MgULine2& i_uln, const MgMat2E& i_tm)	// *	À
 //		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgULine2* = MgMat2E;
+//		MgULine2D* = MgMat2DE;
 //
 //	| px  py  1  |     | px  py  1  |     | m11 m12 m13 |
 //	| vx  vy  0  |  =  | vx  vy  1  |  X  | m21 m22 m23 |
 //			             				  | m31 m32 m33 |
 //
-inline	MgULine2 operator *= ( MgULine2& io_uln, const MgMat2E& i_tm)		// *=	À•W•ÏŠ·
+inline	MgULine2D operator *= ( MgULine2D& io_uln, const MgMat2DE& i_tm)		// *=	À•W•ÏŠ·
 {
 	return MGeo::MatMultEqualULn22( io_uln, i_tm);
 }
@@ -5270,14 +5274,14 @@ inline	MgULine2 operator *= ( MgULine2& io_uln, const MgMat2E& i_tm)		// *=	À•W
 //	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgVect32 = MgVect31 * MgMat2E1;
+//		MgVect3D2 = MgVect3D1 * MgMat2DE1;
 //
 //						  | m11 m12 0 m13 |     
 //	| px  py  pz  1 |  X  | m21 m22 0 m23 |
 //						  |  0   0  1  0  |
 //						  | m31 m32 0 m33 |
 //
-inline	MgVect3 operator * ( const MgVect3& i_Pt, const MgMat2E& i_tm)		// *	À•W•ÏŠ·
+inline	MgVect3D operator * ( const MgVect3D& i_Pt, const MgMat2DE& i_tm)		// *	À•W•ÏŠ·
 {
 	return MGeo::MatMultPt32( i_Pt, i_tm);
 }
@@ -5287,14 +5291,14 @@ inline	MgVect3 operator * ( const MgVect3& i_Pt, const MgMat2E& i_tm)		// *	À•W
 //		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgVect3 *= MgMat2E;
+//		MgVect3D *= MgMat2DE;
 //
 //						 						| m11 m12 0 m13 |
 //	| px  py  pz  1 |  =  | px  py  pz  1 |  X  | m21 m22 0 m23 |
 //			   									|  0   0  1  0  |
 //			   									| m31 m32 0 m33 |
 //
-inline	MgVect3 operator *= ( MgVect3& io_Pt, const MgMat2E& i_tm)			// *=	À•W•ÏŠ·
+inline	MgVect3D operator *= ( MgVect3D& io_Pt, const MgMat2DE& i_tm)			// *=	À•W•ÏŠ·
 
 {
 	return MGeo::MatMultEqualPt32( io_Pt, i_tm);
@@ -5305,14 +5309,14 @@ inline	MgVect3 operator *= ( MgVect3& io_Pt, const MgMat2E& i_tm)			// *=	À•W•Ï
 //		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgULine2 = MgULine2*  MgMat2E;
+//		MgULine2D = MgULine2D*  MgMat2DE;
 //
 //	| px  py  pz  1 |	  | m11 m12 0 m13 |
 //	| vx  vy  vz  1 |  X  | m21 m22 0 m23 |
 //						  |  0   0  1  0  |
 //			   			  | m31 m32 0 m33 |
 //
-inline MgULine3 operator * ( const MgULine3& i_ULn, const MgMat2E& i_tm)		// *	À•W•ÏŠ·
+inline MgULine3D operator * ( const MgULine3D& i_ULn, const MgMat2DE& i_tm)		// *	À•W•ÏŠ·
 {
 	return MGeo::MultULn32( i_ULn, i_tm);
 }
@@ -5322,14 +5326,14 @@ inline MgULine3 operator * ( const MgULine3& i_ULn, const MgMat2E& i_tm)		// *	
 //		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgULine2* = MgMat2E;
+//		MgULine2D* = MgMat2DE;
 //
 //	| px  py  pz  1 |     | px  py  pz  1 |		| m11 m12 0 m13 |
 //	| vx  vy  vz  1 |  =  | vx  vy  vz  1 |  X  | m21 m22 0 m23 |
 //												|  0   0  1  0  |
 //				 				   				| m31 m32 0 m33 |
 //
-inline MgULine3 operator *= ( MgULine3& io_ULn, const MgMat2E& i_tm)			// *=	À•W•ÏŠ·
+inline MgULine3D operator *= ( MgULine3D& io_ULn, const MgMat2DE& i_tm)			// *=	À•W•ÏŠ·
 {
 	return MGeo::MatMultEqualULn32( io_ULn, i_tm);
 }
@@ -5343,14 +5347,14 @@ inline MgULine3 operator *= ( MgULine3& io_ULn, const MgMat2E& i_tm)			// *=	À•
 //		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Ì‰ÁZ
 //
 //	g—p–@
-//		MgMat3E_3 = MgMat3E_1 + MgMat3E_2;
+//		MgMat3DE_3 = MgMat3DE_1 + MgMat3DE_2;
 //
 //	| m11 m12 m13 m14 |     | n11 n12 n13 n14 |
 //	| m21 m22 m23 m24 |  +  | n21 n22 n23 n24 |
 //	| m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 //	| m41 m42 m43 m44 |     | n41 n42 n43 n44 |    
 //
-inline	MgMat3E operator + ( const MgMat3E& i_Tm, const MgMat3E& i_Tn)			// +
+inline	MgMat3DE operator + ( const MgMat3DE& i_Tm, const MgMat3DE& i_Tn)			// +
 {
 	return MGeo::MatPlus3( i_Tm, i_Tn);
 }
@@ -5360,14 +5364,14 @@ inline	MgMat3E operator + ( const MgMat3E& i_Tm, const MgMat3E& i_Tn)			// +
 //		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Ì‰ÁZ
 //
 //	g—p–@
-//		MgMat3E += MgMat3E;
+//		MgMat3DE += MgMat3DE;
 //
 //	| m11 m12 m13 m14 |		| m11 m12 m13 m14 |     | n11 n12 n13 n14 |
 //	| m21 m22 m23 m24 |  =  | m21 m22 m23 m24 |  +  | n21 n22 n23 n24 |
 //	| m31 m32 m33 m34 |     | m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 //	| m41 m42 m43 m44 |     | m41 m42 m43 m44 |     | n41 n42 n43 n44 |     
 //
-inline	MgMat3E operator += ( MgMat3E& io_Tm, const MgMat3E& i_Tn)				// +=
+inline	MgMat3DE operator += ( MgMat3DE& io_Tm, const MgMat3DE& i_Tn)				// +=
 {
 	return MGeo::MatPlusEqual3( io_Tm, i_Tn);
 }	
@@ -5377,14 +5381,14 @@ inline	MgMat3E operator += ( MgMat3E& io_Tm, const MgMat3E& i_Tn)				// +=
 //		•‰‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 //
 //	g—p–@
-//		MgMat3E_2 = - MgMat3E_1;
+//		MgMat3DE_2 = - MgMat3DE_1;
 //
 //	  | m11 m12 m13 m14 |
 //	- | m21 m22 m23 m24 |
 //	  | m31 m32 m33 m34 |
 //	  | m41 m42 m43 m44 |     
 //
-inline	MgMat3E operator - ( const MgMat3E& i_Tm)								// -
+inline	MgMat3DE operator - ( const MgMat3DE& i_Tm)								// -
 {
 	return MGeo::MatSingleMinus3( i_Tm);
 }
@@ -5394,14 +5398,14 @@ inline	MgMat3E operator - ( const MgMat3E& i_Tm)								// -
 //		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ÌˆøZ
 //
 //	g—p–@
-//		MgMat3E_3 = MgMat3E_1 - MgMat3E_2;
+//		MgMat3DE_3 = MgMat3DE_1 - MgMat3DE_2;
 //
 //	  | m11 m12 m13 m14 |     | n11 n12 n13 n14 |
 //	  | m21 m22 m23 m24 |  -  | n21 n22 n23 n24 |
 //	  | m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 //	  | m41 m42 m43 m44 |     | n41 n42 n43 n44 |    
 //
-inline	MgMat3E operator - ( const MgMat3E& i_Tm, const MgMat3E& i_Tn)			// -
+inline	MgMat3DE operator - ( const MgMat3DE& i_Tm, const MgMat3DE& i_Tn)			// -
 {
 	return MGeo::MatMinus3( i_Tm, i_Tn);
 }
@@ -5411,14 +5415,14 @@ inline	MgMat3E operator - ( const MgMat3E& i_Tm, const MgMat3E& i_Tn)			// -
 //		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ÌˆøZ
 //
 //	g—p–@
-//		MgMat3E -= MgMat3E;
+//		MgMat3DE -= MgMat3DE;
 //
 //	| m11 m12 m13 m14 |		| m11 m12 m13 m14 |     | n11 n12 n13 n14 |
 //	| m21 m22 m23 m24 |  =  | m21 m22 m23 m24 |  -  | n21 n22 n23 n24 |
 //	| m31 m32 m33 m34 |     | m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 //	| m41 m42 m43 m44 |     | m41 m42 m43 m44 |     | n41 n42 n43 n44 |     
 //
-inline MgMat3E operator -= ( MgMat3E& io_Tm, const MgMat3E& i_Tn)				// -=
+inline MgMat3DE operator -= ( MgMat3DE& io_Tm, const MgMat3DE& i_Tn)				// -=
 {
 	return MGeo::MatMinusEqual3( io_Tm, i_Tn);
 }
@@ -5428,14 +5432,14 @@ inline MgMat3E operator -= ( MgMat3E& io_Tm, const MgMat3E& i_Tn)				// -=
 //		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Ì‚©‚¯Z
 //
 //	g—p–@
-//		MgMat3E_3 = MgMat3E_1 * MgMat3E_2;
+//		MgMat3DE_3 = MgMat3DE_1 * MgMat3DE_2;
 //
 //	| m11 m12 m13 m14 |     | n11 n12 n13 n14 |
 //	| m21 m22 m23 m24 |  X  | n21 n22 n23 n24 |
 //	| m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 //	| m41 m42 m43 m44 |     | n41 n42 n43 n44 |    
 //
-inline MgMat3E operator * ( const MgMat3E& i_Tm, const MgMat3E& i_Tn)			// *
+inline MgMat3DE operator * ( const MgMat3DE& i_Tm, const MgMat3DE& i_Tn)			// *
 {
 	return MGeo::MatMult3( i_Tm, i_Tn);
 }
@@ -5445,14 +5449,14 @@ inline MgMat3E operator * ( const MgMat3E& i_Tm, const MgMat3E& i_Tn)			// *
 //		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Ì‚©‚¯Z
 //
 //	g—p–@
-//		MgMat3E *= MgMat3E;
+//		MgMat3DE *= MgMat3DE;
 //
 //	| m11 m12 m13 m14 |     | m11 m12 m13 m14 |     | n11 n12 n13 n14 |
 //	| m21 m22 m23 m24 |  =  | m21 m22 m23 m24 |  X  | n21 n22 n23 n24 |
 //	| m31 m32 m33 m34 |     | m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 //	| m41 m42 m43 m44 |     | m41 m42 m43 m44 |     | n41 n42 n43 n44 |     
 //
-inline MgMat3E operator *= ( MgMat3E& io_Tm, const MgMat3E& i_Tn)
+inline MgMat3DE operator *= ( MgMat3DE& io_Tm, const MgMat3DE& i_Tn)
 {
 	return MGeo::MatMultEqual3( io_Tm, i_Tn);
 }
@@ -5462,14 +5466,14 @@ inline MgMat3E operator *= ( MgMat3E& io_Tm, const MgMat3E& i_Tn)
 //		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚QŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgMat3E_2 = MgVect2 * MgMat3E_1;
+//		MgMat3DE_2 = MgVect2D * MgMat3DE_1;
 //
 //						    | m11 m12 m13 m14 |
 //	| px  py  0   1   |  X  | m21 m22 m23 m24 |
 //						    | m31 m32 m33 m34 |
 //						    | m41 m42 m43 m44 |
 //
-inline MgVect2 operator * ( const MgVect2& i_Pt, const MgMat3E& i_Tm)		// À•W•ÏŠ·
+inline MgVect2D operator * ( const MgVect2D& i_Pt, const MgMat3DE& i_Tm)		// À•W•ÏŠ·
 {
 	return MGeo::MatMultPt23( i_Pt, i_Tm);
 }
@@ -5479,14 +5483,14 @@ inline MgVect2 operator * ( const MgVect2& i_Pt, const MgMat3E& i_Tm)		// À•W•Ï
 //		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚QŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgVect2 *= MgMat3E;
+//		MgVect2D *= MgMat3DE;
 //
 //						     					    | m11 m12 m13 m14 |
 //	| px  py  0   1   |  =  | px  py  0   1   |  X  | m21 m22 m23 m24 |
 //	           									    | m31 m32 m33 m34 |
 //	           									    | m41 m42 m43 m44 |
 //
-inline MgVect2 operator *= ( MgVect2& io_Pt, const MgMat3E& i_Tm)			// À•W•ÏŠ·
+inline MgVect2D operator *= ( MgVect2D& io_Pt, const MgMat3DE& i_Tm)			// À•W•ÏŠ·
 {
 	return MGeo::MatMultEqualPt23( io_Pt, i_Tm);
 }
@@ -5496,14 +5500,14 @@ inline MgVect2 operator *= ( MgVect2& io_Pt, const MgMat3E& i_Tm)			// À•W•ÏŠ·
 //		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgVect3_2 = MgVect3_1 * MgMat3E;
+//		MgVect3D_2 = MgVect3D_1 * MgMat3DE;
 //
 //	 					    | m11 m12 m13 m14 |
 //	| px  py  pz  1   |  X  | m21 m22 m23 m24 |
 //						    | m31 m32 m33 m34 |
 //						    | m41 m42 m43 m44 |
 //
-inline MgVect3 operator * ( const MgVect3& i_Pt, const MgMat3E& i_Tm)		// À•W•ÏŠ·
+inline MgVect3D operator * ( const MgVect3D& i_Pt, const MgMat3DE& i_Tm)		// À•W•ÏŠ·
 {
 	return MGeo::MatMultPt33( i_Pt, i_Tm);
 }
@@ -5513,14 +5517,14 @@ inline MgVect3 operator * ( const MgVect3& i_Pt, const MgMat3E& i_Tm)		// À•W•Ï
 //		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgVect3 *= MgMat3E;
+//		MgVect3D *= MgMat3DE;
 //
 //							 					    | m11 m12 m13 m14 |
 //	| px  py  pz  1   |  =  | px  py  pz  1   |  X  | m21 m22 m23 m24 |
 //												    | m31 m32 m33 m34 |
 //												    | m41 m42 m43 m44 |
 //
-inline MgVect3 operator *= ( MgVect3& io_Pt, const MgMat3E& i_Tm)			// À•W•ÏŠ·
+inline MgVect3D operator *= ( MgVect3D& io_Pt, const MgMat3DE& i_Tm)			// À•W•ÏŠ·
 {
 	return MGeo::MatMultEqualPt33( io_Pt, i_Tm);
 }
@@ -5530,14 +5534,14 @@ inline MgVect3 operator *= ( MgVect3& io_Pt, const MgMat3E& i_Tm)			// À•W•ÏŠ·
 //		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgULine3_2 = MgULine3_1 * MgMat3E;
+//		MgULine3D_2 = MgULine3D_1 * MgMat3DE;
 //
 //	| px  py  pz  1   |     | m11 m12 m13 m14 |
 //	| vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
 //							| m31 m32 m33 m34 |
 //							| m41 m42 m43 m44 |
 //
-inline MgULine3 operator * ( const MgULine3& i_ULn, const MgMat3E& i_Tm)		// À•W•ÏŠ·
+inline MgULine3D operator * ( const MgULine3D& i_ULn, const MgMat3DE& i_Tm)		// À•W•ÏŠ·
 {
 	return MGeo::MatMultULn33( i_ULn, i_Tm);
 }
@@ -5547,14 +5551,14 @@ inline MgULine3 operator * ( const MgULine3& i_ULn, const MgMat3E& i_Tm)		// À•
 //		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgVect3 *= MgMat3E;
+//		MgVect3D *= MgMat3DE;
 //
 //	| px  py  pz  1   |     | px  py  pz  1   |     | m11 m12 m13 m14 |
 //	| vx  vy  vz  0   |  =  | vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
 //													| m31 m32 m33 m34 |
 //													| m41 m42 m43 m44 |
 //
-inline MgULine3 operator *= ( MgULine3& io_ULn, const MgMat3E& i_Tm)			// À•W•ÏŠ·
+inline MgULine3D operator *= ( MgULine3D& io_ULn, const MgMat3DE& i_Tm)			// À•W•ÏŠ·
 {
 	return MGeo::MatMultEqualULn33( io_ULn, i_Tm);
 }
@@ -5568,13 +5572,13 @@ inline MgULine3 operator *= ( MgULine3& io_ULn, const MgMat3E& i_Tm)			// À•W•Ï
 //	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Ì‰ÁZ
 //
 //	g—p–@
-//		MgMat4 = MgMat31 + MgMat32;
+//		MgMat4D = MgMat3D1 + MgMat3D2;
 //
 //	| m11 m12 m13 |     | n11 n12 n13 |
 //	| m21 m22 m23 |  +  | n21 n22 n23 |
 //	| m31 m32 m33 |     | n31 n32 n33 |
 //
-inline MgMat3 operator + ( const MgMat3& i_tm, const MgMat3& i_tn)			// +
+inline MgMat3D operator + ( const MgMat3D& i_tm, const MgMat3D& i_tn)			// +
 {
 	return MGeo::MatPlus2( i_tm, i_tn);
 }
@@ -5584,13 +5588,13 @@ inline MgMat3 operator + ( const MgMat3& i_tm, const MgMat3& i_tn)			// +
 //		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Ì‰ÁZ
 //
 //	g—p–@
-//		MgMat31 += MgMat32;
+//		MgMat3D1 += MgMat3D2;
 //
 //	| m11 m12 m13 |     | m11 m12 m13 |     | n11 n12 n13 |
 //	| m21 m22 m23 |  =  | m21 m22 m23 |  +  | n21 n22 n23 |
 //	| m31 m32 m33 |     | m31 m32 m33 |     | n31 n32 n33 |
 //
-inline	MgMat3 operator += ( MgMat3& io_tm, const MgMat3& i_tn)				// +=
+inline	MgMat3D operator += ( MgMat3D& io_tm, const MgMat3D& i_tn)				// +=
 {
 	return MGeo::MatPlusEqual2( io_tm, i_tn);
 }
@@ -5600,13 +5604,13 @@ inline	MgMat3 operator += ( MgMat3& io_tm, const MgMat3& i_tn)				// +=
 //		•‰‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 //
 //	g—p–@
-//		MgMat32 = - MgMat31;
+//		MgMat3D2 = - MgMat3D1;
 //
 //	  | m11 m12 m13 |
 //	- | m21 m22 m23 |
 //	  | m31 m32 m33 |
 //
-inline	MgMat3 operator - ( const MgMat3& i_tm)								// -
+inline	MgMat3D operator - ( const MgMat3D& i_tm)								// -
 {
 	return MGeo::MatSingleMinus2( i_tm);
 }
@@ -5616,13 +5620,13 @@ inline	MgMat3 operator - ( const MgMat3& i_tm)								// -
 //		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ÌˆøZ
 //
 //	g—p–@
-//		MgMat4 = MgMat31 - MgMat32;
+//		MgMat4D = MgMat3D1 - MgMat3D2;
 //
 //	  | m11 m12 m13 |     | n11 n12 n13 |
 //	  | m21 m22 m23 |  -  | n21 n22 n23 |
 //	  | m31 m32 m33 |     | n31 n32 n33 |
 //
-inline	MgMat3 operator - ( const MgMat3& i_tm, const MgMat3& i_tn)			// -
+inline	MgMat3D operator - ( const MgMat3D& i_tm, const MgMat3D& i_tn)			// -
 {
 	return MGeo::MatMinus2( i_tm, i_tn);
 }
@@ -5632,13 +5636,13 @@ inline	MgMat3 operator - ( const MgMat3& i_tm, const MgMat3& i_tn)			// -
 //	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ÌˆøZ
 //
 //	g—p–@
-//		MgMat31 -= MgMat32;
+//		MgMat3D1 -= MgMat3D2;
 //
 //	| m11 m12 m13 |    | m11 m12 m13 |     | n11 n12 n13 |
 //	| m21 m22 m23 |  = | m21 m22 m23 |  -  | n21 n22 n23 |
 //	| m31 m32 m33 |    | m31 m32 m33 |     | n31 n32 n33 |
 //
-inline	MgMat3 operator -= ( MgMat3& io_tm, const MgMat3& i_tn)				// -=
+inline	MgMat3D operator -= ( MgMat3D& io_tm, const MgMat3D& i_tn)				// -=
 {
 	return MGeo::MatMinusEqual2( io_tm, i_tn);
 }
@@ -5649,13 +5653,13 @@ inline	MgMat3 operator -= ( MgMat3& io_tm, const MgMat3& i_tn)				// -=
 //	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚é•ÏŠ·Œã‚ÉA‚³‚ç‚ÉÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚é•ÏŠ·‚·‚éƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 //
 //	g—p–@
-//		MgMat4 = MgMat31 * MgMat32;
+//		MgMat4D = MgMat3D1 * MgMat3D2;
 //
 //	| m11 m12 m13 |     | n11 n12 n13 |
 //	| m21 m22 m23 |  X  | n21 n22 n23 |
 //	| m31 m32 m33 |     | n31 n32 n33 |
 //
-inline	MgMat3 operator * ( const MgMat3& i_tm, const MgMat3& i_tn)			// *
+inline	MgMat3D operator * ( const MgMat3D& i_tm, const MgMat3D& i_tn)			// *
 {
 	return MGeo::MatMult2( i_tm, i_tn);
 }
@@ -5666,13 +5670,13 @@ inline	MgMat3 operator * ( const MgMat3& i_tm, const MgMat3& i_tn)			// *
 //	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚é•ÏŠ·Œã‚ÉA‚³‚ç‚ÉÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚é•ÏŠ·‚·‚éƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 //
 //	g—p–@
-//		MgMat32 *= MgMat31;
+//		MgMat3D2 *= MgMat3D1;
 //
 //	| m11 m12 m13 |     | m11 m12 m13 |     | n11 n12 n13 |
 //	| m21 m22 m23 |  =  | m21 m22 m23 |  X  | n21 n22 n23 |
 //	| m31 m32 m33 |     | m31 m32 m33 |     | n31 n32 n33 |
 //
-inline	MgMat3 operator *= ( MgMat3& io_tm, const MgMat3& i_tn)				// *=
+inline	MgMat3D operator *= ( MgMat3D& io_tm, const MgMat3D& i_tn)				// *=
 {
 	return MGeo::MatMultEqual2( io_tm, i_tn);
 }
@@ -5682,13 +5686,13 @@ inline	MgMat3 operator *= ( MgMat3& io_tm, const MgMat3& i_tn)				// *=
 //	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgVect2 = MgVect2 * MgMat3;
+//		MgVect2D = MgVect2D * MgMat3D;
 //
 //					   | m11 m12 m13 |
 //	| px  py  1  |  X  | m21 m22 m23 |
 //					   | m31 m32 m33 |     
 //
-inline	MgVect2 operator * ( const MgVect2& i_pt, const MgMat3& i_tm)		// *	À•W•ÏŠ·
+inline	MgVect2D operator * ( const MgVect2D& i_pt, const MgMat3D& i_tm)		// *	À•W•ÏŠ·
 {
 	return MGeo::MatMultPt22( i_pt, i_tm);
 }
@@ -5698,13 +5702,13 @@ inline	MgVect2 operator * ( const MgVect2& i_pt, const MgMat3& i_tm)		// *	À•W•
 //		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgVect2 *= MgMat3;
+//		MgVect2D *= MgMat3D;
 //
 //										  | m11 m12 m13 |
 //	| px  py  1  |  =  | px  py  1  |  X  | m21 m22 m23 |
 //				   						  | m31 m32 m33 |
 //
-inline	MgVect2 operator *= ( MgVect2& io_pt, const MgMat3& i_tm)			// *=	À•W•ÏŠ·
+inline	MgVect2D operator *= ( MgVect2D& io_pt, const MgMat3D& i_tm)			// *=	À•W•ÏŠ·
 {
 	return MGeo::MatMultEqualPt22( io_pt, i_tm);
 }
@@ -5714,13 +5718,13 @@ inline	MgVect2 operator *= ( MgVect2& io_pt, const MgMat3& i_tm)			// *=	À•W•ÏŠ
 //		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgULine2 = MgULine2*  MgMat3;
+//		MgULine2D = MgULine2D*  MgMat3D;
 //
 //	| px  py  1  |     | m11 m12 m13 |
 //	| vx  vy  0  |  X  | m21 m22 m23 |
 //					   | m31 m32 m33 |
 //
-inline	MgULine2 operator * ( const MgULine2& i_uln, const MgMat3& i_tm)	// *	À•W•ÏŠ·
+inline	MgULine2D operator * ( const MgULine2D& i_uln, const MgMat3D& i_tm)	// *	À•W•ÏŠ·
 {
 	return MGeo::MatMultULn22( i_uln, i_tm);
 }
@@ -5730,13 +5734,13 @@ inline	MgULine2 operator * ( const MgULine2& i_uln, const MgMat3& i_tm)	// *	À•
 //		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgULine2* = MgMat3;
+//		MgULine2D* = MgMat3D;
 //
 //	| px  py  1  |     | px  py  1  |     | m11 m12 m13 |
 //	| vx  vy  0  |  =  | vx  vy  1  |  X  | m21 m22 m23 |
 //			             				  | m31 m32 m33 |
 //
-inline	MgULine2 operator *= ( MgULine2& io_uln, const MgMat3& i_tm)		// *=	À•W•ÏŠ·
+inline	MgULine2D operator *= ( MgULine2D& io_uln, const MgMat3D& i_tm)		// *=	À•W•ÏŠ·
 {
 	return MGeo::MatMultEqualULn22( io_uln, i_tm);
 }
@@ -5748,14 +5752,14 @@ inline	MgULine2 operator *= ( MgULine2& io_uln, const MgMat3& i_tm)		// *=	À•W•
 //	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgVect32 = MgVect31 * MgMat31;
+//		MgVect3D2 = MgVect3D1 * MgMat3D1;
 //
 //						  | m11 m12 0 m13 |     
 //	| px  py  pz  1 |  X  | m21 m22 0 m23 |
 //						  |  0   0  1  0  |
 //						  | m31 m32 0 m33 |
 //
-inline	MgVect3 operator * ( const MgVect3& i_Pt, const MgMat3& i_tm)		// *	À•W•ÏŠ·
+inline	MgVect3D operator * ( const MgVect3D& i_Pt, const MgMat3D& i_tm)		// *	À•W•ÏŠ·
 {
 	return MGeo::MatMultPt32( i_Pt, i_tm);
 }
@@ -5765,14 +5769,14 @@ inline	MgVect3 operator * ( const MgVect3& i_Pt, const MgMat3& i_tm)		// *	À•W•
 //		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgVect3 *= MgMat3;
+//		MgVect3D *= MgMat3D;
 //
 //						 						| m11 m12 0 m13 |
 //	| px  py  pz  1 |  =  | px  py  pz  1 |  X  | m21 m22 0 m23 |
 //			   									|  0   0  1  0  |
 //			   									| m31 m32 0 m33 |
 //
-inline	MgVect3 operator *= ( MgVect3& io_Pt, const MgMat3& i_tm)			// *=	À•W•ÏŠ·
+inline	MgVect3D operator *= ( MgVect3D& io_Pt, const MgMat3D& i_tm)			// *=	À•W•ÏŠ·
 
 {
 	return MGeo::MatMultEqualPt32( io_Pt, i_tm);
@@ -5783,14 +5787,14 @@ inline	MgVect3 operator *= ( MgVect3& io_Pt, const MgMat3& i_tm)			// *=	À•W•ÏŠ
 //		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgULine2 = MgULine2*  MgMat3;
+//		MgULine2D = MgULine2D*  MgMat3D;
 //
 //	| px  py  pz  1 |	  | m11 m12 0 m13 |
 //	| vx  vy  vz  1 |  X  | m21 m22 0 m23 |
 //						  |  0   0  1  0  |
 //			   			  | m31 m32 0 m33 |
 //
-inline MgULine3 operator * ( const MgULine3& i_ULn, const MgMat3& i_tm)		// *	À•W•ÏŠ·
+inline MgULine3D operator * ( const MgULine3D& i_ULn, const MgMat3D& i_tm)		// *	À•W•ÏŠ·
 {
 	return MGeo::MultULn32( i_ULn, i_tm);
 }
@@ -5800,14 +5804,14 @@ inline MgULine3 operator * ( const MgULine3& i_ULn, const MgMat3& i_tm)		// *	À
 //		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgULine2* = MgMat3;
+//		MgULine2D* = MgMat3D;
 //
 //	| px  py  pz  1 |     | px  py  pz  1 |		| m11 m12 0 m13 |
 //	| vx  vy  vz  1 |  =  | vx  vy  vz  1 |  X  | m21 m22 0 m23 |
 //												|  0   0  1  0  |
 //				 				   				| m31 m32 0 m33 |
 //
-inline MgULine3 operator *= ( MgULine3& io_ULn, const MgMat3& i_tm)			// *=	À•W•ÏŠ·
+inline MgULine3D operator *= ( MgULine3D& io_ULn, const MgMat3D& i_tm)			// *=	À•W•ÏŠ·
 {
 	return MGeo::MatMultEqualULn32( io_ULn, i_tm);
 }
@@ -5821,14 +5825,14 @@ inline MgULine3 operator *= ( MgULine3& io_ULn, const MgMat3& i_tm)			// *=	À•W
 //		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Ì‰ÁZ
 //
 //	g—p–@
-//		MgMat4_3 = MgMat4_1 + MgMat4_2;
+//		MgMat4D_3 = MgMat4D_1 + MgMat4D_2;
 //
 //	| m11 m12 m13 m14 |     | n11 n12 n13 n14 |
 //	| m21 m22 m23 m24 |  +  | n21 n22 n23 n24 |
 //	| m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 //	| m41 m42 m43 m44 |     | n41 n42 n43 n44 |    
 //
-inline	MgMat4 operator + ( const MgMat4& i_Tm, const MgMat4& i_Tn)			// +
+inline	MgMat4D operator + ( const MgMat4D& i_Tm, const MgMat4D& i_Tn)			// +
 {
 	return MGeo::MatPlus3( i_Tm, i_Tn);
 }
@@ -5838,14 +5842,14 @@ inline	MgMat4 operator + ( const MgMat4& i_Tm, const MgMat4& i_Tn)			// +
 //		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Ì‰ÁZ
 //
 //	g—p–@
-//		MgMat4 += MgMat4;
+//		MgMat4D += MgMat4D;
 //
 //	| m11 m12 m13 m14 |		| m11 m12 m13 m14 |     | n11 n12 n13 n14 |
 //	| m21 m22 m23 m24 |  =  | m21 m22 m23 m24 |  +  | n21 n22 n23 n24 |
 //	| m31 m32 m33 m34 |     | m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 //	| m41 m42 m43 m44 |     | m41 m42 m43 m44 |     | n41 n42 n43 n44 |     
 //
-inline	MgMat4 operator += ( MgMat4& io_Tm, const MgMat4& i_Tn)				// +=
+inline	MgMat4D operator += ( MgMat4D& io_Tm, const MgMat4D& i_Tn)				// +=
 {
 	return MGeo::MatPlusEqual3( io_Tm, i_Tn);
 }	
@@ -5855,14 +5859,14 @@ inline	MgMat4 operator += ( MgMat4& io_Tm, const MgMat4& i_Tn)				// +=
 //		•‰‚ÌÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 //
 //	g—p–@
-//		MgMat4_2 = - MgMat4_1;
+//		MgMat4D_2 = - MgMat4D_1;
 //
 //	  | m11 m12 m13 m14 |
 //	- | m21 m22 m23 m24 |
 //	  | m31 m32 m33 m34 |
 //	  | m41 m42 m43 m44 |     
 //
-inline	MgMat4 operator - ( const MgMat4& i_Tm)								// -
+inline	MgMat4D operator - ( const MgMat4D& i_Tm)								// -
 {
 	return MGeo::MatSingleMinus3( i_Tm);
 }
@@ -5872,14 +5876,14 @@ inline	MgMat4 operator - ( const MgMat4& i_Tm)								// -
 //		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ÌˆøZ
 //
 //	g—p–@
-//		MgMat4_3 = MgMat4_1 - MgMat4_2;
+//		MgMat4D_3 = MgMat4D_1 - MgMat4D_2;
 //
 //	  | m11 m12 m13 m14 |     | n11 n12 n13 n14 |
 //	  | m21 m22 m23 m24 |  -  | n21 n22 n23 n24 |
 //	  | m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 //	  | m41 m42 m43 m44 |     | n41 n42 n43 n44 |    
 //
-inline	MgMat4 operator - ( const MgMat4& i_Tm, const MgMat4& i_Tn)			// -
+inline	MgMat4D operator - ( const MgMat4D& i_Tm, const MgMat4D& i_Tn)			// -
 {
 	return MGeo::MatMinus3( i_Tm, i_Tn);
 }
@@ -5889,14 +5893,14 @@ inline	MgMat4 operator - ( const MgMat4& i_Tm, const MgMat4& i_Tn)			// -
 //		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ÌˆøZ
 //
 //	g—p–@
-//		MgMat4 -= MgMat4;
+//		MgMat4D -= MgMat4D;
 //
 //	| m11 m12 m13 m14 |		| m11 m12 m13 m14 |     | n11 n12 n13 n14 |
 //	| m21 m22 m23 m24 |  =  | m21 m22 m23 m24 |  -  | n21 n22 n23 n24 |
 //	| m31 m32 m33 m34 |     | m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 //	| m41 m42 m43 m44 |     | m41 m42 m43 m44 |     | n41 n42 n43 n44 |     
 //
-inline MgMat4 operator -= ( MgMat4& io_Tm, const MgMat4& i_Tn)				// -=
+inline MgMat4D operator -= ( MgMat4D& io_Tm, const MgMat4D& i_Tn)				// -=
 {
 	return MGeo::MatMinusEqual3( io_Tm, i_Tn);
 }
@@ -5906,14 +5910,14 @@ inline MgMat4 operator -= ( MgMat4& io_Tm, const MgMat4& i_Tn)				// -=
 //		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Ì‚©‚¯Z
 //
 //	g—p–@
-//		MgMat4_3 = MgMat4_1 * MgMat4_2;
+//		MgMat4D_3 = MgMat4D_1 * MgMat4D_2;
 //
 //	| m11 m12 m13 m14 |     | n11 n12 n13 n14 |
 //	| m21 m22 m23 m24 |  X  | n21 n22 n23 n24 |
 //	| m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 //	| m41 m42 m43 m44 |     | n41 n42 n43 n44 |    
 //
-inline MgMat4 operator * ( const MgMat4& i_Tm, const MgMat4& i_Tn)			// *
+inline MgMat4D operator * ( const MgMat4D& i_Tm, const MgMat4D& i_Tn)			// *
 {
 	return MGeo::MatMult3( i_Tm, i_Tn);
 }
@@ -5923,14 +5927,14 @@ inline MgMat4 operator * ( const MgMat4& i_Tm, const MgMat4& i_Tn)			// *
 //		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Ì‚©‚¯Z
 //
 //	g—p–@
-//		MgMat4 *= MgMat4;
+//		MgMat4D *= MgMat4D;
 //
 //	| m11 m12 m13 m14 |     | m11 m12 m13 m14 |     | n11 n12 n13 n14 |
 //	| m21 m22 m23 m24 |  =  | m21 m22 m23 m24 |  X  | n21 n22 n23 n24 |
 //	| m31 m32 m33 m34 |     | m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 //	| m41 m42 m43 m44 |     | m41 m42 m43 m44 |     | n41 n42 n43 n44 |     
 //
-inline MgMat4 operator *= ( MgMat4& io_Tm, const MgMat4& i_Tn)
+inline MgMat4D operator *= ( MgMat4D& io_Tm, const MgMat4D& i_Tn)
 {
 	return MGeo::MatMultEqual3( io_Tm, i_Tn);
 }
@@ -5940,14 +5944,14 @@ inline MgMat4 operator *= ( MgMat4& io_Tm, const MgMat4& i_Tn)
 //		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚QŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgMat4_2 = MgVect2 * MgMat4_1;
+//		MgMat4D_2 = MgVect2D * MgMat4D_1;
 //
 //						    | m11 m12 m13 m14 |
 //	| px  py  0   1   |  X  | m21 m22 m23 m24 |
 //						    | m31 m32 m33 m34 |
 //						    | m41 m42 m43 m44 |
 //
-inline MgVect2 operator * ( const MgVect2& i_Pt, const MgMat4& i_Tm)		// À•W•ÏŠ·
+inline MgVect2D operator * ( const MgVect2D& i_Pt, const MgMat4D& i_Tm)		// À•W•ÏŠ·
 {
 	return MGeo::MatMultPt23( i_Pt, i_Tm);
 }
@@ -5957,14 +5961,14 @@ inline MgVect2 operator * ( const MgVect2& i_Pt, const MgMat4& i_Tm)		// À•W•ÏŠ
 //		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚QŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgVect2 *= MgMat4;
+//		MgVect2D *= MgMat4D;
 //
 //						     					    | m11 m12 m13 m14 |
 //	| px  py  0   1   |  =  | px  py  0   1   |  X  | m21 m22 m23 m24 |
 //	           									    | m31 m32 m33 m34 |
 //	           									    | m41 m42 m43 m44 |
 //
-inline MgVect2 operator *= ( MgVect2& io_Pt, const MgMat4& i_Tm)			// À•W•ÏŠ·
+inline MgVect2D operator *= ( MgVect2D& io_Pt, const MgMat4D& i_Tm)			// À•W•ÏŠ·
 {
 	return MGeo::MatMultEqualPt23( io_Pt, i_Tm);
 }
@@ -5974,14 +5978,14 @@ inline MgVect2 operator *= ( MgVect2& io_Pt, const MgMat4& i_Tm)			// À•W•ÏŠ·
 //		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgVect3_2 = MgVect3_1 * MgMat4;
+//		MgVect3D_2 = MgVect3D_1 * MgMat4D;
 //
 //	 					    | m11 m12 m13 m14 |
 //	| px  py  pz  1   |  X  | m21 m22 m23 m24 |
 //						    | m31 m32 m33 m34 |
 //						    | m41 m42 m43 m44 |
 //
-inline MgVect3 operator * ( const MgVect3& i_Pt, const MgMat4& i_Tm)		// À•W•ÏŠ·
+inline MgVect3D operator * ( const MgVect3D& i_Pt, const MgMat4D& i_Tm)		// À•W•ÏŠ·
 {
 	return MGeo::MatMultPt33( i_Pt, i_Tm);
 }
@@ -5991,14 +5995,14 @@ inline MgVect3 operator * ( const MgVect3& i_Pt, const MgMat4& i_Tm)		// À•W•ÏŠ
 //		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgVect3 *= MgMat4;
+//		MgVect3D *= MgMat4D;
 //
 //							 					    | m11 m12 m13 m14 |
 //	| px  py  pz  1   |  =  | px  py  pz  1   |  X  | m21 m22 m23 m24 |
 //												    | m31 m32 m33 m34 |
 //												    | m41 m42 m43 m44 |
 //
-inline MgVect3 operator *= ( MgVect3& io_Pt, const MgMat4& i_Tm)			// À•W•ÏŠ·
+inline MgVect3D operator *= ( MgVect3D& io_Pt, const MgMat4D& i_Tm)			// À•W•ÏŠ·
 {
 	return MGeo::MatMultEqualPt33( io_Pt, i_Tm);
 }
@@ -6008,14 +6012,14 @@ inline MgVect3 operator *= ( MgVect3& io_Pt, const MgMat4& i_Tm)			// À•W•ÏŠ·
 //		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgULine3_2 = MgULine3_1 * MgMat4;
+//		MgULine3D_2 = MgULine3D_1 * MgMat4D;
 //
 //	| px  py  pz  1   |     | m11 m12 m13 m14 |
 //	| vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
 //							| m31 m32 m33 m34 |
 //							| m41 m42 m43 m44 |
 //
-inline MgULine3 operator * ( const MgULine3& i_ULn, const MgMat4& i_Tm)		// À•W•ÏŠ·
+inline MgULine3D operator * ( const MgULine3D& i_ULn, const MgMat4D& i_Tm)		// À•W•ÏŠ·
 {
 	return MGeo::MatMultULn33( i_ULn, i_Tm);
 }
@@ -6025,14 +6029,14 @@ inline MgULine3 operator * ( const MgULine3& i_ULn, const MgMat4& i_Tm)		// À•W
 //		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgVect3 *= MgMat4;
+//		MgVect3D *= MgMat4D;
 //
 //	| px  py  pz  1   |     | px  py  pz  1   |     | m11 m12 m13 m14 |
 //	| vx  vy  vz  0   |  =  | vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
 //													| m31 m32 m33 m34 |
 //													| m41 m42 m43 m44 |
 //
-inline MgULine3 operator *= ( MgULine3& io_ULn, const MgMat4& i_Tm)			// À•W•ÏŠ·
+inline MgULine3D operator *= ( MgULine3D& io_ULn, const MgMat4D& i_Tm)			// À•W•ÏŠ·
 {
 	return MGeo::MatMultEqualULn33( io_ULn, i_Tm);
 }
@@ -6040,68 +6044,95 @@ inline MgULine3 operator *= ( MgULine3& io_ULn, const MgMat4& i_Tm)			// À•W•ÏŠ
 //===========================================================================
 //		•½–Ê Œ`ó‰‰Z
 //
-inline MgPlane3 MgPlane3C( const MgPoint3 *pt)						// ‚R“_‚æ‚è•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”‚ğ‹‚ß‚éi³‹K‰»j
-						{ return MGeo::Plane3CPPt( pt);}
+inline MgPlane3D MgPlane3DC(									// ‚R“_‚æ‚è•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”‚ğ‹‚ß‚éi³‹K‰»j
+					const	MgPoint3D*	i_ppt)
+						{ return MGeo::Plane3CPPt( i_ppt);}
 
-inline MgPlane3 MgPlane3C( const MgPoint3& p0, const MgPoint3& p1,	// ‚R“_‚æ‚è•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”‚ğ‹‚ß‚éi³‹K‰»j
-						   const MgPoint3& p2)
-						{ return MGeo::Plane3C3Pt( p0, p1, p2);}
+inline MgPlane3D MgPlane3DC(									// ‚R“_‚æ‚è•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”‚ğ‹‚ß‚éi³‹K‰»j
+					const	MgPoint3D&	i_p0,
+					const	MgPoint3D&	i_p1,
+					const	MgPoint3D&	i_p2)
+						{ return MGeo::Plane3C3Pt( i_p0, i_p1, i_p2);}
 
-inline MgPlane3 MgPlane3C( const MgPolyg3 &pg)						// ‘½ŠpŒ`‚æ‚è•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”‚ğ‹‚ß‚éi³‹K‰»j
-						{ return MGeo::Plane3CPg( pg);}
+inline MgPlane3D MgPlane3DC(									// ‘½ŠpŒ`‚æ‚è•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”‚ğ‹‚ß‚éi³‹K‰»j
+					const	MgPolyg3D&	i_pg)
+						{ return MGeo::Plane3CPg( i_pg);}
 
-inline MgPlane3 MgPlane3C( const MgPoint2& p1, const MgPoint2& p2,	// n“_‚ÆI“_‚Ì‚Q“_‚ÆŒù”z‚æ‚è•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”‚ğ‹‚ß‚éi³‹K‰»j
-						 MREAL rkb, MREAL z = 0.)
-						{ return MGeo::Plane3C2Pt2F( p1, p2,	rkb, z);}
+inline MgPlane3D MgPlane3DC(									// n“_‚ÆI“_‚Ì‚Q“_‚ÆŒù”z‚æ‚è•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”‚ğ‹‚ß‚éi³‹K‰»j
+					const	MgPoint2D&	i_p1,
+					const	MgPoint2D&	i_p2,
+							MREAL		i_rkb,
+							MREAL		i_z = 0.)
+						{ return MGeo::Plane3C2Pt2F( i_p1, i_p2, i_rkb, i_z);}
 
-inline MgPlane3 MgPlane3C( const MgLine2& ln1,						// ü•ª‚ÆŒù”z‚æ‚è•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”‚ğ‹‚ß‚éi³‹K‰»j
-						MREAL rkb, MREAL z = 0.)
-						{ return MGeo::Plane3CLn2F( ln1, rkb, z);}
+inline MgPlane3D MgPlane3DC(									// ü•ª‚ÆŒù”z‚æ‚è•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”‚ğ‹‚ß‚éi³‹K‰»j
+					const	MgLine2D&	i_ln1,
+							MREAL		i_rkb,
+							MREAL		i_z = 0.)
+						{ return MGeo::Plane3CLn2F( i_ln1, i_rkb, i_z);}
 //
 //===========================================================================
 //		•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”‚ğ³‹K‰»‚µ‚½•½–Ê‚ğ‹‚ß‚é
 //		ax+by+cz+d=0	(a*a+b*b+c*c=1.0)
 //
-inline MgPlane3	MgNorm(							// (  O) ³‹K‰»Œã‚Ì‚RŸŒ³•½–Ê
-				const	MgPlane3	&pl)		// (I  ) ‚RŸŒ³•½–Ê
-{ return MGeo::NormPln( pl);}
+inline MgPlane3D	MgNorm(							// (  O) ³‹K‰»Œã‚Ì‚RŸŒ³•½–Ê
+					const	MgPlane3D&	i_pl)		// (I  ) ‚RŸŒ³•½–Ê
+						{ return MGeo::NormPln( i_pl);}
 //
 //===========================================================================
-//		MgPlane3‚ğg—p‚ÌƒCƒ“ƒ‰ƒCƒ“ŠÖ”
+//		MgPlane3D‚ğg—p‚ÌƒCƒ“ƒ‰ƒCƒ“ŠÖ”
 //	
-inline MgPoint3::MgPoint3( const MgPoint2& v1, const MgPlane3& Pln)							// ‚QŸŒ³¨‚RŸŒ³
-						{ x = v1.x; y = v1.y; z = Pln.GetZ( v1);} 
+inline MgPoint3D::MgPoint3D(									// ‚QŸŒ³¨‚RŸŒ³
+					const	MgPoint2D&	i_v1,
+					const	MgPlane3D&	i_Pln)
+						{ x = i_v1.x; y = i_v1.y; z = i_Pln.GetZ( i_v1);} 
 
 //======================( ‚RŸŒ³ )==============================
 //		‚RŸŒ³ƒxƒNƒgƒ‹‰‰Z
-inline MgVect3 MgVect3C( const MgPoint2& v1, const MgPlane3& Pln)							// ‚QŸŒ³¨‚RŸŒ³
-						{ MgVect3 Vto; Vto.x = v1.x; Vto.y = v1.y;
-									   Vto.z = Pln.GetZ( v1); return Vto;} 
-inline MgPoint3 MgPoint3::Set( const MgPoint2& v1, const MgPlane3& Pln)						// ‚QŸŒ³¨‚RŸŒ³
-						{ x = v1.x; y = v1.y; z = Pln.GetZ( v1); return *this;} 
+inline MgVect3D MgVect3DC(										// ‚QŸŒ³¨‚RŸŒ³
+					const	MgPoint2D&	i_v1,
+					const	MgPlane3D&	i_Pln)
+						{ MgVect3D Vto; Vto.x = i_v1.x; Vto.y = i_v1.y;
+									   Vto.z = i_Pln.GetZ( i_v1); return Vto;} 
+inline MgPoint3D MgPoint3D::Set(								// ‚QŸŒ³¨‚RŸŒ³
+					const	MgPoint2D&	i_v1,
+					const	MgPlane3D&	i_Pln)
+						{ x = i_v1.x; y = i_v1.y; z = i_Pln.GetZ( i_v1); return *this;} 
 
-inline MgULine3 MgULine3C( const MgULine2& uln, const MgPlane3& Pln, MREAL i_Tol = g_gTol.D)	// ‚QŸŒ³¨‚RŸŒ³
-						{ MgULine3 ULno; ULno.p.x = uln.p.x; ULno.p.y = uln.p.y;
-										 ULno.p.z = Pln.GetZ( uln.p);
-						  ULno.v = MgVect3C( uln.v, - (Pln.v.x * uln.v.x + Pln.v.y * uln.v.y) / Pln.v.z);
+inline MgULine3D MgULine3DC(									// ‚QŸŒ³¨‚RŸŒ³
+					const	MgULine2D&	i_uln,
+					const	MgPlane3D&	i_Pln,
+							MREAL	i_Tol = g_gTol.D)
+						{ MgULine3D ULno; ULno.p.x = i_uln.p.x; ULno.p.y = i_uln.p.y;
+										 ULno.p.z = i_Pln.GetZ( i_uln.p);
+						  ULno.v = MgVect3DC( i_uln.v, - ( i_Pln.v.x * i_uln.v.x + i_Pln.v.y * i_uln.v.y) / i_Pln.v.z);
 						  ULno.v.SetUnitize( i_Tol); return ULno;} 
-inline MgULine3 MgULine3::Set( const MgULine2& uln, const MgPlane3& Pln, MREAL i_Tol)		// ‚QŸŒ³¨‚RŸŒ³
-						{ p.x = uln.p.x; p.y = uln.p.y; p.z = Pln.GetZ( uln.p);
-						  v = MgVect3C( uln.v, - (Pln.v.x * uln.v.x + Pln.v.y * uln.v.y) / Pln.v.z);
-						  v.SetUnitize( i_Tol); return *this;} 
 
-inline MgLine3 MgLine3C( const MgLine2& ln, const MgPlane3& Pln)							// ‚QŸŒ³¨‚RŸŒ³
-						{ MgLine3 Lno; Lno.p[0].x = ln.p[0].x; Lno.p[0].y = ln.p[0].y;
-									   Lno.p[0].z = Pln.GetZ( ln.p[0]);
-									   Lno.p[1].x = ln.p[1].x; Lno.p[1].y = ln.p[1].y;
-									   Lno.p[0].z = Pln.GetZ( ln.p[1]); return Lno;}
-inline MgLine3 MgLine3::Set( const MgLine2& ln, const MgPlane3& Pln)						// ‚QŸŒ³¨‚RŸŒ³
-						{ p[0].x = ln.p[0].x; p[0].y = ln.p[0].y; p[0].z = Pln.GetZ( ln.p[0]);
-						  p[1].x = ln.p[1].x; p[1].y = ln.p[1].y; p[0].z = Pln.GetZ( ln.p[1]);
+inline MgULine3D MgULine3D::Set(								// ‚QŸŒ³¨‚RŸŒ³
+					const	MgULine2D&	i_uln,
+					const	MgPlane3D&	i_Pln,
+							MREAL	i_Tol)
+						{ p.x = i_uln.p.x; p.y = i_uln.p.y; p.z = i_Pln.GetZ( i_uln.p);
+						  v = MgVect3DC( i_uln.v, - ( i_Pln.v.x * i_uln.v.x + i_Pln.v.y * i_uln.v.y) / i_Pln.v.z);
+						  v.SetUnitize( i_Tol); return *this;} 
+	
+inline MgLine3D MgLine3DC(										// ‚QŸŒ³¨‚RŸŒ³
+					const	MgLine2D&	i_ln,
+					const	MgPlane3D&	i_Pln)
+						{ MgLine3D Lno; Lno.p[0].x = i_ln.p[0].x; Lno.p[0].y = i_ln.p[0].y;
+									   Lno.p[0].z = i_Pln.GetZ( i_ln.p[0]);
+									   Lno.p[1].x = i_ln.p[1].x; Lno.p[1].y = i_ln.p[1].y;
+									   Lno.p[0].z = i_Pln.GetZ( i_ln.p[1]); return Lno;}
+
+inline MgLine3D MgLine3D::Set(									// ‚QŸŒ³¨‚RŸŒ³
+					const	MgLine2D&	i_ln,
+					const	MgPlane3D&	i_Pln)
+						{ p[0].x = i_ln.p[0].x; p[0].y = i_ln.p[0].y; p[0].z = i_Pln.GetZ( i_ln.p[0]);
+						  p[1].x = i_ln.p[1].x; p[1].y = i_ln.p[1].y; p[0].z = i_Pln.GetZ( i_ln.p[1]);
 						  return *this;}
 
-inline MINT SZMgPlane3( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgPlane3));}
+inline MINT SZMgPlane3D( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgPlane3D));}
 
-inline MINT WSZMgPlane3( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgPlane3) / SZMINT());}
+inline MINT WSZMgPlane3D( MINT i_sz = 1) { return  ( i_sz * (MINT)sizeof( MgPlane3D) / SZMINT());}
 
 } // namespace MC

@@ -18,7 +18,7 @@ void MtClose();
 MINT MtWaitLoop( void);
 
 MINT MtAskForPoint(
-						MgPoint2*		pt1
+						MgPoint2D*		pt1
 						);
 
 struct MT_InternalCmdList {
@@ -41,12 +41,12 @@ MINT MtGetInp( MCHAR (&o_sEntry)[SIZE])
 
 void MtSetNFlag( const MINT nflag);
 MINT MtGetNFlag( void);
-MINT MtSendMessage( MINT message, MINT nFlags, MgPoint2* pPtMR);
+MINT MtSendMessage( MINT message, MINT nFlags, MgPoint2D* pPtMR);
 
 class	MtPrcEventQueue *MtGetCommandQueue( void);
 class	MtPrcEventQueue *MtGetMenuQueue();
 void	MtMnuStrToRB( class MtPrcEventQueue* pRbQue, MCHAR* mnustr);
-MINT	MtSendMessage( MINT message, MINT nFlags, MgPoint2* pPtMR);
+MINT	MtSendMessage( MINT message, MINT nFlags, MgPoint2D* pPtMR);
 MINT	MtDoOneCommand(MCHAR* cmd, int pushlsp);
 MINT	MtCmdThread( void);
 

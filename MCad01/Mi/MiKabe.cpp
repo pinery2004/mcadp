@@ -46,8 +46,8 @@ namespace MC
 //
 void mhInput::GetMarumeKabeLine(
 						MINT		iKai,			// 検索階
-				const	MgPoint2	&Pi,			// 入力座標
-						MgGLine2	*pGLn			// 対象壁芯
+				const	MgPoint2D	&Pi,			// 入力座標
+						MgGLine2D	*pGLn			// 対象壁芯
 				)
 {
 	MINT		ist1;
@@ -56,7 +56,7 @@ void mhInput::GetMarumeKabeLine(
 	mhPlcParts*	pHaiKabe[MAXHAIKABE];				// 壁データ
 	MINT		nHaiKabe;							// 壁数
 	MINT		ic2;
-	MgLine2		ln1;
+	MgLine2D		ln1;
 
 	iCdMarume = z_mnIA.GetComboMarumeCd();
 	if ( iCdMarume == 0)
@@ -69,9 +69,9 @@ void mhInput::GetMarumeKabeLine(
 																				// 家モデルよりカレント階の全ての壁を取得
 	pGLn->m_n = 0;
 	for ( ic2=0; ic2<nHaiKabe; ic2++) {											// 壁
-		ln1 = MgLine2C( pHaiKabe[ic2]->GetPIPlcIti());
+		ln1 = MgLine2DC( pHaiKabe[ic2]->GetPIPlcIti());
 		if ( MGeo::ChkPt2OnLn2WS( Pi, ln1, &ist1, MC_KABE_TOL))
-			(*pGLn) += MgLine2C( pHaiKabe[ic2]->GetPIPlcIti());
+			(*pGLn) += MgLine2DC( pHaiKabe[ic2]->GetPIPlcIti());
 	}
 	if ( pGLn->m_n == 0) {
 		Msg::ErrorMsg( Mstr( "壁上に入力して下さい"), MC_ERR_BASE);				// ""

@@ -449,7 +449,7 @@ MINT	MdbAddZukei (
 						MDID		i_idBhn,	// 部品Id
 						MDID		i_iBfn,		// 機能番号
 						MDID		i_iZDpr,	// 図形Dpr
-						MgMat3E		i_matCnv	// 変換する座標テーブル
+						MgMat3DE		i_matCnv	// 変換する座標テーブル
 				)
 {
 	return 0;
@@ -517,7 +517,7 @@ MINT	MdbAddEnt (
 						MINT		i_mdAdd,	// 追加モード
 												//　0:指定されたエンティティは残る
 												//	1:指定されたエンティティは残らない
-						MgMat3E&		i_matCng	// 変換する座標テーブル
+						MgMat3DE&		i_matCng	// 変換する座標テーブル
 				)
 {
 	return 0;
@@ -579,7 +579,7 @@ MINT	MdbPack (
 						MINT		i_ifStrct,	// フラグ　0:構造化　1:非構造化
 						MDID		i_idFn,		// 機能番号（flg=0の時は無効）
 						MDID&		i_idEnt,	// 部品化するエンティティリスト
-						MgMat3E&		i_matCng	// 変換する座標テーブル
+						MgMat3DE&		i_matCng	// 変換する座標テーブル
 				)
 {
 	return 0;

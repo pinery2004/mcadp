@@ -163,7 +163,7 @@ MINT	MdlSetAmbient(
 //		８個以上ある場合は、生成順に有効な光源８個がOpenGLに設定される。
 //
 MINT	MdlGetDefaultData(
-						MgPoint3&	i_ptOrg		// 光源タイプ
+						MgPoint3D&	i_ptOrg		// 光源タイプ
 												//	0:平行光源
 												//	1:点光源
 												//	2:スポット光源

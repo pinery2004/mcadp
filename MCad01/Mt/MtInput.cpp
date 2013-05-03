@@ -22,10 +22,10 @@ namespace MC
 /////////////////////////////////////////////////////////////////////////////
 //	連続した長さ２点入力用の２点目の入力(外壁入力用)
 
-MINT mhInput::GetLenEPt( MgLine2*	pLn)
+MINT mhInput::GetLenEPt( MgLine2D*	pLn)
 {
 	MINT		irt;
-	MgPoint2	pt1, pt2;
+	MgPoint2D	pt1, pt2;
 
 	Msg::GuidanceMsg( MC_GUID_SYUUTEN);
 	irt = Window::DragObject(  MC_RBND_LINE, (void*)&pLn->p[0], &pt1);// ラバーバンド図形表示しながら２点目を入力
@@ -47,10 +47,10 @@ exit:
 /////////////////////////////////////////////////////////////////////////////
 //	長方形区画入力
 
-MINT mhInput::GetRect2Pt( MgLine2*	pLn)
+MINT mhInput::GetRect2Pt( MgLine2D*	pLn)
 {
 	MINT		irt;
-	MgPoint2	pt1, pt2;
+	MgPoint2D	pt1, pt2;
 	MINT		iSeq = 0;						// 入力シークエンス
 
 	MFOREVER {
@@ -93,13 +93,13 @@ MINT mhInput::GetRect2Pt( MgLine2*	pLn)
 //	区画入力
 
 MINT mhInput::GetArea(
-						MgPolyg2*	o_ppg1		// ２Ｄ多角形
+						MgPolyg2D*	o_ppg1		// ２Ｄ多角形
 				)
 {
 	MINT		irt;
-	MgPolyg2	PgS(20);
-	MgPoint2	pt1, pt2;
-	MgMinMaxR2	mMM;
+	MgPolyg2D	PgS(20);
+	MgPoint2D	pt1, pt2;
+	MgMinMaxR2D	mMM;
 	CPoint		ptMouthL;
 	MINT 		iCdInpKb;
 	MINT		iSeq = 0;						// 入力シークエンス
@@ -167,9 +167,9 @@ MINT mhInput::GetArea(
 			mMM.Ins2( o_ppg1->m_p[0]);
 			mMM.Ins2( o_ppg1->m_p[1]);
 			o_ppg1->m_p[0] = mMM.min;
-			o_ppg1->m_p[1] = MgPoint2( mMM.max.x, mMM.min.y);
+			o_ppg1->m_p[1] = MgPoint2D( mMM.max.x, mMM.min.y);
 			o_ppg1->m_p[2] = mMM.max;
-			o_ppg1->m_p[3] = MgPoint2( mMM.min.x, mMM.max.y);
+			o_ppg1->m_p[3] = MgPoint2D( mMM.min.x, mMM.max.y);
 			o_ppg1->m_n = 4;
 			break;												// 対角２点の２点目の入力終了は区画入力終了とする
 		}
@@ -193,8 +193,8 @@ MINT mhInput::GetLen2Pt(
 												//				　1: 連続長さ２点の終点入力
 												//						始点は前回入力(pLn)の終点とする
 												//				　2: 方向１点入力
-						MgPoint2*	io_ptln,	// まるめ座標（長さ２点座標 ＋　複数部材の領域をあらわす３点目）
-						MgPoint2*	io_ptln_org	// オリジナル座標（長さ２点座標 ＋　複数部材の領域をあらわす３点目） 
+						MgPoint2D*	io_ptln,	// まるめ座標（長さ２点座標 ＋　複数部材の領域をあらわす３点目）
+						MgPoint2D*	io_ptln_org	// オリジナル座標（長さ２点座標 ＋　複数部材の領域をあらわす３点目） 
 				 )
 {
 	MINT		ist1;
@@ -305,8 +305,8 @@ MINT mhInput::GetLen2Pt(
 //	１点入力
 
 MINT mhInput::Get1Pt(
-						MgPoint2*	ppt1,			// (  O) 入力丸め点
-						MgPoint2*	ppt1_org		// (  O) 入力オリジナル点
+						MgPoint2D*	ppt1,			// (  O) 入力丸め点
+						MgPoint2D*	ppt1_org		// (  O) 入力オリジナル点
 				 )
 {
 	MINT	irt;
@@ -327,10 +327,10 @@ MINT mhInput::Get1Pt(
 /////////////////////////////////////////////////////////////////////////////
 //	長方形区画入力
 
-MINT mhInput::GetRect2Pt( MgLine2*	pLn)
+MINT mhInput::GetRect2Pt( MgLine2D*	pLn)
 {
 	MINT		irt;
-	MgPoint2	pt1, pt2;
+	MgPoint2D	pt1, pt2;
 
 	MmWndInfo* pWndInfo = MmWndKGetCurWnd();					// カレントウィンドウを取得する
 
@@ -367,14 +367,14 @@ MINT mhInput::GetRect2Pt( MgLine2*	pLn)
 //	各辺に　シフトキー有無のフラグ付き
 
 MINT mhInput::GetAreaI(
-						MgPolyg2*	pPg1,			// (  O) 地廻り区画
+						MgPolyg2D*	pPg1,			// (  O) 地廻り区画
 						MgGInt*		pGifInp			// (  O) 地廻り線種類(仮想キー(nflag)  MK_SHIFT(004): シフトキー)
 				)
 {
 	MINT			irt;
 	MINT			ic;
-	MgPolyg2		PgS(20);
-	MgPoint2		pt1, pt2;
+	MgPolyg2D		PgS(20);
+	MgPoint2D		pt1, pt2;
 
 	MINT iCdInpKb = z_mnIA.GetComboInpKbCd();
 
@@ -433,22 +433,22 @@ MINT mhInput::GetAreaI(
 /////////////////////////////////////////////////////////////////////////////
 //	丸め
 void mhInput::Marume(
-				const	MgPoint2	&Pi,
-						MgPoint2*	pPo
+				const	MgPoint2D	&Pi,
+						MgPoint2D*	pPo
 				)
 {
 	MINT		ist;
-	MgVect2		vtDis;
+	MgVect2D		vtDis;
 	MREAL		rDis_2;
 	MINT		ic1, ic2;
 
 	MREAL		rDisMin_2;
-	MgPoint2	Po, P0;
+	MgPoint2D	Po, P0;
 
 	MINT		iCdPlc;											// 配置コード
 	MINT		iCdMarume;										// グリッド丸め分割値
-	MgPoint2	PtGrid;
-	MgLine2		Lnm[2];
+	MgPoint2D	PtGrid;
+	MgLine2D		Lnm[2];
 	MGGLINE2( GLnk, 10);
 
 	MmWndInfo* pWndInfo = WindowCtrl::MmWndKGetCurWnd();		// カレントウィンドウを取得する

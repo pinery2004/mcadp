@@ -20,9 +20,9 @@ namespace MC
 //===========================================================================
 //	点列をベクトル方向の座標順に並べ同一座標の点は取り除く
 //
-void	MGeo::SortVGPt2(							//
-				const	MgVect2&	V1, 		// (I  ) ベクトル
-						MgGPoint2*	GPt2 		// (I O) 点群
+void	MGeo::SortVGPt2(						//
+				const	MgVect2D&	V1, 		// (I  ) ベクトル
+						MgGPoint2D*	GPt2 		// (I O) 点群
 		)	
 {
 	MINT	ic;
@@ -72,14 +72,14 @@ exit:;
 ////	線分群を正規化する。（線分の逆方向の重なりを除去する）
 ////
 //void	MgNorm(									//
-//				const	MgGLine2&	GLn1,		// (I  ) 線分
-//				const	MgGLine2*	GLn2		// (  O) 重なりを除去後の線分
+//				const	MgGLine2D&	GLn1,		// (I  ) 線分
+//				const	MgGLine2D*	GLn2		// (  O) 重なりを除去後の線分
 //		)
 //{
-//	MgLine2		work[MX_LIN1+1];				// 線分の数用のエリアを追加した作業エリアを確保する
-//	MgGLine2	*GLn = (MgGLine2*)work;
+//	MgLine2D		work[MX_LIN1+1];			// 線分の数用のエリアを追加した作業エリアを確保する
+//	MgGLine2D	*GLn = (MgGLine2D*)work;
 //	MgDivideGLn2( GLn1, GLn);					// 線分を交点で分割する
-////	MgThinOut( *GLn, GLn2);						// 往復線分と開放端を持つ線分を間引く
+////	MgThinOut( *GLn, GLn2);					// 往復線分と開放端を持つ線分を間引く
 //}
 
 /*

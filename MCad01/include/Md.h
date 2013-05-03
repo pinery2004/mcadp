@@ -52,7 +52,7 @@ class MCadSharedGlobals
 	};
 
 
-//	int  MdAextrucpy(MREAL **extrup, MgPoint2 newextru);
+//	int  MdAextrucpy(MREAL **extrup, MgPoint2D newextru);
 void MdAstrncpy(LPTSTR *c, LPCTSTR source, int maxnc);
 //	void MdMstrncpy_s(LPTSTR *c, LPCTSTR source, int maxnc);
 

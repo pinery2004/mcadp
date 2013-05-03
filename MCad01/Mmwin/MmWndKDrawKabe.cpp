@@ -45,18 +45,18 @@ void MmWndKDrawLine(
 						mhPlcParts		*pPlcEn,	// 配置レコード
 						MPENSTYLE		LineType,	// 線種
 						MSYSTEMCOLOR	iLineColor,	// 線色コード
-						MgVect2			vSinZ		// 芯ずれ
+						MgVect2D			vSinZ		// 芯ずれ
 				)
 {
-	MgPoint2	ptW[2];
+	MgPoint2D	ptW[2];
 	DWORD		PartsLineColor;
 
-	ptW[0] = (*(MgPoint2*)&(pPlcEn->GetPIPlcIti( 0))) + vSinZ;
-	ptW[1] = (*(MgPoint2*)&(pPlcEn->GetPIPlcIti( 1))) + vSinZ;
+	ptW[0] = (*(MgPoint2D*)&(pPlcEn->GetPIPlcIti( 0))) + vSinZ;
+	ptW[1] = (*(MgPoint2D*)&(pPlcEn->GetPIPlcIti( 1))) + vSinZ;
 
 	PartsLineColor = mcs::GetColor( iLineColor);
 	pCod->SetLineAttr( LineType, 1, PartsLineColor);
-	pCod->Line( MgLine2( ptW[0], ptW[1]));
+	pCod->Line( MgLine2D( ptW[0], ptW[1]));
 
 }
 
@@ -70,26 +70,26 @@ void MmWndKDrawLine(
 						mhPlcParts		*pPlcEn,	// 配置レコード
 						MPENSTYLE		LineType,	// 線種
 						MSYSTEMCOLOR	iLineColor,	// 線色コード
-						MgVect2			vSinZ		// 芯ずれ
+						MgVect2D			vSinZ		// 芯ずれ
 				)
 {
-	MgPoint2	ptW[2];
+	MgPoint2D	ptW[2];
 	DWORD		PartsLineColor;
 	MhZukei		*pZukei;
 	MINT		ic;
 
-	ptW[0] = (*(MgPoint2*)&(pPlcEn->GetPIPlcIti( 0))) + vSinZ;
-	ptW[1] = (*(MgPoint2*)&(pPlcEn->GetPIPlcIti( 1))) + vSinZ;
+	ptW[0] = (*(MgPoint2D*)&(pPlcEn->GetPIPlcIti( 0))) + vSinZ;
+	ptW[1] = (*(MgPoint2D*)&(pPlcEn->GetPIPlcIti( 1))) + vSinZ;
 
 	PartsLineColor = mcs::GetColor( iLineColor);
 	pCod->SetLineAttr( LineType, 1, PartsLineColor);
 
 	pZukei = pPlcEn->GetPIZukei();
 	if ( iMode == 0 || pZukei == NULL) {
-		pCod->Line( MgLine2( ptW[0], ptW[1]));
+		pCod->Line( MgLine2D( ptW[0], ptW[1]));
 	} else {
 		for ( ic=0; ic<pZukei->m_isNZukei; ic++) 
-			pCod->Line( MgLine2C( pZukei->m_lnZukei[ic]));
+			pCod->Line( MgLine2DC( pZukei->m_lnZukei[ic]));
 	}
 }
 
@@ -106,10 +106,10 @@ void WindowCtrl::MmWndKDrawKabe(
 	MINT		iEnKai;
 //	MsBitSet	*pOptv;
 //	MsBitSet*	pHstv;
-	MgPoint2	ptW[2];
+	MgPoint2D	ptW[2];
 
 	MREAL		rKabeSinZ = pCod->LPtoRP( MINT( pCod->DPtoLP(1)));
-	MgVect2		vKabeSinZ = MgVect2( rKabeSinZ, rKabeSinZ) / 2.;
+	MgVect2D		vKabeSinZ = MgVect2D( rKabeSinZ, rKabeSinZ) / 2.;
 
 	// 壁線を表示する
 

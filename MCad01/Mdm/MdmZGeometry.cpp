@@ -28,7 +28,7 @@ namespace MC
 //		作成した面は３角形の面の集まりでできた多面。
 //
 MINT	MdzCreateTriangleFromPoint(
-						MgPolyg3	i_pgPlt,	// プロット点座標値リスト（３次元の点リスト）
+						MgPolyg3D	i_pgPlt,	// プロット点座標値リスト（３次元の点リスト）
 						MDFIG*		o_pfigPln	// 生成された面の図形情報
 				)
 {
@@ -44,7 +44,7 @@ MINT	MdzCreateTriangleFromPoint(
 //		から構成される線形構造立体の図形情報を作成する。
 //
 MINT	MdzCreateSolidFromPoint(
-						MgPolyg3	i_pgPlt,	// プロット点座標値リスト（３次元の点リスト）
+						MgPolyg3D	i_pgPlt,	// プロット点座標値リスト（３次元の点リスト）
 						MDFIG*		o_pfigPln	// 生成された面の図形情報
 				)
 {
@@ -95,7 +95,7 @@ MINT	MdzGetLenAreaVol(
 //		指定された点と立体（多面体）との包含関係を調べる。
 //
 MINT	MdzCheckPointSolid(
-						MgPoint3	i_ptChk,	// 点座標値
+						MgPoint3D	i_ptChk,	// 点座標値
 						MDFIG&		i_stFigVol,	// 多面体の図形情報
 						MINT*		o_iCond		// チェック結果
 												//	-1:立体の面上にある
@@ -175,7 +175,7 @@ MINT	MdzCheckInter(
 //
 MINT	MdzGetGravityPoint(
 						MDFIG&		i_stFigZk,	// 図形情報（３次元）
-						MgPoint3*	o_pptG		// 重心の点座標値（３次元）
+						MgPoint3D*	o_pptG		// 重心の点座標値（３次元）
 				)
 {
 	return 0;
@@ -191,7 +191,7 @@ MINT	MdzGetGravityPoint(
 //
 MINT	MdzBeelinePointPlane(
 						MDFIG&		i_stFigPg,	// 有意点列の図形情報（３次元）
-						MgPoint3	i_pt,		// 点座標値（３次元）
+						MgPoint3D	i_pt,		// 点座標値（３次元）
 						MREAL*		o_pLng		// 最短距離
 				)
 {

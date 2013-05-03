@@ -27,7 +27,7 @@ namespace MC
 MINT	MdwTransMatrixViewToWorld (
 						MDID		i_idWin,	// ウィンドウＩＤ
 						MDID		i_idDB,		// DB座標系
-						MgMat3E*		o_pmatVtD	// 座標変換マトリックス (視点座標 -> DB座標)
+						MgMat3DE*		o_pmatVtD	// 座標変換マトリックス (視点座標 -> DB座標)
 				)
 {
 	return 0;
@@ -40,7 +40,7 @@ MINT	MdwTransMatrixViewToWorld (
 MINT	MdwTransMatrixWorldToView (
 						MDID		i_idDB,		// DB座標系
 						MDID		i_idWin,	// ウィンドウＩＤ
-						MgMat3E*		o_pmatDtV	// 座標変換マトリックス (視点座標 -> DB座標)
+						MgMat3DE*		o_pmatDtV	// 座標変換マトリックス (視点座標 -> DB座標)
 				)
 {
 	return 0;
@@ -52,7 +52,7 @@ MINT	MdwTransMatrixWorldToView (
 //
 MINT	MdwTransMatrixPixelToView (
 						MDID		i_idWin,	// ウィンドウＩＤ
-						MgMat3E*		o_pmatPtV	// 座標変換マトリックス (pixel座標 -> 視点座標)
+						MgMat3DE*		o_pmatPtV	// 座標変換マトリックス (pixel座標 -> 視点座標)
 				)
 {
 	return 0;
@@ -64,7 +64,7 @@ MINT	MdwTransMatrixPixelToView (
 //
 MINT	MdwTransMatrixViewToPixel (
 						MDID		i_idWin,	// ウィンドウＩＤ
-						MgMat3E*		o_pmatVtP	// 座標変換マトリックス (視点座標 -> pixel座標)
+						MgMat3DE*		o_pmatVtP	// 座標変換マトリックス (視点座標 -> pixel座標)
 				)
 {
 	return 0;
@@ -76,7 +76,7 @@ MINT	MdwTransMatrixViewToPixel (
 //
 MINT	MdwGetEyeCoord (
 						MDID		i_idWin,	// ウィンドウＩＤ
-						MgMat3E*		o_pmatV		// 視点座標変換マトリックス（基準座標系での値）
+						MgMat3DE*		o_pmatV		// 視点座標変換マトリックス（基準座標系での値）
 				)
 {
 	return 0;
@@ -88,7 +88,7 @@ MINT	MdwGetEyeCoord (
 //
 MINT	MdwSetEyeCoord (
 						MDID		i_idWin,	// ウィンドウＩＤ
-						MgMat3E*		i_pmatV		// 視点座標変換マトリックス（基準座標系での値）
+						MgMat3DE*		i_pmatV		// 視点座標変換マトリックス（基準座標系での値）
 				)
 {
 	return 0;
@@ -100,7 +100,7 @@ MINT	MdwSetEyeCoord (
 //
 MINT	MdwGetTypeEyeCoord (
 						MDID		i_idWFn,	// ウィンドウ機能番号
-						MgMat3E*		o_pmatV		// 視点座標変換マトリックス（基準座標系での値）
+						MgMat3DE*		o_pmatV		// 視点座標変換マトリックス（基準座標系での値）
 				)
 {
 	return 0;
@@ -112,7 +112,7 @@ MINT	MdwGetTypeEyeCoord (
 //
 MINT	MdwSetTypeEyeCoord (
 						MDID		i_idWFn,	// ウィンドウ機能番号
-						MgMat3E*		i_pmatV		// 視点座標変換マトリックス（基準座標系での値）
+						MgMat3DE*		i_pmatV		// 視点座標変換マトリックス（基準座標系での値）
 				)
 {
 	return 0;
@@ -124,7 +124,7 @@ MINT	MdwSetTypeEyeCoord (
 //
 MINT	MdwGetLookPoint (
 						MDID		i_idWin,	// ウィンドウＩＤ
-						MgPoint3*	o_pptLook	// 注視点座標（基準座標系での値）
+						MgPoint3D*	o_pptLook	// 注視点座標（基準座標系での値）
 				)
 {
 	return 0;
@@ -136,7 +136,7 @@ MINT	MdwGetLookPoint (
 //
 MINT	MdwSetLookPoint (
 						MDID		i_idWin,	// ウィンドウＩＤ
-						MgPoint3*	i_pptLook	// 注視点座標（基準座標系での値）
+						MgPoint3D*	i_pptLook	// 注視点座標（基準座標系での値）
 				)
 {
 	return 0;
@@ -148,7 +148,7 @@ MINT	MdwSetLookPoint (
 //
 MINT	MdwGetTypeLookPoint (
 						MDID		i_idWFn,	// ウィンドウ機能番号
-						MgPoint3*	o_pptLook	// 注視点座標（基準座標系での値）
+						MgPoint3D*	o_pptLook	// 注視点座標（基準座標系での値）
 				)
 {
 	return 0;
@@ -160,7 +160,7 @@ MINT	MdwGetTypeLookPoint (
 //
 MINT	MdwSetTypeLookPoint (
 						MDID		i_idWFn,	// ウィンドウ機能番号
-						MgPoint3*	i_pptLook	// 注視点座標（基準座標系での値）
+						MgPoint3D*	i_pptLook	// 注視点座標（基準座標系での値）
 				)
 {
 	return 0;
@@ -312,7 +312,7 @@ MINT	MdwSetScale (
 //
 MINT	MdwGetRange (
 						MDID		i_idWin,	// ウィンドウＩＤ
-						MgPoint3	o_ptArea[2]	// 表示領域（左下点、右上点）
+						MgPoint3D	o_ptArea[2]	// 表示領域（左下点、右上点）
 												//	視点系での座標値
 				)
 {
@@ -325,7 +325,7 @@ MINT	MdwGetRange (
 //
 MINT	MdwSetRange (
 						MDID		i_idWin,	// ウィンドウＩＤ
-						MgPoint3	i_ptArea[2]	// 表示領域（左下点、右上点）
+						MgPoint3D	i_ptArea[2]	// 表示領域（左下点、右上点）
 												//	視点系での座標値
 				)
 {
@@ -365,7 +365,7 @@ MINT	MdwSetAngle (
 //
 MINT	MdwScroll (
 						MDID		i_idWin,	// ウィンドウId
-						MgPoint2	i_vMv		// 移動ベクトル（視点座標系でのベクトル）
+						MgPoint2D	i_vMv		// 移動ベクトル（視点座標系でのベクトル）
 				)
 {
 	return 0;
@@ -377,7 +377,7 @@ MINT	MdwScroll (
 //
 MINT	MdwPanning (
 						MDID		i_idWin,	// ウィンドウId
-						MgPoint2	i_ptCnt		// 画面の中心としたい点（視点座標系での座標値）
+						MgPoint2D	i_ptCnt		// 画面の中心としたい点（視点座標系での座標値）
 				)
 {
 	return 0;
@@ -1197,7 +1197,7 @@ MINT	MdwGetTypeName (
 //
 MINT	MdwGetTypeOriginPosition (
 						MDID		i_idWFn,	// ウィンドウ機能番号
-						MgPoint2*	o_pptOrg	// ウィンドウ領域内（(0,0)-(1,1)）の原点位置
+						MgPoint2D*	o_pptOrg	// ウィンドウ領域内（(0,0)-(1,1)）の原点位置
 				)
 {
 	return 0;
@@ -1211,7 +1211,7 @@ MINT	MdwGetTypeOriginPosition (
 //
 MINT	MdwSetTypeOriginPosition (
 						MDID		i_idWFn,	// ウィンドウ機能番号
-						MgPoint2	i_ptOrg		// ウィンドウ領域内（(0,0)-(1,1)）の原点位置
+						MgPoint2D	i_ptOrg		// ウィンドウ領域内（(0,0)-(1,1)）の原点位置
 				)
 {
 	return 0;
@@ -1377,7 +1377,7 @@ MINT	MdwSetBasePlaneShapeFlg (
 //
 MINT	MdwGetBasePlaneRange (
 						MDID		i_idWin,	// ウィンドウId
-						MgRect2*	o_prcDsp	//	作業面表示範囲（最小XY、最大XY）
+						MgRect2D*	o_prcDsp	//	作業面表示範囲（最小XY、最大XY）
 				)
 {
 	return 0;
@@ -1393,7 +1393,7 @@ MINT	MdwGetBasePlaneRange (
 //
 MINT	MdwSetBasePlaneRange (
 						MDID		i_idWin,	// ウィンドウId
-						MgRect2*	o_prcDsp	//	作業面表示範囲（最小XY、最大XY）
+						MgRect2D*	o_prcDsp	//	作業面表示範囲（最小XY、最大XY）
 				)
 {
 	return 0;
@@ -1410,7 +1410,7 @@ MINT	MdwSetBasePlaneRange (
 //
 MINT	MdwGetDefaultBasePlaneRange (
 						MDID		i_idWFn,	// ウィンドウ機能番号
-						MgRect2*	o_prcDsp	//	作業面表示範囲（最小XY、最大XY）
+						MgRect2D*	o_prcDsp	//	作業面表示範囲（最小XY、最大XY）
 				)
 {
 	return 0;
@@ -1428,7 +1428,7 @@ MINT	MdwGetDefaultBasePlaneRange (
 //
 MINT	MdwSetDefaultBasePlaneRange (
 						MDID		i_idWFn,	// ウィンドウ機能番号
-						MgRect2*	i_prcDsp	//	作業面表示範囲（最小XY、最大XY）
+						MgRect2D*	i_prcDsp	//	作業面表示範囲（最小XY、最大XY）
 				)
 {
 	return 0;
@@ -1474,7 +1474,7 @@ MINT	MdwSetBasePlaneXYZ (
 //
 MINT	MdwGetTempPlaneCoord (
 						MDID		i_idWFn,	// ウィンドウ機能番号
-						MgMat3E*		o_pmatV		// 作業面の座標系の座標変換マトリックス
+						MgMat3DE*		o_pmatV		// 作業面の座標系の座標変換マトリックス
 												// （基準座標系での値）
 				)
 {
@@ -1487,7 +1487,7 @@ MINT	MdwGetTempPlaneCoord (
 //
 MINT	MdwSetTempPlaneCoord (
 						MDID		i_idWFn,	// ウィンドウ機能番号
-						MgMat3E*		i_pmatV		// 作業面の座標系の座標変換マトリックス
+						MgMat3DE*		i_pmatV		// 作業面の座標系の座標変換マトリックス
 												// （基準座標系での値）
 				)
 {
@@ -1503,7 +1503,7 @@ MINT	MdwSetTempPlaneCoord (
 //
 MINT	MdwGetBasePlaneCoord (
 						MDID		i_idWFn,	// ウィンドウ機能番号
-						MgMat3E*		o_pmatV		// 作業面の座標系の座標変換マトリックス
+						MgMat3DE*		o_pmatV		// 作業面の座標系の座標変換マトリックス
 												// （基準座標系での値）
 				)
 {
@@ -1519,7 +1519,7 @@ MINT	MdwGetBasePlaneCoord (
 //
 MINT	MdwGetDefaultBasePlaneCoord (
 						MDID		i_idWFn,	// ウィンドウ機能番号
-						MgMat3E*		o_pmatV		// 作業面の座標系の座標変換マトリックス
+						MgMat3DE*		o_pmatV		// 作業面の座標系の座標変換マトリックス
 												// （基準座標系での値）
 				)
 {
@@ -1537,7 +1537,7 @@ MINT	MdwGetDefaultBasePlaneCoord (
 //
 MINT	MdwSetDefaultBasePlaneCoord (
 						MDID		i_idWFn,	// ウィンドウ機能番号
-						MgMat3E*		i_pmatV		// 作業面の座標系の座標変換マトリックス
+						MgMat3DE*		i_pmatV		// 作業面の座標系の座標変換マトリックス
 												// （基準座標系での値）
 				)
 {

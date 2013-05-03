@@ -126,7 +126,7 @@ MINT Window::DispCrossHair(
 	dc.SetROP2( R2_XORPEN);
 
 	if ( ictl >= 0) {
-		MgMinMaxI2	iMinMaxL = z_pCurWndInfo->GetMinMaxL();
+		MgMinMaxI2D	iMinMaxL = z_pCurWndInfo->GetMinMaxL();
 		MINT		iUpL = z_pCurWndInfo->GetUpL();								// ‚w‚x•\Ž¦ƒoƒ‰ƒ“ƒX
 //S		z_ptCurCrossHairL[0][0] = CPoint( z_ptLCurMouth.x, iMinMaxL.min.y * iUpL);
 //		z_ptCurCrossHairL[0][1] = CPoint( z_ptLCurMouth.x, ( iMinMaxL.max.y+100) * iUpL);

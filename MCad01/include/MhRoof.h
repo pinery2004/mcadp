@@ -70,12 +70,12 @@ class	MhRfm;
 class MhJim
 {
 public:
-	MgPoint2	m_p;								// 地廻り線右端の頂点
+	MgPoint2D	m_p;								// 地廻り線右端の頂点
 	MINT		m_icd;								// 地廻り線コード
 	MINT		m_ifInp;							// 入力フラグ
 	MREAL		m_rKb;								// 勾配
 	MINT		m_iRfm;								// 屋根面配列番号
-	MgLine3		m_LnR;								// 右側屋根構成線（延長）
+	MgLine3D		m_LnR;								// 右側屋根構成線（延長）
 	MINT		m_icdLnR;							// 右側屋根構成線コード
 public:
 	void Free()			{}
@@ -97,7 +97,7 @@ public:
 class MgKs1
 {
 public:
-	MgLine3		m_Ln;							// 構成線分
+	MgLine3D		m_Ln;							// 構成線分
 	MINT		m_itpLn;						// 線分タイプ(0: 半直線　1:線分)
 	MINT		m_iCd;							// 構成コード
 	MINT		m_ifProc;						// 計算処理用フラグ
@@ -122,8 +122,8 @@ public:
 class MhRfm
 {
 public:
-	MgPlane3	m_Pln;							// 屋根面係数
-	MgPolyg3	m_Pg;							// 屋根面形状（屋根構成線）
+	MgPlane3D	m_Pln;							// 屋根面係数
+	MgPolyg3D	m_Pg;							// 屋根面形状（屋根構成線）
 	MgGInt		m_cdPg;							// 屋根構成線コード
 	MINT		m_icd;							// 構成コード
 public:
@@ -153,21 +153,21 @@ class MhRoofInfo: public MOBJECT
 	friend	class	MdRoofQueue;
 	friend	MINT	MdRoofModify( MhRoofInfo *pRfInfoR, MhRoofInfo* *ppRfInfoM);
 	friend	void	MdRoofDelete( MPOSITION pPosition);
-	friend	MINT	RoofPlc( const MgPolyg2 &pgJim, const MgGInt &gint, const MgPoint2 &pth);
+	friend	MINT	RoofPlc( const MgPolyg2D &pgJim, const MgGInt &gint, const MgPoint2D &pth);
 	friend	void	MmWndKDrawRoof( MmWndInfo* pWndInfo);
 
 //public:
 	MINT				m_iKai;						// 階( 1, 2, 3)
 	MgGrpS<MhJim>		m_GJim1;					// 地廻り線（入力）
 													// （（頂点・地廻り線コード・入力フラグ)n）
-	MgPoint2			m_ptH;						// 方向を示す点（入力）
+	MgPoint2D			m_ptH;						// 方向を示す点（入力）
 	MgGrpS<MgKs1>		m_GKs1;						// 構成線（入力）
 													// （（構成線分・構成コード・構成線情報)n）
 	MgGrpF<MhRfm>		m_GRfm;						// 屋根面
 													// （（(頂点・構成コード)n)n）
-	MgGPolyg3			m_GNUm;						// 軒裏面
+	MgGPolyg3D			m_GNUm;						// 軒裏面
 													// （（(頂点)n)n）
-	MgGPolyg3			m_GHm;						// へり面
+	MgGPolyg3D			m_GHm;						// へり面
 													// （（(頂点)n)n）
 	
 //	MhRoofInfo*			m_Oya;						// 親屋根
@@ -197,7 +197,7 @@ class MhRoofInfo: public MOBJECT
 	MINT				m_nRtm;						// 立面数
 	MINT*				m_pifRitm;					// 立面表示(面フラグ)  0:面  1:穴
 	MINT*				m_pnPtRitm;					// 立面表示(頂点数)
-	MgPoint3*			m_pPtRitm;					// 立面表示(頂点)
+	MgPoint3D*			m_pPtRitm;					// 立面表示(頂点)
 //	MnDisp*				m_pLnRitm;					// 立面表示情報（線分）
 
 //	MhTexture*			m_KsInfo[NKSINFO];			// 構成情報
@@ -285,9 +285,9 @@ public:
 
 	// 地廻り線にコードを設定する
 	void SetJimCd(
-				const	MgPolyg2	&pgJim,			// (I  ) 地廻り区画
+				const	MgPolyg2D	&pgJim,			// (I  ) 地廻り区画
 				const	MgGInt		&GifInp,		// (I  ) 地廻り線種類(仮想キー(nflag)  MK_SHIFT(004): シフトキー)
-				const	MgPoint2	&pth			// (I  ) 方向点
+				const	MgPoint2D	&pth			// (I  ) 方向点
 				);
 
 	// 属性入力値を取り込み設定する 

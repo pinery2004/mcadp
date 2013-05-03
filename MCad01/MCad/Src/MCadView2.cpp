@@ -123,7 +123,7 @@ BOOL CMCadView2::Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD dwS
 
 int CMCadView2::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
-	MC::MgPoint3	PtCtr;						// 中心座標
+	MC::MgPoint3D	PtCtr;						// 中心座標
 
 	if (CView::OnCreate(lpCreateStruct) == -1)
 		return -1;
@@ -198,8 +198,8 @@ void CMCadView2::OnMouseMove(UINT nFlags, CPoint point)
 	CPoint	iPtD;												// マウス移動量	
 	CRect	iRcWin;												// ウィンドウ領域 (描画領域)
 	CPoint	iSzWin;												// ウィンドウの幅と高さ
-	MC::MgVect3	PtD( 0., 0., 0.);
-	MC::MgVect3	RtD( 0., 0., 0.);
+	MC::MgVect3D	PtD( 0., 0., 0.);
+	MC::MgVect3D	RtD( 0., 0., 0.);
 	MREAL	SclD = 0.;
 
 	if (!(nFlags & MK_LBUTTON) && !( nFlags & MK_RBUTTON))
