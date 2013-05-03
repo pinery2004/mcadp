@@ -30,6 +30,17 @@ namespace MC
 
 //
 //======================( ２次元 )==============================
+//		ベクトルをトレースする
+//
+void MgPoint2::Print(MCHAR* s) const				// Print
+{
+#ifdef LOGOUT
+	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgPoint2	: (%7.1f,%7.1f)\n"), s, x, y);
+	MBLOGPRBF;
+#endif
+}
+//
+//======================( ２次元 )==============================
 //		ベクトルを単位ベクトルに変換する
 //
 MgVect2 MgVect2::SetUnitize( MREAL i_Tol)		//	(  O) 単位ベクトル
@@ -58,8 +69,8 @@ MgVect2 MgVect2::Unitize( MREAL i_Tol) const	//	(  O) 単位ベクトル
 //
 void MgVect2::Print(MCHAR* s) const				// Print
 {
-#ifdef _DEBUG
-	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgPoint2	: (%7.1f,%7.1f)\n"), s, x, y);
+#ifdef LOGOUT
+	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgVect2	: (%7.1f,%7.1f)\n"), s, x, y);
 	MBLOGPRBF;
 #endif
 }
@@ -109,6 +120,17 @@ MgPoint2a Norma( const MgPoint2& i_p, MREAL i_Tol)
 #endif
 //
 //======================( ３次元 )==============================
+//		ベクトルをトレースする
+//
+void MgPoint3::Print(MCHAR* s) const				// Print
+{
+#ifdef LOGOUT
+	Msprintf_s( mlLog::m_Str, Mstr( "%s 	MgPoint3	: (%7.1f, %7.1f, %7.1f)\n"), s, x, y, z);
+	MBLOGPRBF;
+#endif
+}
+//
+//======================( ３次元 )==============================
 //		ベクトルを単位ベクトルに変換する
 //
 MgVect3 MgVect3::SetUnitize( MREAL i_Tol)		//	(  O) 単位ベクトル
@@ -138,8 +160,8 @@ MgVect3 MgVect3::Unitize( MREAL i_Tol) const				//	(  O) 単位ベクトル
 //
 void MgVect3::Print(MCHAR* s) const				// Print
 {
-#ifdef _DEBUG
-	Msprintf_s( mlLog::m_Str, Mstr( "%s 	MgPoint3	: (%7.1f, %7.1f, %7.1f)\n"), s, x, y, z);
+#ifdef LOGOUT
+	Msprintf_s( mlLog::m_Str, Mstr( "%s 	MgVect3	: (%7.1f, %7.1f, %7.1f)\n"), s, x, y, z);
 	MBLOGPRBF;
 #endif
 }

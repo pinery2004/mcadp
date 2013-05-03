@@ -245,7 +245,7 @@ void mmIoPartsAttr::InitComboAttr(
 		m_iIoPartsAttrMd = MnCalcInpAtMode();
 
 	if ( m_iIoPartsAttrMd < 0 || m_iIoPartsAttrMd >= MP_AT_END) {
-		mlLog::LogOutT( MC_LOG_ERROR, Mstr( "属性値入力モードエラー: %d\n"), m_iIoPartsAttrMd);
+		mlLog::LogOutWL( MC_LOG_ERROR, Mstr( "属性値入力モードエラー: %d\n"), m_iIoPartsAttrMd);
 		goto EXIT;
 	}
 
@@ -555,7 +555,7 @@ int mmIoPartsAttr::GetComboAttrNo(
 	int		iCmbNo = 0;
 
 	if (  m_iIoPartsAttrMd == -1) {
-		mlLog::LogOutT( MC_LOG_ERROR, Mstr( "属性値入力モードエラー: %d\n"), m_iIoPartsAttrMd);
+		mlLog::LogOutWL( MC_LOG_ERROR, Mstr( "属性値入力モードエラー: %d\n"), m_iIoPartsAttrMd);
 	} else {
 		for ( ic=0; ic<MC_SZ_CMBATTR; ic++)
 			if ( i_iAttr == s_Combo_Attr[m_iIoPartsAttrMd][ic])

@@ -70,20 +70,31 @@ public:
 
 //	MgPoint2( const MgVect2& pt);
 
-	// 属性値の設定
-	MgPoint2 SetUnitize( MREAL i_tol = MgTol_Dt::D);							// 単位ベクトルに変換する
+	// 演算
+//	MgPoint2 Unitize( MREAL i_tol = MgTol_Dt::D) const;							// 原点から点方向の単位ベクトルを求める
+
+	MgPoint2 RotR90() const														// 原点を中心に右に９０度回転した点の位置を求める
+						{ return MgPoint2( y, -x);}
+	MgPoint2 RotL90() const														// 原点を中心に左に９０度回転した点の位置を求める
+						{ return MgPoint2( -y, x);}
+	MgPoint2 Rot180() const														// 原点を中心に１８０度回転した点の位置を求める
+						{ return MgPoint2( -x, -y);}
+	MgPoint2 Rot( const MgVect2& v) const;										// 原点を中心に単位ベクトル方向に回転した点の位置を求める
+
+	MgPoint2 Rot( MREAL ang);													// 原点を中心に指定角度で左回転した点の位置を求める
+
+	// 変換
+//	MgPoint2 SetUnitize( MREAL i_tol = MgTol_Dt::D);							// 原点から点方向の単位ベクトルに変換する
 	
-	MgPoint2 SetRotR90()														// 右に９０度回転したベクトルに変換する
+	MgPoint2 SetRotR90()														// 原点を中心に右に９０度回転する
 						{ MREAL xs = x; x = y; y = -xs; return *this;}
-	MgPoint2 SetRotL90()														// 左に９０度回転したベクトルに変換する
+	MgPoint2 SetRotL90()														// 原点を中心に左に９０度回転する
 						{ MREAL xs = x; x = -y; y = xs; return *this;}
-	MgPoint2 SetRot180()														// １８０度回転したベクトルに変換する
+	MgPoint2 SetRot180()														// 原点を中心に１８０度回転する
 						{ x = -x; y = -y; return *this;}
-	MgPoint2 SetRot( const MgPoint2& v)											// 単位ベクトル方向に回転したベクトルに変換する
-						{ MgPoint2 vt = *this; 
-						  x = vt.x * v.x -  vt.y * v.y;
-						  y = vt.x * v.y +  vt.y * v.x;
-						  return *this;}
+	MgPoint2 SetRot( const MgVect2& v);											// 原点を中心に単位ベクトル方向に回転する
+
+	MgPoint2 SetRot( MREAL ang);												// 原点を中心に指定角度で左回転する
 
 	// 属性値の取得
 	void Get( MREAL* rP) const
@@ -131,15 +142,6 @@ public:
 
 	bool operator != (const MgPoint2& v) const;									// b = (P1 != P2) 判定
 
-	MgPoint2 Unitize( MREAL i_tol = MgTol_Dt::D) const;							// 単位ベクトルを求める
-
-	MgPoint2 RotR90() const;													// 右に９０度回転したベクトルを求める
-
-	MgPoint2 RotL90() const;													// 左に９０度回転したベクトルを求める
-
-	MgPoint2 Rot180() const;													// １８０度回転したベクトルを求める
-
-	MgPoint2 Rot( const MgPoint2& v) const;										// 単位ベクトル方向に回転したベクトルを求める
 
 	// トレース
 	void Print(MCHAR* s) const;
@@ -170,7 +172,27 @@ public:
 
 //	MgVect2( const MgPoint2& pt);
 
-	// 属性値の設定
+	// 演算
+	MgVect2 Unitize( MREAL i_tol = MgTol_Dt::D) const;							// 単位ベクトルを求める
+
+	MgVect2 RotR90() const														// 右に９０度回転したベクトルを求める
+						{ return MgVect2( y, -x);}
+
+	MgVect2 RotL90() const														// 左に９０度回転したベクトルを求める
+						{ return MgVect2( -y, x);}
+
+	MgVect2 Rot180() const														// １８０度回転したベクトルを求める
+						{ return MgVect2( -x, -y);}
+
+	MgVect2 Rot( const MgVect2& v) const										// 単位ベクトル方向に回転したベクトルを求める
+						{ return MgVect2( x * v.x -  y * v.y,
+		 			               		  x * v.y +  y * v.x);}
+
+	MgVect2 Rot( MREAL ang)														// 指定角度で左回転したベクトルを求める
+						{ MgVect2 v = MgVect2( cos( ang), sin( ang));
+						  return Rot( v);}
+
+	// 変換
 	MgVect2 SetUnitize( MREAL i_tol = MgTol_Dt::D);								// 単位ベクトルに変換する
 	
 	MgVect2 SetRotR90()															// 右に９０度回転したベクトルに変換する
@@ -180,9 +202,17 @@ public:
 	MgVect2 SetRot180()															// １８０度回転したベクトルに変換する
 						{ x = -x; y = -y; return *this;}
 	MgVect2 SetRot( const MgVect2& v)											// 単位ベクトル方向に回転したベクトルに変換する
-						{ MgVect2 vt = *this; 
-						  x = vt.x * v.x -  vt.y * v.y;
-						  y = vt.x * v.y +  vt.y * v.x;
+//S						{ MgVect2 vt = *this; 
+//						  x = vt.x * v.x -  vt.y * v.y;
+//						  y = vt.x * v.y +  vt.y * v.x;
+						{ *this = Rot( v);
+						  return *this;}
+	MgVect2 SetRot( MREAL ang)													// 指定角度で左回転したベクトルに変換する
+						{ MgVect2 v = MgVect2( cos( ang), sin( ang));
+//S						  MgVect2 vt = *this;
+//						  x = vt.x * v.x -  vt.y * v.y;
+//						  y = vt.x * v.y +  vt.y * v.x;
+						  *this = Rot( v);
 						  return *this;}
 
 	// 属性値の取得
@@ -227,15 +257,6 @@ public:
 
 	bool operator != (const MgVect2& v) const;									// b = (P1 != P2) 判定
 
-	MgVect2 Unitize( MREAL i_tol = MgTol_Dt::D) const;							// 単位ベクトルを求める
-
-	MgVect2 RotR90() const;														// 右に９０度回転したベクトルを求める
-
-	MgVect2 RotL90() const;														// 左に９０度回転したベクトルを求める
-
-	MgVect2 Rot180() const;														// １８０度回転したベクトルを求める
-
-	MgVect2 Rot( const MgVect2& v) const;										// 単位ベクトル方向に回転したベクトルを求める
 
 	// トレース
 	void Print(MCHAR* s) const;

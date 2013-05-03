@@ -59,7 +59,7 @@ inline void mdmEnt::Alloc( MINT i_szSC, MINT i_szAtr/*=0*/, MINT i_szFig/*=0*/)
 //	トレース
 inline void mdmEnt::Print( MCHAR* s, MINT i_i)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "\t%d: %s < mdmDEnt > 親ID = %d\n"), i_i, s, m_idP);
 	MBLOGPRBF;
 	m_GidC.Print( Mstr( "付属子"), MDC_NONE_ID);

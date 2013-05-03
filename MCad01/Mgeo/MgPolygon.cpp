@@ -226,7 +226,7 @@ MgMinMaxR2 MgPolyg2::MinMax()
 //	トレース
 void MgPolyg2::Print( MCHAR* s) const
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgPolyg2	サイズ: %d, 頂点数: %d\n"), s, m_isz, m_n);
 	MBLOGPRBF;
 	for (int ic=0; ic<m_n; ic++) {
@@ -420,7 +420,7 @@ MgMinMaxR3 MgPolyg3::MinMax()
 //	トレース
 void MgPolyg3::Print( MCHAR* s) const							// Print
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgPolyg3 サイズ: %d, 頂点数: %d\n"), s, m_isz, m_n);
 	MBLOGPRBF;
 	for (int ic=0; ic<m_n; ic++) {
@@ -635,7 +635,7 @@ void MgGPolyg2::Resize( MINT szn)
 //	トレース
 void MgGPolyg2::Print( MCHAR* s) const							// Print
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgGPolyg2	サイズ: %d, ポリゴン数: %d\n"), s, m_isz, m_n);
 	MBLOGPRBF;
 	for (int ic=0; ic<m_n; ic++)
@@ -862,7 +862,7 @@ void MgGPolyg3::Resize( MINT szn)
 //	トレース
 void MgGPolyg3::Print( MCHAR* s) const							// Print
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgGPolyg3	サイズ: %d, ポリゴン数: %d\n"), s, m_isz, m_n);
 	MBLOGPRBF;
 	for (int ic=0; ic<m_n; ic++)
@@ -1022,7 +1022,7 @@ void MgGLine2::Resize( MINT szn)
 //	トレース
 void MgGLine2::Print( MCHAR* s) const
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgGLine2	サイズ: %d, 線分数: %d\n"), s, m_isz, m_n);
 	MBLOGPRBF;
 	for (int ic=0; ic<m_n; ic++) {
@@ -1204,7 +1204,7 @@ void MgGLine3::Resize( MINT szn)
 //	トレース
 void MgGLine3::Print( MCHAR* s) const
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgGLine3	サイズ: %d, 線分数: %d\n"), s, m_isz, m_n);
 	MBLOGPRBF;
 	for (int ic=0; ic<m_n; ic++) {
@@ -1360,7 +1360,7 @@ void MgGInt::Resize( MINT szn)
 //	トレース
 void MgGInt::Print( MCHAR* s) const
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgGInt	サイズ: %d, 整数の数: %d\n"), s, m_isz, m_n);
 	MBLOGPRBF;
 	for (int ic=0; ic<m_n; ic++) {
@@ -1515,7 +1515,7 @@ void MgGReal::Resize( MINT szn)
 //	トレース
 void MgGReal::Print( MCHAR* s) const
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgGReal	サイズ: %d, 実数の数: %d\n"), s, m_isz, m_n);
 	MBLOGPRBF;
 	for (int ic=0; ic<m_n; ic++) {
@@ -1682,7 +1682,7 @@ MgMinMaxR2 MgGPoint2::MinMax()
 //	トレース
 void MgGPoint2::Print( MCHAR* s) const
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgPolyg2	サイズ: %d, 頂点数: %d\n"), s, m_isz, m_n);
 	MBLOGPRBF;
 	for (int ic=0; ic<m_n; ic++) {
@@ -1869,7 +1869,7 @@ MgMinMaxR3 MgGPoint3::MinMax()
 //	トレース
 void MgGPoint3::Print( MCHAR* s) const
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgPolyg2	サイズ: %d, 頂点数: %d\n"), s, m_isz, m_n);
 	MBLOGPRBF;
 	for (int ic=0; ic<m_n; ic++) {

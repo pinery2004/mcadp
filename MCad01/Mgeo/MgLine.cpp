@@ -68,7 +68,7 @@ bool MgULine2::operator == ( const MgULine2& ULn1) const							// b = (uln == UL
 //
 void MgULine2::Print( MCHAR* s)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgULine2	: (%7.1f,%7.1f), (%7.1f,%7.1f)\n"),
 								 s, p.x, p.y, v.x, v.y);
 	MBLOGPRBF;
@@ -122,7 +122,7 @@ bool MgHLine2::operator == ( const MgHLine2 &HLn1) const							// b = (uln == UL
 //
 void MgHLine2::Print( MCHAR* s)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgHLine2	: (%7.1f,%7.1f), (%7.1f,%7.1f)\n"),
 									s, p.x, p.y, v.x, v.y);
 	MBLOGPRBF;
@@ -143,7 +143,7 @@ bool MgLine2::operator == ( const MgLine2& Ln1) const								// b = (ln == Ln1) 
 //
 void MgLine2::Print( MCHAR* s)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgLine2		: (%7.1f,%7.1f), (%7.1f,%7.1f)\n"),
 									 s, p[0].x, p[0].y, p[1].x, p[1].y);
 	MBLOGPRBF;
@@ -180,7 +180,7 @@ bool MgULine3::operator == ( const MgULine3& ULn1) const							// b = (uln == UL
 //
 void MgULine3::Print( MCHAR* s)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "%s 	MgULine3	: (%7.1f,%7.1f,%7.1f), (%7.1f,%7.1f,%7.1f)\n"),
 									s, p.x, p.y, p.z, v.x, v.y, v.z);
 	MBLOGPRBF;
@@ -217,7 +217,7 @@ bool MgHLine3::operator == ( const MgHLine3 &HLn1) const							// b = (uln == UL
 //
 void MgHLine3::Print( MCHAR* s)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "%s 	MgHLine3	: (%7.1f,%7.1f,%7.1f), (%7.1f,%7.1f,%7.1f)\n"),
 									s, p.x, p.y, p.z, v.x, v.y, v.z);
 	MBLOGPRBF;
@@ -238,7 +238,7 @@ bool MgLine3::operator == ( const MgLine3& Ln1) const							// b = (ln == Ln1) ”
 //
 void MgLine3::Print( MCHAR* s)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "%s 	MgLine3 	: (%7.1f,%7.1f,%7.1f), (%7.1f,%7.1f,%7.1f)\n"),
 									 s, p[0].x, p[0].y, p[0].z, p[1].x, p[1].y, p[1].z);
 	MBLOGPRBF;

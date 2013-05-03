@@ -49,7 +49,7 @@ void mnIoPartsAttr::InitComboParts()
 void mnIoPartsAttr::GetPartsSpec( void)
 {
 	if ( m_iComboKmIdPartsNm < 0)
-		mlLog::LogOutT( MC_LOG_ERROR, Mstr( "部品仕様エラー: %d\n"), m_iComboKmIdPartsNm);
+		mlLog::LogOutWL( MC_LOG_ERROR, Mstr( "部品仕様エラー: %d\n"), m_iComboKmIdPartsNm);
 
 	// 部品仕様を部品配置入力データへ設定
 	int iIdPartsSpec;

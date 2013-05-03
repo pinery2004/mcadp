@@ -118,7 +118,7 @@ inline void MdmSetGRP::SetInit(
 //	トレース
 inline void MdmSetGRP::Print( MCHAR* s, MINT i_i)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "	%3d: %s < MdmSetGRP > 親ID = %d，"), i_i, m_psName, m_idP);
 	MBLOGPRBF;
 	Msprintf_s( mlLog::m_Str, Mstr( "階高さ = %.1f, 床高さ = %.1f\n"),

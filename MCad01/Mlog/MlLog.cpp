@@ -34,11 +34,11 @@ MCHAR	mlLog::m_Str[1000];
 FILE*	mlLog::m_File;
 MINT	mlLog::m_iCtl;
 
-void mlLog::OpenTrace( MCHAR* i_cLogFilePath)
+void mlLog::OpenLogFile( MCHAR* i_cLogFilePath)
 {
 	errno_t	err;
 
-#ifdef _DEBUG
+#ifdef LOGOUT
 	if ( Mstrcmp( i_cLogFilePath, Mstr( "stdout")) == 0) {
 		m_File = stdout;
 	} else {
@@ -51,9 +51,9 @@ void mlLog::OpenTrace( MCHAR* i_cLogFilePath)
 #endif
 }
 
-void mlLog::CloseTrace( )
+void mlLog::CloseLogFile( )
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	if ( m_File != stdout)
 		fclose( m_File);
 #endif
@@ -61,14 +61,14 @@ void mlLog::CloseTrace( )
 
 void mlLog::Ctrl( int ictrl)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	m_iCtl = ictrl;
 #endif
 }
 
 int mlLog::Wait( MCHAR* str)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	int ii;
 	if( m_iCtl != 0) {
 		TRACE( Mstr( "%s --- Keyin dumy number >"), str);
@@ -82,7 +82,7 @@ int mlLog::Wait( MCHAR* str)
 }
 void mlLog::Flush( )
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	if( m_iCtl != 0) {
 		fflush( m_File);
 	}
@@ -90,7 +90,7 @@ void mlLog::Flush( )
 }
 void mlLog::PrintCR( )
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	if( m_iCtl != 0) {
 		Mfprintf( m_File, Mstr( "\n"));
 		TRACE( Mstr( "\n"));
@@ -100,7 +100,7 @@ void mlLog::PrintCR( )
 
 void mlLog::Print( MCHAR* str)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	if( m_iCtl != 0) {
 		Mfprintf( m_File, Mstr( "%s\n"), str);
 		TRACE( Mstr( "%s\n"), str);
@@ -110,7 +110,7 @@ void mlLog::Print( MCHAR* str)
 
 void mlLog::Print( MCHAR* str, const MCHAR* s1)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	if( m_iCtl != 0) {
 		Mfprintf( m_File, Mstr( "%s	= %s\n"), str, s1);
 		TRACE( Mstr( "%s	= %s\n"), str, s1);
@@ -120,7 +120,7 @@ void mlLog::Print( MCHAR* str, const MCHAR* s1)
 
 void mlLog::Print( MCHAR* str, MINT i1)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	if( m_iCtl != 0) {
 		Mfprintf( m_File, Mstr( "%s	= %d\n"), str, i1);
 		TRACE( Mstr( "%s	= %d\n"), str, i1);
@@ -130,7 +130,7 @@ void mlLog::Print( MCHAR* str, MINT i1)
 
 void mlLog::Print( MCHAR* str, MINT *i1, int ni1)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	if( m_iCtl != 0) {
 		if ( ni1 != 0) {
 			Mfprintf( m_File, Mstr( "%s	="), str);
@@ -156,7 +156,7 @@ void mlLog::Print( MCHAR* str, MINT *i1, int ni1)
 
 void mlLog::Print( MCHAR* str, MUBYTE i1)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	if( m_iCtl != 0) {
 		Mfprintf( m_File, Mstr( "%s	= %d\n"), str, i1);
 		TRACE( Mstr( "%s	= %d\n"), str, i1);
@@ -166,7 +166,7 @@ void mlLog::Print( MCHAR* str, MUBYTE i1)
 
 void mlLog::Print( MCHAR* str, MUBYTE *i1, int ni1)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	if( m_iCtl != 0) {
 		Mfprintf( m_File, Mstr( "%s	="), str);
 		TRACE( Mstr( "%s	="), str);
@@ -188,7 +188,7 @@ void mlLog::Print( MCHAR* str, MUBYTE *i1, int ni1)
 
 void mlLog::Print( MCHAR* str, MREAL f1)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	if( m_iCtl != 0) {
 		Mfprintf( m_File, Mstr( "%s	= %f\n"), str, f1);
 		TRACE( Mstr( "%s	= %f\n"), str, f1);
@@ -198,7 +198,7 @@ void mlLog::Print( MCHAR* str, MREAL f1)
 
 void mlLog::Print( MCHAR* str, MREAL *f1, int nf1)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	if( m_iCtl != 0) {
 		Mfprintf( m_File, Mstr( "%s	="), str);
 		TRACE( Mstr( "%s	="), str);
@@ -226,7 +226,7 @@ void mlLog::LogOut(
 						MCHAR* i_cFormat, ...	// ログ書き込みデータ
 						)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	va_list	cList;
 	if( m_iCtl != 0) {
 		va_start( cList, i_cFormat);
@@ -241,7 +241,7 @@ void mlLog::LogOut(
 //
 //		Ex.	mlLog::LogOut( MC_LOG_ERROR, Mstr("%s(%d) XXX処理\n"), __FILE__, __LINE__);
 //
-void mlLog::LogOutT(
+void mlLog::LogOutWL(
 						int		i_iLevel,		// ログレベル
 												//				MC_LOG_ERROR
 												//				MC_LOG_WARNING
@@ -249,11 +249,12 @@ void mlLog::LogOutT(
 						MCHAR*	i_cFormat, ...	// ログ書き込みデータ
 						)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	switch ( i_iLevel) {
 	case MC_LOG_ERROR:
 		fprintf( m_File, " *** ERROR *** ");
-		__debugbreak();										// ブレークポイント
+//U		__debugbreak();										// ブレークポイント
+		AfxDebugBreak();
 		break;
 	case MC_LOG_WARNING:
 		fprintf( m_File, " *** WARNING *** ");
@@ -271,7 +272,7 @@ void mlLog::LogOutT(
 
 void mlLog::Trace( MCHAR* str)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	if( m_iCtl != 0) {
 		Mfprintf( m_File, Mstr( "%s"), str);
 		TRACE( Mstr( "%s"), str);
@@ -281,7 +282,7 @@ void mlLog::Trace( MCHAR* str)
 
 void mlLog::Trace( )
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	if( m_iCtl != 0) {
 		Mfprintf( m_File, Mstr( "%s"), m_Str);
 		TRACE( Mstr( "%s"), m_Str);
@@ -293,7 +294,7 @@ void mlLog::Trace( )
 //【機能】		ログファイルのオープン
 //【返値】		なし
 //------------------------------------------------------------------------
-void Trace::OpenLogFile(
+void Trace::OpenTraceFile(
 						MCHAR i_cLogFilePath[]	// ログファイルパス
 						)
 {
@@ -311,7 +312,7 @@ void Trace::OpenLogFile(
 //【機能】		ログファイルのクローズ
 //【返値】		なし
 //------------------------------------------------------------------------
-void Trace::CloseLogFile( void)
+void Trace::CloseTraceFile( void)
 {
 	if ( m_pfp!=NULL) {
 		Mfclose( m_pfp);

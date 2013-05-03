@@ -369,11 +369,11 @@ MINT MhRoofInfo::AdjustRfm1()						// (  O) ÉXÉeÉCÉ^ÉXÅ@0: ê≥èÌÅ@-1: âÆç™ñ å`èÛç
 	MgPolyg2	pg0, pg1, pg3;
 	MgPolyg3	Pg0;
 	MgGLine3	GLnW;
-//#ifdef _DEBUG
+//#ifdef LOGOUT
 //MBLOGON;
 //#endif
 	for ( ic1=0; ic1<m_GRfm.m_n; ic1++) {
-//#ifdef _DEBUG
+//#ifdef LOGOUT
 //							MBLOGON;
 //							Msprintf_s( mlLog::m_Str, Mstr( "******* âÆç™ AdjustRfm ic1=%d\n"), ic1); MBLOGPRBF;
 //#endif
@@ -390,7 +390,7 @@ MINT MhRoofInfo::AdjustRfm1()						// (  O) ÉXÉeÉCÉ^ÉXÅ@0: ê≥èÌÅ@-1: âÆç™ñ å`èÛç
 		Gln0 += MgLine2( pg1.m_p[pg1.m_n-1], pg1.m_p[0]);
 
 		for ( ic2=0; ic2<m_GRfm.m_n; ic2++) {
-//#ifdef _DEBUG
+//#ifdef LOGOUT
 //							Msprintf_s( mlLog::m_Str, Mstr( "-------- âÆç™ AdjustRfm ic2=%d\n"), ic2); MBLOGPRBF;
 //#endif
 			if ( ic1 == ic2)										// ìØàÍâÆç™ñ ÇÕñ≥éã
@@ -779,7 +779,7 @@ void MhRoofInfo::CreateRfmZukei()
 // ÉgÉåÅ[ÉX
 void MhJim::Print( MCHAR* s, MINT ic)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MhJim[%2d]	(%7.1f,%7.1f)	Cd: %d	fInp: %d	rKb:%7.1f	Rfm: %d")
 						   Mstr( "	LnR:(%7.1f,%7.1f,%7.1f)	(%7.1f,%7.1f,%7.1f)\n"),
 								s, ic, m_p.x, m_p.y, m_icd, m_ifInp, m_rKb, m_iRfm,
@@ -789,7 +789,7 @@ void MhJim::Print( MCHAR* s, MINT ic)
 }
 void MgKs1::Print( MCHAR* s, MINT ic)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgKs1[%2d]	LnR: (%7.1f,%7.1f,%7.1f) (%7.1f,%7.1f,%7.1f)")
 						   Mstr( "	Typ: %d	Cd: %d	fProc: %d	Rfm = %d, %d\n"),
 								s, ic, m_Ln.p[0].x, m_Ln.p[0].y, m_Ln.p[0].z, m_Ln.p[1].x, m_Ln.p[1].y, m_Ln.p[1].z,
@@ -799,7 +799,7 @@ void MgKs1::Print( MCHAR* s, MINT ic)
 }
 void MhRfm::Print( MCHAR* s, MINT ic)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MhRfm[%2d]	pln: (%7.3f,%7.3f,%7.3f),%7.1f	Cd: %d\n"),
 								s, ic, m_Pln.v.x, m_Pln.v.y, m_Pln.v.z, m_Pln.d, m_icd);
 	MBLOGPRBF;
@@ -810,7 +810,7 @@ void MhRfm::Print( MCHAR* s, MINT ic)
 
 void MhRoofInfo::Print( MCHAR* s)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MhRoofInfo	Kai: %d	Kb:%7.1f	RkH:%7.1f	RfmA:%7.1f	NUmA:%7.1f\n")
 						   Mstr( "			MnZ:%7.1f,%7.1f	NkD:%7.1f,%7.1f	KrD:%7.1f,%7.1f")
 						   Mstr( "	tpNU: %d	tpNS: %d	HKmA:%7.1f	NUk:%7.1f	cdURS:  %d\n"),

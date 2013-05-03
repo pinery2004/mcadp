@@ -46,7 +46,7 @@ public:
 //	トレース
 inline void MdDelLink::Print( MCHAR* s, MINT i_i)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	< MdDelLink > ID = %d，親ID = %d, 次ID = %d, 前ID = %d\n"),
 									s, i_i, m_idP, m_idNext, m_idBefore);
 	MBLOGPRBF;

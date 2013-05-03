@@ -226,7 +226,7 @@ MgMinMaxR2 MgPolyl2::MinMax()
 //	トレース
 void MgPolyl2::Print( MCHAR* s) const
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr("%s	MgPolyl2	サイズ: %d, 頂点数: %d\n"), s, m_isz, m_n);
 	MBLOGPRBF;
 	for (int ic=0; ic<m_n; ic++) {
@@ -420,7 +420,7 @@ MgMinMaxR3 MgPolyl3::MinMax()
 //	トレース
 void MgPolyl3::Print( MCHAR* s) const							// Print
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgPolyl3 サイズ: %d, 頂点数: %d\n"), s, m_isz, m_n);
 	MBLOGPRBF;
 	for (int ic=0; ic<m_n; ic++) {
@@ -635,7 +635,7 @@ void MgGPolyl2::Resize( MINT szn)
 //	トレース
 void MgGPolyl2::Print( MCHAR* s) const							// Print
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgGPolyl2	サイズ: %d, ポリゴン数: %d\n"), s, m_isz, m_n);
 	MBLOGPRBF;
 	for (int ic=0; ic<m_n; ic++)
@@ -862,7 +862,7 @@ void MgGPolyl3::Resize( MINT szn)
 //	トレース
 void MgGPolyl3::Print( MCHAR* s) const							// Print
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgGPolyl3	サイズ: %d, ポリゴン数: %d\n"), s, m_isz, m_n);
 	MBLOGPRBF;
 	for (int ic=0; ic<m_n; ic++)

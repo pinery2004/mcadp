@@ -347,7 +347,7 @@ inline_nu MDPMT* MDFIG::PmtAlloc( MINT i_n)
 //	トレース
 inline_nu void MDFIG::Print(MCHAR* i_s)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	if ( m_pPmtl) {
 		Msprintf_s( mlLog::m_Str, Mstr( "\t\t\t%s < MDFIG > 整数型データセット，バッファサイズ =%d，データサイズ = %d\n"),
 										i_s, m_pPmtl->m_sz, m_pPmtl->m_n);

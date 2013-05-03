@@ -67,6 +67,7 @@ MdModel::~MdModel( void)
 //	トレース
 void MdModel::Print( MCHAR* s)
 {
+#ifdef LOGOUT
 	MBLOGPRINTS( s);
 	mlLog::Print( Mstr( "◇家モデル	"));
 	m_GrpBf.Print( Mstr( "◇グループセット	"), MDC_NONE_ID);
@@ -85,6 +86,7 @@ void MdModel::Print( MCHAR* s)
 	MBLOGPRINTI( Mstr( "	カレントスキーマID		"), m_idCurScm);
 	MBLOGPRINTIN( Mstr( "	ポリゴン展開処理モード	"), m_mdTenkai, 28);
 	MBLOGPRINTFN( Mstr( "	ポリゴン展開処理パラメータ"), m_rmdTenkai, 7);
+#endif
 }
 
 

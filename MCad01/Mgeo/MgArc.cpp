@@ -26,7 +26,7 @@ namespace MC
 //
 void MgArc2::Print(MCHAR* s)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgArc2	: (%7.1f,%7.1f), (%7.1f,%7.1f), (%7.1f,%7.1f), %7.1f\n"),
 								 s, pt[0].x, pt[0].y, pt[1].x, pt[1].y, pc.x, pc.y, r);
 	MBLOGPRBF;
@@ -39,7 +39,7 @@ void MgArc2::Print(MCHAR* s)
 //
 void MgArc3::Print(MCHAR* s)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "%s 	MgArc3 	: (%7.1f,%7.1f,%7.1f), (%7.1f,%7.1f,%7.1f), (%7.1f,%7.1f,%7.1f), (%7.1f,%7.1f,%7.1f), %7.1f\n"),
 								 s,  Pt[0].x, Pt[0].y, Pt[1].x, Pt[1].y,Pc.x, Pc.y, Pc.z, V.x, V.y, V.z, r);
 	MBLOGPRBF;

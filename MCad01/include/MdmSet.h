@@ -72,7 +72,7 @@ public:
 //	トレース
 inline void MdeRfC::Print( MCHAR* s, MINT i_i)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str,
 			  Mstr( "・%s < MdeRfC > ID = %d, 関係コード = %d, 属性コード = %d, ループコード = %d, 子ID = %d\n"),
 			  s, i_i, m_iC, m_iA, m_iLp, m_idC);
@@ -138,7 +138,7 @@ public:
 template <typename T>
 inline void MdAryH_F_D<T>::Print( MCHAR* i_s, MINT i_i)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	if ( i_i == MDC_NONE_ID) {
 		if ( m_idSpaceLast ==0 && m_nidSpace == 0) {
 			Msprintf_s( mlLog::m_Str, Mstr( "%s < MdAryH_F_D >\n"), i_s);

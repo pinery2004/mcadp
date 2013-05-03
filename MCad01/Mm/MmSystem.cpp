@@ -78,7 +78,7 @@ MINT System::MmInitialize()
 	// Logファイルの削除とオープン
 	MCHAR	cLogFilePath[MAX_PATH];
 	mcsGetEnvPath( MP_PATH_ROOT, mcs::GetStr( MM_STR_TRACEFILE), cLogFilePath);
-	Trace::OpenLogFile( cLogFilePath);
+	Trace::OpenTraceFile( cLogFilePath);
 	
 	// DBを初期化する
 	Mdm::MdmInitialize();

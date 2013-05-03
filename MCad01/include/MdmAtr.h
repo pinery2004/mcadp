@@ -27,7 +27,7 @@ public:
 //	ÉgÉåÅ[ÉX
 inline void MdmAtr::Print( MCHAR* s, MINT i_i)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "		%s < MdmAtr > ID = %d\n"), s, i_i);
 	MBLOGPRBF;
 #endif

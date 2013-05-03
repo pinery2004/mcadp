@@ -81,24 +81,33 @@ public:
 
 public:
 	//	é¿êî
-	static MREAL MgAbs(MREAL x)
-						{return ((x > 0) ? x : -x);}
-	static MINT MgAbs(MINT x)
-						{return ((x > 0) ? x : -x);}
-	static bool MgZero(MREAL x, MREAL tol = D)
-						{return (x < tol && x > -tol);}
-	static bool MgEqual(MREAL x, MREAL y, MREAL tol = D)
-						{return (x - y < tol && y - x < tol);}
-	static bool MgEQ(MREAL x, MREAL y, MREAL tol = D)					// MgEqualÇ∆ìØÇ∂
-						{return (x - y < tol && y - x < tol);}
-	static bool MgLT(MREAL x, MREAL y, MREAL tol = D)
-						{return (x < y - tol);}
-	static bool MgLE(MREAL x, MREAL y, MREAL tol = D)
-						{return (x <= y + tol);}
-	static bool MgGT(MREAL x, MREAL y, MREAL tol = D)
-						{return (x > y + tol);}
-	static bool MgGE(MREAL x, MREAL y, MREAL tol = D)
-						{return (x >= y - tol);}
+	static MREAL MgAbs(MREAL x) {
+						return ((x > 0) ? x : -x);}
+	static MINT MgAbs(MINT x) {
+						return ((x > 0) ? x : -x);}
+	static bool MgZero(MREAL x, MREAL tol = D) {
+						return (x < tol && x > -tol);}
+	static bool MgEqual(MREAL x, MREAL y, MREAL tol = D) {
+						return (x - y < tol && y - x < tol);}
+	static bool MgEQ(MREAL x, MREAL y, MREAL tol = D) {					// MgEqualÇ∆ìØÇ∂
+						return (x - y < tol && y - x < tol);}
+	static bool MgLT(MREAL x, MREAL y, MREAL tol = D) {
+						return (x < y - tol);}
+	static bool MgLE(MREAL x, MREAL y, MREAL tol = D) {
+						return (x <= y + tol);}
+	static bool MgGT(MREAL x, MREAL y, MREAL tol = D) {
+						return (x > y + tol);}
+	static bool MgGE(MREAL x, MREAL y, MREAL tol = D) {
+						return (x >= y - tol);}
+	// ê›íË
+	static void SetD( MREAL i_rD) {
+						 D = i_rD; D_2 = i_rD * i_rD;}
+	static void SetL( MREAL i_rL) {
+						 L = i_rL; L_2 = i_rL * i_rL;}
+	static void SetA( MREAL i_rA) {
+						 A = i_rA; A_2 = i_rA * i_rA;}
+	static void SetS( MREAL i_rS) {
+						 S = i_rS; S_2 = i_rS * i_rS;}
 };
 
 extern	MgTol_Dt	g_gTol;

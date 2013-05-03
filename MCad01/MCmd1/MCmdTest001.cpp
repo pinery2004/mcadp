@@ -26,12 +26,78 @@ namespace MC
 {
 
 ////////////////////////////////////////////////////////////////////////////
+//	Geoテスト
+//
+void BrkPoint()
+{
+	_asm int 3;
+}
+void Test000_Geo()
+{
+	MgVect2 v22 = MgVect2( 1., 2.);
+	MgVect2 v23 = v22.RotR90();
+	v22.Print( Mstr("v22"));
+	v23.Print( Mstr("v23"));
+	v22 = v22.RotR90();
+	v22.Print( Mstr("v22"));
+	v23.SetRotR90();
+	v23.Print( Mstr("v23"));
+	MgVect2 v24;
+	v24 = v22.Rot( MgVect2( 1., 1.).Unitize());
+	v24.Print( Mstr("v24(v22.Rot(1.,1.))"));
+	v22.SetRot( (MREAL)MC_PIE/4);
+	v22.Print( Mstr("v22.SetRot(MC_PIE/4)"));
+
+	MgPoint2 pt22 = MgPoint2( 1., 2.);
+	MgPoint2 pt23 = pt22.RotR90();
+	pt22.Print( Mstr("pt22"));
+	pt23.Print( Mstr("pt23"));
+	pt22 = pt22.RotR90();
+	pt22.Print( Mstr("pt22"));
+	pt23.SetRotR90();
+	pt23.Print( Mstr("pt23"));
+	MgPoint2 pt24;
+	pt24 = pt22.Rot( (MREAL)MC_PIE/4);
+	pt24.Print( Mstr("pt24(pt22.Rot(MC_PIE/4))"));
+	pt22.SetRot( (MREAL)MC_PIE/4);
+	pt22.Print( Mstr("pt22.SetRot(MC_PIE/4)"));
+
+	MgVect3 v32 = MgVect3( 1., 2., 3.);
+	MgVect3 v33 = v32.RotR90();
+	v32.Print( Mstr("v32"));
+	v33.Print( Mstr("v33"));
+	v32 = v32.RotR90();
+	v32.Print( Mstr("v32"));
+	v33.SetRotR90();
+	v33.Print( Mstr("v33"));
+	MgVect3 v34;
+	v34 = v32.Rot( MgVect2( 1., 1.).Unitize());
+	v34.Print( Mstr("v34(v32.Rot(1.,1.))"));
+	v32.SetRot( (MREAL)MC_PIE/4);
+	v32.Print( Mstr("v22.SetRot(MC_PIE/4)"));
+
+	MgPoint3 pt32 = MgPoint3( 1., 2., 3.);
+	MgPoint3 pt33 = pt32.RotR90();
+	pt32.Print( Mstr("pt32"));
+	pt33.Print( Mstr("pt33"));
+	pt32 = pt32.RotR90();
+	pt32.Print( Mstr("pt32"));
+	pt33.SetRotR90();
+	pt33.Print( Mstr("pt33"));
+	MgPoint3 pt34;
+	pt34 = pt32.Rot( (MREAL)MC_PIE/4);
+	pt34.Print( Mstr("pt34(pt32.Rot(MC_PIE/4))"));
+	pt32.SetRot( (MREAL)MC_PIE/4);
+	pt32.Print( Mstr("pt32.SetRot(MC_PIE/4)"));
+	AfxDebugBreak( );
+	BrkPoint();
+}
+
+////////////////////////////////////////////////////////////////////////////
 //	ファイル・フォルダ選択テスト
 //
 void Test001_SelectFile()
 {
-
-
 	MCHAR FilePathI[] = Mstr( "D:\\temp\\*.txt");
 	MCHAR FilePathO[MAX_PATH];
 
@@ -60,6 +126,7 @@ void Test001_SelectFile()
 	MCHAR FolderPath[MAX_PATH] = Mstr( "D:\\Temp");
 	MsForFolderDlg( hWnd, Mstr( "テスト用フォルダの選択"), Mstr( "D:\\Temp"), FolderPath, MAX_PATH);
 	MessageBox( hWnd, FolderPath, Mstr( "Folder Name"), MB_OK | MB_TOPMOST);
+	BrkPoint();
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -441,6 +508,7 @@ void MCmdTest001()
 	//Test001_SelectFile();
 
 	//	ＤＢモジュールテスト
+	Test000_Geo();
 //	Test001_SelectFile();
 	Test002_DBModule();
 	Test003_DBModule();

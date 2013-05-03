@@ -71,15 +71,39 @@ public:
 
 //	MgPoint3( const MgVect3& v1);
 
-	// 属性値の設定
+	// 演算
+//	MgPoint3 Unitize( MREAL i_tol = MgTol_Dt::D) const;							// 単位ベクトルを求める
+
+	MgPoint3 RotR90() const														// Z軸を中心軸として右に９０度回転した点の位置を求める
+						{ return MgPoint3( y, -x, z);}
+	MgPoint3 RotL90() const														// Z軸を中心軸として左に９０度回転した点の位置を求める
+						{ return MgPoint3( -y, x, z);}
+	MgPoint3 Rot180() const														// Z軸を中心軸として１８０度回転した点の位置を求める
+						{ return MgPoint3( -x, -y, z);}
+	MgPoint3 Rot( const MgVect2& v) const;										// Z軸を中心軸として単位ベクトル方向に回転した点の位置を求める
+
+	MgPoint3 Rot( MREAL ang) const;												// Z軸を中心軸として指定角度で左回転した点の位置を求める
+
+
+	// 変換
 	MgPoint3 Set( const MgPoint2& v1, const MgPlane3& Pln3);					// ２次元→３次元
 
 	MgPoint3 SetUnit()
 						{ x = 1; y = 0; z = 0; return *this;}					// (1., 0., 0.)に変更する
-	MgPoint3 SetUnitize( MREAL i_tol = MgTol_Dt::D);							// 単位ベクトルに変換する
+//	MgPoint3 SetUnitize( MREAL i_tol = MgTol_Dt::D);							// 単位ベクトルに変換する
 
 	MgPoint3& operator = ( const MREAL* pt)
 						{ x = pt[0]; y = pt[1]; z = pt[2]; return *this;}
+	MgPoint3 SetRotR90()														// Z軸を中心軸として右に９０度回転する
+						{ MREAL xs = x; x = y; y = -xs; return *this;}
+	MgPoint3 SetRotL90()														// Z軸を中心軸として左に９０度回転する
+						{ MREAL xs = x; x = -y; y = xs; return *this;}
+	MgPoint3 SetRot180()														// Z軸を中心軸として１８０度回転する
+						{ x = -x; y = -y; return *this;}
+	MgPoint3 SetRot( const MgVect2& v);											// Z軸を中心軸として単位ベクトル方向に回転する
+
+	MgPoint3 SetRot( MREAL ang);												// Z軸を中心軸として指定角度で左回転する
+
 
 	// 属性値の取得
 	void	Get( MREAL* rP) const
@@ -122,16 +146,6 @@ public:
 
 	bool operator != ( const MgPoint3& v) const;								// b = (P1 != P2) 判定
 
-	MgPoint3 Unitize( MREAL i_tol = MgTol_Dt::D) const;							// 単位ベクトルを求める
-
-	MgPoint3 RotR90() const;													// Z軸を中心軸として右に９０度回転したベクトルを求める
-
-	MgPoint3 RotL90() const;													// Z軸を中心軸として左に９０度回転したベクトルを求める
-
-	MgPoint3 Rot180() const;													// Z軸を中心軸として１８０度回転したベクトルを求める
-
-	MgPoint3 Rot( const MgVect2& v) const;										// 単位ベクトル方向に回転したベクトルを求める
-
 	// トレース
 	void	Print(MCHAR* s) const;
 };
@@ -163,6 +177,30 @@ public:
 
 
 	// 属性値の設定
+
+	// 属性値の取得
+	void	Get( MREAL* rP) const
+						{ rP[0] = x; rP[1] = y; rP[2] = z;}
+
+	// 演算
+	MgVect2	To2D() const	{ return MgVect2( x, y);}							// 3D Point → 2D Point
+
+	MgVect3 Unitize( MREAL i_tol = MgTol_Dt::D) const;							// 単位ベクトルを求める
+
+	MgVect3 RotR90() const														// Z軸を中心軸として右に９０度回転したベクトルを求める
+						{ return MgVect3( y, -x, z);}
+
+	MgVect3 RotL90() const														// Z軸を中心軸として左に９０度回転したベクトルを求める
+						{ return MgVect3( -y, x, z);}
+
+	MgVect3 Rot180() const														// Z軸を中心軸として１８０度回転したベクトルを求める
+						{ return MgVect3( -x, -y, z);}
+
+	MgVect3 Rot( const MgVect2& v) const;										// Z軸を中心軸として単位ベクトル方向に回転したベクトルを求める
+
+	MgVect3 Rot( MREAL ang) const;												// Z軸を中心軸として指定角度で左回転した点の位置を求める
+
+	// 変換
 //	MgVect3 Set( const MgPoint2& v1, const MgPlane3& Pln3);						// ２次元→３次元
 
 	MgVect3 SetUnit()
@@ -171,11 +209,17 @@ public:
 
 	MgVect3& operator = ( const MREAL* pt)
 						{ x = pt[0]; y = pt[1]; z = pt[2]; return *this;}
+	MgVect3 Set( const MgPoint2& v1, const MgPlane3& Pln3);						// ２次元→３次元
 
-	// 属性値の取得
-	void	Get( MREAL* rP) const
-						{ rP[0] = x; rP[1] = y; rP[2] = z;}
-	MgVect2	To2D() const	{ return MgVect2( x, y);}							// 3D Point → 2D Point
+	MgVect3 SetRotR90()															// Z軸を中心軸として右に９０度回転する
+						{ MREAL xs = x; x = y; y = -xs; return *this;}
+	MgVect3 SetRotL90()															// Z軸を中心軸として左に９０度回転する
+						{ MREAL xs = x; x = -y; y = xs; return *this;}
+	MgVect3 SetRot180()															// Z軸を中心軸として１８０度回転する
+						{ x = -x; y = -y; return *this;}
+	MgVect3 SetRot( const MgVect2& v);											// Z軸を中心軸として単位ベクトル方向に回転する
+
+	MgVect3 SetRot( MREAL ang);													// Z軸を中心軸として指定角度で左回転する
 
 	// 演算オペレータ
 	MgVect3 operator + ( const MgVect3& v) const;								// P1 = P2 + p3
@@ -208,16 +252,6 @@ public:
 	bool operator == ( const MgVect3& v) const;									// b = (P1 == P2) 判定
 
 	bool operator != ( const MgVect3& v) const;									// b = (P1 != P2) 判定
-
-	MgVect3 Unitize( MREAL i_tol = MgTol_Dt::D) const;							// 単位ベクトルを求める
-
-	MgVect3 RotR90() const;														// Z軸を中心軸として右に９０度回転したベクトルを求める
-
-	MgVect3 RotL90() const;														// Z軸を中心軸として左に９０度回転したベクトルを求める
-
-	MgVect3 Rot180() const;														// Z軸を中心軸として１８０度回転したベクトルを求める
-
-	MgVect3 Rot( const MgVect2& v) const;										// 単位ベクトル方向に回転したベクトルを求める
 
 	// トレース
 	void	Print(MCHAR* s) const;

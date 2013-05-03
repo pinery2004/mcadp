@@ -102,7 +102,7 @@ inline void MdmSetSCM::SetInit(
 //	トレース
 inline void MdmSetSCM::Print( MCHAR* s, MINT i_i)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "\t%3d: %s	< MdmSetSCM > 親ID = %d\n"),
 									i_i, m_psName, m_idP);
 	MBLOGPRBF;

@@ -82,7 +82,7 @@ template <typename T> inline void MdAryH<T>::ReSize( MUSHORT i_sz)
 //	トレース
 template <typename T> inline void MdAryH<T>::PrintC(MCHAR* i_s)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	< MdAryH > サイズ: %d，頂点数: %d\n"),
 									i_s, m_sz, m_n);
 	MBLOGPRBF;
@@ -231,7 +231,7 @@ public:
 //	トレース
 template <typename T> inline void MdAryH_S_C<T>::Print(MCHAR* i_s, MINT i_i)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	if ( m_n) {
 		if ( i_i == MDC_NONE_ID) {
 			Msprintf_s( mlLog::m_Str, Mstr( "\t\t%s < MdAryH_S_C > サイズ = %d、データ数 = %d\n"),
@@ -268,7 +268,7 @@ public:
 //	トレース
 template <typename T> inline void MdAryH_S_I<T>::Print(MCHAR* i_s, MINT i_i)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	if ( m_n) {
 		if ( i_i == MDC_NONE_ID) {
 			Msprintf_s( mlLog::m_Str, Mstr( "\t\t\t%s < MdAryH_S_I > 整数型データセット，サイズ =%d，データ数 = %d\n"),
@@ -304,7 +304,7 @@ public:
 //	トレース
 template <typename T> inline void MdAryH_S_B<T>::PrintB(MCHAR* i_s, MINT i_i)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	if ( i_i == MDC_NONE_ID) {
 		Msprintf_s( mlLog::m_Str, Mstr( "\t\t\t%s < MdAryH_S_B > 整数型データセット，サイズ: %d，データ数: %d\n"),
 										i_s, m_sz, m_n);
@@ -444,10 +444,12 @@ template <typename T> inline T& MdAryH_F<T>::operator () (MUSHORT i_idx)
 //	トレース
 template <typename T> inline void MdAryH_F<T>::Print(MCHAR* i_s, MINT i_i)
 {
+#ifdef LOGOUT
 	MBLOGPRBF;
 	for (MUSHORT ic=0; ic<m_n; ic++) {
 		m_pst[ic].Print( i_s, i_i, ic);
 	}
+#endif
 }
 
 } // namespace MC

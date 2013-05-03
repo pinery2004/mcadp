@@ -26,7 +26,7 @@ namespace MC
 //
 void MgCir2::Print(MCHAR* s)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgCir2	: (%7.1f,%7.1f), %7.1f\n"),
 								 s, pc.x, pc.y, r);
 	MBLOGPRBF;
@@ -38,7 +38,7 @@ void MgCir2::Print(MCHAR* s)
 //
 void MgCir3::Print(MCHAR* s)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "%s 	MgCir3 	: (%7.1f,%7.1f,%7.1f), (%7.1f,%7.1f,%7.1f), %7.1f\n"),
 								 s, Pc.x, Pc.y, Pc.z, V.x, V.y, V.z, r);
 	MBLOGPRBF;

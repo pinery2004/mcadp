@@ -67,7 +67,7 @@ void mhPlcParts::Copy( const mhPlcParts &Ent)
 		szVer = sizeof( MsBitSet);
 		pVer = (MsBitSet*)new char[szVer];
 	
-#ifdef _DEBUG
+#ifdef LOGOUT
 		Msprintf_s( mlLog::m_Str, Mstr( "MALLOC VERSION TRC %x\n"), pVer);
 		MBLOGPRBF;
 #endif
@@ -81,7 +81,7 @@ void mhPlcParts::Copy( const mhPlcParts &Ent)
 		szOpt1 = sizeof( MsBitSet);
 		pOpt1 = (MsBitSet*)new char[szOpt1];
 
-#ifdef _DEBUG
+#ifdef LOGOUT
 		Msprintf_s( mlLog::m_Str, Mstr( "MALLOC OPTION Copy1 TRC %x\n"), pOpt1);
 		MBLOGPRBF;
 #endif
@@ -95,7 +95,7 @@ void mhPlcParts::Copy( const mhPlcParts &Ent)
 		szOpt2 = sizeof( MsBitSet);
 		pOpt2 = (MsBitSet*)new char[szOpt2];
 
-#ifdef _DEBUG
+#ifdef LOGOUT
 		Msprintf_s( mlLog::m_Str, Mstr( "MALLOC OPTION Copy2 TRC %x\n"), pOpt2);
 		MBLOGPRBF;
 #endif
@@ -503,7 +503,7 @@ void	BuzaiCode::MhBziSin(
 // 配置データ　トレース
 void	mhPlcParts::Print(MCHAR* s)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	MCHAR sTrc[256], sCat[256];
 	MUINT*	pVmb;
 
@@ -530,7 +530,7 @@ void	mhPlcParts::Print(MCHAR* s)
 // 全配置内容をトレース
 void	BuzaiCode::MhPrintallmhPlcParts(MCHAR* s)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	mhPlcParts* pPlcEn;
 	MPOSITION	PartsPos;
 

@@ -150,7 +150,11 @@ inline	MgLine3 operator *= ( MgLine3& Ln, const MgMat2E &Mat)					// *=	À•W•ÏŠ·
 						{ Ln.p[0] *= Mat; Ln.p[1] *= Mat;}
 
 inline	void MgMat2E::Print( MCHAR* s)											// print
-						{ MgMatPrint2( s);}
+						{
+#ifdef LOGOUT
+							MgMatPrint2( s);
+#endif
+						}
 //
 //======================( ‚RŸŒ³ )==============================
 //	‚RŸŒ³À•WŒvZ—p‚SŸŒ³ƒ}ƒgƒŠƒbƒNƒX
@@ -252,6 +256,10 @@ inline MgLine3 operator * ( const MgLine3& Ln1, const MgMat3E &m2)				// À•W•ÏŠ
 inline MgLine3 operator *= ( MgLine3& Ln1, const MgMat3E &m2)					// À•W•ÏŠ·
 						{ Ln1.p[0] *= m2; Ln1.p[1] *= m2;}
 inline	void MgMat3E::Print( MCHAR* s)											// print
-						{ MgMatPrint3( s);}
+						{
+#ifdef LOGOUT
+							MgMatPrint3( s);
+#endif
+						}
 
 } // namespace MC

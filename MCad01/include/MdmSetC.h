@@ -90,7 +90,7 @@ inline void MdmSetC::initialize(
 //	トレース
 inline void MdmSetC::Print( MCHAR* s, MINT i_i)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "\t\t%s < MdmSetC > ID = %d、親ID = %d\n"), s, i_i, m_idP);
 	MBLOGPRBF;
 	m_GidC.Print( Mstr( "子IDセット"), MDC_NONE_ID);

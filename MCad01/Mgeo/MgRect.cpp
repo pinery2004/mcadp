@@ -53,7 +53,7 @@ void MgRect2::SetUnit()		{ *this = MgRect2( 0.0f, 0.0f, 1.0f, 1.0f);}
 //
 void MgRect2::Print(MCHAR* s)														// print
 {
-//#ifdef _DEBUG
+//#ifdef LOGOUT
 //	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgRect2	= %f, %f, %f, %f\n"),
 //							s, p[0].x, p[0].y, p[1].x, p[1].y);
 //	MBLOGPRBF;
@@ -71,7 +71,7 @@ void MgRect3::SetUnit()		{ *this = MgRect3( 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);
 //
 void MgRect3::Print(MCHAR* s)														// print
 {
-//#ifdef _DEBUG
+//#ifdef LOGOUT
 //	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgRect2	= %f, %f, %f, %f, %f, %f\n"),
 //							s, p[0].x, p[0].y, p[0].z, 
 //							   p[1].x, p[1].y, p[1].z);

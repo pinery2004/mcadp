@@ -38,7 +38,7 @@ public:
 //	トレース
 inline void MdmWin::Print( MCHAR* i_s, MINT i_i)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	//Msprintf_s( mlLog::m_Str, Mstr( "%s < MdmSetP > ID = %d\n"), i_s, i_i);
 	//MBLOGPRBF;
 	//MBLOGPRINTI( Mstr( "		ウィンドウタイプ ( 0:３Ｄ、1：図面)", m_itpWin);
@@ -61,7 +61,7 @@ public:
 //	トレース
 inline void MdmCordinate::Print( MCHAR* i_s, MINT i_i)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	< MdmCordinate > ID = %d\n"), i_s, i_i);
 	MBLOGPRBF;
 #endif

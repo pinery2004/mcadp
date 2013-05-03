@@ -147,7 +147,11 @@ inline	MgLine3 operator *= ( MgLine3& Ln, const MgMat3 &Mat)					// *=	座標変換
 						{ Ln.p[0] *= Mat; Ln.p[1] *= Mat;}
 
 inline	void MgMat3::Print( MCHAR* s)											// print
-						{ MgMatPrint3( s);}
+						{
+#ifdef LOGOUT
+							MgMatPrint3( s);
+#endif
+						}
 //
 //======================( ４Ｄ )==============================
 //	４Ｄマトリックス
@@ -243,6 +247,10 @@ inline MgLine3 operator * ( const MgLine3& Ln1, const MgMat4 &m2)				// 座標変換
 inline MgLine3 operator *= ( MgLine3& Ln1, const MgMat4 &m2)					// 座標変換
 						{ Ln1.p[0] *= m2; Ln1.p[1] *= m2;}
 inline	void MgMat4::Print( MCHAR* s)											// print
-						{ MgMatPrint4( s);}
+						{
+#ifdef LOGOUT
+							MgMatPrint4( s);
+#endif
+						}
 
 } // namespace MC

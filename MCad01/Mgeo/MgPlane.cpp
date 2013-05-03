@@ -192,7 +192,7 @@ void MgPlane3::Print(
 						MCHAR*		s
 				)								// print
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgPlane3	: (%7.1f,%7.1f,%7.1f),%7.1f\n"),
 								s, v.x, v.y, v.z, d);
 	MBLOGPRBF;

@@ -74,7 +74,7 @@ inline void MdmSetP::initialize(
 //	トレース
 inline void MdmSetP::Print( MCHAR* s, MINT i_i)
 {
-#ifdef _DEBUG
+#ifdef LOGOUT
 	Msprintf_s( mlLog::m_Str, Mstr( "%s < MdmSetP > ID = %d, 子ID = %d\n"), s, i_i, m_idC);
 	MBLOGPRBF;
 	m_GidP.Print( Mstr( "親ID群"));
