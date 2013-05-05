@@ -229,7 +229,7 @@ enum MCCHKATTR {
 //S #define		MMAX_PARTSSPEC	300									// ç≈ëÂïîïiédólêî
 
 #define		MMAX_BZILEN		30000.									// ç≈ëÂïîçﬁí∑Ç≥30m
-#define		MMIN_BZILEN		1.										// ç≈è¨ïîçﬁí∑Ç≥
-#define		MMIN_BZILEN_2	(MMIN_BZILEN * MMIN_BZILEN)				// ç≈è¨ïîçﬁí∑Ç≥ * ç≈è¨ïîçﬁí∑Ç≥
+#define		MinmaxIN_BZILEN		1.										// ç≈è¨ïîçﬁí∑Ç≥
+#define		MinmaxIN_BZILEN_2	(MinmaxIN_BZILEN * MinmaxIN_BZILEN)				// ç≈è¨ïîçﬁí∑Ç≥ * ç≈è¨ïîçﬁí∑Ç≥
 
 	

@@ -57,7 +57,7 @@ protected:
 	MgMinMaxR2D		m_rMinMaxRI;				// 実座標( Min/Max)初期値
 	MgMinMaxR2D		m_rMinMaxRS[MT_SZMINMAXRS];	// 実座標
 	CPoint			m_ptCurMouseL;				// カレントのマウス位置（論理座標）
-	MgMat3DE			m_mat;						// 座標変換マトリックス
+	MgMat3E			m_mat;						// 座標変換マトリックス
 	MREAL			m_sclRPtoLP;				// RPtoLPの座標変換倍率
 	MgVect2D			m_vsclLPtoDP;				// LPtoDPの座標変換倍率( x,y)
 	CDC*			m_pDC;						// 表示　デバイスコンテキスト
@@ -476,7 +476,7 @@ inline MgPoint2D msCod::LPtoRP(
 				)
 {
 	MgPoint2D MbP2_t1= p;
-	return MbP2_t1 * MGeo::Mat3Inv( m_mat);
+	return MbP2_t1 * MGeo::Mat3EInv( m_mat);
 }
 
 inline MREAL msCod::LPtoRP( 
@@ -501,7 +501,7 @@ inline MgPoint2D msCod::DPtoRP(
 {
 	MgPoint2D pLP = MgPoint2D( pDP.x / m_vsclLPtoDP.x,
 							 pDP.y / m_vsclLPtoDP.y);
-	return pLP * MGeo::Mat3Inv( m_mat);
+	return pLP * MGeo::Mat3EInv( m_mat);
 }
 
 } // namespace MC

@@ -237,7 +237,7 @@ void MhRoofInfo::SetJimCd(
 			rMinD2 = MREALMAX;
 			ic0 = m_GJim1.n;
 			for ( ic1=0; ic1<m_GJim1.n; ic1++) {
-				ist = MgPerpPtLn2( m_ptH, MgLine2D( m_GJim1[ic0].p, m_GJim1[ic1].p), &pt0);
+				ist = MgPerpPointLine2D( m_ptH, MgLine2D( m_GJim1[ic0].p, m_GJim1[ic1].p), &pt0);
 				if ( ist == MC_ON_LINE) {
 					rD2 = MgDist_2( pt0, m_ptH);				// ‹——£‚Ì‚Qæ
 					if ( rD2 < rMinD2) {
@@ -286,12 +286,12 @@ void MhRoofInfo::CreateRfmForJim()
 		RfmI.m_icd = 0;
 		if ( m_GJim1[ic1].m_icd == MHRL_NOKI) {
 			RfmI.m_icd = MHRL_NOKI;
-			RfmI.m_Pln = MgPlane3DC( m_GJim1[ic0].m_p, m_GJim1[ic1].m_p, m_GJim1[ic1].m_rKb / 10.f);	// n“_EI“_¥Œù”z
+			RfmI.m_Pln = MgPlane2PointSlope3D( m_GJim1[ic0].m_p, m_GJim1[ic1].m_p, m_GJim1[ic1].m_rKb / 10.f);	// n“_EI“_¥Œù”z
 		} else if ( m_GJim1[ic1].m_icd == MHRL_KERABA) {
 			RfmI.m_icd = MHRL_YAGIRI;
 			Pth = MgPoint3DC( m_GJim1[ic0].m_p);
 			Pth.z += 1000.;
-			RfmI.m_Pln = MgPlane3DC( MgPoint3DC( m_GJim1[ic0].m_p), MgPoint3DC( m_GJim1[ic1].m_p), Pth);			// ‚R“_
+			RfmI.m_Pln = MgPlane3Point3D( MgPoint3DC( m_GJim1[ic0].m_p), MgPoint3DC( m_GJim1[ic1].m_p), Pth);			// ‚R“_
 		}
 		if ( RfmI.m_icd) {
 			m_GRfm += RfmI;										// ‰®ª–Ê’Ç‰Á
@@ -307,7 +307,7 @@ void MhRoofInfo::CreateRfmForJim()
 		Pln0 = m_GRfm.m_st[iRfm0].m_Pln;						// ’n‰ô‚èü‚ÉÚ‘±‚·‚é‰®ª–Ê
 		iRfm1 = m_GJim1[ic1].m_iRfm;
 		Pln1 = m_GRfm.m_st[iRfm1].m_Pln;						// Ÿ‚Ì’n‰ô‚èü‚ÉÚ‘±‚·‚é‰®ª–Ê
-		ist = MGeo::Intr2Pln3( Pln0, Pln1, &ULn1);				// ‰®ª–ÊŠÔ‚ÌŒğü‚ğ‹‚ß‚é
+		ist = MGeo::Intr2Pln3D( Pln0, Pln1, &ULn1);				// ‰®ª–ÊŠÔ‚ÌŒğü‚ğ‹‚ß‚é
 			ASSERT( ist == MC_INT);								// Šñ“•”\¬üì¬ƒGƒ‰[@<ERROR>
 		if ( ULn1.v.z < 0.0)									// Œğü‚Ì•ûŒü‚ğãŒü‚«‚É‚·‚é
 			ULn1.v = - ULn1.v;
@@ -333,7 +333,7 @@ void MhRoofInfo::CreateRfmForJim()
 		Ln1 = m_GJim1[ic0].m_LnR;
 		Ln2 = m_GJim1[ic1].m_LnR;
 		Ln0 = MgLine3D( Ln1.p[0], Ln2.p[0]); 
-		ist = MGeo::Intr2Ln3( Ln1, Ln2, &P0);						// ’n‰ô‚èü‚ÉÚ‘±‚·‚é¶‰E‚Ì‰®ª\¬ü‚ªŒğ·‚ğŠm”F
+		ist = MGeo::Intr2Line3D( Ln1, Ln2, &P0);						// ’n‰ô‚èü‚ÉÚ‘±‚·‚é¶‰E‚Ì‰®ª\¬ü‚ªŒğ·‚ğŠm”F
 
 		m_GRfm.m_st[iRfm1].m_Pg   += Ln1.p[0];					// 0: ’n‰ô‚èü( ic1)‚Ì¶‚Ì“_‚ğA’n‰ô‚èü‚ÉÚ‘±‚·‚é‰®ª–ÊŒ`ó‚ÌÅ‰“_‚Æ‚µ‚Ä’Ç‰Á
 		m_GRfm.m_st[iRfm1].m_cdPg += m_GJim1[ic0].m_icdLnR;		// 0: è‘O‚Ì’n‰ô‚èü( ic0)‚Ì‰E‘¤‚Ìüí‚ğİ’è
@@ -359,8 +359,8 @@ MINT MhRoofInfo::AdjustRfm1()						// (  O) ƒXƒeƒCƒ^ƒX@0: ³í@-1: ‰®ª–ÊŒ`ó
 	MINT		ic1, ic2;
 	MINT		sel1;
 	MgPlane3D	*pPln1, *pPln2;
-	MgMat3DE		MatXY;											// Pln to XY•½–Ê ‚R‚cƒ}ƒgƒŠƒbƒNƒX
-	MgMat3DE		MatPln;											// XY•½–Ê to Pln ‚R‚cƒ}ƒgƒŠƒbƒNƒX
+	MgMat3E		MatXY;											// Pln to XY•½–Ê ‚R‚cƒ}ƒgƒŠƒbƒNƒX
+	MgMat3E		MatPln;											// XY•½–Ê to Pln ‚R‚cƒ}ƒgƒŠƒbƒNƒX
 	MgLine2D		ln0;
 	MgULine3D	ULn0;
 	MgULine2D	uln1;
@@ -379,7 +379,7 @@ MINT MhRoofInfo::AdjustRfm1()						// (  O) ƒXƒeƒCƒ^ƒX@0: ³í@-1: ‰®ª–ÊŒ`ó
 //#endif
 		pPln1 = &m_GRfm.m_st[ic1].m_Pln;						// ‰®ª–Ê1‚ğæ‚èo‚·
 
-		MGeo::Mat3PlntoXY( *pPln1, m_GRfm.m_st[ic1].m_Pg.m_P[0], &MatXY, &MatPln);	// ‚R‚c¨‚Q‚c—p•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Æ‹t•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğ‹‚ß‚é
+		MGeo::Mat3EPlntoXY( *pPln1, m_GRfm.m_st[ic1].m_Pg.m_P[0], &MatXY, &MatPln);	// ‚R‚c¨‚Q‚c—p•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Æ‹t•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğ‹‚ß‚é
 
 		MGeo::Polyg3Dto2D( m_GRfm.m_st[ic1].m_Pg, MatXY, &pg1);		// ‰®ª–Ê1‚ÌŒ`ó‚ğ‚QŸŒ³‚É•ÏŠ·‚·‚é
 //							m_GRfm.m_st[ic1].pg.Print( Mstr( "051114 m_GRfm.m_st[ic1].pg"));
@@ -399,14 +399,14 @@ MINT MhRoofInfo::AdjustRfm1()						// (  O) ƒXƒeƒCƒ^ƒX@0: ³í@-1: ‰®ª–ÊŒ`ó
 				MQUIT;
 //			ASSERT(m_GRfm.m_st[ic2].pg.n != 0);
 			pPln2 = &m_GRfm.m_st[ic2].m_Pln;					// ‘¼‚Ì‰®ª–Ê2‚ğæ‚èo‚·
-			ist1 = MGeo::Intr2Pln3( *pPln1, *pPln2, &ULn0);			// “ñ‚Â‚Ì‰®ª–Ê‚ÌŒğ·’¼ü‚ğ‹‚ß‚é
+			ist1 = MGeo::Intr2Pln3D( *pPln1, *pPln2, &ULn0);			// “ñ‚Â‚Ì‰®ª–Ê‚ÌŒğ·’¼ü‚ğ‹‚ß‚é
 																// ‰®ª–Ê‚Í’n‰ô‚èü‚Ì‡‚É•À‚ñ‚Å‚¨‚èŒğ·’¼ü‚Ì•ûŒü‚Í
 																// ‚QŸŒ³‚É‚µ‚½‚Éx‚ª‘å‚©‚ç¬‚Ì•ûŒü‚ÉŒü‚©‚Á‚Ä‚¢‚é
 			if ( ist1 != MC_INT) 
 				continue;
 
 			MGeo::ULine3Dto2D( ULn0,  MatXY, &uln1);					// Œğ·’¼ü‚ğ‚QŸŒ³‚É•ÏŠ·‚µ
-			ist1 = MGeo::DivideULnPg2( MC_IN_BORDER | MC_ON_BORDER , uln1, pg1, &Gln1);
+			ist1 = MGeo::DivideULinePolygon2D( MC_IN_BORDER | MC_ON_BORDER , uln1, pg1, &Gln1);
 																// ‰®ª–Ê1‚ÌŒ`ó“à‚ÉŠÜ‚Ü‚ê‚éü•ªŒQ1‚ğ‹‚ß‚é
 //							Gln1.Print( Mstr( "051114 ‰®ª–Ê1‚ÌŒ`ó“à‚ÉŠÜ‚Ü‚ê‚éü•ªŒQ1 Gln1"));
 			if ( ist1 != (MC_INT | MC_MATCH)) 
@@ -419,7 +419,7 @@ MINT MhRoofInfo::AdjustRfm1()						// (  O) ƒXƒeƒCƒ^ƒX@0: ³í@-1: ‰®ª–ÊŒ`ó
 				sel1 = MC_IN_BORDER;
 //				sel1 = MC_IN_BORDER | MC_ON_BORDER;
 
-			ist1 = MGeo::DivideULnPg3( sel1, ULn0, m_GRfm.m_st[ic2].m_Pg, &GLn2);
+			ist1 = MGeo::DivideULinePolygon3D( sel1, ULn0, m_GRfm.m_st[ic2].m_Pg, &GLn2);
 //							GLn2.Print( Mstr( "051114 ‰®ª–Ê2‚ÌŒ`ó“à‚ÉŠÜ‚Ü‚ê‚éü•ªŒQ2 GLn2"));
 			if ( ist1 != (MC_INT | MC_MATCH)) 
 				continue;
@@ -433,7 +433,7 @@ MINT MhRoofInfo::AdjustRfm1()						// (  O) ƒXƒeƒCƒ^ƒX@0: ³í@-1: ‰®ª–ÊŒ`ó
 //							Gln0.Print( Mstr( "051114 d‚Ë‚½ü•ªŒQŒv Gln0"));
 		}
 		if ( Gln0.m_n > 1) {
-			MGeo::MakeGPg2FromLn2InGLn2( ln0, Gln0, &pg0);			// ’n‰ô‚èü‚ğŠîü‚Æ‚µŒğ·ü•ª‚ğŒ‹‡‚µÅ¬‚Ì‘½ŠpŒ`‚ğì‚é
+			MGeo::MakeGPolygonFromLineInGLine2D( ln0, Gln0, &pg0);			// ’n‰ô‚èü‚ğŠîü‚Æ‚µŒğ·ü•ª‚ğŒ‹‡‚µÅ¬‚Ì‘½ŠpŒ`‚ğì‚é
 //							pg0.Print( Mstr( "051114 Œ‹‡‚µÅ¬‚Ì‘½ŠpŒ` pg0"));
 			MGeo::Polyg2Dto3D( pg0, MatPln, &Pg0);						// ‚RŸŒ³‚É–ß‚·
 //							Pg0.Print( Mstr( "051114 Œ‹‡‚µÅ¬‚Ì‘½ŠpŒ` Pg0"));
@@ -483,7 +483,7 @@ MINT MhRoofInfo::AdjustRfm2()						// (  O) ƒXƒeƒCƒ^ƒX@0: ³í@-1: ‰®ª–ÊŒ`ó
 	for ( ic1=0; ic1<nHaiKabe; ic1++)
 		GlnGKb += MgLine2DC( pHaiKabe[ic1]->GetPIPlcIti());
 
-	MGeo::MakeGPg2InGLn2( GlnGKb, &GpgGKb);
+	MGeo::MakeGPolygonInGLine2D( GlnGKb, &GpgGKb);
 	if ( GpgGKb.m_n == 0)
 		return ist;
 
@@ -499,7 +499,7 @@ MINT MhRoofInfo::AdjustRfm2()						// (  O) ƒXƒeƒCƒ^ƒX@0: ³í@-1: ‰®ª–ÊŒ`ó
 		//	continue;
 		pgRfm = (*pPgRfm);										// XY•½–Ê‚É“Š‰e‚µ‚QŸŒ³‰»
 
-		ist1 = MGeo::MergePgGPgtoGPg2( MC_DIFF, pgRfm, GpgGKb, &GpgRfm);
+		ist1 = MGeo::MergePgGPgtoGPolygon2D( MC_DIFF, pgRfm, GpgGKb, &GpgRfm);
 		if ( ist1 == MC_MATCH)									// ‰®ª–ÊŒ`ó‚ªŠO•Ç‚ÆŒğ·‚È‚µ‚Å‚»‚Ì‚Ü‚Üc‚éê‡‚Í
 			continue;											// ‰®ª–ÊŒ`ó‚Ì•ÏX‚È‚µ
 		GPgRfm.Set( GpgRfm, *pPln1);							// ‰®ª•½–Êó‚Ì‚RŸŒ³‰»
@@ -517,7 +517,7 @@ MINT MhRoofInfo::AdjustRfm2()						// (  O) ƒXƒeƒCƒ^ƒX@0: ³í@-1: ‰®ª–ÊŒ`ó
 				for ( ic3b=pPgRfmN->m_n-1,ic3=0; ic3<pPgRfmN->m_n; ic3b=ic3,ic3++) {
 					
 					for ( ic4b=pPgRfm->m_n-1,ic4=0; ic4<pPgRfm->m_n; ic4b=ic4,ic4++) {
-						if ( MGeo::ChkLn3OnLn3( MgLine3D(pPgRfmN->m_P[ic3b], pPgRfmN->m_P[ic3]), MgLine3D(pPgRfm->m_P[ic4b], pPgRfm->m_P[ic4])))
+						if ( MGeo::ChkLineOnLine3D( MgLine3D(pPgRfmN->m_P[ic3b], pPgRfmN->m_P[ic3]), MgLine3D(pPgRfm->m_P[ic4b], pPgRfm->m_P[ic4])))
 							break;
 					}
 					if ( ic4 < pPgRfm->m_n)
@@ -558,8 +558,8 @@ static bool MgChkRfmCls(							// (  O) true:	Œğ·ƒ`ƒFƒbƒN‚É‰®ª–Ê2‚Ì‹«ŠE‚ğŠÜ‚
 	MINT	ist1, ist2;
 	bool	bst1, bst2;
 
-	MGeo::ChkLn3OnPln3WS( LnJim1, Pln2, &ist1);							// ‰®ª–Ê1‚Ì’n‰ô‚èüˆÊ’u‚ªA‰®ª–Ê2‚Ìã‰º‚Ç‚¿‚ç‚©‚ğ”»’è
-	MGeo::ChkLn3OnPln3WS( LnJim2, Pln1, &ist2);							// ‰®ª–Ê2‚Ì’n‰ô‚èüˆÊ’u‚ªA‰®ª–Ê1‚Ìã‰º‚Ç‚¿‚ç‚©‚ğ”»’è
+	MGeo::ChkLineOnPln3DWS( LnJim1, Pln2, &ist1);							// ‰®ª–Ê1‚Ì’n‰ô‚èüˆÊ’u‚ªA‰®ª–Ê2‚Ìã‰º‚Ç‚¿‚ç‚©‚ğ”»’è
+	MGeo::ChkLineOnPln3DWS( LnJim2, Pln1, &ist2);							// ‰®ª–Ê2‚Ì’n‰ô‚èüˆÊ’u‚ªA‰®ª–Ê1‚Ìã‰º‚Ç‚¿‚ç‚©‚ğ”»’è
 
 	bst1 = !( ist1 & MC_PS_LOWER || ist1 & MC_PE_LOWER);	// ‰®ª–Ê1‚Ì’n‰ô‚èü1‚ª‰®ª–Ê2‚Ìã‚Ü‚½‚Íã‘¤
 	bst2 = !( ist2 & MC_PS_LOWER || ist2 & MC_PE_LOWER);	// ‰®ª–Ê2‚Ì’n‰ô‚èü2‚ª‰®ª–Ê1‚Ìã‚Ü‚½‚Íã‘¤
@@ -658,7 +658,7 @@ void MhRoofInfo::ConnectRfm()
 			if ( Pln1 != Pln2)
 				continue;										// “¯ˆê•½–Êã‚É–³‚¢‰®ª–Ê‚Í–³‹
 
-			ist1 = MGeo::Merge2PgtoGPg3( MC_OR, m_GRfm.m_st[ic1].m_Pg, m_GRfm.m_st[ic2].m_Pg, &GPgw);
+			ist1 = MGeo::Merge2PgtoGPolygon3D( MC_OR, m_GRfm.m_st[ic1].m_Pg, m_GRfm.m_st[ic2].m_Pg, &GPgw);
 			if ( MF_CHECK_OR( ist1, MC_INT) && GPgw.m_n == 1) {			// Œ‹‡—L‚è‚Ìê‡‚Í
 				// ‰®ª\¬üí‚ÌŒŸõ—p
 				Pgw = m_GRfm.m_st[ic1].m_Pg;
@@ -671,14 +671,14 @@ void MhRoofInfo::ConnectRfm()
 					fSet = false;
 					for ( ic4b=pPg1->m_n-1,ic4=0; !fSet && ic4<pPg1->m_n; ic4b=ic4,ic4++) {
 						Ln4 = MgLine3D( pPg1->m_P[ic4b], pPg1->m_P[ic4]);
-						if ( MGeo::ChkLn3OnLn3( Ln3, Ln4)) {
+						if ( MGeo::ChkLineOnLine3D( Ln3, Ln4)) {
 							GpgCd += m_GRfm.m_st[ic1].m_cdPg.m_i[ic4];
 							fSet = true;
 						}
 					}
 					for ( ic4b=pPg2->m_n-1,ic4=0; !fSet && ic4<pPg2->m_n; ic4b=ic4,ic4++) {
 						Ln4 = MgLine3D( pPg2->m_P[ic4b], pPg2->m_P[ic4]);
-						if ( MGeo::ChkLn3OnLn3( Ln3, Ln4)) {
+						if ( MGeo::ChkLineOnLine3D( Ln3, Ln4)) {
 							GpgCd += m_GRfm.m_st[ic2].m_cdPg.m_i[ic4];
 							fSet = true;
 						}
@@ -736,7 +736,7 @@ void MhRoofInfo::OffsetRfm()
 			vc2 = pc2 - pb1;
 			vc2.SetUnitize();
 			lnc2 = MgLine2D( pb1, pc2) + vc2.RotR90() * McRfmOffset[Rfm->m_cdPg[ic2]];
-			MGeo::Intr2Ln2( lnb1, lnc2, &pb0);
+			MGeo::Intr2Line2D( lnb1, lnc2, &pb0);
 			Rfm->m_Pg.m_P[ib1] = MgPoint3DC( pb0, Pln1.GetZ( pb0));
 			pb2 = pb1;
 			ib1 = ic2;

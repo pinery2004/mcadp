@@ -25,17 +25,17 @@
 namespace MC
 {
 
-static MgMat3D McMatN  = MgMat3D ( 1.0f, 0.0f, 0.0f,
-						 		 0.0f, 1.0f, 0.0f,
-								 0.0f, 0.0f, 1.0f);
-static MgMat4D McMat3N = MgMat4D( 1.0f, 0.0f, 0.0f, 0.0f,
-								0.0f, 1.0f, 0.0f, 0.0f,
-								0.0f, 0.0f, 1.0f, 0.0f,
-								0.0f, 0.0f, 0.0f, 1.0f);
+static MgMat2D McMatN  = MgMat2D( 1.0f, 0.0f, 0.0f,
+						 		  0.0f, 1.0f, 0.0f,
+								  0.0f, 0.0f, 1.0f);
+static MgMat3D McMat3N = MgMat3D( 1.0f, 0.0f, 0.0f, 0.0f,
+								  0.0f, 1.0f, 0.0f, 0.0f,
+								  0.0f, 0.0f, 1.0f, 0.0f,
+								  0.0f, 0.0f, 0.0f, 1.0f);
 
 //
-void MgMat3D::SetUnit() {*this = McMatN;}
-void MgMat4D::SetUnit() {*this = McMat3N;}
+void MgMat2D::SetUnit() { *this = McMatN;}
+void MgMat3D::SetUnit() { *this = McMat3N;}
 
 //// 指定軸を中心に回転する
 //MgRot( MgULine3D& i_UL, MgVect3D& i_VR)
@@ -47,7 +47,7 @@ void MgMat4D::SetUnit() {*this = McMat3N;}
 //	MREAL	Vyz = i_UL.v.y * i_UL.v.z;
 //	MREAL	Vzx = i_UL.v.z * i_UL.v.x;
 //	MREAL	VRmc = 1 - i_VR.x;
-//	MgMat4D	M1;
+//	MgMat3D	M1;
 //	M1.m[0][0]
 //}
 
@@ -73,16 +73,16 @@ void MgMat4D::SetUnit() {*this = McMat3N;}
 //	    座標変換マトリックスの加算
 //
 //	使用法
-//		MgMat4D = MgMat3D1 + MgMat3D2;
+//		MgMat3D= MgMat3D1 + MgMat3D2;
 //
 //	| m11 m12 m13 |     | n11 n12 n13 |
 //	| m21 m22 m23 |  +  | n21 n22 n23 |
 //	| m31 m32 m33 |     | n31 n32 n33 |
 //
-//MgMat3D operator + (const MgMat3D &tm, const MgMat3D &tn)
-MgMat3D MGeo::MatPlus2( const MgMat3D& i_tm, const MgMat3D& i_tn)
+//MgMat2D operator + (const MgMat2D&tm, const MgMat2D&tn)
+MgMat2D MGeo::Mat2DPlus( const MgMat2D& i_tm, const MgMat2D& i_tn)
 {
-	MgMat3D	to;
+	MgMat2D	to;
 	int		ic;
 	for ( ic=0; ic<3; ic++) {
 		to.m[ic][0] = i_tm.m[ic][0] + i_tn.m[ic][0];
@@ -103,8 +103,8 @@ MgMat3D MGeo::MatPlus2( const MgMat3D& i_tm, const MgMat3D& i_tn)
 //	| m21 m22 m23 |  =  | m21 m22 m23 |  +  | n21 n22 n23 |
 //	| m31 m32 m33 |     | m31 m32 m33 |     | n31 n32 n33 |
 //
-//MgMat3D operator += (MgMat3D &tm, const MgMat3D &tn)
-MgMat3D MGeo::MatPlusEqual2( MgMat3D& io_tm, const MgMat3D& i_tn)
+//MgMat2D operator += (MgMat2D&tm, const MgMat2D&tn)
+MgMat2D MGeo::Mat2DPlusEqual( MgMat2D& io_tm, const MgMat2D& i_tn)
 {
 	int		ic;
 	for ( ic=0; ic<3; ic++) {
@@ -120,16 +120,16 @@ MgMat3D MGeo::MatPlusEqual2( MgMat3D& io_tm, const MgMat3D& i_tn)
 //		負の座標変換マトリックスを作成
 //
 //	使用法
-//		MgMat3D2 = - MgMat3D1;
+//		MgMat2D2 = - MgMat2D1;
 //
 //	  | m11 m12 m13 |
 //	- | m21 m22 m23 |
 //	  | m31 m32 m33 |
 //
-//MgMat3D operator - (const MgMat3D &tm)
-MgMat3D MGeo::MatMinusSingle2( const MgMat3D& i_tm)
+//MgMat2D operator - (const MgMat2D&tm)
+MgMat2D MGeo::MatMinusSingle2( const MgMat2D& i_tm)
 {
-	return MgMat3D( -i_tm.m[0][0], -i_tm.m[0][1], -i_tm.m[0][2],
+	return MgMat2D( -i_tm.m[0][0], -i_tm.m[0][1], -i_tm.m[0][2],
 				    -i_tm.m[1][0], -i_tm.m[1][1], -i_tm.m[1][2],
 				   -i_tm.m[2][0], -i_tm.m[2][1], -i_tm.m[2][2]);
 }
@@ -139,16 +139,16 @@ MgMat3D MGeo::MatMinusSingle2( const MgMat3D& i_tm)
 //		座標変換マトリックスの引算
 //
 //	使用法
-//		MgMat4D = MgMat3D1 - MgMat3D2;
+//		MgMat2D= MgMat2D1 - MgMat2D2;
 //
 //	  | m11 m12 m13 |     | n11 n12 n13 |
 //	  | m21 m22 m23 |  -  | n21 n22 n23 |
 //	  | m31 m32 m33 |     | n31 n32 n33 |
 //
-//MgMat3D operator - (const MgMat3D &M1, const MgMat3D &M2)
-MgMat3D MGeo::MatMinus2( const MgMat3D& i_tm, const MgMat3D& i_tn)
+//MgMat2D operator - (const MgMat2D&M1, const MgMat2D&M2)
+MgMat2D MGeo::Mat2DMinus( const MgMat2D& i_tm, const MgMat2D& i_tn)
 {
-	MgMat3D	to;
+	MgMat2D	to;
 	int		ic;
 	for ( ic=0; ic<3; ic++) {
 		to.m[ic][0] = i_tm.m[ic][0] - i_tn.m[ic][0];
@@ -163,14 +163,14 @@ MgMat3D MGeo::MatMinus2( const MgMat3D& i_tm, const MgMat3D& i_tn)
 //	    座標変換マトリックスの引算
 //
 //	使用法
-//		MgMat3D1 -= MgMat3D2;
+//		MgMat2D1 -= MgMat2D2;
 //
 //	| m11 m12 m13 |    | m11 m12 m13 |     | n11 n12 n13 |
 //	| m21 m22 m23 |  = | m21 m22 m23 |  -  | n21 n22 n23 |
 //	| m31 m32 m33 |    | m31 m32 m33 |     | n31 n32 n33 |
 //
-//MgMat3D operator -= (MgMat3D &tm, const MgMat3D &tn)
-MgMat3D MGeo::MatMinusEqual2( MgMat3D& io_tm, const MgMat3D& i_tn)
+//MgMat2D operator -= (MgMat2D&tm, const MgMat2D&tn)
+MgMat2D MGeo::Mat2DMinusEqual( MgMat2D& io_tm, const MgMat2D& i_tn)
 {
 	int		ic;
 	for ( ic=0; ic<3; ic++) {
@@ -187,16 +187,16 @@ MgMat3D MGeo::MatMinusEqual2( MgMat3D& io_tm, const MgMat3D& i_tn)
 //	    座標変換マトリックスによる変換後に、さらに座標変換マトリックスによる変換するマトリックスを作成
 //
 //	使用法
-//		MgMat4D = MgMat3D1 * MgMat3D2;
+//		MgMat2D= MgMat2D1 * MgMat2D2;
 //
 //	| m11 m12 m13 |     | n11 n12 n13 |
 //	| m21 m22 m23 |  X  | n21 n22 n23 |
 //	| m31 m32 m33 |     | n31 n32 n33 |
 //
-//MgMat3D operator * (const MgMat3D &tm, const MgMat3D &tn)
-MgMat3D MGeo::MatMult2( const MgMat3D& i_tm, const MgMat3D& i_tn)
+//MgMat2D operator * (const MgMat2D&tm, const MgMat2D&tn)
+MgMat2D MGeo::Mat2DMult( const MgMat2D& i_tm, const MgMat2D& i_tn)
 {
-	MgMat3D	to;
+	MgMat2D	to;
 	int		i1, i2;
 	for (i1=0; i1<3; i1++) 
 		for (i2=0; i2<3; i2++) 
@@ -212,16 +212,16 @@ MgMat3D MGeo::MatMult2( const MgMat3D& i_tm, const MgMat3D& i_tn)
 //	    座標変換マトリックスによる変換後に、さらに座標変換マトリックスによる変換するマトリックスを作成
 //
 //	使用法
-//		MgMat3D2 *= MgMat3D1;
+//		MgMat2D2 *= MgMat2D1;
 //
 //	| m11 m12 m13 |     | m11 m12 m13 |     | n11 n12 n13 |
 //	| m21 m22 m23 |  =  | m21 m22 m23 |  X  | n21 n22 n23 |
 //	| m31 m32 m33 |     | m31 m32 m33 |     | n31 n32 n33 |
 //
-//MgMat3D operator *= (MgMat3D &tm, const MgMat3D &tn)
-MgMat3D MGeo::MatMultEqual2( MgMat3D& io_tm, const MgMat3D& i_tn)
+//MgMat2D operator *= (MgMat2D&tm, const MgMat2D&tn)
+MgMat2D MGeo::Mat2DMultEqual( MgMat2D& io_tm, const MgMat2D& i_tn)
 {
-	MgMat3D	tw;
+	MgMat2D	tw;
 	int		i1, i2;
 	for (i1=0; i1<3; i2++) 
 		for (i2=0; i2<3; i1++) 
@@ -237,14 +237,14 @@ MgMat3D MGeo::MatMultEqual2( MgMat3D& io_tm, const MgMat3D& i_tn)
 //	    座標変換マトリックスにより座標変換する
 //
 //	使用法
-//		MgPoint2Dpo = MgPoint2Dp * MgMat3Dtm;
+//		MgPoint2Dpo = MgPoint2Dp * MgMat2Dtm;
 //
 //					   | m11 m12 m13 |
 //	| px  py  1  |  X  | m21 m22 m23 |
 //					   | m31 m32 m33 |     
 //
-//MgPoint2D operator * (const MgPoint2D& pi, const MgMat3D &tm)
-MgVect2D MGeo::MatMultPt22( const MgVect2D& i_pt, const MgMat3D& i_tm)
+//MgPoint2D operator * (const MgPoint2D& pi, const MgMat2D&tm)
+MgVect2D MGeo::Mat2DMultPoint2D( const MgVect2D& i_pt, const MgMat2D& i_tm)
 {
 	MgVect2D	po;
 	po.x = i_tm.m[0][0] * i_pt.x + i_tm.m[1][0] * i_pt.y + i_tm.m[2][0];
@@ -257,14 +257,14 @@ MgVect2D MGeo::MatMultPt22( const MgVect2D& i_pt, const MgMat3D& i_tm)
 //		座標変換マトリックスにより座標変換する
 //
 //	使用法
-//		MgVect2D *= MgMat3D;
+//		MgVect2D *= MgMat2D;
 //
 //										  | m11 m12 m13 |
 //	| px  py  1  |  =  | px  py  1  |  X  | m21 m22 m23 |
 //				   						  | m31 m32 m33 |
 //
-//MgVect2D operator *= (MgVect2D& pi, const MgMat3D& tm)
-MgVect2D MGeo::MatMultEqualPt22( MgVect2D& io_pt, const MgMat3D& i_tm)
+//MgVect2D operator *= (MgVect2D& pi, const MgMat2D& tm)
+MgVect2D MGeo::Mat2DMultEqualPoint2D( MgVect2D& io_pt, const MgMat2D& i_tm)
 {
 	MREAL	rwx;
 	rwx	    = i_tm.m[0][0] * io_pt.x + i_tm.m[1][0] * io_pt.y + i_tm.m[2][0];
@@ -278,14 +278,14 @@ MgVect2D MGeo::MatMultEqualPt22( MgVect2D& io_pt, const MgMat3D& i_tm)
 //		座標変換マトリックスにより座標変換する
 //
 //	使用法
-//		MgULine2D = MgULine2D*  MgMat3D;
+//		MgULine2D = MgULine2D*  MgMat2D;
 //
 //	| px  py  1  |     | m11 m12 m13 |
 //	| vx  vy  0  |  X  | m21 m22 m23 |
 //					   | m31 m32 m33 |
 //
-//MgULine2D operator * (const MgULine2D& uln1, const MgMat3D &m2)
-MgULine2D MGeo::MatMultULn22( const MgULine2D& i_uln, const MgMat3D& i_tm)
+//MgULine2D operator * (const MgULine2D& uln1, const MgMat2D&m2)
+MgULine2D MGeo::Mat2DMultULine2D( const MgULine2D& i_uln, const MgMat2D& i_tm)
 {
 	MgULine2D	ulno;
 	ulno.p.x = i_tm.m[0][0] * i_uln.p.x + i_tm.m[1][0] * i_uln.p.y + i_tm.m[2][0];
@@ -301,14 +301,14 @@ MgULine2D MGeo::MatMultULn22( const MgULine2D& i_uln, const MgMat3D& i_tm)
 //		座標変換マトリックスにより座標変換する
 //
 //	使用法
-//		MgULine2D* = MgMat3D;
+//		MgULine2D* = MgMat2D;
 //
 //	| px  py  1  |     | px  py  1  |     | m11 m12 m13 |
 //	| vx  vy  0  |  =  | vx  vy  1  |  X  | m21 m22 m23 |
 //			             				  | m31 m32 m33 |
 //
-//MgULine2D operator *= (MgULine2D& ili, const MgMat3D &m2)
-MgULine2D MGeo::MatMultEqualULn22( MgULine2D& io_uln, const MgMat3D& i_tm)
+//MgULine2D operator *= (MgULine2D& ili, const MgMat2D&m2)
+MgULine2D MGeo::Mat2DMultEqualULine2D( MgULine2D& io_uln, const MgMat2D& i_tm)
 {
 	MREAL	rwx;
 	rwx		   = i_tm.m[0][0] * io_uln.p.x + i_tm.m[1][0] * io_uln.p.y + i_tm.m[2][0];
@@ -328,15 +328,15 @@ MgULine2D MGeo::MatMultEqualULn22( MgULine2D& io_uln, const MgMat3D& i_tm)
 //	    座標変換マトリックスにより座標変換する
 //
 //	使用法
-//		MgVect3D2 = MgVect3D1 * MgMat3D1;
+//		MgVect3D2 = MgVect3D1 * MgMat2D1;
 //
 //						  | m11 m12 0 m13 |     
 //	| px  py  pz  1 |  X  | m21 m22 0 m23 |
 //						  |  0   0  1  0  |
 //						  | m31 m32 0 m33 |
 //
-//MgVect3D operator * (const MgVect3D& Pt1, const MgMat3D &m2)
-MgVect3D MGeo::MatMultPt32( const MgVect3D& i_Pt, const MgMat3D& i_tm)
+//MgVect3D operator * (const MgVect3D& Pt1, const MgMat2D&m2)
+MgVect3D MGeo::Mat2DMultPointt3D( const MgVect3D& i_Pt, const MgMat2D& i_tm)
 {
 	MgVect3D	Po;
 	Po.x = i_tm.m[0][0] * i_Pt.x + i_tm.m[1][0] * i_Pt.y + i_tm.m[2][0];
@@ -350,7 +350,7 @@ MgVect3D MGeo::MatMultPt32( const MgVect3D& i_Pt, const MgMat3D& i_tm)
 //		座標変換マトリックスにより座標変換する
 //
 //	使用法
-//		MgVect3D *= MgMat3D;
+//		MgVect3D *= MgMat2D;
 //
 //						 						| m11 m12 0 m13 |
 //	| px  py  pz  1 |  =  | px  py  pz  1 |  X  | m21 m22 0 m23 |
@@ -358,8 +358,8 @@ MgVect3D MGeo::MatMultPt32( const MgVect3D& i_Pt, const MgMat3D& i_tm)
 //			   									| m31 m32 0 m33 |
 
 
-//MgVect3D operator *= (MgVect3D& Pt1, const MgMat3D &m2)
-MgVect3D MGeo::MatMultEqualPt32( MgVect3D& io_Pt, const MgMat3D& i_tm)
+//MgVect3D operator *= (MgVect3D& Pt1, const MgMat2D&m2)
+MgVect3D MGeo::Mat2DMultEqualPoint3D( MgVect3D& io_Pt, const MgMat2D& i_tm)
 {
 	MREAL	rwx;
 	rwx		= i_tm.m[0][0] * io_Pt.x + i_tm.m[1][0] * io_Pt.y + i_tm.m[2][0];
@@ -373,15 +373,15 @@ MgVect3D MGeo::MatMultEqualPt32( MgVect3D& io_Pt, const MgMat3D& i_tm)
 //		座標変換マトリックスにより座標変換する
 //
 //	使用法
-//		MgULine2D = MgULine2D*  MgMat3D;
+//		MgULine2D = MgULine2D*  MgMat2D;
 //
 //	| px  py  pz  1 |	  | m11 m12 0 m13 |
 //	| vx  vy  vz  1 |  X  | m21 m22 0 m23 |
 //						  |  0   0  1  0  |
 //			   			  | m31 m32 0 m33 |
 //
-//MgULine3D operator * (const MgULine3D& uln1, const MgMat3D &m2)
-MgULine3D MGeo::MatMultULn32( const MgULine3D& i_ULn, const MgMat3D& i_tm)
+//MgULine3D operator * (const MgULine3D& uln1, const MgMat2D&m2)
+MgULine3D MGeo::Mat2DMultULine3D( const MgULine3D& i_ULn, const MgMat2D& i_tm)
 {
 	MgULine3D ULno;
 	ULno.p.x = i_tm.m[0][0] * i_ULn.p.x + i_tm.m[1][0] * i_ULn.p.y + i_tm.m[2][0];
@@ -399,15 +399,15 @@ MgULine3D MGeo::MatMultULn32( const MgULine3D& i_ULn, const MgMat3D& i_tm)
 //		座標変換マトリックスにより座標変換する
 //
 //	使用法
-//		MgULine2D* = MgMat3D;
+//		MgULine2D* = MgMat2D;
 //
 //	| px  py  pz  1 |     | px  py  pz  1 |		| m11 m12 0 m13 |
 //	| vx  vy  vz  1 |  =  | vx  vy  vz  1 |  X  | m21 m22 0 m23 |
 //												|  0   0  1  0  |
 //				 				   				| m31 m32 0 m33 |
 //
-//MgULine3D operator *= (MgULine3D& ULn1, const MgMat3D &m2)
-MgULine3D MGeo::MatMultEqualULn32( MgULine3D& io_ULn, const MgMat3D& i_tm)
+//MgULine3D operator *= (MgULine3D& ULn1, const MgMat2D& m2)
+MgULine3D MGeo::Mat2DMultEqualULine3D( MgULine3D& io_ULn, const MgMat2D& i_tm)
 {
 	MREAL	rwx;
 	rwx		   = i_tm.m[0][0] * io_ULn.p.x + i_tm.m[1][0] * io_ULn.p.y + i_tm.m[2][0];
@@ -423,10 +423,10 @@ MgULine3D MGeo::MatMultEqualULn32( MgULine3D& io_ULn, const MgMat3D& i_tm)
 //======================( ２次元 )==============================
 //		マトリックスをトレースする
 //
-void MgMat3D::MgMatPrint3(MCHAR* s)														// print
+void MgMat2D::MgMatPrint3(MCHAR* s)														// print
 {
 #ifdef _DEBUG
-	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgMat3D	=	%f, %f, %f\n")
+	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgMat2D	=	%f, %f, %f\n")
 			        Mstr( "					%f, %f, %f\n")
 					Mstr( "					%f, %f, %f\n"),
 							s, m[0][0], m[0][1], m[0][2],
@@ -445,17 +445,17 @@ void MgMat3D::MgMatPrint3(MCHAR* s)														// print
 //		座標変換マトリックスの加算
 //
 //	使用法
-//		MgMat4D_3 = MgMat4D_1 + MgMat4D_2;
+//		MgMat3D_3 = MgMat3D_1 + MgMat3D_2;
 //
 //	| m11 m12 m13 m14 |     | n11 n12 n13 n14 |
 //	| m21 m22 m23 m24 |  +  | n21 n22 n23 n24 |
 //	| m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 //	| m41 m42 m43 m44 |     | n41 n42 n43 n44 |    
 //
-//MgMat4D operator + (const MgMat4D &M1, const MgMat4D &M2)
-MgMat4D MGeo::MatPlus3(const MgMat4D &i_Tm, const MgMat4D &i_Tn)
+//MgMat3D operator + (const MgMat3D&M1, const MgMat3D&M2)
+MgMat3D MGeo::Mat3DPlus(const MgMat3D&i_Tm, const MgMat3D&i_Tn)
 {
-	MgMat4D	To;
+	MgMat3D	To;
 	int		ic;
 	for ( ic=0; ic<4; ic++) {
 		To.m[ic][0] = i_Tm.m[ic][0] + i_Tn.m[ic][0];
@@ -471,15 +471,15 @@ MgMat4D MGeo::MatPlus3(const MgMat4D &i_Tm, const MgMat4D &i_Tn)
 //		座標変換マトリックスの加算
 //
 //	使用法
-//		MgMat4D += MgMat4D;
+//		MgMat3D+= MgMat3D;
 //
 //	| m11 m12 m13 m14 |		| m11 m12 m13 m14 |     | n11 n12 n13 n14 |
 //	| m21 m22 m23 m24 |  =  | m21 m22 m23 m24 |  +  | n21 n22 n23 n24 |
 //	| m31 m32 m33 m34 |     | m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 //	| m41 m42 m43 m44 |     | m41 m42 m43 m44 |     | n41 n42 n43 n44 |     
 //
-//MgMat4D operator += (MgMat4D &M1, const MgMat4D &M2)
-MgMat4D MGeo::MatPlusEqual3( MgMat4D &io_Tm, const MgMat4D &i_Tn)
+//MgMat3D operator += (MgMat3D&M1, const MgMat3D&M2)
+MgMat3D MGeo::Mat3DPlusEqual( MgMat3D&io_Tm, const MgMat3D&i_Tn)
 {
 	int		ic;
 	for ( ic=0; ic<4; ic++) {
@@ -496,17 +496,17 @@ MgMat4D MGeo::MatPlusEqual3( MgMat4D &io_Tm, const MgMat4D &i_Tn)
 //		負の座標変換マトリックスを作成
 //
 //	使用法
-//		MgMat4D_2 = - MgMat4D_1;
+//		MgMat3D_2 = - MgMat3D_1;
 //
 //	  | m11 m12 m13 m14 |
 //	- | m21 m22 m23 m24 |
 //	  | m31 m32 m33 m34 |
 //	  | m41 m42 m43 m44 |     
 //
-//MgMat4D operator - (const MgMat4D &M1)
-MgMat4D MGeo::MatSingleMinus3( const MgMat4D& i_Tm)
+//MgMat3D operator - (const MgMat3D&M1)
+MgMat3D MGeo::Mat3DSingleMinus( const MgMat3D& i_Tm)
 {
-	MgMat4D	To;
+	MgMat3D	To;
 	int		ic;
 	for ( ic=0; ic<4; ic++) {
 		To.m[ic][0] = - i_Tm.m[ic][0];
@@ -522,17 +522,17 @@ MgMat4D MGeo::MatSingleMinus3( const MgMat4D& i_Tm)
 //		座標変換マトリックスの引算
 //
 //	使用法
-//		MgMat4D_3 = MgMat4D_1 - MgMat4D_2;
+//		MgMat3D_3 = MgMat3D_1 - MgMat3D_2;
 //
 //	  | m11 m12 m13 m14 |     | n11 n12 n13 n14 |
 //	  | m21 m22 m23 m24 |  -  | n21 n22 n23 n24 |
 //	  | m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 //	  | m41 m42 m43 m44 |     | n41 n42 n43 n44 |    
 //
-//MgMat4D operator - (const MgMat4D &M1, const MgMat4D &M2)
-MgMat4D MGeo::MatMinus3( const MgMat4D& i_Tm, const MgMat4D& i_Tn)
+//MgMat3D operator - (const MgMat3D&M1, const MgMat3D&M2)
+MgMat3D MGeo::Mat3DMinus( const MgMat3D& i_Tm, const MgMat3D& i_Tn)
 {
-	MgMat4D	To;
+	MgMat3D	To;
 	int		ic;
 	for ( ic=0; ic<4; ic++) {
 		To.m[ic][0] = i_Tm.m[ic][0] - i_Tn.m[ic][0];
@@ -548,15 +548,15 @@ MgMat4D MGeo::MatMinus3( const MgMat4D& i_Tm, const MgMat4D& i_Tn)
 //		座標変換マトリックスの引算
 //
 //	使用法
-//		MgMat4D -= MgMat4D;
+//		MgMat3D-= MgMat3D;
 //
 //	| m11 m12 m13 m14 |		| m11 m12 m13 m14 |     | n11 n12 n13 n14 |
 //	| m21 m22 m23 m24 |  =  | m21 m22 m23 m24 |  -  | n21 n22 n23 n24 |
 //	| m31 m32 m33 m34 |     | m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 //	| m41 m42 m43 m44 |     | m41 m42 m43 m44 |     | n41 n42 n43 n44 |     
 //
-//MgMat4D operator -= (MgMat4D &M1, const MgMat4D &M2)
-MgMat4D MGeo::MatMinusEqual3( MgMat4D& io_Tm, const MgMat4D& i_Tn)
+//MgMat3D operator -= (MgMat3D&M1, const MgMat3D&M2)
+MgMat3D MGeo::Mat3DMinusEqual( MgMat3D& io_Tm, const MgMat3D& i_Tn)
 {
 	int		ic;
 	for ( ic=0; ic<4; ic++) {
@@ -573,17 +573,17 @@ MgMat4D MGeo::MatMinusEqual3( MgMat4D& io_Tm, const MgMat4D& i_Tn)
 //		座標変換マトリックスのかけ算
 //
 //	使用法
-//		MgMat4D_3 = MgMat4D_1 * MgMat4D_2;
+//		MgMat3D_3 = MgMat3D_1 * MgMat3D_2;
 //
 //	| m11 m12 m13 m14 |     | n11 n12 n13 n14 |
 //	| m21 m22 m23 m24 |  X  | n21 n22 n23 n24 |
 //	| m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 //	| m41 m42 m43 m44 |     | n41 n42 n43 n44 |    
 //
-//MgMat4D operator * (const MgMat4D &M1, const MgMat4D &M2)
-MgMat4D MGeo::MatMult3( const MgMat4D& i_Tm, const MgMat4D& i_Tn)
+//MgMat3D operator * (const MgMat3D&M1, const MgMat3D&M2)
+MgMat3D MGeo::Mat3DMult( const MgMat3D& i_Tm, const MgMat3D& i_Tn)
 {
-	MgMat4D	To;
+	MgMat3D	To;
 	int		i1, i2;
 	for (i1=0; i1<4; i1++) 
 		for (i2=0; i2<4; i2++) 
@@ -599,17 +599,17 @@ MgMat4D MGeo::MatMult3( const MgMat4D& i_Tm, const MgMat4D& i_Tn)
 //		座標変換マトリックスのかけ算
 //
 //	使用法
-//		MgMat4D *= MgMat4D;
+//		MgMat3D*= MgMat3D;
 //
 //	| m11 m12 m13 m14 |     | m11 m12 m13 m14 |     | n11 n12 n13 n14 |
 //	| m21 m22 m23 m24 |  =  | m21 m22 m23 m24 |  X  | n21 n22 n23 n24 |
 //	| m31 m32 m33 m34 |     | m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 //	| m41 m42 m43 m44 |     | m41 m42 m43 m44 |     | n41 n42 n43 n44 |     
 //
-//MgMat4D operator *= (MgMat4D &M1, const MgMat4D &M2)
-MgMat4D MGeo::MatMultEqual3( MgMat4D& io_Tm, const MgMat4D& i_Tn)
+//MgMat3D operator *= (MgMat3D&M1, const MgMat3D&M2)
+MgMat3D MGeo::Mat3DMultEqual( MgMat3D& io_Tm, const MgMat3D& i_Tn)
 {
-	MgMat4D	To;
+	MgMat3D	To;
 	int		i1, i2;
 	for (i1=0; i1<4; i1++) 
 		for (i2=0; i2<4; i2++) 
@@ -626,15 +626,15 @@ MgMat4D MGeo::MatMultEqual3( MgMat4D& io_Tm, const MgMat4D& i_Tn)
 //		３次元座標変換マトリックスにより２次元データを座標変換する
 //
 //	使用法
-//		MgMat4D_2 = MgVect2D * MgMat4D_1;
+//		MgMat3D_2 = MgVect2D * MgMat3D_1;
 //
 //						    | m11 m12 m13 m14 |
 //	| px  py  0   1   |  X  | m21 m22 m23 m24 |
 //						    | m31 m32 m33 m34 |
 //						    | m41 m42 m43 m44 |
 //
-//MgVect2D operator * (const MgVect2D& Pt1, const MgMat4D &M1)
-MgVect2D MGeo::MatMultPt23( const MgVect2D& i_Pt, const MgMat4D& i_Tm)
+//MgVect2D operator * (const MgVect2D& Pt1, const MgMat3D&M1)
+MgVect2D MGeo::Mat3DMultPoint2D( const MgVect2D& i_Pt, const MgMat3D& i_Tm)
 {
 	MgVect2D	Po;
 	Po.x = i_Tm.m[0][0] * i_Pt.x + i_Tm.m[1][0] * i_Pt.y + i_Tm.m[3][0];
@@ -647,15 +647,15 @@ MgVect2D MGeo::MatMultPt23( const MgVect2D& i_Pt, const MgMat4D& i_Tm)
 //		３次元座標変換マトリックスにより２次元データを座標変換する
 //
 //	使用法
-//		MgVect2D *= MgMat4D;
+//		MgVect2D *= MgMat3D;
 //
 //						     					    | m11 m12 m13 m14 |
 //	| px  py  0   1   |  =  | px  py  0   1   |  X  | m21 m22 m23 m24 |
 //	           									    | m31 m32 m33 m34 |
 //	           									    | m41 m42 m43 m44 |
 //
-//MgVect2D operator *= (MgVect2D& Pt1o, const MgMat4D &M1)
-MgVect2D MGeo::MatMultEqualPt23( MgVect2D& io_Pt, const MgMat4D& i_Tm)
+//MgVect2D operator *= (MgVect2D& Pt1o, const MgMat3D&M1)
+MgVect2D MGeo::Mat3DMultEqualPoint2D( MgVect2D& io_Pt, const MgMat3D& i_Tm)
 {
 	MREAL	rwx;
 	rwx		= i_Tm.m[0][0] * io_Pt.x + i_Tm.m[1][0] * io_Pt.y + i_Tm.m[3][0];
@@ -669,15 +669,15 @@ MgVect2D MGeo::MatMultEqualPt23( MgVect2D& io_Pt, const MgMat4D& i_Tm)
 //		３次元座標変換マトリックスにより３次元データを座標変換する
 //
 //	使用法
-//		MgVect3D_2 = MgVect3D_1 * MgMat4D;
+//		MgVect3D_2 = MgVect3D_1 * MgMat3D;
 //
 //	 					    | m11 m12 m13 m14 |
 //	| px  py  pz  1   |  X  | m21 m22 m23 m24 |
 //						    | m31 m32 m33 m34 |
 //						    | m41 m42 m43 m44 |
 //
-//MgVect3D operator * (const MgVect3D& Pt1, const MgMat4D &M1)
-MgVect3D MGeo::MatMultPt33( const MgVect3D& i_Pt, const MgMat4D& i_Tm)
+//MgVect3D operator * (const MgVect3D& Pt1, const MgMat3D&M1)
+MgVect3D MGeo::Mat3DMultPoint3D( const MgVect3D& i_Pt, const MgMat3D& i_Tm)
 {
 	MgVect3D	Pto;
 	Pto.x = i_Tm.m[0][0] * i_Pt.x + i_Tm.m[1][0] * i_Pt.y +	i_Tm.m[2][0] * i_Pt.z + i_Tm.m[3][0];
@@ -687,7 +687,7 @@ MgVect3D MGeo::MatMultPt33( const MgVect3D& i_Pt, const MgMat4D& i_Tm)
 	MREAL		dd;
 	dd 	  = i_Tm.m[0][3] * i_Pt.x + i_Tm.m[1][3] * i_Pt.y + i_Tm.m[2][3] * i_Pt.z + i_Tm.m[3][3];
 //	_ASSERT(dd>MCTOLDN);
-	if (dd > g_gTol.DN) {
+	if (dd > MGPTOL->DN) {
 		MREAL	dd1 = 1. / dd;
 		po.x *= dd1;
 		po.y *= dd1;
@@ -702,15 +702,15 @@ MgVect3D MGeo::MatMultPt33( const MgVect3D& i_Pt, const MgMat4D& i_Tm)
 //		３次元座標変換マトリックスにより３次元データを座標変換する
 //
 //	使用法
-//		MgVect3D *= MgMat4D;
+//		MgVect3D *= MgMat3D;
 //
 //							 					    | m11 m12 m13 m14 |
 //	| px  py  pz  1   |  =  | px  py  pz  1   |  X  | m21 m22 m23 m24 |
 //												    | m31 m32 m33 m34 |
 //												    | m41 m42 m43 m44 |
 //
-//MgVect3D operator *= (MgVect3D& Pt1o, const MgMat4D &M1)
-MgVect3D MGeo::MatMultEqualPt33( MgVect3D& io_Pt, const MgMat4D& i_Tm)
+//MgVect3D operator *= (MgVect3D& Pt1o, const MgMat3D&M1)
+MgVect3D MGeo::Mat3DMultEqualPoint3D( MgVect3D& io_Pt, const MgMat3D& i_Tm)
 {
 	MgVect3D	Pto;
 	Pto.x = i_Tm.m[0][0] * io_Pt.x + i_Tm.m[1][0] * io_Pt.y + i_Tm.m[2][0] * io_Pt.z + i_Tm.m[3][0];
@@ -720,7 +720,7 @@ MgVect3D MGeo::MatMultEqualPt33( MgVect3D& io_Pt, const MgMat4D& i_Tm)
 	MREAL		dd;
 	dd 	  = i_Tm.m[0][3] * io_Pt.x + i_Tm.m[1][3] * io_Pt.y + i_Tm.m[2][3] * io_Pt.z + i_Tm.m[3][3];
 //	_ASSERT(dd>MCTOLDN);
-	if (dd > g_gTol.DN) {
+	if (dd > MGPTOL->DN) {
 		MREAL	dd1 = 1. / dd;
 		po.x *= dd1;
 		po.y *= dd1;
@@ -736,15 +736,15 @@ MgVect3D MGeo::MatMultEqualPt33( MgVect3D& io_Pt, const MgMat4D& i_Tm)
 //		３次元座標変換マトリックスにより３次元データを座標変換する
 //
 //	使用法
-//		MgULine3D_2 = MgULine3D_1 * MgMat4D;
+//		MgULine3D_2 = MgULine3D_1 * MgMat3D;
 //
 //	| px  py  pz  1   |     | m11 m12 m13 m14 |
 //	| vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
 //							| m31 m32 m33 m34 |
 //							| m41 m42 m43 m44 |
 //
-//MgULine3D operator * (const MgULine3D& ULn1, const MgMat4D &M1)
-MgULine3D MGeo::MatMultULn33( const MgULine3D& i_ULn, const MgMat4D& i_Tm)
+//MgULine3D operator * (const MgULine3D& ULn1, const MgMat3D&M1)
+MgULine3D MGeo::Mat3DMultULine3D( const MgULine3D& i_ULn, const MgMat3D& i_Tm)
 {
 	MgULine3D	ULno;
 	ULno.p.x = i_Tm.m[0][0] * i_ULn.p.x + i_Tm.m[1][0] * i_ULn.p.y + i_Tm.m[2][0] * i_ULn.p.z + i_Tm.m[3][0];
@@ -763,15 +763,15 @@ MgULine3D MGeo::MatMultULn33( const MgULine3D& i_ULn, const MgMat4D& i_Tm)
 //		３次元座標変換マトリックスにより３次元データを座標変換する
 //
 //	使用法
-//		MgVect3D *= MgMat4D;
+//		MgVect3D *= MgMat3D;
 //
 //	| px  py  pz  1   |     | px  py  pz  1   |     | m11 m12 m13 m14 |
 //	| vx  vy  vz  0   |  =  | vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
 //													| m31 m32 m33 m34 |
 //													| m41 m42 m43 m44 |
 //
-//MgULine3D operator *= (MgULine3D& ULn1, const MgMat4D &M1)
-MgULine3D MGeo::MatMultEqualULn33( MgULine3D& io_ULn, const MgMat4D& i_Tm)
+//MgULine3D operator *= (MgULine3D& ULn1, const MgMat3D&M1)
+MgULine3D MGeo::Mat3DMultEqualULine3D( MgULine3D& io_ULn, const MgMat3D& i_Tm)
 {
 	MgULine3D	ULno;
 	ULno.p.x = i_Tm.m[0][0] * io_ULn.p.x + i_Tm.m[1][0] * io_ULn.p.y + i_Tm.m[2][0] * io_ULn.p.z + i_Tm.m[3][0];
@@ -788,7 +788,7 @@ MgULine3D MGeo::MatMultEqualULn33( MgULine3D& io_ULn, const MgMat4D& i_Tm)
 //======================( ３次元 )==============================
 //		マトリックスをトレースする
 //
-void MgMat4D::MgMatPrint4(MCHAR* s)													// print
+void MgMat3D::MgMatPrint4(MCHAR* s)													// print
 {
 #ifdef _DEBUG
 	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgMat3D	=	%f, %f, %f, %f\n")
@@ -813,7 +813,7 @@ void MgMat4D::MgMatPrint4(MCHAR* s)													// print
 //		原点を中心に回転の座標変換マトリックスを作成
 //
 //	使用法
-//		MgMat3D = MgMat3DRotV(MgVect2D);
+//		MgMat2D= MgMat2DRotV(MgVect2D);
 //
 //		( MgVect2D: 単位ベクトル)
 //
@@ -821,9 +821,9 @@ void MgMat4D::MgMatPrint4(MCHAR* s)													// print
 //	| -sin  cos  0. |
 //	|   0.   0.  1. |
 //
-MgMat3D MGeo::Mat3RotV(const MgVect2D& v)
+MgMat2D MGeo::Mat2DRotV(const MgVect2D& v)
 {
-	return MgMat3D( v.x,  v.y,  0.0f, 
+	return MgMat2D( v.x,  v.y,  0.0f, 
 				  -v.y,  v.x,  0.0f, 
 				   0.0f, 0.0f, 1.0f);
 }
@@ -833,7 +833,7 @@ MgMat3D MGeo::Mat3RotV(const MgVect2D& v)
 //		原点を中心に逆回転の座標変換マトリックスを作成
 //
 //	使用法
-//		MgMat3D = MgMat3DRotRevV(MgVect2D);
+//		MgMat2D= MgMat2DRotRevV(MgVect2D);
 //
 //		( MgVect2D: 単位ベクトル)
 //
@@ -841,11 +841,11 @@ MgMat3D MGeo::Mat3RotV(const MgVect2D& v)
 //	| sin  cos  0. |
 //	|  0.   0.  1. |
 //
-MgMat3D MGeo::Mat3RotRevV(const MgVect2D& v)
+MgMat2D MGeo::Mat2DRotRevV(const MgVect2D& v)
 {
-	return MgMat3D( v.x, -v.y,  0.0f, 
-				   v.y,  v.x,  0.0f,
-				   0.0f, 0.0f, 1.0f);
+	return MgMat2D( v.x, -v.y,  0.0f, 
+				    v.y,  v.x,  0.0f,
+				    0.0f, 0.0f, 1.0f);
 }
 //
 //======================( ３次元 )==============================
@@ -853,7 +853,7 @@ MgMat3D MGeo::Mat3RotRevV(const MgVect2D& v)
 //		ＸＹ平面で原点を中心に回転の座標変換マトリックスを作成
 //
 //	使用法
-//		MgMat4D = MgMat4DRotZV(MgVect2D);
+//		MgMat3D= MgMat3DRotZV(MgVect2D);
 //
 //		( MgVect2D: 単位ベクトル)
 //
@@ -862,12 +862,12 @@ MgMat3D MGeo::Mat3RotRevV(const MgVect2D& v)
 //	|   0.   0.  1.  0. |
 //	|   0.   0.  0.  1. |
 //
-MgMat4D MGeo::Mat4RotZV(const MgVect2D& v)
+MgMat3D MGeo::Mat3DRotZV(const MgVect2D& v)
 {
-	return MgMat4D( v.x,  v.y,  0.0f, 0.0f,
-				  -v.y,  v.x,  0.0f, 0.0f,
-				   0.0f, 0.0f, 1.0f, 0.0f,
-				   0.0f, 0.0f, 0.0f, 1.0f);
+	return MgMat3D( v.x,  v.y,  0.0f, 0.0f,
+				   -v.y,  v.x,  0.0f, 0.0f,
+				    0.0f, 0.0f, 1.0f, 0.0f,
+				    0.0f, 0.0f, 0.0f, 1.0f);
 }
 //
 //======================( ３次元 )==============================
@@ -875,7 +875,7 @@ MgMat4D MGeo::Mat4RotZV(const MgVect2D& v)
 //		ＸＹ平面で原点を中心に逆回転の座標変換マトリックスを作成
 //
 //	使用法
-//		MgMat4D = MgMat4DRotRevZV(MgVect2D);
+//		MgMat3D= MgMat3DRotRevZV(MgVect2D);
 //
 //		( MgVect2D: 単位ベクトル)
 //
@@ -884,12 +884,12 @@ MgMat4D MGeo::Mat4RotZV(const MgVect2D& v)
 //	|   0.   0.  1.  0. |
 //	|   0.   0.  0.  1. |
 //
-MgMat4D MGeo::Mat4RotRevZV(const MgVect2D& v)
+MgMat3D MGeo::Mat3DRotRevZV(const MgVect2D& v)
 {
-	return MgMat4D( v.x, -v.y,  0.0f, 0.0f,
-				   v.y,  v.x,  0.0f, 0.0f,
-				   0.0f, 0.0f, 1.0f, 0.0f,
-				   0.0f, 0.0f, 0.0f, 1.0f);
+	return MgMat3D( v.x, -v.y,  0.0f, 0.0f,
+				    v.y,  v.x,  0.0f, 0.0f,
+				    0.0f, 0.0f, 1.0f, 0.0f,
+				    0.0f, 0.0f, 0.0f, 1.0f);
 }
 //
 //======================( ３次元 )==============================
@@ -897,7 +897,7 @@ MgMat4D MGeo::Mat4RotRevZV(const MgVect2D& v)
 //		ＹＺ平面で原点を中心に回転の座標変換マトリックスを作成
 //
 //	使用法
-//		MgMat4D = MgMat4DRotTXV(MgVect2D);
+//		MgMat3D= MgMat3DRotTXV(MgVect2D);
 //
 //		( MgVect2D: 単位ベクトル)
 //
@@ -906,12 +906,12 @@ MgMat4D MGeo::Mat4RotRevZV(const MgVect2D& v)
 //	|  0. -sin  cos  0. |
 //	|  0.   0.   0.  1. |
 //
-MgMat4D MGeo::Mat4RotTXV(const MgVect2D& v)
+MgMat3D MGeo::Mat3DRotTXV(const MgVect2D& v)
 {
-	return MgMat4D( 1.0f,  0.0f, 0.0f, 0.0f,
-				   0.0f,  v.x,  v.y,  0.0f,
-				   0.0f, -v.y,  v.x,  0.0f,
-				   0.0f,  0.0f, 0.0f, 1.0f);
+	return MgMat3D( 1.0f,  0.0f, 0.0f, 0.0f,
+				    0.0f,  v.x,  v.y,  0.0f,
+				    0.0f, -v.y,  v.x,  0.0f,
+				    0.0f,  0.0f, 0.0f, 1.0f);
 }
 //
 //======================( ３次元 )==============================
@@ -919,7 +919,7 @@ MgMat4D MGeo::Mat4RotTXV(const MgVect2D& v)
 //		ＹＺ平面で原点を中心に逆回転の座標変換マトリックスを作成
 //
 //	使用法
-//		MgMat4D = MgMat4DRotRevXV(MgVect2D);
+//		MgMat3D= MgMat3DRotRevXV(MgVect2D);
 //
 //		( MgVect2D: 単位ベクトル)
 //
@@ -928,12 +928,12 @@ MgMat4D MGeo::Mat4RotTXV(const MgVect2D& v)
 //	|  0.  sin  cos  0. |
 //	|  0.   0.   0.  1. |
 //
-MgMat4D MGeo::Mat4RotRevXV(const MgVect2D& v)
+MgMat3D MGeo::Mat3DRotRevXV(const MgVect2D& v)
 {
-	return MgMat4D( 1.0f,  0.0f, 0.0f, 0.0f,
-				   0.0f,  v.x, -v.y,  0.0f,
-				   0.0f,  v.y,  v.x,  0.0f,
-				   0.0f,  0.0f, 0.0f, 1.0f);
+	return MgMat3D( 1.0f,  0.0f, 0.0f, 0.0f,
+				    0.0f,  v.x, -v.y,  0.0f,
+				    0.0f,  v.y,  v.x,  0.0f,
+				    0.0f,  0.0f, 0.0f, 1.0f);
 }
 //
 //======================( ３次元 )==============================
@@ -941,7 +941,7 @@ MgMat4D MGeo::Mat4RotRevXV(const MgVect2D& v)
 //		ＺＸ平面で原点を中心に回転の座標変換マトリックスを作成
 //
 //	使用法
-//		MgMat4D = MgMat4DRotYV(MgVect2D);
+//		MgMat3D= MgMat3DRotYV(MgVect2D);
 //
 //		( MgVect2D: 単位ベクトル)
 //
@@ -950,12 +950,12 @@ MgMat4D MGeo::Mat4RotRevXV(const MgVect2D& v)
 //	|  sin   0.  cos   0. |
 //	|   0.   0.   0.   1. |
 //
-MgMat4D MGeo::Mat4RotYV(const MgVect2D& v)
+MgMat3D MGeo::Mat3DRotYV(const MgVect2D& v)
 {
-	return MgMat4D( v.x,   0.0f, -v.y,  0.0f,
-				   0.0f,  1.0f,  0.0f, 0.0f,
-				   v.y,   0.0f,  v.x,  0.0f,
-				   0.0f,  0.0f,  0.0f, 1.0f);
+	return MgMat3D( v.x,   0.0f, -v.y,  0.0f,
+				    0.0f,  1.0f,  0.0f, 0.0f,
+				    v.y,   0.0f,  v.x,  0.0f,
+				    0.0f,  0.0f,  0.0f, 1.0f);
 }
 //
 //======================( ３次元 )==============================
@@ -963,7 +963,7 @@ MgMat4D MGeo::Mat4RotYV(const MgVect2D& v)
 //		ＺＸ平面で原点を中心に逆回転の座標変換マトリックスを作成
 //
 //	使用法
-//		MgMat4D = MgMat4DRotRevYV(MgVect2D);
+//		MgMat3D= MgMat3DRotRevYV(MgVect2D);
 //
 //		( MgVect2D: 単位ベクトル)
 //
@@ -972,12 +972,12 @@ MgMat4D MGeo::Mat4RotYV(const MgVect2D& v)
 //	| -sin   0.  cos   0. |
 //	|   0.   0.   0.   1. |
 //
-MgMat4D MGeo::Mat4RotRevYV(const MgVect2D& v)
+MgMat3D MGeo::Mat3DRotRevYV(const MgVect2D& v)
 {
-	return MgMat4D( v.x,   0.0f,  v.y,  0.0f,
-				   0.0f,  1.0f,  0.0f, 0.0f,
-				  -v.y,   0.0f,  v.x,  0.0f,
-				   0.0f,  0.0f,  0.0f, 1.0f);
+	return MgMat3D( v.x,   0.0f,  v.y,  0.0f,
+				    0.0f,  1.0f,  0.0f, 0.0f,
+				   -v.y,   0.0f,  v.x,  0.0f,
+				    0.0f,  0.0f,  0.0f, 1.0f);
 }
 //
 //======================( ２次元 )==============================
@@ -991,11 +991,11 @@ MgMat4D MGeo::Mat4RotRevYV(const MgVect2D& v)
 //	| 0   xy  0  |
 //	| 0   0   1  |
 //
-MgMat3D MGeo::Mat3Scl(const MgVect2D& vs)
+MgMat2D MGeo::Mat2DScl(const MgVect2D& vs)
 {
-	return MgMat3D(vs.x, 0.0f, 0.0f, 
-			      0.0f, vs.y, 0.0f,
-				  0.0f, 0.0f, 1.0f);
+	return MgMat2D(vs.x, 0.0f, 0.0f, 
+			       0.0f, vs.y, 0.0f,
+				   0.0f, 0.0f, 1.0f);
 }
 //
 //======================( ３次元 )==============================
@@ -1003,16 +1003,16 @@ MgMat3D MGeo::Mat3Scl(const MgVect2D& vs)
 //	    Ｘ，Ｙ，Ｚ方向に拡大／縮小するマトリックスを作成する
 //
 //	使用法
-//		Mgmat3_2 = MgMat4DScl(MgMat4D_1);
+//		Mgmat3_2 = MgMat3DScl(MgMat3D_1);
 //
 //	| sx  0   0   0  |
 //	| 0   xy  0   0  |
 //	| 0   0   sz  0  |
 //	| 0   0   0   1  |
 //
-MgMat4D MGeo::Mat4Scl(const MgVect3D& vs)
+MgMat3D MGeo::Mat3DScl(const MgVect3D& vs)
 {
-	return MgMat4D(vs.x, 0.0f, 0.0f, 0.0f, 
+	return MgMat3D(vs.x, 0.0f, 0.0f, 0.0f, 
 				  0.0f, vs.y, 0.0f, 0.0f,
 				  0.0f, 0.0f, vs.z, 0.0f, 
 				  0.0f, 0.0f, 0.0f, 1.0f);
@@ -1023,17 +1023,17 @@ MgMat4D MGeo::Mat4Scl(const MgVect3D& vs)
 //		平行移動の変換マトリックスを作成する
 //
 //	使用法
-//		MgMat3D = MgMat3DMov(MgVect2D)
+//		MgMat2D= MgMat2DMov(MgVect2D)
 //
 //	|  1.  0.  0. |
 //	|  0.  1.  0. |
 //	|  v.x v.y 1. |
 //
-MgMat3D MGeo::Mat3Mov(const MgVect2D& v)
+MgMat2D MGeo::Mat2DMov(const MgVect2D& v)
 {
-	return MgMat3D(1.0f, 0.0f, 0.0f,
-				  0.0f, 1.0f, 0.0f,
-				  v.x,  v.y,  1.0f);
+	return MgMat2D(1.0f, 0.0f, 0.0f,
+				   0.0f, 1.0f, 0.0f,
+				   v.x,  v.y,  1.0f);
 }
 
 //
@@ -1042,19 +1042,19 @@ MgMat3D MGeo::Mat3Mov(const MgVect2D& v)
 //		平行移動の変換マトリックスを作成する
 //
 //	使用法
-//		Mgmat3 = MgMat4DMov(MgVect3D)
+//		Mgmat3 = MgMat3DMov(MgVect3D)
 //
 //	| 1.  0.  0.  0. |
 //	| 0.  1.  0.  0. |
 //	| 0.  0.  1.  0. |
 //	| v.x v.y v.z 1. |
 //
-MgMat4D MGeo::Mat4Mov(const MgVect3D& v)
+MgMat3D MGeo::Mat3DMov(const MgVect3D& v)
 {
-	return MgMat4D(1.0f, 0.0f, 0.0f, 0.0f,
-				  0.0f, 1.0f, 0.0f, 0.0f,
-				  0.0f, 0.0f, 1.0f, 0.0f,
-				  v.x,  v.y,  v.z,  1.0f);
+	return MgMat3D(1.0f, 0.0f, 0.0f, 0.0f,
+				   0.0f, 1.0f, 0.0f, 0.0f,
+				   0.0f, 0.0f, 1.0f, 0.0f,
+				   v.x,  v.y,  v.z,  1.0f);
 }
 //
 //======================( ２次元 )==============================
@@ -1062,16 +1062,16 @@ MgMat4D MGeo::Mat4Mov(const MgVect3D& v)
 //		変換マトリックスの逆変換マトリックスを作成
 //
 //	使用法
-//		MgMat3D = MgMat3DInv(MgMat3D);
+//		MgMat2D= MgMat2DInv(MgMat3D);
 //
 //	| m11 m21 m31 |
 //	| m12 m22 m32 |			（入力行列は単位行列である事 ???）
 //	| m13 m23 m33 |
 //
-MgMat3D MGeo::Mat3Inv( const MgMat3D& i_tm)
+MgMat2D MGeo::Mat2DInv( const MgMat2D& i_tm)
 {
-	MgMat3D	tmlu = i_tm;
-	MgMat3D	tmo;
+	MgMat2D	tmlu = i_tm;
+	MgMat2D	tmo;
 	int		i, j, k;
 	
     // LU分解	
@@ -1109,17 +1109,17 @@ MgMat3D MGeo::Mat3Inv( const MgMat3D& i_tm)
 //	    変換マトリックスの逆変換マトリックスを作成する
 //
 //	使用法
-//		Mgmat3_2 = MgMat4DInv(MgMat4D_1);
+//		Mgmat3_2 = MgMat3DInv(MgMat3D_1);
 //
 //	| m11 m21 m31 m41 |
 //	| m12 m22 m32 m42 |     （入力行列は単位行列である事 ???）
 //	| m13 m23 m33 m43 |
 //	| M14 m24 m34 m44 |
 //
-MgMat4D MGeo::Mat4Inv( const MgMat4D& i_Tm)
+MgMat3D MGeo::Mat3DInv( const MgMat3D& i_Tm)
 {
-	MgMat4D	Tmlu = i_Tm;
-	MgMat4D	Tmo;
+	MgMat3D	Tmlu = i_Tm;
+	MgMat3D	Tmo;
 	int		i, j, k;
 	
     // LU分解 
@@ -1158,21 +1158,21 @@ MgMat4D MGeo::Mat4Inv( const MgMat4D& i_Tm)
 //
 // ---------------------( ２次元 )------------------------------
 //
-MgMat3D MGeo::Mat3Mirror(							// (  O) 鏡像変換行列
-				const MgMat3D&	i_tm, 				// (I  ) 変換行列
+MgMat2D MGeo::Mat2DMirror(							// (  O) 鏡像変換行列
+				const MgMat2D&	i_tm, 				// (I  ) 変換行列
 				const MgULine2D& i_uln				// (I  ) 鏡映の軸とする直線
 		)
 {
-	MgMat3D	tmo;
-//
+	MgMat2D	tmo;
+
 	tmo = i_tm;
-	tmo *= Mat3Mov( - i_uln.p);
-	tmo *= Mat3RotRevV( i_uln.v);
-//
-	tmo *= Mat3Scl( MgVect2D( 1.0f, -1.0f));
-//
-	tmo *= Mat3RotV( i_uln.v);
-    tmo *= Mat3Mov( i_uln.p);
+	tmo *= Mat2DMov( - i_uln.p);
+	tmo *= Mat2DRotRevV( i_uln.v);
+
+	tmo *= Mat2DScl( MgVect2D( 1.0f, -1.0f));
+
+	tmo *= Mat2DRotV( i_uln.v);
+    tmo *= Mat2DMov( i_uln.p);
 	return tmo;
 }
 //===========================================================================
@@ -1180,28 +1180,28 @@ MgMat3D MGeo::Mat3Mirror(							// (  O) 鏡像変換行列
 //
 // ---------------------( ３次元 )------------------------------
 //
-MgMat4D MGeo::Mat4Mirror(							// (  O) 鏡像変換行列
-				const	MgMat4D&	i_Tm, 			// (I  ) 変換行列
+MgMat3D MGeo::Mat3DMirror(							// (  O) 鏡像変換行列
+				const	MgMat3D&	i_Tm, 			// (I  ) 変換行列
 				const	MgPlane3D&	i_Pln			// (I  ) 鏡映の面とする平面
 		)
 {
 	MgVect3D V0, V1, V2;
-	MgMat4D	Tmo;
-//
+	MgMat3D	Tmo;
+
 	Tmo = i_Tm;
-//
+
 	V0 = i_Pln.d * i_Pln.v;
-	V1 = TaniV3( i_Pln.v);
+	V1 = TaniVect3D( i_Pln.v);
 	V2 = i_Pln.v ^ V1;
-	MgMat4D rm1( V2, i_Pln.v, V1);
-//
-	Tmo *= Mat4Mov( -V0);
+	MgMat3D rm1( V2, i_Pln.v, V1);
+
+	Tmo *= Mat3DMov( -V0);
 	Tmo *= rm1;
-//
-	Tmo *= Mat4Scl( MgVect3D( 1.0f, -1.0f, 1.0f));
-//
-	Tmo *= Mat4Inv( rm1);
-	Tmo *= Mat4Mov( V0);
+
+	Tmo *= Mat3DScl( MgVect3D( 1.0f, -1.0f, 1.0f));
+
+	Tmo *= Mat3DInv( rm1);
+	Tmo *= Mat3DMov( V0);
 	return Tmo;
 }
 //
@@ -1210,13 +1210,13 @@ MgMat4D MGeo::Mat4Mirror(							// (  O) 鏡像変換行列
 ////
 //// ---------------------( ２次元 )------------------------------
 ////
-//MgMat3D MGeo::Mat2Rot(							// (  O) 変換行列
+//MgMat2D MGeo::Mat2Rot(							// (  O) 変換行列
 //				const	MgPoint2D&	i_ptc, 			// (I  ) 回転の中心となる点
 //				const	MREAL&		i_ar			// (I  ) 回転角 Degree
 //		)
 //{
 //
-//	MgMat3D    tmw, tmo;
+//	MgMat2D   tmw, tmo;
 //	MgAngleR  ra;
 //	MgVect2D   v1;
 ////
@@ -1225,9 +1225,9 @@ MgMat4D MGeo::Mat4Mirror(							// (  O) 鏡像変換行列
 ////
 //	tmw = Mat2RotV( v1);
 ////
-//    tmo = Mat2Mov( -i_ptc) * tmw;
+//    tmo = Mat2DMov( -i_ptc) * tmw;
 ////
-//	tmo *= Mat2Mov( i_ptc);
+//	tmo *= Mat2DMov( i_ptc);
 //	return tmo;
 //}
 ////===========================================================================
@@ -1235,12 +1235,12 @@ MgMat4D MGeo::Mat4Mirror(							// (  O) 鏡像変換行列
 ////
 //// ---------------------( ３次元 )------------------------------
 ////
-//MgMat4D MGeo::Mat3Rot(							// (  O) 変換行列
+//MgMat3D MGeo::Mat3DRot(							// (  O) 変換行列
 //				const	MgULine3D&	i_ULn, 			// (I  ) 回転軸となる直線
 //				const	MREAL		&i_ar			// (I  ) 回転角(Degree)
 //		)
 //{
-//	MgMat4D		Tmw, Tmo;
+//	MgMat3D		Tmw, Tmo;
 //	MgAngleR	ra;
 //	MgVect2D		va;
 //	MREAL		rmcos;
@@ -1266,11 +1266,11 @@ MgMat4D MGeo::Mat4Mirror(							// (  O) 鏡像変換行列
 //	Tmw.m[0][3] = Tmw.m[1][3] = Tmw.m[2][3] = 0.0f;
 //	Tmw.m[3][3] = 1.0f;
 ////
-//    Tmo = Mat3Mov( -i_ULn.p) * Tmw;
+//    Tmo = Mat2DMov( -i_ULn.p) * Tmw;
 ////
 //	//MgPoint3D a;
 //	//a = i_ULn.p;
-//	Tmo *= Mat3Mov( i_ULn.p);
+//	Tmo *= Mat2DMov( i_ULn.p);
 //	return Tmo;
 //}
 //===========================================================================
@@ -1278,18 +1278,18 @@ MgMat4D MGeo::Mat4Mirror(							// (  O) 鏡像変換行列
 //
 // ---------------------( ３次元 )------------------------------
 //
-MgMat4D MGeo::Mat4NProj(							// (  O) 正投象変換行列
-				const	MgMat4D		&i_Tm,			// (I  ) 入力座標変換行列
+MgMat3D MGeo::Mat3DNProj(							// (  O) 正投象変換行列
+				const	MgMat3D		&i_Tm,			// (I  ) 入力座標変換行列
 				const	MgPlane3D	&i_Pln			// (I  ) 投象面
 		)
 {
 	MgVect3D V1, V2;
-	MgMat4D	Tmw, Tmo;
+	MgMat3D	Tmw, Tmo;
 	int		ic, jc;
 //
-	V1 = TaniV3( i_Pln.v);
+	V1 = TaniVect3D( i_Pln.v);
 	V2 = i_Pln.v ^ V1;
-	MgMat4D Tm1(V1, V2, i_Pln.v);
+	MgMat3D Tm1(V1, V2, i_Pln.v);
 //
 	Tmw = Tm1 * i_Tm;
 //
@@ -1311,19 +1311,19 @@ MgMat4D MGeo::Mat4NProj(							// (  O) 正投象変換行列
 //
 // ---------------------( ３次元 )------------------------------
 //
-MgMat4D MGeo::Mat4SProj(							// (  O) 斜投象変座標変換行列
-				const	MgMat4D		&i_Tm,			// (I  ) 入力座標変換行列
+MgMat3D MGeo::Mat3DSProj(							// (  O) 斜投象変座標変換行列
+				const	MgMat3D		&i_Tm,			// (I  ) 入力座標変換行列
 				const	MgPlane3D	&i_Pln,			// (I  ) 投象面
 				const	MgVect3D&	i_V				// (I  ) 投象方向を示す単位ベクトル
 		)
 {
 	MgVect3D V1, V2, V3;
-	MgMat4D	Tm2, Tm3, Tmo;
+	MgMat3D	Tm2, Tm3, Tmo;
 	int		ic, jc;
 //
-	V1 = TaniV3( i_Pln.v);
+	V1 = TaniVect3D( i_Pln.v);
 	V2 = i_Pln.v ^ V1;
-	MgMat4D Tm1(V1, V2, i_Pln.v);
+	MgMat3D Tm1(V1, V2, i_Pln.v);
 //
 	Tm2 = Tm1 * i_Tm;
 	V3	= i_V * Tm2;
@@ -1351,16 +1351,16 @@ MgMat4D MGeo::Mat4SProj(							// (  O) 斜投象変座標変換行列
 //
 // ---------------------( ３次元 )------------------------------
 //
-MgMat4D MGeo::Mat3Dto2D(							// (  O) 座標変換行列
+MgMat3D MGeo::Mat3Dto2D(							// (  O) 座標変換行列
 				const	MgPlane3D	&pln,			// (I  ) 平面の法線を示す単位ベクトル
 				const	MgVect3D&		vi			// (I  ) 平面の法線を示す単位ベクトル
 				)
 {
-	MgMat4D	M1o;
+	MgMat3D	M1o;
 	M1o.SetUnit();
 //
 	MREAL ra = MgAbs( *(MgVect2D*)&pln.v);
-	if (ra > g_gTol.S)
+	if (ra > MGPTOL->S)
 		MgVect2D Vh = *(MgVect2D*)&pln.v;
 	
 	MgVect2D	vt;
@@ -1514,18 +1514,18 @@ MgMat4D MGeo::Mat3Dto2D(							// (  O) 座標変換行列
 //					|	-ab/(ca)	(ca)		-bc/(ca)	|
 //					|	a			b			c			|
 
-void MGeo::Mat4PlntoXY(
-				const	MgPlane3D	&i_Pln,		// (I  ) 変換対象平面
+void MGeo::Mat3DPlntoXY(
+				const	MgPlane3D&	i_Pln,		// (I  ) 変換対象平面
 				const	MgPoint3D&	i_PtOrg,	// (I  ) 原点座標			
-						MgMat4D*		o_MatXY,	// (  O) Pln to XY平面 ３Ｄマトリックス
-						MgMat4D*		o_MatPln	// (  O) XY平面 to Pln ３Ｄマトリックス
+						MgMat3D*	o_MatXY,	// (  O) Pln to XY平面 ３Ｄマトリックス
+						MgMat3D*	o_MatPln	// (  O) XY平面 to Pln ３Ｄマトリックス
 				)
 {
 	MREAL		A = i_Pln.v.x, B = i_Pln.v.y, C = i_Pln.v.z;
 	MgPoint3D	PtOrgD;
 
 	// 投影マトリックス
-//	MgMat4D(MREAL m11, MREAL m12, MREAL m13, MREAL m14,
+//	MgMat3D(MREAL m11, MREAL m12, MREAL m13, MREAL m14,
 //		   MREAL m21, MREAL m22, MREAL m23, MREAL m24,
 //		   MREAL m31, MREAL m32, MREAL m33, MREAL m34,
 //		   MREAL m41, MREAL m42, MREAL m43, MREAL m44)
@@ -1536,7 +1536,7 @@ void MGeo::Mat4PlntoXY(
 	if ( Abs(C) < 0.98) {
 		MREAL	Lab = sqrt( A * A + B * B);
 		
-		*o_MatXY  = MgMat4D(	-B / Lab,		-A * C / Lab,	A,				0.,
+		*o_MatXY  = MgMat3D(	-B / Lab,		-A * C / Lab,	A,				0.,
 								A / Lab,		-B * C / Lab,	B,				0.,
 								0.,				Lab,			C,				0.,
 								0.,				0.,				0.,				1. );
@@ -1544,7 +1544,7 @@ void MGeo::Mat4PlntoXY(
 		*o_MatXY -= PtOrgD;
 
 		// 逆変換マトリックス
-		*o_MatPln = MgMat4D(	-B / Lab,		A / Lab,		0.,				0.,
+		*o_MatPln = MgMat3D(	-B / Lab,		A / Lab,		0.,				0.,
 								-A * C / Lab,	-B * C / Lab,	Lab,			0.,
 								A,				B,				C,				0.,
 								0.,				0.,				0.,				1. );
@@ -1552,7 +1552,7 @@ void MGeo::Mat4PlntoXY(
 	} else {
 		MREAL	Lca = sqrt( C * C + A * A);
 
-		*o_MatXY  = MgMat4D(	C / Lca,		-A * B / Lca,	A,				0.,
+		*o_MatXY  = MgMat3D(	C / Lca,		-A * B / Lca,	A,				0.,
 								0.,				Lca,			B,				0.,
 								-A / Lca,		-B * C / Lca,	C,				0.,
 								0.,				0.,				0.,				1. );
@@ -1560,7 +1560,7 @@ void MGeo::Mat4PlntoXY(
 		*o_MatXY -= PtOrgD;
 							
 		// 逆変換マトリックス
-		*o_MatPln	= MgMat4D( 	C / Lca,		0.,				-A / Lca,		0.,
+		*o_MatPln	= MgMat3D( 	C / Lca,		0.,				-A / Lca,		0.,
 								-A * B / Lca,	Lca,			-B * C / Lca,	0.,
 								A,				B,				C,				0.,
 								0.,				0.,				0.,				1. );
@@ -1574,8 +1574,8 @@ void MGeo::Mat4PlntoXY(
 //
 void MGeo::Point3Dto2D(
 				const	MgPoint3D&	i_P,			// (I  ) ３Ｄ座標
-				const	MgMat4D		&i_Tm,			// (I  ) 座標変換マトリックス
-						MgPoint2D*	o_P			// (  O) ２Ｄ座標
+				const	MgMat3D		&i_Tm,			// (I  ) 座標変換マトリックス
+						MgPoint2D*	o_P				// (  O) ２Ｄ座標
 				)
 {
 	o_P->v[0] = i_Tm.m[0][0] * i_P.x + i_Tm.m[1][0] * i_P.y + i_Tm.m[2][0] * i_P.z + i_Tm.m[3][0];
@@ -1588,7 +1588,7 @@ void MGeo::Point3Dto2D(
 //
 inline void MGeo::Line3Dto2D(
 				const MgLine3D		&i_Ln,			// (I  ) ３Ｄ線分
-				const MgMat4D		&i_Tm,			// (I  ) 座標変換マトリックス
+				const MgMat3D		&i_Tm,			// (I  ) 座標変換マトリックス
 					  MgLine2D		*o_ln			// (  O) ２Ｄ線分
 				)
 						{ Mg3Dto2D( i_Ln.p[0], Mat, &o_ln->p[0]); 
@@ -1600,7 +1600,7 @@ inline void MGeo::Line3Dto2D(
 //
 void MGeo::ULine3Dto2D(
 				const MgULine3D		&i_ULn,			// (I  ) ３Ｄ直線
-				const MgMat4D		&i_Mt,			// (I  ) 座標変換マトリックス
+				const MgMat3D		&i_Mt,			// (I  ) 座標変換マトリックス
 					  MgULine2D		*o_uln			// (  O) ２Ｄ直線
 				)
 {
@@ -1616,7 +1616,7 @@ void MGeo::ULine3Dto2D(
 //
 MgPoint2D MGeo::Point3Dto2D2(						// (  O) ２Ｄ座標
 				const	MgPoint3D&	i_P,			// (I  ) ３Ｄ座標
-				const	MgMat4D		&i_Tm			// (I  ) 座標変換マトリックス
+				const	MgMat3D		&i_Tm			// (I  ) 座標変換マトリックス
 				)
 {
 	MgPoint2D	Po;
@@ -1632,7 +1632,7 @@ MgPoint2D MGeo::Point3Dto2D2(						// (  O) ２Ｄ座標
 //
 inline MgLine2D MgLine3DDto2D2(						// (  O) ２Ｄ線分
 				const MgLine3D		&i_Ln,			// (I  ) ３Ｄ線分
-				const MgMat4D		&i_Tm			// (I  ) 座標変換マトリックス
+				const MgMat3D		&i_Tm			// (I  ) 座標変換マトリックス
 				)
 						{ return MgLine2D( 
 						  Point3Dto2D2( i_Ln.p[0], i_Tm), 
@@ -1644,7 +1644,7 @@ inline MgLine2D MgLine3DDto2D2(						// (  O) ２Ｄ線分
 //
 MgULine2D MGeo::ULine3Dto2D2(						// (  O) ２Ｄ直線
 				const MgULine3D		&i_ULn,			// (I  ) ３Ｄ直線
-				const MgMat4D		&i_Tm			// (I  ) 座標変換マトリックス
+				const MgMat3D		&i_Tm			// (I  ) 座標変換マトリックス
 				)
 {
 	MgULine2D	ulno;
@@ -1661,7 +1661,7 @@ MgULine2D MGeo::ULine3Dto2D2(						// (  O) ２Ｄ直線
 //
 void MGeo::GPoint3Dto2D(
 				const	MgGPoint3D	&i_GP,			// (I  ) ３Ｄ座標群
-				const	MgMat4D		&i_Tm,			// (I  ) 座標変換マトリックス
+				const	MgMat3D		&i_Tm,			// (I  ) 座標変換マトリックス
 						MgGPoint2D	*o_GP			// (  O) ２Ｄ座標群
 				)
 {
@@ -1677,7 +1677,7 @@ void MGeo::GPoint3Dto2D(
 //
 void MGeo::Polyg3Dto2D(
 				const	MgPolyg3D&	i_Pg,			// (I  ) ３Ｄ座標群
-				const	MgMat4D		&iTm,			// (I  ) 座標変換マトリックス
+				const	MgMat3D		&iTm,			// (I  ) 座標変換マトリックス
 						MgPolyg2D*	o_Pg			// (  O) ２Ｄ座標群
 				)
 {
@@ -1693,7 +1693,7 @@ void MGeo::Polyg3Dto2D(
 //
 void MGeo::GLine3Dto2D(
 				const	MgGLine3D	&i_GLn,			// (I  ) ３Ｄ線分群
-				const	MgMat4D		&i_Tm,			// (I  ) 座標変換マトリックス
+				const	MgMat3D		&i_Tm,			// (I  ) 座標変換マトリックス
 						MgGLine2D*	o_gln			// (  O) ２Ｄ線分群
 				)
 {
@@ -1709,7 +1709,7 @@ void MGeo::GLine3Dto2D(
 //
 void MGeo::GPolyg3Dto2D(
 				const MgGPolyg3D	&i_gPg,			// (I  ) ３Ｄ多角形群
-				const MgMat4D		&i_Tm,			// (I  ) 座標変換マトリックス
+				const MgMat3D		&i_Tm,			// (I  ) 座標変換マトリックス
 					  MgGPolyg2D	*o_gpg			// (  O) ２Ｄ多角形群
 				)
 {
@@ -1728,7 +1728,7 @@ void MGeo::GPolyg3Dto2D(
 //
 void MGeo::Point2Dto3D(
 				const	MgPoint2D&	i_pt,			// (I  ) ２Ｄ座標
-				const	MgMat4D		&i_Tm,			// (I  ) 座標変換マトリックス
+				const	MgMat3D		&i_Tm,			// (I  ) 座標変換マトリックス
 						MgPoint3D	*o_Pt			// (  O) ３Ｄ座標
 				)
 {
@@ -1743,7 +1743,7 @@ void MGeo::Point2Dto3D(
 //
 inline void MgLine2DDto3D(
 				const MgLine2D&		i_ln,			// (I  ) ２Ｄ線分
-				const MgMat4D		&i_Tm,			// (I  ) 座標変換マトリックス
+				const MgMat3D		&i_Tm,			// (I  ) 座標変換マトリックス
 					  MgLine3D		*o_Ln			// (  O) ３Ｄ線分
 				)
 						{ Mg2Dto3D( i_ln.p[0], i_Tm, &o_Ln->p[0]);
@@ -1755,7 +1755,7 @@ inline void MgLine2DDto3D(
 //
 void MGeo::ULine2Dto3D(
 				const MgULine2D		&i_uln,			// (I  ) ２Ｄ直線
-				const MgMat4D		&i_Tm,			// (I  ) 座標変換マトリックス
+				const MgMat3D		&i_Tm,			// (I  ) 座標変換マトリックス
 					  MgULine3D		*o_ULn			// (  O) ３Ｄ直線
 				)
 {
@@ -1772,7 +1772,7 @@ void MGeo::ULine2Dto3D(
 //
 MgPoint3D MGeo::Point2Dto3D3(						// (  O) ３Ｄ座標
 				const	MgPoint2D&	i_Pt,			// (I  ) ２Ｄ座標
-				const	MgMat4D		&i_Tm			// (I  ) 座標変換マトリックス
+				const	MgMat3D		&i_Tm			// (I  ) 座標変換マトリックス
 				)
 {
 	MgPoint3D	Pto;
@@ -1787,7 +1787,7 @@ MgPoint3D MGeo::Point2Dto3D3(						// (  O) ３Ｄ座標
 //
 inline MgLine3D MgLine2DDto3D3(						// (  O) ３Ｄ線分
 				const MgLine2D&		i_ln,			// (I  ) ２Ｄ線分
-				const MgMat4D		&i_Tm			// (I  ) 座標変換マトリックス
+				const MgMat3D		&i_Tm			// (I  ) 座標変換マトリックス
 				)
 						{ return MgLine3D(
 						  Mg2Dto3D( i_ln.p[0], i_Tm), 
@@ -1799,7 +1799,7 @@ inline MgLine3D MgLine2DDto3D3(						// (  O) ３Ｄ線分
 //
 MgULine3D MGeo::ULine2Dto3D3(						// (  O) ３Ｄ直線
 				const MgULine2D		&i_uln,			// (I  ) ２Ｄ直線
-				const MgMat4D		&i_Tm			// (I  ) 座標変換マトリックス
+				const MgMat3D		&i_Tm			// (I  ) 座標変換マトリックス
 				)
 {
 	MgULine3D	ULno;
@@ -1817,7 +1817,7 @@ MgULine3D MGeo::ULine2Dto3D3(						// (  O) ３Ｄ直線
 //
 void MGeo::GPoint2Dto3D(
 				const	MgGPoint2D	&i_GPt,			// (I  ) ２Ｄ座標群
-				const	MgMat4D		&i_Tm,			// (I  ) 座標変換マトリックス
+				const	MgMat3D		&i_Tm,			// (I  ) 座標変換マトリックス
 						MgGPoint3D	*o_GPt			// (  O) ３Ｄ座標群
 				)
 {
@@ -1833,7 +1833,7 @@ void MGeo::GPoint2Dto3D(
 //
 void MGeo::Polyg2Dto3D(
 				const	MgPolyg2D&	i_Pg,			// (I  ) ２Ｄ座標群
-				const	MgMat4D		&i_Tm,			// (I  ) 座標変換マトリックス
+				const	MgMat3D		&i_Tm,			// (I  ) 座標変換マトリックス
 						MgPolyg3D*	o_Pg			// (  O) ３Ｄ座標群
 				)
 {
@@ -1849,7 +1849,7 @@ void MGeo::Polyg2Dto3D(
 //
 void MGeo::GLine2Dto3D(
 				const	MgGLine2D&	i_gln,			// (I  ) ２Ｄ直線群
-				const	MgMat4D		&i_Tm,			// (I  ) 座標変換マトリックス
+				const	MgMat3D		&i_Tm,			// (I  ) 座標変換マトリックス
 						MgGLine3D	*o_GLn			// (  O) ３Ｄ直線群
 				)
 {
@@ -1864,7 +1864,7 @@ void MGeo::GLine2Dto3D(
 //
 void MGeo::GPolyg2Dto3D(
 				const MgGPolyg2D	&i_GPg,			// (I  ) ２Ｄ多角形群
-				const MgMat4D		&i_Tm,			// (I  ) 座標変換マトリックス
+				const MgMat3D		&i_Tm,			// (I  ) 座標変換マトリックス
 					  MgGPolyg3D	*o_GPg			// (  O) ３Ｄ多角形群
 				)
 {
@@ -1949,14 +1949,14 @@ void mmuLn1(double a[], double b[], int la, int lb, int m)
 	return;
 }
 
-void mmuLn2(double a[], double b[], double c[], int la, int lb, int lc, int m, int n, int k)
+void mmuLine2D(double a[], double b[], double c[], int la, int lb, int lc, int m, int n, int k)
 {
 	int i, j, ka, kc, l;
 	double *p, *q, *r, w;
 
 	if(m <= 0 || n <= 0 || k <= 0 || la < n || lb < k || lc < k)
 	{
-		fprintf(stderr, "Error : Illegal parameter  in mmuLn2()\n");
+		fprintf(stderr, "Error : Illegal parameter  in mmuLine2D()\n");
 		return;
 	}
 	for (i=0, ka=kc=0; i<m; i++, ka+=la, kc+=lc)

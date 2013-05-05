@@ -318,7 +318,7 @@ inline_nu void	MDPMT::zTextureCoordinate(
 						MINT		i_iMdCdn,	// 座標生成モードB	( MC_PLANE:0		面からベクトルを生成、
 												//					  MC_1:指定したベクトル)
 				const	MgVect2D* 	i_pvszimg,	// イメージ寸法	(mm)( 横、縦) 
-				const	MgMat3DE*		i_pmatH		// 配置マトリックス
+				const	MgMat3E*		i_pmatH		// 配置マトリックス
 				)
 { 
 	SetHd( MZAT_TXTRC, 0, ((i_iMdCdn == 0) ? MZWD_TXTRC_S:MZWD_TXTRC_L) );
@@ -326,14 +326,14 @@ inline_nu void	MDPMT::zTextureCoordinate(
 	if ( i_pvszimg)
 		(MgVect2D&)m_dt[1] = *i_pvszimg;
 	if ( i_pmatH)
-		(MgMat3DE&)m_dt[3] = *i_pmatH;
+		(MgMat3E&)m_dt[3] = *i_pmatH;
 }
 
 inline_nu void	MDFIG::zTextureCoordinate(
 						MINT		i_iMdCre,	// 座標生成モードA	( 0:EYE_PLANE、1:OBJECT_PLANE、2:環境マップ用)
 						MINT		i_iMdCdn,	// 座標生成モードB	( 0:面からベクトルを生成、1:指定したベクトル)
 				const	MgVect2D* 	i_pvszimg,	// イメージ寸法	(mm)( 横、縦) 
-				const	MgMat3DE*		i_pmatH		// 配置マトリックス
+				const	MgMat3E*		i_pmatH		// 配置マトリックス
 				)
 { 
 	GetpPmt( m_pPmtl->m_n)->zTextureCoordinate( i_iMdCre, i_iMdCdn, i_pvszimg, i_pmatH);
@@ -444,47 +444,47 @@ inline_nu void MDFIG::Point3(
 }
 
 // 線分（3次元）
-inline_nu void MDPMT::Line3(
+inline_nu void MDPMT::Line3D(
 				const	MgLine3D& i_Ln)			// 線分データ
 {
 	SetHd( MZCD_LINE, MZTP_3D, MZWD_LINE_3D);
 	(MgLine3D&)m_dt[0] = i_Ln;
 }
 
-inline_nu void MDFIG::Line3(
+inline_nu void MDFIG::Line3D(
 				const	MgLine3D& i_Ln)			// 線分データ
 {
-	GetpPmt( m_pPmtl->m_n)->Line3( i_Ln);
+	GetpPmt( m_pPmtl->m_n)->Line3D( i_Ln);
 	IncrN( MZWD_LINE_3D + 1);
 }
 
 // 直線（3次元）
-inline_nu void MDPMT::ULine3(
+inline_nu void MDPMT::ULine3D(
 				const	MgULine3D& i_uLn)		// 直線データ
 {
 	SetHd( MZCD_ULINE, MZTP_3D, MZWD_ULINE_3D);
 	(MgULine3D&)m_dt[0] = i_uLn;
 }
 
-inline_nu void MDFIG::ULine3(
+inline_nu void MDFIG::ULine3D(
 				const	MgULine3D& i_uLn)		// 直線データ
 {
-	GetpPmt( m_pPmtl->m_n)->ULine3( i_uLn);
+	GetpPmt( m_pPmtl->m_n)->ULine3D( i_uLn);
 	IncrN( MZWD_ULINE_3D + 1);
 }
 
 // 半直線（3次元）
-inline_nu void MDPMT::HLine3(
+inline_nu void MDPMT::HLine3D(
 				const	MgHLine3D&	i_hLn)		// 半直線データ（3次元）
 {
 	SetHd( MZCD_HLINE, MZTP_3D, MZWD_HLINE_3D);
 	(MgHLine3D&)m_dt[0] = i_hLn;
 }
 
-inline_nu void MDFIG::HLine3(
+inline_nu void MDFIG::HLine3D(
 				const	MgHLine3D&	i_hLn)		// 半直線データ（3次元）
 {
-	GetpPmt( m_pPmtl->m_n)->HLine3( i_hLn);
+	GetpPmt( m_pPmtl->m_n)->HLine3D( i_hLn);
 	IncrN( MZWD_HLINE_3D + 1);
 }
 

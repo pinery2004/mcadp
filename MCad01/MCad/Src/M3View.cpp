@@ -175,7 +175,7 @@ BOOL M3View::InitializeOpenGL( void)
 
 	// À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Ì‰Šú‰»
 	m_rScl = 1.;
-	m_mTrans = MGeo::Mat3RotRevZ( m_rRotZ) * MGeo::Mat3RotRevY( m_rRotY) * MGeo::Mat3RotRevX( m_rRotX);
+	m_mTrans = MGeo::Mat3ERotRevZ( m_rRotZ) * MGeo::Mat3ERotRevY( m_rRotY) * MGeo::Mat3ERotRevX( m_rRotX);
 
 	return TRUE;
 }
@@ -206,7 +206,7 @@ void M3View::OnMouseMove(
 	CPoint	iPtD;												// ƒ}ƒEƒXˆÚ“®—Ê	
 	MgVect3D	rdMov1;
 	MgVect3D	rdMov2;
-	MgMat3DE	mTr1, mTr2, mTr3, mTrW, mTrW1, mTrW2;				// À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX (work)
+	MgMat3E	mTr1, mTr2, mTr3, mTrW, mTrW1, mTrW2;				// À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX (work)
 	MgVect2D	vRx, vRy, vRz;										// ‚w²‰ñ“]Šp, ‚x²‰ñ“]Šp, ‚y²‰ñ“]Šp
 
 	if ( nFlags & MK_CONTROL) {
@@ -220,15 +220,15 @@ void M3View::OnMouseMove(
 		
 	} else if ( nFlags & MK_LBUTTON) {
 		vRx = MgVect2D( 1., - RtD.y * 3).Unitize();				// ‚w²‰ñ“]Šp@(³•ûŒü:	‚w²‚É‘Î‚µ‚Ä¶‰ñ“])
-		mTr1 = MGeo::Mat3RotRevXV( vRx);						//					   (‚w²‚©‚çŒ©‚Ä‰E‰ñ“])
+		mTr1 = MGeo::Mat3ERotRevXV( vRx);						//					   (‚w²‚©‚çŒ©‚Ä‰E‰ñ“])
 		mTrW1 = mTr1 * m_mTrans;
 
 		vRy = MgVect2D( 1., RtD.x * 3).Unitize();				// ‚x²‰ñ“]Šp@(³•ûŒü:	‚x²‚É‘Î‚µ‚Ä‰E‰ñ“])
-		mTr2 = MGeo::Mat3RotRevYV( vRy);						//					   (‚x²‚©‚çŒ©‚Ä¶‰ñ“])
+		mTr2 = MGeo::Mat3ERotRevYV( vRy);						//					   (‚x²‚©‚çŒ©‚Ä¶‰ñ“])
 		mTrW2 = mTr2 * mTrW1;
 
 		vRz = MgVect2D( 1., RtD.z * 3).Unitize();				// ‰º‚Í (³•ûŒü:‚y²‚É‘Î‚µ‚Ä‰E‰ñ“])
-		mTr3 = MGeo::Mat3RotRevZV( vRz);						//			   (‚y²‚©‚çŒ©‚Ä¶‰ñ“])
+		mTr3 = MGeo::Mat3ERotRevZV( vRz);						//			   (‚y²‚©‚çŒ©‚Ä¶‰ñ“])
 		mTrW = mTr3 * mTrW2;
 		m_mTrans = mTrW;
 
@@ -239,7 +239,7 @@ void M3View::OnMouseMove(
 																//			   (‚y²‚©‚çŒ©‚Ä‰E‰ñ“])
 		vRz = MgVect2D( 1., RtD.z * 3).Unitize();				// ‰º‚Í (³•ûŒü:‚y²‚É‘Î‚µ‚Ä‰E‰ñ“])
 																//			   (‚y²‚©‚çŒ©‚Ä¶‰ñ“])
-		mTr1 = MGeo::Mat3RotRevZV( vRz);
+		mTr1 = MGeo::Mat3ERotRevZV( vRz);
 		mTrW = mTr1 * m_mTrans;
 		m_mTrans = mTrW;
 	}

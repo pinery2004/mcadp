@@ -194,7 +194,7 @@ void DrawPart(
 
 	// 部材の形を表示
 	VtW = ptW[1] - ptW[0];										// 芯線
-	VtUtW = MGeo::UnitizeV2( VtW);								// 部材の形を求める
+	VtUtW = MGeo::UnitizeVect2D( VtW);								// 部材の形を求める
 
 	// たて枠用の形状作成
 	if ( pPlcEn->IsFrame()) {									// たて枠用の形状作成
@@ -276,9 +276,9 @@ void DrawPart(
 	if ( iKeijoF == 2) {										// パネル
 		MgPoint2D ptCenter = (ptK[0] + ptK[2]) / 2.f;
 		MgVect2D  vtL1 = ptK[2] - ptK[0];
-		MgVect2D  vtutL1 = MGeo::UnitizeV2( vtL1);
+		MgVect2D  vtutL1 = MGeo::UnitizeVect2D( vtL1);
 		MgVect2D  vtL2 = ptK[3] - ptK[1];
-		MgVect2D  vtutL2 = MGeo::UnitizeV2( vtL2);
+		MgVect2D  vtutL2 = MGeo::UnitizeVect2D( vtL2);
 
 		pCod->Arc1( ptCenter, MC_PNLNO_HANKEI, 0., 0.);
 

@@ -167,10 +167,10 @@ public:
 						{ return !((*this) == ULn1);}
 	MgULine3D Set( const MgPoint3D& p1, const MgVect3D& v1)
 						{ p = p1; v = v1; return *this;}
-	MgULine3D Set( const MgULine2D& uln1, const MREAL z1 = 0.f, MREAL i_Tol = g_gTol.D)	// ‚QŸŒ³¨‚RŸŒ³@(ZÈ—ª0.)
+	MgULine3D Set( const MgULine2D& uln1, const MREAL z1 = 0.f, MREAL i_Tol = MGPTOL->D)	// ‚QŸŒ³¨‚RŸŒ³@(ZÈ—ª0.)
 						{ p.x = uln1.p.x; p.y = uln1.p.y; p.z = z1;
 						  v = MgVect3DC( uln1.v).Unitize(i_Tol); return *this;} 
-	MgULine3D Set( const MgULine2D& ULn1, const MgPlane3D& Pln, MREAL i_Tol = g_gTol.D);// ‚QŸŒ³¨‚RŸŒ³
+	MgULine3D Set( const MgULine2D& ULn1, const MgPlane3D& Pln, MREAL i_Tol = MGPTOL->D);// ‚QŸŒ³¨‚RŸŒ³
 
 	MgULine3D SetRev()	{ v = - v; return *this;}								// ’¼ü”½“]
 	void Print(MCHAR* s);

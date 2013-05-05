@@ -26,8 +26,8 @@ namespace MC
 //
 //	同次座標による３点よりＳ形式を求める
 //
-MREAL	MgSMatD(const MgPoint2DD3& p0, const MgPoint2DD3& p1,
-			   const MgPoint2DD3& p2)
+MREAL	MgSMatD(const MgPoint3D& p0, const MgPoint3D& p1,
+			   const MgPoint3D& p2)
 {
 	return 
 	(	  p0.x * (p1.y*p2.w-p1.w*p2.y)
@@ -39,8 +39,8 @@ MREAL	MgSMatD(const MgPoint2DD3& p0, const MgPoint2DD3& p1,
 //
 //	同次座標による４点よりＳ形式を求める
 //
-MREAL	MgSMatD3(const MgPoint2DD3& p0, const MgPoint2DD3& p1,
-				 const MgPoint2DD3& p2, const MgPoint2DD3& p3)
+MREAL	MgSMatD3(const MgPoint3D& p0, const MgPoint3D& p1,
+				 const MgPoint3D& p2, const MgPoint3D& p3)
 {
 	return 
 	(	  (p0.x*p1.y-p0.y*p1.x) * (p2.z*p3.w-p2.w*p3.z)
@@ -55,8 +55,8 @@ MREAL	MgSMatD3(const MgPoint2DD3& p0, const MgPoint2DD3& p1,
 //
 //  平面式 : nx*X + ny*Y + nz*Z + d = 0
 //
-MgPlane3DD3::MgPlane3DD3(const MgPoint2DD3& p0, const MgPoint2DD3& p1,
-						  const MgPoint2DD3& p2)
+MgPlane3DD3::MgPlane3DD3(const MgPoint3D& p0, const MgPoint3D& p1,
+						  const MgPoint3D& p2)
 {
 	MREAL xy = p1.x*p2.y - p1.y*p2.x;
 	MREAL yz = p1.y*p2.z - p1.z*p2.y;
@@ -74,7 +74,7 @@ MgPlane3DD3::MgPlane3DD3(const MgPoint2DD3& p0, const MgPoint2DD3& p1,
 //
 //  平面式 : nx*X + ny*Y + nz*Z + d = 0
 //
-MgPlane3DD3::MgPlane3DD3(const MgMat3DE &m1)
+MgPlane3DD3::MgPlane3DD3(const MgMat3E &m1)
 {
 	MREAL xy = m1.m[0][2] * m1.m[1][3] - m1.m[1][2] * m1.m[0][3];
 	MREAL yz = m1.m[1][2] * m1.m[2][3] - m1.m[2][2] * m1.m[1][3];
@@ -92,7 +92,7 @@ MgPlane3DD3::MgPlane3DD3(const MgMat3DE &m1)
 //
 //  return -1:平面の裏側　0:平面上　1:面の表側
 //
-int	MgSide(const MgPoint2DD3& p1, const MgPlane3DD3 &Pln1)
+int	MgSide(const MgPoint3D& p1, const MgPlane3DD3 &Pln1)
 {
 	MREAL	hb1;
 	MREAL	pltol;				// (平面の法線ベクトルの絶対値*誤差範囲)**2
@@ -100,7 +100,7 @@ int	MgSide(const MgPoint2DD3& p1, const MgPlane3DD3 &Pln1)
 	hb1 = Pln1.NX * p1.x + Pln1.NY * p1.y +
 		  Pln1.NZ * p1.z + Pln1.d * p1.w;
 
-    pltol = g_gTol.A_2 * 
+    pltol = MGPTOL->A_2 * 
 		    (Pln1.NX * Pln1.NX + Pln1.NY * Pln1.NY + Pln1.NZ * Pln1.NZ);
 	if (hb1 * hb1 < pltol) return 0;
 	if (hb1 > 0) return 1;
@@ -119,11 +119,11 @@ MINT MgIntersect(const MgLine2DD3 &Ln1, const MgLine2DD3 &Ln2, MINT *ist)
 */
 	return 1;
 }
-MREAL	MgSMatD3(const MgPoint2DD3& p0, const MgPoint2DD3& p1,
-				 const MgPoint2DD3& p2, const MgPoint2DD3& p3);
-MINT MgIntersect(const MgPoint2DD3& p1, const MgTriangleD3 &t1, MINT *ist);
+MREAL	MgSMatD3(const MgPoint3D& p0, const MgPoint3D& p1,
+				 const MgPoint3D& p2, const MgPoint3D& p3);
+MINT MgIntersect(const MgPoint3D& p1, const MgTriangleD3 &t1, MINT *ist);
 //	点と３角形の半空間テスト(2)
-MINT MgInside(const MgTriangleD3 &t1, const MgPoint2DD3& p1, MINT *ist);
+MINT MgInside(const MgTriangleD3 &t1, const MgPoint3D& p1, MINT *ist);
 //	３角形と点（平面）の内外テスト(3)
 MINT MgIntersect(const MgLine2DD3 &Ln1, const MgTriangleD3 &t1);
 //	線分と３角形の交差テスト(4,5,6)
@@ -133,9 +133,9 @@ void  MgPartition(const MgPolyg2DonD3 &pg1, MgCVTD3 *cvt);
 //	面分の３角形分割(12)
 MINT MgVolume(const MgPoint2D& p1, const MgPolyg2DonD3 &pg1, MgCVTD3 *cvt);
 //	点と面分の錐体体積の算出、距離(20)
-MINT MgInside(const MgPolyg2DonD3 &pg1, const MgPoint2DD3& p1, MINT *ist);
+MINT MgInside(const MgPolyg2DonD3 &pg1, const MgPoint3D& p1, MINT *ist);
 //	面分に対する点（平面）の内外テスト(21)
-MINT MgShade(const MgPolyg2DonD3 &pg1, const MgPoint2DD3& p1, MINT *ist);
+MINT MgShade(const MgPolyg2DonD3 &pg1, const MgPoint3D& p1, MINT *ist);
 //	面分に対する点（平面）の遮蔽(22)
 MINT MgIntersect(const MgLine2DD3 &Ln1, const MgPolyg2DonD3 &Ln2, MINT *ist);
 //	線分と面分の交差テスト(30,31,32)
@@ -145,16 +145,16 @@ MINT MgInside(const MgPolyg2DonD3 &pg1, const MgLine2DD3 &Ln1, MINT *ist);
 //	面分に対する線分（平面）の内外テスト(34)
 MINT MgShade(const MgPolyg2DonD3 &pg1, const MgLine2DD3 &Ln1, MINT *ist);
 //	面分に対する線分（平面）の遮蔽(35)
-MgPoint2DD3 MgRatio(const MgPoint2D& p1, const MgPoint2D& p2, MREAL r1);
+MgPoint3D MgRatio(const MgPoint2D& p1, const MgPoint2D& p2, MREAL r1);
 //	線分ＶａＶｂと内分比r1より、線分ＶａＶｂをr1:(1-r1)に内分する点の
 //	同時座標値の算出(192)
-void MgSValue(const MgPoint2DD3& p1, MINT a, MINT b, MgCVTD3 *cvt);
+void MgSValue(const MgPoint3D& p1, MINT a, MINT b, MgCVTD3 *cvt);
 //	点p1(Vx)とa,bより、Sxijk(i=a..b)をSARY[i]に書き込む(200)
 //	(j=i+1, k=i+2)
-void MgSValue(const MgPoint2DD3& p1, const MgPoint2DD3& p2, MINT a, MINT b, MgCVTD3 *cvt);
+void MgSValue(const MgPoint3D& p1, const MgPoint3D& p2, MINT a, MINT b, MgCVTD3 *cvt);
 //	点p1(Vx)、点p2(Vy)とa,bより、Sxyij(i=a..b)をSARY[i]に書き込む(220)
 //	(j=i+1)
-void MgSValue(const MgPoint2DD3& p1, const MgPoint2DD3& p2, const MgPoint2D& p3, 
+void MgSValue(const MgPoint3D& p1, const MgPoint3D& p2, const MgPoint2D& p3, 
 			  MINT a, MINT b, MgCVTD3 *cvt);
 //	点p1(Vx)、点p2(Vy)、点p3(Vz)とa,bより、Sxyzi(i=a..b)をSARY[i]に書き込む(220)
 	

@@ -471,10 +471,10 @@ void mhInput::Marume(
 		if ( GLnk.m_n >= 2) {
 			for ( ic1=0; ic1<GLnk.m_n - 1; ic1++) {
 				for ( ic2=ic1+1; ic2<GLnk.m_n; ic2++) {
-					ist = MGeo::Intr2Ln2( GLnk.m_ln[ic1], GLnk.m_ln[ic2], &P0);
+					ist = MGeo::Intr2Line2D( GLnk.m_ln[ic1], GLnk.m_ln[ic2], &P0);
 					if ( MF_CHECK_OR( ist, (MC_INT | MC_CONNECTION))) {
 						vtDis = P0 - Pi;
-						rDis_2 =MGeo::Abs_2( vtDis);
+						rDis_2 =MGeo::AbsVect2D_2( vtDis);
 						if ( rDis_2 < rDisMin_2) {
 							rDisMin_2 = rDis_2;
 							Po = P0;
@@ -501,9 +501,9 @@ void mhInput::Marume(
 			// 壁芯丸めで壁との重なりありの場合は、最も近い壁芯上の位置を返す
 			rDisMin_2 = MREALMAX;
 			for ( ic1=0; ic1<GLnk.m_n; ic1++) {
-				MGeo::PerpPtLn2( Pi, GLnk.m_ln[ic1], &P0);
+				MGeo::PerpPointLine2D( Pi, GLnk.m_ln[ic1], &P0);
 				vtDis = P0 - Pi;
-				rDis_2 =MGeo::Abs_2( vtDis);
+				rDis_2 =MGeo::AbsVect2D_2( vtDis);
 				if ( rDis_2 < rDisMin_2) {
 					rDisMin_2 = rDis_2;
 					Po = P0;
@@ -517,7 +517,7 @@ void mhInput::Marume(
 	pWndInfo->GetMarumeGridLine( iCdMarume, Pi, Lnm);
 	if ( GLnk.m_n == 0) {
 		// 壁芯での丸めなし(または候補の壁なし)の場合は、グリッド丸め位置をそのまま返す
-		ist = MGeo::Intr2Ln2( Lnm[0], Lnm[1], pPo);
+		ist = MGeo::Intr2Line2D( Lnm[0], Lnm[1], pPo);
 		if ( !MF_CHECK_OR( ist, (MC_INT | MC_CONNECTION))) {
 			*pPo = Pi;
 		}
@@ -527,10 +527,10 @@ void mhInput::Marume(
 		rDisMin_2 = MREALMAX;
 		for ( ic1=0; ic1<GLnk.m_n; ic1++) {
 			for ( ic2=0; ic2<2; ic2++) {
-				ist = MGeo::Intr2Ln2( GLnk.m_ln[ic1], Lnm[ic2], &P0);
+				ist = MGeo::Intr2Line2D( GLnk.m_ln[ic1], Lnm[ic2], &P0);
 				if ( MF_CHECK_OR( ist, (MC_INT | MC_CONNECTION))) {
 					vtDis = P0 - Pi;
-					rDis_2 = MGeo::Abs_2( vtDis);
+					rDis_2 = MGeo::AbsVect2D_2( vtDis);
 					if ( rDis_2 < rDisMin_2) {
 						rDisMin_2 = rDis_2;
 						Po = P0;

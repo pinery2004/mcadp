@@ -637,7 +637,7 @@ static MINT	AddZukei(
 						MDID		i_idBhn,	// 部品Id
 						MDID		i_iBfn,		// 機能番号
 						MDID		i_iZDpr,	// 図形Dpr
-						MgMat3DE		i_matCnv	// 変換する座標テーブル
+						MgMat3E		i_matCnv	// 変換する座標テーブル
 				);
 
 //===========================================================================
@@ -696,7 +696,7 @@ static MINT	AddEnt(
 						MINT		i_mdAdd,	// 追加モード
 												//　0:指定されたエンティティは残る
 												//	1:指定されたエンティティは残らない
-						MgMat3DE*		i_matCng	// 変換する座標テーブル
+						MgMat3E*		i_matCng	// 変換する座標テーブル
 				);
 
 //===========================================================================
@@ -749,7 +749,7 @@ static MINT	Pack(
 						MINT		i_ifStrct,	// フラグ　0:構造化　1:非構造化
 						MDID		i_idFn,		// 機能番号（flg=0の時は無効）
 						MDID&		i_idEnt,	// 部品化するエンティティリスト
-						MgMat3DE&		i_matCng	// 変換する座標テーブル
+						MgMat3E&		i_matCng	// 変換する座標テーブル
 				);
 
 //===========================================================================
@@ -3587,7 +3587,7 @@ static MINT	GetEnt(
 //
 static MINT	GetGrpCoord(
 						MDID		i_idGrp,	// グループId
-						MgMat3DE*		o_mTrans	// 座標変換マトリックス
+						MgMat3E*		o_mTrans	// 座標変換マトリックス
 				);
 
 //===========================================================================
@@ -3595,7 +3595,7 @@ static MINT	GetGrpCoord(
 //
 //		データベースをオープンすると、基準座標系は必ず１つ存在する。
 //
-static MgMat3DE GetBaseCoord( );					// 基準座標変換マトリックス
+static MgMat3E GetBaseCoord( );					// 基準座標変換マトリックス
 
 //===========================================================================
 //		カレント座標変換マトリックスを得る
@@ -3605,7 +3605,7 @@ static MgMat3DE GetBaseCoord( );					// 基準座標変換マトリックス
 //		そのグループの座標系がカレント座標系になる。
 //		Inp:Point等で得られる座標値はカレント座標系上の座標値となる。
 //
-static MgMat3DE	GetCurCoord( );					// カレント座標変換マトリックス
+static MgMat3E	GetCurCoord( );					// カレント座標変換マトリックス
 
 //===========================================================================
 //		カレント座標変換マトリックスを設定
@@ -3617,8 +3617,8 @@ static MgMat3DE	GetCurCoord( );					// カレント座標変換マトリックス
 //
 //		カレント座標系を一時的に変更する場合は、処理終了時に元に戻すこと。
 //
-static MgMat3DE SetCurCoord(						// 直前のカレント座標変換マトリックス
-						MgMat3DE&		i_MTransr	// 座標変換マトリックス
+static MgMat3E SetCurCoord(						// 直前のカレント座標変換マトリックス
+						MgMat3E&		i_MTransr	// 座標変換マトリックス
 				);
 
 //===========================================================================
@@ -4155,7 +4155,7 @@ static MINT	SetFigPmt(
 //
 static MINT	SetPartPlc (
 						MDID		i_idEnt,	// エンティテイID
-						MgMat3DE*		i_pmat,		// 配置座標系マトリックス
+						MgMat3E*		i_pmat,		// 配置座標系マトリックス
 						MDID		i_idB		// 部品ID
 				);
 
@@ -4806,7 +4806,7 @@ public:
 static MINT	MdwTransMatrixViewToWorld(
 						MDID		i_idWin,	// ウィンドウＩＤ
 						MDID		i_idDB,		// DB座標系
-						MgMat3DE*		o_pmatVtD	// 座標変換マトリックス(視点座標 -> DB座標)
+						MgMat3E*		o_pmatVtD	// 座標変換マトリックス(視点座標 -> DB座標)
 				);
 
 //===========================================================================
@@ -4815,7 +4815,7 @@ static MINT	MdwTransMatrixViewToWorld(
 static MINT	MdwTransMatrixWorldToView(
 						MDID		i_idDB,		// DB座標系
 						MDID		i_idWin,	// ウィンドウＩＤ
-						MgMat3DE*		o_pmatDtV	// 座標変換マトリックス(視点座標 -> DB座標)
+						MgMat3E*		o_pmatDtV	// 座標変換マトリックス(視点座標 -> DB座標)
 				);
 
 //===========================================================================
@@ -4823,7 +4823,7 @@ static MINT	MdwTransMatrixWorldToView(
 //
 static MINT	MdwTransMatrixPixelToView(
 						MDID		i_idWin,	// ウィンドウＩＤ
-						MgMat3DE*		o_pmatPtV	// 座標変換マトリックス(pixel座標 -> 視点座標)
+						MgMat3E*		o_pmatPtV	// 座標変換マトリックス(pixel座標 -> 視点座標)
 				);
 
 //===========================================================================
@@ -4831,7 +4831,7 @@ static MINT	MdwTransMatrixPixelToView(
 //
 static MINT	MdwTransMatrixViewToPixel(
 						MDID		i_idWin,	// ウィンドウＩＤ
-						MgMat3DE*		o_pmatVtP	// 座標変換マトリックス(視点座標 -> pixel座標)
+						MgMat3E*		o_pmatVtP	// 座標変換マトリックス(視点座標 -> pixel座標)
 				);
 
 
@@ -4840,7 +4840,7 @@ static MINT	MdwTransMatrixViewToPixel(
 //
 static MINT	MdwGetEyeCoord(
 						MDID		i_idWin,	// ウィンドウＩＤ
-						MgMat3DE*		o_pmatV		// 視点座標変換マトリックス（基準座標系での値）
+						MgMat3E*		o_pmatV		// 視点座標変換マトリックス（基準座標系での値）
 				);
 
 //===========================================================================
@@ -4848,7 +4848,7 @@ static MINT	MdwGetEyeCoord(
 //
 static MINT	MdwSetEyeCoord(
 						MDID		i_idWin,	// ウィンドウＩＤ
-						MgMat3DE*		i_pmatV		// 視点座標変換マトリックス（基準座標系での値）
+						MgMat3E*		i_pmatV		// 視点座標変換マトリックス（基準座標系での値）
 				);
 
 //===========================================================================
@@ -4856,7 +4856,7 @@ static MINT	MdwSetEyeCoord(
 //
 static MINT	MdwGetTypeEyeCoord(
 						MDID		i_idWFn,	// ウィンドウ機能番号
-						MgMat3DE*		o_pmatV		// 視点座標変換マトリックス（基準座標系での値）
+						MgMat3E*		o_pmatV		// 視点座標変換マトリックス（基準座標系での値）
 				);
 
 //===========================================================================
@@ -4864,7 +4864,7 @@ static MINT	MdwGetTypeEyeCoord(
 //
 static MINT	MdwSetTypeEyeCoord(
 						MDID		i_idWFn,	// ウィンドウ機能番号
-						MgMat3DE*		i_pmatV		// 視点座標変換マトリックス（基準座標系での値）
+						MgMat3E*		i_pmatV		// 視点座標変換マトリックス（基準座標系での値）
 				);
 
 //===========================================================================
@@ -5886,7 +5886,7 @@ static MINT	MdwSetBasePlaneXYZ(
 //
 static MINT	MdwGetTempPlaneCoord(
 						MDID		i_idWFn,	// ウィンドウ機能番号
-						MgMat3DE*		o_pmatV		// 作業面の座標系の座標変換マトリックス
+						MgMat3E*		o_pmatV		// 作業面の座標系の座標変換マトリックス
 												// （基準座標系での値）
 				);
 
@@ -5895,7 +5895,7 @@ static MINT	MdwGetTempPlaneCoord(
 //
 static MINT	MdwSetTempPlaneCoord(
 						MDID		i_idWFn,	// ウィンドウ機能番号
-						MgMat3DE*		i_pmatV		// 作業面の座標系の座標変換マトリックス
+						MgMat3E*		i_pmatV		// 作業面の座標系の座標変換マトリックス
 												// （基準座標系での値）
 				);
 
@@ -5907,7 +5907,7 @@ static MINT	MdwSetTempPlaneCoord(
 //
 static MINT	MdwGetBasePlaneCoord(
 						MDID		i_idWFn,	// ウィンドウ機能番号
-						MgMat3DE*		o_pmatV		// 作業面の座標系の座標変換マトリックス
+						MgMat3E*		o_pmatV		// 作業面の座標系の座標変換マトリックス
 												// （基準座標系での値）
 				);
 
@@ -5919,7 +5919,7 @@ static MINT	MdwGetBasePlaneCoord(
 //
 static MINT	MdwGetDefaultBasePlaneCoord(
 						MDID		i_idWFn,	// ウィンドウ機能番号
-						MgMat3DE*		o_pmatV		// 作業面の座標系の座標変換マトリックス
+						MgMat3E*		o_pmatV		// 作業面の座標系の座標変換マトリックス
 												// （基準座標系での値）
 				);
 
@@ -5932,7 +5932,7 @@ static MINT	MdwGetDefaultBasePlaneCoord(
 //
 static MINT	MdwSetDefaultBasePlaneCoord(
 						MDID		i_idWFn,	// ウィンドウ機能番号
-						MgMat3DE*		i_pmatV		// 作業面の座標系の座標変換マトリックス
+						MgMat3E*		i_pmatV		// 作業面の座標系の座標変換マトリックス
 												// （基準座標系での値）
 				);
 
@@ -6251,7 +6251,7 @@ static MINT	MdzCreate(
 //		拡大率は1.0が原寸。
 //
 static MINT	MdzCreatePartPlc(
-						MgMat3DE*		i_pmat,		// 配置座標系マトリックス
+						MgMat3E*		i_pmat,		// 配置座標系マトリックス
 						MDID		i_idB,		// 部品ID
 						MDID*		o_pidDpr	// 点部材プリミティブDpr-ID
 				);
@@ -6276,7 +6276,7 @@ static MINT	MdzChange(
 //		図形情報の座標変換
 //
 static MINT	MdzTrans(
-						MgMat3DE&		i_Mat,		// 配置座標系マトリックス
+						MgMat3E&		i_Mat,		// 配置座標系マトリックス
 						MDFIG&		i_stFig,	// 図形情報
 						MDFIG*		o_pFig		// 座標変換後図形情報
 				);
@@ -6285,7 +6285,7 @@ static MINT	MdzTrans(
 ////		図形情報の回転
 ////
 //static MINT	MdzRotate(
-//						MgMat3DE*		i_pmat,		// 配置座標系マトリックス
+//						MgMat3E*		i_pmat,		// 配置座標系マトリックス
 //						MDFIG&		i_pFig,		// 図形情報
 //						MDFIG*		o_pFig		// 座標変換後図形情報
 //				);

@@ -160,7 +160,7 @@ void MdlDispList::DrawKabe(
 
 		if ( pPlcTEn->GetPIKai() == i_pPlcEn->GetPIKai() &&
 			Mstrcmp( (&pPlcTEn->GetPIPartsSpec()->GetPTNmGeneral()[2]), Mstr( "建具")) == 0) {
-			if ( MGeo::ChkLn3OnLn3WS( pPlcTEn->GetPIPlcIti(), i_pPlcEn->GetPIPlcIti(), &ist1)) {
+			if ( MGeo::ChkLineOnLine3DWS( pPlcTEn->GetPIPlcIti(), i_pPlcEn->GetPIPlcIti(), &ist1)) {
 				MdlDispList::TateguHole( i_pPlcEn, pPlcTEn, &PgR, &PgL);
 				pAuxTategu = (MhTateguInfo*)pPlcTEn->GetPIAuxTategu();
 				if ( MGeo::GE( pAuxTategu->GetHeight(), rZU) ||
@@ -168,8 +168,8 @@ void MdlDispList::DrawKabe(
 					 MGeo::Abs( ist1) == 2) {					// 壁と建具が部分的に重なる
 					 PgR.Rev();
 					 PgL.Rev();
-					 MGeo::MergeGPgPgtoGPg3( MC_DIFF, GPgR, PgR, &GPgR);		// (  O) 穴付き多角形3
-					 MGeo::MergeGPgPgtoGPg3( MC_DIFF, GPgL, PgL, &GPgL);		// (  O) 穴付き多角形3
+					 MGeo::MergeGPgPgtoGPolygon3D( MC_DIFF, GPgR, PgR, &GPgR);		// (  O) 穴付き多角形3
+					 MGeo::MergeGPgPgtoGPolygon3D( MC_DIFF, GPgL, PgL, &GPgL);		// (  O) 穴付き多角形3
 				} else {										// 建具が壁の中に含まれ
 					GPgR += PgR;
 					GPgL += PgL;
@@ -223,9 +223,9 @@ void MdlDispList::DrawYane1(
 	MINT			ist1;
 	MINT			ic0, ic1, ic2;
 	MINT			ic0b;
-	MgVect3D			VtU, VtL;
-	MgLine3D			LnU, LnL;
-	MgLine3D			LncU, LncL;
+	MgVect3D		VtU, VtL;
+	MgLine3D		LnU, LnL;
+	MgLine3D		LncU, LncL;
 	MREAL			rZ;
 	MgGPolyg3D		GPg2(10);
 	MGPOLYG3( Pg3U, 3);
@@ -246,7 +246,7 @@ void MdlDispList::DrawYane1(
 			
 //			DispList::SetMaterial( 0, 0);
 		}
-		ist1 = MGeo::DivideTriPg3( pRfm2->m_Pg, pRfm2->m_Pln.v, &GPg2);
+		ist1 = MGeo::DivideTriPolygon3D( pRfm2->m_Pg, pRfm2->m_Pln.v, &GPg2);
 		rZ = mcs::GetStnd( pRoofEn->GetInpKai(), MM_STNDH_ROOF);
 		for ( ic2=0; ic2<GPg2.m_n; ic2++) {
 			DPtoDSP3R( GPg2.m_Pg[ic2], rZ, VtL, PtCtr, rB, &Pg3L);
@@ -299,7 +299,7 @@ void MdlDispList::DrawYagiri(
 			// 屋根面
 			continue;
 		}
-		ist1 = MGeo::DivideTriPg3( pRfm2->m_Pg, pRfm2->m_Pln.v, &GPg2);
+		ist1 = MGeo::DivideTriPolygon3D( pRfm2->m_Pg, pRfm2->m_Pln.v, &GPg2);
 		rZ = mcs::GetStnd( pRoofEn->GetInpKai(), MM_STNDH_ROOF);
 		for ( ic2=0; ic2<GPg2.m_n; ic2++) {
 			DPtoDSP3R( GPg2.m_Pg[ic2], rZ, VtL, PtCtr, rB, &Pg3L);
@@ -351,7 +351,7 @@ void MdlDispList::DrawYane2(
 			VtU = MgVect3D( 0., 0., 120.);
 			VtL = MgVect3D( 0., 0., 0.);
 		}
-		ist1 = MGeo::DivideTriPg3( pRfm2->m_Pg, pRfm2->m_Pln.v, &GPg2);
+		ist1 = MGeo::DivideTriPolygon3D( pRfm2->m_Pg, pRfm2->m_Pln.v, &GPg2);
 		rZ = mcs::GetStnd( pRoofEn->GetInpKai(), MM_STNDH_ROOF);
 		for ( ic2=0; ic2<GPg2.m_n; ic2++) {
 			DPtoDSP3R( GPg2.m_Pg[ic2], rZ, VtL, PtCtr, rB, &Pg3L);

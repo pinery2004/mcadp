@@ -208,15 +208,15 @@ void MCmdLineAdd()
 			ist = z_mmIA.GetComboAttrR( MC_CMB_INTR, &rIntrv);	//		間隔
 			if ( iNum == MC_INT_AREA) {							//			本数を領域で指定する複数部材の配置
 				VtArea = PtMltBziAr - Ln1.p[0];
-				iNum = MGMIN( MINT( MGeo::Abs( VtArea) / rIntrv + 1.0 + MGPTOL->D),
+				iNum = MGMIN( MINT( MGeo::AbsVect3D( VtArea) / rIntrv + 1.0 + MGPTOL->D),
 							  MMAX_BZI_HONSU);					//			部材配置本数を最大100本に限定
 				if ( iNum > 1)
-					VtBziIntrv = rIntrv * MGeo::UnitizeV3( VtArea);
+					VtBziIntrv = rIntrv * MGeo::UnitizeVect3D( VtArea);
 				else
 				VtBziIntrv = MgVect3D( 1., 0., 0.);				//			dumy
 					
 			} else {											//			本数指定による複数部材の配置
-				MgVect2D vtutBzi = MGeo::UnitizeV2( MgVect2DC( Ln1.p[1] - Ln1.p[0]));
+				MgVect2D vtutBzi = MGeo::UnitizeVect2D( MgVect2DC( Ln1.p[1] - Ln1.p[0]));
 				if ( pPartsSpec->GetPTCdInpKb() != MP_INPKB_DIR1PT)	//			方向１点の場合は方向に向かって複数配置する
 					vtutBzi.SetRotR90();						//			長さ２点の場合は右側方向に複数配置する
 				VtBziIntrv = rIntrv * MgVect3DC( vtutBzi);

@@ -84,7 +84,7 @@ void mhInput::MmGetMarumeYaneLine(
 			for ( ic2=0; ic2<pRoofEn->GetpGRfm()->m_st[ic1].m_Pg.m_n; ic2b=ic2,ic2++) {
 				Ln1 = MgLine2D( MgPoint2DC( pRoofEn->GetpGRfm()->m_st[ic1].m_Pg.m_P[ic2b]),
 							   MgPoint2DC( pRoofEn->GetpGRfm()->m_st[ic1].m_Pg.m_P[ic2]));
-				if ( MGeo::ChkPt2OnLn2WS( Pi, Ln1, &ist1, rTol))
+				if ( MGeo::ChkPointOnLine2DWS( Pi, Ln1, &ist1, rTol))
 					(*pGLn) += Ln1;
 			}
 		}

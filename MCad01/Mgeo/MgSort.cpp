@@ -20,7 +20,7 @@ namespace MC
 //===========================================================================
 //	点列をベクトル方向の座標順に並べ同一座標の点は取り除く
 //
-void	MGeo::SortVGPt2(						//
+void	MGeo::SortVectGPoint2D(						//
 				const	MgVect2D&	V1, 		// (I  ) ベクトル
 						MgGPoint2D*	GPt2 		// (I O) 点群
 		)	
@@ -78,7 +78,7 @@ exit:;
 //{
 //	MgLine2D		work[MX_LIN1+1];			// 線分の数用のエリアを追加した作業エリアを確保する
 //	MgGLine2D	*GLn = (MgGLine2D*)work;
-//	MgDivideGLn2( GLn1, GLn);					// 線分を交点で分割する
+//	MgDivideGLine2D( GLn1, GLn);					// 線分を交点で分割する
 ////	MgThinOut( *GLn, GLn2);					// 往復線分と開放端を持つ線分を間引く
 //}
 

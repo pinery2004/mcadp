@@ -302,8 +302,8 @@ public:
 	void Print( MCHAR* s) const;												// Print
 };
 
-MINT DLL_EXPORT_POLYGON MgMergeGLine2( const MgGLine2D &gln1);					// 線分の重なりをまとめ一本にする
-MINT DLL_EXPORT_POLYGON MgCutGLine2( const MgGLine2D &gln1);					// 線分を交差部で分割する
+MINT DLL_EXPORT_POLYGON MgMergeGLine2D( const MgGLine2D &gln1);					// 線分の重なりをまとめ一本にする
+MINT DLL_EXPORT_POLYGON MgCutGLine2D( const MgGLine2D &gln1);					// 線分を交差部で分割する
 
 //======================( ３次元 )==============================
 //		線分群

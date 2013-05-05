@@ -30,10 +30,10 @@ void MGeo::MovePt2InDirOfVt2(					//
 						MgPoint2D	*p3			//	(  O) 移動された点3
 		)
 {
-	*p3 = p1 + dl * MGeo::UnitizeV2(v2);
+	*p3 = p1 + dl * MGeo::UnitizeVect2D(v2);
 }
 //	------------------------
-void MGeo::MovePt2AlongULn2(					//
+void MGeo::MovePt2AlongULine2D(					//
 				const	MgPoint2D&	p1,			//  (I  ) 移動点1
 				const	MgULine2D&	ULn2,		//	(I  ) 移動方向を示す直線2
 						MREAL		dl,			//	(I  ) 移動距離
@@ -43,7 +43,7 @@ void MGeo::MovePt2AlongULn2(					//
 	*p3 = p1 + dl * ULn2.v;
 }
 //	------------------------
-void MGeo::MovePt2AlongLn2(						//
+void MGeo::MovePt2AlongLine2D(						//
 				const	MgPoint2D&	p1,			//  (I  ) 移動点1
 				const	MgLine2D&	Ln2,		//	(I  ) 移動方向を示す線分2
 						MREAL		dl,			//	(I  ) 移動距離
@@ -53,7 +53,7 @@ void MGeo::MovePt2AlongLn2(						//
 	MgVect2D	vd, vn;
 //
 	vd = Ln2.p[1] - Ln2.p[0];
-	vn = MGeo::UnitizeV2(vd);
+	vn = MGeo::UnitizeVect2D(vd);
 	*p3 = p1 + dl * vn;
 }
 //
@@ -66,10 +66,10 @@ void MGeo::MovePt3InDirOfVt3(					//
 						MgPoint3D	*p3			//	(  O) 移動された点3
 		)
 {
-	*p3 = p1 + dl * MgUnitizeV3(v2);
+	*p3 = p1 + dl * MgUnitizeVect3D(v2);
 }
 //	------------------------
-void MGeo::MovePt3AlongULn3(					//	(  O) ステイタス
+void MGeo::MovePt3AlongULine3D(					//	(  O) ステイタス
 				const	MgPoint3D&	p1,			//  (I  ) 移動点1
 				const	MgULine3D&	ULn2,		//	(I  ) 移動方向を示す直線2
 						MREAL		dl,			//	(I  ) 移動距離
@@ -79,7 +79,7 @@ void MGeo::MovePt3AlongULn3(					//	(  O) ステイタス
 	*p3 = p1 + dl * ULn2.v;
 }
 //	------------------------
-void MGeo::MovePt3AlongLn3(						//	(  O) ステイタス
+void MGeo::MovePt3AlongLine3D(						//	(  O) ステイタス
 				const	MgPoint3D&	p1,			//  (I  ) 移動点1
 				const	MgLine3D	&Ln2,		//	(I  ) 移動方向を示す線分2
 						MREAL		dl,			//	(I  ) 移動距離
@@ -89,7 +89,7 @@ void MGeo::MovePt3AlongLn3(						//	(  O) ステイタス
 	MgVect3D	vd, vn;
 //
 	vd = Ln2.p[1] - Ln2.p[0];
-	vn = MgUnitizeV3(vd);
+	vn = MgUnitizeVect3D(vd);
 	*p3 = p1 + dl * vn;
 }
 //===========================================================================
@@ -99,7 +99,7 @@ void MGeo::MovePt3AlongLn3(						//	(  O) ステイタス
 //
 //	直線をオフセットする。
 //
-void MGeo::OffsetULn2(							//	(  O) ステイタス (=1)
+void MGeo::OffsetULine2D(							//	(  O) ステイタス (=1)
 				const	MgULine2D&	ULn1,		//	(I  ) 直線1
 						MREAL		dl,			//	(I  ) オフセット量
 						MgULine2D 	*ULn2		//	(  O) オフセットされた直線2
@@ -110,7 +110,7 @@ void MGeo::OffsetULn2(							//	(  O) ステイタス (=1)
 	ULn2->v = ULn1.v;
 }
 //	------------------------
-void MGeo::OffsetLn2(							//	(  O) ステイタス
+void MGeo::OffsetLine2D(							//	(  O) ステイタス
 				const	MgLine2D&	Ln1,		//	(I  ) 線分1
 						MREAL		dl,			//	(I  ) オフセット量
 						MgLine2D	*Ln2		//	(  O) オフセットされた線分2
@@ -119,14 +119,14 @@ void MGeo::OffsetLn2(							//	(  O) ステイタス
 	MgVect2D	vd, vn;
 //
 	vd = Ln1.p[1] - Ln1.p[0];
-	vn = MGeo::UnitizeV2(vd);
+	vn = MGeo::UnitizeVect2D(vd);
 	Ln2->p[0] = Ln1.p[0] + dl * MgRotL90(vn);
 	Ln2->p[1] = Ln2->p[0] + vd;
 }
 //
 // ---------------------( ３次元 )------------------------------
 //
-void MGeo::OffsetULn3(							//	(  O) ステイタス
+void MGeo::OffsetULine3D(							//	(  O) ステイタス
 				const	MgULine3D&	ULn1,		//	(I  ) 直線1
 				const	MgPlane3D	&Pln2,		//	(I  ) 直線1が乗る平面2
 						MREAL		dl,			//	(I  ) オフセット量
@@ -137,7 +137,7 @@ void MGeo::OffsetULn3(							//	(  O) ステイタス
 	ULn3->v = ULn1.v;
 }
 //	------------------------
-void MGeo::OffsetLn3(							//	(  O) ステイタス
+void MGeo::OffsetLine3D(							//	(  O) ステイタス
 				const	MgLine3D	&Ln1,		//	(I  ) 線分1
 				const	MgPlane3D	&Pln2,		//	(I  ) 線分1が乗る平面2
 						MREAL		dl,			//	(I  ) オフセット量
@@ -147,7 +147,7 @@ void MGeo::OffsetLn3(							//	(  O) ステイタス
 	MgVect3D	vd, vn;
 //
 	vd = Ln1.p[1] - Ln1.p[0];
-	vn = MgUnitizeV3(vd);
+	vn = MgUnitizeVect3D(vd);
 	MgVect3D vv = vn ^ Pln2.v;
 	Ln3->p[0] = Ln1.p[0] + dl * (Pln2.v ^ vn);
 	Ln3->p[1] = Ln3->p[0] + vd;

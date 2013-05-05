@@ -70,7 +70,7 @@ void mhInput::GetMarumeKabeLine(
 	pGLn->m_n = 0;
 	for ( ic2=0; ic2<nHaiKabe; ic2++) {											// •Ç
 		ln1 = MgLine2DC( pHaiKabe[ic2]->GetPIPlcIti());
-		if ( MGeo::ChkPt2OnLn2WS( Pi, ln1, &ist1, MC_KABE_TOL))
+		if ( MGeo::ChkPointOnLine2DWS( Pi, ln1, &ist1, MC_KABE_TOL))
 			(*pGLn) += MgLine2DC( pHaiKabe[ic2]->GetPIPlcIti());
 	}
 	if ( pGLn->m_n == 0) {

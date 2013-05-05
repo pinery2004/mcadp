@@ -384,7 +384,7 @@ public:
 						MINT		i_iMdCA,
 						MINT		i_iMdCB = 0,
 				const	MgVect2D*	i_vszimg = 0,
-				const	MgMat3DE*		i_matH = 0);		// テクスチャ座標
+				const	MgMat3E*		i_matH = 0);		// テクスチャ座標
 	void zTextureParam( MINT i_iTp, MINT i_iPxLap,
 					    MINT i_iPyLap, MINT i_iFltEx,
 					    MINT i_iFltRd, MREAL3& i_fColBlc1,
@@ -393,9 +393,9 @@ public:
 	void zPovRay( MCHAR* i_sStr);							// PovRay出力属性
 
 	void Point3( const MgPoint3D&	i_Pt);
-	void Line3( const MgLine3D&		i_Ln);
-	void ULine3( const MgULine3D&	i_uLn);
-	void HLine3( const MgHLine3D&	i_hLn);
+	void Line3D( const MgLine3D&		i_Ln);
+	void ULine3D( const MgULine3D&	i_uLn);
+	void HLine3D( const MgHLine3D&	i_hLn);
 	void Polyl3( const MgPolyl3D&	i_Ply);
 	void Polyg3( const MgPolyg3D&	i_Pgn);
 	void Cir3( const MgCir3D&		i_Cir);
@@ -405,7 +405,7 @@ public:
 	void Plane3( const MgPlane3D&	i_Pln);
 	void IPlane3( const MgPlane3D&	i_iPln);
 //U	void Cyl3( const MgCly3&		i_Cly);
-//U	void SLine3( const MgSLine3&	i_sLn);
+//U	void SLine3D( const MgSLine3&	i_sLn);
 };
 
 // 図形情報
@@ -540,7 +540,7 @@ public:
 						MINT		i_iMdCA,
 						MINT		i_iMdCB, 
 				const	MgVect2D*	i_vszimg,
-				const	MgMat3DE*		i_matH);			// テクスチャ座標
+				const	MgMat3E*		i_matH);			// テクスチャ座標
 	void zTextureParam( MINT i_iTp, MINT i_iPxLap,
 						MINT i_iPyLap, MINT i_iFltEx,
 						MINT i_iFltRd, MREAL3& i_fColBlc1,
@@ -550,9 +550,9 @@ public:
 
 	// 図形要素
 	void Point3( const MgPoint3D&	i_Pt);
-	void Line3( const MgLine3D&		i_Ln);
-	void ULine3( const MgULine3D&	i_uLn);
-	void HLine3( const MgHLine3D&	i_hLn);
+	void Line3D( const MgLine3D&		i_Ln);
+	void ULine3D( const MgULine3D&	i_uLn);
+	void HLine3D( const MgHLine3D&	i_hLn);
 	void Polyl3( const MgPolyl3D&	i_Ply);
 	void Polyg3( const MgPolyg3D&	i_Pgn);
 	void Cir3( const MgCir3D&		i_Cir);
@@ -562,7 +562,7 @@ public:
 	void Plane3( const MgPlane3D&	i_Pln);
 	void IPlane3( const MgPlane3D&	i_iPln);
 //U	void Cyl3( const MgCly3&		i_Cly);
-//U	void SLine3( const MgSLine3&	i_sLn);
+//U	void SLine3D( const MgSLine3&	i_sLn);
 
 	// デバッグ用トレース出力
 	void Print( MCHAR* i_s);

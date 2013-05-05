@@ -323,7 +323,7 @@ MINT mdmDEnt::SetFig(
 //
 MINT mdmDEnt::SetPartPlc (
 						MDID		i_idEnt,	// エンティテイID
-						MgMat3DE*		i_pmat,		// 配置座標系マトリックス
+						MgMat3E*		i_pmat,		// 配置座標系マトリックス
 						MDID		i_idB		// 部品ID
 				)
 {
@@ -462,15 +462,15 @@ MINT mdmDEnt::CngLyr(
 	MDID	idGrpF;
 	MDID	idGrpFB;
 	MDID	idGrpT;								// 変更先
-	MgMat3DE* pMTransT;							// 変更先グループの座標変換マトリックス
-	MgMat3DE	MTransTR;							// 変更先グループの座標逆変換マトリックス
-	MgMat3DE	MTrans;								// 変更先グループから変更先グループへの座標変換マトリックス
+	MgMat3E* pMTransT;							// 変更先グループの座標変換マトリックス
+	MgMat3E	MTransTR;							// 変更先グループの座標逆変換マトリックス
+	MgMat3E	MTrans;								// 変更先グループから変更先グループへの座標変換マトリックス
 	MdModel* pCurMdl = Mdm::GetCurModel();
 
 	// 変更先のレイヤーが属するグループの座標逆変換マトリックスを求める
 	idGrpT = pCurMdl->m_LyrBf.m_pst[MIDtoHN( i_idLyrT)].m_idP1;
 	pMTransT = &pCurMdl->m_GrpBf.m_pst[MIDtoHN( idGrpT)].m_MTrans;
-	MTransTR = MGeo::Mat3Inv( *pMTransT);
+	MTransTR = MGeo::Mat3EInv( *pMTransT);
 
 	// 指定全エンティティのレイヤーを変更する
 	idGrpFB = MDC_ID_NULL;
@@ -563,8 +563,8 @@ MINT mdmDEnt::GetEntInBox(
 		for ( iCe=0; iCe<GidEnt.m_n; iCe++) {
 			idEnt = GidEnt.m_pst[iCe];
 //			rMnMxEnt = pCurMdl->m_EntBf.m_pst[MIDtoHN( idEnt)].m_Fig.m_pPmts->m_Mmx;
-			if ( MGeo::ChkPt3InMMR3( rMnMxEnt.min, i_rMnmx) &&
-				 MGeo::ChkPt3InMMR3( rMnMxEnt.max, i_rMnmx) ) {
+			if ( MGeo::ChkPt3InMinmaxR3D( rMnMxEnt.min, i_rMnmx) &&
+				 MGeo::ChkPt3InMinmaxR3D( rMnMxEnt.max, i_rMnmx) ) {
 				(*o_pGidEnt) += idEnt;
 			}
 		}

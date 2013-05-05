@@ -92,7 +92,7 @@ MINT	iPen[] = {
 //  座標変換
 msCod::msCod()
 {
-	MREAL rr = g_gTol.S;
+	MREAL rr = MGPTOL->S;
 
 	m_iMinMaxD.SetUnit();
 	m_iMinMaxL.SetUnit();
@@ -433,8 +433,8 @@ void msCod::Text(
 	MINT		iAngle;											// 表示角度（度） × 10
 	MINT		iTextPosLR;
 	MINT		iTextPosUL;
-	MgVect2D		vDirect;										// 表示方向（単位ベクトル）
-	MgVect2D		vOffset;										// 表示オフセット
+	MgVect2D	vDirect;										// 表示方向（単位ベクトル）
+	MgVect2D	vOffset;										// 表示オフセット
 
 //	MINT		TAUD[] = { TA_TOP, TA_TOP, TA_BOTTOM};			// 上下文字基準位置変換テーブル　TA_BASELINEは未使用
 	MINT		TAUD[] = { TA_TOP, TA_TOP, TA_BASELINE};		// 上下文字基準位置変換テーブル　TA_BOTTOMは未使用
@@ -451,7 +451,7 @@ void msCod::Text(
 	vDirect = z_vTextDirect;
 	vOffset = z_pTextOffset;
 
-	fAngle = MGeo::GetAngleVH2( vDirect);							// 左回転角度(度)
+	fAngle = MGeo::AngleVectH2D( vDirect);							// 左回転角度(度)
 	if (fAngle <= 105 && fAngle >= -75) {
 		iTextPosUL = z_iTextPosUL;
 		iTextPosLR = z_iTextPosLR;
@@ -473,7 +473,7 @@ void msCod::Text(
 		vOffset /= (m_sclRPtoLP * m_vsclLPtoDP.x);				// x方向とy方向とでずれが異なったためm_vsclLPtoDP.yは不使用
 	} else {
 		iTextHeight = MINT( z_fTextHeight * m_sclRPtoLP * 10 *
-			(MGeo::Abs( MgVect2D( abs(m_vsclLPtoDP.y * vDirect.x),
+			(MGeo::AbsVect2D( MgVect2D( abs(m_vsclLPtoDP.y * vDirect.x),
 									    abs(m_vsclLPtoDP.x * vDirect.y)))));
 //		vOffset *= (m_sclRPtoLP * m_vsclLPtoDP.x);				// x方向とy方向とでずれが異なったためm_vsclLPtoDP.yは不使用
 		if (z_iTextPosUL == 2) 

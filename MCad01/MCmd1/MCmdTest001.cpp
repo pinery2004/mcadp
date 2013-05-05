@@ -47,6 +47,12 @@ void Test000_Geo()
 	v24.Print( Mstr("v24(v22.Rot(1.,1.))"));
 	v22.SetRot( (MREAL)MC_PIE/4);
 	v22.Print( Mstr("v22.SetRot(MC_PIE/4)"));
+	MREAL ri = v22 * v23;
+	mlLog::Print( Mstr("v22 * v23"), ri);
+	MREAL ro = v22 ^ v23;
+	mlLog::Print( Mstr("v22 ^ v23"), ro);
+//	MREAL ang = v24.ang();
+//	MGeo::arc3di
 
 	MgPoint2D pt22 = MgPoint2D( 1., 2.);
 	MgPoint2D pt23 = pt22.RotR90();
@@ -89,6 +95,7 @@ void Test000_Geo()
 	pt34.Print( Mstr("pt34(pt32.Rot(MC_PIE/4))"));
 	pt32.SetRot( (MREAL)MC_PIE/4);
 	pt32.Print( Mstr("pt32.SetRot(MC_PIE/4)"));
+	
 	AfxDebugBreak( );
 	BrkPoint();
 }
@@ -380,12 +387,12 @@ void Test006_DBModule()
 	
 	// ê¸ï™ÇP
 	MDFIG stFig1( 10);
-	stFig1.Line3( MgLine3D( Pt0, Pt1));
+	stFig1.Line3D( MgLine3D( Pt0, Pt1));
 	mdmDEnt::SetFig( idEnt[0], stFig1); 
 
 	// ê¸ï™ÇQ
 	MDFIG stFig2( 12);
-	stFig2.Line3( MgLine3D( Pt0, Pt1));
+	stFig2.Line3D( MgLine3D( Pt0, Pt1));
 	mdmDEnt::SetFig( idEnt[2], stFig2); 
 
 	// É|ÉäÉSÉì
@@ -407,12 +414,12 @@ void Test006_DBModule()
 
 	// íºê¸
 	MDFIG stFig5( 10);
-	stFig5.ULine3( MgULine3D( MgPoint3D( 3000., 3000., -2000.), MgVect3D( 1., 0., 0.)));
+	stFig5.ULine3D( MgULine3D( MgPoint3D( 3000., 3000., -2000.), MgVect3D( 1., 0., 0.)));
 	mdmDEnt::SetFig( idEnt[5], stFig5);
 
 	// îºíºê¸
 	MDFIG stFig6( 10);
-	stFig6.HLine3( MgHLine3D( MgPoint3D( 2000., 2000., -1500.), MgVect3D( 0., 1., 0.)));
+	stFig6.HLine3D( MgHLine3D( MgPoint3D( 2000., 2000., -1500.), MgVect3D( 0., 1., 0.)));
 	mdmDEnt::SetFig( idEnt[6], stFig6);
 
 	// É|ÉäÉâÉCÉì
@@ -477,11 +484,11 @@ void Test006_DBModule()
 	stFig13.zMaterialRGBA( MC_DIFFUSE, FLOAT3( 1.f, 0.5f, 0.3f), 0.7f);	// A ìßâﬂó¶	( 0. Å` 1.)
 	stFig13.zMaterialShininess( 100.0f);						// ãæñ åıåWêî ( 0. Å` 128.)
 	stFig13.zTexture( 5);										// ÉeÉNÉXÉ`ÉÉÇhÇc
-//S	MgMat3DE mat3( 1., 0., 0., 1.,
+//S	MgMat3E mat3( 1., 0., 0., 1.,
 //				  0., 1., 0., 1.,
 //				  0., 1., 1., 1.,
 //				  100., 200., 300., 1.);
-	MgMat3DE mat3( 1., 0., 0.,
+	MgMat3E mat3( 1., 0., 0.,
 				  0., 1., 0.,
 				  0., 0., 1.,
 				  100., 200., 300.);

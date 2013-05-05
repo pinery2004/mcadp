@@ -29,7 +29,7 @@ namespace MC
 //
 //	ax+by+cz+d=0
 //
-MgPlane3D MGeo::Plane3CPPt(						// (  O) •½–ÊŽ®
+MgPlane3D MGeo::Plane3pPoint3D(						// (  O) •½–ÊŽ®
 				const	MgPoint3D*	pt			// (I  ) ‚R“_À•W
 				)
 {
@@ -39,7 +39,7 @@ MgPlane3D MGeo::Plane3CPPt(						// (  O) •½–ÊŽ®
 	v1 = pt[1] - pt[0];
 	v2 = pt[2] - pt[0];
 
-	Plno.v = MGeo::UnitizeV3( v1 ^ v2);
+	Plno.v = MGeo::UnitizeVect3D( v1 ^ v2);
 	Plno.d = -(Plno.v * pt[0]);
 	return Plno;
 }
@@ -47,7 +47,7 @@ MgPlane3D MGeo::Plane3CPPt(						// (  O) •½–ÊŽ®
 //===========================================================================
 //		‚R“_‚æ‚è•½–Ê‚Ì•û’öŽ®‚ÌŒW”‚Æ’è”‚ð‹‚ß‚éi³‹K‰»j
 //
-MgPlane3D MGeo::Plane3C3Pt(						// (  O) •½–ÊŽ®
+MgPlane3D MGeo::Plane3Point3D(						// (  O) •½–ÊŽ®
 				const	MgPoint3D&	p0,			// (I  ) “_‚P
 				const	MgPoint3D&	p1,			// (I  ) “_‚Q
 				const	MgPoint3D&	p2			// (I  ) “_‚R
@@ -59,7 +59,7 @@ MgPlane3D MGeo::Plane3C3Pt(						// (  O) •½–ÊŽ®
 	v1 = p1 - p0;
 	v2 = p2 - p0;
 
-	Plno.v = MGeo::UnitizeV3( v1 ^ v2);
+	Plno.v = MGeo::UnitizeVect3D( v1 ^ v2);
 	Plno.d = -(Plno.v * p0);
 	return Plno;
 }
@@ -67,7 +67,7 @@ MgPlane3D MGeo::Plane3C3Pt(						// (  O) •½–ÊŽ®
 //===========================================================================
 //		‘½ŠpŒ`‚æ‚è•½–Ê‚Ì•û’öŽ®‚ÌŒW”‚Æ’è”‚ð‹‚ß‚éi³‹K‰»j
 //													pkm	–ÊÏ‚Ìâ‘Î’l‚Ì‡Œv‚Å‹‚ß•ûŒü‚ÍŽÀ–ÊÏ‚Å‹‚ß‚é•û‚ª—Ç‚¢‚© pkm
-MgPlane3D MGeo::Plane3CPg(						// (  O) •½–ÊŽ®
+MgPlane3D MGeo::Plane3DPolygon3D(						// (  O) •½–ÊŽ®
 				const	MgPolyg3D&	i_Pg		// (I  ) ‘½ŠpŒ`
 				)
 {
@@ -81,7 +81,7 @@ MgPlane3D MGeo::Plane3CPg(						// (  O) •½–ÊŽ®
 		vNf += (i_Pg.m_P[ic1] ^ i_Pg.m_P[ic0]);
 		ic1 = ic0;
 	}
-	Plno.v = MGeo::UnitizeV3( vNf);
+	Plno.v = MGeo::UnitizeVect3D( vNf);
 	Plno.d = -(Plno.v * i_Pg.m_P[0]);
 	return Plno;
 }
@@ -90,7 +90,7 @@ MgPlane3D MGeo::Plane3CPg(						// (  O) •½–ÊŽ®
 //===========================================================================
 //		‚QŽŸŒ³Žn“_‚Æ‚QŽŸŒ³I“_‚Ì‚Q“_AŒù”z‚Æ‚yÀ•W‚æ‚è•½–Ê‚Ì•û’öŽ®‚ÌŒW”‚Æ’è”‚ð‹‚ß‚éi³‹K‰»j
 //
-MgPlane3D MGeo::Plane3C2Pt2F(
+MgPlane3D MGeo::Plane2PointSlope3D(
 				const	MgPoint2D&	p1,			// (I  ) ‚QŽŸŒ³Žn“_
 				const	MgPoint2D&	p2,			// (I  ) ‚QŽŸŒ³I“_
 						MREAL		rkb,		// (I  ) Œù”z	(Žn“_‚©‚çI“_‚ÉŒü‚©‚¢¶•ûŒü=0 tan)
@@ -107,11 +107,11 @@ MgPlane3D MGeo::Plane3C2Pt2F(
 	v1 = Pt[1] - Pt[0];
 
 	Pt[2] = Pt[0] + v1.RotL90();
-	h1 = MGeo::Abs( v1) * rkb;
+	h1 = MGeo::AbsVect3D( v1) * rkb;
 	Pt[2].z += h1;
 	v2 = Pt[2] - Pt[0];
 
-	Plno.v = MGeo::UnitizeV3( v1 ^ v2);
+	Plno.v = MGeo::UnitizeVect3D( v1 ^ v2);
 	Plno.d = -(Plno.v * Pt[0]);
 	return Plno;
 }
@@ -120,7 +120,7 @@ MgPlane3D MGeo::Plane3C2Pt2F(
 //===========================================================================
 //		‚QŽŸŒ³ü•ªAŒù”z‚Æ‚yÀ•W‚æ‚è•½–Ê‚Ì•û’öŽ®‚ÌŒW”‚Æ’è”‚ð‹‚ß‚éi³‹K‰»j
 //
-MgPlane3D MGeo::Plane3CLn2F(
+MgPlane3D MGeo::PlaneLineSlope3D(
 				const	MgLine2D&	ln1,		// (I  ) ‚QŽŸŒ³ü•ª
 						MREAL		rkb,		// (I  ) Œù”z	(ü•ª‚ÌŽn“_‚©‚çI“_‚ÉŒü‚©‚¢¶•ûŒü=0 tan)
 						MREAL		z			// (I  ) ‚yÀ•W
@@ -136,11 +136,11 @@ MgPlane3D MGeo::Plane3CLn2F(
 	v1 = Pt[1] - Pt[0];
 
 	Pt[2] = Pt[0] + v1.RotL90();
-	h1 = MGeo::Abs( v1) * rkb;
+	h1 = MGeo::AbsVect3D( v1) * rkb;
 	Pt[2].z += h1;
 	v2 = Pt[2] - Pt[0];
 
-	Plno.v = MGeo::UnitizeV3( v1 ^ v2);
+	Plno.v = MGeo::UnitizeVect3D( v1 ^ v2);
 	Plno.d = -(Plno.v * Pt[0]);
 	return Plno;
 }
@@ -167,7 +167,7 @@ MgPlane3D MGeo::Plane3CLn2F(
 //
 MgPlane3D MgPlane3D::Norm( MREAL i_Tol)
 {
-	MREAL	d1 = MGeo::Abs( v);
+	MREAL	d1 = MGeo::AbsVect3D( v);
 		MBCHECK_ZEROVECT( d1, MBCstr("MgPlane3D Norm"), i_Tol);
 	MREAL	d2 = 1.f / d1;
 	return MgPlane3D(v.x * d2, v.y * d2, v.z * d2, d * d2);
@@ -180,9 +180,9 @@ bool MgPlane3D::operator == ( const MgPlane3D& pl) const							// b = (Pl1 == Pl
 {
 //	MgPlane3D pl1 = MgNorm( *this);
 //	MgPlane3D pl2 = MgNorm( pl); 
-//	return (pl1.v == pl2.v) && MFEQUAL( pl1.d, pl2.d, g_gTol.D);
-//	return ( v == pl.v) && MFEQUAL( d, pl.d, g_gTol.D);
-	return ( v == pl.v) && MGeo::Equal( d, pl.d, g_gTol.D);
+//	return (pl1.v == pl2.v) && MFEQUAL( pl1.d, pl2.d, MGPTOL->D);
+//	return ( v == pl.v) && MFEQUAL( d, pl.d, MGPTOL->D);
+	return ( v == pl.v) && MGeo::Equal( d, pl.d, MGPTOL->D);
 }
 //
 //======================( ‚RŽŸŒ³ )==============================
@@ -207,7 +207,7 @@ MgPlane3D MGeo::NormPln(
 						MREAL		i_Tol
 				)
 {
-	MREAL	d1 = MGeo::Abs( i_pl.v);
+	MREAL	d1 = MGeo::AbsVect3D( i_pl.v);
 		MBCHECK_ZEROVECT( d1, MBCstr( "MgPlane3D MgNorm"), i_Tol);
 	MREAL	d2 = 1.f / d1;
 	return MgPlane3D( i_pl.v.x * d2, i_pl.v.y * d2, i_pl.v.z * d2, i_pl.d * d2);

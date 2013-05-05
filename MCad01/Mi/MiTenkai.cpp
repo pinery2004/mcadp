@@ -40,8 +40,8 @@ namespace MC
 
 //static	CMmDialogTenkai* z_pDlgTenkai = NULL;	// モードレスバージョンダイアログの表示用
 JTTenkaiPr 	JTTenkai::z_TenkaiPara;				// 住棟展開パラメータ
-MgMat2DE	JTTenkai::z_matTenkai[MX_NJUKO];	// 住棟展開マトリックス
-MgMat2DE	JTTenkai::z_matRTenkai[MX_NJUKO];	// 住棟展開逆マトリックス
+MgMat2E	JTTenkai::z_matTenkai[MX_NJUKO];	// 住棟展開マトリックス
+MgMat2E	JTTenkai::z_matRTenkai[MX_NJUKO];	// 住棟展開逆マトリックス
 MgMinMaxR2D	JTTenkai::z_mmTenkai[MX_NJUKO];		// 住戸領域ＭｉｎＭａｘ
 MINT		JTTenkai::z_iJuko;					// 選択住戸
 MUINT		JTTenkai::z_iTenkai[MX_NJUKO];		// 住棟展開制御
@@ -180,7 +180,7 @@ void JTTenkai::CreJTTArea()
 void JTTenkai::SetJTTMAT()
 {
 	MINT	ic;
-	MgMat2DE matSt;
+	MgMat2E matSt;
 
 	matSt.SetUnit();
 

@@ -22,7 +22,7 @@ public:
 	MREAL	m_rMovZ;											// Ｚ軸方向移動量
 
 	MREAL	m_rScl;												// 座標変換スケール
-	MgMat3DE	m_mTrans;											// 座標変換マトリックス
+	MgMat3E	m_mTrans;											// 座標変換マトリックス
 
 	M3View();
 	int OnCreate( HDC hdc);

@@ -63,7 +63,7 @@ void HaitiCmd::MmPartsPlc(
 	MINT		szZukei;
 	MgVect3D		vBz = Pt[1] - Pt[0];
 	MREAL		rBzLng_2 = vBz * vBz;
-	if ( rBzLng_2 < MMIN_BZILEN_2) {
+	if ( rBzLng_2 < MinmaxIN_BZILEN_2) {
 		//	部材長さ不足エラー表示 **************************************
 		MQUIT;
 	}
@@ -283,8 +283,8 @@ mhPlcParts* mhHaitiIn::SrchBuzai(
 		for ( ic1=0; ic1<pgHitBzi.m_n; ic1++) 
 			rMinMax.Ins2( pgHitBzi.m_p[ic1]);
 		// 指示部材を検索
-		if ( MGeo::ChkPt2InMMR2( ptMouthR, rMinMax)) {				// 部材形状のMIN/MAXで検査し
-			if ( MGeo::ChkPt2OnPg2WS( ptMouthR, pgHitBzi, &ist1)) {	// さらに部材形状で検査する
+		if ( MGeo::ChkPointInMinmaxR2D( ptMouthR, rMinMax)) {				// 部材形状のMIN/MAXで検査し
+			if ( MGeo::ChkPointOnPolygon2DWS( ptMouthR, pgHitBzi, &ist1)) {	// さらに部材形状で検査する
 				pHitBziEn[nHitBziEn] = pPlcEn;
 				// 複数該当の場合は面積最小を選ぶ
 				rArea = pgHitBzi.Area();
@@ -379,12 +379,12 @@ void mhHaitiIn::MmSrchCrossBuzai(
 		BuzaiCode::MhBziSin( pPlcEn, &lnBziSin2);				// 芯線を求める
 
 		// 交差または端部接続部材を検索
-		if ( MGeo::ChkMMR2OnMMR2( rMinMax1, rMinMax2)) {		// 部材形状のMIN/MAXで重なりありかを検査する
-			iIntr = MGeo::Intr2Ln2( lnBziSin2, lnBziSin1, &po);
+		if ( MGeo::ChkMinmaxROnMinmaxR2D( rMinMax1, rMinMax2)) {		// 部材形状のMIN/MAXで重なりありかを検査する
+			iIntr = MGeo::Intr2Line2D( lnBziSin2, lnBziSin1, &po);
 			if ( iIntr != MC_PARALLEL) {						// 交差または接触
 				nT = 0;
 				for ( ic1=0; ic1<pgBzi2.m_n; ic1++) {			// 検索部部位の構成点が長さ調整部材内にある場合は接触とみなす
-					if ( MGeo::ChkPt2OnPg2WS( pgBzi2.m_p[ic1], pgBzi1, &ist1))
+					if ( MGeo::ChkPointOnPolygon2DWS( pgBzi2.m_p[ic1], pgBzi1, &ist1))
 						nT++;
 				}
 				if ( nT >= 1) {
@@ -432,7 +432,7 @@ void mhHaitiIn::PartsShape(
 
 	// 部材の形を求め検索する
 	VtW = ptW[1] - ptW[0];										// 芯線
-	VtUtW = MGeo::UnitizeV2( VtW);								// 部材の形を求める
+	VtUtW = MGeo::UnitizeVect2D( VtW);								// 部材の形を求める
 	if ( pPlcEn->IsFrame()) {									// たて枠用の形状作成
 		VtWidthR = (pPlcEn->GetMbTWidthR() + pPlcEn->GetPISinZure()) * VtUtW.RotR90(); 
 		VtWidth = pPlcEn->GetMbTWidth() * VtUtW.RotL90(); 
@@ -591,12 +591,12 @@ MINT mhHaitiIn::MhAdjBzL(							// (  O) ステイタス　
 	}
 
 	ULnBz1 = Bz1.ULnW[0];										// 部材1左側直線
-	ist = MGeo::Intr2ULn3( ULnBz1, ULnBz2, &PtI[0]);			// カット直線との交点
+	ist = MGeo::Intr2ULine3D( ULnBz1, ULnBz2, &PtI[0]);			// カット直線との交点
 	if ( ist != MC_INT)
 		goto exit;
 
 	ULnBz1 = Bz1.ULnW[1];										// 部材1右側直線
-	ist = MGeo::Intr2ULn3( ULnBz1, ULnBz2, &PtI[1]);			// カット直線との交点
+	ist = MGeo::Intr2ULine3D( ULnBz1, ULnBz2, &PtI[1]);			// カット直線との交点
 	if ( ist != MC_INT)
 		goto exit;
 
@@ -639,7 +639,7 @@ void mhHaitiIn::MhAdjBzL(							// (  O) ステイタス　
 	Bz1 = *pPlcEn1;
 	Bz2 = *pPlcEn2;
 
-	if ( MGeo::Dist2Pt3( Bz2.LnWH.p[0], Pt2) < MGeo::Dist2Pt3( Bz2.LnWH.p[1], Pt2)) {
+	if ( MGeo::Dist2Point3D( Bz2.LnWH.p[0], Pt2) < MGeo::Dist2Point3D( Bz2.LnWH.p[1], Pt2)) {
 		iRef = 0;												// 調整先を部材2の配置点側とする
 	} else {
 		iRef = 1;												// 調整先を部材2の配置方向点側とする
@@ -655,7 +655,7 @@ void mhHaitiIn::MhAdjBzL(							// (  O) ステイタス　
 	MREAL		s1, s2;
 
 	// 部材1の残す方の位置が部材２指定端部の前後ろどちらにあるか判定し、カット直線を求める
-	MGeo::PerpLnPt3( Bz1.Ln, Bz2.LnWH.p[iRef], &PtIntWH);
+	MGeo::PerpLinePoint3D( Bz1.Ln, Bz2.LnWH.p[iRef], &PtIntWH);
 	
 	s1 = (Bz1.LnWH.p[0] - PtIntWH) * Bz1.vtUt;
 	s2 = (Bz1.LnWH.p[1] - PtIntWH) * Bz1.vtUt;
@@ -673,14 +673,14 @@ void mhHaitiIn::MhAdjBzL(							// (  O) ステイタス　
 			iMov = 1;											// 配置方向点側の長さを補正
 		}
 	} else {													// 長さ調整部材は長さ調整先の部材の前後にまたがってあり
-		if ( MGeo::Dist2Pt3( Bz1.LnWH.p[0], Pt1) < MGeo::Dist2Pt3( Bz1.LnWH.p[1], Pt1)) {
+		if ( MGeo::Dist2Point3D( Bz1.LnWH.p[0], Pt1) < MGeo::Dist2Point3D( Bz1.LnWH.p[1], Pt1)) {
 			iMov = 0;											// 配置点側の長さを補正
 		} else {
 			iMov = 1;											// 配置方向点側の長さを補正
 		}
 	}
 
-	MGeo::PerpLnPt3( Bz1.Ln, Bz2.Ln.p[iRef], &PtInt);
+	MGeo::PerpLinePoint3D( Bz1.Ln, Bz2.Ln.p[iRef], &PtInt);
 	rLH = Bz2.rLH[iRef];
 	if (Bz1.vtUt * Bz2.vtUt > 0) {
 		if ( iMov != iRef)
@@ -718,7 +718,7 @@ void mhHaitiIn::MhAdjBzL(
 
 	Bz1 = *pPlcEn1;
 
-	MGeo::PerpLnPt3( Bz1.Ln, Pt2, &PtInt);
+	MGeo::PerpLinePoint3D( Bz1.Ln, Pt2, &PtInt);
 	
 	s1 = (Bz1.Ln.p[0] - PtInt) * Bz1.vtUt;
 	s2 = (Bz1.Ln.p[1] - PtInt) * Bz1.vtUt;
@@ -728,7 +728,7 @@ void mhHaitiIn::MhAdjBzL(
 	} else if(s1 < 0 && s2 < 0) {								// 始点終点共に配置点側なので
 		iMov = 1;												// 配置方向点の方が近く配置方向点側の長さ補正を修正
 	} else {
-		if ( MGeo::Dist2Pt3( Bz1.Ln.p[0], Pt1) < MGeo::Dist2Pt3( Bz1.Ln.p[1], Pt1)) {
+		if ( MGeo::Dist2Point3D( Bz1.Ln.p[0], Pt1) < MGeo::Dist2Point3D( Bz1.Ln.p[1], Pt1)) {
 			iMov = 0;											// 配置点側の長さ補正
 		} else {
 			iMov = 1;											// 配置方向点側の長さ補正

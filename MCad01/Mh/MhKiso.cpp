@@ -98,14 +98,14 @@ void IeModel::MhNormKiso(
 		for ( ic2=ics; ic2<nHaiKiso; ic2++) {										// 基礎2
 			if ( ic1 == ic2 || fPlc[ic2] < 0)
 				continue;															// 同一基礎と削除基礎は比較対象外
-			if ( !MGeo::ChkMMR2OnMMR2( MgMinMaxR2D( MgLine2DC( pHaiKiso[ic1]->m_lnPlc)),
+			if ( !MGeo::ChkMinmaxROnMinmaxR2D( MgMinMaxR2D( MgLine2DC( pHaiKiso[ic1]->m_lnPlc)),
 						    MgMinMaxR2D( MgLine2DC(pHaiKiso[ic2]->m_lnPlc))))
 				continue;															// MinMaxの重なりなしの場合は比較対象外
-			if ( MGeo::Parallel( pHaiKiso[ic1]->m_lnPlc, pHaiKiso[ic2]->m_lnPlc)) {	// 平行
-				ist = MGeo::ChkPt3OnLn3WS( pHaiKiso[ic2]->m_lnPlc.p[0], pHaiKiso[ic1]->m_lnPlc, &ist2s1);	// 基礎2の始点が基礎1のどこに乗っているか調べる
-				ist = MGeo::ChkPt3OnLn3WS( pHaiKiso[ic2]->m_lnPlc.p[1], pHaiKiso[ic1]->m_lnPlc, &ist2e1);	// 基礎2の終点が基礎1のどこに乗っているか調べる
-				ist = MGeo::ChkPt3OnLn3WS( pHaiKiso[ic1]->m_lnPlc.p[0], pHaiKiso[ic2]->m_lnPlc, &ist1s2);	// 基礎1の始点が基礎2のどこに乗っているか調べる
-				ist = MGeo::ChkPt3OnLn3WS( pHaiKiso[ic1]->m_lnPlc.p[1], pHaiKiso[ic2]->m_lnPlc, &ist1e2);	// 基礎1の終点が基礎2のどこに乗っているか調べる
+			if ( MGeo::ParallelLine3D( pHaiKiso[ic1]->m_lnPlc, pHaiKiso[ic2]->m_lnPlc)) {	// 平行
+				ist = MGeo::ChkPointOnLine3DWS( pHaiKiso[ic2]->m_lnPlc.p[0], pHaiKiso[ic1]->m_lnPlc, &ist2s1);	// 基礎2の始点が基礎1のどこに乗っているか調べる
+				ist = MGeo::ChkPointOnLine3DWS( pHaiKiso[ic2]->m_lnPlc.p[1], pHaiKiso[ic1]->m_lnPlc, &ist2e1);	// 基礎2の終点が基礎1のどこに乗っているか調べる
+				ist = MGeo::ChkPointOnLine3DWS( pHaiKiso[ic1]->m_lnPlc.p[0], pHaiKiso[ic2]->m_lnPlc, &ist1s2);	// 基礎1の始点が基礎2のどこに乗っているか調べる
+				ist = MGeo::ChkPointOnLine3DWS( pHaiKiso[ic1]->m_lnPlc.p[1], pHaiKiso[ic2]->m_lnPlc, &ist1e2);	// 基礎1の終点が基礎2のどこに乗っているか調べる
 					// 重なって含まれる基礎を削除する
 				if ( ( ist1s2 & (MC_ON_PS | MC_INSIDE | MC_ON_PE)) &&					//		基礎1が基礎2に重なるまたは含まれる場合				*** 外基礎、内基礎の調査残 ***
 					( ist1e2 & (MC_ON_PS | MC_INSIDE | MC_ON_PE))) {
@@ -122,9 +122,9 @@ void IeModel::MhNormKiso(
 			}
 
 			if ( idivdel == 0) {
-				ist = MGeo::Intr2Ln3( pHaiKiso[ic1]->m_lnPlc, pHaiKiso[ic2]->m_lnPlc, &po);
+				ist = MGeo::Intr2Line3D( pHaiKiso[ic1]->m_lnPlc, pHaiKiso[ic2]->m_lnPlc, &po);
 				if ( MF_CHECK_OR( ist, (MC_INT | MC_CONNECTION))) {					// 交差
-					ist = MGeo::ChkPt3OnLn3WS( po, pHaiKiso[ic1]->m_lnPlc, &ist1);
+					ist = MGeo::ChkPointOnLine3DWS( po, pHaiKiso[ic1]->m_lnPlc, &ist1);
 					if ( ist1 == (MC_ON_LINE | MC_INSIDE)) {							//		基礎1の内部で交差があり分割する
 						idivdel = 1;
 					} else {
@@ -175,12 +175,12 @@ void IeModel::MhNormKiso(
 		for ( ic2=0; ic2<nHaiKiso; ic2++) {
 			if ( ic1 == ic2 || fPlc[ic2] < 0)
 				continue;															// 同一基礎と削除基礎は比較対象外
-			if ( !MGeo::ChkMMR2OnMMR2( MgMinMaxR2D( MgLine2DC( pHaiKiso[ic1]->m_lnPlc)),
+			if ( !MGeo::ChkMinmaxROnMinmaxR2D( MgMinMaxR2D( MgLine2DC( pHaiKiso[ic1]->m_lnPlc)),
 							MgMinMaxR2D( MgLine2DC( pHaiKiso[ic2]->m_lnPlc))))
 				continue;															// MinMaxの重なりなしの場合は比較対象外
-			if ( MGeo::Parallel( pHaiKiso[ic1]->m_lnPlc, pHaiKiso[ic2]->m_lnPlc)) {	// 平行
-				ist = MGeo::ChkPt3OnLn3WS( pHaiKiso[ic2]->m_lnPlc.p[0], pHaiKiso[ic1]->m_lnPlc, &ist2s1);	// 基礎2の始点が基礎1のどこに乗っているか調べる
-				ist = MGeo::ChkPt3OnLn3WS( pHaiKiso[ic2]->m_lnPlc.p[1], pHaiKiso[ic1]->m_lnPlc, &ist2e1);	// 基礎2の終点が基礎1のどこに乗っているか調べる
+			if ( MGeo::ParallelLine3D( pHaiKiso[ic1]->m_lnPlc, pHaiKiso[ic2]->m_lnPlc)) {	// 平行
+				ist = MGeo::ChkPointOnLine3DWS( pHaiKiso[ic2]->m_lnPlc.p[0], pHaiKiso[ic1]->m_lnPlc, &ist2s1);	// 基礎2の始点が基礎1のどこに乗っているか調べる
+				ist = MGeo::ChkPointOnLine3DWS( pHaiKiso[ic2]->m_lnPlc.p[1], pHaiKiso[ic1]->m_lnPlc, &ist2e1);	// 基礎2の終点が基礎1のどこに乗っているか調べる
 
 				if ( ( ist2s1 & (MC_ON_PS | MC_INSIDE | MC_ON_PE)) &&					//		基礎2が基礎1に重なるまたは含まれる場合は			*** 外基礎、内基礎の調査残 ***
 					( ist2e1 & (MC_ON_PS | MC_INSIDE | MC_ON_PE))) {
@@ -211,9 +211,9 @@ void IeModel::MhNormKiso(
 				continue;
 			}
 
-			ist = MGeo::Intr2Ln3( pHaiKiso[ic1]->m_lnPlc, pHaiKiso[ic2]->m_lnPlc, &po);
+			ist = MGeo::Intr2Line3D( pHaiKiso[ic1]->m_lnPlc, pHaiKiso[ic2]->m_lnPlc, &po);
 			if ( MF_CHECK_OR( ist, (MC_INT | MC_CONNECTION))) {							// 交差( または 連結)(連結は前の平行処理でスキップされここには入らない)
-				ist = MGeo::ChkPt3OnLn3WS( po, pHaiKiso[ic1]->m_lnPlc, &ist1);
+				ist = MGeo::ChkPointOnLine3DWS( po, pHaiKiso[ic1]->m_lnPlc, &ist1);
 					if ( ist1 == (MC_ON_LINE | MC_INSIDE))							//		基礎内部で交差あり
 					ASSERT( FALSE);													//			交差点で分割済みなので処理エラー　<ERROR>
 				// 交差基礎の図形作成
@@ -250,7 +250,7 @@ void IeModel::MhNormKiso(
 		if ( fPlc[ic1] < 0 || (fPlc[ic1] != 2 && ic1 < icst))
 			continue;																// 削除基礎または追加修正以外の基礎で追加修正基礎と無交差は対象外
 		lnKiso1 = pHaiKiso[ic1]->m_lnPlc;											// 結合線分算出用
-		MgVect3D	vtutLn1 = MGeo::UnitizeV3( MgVect3DC( lnKiso1));
+		MgVect3D	vtutLn1 = MGeo::UnitizeVect3D( MgVect3DC( lnKiso1));
 		lnKiso1.p[0] = lnKiso1.p[0] - vtutLn1 * EXPKISOLN;
 		lnKiso1.p[1] = lnKiso1.p[1] + vtutLn1 * EXPKISOLN;
 
@@ -278,14 +278,14 @@ void IeModel::MhNormKiso(
 			if ( ic1 == ic2 || fPlc[ic2] < 0)
 				continue;															// 同一基礎と削除基礎は比較対象外
 
-			if ( !MGeo::ChkMMR2OnMMR2( MgMinMaxR2D( MgLine2DC( pHaiKiso[ic1]->m_lnPlc)),
+			if ( !MGeo::ChkMinmaxROnMinmaxR2D( MgMinMaxR2D( MgLine2DC( pHaiKiso[ic1]->m_lnPlc)),
 							MgMinMaxR2D( MgLine2DC( pHaiKiso[ic2]->m_lnPlc))))
 				continue;															// MinMaxの重なりなしの場合は比較対象外
-			if ( MGeo::Parallel( pHaiKiso[ic1]->m_lnPlc, pHaiKiso[ic2]->m_lnPlc)) {	// 平行
-				ist = MGeo::ChkPt3OnLn3WS( pHaiKiso[ic2]->m_lnPlc.p[0], pHaiKiso[ic1]->m_lnPlc, &ist2s1);	// 基礎2の始点が基礎1のどこに乗っているか調べる
+			if ( MGeo::ParallelLine3D( pHaiKiso[ic1]->m_lnPlc, pHaiKiso[ic2]->m_lnPlc)) {	// 平行
+				ist = MGeo::ChkPointOnLine3DWS( pHaiKiso[ic2]->m_lnPlc.p[0], pHaiKiso[ic1]->m_lnPlc, &ist2s1);	// 基礎2の始点が基礎1のどこに乗っているか調べる
 //				if ( !( ist1 & MC_ON_LINE))
 //					continue;														//		離れている基礎は結合対象外
-				ist = MGeo::ChkPt3OnLn3WS( pHaiKiso[ic2]->m_lnPlc.p[1], pHaiKiso[ic1]->m_lnPlc, &ist2e1);	// 基礎2の終点が基礎1のどこに乗っているか調べる
+				ist = MGeo::ChkPointOnLine3DWS( pHaiKiso[ic2]->m_lnPlc.p[1], pHaiKiso[ic1]->m_lnPlc, &ist2e1);	// 基礎2の終点が基礎1のどこに乗っているか調べる
 
 				if ( ( ist2s1 & (MC_ON_PS | MC_INSIDE | MC_ON_PE)) &&					//		基礎2が基礎1に重なるまたは含まれる場合は			*** 外基礎、内基礎の調査残 ***
 					( ist2e1 & (MC_ON_PS | MC_INSIDE | MC_ON_PE))) {
@@ -302,26 +302,26 @@ void IeModel::MhNormKiso(
 				continue;
 			}
 
-			ist = MGeo::Intr2Ln3( pHaiKiso[ic1]->m_lnPlc, pHaiKiso[ic2]->m_lnPlc, &po);
+			ist = MGeo::Intr2Line3D( pHaiKiso[ic1]->m_lnPlc, pHaiKiso[ic2]->m_lnPlc, &po);
 			if ( MF_CHECK_OR( ist, (MC_INT | MC_CONNECTION))) {							// 交差( または 連結)(連結は前の平行処理でスキップされここには入らない)
-				ist = MGeo::ChkPt3OnLn3WS( po, pHaiKiso[ic1]->m_lnPlc, &ist1);
+				ist = MGeo::ChkPointOnLine3DWS( po, pHaiKiso[ic1]->m_lnPlc, &ist1);
 				if ( ist1 == (MC_ON_LINE | MC_INSIDE))								//		基礎内部で交差あり
 					ASSERT( FALSE);													//			交差点で分割済みなので処理エラー　<ERROR>
-				ist = MGeo::ChkPt3OnLn3WS( po, pHaiKiso[ic2]->m_lnPlc, &ist2);
+				ist = MGeo::ChkPointOnLine3DWS( po, pHaiKiso[ic2]->m_lnPlc, &ist2);
 				if ( ist2 == (MC_ON_LINE | MC_INSIDE))								//		基礎内部で交差あり
 					ASSERT( FALSE);													//			交差点で分割済みなので処理エラー　<ERROR>
 
 				// 交差基礎の図形作成
-                MgVect3D vtutLn2 = MGeo::UnitizeV3( MgVect3DC( pHaiKiso[ic2]->m_lnPlc));
+                MgVect3D vtutLn2 = MGeo::UnitizeVect3D( MgVect3DC( pHaiKiso[ic2]->m_lnPlc));
 				MgULine3D ULnR = MgULine3D( pHaiKiso[ic2]->m_pZukei->m_lnZukei[0].p[0], vtutLn2);
 				MgULine3D ULnL = MgULine3D( pHaiKiso[ic2]->m_pZukei->m_lnZukei[1].p[0], vtutLn2);
 
 				if ( ( ist1 & (MC_ON_PS | MC_ON_PE)) == ( ist2 & (MC_ON_PS | MC_ON_PE))) {	// 基礎の向きが対向
-					istr = MGeo::IntrLnULn3( lnZukei[0], ULnL, &p0);
-					istl = MGeo::IntrLnULn3( lnZukei[1], ULnR, &p1);
+					istr = MGeo::IntrLineULine3D( lnZukei[0], ULnL, &p0);
+					istl = MGeo::IntrLineULine3D( lnZukei[1], ULnR, &p1);
 				} else {																// 基礎の向きが同方向
-					istr = MGeo::IntrLnULn3( lnZukei[0], ULnR, &p0);
-					istl = MGeo::IntrLnULn3( lnZukei[1], ULnL, &p1);
+					istr = MGeo::IntrLineULine3D( lnZukei[0], ULnR, &p0);
+					istl = MGeo::IntrLineULine3D( lnZukei[1], ULnL, &p1);
 				}
 				if ( ist1 & MC_ON_PS) {
 					if ( MF_CHECK_OR( istr, (MC_INT | MC_CONNECTION)))
@@ -340,7 +340,7 @@ void IeModel::MhNormKiso(
 		}
 
 		if ( iPlcCn[0] == -2 || iPlcCn[1] == -2) {
-			MgVect3D	vtutLn1 = MGeo::UnitizeV3( MgVect3DC( lnKiso1));
+			MgVect3D	vtutLn1 = MGeo::UnitizeVect3D( MgVect3DC( lnKiso1));
 			lnKiso1.p[0] = lnKiso1.p[0] - vtutLn1 * 60.0;
 			lnKiso1.p[1] = lnKiso1.p[1] + vtutLn1 * 60.0;
 

@@ -35,9 +35,9 @@ inline MgPoint2D MgPoint2DC( const MgPoint3D& v)								// ‚RŸŒ³(x,y)¨‚QŸŒ³
 inline MgPoint2D MgPoint2DC( const CPoint &cp)									// CPoint¨‚QŸŒ³
 						{ MgPoint2D vto; vto.x = MREAL( cp.x);
 						  vto.y = MREAL( cp.y); return vto;}
-inline CPoint MgCPointC(MgPoint2D& v)
-						{ CPoint cp; cp.x = MINT( v.x + 0.5);
-						  cp.y = MINT( v.y + 0.5); return cp;}
+inline CPoint MgCPointC(MgPoint2D& p)
+						{ CPoint cp; cp.x = MINT( p.x + 0.5);
+						  cp.y = MINT( p.y + 0.5); return cp;}
 inline MgPoint2D MgPoint2DAngR( MREAL rad)
 						{ return MgPoint2D( cos( rad), sin( rad));}
 inline MgPoint2D MgPoint2DAngD( MREAL deg)
@@ -54,66 +54,60 @@ inline MgPoint2D	MgPoint2D::Rot( MREAL ang)									// Œ´“_‚ğ’†S‚Éw’èŠp“x‚Å¶‰
 
 // •ÏŠ·
 inline MgPoint2D MgPoint2D::SetRot( const MgVect2D& v)							// Œ´“_‚ğ’†S‚É’PˆÊƒxƒNƒgƒ‹•ûŒü‚É‰ñ“]‚·‚é
-//S						{ MgPoint2D pt = *this; 
-//						  x = pt.x * v.x -  pt.y * v.y;
-//						  y = pt.x * v.y +  pt.y * v.x;
 						{ *this = Rot( v);
 						  return *this;}
 inline MgPoint2D MgPoint2D::SetRot( MREAL ang)									// Œ´“_‚ğ’†S‚Éw’èŠp“x‚Å¶‰ñ“]‚·‚é
 						{ MgVect2D v = MgVect2D( cos( ang), sin( ang));
-//S						  MgPoint2D pt = *this;
-//						  x = pt.x * v.x -  pt.y * v.y;
-//						  y = pt.x * v.y +  pt.y * v.x;
 						  *this = Rot( v);
 						  return *this;}
 // ‰‰ZƒIƒyƒŒ[ƒ^
-inline MgPoint2D MgPoint2D::operator + ( const MgPoint2D& v) const				// P1 = P2 + p3
+inline MgPoint2D MgPoint2D::operator + ( const MgPoint2D& p) const				// p3 = p1 + p2
+				 		{ return MgPoint2D( x + p.x, y + p.y);}
+inline MgPoint2D MgPoint2D::operator + ( const MgVect2D& v) const				// p3 = p1 + v2
 				 		{ return MgPoint2D( x + v.x, y + v.y);}
-inline MgPoint2D MgPoint2D::operator + ( const MgVect2D& v) const				// P1 = P2 + p3
-				 		{ return MgPoint2D( x + v.x, y + v.y);}
-inline MgVect2D MgPoint2D::operator - ( const MgPoint2D& v) const				// P1 = P2 - P3
-				 		{ return MgVect2D( x - v.x, y - v.y);}
-inline MgPoint2D MgPoint2D::operator - ( const MgVect2D& v) const				// P1 = P2 - P3
+inline MgVect2D MgPoint2D::operator - ( const MgPoint2D& p) const				// p3 = p1 - p2
+				 		{ return MgVect2D( x - p.x, y - p.y);}
+inline MgPoint2D MgPoint2D::operator - ( const MgVect2D& v) const				// P3 = p1 - v2
 				 		{ return MgPoint2D( x - v.x, y - v.y);}
-inline MgPoint2D MgPoint2D::operator += ( const MgPoint2D& v)					// P1 += P2
+inline MgPoint2D MgPoint2D::operator += ( const MgPoint2D& p)					// p1 += p2
+				 		{ return MgPoint2D( x += p.x, y += p.y);}
+inline MgPoint2D MgPoint2D::operator += ( const MgVect2D& v)					// p1 += v2
 				 		{ return MgPoint2D( x += v.x, y += v.y);}
-inline MgPoint2D MgPoint2D::operator += ( const MgVect2D& v)					// P1 += P2
-				 		{ return MgPoint2D( x += v.x, y += v.y);}
-inline MgPoint2D MgPoint2D::operator -= ( const MgPoint2D& v)					// P1 -= P2
+inline MgPoint2D MgPoint2D::operator -= ( const MgPoint2D& p)					// p1 -= p2
+				 		{ return MgPoint2D( x -= p.x, y -= p.y);}
+inline MgPoint2D MgPoint2D::operator -= ( const MgVect2D& v)					// p1 -= v2
 				 		{ return MgPoint2D( x -= v.x, y -= v.y);}
-inline MgPoint2D MgPoint2D::operator -= ( const MgVect2D& v)					// P1 -= P2
-				 		{ return MgPoint2D( x -= v.x, y -= v.y);}
-inline MgPoint2D MgPoint2D::operator * ( MREAL r) const							// P1 = P2 * r
+inline MgPoint2D MgPoint2D::operator * ( MREAL r) const							// p2 = p1 * r
 				 		{ return MgPoint2D( x * r, y * r);}
-inline MgPoint2D MgPoint2D::operator / ( MREAL r) const							// P1 = P2 / r
+inline MgPoint2D MgPoint2D::operator / ( MREAL r) const							// p2 = p1 / r
 				 		{ return MgPoint2D( x / r, y / r);}
-inline MgPoint2D MgPoint2D::operator *= ( MREAL r)								// P1 *= r
+inline MgPoint2D MgPoint2D::operator *= ( MREAL r)								// p1 *= r
 				 		{ return MgPoint2D( x *= r, y *= r);}
-inline MgPoint2D MgPoint2D::operator /= ( MREAL r)								// P1 /= r
+inline MgPoint2D MgPoint2D::operator /= ( MREAL r)								// p1 /= r
 				 		{ return MgPoint2D( x /= r, y /= r);}
-inline MREAL MgPoint2D::operator * ( const MgPoint2D& v) const					// r = P1 * P2 (“àÏ cos)
+inline MREAL MgPoint2D::operator * ( const MgPoint2D& p) const					// r = p1 * p2 (“àÏ cos)
+				 		{ return ( x * p.x + y * p.y);}
+inline MREAL MgPoint2D::operator * ( const MgVect2D& v) const					// r = p1 * v2 (“àÏ cos)
 				 		{ return ( x * v.x + y * v.y);}
-inline MREAL MgPoint2D::operator * ( const MgVect2D& v) const					// r = P1 * P2 (“àÏ cos)
-				 		{ return ( x * v.x + y * v.y);}
-inline MREAL MgPoint2D::operator ^ ( const MgPoint2D& v) const					// r = P2 ^ P3 (ŠOÏ sin)
-				 		{ return ( x * v.y -  y * v.x);}
-inline MgPoint2D MgPoint2D::operator & ( const MgPoint2D& v) const				// P1 = P2 & P3 (rotation)
-				 		{ return MgPoint2D( x * v.x -  y * v.y,
-		 			               		   x * v.y +  y * v.x);}
-inline bool MgPoint2D::operator == (const MgPoint2D& v) const					// b = (P1 == P2) ”»’è
-				 		{ MgVect2D v1 = v - *this;
-						  return (v1 * v1) <= g_gTol.D_2;}
-inline bool MgPoint2D::operator != (const MgPoint2D& v) const					// b = (P1 != P2) ”»’è
-				 		{ return !((*this) == v);}
+inline MREAL MgPoint2D::operator ^ ( const MgPoint2D& p) const					// r = p1 ^ p2 (ŠOÏ sin)
+				 		{ return ( x * p.y -  y * p.x);}
+inline MgPoint2D MgPoint2D::operator & ( const MgPoint2D& p) const				// p3 = p1 & p2 (rotation)
+				 		{ return MgPoint2D( x * p.x -  y * p.y,
+		 			               		    x * p.y +  y * p.x);}
+inline bool MgPoint2D::operator == (const MgPoint2D& p) const					// b = (p1 == p2) ”»’è
+				 		{ MgVect2D v1 = p - *this;
+						  return (v1 * v1) <= MGPTOL->D_2;}
+inline bool MgPoint2D::operator != (const MgPoint2D& p) const					// b = (p1 != p2) ”»’è
+				 		{ return !((*this) == p);}
 //
 //======================( ‚QŸŒ³ )==============================
 //		‚QŸŒ³ƒxƒNƒgƒ‹@ƒxƒNƒgƒ‹‰‰Z
 //
 // ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-inline MgVect2D::MgVect2D( const MgVect3D& pt)
-						{ x = pt.x; y = pt.y;}
-//inline MgVect2D::MgVect2D( const MgPoint2D& pt)
-//						{ x = pt.x; y = pt.y;}
+inline MgVect2D::MgVect2D( const MgVect3D& V)
+						{ x = V.x; y = V.y;}
+//inline MgVect2D::MgVect2D( const MgPoint2D& p)
+//						{ x = p.x; y = p.y;}
 
 // ‰‰Z
 
@@ -136,35 +130,35 @@ inline MgVect2D MgVect2DAngD( MREAL deg)
 						  return MgVect2D( cos( rad), sin( rad));}
 
 // ‰‰ZƒIƒyƒŒ[ƒ^
-inline MgVect2D MgVect2D::operator + ( const MgVect2D& v) const					// P1 = P2 + p3
+inline MgVect2D MgVect2D::operator + ( const MgVect2D& v) const					// v3 = v1 + v2
 				 		{ return MgVect2D( x + v.x, y + v.y);}
-inline MgVect2D MgVect2D::operator - ( const MgVect2D& v) const					// P1 = P2 - P3
+inline MgVect2D MgVect2D::operator - ( const MgVect2D& v) const					// v3 = v1 - v2
 				 		{ return MgVect2D( x - v.x, y - v.y);}
-inline MgVect2D MgVect2D::operator += ( const MgVect2D& v)						// P1 += P2
+inline MgVect2D MgVect2D::operator += ( const MgVect2D& v)						// v1 += v2
 				 		{ return MgVect2D( x += v.x, y += v.y);}
-inline MgVect2D MgVect2D::operator -= ( const MgVect2D& v)						// P1 -= P2
+inline MgVect2D MgVect2D::operator -= ( const MgVect2D& v)						// v1 -= v2
 				 		{ return MgVect2D( x -= v.x, y -= v.y);}
-inline MgVect2D MgVect2D::operator * ( MREAL r) const							// P1 = P2 * r
+inline MgVect2D MgVect2D::operator * ( MREAL r) const							// v2 = v1 * r
 				 		{ return MgVect2D( x * r, y * r);}
-inline MgVect2D MgVect2D::operator / ( MREAL r) const							// P1 = P2 / r
+inline MgVect2D MgVect2D::operator / ( MREAL r) const							// v2 = v1 / r
 				 		{ return MgVect2D( x / r, y / r);}
-inline MgVect2D MgVect2D::operator *= ( MREAL r)								// P1 *= r
+inline MgVect2D MgVect2D::operator *= ( MREAL r)								// v1 *= r
 				 		{ return MgVect2D( x *= r, y *= r);}
-inline MgVect2D MgVect2D::operator /= ( MREAL r)								// P1 /= r
+inline MgVect2D MgVect2D::operator /= ( MREAL r)								// v1 /= r
 				 		{ return MgVect2D( x /= r, y /= r);}
-inline MREAL MgVect2D::operator * ( const MgVect2D& v) const					// r = P1 * P2 (“àÏ cos)
+inline MREAL MgVect2D::operator * ( const MgVect2D& v) const					// r = v1 * v2 (“àÏ cos)
 				 		{ return ( x * v.x + y * v.y);}
-inline MREAL MgVect2D::operator * ( const MgPoint2D& v) const					// r = P1 * P2 (“àÏ cos)
+inline MREAL MgVect2D::operator * ( const MgPoint2D& v) const					// r = v1 * p2 (“àÏ cos)
 				 		{ return ( x * v.x + y * v.y);}
-inline MREAL MgVect2D::operator ^ ( const MgVect2D& v) const					// r = P2 ^ P3 (ŠOÏ sin)
+inline MREAL MgVect2D::operator ^ ( const MgVect2D& v) const					// r = v1 ^ v2 (ŠOÏ sin)
 				 		{ return ( x * v.y -  y * v.x);}
-inline MgVect2D MgVect2D::operator & ( const MgVect2D& v) const					// P1 = P2 & P3 (rotation)
+inline MgVect2D MgVect2D::operator & ( const MgVect2D& v) const					// v3 = v1 & v2 (rotation)
 				 		{ return MgVect2D( x * v.x -  y * v.y,
 		 			               		  x * v.y +  y * v.x);}
-inline bool MgVect2D::operator == (const MgVect2D& v) const						// b = (P1 == P2) ”»’è
+inline bool MgVect2D::operator == (const MgVect2D& v) const						// b = (v1 == v2) ”»’è
 				 		{ MgVect2D v1 = v - *this;
-						  return (v1 * v1) <= g_gTol.D_2;}
-inline bool MgVect2D::operator != (const MgVect2D& v) const						// b = (P1 != P2) ”»’è
+						  return (v1 * v1) <= MGPTOL->D_2;}
+inline bool MgVect2D::operator != (const MgVect2D& v) const						// b = (v1 != v2) ”»’è
 				 		{ return !((*this) == v);}
 //
 //======================( ‚RŸŒ³ )==============================
@@ -181,72 +175,60 @@ inline MgPoint3D MgPoint3D::Rot( const MgVect2D& v) const						// Z²‚ğ’†S²‚Æ‚
 		 			               		   x * v.y +  y * v.x, z);}
 inline MgPoint3D MgPoint3D::Rot( MREAL ang) const								// Z²‚ğ’†S²‚Æ‚µ‚Äw’èŠp“x‚Å¶‰ñ“]‚µ‚½“_‚ÌˆÊ’u‚ğ‹‚ß‚é
 						{ MgVect2D v = MgVect2D( cos( ang), sin( ang));
-//S						  return MgPoint3D( x * v.x -  y * v.y,
-//		 			               		   x * v.y +  y * v.x, z);}
 						  return Rot( v);}
 
 // •ÏŠ·
 inline MgPoint3D MgPoint3D::SetRot( const MgVect2D& v)							// Z²‚ğ’†S²‚Æ‚µ‚Ä’PˆÊƒxƒNƒgƒ‹•ûŒü‚É‰ñ“]‚·‚é
-//S						{ MgPoint2D pt; 
-//						  pt.x = x * v.x -  y * v.y;
-//						  pt.y = x * v.y +  y * v.x;
-//						  x = pt.x;
-//						  y = pt.y;
 						{ *this = Rot( v);
 						  return *this;}
 inline MgPoint3D MgPoint3D::SetRot( MREAL ang)									// Z²‚ğ’†S²‚Æ‚µ‚Äw’èŠp“x‚Å¶‰ñ“]‚·‚é
 						{ MgVect2D v = MgVect2D( cos( ang), sin( ang));
-//S						  MgPoint2D pt;
-//						  pt.x = x * v.x -  y * v.y;
-//						  pt.y = x * v.y +  y * v.x;
-//						  x = pt.x;
-//						  y = pt.y;
 						  *this = Rot( v);
 						  return *this;}
 
 // ‰‰ZƒIƒyƒŒ[ƒ^
 inline MgPoint3D MgPoint3DC( const MgPoint2D& v1, MREAL z2 = 0.)				// ‚QŸŒ³¨‚RŸŒ³@(ZÈ—ª0.)
-						{ MgPoint3D vto; vto.x = v1.x; vto.y = v1.y;
-						  vto.z = z2; return vto;} 
+						{ MgPoint3D Pto; Pto.x = v1.x; Pto.y = v1.y;
+						  Pto.z = z2; return Pto;} 
 inline MgPoint3D MgPoint3DC( const MgPoint2D& v1, const MgPlane3D& Pln3);		// ‚QŸŒ³¨‚RŸŒ³
 
-inline MgPoint3D MgPoint3D::operator + ( const MgPoint3D& v) const				// P1 = P2 + p3
-				 		{ return MgPoint3D( x + v.x, y + v.y, z + v.z);}
-inline MgPoint3D MgPoint3D::operator + ( const MgVect3D& v) const				// P1 = P2 + p3
-				 		{ return MgPoint3D( x + v.x, y + v.y, z + v.z);}
-inline MgVect3D MgPoint3D::operator - ( const MgPoint3D& p) const				// P1 = P2 - P3
-						{ return MgVect3D(x - p.x, y - p.y, z - p.z);}
-inline MgPoint3D MgPoint3D::operator - ( const MgVect3D& p) const				// P1 = P2 - P3
-				 		{ return MgPoint3D(x - p.x, y - p.y, z - p.z);}
-inline MgPoint3D MgPoint3D::operator += ( const MgPoint3D& v)					// P1 += P2
-				 		{ return MgPoint3D( x += v.x, y += v.y, z += v.z);}
-inline MgPoint3D MgPoint3D::operator += ( const MgVect3D& v)					// P1 += P2
-				 		{ return MgPoint3D( x += v.x, y += v.y, z += v.z);}
-inline MgPoint3D MgPoint3D::operator -= ( const MgPoint3D& v)					// P1 -= P2
-				 		{ return MgPoint3D( x -= v.x, y -= v.y, z -= v.z);}
-inline MgPoint3D MgPoint3D::operator -= ( const MgVect3D& v)					// P1 -= P2
-				 		{ return MgPoint3D( x -= v.x, y -= v.y, z -= v.z);}
-inline MgPoint3D MgPoint3D::operator * (  MREAL r)	const						// P1 = P2 * r
+inline MgPoint3D MgPoint3D::operator + ( const MgPoint3D& P) const				// P3 = P1 + p2
+				 		{ return MgPoint3D( x + P.x, y + P.y, z + P.z);}
+inline MgPoint3D MgPoint3D::operator + ( const MgVect3D& V) const				// P3 = P1 + p2
+				 		{ return MgPoint3D( x + V.x, y + V.y, z + V.z);}
+inline MgVect3D MgPoint3D::operator - ( const MgPoint3D& P) const				// P3 = P1 - P2
+						{ return MgVect3D(x - P.x, y - P.y, z - P.z);}
+inline MgPoint3D MgPoint3D::operator - ( const MgVect3D& P) const				// P3 = P1 - P2
+				 		{ return MgPoint3D(x - P.x, y - P.y, z - P.z);}
+inline MgPoint3D MgPoint3D::operator += ( const MgPoint3D& P)					// P1 += P2
+				 		{ return MgPoint3D( x += P.x, y += P.y, z += P.z);}
+inline MgPoint3D MgPoint3D::operator += ( const MgVect3D& V)					// P1 += P2
+				 		{ return MgPoint3D( x += V.x, y += V.y, z += V.z);}
+inline MgPoint3D MgPoint3D::operator -= ( const MgPoint3D& P)					// P1 -= P2
+				 		{ return MgPoint3D( x -= P.x, y -= P.y, z -= P.z);}
+inline MgPoint3D MgPoint3D::operator -= ( const MgVect3D& V)					// P1 -= P2
+				 		{ return MgPoint3D( x -= V.x, y -= V.y, z -= V.z);}
+inline MgPoint3D MgPoint3D::operator * (  MREAL r)	const						// P2 = P1 * r
 				 		{ return MgPoint3D( x * r, y * r, z * r);}
-inline MgPoint3D MgPoint3D::operator / (  MREAL r) const						// P1 = P2 / r
+inline MgPoint3D MgPoint3D::operator / (  MREAL r) const						// P2 = P1 / r
 				 		{ return MgPoint3D( x / r, y / r, z / r);}
 inline MgPoint3D MgPoint3D::operator *= ( MREAL r)								// P1 *= r
 				 		{ return MgPoint3D( x *= r, y *= r, z *= r);}
 inline MgPoint3D MgPoint3D::operator /= ( MREAL r)								// P1 /= r
 				 		{ return MgPoint3D( x /= r, y /= r, z /= r);}
-inline MREAL MgPoint3D::operator * ( const MgPoint3D& v) const					// r = P1 * P2 (“àÏ cos)
-				 		{ return ( x * v.x + y * v.y + z * v.z);}
-inline MREAL MgPoint3D::operator * ( const MgVect3D& v) const					// r = P1 * P2 (“àÏ cos)
-				 		{ return ( x * v.x + y * v.y + z * v.z);}
-inline MgVect3D MgPoint3D::operator ^ ( const MgPoint3D& v) const				// P1 = P2 ^ P3 (ŠOÏ sin)
-				 		{ return MgVect3D( y * v.z - z * v.y,
-						                  z * v.x - x * v.z,
-								          x * v.y - y * v.x);}
-inline bool MgPoint3D::operator == ( const MgPoint3D& v) const					// b = (P1 == P2) ”»’è
-				 		{ MgVect3D v1 = v - *this;
-						  return ((v1 * v1) <= g_gTol.D_2);}
-inline bool MgPoint3D::operator != ( const MgPoint3D& v) const					// b = (P1 != P2) ”»’è
-				 		{ return !((*this) == v);}
+inline MREAL MgPoint3D::operator * ( const MgPoint3D& P) const					// r = P1 * P2 (“àÏ cos)
+				 		{ return ( x * P.x + y * P.y + z * P.z);}
+inline MREAL MgPoint3D::operator * ( const MgVect3D& V) const					// r = P1 * V2 (“àÏ cos)
+				 		{ return ( x * V.x + y * V.y + z * V.z);}
+inline MgVect3D MgPoint3D::operator ^ ( const MgPoint3D& P) const				// P3 = P1 ^ P2 (ŠOÏ sin)
+				 		{ return MgVect3D( y * P.z - z * P.y,
+						                   z * P.x - x * P.z,
+								           x * P.y - y * P.x);}
+inline bool MgPoint3D::operator == ( const MgPoint3D& P) const					// b = (P1 == P2) ”»’è
+				 		{ MgVect3D v1 = P - *this;
+						  return ((v1 * v1) <= MGPTOL->D_2);}
+inline bool MgPoint3D::operator != ( const MgPoint3D& P) const					// b = (P1 != P2) ”»’è
+				 		{ return !((*this) == P);}
 //
 //======================( ‚RŸŒ³ )==============================
 //		‚RŸŒ³ƒxƒNƒgƒ‹	ƒxƒNƒgƒ‹‰‰Z
@@ -261,8 +243,6 @@ inline MgVect3D MgVect3D::Rot( const MgVect2D& v) const							// Z²‚ğ’†S²‚Æ‚µ
 		 			               		  x * v.y +  y * v.x, z);}
 inline MgVect3D MgVect3D::Rot( MREAL ang) const									// Z²‚ğ’†S²‚Æ‚µ‚Äw’èŠp“x‚Å¶‰ñ“]‚µ‚½“_‚ÌˆÊ’u‚ğ‹‚ß‚é
 						{ MgVect2D v = MgVect2D( cos( ang), sin( ang));
-//S						  return MgVect3D( x * v.x -  y * v.y,
-//		 			               		   x * v.y +  y * v.x, z);}
 						  return Rot( v);}
 // •ÏŠ·
 inline MgVect3D MgVect3D::SetRot( const MgVect2D& v)							// Z²‚ğ’†S²‚Æ‚µ‚Ä’PˆÊƒxƒNƒgƒ‹•ûŒü‚É‰ñ“]‚·‚é
@@ -280,34 +260,34 @@ inline MgVect3D MgVect3DC( const MgVect2D& v1, MREAL z2 = 0.)					// ‚QŸŒ³¨‚R
 						  vto.z = z2; return vto;} 
 inline MgVect3D MgVect3DC( const MgVect2D& v1, const MgPlane3D& Pln3);			// ‚QŸŒ³¨‚RŸŒ³
 
-inline MgVect3D MgVect3D::operator + ( const MgVect3D& v) const					// P1 = P2 + p3
-				 		{ return MgVect3D( x + v.x, y + v.y, z + v.z);}
-inline MgVect3D MgVect3D::operator - ( const MgVect3D& p) const					// P1 = P2 - P3
-				 		{ return MgVect3D(x - p.x, y - p.y, z - p.z);}
-inline MgVect3D MgVect3D::operator += ( const MgVect3D& v)						// P1 += P2
-				 		{ return MgVect3D( x += v.x, y += v.y, z += v.z);}
-inline MgVect3D MgVect3D::operator -= ( const MgVect3D& v)						// P1 -= P2
-				 		{ return MgVect3D( x -= v.x, y -= v.y, z -= v.z);}
-inline MgVect3D MgVect3D::operator * (  MREAL r)	const						// P1 = P2 * r
+inline MgVect3D MgVect3D::operator + ( const MgVect3D& V) const					// V3 = V1 + V2
+				 		{ return MgVect3D( x + V.x, y + V.y, z + V.z);}
+inline MgVect3D MgVect3D::operator - ( const MgVect3D& P) const					// V3 = V1 - V2
+				 		{ return MgVect3D(x - P.x, y - P.y, z - P.z);}
+inline MgVect3D MgVect3D::operator += ( const MgVect3D& V)						// V1 += V2
+				 		{ return MgVect3D( x += V.x, y += V.y, z += V.z);}
+inline MgVect3D MgVect3D::operator -= ( const MgVect3D& V)						// V1 -= V2
+				 		{ return MgVect3D( x -= V.x, y -= V.y, z -= V.z);}
+inline MgVect3D MgVect3D::operator * (  MREAL r)	const						// V2 = V1 * r
 				 		{ return MgVect3D( x * r, y * r, z * r);}
-inline MgVect3D MgVect3D::operator / (  MREAL r) const							// P1 = P2 / r
+inline MgVect3D MgVect3D::operator / (  MREAL r) const							// V2 = V1 / r
 				 		{ return MgVect3D( x / r, y / r, z / r);}
-inline MgVect3D MgVect3D::operator *= ( MREAL r)								// P1 *= r
+inline MgVect3D MgVect3D::operator *= ( MREAL r)								// V1 *= r
 				 		{ return MgVect3D( x *= r, y *= r, z *= r);}
-inline MgVect3D MgVect3D::operator /= ( MREAL r)								// P1 /= r
+inline MgVect3D MgVect3D::operator /= ( MREAL r)								// V1 /= r
 				 		{ return MgVect3D( x /= r, y /= r, z /= r);}
-inline MREAL MgVect3D::operator * ( const MgVect3D& v) const					// r = P1 * P2 (“àÏ cos)
-				 		{ return ( x * v.x + y * v.y + z * v.z);}
-inline MREAL MgVect3D::operator * ( const MgPoint3D& v) const					// r = P1 * P2 (“àÏ cos)
-				 		{ return ( x * v.x + y * v.y + z * v.z);}
-inline MgVect3D MgVect3D::operator ^ ( const MgVect3D& v) const					// P1 = P2 ^ P3 (ŠOÏ sin)
-				 		{ return MgVect3D( y * v.z - z * v.y,
-						                  z * v.x - x * v.z,
-								          x * v.y - y * v.x);}
-inline bool MgVect3D::operator == ( const MgVect3D& v) const					// b = (P1 == P2) ”»’è
-				 		{ MgVect3D v1 = v - *this;
-						  return ((v1 * v1) <= g_gTol.D_2);}
-inline bool MgVect3D::operator != ( const MgVect3D& v) const					// b = (P1 != P2) ”»’è
-				 		{ return !((*this) == v);}
+inline MREAL MgVect3D::operator * ( const MgVect3D& V) const					// r = V1 * V2 (“àÏ cos)
+				 		{ return ( x * V.x + y * V.y + z * V.z);}
+inline MREAL MgVect3D::operator * ( const MgPoint3D& P) const					// r = V1 * P2 (“àÏ cos)
+				 		{ return ( x * P.x + y * P.y + z * P.z);}
+inline MgVect3D MgVect3D::operator ^ ( const MgVect3D& V) const					// V3 = V1 ^ V2 (ŠOÏ sin)
+				 		{ return MgVect3D( y * V.z - z * V.y,
+						                  z * V.x - x * V.z,
+								          x * V.y - y * V.x);}
+inline bool MgVect3D::operator == ( const MgVect3D& V) const					// b = (V1 == V2) ”»’è
+				 		{ MgVect3D V1 = V - *this;
+						  return ((V1 * V1) <= MGPTOL->D_2);}
+inline bool MgVect3D::operator != ( const MgVect3D& V) const					// b = (V1 != V2) ”»’è
+				 		{ return !((*this) == V);}
 
 } // namespace MC

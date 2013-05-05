@@ -83,6 +83,9 @@ public:
 
 	MgPoint2D Rot( MREAL ang);													// 原点を中心に指定角度で左回転した点の位置を求める
 
+//S	MREAL Ang() const															// 原点から点方向のX軸からの半時計方向角度
+
+
 	// 変換
 //	MgPoint2D SetUnitize( MREAL i_tol = MgTol_Dt::D);							// 原点から点方向の単位ベクトルに変換する
 	
@@ -105,42 +108,42 @@ public:
 						{ x = pt[0]; y = pt[1]; return *this;}
 
 	// 演算オペレータ
-	MgPoint2D operator + ( const MgPoint2D& v) const;							// P1 = P2 + p3
-	MgPoint2D operator + ( const MgVect2D& v) const;							// P1 = P2 + p3
+	MgPoint2D operator + ( const MgPoint2D& v) const;							// p3 = p1 + p2
+	MgPoint2D operator + ( const MgVect2D& v) const;							// p3 = p1 + v2
 
-	MgVect2D operator - ( const MgPoint2D& v) const;							// P1 = P2 - P3
-	MgPoint2D operator - ( const MgVect2D& v) const;							// P1 = P2 - P3
+	MgVect2D operator - ( const MgPoint2D& v) const;							// p3 = p1 - p2
+	MgPoint2D operator - ( const MgVect2D& v) const;							// p3 = p1 - v2
 
-	friend	MgPoint2D operator - ( const MgPoint2D& p)							// P1 = - P2
+	friend	MgPoint2D operator - ( const MgPoint2D& p)							// p2 = - p1
 				 		{ MgPoint2D vto; vto.x = -p.x;
 						  vto.y = -p.y; return vto;}
-	MgPoint2D operator += ( const MgPoint2D& v);								// P1 += P2
-	MgPoint2D operator += ( const MgVect2D& v);									// P1 += P2
+	MgPoint2D operator += ( const MgPoint2D& v);								// p1 += p2
+	MgPoint2D operator += ( const MgVect2D& v);									// p1 += v2
 
-	MgPoint2D operator -= ( const MgPoint2D& v);								// P1 -= P2
-	MgPoint2D operator -= ( const MgVect2D& v);									// P1 -= P2
+	MgPoint2D operator -= ( const MgPoint2D& v);								// p1 -= p2
+	MgPoint2D operator -= ( const MgVect2D& v);									// p1 -= v2
 
-	friend	MgPoint2D operator * ( MREAL r, const MgPoint2D& v)					// P1 = r * P2
+	friend	MgPoint2D operator * ( MREAL r, const MgPoint2D& v)					// p2 = r * p1
 				 		{ MgPoint2D vto;vto.x = r * v.x;
 						  vto.y = r * v.y; return vto;}
-	MgPoint2D operator * ( MREAL r) const;										// P1 = P2 * r
+	MgPoint2D operator * ( MREAL r) const;										// p2 = p1 * r
 
-	MgPoint2D operator / ( MREAL r) const;										// P1 = P2 / r
+	MgPoint2D operator / ( MREAL r) const;										// p2 = p1 / r
 
-	MgPoint2D operator *= ( MREAL r);											// P1 *= r
+	MgPoint2D operator *= ( MREAL r);											// p1 *= r
 
-	MgPoint2D operator /= ( MREAL r);											// P1 /= r
+	MgPoint2D operator /= ( MREAL r);											// p1 /= r
 
-	MREAL operator * ( const MgPoint2D& v) const;								// r = P1 * P2 (内積 cos)
-	MREAL operator * ( const MgVect2D& v) const;								// r = P1 * P2 (内積 cos)
+	MREAL operator * ( const MgPoint2D& v) const;								// r = p1 * p2 (内積 cos)
+	MREAL operator * ( const MgVect2D& v) const;								// r = p1 * v2 (内積 cos)
 
-	MREAL operator ^ ( const MgPoint2D& v) const;								// P1 = P2 ^ P3 (外積 sin)
+	MREAL operator ^ ( const MgPoint2D& v) const;								// p3 = p1 ^ p2 (外積 sin)
 
-	MgPoint2D operator & ( const MgPoint2D& v) const;							// P1 = P2 & P3 (rotation)
+	MgPoint2D operator & ( const MgPoint2D& v) const;							// p3 = p1 & p2 (rotation)
 
-	bool operator == (const MgPoint2D& v) const;								// b = (P1 == P2) 判定
+	bool operator == (const MgPoint2D& v) const;								// b = (p1 == p2) 判定
 
-	bool operator != (const MgPoint2D& v) const;								// b = (P1 != P2) 判定
+	bool operator != (const MgPoint2D& v) const;								// b = (p1 != p2) 判定
 
 
 	// トレース
@@ -216,46 +219,48 @@ public:
 						  return *this;}
 
 	// 属性値の取得
-	void Get( MREAL* rP) const
-						{ rP[0] = x; rP[1] = y;} 
-	MgVect2D& operator = ( const CPoint &pt)
+	void Get( MREAL* rP) const													// MREAL[2] = v1
+						{ rP[0] = x; rP[1] = y;}
+
+	
+	MgVect2D& operator = ( const CPoint &pt)									// v1 = CPoint 
 						{ x = MREAL(pt.x); y = MREAL(pt.y); return *this;}
-	MgVect2D& operator = ( const MREAL* pt)
+	MgVect2D& operator = ( const MREAL* pt)										// v1 = MREAL[2]
 						{ x = pt[0]; y = pt[1]; return *this;}
 
 	// 演算オペレータ
-	MgVect2D operator + ( const MgVect2D& v) const;								// P1 = P2 + p3
+	MgVect2D operator + ( const MgVect2D& v) const;								// v3 = v1 + v2
 
-	MgVect2D operator - ( const MgVect2D& v) const;								// P1 = P2 - P3
+	MgVect2D operator - ( const MgVect2D& v) const;								// v3 = v1 - v2
 
-	friend	MgVect2D operator - ( const MgVect2D& p)							// P1 = - P2
+	friend	MgVect2D operator - ( const MgVect2D& p)							// v2 = - v1
 				 		{ MgVect2D vto; vto.x = -p.x;
 						  vto.y = -p.y; return vto;}
-	MgVect2D operator += ( const MgVect2D& v);									// P1 += P2
+	MgVect2D operator += ( const MgVect2D& v);									// v1 += v2
 
-	MgVect2D operator -= ( const MgVect2D& v);									// P1 -= P2
+	MgVect2D operator -= ( const MgVect2D& v);									// v1 -= v2
 
-	friend	MgVect2D operator * ( MREAL r, const MgVect2D& v)					// P1 = r * P2
+	friend	MgVect2D operator * ( MREAL r, const MgVect2D& v)					// v1 = r * v2
 				 		{ MgVect2D vto;vto.x = r * v.x;
 						  vto.y = r * v.y; return vto;}
-	MgVect2D operator * ( MREAL r) const;										// P1 = P2 * r
+	MgVect2D operator * ( MREAL r) const;										// v2 = v1 * r
 
-	MgVect2D operator / ( MREAL r) const;										// P1 = P2 / r
+	MgVect2D operator / ( MREAL r) const;										// v2 = v1 / r
 
-	MgVect2D operator *= ( MREAL r);											// P1 *= r
+	MgVect2D operator *= ( MREAL r);											// v1 *= r
 
-	MgVect2D operator /= ( MREAL r);											// P1 /= r
+	MgVect2D operator /= ( MREAL r);											// v1 /= r
 
-	MREAL operator * ( const MgVect2D& v) const;								// r = P1 * P2 (内積 cos)
-	MREAL operator * ( const MgPoint2D& v) const;								// r = P1 * P2 (内積 cos)
+	MREAL operator * ( const MgVect2D& v) const;								// r = v1 * v2 (内積 cos)
+	MREAL operator * ( const MgPoint2D& v) const;								// r = v1 * p2 (内積 cos)
 
-	MREAL operator ^ ( const MgVect2D& v) const;								// P1 = P2 ^ P3 (外積 sin)
+	MREAL operator ^ ( const MgVect2D& v) const;								// v3 = P1 ^ P2 (外積 sin)
 
-	MgVect2D operator & ( const MgVect2D& v) const;								// P1 = P2 & P3 (rotation)
+	MgVect2D operator & ( const MgVect2D& v) const;								// v3 = v1 & v2 (rotation)
 
-	bool operator == (const MgVect2D& v) const;									// b = (P1 == P2) 判定
+	bool operator == (const MgVect2D& v) const;									// b = (v1 == v2) 判定
 
-	bool operator != (const MgVect2D& v) const;									// b = (P1 != P2) 判定
+	bool operator != (const MgVect2D& v) const;									// b = (v1 != v2) 判定
 
 
 	// トレース

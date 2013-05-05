@@ -24,7 +24,7 @@ namespace MC
 //// ---------------------( ２次元 )------------------------------
 ////		指定線分より始まり線分群の線分を結合して最小の多角形を作成する
 ////	
-//bool MGeo::MakeGPg2FromLn2InGLn2(				// (  O) ステイタス　true: 正常作成　false: 作成不可
+//bool MGeo::MakeGPolygonFromLineInGLine2D(				// (  O) ステイタス　true: 正常作成　false: 作成不可
 //				const	MgLine2D&	ln1,		// (I  ) 指定線分
 //						MgGLine2D*	Gln2,		// (I  ) 結合する線分群
 //						MINT*		nHk,		// (I O) 結合する線分の中の正しい方向を持つ線分数（先頭より幾つかを表す）
@@ -35,7 +35,7 @@ namespace MC
 // ---------------------( ２次元 )------------------------------
 //		多角形を直線で切り、直線の指定側の領域を得る			<多角形が穴の場合の考慮不足?>
 //
-MINT MGeo::DividePgULn2(						// (  O) ステイタス
+MINT MGeo::DividePolygonULine2D(						// (  O) ステイタス
 												//			MC_NINT			(0): 交差なし
 												//			MC_INT			(1): 交差あり
 						MINT		i_Sel,		// (I  ) 選択条件
@@ -74,7 +74,7 @@ MINT MGeo::DividePgULn2(						// (  O) ステイタス
 	GLn1.m_n = 0;
 	for ( icb=i_pg1.m_n-1,ic1=0; ic1<i_pg1.m_n; icb=ic1,icb=ic1,ic1++) {
 		lnw1 = MgLine2D( i_pg1.m_p[icb], i_pg1.m_p[ic1]);
-		ist1 = DivideAddLnULn2( sels, lnw1, uln2, &GLn1);
+		ist1 = DivideAddLineULine2D( sels, lnw1, uln2, &GLn1);
 		if ( ist1 != (MC_NINT | MC_MATCH))						// 多角形の辺に削除部分あり
 			 icls = 1;
 	}
@@ -91,11 +91,11 @@ MINT MGeo::DividePgULn2(						// (  O) ステイタス
 //
 //	直線の分割
 
-	ist1 = DivideAddULnPg2( MC_IN_BORDER, uln2, i_pg1, &GLn2);
+	ist1 = DivideAddULinePolygon2D( MC_IN_BORDER, uln2, i_pg1, &GLn2);
 	
 	ist |= ist1;
 //
-	MakeGPg2InGLn2( GLn2, o_pGpg3);								// GLn2(正しい方向を持っている線分群)より領域群を作成する
+	MakeGPolygonInGLine2D( GLn2, o_pGpg3);								// GLine2D(正しい方向を持っている線分群)より領域群を作成する
 	
 	*o_pGpg3 += GPgW1;											// 領域群を返す
 
@@ -108,7 +108,7 @@ MINT MGeo::DividePgULn2(						// (  O) ステイタス
 // ---------------------( ２次元 )------------------------------
 //		穴付き多角形を直線で切り、直線の指定側の領域を得る
 //
-MINT MGeo::DivideGPgULn2(						// (  O) ステイタス
+MINT MGeo::DivideGPolygonULine2D(						// (  O) ステイタス
 												//			MC_NINT			(0): 交差なし
 												//			MC_INT			(1): 交差あり
 						MINT		i_Sel,		// (I  ) 選択条件
@@ -152,7 +152,7 @@ MINT MGeo::DivideGPgULn2(						// (  O) ステイタス
 		GLn1.m_n = 0;
 		for ( icb=pg1->m_n-1,ic2=0; ic2<pg1->m_n; icb=ic2,ic2++) {
 			lnw1 = MgLine2D( pg1->m_p[icb], pg1->m_p[ic2]);
-			ist1 = DivideAddLnULn2( sels, lnw1, uln2, &GLn1);
+			ist1 = DivideAddLineULine2D( sels, lnw1, uln2, &GLn1);
 			if ( ist1 != (MC_NINT | MC_MATCH))					// 多角形の辺に削除部分あり
 				 icls = 1;
 		}
@@ -170,11 +170,11 @@ MINT MGeo::DivideGPgULn2(						// (  O) ステイタス
 //
 //	直線の分割
 
-	ist1 = DivideAddULnGPg2( MC_IN_BORDER, uln2, i_Gpg1, &GLn2);
+	ist1 = DivideAddULineGPolygon2D( MC_IN_BORDER, uln2, i_Gpg1, &GLn2);
 	
 	MF_SET_ON( ist, ist1);
 //
-	MakeGPg2InGLn2( GLn2, o_pGpg3);								// GLn2(正しい方向を持っている線分群)より領域群を作成する
+	MakeGPolygonInGLine2D( GLn2, o_pGpg3);								// GLine2D(正しい方向を持っている線分群)より領域群を作成する
 	
 	*o_pGpg3 += GPgW1;											// 領域群を返す
 
@@ -187,7 +187,7 @@ MINT MGeo::DivideGPgULn2(						// (  O) ステイタス
 // ---------------------( ２次元 )------------------------------
 //		多角形1を多角形2で分割し、多角形2の指定側（内側または外側）の領域を得る
 //
-MINT MGeo::Divide2Pg2(							// (  O) ステイタス
+MINT MGeo::Divide2Polygon2D(							// (  O) ステイタス
 												//			MC_NINT			(0): 交差なし
 												//			MC_INT			(1): 交差あり
 												//			MC_MATCH		(4): 選択条件に合う部分あり
@@ -210,14 +210,14 @@ MINT MGeo::Divide2Pg2(							// (  O) ステイタス
 	else if ( i_Sel == MC_OUT_BORDER)
 		Selc = MC_DIFF;
 
-	return Merge2PgtoGPg2( Selc, i_pg1, i_pg2, o_pGpgo);
+	return Merge2PgtoGPolygon2D( Selc, i_pg1, i_pg2, o_pGpgo);
 }
 
 //
 // ---------------------( ２次元 )------------------------------
 //		穴付き多角形を穴付き多角形で分割し、選択条件に合う領域を得る
 //
-MINT MGeo::Divide2GPg2(							// (  O) ステイタス
+MINT MGeo::Divide2GPolygon2D(							// (  O) ステイタス
 												//			MC_NINT			(0): 交差なし
 												//			MC_INT			(1): 交差あり
 												//			MC_MATCH		(4): 選択条件に合う部分あり
@@ -239,14 +239,14 @@ MINT MGeo::Divide2GPg2(							// (  O) ステイタス
 	else if ( i_Sel == MC_OUT_BORDER)
 		Selc = MC_DIFF;
 
-	return Merge2GPgtoGPg2( Selc, i_Gpg1, i_Gpg2, o_pGpgo);
+	return Merge2GPgtoGPolygon2D( Selc, i_Gpg1, i_Gpg2, o_pGpgo);
 }
 
 //
 // ---------------------( ３次元 )------------------------------
 //		多角形1を多角形2で分割し、多角形2の指定側（内側または外側）の領域を得る
 //
-MINT MGeo::Divide2Pg3(							// (  O) ステイタス
+MINT MGeo::Divide2Polygon3D(							// (  O) ステイタス
 												//			MC_NINT			(0): 交差なし
 												//			MC_INT			(1): 交差あり
 												//			MC_MATCH		(4): 選択条件に合う部分あり
@@ -269,14 +269,14 @@ MINT MGeo::Divide2Pg3(							// (  O) ステイタス
 	else if ( i_Sel == MC_OUT_BORDER)
 		Selc = MC_DIFF;
 
-	return Merge2PgtoGPg3( Selc, i_Pg1, i_Pg2, o_pGPgo);
+	return Merge2PgtoGPolygon3D( Selc, i_Pg1, i_Pg2, o_pGPgo);
 }
 
 //
 // ---------------------( ３次元 )------------------------------
 //		穴付き多角形を穴付き多角形で分割し、選択条件に合う領域を得る
 //
-MINT MGeo::Divide2GPg3(							// (  O) ステイタス
+MINT MGeo::Divide2GPolygon3D(							// (  O) ステイタス
 												//			MC_NINT			(0): 交差なし
 												//			MC_INT			(1): 交差あり
 												//			MC_MATCH		(4): 選択条件に合う部分あり
@@ -298,14 +298,14 @@ MINT MGeo::Divide2GPg3(							// (  O) ステイタス
 	else if ( i_Sel == MC_OUT_BORDER)
 		Selc = MC_DIFF;
 
-	return Merge2GPgtoGPg3( Selc, i_GPg1, i_GPg2, o_pGPgo);
+	return Merge2GPgtoGPolygon3D( Selc, i_GPg1, i_GPg2, o_pGPgo);
 }
 
 //
 // ---------------------( ２次元 )------------------------------
 //		多角形と多角形の和、差、積の穴付き多角形を求める
 //
-MINT MGeo::Merge2PgtoGPg2(						// (  O) ステイタス
+MINT MGeo::Merge2PgtoGPolygon2D(						// (  O) ステイタス
 												//			MC_NINT			(0): 交差なし
 												//			MC_INT			(1): 交差あり
 												//			MC_MATCH		(4): 選択条件に合う部分あり
@@ -347,10 +347,10 @@ MINT MGeo::Merge2PgtoGPg2(						// (  O) ステイタス
 	fRev = ( i_Sel == MC_DIFF);
 	//	多角形1の線分を多角形2で分割し指定側を残す
 	o_pGpgo->SetCount0();
-	ist  = DivideAdd2Pg2( sel1, false, i_pg1, i_pg2, &GLnw, o_pGpgo);
-	ist2 = DivideAdd2Pg2( sel2, fRev, i_pg2, i_pg1, &GLnw, o_pGpgo);
+	ist  = DivideAdd2Polygon2D( sel1, false, i_pg1, i_pg2, &GLnw, o_pGpgo);
+	ist2 = DivideAdd2Polygon2D( sel2, fRev, i_pg2, i_pg1, &GLnw, o_pGpgo);
 	if (GLnw.m_n > 2) {
-		MakeGPg2InGLn2( GLnw, &GPgw);							// 正しい方向を持った線分群より領域群を作成する
+		MakeGPolygonInGLine2D( GLnw, &GPgw);							// 正しい方向を持った線分群より領域群を作成する
 		*o_pGpgo += GPgw;										// 領域群を追加する
 	}
 //	
@@ -365,7 +365,7 @@ MINT MGeo::Merge2PgtoGPg2(						// (  O) ステイタス
 // ---------------------( ２次元 )------------------------------
 //		多角形と穴付き多角形の和、差、積の穴付き多角形を求める
 //
-MINT MGeo::MergePgGPgtoGPg2(					// (  O) ステイタス
+MINT MGeo::MergePgGPgtoGPolygon2D(					// (  O) ステイタス
 												//			MC_NINT			(0): 交差なし
 												//			MC_INT			(1): 交差あり
 												//			MC_MATCH		(4): 選択条件に合う部分あり
@@ -411,16 +411,16 @@ MINT MGeo::MergePgGPgtoGPg2(					// (  O) ステイタス
 
 	o_pGpgo->SetCount0();
 	//	多角形1の線分を穴付き多角形2で分割し指定側を残す
-	ist = DivideAddPgGPg2( sel1, false, i_pg1, i_Gpg2, &GLnw, o_pGpgo);
+	ist = DivideAddPolygonGPolygon2D( sel1, false, i_pg1, i_Gpg2, &GLnw, o_pGpgo);
 
 	//	穴付き多角形2の線分を多角形1で分割し指定側を残す
 	for ( ic2=0; ic2<i_Gpg2.m_n; ic2++) {
 		ppg2 = &i_Gpg2.m_pg[ic2];
-		ist2 = DivideAdd2Pg2( sel2, fRev, *ppg2, i_pg1, &GLnw, o_pGpgo);
+		ist2 = DivideAdd2Polygon2D( sel2, fRev, *ppg2, i_pg1, &GLnw, o_pGpgo);
 		MF_SET_ON( ist, ist2);
 	}
 	if (GLnw.m_n > 2) {
-		MakeGPg2InGLn2( GLnw, &GPgw);									// 正しい方向を持った線分群より領域群を作成する
+		MakeGPolygonInGLine2D( GLnw, &GPgw);									// 正しい方向を持った線分群より領域群を作成する
 		*o_pGpgo += GPgw;											// 領域群を追加する
 	}
 
@@ -434,7 +434,7 @@ MINT MGeo::MergePgGPgtoGPg2(					// (  O) ステイタス
 // ---------------------( ２次元 )------------------------------
 //		穴付き多角形と多角形の和、差、積の穴付き多角形を求める
 //
-MINT MGeo::MergeGPgPgtoGPg2(					// (  O) ステイタス
+MINT MGeo::MergeGPgPgtoGPolygon2D(					// (  O) ステイタス
 												//			MC_NINT			(0): 交差なし
 												//			MC_INT			(1): 交差あり
 												//			MC_MATCH		(4): 選択条件に合う部分あり
@@ -483,15 +483,15 @@ MINT MGeo::MergeGPgPgtoGPg2(					// (  O) ステイタス
 	for ( ic1=0; ic1<i_Gpg1.m_n; ic1++) {
 		ppg1 = &i_Gpg1.m_pg[ic1];
 		//	多角形1の線分を穴付き多角形2で分割し指定側を残す
-		ist1 = DivideAdd2Pg2( sel1, false, *ppg1, i_pg2, &GLnw, o_pGpgo);
+		ist1 = DivideAdd2Polygon2D( sel1, false, *ppg1, i_pg2, &GLnw, o_pGpgo);
 		MF_SET_ON( ist, ist1);
 	}
 	//	多角形2の線分を穴付き多角形1で分割し指定側を残す
-	ist2 = DivideAddPgGPg2( sel2, fRev, i_pg2, i_Gpg1, &GLnw, o_pGpgo);
+	ist2 = DivideAddPolygonGPolygon2D( sel2, fRev, i_pg2, i_Gpg1, &GLnw, o_pGpgo);
 	MF_SET_ON( ist, ist2);
 
 	if (GLnw.m_n > 2) {
-		MakeGPg2InGLn2( GLnw, &GPgw);							// 正しい方向を持った線分群より領域群を作成する
+		MakeGPolygonInGLine2D( GLnw, &GPgw);							// 正しい方向を持った線分群より領域群を作成する
 		*o_pGpgo += GPgw;										// 領域群を追加する
 	}
 
@@ -505,7 +505,7 @@ MINT MGeo::MergeGPgPgtoGPg2(					// (  O) ステイタス
 // ---------------------( ２次元 )------------------------------
 //		穴付き多角形と穴付き多角形の和、差、積の穴付き多角形を求める
 //
-MINT MGeo::Merge2GPgtoGPg2(						// (  O) ステイタス
+MINT MGeo::Merge2GPgtoGPolygon2D(						// (  O) ステイタス
 												//			MC_NINT			(x01): 交差なし
 												//			MC_INT			(x02): 交差あり
 												//			MC_MATCH		(x10): 選択条件に合う部分あり
@@ -554,18 +554,18 @@ MINT MGeo::Merge2GPgtoGPg2(						// (  O) ステイタス
 	for ( ic1=0; ic1<i_Gpg1.m_n; ic1++) {
 		ppg1 = &i_Gpg1.m_pg[ic1];
 		//	多角形1の線分を穴付き多角形2で分割し指定側を残す
-		ist1 = DivideAddPgGPg2( sel1, false, *ppg1, i_Gpg2, &GLnw, o_pGpgo);
+		ist1 = DivideAddPolygonGPolygon2D( sel1, false, *ppg1, i_Gpg2, &GLnw, o_pGpgo);
 		MF_SET_ON( ist, ist1);
 	}
 	//	穴付き多角形2の線分を穴付き多角形1で分割し指定側を残す
 	for ( ic2=0; ic2<i_Gpg2.m_n; ic2++) {
 		ppg2 = &i_Gpg2.m_pg[ic2];
 		//	多角形2の線分を穴付き多角形1で分割し指定側を残す
-		ist2 = DivideAddPgGPg2( sel2, fRev, *ppg2, i_Gpg1, &GLnw, o_pGpgo);
+		ist2 = DivideAddPolygonGPolygon2D( sel2, fRev, *ppg2, i_Gpg1, &GLnw, o_pGpgo);
 		MF_SET_ON( ist, ist2);
 	}
 	if (GLnw.m_n > 2) {
-		MakeGPg2InGLn2( GLnw, &GPgw);							// 正しい方向を持った線分群より領域群を作成する
+		MakeGPolygonInGLine2D( GLnw, &GPgw);							// 正しい方向を持った線分群より領域群を作成する
 		*o_pGpgo += GPgw;										// 領域群を返す
 	}
 
@@ -578,7 +578,7 @@ MINT MGeo::Merge2GPgtoGPg2(						// (  O) ステイタス
 // ---------------------( ３次元 )------------------------------
 //		多角形と多角形の和、差、積の穴付き多角形を求める
 //
-MINT MGeo::Merge2PgtoGPg3(						// (  O) ステイタス
+MINT MGeo::Merge2PgtoGPolygon3D(						// (  O) ステイタス
 												//			MC_NINT			(0): 交差なし
 												//			MC_INT			(1): 交差あり
 												//			MC_MATCH		(4): 選択条件に合う部分あり
@@ -596,23 +596,23 @@ MINT MGeo::Merge2PgtoGPg3(						// (  O) ステイタス
 {
 	MINT		ist = MC_NINT;
 	MgPlane3D	Pln1, Pln2;
-	MgMat3DE		MatXY;							// Pln to XY平面 ３Ｄマトリックス
-	MgMat3DE		MatPln;							// XY平面 to Pln ３Ｄマトリックス
+	MgMat3E		MatXY;							// Pln to XY平面 ３Ｄマトリックス
+	MgMat3E		MatPln;							// XY平面 to Pln ３Ｄマトリックス
 
 	MGPOLYG2( pg1, MX_PNT0);
 	MGPOLYG2( pg2, MX_PNT0);
 	MGGPOLYG2( gpg3, MX_LIN1, MX_PNT0, MX_PNT0);
 
-	Pln1 = MgPlane3DC( i_Pg1);									// 多角形1の平面係数を取り出す
-	Pln2 = MgPlane3DC( i_Pg2);									// 多角形2の平面係数を取り出す
+	Pln1 = MgPlanePolygon3D( i_Pg1);							// 多角形1の平面係数を取り出す
+	Pln2 = MgPlanePolygon3D( i_Pg2);									// 多角形2の平面係数を取り出す
 	if (Pln1 != Pln2)
 		MQUIT;													// 同一平面上に無い
 
-	Mat3PlntoXY( Pln1, i_Pg1.m_P[0], &MatXY, &MatPln);			// ３Ｄ→２Ｄ用変換マトリックスと逆変換マトリックスを求める
+	Mat3EPlntoXY( Pln1, i_Pg1.m_P[0], &MatXY, &MatPln);			// ３Ｄ→２Ｄ用変換マトリックスと逆変換マトリックスを求める
 	Polyg3Dto2D( i_Pg1, MatXY, &pg1);							// 多角形1を２次元に変換する
 	Polyg3Dto2D( i_Pg2, MatXY, &pg2);							// 多角形2を２次元に変換する
 
-	ist = Merge2PgtoGPg2( i_Sel, pg1, pg2, &gpg3);
+	ist = Merge2PgtoGPolygon2D( i_Sel, pg1, pg2, &gpg3);
 	GPolyg2Dto3D( gpg3, MatPln, o_pGPgo);
 exit:
 	return ist;
@@ -622,7 +622,7 @@ exit:
 // ---------------------( ３次元 )------------------------------
 //		多角形と穴付き多角形の和、差、積の穴付き多角形を求める
 //
-MINT MGeo::MergePgGPgtoGPg3(					// (  O) ステイタス
+MINT MGeo::MergePgGPgtoGPolygon3D(					// (  O) ステイタス
 												//			MC_NINT			(0): 交差なし
 												//			MC_INT			(1): 交差あり
 												//			MC_MATCH		(4): 選択条件に合う部分あり
@@ -640,24 +640,24 @@ MINT MGeo::MergePgGPgtoGPg3(					// (  O) ステイタス
 {
 	MINT		ist = MC_NINT;
 	MgPlane3D	Pln1, Pln2;
-	MgMat3DE		MatXY;							// Pln to XY平面 ３Ｄマトリックス
-	MgMat3DE		MatPln;							// XY平面 to Pln ３Ｄマトリックス
+	MgMat3E		MatXY;							// Pln to XY平面 ３Ｄマトリックス
+	MgMat3E		MatPln;							// XY平面 to Pln ３Ｄマトリックス
 
 	MGPOLYG2( pg1, MX_PNT0);
 	MGGPOLYG2( gpg2, MX_LIN1, MX_PNT0, MX_PNT0);
 	MGGPOLYG2( gpg3, MX_LIN1, MX_PNT0, MX_PNT0);
 //
 
-	Pln1 = MgPlane3DC( i_Pg1);										// 多角形1の平面係数を取り出す
-	Pln2 = MgPlane3DC( i_GPg2.m_Pg[0]);								// 穴付き多角形2の平面係数を取り出す
+	Pln1 = MgPlanePolygon3D( i_Pg1);										// 多角形1の平面係数を取り出す
+	Pln2 = MgPlanePolygon3D( i_GPg2.m_Pg[0]);								// 穴付き多角形2の平面係数を取り出す
 	if (Pln1 != Pln2)
 		MQUIT;													// 同一平面上に無い
 
-	Mat3PlntoXY( Pln1, i_Pg1.m_P[0], &MatXY, &MatPln);			// ３Ｄ→２Ｄ用変換マトリックスと逆変換マトリックスを求める
+	Mat3EPlntoXY( Pln1, i_Pg1.m_P[0], &MatXY, &MatPln);			// ３Ｄ→２Ｄ用変換マトリックスと逆変換マトリックスを求める
 	Polyg3Dto2D( i_Pg1, MatXY, &pg1);							// 穴付き多角形1を２次元に変換する
 	GPolyg3Dto2D( i_GPg2, MatXY, &gpg2);						// 穴付き多角形2を２次元に変換する
 
-	ist = MergePgGPgtoGPg2( i_Sel, pg1, gpg2, &gpg3);
+	ist = MergePgGPgtoGPolygon2D( i_Sel, pg1, gpg2, &gpg3);
 	GPolyg2Dto3D( gpg3, MatPln, o_pGPgo);
 exit:
 	return ist;
@@ -667,7 +667,7 @@ exit:
 // ---------------------( ３次元 )------------------------------
 //		穴付き多角形と多角形の和、差、積の穴付き多角形を求める
 //
-MINT MGeo::MergeGPgPgtoGPg3(					// (  O) ステイタス
+MINT MGeo::MergeGPgPgtoGPolygon3D(					// (  O) ステイタス
 												//			MC_NINT			(0): 交差なし
 												//			MC_INT			(1): 交差あり
 												//			MC_MATCH		(4): 選択条件に合う部分あり
@@ -685,26 +685,26 @@ MINT MGeo::MergeGPgPgtoGPg3(					// (  O) ステイタス
 {
 	MINT		ist = MC_NINT;
 	MgPlane3D	Pln1, Pln2;
-	MgMat3DE		MatXY;							// Pln to XY平面 ３Ｄマトリックス
-	MgMat3DE		MatPln;							// XY平面 to Pln ３Ｄマトリックス
-	MgMat3DE		Dbg1;
-	MgMat3DE		Dbg2;
+	MgMat3E		MatXY;							// Pln to XY平面 ３Ｄマトリックス
+	MgMat3E		MatPln;							// XY平面 to Pln ３Ｄマトリックス
+	MgMat3E		Dbg1;
+	MgMat3E		Dbg2;
 	MGGPOLYG2( gpg1, MX_LIN1, MX_PNT0, MX_PNT0);
 	MGPOLYG2( pg2, MX_PNT0);
 	MGGPOLYG2( gpg3, MX_LIN1, MX_PNT0, MX_PNT0);
 //
-	Pln1 = MgPlane3DC( i_GPg1.m_Pg[0]);							// 穴付き多角形1の平面係数を取り出す
-	Pln2 = MgPlane3DC( i_Pg2);									// 多角形2の平面係数を取り出す
+	Pln1 = MgPlanePolygon3D( i_GPg1.m_Pg[0]);							// 穴付き多角形1の平面係数を取り出す
+	Pln2 = MgPlanePolygon3D( i_Pg2);									// 多角形2の平面係数を取り出す
 	if (Pln1 != Pln2)
 		MQUIT;													// 同一平面上に無い
 
-	Mat3PlntoXY( Pln1, i_GPg1.m_Pg[0].m_P[0], &MatXY, &MatPln);	// ３Ｄ→２Ｄ用変換マトリックスと逆変換マトリックスを求める
+	Mat3EPlntoXY( Pln1, i_GPg1.m_Pg[0].m_P[0], &MatXY, &MatPln);	// ３Ｄ→２Ｄ用変換マトリックスと逆変換マトリックスを求める
 	Dbg1 = MatXY * MatPln;
 	Dbg2 = MatPln * MatXY;
 	GPolyg3Dto2D( i_GPg1, MatXY, &gpg1);						// 穴付き多角形1を２次元に変換する
 	Polyg3Dto2D( i_Pg2, MatXY, &pg2);							// 穴付き多角形2を２次元に変換する
 
-	ist = MergeGPgPgtoGPg2( i_Sel, gpg1, pg2, &gpg3);
+	ist = MergeGPgPgtoGPolygon2D( i_Sel, gpg1, pg2, &gpg3);
 	GPolyg2Dto3D( gpg3, MatPln, o_pGPgo);
 exit:
 	return ist;
@@ -714,7 +714,7 @@ exit:
 // ---------------------( ３次元 )------------------------------
 //		穴付き多角形と穴付き多角形の和、差、積の穴付き多角形を求める
 //
-MINT MGeo::Merge2GPgtoGPg3(						// (  O) ステイタス
+MINT MGeo::Merge2GPgtoGPolygon3D(						// (  O) ステイタス
 												//			MC_NINT			(0): 交差なし
 												//			MC_INT			(1): 交差あり
 												//			MC_MATCH		(4): 選択条件に合う部分あり
@@ -732,24 +732,24 @@ MINT MGeo::Merge2GPgtoGPg3(						// (  O) ステイタス
 {
 	MINT		ist = MC_NINT;
 	MgPlane3D	Pln1, Pln2;
-	MgMat3DE		MatXY;								// Pln to XY平面 ３Ｄマトリックス
-	MgMat3DE		MatPln;								// XY平面 to Pln ３Ｄマトリックス
+	MgMat3E		MatXY;								// Pln to XY平面 ３Ｄマトリックス
+	MgMat3E		MatPln;								// XY平面 to Pln ３Ｄマトリックス
 
 	MGGPOLYG2( gpg1, MX_LIN1, MX_PNT0, MX_PNT0);
 	MGGPOLYG2( gpg2, MX_LIN1, MX_PNT0, MX_PNT0);
 	MGGPOLYG2( gpg3, MX_LIN1, MX_PNT0, MX_PNT0);
 //
 
-	Pln1 = MgPlane3DC( i_GPg1.m_Pg[0]);							// 穴付き多角形1の平面係数を取り出す
-	Pln2 = MgPlane3DC( i_GPg2.m_Pg[0]);							// 穴付き多角形2の平面係数を取り出す
+	Pln1 = MgPlanePolygon3D( i_GPg1.m_Pg[0]);							// 穴付き多角形1の平面係数を取り出す
+	Pln2 = MgPlanePolygon3D( i_GPg2.m_Pg[0]);							// 穴付き多角形2の平面係数を取り出す
 	if (Pln1 != Pln2)
 		MQUIT;													// 同一平面上に無い
 
-	Mat3PlntoXY( Pln1, i_GPg1.m_Pg[0].m_P[0], &MatXY, &MatPln);		// ３Ｄ→２Ｄ用変換マトリックスと逆変換マトリックスを求める
+	Mat3EPlntoXY( Pln1, i_GPg1.m_Pg[0].m_P[0], &MatXY, &MatPln);		// ３Ｄ→２Ｄ用変換マトリックスと逆変換マトリックスを求める
 	GPolyg3Dto2D( i_GPg1, MatXY, &gpg1);							// 穴付き多角形1を２次元に変換する
 	GPolyg3Dto2D( i_GPg2, MatXY, &gpg2);							// 穴付き多角形2を２次元に変換する
 
-	ist = Merge2GPgtoGPg2( i_Sel, gpg1, gpg2, &gpg3);
+	ist = Merge2GPgtoGPolygon2D( i_Sel, gpg1, gpg2, &gpg3);
 	GPolyg2Dto3D( gpg3, MatPln, o_pGPgo);
 exit:
 	return ist;
@@ -763,7 +763,7 @@ exit:
 //				(2) 選択条件が辺上逆方向の場合は、逆方向の時残す
 //				(3) その他の場合は捨てる
 //
-MINT MGeo::DivideAdd2Pg2(							// (  O) ステイタス
+MINT MGeo::DivideAdd2Polygon2D(							// (  O) ステイタス
 													//			MC_NINT			(0): 交差なし
 													//			MC_INT			(1): 交差あり
 													//			MC_MATCH		(4): 選択条件に合う部分あり
@@ -797,7 +797,7 @@ MINT MGeo::DivideAdd2Pg2(							// (  O) ステイタス
 	fcls = false;												// 多角形1の線分と多角形2との交差有無 (0:無し、1:有り)
 	for ( icb=i_pg1.m_n-1,ic1=0; ic1<i_pg1.m_n; icb=ic1,ic1++) {
 		lnw1 = MgLine2D( i_pg1.m_p[icb], i_pg1.m_p[ic1]);		// 線分を多角形で切る
-		ist1 = DivideAddLnPg2( i_Sel1, lnw1, i_pg2, &GLnw);
+		ist1 = DivideAddLinePolygon2D( i_Sel1, lnw1, i_pg2, &GLnw);
 		if (!MF_CHECK_AND( ist1, (MC_NINT | MC_MATCH)))			// 多角形の辺に削除部分あり(交差または選択範囲外側)
 			 fcls = true;
 	}
@@ -827,7 +827,7 @@ MINT MGeo::DivideAdd2Pg2(							// (  O) ステイタス
 //				(3) その他の場合は捨てる
 //
 
-MINT MGeo::DivideAddPgGPg2(							// (  O) ステイタス
+MINT MGeo::DivideAddPolygonGPolygon2D(							// (  O) ステイタス
 													//			MC_NINT			(0): 交差なし
 													//			MC_INT			(1): 交差あり
 													//			MC_MATCH		(4): 選択条件に合う部分あり
@@ -861,7 +861,7 @@ MINT MGeo::DivideAddPgGPg2(							// (  O) ステイタス
 	fcls = false;												// 多角形1の線分と穴付き多角形2との交差有無 (0:無し、1:有り)
 	for ( icb=i_pg1.m_n-1,ic1=0; ic1<i_pg1.m_n; icb=ic1,ic1++) {
 		lnw1 = MgLine2D( i_pg1.m_p[icb], i_pg1.m_p[ic1]);		// 線分を穴付き多角形で切る
-		ist1 = DivideAddLnGPg2( i_Sel1, lnw1, i_Gpg2, &GLnw);
+		ist1 = DivideAddLineGPolygon2D( i_Sel1, lnw1, i_Gpg2, &GLnw);
 		if (!MF_CHECK_AND( ist1, (MC_NINT | MC_MATCH)))			// 多角形1の辺に削除部分あり(交差または選択範囲外側)
 			 fcls = true;
 	}
@@ -887,7 +887,7 @@ MINT MGeo::DivideAddPgGPg2(							// (  O) ステイタス
 
 #define	MX_AREA_BY_PT	20						// １点の周りの最大領域数
 
-void MGeo::MakeGPg2InGLn2(
+void MGeo::MakeGPolygonInGLine2D(
 				const	MgGLine2D&	i_Gln1,		// (I  ) 正しい方向を持つ線分群
 						MgGPolyg2D*	o_pGpg3		// (  O) 領域群
 				)
@@ -909,7 +909,7 @@ void MGeo::MakeGPg2InGLn2(
 			gLnW1.m_ln[ic1-1] = gLnW1.m_ln[ic1];
 		gLnW1.m_n--;
 		nHk = gLnW1.m_n;
-		bst1 = MakeGPg2FromLn2InGLn2( Lnh1, &gLnW1, &nHk, &pgW1);
+		bst1 = MakeGPolygonFromLineInGLine2D( Lnh1, &gLnW1, &nHk, &pgW1);
 		if (bst1)
 			(*o_pGpg3) += pgW1;
 	}
@@ -919,7 +919,7 @@ void MGeo::MakeGPg2InGLn2(
 // ---------------------( ２次元 )------------------------------
 //		GLn1の方向を考慮して直線分割線分GLn2を追加し領域群を作成する
 //
-void MGeo::MakeGPg2In2GLn2(
+void MGeo::MakeGPolygonIn2GLine2D(
 				const	MgGLine2D&	i_Gln1,		// (I  ) 正しい方向を持つ線分群
 				const	MgGLine2D&	i_Gln2,		// (I  ) 不正確な方向の線分群
 						MgGPolyg2D*	o_Gpg3		// (  O) 領域群
@@ -945,7 +945,7 @@ void MGeo::MakeGPg2In2GLn2(
 			GLnW1.m_ln[ic1-1] = GLnW1.m_ln[ic1];
 		GLnW1.m_n--;
 		nHk--;
-		bst = MakeGPg2FromLn2InGLn2( Lnh1, &GLnW1, &nHk, &PgW1);
+		bst = MakeGPolygonFromLineInGLine2D( Lnh1, &GLnW1, &nHk, &PgW1);
 		if (bst)
 			(*o_Gpg3) += PgW1;
 	}
@@ -955,7 +955,7 @@ void MGeo::MakeGPg2In2GLn2(
 // ---------------------( ２次元 )------------------------------
 //		指定線分より始まり線分群の線分を交点で分割後に結合して最小の多角形を作成する
 //
-bool MGeo::MakeGPg2FromLn2InGLn2(				// (  O) ステイタス　true: 正常作成　false: 作成不可
+bool MGeo::MakeGPolygonFromLineInGLine2D(				// (  O) ステイタス　true: 正常作成　false: 作成不可
 				const	MgLine2D&	i_ln1,		// (I  ) 指定線分
 				const	MgGLine2D&	i_Gln2,		// (I  ) 結合する線分群
 						MgPolyg2D*	o_ppg3		// (  O) 領域
@@ -969,11 +969,11 @@ bool MGeo::MakeGPg2FromLn2InGLn2(				// (  O) ステイタス　true: 正常作成　false:
 	MGPOLYG2( PgW1,	MX_PNT1);									// 多角形頂点
 
 	o_ppg3->m_n = 0;
-	DivideGLn2( i_Gln2, &GLnW1);
+	DivideGLine2D( i_Gln2, &GLnW1);
 	nHk = 0;
 	GLn2t = i_Gln2;
 
-	bst = MakeGPg2FromLn2InGLn2( i_ln1, &GLnW1, &nHk, &PgW1);
+	bst = MakeGPolygonFromLineInGLine2D( i_ln1, &GLnW1, &nHk, &PgW1);
 	if (bst)
 		*o_ppg3 = PgW1;
 	return bst;
@@ -983,7 +983,7 @@ bool MGeo::MakeGPg2FromLn2InGLn2(				// (  O) ステイタス　true: 正常作成　false:
 // ---------------------( ２次元 )------------------------------
 //		指定線分より始まり線分群の線分を結合して最小の多角形を作成する
 //
-bool MGeo::MakeGPg2FromLn2InGLn2(				// (  O) ステイタス　true: 正常作成　false: 作成不可
+bool MGeo::MakeGPolygonFromLineInGLine2D(				// (  O) ステイタス　true: 正常作成　false: 作成不可
 				const	MgLine2D&	i_ln1,		// (I  ) 指定線分
 						MgGLine2D*	io_Gln2,	// (I O) 結合する線分群
 						MINT*		io_nHk,		// (I O) 結合する線分の中の正しい方向を持つ線分数（先頭より幾つかを表す）
@@ -1082,7 +1082,7 @@ bool MGeo::MakeGPg2FromLn2InGLn2(				// (  O) ステイタス　true: 正常作成　false:
 // ---------------------( ２次元 )------------------------------
 //		穴付き多角形を多角形に結合する
 //
-void MGeo::ConnectGPgtoPg2(						//
+void MGeo::ConnectGPolygontoPolygon2D(						//
 				const	MgGPolyg2D&	i_GpgI,		// (I  ) 穴付き多角形
 						MgPolyg2D*	o_pgO		// (  O) 結合後の多角形
 				)
@@ -1131,7 +1131,7 @@ void MGeo::ConnectGPgtoPg2(						//
 // ---------------------( ３次元 )------------------------------
 //		穴付き多角形を多角形に結合する
 //
-void MGeo::ConnectGPgtoPg3(						//
+void MGeo::ConnectGPolygontoPolygon3D(						//
 				const	MgGPolyg3D&	i_GPgI,		// (I  ) 穴付き多角形
 				const	MgVect3D&	i_VuH,		// (I  ) 法線方向
 						MgPolyg3D*	o_pPgO		// (  O) 結合後の多角形
@@ -1164,7 +1164,7 @@ void MGeo::ConnectGPgtoPg3(						//
 					V12 = gPgW.m_Pg[ic2].m_P[ic2a1] - Pt1;
 					rL2 = V12 * V12;											// 距離の二乗
 
-					if ((rL2 - rMinL2) * (rL2 - rMinL2) < g_gTol.D_2 * 4 * rL2) {
+					if ((rL2 - rMinL2) * (rL2 - rMinL2) < MGPTOL->D_2 * 4 * rL2) {
 						V1 = gPgW.m_Pg[ic2min].m_P[ic2a1] - gPgW.m_Pg[ic2min].m_P[ic2a2];
 						V1p = Pt1 - gPgW.m_Pg[ic2min].m_P[ic2a2];
 						V2 = gPgW.m_Pg[ic2min].m_P[ic2a] - gPgW.m_Pg[ic2min].m_P[ic2a1];
@@ -1213,8 +1213,8 @@ void MGeo::ConnectGPgtoPg3(						//
 		// ３点が直線に並んでいる場合は中央の点を間引きする
 		MREAL D12 = (V1 ^ V2) * i_VuH;
 			MBLOGPRINTF( L"D12", D12);
-			MBLOGPRINTF( L"g_gTol.D_2", g_gTol.D_2);
-		if (D12 * D12 > V2 * V2 * g_gTol.D_2)
+			MBLOGPRINTF( L"MGPTOL->D_2", MGPTOL->D_2);
+		if (D12 * D12 > V2 * V2 * MGPTOL->D_2)
 			(*o_pPgO) += gPgW.m_Pg[0].m_P[ic1b1];
 	}
 //								PgO->Print( Mstr( "051127 穴付き多角形を多角形に結合 PgO"));

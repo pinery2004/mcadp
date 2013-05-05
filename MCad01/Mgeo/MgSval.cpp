@@ -25,7 +25,7 @@ namespace MC
 //		共通　形状演算
 //
 ////	------------- Ｓ値の算出　------------------
-//MREAL MGeo::SVal2ULn3(						// (  O) Ｓ値(２直線の方向ベクトルからなる平行６面体の体積）
+//MREAL MGeo::SVal2ULine3D(						// (  O) Ｓ値(２直線の方向ベクトルからなる平行６面体の体積）
 //			    const	MgULine3D&	ULn1,		// (I  ) 直線1
 //				const	MgULine3D&	ULn2		// (I  ) 直線2
 //		)
@@ -47,7 +47,7 @@ namespace MC
 //}
 
 ////
-//MREAL MGeo::SValULnLn3(						// (  O) Ｓ値(直線の方向ベクトルと線分からなる平行６面体の体積）
+//MREAL MGeo::SValULineLine3D(						// (  O) Ｓ値(直線の方向ベクトルと線分からなる平行６面体の体積）
 //			    const	MgULine3D&	ULn1,		// (I  ) 直線1
 //				const	MgLine3D&	Ln2			// (I  ) 線分2
 //		)
@@ -69,7 +69,7 @@ namespace MC
 //}
 
 ////
-//MREAL MGeo::SVal2Ln3(							// (  O) Ｓ値(2線分からなる平行６面体の体積）
+//MREAL MGeo::SVal2Line3D(							// (  O) Ｓ値(2線分からなる平行６面体の体積）
 //			    const	MgLine3D&	Ln1,		// (I  ) 線分1
 //				const	MgLine3D&	Ln2			// (I  ) 線分2
 //		)
@@ -113,7 +113,7 @@ namespace MC
 //}
 
 ////
-//void MGeo::SVal2LnS3(							//
+//void MGeo::SVal2Line3D(							//
 //			    const MgLine3D& Ln1,			// (I  ) 線分1
 //				const MgLine3D& Ln2,			// (I  ) 線分2
 //				const MgVect3D& vso,			// (I  ) 線分1と線分2がある平面の法線ベクトル

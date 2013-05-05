@@ -65,10 +65,12 @@ public:
 //	static	MREAL	ZN;					//	ゼロ判定用	Normarize用軸方向最小長さ（現在不使用）
 	static	MREAL	D;					//	同一座標判定用	線分長さ		許容誤差
 	static	MREAL	L;					//	同一論理座標判定用	線分長さ	許容誤差
+	static	MREAL	U;					//	同一単位ベクトル判定用			許容誤差
 	static	MREAL	A;					//	同一角度判定用	角度(ラジアン)	許容誤差
 	static	MREAL	S;					//	同一平面判定用	平面			許容誤差
 	static	MREAL	D_2;				//	同一座標判定用	線分長さ		許容誤差**2
 	static	MREAL	L_2;				//	同一論理座標判定用	線分長さ	許容誤差**2
+	static	MREAL	U_2;				//	同一単位ベクトル判定用			許容誤差**2
 	static	MREAL	A_2;				//	同一角度判定用	角度(ラジアン)	許容誤差**2
 	static	MREAL	S_2;				//	同一平面判定用	平面			許容誤差**2
 };
@@ -104,6 +106,8 @@ public:
 						 D = i_rD; D_2 = i_rD * i_rD;}
 	static void SetL( MREAL i_rL) {
 						 L = i_rL; L_2 = i_rL * i_rL;}
+	static void SetU( MREAL i_rU) {
+						 U = i_rU; D_2 = i_rU * i_rU;}
 	static void SetA( MREAL i_rA) {
 						 A = i_rA; A_2 = i_rA * i_rA;}
 	static void SetS( MREAL i_rS) {

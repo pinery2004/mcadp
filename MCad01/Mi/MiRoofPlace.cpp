@@ -183,7 +183,7 @@ MhRfm*	mhHaitiIn::SrchRfm(							// (  O) âÆç™ñ Å@Ç‹ÇΩÇÕÅ@NULL
 				continue;
 			pgRfm = pRoofEn->GetpGRfm()->m_st[ic1].m_Pg;		// É|ÉäÉSÉìÅ@ÇRÇcÅ®ÇQÇc
 			
-			if ( MGeo::ChkPt2OnPg2WS( pt1, pgRfm, &ist1)) {
+			if ( MGeo::ChkPointOnPolygon2DWS( pt1, pgRfm, &ist1)) {
 				if ( imode == MC_PRI_MIN_AREA) {
 					rArea = pgRfm.Area();
 					if ( rArea < rMinArea) {

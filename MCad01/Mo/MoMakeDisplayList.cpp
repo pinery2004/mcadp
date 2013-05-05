@@ -71,7 +71,7 @@ namespace MC
 	ptW[0] = (MgPoint2D&)pPlcTEn->GetPIPlcIti( 0);
 	ptW[1] = (MgPoint2D&)pPlcTEn->GetPIPlcIti( 1);
 	vtW = ptW[1] - ptW[0];
-	vuW = MGeo::UnitizeV2( vtW);
+	vuW = MGeo::UnitizeVect2D( vtW);
 	vtWidthR = pPlcTEn->GetMbWidthR() * vuW.RotR90(); 
 	vtWidth = pPlcTEn->GetMbWidth() * vuW.RotL90(); 
 
@@ -427,7 +427,7 @@ void MdlDispList::DrawKaiko(
 		   i_pPlcEn->GetPIOkuHosei()) * rB;						// パネル手前側補正値 + 奥行長 + 奥側補正値
 	if ( i_pPlcEn->IsYanePanel()) {
 		vuRt = MgVect2DC( VuRt);
-		rlXY = MGeo::Abs( vuRt);
+		rlXY = MGeo::AbsVect2D( vuRt);
 		if ( !MGeo::Zero( rlXY)) {
 			rTH /= rlXY;
 			rOY /= rlXY;

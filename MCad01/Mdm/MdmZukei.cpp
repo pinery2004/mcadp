@@ -46,7 +46,7 @@ namespace MC
 ////
 //MINT	MdzSetPartPlc (
 //						MDID		i_idEnt,	// エンティテイID
-//						MgMat3DE*		i_pmat,		// 配置座標系マトリックス
+//						MgMat3E*		i_pmat,		// 配置座標系マトリックス
 //						MDID		i_idB		// 部品ID
 //				)
 //{
@@ -79,7 +79,7 @@ namespace MC
 //		図形情報の座標変換
 //
 MINT DZukei::MdzTrans (
-						MgMat3DE&	i_Mat,		// 配置座標系マトリックス
+						MgMat3E&	i_Mat,		// 配置座標系マトリックス
 						MDFIG&		i_stFig,	// 図形情報
 						MDFIG*		o_stFig		// 座標変換後図形情報
 				)

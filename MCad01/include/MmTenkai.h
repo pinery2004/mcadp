@@ -53,8 +53,8 @@ public:
 class DLL_EXPORT JTTenkai {
 public:
 	static	JTTenkaiPr 	z_TenkaiPara;			// 住棟展開パラメータ
-	static	MgMat2DE		z_matTenkai[MX_NJUKO];	// 住棟展開マトリックス
-	static	MgMat2DE		z_matRTenkai[MX_NJUKO];	// 住棟展開逆マトリックス
+	static	MgMat2E		z_matTenkai[MX_NJUKO];	// 住棟展開マトリックス
+	static	MgMat2E		z_matRTenkai[MX_NJUKO];	// 住棟展開逆マトリックス
 	static	MgMinMaxR2D	z_mmTenkai[MX_NJUKO];	// 住戸領域ＭｉｎＭａｘ
 	static	MINT		z_iJuko;				// 選択住戸
 	static	MUINT		z_iTenkai[MX_NJUKO];	// 住棟展開制御

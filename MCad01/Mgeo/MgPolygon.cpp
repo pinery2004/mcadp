@@ -149,9 +149,9 @@ MINT MgPolyg2D::Rotation() const
 		s += (Pb ^ Pc);											// ‰ñ“]•ûŒü‚ðl—¶‚µ‚½‘½ŠpŒ`‚Ì–ÊÏ*2‚ð‹‚ß‚é
 		Pb = Pc;
 	}
-	if (s > g_gTol.D_2) {
+	if (s > MGPTOL->D_2) {
 		ist = MC_LEFT_ROT;
-	} else if (s < -g_gTol.D_2) {
+	} else if (s < -MGPTOL->D_2) {
 		ist = MC_RIGHT_ROT;
 	}							
 	return ist;

@@ -67,7 +67,7 @@ void MCmdLineDelete()
 			ptW[1] = *(MgPoint2D*)&(pPlcEn->GetPIPlcIti( 1));
 
 			MgVect2D	VtW = ptW[1] - ptW[0];
-			MgVect2D	VtUtW = MGeo::UnitizeV2( VtW);
+			MgVect2D	VtUtW = MGeo::UnitizeVect2D( VtW);
 			MgVect2D	VtWidthR = (pPlcEn->GetMbWidthR() + pPlcEn->GetPISinZure()) * VtUtW.RotR90(); 
 			MgVect2D	VtWidth = pPlcEn->GetMbWidth() * VtUtW.RotL90(); 
 			pg1.m_n = 0;
@@ -76,7 +76,7 @@ void MCmdLineDelete()
 			pg1 += (pg1.m_p[1] + VtWidth);
 			pg1 += (pg1.m_p[0] + VtWidth);
 
-			MGeo::ChkPt2OnPg2WS( pt1, pg1, &ist1);
+			MGeo::ChkPointOnPolygon2DWS( pt1, pg1, &ist1);
 			if ( ist1 == MC_IN_BORDER) {
 				if (mhHaitiIn::ChkParts( NULL, MP_GP_TAIRYOKU, Mstr( "•Ç"), NULL, pPlcEn))
 					IeModel::MhKabeSetUpFlg();
@@ -136,7 +136,7 @@ void MCmdRoofDelete()
 				}
 			}
 			rmmMdl = MgMinMaxR2D( MgPoint2DC( rMmMdl.min), MgPoint2DC( rMmMdl.max));
-			if ( MGeo::ChkPt2InMMR2( pt1, rmmMdl))
+			if ( MGeo::ChkPointInMinmaxR2D( pt1, rmmMdl))
 				break;
 		}
 

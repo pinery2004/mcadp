@@ -26,12 +26,12 @@ namespace MC
 //
 //	ベクトルと水平線の角度を求める
 //
-MREAL	MGeo::GetAngleVH2(					// (  O) 左回転角度　（度）
-												//		ベクトルの長さがg_gTol.D未満の場合は0度を返す
+MREAL	MGeo::AngleVectH2D(					// (  O) 左回転角度　（度）
+												//		ベクトルの長さがMGPTOL->D未満の場合は0度を返す
 				const	MgVect2D&	v1			// (I  ) ベクトル
 		)
 {
-	if ((v1 * v1) < g_gTol.D_2) return 0.0f;
+	if ((v1 * v1) < MGPTOL->D_2) return 0.0f;
 	
 	return MGDEGREE( MREAL( atan2( v1.y, v1.x)));
 }
@@ -39,8 +39,8 @@ MREAL	MGeo::GetAngleVH2(					// (  O) 左回転角度　（度）
 /////////////////////////////////////////////////////////////////////////////
 //	２点と水平線の角度を求める
 //
-MREAL	MGeo::GetAngle2PtH2(					// (  O) 左回転角度　（度）
-												//		始点、終点間の距離がg_gTol.D未満の場合は0度を返す
+MREAL	MGeo::Angle2PointH2D(					// (  O) 左回転角度　（度）
+												//		始点、終点間の距離がMGPTOL->D未満の場合は0度を返す
 				const	MgPoint2D&	p1,			// (I  ) 始点
 				const	MgPoint2D&	p2			// (I  ) 終点
 		)
@@ -48,7 +48,7 @@ MREAL	MGeo::GetAngle2PtH2(					// (  O) 左回転角度　（度）
 	MgVect2D v1;
 	
 	v1 = p2 - p1;
-	if ((v1 * v1) < g_gTol.D_2) return 0.0f;
+	if ((v1 * v1) < MGPTOL->D_2) return 0.0f;
 	
 	return MGDEGREE( MREAL( atan2( v1.y, v1.x)));
 }
@@ -56,8 +56,8 @@ MREAL	MGeo::GetAngle2PtH2(					// (  O) 左回転角度　（度）
 /////////////////////////////////////////////////////////////////////////////
 //	２ベクトルの角度を求める
 //
-MREAL	MGeo::GetAngle2V2(						// (  O) 左回転角度　（度）
-												//		ベクトルの長さがg_gTol.D未満の場合は0度を返す
+MREAL	MGeo::Angle2Vect2D(						// (  O) 左回転角度　（度）
+												//		ベクトルの長さがMGPTOL->D未満の場合は0度を返す
 				const	MgVect2D&	v1,			// (I  ) ベクトル1
 				const	MgVect2D&	v2			// (I  ) ベクトル2
 		)
@@ -66,8 +66,8 @@ MREAL	MGeo::GetAngle2V2(						// (  O) 左回転角度　（度）
 //	MREAL ss2, s12, c12, ang;
 	MREAL s12, c12;
 //
-	if ((l1 = (v1 * v1)) < g_gTol.D_2 ||
-	    (l2 = (v2 * v2)) < g_gTol.D_2) return 0.0f;
+	if ((l1 = (v1 * v1)) < MGPTOL->D_2 ||
+	    (l2 = (v2 * v2)) < MGPTOL->D_2) return 0.0f;
 
 	s12 = (v1 ^ v2);
 	c12 = (v1 * v2);
@@ -91,8 +91,8 @@ MREAL	MGeo::GetAngle2V2(						// (  O) 左回転角度　（度）
 /////////////////////////////////////////////////////////////////////////////
 //	３点で作られる２直線の角度を求める
 //
-MREAL	MGeo::GetAngle3Pt2(						// (  O) 左回転角度　（度）
-												//		2点間の距離がg_gTol.D未満の場合は0度を返す
+MREAL	MGeo::Angle3Point2D(					// (  O) 左回転角度　（度）
+												//		2点間の距離がMGPTOL->D未満の場合は0度を返す
 				const	MgPoint2D&	p1,			// (I  ) 点1
 				const	MgPoint2D&	p2,			// (I  ) 点2
 				const	MgPoint2D&	p3			// (I  ) 点3
@@ -102,26 +102,26 @@ MREAL	MGeo::GetAngle3Pt2(						// (  O) 左回転角度　（度）
 //
 	v21 = p1 - p2;
 	v23 = p3 - p2;
-	return GetAngle2V2(v21, v23);
+	return Angle2Vect2D(v21, v23);
 }
 
 /////////////////////////////////////////////////////////////////////////////
 //	２直線の角度を求める
 //
-MREAL	MGeo::GetAngle2ULn2(					// (  O) 左回転角度　（度）
-												//		2点間の距離がg_gTol.D未満の場合は0度を返す
+MREAL	MGeo::Angle2ULine2D(					// (  O) 左回転角度　（度）
+												//		2点間の距離がMGPTOL->D未満の場合は0度を返す
 				const	MgULine2D&	ULn1,		// (I  ) 線分1
 				const	MgULine2D&	ULn2		// (I  ) 線分2
 		)
 {
-	return GetAngle2V2(ULn1.v, ULn2.v);
+	return Angle2Vect2D(ULn1.v, ULn2.v);
 }
 
 /////////////////////////////////////////////////////////////////////////////
 //	直線と線分の角度を求める
 //
-MREAL	MGeo::GetAngleULnLn2(					// (  O) 左回転角度　（度）
-												//		2点間の距離がg_gTol.D未満の場合は0度を返す
+MREAL	MGeo::AngleULineLine2D(					// (  O) 左回転角度　（度）
+												//		2点間の距離がMGPTOL->D未満の場合は0度を返す
 				const	MgULine2D&	ULn1,		// (I  ) 直線1
 				const	MgLine2D&	Ln2			// (I  ) 線分2
 		)
@@ -129,12 +129,12 @@ MREAL	MGeo::GetAngleULnLn2(					// (  O) 左回転角度　（度）
 	MgVect2D	v2;
 //
 	v2 = Ln2.p[1] - Ln2.p[0];
-	return GetAngle2V2( ULn1.v, v2);
+	return Angle2Vect2D( ULn1.v, v2);
 }
 
 //	-------------------------------------------------------
-MREAL	MGeo::GetAngleLnULn2(					// (  O) 左回転角度　（度）
-												//		2点間の距離がg_gTol.D未満の場合は0度を返す
+MREAL	MGeo::AngleLineULine2D(					// (  O) 左回転角度　（度）
+												//		2点間の距離がMGPTOL->D未満の場合は0度を返す
 				const	MgLine2D&	Ln1,		// (I  ) 線分1
 				const	MgULine2D&	ULn2		// (I  ) 直線2
 		)
@@ -142,14 +142,14 @@ MREAL	MGeo::GetAngleLnULn2(					// (  O) 左回転角度　（度）
 	MgVect2D	v1;
 //
 	v1 = Ln1.p[1] - Ln1.p[0];
-	return GetAngle2V2(v1, ULn2.v);
+	return Angle2Vect2D(v1, ULn2.v);
 }
 
 /////////////////////////////////////////////////////////////////////////////
 //	２線分の角度を求める
 //
-MREAL	MGeo::GetAngle2Ln2(						// (  O) 左回転角度　（度）
-												//		2点間の距離がg_gTol.D未満の場合は0度を返す
+MREAL	MGeo::Angle2Line2D(						// (  O) 左回転角度　（度）
+												//		2点間の距離がMGPTOL->D未満の場合は0度を返す
 				const	MgLine2D&	Ln1,		// (I  ) 線分1
 				const	MgLine2D&	Ln2			// (I  ) 線分2
 		)
@@ -158,14 +158,14 @@ MREAL	MGeo::GetAngle2Ln2(						// (  O) 左回転角度　（度）
 //
 	v1 = Ln1.p[1] - Ln1.p[0];
 	v2 = Ln2.p[1] - Ln2.p[0];
-	return GetAngle2V2( v1, v2);
+	return Angle2Vect2D( v1, v2);
 }
 
 /////////////////////////////////////////////////////////////////////////////
 //	２ベクトルの角度を求める
 //
-MREAL	MGeo::GetAngle2V3(						// (  O) 左回転角度　（度）
-												//		ベクトルの長さがg_gTol.D未満の場合は0度を返す
+MREAL	MGeo::Angle2Vect3D(						// (  O) 左回転角度　（度）
+												//		ベクトルの長さがMGPTOL->D未満の場合は0度を返す
 				const	MgVect3D&	v1,			// (I  ) ベクトル1
 				const	MgVect3D&	v2,			// (I  ) ベクトル2
 				const	MgVect3D&	vn			// (I  ) ２ベクトルに直交する単位ベクトル
@@ -180,8 +180,8 @@ MREAL	MGeo::GetAngle2V3(						// (  O) 左回転角度　（度）
 
 	return MGDEGREE( MREAL( atan2( s12, c12)));
 /*
-	if ((l1 = (v1 * v1)) < g_gTol.D_2 ||
-	    (l2 = (v2 * v2)) < g_gTol.D_2) return 0.0f;
+	if ((l1 = (v1 * v1)) < MGPTOL->D_2 ||
+	    (l2 = (v2 * v2)) < MGPTOL->D_2) return 0.0f;
 	ss2 = MREAL(sqrt(l1 * l2));
 	s12 = ((v1 ^ v2) * vn) / ss2;
 	c12 = (v1 * v2) / ss2;
@@ -199,8 +199,8 @@ MREAL	MGeo::GetAngle2V3(						// (  O) 左回転角度　（度）
 /////////////////////////////////////////////////////////////////////////////
 //	３点で作られる２直線の角度を求める
 //
-MREAL	MGeo::GetAngle3Pt3(						// (  O) 左回転角度　（度）
-												//		2点間の距離がg_gTol.D未満の場合は0度を返す
+MREAL	MGeo::Angle3Point3D(						// (  O) 左回転角度　（度）
+												//		2点間の距離がMGPTOL->D未満の場合は0度を返す
 				const	MgPoint3D&	p1,			// (I  ) 点1
 				const	MgPoint3D&	p2,			// (I  ) 点2
 				const	MgPoint3D&	p3,			// (I  ) 点3
@@ -211,27 +211,27 @@ MREAL	MGeo::GetAngle3Pt3(						// (  O) 左回転角度　（度）
 //
 	v21 = p1 - p2;
 	v23 = p3 - p2;
-	return GetAngle2V3( v21, v23, vn);
+	return Angle2Vect3D( v21, v23, vn);
 }
 
 /////////////////////////////////////////////////////////////////////////////
 //	２直線の角度を求める
 //
-MREAL	MGeo::GetAngle2ULn3(					// (  O) 左回転角度　（度）
-												//		2点間の距離がg_gTol.D未満の場合は0度を返す
+MREAL	MGeo::Angle2ULine3D(					// (  O) 左回転角度　（度）
+												//		2点間の距離がMGPTOL->D未満の場合は0度を返す
 				const	MgULine3D&	ULn1,		// (I  ) 直線1
 				const	MgULine3D&	ULn2,		// (I  ) 直線2
 				const	MgVect3D&	vn			// (I  ) ２直線に直交する単位ベクトル
 		)
 {
-	return GetAngle2V3( ULn1.v, ULn2.v, vn);
+	return Angle2Vect3D( ULn1.v, ULn2.v, vn);
 }
 
 /////////////////////////////////////////////////////////////////////////////
 //	直線と線分の角度を求める
 //
-MREAL	MGeo::GetAngleULnLn3(					// (  O) 左回転角度　（度）
-												//		2点間の距離がg_gTol.D未満の場合は0度を返す
+MREAL	MGeo::AngleULineLine3D(					// (  O) 左回転角度　（度）
+												//		2点間の距離がMGPTOL->D未満の場合は0度を返す
 				const	MgULine3D&	ULn1,		// (I  ) 直線1
 				const	MgLine3D&	Ln2,		// (I  ) 線分2
 				const	MgVect3D&	vn			// (I  ) 直線と線分に直交する単位ベクトル
@@ -240,12 +240,12 @@ MREAL	MGeo::GetAngleULnLn3(					// (  O) 左回転角度　（度）
 	MgVect3D	v2;
 //
 	v2 = Ln2.p[1] - Ln2.p[0];
-	return GetAngle2V3( ULn1.v, v2, vn);
+	return Angle2Vect3D( ULn1.v, v2, vn);
 }
 
 //	-------------------------------------------------------
-MREAL	MGeo::GetAngleLnULn3(					// (  O) 左回転角度　（度）
-												//		2点間の距離がg_gTol.D未満の場合は0度を返す
+MREAL	MGeo::AngleLineULine3D(					// (  O) 左回転角度　（度）
+												//		2点間の距離がMGPTOL->D未満の場合は0度を返す
 				const	MgLine3D&	Ln1,		// (I  ) 線分1
 				const	MgULine3D&	ULn2,		// (I  ) 直線2
 				const	MgVect3D&	vn			// (I  ) 線分と直線に直交する単位ベクトル
@@ -254,14 +254,14 @@ MREAL	MGeo::GetAngleLnULn3(					// (  O) 左回転角度　（度）
 	MgVect3D	v1;
 //
 	v1 = Ln1.p[1] - Ln1.p[0];
-	return GetAngle2V3( v1, ULn2.v, vn);
+	return Angle2Vect3D( v1, ULn2.v, vn);
 }
 
 /////////////////////////////////////////////////////////////////////////////
 //	２線分の角度を求める
 //
-MREAL	MGeo::GetAngle2Ln3(						// (  O) 左回転角度　（度）
-												//		2点間の距離がg_gTol.D未満の場合は0度を返す
+MREAL	MGeo::Angle2Line3D(						// (  O) 左回転角度　（度）
+												//		2点間の距離がMGPTOL->D未満の場合は0度を返す
 				const	MgLine3D&	Ln1,		// (I  ) 線分1
 				const	MgLine3D&	Ln2,		// (I  ) 線分2
 				const	MgVect3D&	vn			// (I  ) ２線分に直行する単位ベクトル
@@ -271,7 +271,7 @@ MREAL	MGeo::GetAngle2Ln3(						// (  O) 左回転角度　（度）
 //
 	v1 = Ln1.p[1] - Ln1.p[0];
 	v2 = Ln2.p[1] - Ln2.p[0];
-	return GetAngle2V3( v1, v2, vn);
+	return Angle2Vect3D( v1, v2, vn);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -281,8 +281,8 @@ MREAL	MGeo::GetAngle2Ln3(						// (  O) 左回転角度　（度）
 //
 //	ベクトルと平面の角度を求める
 //
-MREAL	MGeo::GetAngleVPln3(					// (  O) 左回転角度　（度）
-												//		2点間の距離がg_gTol.D未満の場合は0度を返す
+MREAL	MGeo::AngleVectPln3D(					// (  O) 左回転角度　（度）
+												//		2点間の距離がMGPTOL->D未満の場合は0度を返す
 				const	MgVect3D&	v1,			// (I  ) ベクトル1
 				const	MgPlane3D&	Pln2		// (I  ) 平面2
 		)
@@ -291,15 +291,15 @@ MREAL	MGeo::GetAngleVPln3(					// (  O) 左回転角度　（度）
 //	MREAL s12, c12, ang;
 	MREAL s12, c12;
 //
-	if ((v1 * v1) < g_gTol.D_2) return 0.0f;
+	if ((v1 * v1) < MGPTOL->D_2) return 0.0f;
 	
-	c12 = Abs(v1 ^ Pln2.v);
+	c12 = AbsVect3D(v1 ^ Pln2.v);
 	s12 = Abs(v1 * Pln2.v);
 	
 	return MGDEGREE( MREAL( atan2( s12, c12)));
 /*
 	l1 = MgAbs(v1);
-	if (l1 < g_gTol.D) return 0.0f;
+	if (l1 < MGPTOL->D) return 0.0f;
 	c12 = MgAbs(v1 ^ Pln2.v) / l1;
 	s12 = MgAbs(v1 * Pln2.v) / l1;
 	if (s12 < 0.5) {
@@ -314,27 +314,27 @@ MREAL	MGeo::GetAngleVPln3(					// (  O) 左回転角度　（度）
 /////////////////////////////////////////////////////////////////////////////
 //	直線と平面の角度を求める
 //
-MREAL	MGeo::GetAngleULnPln3(					// (  O) 左回転角度　（度）
-												//		2点間の距離がg_gTol.D未満の場合は0度を返す
+MREAL	MGeo::AngleULinePln3D(					// (  O) 左回転角度　（度）
+												//		2点間の距離がMGPTOL->D未満の場合は0度を返す
 				const	MgULine3D&	ULn1,		// (I  ) 直線1
 				const	MgPlane3D&	Pln2		// (I  ) 平面2
 		)
 {
-	return GetAngleVPln3( ULn1.v, Pln2);
+	return AngleVectPln3D( ULn1.v, Pln2);
 }
 
 /////////////////////////////////////////////////////////////////////////////
 //	線分と平面の角度を求める
 //
-MREAL	MGeo::GetAngleLnPln3(					// (  O) 左回転角度　（度）
-												//		2点間の距離がg_gTol.D未満の場合は0度を返す
+MREAL	MGeo::AngleLinePln3D(					// (  O) 左回転角度　（度）
+												//		2点間の距離がMGPTOL->D未満の場合は0度を返す
 				const	MgLine3D&	Ln1,		// (I  ) 線分1
 				const	MgPlane3D&	Pln2		// (I  ) 平面2
 		)
 {
 	MgVect3D	v1;
 	v1 = Ln1.p[1] - Ln1.p[0];
-	return GetAngleVPln3( v1, Pln2);
+	return AngleVectPln3D( v1, Pln2);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -344,7 +344,7 @@ MREAL	MGeo::GetAngleLnPln3(					// (  O) 左回転角度　（度）
 //
 //	２直線間の角の2等分線を求める
 //
-void	MGeo::Bisector2ULn2(					// (  O) ステータス
+void	MGeo::Bisector2ULine2D(					// (  O) ステータス
 				const	MgULine2D&	ULn1,		// (I  ) 直線1
 				const	MgULine2D&	ULn2,		// (I  ) 直線2
 						MgULine2D*	ULn3		// (  O) 直線3
@@ -353,20 +353,20 @@ void	MGeo::Bisector2ULn2(					// (  O) ステータス
 	MREAL	c12;
 	MgVect2D vd;
 //
-	if ( Intr2ULn2(ULn1, ULn2, &(*ULn3).p) == MC_PARALLEL) (*ULn3).p = ULn1.p;
+	if ( Intr2ULine2D(ULn1, ULn2, &(*ULn3).p) == MC_PARALLEL) (*ULn3).p = ULn1.p;
 	c12 = ULn1.v * ULn2.v;
 	if ( c12 > -0.7) {
 		vd = (ULn1.v + ULn2.v);
 	} else {
-		vd = RotL90( ULn1.v - ULn2.v);
+		vd = RotL90Vect2D( ULn1.v - ULn2.v);
 	}
-	(*ULn3).v = MGeo::UnitizeV2(vd);
+	(*ULn3).v = MGeo::UnitizeVect2D(vd);
 }
 
 /////////////////////////////////////////////////////////////////////////////
 //	直線と線分間の角の2等分線を求める
 //
-void MGeo::BisectorULnLn2(						// (  O) ステータス
+void MGeo::BisectorULineLine2D(						// (  O) ステータス
 				const	MgULine2D&	ULn1,		// (I  ) 直線1
 				const	MgLine2D&	Ln2,		// (I  ) 線分2
 						MgULine2D*	ULn3		// (  O) 直線3
@@ -375,14 +375,14 @@ void MGeo::BisectorULnLn2(						// (  O) ステータス
 	MgULine2D	ULn2;
 //
 	ULn2.p = Ln2.p[0];
-	ULn2.v = MGeo::UnitizeV2(Ln2.p[1] - Ln2.p[0]);
-	Bisector2ULn2( ULn1, ULn2, ULn3);
+	ULn2.v = MGeo::UnitizeVect2D(Ln2.p[1] - Ln2.p[0]);
+	Bisector2ULine2D( ULn1, ULn2, ULn3);
 }
 
 /////////////////////////////////////////////////////////////////////////////
 //	線分と直線間の角の2等分線を求める
 //
-void MGeo::BisectorLnULn2(						// (  O) ステータス
+void MGeo::BisectorLineULine2D(						// (  O) ステータス
 				const	MgLine2D&	Ln1,		// (I  ) 線分1
 				const	MgULine2D&	ULn2,		// (I  ) 直線2
 						MgULine2D*	ULn3		// (  O) 直線3
@@ -391,14 +391,14 @@ void MGeo::BisectorLnULn2(						// (  O) ステータス
 	MgULine2D	ULn1;
 //
 	ULn1.p = Ln1.p[0];
-	ULn1.v = MGeo::UnitizeV2(Ln1.p[1] - Ln1.p[0]);
-	Bisector2ULn2( ULn1, ULn2, ULn3);
+	ULn1.v = MGeo::UnitizeVect2D(Ln1.p[1] - Ln1.p[0]);
+	Bisector2ULine2D( ULn1, ULn2, ULn3);
 }
 
 /////////////////////////////////////////////////////////////////////////////
 //	線分と線分間の角の2等分線を求める
 //
-void MGeo::Bisector2Ln2(						// (  O) ステータス
+void MGeo::Bisector2Line2D(						// (  O) ステータス
 				const	MgLine2D&	Ln1,		// (I  ) 線分1
 				const	MgLine2D&	Ln2,		// (I  ) 線分2
 						MgULine2D*	ULn3		// (  O) 直線3
@@ -408,10 +408,10 @@ void MGeo::Bisector2Ln2(						// (  O) ステータス
 	MgULine2D	ULn2;
 //
 	ULn1.p = Ln1.p[0];
-	ULn1.v = MGeo::UnitizeV2( Ln1.p[1] - Ln1.p[0]);
+	ULn1.v = MGeo::UnitizeVect2D( Ln1.p[1] - Ln1.p[0]);
 	ULn2.p = Ln2.p[0];
-	ULn2.v = MGeo::UnitizeV2( Ln2.p[1] - Ln2.p[0]);
-	Bisector2ULn2( ULn1, ULn2, ULn3);
+	ULn2.v = MGeo::UnitizeVect2D( Ln2.p[1] - Ln2.p[0]);
+	Bisector2ULine2D( ULn1, ULn2, ULn3);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -420,7 +420,7 @@ void MGeo::Bisector2Ln2(						// (  O) ステータス
 //
 //	２直線間の角の2等分線を求める
 //
-void MGeo::Bisector2ULn3(						// (  O) ステータス
+void MGeo::Bisector2ULine3D(						// (  O) ステータス
 				const	MgULine3D&	ULn1,		// (I  ) 直線1
 				const	MgULine3D&	ULn2,		// (I  ) 直線2
 						MgULine3D*	ULn3		// (  O) 直線3
@@ -431,7 +431,7 @@ void MGeo::Bisector2ULn3(						// (  O) ステータス
 	MgVect3D vp;
 	MgVect3D vd;
 //
-	if ( Intr2ULn3( ULn1, ULn2, &(*ULn3).p) == MC_PARALLEL) (*ULn3).p = ULn1.p;
+	if ( Intr2ULine3D( ULn1, ULn2, &(*ULn3).p) == MC_PARALLEL) (*ULn3).p = ULn1.p;
 	c12 = ULn1.v * ULn2.v;
 	if ( c12 > -0.7) {
 		vd = (ULn1.v + ULn2.v);
@@ -440,13 +440,13 @@ void MGeo::Bisector2ULn3(						// (  O) ステータス
 		vp = (ULn1.v ^ ULn2.v);
 		vd = vt ^ vp;
 	}
-	ULn3->v = UnitizeV3( vd);
+	ULn3->v = UnitizeVect3D( vd);
 }
 
 /////////////////////////////////////////////////////////////////////////////
 //	直線と線分間の角の2等分線を求める
 //
-void MGeo::BisectorULnLn3(						// (  O) ステータス
+void MGeo::BisectorULineLine3D(						// (  O) ステータス
 				const	MgULine3D&	ULn1,		// (I  ) 直線1
 				const	MgLine3D&	Ln2,		// (I  ) 線分2
 						MgULine3D*	ULn3		// (  O) 直線3
@@ -455,14 +455,14 @@ void MGeo::BisectorULnLn3(						// (  O) ステータス
 	MgULine3D ULn2;
 //
 	ULn2.p = Ln2.p[0];
-	ULn2.v = UnitizeV3(Ln2.p[1] - Ln2.p[0]);
-	Bisector2ULn3( ULn1, ULn2, ULn3);
+	ULn2.v = UnitizeVect3D(Ln2.p[1] - Ln2.p[0]);
+	Bisector2ULine3D( ULn1, ULn2, ULn3);
 }
 
 /////////////////////////////////////////////////////////////////////////////
 //	線分と直線間の角の2等分線を求める
 //
-void MGeo::BisectorLnULn3(						//
+void MGeo::BisectorLineULine3D(						//
 				const	MgLine3D&	Ln1,		// (I  ) 線分1
 				const	MgULine3D&	ULn2,		// (I  ) 直線2
 						MgULine3D*	ULn3		// (  O) 直線3
@@ -471,14 +471,14 @@ void MGeo::BisectorLnULn3(						//
 	MgULine3D ULn1;
 //
 	ULn1.p = Ln1.p[0];
-	ULn1.v = UnitizeV3(Ln1.p[1] - Ln1.p[0]);
-	Bisector2ULn3( ULn1, ULn2, ULn3);
+	ULn1.v = UnitizeVect3D(Ln1.p[1] - Ln1.p[0]);
+	Bisector2ULine3D( ULn1, ULn2, ULn3);
 }
 
 /////////////////////////////////////////////////////////////////////////////
 //	線分と線分間の角の2等分線を求める
 //
-void MGeo::Bisector2Ln3(						//
+void MGeo::Bisector2Line3D(						//
 				const	MgLine3D&	Ln1,		// (I  ) 線分1
 				const	MgLine3D&	Ln2,		// (I  ) 線分2
 						MgULine3D*	ULn3		// (  O) 直線3
@@ -488,10 +488,10 @@ void MGeo::Bisector2Ln3(						//
 	MgULine3D ULn2;
 //
 	ULn1.p = Ln1.p[0];
-	ULn1.v = UnitizeV3(Ln1.p[1] - Ln1.p[0]);
+	ULn1.v = UnitizeVect3D(Ln1.p[1] - Ln1.p[0]);
 	ULn2.p = Ln2.p[0];
-	ULn2.v = UnitizeV3(Ln2.p[1] - Ln2.p[0]);
-	Bisector2ULn3( ULn1, ULn2, ULn3);
+	ULn2.v = UnitizeVect3D(Ln2.p[1] - Ln2.p[0]);
+	Bisector2ULine3D( ULn1, ULn2, ULn3);
 }
 
 } // namespace MC

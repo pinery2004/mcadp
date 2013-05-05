@@ -475,7 +475,7 @@ void DispList::DspQuads(
 	VtLng = LnLf.p[1] - LnLf.p[0];
 	VtLf = LnRt.p[0] - LnLf.p[0];
 	VuUp = VtLng ^ VtLf;
-	VuUp.SetUnitize( g_gTol.L);									// 論理座標
+	VuUp.SetUnitize( MGPTOL->L);									// 論理座標
 
 	glBegin( GL_QUADS);
 		glNormal3r( VuUp.x, VuUp.y, VuUp.z);					// 面の法線ベクトル
@@ -508,13 +508,13 @@ void DispList::DrawPolygon(
 	VuRt = V1 ^ V2;
 	VuRt.SetUnitize();
 
-	MGeo::ConnectGPgtoPg3( GPgR, VuRt, &PgW);
+	MGeo::ConnectGPolygontoPolygon3D( GPgR, VuRt, &PgW);
 
 	GPgR.Print( Mstr( "GPgR"));
 	VuRt.Print( Mstr( "VuRt"));
 	PgW.Print( Mstr( "PgW"));
 
-	ist1 = MGeo::DivideTriPg3( PgW, VuRt, &GPgW);
+	ist1 = MGeo::DivideTriPolygon3D( PgW, VuRt, &GPgW);
 
 	GPgW.Print( Mstr( "GPgW"));
 

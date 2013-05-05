@@ -111,40 +111,40 @@ public:
 	MgPoint2D	To2D() const	{ return MgPoint2D( x, y);}						// 3D Point → 2D Point
 
 	// 演算オペレータ
-	MgPoint3D operator + ( const MgPoint3D& v) const;							// P1 = P2 + p3
-	MgPoint3D operator + ( const MgVect3D& v) const;							// P1 = P2 + p3
+	MgPoint3D operator + ( const MgPoint3D& P) const;							// P3 = P1 + p2
+	MgPoint3D operator + ( const MgVect3D& V) const;							// P3 = P1 + p2
 
-	MgVect3D operator - ( const MgPoint3D& p) const;							// P1 = P2 - P3
-	MgPoint3D operator - ( const MgVect3D& p) const;							// P1 = P2 - P3
+	MgVect3D operator - ( const MgPoint3D& P) const;							// P3 = P1 - P2
+	MgPoint3D operator - ( const MgVect3D& P) const;							// P3 = P1 - P2
 
-	friend	MgPoint3D operator - ( const MgPoint3D& v)							// P1 = - P2
-				 		{ MgPoint3D Vto; Vto.x =-v.x; Vto.y = -v.y;
-						  Vto.z = -v.z; return Vto;}
-	MgPoint3D operator += ( const MgPoint3D& v);								// P1 += P2
-	MgPoint3D operator += ( const MgVect3D& v);									// P1 += P2
+	friend	MgPoint3D operator - ( const MgPoint3D& P)							// P1 = - P2
+				 		{ MgPoint3D Vto; Vto.x =-P.x; Vto.y = -P.y;
+						  Vto.z = -P.z; return Vto;}
+	MgPoint3D operator += ( const MgPoint3D& P);								// P1 += P2
+	MgPoint3D operator += ( const MgVect3D& V);									// P1 += V2
 
-	MgPoint3D operator -= ( const MgPoint3D& v);								// P1 -= P2
-	MgPoint3D operator -= ( const MgVect3D& v);									// P1 -= P2
+	MgPoint3D operator -= ( const MgPoint3D& P);								// P1 -= P2
+	MgPoint3D operator -= ( const MgVect3D& V);									// P1 -= V2
 
-	friend	MgPoint3D operator * ( MREAL r, const MgPoint3D& v)					// P1 = r * P2
-				 		{ MgPoint3D Vto; Vto.x =r * v.x; Vto.y = r * v.y;
-						  Vto.z = r * v.z; return Vto;}
-	MgPoint3D operator * (  MREAL r)	const;									// P1 = P2 * r
+	friend	MgPoint3D operator * ( MREAL r, const MgPoint3D& P)					// P2 = r * P1
+				 		{ MgPoint3D Vto; Vto.x =r * P.x; Vto.y = r * P.y;
+						  Vto.z = r * P.z; return Vto;}
+	MgPoint3D operator * (  MREAL r)	const;									// P2 = P1 * r
 
-	MgPoint3D operator / (  MREAL r) const;										// P1 = P2 / r
+	MgPoint3D operator / (  MREAL r) const;										// P2 = P1 / r
 
 	MgPoint3D operator *= ( MREAL r);											// P1 *= r
 
 	MgPoint3D operator /= ( MREAL r);											// P1 /= r
 
-	MREAL operator * ( const MgPoint3D& v) const;								// r = P1 * P2 (内積 cos)
-	MREAL operator * ( const MgVect3D& v) const;								// r = P1 * P2 (内積 cos)
+	MREAL operator * ( const MgPoint3D& P) const;								// r = P1 * P2 (内積 cos)
+	MREAL operator * ( const MgVect3D& V) const;								// r = P1 * P2 (内積 cos)
 
-	MgVect3D operator ^ ( const MgPoint3D& v) const;							// P1 = P2 ^ P3 (外積 sin)
+	MgVect3D operator ^ ( const MgPoint3D& P) const;							// V3 = P1 ^ P2 (外積 sin)
 
-	bool operator == ( const MgPoint3D& v) const;								// b = (P1 == P2) 判定
+	bool operator == ( const MgPoint3D& P) const;								// b = (P1 == P2) 判定
 
-	bool operator != ( const MgPoint3D& v) const;								// b = (P1 != P2) 判定
+	bool operator != ( const MgPoint3D& P) const;								// b = (P1 != P2) 判定
 
 	// トレース
 	void	Print(MCHAR* s) const;
@@ -222,20 +222,20 @@ public:
 	MgVect3D SetRot( MREAL ang);												// Z軸を中心軸として指定角度で左回転する
 
 	// 演算オペレータ
-	MgVect3D operator + ( const MgVect3D& v) const;								// P1 = P2 + p3
+	MgVect3D operator + ( const MgVect3D& V) const;								// P1 = P2 + p3
 
-	MgVect3D operator - ( const MgVect3D& p) const;								// P1 = P2 - P3
+	MgVect3D operator - ( const MgVect3D& V) const;								// P1 = P2 - P3
 
-	friend	MgVect3D operator - ( const MgVect3D& v)							// P1 = - P2
-				 		{ MgVect3D Vto; Vto.x =-v.x; Vto.y = -v.y;
-						  Vto.z = -v.z; return Vto;}
-	MgVect3D operator += ( const MgVect3D& v);									// P1 += P2
+	friend	MgVect3D operator - ( const MgVect3D& V)							// P1 = - P2
+				 		{ MgVect3D Vto; Vto.x =-V.x; Vto.y = -V.y;
+						  Vto.z = -V.z; return Vto;}
+	MgVect3D operator += ( const MgVect3D& V);									// P1 += P2
 
-	MgVect3D operator -= ( const MgVect3D& v);									// P1 -= P2
+	MgVect3D operator -= ( const MgVect3D& V);									// P1 -= P2
 
-	friend	MgVect3D operator * ( MREAL r, const MgVect3D& v)					// P1 = r * P2
-				 		{ MgVect3D Vto; Vto.x =r * v.x; Vto.y = r * v.y;
-						  Vto.z = r * v.z; return Vto;}
+	friend	MgVect3D operator * ( MREAL r, const MgVect3D& V)					// P1 = r * P2
+				 		{ MgVect3D Vto; Vto.x =r * V.x; Vto.y = r * V.y;
+						  Vto.z = r * V.z; return Vto;}
 	MgVect3D operator * (  MREAL r)	const;										// P1 = P2 * r
 
 	MgVect3D operator / (  MREAL r) const;										// P1 = P2 / r
@@ -244,14 +244,14 @@ public:
 
 	MgVect3D operator /= ( MREAL r);											// P1 /= r
 
-	MREAL operator * ( const MgVect3D& v) const;								// r = P1 * P2 (内積 cos)
-	MREAL operator * ( const MgPoint3D& v) const;								// r = P1 * P2 (内積 cos)
+	MREAL operator * ( const MgVect3D& V) const;								// r = P1 * P2 (内積 cos)
+	MREAL operator * ( const MgPoint3D& P) const;								// r = P1 * P2 (内積 cos)
 
-	MgVect3D operator ^ ( const MgVect3D& v) const;								// P1 = P2 ^ P3 (外積 sin)
+	MgVect3D operator ^ ( const MgVect3D& V) const;								// P1 = P2 ^ P3 (外積 sin)
 
-	bool operator == ( const MgVect3D& v) const;								// b = (P1 == P2) 判定
+	bool operator == ( const MgVect3D& V) const;								// b = (P1 == P2) 判定
 
-	bool operator != ( const MgVect3D& v) const;								// b = (P1 != P2) 判定
+	bool operator != ( const MgVect3D& V) const;								// b = (P1 != P2) 判定
 
 	// トレース
 	void	Print(MCHAR* s) const;

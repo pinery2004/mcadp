@@ -26,7 +26,7 @@ namespace MC
 ////
 ////	点から直線への垂線の足位置を求める
 ////
-//void MGeo::PerpULnPt2(
+//void MGeo::PerpULnPoint2D(
 //				const	MgULine2D&	ULn1,		// (I  ) 直線1
 //				const	MgPoint2D&	p2,			// (I  ) 点2
 //						MgPoint2D*	po			// (  O) 点から直線への垂線の足
@@ -39,7 +39,7 @@ namespace MC
 //}
 
 ////	------------------------
-//MINT MGeo::PerpLnPt2(							// (  O) ステイタス(=MC_ON_LINE	:線分上,
+//MINT MGeo::PerpLnPoint2D(							// (  O) ステイタス(=MC_ON_LINE	:線分上,
 //												//					=0			:線分範囲外)
 //				const	MgLine2D&	Ln1,		// (I  ) 線分1
 //				const	MgPoint2D&	p2,			// (I  ) 点2
@@ -65,23 +65,23 @@ namespace MC
 
 //	------------------------
 /*
-void MGeo::PerpPtULn2(
+void MGeo::PerpPointULine2D(
 				const	MgPoint2D&	p1,			// (I  ) 点1
 				const	MgULine2D&	ULn2,		// (I  ) 直線2
 						MgPoint2D*	po			// (  O) ２次元交点(点の標準形式)
 		)
 {
-	MgPerpULnPt2(ULn2, p1, po);
+	MgPerpULnPoint2D(ULn2, p1, po);
 }
 //	------------------------
-MINT MGeo::PerpPtLn2(							// (  O) ステイタス(=MC_ON_LINE	:線分上,
+MINT MGeo::PerpPointLine2D(							// (  O) ステイタス(=MC_ON_LINE	:線分上,
 												//					=0			:線分範囲外)
 				const	MgPoint2D&	p1,			// (I  ) 点1
 				const	MgLine2D	&Ln2,		// (I  ) 線分2
 						MgPoint2D*	po			// (  O) ２次元交点(点の標準形式)
 		)
 {
-	return MgPerpLnPt2(Ln2, p1, po);
+	return MgPerpLnPoint2D(Ln2, p1, po);
 }
 */
 
@@ -90,7 +90,7 @@ MINT MGeo::PerpPtLn2(							// (  O) ステイタス(=MC_ON_LINE	:線分上,
 ////
 ////	点から直線への垂線の足位置を求める
 ////
-//void MGeo::PerpULnPt3(
+//void MGeo::PerpULnPoint3D(
 //				const	MgULine3D&	ULn1,		// (I  ) 直線1
 //				const	MgPoint3D&	p2,			// (I  ) 点2
 //						MgPoint3D	*po			// (  O) 点から直線への垂線の足
@@ -103,7 +103,7 @@ MINT MGeo::PerpPtLn2(							// (  O) ステイタス(=MC_ON_LINE	:線分上,
 //}
 
 ////	------------------------
-//MINT MGeo::PerpLnPt3(							// (  O) ステイタス(=MC_ON_LINE	:線分上,
+//MINT MGeo::PerpLnPoint3D(							// (  O) ステイタス(=MC_ON_LINE	:線分上,
 //												//					=0			:線分範囲外)
 //				const	MgLine3D	&Ln1,		// (I  ) 線分1
 //				const	MgPoint3D&	p2,			// (I  ) 点2
@@ -132,24 +132,24 @@ MINT MGeo::PerpPtLn2(							// (  O) ステイタス(=MC_ON_LINE	:線分上,
 
 //	------------------------
 /*
-void MGeo::PerpPtLn3(
+void MGeo::PerpPointLine3D(
 				const	MgPoint3D&	p1,			// (I  ) 点1
 				const	MgLine3D	&Ln2,		// (I  ) 直線2
 						MgPoint3D	*po			// (  O) ３次元交点(点の標準形式)
 		)
 {
-	MgPerpLnPt3(Ln2,	p1, po);
+	MgPerpLnPoint3D(Ln2,	p1, po);
 }
 
 //	------------------------
-MINT MGeo::PerpPtULn3(							// (  O) ステイタス(=MC_ON_LINE	:線分上,
+MINT MGeo::PerpPointULine3D(							// (  O) ステイタス(=MC_ON_LINE	:線分上,
 												//					=0			:線分範囲外)
 				const MgPoint3D& p1,			// (I  ) 点1
 				const MgULine3D& ULn2,			// (I  ) 線分2
 				MgPoint3D	*po					// (  O) ３次元交点(点の標準形式)
 		)
 {
-	return MgPerpULnPt3(ULn2, p1, po);
+	return MgPerpULnPoint3D(ULn2, p1, po);
 }
 */
 
@@ -158,7 +158,7 @@ MINT MGeo::PerpPtULn3(							// (  O) ステイタス(=MC_ON_LINE	:線分上,
 ////
 ////	点から面への垂線の足位置を求める
 ////
-//void MGeo::PerpPlnPt3(
+//void MGeo::PerpPlnPoint3D(
 //				const	MgPlane3D	&Pln1,		// (I  ) 面1
 //				const	MgPoint3D&	p2,			// (I  ) 点2
 //						MgPoint3D	*po			// (  O) 点から直線への垂線の足
@@ -172,13 +172,13 @@ MINT MGeo::PerpPtULn3(							// (  O) ステイタス(=MC_ON_LINE	:線分上,
 
 //	------------------------
 /*
-void MGeo::PerpPtPln3(
+void MGeo::PerpPointPln3D(
 				const	MgPoint3D&	p1,			// (I  ) 点1
 				const	MgPlane3D	&Pln2,		// (I  ) 面2
 						MgPoint3D	*po			// (  O) ３次元交点(点の標準形式)
 		)
 {
-	MgPerpPlnPt3(Pln2, p1, po);
+	MgPerpPlnPoint3D(Pln2, p1, po);
 }
 */
 
