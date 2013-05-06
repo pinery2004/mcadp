@@ -198,9 +198,11 @@
     <ClInclude Include="..\include\MgGrp.h" />
     <ClInclude Include="..\include\MgKeijyou.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\include\MgKeijyou2.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\include\MgLib.h" />
     <ClInclude Include="..\include\MgLine.h" />
@@ -374,6 +376,7 @@
     <ClCompile Include="..\MGeo\MgIntr.cpp" />
     <ClCompile Include="..\MGeo\MgKeijou.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\MGeo\MgLine.cpp" />
     <ClCompile Include="..\MGeo\MgMat.cpp" />

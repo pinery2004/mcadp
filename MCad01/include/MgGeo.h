@@ -460,7 +460,7 @@ public:
 	//
 	//	ƒxƒNƒgƒ‹‚Æ•½–Ê‚ÌŠp“x‚ğ‹‚ß‚é
 	//
-	static MREAL AngleVectPln3D(						// (  O) ¶‰ñ“]Šp“x@i“xj
+	static MREAL AngleVectPln3D(					// (  O) ¶‰ñ“]Šp“x@i“xj
 													//		2“_ŠÔ‚Ì‹——£‚ªMGPTOL->D–¢–‚Ìê‡‚Í0“x‚ğ•Ô‚·
 					const	MgVect3D&	i_v1,		// (I  ) ƒxƒNƒgƒ‹1
 					const	MgPlane3D&	i_Pln2		// (I  ) •½–Ê2
@@ -469,7 +469,7 @@ public:
 	/////////////////////////////////////////////////////////////////////////////
 	//	’¼ü‚Æ•½–Ê‚ÌŠp“x‚ğ‹‚ß‚é
 	//
-	static MREAL AngleULinePln3D(						// (  O) ¶‰ñ“]Šp“x@i“xj
+	static MREAL AngleULinePln3D(					// (  O) ¶‰ñ“]Šp“x@i“xj
 													//		2“_ŠÔ‚Ì‹——£‚ªMGPTOL->D–¢–‚Ìê‡‚Í0“x‚ğ•Ô‚·
 					const	MgULine3D&	i_ULn1,		// (I  ) ’¼ü1
 					const	MgPlane3D&	i_Pln2		// (I  ) •½–Ê2
@@ -478,7 +478,7 @@ public:
 	/////////////////////////////////////////////////////////////////////////////
 	//	ü•ª‚Æ•½–Ê‚ÌŠp“x‚ğ‹‚ß‚é
 	//
-	static MREAL AngleLinePln3D(						// (  O) ¶‰ñ“]Šp“x@i“xj
+	static MREAL AngleLinePln3D(					// (  O) ¶‰ñ“]Šp“x@i“xj
 													//		2“_ŠÔ‚Ì‹——£‚ªMGPTOL->D–¢–‚Ìê‡‚Í0“x‚ğ•Ô‚·
 					const	MgLine3D&	i_Ln1,		// (I  ) ü•ª1
 					const	MgPlane3D&	i_Pln2		// (I  ) •½–Ê2
@@ -500,7 +500,7 @@ public:
 	/////////////////////////////////////////////////////////////////////////////
 	//	’¼ü‚Æü•ªŠÔ‚ÌŠp‚Ì2“™•ªü‚ğ‹‚ß‚é
 	//
-	static void BisectorULineLine2D(						// (  O) ƒXƒe[ƒ^ƒX
+	static void BisectorULineLine2D(				// (  O) ƒXƒe[ƒ^ƒX
 					const	MgULine2D&	i_ULn1,		// (I  ) ’¼ü1
 					const	MgLine2D&	i_Ln2,		// (I  ) ü•ª2
 							MgULine2D*	o_pULn3		// (  O) ’¼ü3
@@ -509,7 +509,7 @@ public:
 	/////////////////////////////////////////////////////////////////////////////
 	//	ü•ª‚Æ’¼üŠÔ‚ÌŠp‚Ì2“™•ªü‚ğ‹‚ß‚é
 	//
-	static void BisectorLineULine2D(						// (  O) ƒXƒe[ƒ^ƒX
+	static void BisectorLineULine2D(				// (  O) ƒXƒe[ƒ^ƒX
 					const	MgLine2D&	i_Ln1,		// (I  ) ü•ª1
 					const	MgULine2D&	i_ULn2,		// (I  ) ’¼ü2
 							MgULine2D*	o_pULn3		// (  O) ’¼ü3
@@ -518,7 +518,7 @@ public:
 	/////////////////////////////////////////////////////////////////////////////
 	//	ü•ª‚Æü•ªŠÔ‚ÌŠp‚Ì2“™•ªü‚ğ‹‚ß‚é
 	//
-	static void Bisector2Line2D(						// (  O) ƒXƒe[ƒ^ƒX
+	static void Bisector2Line2D(					// (  O) ƒXƒe[ƒ^ƒX
 					const	MgLine2D&	i_Ln1,		// (I  ) ü•ª1
 					const	MgLine2D&	i_Ln2,		// (I  ) ü•ª2
 							MgULine2D*	o_pULn3		// (  O) ’¼ü3
@@ -530,7 +530,7 @@ public:
 	//
 	//	‚Q’¼üŠÔ‚ÌŠp‚Ì2“™•ªü‚ğ‹‚ß‚é
 	//
-	static void Bisector2ULine3D(						// (  O) ƒXƒe[ƒ^ƒX
+	static void Bisector2ULine3D(					// (  O) ƒXƒe[ƒ^ƒX
 					const	MgULine3D&	i_ULn1,		// (I  ) ’¼ü1
 					const	MgULine3D&	i_ULn2,		// (I  ) ’¼ü2
 							MgULine3D*	o_pULn3		// (  O) ’¼ü3
@@ -539,7 +539,7 @@ public:
 	/////////////////////////////////////////////////////////////////////////////
 	//	’¼ü‚Æü•ªŠÔ‚ÌŠp‚Ì2“™•ªü‚ğ‹‚ß‚é
 	//
-	static void BisectorULineLine3D(						// (  O) ƒXƒe[ƒ^ƒX
+	static void BisectorULineLine3D(				// (  O) ƒXƒe[ƒ^ƒX
 					const	MgULine3D&	i_ULn1,		// (I  ) ’¼ü1
 					const	MgLine3D&	i_Ln2,		// (I  ) ü•ª2
 							MgULine3D*	o_pULn3		// (  O) ’¼ü3
@@ -548,7 +548,7 @@ public:
 	/////////////////////////////////////////////////////////////////////////////
 	//	ü•ª‚Æ’¼üŠÔ‚ÌŠp‚Ì2“™•ªü‚ğ‹‚ß‚é
 	//
-	static void BisectorLineULine3D(						//
+	static void BisectorLineULine3D(				//
 					const	MgLine3D&	i_Ln1,		// (I  ) ü•ª1
 					const	MgULine3D&	i_ULn2,		// (I  ) ’¼ü2
 							MgULine3D*	o_pULn3		// (  O) ’¼ü3
@@ -557,7 +557,7 @@ public:
 	/////////////////////////////////////////////////////////////////////////////
 	//	ü•ª‚Æü•ªŠÔ‚ÌŠp‚Ì2“™•ªü‚ğ‹‚ß‚é
 	//
-	static void Bisector2Line3D(						//
+	static void Bisector2Line3D(					//
 					const	MgLine3D&	i_Ln1,		// (I  ) ü•ª1
 					const	MgLine3D&	i_Ln2,		// (I  ) ü•ª2
 							MgULine3D*	o_pULn3		// (  O) ’¼ü3
@@ -650,7 +650,7 @@ public:
 	//	| m21 m22 0 |  +  | n21 n22 0 |
 	//	| m31 m32 1 |     | n31 n32 1 |
 	//
-	static MgMat2E Mat2EPlus( const MgMat2E& i_tm, const MgMat2E& i_tn);
+	static MgMat2E Mat2EPlus( const MgMat2E& i_mt, const MgMat2E& i_tn);
 
 	//
 	//===========================================================================
@@ -691,7 +691,7 @@ public:
 	//	- | m21 m22 0 |
 	//	  | m31 m32 1 |
 	//
-	static MgMat2E Mat2EMinusSingle( const MgMat2E& i_tm);
+	static MgMat2E Mat2EMinusSingle( const MgMat2E& i_mt);
 
 	//===========================================================================
 	//	ˆ—“à—e
@@ -704,7 +704,7 @@ public:
 	//	  | m21 m22 0 |  -  | n21 n22 0 |
 	//	  | m31 m32 1 |     | n31 n32 1 |
 	//
-	static MgMat2E Mat2EMinus( const MgMat2E& i_tm, const MgMat2E& i_tn);
+	static MgMat2E Mat2EMinus( const MgMat2E& i_mt, const MgMat2E& i_tn);
 
 	//===========================================================================
 	//	ˆ—“à—e
@@ -731,7 +731,7 @@ public:
 	//	| m21 m22 0 |  X  | n21 n22 0 |
 	//	| m31 m32 1 |     | n31 n32 1 |
 	//
-	static MgMat2E Mat2EMult( const MgMat2E& i_tm, const MgMat2E& i_tn);
+	static MgMat2E Mat2EMult( const MgMat2E& i_mt, const MgMat2E& i_tn);
 
 	//===========================================================================
 	//	ˆ—“à—e
@@ -758,7 +758,20 @@ public:
 	//	| px  py  1  |  X  | m21 m22 0 |
 	//					   | m31 m32 1 |     
 	//
-	static MgVect2D Mat2EMultPoint2D( const MgVect2D& i_pt, const MgMat2E& i_tm);
+	static MgPoint2D Mat2EMultPoint2D( const MgPoint2D& i_pt, const MgMat2E& i_mt);
+
+	//===========================================================================
+	//	ˆ—“à—e
+	//	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
+	//
+	//	g—p–@
+	//		MgVect2Dvo = MgVect2Dv * MgMat2Etm;
+	//
+	//					   | m11 m12 0 |
+	//	| vx  vy  0  |  X  | m21 m22 0 |
+	//					   | m31 m32 1 |     
+	//
+	static MgVect2D Mat2EMultVect2D( const MgVect2D& i_pt, const MgMat2E& i_mt);
 
 	//===========================================================================
 	//	ˆ—“à—e
@@ -768,10 +781,23 @@ public:
 	//		MgPoint2Dp *= MgMat2Em;
 	//
 	//										  | m11 m12 0 |
-	//	| px  py  1  |  =  | px  py  1  |  X  | m21 m22 0 |
+	//	| px  py  0  |  =  | px  py  0  |  X  | m21 m22 0 |
 	//				   						  | m31 m32 1 |
 	//
-	static MgVect2D Mat2EMultEqualPoint2D( MgVect2D& io_pt, const MgMat2E& i_tm);
+	static MgPoint2D Mat2EMultEqualPoint2D( MgPoint2D& io_pt, const MgMat2E& i_mt);
+
+	//===========================================================================
+	//	ˆ—“à—e
+	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
+	//
+	//	g—p–@
+	//		MgPoint2Dp *= MgMat2Em;
+	//
+	//										  | m11 m12 0 |
+	//	| vx  vy  0  |  =  | vx  vy  0  |  X  | m21 m22 0 |
+	//				   						  | m31 m32 1 |
+	//
+	static MgVect2D Mat2EMultEqualVect2D( MgVect2D& io_pt, const MgMat2E& i_mt);
 
 	//===========================================================================
 	//	ˆ—“à—e
@@ -784,7 +810,7 @@ public:
 	//	| vx  vy  0  |  X  | m21 m22 0 |
 	//					   | m31 m32 1 |
 	//
-	static MgULine2D Mat2EMultULine2D( const MgULine2D& i_uln, const MgMat2E& i_tm);
+	static MgULine2D Mat2EMultULine2D( const MgULine2D& i_uln, const MgMat2E& i_mt);
 
 	//===========================================================================
 	//	ˆ—“à—e
@@ -797,7 +823,7 @@ public:
 	//	| vx  vy  0  |  =  | vx  vy  0  |  X  | m21 m22 0 |
 	//			             				  | m31 m32 1 |
 	//
-	static MgULine2D Mat2EMultEqualULine2D( MgULine2D& io_uln, const MgMat2E& i_tm);
+	static MgULine2D Mat2EMultEqualULine2D( MgULine2D& io_uln, const MgMat2E& i_mt);
 
 	//===============( ‚QŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Å‚RŸŒ³À•Wˆ— )==============
 	//
@@ -806,14 +832,42 @@ public:
 	//	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
-	//		MgVect3D2 = MgVect3D1 * MgMat2E1;
+	//		MgPoint3D2 = MgPoint3D1 * MgMat2E1;
 	//
 	//						  | m11 m12 0 0 |     
 	//	| px  py  pz  1 |  X  | m21 m22 0 0 |
 	//						  |  0   0  1 0 |
 	//						  | m31 m32 0 1 |
 	//
-	static MgVect3D Mat2EMultPoint3D( const MgVect3D& i_Pt, const MgMat2E& i_tm);
+	static MgPoint3D Mat2EMultPoint3D( const MgPoint3D& i_Pt, const MgMat2E& i_mt);
+
+	//===========================================================================
+	//	ˆ—“à—e
+	//	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
+	//
+	//	g—p–@
+	//		MgVect3D2 = MgVect3D1 * MgMat2E1;
+	//
+	//						  | m11 m12 0 0 |     
+	//	| vx  vy  vz  0 |  X  | m21 m22 0 0 |
+	//						  |  0   0  1 0 |
+	//						  | m31 m32 0 1 |
+	//
+	static MgVect3D Mat2EMultVect3D( const MgVect3D& i_Pt, const MgMat2E& i_mt);
+
+	//===========================================================================
+	//	ˆ—“à—e
+	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
+	//
+	//	g—p–@
+	//		MgPoint3D *= MgMat2E;
+	//
+	//						 						| m11 m12 0 0 |
+	//	| px  py  pz  1 |  =  | px  py  pz  1 |  X  | m21 m22 0 0 |
+	//			   									|  0   0  1 0 |
+	//			   									| m31 m32 0 1 |
+	//
+	static MgPoint3D Mat2EMultEqualPoint3D( MgPoint3D& io_Pt, const MgMat2E& i_mt);
 
 	//===========================================================================
 	//	ˆ—“à—e
@@ -823,11 +877,11 @@ public:
 	//		MgVect3D *= MgMat2E;
 	//
 	//						 						| m11 m12 0 0 |
-	//	| px  py  pz  0 |  =  | px  py  pz  0 |  X  | m21 m22 0 0 |
+	//	| vx  vy  vz  0 |  =  | vx  vy  vz  0 |  X  | m21 m22 0 0 |
 	//			   									|  0   0  1 0 |
 	//			   									| m31 m32 0 1 |
 	//
-	static MgVect3D Mat2EMultEqualVect3D( MgVect3D& io_Pt, const MgMat2E& i_tm);
+	static MgVect3D Mat2EMultEqualVect3D( MgVect3D& io_Pt, const MgMat2E& i_mt);
 
 	//S//===========================================================================
 	////	ˆ—“à—e
@@ -855,7 +909,7 @@ public:
 	//						  |  0   0  1 0 |
 	//						  | m31 m32 0 1 |
 	//
-	static MgULine3D Mat2EMultULine3D( const MgULine3D& i_ULn, const MgMat2E& i_tm);
+	static MgULine3D Mat2EMultULine3D( const MgULine3D& i_ULn, const MgMat2E& i_mt);
 
 	//===========================================================================
 	//	ˆ—“à—e
@@ -869,7 +923,7 @@ public:
 	//												|  0   0  1 0 |
 	//				 				   				| m31 m32 0 1 |
 	//
-	static MgULine3D Mat2EMultEqualULine3D( MgULine3D& io_ULn, const MgMat2E& i_tm);
+	static MgULine3D Mat2EMultEqualULine3D( MgULine3D& io_ULn, const MgMat2E& i_mt);
 
 	//===========================================================================
 	//
@@ -978,10 +1032,24 @@ public:
 	//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚QŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
+	//		MgMat3E_2 = MgPoint2D * MgMat3E_1;
+	//
+	//						    | m11 m12 m13 0 |
+	//	| px  py  0   1   |  X  | m21 m22 m23 0 |
+	//						    | m31 m32 m33 0 |
+	//						    | m41 m42 m43 1 |
+	//
+	static MgPoint2D Mat3EMultPoint2D( const MgPoint2D& i_Pt, const MgMat3E& i_Tm);
+
+	//===========================================================================
+	//	ˆ—“à—e
+	//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚QŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
+	//
+	//	g—p–@
 	//		MgMat3E_2 = MgVect2D * MgMat3E_1;
 	//
 	//						    | m11 m12 m13 0 |
-	//	| px  py  0   0   |  X  | m21 m22 m23 0 |
+	//	| vx  vy  0   0   |  X  | m21 m22 m23 0 |
 	//						    | m31 m32 m33 0 |
 	//						    | m41 m42 m43 1 |
 	//
@@ -992,10 +1060,24 @@ public:
 	//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚QŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
+	//		MgPoint2D *= MgMat3E;
+	//
+	//						     					    | m11 m12 m13 0 |
+	//	| px  py  0   1   |  =  | px  py  0   1   |  X  | m21 m22 m23 0 |
+	//	           									    | m31 m32 m33 0 |
+	//	           									    | m41 m42 m43 1 |
+	//
+	static MgPoint2D Mat3EMultEqualPoint2D( MgPoint2D& io_Pt, const MgMat3E& i_Tm);
+
+	//===========================================================================
+	//	ˆ—“à—e
+	//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚QŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
+	//
+	//	g—p–@
 	//		MgVect2D *= MgMat3E;
 	//
 	//						     					    | m11 m12 m13 0 |
-	//	| px  py  0   0   |  =  | px  py  0   0   |  X  | m21 m22 m23 0 |
+	//	| vx  vy  0   0   |  =  | vx  vy  0   0   |  X  | m21 m22 m23 0 |
 	//	           									    | m31 m32 m33 0 |
 	//	           									    | m41 m42 m43 1 |
 	//
@@ -1006,10 +1088,24 @@ public:
 	//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
+	//		MgPoint3D_2 = MgPoint3D_1 * MgMat3E;
+	//
+	//	 					    | m11 m12 m13 0 |
+	//	| px  py  pz  1   |  X  | m21 m22 m23 0 |
+	//						    | m31 m32 m33 0 |
+	//						    | m41 m42 m43 1 |
+	//
+	static MgPoint3D Mat3EMultPoint3D( const MgPoint3D& i_Pt, const MgMat3E& i_Tm);
+
+	//===========================================================================
+	//	ˆ—“à—e
+	//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
+	//
+	//	g—p–@
 	//		MgVect3D_2 = MgVect3D_1 * MgMat3E;
 	//
 	//	 					    | m11 m12 m13 0 |
-	//	| px  py  pz  0   |  X  | m21 m22 m23 0 |
+	//	| vx  vy  vz  0   |  X  | m21 m22 m23 0 |
 	//						    | m31 m32 m33 0 |
 	//						    | m41 m42 m43 1 |
 	//
@@ -1020,10 +1116,24 @@ public:
 	//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
+	//		MgPoint3D *= MgMat3E;
+	//
+	//							 					    | m11 m12 m13 0 |
+	//	| px  py  pz  1   |  =  | px  py  pz  1   |  X  | m21 m22 m23 0 |
+	//												    | m31 m32 m33 0 |
+	//												    | m41 m42 m43 1 |
+	//
+	static MgPoint3D Mat3EMultEqualPoint3D( MgPoint3D& io_Pt, const MgMat3E& i_Tm);
+
+	//===========================================================================
+	//	ˆ—“à—e
+	//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
+	//
+	//	g—p–@
 	//		MgVect3D *= MgMat3E;
 	//
 	//							 					    | m11 m12 m13 0 |
-	//	| px  py  pz  0   |  =  | px  py  pz  0   |  X  | m21 m22 m23 0 |
+	//	| vx  vy  vz  0   |  =  | vx  vy  vz  0   |  X  | m21 m22 m23 0 |
 	//												    | m31 m32 m33 0 |
 	//												    | m41 m42 m43 1 |
 	//
@@ -1252,7 +1362,7 @@ public:
 	//	| m12 m22 m32 |			i“ü—Ís—ñ‚Í’PˆÊs—ñ‚Å‚ ‚é– ???j
 	//	| m13 m23 m33 |
 	//
-	static MgMat2E Mat2EInv( const MgMat2E& i_tm);
+	static MgMat2E Mat2EInv( const MgMat2E& i_mt);
 
 	//======================( ‚RŸŒ³ )==============================
 	//	ˆ—“à—e
@@ -1272,7 +1382,7 @@ public:
 	//		’¼ü‚É‘Î‚·‚é‹¾‘œÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
 	static MgMat2E Mat2EMirror(						// (  O) ‹¾‘œ•ÏŠ·s—ñ
-					const	MgMat2E&	i_tm, 		// (I  ) •ÏŠ·s—ñ
+					const	MgMat2E&	i_mt, 		// (I  ) •ÏŠ·s—ñ
 					const	MgULine2D&	i_uln		// (I  ) ‹¾‰f‚Ì²‚Æ‚·‚é’¼ü
 			);
 
@@ -1720,7 +1830,7 @@ public:
 	//	| m21 m22 m23 |  +  | n21 n22 n23 |
 	//	| m31 m32 m33 |     | n31 n32 n33 |
 	//
-	static MgMat2D Mat2DPlus( const MgMat2D& i_tm, const MgMat2D& i_tn);
+	static MgMat2D Mat2DPlus( const MgMat2D& i_mt, const MgMat2D& i_tn);
 
 	//
 	//===========================================================================
@@ -1760,7 +1870,7 @@ public:
 	//	- | m21 m22 m23 |
 	//	  | m31 m32 m33 |
 	//
-	static MgMat2D MatMinusSingle2( const MgMat2D& i_tm);
+	static MgMat2D MatMinusSingle2( const MgMat2D& i_mt);
 
 	//===========================================================================
 	//	ˆ—“à—e
@@ -1773,7 +1883,7 @@ public:
 	//	  | m21 m22 m23 |  -  | n21 n22 n23 |
 	//	  | m31 m32 m33 |     | n31 n32 n33 |
 	//
-	static MgMat2D Mat2DMinus( const MgMat2D& i_tm, const MgMat2D& i_tn);
+	static MgMat2D Mat2DMinus( const MgMat2D& i_mt, const MgMat2D& i_tn);
 
 	//===========================================================================
 	//	ˆ—“à—e
@@ -1800,7 +1910,7 @@ public:
 	//	| m21 m22 m23 |  X  | n21 n22 n23 |
 	//	| m31 m32 m33 |     | n31 n32 n33 |
 	//
-	static MgMat2D Mat2DMult( const MgMat2D& i_tm, const MgMat2D& i_tn);
+	static MgMat2D Mat2DMult( const MgMat2D& i_mt, const MgMat2D& i_tn);
 
 	//===========================================================================
 	//	ˆ—“à—e
@@ -1827,7 +1937,20 @@ public:
 	//	| px  py  1  |  X  | m21 m22 m23 |
 	//					   | m31 m32 m33 |     
 	//
-	static MgVect2D Mat2DMultPoint2D( const MgVect2D& i_pt, const MgMat2D& i_tm);
+	static MgPoint2D Mat2DMultPoint2D( const MgPoint2D& i_pt, const MgMat2D& i_mt);
+
+	//===========================================================================
+	//	ˆ—“à—e
+	//	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
+	//
+	//	g—p–@
+	//		MgVect2Dpo = MgVect2Dp * MgMat2Dtm;
+	//
+	//					   | m11 m12 m13 |
+	//	| vx  vy  0  |  X  | m21 m22 m23 |
+	//					   | m31 m32 m33 |     
+	//
+	static MgVect2D Mat2DMultVect2D( const MgVect2D& i_pt, const MgMat2D& i_mt);
 
 	//===========================================================================
 	//	ˆ—“à—e
@@ -1840,7 +1963,20 @@ public:
 	//	| px  py  1  |  =  | px  py  1  |  X  | m21 m22 m23 |
 	//				   						  | m31 m32 m33 |
 	//
-	static MgVect2D Mat2DMultEqualPoint2D( MgVect2D& io_pt, const MgMat2D& i_tm);
+	static MgPoint2D Mat2DMultEqualPoint2D( MgPoint2D& io_pt, const MgMat2D& i_mt);
+
+	//===========================================================================
+	//	ˆ—“à—e
+	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
+	//
+	//	g—p–@
+	//		MgVect2Dp *= MgMat2Dm;
+	//
+	//										  | m11 m12 m13 |
+	//	| vx  vy  0  |  =  | vx  vy  0  |  X  | m21 m22 m23 |
+	//				   						  | m31 m32 m33 |
+	//
+	static MgVect2D Mat2DMultEqualVect2D( MgVect2D& io_pt, const MgMat2D& i_mt);
 
 	//===========================================================================
 	//	ˆ—“à—e
@@ -1853,7 +1989,7 @@ public:
 	//	| vx  vy  0  |  X  | m21 m22 m23 |
 	//					   | m31 m32 m33 |
 	//
-	static MgULine2D Mat2DMultULine2D( const MgULine2D& i_uln, const MgMat2D& i_tm);
+	static MgULine2D Mat2DMultULine2D( const MgULine2D& i_uln, const MgMat2D& i_mt);
 
 	//===========================================================================
 	//	ˆ—“à—e
@@ -1866,9 +2002,24 @@ public:
 	//	| vx  vy  0  |  =  | vx  vy  1  |  X  | m21 m22 m23 |
 	//			             				  | m31 m32 m33 |
 	//
-	static MgULine2D Mat2DMultEqualULine2D( MgULine2D& io_uln, const MgMat2D& i_tm);
+	static MgULine2D Mat2DMultEqualULine2D( MgULine2D& io_uln, const MgMat2D& i_mt);
 
 	//===============( ‚QŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Å‚RŸŒ³À•Wˆ— )==============
+	//
+	//===========================================================================
+	//	ˆ—“à—e
+	//	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
+	//
+	//	g—p–@
+	//		MgPoint3D2 = MgPoint3D1 * MgMat2D1;
+	//
+	//						  | m11 m12 0 m13 |     
+	//	| px  py  pz  1 |  X  | m21 m22 0 m23 |
+	//						  |  0   0  1  0  |
+	//						  | m31 m32 0 m33 |
+	//
+	static MgPoint3D Mat2DMultPoint3D( const MgPoint3D& i_Pt, const MgMat2D& i_mt);
+
 	//
 	//===========================================================================
 	//	ˆ—“à—e
@@ -1878,11 +2029,25 @@ public:
 	//		MgVect3D2 = MgVect3D1 * MgMat2D1;
 	//
 	//						  | m11 m12 0 m13 |     
-	//	| px  py  pz  1 |  X  | m21 m22 0 m23 |
+	//	| vx  vy  vz  0 |  X  | m21 m22 0 m23 |
 	//						  |  0   0  1  0  |
 	//						  | m31 m32 0 m33 |
 	//
-	static MgVect3D Mat2DMultPointt3D( const MgVect3D& i_Pt, const MgMat2D& i_tm);
+	static MgVect3D Mat2DMultVect3D( const MgVect3D& i_Pt, const MgMat2D& i_mt);
+
+	//===========================================================================
+	//	ˆ—“à—e
+	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
+	//
+	//	g—p–@
+	//		MgPoint3D *= MgMat2D;
+	//
+	//						 						| m11 m12 0 m13 |
+	//	| px  py  pz  1 |  =  | px  py  pz  1 |  X  | m21 m22 0 m23 |
+	//			   									|  0   0  1  0  |
+	//			   									| m31 m32 0 m33 |
+	
+	static MgPoint3D Mat2DMultEqualPoint3D( MgPoint3D& io_Pt, const MgMat2D& i_mt);
 
 	//===========================================================================
 	//	ˆ—“à—e
@@ -1892,11 +2057,11 @@ public:
 	//		MgVect3D *= MgMat2D;
 	//
 	//						 						| m11 m12 0 m13 |
-	//	| px  py  pz  1 |  =  | px  py  pz  1 |  X  | m21 m22 0 m23 |
+	//	| vx  vy  vz  0 |  =  | vx  vy  vz  0 |  X  | m21 m22 0 m23 |
 	//			   									|  0   0  1  0  |
 	//			   									| m31 m32 0 m33 |
 	
-	static MgVect3D Mat2DMultEqualPoint3D( MgVect3D& io_Pt, const MgMat2D& i_tm);
+	static MgVect3D Mat2DMultEqualVect3D( MgVect3D& io_Pt, const MgMat2D& i_mt);
 
 //S	//===========================================================================
 //	//	ˆ—“à—e
@@ -1912,33 +2077,33 @@ public:
 //	//
 //	static MgULine3D Mat2DMultULine3D( const MgULine3D& ULn1, const MgMat2D& m2);
 
-	//===========================================================================
-	//	ˆ—“à—e
-	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
-	//
-	//	g—p–@
-	//		MgULine2D = MgULine2D * MgMat2D;
-	//
-	//	| px  py  pz  1 |	  | m11 m12 0 m13 |
-	//	| vx  vy  vz  0 |  X  | m21 m22 0 m23 |
-	//						  |  0   0  1  0  |
-	//						  | m31 m32 0 m33 |
-	//
-	static MgULine3D Mat2DMultULine3D( const MgULine3D& i_ULn, const MgMat2D& i_tm);
+	////===========================================================================
+	////	ˆ—“à—e
+	////		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
+	////
+	////	g—p–@
+	////		MgULine2D = MgULine2D * MgMat2D;
+	////
+	////	| px  py  pz  1 |	  | m11 m12 0 m13 |
+	////	| vx  vy  vz  0 |  X  | m21 m22 0 m23 |
+	////						  |  0   0  1  0  |
+	////						  | m31 m32 0 m33 |
+	////
+	//static MgULine3D Mat2DMultULine3D( const MgULine3D& i_ULn, const MgMat2D& i_mt);
 
-	//===========================================================================
-	//	ˆ—“à—e
-	//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
-	//
-	//	g—p–@
-	//		MgULine2D *= MgMat2D;
-	//
-	//	| px  py  pz  1 |     | px  py  pz  1 |		| m11 m12 0 m13 |
-	//	| vx  vy  vz  0 |  =  | vx  vy  vz  1 |  X  | m21 m22 0 m23 |
-	//												|  0   0  1  0  |
-	//				 				   				| m31 m32 0 m33 |
-	//
-	static MgULine3D Mat2DMultEqualULine3D( MgULine3D& io_ULn, const MgMat2D& i_tm);
+	////===========================================================================
+	////	ˆ—“à—e
+	////		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
+	////
+	////	g—p–@
+	////		MgULine2D *= MgMat2D;
+	////
+	////	| px  py  pz  1 |     | px  py  pz  1 |		| m11 m12 0 m13 |
+	////	| vx  vy  vz  0 |  =  | vx  vy  vz  0 |  X  | m21 m22 0 m23 |
+	////												|  0   0  1  0  |
+	////				 				   				| m31 m32 0 m33 |
+	////
+	//static MgULine3D Mat2DMultEqualULine3D( MgULine3D& io_ULn, const MgMat2D& i_mt);
 
 	//===========================================================================
 	//
@@ -2047,14 +2212,42 @@ public:
 	//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚QŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 	//
 	//	g—p–@
-	//		MgMat3D_2 = MgVect2D * MgMat3D_1;
+	//		MgMat3D_2 = MgPoint2D * MgMat3D_1;
 	//
 	//						    | m11 m12 m13 m14 |
 	//	| px  py  0   1   |  X  | m21 m22 m23 m24 |
 	//						    | m31 m32 m33 m34 |
 	//						    | m41 m42 m43 m44 |
 	//
-	static MgVect2D Mat3DMultPoint2D( const MgVect2D& i_Pt, const MgMat3D& i_Tm);
+	static MgPoint2D Mat3DMultPoint2D( const MgPoint2D& i_Pt, const MgMat3D& i_Tm);
+
+	//===========================================================================
+	//	ˆ—“à—e
+	//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚QŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
+	//
+	//	g—p–@
+	//		MgMat3D_2 = MgVect2D * MgMat3D_1;
+	//
+	//						    | m11 m12 m13 m14 |
+	//	| vx  vy  0   0   |  X  | m21 m22 m23 m24 |
+	//						    | m31 m32 m33 m34 |
+	//						    | m41 m42 m43 m44 |
+	//
+	static MgVect2D Mat3DMultVect2D( const MgVect2D& i_Pt, const MgMat3D& i_Tm);
+
+	//===========================================================================
+	//	ˆ—“à—e
+	//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚QŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
+	//
+	//	g—p–@
+	//		MgPoint2D *= MgMat3D;
+	//
+	//						     					    | m11 m12 m13 m14 |
+	//	| px  py  0   1   |  =  | px  py  0   1   |  X  | m21 m22 m23 m24 |
+	//	           									    | m31 m32 m33 m34 |
+	//	           									    | m41 m42 m43 m44 |
+	//
+	static MgPoint2D Mat3DMultEqualPoint2D( MgPoint2D& io_Pt, const MgMat3D& i_Tm);
 
 	//===========================================================================
 	//	ˆ—“à—e
@@ -2064,11 +2257,25 @@ public:
 	//		MgVect2D *= MgMat3D;
 	//
 	//						     					    | m11 m12 m13 m14 |
-	//	| px  py  0   1   |  =  | px  py  0   1   |  X  | m21 m22 m23 m24 |
+	//	| vx  vy  0   0   |  =  | vx  vy  0   0   |  X  | m21 m22 m23 m24 |
 	//	           									    | m31 m32 m33 m34 |
 	//	           									    | m41 m42 m43 m44 |
 	//
-	static MgVect2D Mat3DMultEqualPoint2D( MgVect2D& io_Pt, const MgMat3D& i_Tm);
+	static MgVect2D Mat3DMultEqualVect2D( MgVect2D& io_Pt, const MgMat3D& i_Tm);
+
+	//===========================================================================
+	//	ˆ—“à—e
+	//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
+	//
+	//	g—p–@
+	//		MgPoint3D_2 = MgVect3D_1 * MgMat3D;
+	//
+	//	 					    | m11 m12 m13 m14 |
+	//	| px  py  pz  1   |  X  | m21 m22 m23 m24 |
+	//						    | m31 m32 m33 m34 |
+	//						    | m41 m42 m43 m44 |
+	//
+	static MgPoint3D Mat3DMultPoint3D( const MgPoint3D& i_Pt, const MgMat3D& i_Tm);
 
 	//===========================================================================
 	//	ˆ—“à—e
@@ -2078,11 +2285,25 @@ public:
 	//		MgVect3D_2 = MgVect3D_1 * MgMat3D;
 	//
 	//	 					    | m11 m12 m13 m14 |
-	//	| px  py  pz  1   |  X  | m21 m22 m23 m24 |
+	//	| vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
 	//						    | m31 m32 m33 m34 |
 	//						    | m41 m42 m43 m44 |
 	//
-	static MgVect3D Mat3DMultPoint3D( const MgVect3D& i_Pt, const MgMat3D& i_Tm);
+	static MgVect3D Mat3DMultVect3D( const MgVect3D& i_Pt, const MgMat3D& i_Tm);
+
+	//===========================================================================
+	//	ˆ—“à—e
+	//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
+	//
+	//	g—p–@
+	//		MgPoint3D *= MgMat3D;
+	//
+	//							 					    | m11 m12 m13 m14 |
+	//	| px  py  pz  1   |  =  | px  py  pz  1   |  X  | m21 m22 m23 m24 |
+	//												    | m31 m32 m33 m34 |
+	//												    | m41 m42 m43 m44 |
+	//
+	static MgPoint3D Mat3DMultEqualPoint3D( MgPoint3D& io_Pt, const MgMat3D& i_Tm);
 
 	//===========================================================================
 	//	ˆ—“à—e
@@ -2092,39 +2313,39 @@ public:
 	//		MgVect3D *= MgMat3D;
 	//
 	//							 					    | m11 m12 m13 m14 |
-	//	| px  py  pz  1   |  =  | px  py  pz  1   |  X  | m21 m22 m23 m24 |
+	//	| vx  vy  vz  0   |  =  | vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
 	//												    | m31 m32 m33 m34 |
 	//												    | m41 m42 m43 m44 |
 	//
-	static MgVect3D Mat3DMultEqualPoint3D( MgVect3D& io_Pt, const MgMat3D& i_Tm);
+	static MgVect3D Mat3DMultEqualVect3D( MgVect3D& io_Pt, const MgMat3D& i_Tm);
 
-	//===========================================================================
-	//	ˆ—“à—e
-	//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
-	//
-	//	g—p–@
-	//		MgULine3D_2 = MgULine3D_1 * MgMat3D;
-	//
-	//	| px  py  pz  1   |     | m11 m12 m13 m14 |
-	//	| vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
-	//							| m31 m32 m33 m34 |
-	//							| m41 m42 m43 m44 |
-	//
-	static MgULine3D Mat3DMultULine3D( const MgULine3D& i_ULn, const MgMat3D& i_Tm);
+	////===========================================================================
+	////	ˆ—“à—e
+	////		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
+	////
+	////	g—p–@
+	////		MgULine3D_2 = MgULine3D_1 * MgMat3D;
+	////
+	////	| px  py  pz  1   |     | m11 m12 m13 m14 |
+	////	| vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
+	////							| m31 m32 m33 m34 |
+	////							| m41 m42 m43 m44 |
+	////
+	//static MgULine3D Mat3DMultULine3D( const MgULine3D& i_ULn, const MgMat3D& i_Tm);
 
-	//===========================================================================
-	//	ˆ—“à—e
-	//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
-	//
-	//	g—p–@
-	//		MgVect3D *= MgMat3D;
-	//
-	//	| px  py  pz  1   |     | px  py  pz  1   |     | m11 m12 m13 m14 |
-	//	| vx  vy  vz  0   |  =  | vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
-	//													| m31 m32 m33 m34 |
-	//													| m41 m42 m43 m44 |
-	//
-	static MgULine3D Mat3DMultEqualULine3D( MgULine3D& io_ULn, const MgMat3D& i_Tm);
+	////===========================================================================
+	////	ˆ—“à—e
+	////		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
+	////
+	////	g—p–@
+	////		MgVect3D *= MgMat3D;
+	////
+	////	| px  py  pz  1   |     | px  py  pz  1   |     | m11 m12 m13 m14 |
+	////	| vx  vy  vz  0   |  =  | vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
+	////													| m31 m32 m33 m34 |
+	////													| m41 m42 m43 m44 |
+	////
+	//static MgULine3D Mat3DMultEqualULine3D( MgULine3D& io_ULn, const MgMat3D& i_Tm);
 
 	//======================( ‚QŸŒ³ )==============================
 	//	ˆ—“à—e
@@ -2321,7 +2542,7 @@ public:
 	//	| m12 m22 m32 |			i“ü—Ís—ñ‚Í’PˆÊs—ñ‚Å‚ ‚é– ???j
 	//	| m13 m23 m33 |
 	//
-	static MgMat2D Mat2DInv( const MgMat2D& i_tm);
+	static MgMat2D Mat2DInv( const MgMat2D& i_mt);
 
 	//======================( ‚RŸŒ³ )==============================
 	//	ˆ—“à—e
@@ -2341,7 +2562,7 @@ public:
 	//		’¼ü‚É‘Î‚·‚é‹¾‘œÀ•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚ğì¬
 	//
 	static MgMat2D Mat2DMirror(						// (  O) ‹¾‘œ•ÏŠ·s—ñ
-					const	MgMat2D&	i_tm, 		// (I  ) •ÏŠ·s—ñ
+					const	MgMat2D&	i_mt, 		// (I  ) •ÏŠ·s—ñ
 					const	MgULine2D&	i_uln		// (I  ) ‹¾‰f‚Ì²‚Æ‚·‚é’¼ü
 			);
 
@@ -5174,9 +5395,9 @@ public:
 //	| m21 m22 0 |  +  | n21 n22 0 |
 //	| m31 m32 1 |     | n31 n32 1 |
 //
-inline MgMat2E operator + ( const MgMat2E& i_tm, const MgMat2E& i_tn)			// +
+inline MgMat2E operator + ( const MgMat2E& i_mt, const MgMat2E& i_tn)			// +
 {
-	return MGeo::Mat2EPlus( i_tm, i_tn);
+	return MGeo::Mat2EPlus( i_mt, i_tn);
 }
 
 //===========================================================================
@@ -5206,9 +5427,9 @@ inline	MgMat2E operator += ( MgMat2E& io_tm, const MgMat2E& i_tn)				// +=
 //	- | m21 m22 0 |
 //	  | m31 m32 1 |
 //
-inline	MgMat2E operator - ( const MgMat2E& i_tm)								// -
+inline	MgMat2E operator - ( const MgMat2E& i_mt)								// -
 {
-	return MGeo::Mat2ESingleMinus( i_tm);
+	return MGeo::Mat2ESingleMinus( i_mt);
 }
 
 //===========================================================================
@@ -5222,9 +5443,9 @@ inline	MgMat2E operator - ( const MgMat2E& i_tm)								// -
 //	  | m21 m22 0 |  -  | n21 n22 0 |
 //	  | m31 m32 1 |     | n31 n32 1 |
 //
-inline	MgMat2E operator - ( const MgMat2E& i_tm, const MgMat2E& i_tn)			// -
+inline	MgMat2E operator - ( const MgMat2E& i_mt, const MgMat2E& i_tn)			// -
 {
-	return MGeo::Mat2EMinus( i_tm, i_tn);
+	return MGeo::Mat2EMinus( i_mt, i_tn);
 }
 
 //===========================================================================
@@ -5255,9 +5476,9 @@ inline	MgMat2E operator -= ( MgMat2E& io_tm, const MgMat2E& i_tn)				// -=
 //	| m21 m22 0 |  X  | n21 n22 0 |
 //	| m31 m32 1 |     | n31 n32 1 |
 //
-inline	MgMat2E operator * ( const MgMat2E& i_tm, const MgMat2E& i_tn)			// *
+inline	MgMat2E operator * ( const MgMat2E& i_mt, const MgMat2E& i_tn)			// *
 {
-	return MGeo::Mat2EMult( i_tm, i_tn);
+	return MGeo::Mat2EMult( i_mt, i_tn);
 }
 
 //===========================================================================
@@ -5282,15 +5503,31 @@ inline	MgMat2E operator *= ( MgMat2E& io_tm, const MgMat2E& i_tn)				// *=
 //	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgVect2D = MgVect2D * MgMat2E;
+//		MgPoint2D = MgPoint2D * MgMat2E;
 //
 //					   | m11 m12 0 |
 //	| px  py  0  |  X  | m21 m22 0 |
 //					   | m31 m32 1 |     
 //
-inline	MgVect2D operator * ( const MgVect2D& i_pt, const MgMat2E& i_tm)		// *	À•W•ÏŠ·
+inline	MgPoint2D operator * ( const MgPoint2D& i_pt, const MgMat2E& i_mt)		// *	À•W•ÏŠ·
 {
-	return MGeo::Mat2EMultPoint2D( i_pt, i_tm);
+	return MGeo::Mat2EMultPoint2D( i_pt, i_mt);
+}
+
+//===========================================================================
+//	ˆ—“à—e
+//	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
+//
+//	g—p–@
+//		MgVect2D = MgVect2D * MgMat2E;
+//
+//					   | m11 m12 0 |
+//	| vx  vy  0  |  X  | m21 m22 0 |
+//					   | m31 m32 1 |     
+//
+inline	MgVect2D operator * ( const MgVect2D& i_pt, const MgMat2E& i_mt)		// *	À•W•ÏŠ·
+{
+	return MGeo::Mat2EMultVect2D( i_pt, i_mt);
 }
 
 //===========================================================================
@@ -5301,12 +5538,12 @@ inline	MgVect2D operator * ( const MgVect2D& i_pt, const MgMat2E& i_tm)		// *	À
 //		MgVect2D *= MgMat2E;
 //
 //										  | m11 m12 0 |
-//	| px  py  0  |  =  | px  py  0  |  X  | m21 m22 0 |
+//	| px  py  1  |  =  | px  py  1  |  X  | m21 m22 0 |
 //				   						  | m31 m32 1 |
 //
-inline	MgVect2D operator *= ( MgVect2D& io_pt, const MgMat2E& i_tm)			// *=	À•W•ÏŠ·
+inline	MgPoint2D operator *= ( MgPoint2D& io_pt, const MgMat2E& i_mt)			// *=	À•W•ÏŠ·
 {
-	return MGeo::Mat2EMultEqualPoint2D( io_pt, i_tm);
+	return MGeo::Mat2EMultEqualPoint2D( io_pt, i_mt);
 }
 
 //===========================================================================
@@ -5314,31 +5551,15 @@ inline	MgVect2D operator *= ( MgVect2D& io_pt, const MgMat2E& i_tm)			// *=	À•W
 //		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgULine2D = MgULine2D*  MgMat2E;
+//		MgVect2D *= MgMat2E;
 //
-//	| px  py  1  |     | m11 m12 0 |
-//	| vx  vy  0  |  X  | m21 m22 0 |
-//					   | m31 m32 1 |
+//										  | m11 m12 0 |
+//	| vx  vy  0  |  =  | vx  vy  0  |  X  | m21 m22 0 |
+//				   						  | m31 m32 1 |
 //
-inline	MgULine2D operator * ( const MgULine2D& i_uln, const MgMat2E& i_tm)	// *	À•W•ÏŠ·
+inline	MgVect2D operator *= ( MgVect2D& io_pt, const MgMat2E& i_mt)			// *=	À•W•ÏŠ·
 {
-	return MGeo::Mat2EMultULine2D( i_uln, i_tm);
-}
-
-//===========================================================================
-//	ˆ—“à—e
-//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
-//
-//	g—p–@
-//		MgULine2D* = MgMat2E;
-//
-//	| px  py  1  |     | px  py  1  |     | m11 m12 0 |
-//	| vx  vy  0  |  =  | vx  vy  1  |  X  | m21 m22 0 |
-//			             				  | m31 m32 1 |
-//
-inline	MgULine2D operator *= ( MgULine2D& io_uln, const MgMat2E& i_tm)		// *=	À•W•ÏŠ·
-{
-	return MGeo::Mat2EMultEqualULine2D( io_uln, i_tm);
+	return MGeo::Mat2EMultEqualVect2D( io_pt, i_mt);
 }
 
 //===============( ‚QŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Å‚RŸŒ³À•Wˆ— )==============
@@ -5348,16 +5569,51 @@ inline	MgULine2D operator *= ( MgULine2D& io_uln, const MgMat2E& i_tm)		// *=	À
 //	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgVect3D2 = MgVect3D1 * MgMat2E1;
+//		MgPoint3D2 = MgPoint3D1 * MgMat2E1;
 //
 //						  | m11 m12 0 0 |     
 //	| px  py  pz  1 |  X  | m21 m22 0 0 |
 //						  |  0   0  1 0 |
 //						  | m31 m32 0 1 |
 //
-inline	MgVect3D operator * ( const MgVect3D& i_Pt, const MgMat2E& i_tm)		// *	À•W•ÏŠ·
+inline	MgPoint3D operator * ( const MgPoint3D& i_Pt, const MgMat2E& i_mt)		// *	À•W•ÏŠ·
 {
-	return MGeo::Mat2EMultPoint3D( i_Pt, i_tm);
+	return MGeo::Mat2EMultPoint3D( i_Pt, i_mt);
+}
+
+//===========================================================================
+//	ˆ—“à—e
+//	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
+//
+//	g—p–@
+//		MgVect3D2 = MgVect3D1 * MgMat2E1;
+//
+//						  | m11 m12 0 0 |     
+//	| vx  vy  vz  0 |  X  | m21 m22 0 0 |
+//						  |  0   0  1 0 |
+//						  | m31 m32 0 1 |
+//
+inline	MgVect3D operator * ( const MgVect3D& i_Vt, const MgMat2E& i_mt)		// *	À•W•ÏŠ·
+{
+	return MGeo::Mat2EMultVect3D( i_Vt, i_mt);
+}
+
+//===========================================================================
+//	ˆ—“à—e
+//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
+//
+//	g—p–@
+//		MgPoint3D *= MgMat2E;
+//
+//						 						| m11 m12 0 0 |
+//	| px  py  pz  1 |  =  | px  py  pz  1 |  X  | m21 m22 0 0 |
+//			   									|  0   0  1 0 |
+//			   									| m31 m32 0 1 |
+//
+inline	MgPoint3D operator *= ( MgPoint3D& io_Pt, const MgMat2E& i_mt)			// *=	À•W•ÏŠ·
+
+{
+	return MGeo::Mat2EMultEqualPoint3D( io_Pt, i_mt);
 }
 
 //===========================================================================
@@ -5368,48 +5624,14 @@ inline	MgVect3D operator * ( const MgVect3D& i_Pt, const MgMat2E& i_tm)		// *	À
 //		MgVect3D *= MgMat2E;
 //
 //						 						| m11 m12 0 0 |
-//	| px  py  pz  0 |  =  | px  py  pz  0 |  X  | m21 m22 0 0 |
+//	| vx  vy  vz  0 |  =  | vx  vy  vz  0 |  X  | m21 m22 0 0 |
 //			   									|  0   0  1 0 |
 //			   									| m31 m32 0 1 |
 //
-inline	MgVect3D operator *= ( MgVect3D& io_Pt, const MgMat2E& i_tm)			// *=	À•W•ÏŠ·
+inline	MgVect3D operator *= ( MgVect3D& io_Pt, const MgMat2E& i_mt)			// *=	À•W•ÏŠ·
 
 {
-	return MGeo::Mat2EMultEqualVect3D( io_Pt, i_tm);
-}
-
-//===========================================================================
-//	ˆ—“à—e
-//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
-//
-//	g—p–@
-//		MgULine2D = MgULine2D*  MgMat2E;
-//
-//	| px  py  pz  1 |	  | m11 m12 0 0 |
-//	| vx  vy  vz  0 |  X  | m21 m22 0 0 |
-//						  |  0   0  1 0 |
-//			   			  | m31 m32 0 1 |
-//
-inline MgULine3D operator * ( const MgULine3D& i_ULn, const MgMat2E& i_tm)		// *	À•W•ÏŠ·
-{
-	return MGeo::Mat2EMultULine3D( i_ULn, i_tm);
-}
-
-//===========================================================================
-//	ˆ—“à—e
-//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
-//
-//	g—p–@
-//		MgULine2D* = MgMat2E;
-//
-//	| px  py  pz  1 |     | px  py  pz  1 |		| m11 m12 0 0 |
-//	| vx  vy  vz  0 |  =  | vx  vy  vz  0 |  X  | m21 m22 0 0 |
-//												|  0   0  1 0 |
-//				 				   				| m31 m32 0 1 |
-//
-inline MgULine3D operator *= ( MgULine3D& io_ULn, const MgMat2E& i_tm)			// *=	À•W•ÏŠ·
-{
-	return MGeo::Mat2EMultEqualULine3D( io_ULn, i_tm);
+	return MGeo::Mat2EMultEqualVect3D( io_Pt, i_mt);
 }
 
 //===========================================================================
@@ -5540,10 +5762,27 @@ inline MgMat3E operator *= ( MgMat3E& io_Tm, const MgMat3E& i_Tn)
 //		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚QŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgMat3E_2 = MgVect2D * MgMat3E_1;
+//		MgPoint2D = MgPoint2D * MgMat3E_1;
 //
 //						    | m11 m12 m13 0 |
-//	| px  py  0   0   |  X  | m21 m22 m23 0 |
+//	| px  py  0   1   |  X  | m21 m22 m23 0 |
+//						    | m31 m32 m33 0 |
+//						    | m41 m42 m43 1 |
+//
+inline MgPoint2D operator * ( const MgPoint2D& i_Pt, const MgMat3E& i_Tm)		// À•W•ÏŠ·
+{
+	return MGeo::Mat3EMultPoint2D( i_Pt, i_Tm);
+}
+
+//===========================================================================
+//	ˆ—“à—e
+//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚QŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
+//
+//	g—p–@
+//		MgVect2D = MgVect2D * MgMat3E_1;
+//
+//						    | m11 m12 m13 0 |
+//	| vx  vy  0   0   |  X  | m21 m22 m23 0 |
 //						    | m31 m32 m33 0 |
 //						    | m41 m42 m43 1 |
 //
@@ -5557,10 +5796,27 @@ inline MgVect2D operator * ( const MgVect2D& i_Pt, const MgMat3E& i_Tm)		// À•W
 //		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚QŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
+//		MgPoint2D *= MgMat3E;
+//
+//						     					    | m11 m12 m13 0 |
+//	| px  py  0   1   |  =  | px  py  0   1   |  X  | m21 m22 m23 0 |
+//	           									    | m31 m32 m33 0 |
+//	           									    | m41 m42 m43 1 |
+//
+inline MgPoint2D operator *= ( MgPoint2D& io_Pt, const MgMat3E& i_Tm)			// À•W•ÏŠ·
+{
+	return MGeo::Mat3EMultEqualPoint2D( io_Pt, i_Tm);
+}
+
+//===========================================================================
+//	ˆ—“à—e
+//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚QŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
+//
+//	g—p–@
 //		MgVect2D *= MgMat3E;
 //
 //						     					    | m11 m12 m13 0 |
-//	| px  py  0   0   |  =  | px  py  0   0   |  X  | m21 m22 m23 0 |
+//	| vx  vy  0   0   |  =  | vx  vy  0   0   |  X  | m21 m22 m23 0 |
 //	           									    | m31 m32 m33 0 |
 //	           									    | m41 m42 m43 1 |
 //
@@ -5574,10 +5830,27 @@ inline MgVect2D operator *= ( MgVect2D& io_Pt, const MgMat3E& i_Tm)			// À•W•ÏŠ
 //		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
+//		MgPoint3D_2 = MgPoint3D_1 * MgMat3E;
+//
+//	 					    | m11 m12 m13 0 |
+//	| px  py  pz  1   |  X  | m21 m22 m23 0 |
+//						    | m31 m32 m33 0 |
+//						    | m41 m42 m43 1 |
+//
+inline MgPoint3D operator * ( const MgPoint3D& i_Pt, const MgMat3E& i_Tm)		// À•W•ÏŠ·
+{
+	return MGeo::Mat3EMultPoint3D( i_Pt, i_Tm);
+}
+
+//===========================================================================
+//	ˆ—“à—e
+//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
+//
+//	g—p–@
 //		MgVect3D_2 = MgVect3D_1 * MgMat3E;
 //
 //	 					    | m11 m12 m13 0 |
-//	| px  py  pz  0   |  X  | m21 m22 m23 0 |
+//	| vx  vy  vz  0   |  X  | m21 m22 m23 0 |
 //						    | m31 m32 m33 0 |
 //						    | m41 m42 m43 1 |
 //
@@ -5591,10 +5864,27 @@ inline MgVect3D operator * ( const MgVect3D& i_Pt, const MgMat3E& i_Tm)		// À•W
 //		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
+//		MgPoint3D *= MgMat3E;
+//
+//							 					    | m11 m12 m13 0 |
+//	| px  py  pz  1   |  =  | px  py  pz  1   |  X  | m21 m22 m23 0 |
+//												    | m31 m32 m33 0 |
+//												    | m41 m42 m43 1 |
+//
+inline MgPoint3D operator *= ( MgPoint3D& io_Pt, const MgMat3E& i_Tm)			// À•W•ÏŠ·
+{
+	return MGeo::Mat3EMultEqualPoint3D( io_Pt, i_Tm);
+}
+
+//===========================================================================
+//	ˆ—“à—e
+//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
+//
+//	g—p–@
 //		MgVect3D *= MgMat3E;
 //
 //							 					    | m11 m12 m13 0 |
-//	| px  py  pz  0   |  =  | px  py  pz  0   |  X  | m21 m22 m23 0 |
+//	| vx  vy  vz  0   |  =  | vx  vy  vz  0   |  X  | m21 m22 m23 0 |
 //												    | m31 m32 m33 0 |
 //												    | m41 m42 m43 1 |
 //
@@ -5652,9 +5942,9 @@ inline MgULine3D operator *= ( MgULine3D& io_ULn, const MgMat3E& i_Tm)			// À•W
 //	| m21 m22 m23 |  +  | n21 n22 n23 |
 //	| m31 m32 m33 |     | n31 n32 n33 |
 //
-inline MgMat2D operator + ( const MgMat2D& i_tm, const MgMat2D& i_tn)			// +
+inline MgMat2D operator + ( const MgMat2D& i_mt, const MgMat2D& i_tn)			// +
 {
-	return MGeo::Mat2DPlus( i_tm, i_tn);
+	return MGeo::Mat2DPlus( i_mt, i_tn);
 }
 
 //===========================================================================
@@ -5684,9 +5974,9 @@ inline	MgMat2D operator += ( MgMat2D& io_tm, const MgMat2D& i_tn)				// +=
 //	- | m21 m22 m23 |
 //	  | m31 m32 m33 |
 //
-inline	MgMat2D operator - ( const MgMat2D& i_tm)								// -
+inline	MgMat2D operator - ( const MgMat2D& i_mt)								// -
 {
-	return MGeo::Mat2DSingleMinus( i_tm);
+	return MGeo::Mat2DSingleMinus( i_mt);
 }
 
 //===========================================================================
@@ -5700,9 +5990,9 @@ inline	MgMat2D operator - ( const MgMat2D& i_tm)								// -
 //	  | m21 m22 m23 |  -  | n21 n22 n23 |
 //	  | m31 m32 m33 |     | n31 n32 n33 |
 //
-inline	MgMat2D operator - ( const MgMat2D& i_tm, const MgMat2D& i_tn)			// -
+inline	MgMat2D operator - ( const MgMat2D& i_mt, const MgMat2D& i_tn)			// -
 {
-	return MGeo::Mat2DMinus( i_tm, i_tn);
+	return MGeo::Mat2DMinus( i_mt, i_tn);
 }
 
 //===========================================================================
@@ -5733,9 +6023,9 @@ inline	MgMat2D operator -= ( MgMat2D& io_tm, const MgMat2D& i_tn)				// -=
 //	| m21 m22 m23 |  X  | n21 n22 n23 |
 //	| m31 m32 m33 |     | n31 n32 n33 |
 //
-inline	MgMat2D operator * ( const MgMat2D& i_tm, const MgMat2D& i_tn)			// *
+inline	MgMat2D operator * ( const MgMat2D& i_mt, const MgMat2D& i_tn)			// *
 {
-	return MGeo::Mat2DMult( i_tm, i_tn);
+	return MGeo::Mat2DMult( i_mt, i_tn);
 }
 
 //===========================================================================
@@ -5760,15 +6050,47 @@ inline	MgMat2D operator *= ( MgMat2D& io_tm, const MgMat2D& i_tn)				// *=
 //	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgVect2D = MgVect2D * MgMat2D;
+//		MgPoint2D = MgPoint2D * MgMat2D;
 //
 //					   | m11 m12 m13 |
 //	| px  py  1  |  X  | m21 m22 m23 |
 //					   | m31 m32 m33 |     
 //
-inline	MgVect2D operator * ( const MgVect2D& i_pt, const MgMat2D& i_tm)		// *	À•W•ÏŠ·
+inline	MgPoint2D operator * ( const MgPoint2D& i_pt, const MgMat2D& i_mt)		// *	À•W•ÏŠ·
 {
-	return MGeo::Mat2DMultPoint2D( i_pt, i_tm);
+	return MGeo::Mat2DMultPoint2D( i_pt, i_mt);
+}
+
+//===========================================================================
+//	ˆ—“à—e
+//	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
+//
+//	g—p–@
+//		MgVect2D = MgVect2D * MgMat2D;
+//
+//					   | m11 m12 m13 |
+//	| vx  vy  0  |  X  | m21 m22 m23 |
+//					   | m31 m32 m33 |     
+//
+inline	MgVect2D operator * ( const MgVect2D& i_pt, const MgMat2D& i_mt)		// *	À•W•ÏŠ·
+{
+	return MGeo::Mat2DMultVect2D( i_pt, i_mt);
+}
+
+//===========================================================================
+//	ˆ—“à—e
+//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
+//
+//	g—p–@
+//		MgPoint2D *= MgMat2D;
+//
+//										  | m11 m12 m13 |
+//	| px  py  1  |  =  | px  py  1  |  X  | m21 m22 m23 |
+//				   						  | m31 m32 m33 |
+//
+inline	MgPoint2D operator *= ( MgPoint2D& io_vt, const MgMat2D& i_mt)			// *=	À•W•ÏŠ·
+{
+	return MGeo::Mat2DMultEqualPoint2D( io_vt, i_mt);
 }
 
 //===========================================================================
@@ -5779,12 +6101,12 @@ inline	MgVect2D operator * ( const MgVect2D& i_pt, const MgMat2D& i_tm)		// *	À
 //		MgVect2D *= MgMat2D;
 //
 //										  | m11 m12 m13 |
-//	| px  py  1  |  =  | px  py  1  |  X  | m21 m22 m23 |
+//	| vx  vy  0  |  =  | vx  vy  0  |  X  | m21 m22 m23 |
 //				   						  | m31 m32 m33 |
 //
-inline	MgVect2D operator *= ( MgVect2D& io_pt, const MgMat2D& i_tm)			// *=	À•W•ÏŠ·
+inline	MgVect2D operator *= ( MgVect2D& io_pt, const MgMat2D& i_mt)			// *=	À•W•ÏŠ·
 {
-	return MGeo::Mat2DMultEqualPoint2D( io_pt, i_tm);
+	return MGeo::Mat2DMultEqualVect2D( io_pt, i_mt);
 }
 
 //===========================================================================
@@ -5798,9 +6120,9 @@ inline	MgVect2D operator *= ( MgVect2D& io_pt, const MgMat2D& i_tm)			// *=	À•W
 //	| vx  vy  0  |  X  | m21 m22 m23 |
 //					   | m31 m32 m33 |
 //
-inline	MgULine2D operator * ( const MgULine2D& i_uln, const MgMat2D& i_tm)	// *	À•W•ÏŠ·
+inline	MgULine2D operator * ( const MgULine2D& i_uln, const MgMat2D& i_mt)	// *	À•W•ÏŠ·
 {
-	return MGeo::Mat2DMultULine2D( i_uln, i_tm);
+	return MGeo::Mat2DMultULine2D( i_uln, i_mt);
 }
 
 //===========================================================================
@@ -5814,81 +6136,81 @@ inline	MgULine2D operator * ( const MgULine2D& i_uln, const MgMat2D& i_tm)	// *	
 //	| vx  vy  0  |  =  | vx  vy  1  |  X  | m21 m22 m23 |
 //			             				  | m31 m32 m33 |
 //
-inline	MgULine2D operator *= ( MgULine2D& io_uln, const MgMat2D& i_tm)		// *=	À•W•ÏŠ·
+inline	MgULine2D operator *= ( MgULine2D& io_uln, const MgMat2D& i_mt)		// *=	À•W•ÏŠ·
 {
-	return MGeo::Mat2DMultEqualULine2D( io_uln, i_tm);
+	return MGeo::Mat2DMultEqualULine2D( io_uln, i_mt);
 }
 
-//===============( ‚QŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Å‚RŸŒ³À•Wˆ— )==============
+//U1 //===============( ‚QŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Å‚RŸŒ³À•Wˆ— )==============
+////
+////===========================================================================
+////	ˆ—“à—e
+////	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
+////
+////	g—p–@
+////		MgVect3D2 = MgVect3D1 * MgMat2D1;
+////
+////						  | m11 m12 0 m13 |     
+////	| vx  vy  vz  0 |  X  | m21 m22 0 m23 |
+////						  |  0   0  1  0  |
+////						  | m31 m32 0 m33 |
+////
+//inline	MgVect3D operator * ( const MgVect3D& i_Pt, const MgMat2D& i_mt)		// *	À•W•ÏŠ·
+//{
+//	return MGeo::Mat2DMultPointt3D( i_Pt, i_mt);
+//}
 //
-//===========================================================================
-//	ˆ—“à—e
-//	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
+////===========================================================================
+////	ˆ—“à—e
+////		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
+////
+////	g—p–@
+////		MgVect3D *= MgMat2D;
+////
+////						 						| m11 m12 0 m13 |
+////	| vx  vy  vz  0 |  =  | vx  vy  vz  0 |  X  | m21 m22 0 m23 |
+////			   									|  0   0  1  0  |
+////			   									| m31 m32 0 m33 |
+////
+//inline	MgVect3D operator *= ( MgVect3D& io_Pt, const MgMat2D& i_mt)			// *=	À•W•ÏŠ·
 //
-//	g—p–@
-//		MgVect3D2 = MgVect3D1 * MgMat2D1;
+//{
+//	return MGeo::Mat2DMultEqualPoint3D( io_Pt, i_mt);
+//}
 //
-//						  | m11 m12 0 m13 |     
-//	| px  py  pz  1 |  X  | m21 m22 0 m23 |
-//						  |  0   0  1  0  |
-//						  | m31 m32 0 m33 |
+////===========================================================================
+////	ˆ—“à—e
+////		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
+////
+////	g—p–@
+////		MgULine2D = MgULine2D*  MgMat2D;
+////
+////	| px  py  pz  1 |	  | m11 m12 0 m13 |
+////	| vx  vy  vz  0 |  X  | m21 m22 0 m23 |
+////						  |  0   0  1  0  |
+////			   			  | m31 m32 0 m33 |
+////
+//inline MgULine3D operator * ( const MgULine3D& i_ULn, const MgMat2D& i_mt)		// *	À•W•ÏŠ·
+//{
+//	return MGeo::Mat2DMultULine3D( i_ULn, i_mt);
+//}
 //
-inline	MgVect3D operator * ( const MgVect3D& i_Pt, const MgMat2D& i_tm)		// *	À•W•ÏŠ·
-{
-	return MGeo::Mat2DMultPointt3D( i_Pt, i_tm);
-}
-
-//===========================================================================
-//	ˆ—“à—e
-//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
-//
-//	g—p–@
-//		MgVect3D *= MgMat2D;
-//
-//						 						| m11 m12 0 m13 |
-//	| px  py  pz  1 |  =  | px  py  pz  1 |  X  | m21 m22 0 m23 |
-//			   									|  0   0  1  0  |
-//			   									| m31 m32 0 m33 |
-//
-inline	MgVect3D operator *= ( MgVect3D& io_Pt, const MgMat2D& i_tm)			// *=	À•W•ÏŠ·
-
-{
-	return MGeo::Mat2DMultEqualPoint3D( io_Pt, i_tm);
-}
-
-//===========================================================================
-//	ˆ—“à—e
-//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
-//
-//	g—p–@
-//		MgULine2D = MgULine2D*  MgMat2D;
-//
-//	| px  py  pz  1 |	  | m11 m12 0 m13 |
-//	| vx  vy  vz  0 |  X  | m21 m22 0 m23 |
-//						  |  0   0  1  0  |
-//			   			  | m31 m32 0 m33 |
-//
-inline MgULine3D operator * ( const MgULine3D& i_ULn, const MgMat2D& i_tm)		// *	À•W•ÏŠ·
-{
-	return MGeo::Mat2DMultULine3D( i_ULn, i_tm);
-}
-
-//===========================================================================
-//	ˆ—“à—e
-//		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
-//
-//	g—p–@
-//		MgULine2D* = MgMat2D;
-//
-//	| px  py  pz  1 |     | px  py  pz  1 |		| m11 m12 0 m13 |
-//	| vx  vy  vz  0 |  =  | vx  vy  vz  1 |  X  | m21 m22 0 m23 |
-//												|  0   0  1  0  |
-//				 				   				| m31 m32 0 m33 |
-//
-inline MgULine3D operator *= ( MgULine3D& io_ULn, const MgMat2D& i_tm)			// *=	À•W•ÏŠ·
-{
-	return MGeo::Mat2DMultEqualULine3D( io_ULn, i_tm);
-}
+////===========================================================================
+////	ˆ—“à—e
+////		À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
+////
+////	g—p–@
+////		MgULine2D* = MgMat2D;
+////
+////	| px  py  pz  1 |     | px  py  pz  1 |		| m11 m12 0 m13 |
+////	| vx  vy  vz  0 |  =  | vx  vy  vz  0 |  X  | m21 m22 0 m23 |
+////												|  0   0  1  0  |
+////				 				   				| m31 m32 0 m33 |
+////
+//inline MgULine3D operator *= ( MgULine3D& io_ULn, const MgMat2D& i_mt)			// *=	À•W•ÏŠ·
+//{
+//	return MGeo::Mat2DMultEqualULine3D( io_ULn, i_mt);
+//}
 
 //===========================================================================
 //
@@ -6018,7 +6340,24 @@ inline MgMat3D operator *= ( MgMat3D& io_Tm, const MgMat3D& i_Tn)
 //		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚QŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 //
 //	g—p–@
-//		MgMat3D_2 = MgVect2D * MgMat3D_1;
+//		MgPoint2D_2 = MgPoint2D * MgMat3D_1;
+//
+//						    | m11 m12 m13 m14 |
+//	| px  py  0   1   |  X  | m21 m22 m23 m24 |
+//						    | m31 m32 m33 m34 |
+//						    | m41 m42 m43 m44 |
+//
+inline MgPoint2D operator * ( const MgPoint2D& i_Pt, const MgMat3D& i_Tm)		// À•W•ÏŠ·
+{
+	return MGeo::Mat3DMultPoint2D( i_Pt, i_Tm);
+}
+
+//===========================================================================
+//	ˆ—“à—e
+//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚QŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
+//
+//	g—p–@
+//		MgVect2D_2 = MgVect2D * MgMat3D_1;
 //
 //						    | m11 m12 m13 m14 |
 //	| vx  vy  0   0   |  X  | m21 m22 m23 m24 |
@@ -6027,7 +6366,24 @@ inline MgMat3D operator *= ( MgMat3D& io_Tm, const MgMat3D& i_Tn)
 //
 inline MgVect2D operator * ( const MgVect2D& i_Pt, const MgMat3D& i_Tm)		// À•W•ÏŠ·
 {
-	return MGeo::Mat3DMultPoint2D( i_Pt, i_Tm);
+	return MGeo::Mat3DMultVect2D( i_Pt, i_Tm);
+}
+
+//===========================================================================
+//	ˆ—“à—e
+//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚QŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
+//
+//	g—p–@
+//		MgPoint2D *= MgMat3D;
+//
+//						     					    | m11 m12 m13 m14 |
+//	| px  py  0   1   |  =  | px  py  0   1   |  X  | m21 m22 m23 m24 |
+//	           									    | m31 m32 m33 m34 |
+//	           									    | m41 m42 m43 m44 |
+//
+inline MgPoint2D operator *= ( MgPoint2D& io_Pt, const MgMat3D& i_Tm)			// À•W•ÏŠ·
+{
+	return MGeo::Mat3DMultEqualPoint2D( io_Pt, i_Tm);
 }
 
 //===========================================================================
@@ -6044,7 +6400,24 @@ inline MgVect2D operator * ( const MgVect2D& i_Pt, const MgMat3D& i_Tm)		// À•W
 //
 inline MgVect2D operator *= ( MgVect2D& io_Pt, const MgMat3D& i_Tm)			// À•W•ÏŠ·
 {
-	return MGeo::Mat3DMultEqualPoint2D( io_Pt, i_Tm);
+	return MGeo::Mat3DMultEqualVect2D( io_Pt, i_Tm);
+}
+
+//===========================================================================
+//	ˆ—“à—e
+//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
+//
+//	g—p–@
+//		MgPoint3D_2 = MgPoint3D_1 * MgMat3D;
+//
+//	 					    | m11 m12 m13 m14 |
+//	| px  py  pz  0   |  X  | m21 m22 m23 m24 |
+//						    | m31 m32 m33 m34 |
+//						    | m41 m42 m43 m44 |
+//
+inline MgPoint3D operator * ( const MgPoint3D& i_Pt, const MgMat3D& i_Tm)		// À•W•ÏŠ·
+{
+	return MGeo::Mat3DMultPoint3D( i_Pt, i_Tm);
 }
 
 //===========================================================================
@@ -6055,13 +6428,30 @@ inline MgVect2D operator *= ( MgVect2D& io_Pt, const MgMat3D& i_Tm)			// À•W•ÏŠ
 //		MgVect3D_2 = MgVect3D_1 * MgMat3D;
 //
 //	 					    | m11 m12 m13 m14 |
-//	| px  py  pz  0   |  X  | m21 m22 m23 m24 |
+//	| vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
 //						    | m31 m32 m33 m34 |
 //						    | m41 m42 m43 m44 |
 //
 inline MgVect3D operator * ( const MgVect3D& i_Pt, const MgMat3D& i_Tm)		// À•W•ÏŠ·
 {
-	return MGeo::Mat3DMultPoint3D( i_Pt, i_Tm);
+	return MGeo::Mat3DMultVect3D( i_Pt, i_Tm);
+}
+
+//===========================================================================
+//	ˆ—“à—e
+//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
+//
+//	g—p–@
+//		MgPoint3D *= MgMat3D;
+//
+//							 					    | m11 m12 m13 m14 |
+//	| px  py  pz  1   |  =  | px  py  pz  1   |  X  | m21 m22 m23 m24 |
+//												    | m31 m32 m33 m34 |
+//												    | m41 m42 m43 m44 |
+//
+inline MgPoint3D operator *= ( MgPoint3D& io_Pt, const MgMat3D& i_Tm)				// À•W•ÏŠ·
+{
+	return MGeo::Mat3DMultEqualPoint3D( io_Pt, i_Tm);
 }
 
 //===========================================================================
@@ -6072,48 +6462,48 @@ inline MgVect3D operator * ( const MgVect3D& i_Pt, const MgMat3D& i_Tm)		// À•W
 //		MgVect3D *= MgMat3D;
 //
 //							 					    | m11 m12 m13 m14 |
-//	| px  py  pz  0   |  =  | px  py  pz  0   |  X  | m21 m22 m23 m24 |
+//	| vx  vy  vz  0   |  =  | vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
 //												    | m31 m32 m33 m34 |
 //												    | m41 m42 m43 m44 |
 //
 inline MgVect3D operator *= ( MgVect3D& io_Pt, const MgMat3D& i_Tm)				// À•W•ÏŠ·
 {
-	return MGeo::Mat3DMultEqualPoint3D( io_Pt, i_Tm);
+	return MGeo::Mat3DMultEqualVect3D( io_Pt, i_Tm);
 }
 
-//===========================================================================
-//	ˆ—“à—e
-//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
+////===========================================================================
+////	ˆ—“à—e
+////		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
+////
+////	g—p–@
+////		MgULine3D_2 = MgULine3D_1 * MgMat3D;
+////
+////	| px  py  pz  1   |     | m11 m12 m13 m14 |
+////	| vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
+////							| m31 m32 m33 m34 |
+////							| m41 m42 m43 m44 |
+////
+//inline MgULine3D operator * ( const MgULine3D& i_ULn, const MgMat3D& i_Tm)		// À•W•ÏŠ·
+//{
+//	return MGeo::Mat3DMultULine3D( i_ULn, i_Tm);
+//}
 //
-//	g—p–@
-//		MgULine3D_2 = MgULine3D_1 * MgMat3D;
-//
-//	| px  py  pz  1   |     | m11 m12 m13 m14 |
-//	| vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
-//							| m31 m32 m33 m34 |
-//							| m41 m42 m43 m44 |
-//
-inline MgULine3D operator * ( const MgULine3D& i_ULn, const MgMat3D& i_Tm)		// À•W•ÏŠ·
-{
-	return MGeo::Mat3DMultULine3D( i_ULn, i_Tm);
-}
-
-//===========================================================================
-//	ˆ—“à—e
-//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
-//
-//	g—p–@
-//		MgVect3D *= MgMat3D;
-//
-//	| px  py  pz  1   |     | px  py  pz  1   |     | m11 m12 m13 m14 |
-//	| vx  vy  vz  0   |  =  | vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
-//													| m31 m32 m33 m34 |
-//													| m41 m42 m43 m44 |
-//
-inline MgULine3D operator *= ( MgULine3D& io_ULn, const MgMat3D& i_Tm)			// À•W•ÏŠ·
-{
-	return MGeo::Mat3DMultEqualULine3D( io_ULn, i_Tm);
-}
+////===========================================================================
+////	ˆ—“à—e
+////		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
+////
+////	g—p–@
+////		MgVect3D *= MgMat3D;
+////
+////	| px  py  pz  1   |     | px  py  pz  1   |     | m11 m12 m13 m14 |
+////	| vx  vy  vz  0   |  =  | vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
+////													| m31 m32 m33 m34 |
+////													| m41 m42 m43 m44 |
+////
+//inline MgULine3D operator *= ( MgULine3D& io_ULn, const MgMat3D& i_Tm)			// À•W•ÏŠ·
+//{
+//	return MGeo::Mat3DMultEqualULine3D( io_ULn, i_Tm);
+//}
 
 //===========================================================================
 //		•½–Ê Œ`ó‰‰Z

@@ -11,12 +11,12 @@
 
 // ログ取得制御
 #ifdef _DEBUG
-#define LOGOUT
+//#define LOGOUT
 #else
 #undef LOGOUT
 #endif
 
-#define LOGOUT									// releasemodeでもログ作成するように設定
+//#define LOGOUT									// releasemodeでもログ作成するように設定
 
 // ログ取得定義
 #define MBLOGMAXDEPTH			10								// トレースインデント最大深さ
