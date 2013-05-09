@@ -374,9 +374,6 @@
     <ClInclude Include="..\include\MgLine.h">
       <Filter>Mgeo\hdr</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\MgMat.h">
-      <Filter>Mgeo\hdr</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\MgMatE.h">
       <Filter>Mgeo\hdr</Filter>
     </ClInclude>
@@ -751,6 +748,15 @@
     </ClInclude>
     <ClInclude Include="..\include\MdmGeo.h">
       <Filter>Mdm\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MgMatA.h">
+      <Filter>Mgeo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MgMatAf.h">
+      <Filter>Mgeo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MgMatEf.h">
+      <Filter>Mgeo\hdr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

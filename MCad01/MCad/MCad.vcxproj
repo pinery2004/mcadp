@@ -206,8 +206,10 @@
     </ClInclude>
     <ClInclude Include="..\include\MgLib.h" />
     <ClInclude Include="..\include\MgLine.h" />
-    <ClInclude Include="..\include\MgMat.h" />
+    <ClInclude Include="..\include\MgMatA.h" />
+    <ClInclude Include="..\include\MgMatAf.h" />
     <ClInclude Include="..\include\MgMatE.h" />
+    <ClInclude Include="..\include\MgMatEf.h" />
     <ClInclude Include="..\include\MgPlane.h" />
     <ClInclude Include="..\include\MgPoint.h" />
     <ClInclude Include="..\include\MgPoint2D.h" />

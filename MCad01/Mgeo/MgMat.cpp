@@ -16,7 +16,7 @@
 
 #define	DLL_EXPORT_MAT_DO
 
-#include "MgMat.h"
+#include "MgMatA.h"
 
 #define	DLL_EXPORT_GEO_DO
 

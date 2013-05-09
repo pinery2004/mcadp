@@ -14,7 +14,7 @@
 #include "MgDefine.h"
 #include "MgPoint.h"
 #include "MgRect.h"
-#include "MgMat.h"
+#include "MgMatA.h"
 
 #include "MdModel.h"
 #include "MdmDB.h"

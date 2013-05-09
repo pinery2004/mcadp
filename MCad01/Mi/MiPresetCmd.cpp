@@ -11,7 +11,7 @@
 #include "stdafx.h"
 #include "MsBasic.h"
 #include "MgLib.h"
-#include "MgMat.h"
+#include "MgMatA.h"
 #define  DLL_EXPORT_HAITICMD_DO
 #include "MmCmd.h"
 #include "MsDefine.h"

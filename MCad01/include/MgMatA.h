@@ -2,7 +2,7 @@
 //==========================================================================================
 //  Copyright (C) 2006-2008. K.Matsu. All rights reserved.
 //
-//  MODULE: MgMat.h
+//  MODULE: MgMatA.h
 //
 //		マトリックス
 //
@@ -110,47 +110,47 @@ public:
 	void MgMatPrint3(MCHAR* s);
 };
 
-inline	MgMat2D operator + ( const MgMat2D& i_m1, const MgVect2D& i_pt)			// +	平行移動
-{ 
-	MgMat2D mw;
-	mw = i_m1;
-	mw += i_pt;
-	return mw;
-}
-inline	MgMat2D operator +  ( const MgMat2D& i_m1, const MgPoint2D& i_pt)		// +	平行移動
-{
-	return i_m1 + (MgVect2D&)i_pt;
-}
-inline	MgMat2D operator += ( MgMat2D& i_m1, const MgVect2D& i_pt)				// +=	平行移動
-{
-	i_m1.m[2][0] += i_pt.x;
-	i_m1.m[2][1] += i_pt.y;
-	return i_m1;
-}
-inline	MgMat2D operator += ( MgMat2D& i_m1, const MgPoint2D& i_pt)				// +=	平行移動
-{
-	return i_m1 += (MgVect2D&)i_pt;
-}
-inline	MgMat2D operator - ( const MgMat2D& i_m1, const MgVect2D& i_pt)			// -	平行移動
-{
-	MgMat2D mw = i_m1;
-	mw -= i_pt;
-	return mw;
-}
-inline	MgMat2D operator -  ( const MgMat2D& i_m1, const MgPoint2D& i_pt)		// -	平行移動
-{
-	return i_m1 - (MgVect2D&)i_pt;
-}
-inline	MgMat2D operator -= ( MgMat2D& i_m1, const MgVect2D& i_pt)				// -=	平行移動
-{
-	i_m1.m[2][0] -= i_pt.x;
-	i_m1.m[2][1] -= i_pt.y;
-	return i_m1;
-}
-inline	MgMat2D operator -= ( MgMat2D& i_m1, const MgPoint2D& i_pt)				// -=	平行移動
-{
-	return i_m1 -= (MgVect2D&)i_pt;
-}
+//inline	MgMat2D operator + ( const MgMat2D& i_m1, const MgVect2D& i_pt)			// +	平行移動
+//{ 
+//	MgMat2D mw;
+//	mw = i_m1;
+//	mw += i_pt;
+//	return mw;
+//}
+//inline	MgMat2D operator +  ( const MgMat2D& i_m1, const MgPoint2D& i_pt)		// +	平行移動
+//{
+//	return i_m1 + (MgVect2D&)i_pt;
+//}
+//inline	MgMat2D operator += ( MgMat2D& i_m1, const MgVect2D& i_pt)				// +=	平行移動
+//{
+//	i_m1.m[2][0] += i_pt.x;
+//	i_m1.m[2][1] += i_pt.y;
+//	return i_m1;
+//}
+//inline	MgMat2D operator += ( MgMat2D& i_m1, const MgPoint2D& i_pt)				// +=	平行移動
+//{
+//	return i_m1 += (MgVect2D&)i_pt;
+//}
+//inline	MgMat2D operator - ( const MgMat2D& i_m1, const MgVect2D& i_pt)			// -	平行移動
+//{
+//	MgMat2D mw = i_m1;
+//	mw -= i_pt;
+//	return mw;
+//}
+//inline	MgMat2D operator -  ( const MgMat2D& i_m1, const MgPoint2D& i_pt)		// -	平行移動
+//{
+//	return i_m1 - (MgVect2D&)i_pt;
+//}
+//inline	MgMat2D operator -= ( MgMat2D& i_m1, const MgVect2D& i_pt)				// -=	平行移動
+//{
+//	i_m1.m[2][0] -= i_pt.x;
+//	i_m1.m[2][1] -= i_pt.y;
+//	return i_m1;
+//}
+//inline	MgMat2D operator -= ( MgMat2D& i_m1, const MgPoint2D& i_pt)				// -=	平行移動
+//{
+//	return i_m1 -= (MgVect2D&)i_pt;
+//}
 
 inline	MgLine2D operator * ( const MgLine2D& Ln1, const MgMat2D& m2)			// *	座標変換
 {

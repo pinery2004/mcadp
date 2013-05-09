@@ -13,7 +13,7 @@
 #include "MlLog.h"
 #include "MgDefine.h"
 #include "MgPoint.h"
-#include "MgMat.h"
+#include "MgMatA.h"
 
 #include "MdModel.h"
 

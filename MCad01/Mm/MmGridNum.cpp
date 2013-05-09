@@ -11,7 +11,7 @@
 #include "stdafx.h"
 #include "MsBasic.h"
 #include "MgLib.h"
-#include "MgMat.h"
+#include "MgMatA.h"
 #include "MsDefine.h"
 #include "MsCod.h"
 #include "MmDrag.h"

@@ -10,7 +10,7 @@
 //  K.Matsu           08/01/04    Created.
 //==========================================================================================
 //
-#include "MgMat.h"
+#include "MgMatA.h"
 #include "MgGeo.h"
 #include "MsDefine.h"
 

@@ -16,7 +16,7 @@
 #include "MgTol.h"
 
 #include "MsDefine.h"
-#include "MgMat.h"
+#include "MgMatA.h"
 
 #include "MgLib.h"
 #include "MsCod.h"

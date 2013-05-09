@@ -9,7 +9,7 @@
 //	
 //==========================================================================================
 //
-#include "MgMat.h"
+#include "MgMatA.h"
 #include "MgPlane.h"
 #include "MgCircle.h"
 #include "MgArc.h"

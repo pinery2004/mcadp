@@ -19,7 +19,7 @@
 #include "MgLine.h"
 #include "MgPlane.h"
 #include "MgPlane.h"
-#include "MgMat.h"
+#include "MgMatA.h"
 #include "MgLib.h"
 #include "MtAskForPoint.h"
 #include "MhDefParts.h"

@@ -13,7 +13,7 @@
 #include "MlLog.h"
 
 #include "MgLib.h"
-#include "MgMat.h"
+#include "MgMatA.h"
 #include "MsDefine.h"
 #include "MsCod.h"
 #include "MmGridNum.h"

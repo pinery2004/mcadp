@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MgMat.h"
+#include "MgMatA.h"
 
 namespace MC
 {
