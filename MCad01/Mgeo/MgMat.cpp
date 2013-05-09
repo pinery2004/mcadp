@@ -80,14 +80,14 @@ void MgMat3D::SetUnit() { *this = McMat3N;}
 //	| m31 m32 m33 |     | n31 n32 n33 |
 //
 //MgMat2D operator + (const MgMat2D&tm, const MgMat2D&tn)
-MgMat2D MGeo::Mat2DPlus( const MgMat2D& i_mt, const MgMat2D& i_tn)
+MgMat2D MGeo::Mat2DPlus( const MgMat2D& i_mt, const MgMat2D& i_mt2)
 {
 	MgMat2D	to;
 	int		ic;
 	for ( ic=0; ic<3; ic++) {
-		to.m[ic][0] = i_mt.m[ic][0] + i_tn.m[ic][0];
-		to.m[ic][1] = i_mt.m[ic][1] + i_tn.m[ic][1];
-		to.m[ic][2] = i_mt.m[ic][2] + i_tn.m[ic][2];
+		to.m[ic][0] = i_mt.m[ic][0] + i_mt2.m[ic][0];
+		to.m[ic][1] = i_mt.m[ic][1] + i_mt2.m[ic][1];
+		to.m[ic][2] = i_mt.m[ic][2] + i_mt2.m[ic][2];
 	}
 	return to;
 }
@@ -104,15 +104,15 @@ MgMat2D MGeo::Mat2DPlus( const MgMat2D& i_mt, const MgMat2D& i_tn)
 //	| m31 m32 m33 |     | m31 m32 m33 |     | n31 n32 n33 |
 //
 //MgMat2D operator += (MgMat2D&tm, const MgMat2D&tn)
-MgMat2D MGeo::Mat2DPlusEqual( MgMat2D& io_tm, const MgMat2D& i_tn)
+MgMat2D MGeo::Mat2DPlusEqual( MgMat2D& io_mt, const MgMat2D& i_mt2)
 {
 	int		ic;
 	for ( ic=0; ic<3; ic++) {
-		io_tm.m[ic][0] += i_tn.m[ic][0];
-		io_tm.m[ic][1] += i_tn.m[ic][1];
-		io_tm.m[ic][2] += i_tn.m[ic][2];
+		io_mt.m[ic][0] += i_mt2.m[ic][0];
+		io_mt.m[ic][1] += i_mt2.m[ic][1];
+		io_mt.m[ic][2] += i_mt2.m[ic][2];
 	}
-	return io_tm;
+	return io_mt;
 }
 //
 //===========================================================================
@@ -146,14 +146,14 @@ MgMat2D MGeo::MatMinusSingle2( const MgMat2D& i_mt)
 //	  | m31 m32 m33 |     | n31 n32 n33 |
 //
 //MgMat2D operator - (const MgMat2D&M1, const MgMat2D&M2)
-MgMat2D MGeo::Mat2DMinus( const MgMat2D& i_mt, const MgMat2D& i_tn)
+MgMat2D MGeo::Mat2DMinus( const MgMat2D& i_mt, const MgMat2D& i_mt2)
 {
 	MgMat2D	to;
 	int		ic;
 	for ( ic=0; ic<3; ic++) {
-		to.m[ic][0] = i_mt.m[ic][0] - i_tn.m[ic][0];
-		to.m[ic][1] = i_mt.m[ic][1] - i_tn.m[ic][1];
-		to.m[ic][2] = i_mt.m[ic][2] - i_tn.m[ic][2];
+		to.m[ic][0] = i_mt.m[ic][0] - i_mt2.m[ic][0];
+		to.m[ic][1] = i_mt.m[ic][1] - i_mt2.m[ic][1];
+		to.m[ic][2] = i_mt.m[ic][2] - i_mt2.m[ic][2];
 	}
 	return to;
 }
@@ -170,15 +170,15 @@ MgMat2D MGeo::Mat2DMinus( const MgMat2D& i_mt, const MgMat2D& i_tn)
 //	| m31 m32 m33 |    | m31 m32 m33 |     | n31 n32 n33 |
 //
 //MgMat2D operator -= (MgMat2D&tm, const MgMat2D&tn)
-MgMat2D MGeo::Mat2DMinusEqual( MgMat2D& io_tm, const MgMat2D& i_tn)
+MgMat2D MGeo::Mat2DMinusEqual( MgMat2D& io_mt, const MgMat2D& i_mt2)
 {
 	int		ic;
 	for ( ic=0; ic<3; ic++) {
-		io_tm.m[ic][0] -= i_tn.m[ic][0];
-		io_tm.m[ic][1] -= i_tn.m[ic][1];
-		io_tm.m[ic][2] -= i_tn.m[ic][2];
+		io_mt.m[ic][0] -= i_mt2.m[ic][0];
+		io_mt.m[ic][1] -= i_mt2.m[ic][1];
+		io_mt.m[ic][2] -= i_mt2.m[ic][2];
 	}
-	return io_tm;
+	return io_mt;
 }
 //
 //===========================================================================
@@ -194,15 +194,15 @@ MgMat2D MGeo::Mat2DMinusEqual( MgMat2D& io_tm, const MgMat2D& i_tn)
 //	| m31 m32 m33 |     | n31 n32 n33 |
 //
 //MgMat2D operator * (const MgMat2D&tm, const MgMat2D&tn)
-MgMat2D MGeo::Mat2DMult( const MgMat2D& i_mt, const MgMat2D& i_tn)
+MgMat2D MGeo::Mat2DMult( const MgMat2D& i_mt, const MgMat2D& i_mt2)
 {
 	MgMat2D	to;
 	int		i1, i2;
 	for (i1=0; i1<3; i1++) 
 		for (i2=0; i2<3; i2++) 
-			to.m[i1][i2] = i_mt.m[i1][0] * i_tn.m[0][i2] +
-						   i_mt.m[i1][1] * i_tn.m[1][i2] +
-						   i_mt.m[i1][2] * i_tn.m[2][i2]	;
+			to.m[i1][i2] = i_mt.m[i1][0] * i_mt2.m[0][i2] +
+						   i_mt.m[i1][1] * i_mt2.m[1][i2] +
+						   i_mt.m[i1][2] * i_mt2.m[2][i2]	;
 	return to;
 }
 //
@@ -219,17 +219,17 @@ MgMat2D MGeo::Mat2DMult( const MgMat2D& i_mt, const MgMat2D& i_tn)
 //	| m31 m32 m33 |     | m31 m32 m33 |     | n31 n32 n33 |
 //
 //MgMat2D operator *= (MgMat2D&tm, const MgMat2D&tn)
-MgMat2D MGeo::Mat2DMultEqual( MgMat2D& io_tm, const MgMat2D& i_tn)
+MgMat2D MGeo::Mat2DMultEqual( MgMat2D& io_mt, const MgMat2D& i_mt2)
 {
 	MgMat2D	tw;
 	int		i1, i2;
 	for (i1=0; i1<3; i2++) 
 		for (i2=0; i2<3; i1++) 
-			tw.m[i1][i2] = io_tm.m[i1][0] * i_tn.m[0][i2] +
-						   io_tm.m[i1][1] * i_tn.m[1][i2] +
-						   io_tm.m[i1][2] * i_tn.m[2][i2]	;
-	io_tm = tw;
-	return io_tm;
+			tw.m[i1][i2] = io_mt.m[i1][0] * i_mt2.m[0][i2] +
+						   io_mt.m[i1][1] * i_mt2.m[1][i2] +
+						   io_mt.m[i1][2] * i_mt2.m[2][i2]	;
+	io_mt = tw;
+	return io_mt;
 }
 //
 //===========================================================================
@@ -498,15 +498,15 @@ void MgMat2D::MgMatPrint3(MCHAR* s)														// print
 //	| m41 m42 m43 m44 |     | n41 n42 n43 n44 |    
 //
 //MgMat3D operator + (const MgMat3D&M1, const MgMat3D&M2)
-MgMat3D MGeo::Mat3DPlus(const MgMat3D&i_Tm, const MgMat3D&i_Tn)
+MgMat3D MGeo::Mat3DPlus(const MgMat3D&i_Mt, const MgMat3D&i_Mt2)
 {
 	MgMat3D	To;
 	int		ic;
 	for ( ic=0; ic<4; ic++) {
-		To.m[ic][0] = i_Tm.m[ic][0] + i_Tn.m[ic][0];
-		To.m[ic][1] = i_Tm.m[ic][1] + i_Tn.m[ic][1];
-		To.m[ic][2] = i_Tm.m[ic][2] + i_Tn.m[ic][2];
-		To.m[ic][3] = i_Tm.m[ic][3] + i_Tn.m[ic][3];
+		To.m[ic][0] = i_Mt.m[ic][0] + i_Mt2.m[ic][0];
+		To.m[ic][1] = i_Mt.m[ic][1] + i_Mt2.m[ic][1];
+		To.m[ic][2] = i_Mt.m[ic][2] + i_Mt2.m[ic][2];
+		To.m[ic][3] = i_Mt.m[ic][3] + i_Mt2.m[ic][3];
 	}
 	return To;
 }
@@ -524,16 +524,16 @@ MgMat3D MGeo::Mat3DPlus(const MgMat3D&i_Tm, const MgMat3D&i_Tn)
 //	| m41 m42 m43 m44 |     | m41 m42 m43 m44 |     | n41 n42 n43 n44 |     
 //
 //MgMat3D operator += (MgMat3D&M1, const MgMat3D&M2)
-MgMat3D MGeo::Mat3DPlusEqual( MgMat3D&io_Tm, const MgMat3D&i_Tn)
+MgMat3D MGeo::Mat3DPlusEqual( MgMat3D&io_Mt, const MgMat3D&i_Mt2)
 {
 	int		ic;
 	for ( ic=0; ic<4; ic++) {
-		io_Tm.m[ic][0] += i_Tn.m[ic][0];
-		io_Tm.m[ic][1] += i_Tn.m[ic][1];
-		io_Tm.m[ic][2] += i_Tn.m[ic][2];
-		io_Tm.m[ic][3] += i_Tn.m[ic][3];
+		io_Mt.m[ic][0] += i_Mt2.m[ic][0];
+		io_Mt.m[ic][1] += i_Mt2.m[ic][1];
+		io_Mt.m[ic][2] += i_Mt2.m[ic][2];
+		io_Mt.m[ic][3] += i_Mt2.m[ic][3];
 	}
-	return io_Tm;
+	return io_Mt;
 }
 //
 //===========================================================================
@@ -549,15 +549,15 @@ MgMat3D MGeo::Mat3DPlusEqual( MgMat3D&io_Tm, const MgMat3D&i_Tn)
 //	  | m41 m42 m43 m44 |     
 //
 //MgMat3D operator - (const MgMat3D&M1)
-MgMat3D MGeo::Mat3DSingleMinus( const MgMat3D& i_Tm)
+MgMat3D MGeo::Mat3DSingleMinus( const MgMat3D& i_Mt)
 {
 	MgMat3D	To;
 	int		ic;
 	for ( ic=0; ic<4; ic++) {
-		To.m[ic][0] = - i_Tm.m[ic][0];
-		To.m[ic][1] = - i_Tm.m[ic][1];
-		To.m[ic][2] = - i_Tm.m[ic][2];
-		To.m[ic][3] = - i_Tm.m[ic][3];
+		To.m[ic][0] = - i_Mt.m[ic][0];
+		To.m[ic][1] = - i_Mt.m[ic][1];
+		To.m[ic][2] = - i_Mt.m[ic][2];
+		To.m[ic][3] = - i_Mt.m[ic][3];
 	}
 	return To;
 }
@@ -575,15 +575,15 @@ MgMat3D MGeo::Mat3DSingleMinus( const MgMat3D& i_Tm)
 //	  | m41 m42 m43 m44 |     | n41 n42 n43 n44 |    
 //
 //MgMat3D operator - (const MgMat3D&M1, const MgMat3D&M2)
-MgMat3D MGeo::Mat3DMinus( const MgMat3D& i_Tm, const MgMat3D& i_Tn)
+MgMat3D MGeo::Mat3DMinus( const MgMat3D& i_Mt, const MgMat3D& i_Mt2)
 {
 	MgMat3D	To;
 	int		ic;
 	for ( ic=0; ic<4; ic++) {
-		To.m[ic][0] = i_Tm.m[ic][0] - i_Tn.m[ic][0];
-		To.m[ic][1] = i_Tm.m[ic][1] - i_Tn.m[ic][1];
-		To.m[ic][2] = i_Tm.m[ic][2] - i_Tn.m[ic][2];
-		To.m[ic][3] = i_Tm.m[ic][3] - i_Tn.m[ic][3];
+		To.m[ic][0] = i_Mt.m[ic][0] - i_Mt2.m[ic][0];
+		To.m[ic][1] = i_Mt.m[ic][1] - i_Mt2.m[ic][1];
+		To.m[ic][2] = i_Mt.m[ic][2] - i_Mt2.m[ic][2];
+		To.m[ic][3] = i_Mt.m[ic][3] - i_Mt2.m[ic][3];
 	}
 	return To;
 }
@@ -601,16 +601,16 @@ MgMat3D MGeo::Mat3DMinus( const MgMat3D& i_Tm, const MgMat3D& i_Tn)
 //	| m41 m42 m43 m44 |     | m41 m42 m43 m44 |     | n41 n42 n43 n44 |     
 //
 //MgMat3D operator -= (MgMat3D&M1, const MgMat3D&M2)
-MgMat3D MGeo::Mat3DMinusEqual( MgMat3D& io_Tm, const MgMat3D& i_Tn)
+MgMat3D MGeo::Mat3DMinusEqual( MgMat3D& io_Mt, const MgMat3D& i_Mt2)
 {
 	int		ic;
 	for ( ic=0; ic<4; ic++) {
-		io_Tm.m[ic][0] -= i_Tn.m[ic][0];
-		io_Tm.m[ic][1] -= i_Tn.m[ic][1];
-		io_Tm.m[ic][2] -= i_Tn.m[ic][2];
-		io_Tm.m[ic][3] -= i_Tn.m[ic][3];
+		io_Mt.m[ic][0] -= i_Mt2.m[ic][0];
+		io_Mt.m[ic][1] -= i_Mt2.m[ic][1];
+		io_Mt.m[ic][2] -= i_Mt2.m[ic][2];
+		io_Mt.m[ic][3] -= i_Mt2.m[ic][3];
 	}
-	return io_Tm;
+	return io_Mt;
 }
 //
 //===========================================================================
@@ -626,16 +626,16 @@ MgMat3D MGeo::Mat3DMinusEqual( MgMat3D& io_Tm, const MgMat3D& i_Tn)
 //	| m41 m42 m43 m44 |     | n41 n42 n43 n44 |    
 //
 //MgMat3D operator * (const MgMat3D&M1, const MgMat3D&M2)
-MgMat3D MGeo::Mat3DMult( const MgMat3D& i_Tm, const MgMat3D& i_Tn)
+MgMat3D MGeo::Mat3DMult( const MgMat3D& i_Mt, const MgMat3D& i_Mt2)
 {
 	MgMat3D	To;
 	int		i1, i2;
 	for (i1=0; i1<4; i1++) 
 		for (i2=0; i2<4; i2++) 
-			To.m[i1][i2] = i_Tm.m[i1][0] * i_Tn.m[0][i2] +
-						   i_Tm.m[i1][1] * i_Tn.m[1][i2] +
-						   i_Tm.m[i1][2] * i_Tn.m[2][i2] +
-						   i_Tm.m[i1][3] * i_Tn.m[3][i2];
+			To.m[i1][i2] = i_Mt.m[i1][0] * i_Mt2.m[0][i2] +
+						   i_Mt.m[i1][1] * i_Mt2.m[1][i2] +
+						   i_Mt.m[i1][2] * i_Mt2.m[2][i2] +
+						   i_Mt.m[i1][3] * i_Mt2.m[3][i2];
 	return To;
 }
 //
@@ -652,18 +652,18 @@ MgMat3D MGeo::Mat3DMult( const MgMat3D& i_Tm, const MgMat3D& i_Tn)
 //	| m41 m42 m43 m44 |     | m41 m42 m43 m44 |     | n41 n42 n43 n44 |     
 //
 //MgMat3D operator *= (MgMat3D&M1, const MgMat3D&M2)
-MgMat3D MGeo::Mat3DMultEqual( MgMat3D& io_Tm, const MgMat3D& i_Tn)
+MgMat3D MGeo::Mat3DMultEqual( MgMat3D& io_Mt, const MgMat3D& i_Mt2)
 {
 	MgMat3D	To;
 	int		i1, i2;
 	for (i1=0; i1<4; i1++) 
 		for (i2=0; i2<4; i2++) 
-			To.m[i1][i2] = io_Tm.m[i1][0] * i_Tn.m[0][i2] +
-						   io_Tm.m[i1][1] * i_Tn.m[1][i2] +
-						   io_Tm.m[i1][2] * i_Tn.m[2][i2] +
-						   io_Tm.m[i1][3] * i_Tn.m[3][i2];
-	io_Tm = To;
-	return io_Tm;
+			To.m[i1][i2] = io_Mt.m[i1][0] * i_Mt2.m[0][i2] +
+						   io_Mt.m[i1][1] * i_Mt2.m[1][i2] +
+						   io_Mt.m[i1][2] * i_Mt2.m[2][i2] +
+						   io_Mt.m[i1][3] * i_Mt2.m[3][i2];
+	io_Mt = To;
+	return io_Mt;
 }
 //
 //===========================================================================
@@ -679,11 +679,11 @@ MgMat3D MGeo::Mat3DMultEqual( MgMat3D& io_Tm, const MgMat3D& i_Tn)
 //						    | m41 m42 m43 m44 |
 //
 //MgPoint2D operator * (const MgPoint2D& Pt1, const MgMat3D&M1)
-MgPoint2D MGeo::Mat3DMultPoint2D( const MgPoint2D& i_Pt, const MgMat3D& i_Tm)
+MgPoint2D MGeo::Mat3DMultPoint2D( const MgPoint2D& i_Pt, const MgMat3D& i_Mt)
 {
 	MgPoint2D	Po;
-	Po.x = i_Tm.m[0][0] * i_Pt.x + i_Tm.m[1][0] * i_Pt.y + i_Tm.m[3][0];
-	Po.y = i_Tm.m[0][1] * i_Pt.x + i_Tm.m[1][1] * i_Pt.y + i_Tm.m[3][1];
+	Po.x = i_Mt.m[0][0] * i_Pt.x + i_Mt.m[1][0] * i_Pt.y + i_Mt.m[3][0];
+	Po.y = i_Mt.m[0][1] * i_Pt.x + i_Mt.m[1][1] * i_Pt.y + i_Mt.m[3][1];
 	return Po;
 }
 //
@@ -700,11 +700,11 @@ MgPoint2D MGeo::Mat3DMultPoint2D( const MgPoint2D& i_Pt, const MgMat3D& i_Tm)
 //						    | m41 m42 m43 m44 |
 //
 //MgVect2D operator * (const MgVect2D& Pt1, const MgMat3D&M1)
-MgVect2D MGeo::Mat3DMultVect2D( const MgVect2D& i_Pt, const MgMat3D& i_Tm)
+MgVect2D MGeo::Mat3DMultVect2D( const MgVect2D& i_Pt, const MgMat3D& i_Mt)
 {
 	MgVect2D	Po;
-	Po.x = i_Tm.m[0][0] * i_Pt.x + i_Tm.m[1][0] * i_Pt.y;
-	Po.y = i_Tm.m[0][1] * i_Pt.x + i_Tm.m[1][1] * i_Pt.y;
+	Po.x = i_Mt.m[0][0] * i_Pt.x + i_Mt.m[1][0] * i_Pt.y;
+	Po.y = i_Mt.m[0][1] * i_Pt.x + i_Mt.m[1][1] * i_Pt.y;
 	return Po;
 }
 //
@@ -721,11 +721,11 @@ MgVect2D MGeo::Mat3DMultVect2D( const MgVect2D& i_Pt, const MgMat3D& i_Tm)
 //	           									    | m41 m42 m43 m44 |
 //
 //MgPoint2D operator *= (MgVect2D& Pt1o, const MgMat3D&M1)
-MgPoint2D MGeo::Mat3DMultEqualPoint2D( MgPoint2D& io_Pt, const MgMat3D& i_Tm)
+MgPoint2D MGeo::Mat3DMultEqualPoint2D( MgPoint2D& io_Pt, const MgMat3D& i_Mt)
 {
 	MREAL	rwx;
-	rwx		= i_Tm.m[0][0] * io_Pt.x + i_Tm.m[1][0] * io_Pt.y + i_Tm.m[3][0];
-	io_Pt.y = i_Tm.m[0][1] * io_Pt.x + i_Tm.m[1][1] * io_Pt.y + i_Tm.m[3][1];
+	rwx		= i_Mt.m[0][0] * io_Pt.x + i_Mt.m[1][0] * io_Pt.y + i_Mt.m[3][0];
+	io_Pt.y = i_Mt.m[0][1] * io_Pt.x + i_Mt.m[1][1] * io_Pt.y + i_Mt.m[3][1];
 	io_Pt.x = rwx;
 	return io_Pt;
 }
@@ -743,11 +743,11 @@ MgPoint2D MGeo::Mat3DMultEqualPoint2D( MgPoint2D& io_Pt, const MgMat3D& i_Tm)
 //	           									    | m41 m42 m43 m44 |
 //
 //MgVect2D operator *= (MgVect2D& Pt1o, const MgMat3D&M1)
-MgVect2D MGeo::Mat3DMultEqualVect2D( MgVect2D& io_Pt, const MgMat3D& i_Tm)
+MgVect2D MGeo::Mat3DMultEqualVect2D( MgVect2D& io_Pt, const MgMat3D& i_Mt)
 {
 	MREAL	rwx;
-	rwx		= i_Tm.m[0][0] * io_Pt.x + i_Tm.m[1][0] * io_Pt.y;
-	io_Pt.y = i_Tm.m[0][1] * io_Pt.x + i_Tm.m[1][1] * io_Pt.y;
+	rwx		= i_Mt.m[0][0] * io_Pt.x + i_Mt.m[1][0] * io_Pt.y;
+	io_Pt.y = i_Mt.m[0][1] * io_Pt.x + i_Mt.m[1][1] * io_Pt.y;
 	io_Pt.x = rwx;
 	return io_Pt;
 }
@@ -765,15 +765,15 @@ MgVect2D MGeo::Mat3DMultEqualVect2D( MgVect2D& io_Pt, const MgMat3D& i_Tm)
 //						    | m41 m42 m43 m44 |
 //
 //MgPoint3D operator * (const MgVect3D& Pt1, const MgMat3D&M1)
-MgPoint3D MGeo::Mat3DMultPoint3D( const MgPoint3D& i_Pt, const MgMat3D& i_Tm)
+MgPoint3D MGeo::Mat3DMultPoint3D( const MgPoint3D& i_Pt, const MgMat3D& i_Mt)
 {
 	MgPoint3D	Pto;
-	Pto.x = i_Tm.m[0][0] * i_Pt.x + i_Tm.m[1][0] * i_Pt.y +	i_Tm.m[2][0] * i_Pt.z + i_Tm.m[3][0];
-	Pto.y = i_Tm.m[0][1] * i_Pt.x + i_Tm.m[1][1] * i_Pt.y + i_Tm.m[2][1] * i_Pt.z + i_Tm.m[3][1];
-	Pto.z = i_Tm.m[0][2] * i_Pt.x + i_Tm.m[1][2] * i_Pt.y +	i_Tm.m[2][2] * i_Pt.z + i_Tm.m[3][2];
+	Pto.x = i_Mt.m[0][0] * i_Pt.x + i_Mt.m[1][0] * i_Pt.y +	i_Mt.m[2][0] * i_Pt.z + i_Mt.m[3][0];
+	Pto.y = i_Mt.m[0][1] * i_Pt.x + i_Mt.m[1][1] * i_Pt.y + i_Mt.m[2][1] * i_Pt.z + i_Mt.m[3][1];
+	Pto.z = i_Mt.m[0][2] * i_Pt.x + i_Mt.m[1][2] * i_Pt.y +	i_Mt.m[2][2] * i_Pt.z + i_Mt.m[3][2];
 #ifdef	MGDOUJIZAHYOU
 	MREAL		dd;
-	dd 	  = i_Tm.m[0][3] * i_Pt.x + i_Tm.m[1][3] * i_Pt.y + i_Tm.m[2][3] * i_Pt.z + i_Tm.m[3][3];
+	dd 	  = i_Mt.m[0][3] * i_Pt.x + i_Mt.m[1][3] * i_Pt.y + i_Mt.m[2][3] * i_Pt.z + i_Mt.m[3][3];
 //	_ASSERT(dd>MCTOLDN);
 	if (dd > MGPTOL->DN) {
 		MREAL	dd1 = 1. / dd;
@@ -797,15 +797,15 @@ MgPoint3D MGeo::Mat3DMultPoint3D( const MgPoint3D& i_Pt, const MgMat3D& i_Tm)
 //						    | m41 m42 m43 m44 |
 //
 //MgVect3D operator * (const MgVect3D& Pt1, const MgMat3D&M1)
-MgVect3D MGeo::Mat3DMultVect3D( const MgVect3D& i_Pt, const MgMat3D& i_Tm)
+MgVect3D MGeo::Mat3DMultVect3D( const MgVect3D& i_Pt, const MgMat3D& i_Mt)
 {
 	MgVect3D	Pto;
-	Pto.x = i_Tm.m[0][0] * i_Pt.x + i_Tm.m[1][0] * i_Pt.y +	i_Tm.m[2][0] * i_Pt.z;
-	Pto.y = i_Tm.m[0][1] * i_Pt.x + i_Tm.m[1][1] * i_Pt.y + i_Tm.m[2][1] * i_Pt.z;
-	Pto.z = i_Tm.m[0][2] * i_Pt.x + i_Tm.m[1][2] * i_Pt.y +	i_Tm.m[2][2] * i_Pt.z;
+	Pto.x = i_Mt.m[0][0] * i_Pt.x + i_Mt.m[1][0] * i_Pt.y +	i_Mt.m[2][0] * i_Pt.z;
+	Pto.y = i_Mt.m[0][1] * i_Pt.x + i_Mt.m[1][1] * i_Pt.y + i_Mt.m[2][1] * i_Pt.z;
+	Pto.z = i_Mt.m[0][2] * i_Pt.x + i_Mt.m[1][2] * i_Pt.y +	i_Mt.m[2][2] * i_Pt.z;
 #ifdef	MGDOUJIZAHYOU
 	MREAL		dd;
-	dd 	  = i_Tm.m[0][3] * i_Pt.x + i_Tm.m[1][3] * i_Pt.y + i_Tm.m[2][3] * i_Pt.z + i_Tm.m[3][3];
+	dd 	  = i_Mt.m[0][3] * i_Pt.x + i_Mt.m[1][3] * i_Pt.y + i_Mt.m[2][3] * i_Pt.z + i_Mt.m[3][3];
 //	_ASSERT(dd>MCTOLDN);
 	if (dd > MGPTOL->DN) {
 		MREAL	dd1 = 1. / dd;
@@ -830,15 +830,15 @@ MgVect3D MGeo::Mat3DMultVect3D( const MgVect3D& i_Pt, const MgMat3D& i_Tm)
 //												    | m41 m42 m43 m44 |
 //
 //MgVect3D operator *= (MgVect3D& Pt1o, const MgMat3D&M1)
-MgPoint3D MGeo::Mat3DMultEqualPoint3D( MgPoint3D& io_Pt, const MgMat3D& i_Tm)
+MgPoint3D MGeo::Mat3DMultEqualPoint3D( MgPoint3D& io_Pt, const MgMat3D& i_Mt)
 {
 	MgPoint3D	Pto;
-	Pto.x = i_Tm.m[0][0] * io_Pt.x + i_Tm.m[1][0] * io_Pt.y + i_Tm.m[2][0] * io_Pt.z + i_Tm.m[3][0];
-	Pto.y = i_Tm.m[0][1] * io_Pt.x + i_Tm.m[1][1] * io_Pt.y + i_Tm.m[2][1] * io_Pt.z + i_Tm.m[3][1];
-	Pto.z = i_Tm.m[0][2] * io_Pt.x + i_Tm.m[1][2] * io_Pt.y + i_Tm.m[2][2] * io_Pt.z + i_Tm.m[3][2];
+	Pto.x = i_Mt.m[0][0] * io_Pt.x + i_Mt.m[1][0] * io_Pt.y + i_Mt.m[2][0] * io_Pt.z + i_Mt.m[3][0];
+	Pto.y = i_Mt.m[0][1] * io_Pt.x + i_Mt.m[1][1] * io_Pt.y + i_Mt.m[2][1] * io_Pt.z + i_Mt.m[3][1];
+	Pto.z = i_Mt.m[0][2] * io_Pt.x + i_Mt.m[1][2] * io_Pt.y + i_Mt.m[2][2] * io_Pt.z + i_Mt.m[3][2];
 #ifdef	MGDOUJIZAHYOU
 	MREAL		dd;
-	dd 	  = i_Tm.m[0][3] * io_Pt.x + i_Tm.m[1][3] * io_Pt.y + i_Tm.m[2][3] * io_Pt.z + i_Tm.m[3][3];
+	dd 	  = i_Mt.m[0][3] * io_Pt.x + i_Mt.m[1][3] * io_Pt.y + i_Mt.m[2][3] * io_Pt.z + i_Mt.m[3][3];
 //	_ASSERT(dd>MCTOLDN);
 	if (dd > MGPTOL->DN) {
 		MREAL	dd1 = 1. / dd;
@@ -864,15 +864,15 @@ MgPoint3D MGeo::Mat3DMultEqualPoint3D( MgPoint3D& io_Pt, const MgMat3D& i_Tm)
 //												    | m41 m42 m43 m44 |
 //
 //MgVect3D operator *= (MgVect3D& Pt1o, const MgMat3D&M1)
-MgVect3D MGeo::Mat3DMultEqualVect3D( MgVect3D& io_Pt, const MgMat3D& i_Tm)
+MgVect3D MGeo::Mat3DMultEqualVect3D( MgVect3D& io_Pt, const MgMat3D& i_Mt)
 {
 	MgVect3D	Pto;
-	Pto.x = i_Tm.m[0][0] * io_Pt.x + i_Tm.m[1][0] * io_Pt.y + i_Tm.m[2][0] * io_Pt.z;
-	Pto.y = i_Tm.m[0][1] * io_Pt.x + i_Tm.m[1][1] * io_Pt.y + i_Tm.m[2][1] * io_Pt.z;
-	Pto.z = i_Tm.m[0][2] * io_Pt.x + i_Tm.m[1][2] * io_Pt.y + i_Tm.m[2][2] * io_Pt.z;
+	Pto.x = i_Mt.m[0][0] * io_Pt.x + i_Mt.m[1][0] * io_Pt.y + i_Mt.m[2][0] * io_Pt.z;
+	Pto.y = i_Mt.m[0][1] * io_Pt.x + i_Mt.m[1][1] * io_Pt.y + i_Mt.m[2][1] * io_Pt.z;
+	Pto.z = i_Mt.m[0][2] * io_Pt.x + i_Mt.m[1][2] * io_Pt.y + i_Mt.m[2][2] * io_Pt.z;
 #ifdef	MGDOUJIZAHYOU
 	MREAL		dd;
-	dd 	  = i_Tm.m[0][3] * io_Pt.x + i_Tm.m[1][3] * io_Pt.y + i_Tm.m[2][3] * io_Pt.z + i_Tm.m[3][3];
+	dd 	  = i_Mt.m[0][3] * io_Pt.x + i_Mt.m[1][3] * io_Pt.y + i_Mt.m[2][3] * io_Pt.z + i_Mt.m[3][3];
 //	_ASSERT(dd>MCTOLDN);
 	if (dd > MGPTOL->DN) {
 		MREAL	dd1 = 1. / dd;
@@ -898,16 +898,16 @@ MgVect3D MGeo::Mat3DMultEqualVect3D( MgVect3D& io_Pt, const MgMat3D& i_Tm)
 ////							| m41 m42 m43 m44 |
 ////
 ////MgULine3D operator * (const MgULine3D& ULn1, const MgMat3D&M1)
-//MgULine3D MGeo::Mat3DMultULine3D( const MgULine3D& i_ULn, const MgMat3D& i_Tm)
+//MgULine3D MGeo::Mat3DMultULine3D( const MgULine3D& i_ULn, const MgMat3D& i_Mt)
 //{
 //	MgULine3D	ULno;
-//	ULno.p.x = i_Tm.m[0][0] * i_ULn.p.x + i_Tm.m[1][0] * i_ULn.p.y + i_Tm.m[2][0] * i_ULn.p.z + i_Tm.m[3][0];
-//	ULno.p.y = i_Tm.m[0][1] * i_ULn.p.x + i_Tm.m[1][1] * i_ULn.p.y + i_Tm.m[2][1] * i_ULn.p.z + i_Tm.m[3][1];
-//	ULno.p.z = i_Tm.m[0][2] * i_ULn.p.x + i_Tm.m[1][2] * i_ULn.p.y + i_Tm.m[2][2] * i_ULn.p.z + i_Tm.m[3][2];
+//	ULno.p.x = i_Mt.m[0][0] * i_ULn.p.x + i_Mt.m[1][0] * i_ULn.p.y + i_Mt.m[2][0] * i_ULn.p.z + i_Mt.m[3][0];
+//	ULno.p.y = i_Mt.m[0][1] * i_ULn.p.x + i_Mt.m[1][1] * i_ULn.p.y + i_Mt.m[2][1] * i_ULn.p.z + i_Mt.m[3][1];
+//	ULno.p.z = i_Mt.m[0][2] * i_ULn.p.x + i_Mt.m[1][2] * i_ULn.p.y + i_Mt.m[2][2] * i_ULn.p.z + i_Mt.m[3][2];
 //																		   
-//	ULno.v.x = i_Tm.m[0][0] * i_ULn.v.x + i_Tm.m[1][0] * i_ULn.v.y + i_Tm.m[2][0] * i_ULn.v.z;
-//	ULno.v.y = i_Tm.m[0][1] * i_ULn.v.x + i_Tm.m[1][1] * i_ULn.v.y + i_Tm.m[2][1] * i_ULn.v.z;
-//	ULno.v.z = i_Tm.m[0][2] * i_ULn.v.x + i_Tm.m[1][2] * i_ULn.v.y + i_Tm.m[2][2] * i_ULn.v.z;
+//	ULno.v.x = i_Mt.m[0][0] * i_ULn.v.x + i_Mt.m[1][0] * i_ULn.v.y + i_Mt.m[2][0] * i_ULn.v.z;
+//	ULno.v.y = i_Mt.m[0][1] * i_ULn.v.x + i_Mt.m[1][1] * i_ULn.v.y + i_Mt.m[2][1] * i_ULn.v.z;
+//	ULno.v.z = i_Mt.m[0][2] * i_ULn.v.x + i_Mt.m[1][2] * i_ULn.v.y + i_Mt.m[2][2] * i_ULn.v.z;
 //
 //	return ULno;
 //}
@@ -925,16 +925,16 @@ MgVect3D MGeo::Mat3DMultEqualVect3D( MgVect3D& io_Pt, const MgMat3D& i_Tm)
 ////													| m41 m42 m43 m44 |
 ////
 ////MgULine3D operator *= (MgULine3D& ULn1, const MgMat3D&M1)
-//MgULine3D MGeo::Mat3DMultEqualULine3D( MgULine3D& io_ULn, const MgMat3D& i_Tm)
+//MgULine3D MGeo::Mat3DMultEqualULine3D( MgULine3D& io_ULn, const MgMat3D& i_Mt)
 //{
 //	MgULine3D	ULno;
-//	ULno.p.x = i_Tm.m[0][0] * io_ULn.p.x + i_Tm.m[1][0] * io_ULn.p.y + i_Tm.m[2][0] * io_ULn.p.z + i_Tm.m[3][0];
-//	ULno.p.y = i_Tm.m[0][1] * io_ULn.p.x + i_Tm.m[1][1] * io_ULn.p.y + i_Tm.m[2][1] * io_ULn.p.z + i_Tm.m[3][1];
-//	ULno.p.z = i_Tm.m[0][2] * io_ULn.p.x + i_Tm.m[1][2] * io_ULn.p.y + i_Tm.m[2][2] * io_ULn.p.z + i_Tm.m[3][2];
+//	ULno.p.x = i_Mt.m[0][0] * io_ULn.p.x + i_Mt.m[1][0] * io_ULn.p.y + i_Mt.m[2][0] * io_ULn.p.z + i_Mt.m[3][0];
+//	ULno.p.y = i_Mt.m[0][1] * io_ULn.p.x + i_Mt.m[1][1] * io_ULn.p.y + i_Mt.m[2][1] * io_ULn.p.z + i_Mt.m[3][1];
+//	ULno.p.z = i_Mt.m[0][2] * io_ULn.p.x + i_Mt.m[1][2] * io_ULn.p.y + i_Mt.m[2][2] * io_ULn.p.z + i_Mt.m[3][2];
 //																		   
-//	ULno.v.x = i_Tm.m[0][0] * io_ULn.v.x + i_Tm.m[1][0] * io_ULn.v.y + i_Tm.m[2][0] * io_ULn.v.z;
-//	ULno.v.y = i_Tm.m[0][1] * io_ULn.v.x + i_Tm.m[1][1] * io_ULn.v.y + i_Tm.m[2][1] * io_ULn.v.z;
-//	ULno.v.z = i_Tm.m[0][2] * io_ULn.v.x + i_Tm.m[1][2] * io_ULn.v.y + i_Tm.m[2][2] * io_ULn.v.z;
+//	ULno.v.x = i_Mt.m[0][0] * io_ULn.v.x + i_Mt.m[1][0] * io_ULn.v.y + i_Mt.m[2][0] * io_ULn.v.z;
+//	ULno.v.y = i_Mt.m[0][1] * io_ULn.v.x + i_Mt.m[1][1] * io_ULn.v.y + i_Mt.m[2][1] * io_ULn.v.z;
+//	ULno.v.z = i_Mt.m[0][2] * io_ULn.v.x + i_Mt.m[1][2] * io_ULn.v.y + i_Mt.m[2][2] * io_ULn.v.z;
 //	io_ULn = ULno;
 //	return io_ULn;
 //}
@@ -1270,9 +1270,9 @@ MgMat2D MGeo::Mat2DInv( const MgMat2D& i_mt)
 //	| m13 m23 m33 m43 |
 //	| M14 m24 m34 m44 |
 //
-MgMat3D MGeo::Mat3DInv( const MgMat3D& i_Tm)
+MgMat3D MGeo::Mat3DInv( const MgMat3D& i_Mt)
 {
-	MgMat3D	Tmlu = i_Tm;
+	MgMat3D	Tmlu = i_Mt;
 	MgMat3D	Tmo;
 	int		i, j, k;
 	
@@ -1335,14 +1335,14 @@ MgMat2D MGeo::Mat2DMirror(							// (  O) 鏡像変換行列
 // ---------------------( ３次元 )------------------------------
 //
 MgMat3D MGeo::Mat3DMirror(							// (  O) 鏡像変換行列
-				const	MgMat3D&	i_Tm, 			// (I  ) 変換行列
+				const	MgMat3D&	i_Mt, 			// (I  ) 変換行列
 				const	MgPlane3D&	i_Pln			// (I  ) 鏡映の面とする平面
 		)
 {
 	MgVect3D V0, V1, V2;
 	MgMat3D	Tmo;
 
-	Tmo = i_Tm;
+	Tmo = i_Mt;
 
 	V0 = i_Pln.d * i_Pln.v;
 	V1 = TaniVect3D( i_Pln.v);
@@ -1433,7 +1433,7 @@ MgMat3D MGeo::Mat3DMirror(							// (  O) 鏡像変換行列
 // ---------------------( ３次元 )------------------------------
 //
 MgMat3D MGeo::Mat3DNProj(							// (  O) 正投象変換行列
-				const	MgMat3D		&i_Tm,			// (I  ) 入力座標変換行列
+				const	MgMat3D		&i_Mt,			// (I  ) 入力座標変換行列
 				const	MgPlane3D	&i_Pln			// (I  ) 投象面
 		)
 {
@@ -1445,7 +1445,7 @@ MgMat3D MGeo::Mat3DNProj(							// (  O) 正投象変換行列
 	V2 = i_Pln.v ^ V1;
 	MgMat3D Tm1(V1, V2, i_Pln.v);
 //
-	Tmw = Tm1 * i_Tm;
+	Tmw = Tm1 * i_Mt;
 //
 	Tmw.m[0][2] = Tmw.m[0][3] * i_Pln.d;	
 	Tmw.m[1][2] = Tmw.m[1][3] * i_Pln.d;	
@@ -1466,7 +1466,7 @@ MgMat3D MGeo::Mat3DNProj(							// (  O) 正投象変換行列
 // ---------------------( ３次元 )------------------------------
 //
 MgMat3D MGeo::Mat3DSProj(							// (  O) 斜投象変座標変換行列
-				const	MgMat3D		&i_Tm,			// (I  ) 入力座標変換行列
+				const	MgMat3D		&i_Mt,			// (I  ) 入力座標変換行列
 				const	MgPlane3D	&i_Pln,			// (I  ) 投象面
 				const	MgVect3D&	i_V				// (I  ) 投象方向を示す単位ベクトル
 		)
@@ -1479,7 +1479,7 @@ MgMat3D MGeo::Mat3DSProj(							// (  O) 斜投象変座標変換行列
 	V2 = i_Pln.v ^ V1;
 	MgMat3D Tm1(V1, V2, i_Pln.v);
 //
-	Tm2 = Tm1 * i_Tm;
+	Tm2 = Tm1 * i_Mt;
 	V3	= i_V * Tm2;
 //
 //	MULTIPLY TMO BY (OBLIQUE PROJECTION MATRIX).
@@ -1728,12 +1728,12 @@ void MGeo::Mat3DPlntoXY(
 //
 void MGeo::Point3Dto2D(
 				const	MgPoint3D&	i_P,			// (I  ) ３Ｄ座標
-				const	MgMat3D		&i_Tm,			// (I  ) 座標変換マトリックス
+				const	MgMat3D		&i_Mt,			// (I  ) 座標変換マトリックス
 						MgPoint2D*	o_P				// (  O) ２Ｄ座標
 				)
 {
-	o_P->v[0] = i_Tm.m[0][0] * i_P.x + i_Tm.m[1][0] * i_P.y + i_Tm.m[2][0] * i_P.z + i_Tm.m[3][0];
-	o_P->v[1] = i_Tm.m[0][1] * i_P.x + i_Tm.m[1][1] * i_P.y + i_Tm.m[2][1] * i_P.z + i_Tm.m[3][1];
+	o_P->v[0] = i_Mt.m[0][0] * i_P.x + i_Mt.m[1][0] * i_P.y + i_Mt.m[2][0] * i_P.z + i_Mt.m[3][0];
+	o_P->v[1] = i_Mt.m[0][1] * i_P.x + i_Mt.m[1][1] * i_P.y + i_Mt.m[2][1] * i_P.z + i_Mt.m[3][1];
 }
 /*
 //
@@ -1742,7 +1742,7 @@ void MGeo::Point3Dto2D(
 //
 inline void MGeo::Line3Dto2D(
 				const MgLine3D		&i_Ln,			// (I  ) ３Ｄ線分
-				const MgMat3D		&i_Tm,			// (I  ) 座標変換マトリックス
+				const MgMat3D		&i_Mt,			// (I  ) 座標変換マトリックス
 					  MgLine2D		*o_ln			// (  O) ２Ｄ線分
 				)
 						{ Mg3Dto2D( i_Ln.p[0], Mat, &o_ln->p[0]); 
@@ -1770,13 +1770,13 @@ void MGeo::ULine3Dto2D(
 //
 MgPoint2D MGeo::Point3Dto2D2(						// (  O) ２Ｄ座標
 				const	MgPoint3D&	i_P,			// (I  ) ３Ｄ座標
-				const	MgMat3D		&i_Tm			// (I  ) 座標変換マトリックス
+				const	MgMat3D		&i_Mt			// (I  ) 座標変換マトリックス
 				)
 {
 	MgPoint2D	Po;
 
-	Po.x = i_Tm.m[0][0] * i_P.x + i_Tm.m[1][0] * i_P.y + i_Tm.m[2][0] * i_P.z + i_Tm.m[3][0];
-	Po.y = i_Tm.m[0][1] * i_P.x + i_Tm.m[1][1] * i_P.y + i_Tm.m[2][1] * i_P.z + i_Tm.m[3][1];
+	Po.x = i_Mt.m[0][0] * i_P.x + i_Mt.m[1][0] * i_P.y + i_Mt.m[2][0] * i_P.z + i_Mt.m[3][0];
+	Po.y = i_Mt.m[0][1] * i_P.x + i_Mt.m[1][1] * i_P.y + i_Mt.m[2][1] * i_P.z + i_Mt.m[3][1];
 	return Po;
 }
 /*
@@ -1786,11 +1786,11 @@ MgPoint2D MGeo::Point3Dto2D2(						// (  O) ２Ｄ座標
 //
 inline MgLine2D MgLine3DDto2D2(						// (  O) ２Ｄ線分
 				const MgLine3D		&i_Ln,			// (I  ) ３Ｄ線分
-				const MgMat3D		&i_Tm			// (I  ) 座標変換マトリックス
+				const MgMat3D		&i_Mt			// (I  ) 座標変換マトリックス
 				)
 						{ return MgLine2D( 
-						  Point3Dto2D2( i_Ln.p[0], i_Tm), 
-						  Point3Dto2D2( i_Ln.p[1], i_Tm));}  
+						  Point3Dto2D2( i_Ln.p[0], i_Mt), 
+						  Point3Dto2D2( i_Ln.p[1], i_Mt));}  
 */
 //
 //===================(３次元 → ２次元)=========================
@@ -1798,14 +1798,14 @@ inline MgLine2D MgLine3DDto2D2(						// (  O) ２Ｄ線分
 //
 MgULine2D MGeo::ULine3Dto2D2(						// (  O) ２Ｄ直線
 				const MgULine3D		&i_ULn,			// (I  ) ３Ｄ直線
-				const MgMat3D		&i_Tm			// (I  ) 座標変換マトリックス
+				const MgMat3D		&i_Mt			// (I  ) 座標変換マトリックス
 				)
 {
 	MgULine2D	ulno;
-	Point3Dto2D( i_ULn.p, i_Tm, &ulno.p); 
+	Point3Dto2D( i_ULn.p, i_Mt, &ulno.p); 
 
-	ulno.v.x = i_Tm.m[0][0] * i_ULn.v.x + i_Tm.m[1][0] * i_ULn.v.y + i_Tm.m[2][0] * i_ULn.v.z;		
-	ulno.v.y = i_Tm.m[0][1] * i_ULn.v.x + i_Tm.m[1][1] * i_ULn.v.y + i_Tm.m[2][1] * i_ULn.v.z;
+	ulno.v.x = i_Mt.m[0][0] * i_ULn.v.x + i_Mt.m[1][0] * i_ULn.v.y + i_Mt.m[2][0] * i_ULn.v.z;		
+	ulno.v.y = i_Mt.m[0][1] * i_ULn.v.x + i_Mt.m[1][1] * i_ULn.v.y + i_Mt.m[2][1] * i_ULn.v.z;
 	ulno.v.SetUnitize();
 	return ulno;
 }
@@ -1815,14 +1815,14 @@ MgULine2D MGeo::ULine3Dto2D2(						// (  O) ２Ｄ直線
 //
 void MGeo::GPoint3Dto2D(
 				const	MgGPoint3D	&i_GP,			// (I  ) ３Ｄ座標群
-				const	MgMat3D		&i_Tm,			// (I  ) 座標変換マトリックス
+				const	MgMat3D		&i_Mt,			// (I  ) 座標変換マトリックス
 						MgGPoint2D	*o_GP			// (  O) ２Ｄ座標群
 				)
 {
 	int	ic;
 	o_GP->m_n = 0;
 	for ( ic=0; ic<i_GP.m_n; ic++)
-		*o_GP += Point3Dto2D2( i_GP.m_p[ic], i_Tm);
+		*o_GP += Point3Dto2D2( i_GP.m_p[ic], i_Mt);
 }
 
 //
@@ -1847,14 +1847,14 @@ void MGeo::Polyg3Dto2D(
 //
 void MGeo::GLine3Dto2D(
 				const	MgGLine3D	&i_GLn,			// (I  ) ３Ｄ線分群
-				const	MgMat3D		&i_Tm,			// (I  ) 座標変換マトリックス
+				const	MgMat3D		&i_Mt,			// (I  ) 座標変換マトリックス
 						MgGLine2D*	o_gln			// (  O) ２Ｄ線分群
 				)
 {
 	int		ic;
 	o_gln->m_n = 0;
 	for ( ic=0; ic<i_GLn.m_n; ic++)
-		*o_gln += Line3Dto2D2( i_GLn.m_ln[ic], i_Tm);
+		*o_gln += Line3Dto2D2( i_GLn.m_ln[ic], i_Mt);
 }
 
 //
@@ -1863,7 +1863,7 @@ void MGeo::GLine3Dto2D(
 //
 void MGeo::GPolyg3Dto2D(
 				const MgGPolyg3D	&i_gPg,			// (I  ) ３Ｄ多角形群
-				const MgMat3D		&i_Tm,			// (I  ) 座標変換マトリックス
+				const MgMat3D		&i_Mt,			// (I  ) 座標変換マトリックス
 					  MgGPolyg2D	*o_gpg			// (  O) ２Ｄ多角形群
 				)
 {
@@ -1872,7 +1872,7 @@ void MGeo::GPolyg3Dto2D(
 
 	o_gpg->SetCount0();
 	for ( ic=0; ic<i_gPg.m_n; ic++) {
-		Polyg3Dto2D( i_gPg.m_Pg[ic], i_Tm, &pgw);
+		Polyg3Dto2D( i_gPg.m_Pg[ic], i_Mt, &pgw);
 		(*o_gpg) += pgw;
 	}
 }
@@ -1882,13 +1882,13 @@ void MGeo::GPolyg3Dto2D(
 //
 void MGeo::Point2Dto3D(
 				const	MgPoint2D&	i_pt,			// (I  ) ２Ｄ座標
-				const	MgMat3D		&i_Tm,			// (I  ) 座標変換マトリックス
+				const	MgMat3D		&i_Mt,			// (I  ) 座標変換マトリックス
 						MgPoint3D	*o_Pt			// (  O) ３Ｄ座標
 				)
 {
-	o_Pt->v[0] = i_Tm.m[0][0] * i_pt.x + i_Tm.m[1][0] * i_pt.y + i_Tm.m[3][0];
-	o_Pt->v[1] = i_Tm.m[0][1] * i_pt.x + i_Tm.m[1][1] * i_pt.y + i_Tm.m[3][1];
-	o_Pt->v[2] = i_Tm.m[0][2] * i_pt.x + i_Tm.m[1][2] * i_pt.y + i_Tm.m[3][2];
+	o_Pt->v[0] = i_Mt.m[0][0] * i_pt.x + i_Mt.m[1][0] * i_pt.y + i_Mt.m[3][0];
+	o_Pt->v[1] = i_Mt.m[0][1] * i_pt.x + i_Mt.m[1][1] * i_pt.y + i_Mt.m[3][1];
+	o_Pt->v[2] = i_Mt.m[0][2] * i_pt.x + i_Mt.m[1][2] * i_pt.y + i_Mt.m[3][2];
 }
 /*
 //
@@ -1897,11 +1897,11 @@ void MGeo::Point2Dto3D(
 //
 inline void MgLine2DDto3D(
 				const MgLine2D&		i_ln,			// (I  ) ２Ｄ線分
-				const MgMat3D		&i_Tm,			// (I  ) 座標変換マトリックス
+				const MgMat3D		&i_Mt,			// (I  ) 座標変換マトリックス
 					  MgLine3D		*o_Ln			// (  O) ３Ｄ線分
 				)
-						{ Mg2Dto3D( i_ln.p[0], i_Tm, &o_Ln->p[0]);
-						  Mg2Dto3D( i_ln.p[1], i_Tm, &o_Ln->p[1]);}  
+						{ Mg2Dto3D( i_ln.p[0], i_Mt, &o_Ln->p[0]);
+						  Mg2Dto3D( i_ln.p[1], i_Mt, &o_Ln->p[1]);}  
 */
 //
 //===================(２次元 → ３次元)=========================
@@ -1909,15 +1909,15 @@ inline void MgLine2DDto3D(
 //
 void MGeo::ULine2Dto3D(
 				const MgULine2D		&i_uln,			// (I  ) ２Ｄ直線
-				const MgMat3D		&i_Tm,			// (I  ) 座標変換マトリックス
+				const MgMat3D		&i_Mt,			// (I  ) 座標変換マトリックス
 					  MgULine3D		*o_ULn			// (  O) ３Ｄ直線
 				)
 {
-	Point2Dto3D( i_uln.p, i_Tm, &o_ULn->p); 
+	Point2Dto3D( i_uln.p, i_Mt, &o_ULn->p); 
 
-	o_ULn->v.x = i_Tm.m[0][0] * i_uln.v.x + i_Tm.m[1][0] * i_uln.v.y + i_Tm.m[3][0];
-	o_ULn->v.y = i_Tm.m[0][1] * i_uln.v.x + i_Tm.m[1][1] * i_uln.v.y + i_Tm.m[3][1];
-	o_ULn->v.z = i_Tm.m[0][2] * i_uln.v.x + i_Tm.m[1][2] * i_uln.v.y + i_Tm.m[3][2];
+	o_ULn->v.x = i_Mt.m[0][0] * i_uln.v.x + i_Mt.m[1][0] * i_uln.v.y + i_Mt.m[3][0];
+	o_ULn->v.y = i_Mt.m[0][1] * i_uln.v.x + i_Mt.m[1][1] * i_uln.v.y + i_Mt.m[3][1];
+	o_ULn->v.z = i_Mt.m[0][2] * i_uln.v.x + i_Mt.m[1][2] * i_uln.v.y + i_Mt.m[3][2];
 	o_ULn->v.SetUnitize();
 }
 //
@@ -1926,13 +1926,13 @@ void MGeo::ULine2Dto3D(
 //
 MgPoint3D MGeo::Point2Dto3D3(						// (  O) ３Ｄ座標
 				const	MgPoint2D&	i_Pt,			// (I  ) ２Ｄ座標
-				const	MgMat3D		&i_Tm			// (I  ) 座標変換マトリックス
+				const	MgMat3D		&i_Mt			// (I  ) 座標変換マトリックス
 				)
 {
 	MgPoint3D	Pto;
-	Pto.x = i_Tm.m[0][0] * i_Pt.x + i_Tm.m[1][0] * i_Pt.y + i_Tm.m[3][0];
-	Pto.y = i_Tm.m[0][1] * i_Pt.x + i_Tm.m[1][1] * i_Pt.y + i_Tm.m[3][1];
-	Pto.z = i_Tm.m[0][2] * i_Pt.x + i_Tm.m[1][2] * i_Pt.y + i_Tm.m[3][2];
+	Pto.x = i_Mt.m[0][0] * i_Pt.x + i_Mt.m[1][0] * i_Pt.y + i_Mt.m[3][0];
+	Pto.y = i_Mt.m[0][1] * i_Pt.x + i_Mt.m[1][1] * i_Pt.y + i_Mt.m[3][1];
+	Pto.z = i_Mt.m[0][2] * i_Pt.x + i_Mt.m[1][2] * i_Pt.y + i_Mt.m[3][2];
 	return Pto;
 }
 /*
@@ -1941,11 +1941,11 @@ MgPoint3D MGeo::Point2Dto3D3(						// (  O) ３Ｄ座標
 //
 inline MgLine3D MgLine2DDto3D3(						// (  O) ３Ｄ線分
 				const MgLine2D&		i_ln,			// (I  ) ２Ｄ線分
-				const MgMat3D		&i_Tm			// (I  ) 座標変換マトリックス
+				const MgMat3D		&i_Mt			// (I  ) 座標変換マトリックス
 				)
 						{ return MgLine3D(
-						  Mg2Dto3D( i_ln.p[0], i_Tm), 
-						  Mg2Dto3D( i_ln.p[1], i_Tm))}  
+						  Mg2Dto3D( i_ln.p[0], i_Mt), 
+						  Mg2Dto3D( i_ln.p[1], i_Mt))}  
 */
 //
 //===================(２次元 → ３次元)=========================
@@ -1953,15 +1953,15 @@ inline MgLine3D MgLine2DDto3D3(						// (  O) ３Ｄ線分
 //
 MgULine3D MGeo::ULine2Dto3D3(						// (  O) ３Ｄ直線
 				const MgULine2D		&i_uln,			// (I  ) ２Ｄ直線
-				const MgMat3D		&i_Tm			// (I  ) 座標変換マトリックス
+				const MgMat3D		&i_Mt			// (I  ) 座標変換マトリックス
 				)
 {
 	MgULine3D	ULno;
-	Point2Dto3D( i_uln.p, i_Tm, &ULno.p); 
+	Point2Dto3D( i_uln.p, i_Mt, &ULno.p); 
 
-	ULno.v.x = i_Tm.m[0][0] * i_uln.v.x + i_Tm.m[1][0] * i_uln.v.y;
-	ULno.v.y = i_Tm.m[0][1] * i_uln.v.x + i_Tm.m[1][1] * i_uln.v.y;
-	ULno.v.z = i_Tm.m[0][2] * i_uln.v.x + i_Tm.m[1][2] * i_uln.v.y;
+	ULno.v.x = i_Mt.m[0][0] * i_uln.v.x + i_Mt.m[1][0] * i_uln.v.y;
+	ULno.v.y = i_Mt.m[0][1] * i_uln.v.x + i_Mt.m[1][1] * i_uln.v.y;
+	ULno.v.z = i_Mt.m[0][2] * i_uln.v.x + i_Mt.m[1][2] * i_uln.v.y;
 	ULno.v.SetUnitize();
 	return ULno;
 }
@@ -1971,14 +1971,14 @@ MgULine3D MGeo::ULine2Dto3D3(						// (  O) ３Ｄ直線
 //
 void MGeo::GPoint2Dto3D(
 				const	MgGPoint2D	&i_GPt,			// (I  ) ２Ｄ座標群
-				const	MgMat3D		&i_Tm,			// (I  ) 座標変換マトリックス
+				const	MgMat3D		&i_Mt,			// (I  ) 座標変換マトリックス
 						MgGPoint3D	*o_GPt			// (  O) ３Ｄ座標群
 				)
 {
 	int	ic;
 	o_GPt->m_n = 0;
 	for ( ic=0; ic<i_GPt.m_n; ic++)
-		*o_GPt += Point2Dto3D3( i_GPt.m_p[ic], i_Tm);
+		*o_GPt += Point2Dto3D3( i_GPt.m_p[ic], i_Mt);
 }
 
 //
@@ -1987,14 +1987,14 @@ void MGeo::GPoint2Dto3D(
 //
 void MGeo::Polyg2Dto3D(
 				const	MgPolyg2D&	i_Pg,			// (I  ) ２Ｄ座標群
-				const	MgMat3D		&i_Tm,			// (I  ) 座標変換マトリックス
+				const	MgMat3D		&i_Mt,			// (I  ) 座標変換マトリックス
 						MgPolyg3D*	o_Pg			// (  O) ３Ｄ座標群
 				)
 {
 	int ic;
 	o_Pg->m_n = 0;
 	for ( ic=0; ic<i_Pg.m_n; ic++)
-		*o_Pg += Point2Dto3D3( i_Pg.m_p[ic], i_Tm);
+		*o_Pg += Point2Dto3D3( i_Pg.m_p[ic], i_Mt);
 }
 
 //
@@ -2003,14 +2003,14 @@ void MGeo::Polyg2Dto3D(
 //
 void MGeo::GLine2Dto3D(
 				const	MgGLine2D&	i_gln,			// (I  ) ２Ｄ直線群
-				const	MgMat3D		&i_Tm,			// (I  ) 座標変換マトリックス
+				const	MgMat3D		&i_Mt,			// (I  ) 座標変換マトリックス
 						MgGLine3D	*o_GLn			// (  O) ３Ｄ直線群
 				)
 {
 	int ic;
 	o_GLn->m_n = 0;
 	for ( ic=0; ic<i_gln.m_n; ic++)
-		*o_GLn += Line2Dto3D3( i_gln.m_ln[ic], i_Tm);
+		*o_GLn += Line2Dto3D3( i_gln.m_ln[ic], i_Mt);
 }
 //
 //===================(２次元 → ３次元)=========================
@@ -2018,7 +2018,7 @@ void MGeo::GLine2Dto3D(
 //
 void MGeo::GPolyg2Dto3D(
 				const MgGPolyg2D	&i_GPg,			// (I  ) ２Ｄ多角形群
-				const MgMat3D		&i_Tm,			// (I  ) 座標変換マトリックス
+				const MgMat3D		&i_Mt,			// (I  ) 座標変換マトリックス
 					  MgGPolyg3D	*o_GPg			// (  O) ３Ｄ多角形群
 				)
 {
@@ -2027,7 +2027,7 @@ void MGeo::GPolyg2Dto3D(
 	
 	o_GPg->SetCount0();
 	for ( ic=0; ic<i_GPg.m_n; ic++) {
-		Polyg2Dto3D( i_GPg.m_pg[ic], i_Tm, &Pgw);
+		Polyg2Dto3D( i_GPg.m_pg[ic], i_Mt, &Pgw);
 		(*o_GPg) += Pgw;
 	}
 }

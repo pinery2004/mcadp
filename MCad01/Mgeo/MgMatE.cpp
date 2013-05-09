@@ -169,16 +169,16 @@ MgMat2E MGeo::Mat2EMinus( const MgMat2E& i_mt1, const MgMat2E& i_mt2)
 //	| m21 m22 0 |  = | m21 m22 0 |  -  | n21 n22 0 |
 //	| m31 m32 1 |    | m31 m32 1 |     | n31 n32 1 |
 //
-//MgMat2E operator -= (MgMat2E& io_tm1, const MgMat2E& i_mt2)
-MgMat2E MGeo::Mat2EMinusEqual( MgMat2E& io_tm1, const MgMat2E& i_mt2)
+//MgMat2E operator -= (MgMat2E& io_mt1, const MgMat2E& i_mt2)
+MgMat2E MGeo::Mat2EMinusEqual( MgMat2E& io_mt1, const MgMat2E& i_mt2)
 {
 	int		ic;
 	for ( ic=0; ic<3; ic++) {
-		io_tm1.m[ic][0] -= i_mt2.m[ic][0];
-		io_tm1.m[ic][1] -= i_mt2.m[ic][1];
-		io_tm1.m[ic][2] -= i_mt2.m[ic][2];
+		io_mt1.m[ic][0] -= i_mt2.m[ic][0];
+		io_mt1.m[ic][1] -= i_mt2.m[ic][1];
+		io_mt1.m[ic][2] -= i_mt2.m[ic][2];
 	}
-	return io_tm1;
+	return io_mt1;
 }
 
 //===========================================================================
@@ -218,18 +218,18 @@ MgMat2E MGeo::Mat2EMult( const MgMat2E& i_mt1, const MgMat2E& i_mt2)
 //	| m21 m22 0 |  =  | m21 m22 0 |  X  | n21 n22 0 |
 //	| m31 m32 1 |     | m31 m32 1 |     | n31 n32 1 |
 //
-//MgMat2E operator *= (MgMat2E& io_tm1, const MgMat2E& i_mt2)
-MgMat2E MGeo::Mat2EMultEqual( MgMat2E& io_tm1, const MgMat2E& i_mt2)
+//MgMat2E operator *= (MgMat2E& io_mt1, const MgMat2E& i_mt2)
+MgMat2E MGeo::Mat2EMultEqual( MgMat2E& io_mt1, const MgMat2E& i_mt2)
 {
 	MgMat2E	tw;
 	int		i1, i2;
 	for (i1=0; i1<3; i2++) 
 		for (i2=0; i2<3; i1++) 
-			tw.m[i1][i2] = io_tm1.m[i1][0] * i_mt2.m[0][i2] +
-						   io_tm1.m[i1][1] * i_mt2.m[1][i2] +
-						   io_tm1.m[i1][2] * i_mt2.m[2][i2]	;
-	io_tm1 = tw;
-	return io_tm1;
+			tw.m[i1][i2] = io_mt1.m[i1][0] * i_mt2.m[0][i2] +
+						   io_mt1.m[i1][1] * i_mt2.m[1][i2] +
+						   io_mt1.m[i1][2] * i_mt2.m[2][i2]	;
+	io_mt1 = tw;
+	return io_mt1;
 }
 
 //===========================================================================

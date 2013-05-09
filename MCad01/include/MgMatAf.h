@@ -104,9 +104,9 @@ namespace MC
 //	| m21 m22 m23 |  +  | n21 n22 n23 |
 //	| m31 m32 m33 |     | n31 n32 n33 |
 //
-inline MgMat2D operator + ( const MgMat2D& i_mt, const MgMat2D& i_tn)			// +
+inline MgMat2D operator + ( const MgMat2D& i_mt, const MgMat2D& i_mt2)			// +
 {
-	return MGeo::Mat2DPlus( i_mt, i_tn);
+	return MGeo::Mat2DPlus( i_mt, i_mt2);
 }
 
 //===========================================================================
@@ -120,9 +120,9 @@ inline MgMat2D operator + ( const MgMat2D& i_mt, const MgMat2D& i_tn)			// +
 //	| m21 m22 m23 |  =  | m21 m22 m23 |  +  | n21 n22 n23 |
 //	| m31 m32 m33 |     | m31 m32 m33 |     | n31 n32 n33 |
 //
-inline	MgMat2D operator += ( MgMat2D& io_tm, const MgMat2D& i_tn)				// +=
+inline	MgMat2D operator += ( MgMat2D& io_mt, const MgMat2D& i_mt2)				// +=
 {
-	return MGeo::Mat2DPlusEqual( io_tm, i_tn);
+	return MGeo::Mat2DPlusEqual( io_mt, i_mt2);
 }
 
 //===========================================================================
@@ -152,9 +152,9 @@ inline	MgMat2D operator - ( const MgMat2D& i_mt)								// -
 //	  | m21 m22 m23 |  -  | n21 n22 n23 |
 //	  | m31 m32 m33 |     | n31 n32 n33 |
 //
-inline	MgMat2D operator - ( const MgMat2D& i_mt, const MgMat2D& i_tn)			// -
+inline	MgMat2D operator - ( const MgMat2D& i_mt, const MgMat2D& i_mt2)			// -
 {
-	return MGeo::Mat2DMinus( i_mt, i_tn);
+	return MGeo::Mat2DMinus( i_mt, i_mt2);
 }
 
 //===========================================================================
@@ -168,9 +168,9 @@ inline	MgMat2D operator - ( const MgMat2D& i_mt, const MgMat2D& i_tn)			// -
 //	| m21 m22 m23 |  = | m21 m22 m23 |  -  | n21 n22 n23 |
 //	| m31 m32 m33 |    | m31 m32 m33 |     | n31 n32 n33 |
 //
-inline	MgMat2D operator -= ( MgMat2D& io_tm, const MgMat2D& i_tn)				// -=
+inline	MgMat2D operator -= ( MgMat2D& io_mt, const MgMat2D& i_mt2)				// -=
 {
-	return MGeo::Mat2DMinusEqual( io_tm, i_tn);
+	return MGeo::Mat2DMinusEqual( io_mt, i_mt2);
 }
 
 //===========================================================================
@@ -185,9 +185,9 @@ inline	MgMat2D operator -= ( MgMat2D& io_tm, const MgMat2D& i_tn)				// -=
 //	| m21 m22 m23 |  X  | n21 n22 n23 |
 //	| m31 m32 m33 |     | n31 n32 n33 |
 //
-inline	MgMat2D operator * ( const MgMat2D& i_mt, const MgMat2D& i_tn)			// *
+inline	MgMat2D operator * ( const MgMat2D& i_mt, const MgMat2D& i_mt2)			// *
 {
-	return MGeo::Mat2DMult( i_mt, i_tn);
+	return MGeo::Mat2DMult( i_mt, i_mt2);
 }
 
 //===========================================================================
@@ -202,9 +202,9 @@ inline	MgMat2D operator * ( const MgMat2D& i_mt, const MgMat2D& i_tn)			// *
 //	| m21 m22 m23 |  =  | m21 m22 m23 |  X  | n21 n22 n23 |
 //	| m31 m32 m33 |     | m31 m32 m33 |     | n31 n32 n33 |
 //
-inline	MgMat2D operator *= ( MgMat2D& io_tm, const MgMat2D& i_tn)				// *=
+inline	MgMat2D operator *= ( MgMat2D& io_mt, const MgMat2D& i_mt2)				// *=
 {
-	return MGeo::Mat2DMultEqual( io_tm, i_tn);
+	return MGeo::Mat2DMultEqual( io_mt, i_mt2);
 }
 
 inline	MgMat2D operator + ( const MgMat2D& i_m1, const MgVect2D& i_pt)			// +	•½sˆÚ“®
@@ -396,7 +396,7 @@ inline	MgULine2D operator *= ( MgULine2D& io_uln, const MgMat2D& i_mt)		// *=	À
 ////						  |  0   0  1  0  |
 ////			   			  | m31 m32 0 m33 |
 ////
-//inline MgULine3D operator * ( const MgULine3D& i_ULn, const MgMat2D& i_mt)		// *	À•W•ÏŠ·
+//inline MgULine3D operator * ( const MgULine3D& i_ULn, const MgMat2D& i_mt)	// *	À•W•ÏŠ·
 //{
 //	return MGeo::Mat2DMultULine3D( i_ULn, i_mt);
 //}
@@ -413,7 +413,7 @@ inline	MgULine2D operator *= ( MgULine2D& io_uln, const MgMat2D& i_mt)		// *=	À
 ////												|  0   0  1  0  |
 ////				 				   				| m31 m32 0 m33 |
 ////
-//inline MgULine3D operator *= ( MgULine3D& io_ULn, const MgMat2D& i_mt)			// *=	À•W•ÏŠ·
+//inline MgULine3D operator *= ( MgULine3D& io_ULn, const MgMat2D& i_mt)		// *=	À•W•ÏŠ·
 //{
 //	return MGeo::Mat2DMultEqualULine3D( io_ULn, i_mt);
 //}
@@ -434,9 +434,9 @@ inline	MgULine2D operator *= ( MgULine2D& io_uln, const MgMat2D& i_mt)		// *=	À
 //	| m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 //	| m41 m42 m43 m44 |     | n41 n42 n43 n44 |    
 //
-inline	MgMat3D operator + ( const MgMat3D& i_Tm, const MgMat3D& i_Tn)			// +
+inline	MgMat3D operator + ( const MgMat3D& i_Mt, const MgMat3D& i_Mt2)			// +
 {
-	return MGeo::Mat3DPlus( i_Tm, i_Tn);
+	return MGeo::Mat3DPlus( i_Mt, i_Mt2);
 }
 
 //===========================================================================
@@ -451,9 +451,9 @@ inline	MgMat3D operator + ( const MgMat3D& i_Tm, const MgMat3D& i_Tn)			// +
 //	| m31 m32 m33 m34 |     | m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 //	| m41 m42 m43 m44 |     | m41 m42 m43 m44 |     | n41 n42 n43 n44 |     
 //
-inline	MgMat3D operator += ( MgMat3D& io_Tm, const MgMat3D& i_Tn)				// +=
+inline	MgMat3D operator += ( MgMat3D& io_Mt, const MgMat3D& i_Mt2)				// +=
 {
-	return MGeo::Mat3DPlusEqual( io_Tm, i_Tn);
+	return MGeo::Mat3DPlusEqual( io_Mt, i_Mt2);
 }	
 
 //===========================================================================
@@ -468,9 +468,9 @@ inline	MgMat3D operator += ( MgMat3D& io_Tm, const MgMat3D& i_Tn)				// +=
 //	  | m31 m32 m33 m34 |
 //	  | m41 m42 m43 m44 |     
 //
-inline	MgMat3D operator - ( const MgMat3D& i_Tm)								// -
+inline	MgMat3D operator - ( const MgMat3D& i_Mt)								// -
 {
-	return MGeo::Mat3DSingleMinus( i_Tm);
+	return MGeo::Mat3DSingleMinus( i_Mt);
 }
 
 //===========================================================================
@@ -485,9 +485,9 @@ inline	MgMat3D operator - ( const MgMat3D& i_Tm)								// -
 //	  | m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 //	  | m41 m42 m43 m44 |     | n41 n42 n43 n44 |    
 //
-inline	MgMat3D operator - ( const MgMat3D& i_Tm, const MgMat3D& i_Tn)			// -
+inline	MgMat3D operator - ( const MgMat3D& i_Mt, const MgMat3D& i_Mt2)			// -
 {
-	return MGeo::Mat3DMinus( i_Tm, i_Tn);
+	return MGeo::Mat3DMinus( i_Mt, i_Mt2);
 }
 
 //===========================================================================
@@ -502,9 +502,9 @@ inline	MgMat3D operator - ( const MgMat3D& i_Tm, const MgMat3D& i_Tn)			// -
 //	| m31 m32 m33 m34 |     | m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 //	| m41 m42 m43 m44 |     | m41 m42 m43 m44 |     | n41 n42 n43 n44 |     
 //
-inline MgMat3D operator -= ( MgMat3D& io_Tm, const MgMat3D& i_Tn)				// -=
+inline MgMat3D operator -= ( MgMat3D& io_Mt, const MgMat3D& i_Mt2)				// -=
 {
-	return MGeo::Mat3DMinusEqual( io_Tm, i_Tn);
+	return MGeo::Mat3DMinusEqual( io_Mt, i_Mt2);
 }
 
 //===========================================================================
@@ -519,9 +519,9 @@ inline MgMat3D operator -= ( MgMat3D& io_Tm, const MgMat3D& i_Tn)				// -=
 //	| m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 //	| m41 m42 m43 m44 |     | n41 n42 n43 n44 |    
 //
-inline MgMat3D operator * ( const MgMat3D& i_Tm, const MgMat3D& i_Tn)			// *
+inline MgMat3D operator * ( const MgMat3D& i_Mt, const MgMat3D& i_Mt2)			// *
 {
-	return MGeo::Mat3DMult( i_Tm, i_Tn);
+	return MGeo::Mat3DMult( i_Mt, i_Mt2);
 }
 
 //===========================================================================
@@ -536,10 +536,39 @@ inline MgMat3D operator * ( const MgMat3D& i_Tm, const MgMat3D& i_Tn)			// *
 //	| m31 m32 m33 m34 |     | m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 //	| m41 m42 m43 m44 |     | m41 m42 m43 m44 |     | n41 n42 n43 n44 |     
 //
-inline MgMat3D operator *= ( MgMat3D& io_Tm, const MgMat3D& i_Tn)
+inline MgMat3D operator *= ( MgMat3D& io_Mt, const MgMat3D& i_Mt2)
 {
-	return MGeo::Mat3DMultEqual( io_Tm, i_Tn);
+	return MGeo::Mat3DMultEqual( io_Mt, i_Mt2);
 }
+
+inline MgMat3D operator + ( const MgMat3D& i_M1, const MgVect3D& i_Vt)			// +	•½sˆÚ“®
+{
+	MgMat3D mw;
+	mw = i_M1;
+	mw += i_Vt;
+	return mw;
+}
+inline MgMat3D operator += ( MgMat3D& i_M1, const MgVect3D& i_Vt)				// +=	•½sˆÚ“®
+{ 
+	i_M1.m[3][0] += i_Vt.x;
+	i_M1.m[3][1] += i_Vt.y;
+	i_M1.m[3][2] += i_Vt.z;
+	return i_M1;
+} 
+inline MgMat3D operator - ( const MgMat3D& i_M1, const MgVect3D& i_Vt)			// -	•½sˆÚ“®
+{
+	MgMat3D mw;
+	mw = i_M1;
+	mw -= i_Vt;
+	return mw;
+}
+inline MgMat3D operator -= ( MgMat3D& i_M1, const MgVect3D& i_Vt)				// -=	•½sˆÚ“®
+{
+	i_M1.m[3][0] -= i_Vt.x;
+	i_M1.m[3][1] -= i_Vt.y;
+	i_M1.m[3][2] -= i_Vt.z;
+	return i_M1;
+} 
 
 //===========================================================================
 //	ˆ—“à—e
@@ -553,9 +582,9 @@ inline MgMat3D operator *= ( MgMat3D& io_Tm, const MgMat3D& i_Tn)
 //						    | m31 m32 m33 m34 |
 //						    | m41 m42 m43 m44 |
 //
-inline MgPoint2D operator * ( const MgPoint2D& i_Pt, const MgMat3D& i_Tm)		// À•W•ÏŠ·
+inline MgPoint2D operator * ( const MgPoint2D& i_Pt, const MgMat3D& i_Mt)		// À•W•ÏŠ·
 {
-	return MGeo::Mat3DMultPoint2D( i_Pt, i_Tm);
+	return MGeo::Mat3DMultPoint2D( i_Pt, i_Mt);
 }
 
 //===========================================================================
@@ -570,9 +599,9 @@ inline MgPoint2D operator * ( const MgPoint2D& i_Pt, const MgMat3D& i_Tm)		// À
 //						    | m31 m32 m33 m34 |
 //						    | m41 m42 m43 m44 |
 //
-inline MgVect2D operator * ( const MgVect2D& i_Pt, const MgMat3D& i_Tm)		// À•W•ÏŠ·
+inline MgVect2D operator * ( const MgVect2D& i_Pt, const MgMat3D& i_Mt)			// À•W•ÏŠ·
 {
-	return MGeo::Mat3DMultVect2D( i_Pt, i_Tm);
+	return MGeo::Mat3DMultVect2D( i_Pt, i_Mt);
 }
 
 //===========================================================================
@@ -587,9 +616,9 @@ inline MgVect2D operator * ( const MgVect2D& i_Pt, const MgMat3D& i_Tm)		// À•W
 //	           									    | m31 m32 m33 m34 |
 //	           									    | m41 m42 m43 m44 |
 //
-inline MgPoint2D operator *= ( MgPoint2D& io_Pt, const MgMat3D& i_Tm)			// À•W•ÏŠ·
+inline MgPoint2D operator *= ( MgPoint2D& io_Pt, const MgMat3D& i_Mt)			// À•W•ÏŠ·
 {
-	return MGeo::Mat3DMultEqualPoint2D( io_Pt, i_Tm);
+	return MGeo::Mat3DMultEqualPoint2D( io_Pt, i_Mt);
 }
 
 //===========================================================================
@@ -604,9 +633,9 @@ inline MgPoint2D operator *= ( MgPoint2D& io_Pt, const MgMat3D& i_Tm)			// À•W•
 //	           									    | m31 m32 m33 m34 |
 //	           									    | m41 m42 m43 m44 |
 //
-inline MgVect2D operator *= ( MgVect2D& io_Pt, const MgMat3D& i_Tm)			// À•W•ÏŠ·
+inline MgVect2D operator *= ( MgVect2D& io_Pt, const MgMat3D& i_Mt)			// À•W•ÏŠ·
 {
-	return MGeo::Mat3DMultEqualVect2D( io_Pt, i_Tm);
+	return MGeo::Mat3DMultEqualVect2D( io_Pt, i_Mt);
 }
 
 //===========================================================================
@@ -621,9 +650,9 @@ inline MgVect2D operator *= ( MgVect2D& io_Pt, const MgMat3D& i_Tm)			// À•W•ÏŠ
 //						    | m31 m32 m33 m34 |
 //						    | m41 m42 m43 m44 |
 //
-inline MgPoint3D operator * ( const MgPoint3D& i_Pt, const MgMat3D& i_Tm)		// À•W•ÏŠ·
+inline MgPoint3D operator * ( const MgPoint3D& i_Pt, const MgMat3D& i_Mt)		// À•W•ÏŠ·
 {
-	return MGeo::Mat3DMultPoint3D( i_Pt, i_Tm);
+	return MGeo::Mat3DMultPoint3D( i_Pt, i_Mt);
 }
 
 //===========================================================================
@@ -638,9 +667,9 @@ inline MgPoint3D operator * ( const MgPoint3D& i_Pt, const MgMat3D& i_Tm)		// À
 //						    | m31 m32 m33 m34 |
 //						    | m41 m42 m43 m44 |
 //
-inline MgVect3D operator * ( const MgVect3D& i_Pt, const MgMat3D& i_Tm)		// À•W•ÏŠ·
+inline MgVect3D operator * ( const MgVect3D& i_Pt, const MgMat3D& i_Mt)		// À•W•ÏŠ·
 {
-	return MGeo::Mat3DMultVect3D( i_Pt, i_Tm);
+	return MGeo::Mat3DMultVect3D( i_Pt, i_Mt);
 }
 
 //===========================================================================
@@ -655,9 +684,9 @@ inline MgVect3D operator * ( const MgVect3D& i_Pt, const MgMat3D& i_Tm)		// À•W
 //												    | m31 m32 m33 m34 |
 //												    | m41 m42 m43 m44 |
 //
-inline MgPoint3D operator *= ( MgPoint3D& io_Pt, const MgMat3D& i_Tm)				// À•W•ÏŠ·
+inline MgPoint3D operator *= ( MgPoint3D& io_Pt, const MgMat3D& i_Mt)				// À•W•ÏŠ·
 {
-	return MGeo::Mat3DMultEqualPoint3D( io_Pt, i_Tm);
+	return MGeo::Mat3DMultEqualPoint3D( io_Pt, i_Mt);
 }
 
 //===========================================================================
@@ -672,44 +701,86 @@ inline MgPoint3D operator *= ( MgPoint3D& io_Pt, const MgMat3D& i_Tm)				// À•W
 //												    | m31 m32 m33 m34 |
 //												    | m41 m42 m43 m44 |
 //
-inline MgVect3D operator *= ( MgVect3D& io_Pt, const MgMat3D& i_Tm)				// À•W•ÏŠ·
+inline MgVect3D operator *= ( MgVect3D& io_Pt, const MgMat3D& i_Mt)				// À•W•ÏŠ·
 {
-	return MGeo::Mat3DMultEqualVect3D( io_Pt, i_Tm);
+	return MGeo::Mat3DMultEqualVect3D( io_Pt, i_Mt);
 }
 
-////===========================================================================
-////	ˆ—“à—e
-////		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
-////
-////	g—p–@
-////		MgULine3D_2 = MgULine3D_1 * MgMat3D;
-////
-////	| px  py  pz  1   |     | m11 m12 m13 m14 |
-////	| vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
-////							| m31 m32 m33 m34 |
-////							| m41 m42 m43 m44 |
-////
-//inline MgULine3D operator * ( const MgULine3D& i_ULn, const MgMat3D& i_Tm)		// À•W•ÏŠ·
-//{
-//	return MGeo::Mat3DMultULine3D( i_ULn, i_Tm);
-//}
+//===========================================================================
+//	ˆ—“à—e
+//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
 //
-////===========================================================================
-////	ˆ—“à—e
-////		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
-////
-////	g—p–@
-////		MgVect3D *= MgMat3D;
-////
-////	| px  py  pz  1   |     | px  py  pz  1   |     | m11 m12 m13 m14 |
-////	| vx  vy  vz  0   |  =  | vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
-////													| m31 m32 m33 m34 |
-////													| m41 m42 m43 m44 |
-////
-//inline MgULine3D operator *= ( MgULine3D& io_ULn, const MgMat3D& i_Tm)			// À•W•ÏŠ·
-//{
-//	return MGeo::Mat3DMultEqualULine3D( io_ULn, i_Tm);
-//}
+//	g—p–@
+//		MgLine3D = MgLine3D_1 * MgMat3D;
+//
+//	| px  py  pz  1   |     | m11 m12 m13 m14 |
+//	| px  py  pz  1   |  X  | m21 m22 m23 m24 |
+//							| m31 m32 m33 m34 |
+//							| m41 m42 m43 m44 |
+//
+inline MgLine3D operator * ( const MgLine3D& i_Ln1, const MgMat3D& i_Mt2)		// À•W•ÏŠ·
+{
+//S	MgLine3D Ln;
+//	Ln.p[0] = i_Ln1.p[0] * i_M2;
+//	Ln.p[1] = i_Ln1.p[1] * i_M2;
+//	return Ln;
+	return MGeo::Mat3DMultLine3D( i_Ln1, i_Mt2);
+}
+
+//===========================================================================
+//	ˆ—“à—e
+//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
+//
+//	g—p–@
+//		MgULine3D = MgULine3D_1 * MgMat3D;
+//
+//	| px  py  pz  1   |     | m11 m12 m13 m14 |
+//	| vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
+//							| m31 m32 m33 m34 |
+//							| m41 m42 m43 m44 |
+//
+inline MgULine3D operator * ( const MgULine3D& i_ULn1, const MgMat3D& i_Mt2)		// À•W•ÏŠ·
+{
+	return MGeo::Mat3DMultULine3D( i_ULn1, i_Mt2);
+}
+
+//===========================================================================
+//	ˆ—“à—e
+//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
+//
+//	g—p–@
+//		MgULine3D *= MgMat3D;
+//
+//	| px  py  pz  1   |     | px  py  pz  1   |     | m11 m12 m13 m14 |
+//	| px  py  pz  1   |  =  | px  py  pz  1   |  X  | m21 m22 m23 m24 |
+//													| m31 m32 m33 m34 |
+//													| m41 m42 m43 m44 |
+//
+inline MgLine3D operator *= ( MgLine3D& io_Ln1, const MgMat3D& i_Mt2)			// À•W•ÏŠ·
+{
+//S	i_Ln1.p[0] *= i_M2;
+//	i_Ln1.p[1] *= i_M2;
+//	return i_Ln1;
+	return MGeo::Mat3DMultEqualLine3D( io_Ln1, i_Mt2);
+}
+
+//===========================================================================
+//	ˆ—“à—e
+//		‚RŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚è‚RŸŒ³ƒf[ƒ^‚ğÀ•W•ÏŠ·‚·‚é
+//
+//	g—p–@
+//		MgULine3D *= MgMat3D;
+//
+//	| px  py  pz  1   |     | px  py  pz  1   |     | m11 m12 m13 m14 |
+//	| vx  vy  vz  0   |  =  | vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
+//													| m31 m32 m33 m34 |
+//													| m41 m42 m43 m44 |
+//
+inline MgULine3D operator *= ( MgULine3D& io_ULn1, const MgMat3D& i_Mt2)			// À•W•ÏŠ·
+{
+	return MGeo::Mat3DMultEqualULine3D( io_ULn1, i_Mt2);
+}
+
 /*
 //===========================================================================
 //		•½–Ê Œ`ó‰‰Z

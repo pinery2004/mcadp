@@ -650,7 +650,7 @@ public:
 	//	| m21 m22 0 |  +  | n21 n22 0 |
 	//	| m31 m32 1 |     | n31 n32 1 |
 	//
-	static MgMat2E Mat2EPlus( const MgMat2E& i_mt, const MgMat2E& i_tn);
+	static MgMat2E Mat2EPlus( const MgMat2E& i_mt1, const MgMat2E& i_mt2);
 
 	//
 	//===========================================================================
@@ -664,7 +664,7 @@ public:
 	//	| m21 m22 0 |  =  | m21 m22 0 |  +  | n21 n22 0 |
 	//	| m31 m32 1 |     | m31 m32 1 |     | n31 n32 1 |
 	//
-	static MgMat2E Mat2EPlusEqual( MgMat2E& io_tm, const MgMat2E& i_tn);
+	static MgMat2E Mat2EPlusEqual( MgMat2E& io_mt1, const MgMat2E& i_mt2);
 
 	//===========================================================================
 	//	処理内容
@@ -704,7 +704,7 @@ public:
 	//	  | m21 m22 0 |  -  | n21 n22 0 |
 	//	  | m31 m32 1 |     | n31 n32 1 |
 	//
-	static MgMat2E Mat2EMinus( const MgMat2E& i_mt, const MgMat2E& i_tn);
+	static MgMat2E Mat2EMinus( const MgMat2E& i_mt1, const MgMat2E& i_mt2);
 
 	//===========================================================================
 	//	処理内容
@@ -717,7 +717,7 @@ public:
 	//	| m21 m22 0 |  = | m21 m22 0 |  -  | n21 n22 0 |
 	//	| m31 m32 1 |    | m31 m32 1 |     | n31 n32 1 |
 	//
-	static MgMat2E Mat2EMinusEqual( MgMat2E& io_tm, const MgMat2E& i_tn);
+	static MgMat2E Mat2EMinusEqual( MgMat2E& io_mt1, const MgMat2E& i_mt2);
 
 	//===========================================================================
 	//	処理内容
@@ -731,7 +731,7 @@ public:
 	//	| m21 m22 0 |  X  | n21 n22 0 |
 	//	| m31 m32 1 |     | n31 n32 1 |
 	//
-	static MgMat2E Mat2EMult( const MgMat2E& i_mt, const MgMat2E& i_tn);
+	static MgMat2E Mat2EMult( const MgMat2E& i_mt1, const MgMat2E& i_mt2);
 
 	//===========================================================================
 	//	処理内容
@@ -745,7 +745,7 @@ public:
 	//	| m21 m22 0 |  =  | m21 m22 0 |  X  | n21 n22 0 |
 	//	| m31 m32 1 |     | m31 m32 1 |     | n31 n32 1 |
 	//
-	static MgMat2E Mat2EMultEqual( MgMat2E& io_tm, const MgMat2E& i_tn);
+	static MgMat2E Mat2EMultEqual( MgMat2E& io_mt1, const MgMat2E& i_mt2);
 //==
 	//===========================================================================
 	//	処理内容
@@ -1054,7 +1054,7 @@ public:
 	//	| m31 m32 m33 0 |     | m31 m32 m33 0 |
 	//	| m41 m42 m43 1 |     | m41 m42 m43 1 |    
 	//
-	static MgMat3E Mat3EPlus( const MgMat3E& i_Tm, const MgMat3E& i_Tn);
+	static MgMat3E Mat3EPlus( const MgMat3E& i_Mt1, const MgMat3E& i_Mt2);
 
 	//===========================================================================
 	//	処理内容
@@ -1068,7 +1068,7 @@ public:
 	//	| m31 m32 m33 0 |     | m31 m32 m33 0 |     | n31 n32 n33 0 |
 	//	| m41 m42 m43 1 |     | m41 m42 m43 1 |     | n41 n42 n43 1 |     
 	//
-	static MgMat3E Mat3EPlusEqual( MgMat3E& io_Tm, const MgMat3E& i_Tn);
+	static MgMat3E Mat3EPlusEqual( MgMat3E& io_Mt1, const MgMat3E& i_Mt2);
 
 	//===========================================================================
 	//	処理内容
@@ -1082,7 +1082,7 @@ public:
 	//	  | m31 m32 m33 0 |
 	//	  | m41 m42 m43 1 |     
 	//
-	static MgMat3E Mat3ESingleMinus( const MgMat3E& i_Tm);
+	static MgMat3E Mat3ESingleMinus( const MgMat3E& i_Mt);
 
 	//===========================================================================
 	//	処理内容
@@ -1096,7 +1096,7 @@ public:
 	//	  | m31 m32 m33 0 |     | n31 n32 n33 0 |
 	//	  | m41 m42 m43 1 |     | n41 n42 n43 1 |    
 	//
-	static MgMat3E Mat3EMinus( const MgMat3E& i_Tm, const MgMat3E& i_Tn);
+	static MgMat3E Mat3EMinus( const MgMat3E& i_Mt1, const MgMat3E& i_Mt2);
 
 	//===========================================================================
 	//	処理内容
@@ -1110,7 +1110,7 @@ public:
 	//	| m31 m32 m33 0 |     | m31 m32 m33 0 |     | n31 n32 n33 0 |
 	//	| m41 m42 m43 1 |     | m41 m42 m43 1 |     | n41 n42 n43 1 |     
 	//
-	static MgMat3E Mat3EMinusEqual( MgMat3E& io_Tm, const MgMat3E& i_Tn);
+	static MgMat3E Mat3EMinusEqual( MgMat3E& io_Mt1, const MgMat3E& i_Mt2);
 
 	//===========================================================================
 	//	処理内容
@@ -1124,7 +1124,7 @@ public:
 	//	| m31 m32 m33 0 |     | n31 n32 n33 0 |
 	//	| m41 m42 m43 1 |     | n41 n42 n43 1 |    
 	//
-	static MgMat3E Mat3EMult( const MgMat3E& i_Tm, const MgMat3E& i_Tn);
+	static MgMat3E Mat3EMult( const MgMat3E& i_Mt1, const MgMat3E& i_Mt2);
 
 	//===========================================================================
 	//	処理内容
@@ -1138,7 +1138,7 @@ public:
 	//	| m31 m32 m33 0 |     | m31 m32 m33 0 |     | n31 n32 n33 0 |
 	//	| m41 m42 m43 1 |     | m41 m42 m43 1 |     | n41 n42 n43 1 |     
 	//
-	static MgMat3E Mat3EMultEqual( MgMat3E& io_Tm, const MgMat3E& i_Tn);
+	static MgMat3E Mat3EMultEqual( MgMat3E& io_Mt1, const MgMat3E& i_Mt2);
 
 	//===========================================================================
 	//	処理内容
@@ -1152,7 +1152,7 @@ public:
 	//						    | m31 m32 m33 0 |
 	//						    | m41 m42 m43 1 |
 	//
-	static MgPoint2D Mat3EMultPoint2D( const MgPoint2D& i_Pt, const MgMat3E& i_Tm);
+	static MgPoint2D Mat3EMultPoint2D( const MgPoint2D& i_Pt, const MgMat3E& i_Mt);
 
 	//===========================================================================
 	//	処理内容
@@ -1166,7 +1166,7 @@ public:
 	//						    | m31 m32 m33 0 |
 	//						    | m41 m42 m43 1 |
 	//
-	static MgVect2D Mat3EMultVect2D( const MgVect2D& i_Pt, const MgMat3E& i_Tm);
+	static MgVect2D Mat3EMultVect2D( const MgVect2D& i_Pt, const MgMat3E& i_Mt);
 
 	//===========================================================================
 	//	処理内容
@@ -1222,7 +1222,7 @@ public:
 	//	           									    | m31 m32 m33 0 |
 	//	           									    | m41 m42 m43 1 |
 	//
-	static MgPoint2D Mat3EMultEqualPoint2D( MgPoint2D& io_Pt, const MgMat3E& i_Tm);
+	static MgPoint2D Mat3EMultEqualPoint2D( MgPoint2D& io_Pt, const MgMat3E& i_Mt);
 
 	//===========================================================================
 	//	処理内容
@@ -1236,7 +1236,7 @@ public:
 	//	           									    | m31 m32 m33 0 |
 	//	           									    | m41 m42 m43 1 |
 	//
-	static MgVect2D Mat3EMultEqualVect2D( MgVect2D& io_Pt, const MgMat3E& i_Tm);
+	static MgVect2D Mat3EMultEqualVect2D( MgVect2D& io_Pt, const MgMat3E& i_Mt);
 
 	//===========================================================================
 	//	処理内容
@@ -1270,7 +1270,7 @@ public:
 	//													| m31 m32 m33 0 |
 	//													| m41 m42 m43 1 |
 	//
-//S	inline MgULine2D operator *= ( MgULine2D& io_uln, const MgMat3E& i_Tm)				// 座標変換
+//S	inline MgULine2D operator *= ( MgULine2D& io_uln, const MgMat3E& i_Mt)				// 座標変換
 	static MgULine2D MGeo::Mat3EMultEqualULine2D( MgULine2D& io_uln, const MgMat3E& i_Mt)
 	{
 		io_uln.p *= i_Mt;
@@ -1290,7 +1290,7 @@ public:
 	//						    | m31 m32 m33 0 |
 	//						    | m41 m42 m43 1 |
 	//
-	static MgPoint3D Mat3EMultPoint3D( const MgPoint3D& i_Pt, const MgMat3E& i_Tm);
+	static MgPoint3D Mat3EMultPoint3D( const MgPoint3D& i_Pt, const MgMat3E& i_Mt);
 
 	//===========================================================================
 	//	処理内容
@@ -1304,7 +1304,7 @@ public:
 	//						    | m31 m32 m33 0 |
 	//						    | m41 m42 m43 1 |
 	//
-	static MgVect3D Mat3EMultVect3D( const MgVect3D& i_Pt, const MgMat3E& i_Tm);
+	static MgVect3D Mat3EMultVect3D( const MgVect3D& i_Pt, const MgMat3E& i_Mt);
 
 	//===========================================================================
 	//	処理内容
@@ -1360,7 +1360,7 @@ public:
 	//												    | m31 m32 m33 0 |
 	//												    | m41 m42 m43 1 |
 	//
-	static MgPoint3D Mat3EMultEqualPoint3D( MgPoint3D& io_Pt, const MgMat3E& i_Tm);
+	static MgPoint3D Mat3EMultEqualPoint3D( MgPoint3D& io_Pt, const MgMat3E& i_Mt);
 
 	//===========================================================================
 	//	処理内容
@@ -1374,7 +1374,7 @@ public:
 	//												    | m31 m32 m33 0 |
 	//												    | m41 m42 m43 1 |
 	//
-	static MgVect3D Mat3EMultEqualVect3D( MgVect3D& io_Pt, const MgMat3E& i_Tm);
+	static MgVect3D Mat3EMultEqualVect3D( MgVect3D& io_Pt, const MgMat3E& i_Mt);
 
 	//===========================================================================
 	//	処理内容
@@ -1408,14 +1408,13 @@ public:
 	//													| m31 m32 m33 0 |
 	//													| m41 m42 m43 1 |
 	//
-//S	inline MgULine3D operator *= ( MgULine3D& io_ULn, const MgMat3E& i_Tm)			// 座標変換
+//S	inline MgULine3D operator *= ( MgULine3D& io_ULn, const MgMat3E& i_Mt)			// 座標変換
 	static MgULine3D Mat3EMultEqualULine3D( MgULine3D& io_ULn, const MgMat3E& i_Mt)
 	{
 		io_ULn.p *= i_Mt;
 		io_ULn.v *= i_Mt;
 		return io_ULn;
 	}
-
 
 	//======================( ２次元 )==============================
 	//	処理内容
@@ -1626,7 +1625,7 @@ public:
 	//	| m13 m23 m33 0 |
 	//	| M14 m24 m34 1 |
 	//
-	static MgMat3E Mat3EInv( const MgMat3E& i_Tm);
+	static MgMat3E Mat3EInv( const MgMat3E& i_Mt);
 
 	//======================( ２次元 )==============================
 	//		直線に対する鏡像座標変換マトリックスを作成
@@ -1640,7 +1639,7 @@ public:
 	//		平面に対する鏡像座標変換マトリックスを作成
 	//
 	static MgMat3E Mat3EMirror(						// (  O) 鏡像変換行列
-					const	MgMat3E&  i_Tm,	 		// (I  ) 変換行列
+					const	MgMat3E&  i_Mt,	 		// (I  ) 変換行列
 					const	MgPlane3D& i_Pln		// (I  ) 鏡映の面とする平面
 			);
 
@@ -1664,7 +1663,7 @@ public:
 	//		正投象座標変換マトリックスを計算する
 	//
 	static MgMat3E Mat3ENProj(						// (  O) 正投象変換行列
-					const	MgMat3E&	i_Tm,		// (I  ) 入力座標変換行列
+					const	MgMat3E&	i_Mt,		// (I  ) 入力座標変換行列
 					const	MgPlane3D&	i_Pln		// (I  ) 投象面
 			);
 
@@ -1672,7 +1671,7 @@ public:
 	//		斜投象座標変換マトリックスを計算する
 	//
 	static MgMat3E Mat3ESProj(						// (  O) 斜投象変座標変換行列
-					const	MgMat3E&	i_Tm,		// (I  ) 入力座標変換行列
+					const	MgMat3E&	i_Mt,		// (I  ) 入力座標変換行列
 					const	MgPlane3D&	i_Pln,		// (I  ) 投象面
 					const	MgVect3D&	i_V			// (I  ) 投象方向を示す単位ベクトル
 			);
@@ -1805,7 +1804,7 @@ public:
 	//
 	static void Point3Dto2D(
 					const	MgPoint3D&	i_P,		// (I  ) ３Ｄ座標
-					const	MgMat3E&	i_Tm,		// (I  ) 座標変換マトリックス
+					const	MgMat3E&	i_Mt,		// (I  ) 座標変換マトリックス
 							MgPoint2D*	o_pP		// (  O) ２Ｄ座標
 					);
 
@@ -1836,7 +1835,7 @@ public:
 	//
 	static MgPoint2D Point3Dto2D2(					// (  O) ２Ｄ座標
 					const	MgPoint3D&	i_P,		// (I  ) ３Ｄ座標
-					const	MgMat3E&	i_Tm		// (I  ) 座標変換マトリックス
+					const	MgMat3E&	i_Mt		// (I  ) 座標変換マトリックス
 					);
 
 	//===================(３次元 → ２次元)=========================
@@ -1857,7 +1856,7 @@ public:
 	//
 	static MgULine2D ULine3Dto2D2(					// (  O) ２Ｄ直線
 					const	MgULine3D&	i_ULn,		// (I  ) ３Ｄ直線
-					const	MgMat3E&	i_Tm		// (I  ) 座標変換マトリックス
+					const	MgMat3E&	i_Mt		// (I  ) 座標変換マトリックス
 					);
 
 	//===================(３次元 → ２次元)=========================
@@ -1865,7 +1864,7 @@ public:
 	//
 	static void	GPoint3Dto2D(
 					const	MgGPoint3D&	i_GP,		// (I  ) ３Ｄ座標群
-					const	MgMat3E&	i_Tm,		// (I  ) 座標変換マトリックス
+					const	MgMat3E&	i_Mt,		// (I  ) 座標変換マトリックス
 							MgGPoint2D*	o_pGP		// (  O) ２Ｄ座標群
 					);
 	
@@ -1874,7 +1873,7 @@ public:
 	//
 	static void	Polyg3Dto2D(
 					const	MgPolyg3D&	i_Pg,		// (I  ) ３Ｄ座標群
-					const	MgMat3E&	i_Tm,		// (I  ) 座標変換マトリックス
+					const	MgMat3E&	i_Mt,		// (I  ) 座標変換マトリックス
 							MgPolyg2D*	o_pPg		// (  O) ２Ｄ座標群
 					);
 	
@@ -1883,7 +1882,7 @@ public:
 	//
 	static void	GLine3Dto2D(
 					const	MgGLine3D&	i_GLn,		// (I  ) ３Ｄ線分群
-					const	MgMat3E&	i_Tm,		// (I  ) 座標変換マトリックス
+					const	MgMat3E&	i_Mt,		// (I  ) 座標変換マトリックス
 							MgGLine2D*	o_pgln		// (  O) ２Ｄ線分群
 					);
 	
@@ -1892,7 +1891,7 @@ public:
 	//
 	static void GPolyg3Dto2D(
 					const	MgGPolyg3D&	i_GPg,		// (I  ) ３Ｄ多角形群
-					const	MgMat3E&	i_Tm,		// (I  ) 座標変換マトリックス
+					const	MgMat3E&	i_Mt,		// (I  ) 座標変換マトリックス
 						 	MgGPolyg2D*	o_pgpg		// (  O) ２Ｄ多角形群
 					);
 
@@ -1901,7 +1900,7 @@ public:
 	//
 	static void	Point2Dto3D(
 					const	MgPoint2D&	i_pt,		// (I  ) ２Ｄ座標
-					const	MgMat3E&	i_Tm,		// (I  ) 座標変換マトリックス
+					const	MgMat3E&	i_Mt,		// (I  ) 座標変換マトリックス
 							MgPoint3D*	o_pPt		// (  O) ３Ｄ座標
 					);
 
@@ -1924,7 +1923,7 @@ public:
 	//
 	static void ULine2Dto3D(
 					const	MgULine2D	&i_uln,		// (I  ) ２Ｄ直線
-					const	MgMat3E	&i_Tm,		// (I  ) 座標変換マトリックス
+					const	MgMat3E	&i_Mt,		// (I  ) 座標変換マトリックス
 						 	MgULine3D	*o_ULn		// (  O) ３Ｄ直線
 					);
 
@@ -1933,7 +1932,7 @@ public:
 	//
 	static MgPoint3D Point2Dto3D3(					// (  O) ３Ｄ座標
 					const	MgPoint2D&	i_Pt,		// (I  ) ２Ｄ座標
-					const	MgMat3E	&i_Tm		// (I  ) 座標変換マトリックス
+					const	MgMat3E	&i_Mt		// (I  ) 座標変換マトリックス
 					);
 
 	//===================(２次元 → ３次元)=========================
@@ -1954,7 +1953,7 @@ public:
 	//
 	static MgULine3D ULine2Dto3D3(					// (  O) ３Ｄ直線
 					const	MgULine2D	&i_uln,		// (I  ) ２Ｄ直線
-					const	MgMat3E	&i_Tm		// (I  ) 座標変換マトリックス
+					const	MgMat3E	&i_Mt		// (I  ) 座標変換マトリックス
 					);
 
 	//===================(２次元 → ３次元)=========================
@@ -1962,7 +1961,7 @@ public:
 	//
 	static void	GPoint2Dto3D(
 					const	MgGPoint2D	&i_GPt,		// (I  ) ２Ｄ座標群
-					const	MgMat3E	&i_Tm,		// (I  ) 座標変換マトリックス
+					const	MgMat3E	&i_Mt,		// (I  ) 座標変換マトリックス
 							MgGPoint3D	*o_GPt		// (  O) ３Ｄ座標群
 					);
 	
@@ -1971,7 +1970,7 @@ public:
 	//
 	static void	Polyg2Dto3D(
 					const	MgPolyg2D&	i_Pg,		// (I  ) ２Ｄ座標群
-					const	MgMat3E	&i_Tm,		// (I  ) 座標変換マトリックス
+					const	MgMat3E	&i_Mt,		// (I  ) 座標変換マトリックス
 							MgPolyg3D*	o_Pg		// (  O) ３Ｄ座標群
 					);
 	
@@ -1980,7 +1979,7 @@ public:
 	//
 	static void	GLine2Dto3D(
 					const	MgGLine2D&	i_gln,		// (I  ) ２Ｄ直線群
-					const	MgMat3E	&i_Tm,		// (I  ) 座標変換マトリックス
+					const	MgMat3E	&i_Mt,		// (I  ) 座標変換マトリックス
 							MgGLine3D	*o_GLn		// (  O) ３Ｄ直線群
 					);
 
@@ -1989,7 +1988,7 @@ public:
 	//
 	static void GPolyg2Dto3D(
 					const	MgGPolyg2D	&i_GPg,		// (I  ) ２Ｄ多角形群
-					const	MgMat3E	&i_Tm,		// (I  ) 座標変換マトリックス
+					const	MgMat3E	&i_Mt,		// (I  ) 座標変換マトリックス
 						 	MgGPolyg3D	*o_GPg		// (  O) ３Ｄ多角形群
 					);
 
@@ -2080,7 +2079,7 @@ public:
 	//	| m21 m22 m23 |  +  | n21 n22 n23 |
 	//	| m31 m32 m33 |     | n31 n32 n33 |
 	//
-	static MgMat2D Mat2DPlus( const MgMat2D& i_mt, const MgMat2D& i_tn);
+	static MgMat2D Mat2DPlus( const MgMat2D& i_mt1, const MgMat2D& i_mt2);
 
 	//
 	//===========================================================================
@@ -2094,7 +2093,7 @@ public:
 	//	| m21 m22 m23 |  =  | m21 m22 m23 |  +  | n21 n22 n23 |
 	//	| m31 m32 m33 |     | m31 m32 m33 |     | n31 n32 n33 |
 	//
-	static MgMat2D Mat2DPlusEqual( MgMat2D& io_tm, const MgMat2D& i_tn);
+	static MgMat2D Mat2DPlusEqual( MgMat2D& io_mt1, const MgMat2D& i_mt2);
 
 	//===========================================================================
 	//	処理内容
@@ -2133,7 +2132,7 @@ public:
 	//	  | m21 m22 m23 |  -  | n21 n22 n23 |
 	//	  | m31 m32 m33 |     | n31 n32 n33 |
 	//
-	static MgMat2D Mat2DMinus( const MgMat2D& i_mt, const MgMat2D& i_tn);
+	static MgMat2D Mat2DMinus( const MgMat2D& i_mt1, const MgMat2D& i_mt2);
 
 	//===========================================================================
 	//	処理内容
@@ -2146,7 +2145,7 @@ public:
 	//	| m21 m22 m23 |  = | m21 m22 m23 |  -  | n21 n22 n23 |
 	//	| m31 m32 m33 |    | m31 m32 m33 |     | n31 n32 n33 |
 	//
-	static MgMat2D Mat2DMinusEqual( MgMat2D& io_tm, const MgMat2D& i_tn);
+	static MgMat2D Mat2DMinusEqual( MgMat2D& io_mt1, const MgMat2D& i_mt2);
 
 	//===========================================================================
 	//	処理内容
@@ -2160,7 +2159,7 @@ public:
 	//	| m21 m22 m23 |  X  | n21 n22 n23 |
 	//	| m31 m32 m33 |     | n31 n32 n33 |
 	//
-	static MgMat2D Mat2DMult( const MgMat2D& i_mt, const MgMat2D& i_tn);
+	static MgMat2D Mat2DMult( const MgMat2D& i_mt1, const MgMat2D& i_mt2);
 
 	//===========================================================================
 	//	処理内容
@@ -2174,7 +2173,7 @@ public:
 	//	| m21 m22 m23 |  =  | m21 m22 m23 |  X  | n21 n22 n23 |
 	//	| m31 m32 m33 |     | m31 m32 m33 |     | n31 n32 n33 |
 	//
-	static MgMat2D Mat2DMultEqual( MgMat2D& io_tm, const MgMat2D& i_tn);
+	static MgMat2D Mat2DMultEqual( MgMat2D& io_mt1, const MgMat2D& i_mt2);
 
 	//===========================================================================
 	//	処理内容
@@ -2371,7 +2370,7 @@ public:
 	//	| m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 	//	| m41 m42 m43 m44 |     | n41 n42 n43 n44 |    
 	//
-	static MgMat3D Mat3DPlus( const MgMat3D& i_Tm, const MgMat3D& i_Tn);
+	static MgMat3D Mat3DPlus( const MgMat3D& i_Mt, const MgMat3D& i_Mt2);
 
 	//===========================================================================
 	//	処理内容
@@ -2385,7 +2384,7 @@ public:
 	//	| m31 m32 m33 m34 |     | m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 	//	| m41 m42 m43 m44 |     | m41 m42 m43 m44 |     | n41 n42 n43 n44 |     
 	//
-	static MgMat3D Mat3DPlusEqual( MgMat3D& io_Tm, const MgMat3D& i_Tn);
+	static MgMat3D Mat3DPlusEqual( MgMat3D& io_Mt1, const MgMat3D& i_Mt2);
 
 	//===========================================================================
 	//	処理内容
@@ -2399,7 +2398,7 @@ public:
 	//	  | m31 m32 m33 m34 |
 	//	  | m41 m42 m43 m44 |     
 	//
-	static MgMat3D Mat3DSingleMinus( const MgMat3D& i_Tm);
+	static MgMat3D Mat3DSingleMinus( const MgMat3D& i_Mt);
 
 	//===========================================================================
 	//	処理内容
@@ -2413,7 +2412,7 @@ public:
 	//	  | m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 	//	  | m41 m42 m43 m44 |     | n41 n42 n43 n44 |    
 	//
-	static MgMat3D Mat3DMinus( const MgMat3D& i_Tm, const MgMat3D& i_Tn);
+	static MgMat3D Mat3DMinus( const MgMat3D& i_Mt1, const MgMat3D& i_Mt2);
 
 	//===========================================================================
 	//	処理内容
@@ -2427,7 +2426,7 @@ public:
 	//	| m31 m32 m33 m34 |     | m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 	//	| m41 m42 m43 m44 |     | m41 m42 m43 m44 |     | n41 n42 n43 n44 |     
 	//
-	static MgMat3D Mat3DMinusEqual( MgMat3D& io_Tm, const MgMat3D& i_Tn);
+	static MgMat3D Mat3DMinusEqual( MgMat3D& io_Mt1, const MgMat3D& i_Mt2);
 
 	//===========================================================================
 	//	処理内容
@@ -2441,7 +2440,7 @@ public:
 	//	| m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 	//	| m41 m42 m43 m44 |     | n41 n42 n43 n44 |    
 	//
-	static MgMat3D Mat3DMult( const MgMat3D& i_Tm, const MgMat3D& i_Tn);
+	static MgMat3D Mat3DMult( const MgMat3D& i_Mt1, const MgMat3D& i_Mt2);
 
 	//===========================================================================
 	//	処理内容
@@ -2455,7 +2454,7 @@ public:
 	//	| m31 m32 m33 m34 |     | m31 m32 m33 m34 |     | n31 n32 n33 n34 |
 	//	| m41 m42 m43 m44 |     | m41 m42 m43 m44 |     | n41 n42 n43 n44 |     
 	//
-	static MgMat3D Mat3DMultEqual( MgMat3D& io_Tm, const MgMat3D& i_Tn);
+	static MgMat3D Mat3DMultEqual( MgMat3D& io_Mt1, const MgMat3D& i_Mt2);
 
 	//===========================================================================
 	//	処理内容
@@ -2469,7 +2468,7 @@ public:
 	//						    | m31 m32 m33 m34 |
 	//						    | m41 m42 m43 m44 |
 	//
-	static MgPoint2D Mat3DMultPoint2D( const MgPoint2D& i_Pt, const MgMat3D& i_Tm);
+	static MgPoint2D Mat3DMultPoint2D( const MgPoint2D& i_Pt, const MgMat3D& i_Mt);
 
 	//===========================================================================
 	//	処理内容
@@ -2483,7 +2482,7 @@ public:
 	//						    | m31 m32 m33 m34 |
 	//						    | m41 m42 m43 m44 |
 	//
-	static MgVect2D Mat3DMultVect2D( const MgVect2D& i_Pt, const MgMat3D& i_Tm);
+	static MgVect2D Mat3DMultVect2D( const MgVect2D& i_Pt, const MgMat3D& i_Mt);
 
 	//===========================================================================
 	//	処理内容
@@ -2497,7 +2496,7 @@ public:
 	//	           									    | m31 m32 m33 m34 |
 	//	           									    | m41 m42 m43 m44 |
 	//
-	static MgPoint2D Mat3DMultEqualPoint2D( MgPoint2D& io_Pt, const MgMat3D& i_Tm);
+	static MgPoint2D Mat3DMultEqualPoint2D( MgPoint2D& io_Pt, const MgMat3D& i_Mt);
 
 	//===========================================================================
 	//	処理内容
@@ -2511,7 +2510,7 @@ public:
 	//	           									    | m31 m32 m33 m34 |
 	//	           									    | m41 m42 m43 m44 |
 	//
-	static MgVect2D Mat3DMultEqualVect2D( MgVect2D& io_Pt, const MgMat3D& i_Tm);
+	static MgVect2D Mat3DMultEqualVect2D( MgVect2D& io_Pt, const MgMat3D& i_Mt);
 
 	//===========================================================================
 	//	処理内容
@@ -2525,7 +2524,7 @@ public:
 	//						    | m31 m32 m33 m34 |
 	//						    | m41 m42 m43 m44 |
 	//
-	static MgPoint3D Mat3DMultPoint3D( const MgPoint3D& i_Pt, const MgMat3D& i_Tm);
+	static MgPoint3D Mat3DMultPoint3D( const MgPoint3D& i_Pt, const MgMat3D& i_Mt);
 
 	//===========================================================================
 	//	処理内容
@@ -2539,7 +2538,7 @@ public:
 	//						    | m31 m32 m33 m34 |
 	//						    | m41 m42 m43 m44 |
 	//
-	static MgVect3D Mat3DMultVect3D( const MgVect3D& i_Pt, const MgMat3D& i_Tm);
+	static MgVect3D Mat3DMultVect3D( const MgVect3D& i_Pt, const MgMat3D& i_Mt);
 
 	//===========================================================================
 	//	処理内容
@@ -2553,7 +2552,7 @@ public:
 	//												    | m31 m32 m33 m34 |
 	//												    | m41 m42 m43 m44 |
 	//
-	static MgPoint3D Mat3DMultEqualPoint3D( MgPoint3D& io_Pt, const MgMat3D& i_Tm);
+	static MgPoint3D Mat3DMultEqualPoint3D( MgPoint3D& io_Pt, const MgMat3D& i_Mt);
 
 	//===========================================================================
 	//	処理内容
@@ -2567,35 +2566,89 @@ public:
 	//												    | m31 m32 m33 m34 |
 	//												    | m41 m42 m43 m44 |
 	//
-	static MgVect3D Mat3DMultEqualVect3D( MgVect3D& io_Pt, const MgMat3D& i_Tm);
+	static MgVect3D Mat3DMultEqualVect3D( MgVect3D& io_Pt, const MgMat3D& i_Mt);
 
-	////===========================================================================
-	////	処理内容
-	////		３次元座標変換マトリックスにより３次元データを座標変換する
-	////
-	////	使用法
-	////		MgULine3D_2 = MgULine3D_1 * MgMat3D;
-	////
-	////	| px  py  pz  1   |     | m11 m12 m13 m14 |
-	////	| vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
-	////							| m31 m32 m33 m34 |
-	////							| m41 m42 m43 m44 |
-	////
-	//static MgULine3D Mat3DMultULine3D( const MgULine3D& i_ULn, const MgMat3D& i_Tm);
+	//===========================================================================
+	//	処理内容
+	//		３次元座標変換マトリックスにより３次元データを座標変換する
+	//
+	//	使用法
+	//		MgLine3D = MgLine3D_1 * MgMat3D;
+	//
+	//	| px  py  pz  1   |     | m11 m12 m13 m14 |
+	//	| px  py  pz  1   |  X  | m21 m22 m23 m24 |
+	//							| m31 m32 m33 m34 |
+	//							| m41 m42 m43 m44 |
+	//
+//S	inline MgLine3D operator * ( const MgLine3D& io_Ln, const MgMat3D &i_Mt)	// 座標変換
+	static MgLine3D Mat3DMultLine3D( const MgLine3D& i_Ln, const MgMat3D& i_Mt)
+	{
+		MgLine3D Ln;
+		Ln.p[0] = i_Ln.p[0] * i_Mt;
+		Ln.p[1] = i_Ln.p[1] * i_Mt;
+		return Ln;
+	}
 
-	////===========================================================================
-	////	処理内容
-	////		３次元座標変換マトリックスにより３次元データを座標変換する
-	////
-	////	使用法
-	////		MgVect3D *= MgMat3D;
-	////
-	////	| px  py  pz  1   |     | px  py  pz  1   |     | m11 m12 m13 m14 |
-	////	| vx  vy  vz  0   |  =  | vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
-	////													| m31 m32 m33 m34 |
-	////													| m41 m42 m43 m44 |
-	////
-	//static MgULine3D Mat3DMultEqualULine3D( MgULine3D& io_ULn, const MgMat3D& i_Tm);
+	//===========================================================================
+	//	処理内容
+	//		３次元座標変換マトリックスにより３次元データを座標変換する
+	//
+	//	使用法
+	//		MgULine3D_2 = MgULine3D_1 * MgMat3D;
+	//
+	//	| px  py  pz  1   |     | m11 m12 m13 m14 |
+	//	| vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
+	//							| m31 m32 m33 m34 |
+	//							| m41 m42 m43 m44 |
+	//
+//S	inline MgULine3D operator * ( const MgULine3D& i_Ln, const MgMat3E& i_Mt)	// 座標変換
+	static MgULine3D Mat3DMultULine3D( const MgULine3D& i_ULn, const MgMat3D& i_Mt)
+	{
+		MgULine3D ULn;
+		ULn.p = i_ULn.p * i_Mt;
+		ULn.v = i_ULn.v * i_Mt;
+		return ULn;
+	}
+
+	//===========================================================================
+	//	処理内容
+	//		３次元座標変換マトリックスにより３次元データを座標変換する
+	//
+	//	使用法
+	//		MgLine3D *= MgMat3D;
+	//
+	//	| px  py  pz  1   |     | px  py  pz  1   |     | m11 m12 m13 m14 |
+	//	| px  py  pz  1   |  =  | px  py  pz  1   |  X  | m21 m22 m23 m24 |
+	//													| m31 m32 m33 m34 |
+	//													| m41 m42 m43 m44 |
+	//
+//S	inline MgULine3D operator *= ( MgULine3D& io_ULn, const MgMat3E& i_Mt)			// 座標変換
+	static MgLine3D Mat3DMultEqualLine3D( MgLine3D& io_Ln, const MgMat3D& i_Mt)
+	{
+		io_Ln.p[0] *= i_Mt;
+		io_Ln.p[1] *= i_Mt;
+		return io_Ln;
+	}
+
+	//===========================================================================
+	//	処理内容
+	//		３次元座標変換マトリックスにより３次元データを座標変換する
+	//
+	//	使用法
+	//		MgVect3D *= MgMat3D;
+	//
+	//	| px  py  pz  1   |     | px  py  pz  1   |     | m11 m12 m13 m14 |
+	//	| vx  vy  vz  0   |  =  | vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
+	//													| m31 m32 m33 m34 |
+	//													| m41 m42 m43 m44 |
+	//
+//S	inline MgULine3D operator *= ( MgULine3D& io_ULn, const MgMat3E& i_Mt)			// 座標変換
+	static MgULine3D Mat3DMultEqualULine3D( MgULine3D& io_ULn, const MgMat3D& i_Mt)
+	{
+		io_ULn.p *= i_Mt;
+		io_ULn.v *= i_Mt;
+		return io_ULn;
+	}
 
 	//======================( ２次元 )==============================
 	//	処理内容
@@ -2806,7 +2859,7 @@ public:
 	//	| m13 m23 m33 m43 |
 	//	| M14 m24 m34 m44 |
 	//
-	static MgMat3D Mat3DInv( const MgMat3D& i_Tm);
+	static MgMat3D Mat3DInv( const MgMat3D& i_Mt);
 
 	//======================( ２次元 )==============================
 	//		直線に対する鏡像座標変換マトリックスを作成
@@ -2820,7 +2873,7 @@ public:
 	//		平面に対する鏡像座標変換マトリックスを作成
 	//
 	static MgMat3D Mat3DMirror(						// (  O) 鏡像変換行列
-					const	MgMat3D&	i_Tm,		// (I  ) 変換行列
+					const	MgMat3D&	i_Mt,		// (I  ) 変換行列
 					const	MgPlane3D&	i_Pln		// (I  ) 鏡映の面とする平面
 			);
 
@@ -2844,7 +2897,7 @@ public:
 	//		正投象座標変換マトリックスを計算する
 	//
 	static MgMat3D Mat3DNProj(						// (  O) 正投象変換行列
-					const	MgMat3D&	i_Tm,		// (I  ) 入力座標変換行列
+					const	MgMat3D&	i_Mt,		// (I  ) 入力座標変換行列
 					const	MgPlane3D&	i_Pln		// (I  ) 投象面
 			);
 
@@ -2852,7 +2905,7 @@ public:
 	//		斜投象座標変換マトリックスを計算する
 	//
 	static MgMat3D Mat3DSProj(						// (  O) 斜投象変座標変換行列
-					const	MgMat3D&	i_Tm,		// (I  ) 入力座標変換行列
+					const	MgMat3D&	i_Mt,		// (I  ) 入力座標変換行列
 					const	MgPlane3D&	i_Pln,		// (I  ) 投象面
 					const	MgVect3D&	i_V			// (I  ) 投象方向を示す単位ベクトル
 			);
@@ -2985,7 +3038,7 @@ public:
 	//
 	static void Point3Dto2D(
 					const	MgPoint3D&	i_P,		// (I  ) ３Ｄ座標
-					const	MgMat3D&	i_Tm,		// (I  ) 座標変換マトリックス
+					const	MgMat3D&	i_Mt,		// (I  ) 座標変換マトリックス
 							MgPoint2D*	o_P			// (  O) ２Ｄ座標
 					);
 
@@ -3016,7 +3069,7 @@ public:
 	//
 	static MgPoint2D Point3Dto2D2(					// (  O) ２Ｄ座標
 					const	MgPoint3D&	i_P,		// (I  ) ３Ｄ座標
-					const	MgMat3D&	i_Tm		// (I  ) 座標変換マトリックス
+					const	MgMat3D&	i_Mt		// (I  ) 座標変換マトリックス
 					);
 
 	//===================(３次元 → ２次元)=========================
@@ -3037,7 +3090,7 @@ public:
 	//
 	static MgULine2D ULine3Dto2D2(					// (  O) ２Ｄ直線
 					const	MgULine3D&	i_ULn,		// (I  ) ３Ｄ直線
-					const	MgMat3D&	i_Tm		// (I  ) 座標変換マトリックス
+					const	MgMat3D&	i_Mt		// (I  ) 座標変換マトリックス
 					);
 
 	//===================(３次元 → ２次元)=========================
@@ -3045,7 +3098,7 @@ public:
 	//
 	static void	GPoint3Dto2D(
 					const	MgGPoint3D&	i_GP,		// (I  ) ３Ｄ座標群
-					const	MgMat3D&	i_Tm,		// (I  ) 座標変換マトリックス
+					const	MgMat3D&	i_Mt,		// (I  ) 座標変換マトリックス
 							MgGPoint2D*	o_pGP		// (  O) ２Ｄ座標群
 					);
 	
@@ -3063,7 +3116,7 @@ public:
 	//
 	static void	GLine3Dto2D(
 					const	MgGLine3D&	i_GLn,		// (I  ) ３Ｄ線分群
-					const	MgMat3D&	i_Tm,		// (I  ) 座標変換マトリックス
+					const	MgMat3D&	i_Mt,		// (I  ) 座標変換マトリックス
 							MgGLine2D*	o_pgln		// (  O) ２Ｄ線分群
 					);
 	
@@ -3072,7 +3125,7 @@ public:
 	//
 	static void GPolyg3Dto2D(
 					const	MgGPolyg3D&	i_GPg,		// (I  ) ３Ｄ多角形群
-					const	MgMat3D&	i_Tm,		// (I  ) 座標変換マトリックス
+					const	MgMat3D&	i_Mt,		// (I  ) 座標変換マトリックス
 						 	MgGPolyg2D*	o_pgpg		// (  O) ２Ｄ多角形群
 					);
 
@@ -3081,7 +3134,7 @@ public:
 	//
 	static void	Point2Dto3D(
 					const	MgPoint2D&	i_pt,		// (I  ) ２Ｄ座標
-					const	MgMat3D&	i_Tm,		// (I  ) 座標変換マトリックス
+					const	MgMat3D&	i_Mt,		// (I  ) 座標変換マトリックス
 							MgPoint3D*	o_pPt		// (  O) ３Ｄ座標
 					);
 
@@ -3104,7 +3157,7 @@ public:
 	//
 	static void ULine2Dto3D(
 					const	MgULine2D&	i_uln,		// (I  ) ２Ｄ直線
-					const	MgMat3D&	i_Tm,		// (I  ) 座標変換マトリックス
+					const	MgMat3D&	i_Mt,		// (I  ) 座標変換マトリックス
 						 	MgULine3D*	o_pULn		// (  O) ３Ｄ直線
 					);
 
@@ -3113,7 +3166,7 @@ public:
 	//
 	static MgPoint3D Point2Dto3D3(					// (  O) ３Ｄ座標
 					const	MgPoint2D&	i_Pt,		// (I  ) ２Ｄ座標
-					const	MgMat3D&	i_Tm		// (I  ) 座標変換マトリックス
+					const	MgMat3D&	i_Mt		// (I  ) 座標変換マトリックス
 					);
 
 	//===================(２次元 → ３次元)=========================
@@ -3134,7 +3187,7 @@ public:
 	//
 	static MgULine3D ULine2Dto3D3(					// (  O) ３Ｄ直線
 					const	MgULine2D&	i_uln,		// (I  ) ２Ｄ直線
-					const	MgMat3D&	i_Tm		// (I  ) 座標変換マトリックス
+					const	MgMat3D&	i_Mt		// (I  ) 座標変換マトリックス
 					);
 
 	//===================(２次元 → ３次元)=========================
@@ -3142,7 +3195,7 @@ public:
 	//
 	static void	GPoint2Dto3D(
 					const	MgGPoint2D&	i_GPt,		// (I  ) ２Ｄ座標群
-					const	MgMat3D&	i_Tm,		// (I  ) 座標変換マトリックス
+					const	MgMat3D&	i_Mt,		// (I  ) 座標変換マトリックス
 							MgGPoint3D*	o_pGPt		// (  O) ３Ｄ座標群
 					);
 	
@@ -3151,7 +3204,7 @@ public:
 	//
 	static void	Polyg2Dto3D(
 					const	MgPolyg2D&	i_Pg,		// (I  ) ２Ｄ座標群
-					const	MgMat3D&	i_Tm,		// (I  ) 座標変換マトリックス
+					const	MgMat3D&	i_Mt,		// (I  ) 座標変換マトリックス
 							MgPolyg3D*	o_pPg		// (  O) ３Ｄ座標群
 					);
 	
@@ -3160,7 +3213,7 @@ public:
 	//
 	static void	GLine2Dto3D(
 					const	MgGLine2D&	i_gln,		// (I  ) ２Ｄ直線群
-					const	MgMat3D&	i_Tm,		// (I  ) 座標変換マトリックス
+					const	MgMat3D&	i_Mt,		// (I  ) 座標変換マトリックス
 							MgGLine3D*	o_pGLn		// (  O) ３Ｄ直線群
 					);
 
@@ -3169,7 +3222,7 @@ public:
 	//
 	static void GPolyg2Dto3D(
 					const	MgGPolyg2D&	i_GPg,		// (I  ) ２Ｄ多角形群
-					const	MgMat3D&	i_Tm,		// (I  ) 座標変換マトリックス
+					const	MgMat3D&	i_Mt,		// (I  ) 座標変換マトリックス
 						 	MgGPolyg3D*	o_pGPg		// (  O) ３Ｄ多角形群
 					);
 	//
@@ -3179,7 +3232,7 @@ public:
 	// ---------------------( ２次元 )------------------------------
 	//		指定線分より始まり線分群の線分を結合して最小の多角形を作成する
 	//
-	static bool	MakeGPolygonFromLineInGLine2D(				// (  O) ステイタス　true: 正常作成　false: 作成不可
+	static bool	MakeGPolygonFromLineInGLine2D(		// (  O) ステイタス　true: 正常作成　false: 作成不可
 					const	MgLine2D&	i_Ln1,		// (I  ) 指定線分
 							MgGLine2D*	io_GLn2,	// (I O) 結合する線分群
 							MINT*		io_pnHk,	// (I O) 結合する線分の中の正しい方向を持つ線分数（先頭より幾つかを表す）
@@ -3189,7 +3242,7 @@ public:
 	// ---------------------( ２次元 )------------------------------
 	//		多角形を直線で切り、直線の指定側の領域を得る			<多角形が穴の場合の考慮不足?>
 	//
-	static MINT DividePolygonULine2D(						// (  O) ステイタス
+	static MINT DividePolygonULine2D(				// (  O) ステイタス
 													//			MC_NINT			(0): 交差なし
 													//			MC_INT			(1): 交差あり
 							MINT		i_Sel,		// (I  ) 選択条件

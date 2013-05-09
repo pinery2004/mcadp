@@ -110,74 +110,32 @@ public:
 	void MgMatPrint3(MCHAR* s);
 };
 
-//inline	MgMat2D operator + ( const MgMat2D& i_m1, const MgVect2D& i_pt)			// +	平行移動
-//{ 
-//	MgMat2D mw;
-//	mw = i_m1;
-//	mw += i_pt;
-//	return mw;
-//}
-//inline	MgMat2D operator +  ( const MgMat2D& i_m1, const MgPoint2D& i_pt)		// +	平行移動
+//inline	MgLine2D operator * ( const MgLine2D& Ln1, const MgMat2D& m2)			// *	座標変換
 //{
-//	return i_m1 + (MgVect2D&)i_pt;
+//	MgLine2D Ln;
+//	Ln.p[0] = Ln1.p[0] * m2;
+//	Ln.p[1] = Ln1.p[1] * m2;
+//	return Ln;
 //}
-//inline	MgMat2D operator += ( MgMat2D& i_m1, const MgVect2D& i_pt)				// +=	平行移動
+//inline	MgLine2D operator *= ( MgLine2D& Ln, const MgMat2D& m2)					// *=	座標変換
 //{
-//	i_m1.m[2][0] += i_pt.x;
-//	i_m1.m[2][1] += i_pt.y;
-//	return i_m1;
+//	Ln.p[0] *= m2;
+//	Ln.p[1] *= m2;
+//	return Ln;
 //}
-//inline	MgMat2D operator += ( MgMat2D& i_m1, const MgPoint2D& i_pt)				// +=	平行移動
+//inline	MgLine3D operator * ( const MgLine3D& Ln1, const MgMat2D& m1)			// *	座標変換
 //{
-//	return i_m1 += (MgVect2D&)i_pt;
+//	MgLine3D Ln;
+//	Ln.p[0] = Ln1.p[0] * m1;
+//	Ln.p[1] = Ln1.p[1] * m1;
+//	return Ln;
 //}
-//inline	MgMat2D operator - ( const MgMat2D& i_m1, const MgVect2D& i_pt)			// -	平行移動
+//inline	MgLine3D operator *= ( MgLine3D& Ln, const MgMat2D& m1)					// *=	座標変換
 //{
-//	MgMat2D mw = i_m1;
-//	mw -= i_pt;
-//	return mw;
+//	Ln.p[0] *= m1;
+//	Ln.p[1] *= m1;
+//	return Ln;
 //}
-//inline	MgMat2D operator -  ( const MgMat2D& i_m1, const MgPoint2D& i_pt)		// -	平行移動
-//{
-//	return i_m1 - (MgVect2D&)i_pt;
-//}
-//inline	MgMat2D operator -= ( MgMat2D& i_m1, const MgVect2D& i_pt)				// -=	平行移動
-//{
-//	i_m1.m[2][0] -= i_pt.x;
-//	i_m1.m[2][1] -= i_pt.y;
-//	return i_m1;
-//}
-//inline	MgMat2D operator -= ( MgMat2D& i_m1, const MgPoint2D& i_pt)				// -=	平行移動
-//{
-//	return i_m1 -= (MgVect2D&)i_pt;
-//}
-
-inline	MgLine2D operator * ( const MgLine2D& Ln1, const MgMat2D& m2)			// *	座標変換
-{
-	MgLine2D Ln;
-	Ln.p[0] = Ln1.p[0] * m2;
-	Ln.p[1] = Ln1.p[1] * m2;
-	return Ln;
-}
-inline	MgLine2D operator *= ( MgLine2D& Ln, const MgMat2D&m2)					// *=	座標変換
-{
-	Ln.p[0] *= m2;
-	Ln.p[1] *= m2;
-	return Ln;
-}
-inline	MgLine3D operator * ( const MgLine3D& Ln1, const MgMat2D& m1)			// *	座標変換
-{
-	MgLine3D Ln;
-	Ln.p[0] = Ln1.p[0] * m1;
-	Ln.p[1] = Ln1.p[1] * m1;
-	return Ln;
-}
-inline	MgLine3D operator *= ( MgLine3D& Ln, const MgMat2D& m1)					// *=	座標変換
-{
-	Ln.p[0] *= m1;
-	Ln.p[1] *= m1;
-	return Ln;
-}
 
 inline	void MgMat2D::Print( MCHAR* s)											// print
 {
@@ -258,46 +216,46 @@ public:
 	void MgMatPrint4(MCHAR* s);
 };
 
-inline MgMat3D operator + ( const MgMat3D& i_M1, const MgVect3D& i_Vt)			// +	平行移動
-{
-	MgMat3D mw;
-	mw = i_M1;
-	mw += i_Vt;
-	return mw;
-}
-inline MgMat3D operator += ( MgMat3D& i_M1, const MgVect3D& i_Vt)				// +=	平行移動
-{ 
-	i_M1.m[3][0] += i_Vt.x;
-	i_M1.m[3][1] += i_Vt.y;
-	i_M1.m[3][2] += i_Vt.z;
-	return i_M1;
-} 
-inline MgMat3D operator -= ( MgMat3D& i_M1, const MgVect3D& i_Vt)				// -=	平行移動
-{
-	i_M1.m[3][0] -= i_Vt.x;
-	i_M1.m[3][1] -= i_Vt.y;
-	i_M1.m[3][2] -= i_Vt.z;
-	return i_M1;
-} 
-inline MgMat3D operator - ( const MgMat3D& i_M1, const MgVect3D& i_Vt)			// -	平行移動
-{
-	MgMat3D mw = i_M1;
-	mw -= i_Vt;
-	return mw;
-}
-inline MgLine3D operator * ( const MgLine3D& i_Ln1, const MgMat3D& i_M2)		// 座標変換
-{
-	MgLine3D Ln;
-	Ln.p[0] = i_Ln1.p[0] * i_M2;
-	Ln.p[1] = i_Ln1.p[1] * i_M2;
-	return Ln;
-}
-inline MgLine3D operator *= ( MgLine3D& i_Ln1, const MgMat3D& i_M2)				// 座標変換
-{
-	i_Ln1.p[0] *= i_M2;
-	i_Ln1.p[1] *= i_M2;
-	return i_Ln1;
-}
+//inline MgMat3D operator + ( const MgMat3D& i_M1, const MgVect3D& i_Vt)			// +	平行移動
+//{
+//	MgMat3D mw;
+//	mw = i_M1;
+//	mw += i_Vt;
+//	return mw;
+//}
+//inline MgMat3D operator += ( MgMat3D& i_M1, const MgVect3D& i_Vt)				// +=	平行移動
+//{ 
+//	i_M1.m[3][0] += i_Vt.x;
+//	i_M1.m[3][1] += i_Vt.y;
+//	i_M1.m[3][2] += i_Vt.z;
+//	return i_M1;
+//} 
+//inline MgMat3D operator -= ( MgMat3D& i_M1, const MgVect3D& i_Vt)				// -=	平行移動
+//{
+//	i_M1.m[3][0] -= i_Vt.x;
+//	i_M1.m[3][1] -= i_Vt.y;
+//	i_M1.m[3][2] -= i_Vt.z;
+//	return i_M1;
+//} 
+//inline MgMat3D operator - ( const MgMat3D& i_M1, const MgVect3D& i_Vt)			// -	平行移動
+//{
+//	MgMat3D mw = i_M1;
+//	mw -= i_Vt;
+//	return mw;
+//}
+//inline MgLine3D operator * ( const MgLine3D& i_Ln1, const MgMat3D& i_M2)		// 座標変換
+//{
+//	MgLine3D Ln;
+//	Ln.p[0] = i_Ln1.p[0] * i_M2;
+//	Ln.p[1] = i_Ln1.p[1] * i_M2;
+//	return Ln;
+//}
+//inline MgLine3D operator *= ( MgLine3D& i_Ln1, const MgMat3D& i_M2)				// 座標変換
+//{
+//	i_Ln1.p[0] *= i_M2;
+//	i_Ln1.p[1] *= i_M2;
+//	return i_Ln1;
+//}
 inline	void MgMat3D::Print( MCHAR* s)											// print
 {
 #ifdef LOGOUT
