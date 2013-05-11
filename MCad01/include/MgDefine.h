@@ -95,7 +95,7 @@
 #define		MC_ERR_NUM_OVER	   1101				// 処理可能個数超えエラー
 //#define	MC_ERR_BAD_SPLINE  1102				// 
 #define		MC_ERR_VECT_ZERO   1103				// ゼロベクトルで処理不可エラー
-#define		MC_ERR_INPUT_ZERO  1104				// 数値ゼロで処理不可エラー
+#define		MC_ERR_VALUE_ZERO  1104				// 数値ゼロで処理不可エラー
 #define		MC_ERR_OFFSET	   1105				// オフセット誤りエラー
 
 

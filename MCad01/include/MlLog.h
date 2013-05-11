@@ -11,7 +11,7 @@
 
 // ƒƒOæ“¾§Œä
 #ifdef _DEBUG
-//#define LOGOUT
+#define LOGOUT
 #else
 #undef LOGOUT
 #endif

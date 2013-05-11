@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MgMatA.h"
+#include "MgMatD.h"
 
 #ifdef DLL_EXPORT
 	#undef DLL_EXPORT

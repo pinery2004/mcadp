@@ -10,5 +10,5 @@
 //  K.Matsu           08/01/04    Created.
 //==========================================================================================
 #include "MgPolygon.h"
-#include "MgMatA.h"
+#include "MgMatD.h"
 #include "MgGeo.h"

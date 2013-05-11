@@ -12,7 +12,7 @@
 #include "MsBasic.h"
 #include "MgLib.h"
 #include "MhDefParts.h"
-#include "MgMatA.h"
+#include "MgMatD.h"
 #include "MsDefine.h"
 #include "MsCod.h"
 #include "MmGridNum.h"

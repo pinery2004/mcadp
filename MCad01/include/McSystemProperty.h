@@ -87,11 +87,12 @@ enum	MSYSTEMSTR {
 	MM_STR_CSV_BUNRUI,								// 分類.csv 
 	MM_ERR_POINTER,									// メモリ取得エラー
 	MM_ERR_OVERFLOW,								// 領域オーバフローエラー
+	MM_ERR_COMMAND,									// コマンドエラー
 	MM_ERR_ID,										// ＩＤ誤りエラー
 	MM_ERR_INPUT,									// 入力エラー
 	MM_ERR_NUM_OVER,								// 処理可能個数超えエラー
 	MM_ERR_VECT_ZERO,								// ゼロベクトルで処理不可エラー
-	MM_ERR_INPUT_ZERO,								// 数値ゼロで処理不可エラー
+	MM_ERR_VALUE_ZERO,								// 数値ゼロで処理不可エラー
 	MM_ERR_OFFSET,									// オフセット誤りエラー
 	MM_ERR_FILEOPEN,								// ファイルオープンエラー
 	MM_ERR_OTHER,									// その他エラー

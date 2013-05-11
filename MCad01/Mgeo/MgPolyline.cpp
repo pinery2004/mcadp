@@ -49,14 +49,14 @@ MgPolyl2D::MgPolyl2D( MINT sz1, MgPoint2D *p2)
 const MgPoint2D& MgPolyl2D::operator () ( MINT idx) const
 {
 	if ( idx >= m_n)
-		ms::SysError( MBCstr( "MgPolyl2D ()"), MC_ERR_OVERFLOW);
+		RETURN_OVERFLOW_ERR_S( MBCstr( "MgPolyl2D ()"));
 	return m_p[idx];
 }
 
 MgPoint2D& MgPolyl2D::operator () ( MINT idx)
 {
 	if ( idx >= m_isz)
-		ms::SysError( MBCstr( "MgPolyl2D ()"), MC_ERR_OVERFLOW);
+		RETURN_OVERFLOW_ERR_S( MBCstr( "MgPolyl2D ()"));
 	return m_p[idx];
 }
 
@@ -266,14 +266,14 @@ MgPolyl3D::MgPolyl3D( MINT sz1, MgPoint3D *p2)
 const MgPoint3D& MgPolyl3D::operator () (MINT idx) const
 {
 	if ( idx >= m_isz)
-		ms::SysError( MBCstr( "MgPolyl3D ()"), MC_ERR_OVERFLOW);
+		RETURN_OVERFLOW_ERR_S( MBCstr( "MgPolyl3D ()"));
 	return m_p[idx];
 }
 
 MgPoint3D& MgPolyl3D::operator () (MINT idx)
 {
 	if ( idx >= m_isz)
-		ms::SysError( MBCstr( "MgPolyl3D ()"), MC_ERR_OVERFLOW);
+		RETURN_OVERFLOW_ERR_S( MBCstr( "MgPolyl3D ()"));
 	return m_p[idx];
 }
 
@@ -483,14 +483,14 @@ void MgGPolyl2D::Free()
 const MgPolyl2D& MgGPolyl2D::operator () ( MINT idx) const
 {
 	if ( idx >= m_n)
-		ms::SysError( MBCstr( "MgGPolyl2D ()"), MC_ERR_OVERFLOW);
+		RETURN_OVERFLOW_ERR_S( MBCstr( "MgGPolyl2D ()"));
 	return m_pg[idx];
 }
 
 MgPolyl2D& MgGPolyl2D::operator () ( MINT idx)
 {
 	if ( idx >= m_isz)
-		ms::SysError( MBCstr( "MgGPolyl2D ()"), MC_ERR_OVERFLOW);
+		RETURN_OVERFLOW_ERR_S( MBCstr( "MgGPolyl2D ()"));
 	for (; m_n<=idx; m_n++)
 		m_pg[m_n].SetInit();									// 最終データより後のデータはクリアし、n = idx+1　にする
 	return m_pg[idx];
@@ -696,14 +696,14 @@ void MgGPolyl3D::Free()
 const MgPolyl3D& MgGPolyl3D::operator () ( MINT idx) const
 {
 	if ( idx >= m_n)
-		ms::SysError( MBCstr( "MgGPolyl3D ()"), MC_ERR_OVERFLOW);
+		RETURN_OVERFLOW_ERR_S( MBCstr( "MgGPolyl3D ()"));
 	return m_pg[idx];
 };
 
 MgPolyl3D& MgGPolyl3D::operator () ( MINT idx)
 {
 	if ( idx >= m_isz)
-		ms::SysError( MBCstr( "MgGPolyl3D ()"), MC_ERR_OVERFLOW);
+		RETURN_OVERFLOW_ERR_S( MBCstr( "MgGPolyl3D ()"));
 	for (; m_n<=idx; m_n++)
 		m_pg[m_n].SetInit();									//  最終データより後のデータはクリアし、n = idx+1　にする
 	return m_pg[idx];

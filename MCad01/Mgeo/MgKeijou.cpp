@@ -13,7 +13,7 @@
 #include "MlLog.h"
 
 #include "MgLib.h"
-#include "MgMatA.h"
+#include "MgMatD.h"
 #include "MgKeijyou.h"
 
 namespace MC

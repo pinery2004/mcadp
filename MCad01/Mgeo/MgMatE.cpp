@@ -16,7 +16,7 @@
 
 #define	DLL_EXPORT_MAT_DO
 
-#include "MgMatA.h"
+#include "MgMatD.h"
 
 #define	DLL_EXPORT_GEO_DO
 
@@ -87,7 +87,6 @@ MgMat2E MGeo::Mat2EPlus( const MgMat2E& i_mt1, const MgMat2E& i_mt2)
 	for ( ic=0; ic<3; ic++) {
 		to.m[ic][0] = i_mt1.m[ic][0] + i_mt2.m[ic][0];
 		to.m[ic][1] = i_mt1.m[ic][1] + i_mt2.m[ic][1];
-		to.m[ic][2] = i_mt1.m[ic][2] + i_mt2.m[ic][2];
 	}
 	return to;
 }
@@ -110,7 +109,6 @@ MgMat2E MGeo::Mat2EPlusEqual( MgMat2E& io_mt1, const MgMat2E& i_mt2)
 	for ( ic=0; ic<3; ic++) {
 		io_mt1.m[ic][0] += i_mt2.m[ic][0];
 		io_mt1.m[ic][1] += i_mt2.m[ic][1];
-		io_mt1.m[ic][2] += i_mt2.m[ic][2];
 	}
 	return io_mt1;
 }
@@ -153,7 +151,6 @@ MgMat2E MGeo::Mat2EMinus( const MgMat2E& i_mt1, const MgMat2E& i_mt2)
 	for ( ic=0; ic<3; ic++) {
 		to.m[ic][0] = i_mt1.m[ic][0] - i_mt2.m[ic][0];
 		to.m[ic][1] = i_mt1.m[ic][1] - i_mt2.m[ic][1];
-		to.m[ic][2] = i_mt1.m[ic][2] - i_mt2.m[ic][2];
 	}
 	return to;
 }
@@ -176,7 +173,6 @@ MgMat2E MGeo::Mat2EMinusEqual( MgMat2E& io_mt1, const MgMat2E& i_mt2)
 	for ( ic=0; ic<3; ic++) {
 		io_mt1.m[ic][0] -= i_mt2.m[ic][0];
 		io_mt1.m[ic][1] -= i_mt2.m[ic][1];
-		io_mt1.m[ic][2] -= i_mt2.m[ic][2];
 	}
 	return io_mt1;
 }
@@ -198,11 +194,14 @@ MgMat2E MGeo::Mat2EMult( const MgMat2E& i_mt1, const MgMat2E& i_mt2)
 {
 	MgMat2E	to;
 	int		i1, i2;
-	for (i1=0; i1<3; i1++) 
-		for (i2=0; i2<3; i2++) 
+	for (i1=0; i1<3; i1++) {
+		for (i2=0; i2<2; i2++) {
 			to.m[i1][i2] = i_mt1.m[i1][0] * i_mt2.m[0][i2] +
-						   i_mt1.m[i1][1] * i_mt2.m[1][i2] +
-						   i_mt1.m[i1][2] * i_mt2.m[2][i2];
+						   i_mt1.m[i1][1] * i_mt2.m[1][i2];
+		}
+	}
+	to.m[2][0] += i_mt2.m[2][0];
+	to.m[2][1] += i_mt2.m[2][1];
 	return to;
 }
 
@@ -223,11 +222,14 @@ MgMat2E MGeo::Mat2EMultEqual( MgMat2E& io_mt1, const MgMat2E& i_mt2)
 {
 	MgMat2E	tw;
 	int		i1, i2;
-	for (i1=0; i1<3; i2++) 
-		for (i2=0; i2<3; i1++) 
+	for (i1=0; i1<3; i2++) {
+		for (i2=0; i2<2; i1++) { 
 			tw.m[i1][i2] = io_mt1.m[i1][0] * i_mt2.m[0][i2] +
-						   io_mt1.m[i1][1] * i_mt2.m[1][i2] +
-						   io_mt1.m[i1][2] * i_mt2.m[2][i2]	;
+						   io_mt1.m[i1][1] * i_mt2.m[1][i2];
+		}
+	}
+	io_mt1.m[2][0] += i_mt2.m[2][0];
+	io_mt1.m[2][1] += i_mt2.m[2][1];
 	io_mt1 = tw;
 	return io_mt1;
 }
@@ -411,12 +413,13 @@ MgVect3D MGeo::Mat2EMultEqualVect3D( MgVect3D& io_Pt, const MgMat2E& i_mt)
 void MgMat2E::MgMatPrint2( MCHAR* s)														// print
 {
 #ifdef _DEBUG
-	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgMat2E	=	%f, %f, %f\n")
-			        Mstr( "					%f, %f, %f\n")
-					Mstr( "					%f, %f, %f\n"),
-							s, m[0][0], m[0][1], m[0][2],
-							   m[1][0], m[1][1], m[1][2],
-							   m[2][0], m[2][1], m[2][2]);
+	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgMat2E	=\n")
+			        Mstr( "					%f, %f\n")
+			        Mstr( "					%f, %f\n")
+					Mstr( "					%f, %f\n"),
+							s, m[0][0], m[0][1],
+							   m[1][0], m[1][1],
+							   m[2][0], m[2][1]);
 	MBLOGPRBF;
 #endif
 };
@@ -446,7 +449,6 @@ MgMat3E MGeo::Mat3EPlus(const MgMat3E& i_Mt1, const MgMat3E& i_Mt2)
 		To.m[ic][0] = i_Mt1.m[ic][0] + i_Mt2.m[ic][0];
 		To.m[ic][1] = i_Mt1.m[ic][1] + i_Mt2.m[ic][1];
 		To.m[ic][2] = i_Mt1.m[ic][2] + i_Mt2.m[ic][2];
-		To.m[ic][3] = i_Mt1.m[ic][3] + i_Mt2.m[ic][3];
 	}
 	return To;
 }
@@ -471,7 +473,6 @@ MgMat3E MGeo::Mat3EPlusEqual( MgMat3E& io_Mt1, const MgMat3E& i_Mt2)
 		io_Mt1.m[ic][0] += i_Mt2.m[ic][0];
 		io_Mt1.m[ic][1] += i_Mt2.m[ic][1];
 		io_Mt1.m[ic][2] += i_Mt2.m[ic][2];
-		io_Mt1.m[ic][3] += i_Mt2.m[ic][3];
 	}
 	return io_Mt1;
 }
@@ -497,7 +498,6 @@ MgMat3E MGeo::Mat3ESingleMinus( const MgMat3E& i_Mt)
 		To.m[ic][0] = - i_Mt.m[ic][0];
 		To.m[ic][1] = - i_Mt.m[ic][1];
 		To.m[ic][2] = - i_Mt.m[ic][2];
-		To.m[ic][3] = - i_Mt.m[ic][3];
 	}
 	return To;
 }
@@ -523,7 +523,6 @@ MgMat3E MGeo::Mat3EMinus( const MgMat3E& i_Mt1, const MgMat3E& i_Mt2)
 		To.m[ic][0] = i_Mt1.m[ic][0] - i_Mt2.m[ic][0];
 		To.m[ic][1] = i_Mt1.m[ic][1] - i_Mt2.m[ic][1];
 		To.m[ic][2] = i_Mt1.m[ic][2] - i_Mt2.m[ic][2];
-		To.m[ic][3] = i_Mt1.m[ic][3] - i_Mt2.m[ic][3];
 	}
 	return To;
 }
@@ -548,7 +547,6 @@ MgMat3E MGeo::Mat3EMinusEqual( MgMat3E& io_Mt1, const MgMat3E& i_Mt2)
 		io_Mt1.m[ic][0] -= i_Mt2.m[ic][0];
 		io_Mt1.m[ic][1] -= i_Mt2.m[ic][1];
 		io_Mt1.m[ic][2] -= i_Mt2.m[ic][2];
-		io_Mt1.m[ic][3] -= i_Mt2.m[ic][3];
 	}
 	return io_Mt1;
 }
@@ -570,12 +568,16 @@ MgMat3E MGeo::Mat3EMult( const MgMat3E& i_Mt1, const MgMat3E& i_Mt2)
 {
 	MgMat3E	To;
 	int		i1, i2;
-	for (i1=0; i1<4; i1++) 
-		for (i2=0; i2<4; i2++) 
+	for (i1=0; i1<4; i1++) {
+		for (i2=0; i2<3; i2++) { 
 			To.m[i1][i2] = i_Mt1.m[i1][0] * i_Mt2.m[0][i2] +
 						   i_Mt1.m[i1][1] * i_Mt2.m[1][i2] +
-						   i_Mt1.m[i1][2] * i_Mt2.m[2][i2] +
-						   i_Mt1.m[i1][3] * i_Mt2.m[3][i2];
+						   i_Mt1.m[i1][2] * i_Mt2.m[2][i2];
+		}
+	}
+	To.m[3][0] += i_Mt2.m[3][0];
+	To.m[3][1] += i_Mt2.m[3][1];
+	To.m[3][2] += i_Mt2.m[3][2];
 	return To;
 }
 
@@ -596,12 +598,16 @@ MgMat3E MGeo::Mat3EMultEqual( MgMat3E& io_M1t, const MgMat3E& i_Mt2)
 {
 	MgMat3E	To;
 	int		i1, i2;
-	for (i1=0; i1<4; i1++) 
-		for (i2=0; i2<4; i2++) 
+	for (i1=0; i1<4; i1++) {
+		for (i2=0; i2<3; i2++) { 
 			To.m[i1][i2] = io_M1t.m[i1][0] * i_Mt2.m[0][i2] +
 						   io_M1t.m[i1][1] * i_Mt2.m[1][i2] +
-						   io_M1t.m[i1][2] * i_Mt2.m[2][i2] +
-						   io_M1t.m[i1][3] * i_Mt2.m[3][i2];
+						   io_M1t.m[i1][2] * i_Mt2.m[2][i2];
+		}
+	}
+	To.m[3][0] += i_Mt2.m[3][0];
+	To.m[3][1] += i_Mt2.m[3][1];
+	To.m[3][2] += i_Mt2.m[3][2];
 	io_M1t = To;
 	return io_M1t;
 }
@@ -643,8 +649,8 @@ MgPoint2D MGeo::Mat3EMultPoint2D( const MgPoint2D& i_Pt, const MgMat3E& i_Mt)
 MgVect2D MGeo::Mat3EMultVect2D( const MgVect2D& i_Pt, const MgMat3E& i_Mt)
 {
 	MgVect2D	Po;
-	Po.x = i_Mt.m[0][0] * i_Pt.x + i_Mt.m[1][0] * i_Pt.y + i_Mt.m[3][0];
-	Po.y = i_Mt.m[0][1] * i_Pt.x + i_Mt.m[1][1] * i_Pt.y + i_Mt.m[3][1];
+	Po.x = i_Mt.m[0][0] * i_Pt.x + i_Mt.m[1][0] * i_Pt.y;
+	Po.y = i_Mt.m[0][1] * i_Pt.x + i_Mt.m[1][1] * i_Pt.y;
 	return Po;
 }
 
@@ -686,8 +692,8 @@ MgPoint2D MGeo::Mat3EMultEqualPoint2D( MgPoint2D& io_Pt, const MgMat3E& i_Mt)
 MgVect2D MGeo::Mat3EMultEqualVect2D( MgVect2D& io_Pt, const MgMat3E& i_Mt)
 {
 	MREAL	rwx;
-	rwx		= i_Mt.m[0][0] * io_Pt.x + i_Mt.m[1][0] * io_Pt.y + i_Mt.m[3][0];
-	io_Pt.y = i_Mt.m[0][1] * io_Pt.x + i_Mt.m[1][1] * io_Pt.y + i_Mt.m[3][1];
+	rwx		= i_Mt.m[0][0] * io_Pt.x + i_Mt.m[1][0] * io_Pt.y;
+	io_Pt.y = i_Mt.m[0][1] * io_Pt.x + i_Mt.m[1][1] * io_Pt.y;
 	io_Pt.x = rwx;
 	return io_Pt;
 }
@@ -730,9 +736,9 @@ MgPoint3D MGeo::Mat3EMultPoint3D( const MgPoint3D& i_Pt, const MgMat3E& i_Mt)
 MgVect3D MGeo::Mat3EMultVect3D( const MgVect3D& i_Pt, const MgMat3E& i_Mt)
 {
 	MgVect3D	Pto;
-	Pto.x = i_Mt.m[0][0] * i_Pt.x + i_Mt.m[1][0] * i_Pt.y +	i_Mt.m[2][0] * i_Pt.z + i_Mt.m[3][0];
-	Pto.y = i_Mt.m[0][1] * i_Pt.x + i_Mt.m[1][1] * i_Pt.y + i_Mt.m[2][1] * i_Pt.z + i_Mt.m[3][1];
-	Pto.z = i_Mt.m[0][2] * i_Pt.x + i_Mt.m[1][2] * i_Pt.y +	i_Mt.m[2][2] * i_Pt.z + i_Mt.m[3][2];
+	Pto.x = i_Mt.m[0][0] * i_Pt.x + i_Mt.m[1][0] * i_Pt.y +	i_Mt.m[2][0] * i_Pt.z;
+	Pto.y = i_Mt.m[0][1] * i_Pt.x + i_Mt.m[1][1] * i_Pt.y + i_Mt.m[2][1] * i_Pt.z;
+	Pto.z = i_Mt.m[0][2] * i_Pt.x + i_Mt.m[1][2] * i_Pt.y +	i_Mt.m[2][2] * i_Pt.z;
 	return Pto;
 }
 
@@ -788,14 +794,15 @@ MgVect3D MGeo::Mat3EMultEqualVect3D( MgVect3D& io_Vt, const MgMat3E& i_Mt)
 void MgMat3E::MgMatPrint3(MCHAR* s)													// print
 {
 #ifdef _DEBUG
-	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgMat2E	=	%f, %f, %f, %f\n")
-			        Mstr( "					%f, %f, %f, %f\n")
-			        Mstr( "					%f, %f, %f, %f\n")
-					Mstr( "					%f, %f, %f, %f\n"),
-							s, m[0][0], m[0][1], m[0][2],m[0][3],
-							   m[1][0], m[1][1], m[1][2],m[1][3],
-							   m[2][0], m[2][1], m[2][2],m[2][3],
-							   m[3][0], m[3][1], m[3][2],m[3][3]);
+	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgMat3E	=\n")
+					Mstr( "					%f, %f, %f\n")
+					Mstr( "					%f, %f, %f\n")
+					Mstr( "					%f, %f, %f\n")
+					Mstr( "					%f, %f, %f\n"),
+							s, m[0][0], m[0][1], m[0][2],
+							   m[1][0], m[1][1], m[1][2],
+							   m[2][0], m[2][1], m[2][2],
+							   m[3][0], m[3][1], m[3][2]);
 	MBLOGPRBF;
 #endif
 }
@@ -1063,40 +1070,76 @@ MgMat3E MGeo::Mat3EMov(const MgVect3D& v)
 //	| m12 m22 m32 |			（入力行列は単位行列である事 ???）
 //	| m13 m23 m33 |
 //
-MgMat2E MGeo::Mat2EInv( const MgMat2E& i_mt)
+MgMat2E MGeo::Mat2EInv( MgMat2E& i_mt)
 {
-	MgMat2E	tmlu = i_mt;
-	MgMat2E	tmo;
-	int		i, j, k;
-	
-    // LU分解	
-    for (i=0; i<3; i++){
-        for (j=i+1; j<3; j++){
-            tmlu.m[j][i] /= tmlu.m[i][i];
-            for (k=i+1; k<3; k++)
-                tmlu.m[j][k] -= tmlu.m[i][k] * tmlu.m[j][i];
-        }
-    }
+//S	MgMat2E	tmlu = i_mt;
+//	MgMat2E	tmo;
+//	int		i, j, k;
+//	
+//    // LU分解	
+//    for (j=0; j<3; j++){
+//        for (i=j+1; i<3; i++){
+//            tmlu.m[i][j] /= tmlu.m[j][j];
+//            for (k=i+1; k<3; k++)
+//                tmlu.m[i][k] -= tmlu.m[j][k] * tmlu.m[i][j];
+//        }
+//    }
+//
+//    // 逆行列を求める
+//    for (k=0; k<3; k++){
+//        // 初期化
+//        for (i=0; i<3; i++){
+//            if( i == k){ tmo.m[i][k] = 1; }
+//            else{ tmo.m[i][k] = 0; }
+//        }
+//        // 解を求める
+//        for (i=0; i<3; i++){
+//            for (j=i+1; j<3; j++)
+//                tmo.m[j][k] -= tmo.m[i][k] * tmlu.m[j][i];
+//        }
+//        for (i=3-1; i>=0; i--){
+//            for (j=i+1; j<3; j++)
+//                tmo.m[i][k] -= tmlu.m[i][j] * tmo.m[j][k];
+//            tmo.m[i][k] /= tmlu.m[i][i];
+//        }
+//    }
+//    return tmo;
 
-    // 逆行列を求める
-    for (k=0; k<3; k++){
-        // 初期化
-        for (i=0; i<3; i++){
-            if( i == k){ tmo.m[i][k] = 1; }
-            else{ tmo.m[i][k] = 0; }
-        }
-        // 解を求める
-        for (i=0; i<3; i++){
-            for (j=i+1; j<3; j++)
-                tmo.m[j][k] -= tmo.m[i][k] * tmlu.m[j][i];
-        }
-        for (i=3-1; i>=0; i--){
-            for (j=i+1; j<3; j++)
-                tmo.m[i][k] -= tmlu.m[i][j] * tmo.m[j][k];
-            tmo.m[i][k] /= tmlu.m[i][i];
-        }
-    }
-    return tmo;
+	MgMat2E	tmo;
+	MREAL rDetM;
+	MREAL rIDM;
+	MREAL (*m)[2];
+	m = &i_mt.m[0];
+
+	// 行列式の値
+	// detA[3][3] = a11a22a33+a21a32a13+a31a12a23-a11a32a23-a31a22a13-a21a12a33
+	//					   1	     0		   0		 0		   0		 1
+	//            = a11a22 - a21a22 = detA[2][2]
+
+	rDetM = m[0][0] * m[1][1] - m[1][0] * m[0][1];
+	if ( rDetM == 0.)
+		RETURN_VALUE_ZERO_ERR();												// 0エラー
+	
+	rIDM = 1 / rDetM;
+
+	// 余因子行列により求める
+	//					   | a22a33 - a23a32   a13a32 - a12a33   a12a23 - a13a22 |
+	// inv(A) = 1 / detA * | a23a31 - a21a33   a11a33 - a13a31   a13a21 - a11a23 | 
+	//					   | a21a32 - a22a31   a12a31 - a11a32   a11a22 - a12a21 |
+	//
+	//					   | a22(1) - (0)a32   (0)a32 - a12(1)   a12(0) - (0)a22 |
+	// inv(A) = 1 / detA * | (0)a31 - a21(1)   a11(1) - (0)a31   (0)a21 - a11(0) |
+	//					   | a21a32 - a22a31   a12a31 - a11a32   a11a22 - a12a21 |
+
+	//					   |	   a22			   - a12				0		 |
+	// inv(A) = 1 / detA * |	-  a21			     a11				0		 |
+	//					   | a21a32 - a22a31   a12a31 - a11a32   a11a22 - a12a21 |
+
+	tmo = MgMat2E(   rIDM * m[1][1], - rIDM * m[0][1], 
+				   - rIDM * m[1][0],   rIDM * m[0][0],
+				     rIDM * ( m[1][0] * m[2][1] - m[1][1] * m[2][0]),
+				     rIDM * ( m[0][1] * m[2][0] - m[0][0] * m[2][1]));
+	return tmo;
 }
 
 //======================( ３次元 )==============================
@@ -1111,41 +1154,92 @@ MgMat2E MGeo::Mat2EInv( const MgMat2E& i_mt)
 //	| m13 m23 m33 m43 |
 //	| M14 m24 m34 m44 |
 //
-MgMat3E MGeo::Mat3EInv( const MgMat3E& i_Mt)
+MgMat3E MGeo::Mat3EInv( MgMat3E& i_Mt)
 {
-	MgMat3E	Tmlu = i_Mt;
-	MgMat3E	Tmo;
-	int		i, j, k;
-	
-    // LU分解 
-    for (i=0; i<4; i++){
-        for (j=i+1; j<4; j++){
-            Tmlu.m[j][i] /= Tmlu.m[i][i];
-            for (k=i+1; k<4; k++)
-                Tmlu.m[j][k] -= Tmlu.m[i][k] * Tmlu.m[j][i];
-        }
-    }
+//S	MgMat3E	Tmlu = i_Mt;
+//	MgMat3E	Tmo;
+//	int		i, j, k;
+//	
+//    // LU分解 
+//    for (i=0; i<4; i++){
+//        for (j=i+1; j<4; j++){
+//            Tmlu.m[j][i] /= Tmlu.m[i][i];
+//            for (k=i+1; k<4; k++)
+//                Tmlu.m[j][k] -= Tmlu.m[i][k] * Tmlu.m[j][i];
+//        }
+//    }
+//
+//    // 逆行列を求める
+//    for (k=0; k<4; k++){
+//        // 初期化
+//        for (i=0; i<4; i++){
+//            if( i == k)
+//				Tmo.m[i][k] = 1;
+//            else{ Tmo.m[i][k] = 0; }
+//        }
+//        // 解を求める
+//        for (i=0; i<4; i++){
+//            for (j=i+1; j<4; j++)
+//                Tmo.m[j][k] -= Tmo.m[i][k] * Tmlu.m[j][i];
+//        }
+//        for (i=4-1; i>=0; i--){
+//            for (j=i+1; j<4; j++)
+//                Tmo.m[i][k] -= Tmlu.m[i][j] * Tmo.m[j][k];
+//            Tmo.m[i][k] /= Tmlu.m[i][i];
+//        }
+//    }
+//    return Tmo;
+	MgMat3E	tmo;
+	MREAL rDetM;
+	MREAL rIDM;
+	MREAL (*M)[3];
+	M = &i_Mt.m[0];
 
-    // 逆行列を求める
-    for (k=0; k<4; k++){
-        // 初期化
-        for (i=0; i<4; i++){
-            if( i == k)
-				Tmo.m[i][k] = 1;
-            else{ Tmo.m[i][k] = 0; }
-        }
-        // 解を求める
-        for (i=0; i<4; i++){
-            for (j=i+1; j<4; j++)
-                Tmo.m[j][k] -= Tmo.m[i][k] * Tmlu.m[j][i];
-        }
-        for (i=4-1; i>=0; i--){
-            for (j=i+1; j<4; j++)
-                Tmo.m[i][k] -= Tmlu.m[i][j] * Tmo.m[j][k];
-            Tmo.m[i][k] /= Tmlu.m[i][i];
-        }
-    }
-    return Tmo;
+	// 行列式の値
+	// detA[4][4] = detA[3][3] = a11(a22a33-a23a32)+a12(a23a31-a21a33)+a13(a21a32-a22a31)
+
+	rDetM = M[0][0] * ( M[1][1] * M[2][2] - M[1][2] * M[2][1]) +
+			M[0][1] * ( M[1][2] * M[2][0] - M[1][0] * M[2][2]) +
+			M[0][2] * ( M[1][0] * M[2][1] - M[1][1] * M[2][0]);
+
+	if ( rDetM == 0.)
+		RETURN_VALUE_ZERO_ERR();												// 0エラー
+	
+	rIDM = 1 / rDetM;
+
+	// 余因子行列により求める
+	//					   | a22a33 - a23a32   a13a32 - a12a33   a12a23 - a13a22	0		 |
+	// inv(A) = 1 / detA * | a23a31 - a21a33   a11a33 - a13a31   a13a21 - a11a23	0		 | 
+	//					   | a21a32 - a22a31   a12a31 - a11a32   a11a22 - a12a21	0		 |
+	//					   | a21(a33a42 - a32a43) + a22(a31a43 - a33a41) + a23(a32a41 - a31a42)
+	//						 a11(a32a43 - a33a42) + a12(a33a41 - a31a43) + a13(a31a42 - a32a41)
+	//						 a11(a23a42 - a22a43) + a12(a21a43 - a23a41) + a13(a22a41 - a21a42)
+	//						 a11(a22a33 - a23a32) + a12(a23a31 - a21a33) + a13(a21a32 - a22a31) |
+
+
+	tmo = MgMat3E(   rIDM * ( M[1][1] * M[2][2] - M[1][2] * M[2][1]),
+					 rIDM * ( M[0][2] * M[2][1] - M[0][1] * M[2][2]),
+					 rIDM * ( M[0][1] * M[1][2] - M[0][2] * M[1][1]),
+
+					 rIDM * ( M[1][2] * M[2][0] - M[1][0] * M[2][2]),
+					 rIDM * ( M[0][0] * M[2][2] - M[0][2] * M[2][0]),
+					 rIDM * ( M[0][2] * M[1][0] - M[0][0] * M[1][2]),
+
+					 rIDM * ( M[1][0] * M[2][1] - M[1][1] * M[2][0]),
+					 rIDM * ( M[0][1] * M[2][0] - M[0][0] * M[2][1]),
+					 rIDM * ( M[0][0] * M[1][1] - M[0][1] * M[1][0]),
+
+					 rIDM * ( M[1][0] * ( M[2][2] * M[3][1] - M[2][1] * M[3][2]) +
+							  M[1][1] * ( M[2][0] * M[3][2] - M[2][2] * M[3][0]) +
+							  M[1][2] * ( M[2][1] * M[3][0] - M[2][0] * M[3][1])),
+					 rIDM * ( M[0][0] * ( M[2][1] * M[3][2] - M[2][2] * M[3][1]) +
+							  M[0][1] * ( M[2][2] * M[3][0] - M[2][0] * M[3][2]) +
+							  M[0][2] * ( M[2][0] * M[3][1] - M[2][1] * M[3][0])),
+					 rIDM * ( M[0][0] * ( M[1][2] * M[3][1] - M[1][1] * M[3][2]) +
+							  M[0][1] * ( M[1][0] * M[3][2] - M[1][2] * M[3][0]) +
+							  M[0][2] * ( M[1][1] * M[3][0] - M[1][0] * M[3][1]))
+					);
+	return tmo;
 }
 
 //===========================================================================
@@ -1290,15 +1384,16 @@ MgMat3E MGeo::Mat3ENProj(							// (  O) 正投象変換行列
 //
 	Tmw = Tm1 * i_Mt;
 //
-	Tmw.m[0][2] = Tmw.m[0][3] * i_Pln.d;	
-	Tmw.m[1][2] = Tmw.m[1][3] * i_Pln.d;	
-	Tmw.m[2][2] = Tmw.m[2][3] * i_Pln.d;	
-	Tmw.m[3][2] = Tmw.m[3][3] * i_Pln.d;
+//S	Tmw.m[0][2] = Tmw.m[0][3] * i_Pln.d;	
+//	Tmw.m[1][2] = Tmw.m[1][3] * i_Pln.d;	
+//	Tmw.m[2][2] = Tmw.m[2][3] * i_Pln.d;	
+//	Tmw.m[3][2] = Tmw.m[3][3] * i_Pln.d;
+	Tmw.m[3][2] = i_Pln.d;
 //
-	for ( ic=0; ic<4; ic++) {
+	for ( ic=0; ic<3; ic++) {
 		for (jc=0; jc<4; jc++) {
 			Tmo.m[jc][ic] = Tmw.m[ic][0] * Tm1.m[jc][0] + Tmw.m[ic][1] * Tm1.m[jc][1]
-						  + Tmw.m[ic][2] * Tm1.m[jc][2] + Tmw.m[ic][3] * Tm1.m[jc][3];
+						  + Tmw.m[ic][2] * Tm1.m[jc][2];
 		}
 	}
 	return	Tmo;
@@ -1310,7 +1405,7 @@ MgMat3E MGeo::Mat3ENProj(							// (  O) 正投象変換行列
 // ---------------------( ３次元 )------------------------------
 //
 MgMat3E MGeo::Mat3ESProj(							// (  O) 斜投象変座標変換行列
-				const	MgMat3E	&i_Mt,			// (I  ) 入力座標変換行列
+				const	MgMat3E	&i_Mt,				// (I  ) 入力座標変換行列
 				const	MgPlane3D	&i_Pln,			// (I  ) 投象面
 				const	MgVect3D&	i_V				// (I  ) 投象方向を示す単位ベクトル
 		)
@@ -1329,16 +1424,19 @@ MgMat3E MGeo::Mat3ESProj(							// (  O) 斜投象変座標変換行列
 //	MULTIPLY TMO BY (OBLIQUE PROJECTION MATRIX).
 
 	for ( ic=0; ic<4; ic++) {
-		Tm3.m[ic][0] = Tmo.m[ic][0] - ( Tmo.m[ic][2] - Tmo.m[ic][3] * i_Pln.d) * V1.x / V1.z;
-		Tm3.m[ic][1] = Tmo.m[ic][1] - ( Tmo.m[ic][2] - Tmo.m[ic][3] * i_Pln.d) * V1.y / V1.z;
-		Tm3.m[ic][2] = Tmo.m[ic][3] * i_Pln.d;
-		Tm3.m[ic][3] = 0.0f;
+		Tm3.m[ic][0] = Tmo.m[ic][0] - Tmo.m[ic][2] * V1.x / V1.z;
+		Tm3.m[ic][1] = Tmo.m[ic][1] - Tmo.m[ic][2] * V1.y / V1.z;
+		Tm3.m[ic][2] = 0;
 	}
+	Tm3.m[3][0] += i_Pln.d * V1.x / V1.z;
+	Tm3.m[3][1] += i_Pln.d * V1.y / V1.z;
+	Tm3.m[3][2] += i_Pln.d;
+
 //
 	for ( ic=0; ic<4; ic++) {
-		for (jc=0; jc<4; jc++) {
+		for (jc=0; jc<3; jc++) {
 			Tmo.m[ic][jc] = Tm3.m[ic][0] * Tm1.m[jc][0] + Tm3.m[ic][1] * Tm1.m[jc][1]
-						  + Tm3.m[ic][2] * Tm1.m[jc][2] + Tm3.m[ic][3] * Tm1.m[jc][3];
+						  + Tm3.m[ic][2] * Tm1.m[jc][2];
 		}
 	}
 	return	Tmo;
@@ -1812,7 +1910,7 @@ MgULine3D MGeo::ULine2Dto3D3(						// (  O) ３Ｄ直線
 //
 void MGeo::GPoint2Dto3D(
 				const	MgGPoint2D	&i_GPt,			// (I  ) ２Ｄ座標群
-				const	MgMat3E	&i_Mt,			// (I  ) 座標変換マトリックス
+				const	MgMat3E	&i_Mt,				// (I  ) 座標変換マトリックス
 						MgGPoint3D	*o_GPt			// (  O) ３Ｄ座標群
 				)
 {
@@ -1827,7 +1925,7 @@ void MGeo::GPoint2Dto3D(
 //
 void MGeo::Polyg2Dto3D(
 				const	MgPolyg2D&	i_Pg,			// (I  ) ２Ｄ座標群
-				const	MgMat3E	&i_Mt,			// (I  ) 座標変換マトリックス
+				const	MgMat3E	&i_Mt,				// (I  ) 座標変換マトリックス
 						MgPolyg3D*	o_Pg			// (  O) ３Ｄ座標群
 				)
 {
@@ -1842,7 +1940,7 @@ void MGeo::Polyg2Dto3D(
 //
 void MGeo::GLine2Dto3D(
 				const	MgGLine2D&	i_gln,			// (I  ) ２Ｄ直線群
-				const	MgMat3E	&i_Mt,			// (I  ) 座標変換マトリックス
+				const	MgMat3E	&i_Mt,				// (I  ) 座標変換マトリックス
 						MgGLine3D	*o_GLn			// (  O) ３Ｄ直線群
 				)
 {

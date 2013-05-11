@@ -198,7 +198,7 @@ MINT MtCmdThread( void)
 			MtDoOneCommand( fs1,0);								// 対応するコマンドを実行する
 
 		} catch ( ...) {
-			ms::CmdError( MBCstr( "MCadApi"), MC_ERR_COMMAND);
+			ms::CmdError( __FUNCTION__, __LINE__, MC_ERR_COMMAND);
 
 		}
 

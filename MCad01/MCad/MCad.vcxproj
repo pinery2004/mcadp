@@ -206,8 +206,8 @@
     </ClInclude>
     <ClInclude Include="..\include\MgLib.h" />
     <ClInclude Include="..\include\MgLine.h" />
-    <ClInclude Include="..\include\MgMatA.h" />
-    <ClInclude Include="..\include\MgMatAf.h" />
+    <ClInclude Include="..\include\MgMatD.h" />
+    <ClInclude Include="..\include\MgMatDf.h" />
     <ClInclude Include="..\include\MgMatE.h" />
     <ClInclude Include="..\include\MgMatEf.h" />
     <ClInclude Include="..\include\MgPlane.h" />
@@ -381,7 +381,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\MGeo\MgLine.cpp" />
-    <ClCompile Include="..\MGeo\MgMat.cpp" />
+    <ClCompile Include="..\MGeo\MgMatD.cpp" />
     <ClCompile Include="..\MGeo\MgMatE.cpp" />
     <ClCompile Include="..\MGeo\MgMerge.cpp" />
     <ClCompile Include="..\MGeo\MgMove.cpp" />

@@ -13,7 +13,7 @@
 #include "MlLog.h"
 #include "MgDefine.h"
 #include "MgPoint.h"
-#include "MgMatA.h"
+#include "MgMatD.h"
 
 #include "MdModel.h"
 
@@ -219,7 +219,7 @@ MINT DLyr::GetGrpId (
 	ASSERT( MDISLYR( i_idLyr));
 
 	if ( i_idLyr > pCurMdl->m_LyrBf.m_n)
-		ms::SysError( MBCstr( "GetGrpId"), MC_ERR_ID);
+		RETURN_ID_ERR();
 
 	*o_idGrp = pCurMdl->m_LyrBf.m_pst[MIDtoHN( i_idLyr)].m_idP1;
 	return 0;
@@ -238,7 +238,7 @@ MINT DLyr::GetScm (
 	ASSERT( MDISLYR( i_idLyr));
 
 	if ( i_idLyr > pCurMdl->m_LyrBf.m_n)
-		ms::SysError( MBCstr( "GetScm"), MC_ERR_ID);
+		RETURN_ID_ERR();
 
 	*o_idScm = pCurMdl->m_LyrBf.m_pst[MIDtoHN( i_idLyr)].m_idP2;
 	return 0;
@@ -257,7 +257,7 @@ MINT DLyr::GetEnt(
 	ASSERT( MDISLYR( i_idLyr));
 
 	if ( i_idLyr > pCurMdl->m_LyrBf.m_n)
-		ms::SysError( MBCstr( "GetScm"), MC_ERR_ID);
+		RETURN_ID_ERR();
 
 	*o_pGidEnt = pCurMdl->m_LyrBf.m_pst[MIDtoHN( i_idLyr)].m_GidC;
 	return 0;
@@ -289,7 +289,7 @@ MINT DLyr::GetLyrDispMode (
 		*o_iaWD = 0;
 	else {
 		if ( i_idWin > pAWDSet->m_n) {
-			ms::SysError( MBCstr( "GetLyrDispMode"), MC_ERR_ID);
+			RETURN_ID_ERR();
 		}
 		*o_iaWD = pAWDSet->m_pst[MIDtoHN( i_idWin)];
 	}

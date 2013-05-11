@@ -49,14 +49,14 @@ MgPolyg2D::MgPolyg2D( MINT sz1, MgPoint2D *p2)
 const MgPoint2D& MgPolyg2D::operator () ( MINT idx) const
 {
 	if ( idx >= m_n)
-		RETURN_OVERFLOW_ERR( "MgPolyg2D ()");
+		RETURN_OVERFLOW_ERR_S( "MgPolyg2D ()");
 	return m_p[idx];
 }
 
 MgPoint2D& MgPolyg2D::operator () ( MINT idx)
 {
 	if ( idx >= m_isz)
-		RETURN_OVERFLOW_ERR( "MgPolyg2D ()");
+		RETURN_OVERFLOW_ERR_S( "MgPolyg2D ()");
 	return m_p[idx];
 }
 
@@ -266,14 +266,14 @@ MgPolyg3D::MgPolyg3D( MINT i_isz1, MgPoint3D *i_pP2)
 const MgPoint3D& MgPolyg3D::operator () (MINT idx) const
 {
 	if ( idx >= m_isz)
-		RETURN_OVERFLOW_ERR( MBCstr( "MgPolyg3D ()"));
+		RETURN_OVERFLOW_ERR_S( MBCstr( "MgPolyg3D ()"));
 	return m_P[idx];
 }
 
 MgPoint3D& MgPolyg3D::operator () (MINT idx)
 {
 	if ( idx >= m_isz)
-		RETURN_OVERFLOW_ERR( MBCstr( "MgPolyg3D ()"));
+		RETURN_OVERFLOW_ERR_S( MBCstr( "MgPolyg3D ()"));
 	return m_P[idx];
 }
 
@@ -483,14 +483,14 @@ void MgGPolyg2D::Free()
 const MgPolyg2D& MgGPolyg2D::operator () ( MINT idx) const
 {
 	if ( idx >= m_n)
-		RETURN_OVERFLOW_ERR( MBCstr( "MgGPolyg2D ()"));
+		RETURN_OVERFLOW_ERR_S( MBCstr( "MgGPolyg2D ()"));
 	return m_pg[idx];
 }
 
 MgPolyg2D& MgGPolyg2D::operator () ( MINT idx)
 {
 	if ( idx >= m_isz)
-		RETURN_OVERFLOW_ERR( MBCstr( "MgGPolyg2D ()"));
+		RETURN_OVERFLOW_ERR_S( MBCstr( "MgGPolyg2D ()"));
 	for (; m_n<=idx; m_n++)
 		m_pg[m_n].SetInit();									// 最終データより後のデータはクリアし、n = idx+1　にする
 	return m_pg[idx];
@@ -696,14 +696,14 @@ void MgGPolyg3D::Free()
 const MgPolyg3D& MgGPolyg3D::operator () ( MINT idx) const
 {
 	if ( idx >= m_n)
-		RETURN_OVERFLOW_ERR( MBCstr("MgGPolyg3D ()"));
+		RETURN_OVERFLOW_ERR_S( MBCstr("MgGPolyg3D ()"));
 	return m_Pg[idx];
 };
 
 MgPolyg3D& MgGPolyg3D::operator () ( MINT idx)
 {
 	if ( idx >= m_isz)
-		RETURN_OVERFLOW_ERR( MBCstr( "MgGPolyg3D ()"));
+		RETURN_OVERFLOW_ERR_S( MBCstr( "MgGPolyg3D ()"));
 	for (; m_n<=idx; m_n++)
 		m_Pg[m_n].SetInit();									//  最終データより後のデータはクリアし、n = idx+1　にする
 	return m_Pg[idx];
@@ -899,14 +899,14 @@ MgGLine2D::MgGLine2D( MINT sz1, MgLine2D *ln2)
 const MgLine2D& MgGLine2D::operator () ( MINT idx) const
 {
 	if ( idx >= m_n)
-		ms::SysError( MBCstr( "MgGLine2D ()"), MC_ERR_OVERFLOW);
+		RETURN_OVERFLOW_ERR_S( MBCstr( "MgGLine2D ()"));
 	return m_ln[idx];
 }
 
 MgLine2D& MgGLine2D::operator () ( MINT idx)
 {
 	if ( idx >= m_isz)
-		ms::SysError( MBCstr( "MgGLine2D ()"), MC_ERR_OVERFLOW);
+		RETURN_OVERFLOW_ERR_S( MBCstr( "MgGLine2D ()"));
 	return m_ln[idx];
 }
 
@@ -1064,14 +1064,14 @@ MgGLine3D::MgGLine3D( MINT sz1, MgLine3D *ln2)
 const MgLine3D& MgGLine3D::operator () ( MINT idx) const
 {
 	if ( idx >= m_n)
-		ms::SysError( MBCstr( "MgGLine3D ()"), MC_ERR_OVERFLOW);
+		RETURN_OVERFLOW_ERR_S( MBCstr( "MgGLine3D ()"));
 	return m_ln[idx];
 };
 
 MgLine3D& MgGLine3D::operator () ( MINT idx)
 {
 	if ( idx >= m_isz)
-		ms::SysError( MBCstr( "MgGLine3D ()"), MC_ERR_OVERFLOW);
+		RETURN_OVERFLOW_ERR_S( MBCstr( "MgGLine3D ()"));
 	return m_ln[idx];
 };
 
@@ -1246,14 +1246,14 @@ MgGInt::MgGInt( MINT sz1, MINT *i2)
 const MINT& MgGInt::operator () ( MINT idx) const
 {
 	if ( idx >= m_n)
-		ms::SysError( MBCstr( "MgGInt ()"), MC_ERR_OVERFLOW);
+		RETURN_OVERFLOW_ERR_S( MBCstr( "MgGInt ()"));
 	return m_i[idx];
 };
 
 MINT& MgGInt::operator () ( MINT idx)
 {
 	if ( idx >= m_isz)
-		ms::SysError( MBCstr( "MgGInt ()"), MC_ERR_OVERFLOW);
+		RETURN_OVERFLOW_ERR_S( MBCstr( "MgGInt ()"));
 	return m_i[idx];
 };
 
@@ -1401,14 +1401,14 @@ MgGReal::MgGReal( MINT sz1, MREAL* r2)
 const MREAL& MgGReal::operator () ( MINT idx) const
 {
 	if ( idx >= m_n)
-		RETURN_OVERFLOW_ERR( MBCstr( "MgGReal ()"));
+		RETURN_OVERFLOW_ERR_S( MBCstr( "MgGReal ()"));
 	return m_r[idx];
 };
 
 MREAL& MgGReal::operator () ( MINT idx)
 {
 	if ( idx >= m_isz)
-		RETURN_OVERFLOW_ERR( MBCstr( "MgGReal ()"));
+		RETURN_OVERFLOW_ERR_S( MBCstr( "MgGReal ()"));
 	return m_r[idx];
 };
 
@@ -1556,14 +1556,14 @@ MgGPoint2D::MgGPoint2D( MINT sz1, MgPoint2D *p2)
 const MgPoint2D& MgGPoint2D::operator () ( MINT idx) const
 {
 	if ( idx >= m_n)
-		RETURN_OVERFLOW_ERR( MBCstr( "MgGPoint2D ()"));
+		RETURN_OVERFLOW_ERR_S( MBCstr( "MgGPoint2D ()"));
 	return m_p[idx];
 };
 
 MgPoint2D& MgGPoint2D::operator () ( MINT idx)
 {
 	if ( idx >= m_isz)
-		RETURN_OVERFLOW_ERR( MBCstr( "MgGPoint2D ()"));
+		RETURN_OVERFLOW_ERR_S( MBCstr( "MgGPoint2D ()"));
 	return m_p[idx];
 };
 
@@ -1723,14 +1723,14 @@ MgGPoint3D::MgGPoint3D( MINT sz1, MgPoint3D *p2)
 const MgPoint3D& MgGPoint3D::operator () ( MINT idx) const
 {
 	if ( idx >= m_n)
-		RETURN_OVERFLOW_ERR( MBCstr( "MgGPoint3D ()"));
+		RETURN_OVERFLOW_ERR_S( MBCstr( "MgGPoint3D ()"));
 	return m_p[idx];
 };
 
 MgPoint3D& MgGPoint3D::operator () ( MINT idx)
 {
 	if ( idx >= m_isz)
-		RETURN_OVERFLOW_ERR( MBCstr( "MgGPoint3D ()"));
+		RETURN_OVERFLOW_ERR_S( MBCstr( "MgGPoint3D ()"));
 	return m_p[idx];
 };
 

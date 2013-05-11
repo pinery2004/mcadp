@@ -17,7 +17,7 @@
 #include "MgCircle.h"
 #include "MgTol.h"
 
-#include "MgMatA.h"
+#include "MgMatD.h"
 /*
 #ifdef DLL_EXPORT_GEO
 	#undef DLL_EXPORT_GEO

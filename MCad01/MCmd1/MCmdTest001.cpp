@@ -21,6 +21,7 @@
 #include "MdZukei.h"
 #include "MdmFig.h"
 #include "MsLib.h"
+#include "MgGeo.h"
 
 namespace MC
 {
@@ -34,10 +35,71 @@ void BrkPoint()
 }
 void Test000_Geo()
 {
+	//=======================
+	//	MatD
+
+	MgPoint2D ptd1 = MgPoint2D( 1., 2.);
+//	MgMat2D matd1 = MgMat2D( 1., 0., 0., 0., 1., 0., 10., 10., 1.);
+	MgMat2D matd1 = MgMat2D( 0.2, .5, 0., 0.8, 0.2, 0., 10., 10., 1.);
+	matd1.Print( Mstr("matd1"));
+	MgPoint2D ptd2 = ptd1 * matd1;
+	ptd2.Print( Mstr("Ptd2"));
+
+	MgMat2D matd2;
+	matd2 = MGeo::Mat2DInv( matd1);
+	matd2.Print( Mstr("matd2 = Inv( matd1) "));
+
+	MgMat2D matd3;
+	matd3 = matd1 * matd2;
+	matd3.Print( Mstr("matd3 = mate1 * matd2"));
+
+	MgPoint3D Ptd1 = MgPoint3D( 1., 2., 3.);
+//	MgMat3D Matd1 = MgMat3D( 1., 0., 0.,  0.,  0., 1., 0., 0.,  0., 0., 1., 0.,  10., 10., 10., 1.);
+	MgMat3D Matd1 = MgMat3D( 0.2, .5, 0.7, 0.,  0.8, 0.2, 0.3, 0.,  0.2, 0.3, 0.9, 0.,  10., 10., 10., 1.);
+	Matd1.Print( Mstr("Matd1"));
+	MgPoint3D Ptd2 = Ptd1 * Matd1;
+	Ptd2.Print( Mstr("Ptd2"));
+
+	MgMat3D Matd2;
+	Matd2 = MGeo::Mat3DInv( Matd1);
+	Matd2.Print( Mstr("Matd2 = Inv( Matd1) "));
+
+	MgMat3D Matd3;
+	Matd3 = Matd1 * Matd2;
+	Matd3.Print( Mstr("Matd3 = Matd1 * Matd2"));
+
+	//=======================
+	//	MatE
+
+	MgPoint2D pt1 = MgPoint2D( 1., 2.);
+//	MgMat2E mate1 = MgMat2E( 1., 0., 0., 1., 10., 10.);
+	MgMat2E mate1 = MgMat2E( 0.2, .5, 0.8, 0.2, 10., 10.);
+	mate1.Print( Mstr("mate1"));
+	MgPoint2D pt2 = pt1 * mate1;
+	pt2.Print( Mstr("Pt2"));
+
+	MgMat2E mate2;
+	mate2 = MGeo::Mat2EInv( mate1);
+	mate2.Print( Mstr("mate2 = Inv( mate1) "));
+
+	MgMat2E mate3;
+	mate3 = mate1 * mate2;
+	mate3.Print( Mstr("mate3 = mate1 * mate2"));
+
 	MgPoint3D Pt1 = MgPoint3D( 1., 2., 3.);
-	MgMat3E Mat1 = MgMat3E( 1., 0., 0.,  0., 1., 0.,  0., 0., 1.,  10., 10., 10.);
-	MgPoint3D Pt2 = Pt1 * Mat1;
+//	MgMat3E Mate1 = MgMat3E( 1., 0., 0.,  0., 1., 0.,  0., 0., 1.,  10., 10., 10.);
+	MgMat3E Mate1 = MgMat3E( 0.2, .5, 0.7,  0.8, 0.2, 0.3,  0.2, 0.3, 0.9,  10., 10., 10.);
+	Mate1.Print( Mstr("Mate1"));
+	MgPoint3D Pt2 = Pt1 * Mate1;
 	Pt2.Print( Mstr("Pt2"));
+
+	MgMat3E Mate2;
+	Mate2 = MGeo::Mat3EInv( Mate1);
+	Mate2.Print( Mstr("Mate2 = Inv( Mate1) "));
+
+	MgMat3E Mate3;
+	Mate3 = Mate1 * Mate2;
+	Mate3.Print( Mstr("Mate3 = Mate1 * Mate2"));
 
 	MgVect2D v22 = MgVect2D( 1., 2.);
 	MgVect2D v23 = v22.RotR90();
@@ -101,8 +163,8 @@ void Test000_Geo()
 	pt32.SetRot( (MREAL)MC_PIE/4);
 	pt32.Print( Mstr("pt32.SetRot(MC_PIE/4)"));
 	
-	AfxDebugBreak( );
-	BrkPoint();
+//U	AfxDebugBreak( );
+//U	BrkPoint();
 }
 
 ////////////////////////////////////////////////////////////////////////////

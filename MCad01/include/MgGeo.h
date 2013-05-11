@@ -17,7 +17,7 @@
 #include "MgCircle.h"
 #include "MgTol.h"
 
-#include "MgMatA.h"
+#include "MgMatD.h"
 #include "MgMatE.h"
 
 #ifdef DLL_EXPORT_GEO
@@ -1611,7 +1611,8 @@ public:
 	//	| m12 m22 m32 |			（入力行列は単位行列である事 ???）
 	//	| m13 m23 m33 |
 	//
-	static MgMat2E Mat2EInv( const MgMat2E& i_mt);
+//U	static MgMat2E Mat2EInv( const MgMat2E& i_mt);
+	static MgMat2E Mat2EInv( MgMat2E& i_mt);
 
 	//======================( ３次元 )==============================
 	//	処理内容
@@ -1625,7 +1626,8 @@ public:
 	//	| m13 m23 m33 0 |
 	//	| M14 m24 m34 1 |
 	//
-	static MgMat3E Mat3EInv( const MgMat3E& i_Mt);
+//U	static MgMat3E Mat3EInv( const MgMat3E& i_Mt);
+	static MgMat3E Mat3EInv( MgMat3E& i_Mt);
 
 	//======================( ２次元 )==============================
 	//		直線に対する鏡像座標変換マトリックスを作成
@@ -2845,7 +2847,8 @@ public:
 	//	| m12 m22 m32 |			（入力行列は単位行列である事 ???）
 	//	| m13 m23 m33 |
 	//
-	static MgMat2D Mat2DInv( const MgMat2D& i_mt);
+//U	static MgMat2D Mat2DInv( const MgMat2D& i_mt);
+	static MgMat2D Mat2DInv( MgMat2D& i_mt);
 
 	//======================( ３次元 )==============================
 	//	処理内容
@@ -2859,7 +2862,8 @@ public:
 	//	| m13 m23 m33 m43 |
 	//	| M14 m24 m34 m44 |
 	//
-	static MgMat3D Mat3DInv( const MgMat3D& i_Mt);
+//U	static MgMat3D Mat3DInv( const MgMat3D& i_Mt);
+	static MgMat3D Mat3DInv( MgMat3D& i_Mt);
 
 	//======================( ２次元 )==============================
 	//		直線に対する鏡像座標変換マトリックスを作成
@@ -5781,5 +5785,5 @@ inline MINT WSZMgPlane3D( MINT i_sz = 1) { return  ( i_sz * (MINT)sizeof( MgPlan
 
 } // namespace MC
 		
-#include "MgMatAf.h"
+#include "MgMatDf.h"
 #include "MgMatEf.h"

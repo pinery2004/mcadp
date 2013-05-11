@@ -260,7 +260,7 @@ void MhRoofInfo::SetJimCd(
 				Id = 1 - Id;
 			}
 			*/
-			ms::SysError( MBCstr( "MhRoof"), MC_ERR_OTHER);
+			RETURN_OTHER_ERR();
 			break;
 	}
 }

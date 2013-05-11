@@ -31,14 +31,27 @@
 #define		MC_E_CANCEL			 13
 #define		MC_E_NOMSG			 14
 	
-#define 	RETURN_ID_ERR( CPROG)\
-								ms::SysError( CPROG, MC_ERR_ID)
-#define 	RETURN_POINTER_ERR( CPROG)\
-								ms::SysError( CPROG, MC_ERR_POINTER)
-#define 	RETURN_OVERFLOW_ERR( CPROG)\
-								ms::SysError( CPROG, MC_ERR_OVERFLOW)
-#define 	RETURN_OTHER_ERR( CPROG)\
-								msSysError( CPROG, MC_ERR_OTHER)
+#define 	RETURN_COMMAND_ERR()\
+								ms::SysError( __FUNCTION__, __LINE__, MC_ERR_COMMAND)
+#define 	RETURN_ID_ERR()\
+								ms::SysError( __FUNCTION__, __LINE__, MC_ERR_ID)
+#define 	RETURN_POINTER_ERR()\
+								ms::SysError( __FUNCTION__, __LINE__, MC_ERR_POINTER)
+#define 	RETURN_OVERFLOW_ERR()\
+								ms::SysError( __FUNCTION__, __LINE__, MC_ERR_OVERFLOW)
+#define 	RETURN_OVERFLOW_ERR_S( CPROG)\
+								ms::SysError( CPROG, __LINE__, MC_ERR_OVERFLOW)
+#define 	RETURN_FILEOPEN_ERR_S( CPATH)\
+								ms::SysError( __FUNCTION__, __LINE__, MC_ERR_FILEOPEN, CPATH)
+#define 	RETURN_NUM_OVER_ERR()\
+								ms::SysError( __FUNCTION__, __LINE__, MC_ERR_NUM_OVER)
+#define 	RETURN_VECT_ZERO_ERR()\
+								ms::SysError( __FUNCTION__, __LINE__, MC_ERR_VECT_ZERO)
+#define 	RETURN_VALUE_ZERO_ERR()\
+								ms::SysError( __FUNCTION__, __LINE__, MC_ERR_VALUE_ZERO)
+#define 	RETURN_OTHER_ERR()\
+								ms::SysError( __FUNCTION__, __LINE__, MC_ERR_OTHER)
+
 #define 	GOTO_ERROR			{ ms::ErrorReturn(); goto ERR_EXIT;}
 #define 	GOTO_ERROR_1		{ ms::ErrorReturn(); goto ERR_EXIT_1;}
 #define 	GOTO_ERROR1			{ ms::ErrorReturn(); goto ERR_EXIT1;}
@@ -82,8 +95,8 @@
 //	MGCHECK_ZEROVECT( ゼロチェックのベクトル長, "プログラム名");
 //
 #define 	MBCHECK_ZEROVECT(X,Z,T)\
-								{ if ( ( X) < T)  ms::SysError( Z, MC_ERR_VECT_ZERO);}
+								{ if ( ( X) < T)  ms::SysError( Z, __LINE__, MC_ERR_VECT_ZERO);}
 
-#define 	MBCHECK_POINTER(P)	{ if ( P == NULL) ms::SysError( __FILE__ + __LINE__, MC_ERR_POINTER);}
+#define 	MBCHECK_POINTER(P)	{ if ( P == NULL) RETURN_POINTER_ERR();}
 
 

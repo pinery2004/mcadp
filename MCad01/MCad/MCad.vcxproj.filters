@@ -749,13 +749,13 @@
     <ClInclude Include="..\include\MdmGeo.h">
       <Filter>Mdm\hdr</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\MgMatA.h">
-      <Filter>Mgeo\hdr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\MgMatAf.h">
-      <Filter>Mgeo\hdr</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\MgMatEf.h">
+      <Filter>Mgeo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MgMatD.h">
+      <Filter>Mgeo\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MgMatDf.h">
       <Filter>Mgeo\hdr</Filter>
     </ClInclude>
   </ItemGroup>
@@ -818,9 +818,6 @@
       <Filter>Mgeo\Src</Filter>
     </ClCompile>
     <ClCompile Include="..\MGeo\MgLine.cpp">
-      <Filter>Mgeo\Src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\MGeo\MgMat.cpp">
       <Filter>Mgeo\Src</Filter>
     </ClCompile>
     <ClCompile Include="..\MGeo\MgMatE.cpp">
@@ -1296,6 +1293,9 @@
     </ClCompile>
     <ClCompile Include="..\Mdm\MdmGeo.cpp">
       <Filter>Mdm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MGeo\MgMatD.cpp">
+      <Filter>Mgeo\Src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

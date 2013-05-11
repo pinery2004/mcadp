@@ -80,11 +80,12 @@ void	mcs::Init()
 
 	m_Str[MM_ERR_POINTER]			= Mstr( "メモリ取得エラー");
 	m_Str[MM_ERR_OVERFLOW]			= Mstr( "領域オーバフローエラー");
+	m_Str[MM_ERR_COMMAND]			= Mstr( "コマンドエラー");
 	m_Str[MM_ERR_ID]				= Mstr( "ＩＤ誤りエラー");
 	m_Str[MM_ERR_INPUT]				= Mstr( "入力エラー");
 	m_Str[MM_ERR_NUM_OVER]			= Mstr( "処理可能個数超えエラー");
 	m_Str[MM_ERR_VECT_ZERO]			= Mstr( "ゼロベクトルで処理不可エラー");
-	m_Str[MM_ERR_INPUT_ZERO]		= Mstr( "数値ゼロで処理不可エラー");
+	m_Str[MM_ERR_VALUE_ZERO]		= Mstr( "数値ゼロで処理不可エラー");
 	m_Str[MM_ERR_OFFSET]			= Mstr( "オフセット誤りエラー");
 	m_Str[MM_ERR_FILEOPEN]			= Mstr( "ファイルオープンエラー");
 	m_Str[MM_ERR_OTHER]				= Mstr( "その他エラー");

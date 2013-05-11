@@ -78,7 +78,7 @@ public:
 			*pstrL++ = Mtolower( *pstr++);
 		}
 		if ( available == 0) {
-			RETURN_OVERFLOW_ERR( __FUNCTION__);
+			RETURN_OVERFLOW_ERR();
 		}
 		*pstrL = 0;
 	}
@@ -102,7 +102,7 @@ public:
 			*pstrU++ = Mtoupper( *pstr++);
 		}
 		if ( available == 0) {
-			RETURN_OVERFLOW_ERR( __FUNCTION__);
+			RETURN_OVERFLOW_ERR();
 		}
 		*pstrU = 0;
 	}

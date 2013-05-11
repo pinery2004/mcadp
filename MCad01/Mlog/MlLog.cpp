@@ -44,7 +44,7 @@ void mlLog::OpenLogFile( MCHAR* i_cLogFilePath)
 	} else {
 		err = Mfopen_s( &m_File, i_cLogFilePath, Mstr( "w"));
 		if ( err != 0) {
-			ms::SysError( i_cLogFilePath, MC_ERR_FILEOPEN);
+			RETURN_FILEOPEN_ERR_S( i_cLogFilePath);
 		}
 	}
 	m_iCtl = 1;
@@ -303,7 +303,7 @@ void Trace::OpenTraceFile(
 	if ( m_pfp == NULL) {
 		err = Mfopen_s( &m_pfp, i_cLogFilePath, Mstr( "at"));
 		if ( err != 0) {
-			ms::SysError( i_cLogFilePath, MC_ERR_FILEOPEN);
+			RETURN_FILEOPEN_ERR_S( i_cLogFilePath);
 		}
 	}
 }

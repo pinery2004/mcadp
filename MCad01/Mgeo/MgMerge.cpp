@@ -15,7 +15,7 @@
 #define	DLL_EXPORT_GEO_DO
 
 #include "MgLib.h"
-#include "MgMatA.h"
+#include "MgMatD.h"
 
 namespace MC
 {

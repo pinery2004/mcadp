@@ -53,7 +53,7 @@ inline void MbAlloc( T*& P, int S)
 	int isz = S * sizeof( T);
 	P = (T*)new char[isz];
 //E	MBCHECK_POINTER( P);
-	if ( P == NULL) MC::ms::SysError( __FILE__ + __LINE__, MC_ERR_POINTER);
+	if ( P == NULL) MC::ms::SysError( __FUNCTION__, __LINE__, MC_ERR_POINTER);
 }
 
 template<class F, class T>
@@ -62,7 +62,7 @@ inline void MbAllocF( F*& P, int S)
 	int isz = S * sizeof( T);
 	P = (F*)new char[isz];
 //E	MBCHECK_POINTER( P);
-	if ( P == NULL) MC::ms::SysError( __FILE__ + __LINE__, MC_ERR_POINTER);
+	if ( P == NULL) MC::ms::SysError( __FUNCTION__, __LINE__, MC_ERR_POINTER);
 }
 
 //===========================================================================

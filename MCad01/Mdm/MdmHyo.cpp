@@ -15,7 +15,7 @@
 #include "MgPoint.h"
 #include "MgRect.h"
 #include "MgPolygon.h"
-#include "MgMatA.h"
+#include "MgMatD.h"
 
 #include "MdModel.h"
 
