@@ -1066,7 +1066,7 @@ MgMat3D MGeo::Mat3DMov(const MgVect3D& v)
 //		i2 | Ai2j1	Ai2j2 |
 //
 #define M(i,j) m[i-1][j-1]
-#define Y(i1,i2,j1,j2) ( M(i1, j1) * M(i2, j2) - M(i1, j2) * M(i2, j1))
+#define Y(i1,j1,i2,j2) ( M(i1, j1) * M(i2, j2) - M(i1, j2) * M(i2, j1))
 //--------------------------------------------------------------
 
 //======================( ２次元 )==============================
@@ -1124,7 +1124,7 @@ MgMat2D MGeo::Mat2DInv( MgMat2D& i_mt)
 	// 行列式の値
 	// detA = a11(a22a33-a23a32)+a12(a23a31-a21a33)+a13(a21a32-a22a31)
 
-	rDetM = M(1,1) * Y(2,3, 2,3) + M(1,2) * Y(2,3, 3,1) + M(1,3) * Y(2,3, 1,2);
+	rDetM = M(1,1) * Y(2,2, 3,3) + M(1,2) * Y(2,3, 3,1) + M(1,3) * Y(2,1, 3,2);
 	if ( rDetM == 0.)
 		RETURN_VALUE_ZERO_ERR();												// 0エラー
 	
@@ -1135,9 +1135,9 @@ MgMat2D MGeo::Mat2DInv( MgMat2D& i_mt)
 	// inv(A) = 1 / detA * | a23a31 - a21a33   a11a33 - a13a31   a13a21 - a11a23 | 
 	//					   | a21a32 - a22a31   a12a31 - a11a32   a11a22 - a12a21 |
 
-	tmo = MgMat2D( rIDM * Y(2,3, 2,3), rIDM * Y(1,3, 3,2), rIDM * Y(1,2, 2,3), 
-				   rIDM * Y(2,3, 3,1), rIDM * Y(1,3, 1,3), rIDM * Y(1,2, 3,1),
-				   rIDM * Y(2,3, 1,2), rIDM * Y(1,3, 2,1), rIDM * Y(1,2, 1,2));
+	tmo = MgMat2D( rIDM * Y(2,2, 3,3), rIDM * Y(1,3, 3,2), rIDM * Y(1,2, 2,3), 
+				   rIDM * Y(2,3, 3,1), rIDM * Y(1,1, 3,3), rIDM * Y(1,3, 2,1),
+				   rIDM * Y(2,1, 3,2), rIDM * Y(1,2, 3,1), rIDM * Y(1,1, 2,2));
 	return tmo;
 }
 
@@ -1201,17 +1201,17 @@ MgMat3D MGeo::Mat3DInv( MgMat3D& i_Mt)
 	//				(a12a23-a13a22)(a31a44-a34a41)+(a12a24-a14a22)(a33a41-a31a43)+
 	//				(a11a23-a13a21)(a34a42-a32a44)+(a13a24-a14a23)(a31a42-a32a41)
 
-	MREAL Y1212 = Y(1,2, 1,2);
-	MREAL Y1213 = Y(1,2, 1,3);
-	MREAL Y1214 = Y(1,2, 1,4);
+	MREAL Y1212 = Y(1,1, 2,2);
+	MREAL Y1213 = Y(1,1, 2,3);
+	MREAL Y1214 = Y(1,1, 2,4);
 	MREAL Y1223 = Y(1,2, 2,3);
 	MREAL Y1224 = Y(1,2, 2,4);
-	MREAL Y1234 = Y(1,2, 3,4);
-	MREAL Y3412 = Y(3,4, 1,2);
-	MREAL Y3414 = Y(3,4, 1,4);
-	MREAL Y3423 = Y(3,4, 2,3);
-	MREAL Y3431 = Y(3,4, 3,1);
-	MREAL Y3434 = Y(3,4, 3,4);
+	MREAL Y1234 = Y(1,3, 2,4);
+	MREAL Y3412 = Y(3,1, 4,2);
+	MREAL Y3414 = Y(3,1, 4,4);
+	MREAL Y3423 = Y(3,2, 4,3);
+	MREAL Y3431 = Y(3,3, 4,1);
+	MREAL Y3434 = Y(3,3, 4,4);
 	MREAL Y3442 = Y(3,4, 4,2);
 
 	rDetM = Y1212 * Y3434 + Y1214 * Y3423 +	Y1223 * Y3414 + Y1224 * Y3431 +

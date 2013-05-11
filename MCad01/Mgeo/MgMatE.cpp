@@ -1066,7 +1066,7 @@ MgMat3E MGeo::Mat3EMov(const MgVect3D& v)
 //		i2 | Ai2j1	Ai2j2 |
 //
 #define M(i,j) m[i-1][j-1]
-#define Y(i1,i2,j1,j2) ( M(i1, j1) * M(i2, j2) - M(i1, j2) * M(i2, j1))
+#define Y(i1,j1,i2,j2) ( M(i1, j1) * M(i2, j2) - M(i1, j2) * M(i2, j1))
 //--------------------------------------------------------------
 
 //======================( ２次元 )==============================
@@ -1126,7 +1126,7 @@ MgMat2E MGeo::Mat2EInv( MgMat2E& i_mt)
 	//					   1	     0		   0		 0		   0		 1
 	//            = a11a22 - a12a21 = detA[2][2]
 
-	rDetM = Y(1,2, 1,2);
+	rDetM = Y(1,1, 2,2);
 	if ( rDetM == 0.)
 		RETURN_VALUE_ZERO_ERR();												// 0エラー
 	
@@ -1147,8 +1147,8 @@ MgMat2E MGeo::Mat2EInv( MgMat2E& i_mt)
 
 	tmo = MgMat2E(   rIDM * M(2,2), - rIDM * M(1,2), 
 				   - rIDM * M(2,1),   rIDM * M(1,1),
-					 rIDM * Y(2,3, 1,2),
-					 rIDM * Y(1,3, 2,1));
+					 rIDM * Y(2,1, 3,2),
+					 rIDM * Y(1,2, 3,1));
 	return tmo;
 }
 
@@ -1208,7 +1208,7 @@ MgMat3E MGeo::Mat3EInv( MgMat3E& i_Mt)
 	// 行列式の値
 	// detA[4][4] = detA[3][3] = a11(a22a33-a23a32)+a12(a23a31-a21a33)+a13(a21a32-a22a31)
 
-	rDetM = M(1,1) * Y(2,3, 2,3) + M(1,2) * Y(2,3, 3,1) + M(1,3) * Y(2,3, 1,2);
+	rDetM = M(1,1) * Y(2,2, 3,3) + M(1,2) * Y(2,3, 3,1) + M(1,3) * Y(2,1, 3,2);
 
 
 	if ( rDetM == 0.)
@@ -1227,12 +1227,12 @@ MgMat3E MGeo::Mat3EInv( MgMat3E& i_Mt)
 
 
 	tmo = MgMat3E(
-					 rIDM * Y(2,3, 2,3), rIDM * Y(1,3, 3,2), rIDM * Y(1,2, 2,3),
-					 rIDM * Y(2,3, 3,1), rIDM * Y(1,3, 1,3), rIDM * Y(1,2, 3,1),
-					 rIDM * Y(2,3, 1,2), rIDM * Y(1,3, 2,1), rIDM * Y(1,2, 1,2),
-					 rIDM * ( M(2,1) * Y(3,4, 3,2) + M(2,2) * Y(3,4, 1,3) + M(2,3) * Y(3,4, 2,1)),
-					 rIDM * ( M(1,1) * Y(3,4, 2,3) + M(1,2) * Y(3,4, 3,1) + M(1,3) * Y(3,4, 1,2)),
-					 rIDM * ( M(1,1) * Y(2,4, 3,2) + M(1,2) * Y(2,4, 1,3) + M(1,3) * Y(2,4, 2,1))
+					 rIDM * Y(2,2, 3,3), rIDM * Y(1,3, 3,2), rIDM * Y(1,2, 2,3),
+					 rIDM * Y(2,3, 3,1), rIDM * Y(1,1, 3,3), rIDM * Y(1,3, 2,1),
+					 rIDM * Y(2,1, 3,2), rIDM * Y(1,2, 3,1), rIDM * Y(1,1, 2,2),
+					 rIDM * ( M(2,1) * Y(3,3, 4,2) + M(2,2) * Y(3,1, 4,3) + M(2,3) * Y(3,2, 4,1)),
+					 rIDM * ( M(1,1) * Y(3,2, 4,3) + M(1,2) * Y(3,3, 4,1) + M(1,3) * Y(3,1, 4,2)),
+					 rIDM * ( M(1,1) * Y(2,3, 4,2) + M(1,2) * Y(2,1, 4,3) + M(1,3) * Y(2,2, 4,1))
 					);
 	return tmo;
 }
