@@ -40,7 +40,7 @@
 #define 	RETURN_OVERFLOW_ERR()\
 								ms::SysError( __FUNCTION__, __LINE__, MC_ERR_OVERFLOW)
 #define 	RETURN_OVERFLOW_ERR_S( CPROG)\
-								ms::SysError( CPROG, __LINE__, MC_ERR_OVERFLOW)
+								ms::SysError( __FUNCTION__, __LINE__, MC_ERR_OVERFLOW, CPROG)
 #define 	RETURN_FILEOPEN_ERR_S( CPATH)\
 								ms::SysError( __FUNCTION__, __LINE__, MC_ERR_FILEOPEN, CPATH)
 #define 	RETURN_NUM_OVER_ERR()\

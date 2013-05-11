@@ -240,27 +240,29 @@ public:
 	//
 	static void	ErrorReturn( void);
 	
-//S	static void	SysError( 
-//							char*				i_pcProgram,						// エラープログラム名
-//							int					i_iLineN,							// 行番号
-//							int					i_iErrorCode						// エラーコード
-//							);
-//	static void	SysError( 
-//							MCHAR*				i_pcProgram,						// エラープログラム名
-//							int					i_iLineN,							// 行番号
-//							int					i_iErrorCode						// エラーコード
-//							);
 	static void	SysError( 
 							MCHAR*				i_pcProgram,						// エラープログラム名
 							int					i_iLineN,							// 行番号
 							int					i_iErrorCode,						// エラーコード
-							MCHAR*				i_cComment = NULL					// コメント
+							MCHAR*				i_cComment							// コメント
+							);
+	static void	SysError( 
+							MCHAR*				i_pcProgram,						// エラープログラム名
+							int					i_iLineN,							// 行番号
+							int					i_iErrorCode,						// エラーコード
+							char*				i_cComment = NULL					// コメント
 							);
 	static void	SysError( 
 							char*				i_pcProgram,						// エラープログラム名
 							int					i_iLineN,							// 行番号
 							int					i_iErrorCode,						// エラーコード
-							MCHAR*				i_cComment = NULL					// コメント
+							MCHAR*				i_cComment							// コメント
+							);
+	static void	SysError( 
+							char*				i_pcProgram,						// エラープログラム名
+							int					i_iLineN,							// 行番号
+							int					i_iErrorCode,						// エラーコード
+							char*				i_cComment = NULL					// コメント
 							);
 	static void	CmdError( 
 							char*				i_pcProgram,						// エラープログラム名

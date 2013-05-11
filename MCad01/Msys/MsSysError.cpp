@@ -15,6 +15,8 @@
 #include "MgDefine.h"
 #include "MfFile.h"
 #include "McSystemProperty.h"
+#include "MainFrm.h"
+#include "MmSystem.h"
 
 namespace MC
 {
@@ -31,6 +33,25 @@ void 	ms::SysError(
 						char*	i_cFunction,	// エラー関数名
 						int		i_iLineN,		// 行番号
 						int		i_iErrorCode,	// エラーコード
+						char*	i_cComment		// コメント
+				  )
+{
+	MINT	ist;
+	MCHAR	cFunction[256];						// エラー関数名
+	MCHAR	cComment[256];						// コメント
+
+	ist = Code::msbstowcs( i_cFunction, cFunction, 256);
+	ist = Code::msbstowcs( i_cComment, cComment, 256);
+	ms::SysError( cFunction, i_iLineN, i_iErrorCode, cComment);
+}
+
+//===========================================================================
+//	エラー表示後に処理を終了する
+//
+void 	ms::SysError( 
+						char*	i_cFunction,	// エラー関数名
+						int		i_iLineN,		// 行番号
+						int		i_iErrorCode,	// エラーコード
 						MCHAR*	i_cComment		// コメント
 				  )
 {
@@ -39,6 +60,23 @@ void 	ms::SysError(
 
 	ist = Code::msbstowcs( i_cFunction, cFunction, 256);
 	ms::SysError( cFunction, i_iLineN, i_iErrorCode, i_cComment);
+}
+
+//===========================================================================
+//	エラー表示後に処理を終了する
+//
+void 	ms::SysError( 
+						MCHAR*	i_cFunction,	// エラー関数名
+						int		i_iLineN,		// 行番号
+						int		i_iErrorCode,	// エラーコード
+						char*	i_cComment		// コメント
+				  )
+{
+	MINT	ist;
+	MCHAR	cComment[256];						// コメント
+
+	ist = Code::msbstowcs( i_cComment, cComment, 256);
+	ms::SysError( i_cFunction, i_iLineN, i_iErrorCode, cComment);
 }
 
 //===========================================================================
@@ -70,18 +108,20 @@ void 	ms::SysError(
 	default:				iErrorMsgCd = MM_ERR_OTHER;			break;			// その他エラー
 	}
 	if ( i_cComment) {
-		Msprintf_s( cErrorMsg, Mstr( "Function Name = %s Line No = %d\n\n%s  \n\n%s　\n\n%s　"), i_cFunction, i_iLineN, i_cComment,
+		Msprintf_s( cErrorMsg, Mstr( "Function Name = %s\n Line No = %d\n\n%s  \n\n%s　\n\n%s　"), i_cFunction, i_iLineN, i_cComment,
 													mcs::GetStr( iErrorMsgCd),
 													mcs::GetStr( MM_ERR_SYSTEMEXIT));
 	} else {
-		Msprintf_s( cErrorMsg, Mstr( "Function Name = %s Line No = %d\n\n%s　\n\n%s　"), i_cFunction,
+		Msprintf_s( cErrorMsg, Mstr( "Function Name = %s\n Line No = %d\n\n%s　\n\n%s　"), i_cFunction,
 													mcs::GetStr( iErrorMsgCd),
 													mcs::GetStr( MM_ERR_SYSTEMEXIT));
 	}
 
 	ist = AfxMessageBox( cErrorMsg, 256, MB_ICONSTOP);
 	__debugbreak();
-	AfxGetMainWnd( )->PostMessage( WM_CLOSE, 0, 0);								// メインウィンドウ取得・終了
+//U	AfxGetMainWnd( )->PostMessage( WM_CLOSE, 0, 0);								// メインウィンドウ取得・終了
+	CMainFrame*	pMainFrame = MC::System::GetpMainFrame();
+	pMainFrame->PostMessage( WM_CLOSE);
 }
 
 //===========================================================================

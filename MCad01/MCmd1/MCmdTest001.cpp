@@ -68,6 +68,8 @@ void Test000_Geo()
 	Matd3 = Matd1 * Matd2;
 	Matd3.Print( Mstr("Matd3 = Matd1 * Matd2"));
 
+	RETURN_FILEOPEN_ERR_S( "CHECK");
+
 	//=======================
 	//	MatE
 
