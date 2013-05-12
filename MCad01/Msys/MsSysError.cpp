@@ -52,7 +52,7 @@ void 	ms::SysError(
 						char*	i_cFunction,	// エラー関数名
 						int		i_iLineN,		// 行番号
 						int		i_iErrorCode,	// エラーコード
-						MCHAR*	i_cComment		// コメント
+						MCHAR*	i_cComment/*0*/	// コメント
 				  )
 {
 	MINT	ist;
@@ -86,7 +86,7 @@ void 	ms::SysError(
 						MCHAR*	i_cFunction,	// エラー関数名
 						int		i_iLineN,		// 行番号
 						int		i_iErrorCode,	// エラーコード
-						MCHAR*	i_cComment		// コメント
+						MCHAR*	i_cComment/*0*/	// コメント
 				  )
 {
 	MINT	ist;
@@ -112,7 +112,7 @@ void 	ms::SysError(
 													mcs::GetStr( iErrorMsgCd),
 													mcs::GetStr( MM_ERR_SYSTEMEXIT));
 	} else {
-		Msprintf_s( cErrorMsg, Mstr( "Function Name = %s\n Line No = %d\n\n%s　\n\n%s　"), i_cFunction,
+		Msprintf_s( cErrorMsg, Mstr( "Function Name = %s\n Line No = %d\n\n%s　\n\n%s　"), i_cFunction, i_iLineN,
 													mcs::GetStr( iErrorMsgCd),
 													mcs::GetStr( MM_ERR_SYSTEMEXIT));
 	}

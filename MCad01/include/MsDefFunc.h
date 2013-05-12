@@ -244,25 +244,25 @@ public:
 							MCHAR*				i_pcProgram,						// エラープログラム名
 							int					i_iLineN,							// 行番号
 							int					i_iErrorCode,						// エラーコード
-							MCHAR*				i_cComment							// コメント
+							MCHAR*				i_cComment = 0						// コメント
 							);
 	static void	SysError( 
 							MCHAR*				i_pcProgram,						// エラープログラム名
 							int					i_iLineN,							// 行番号
 							int					i_iErrorCode,						// エラーコード
-							char*				i_cComment = NULL					// コメント
+							char*				i_cComment							// コメント
 							);
 	static void	SysError( 
 							char*				i_pcProgram,						// エラープログラム名
 							int					i_iLineN,							// 行番号
 							int					i_iErrorCode,						// エラーコード
-							MCHAR*				i_cComment							// コメント
+							MCHAR*				i_cComment = 0						// コメント
 							);
 	static void	SysError( 
 							char*				i_pcProgram,						// エラープログラム名
 							int					i_iLineN,							// 行番号
 							int					i_iErrorCode,						// エラーコード
-							char*				i_cComment = NULL					// コメント
+							char*				i_cComment							// コメント
 							);
 	static void	CmdError( 
 							char*				i_pcProgram,						// エラープログラム名
