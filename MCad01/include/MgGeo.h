@@ -80,37 +80,37 @@ public:
 	// MgVect2D, MgPoint2D
 
 	// ƒxƒNƒgƒ‹‚Ì’·‚³‚Ì‚Qæ	Abs**2
-	static MREAL AbsVect2D_2( const MgVect2D& v)
-				 		{ return ( v.x*v.x+v.y*v.y);}
+	static MREAL SqAbsVect2D( const MgVect2D& v)
+				 		{ return ( v * v);}
 	// ƒxƒNƒgƒ‹‚Ì’·‚³		ABS
 	static MREAL AbsVect2D( const MgVect2D& v)
-				 		{ return (MREAL)sqrt( v.x*v.x+v.y*v.y);}
+				 		{ return (MREAL)sqrt( v * v);}
 	// ‚Q“_ŠÔ‚Ì‹——£‚Ì‚Qæ MgDist**2
-	static MREAL Dist2Point2D_2( const MgPoint2D& P1, const MgPoint2D& P2)
-						{ return ( (P2.x-P1.x)*(P2.x-P1.x)+
-								   (P2.y-P1.y)*(P2.y-P1.y));}
+	static MREAL SqDist2Point2D( const MgPoint2D& P1, const MgPoint2D& P2)
+						{ MgVect2D v = P2 - P1;
+						  return ( v * v);}
 	// ‚Q“_ŠÔ‚Ì‹——£
 	static MREAL Dist2Point2D( const MgPoint2D& P1, const MgPoint2D& P2)
-						{ return (MREAL)sqrt( (P2.x-P1.x)*(P2.x-P1.x)+
-											  (P2.y-P1.y)*(P2.y-P1.y));}
+						{ MgVect2D v = P2 - P1;
+						  return (MREAL)sqrt( v * v);}
 	// P1 == (0.,0.)	”»’è
 	static bool ZeroVect2D( const MgVect2D& v1)
-						{ return AbsVect2D_2( v1) <= MGPTOL->D_2;}
+						{ return SqAbsVect2D( v1) <= MGPTOL->D_2;}
 	// P1 == (0.,0.)	Œë·w’è‚Ì”»’è
 	static bool ZeroVect2D( const MgVect2D& v1, MREAL tol)
-						{ return AbsVect2D_2( v1) <= tol * tol;}
+						{ return SqAbsVect2D( v1) <= tol * tol;}
 	// P1 == P2 		”»’è
 	static bool EqualPoint2D( const MgPoint2D& p1, const MgPoint2D& p2)
-				 		{ MgVect2D pt = p2 - p1; return AbsVect2D_2( pt) <= MGPTOL->D_2;}
+				 		{ MgVect2D pt = p2 - p1; return SqAbsVect2D( pt) <= MGPTOL->D_2;}
 	// P1 == P2			Œë·w’è‚Ì”»’è
 	static bool EqualPoint2D( const MgPoint2D& p1, const MgPoint2D& p2, MREAL tol)
-				 		{ MgVect2D vt = p2 - p1; return AbsVect2D_2( vt) <= tol * tol;}
+				 		{ MgVect2D vt = p2 - p1; return SqAbsVect2D( vt) <= tol * tol;}
 	// V1 == V2 		’PˆÊƒxƒNƒgƒ‹Œ^®‚Ì“™†”»’è
 	static bool EqualVect2D( const MgVect2D& v1, const MgVect2D& v2)
-				 		{ MgVect2D vt = v2 - v1; return AbsVect2D_2( vt) <= MGPTOL->U_2;}
+				 		{ MgVect2D vt = v2 - v1; return SqAbsVect2D( vt) <= MGPTOL->U_2;}
 	// V1 == V2			Œë·w’è‚Ì”»’è
 	static bool EqualVect2D( const MgVect2D& v1, const MgVect2D& v2, MREAL tol)
-				 		{ MgVect2D vt = v2 - v1; return AbsVect2D_2( vt) <= tol * tol;}
+				 		{ MgVect2D vt = v2 - v1; return SqAbsVect2D( vt) <= tol * tol;}
 	// V1‚ÆV2‚ª•½s‚Å‚ ‚é‚©‚ğŠm”F
 	static bool ParallelVect2D( const MgVect2D& v1, const MgVect2D& v2)
 				 		{ MREAL ro = v1 ^ v2; MREAL ri = v1 * v2;
@@ -122,11 +122,10 @@ public:
 				 		  *so = ro; *si = ri;
 						  if (ro < 0) ro = - ro; if (ri < 0) ri = -ri;
 						  return (ro <= ri * MGPTOL->A);}
+	// ss = ’¼ü(p1,v1)‚©‚ç“_ps‚Ö‚Ì‚’¼‹——£ ‚Æ se = ’¼ü(p1,v1)‚©‚ç“_pe‚Ö‚Ì‚’¼‹——£‚ğ‹‚ß‚é
+	// ’¼ü(p1,v1)‚Æü•ª(ps, pe)‚ÌŒğ“_‚ğ‹‚ß‚é‚Ì‚Ég—p
 	static void SVal( const MgPoint2D& ps, const MgPoint2D& pe, const MgPoint2D& p1, const MgVect2D& v1,
 						MREAL* ss, MREAL* se)
-																					// ’¼ü(p1,v1)‚Æü•ª(ps, pe)‚ÌŒğ“_‚ğ‹‚ß‚é‚Ì‚Ég—p‰Â”\
-																					// ss = ’¼ü(p1,v1)‚©‚ç“_ps‚Ö‚Ì‚’¼‹——£
-																					// se = ’¼ü(p1,v1)‚©‚ç“_pe‚Ö‚Ì‚’¼‹——£
 						{ *ss = (v1 ^ (ps - p1));									// ü•ª2‚Ìn“_‘¤S
 						  *se = (v1 ^ (pe - p1));}									// ü•ª2‚ÌI“_‘¤S
 	// ’·‚³‚P‚É³‹K‰»‚·‚é
@@ -142,49 +141,74 @@ public:
 	static MgVect2D RotR90Vect2D( const MgVect2D& v1)
 						{ return	MgVect2D( v1.y, -v1.x);}
 
+	// “_—ñ‚Ì“¯ˆêÀ•W‚ğ‚Â‚ß‚é
+	static int PackSamePoint2D( MgPoint2D* io_pPt, int* io_pn)
+	{
+		int iC1, iC2;
+		int iN;
+		bool bPack;
+		if( *io_pn != 0) {
+			bPack = false;
+			iN = *io_pn;
+			iC1 = 0;
+			for ( iC2=1; iC2<iN; iC2++) {
+				if( io_pPt[iC1] == io_pPt[iC2]) {
+					bPack = true;
+				} else {
+					iC1++;
+					if( bPack)
+						memcpy( &io_pPt[iC1], &io_pPt[iC2], SZMgPoint2D());
+				}
+			}
+			*io_pn = iC1 + 1;
+		}
+		return 0;
+	}
+	static int PackSamePoint2D( MREAL* io_pPt, int* io_pn)
+	{
+		return PackSamePoint2D( (MgPoint2D*)io_pPt, io_pn);
+	}
 	//======================( ‚RŸŒ³ )==============================
 	// MgVect3D, MgPoint3D
 
 	// ƒxƒNƒgƒ‹‚Ì’·‚³‚Ì‚Qæ	MgAbs**2
-	static MREAL AbsVect3D_2( const MgVect3D& v)
-				 		{ return v.x*v.x+v.y*v.y+v.z*v.z;}
+	static MREAL SqAbsVect3D( const MgVect3D& v)
+				 		{ return v * v;}
 	// ƒxƒNƒgƒ‹‚Ì’·‚³		MGABS
 	static MREAL AbsVect3D( const MgVect3D& v)
-				 		{ return (MREAL)sqrt(v.x*v.x+v.y*v.y+v.z*v.z);}
+				 		{ return (MREAL)sqrt( v * v);}
 	// ‚Q“_ŠÔ‚Ì‹——£‚Ì‚Qæ MgDist**2
-	static MREAL Dist2Point3D_2( const MgPoint3D& P1, const MgPoint3D& P2)
-						{ return ( (P2.x-P1.x)*(P2.x-P1.x)+
-								   (P2.y-P1.y)*(P2.y-P1.y)+
-								   (P2.z-P1.z)*(P2.z-P1.z));}
+	static MREAL SqDist2Point3D( const MgPoint3D& P1, const MgPoint3D& P2)
+						{ MgVect3D v = P2 - P1;
+						  return ( v * v);}
 	// ‚Q“_ŠÔ‚Ì‹——£
 	static MREAL Dist2Point3D( const MgPoint3D& P1, const MgPoint3D& P2)
-						{ return (MREAL)sqrt( (P2.x-P1.x)*(P2.x-P1.x)+
-											   (P2.y-P1.y)*(P2.y-P1.y)+
-											   (P2.z-P1.z)*(P2.z-P1.z));}
+						{ MgVect3D v = P2 - P1;
+						  return (MREAL)sqrt( v * v);}
 	// P1 == (0.,0.,0.)	”»’è
 	static bool ZeroVect3D( const MgVect3D& v1)
-						{ return AbsVect3D_2(v1) <= MGPTOL->D_2;}
+						{ return SqAbsVect3D(v1) <= MGPTOL->D_2;}
 	// P1 == (0.,0.,0.)	Œë·w’è‚Ì”»’è
 	static bool ZeroVect3D( const MgVect3D& v1, MREAL tol)
-						{ return AbsVect3D_2(v1) <= tol * tol;}
+						{ return SqAbsVect3D(v1) <= tol * tol;}
 	// P1 == P2 		”»’è== ”»’è
 	static bool EqualVect3D( const MgVect3D& v1, const MgVect3D& v2)
-				 		{ MgVect3D vt = v2 - v1; return AbsVect3D_2(vt) <= MGPTOL->D_2;}  
+				 		{ MgVect3D vt = v2 - v1; return SqAbsVect3D(vt) <= MGPTOL->D_2;}  
 	// V1 == V2 		ƒxƒNƒgƒ‹Œ^®‚ÌŠp“x‚Ì“™†”»’è
 	static bool EqualUVect3D( const MgVect3D& v1, const MgVect3D& v2)
-				 		{ MgVect3D vt = v2 - v1; return AbsVect3D_2(vt) <= MGPTOL->U_2;}  
+				 		{ MgVect3D vt = v2 - v1; return SqAbsVect3D(vt) <= MGPTOL->U_2;}  
 	// P1 == P2			Œë·w’è‚Ì”»’è== ”»’è
 	static bool EqualVect3D( const MgVect3D& v1, const MgVect3D& v2, MREAL tol)
-				 		{ MgVect3D vt = v2 - v1; return AbsVect3D_2(vt) <= tol * tol;}  
+				 		{ MgVect3D vt = v2 - v1; return SqAbsVect3D(vt) <= tol * tol;}  
 	// V1‚ÆV2‚ª•½s‚Å‚ ‚é‚©‚ğŠm”F
 	static bool ParallelVect3D( const MgVect3D& v1, const MgVect3D& v2)
 				 		{ MgVect3D vo = v1 ^ v2; MREAL fi = v1 * v2;
-						  return ( AbsVect3D_2(vo) <= fi * fi * MGPTOL->A_2);}
+						  return ( SqAbsVect3D(vo) <= fi * fi * MGPTOL->A_2);}
 	// V1‚ÆV2‚ª•½s‚Å‚ ‚é‚©‚ğŠm”F‚µAŠOÏ‚Æ“àÏ‚ğo—Í
 	static bool ParallelVect3DWP( const MgVect3D& v1, const MgVect3D& v2, MgVect3D *pso, MREAL* si)
 				 		{ MgVect3D vo = v1 ^ v2; MREAL fi = v1 * v2;
 				 		  *pso = vo; *si = fi;
-						  return ( AbsVect3D_2(vo) <= fi * fi * MGPTOL->A_2);}
+						  return ( SqAbsVect3D(vo) <= fi * fi * MGPTOL->A_2);}
 	// ’PˆÊƒxƒNƒgƒ‹‚ğ‹‚ß‚é
 	static MgVect3D UnitizeVect3D( const MgVect3D& V1, MREAL i_Tol = MGPTOL->D);
 
@@ -200,6 +224,33 @@ public:
 	// ‰E90K‰ñ“]
 	static MgVect3D RotR90Vect3D( const MgVect3D& v1)
 						{ return	MgVect3D( v1.y, -v1.x, v1.z);}
+	// “_—ñ‚Ì“¯ˆêÀ•W‚ğ‚Â‚ß‚é
+	static int PackSamePoint3D( MgPoint3D* io_pPt, int* io_pn)
+	{
+		int iC1, iC2;
+		int iN;
+		bool bPack;
+		if( *io_pn != 0) {
+			bPack = false;
+			iN = *io_pn;
+			iC1 = 0;
+			for ( iC2=1; iC2<iN; iC2++) {
+				if( io_pPt[iC1] == io_pPt[iC2]) {
+					bPack = true;
+				} else {
+					iC1++;
+					if( bPack)
+						memcpy( &io_pPt[iC1], &io_pPt[iC2], SZMgPoint2D());
+				}
+			}
+			*io_pn = iC1 + 1;
+		}
+		return 0;
+	}
+	static int PackSamePoint3D( MREAL* io_pPt, int* io_pn)
+	{
+		return PackSamePoint3D( (MgPoint3D*)io_pPt, io_pn);
+	}
 
 #ifdef _MgPoint3DA
 	//
@@ -306,37 +357,19 @@ public:
 	// ---------------------( ‚QŸŒ³ )------------------------------
 	//
 	/////////////////////////////////////////////////////////////////////////////
-	//	ƒxƒNƒgƒ‹‚Æ…•½ü(X•ûŒü)‚Æ‚ÌŠp“x‚ğ‹‚ß‚é
+	//	…•½ü(X•ûŒü)‚ÆƒxƒNƒgƒ‹•ûŒü‚Æ‚ÌŠp“x‚ğ‹‚ß‚é
 	//
-	static MREAL AngleVectH2D(						// (  O) ¶‰ñ“]Šp“x@i“xj
+	static MREAL AngleXVect2D(						// (  O) ¶‰ñ“]Šp“x@i“xj
 													//		ƒxƒNƒgƒ‹‚Ì’·‚³‚ªMGPTOL->D–¢–‚Ìê‡‚Í0“x‚ğ•Ô‚·
 					const	MgVect2D&	i_v1		// (I  ) ƒxƒNƒgƒ‹
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
-	//	‚Q“_‚Æ…•½ü(X•ûŒü)‚Æ‚ÌŠp“x‚ğ‹‚ß‚é
+	//	‚’¼ü(Y•ûŒü)‚ÆƒxƒNƒgƒ‹•ûŒü‚Æ‚ÌŠp“x‚ğ‹‚ß‚é
 	//
-	static MREAL Angle2PointH2D(					// (  O) ¶‰ñ“]Šp“x@i“xj
-													//		n“_AI“_ŠÔ‚Ì‹——£‚ªMGPTOL->D–¢–‚Ìê‡‚Í0“x‚ğ•Ô‚·
-					const	MgPoint2D&	i_p1,		// (I  ) n“_
-					const	MgPoint2D&	i_p2		// (I  ) I“_
-			);
-
-	/////////////////////////////////////////////////////////////////////////////
-	//	ƒxƒNƒgƒ‹‚Æ…•½ü(Y•ûŒü)‚Æ‚ÌŠp“x‚ğ‹‚ß‚é
-	//
-	static MREAL AngleVectV2D(						// (  O) ¶‰ñ“]Šp“x@i“xj
+	static MREAL AngleYVect2D(						// (  O) ¶‰ñ“]Šp“x@i“xj
 													//		ƒxƒNƒgƒ‹‚Ì’·‚³‚ªMGPTOL->D–¢–‚Ìê‡‚Í0“x‚ğ•Ô‚·
 					const	MgVect2D&	i_v1		// (I  ) ƒxƒNƒgƒ‹
-			);
-
-	/////////////////////////////////////////////////////////////////////////////
-	//	‚Q“_‚Æ‚’¼ü(Y•ûŒü)‚Æ‚ÌŠp“x‚ğ‹‚ß‚é
-	//
-	static MREAL Angle2PointV2D(					// (  O) ¶‰ñ“]Šp“x@i“xj
-													//		n“_AI“_ŠÔ‚Ì‹——£‚ªMGPTOL->D–¢–‚Ìê‡‚Í0“x‚ğ•Ô‚·
-					const	MgPoint2D&	i_p1,		// (I  ) n“_
-					const	MgPoint2D&	i_p2		// (I  ) I“_
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -359,42 +392,6 @@ public:
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
-	//	‚Q’¼ü‚ÌŠp“x‚ğ‹‚ß‚é
-	//
-	static MREAL Angle2ULine2D(						// (  O) ¶‰ñ“]Šp“x@i“xj
-													//		2“_ŠÔ‚Ì‹——£‚ªMGPTOL->D–¢–‚Ìê‡‚Í0“x‚ğ•Ô‚·
-					const	MgULine2D&	i_ULn1,		// (I  ) ü•ª1
-					const	MgULine2D&	i_ULn2		// (I  ) ü•ª2
-			);
-
-	/////////////////////////////////////////////////////////////////////////////
-	//	’¼ü‚Æü•ª‚ÌŠp“x‚ğ‹‚ß‚é
-	//
-	static MREAL AngleULineLine2D(					// (  O) ¶‰ñ“]Šp“x@i“xj
-													//		2“_ŠÔ‚Ì‹——£‚ªMGPTOL->D–¢–‚Ìê‡‚Í0“x‚ğ•Ô‚·
-					const	MgULine2D&	i_ULn1,		// (I  ) ’¼ü1
-					const	MgLine2D&	i_Ln2		// (I  ) ü•ª2
-			);
-
-	/////////////////////////////////////////////////////////////////////////////
-	//	ü•ª‚Æ’¼ü‚ÌŠp“x‚ğ‹‚ß‚é
-	//
-	static MREAL AngleLineULine2D(					// (  O) ¶‰ñ“]Šp“x@i“xj
-													//		2“_ŠÔ‚Ì‹——£‚ªMGPTOL->D–¢–‚Ìê‡‚Í0“x‚ğ•Ô‚·
-					const	MgLine2D&	i_Ln1,		// (I  ) ü•ª1
-					const	MgULine2D&	i_ULn2		// (I  ) ’¼ü2
-			);
-
-	/////////////////////////////////////////////////////////////////////////////
-	//	‚Qü•ª‚ÌŠp“x‚ğ‹‚ß‚é
-	//
-	static MREAL Angle2Line2D(						// (  O) ¶‰ñ“]Šp“x@i“xj
-													//		2“_ŠÔ‚Ì‹——£‚ªMGPTOL->D–¢–‚Ìê‡‚Í0“x‚ğ•Ô‚·
-					const	MgLine2D&	i_Ln1,		// (I  ) ü•ª1
-					const	MgLine2D&	i_Ln2		// (I  ) ü•ª2
-			);
-
-	/////////////////////////////////////////////////////////////////////////////
 	//	‚QƒxƒNƒgƒ‹‚ÌŠp“x‚ğ‹‚ß‚é
 	//
 	static MREAL Angle2Vect3D(						// (  O) ¶‰ñ“]Šp“x@i“xj
@@ -413,44 +410,6 @@ public:
 					const	MgPoint3D&	i_p2,		// (I  ) “_2
 					const	MgPoint3D&	i_p3,		// (I  ) “_3
 					const	MgVect3D&	i_vn		// (I  ) “_1,“_,2“_3‚ğ’Ê‚é•½–Ê‚É’¼Œğ‚·‚é’PˆÊƒxƒNƒgƒ‹
-			);
-
-	/////////////////////////////////////////////////////////////////////////////
-	//	‚Q’¼ü‚ÌŠp“x‚ğ‹‚ß‚é
-	//
-	static MREAL Angle2ULine3D(						// (  O) ¶‰ñ“]Šp“x@i“xj
-													//		2“_ŠÔ‚Ì‹——£‚ªMGPTOL->D–¢–‚Ìê‡‚Í0“x‚ğ•Ô‚·
-					const	MgULine3D&	i_ULn1,		// (I  ) ’¼ü1
-					const	MgULine3D&	i_ULn2,		// (I  ) ’¼ü2
-					const	MgVect3D&	i_vn		// (I  ) ‚Q’¼ü‚É’¼Œğ‚·‚é’PˆÊƒxƒNƒgƒ‹
-			);
-
-	/////////////////////////////////////////////////////////////////////////////
-	//	’¼ü‚Æü•ª‚ÌŠp“x‚ğ‹‚ß‚é
-	//
-	static MREAL AngleULineLine3D(					// (  O) ¶‰ñ“]Šp“x@i“xj
-													//		2“_ŠÔ‚Ì‹——£‚ªMGPTOL->D–¢–‚Ìê‡‚Í0“x‚ğ•Ô‚·
-					const	MgULine3D&	i_ULn1,		// (I  ) ’¼ü1
-					const	MgLine3D&	i_Ln2,		// (I  ) ü•ª2
-					const	MgVect3D&	i_vn		// (I  ) ’¼ü‚Æü•ª‚É’¼Œğ‚·‚é’PˆÊƒxƒNƒgƒ‹
-			);
-
-	//	-------------------------------------------------------
-	static MREAL AngleLineULine3D(					// (  O) ¶‰ñ“]Šp“x@i“xj
-													//		2“_ŠÔ‚Ì‹——£‚ªMGPTOL->D–¢–‚Ìê‡‚Í0“x‚ğ•Ô‚·
-					const	MgLine3D&	i_Ln1,		// (I  ) ü•ª1
-					const	MgULine3D&	i_ULn2,		// (I  ) ’¼ü2
-					const	MgVect3D&	i_vn		// (I  ) ü•ª‚Æ’¼ü‚É’¼Œğ‚·‚é’PˆÊƒxƒNƒgƒ‹
-			);
-
-	/////////////////////////////////////////////////////////////////////////////
-	//	‚Qü•ª‚ÌŠp“x‚ğ‹‚ß‚é
-	//
-	static MREAL Angle2Line3D(						// (  O) ¶‰ñ“]Šp“x@i“xj
-													//		2“_ŠÔ‚Ì‹——£‚ªMGPTOL->D–¢–‚Ìê‡‚Í0“x‚ğ•Ô‚·
-					const	MgLine3D&	i_Ln1,		// (I  ) ü•ª1
-					const	MgLine3D&	i_Ln2,		// (I  ) ü•ª2
-					const	MgVect3D&	i_vn		// (I  ) ‚Qü•ª‚É’¼s‚·‚é’PˆÊƒxƒNƒgƒ‹
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -899,7 +858,7 @@ public:
 	}
 
 	//===============( ‚QŸŒ³À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚Å‚RŸŒ³À•Wˆ— )==============
-	//
+
 	//===========================================================================
 	//	ˆ—“à—e
 	//	    À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX‚É‚æ‚èÀ•W•ÏŠ·‚·‚é
@@ -4669,7 +4628,7 @@ public:
 	{
 	//	return (p1 == p2);
 		MgVect2D	V1 = i_p2 - i_p1;
-		return ( AbsVect2D_2( V1) <= rTol * rTol);
+		return ( SqAbsVect2D( V1) <= rTol * rTol);
 	}
 	
 	//===========================================================================
@@ -4700,7 +4659,7 @@ public:
 	{
 	//	return (p1 == p2);
 		MgVect3D	V1 = i_p2 - i_p1;
-		return ( AbsVect3D_2( V1) <= rTol * rTol);
+		return ( SqAbsVect3D( V1) <= rTol * rTol);
 	}
 	
 	//===========================================================================
@@ -4864,7 +4823,7 @@ public:
 		va1 = v21 ^ i_ULn2.v;
 	//	pa_2 = Abs_2(va1);
 	//	return ( pa_2 <= rTol * rTol);
-		return ( AbsVect3D_2(va1) <= rTol * rTol);
+		return ( SqAbsVect3D(va1) <= rTol * rTol);
 	}
 	
 	// ---------------------( ‚RŸŒ³ )------------------------------
@@ -4888,7 +4847,7 @@ public:
 		c1 = v21 * i_HLn2.v;
 	//	pa_2 = Abs_2(va1);
 	//	return ( pa_2 <= rTol * rTol);
-		return ( AbsVect3D_2(va1) <= rTol * rTol && c1 > -rTol);
+		return ( SqAbsVect3D(va1) <= rTol * rTol && c1 > -rTol);
 	}
 	
 	// ---------------------( ‚RŸŒ³ )------------------------------
@@ -4972,7 +4931,7 @@ public:
 	{
 		MgVect3D vo = i_v1 ^ i_v2;
 		MREAL fi = i_v1 * i_v2;
-		return (fi * fi <= AbsVect3D_2(vo) * MGPTOL->A_2);
+		return (fi * fi <= SqAbsVect3D(vo) * MGPTOL->A_2);
 	}
 
 	// ---------------------( ‚RŸŒ³ )------------------------------
@@ -4987,7 +4946,7 @@ public:
 		MgVect3D vo = i_v1 ^ i_v2;
 		MREAL fi = i_v1 * i_v2;
 		*o_ppso = vo; *o_psi = fi;
-		return (fi * fi <= AbsVect3D_2(vo) * MGPTOL->A_2);
+		return (fi * fi <= SqAbsVect3D(vo) * MGPTOL->A_2);
 	}
 
 	//===========================================================================
@@ -5704,14 +5663,14 @@ inline MgPlane3D MgPlanePolygon3D(									// ‘½ŠpŒ`‚æ‚è•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”
 					const	MgPolyg3D&	i_pg)
 						{ return MGeo::Plane3DPolygon3D( i_pg);}
 
-inline MgPlane3D MgPlane2PointSlope3D(									// n“_‚ÆI“_‚Ì‚Q“_‚ÆŒù”z‚æ‚è•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”‚ğ‹‚ß‚éi³‹K‰»j
+inline MgPlane3D MgPlane2PointSlope3D(								// n“_‚ÆI“_‚Ì‚Q“_‚ÆŒù”z‚æ‚è•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”‚ğ‹‚ß‚éi³‹K‰»j
 					const	MgPoint2D&	i_p1,
 					const	MgPoint2D&	i_p2,
 							MREAL		i_rkb,
 							MREAL		i_z = 0.)
 						{ return MGeo::Plane2PointSlope3D( i_p1, i_p2, i_rkb, i_z);}
 
-inline MgPlane3D PlaneLineSlope3D(										// ü•ª‚ÆŒù”z‚æ‚è•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”‚ğ‹‚ß‚éi³‹K‰»j
+inline MgPlane3D PlaneLineSlope3D(									// ü•ª‚ÆŒù”z‚æ‚è•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”‚ğ‹‚ß‚éi³‹K‰»j
 					const	MgLine2D&	i_ln1,
 							MREAL		i_rkb,
 							MREAL		i_z = 0.)
@@ -5721,8 +5680,8 @@ inline MgPlane3D PlaneLineSlope3D(										// ü•ª‚ÆŒù”z‚æ‚è•½–Ê‚Ì•û’ö®‚ÌŒW”‚
 //		•½–Ê‚Ì•û’ö®‚ÌŒW”‚Æ’è”‚ğ³‹K‰»‚µ‚½•½–Ê‚ğ‹‚ß‚é
 //		ax+by+cz+d=0	(a*a+b*b+c*c=1.0)
 //
-inline MgPlane3D MgPlane3DNorm(							// (  O) ³‹K‰»Œã‚Ì‚RŸŒ³•½–Ê
-					const	MgPlane3D&	i_pl)		// (I  ) ‚RŸŒ³•½–Ê
+inline MgPlane3D MgPlane3DNorm(									// (  O) ³‹K‰»Œã‚Ì‚RŸŒ³•½–Ê
+					const	MgPlane3D&	i_pl)					// (I  ) ‚RŸŒ³•½–Ê
 						{ return MGeo::NormPln( i_pl);}
 //
 //===========================================================================
@@ -5778,10 +5737,12 @@ inline MgLine3D MgLine3D::Set(									// ‚QŸŒ³¨‚RŸŒ³
 						  return *this;}
 
 // •½–Êƒf[ƒ^ƒTƒCƒY(bytes)
-inline MINT SZMgPlane3D( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgPlane3D));}
+inline int SZMgPlane3D( int i_sz)	{ return  ( i_sz * (int)sizeof( MgPlane3D));}
+inline int SZMgPlane3D()			{ return  (int)sizeof( MgPlane3D);}
 
 // •½–Êƒf[ƒ^ƒTƒCƒY(words)
-inline MINT WSZMgPlane3D( MINT i_sz = 1) { return  ( i_sz * (MINT)sizeof( MgPlane3D) / SZMINT());}
+inline int WSZMgPlane3D( int i_sz)	{ return  ( i_sz * (int)sizeof( MgPlane3D) / SZMINT());}
+inline int WSZMgPlane3D()			{ return  (int)sizeof( MgPlane3D) / SZMINT();}
 
 } // namespace MC
 		

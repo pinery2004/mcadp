@@ -19,7 +19,7 @@ namespace MC
 //y‹@”\zŒ»İ‚ğæ“¾‚·‚é
 //y•Ô’lzMTIMEŒ^@Œ»İ
 
-MTIME MsGetCurrentTime()
+MTIME mslib::GetCurrentTime()
 {
 	return CTime::GetCurrentTime();
 }

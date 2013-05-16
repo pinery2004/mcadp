@@ -235,7 +235,7 @@ void mmIoPartsAttr::InitComboAttr(
 						MC_CHK_NULL, MC_CHK_NULL}				// null, null
 					};
 
-	int iC1, iAn;
+	int iAn;
 
 	if ( !GetDispFlg())	goto EXIT;	
 
@@ -645,7 +645,7 @@ void mmIoPartsAttr::InitComboAttrR(
 ///////////////////////////////////////////////////////////////////////////////
 //	属性値入力用コンボボックスの実数値を取得する
 //
-MREAL mmIoPartsAttr::GetComboAttrRCbn(				// 実数値　または　0(未設定)
+MREAL mmIoPartsAttr::GetComboAttrRCbn(			// 実数値　または　0(未設定)
 						int		i_iAttr			// コンボボックス番号
 				)
 {
@@ -654,13 +654,13 @@ MREAL mmIoPartsAttr::GetComboAttrRCbn(				// 実数値　または　0(未設定)
 	CComboBox *pCmbBox = GetCmbBzaiAttr( i_iAttr);
 	pCmbBox->GetWindowText( strValue);
 
-	return MsGetMREAL( strValue);
+	return ms::CnvMREAL( strValue);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 //	属性値入力用コンボボックスの実数値を取得する
 
-int mmIoPartsAttr::GetComboAttrR(					// ステイタス0(未設定) 1(設定)
+int mmIoPartsAttr::GetComboAttrR(				// ステイタス0(未設定) 1(設定)
 						MCCMBATTR	i_iAttr,	// 属性ID
 						MREAL*		o_rValue	// 実数値
 				)
@@ -747,7 +747,7 @@ void mmIoPartsAttr::InitComboAttrI(
 ///////////////////////////////////////////////////////////////////////////////
 //	属性値入力用コンボボックスの整数値を取得する
 //
-int mmIoPartsAttr::GetComboAttrICbn(				// 整数値　または　0(未設定)
+int mmIoPartsAttr::GetComboAttrICbn(			// 整数値　または　0(未設定)
 						int		i_iAttr			// コンボボックス番号
 					)
 {
@@ -762,7 +762,7 @@ int mmIoPartsAttr::GetComboAttrICbn(				// 整数値　または　0(未設定)
 	else if ( Mstrcmp( strValue, MC_STR_AREA) == 0)				// 領域
 		iNum = MC_INT_AREA;										// 9998
 	else
-		iNum =  MsGetMINT( strValue);
+		iNum =  ms::CnvMINT( strValue);
 		
 	return iNum;
 }
@@ -770,7 +770,7 @@ int mmIoPartsAttr::GetComboAttrICbn(				// 整数値　または　0(未設定)
 ///////////////////////////////////////////////////////////////////////////////
 //	属性値入力用コンボボックスの整数値を取得する
 
-int	mmIoPartsAttr::GetComboAttrI(					// ステイタス0(未設定) 1(設定)
+int	mmIoPartsAttr::GetComboAttrI(				// ステイタス0(未設定) 1(設定)
 						MCCMBATTR	i_iAttr,	// 属性ID
 						int*		o_iValue 	// 表示する整数値
 					)

@@ -28,20 +28,18 @@
 namespace MC
 {
 
-//
 //======================( ‚QŸŒ³ )==============================
-//		ƒxƒNƒgƒ‹‚ğƒgƒŒ[ƒX‚·‚é
+//		2D“_‚ğƒgƒŒ[ƒX‚·‚é
 //
 void MgPoint2D::Print(MCHAR* s) const				// Print
 {
 #ifdef LOGOUT
-	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgPoint2D	: (%7.1f,%7.1f)\n"), s, x, y);
-	MBLOGPRBF;
+	MBLOGOUT( Mstr( "%s	MgPoint2D	: (%7.1f,%7.1f)\n"), s, x, y);
 #endif
 }
-//
+
 //======================( ‚QŸŒ³ )==============================
-//		ƒxƒNƒgƒ‹‚ğ’PˆÊƒxƒNƒgƒ‹‚É•ÏŠ·‚·‚é
+//		2DƒxƒNƒgƒ‹‚ğ’PˆÊƒxƒNƒgƒ‹‚É•ÏŠ·‚·‚é
 //
 MgVect2D MgVect2D::SetUnitize( MREAL i_Tol)		//	(  O) ’PˆÊƒxƒNƒgƒ‹
 {
@@ -52,9 +50,9 @@ MgVect2D MgVect2D::SetUnitize( MREAL i_Tol)		//	(  O) ’PˆÊƒxƒNƒgƒ‹
 	y *= d2;
 	return *this;
 }
-//
+
 //======================( ‚QŸŒ³ )==============================
-//		ƒxƒNƒgƒ‹‚Ì’PˆÊƒxƒNƒgƒ‹‚ğ‹‚ß‚é
+//		2DƒxƒNƒgƒ‹‚Ì’PˆÊƒxƒNƒgƒ‹‚ğ‹‚ß‚é
 //
 MgVect2D MgVect2D::Unitize( MREAL i_Tol) const	//	(  O) ’PˆÊƒxƒNƒgƒ‹
 {
@@ -63,20 +61,19 @@ MgVect2D MgVect2D::Unitize( MREAL i_Tol) const	//	(  O) ’PˆÊƒxƒNƒgƒ‹
 	MREAL	d2 = 1.f / d1;
     return	MgVect2D(x * d2, y * d2);
 }
-//
+
 //======================( ‚QŸŒ³ )==============================
-//		ƒxƒNƒgƒ‹‚ğƒgƒŒ[ƒX‚·‚é
+//		2DƒxƒNƒgƒ‹‚ğƒgƒŒ[ƒX‚·‚é
 //
 void MgVect2D::Print(MCHAR* s) const				// Print
 {
 #ifdef LOGOUT
-	Msprintf_s( mlLog::m_Str, Mstr( "%s	MgVect2D	: (%7.1f,%7.1f)\n"), s, x, y);
-	MBLOGPRBF;
+	MBLOGOUT( Mstr( "%s	MgVect2D	: (%7.1f,%7.1f)\n"), s, x, y);
 #endif
 }
-//
+
 //======================( ‚QŸŒ³ )==============================
-//		ƒxƒNƒgƒ‹‚Ì’PˆÊƒxƒNƒgƒ‹‚ğ‹‚ß‚é
+//		2DƒxƒNƒgƒ‹‚Ì’PˆÊƒxƒNƒgƒ‹‚ğ‹‚ß‚é
 //
 MgVect2D MGeo::UnitizeVect2D( const MgVect2D& i_v, MREAL i_Tol)		//	(  O) ’PˆÊƒxƒNƒgƒ‹
 {
@@ -85,7 +82,7 @@ MgVect2D MGeo::UnitizeVect2D( const MgVect2D& i_v, MREAL i_Tol)		//	(  O) ’PˆÊƒx
 	MREAL	d2 = 1.f / d1;
     return	MgVect2D( i_v.x * d2, i_v.y * d2);
 }
-//
+
 //======================( ‚RŸŒ³ )==============================
 //
 MgVect3D MGeo::TaniVect3D( const MgVect3D& i_v, MREAL i_Tol)
@@ -107,31 +104,30 @@ MgVect3D MGeo::TaniVect3D( const MgVect3D& i_v, MREAL i_Tol)
 //
 	return MGeo::UnitizeVect3D( vo, i_Tol);
 }
-//
-//======================( ‚QŸŒ³ )==============================
-#ifdef _MgPoint2DA
-MgPoint2Da Norma( const MgPoint2D& i_p, MREAL i_Tol)
-{
-	MREAL	d1 = MgAbs(p);
-//A		MBCHECK_ZEROVECT( d1, MBCstr( "MgPoint2DA Norma"), i_Tol);
-	MREAL	d2 = 1. / d1;
-    return MgPoint2Da( i_p.x * d2, i_p.y * d2, d1);
-}
-#endif
-//
+
+//S //======================( ‚QŸŒ³ )==============================
+//#ifdef _MgPoint2DA
+//MgPoint2Da Norma( const MgPoint2D& i_p, MREAL i_Tol)
+//{
+//	MREAL	d1 = MgAbs(p);
+////A		MBCHECK_ZEROVECT( d1, MBCstr( "MgPoint2DA Norma"), i_Tol);
+//	MREAL	d2 = 1. / d1;
+//    return MgPoint2Da( i_p.x * d2, i_p.y * d2, d1);
+//}
+//#endif
+
 //======================( ‚RŸŒ³ )==============================
-//		ƒxƒNƒgƒ‹‚ğƒgƒŒ[ƒX‚·‚é
+//		3D“_‚ğƒgƒŒ[ƒX‚·‚é
 //
 void MgPoint3D::Print(MCHAR* s) const				// Print
 {
 #ifdef LOGOUT
-	Msprintf_s( mlLog::m_Str, Mstr( "%s 	MgPoint3D	: (%7.1f, %7.1f, %7.1f)\n"), s, x, y, z);
-	MBLOGPRBF;
+	MBLOGOUT( Mstr( "%s 	MgPoint3D	: (%7.1f, %7.1f, %7.1f)\n"), s, x, y, z);
 #endif
 }
-//
+
 //======================( ‚RŸŒ³ )==============================
-//		ƒxƒNƒgƒ‹‚ğ’PˆÊƒxƒNƒgƒ‹‚É•ÏŠ·‚·‚é
+//		3DƒxƒNƒgƒ‹‚ğ’PˆÊƒxƒNƒgƒ‹‚É•ÏŠ·‚·‚é
 //
 MgVect3D MgVect3D::SetUnitize( MREAL i_Tol)			//	(  O) ’PˆÊƒxƒNƒgƒ‹
 {
@@ -143,9 +139,9 @@ MgVect3D MgVect3D::SetUnitize( MREAL i_Tol)			//	(  O) ’PˆÊƒxƒNƒgƒ‹
 	z *= d2;
 	return *this;
 }
-//
+
 //======================( ‚RŸŒ³ )==============================
-//		ƒxƒNƒgƒ‹‚Ì’PˆÊƒxƒNƒgƒ‹‚ğ‹‚ß‚é
+//		3DƒxƒNƒgƒ‹‚Ì’PˆÊƒxƒNƒgƒ‹‚ğ‹‚ß‚é
 //
 MgVect3D MgVect3D::Unitize( MREAL i_Tol) const		//	(  O) ’PˆÊƒxƒNƒgƒ‹
 {
@@ -154,20 +150,19 @@ MgVect3D MgVect3D::Unitize( MREAL i_Tol) const		//	(  O) ’PˆÊƒxƒNƒgƒ‹
 	MREAL	d2 = 1.f / d1;
 	return MgVect3D( x * d2, y * d2, z * d2);
 }
-//
+
 //======================( ‚RŸŒ³ )==============================
-//		ƒxƒNƒgƒ‹‚ğƒgƒŒ[ƒX‚·‚é
+//		3DƒxƒNƒgƒ‹‚ğƒgƒŒ[ƒX‚·‚é
 //
 void MgVect3D::Print(MCHAR* s) const				// Print
 {
 #ifdef LOGOUT
-	Msprintf_s( mlLog::m_Str, Mstr( "%s 	MgVect3D	: (%7.1f, %7.1f, %7.1f)\n"), s, x, y, z);
-	MBLOGPRBF;
+	MBLOGOUT( Mstr( "%s 	MgVect3D	: (%7.1f, %7.1f, %7.1f)\n"), s, x, y, z);
 #endif
 }
-//
+
 //======================( ‚RŸŒ³ )==============================
-//		ƒxƒNƒgƒ‹‚Ì’PˆÊƒxƒNƒgƒ‹‚ğ‹‚ß‚é
+//		3DƒxƒNƒgƒ‹‚Ì’PˆÊƒxƒNƒgƒ‹‚ğ‹‚ß‚é
 //
 MgVect3D MGeo::UnitizeVect3D( const MgVect3D& i_v, MREAL i_Tol)	//	(  O) ’PˆÊƒxƒNƒgƒ‹
 {
@@ -176,23 +171,22 @@ MgVect3D MGeo::UnitizeVect3D( const MgVect3D& i_v, MREAL i_Tol)	//	(  O) ’PˆÊƒxƒ
 	MREAL	d2 = 1.f / d1;
 	return MgVect3D( i_v.x * d2, i_v.y * d2, i_v.z * d2);
 }
-#ifdef _MgPoint3DA
-
-
-MgPoint3Da Norma( const MgPoint3D& i_p, MREAL i_Tol)
-{
-	MREAL d1;
-/*
-	MgPoint3Da p1;
-	if(fabs(p.x < i_Tol)) p1.x = 0;	else p1.x = i_p.x;
-	if(fabs(p.y < i_Tol)) p1.y = 0;	else p1.y = i_p.y;
-	if(fabs(p.z < i_Tol)) p1.z = 0;	else p1.z = i_p.z;
-*/
-	MREAL	d1= MgAbs( p);
-		MBCHECK_ZEROVECT( d1, MBCstr( "MgPoint3Da Norma"), i_Tol);
-	MREAL	d2 = 1.f / d1;
-	return MgPoint3Da( i_p.x * d2, i_p.y * d2, i_p.z * d2, d1);
-}
-#endif
+//S #ifdef _MgPoint3DA
+//
+//MgPoint3Da Norma( const MgPoint3D& i_p, MREAL i_Tol)
+//{
+//	MREAL d1;
+///*
+//	MgPoint3Da p1;
+//	if(fabs(p.x < i_Tol)) p1.x = 0;	else p1.x = i_p.x;
+//	if(fabs(p.y < i_Tol)) p1.y = 0;	else p1.y = i_p.y;
+//	if(fabs(p.z < i_Tol)) p1.z = 0;	else p1.z = i_p.z;
+//*/
+//	MREAL	d1= MgAbs( p);
+//		MBCHECK_ZEROVECT( d1, MBCstr( "MgPoint3Da Norma"), i_Tol);
+//	MREAL	d2 = 1.f / d1;
+//	return MgPoint3Da( i_p.x * d2, i_p.y * d2, i_p.z * d2, d1);
+//}
+//#endif
 
 } // namespace MC

@@ -260,10 +260,10 @@ void CMmDialogTenkai::SetControl()
 	for (MINT ic=0; ic<MX_NJUKO; ic++) {
 		if ( ic < m_TenkaiPara.nJuko) {
 			m_pH( ic)->SetCheck( m_TenkaiPara.ifH[ic]);
-			m_pNmJuko( ic)->SetWindowTextW( MC::MsCnvSMINT( 0, m_TenkaiPara.nOJuko[ic]));
-			m_pMDJuko( ic)->SetWindowTextW( MC::MsCnvSMREAL( 1, m_TenkaiPara.rMDJuko[ic]));
-			m_pDJuko( ic)->SetWindowTextW( MC::MsCnvSMREAL( 1, m_TenkaiPara.rDJuko[ic]));
-			m_pWJuko( ic)->SetWindowTextW( MC::MsCnvSMREAL( 1, m_TenkaiPara.rWJuko[ic]));
+			m_pNmJuko( ic)->SetWindowTextW( MC::ms::CnvSMINT( 0, m_TenkaiPara.nOJuko[ic]));
+			m_pMDJuko( ic)->SetWindowTextW( MC::ms::CnvSMREAL( 1, m_TenkaiPara.rMDJuko[ic]));
+			m_pDJuko( ic)->SetWindowTextW( MC::ms::CnvSMREAL( 1, m_TenkaiPara.rDJuko[ic]));
+			m_pWJuko( ic)->SetWindowTextW( MC::ms::CnvSMREAL( 1, m_TenkaiPara.rWJuko[ic]));
 
 			m_pgrpJuko( ic)->ShowWindow( 1);
 			m_pH( ic)->ShowWindow( 1);
@@ -410,7 +410,7 @@ void CMmDialogTenkai::ChangeEditW( MINT iJ)
 {
 	CString sD;
 	m_pWJuko( iJ)->GetWindowTextW( sD);
-	m_TenkaiPara.rWJuko[iJ] = MC::MsGetMREAL( sD);
+	m_TenkaiPara.rWJuko[iJ] = MC::ms::CnvMREAL( sD);
 }
 void CMmDialogTenkai::OnEnChangeEditW1()	{	ChangeEditW( 0);}
 	// TODO:  これが RICHEDIT コントロールの場合、
@@ -476,7 +476,7 @@ void CMmDialogTenkai::ChangeEditD( MINT iJ)
 {
 	CString sD;
 	m_pDJuko( iJ)->GetWindowTextW( sD);
-	m_TenkaiPara.rDJuko[iJ] = MC::MsGetMREAL( sD);
+	m_TenkaiPara.rDJuko[iJ] = MC::ms::CnvMREAL( sD);
 }
 void CMmDialogTenkai::OnEnChangeEditD1()	{ ChangeEditD( 0);}
 void CMmDialogTenkai::OnEnChangeEditD2()	{ ChangeEditD( 1);}
@@ -496,7 +496,7 @@ void CMmDialogTenkai::ChangeEditMd( MINT iJ)
 {
 	CString sD;
 	m_pMDJuko( iJ)->GetWindowTextW( sD);
-	m_TenkaiPara.rMDJuko[iJ] = MC::MsGetMREAL( sD);
+	m_TenkaiPara.rMDJuko[iJ] = MC::ms::CnvMREAL( sD);
 }
 void CMmDialogTenkai::OnEnChangeEditMd1()	{ ChangeEditMd( 0);}
 //	CString sD;

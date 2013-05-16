@@ -529,7 +529,7 @@ void	MBHZDT::BackCh(
 // ********************************************************************************
 
 MINT Code::msbstowcs( 
-				char*	i_StrC,					// MBCS•¶Žš—ñ
+		const	char*	i_StrC,					// MBCS•¶Žš—ñ
 				MCHAR*	o_StrU,					// UNICODE•¶Žš—ñ
 				MINT	i_iSize					// Å‘å•¶Žš”
 				)
@@ -567,8 +567,8 @@ MINT Code::msbstowcs(
 // ********************************************************************************
 
 MINT Code::mswcstombs( 
-				MCHAR*	StrU,					// ( I  ) UNICODE•¶Žš—ñ
-				char*	StrC,					// (  O) MBCS•¶Žš—ñ
+				LPCWSTR	StrU,					// ( I  ) UNICODE•¶Žš—ñ
+				LPSTR	StrC,					// (  O) MBCS•¶Žš—ñ
 				MINT	iSize					// ( I  ) Å‘å•¶Žš”
 				)
 {

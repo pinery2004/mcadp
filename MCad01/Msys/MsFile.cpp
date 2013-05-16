@@ -76,7 +76,7 @@ BOOL MsFileDialog::OnInitDialog()
 
 ///////////////////////////////////////////////////////////////////////////////
 //	読み込み用ファイル選択ダイアログを表示する
-void MsLoadFileDlg(
+void mslib::LoadFileDlg(
 					CWnd*		i_pWnd,				// 親ウィンドウまたはオーナー ウィンドウへのポインタ
 					MCHAR*		i_sInitFilePath,	// 初期設定ファイルパス
 					MCHAR*		o_sSelFilePath,		// 選択ファイルパス
@@ -89,7 +89,7 @@ void MsLoadFileDlg(
 
 ///////////////////////////////////////////////////////////////////////////////
 //	保存用ファイル選択ダイアログを表示する
-void MsSaveFileDlg(
+void mslib::SaveFileDlg(
 					CWnd*		i_pWnd,				// 親ウィンドウまたはオーナー ウィンドウへのポインタ
 					MCHAR*		i_sInitFilePath,	// 初期設定ファイルパス
 					MCHAR*		o_sSelFilePath,		// 選択ファイルパス
@@ -155,11 +155,13 @@ void MsFileDialog::DispFileDlg(
 	}
 }
 
+///////////////////////////////////////////////////////////////////////////////
+// フォルダ選択ダイアログプロシージャ
 int CALLBACK MsForFolderDlg_Callback(HWND hWnd, UINT uMsg, LPARAM lParam, LPARAM lpData);
 
 /////////////////////////////////////////////////////////////////////////////
 //	フォルダ選択ダイアログを表示する
-void MsForFolderDlg( 
+void mslib::ForFolderDlg( 
 					HWND		i_hWnd,				// (I  ) 親ウィンドウのハンドル
 					MCHAR*		i_sCaptionStr,		// (I  ) 説明の文字列
 					MCHAR*		i_sInitFldrPath,	// (I  ) 初期設定フォルダパス
@@ -251,7 +253,9 @@ void MsForFolderDlg(
     pMalloc->Release();
 }
 
-int CALLBACK MsForFolderDlg_Callback(HWND hWnd, UINT uMsg, LPARAM lParam, LPARAM lpData) {
+///////////////////////////////////////////////////////////////////////////////
+// フォルダ選択ダイアログプロシージャ
+static int CALLBACK MsForFolderDlg_Callback(HWND hWnd, UINT uMsg, LPARAM lParam, LPARAM lpData) {
     if( uMsg == BFFM_INITIALIZED) {
         SendMessage(hWnd, BFFM_SETSELECTION, (WPARAM)TRUE, lpData);
     }

@@ -82,9 +82,9 @@ public:
 
 	MgMinMaxI2D operator | ( const MgMinMaxI2D &imm1) const							// mm1 = mm2 | mm3
 						{ return MgMinMaxI2D( MGMIN( min.x, imm1.min.x),
-											 MGMIN( min.y, imm1.min.y),
-											 MGMAX( max.x, imm1.max.x),
-											 MGMAX( max.y, imm1.max.y));}
+											  MGMIN( min.y, imm1.min.y),
+											  MGMAX( max.x, imm1.max.x),
+											  MGMAX( max.y, imm1.max.y));}
 	MgMinMaxI2D operator + ( const CPoint &pt) const								// mm1 = mm2 + pt
 						{ return MgMinMaxI2D( min + pt, max + pt);}
 	MgMinMaxI2D operator - ( const CPoint &pt) const								// mm1 = mm2 - pt
@@ -95,44 +95,44 @@ public:
 						{ min -= pt; max -= pt; return *this;}
 	friend MgMinMaxI2D operator * ( MINT isc, const MgMinMaxI2D &mm)				// mm1 = isc * mm2
 						{ return MgMinMaxI2D( mm.min.x * isc, mm.min.y * isc, 
-										     mm.max.x * isc, mm.max.y * isc);}
+										      mm.max.x * isc, mm.max.y * isc);}
 	friend MgMinMaxI2D operator * ( MREAL rsc, const MgMinMaxI2D &mm)				// mm1 = rsc * mm2
 						{ return MgMinMaxI2D( MINT(mm.min.x * rsc),
-										     MINT(mm.min.y * rsc), 
-										     MINT(mm.max.x * rsc), 
-										     MINT(mm.max.y * rsc));}
+										      MINT(mm.min.y * rsc), 
+										      MINT(mm.max.x * rsc), 
+										      MINT(mm.max.y * rsc));}
 	MgMinMaxI2D operator * ( MINT isc) const										// mm1 = mm2 * isc
 						{ return MgMinMaxI2D( min.x * isc, min.y * isc, 
 										     max.x * isc, max.y * isc);}
 	MgMinMaxI2D operator * ( MREAL rsc) const										// mm1 = mm2 * rsc
 						{ return MgMinMaxI2D( MINT(min.x * rsc),
-										     MINT(min.y * rsc), 
-										     MINT(max.x * rsc),
-										     MINT(max.y * rsc));}
+										      MINT(min.y * rsc), 
+										      MINT(max.x * rsc),
+										      MINT(max.y * rsc));}
 	MgMinMaxI2D operator / ( MINT isc) const										// mm1 = mm2 / isc
 						{ return MgMinMaxI2D( min.x / isc, min.y / isc, 
-										     max.x / isc, max.y / isc);}
+										      max.x / isc, max.y / isc);}
 	MgMinMaxI2D operator / ( MREAL rsc) const										// mm1 = mm2 / rsc
 						{ return MgMinMaxI2D( MINT(min.x / rsc),
-										     MINT(min.y / rsc), 
-										     MINT(max.x / rsc),
-										     MINT(max.y / rsc));}
+										      MINT(min.y / rsc), 
+										      MINT(max.x / rsc),
+										      MINT(max.y / rsc));}
 	MgMinMaxI2D operator *= ( MINT isc)												// mm1 *= isc
 						{ return MgMinMaxI2D( min.x *= isc, min.y *= isc, 
-										     max.x *= isc, max.y *= isc);}
+										      max.x *= isc, max.y *= isc);}
 	MgMinMaxI2D operator *= ( MREAL rsc)											// mm1 *= rsc
 						{ return MgMinMaxI2D( min.x = MINT(min.x * rsc),
-										     min.y = MINT(min.y * rsc), 
-										     max.x = MINT(max.x * rsc),
-										     max.y = MINT(max.y * rsc));}
+										      min.y = MINT(min.y * rsc), 
+										      max.x = MINT(max.x * rsc),
+										      max.y = MINT(max.y * rsc));}
 	MgMinMaxI2D operator /= ( MINT isc)												// mm1 /= isc
 						{ return MgMinMaxI2D( min.x /= isc, min.y /= isc, 
-										     max.x /= isc, max.y /= isc);}
+										      max.x /= isc, max.y /= isc);}
 	MgMinMaxI2D operator /= ( MREAL rsc)											// mm1 /= rsc
 						{ return MgMinMaxI2D( min.x = MINT(min.x / rsc),
-										     min.y = MINT(min.y / rsc), 
-										     max.x = MINT(max.x / rsc),
-										     max.y = MINT(max.y / rsc));}
+										      min.y = MINT(min.y / rsc), 
+										      max.x = MINT(max.x / rsc),
+										      max.y = MINT(max.y / rsc));}
 
 	void Print(MCHAR* s);															// print
 };
@@ -185,9 +185,9 @@ public:
 
 	MgMinMaxR2D operator | ( const MgMinMaxR2D &mm1) const							// mm1 = mm2 | mm3
 						{ return MgMinMaxR2D( MGMIN( min.x, mm1.min.x),
-											 MGMIN( min.y, mm1.min.y),
-											 MGMAX( max.x, mm1.max.x),
-											 MGMAX( max.y, mm1.max.y));}
+											  MGMIN( min.y, mm1.min.y),
+											  MGMAX( max.x, mm1.max.x),
+											  MGMAX( max.y, mm1.max.y));}
 	MgMinMaxR2D operator + ( const MgVect2D& pt) const								// mm1 = mm2 + pt
 						{ return MgMinMaxR2D( min + pt, max + pt);}
 	MgMinMaxR2D operator - ( const MgVect2D& pt) const								// mm1 = mm2 - pt
@@ -198,19 +198,19 @@ public:
 						{ min -= pt; max -= pt; return *this;}
 	friend MgMinMaxR2D operator * ( MREAL rsc, const MgMinMaxR2D &mm)				// mm1 = rsc * mm2
 						{ return MgMinMaxR2D( mm.min.x * rsc, mm.min.y * rsc, 
-										     mm.max.x * rsc, mm.max.y * rsc);}
+										      mm.max.x * rsc, mm.max.y * rsc);}
 	MgMinMaxR2D operator * ( MREAL rsc) const										// mm1 = mm2 * rsc
 						{ return MgMinMaxR2D( min.x * rsc, min.y * rsc, 
-										     max.x * rsc, max.y * rsc);}
+										      max.x * rsc, max.y * rsc);}
 	MgMinMaxR2D operator / ( MREAL rsc) const										// mm1 = mm2 / rsc
 						{ return MgMinMaxR2D( min.x / rsc, min.y / rsc, 
-										     max.x / rsc, max.y / rsc);}
+										      max.x / rsc, max.y / rsc);}
 	MgMinMaxR2D operator *= ( MREAL rsc)											// mm1 *= rsc
 						{ return MgMinMaxR2D( min.x *= rsc, min.y *= rsc, 
-										     max.x *= rsc, max.y *= rsc);}
+										      max.x *= rsc, max.y *= rsc);}
 	MgMinMaxR2D operator /= ( MREAL rsc)											// mm1 /= rsc
 						{ return MgMinMaxR2D( min.x /= rsc, min.y /= rsc, 
-										     max.x /= rsc, max.y /= rsc);}
+										      max.x /= rsc, max.y /= rsc);}
 
 	void Print(MCHAR* s);															// print
 };
@@ -278,29 +278,29 @@ public:
 											 MGMAX( max.z, mm1.max.z));}
 	MgMinMaxR3D operator + ( const MgVect3D& pt) const								// mm1 = mm2 + pt
 						{ return MgMinMaxR3D( min + pt,
-											 max + pt);}
+											  max + pt);}
 	MgMinMaxR3D operator - ( const MgVect3D& pt) const								// mm1 = mm2 - pt
 						{ return MgMinMaxR3D( min - pt,
-											 max - pt);}
-	MgMinMaxR3D operator += ( const MgPoint3D& pt)									// mm1 += pt
+											  max - pt);}
+	MgMinMaxR3D operator += ( const MgVect3D& pt)									// mm1 += pt
 						{ min += pt; max += pt; return *this;}
-	MgMinMaxR3D operator -= ( const MgPoint3D& pt)									// mm1 -= pt
+	MgMinMaxR3D operator -= ( const MgVect3D& pt)									// mm1 -= pt
 						{ min -= pt; max -= pt; return *this;}
 	friend MgMinMaxR3D operator * ( MREAL rsc, const MgMinMaxR3D &mm)				// mm1 = rsc * mm2
 						{ return MgMinMaxR3D( mm.min.x * rsc, mm.min.y * rsc, mm.min.z * rsc, 
-											 mm.max.x * rsc, mm.max.y * rsc, mm.max.z * rsc);}
+											  mm.max.x * rsc, mm.max.y * rsc, mm.max.z * rsc);}
 	MgMinMaxR3D operator * ( MREAL rsc) const										// mm1 = mm2 * rsc
 						{ return MgMinMaxR3D( min.x * rsc, min.y * rsc, min.z * rsc,
-											 max.x * rsc, max.y * rsc, max.z * rsc);}
+											  max.x * rsc, max.y * rsc, max.z * rsc);}
 	MgMinMaxR3D operator / ( MREAL rsc) const										// mm1 = mm2 / rsc
 						{ return MgMinMaxR3D( min.x / rsc, min.y / rsc, min.z / rsc,
-											 max.x / rsc, max.y / rsc, max.z / rsc);}
+											  max.x / rsc, max.y / rsc, max.z / rsc);}
 	MgMinMaxR3D operator *= ( MREAL rsc)											// mm1 *= rsc
 						{ return MgMinMaxR3D( min.x *= rsc, min.y *= rsc, min.z *= rsc,
-											 max.x *= rsc, max.y *= rsc, max.z *= rsc);}
+											  max.x *= rsc, max.y *= rsc, max.z *= rsc);}
 	MgMinMaxR3D operator /= ( MREAL rsc)											// mm1 /= rsc
 						{ return MgMinMaxR3D( min.x /= rsc, min.y /= rsc, min.z /= rsc,
-											 max.x /= rsc, max.y /= rsc, max.z /= rsc);}
+											  max.x /= rsc, max.y /= rsc, max.z /= rsc);}
 
 	void Print(MCHAR* s);														// print
 };
@@ -329,29 +329,29 @@ public:
 
 	MgRect2D operator + ( const MgVect2D& pt) const									// rc1 = rc2 + pt
 						{ return MgRect2D( p[0] + pt,
-										 p[1] + pt);}
+										   p[1] + pt);}
 	MgRect2D operator - ( const MgVect2D& pt) const									// rc1 = rc2 - pt
 						{ return MgRect2D( p[0] - pt,
-										 p[1] - pt);}
+										   p[1] - pt);}
 	MgRect2D operator += ( const MgVect2D& pt)										// rc1 += pt
 						{ p[0] += pt; p[1] += pt; return *this;}
 	MgRect2D operator -= ( const MgVect2D& pt)										// rc1 -= pt
 						{ p[0] -= pt; p[1] -= pt; return *this;}
 	friend MgRect2D operator * ( MREAL rsc, const MgRect2D &rc)						// rc1 = rsc * rc2
 						{ return MgRect2D( rc.p[0].x * rsc, rc.p[0].y * rsc, 
-										 rc.p[1].x * rsc, rc.p[1].y * rsc);}
+										   rc.p[1].x * rsc, rc.p[1].y * rsc);}
 	MgRect2D operator * ( MREAL rsc) const											// rc1 = rc2 * rsc
 						{ return MgRect2D( p[0].x * rsc, p[0].y * rsc, 
-										 p[1].x * rsc, p[1].y * rsc);}
+										   p[1].x * rsc, p[1].y * rsc);}
 	MgRect2D operator / ( MREAL rsc) const											// rc1 = rc2 / rsc
 						{ return MgRect2D( p[0].x / rsc, p[0].y / rsc, 
-										 p[1].x / rsc, p[1].y / rsc);}
+										   p[1].x / rsc, p[1].y / rsc);}
 	MgRect2D operator *= ( MREAL rsc)												// rc1 *= rsc
 						{ return MgRect2D( p[0].x *= rsc, p[0].y *= rsc, 
-										 p[1].x *= rsc, p[1].y *= rsc);}
+										   p[1].x *= rsc, p[1].y *= rsc);}
 	MgRect2D operator /= ( MREAL rsc)												// rc1 /= rsc
 						{ return MgRect2D( p[0].x /= rsc, p[0].y /= rsc, 
-										 p[1].x /= rsc, p[1].y /= rsc);}
+										   p[1].x /= rsc, p[1].y /= rsc);}
 
 	void Print(MCHAR* s);															// print
 };
@@ -385,46 +385,46 @@ public:
 						{ return (p[1].z - p[0].z);}
 	bool Overlap(const MgRect3D&, const MgRect3D);
 
-	MgRect3D operator + ( const MgVect3D& pt) const								// rc1 = rc2 + pt
+	MgRect3D operator + ( const MgVect3D& pt) const									// rc1 = rc2 + pt
 						{ return MgRect3D( p[0] + pt,
-										  p[1] + pt);}
-	MgRect3D operator - ( const MgVect3D& pt) const								// rc1 = rc2 - pt
+										   p[1] + pt);}
+	MgRect3D operator - ( const MgVect3D& pt) const									// rc1 = rc2 - pt
 						{ return MgRect3D( p[0] - pt,
-										  p[1] - pt);}
-	MgRect3D operator += ( const MgVect3D& pt)									// rc1 += pt
+										   p[1] - pt);}
+	MgRect3D operator += ( const MgVect3D& pt)										// rc1 += pt
 						{ p[0] += pt; p[1] += pt; return *this;}
-	MgRect3D operator -= ( const MgPoint3D& pt)									// rc1 -= pt
+	MgRect3D operator -= ( const MgPoint3D& pt)										// rc1 -= pt
 						{ p[0] -= pt; p[1] -= pt; return *this;}
 
-	friend MgRect3D operator * ( MREAL rsc, const MgRect3D &rc)					// rc1 = rsc * rc2
+	friend MgRect3D operator * ( MREAL rsc, const MgRect3D &rc)						// rc1 = rsc * rc2
 						{ return MgRect3D( rc.p[0].x * rsc, rc.p[0].y * rsc, rc.p[0].z * rsc,
-										  rc.p[1].x * rsc, rc.p[1].y * rsc, rc.p[1].z * rsc);}
-	MgRect3D operator * ( MREAL rsc) const										// rc1 = rc2 * rsc
+										   rc.p[1].x * rsc, rc.p[1].y * rsc, rc.p[1].z * rsc);}
+	MgRect3D operator * ( MREAL rsc) const											// rc1 = rc2 * rsc
 						{ return MgRect3D( p[0].x * rsc, p[0].y * rsc, p[0].z * rsc,
-										  p[1].x * rsc, p[1].y * rsc, p[1].z * rsc);}
-	MgRect3D operator / ( MREAL rsc) const										// rc1 = rc2 / rsc
+										   p[1].x * rsc, p[1].y * rsc, p[1].z * rsc);}
+	MgRect3D operator / ( MREAL rsc) const											// rc1 = rc2 / rsc
 						{ return MgRect3D( p[0].x / rsc, p[0].y / rsc, p[0].z / rsc,
-										  p[1].x / rsc, p[1].y / rsc, p[1].z / rsc);}
-	MgRect3D operator *= ( MREAL rsc)											// rc1 *= rsc
+										   p[1].x / rsc, p[1].y / rsc, p[1].z / rsc);}
+	MgRect3D operator *= ( MREAL rsc)												// rc1 *= rsc
 						{ return MgRect3D( p[0].x *= rsc, p[0].y *= rsc, p[0].z *= rsc,
-										  p[1].x *= rsc, p[1].y *= rsc, p[1].z *= rsc);}
-	MgRect3D operator /= ( MREAL rsc)											// rc1 /= rsc
+										   p[1].x *= rsc, p[1].y *= rsc, p[1].z *= rsc);}
+	MgRect3D operator /= ( MREAL rsc)												// rc1 /= rsc
 						{ return MgRect3D( p[0].x /= rsc, p[0].y /= rsc, p[0].z /= rsc,
-										  p[1].x /= rsc, p[1].y /= rsc, p[1].z /= rsc);}
+										   p[1].x /= rsc, p[1].y /= rsc, p[1].z /= rsc);}
 
-	void Print(MCHAR* s);														// print
+	void Print(MCHAR* s);															// print
 };
 
 inline MINT SZMgMinMaxI2D( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgMinMaxI2D));}
 inline MINT SZMgMinMaxR2D( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgMinMaxR2D));}
 inline MINT SZMgMinMaxR3D( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgMinMaxR3D));}
-inline MINT SZMgRect2D( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgRect2D));}
-inline MINT SZMgRect3D( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgRect3D));}
+inline MINT SZMgRect2D( MINT i_sz = 1)		{ return  ( i_sz * (MINT)sizeof( MgRect2D));}
+inline MINT SZMgRect3D( MINT i_sz = 1)		{ return  ( i_sz * (MINT)sizeof( MgRect3D));}
 
 inline MINT WSZMgMinMaxI2D( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgMinMaxI2D) / SZMINT());}
 inline MINT WSZMgMinMaxR2D( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgMinMaxR2D) / SZMINT());}
 inline MINT WSZMgMinMaxR3D( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgMinMaxR3D) / SZMINT());}
-inline MINT WSZMgRect2D( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgRect2D) / SZMINT());}
-inline MINT WSZMgRect3D( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgRect3D) / SZMINT());}
+inline MINT WSZMgRect2D( MINT i_sz = 1)		{ return  ( i_sz * (MINT)sizeof( MgRect2D) / SZMINT());}
+inline MINT WSZMgRect3D( MINT i_sz = 1)		{ return  ( i_sz * (MINT)sizeof( MgRect3D) / SZMINT());}
 
 } // namespace MC

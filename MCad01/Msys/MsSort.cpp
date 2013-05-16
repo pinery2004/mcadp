@@ -17,17 +17,17 @@
 namespace MC
 {
 
-static MINT			z_CmpWidth;									// デフォルトの配列の要素サイズ
-static MAryCmpFunc	AryCompare;									// デフォルトの比較関数
+static MINT					z_CmpWidth;			// デフォルトの配列の要素サイズ
+static mslib::AryCmpFunc	AryCompare;			// デフォルトの比較関数
 
 ////////////////////////////////////////////////////////////////////////////
 //【機能】クイックソート
 
-void MsQSort(													// (  O) ｽﾃｰﾀｽ
-			void*			base,								// (I  ) 並び替える配列の先頭
-			MINT			num,								// (I  ) 配列の要素数
-			MINT			width,								// (I  ) 配列の要素サイズ(バイト数)
-			MAryCmpFunc*	AryCmpFunc							// (I  ) 比較関数
+void mslib::QSort(								// (  O) ｽﾃｰﾀｽ
+					void*	base,				// (I  ) 並び替える配列の先頭
+					MINT	num,				// (I  ) 配列の要素数
+					MINT	width,				// (I  ) 配列の要素サイズ(バイト数)
+					AryCmpFunc*	AryCmpFunc		// (I  ) 比較関数
 			)
 {
 	z_CmpWidth = width;
@@ -41,9 +41,9 @@ void MsQSort(													// (  O) ｽﾃｰﾀｽ
 //		  == 0 : array1 == array2
 //		   > 0 : array1  > array2 
 
-static MINT AryCompare(											// (  O) ｽﾃｰﾀｽ
-			const void*		array1,								// (I  ) ﾃﾞｰﾀ1
-			const void*		array2								// (I  ) ﾃﾞｰﾀ2
+MINT mslib::AryCompare(							// (  O) ｽﾃｰﾀｽ
+			const	void*	array1,				// (I  ) ﾃﾞｰﾀ1
+			const	void*	array2				// (I  ) ﾃﾞｰﾀ2
 			)
 {
 	return memcmp(array1, array2, z_CmpWidth);

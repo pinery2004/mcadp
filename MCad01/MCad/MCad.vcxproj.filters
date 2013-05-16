@@ -758,6 +758,9 @@
     <ClInclude Include="..\include\MgMatDf.h">
       <Filter>Mgeo\hdr</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\MsMsg.h">
+      <Filter>Msys\hdr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -866,9 +869,6 @@
       <Filter>Msys\src</Filter>
     </ClCompile>
     <ClCompile Include="..\Msys\MsSynchroObj.cpp">
-      <Filter>Msys\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Msys\MsSysError.cpp">
       <Filter>Msys\src</Filter>
     </ClCompile>
     <ClCompile Include="..\Mfile\MfFile.cpp">
@@ -1296,6 +1296,9 @@
     </ClCompile>
     <ClCompile Include="..\MGeo\MgMatD.cpp">
       <Filter>Mgeo\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Msys\MsMsg.cpp">
+      <Filter>Msys\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

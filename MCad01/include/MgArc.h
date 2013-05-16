@@ -230,9 +230,13 @@ inline MgArc3D MgArc3DC( const MgPoint2D pt1, const MgPoint2D pt2,
 						  Arco.V = Pln.v; Arco.r = r; return Arco;}
 
 // ÉTÉCÉY
-inline MINT SZMgArc2D( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgArc2D));}
-inline MINT SZMgArc3D( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgArc3D));}
-inline MINT WSZMgArc2D( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgArc2D) / SZMINT());}
-inline MINT WSZMgArc3D( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgArc3D) / SZMINT());}
+inline int SZMgArc2D( int i_sz)		{ return ( i_sz * (int)sizeof( MgArc2D));}
+inline int SZMgArc2D()				{ return (int)sizeof( MgArc2D);}
+inline int SZMgArc3D( int i_sz)		{ return ( i_sz * (int)sizeof( MgArc3D));}
+inline int SZMgArc3D()				{ return (int)sizeof( MgArc3D);}
+inline int WSZMgArc2D( int i_sz)	{ return ( i_sz * (int)sizeof( MgArc2D) / SZMINT());}
+inline int WSZMgArc2D()				{ return (int)sizeof( MgArc2D) / SZMINT();}
+inline int WSZMgArc3D( int i_sz)	{ return ( i_sz * (int)sizeof( MgArc3D) / SZMINT());}
+inline int WSZMgArc3D()				{ return (int)sizeof( MgArc3D) / SZMINT();}
 
 } // namespace MC

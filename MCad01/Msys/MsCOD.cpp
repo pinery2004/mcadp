@@ -451,7 +451,7 @@ void msCod::Text(
 	vDirect = z_vTextDirect;
 	vOffset = z_pTextOffset;
 
-	fAngle = MGeo::AngleVectH2D( vDirect);							// ç∂âÒì]äpìx(ìx)
+	fAngle = MGeo::AngleXVect2D( vDirect);							// ç∂âÒì]äpìx(ìx)
 	if (fAngle <= 105 && fAngle >= -75) {
 		iTextPosUL = z_iTextPosUL;
 		iTextPosLR = z_iTextPosLR;

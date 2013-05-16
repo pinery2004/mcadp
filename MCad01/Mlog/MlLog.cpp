@@ -227,10 +227,14 @@ void mlLog::LogOut(
 						)
 {
 #ifdef LOGOUT
+	MCHAR	CMsg[MAX_PATH];
 	va_list	cList;
 	if( m_iCtl != 0) {
 		va_start( cList, i_cFormat);
-		_vftprintf_s( m_File, i_cFormat, cList);
+//		_vftprintf_s( m_File, i_cFormat, cList);
+		_vstprintf_s( CMsg, i_cFormat, cList);
+		Mfprintf( m_File, CMsg);
+		TRACE( CMsg);
 		va_end( cList);
 	}
 #endif
@@ -250,21 +254,29 @@ void mlLog::LogOutWL(
 						)
 {
 #ifdef LOGOUT
+	MCHAR	cMsg[MAX_PATH];
 	switch ( i_iLevel) {
 	case MC_LOG_ERROR:
-		fprintf( m_File, " *** ERROR *** ");
-//U		__debugbreak();										// ブレークポイント
-		AfxDebugBreak();
+		fprintf( m_File, "\n *** ERROR *** ");
+		TRACE( "\n *** ERROR *** ");
 		break;
 	case MC_LOG_WARNING:
-		fprintf( m_File, " *** WARNING *** ");
+		fprintf( m_File, "\n *** WARNING *** ");
+		TRACE( "\n *** WARNING *** ");
 		break;
 	}
 	va_list	cList;
 	if( m_iCtl != 0) {
 		va_start( cList, i_cFormat);
-		_vftprintf( m_File, i_cFormat, cList);
+//		_vftprintf( m_File, i_cFormat, cList);
+		_vstprintf_s( cMsg, i_cFormat, cList);
+		Mfprintf( m_File, cMsg);
+		TRACE( cMsg);
 		va_end( cList);
+	}
+	if( i_iLevel == MC_LOG_ERROR) {
+//S		__debugbreak();											// ブレークポイント
+		AfxDebugBreak();										// ブレークポイント
 	}
 #endif
 }
@@ -274,8 +286,8 @@ void mlLog::Trace( MCHAR* str)
 {
 #ifdef LOGOUT
 	if( m_iCtl != 0) {
-		Mfprintf( m_File, Mstr( "%s"), str);
-		TRACE( Mstr( "%s"), str);
+		Mfprintf( m_File, str);
+		TRACE( str);
 	}
 #endif
 }

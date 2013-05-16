@@ -28,8 +28,8 @@ static MCHAR*	SubKey = Mstr( "Path");
 ////////////////////////////////////////////////////////////////////////////
 //	ƒvƒƒZƒX‚ð‹N“®‚µI—¹‚·‚é‚Ü‚Å‘Ò‚ÂB
 MINT MsProcXqt(									// ½Ã°À½	0 : ƒvƒƒZƒX‚ðŽÀs‚µI—¹   -1 : ƒvƒƒZƒX‚ÌŽÀs‚ÉŽ¸”s
-						MCHAR*	i_AplName,		// ŽÀs‚·‚éÓ¼Þ­°Ù–¼
-						MCHAR*	i_cCmdLine)		// ±ÌßØ¹°¼®Ý‚É“n‚·ºÏÝÄÞ×²Ý
+				const	MCHAR*	i_AplName,		// ŽÀs‚·‚éÓ¼Þ­°Ù–¼
+						MCHAR*	io_cCmdLine)	// ±ÌßØ¹°¼®Ý‚É“n‚·ºÏÝÄÞ×²Ý
 {
 	MINT		Status;							// ½Ã°À½
 	STARTUPINFO	StatInf;						// ÌßÛ¾½‚ÌÒ²Ý³¨ÝÄÞ³‚Ì•\Ž¦î•ñ\‘¢‘Ì
@@ -44,20 +44,20 @@ MINT MsProcXqt(									// ½Ã°À½	0 : ƒvƒƒZƒX‚ðŽÀs‚µI—¹   -1 : ƒvƒƒZƒX‚ÌŽÀs‚
 	memset(&ProcInf, 0, sizeof(ProcInf));
 
 	// ƒvƒƒZƒX‚Ìì¬
-	if ( ( BolSts = CreateProcess( i_AplName, i_cCmdLine, 0, 0, false, NORMAL_PRIORITY_CLASS,
+	if ( ( BolSts = CreateProcess( i_AplName, io_cCmdLine, 0, 0, false, NORMAL_PRIORITY_CLASS,
 								   0, 0, &StatInf, &ProcInf)) == false) {
 		Status = -1;
 		goto  PRG_EXIT;
 	}
-	HProc = ProcInf.hProcess;															// ÌßÛ¾½ÊÝÄÞÙ‚Ì¾¯Ä
+	HProc = ProcInf.hProcess;													// ÌßÛ¾½ÊÝÄÞÙ‚Ì¾¯Ä
 
 	do {
-		while ( ( ItrSts = WaitForSingleObject( HProc, 200)) == WAIT_TIMEOUT);				// ‘Ò‹@
+		while ( ( ItrSts = WaitForSingleObject( HProc, 200)) == WAIT_TIMEOUT);	// ‘Ò‹@
 		GetExitCodeProcess( HProc, &ExitFlg);
 
-	} while ( ExitFlg == STILL_ACTIVE);													// I—¹‚Ü‚Å‘Ò‚Â
+	} while ( ExitFlg == STILL_ACTIVE);											// I—¹‚Ü‚Å‘Ò‚Â
 
-	if ( HProc != 0)  CloseHandle(HProc);												// ÊÝÄÞÙ‚ð¸Û°½Þ‚·‚é
+	if ( HProc != 0)  CloseHandle(HProc);										// ÊÝÄÞÙ‚ð¸Û°½Þ‚·‚é
 
 PRG_EXIT:
 
@@ -67,8 +67,9 @@ PRG_EXIT:
 ////////////////////////////////////////////////////////////////////////////
 //		ŠÂ‹«•Ï”‚ð“¾‚é
 MINT MsGetenv(									// ½Ã°À½	0 : ³í   -1 : ƒGƒ‰[
-						MCHAR*	i_cEnvNam,		// ŠÂ‹«•Ï”–¼
-						MCHAR*	o_cEnvVal)		// ŠÂ‹«•Ï”‚Ì’l
+				const	MCHAR*	i_cEnvNam,		// ŠÂ‹«•Ï”–¼
+						MCHAR*	o_cEnvVal,		// ŠÂ‹«•Ï”‚Ì’l
+						size_t	i_iszEnvVal)	// ŠÂ‹«•Ï”‚Ì’l‚ÌÅ‘å•¶Žš”+1
 {
 	MINT		iSt;							// ½Ã°À½
 	MCHAR*		cEnvPtr;						// ŠÂ‹«•Ï”Îß²ÝÀ
@@ -79,7 +80,7 @@ MINT MsGetenv(									// ½Ã°À½	0 : ³í   -1 : ƒGƒ‰[
 	cEnvPtr = _tgetenv( i_cEnvNam);
 	if ( cEnvPtr == NULL)  goto  PRG_EXIT;
 
-	Mstrcpy( o_cEnvVal, cEnvPtr);
+	Mstrcpy_s( o_cEnvVal, i_iszEnvVal, cEnvPtr);
 	iSt = 0;
 
 PRG_EXIT:
@@ -91,8 +92,9 @@ PRG_EXIT:
 //		ŠÂ‹«•Ï”‚ð‰Á‚¦‚½ƒpƒX–¼‚ð“¾‚é
 MINT MsAddEnvNam(								// ½Ã°À½	0 : ³í   -1 : ƒGƒ‰[
 						MINT	i_iType,		// 0;‘®« 1:}Œ` 2:Ã°ÌÞÙ 3:Ã·½Á¬ -1:HTEMP
-						MCHAR*	i_cFilNam,		// Ì§²Ù–¼
-						MCHAR*	o_cPasNam)		// ŠÂ‹«•Ï”‚ð‰Á‚¦‚½Êß½–¼
+				const	MCHAR*	i_cFilNam,		// Ì§²Ù–¼
+						MCHAR*	o_cPasNam,		// ŠÂ‹«•Ï”‚ð‰Á‚¦‚½Êß½–¼
+						size_t	i_iszPasNam)	// ŠÂ‹«•Ï”‚ð‰Á‚¦‚½Êß½–¼‚ÌÅ‘å•¶Žš”+1
 {
 	MINT		Status;							// ½Ã°À½
 	MINT		Leng;
@@ -102,26 +104,29 @@ MINT MsAddEnvNam(								// ½Ã°À½	0 : ³í   -1 : ƒGƒ‰[
 	Status = -1;
 
 	if ( i_iType >= 0 && i_iType < HOLDNUM) {
-		ItrSts = MsGetenv( Mstr("MCAD"), o_cPasNam);
-		if ( ItrSts != 0)  Mstrcpy( o_cPasNam, Mstr("E:/MCAD"));
+		ItrSts = MsGetenv( Mstr("MCAD"), o_cPasNam, i_iszPasNam);
+		if ( ItrSts != 0)
+			Mstrcpy_s( o_cPasNam, i_iszPasNam, Mstr("E:/MCAD"));
 
-		Leng = (MINT)Mstrlen( o_cPasNam);													// •¶Žš”
-		if ( Mstrncmp( &o_cPasNam[Leng-1], Mstr("/"), 1) != 0)  Mstrcat( o_cPasNam, Mstr("/"));
+		Leng = (MINT)Mstrlen( o_cPasNam);						// •¶Žš”
+		if ( Mstrncmp( &o_cPasNam[Leng-1], Mstr("/"), 1) != 0)
+			Mstrcat_s( o_cPasNam, i_iszPasNam, Mstr("/"));
 
-		Mstrcat( o_cPasNam, HOLDER[i_iType]);
+		Mstrcat_s( o_cPasNam, i_iszPasNam, HOLDER[i_iType]);
 
 		if ( i_cFilNam) {
-			Mstrcat( o_cPasNam, Mstr("/"));
-			Mstrcat( o_cPasNam, i_cFilNam);
+			Mstrcat_s( o_cPasNam, i_iszPasNam, Mstr("/"));
+			Mstrcat_s( o_cPasNam, i_iszPasNam, i_cFilNam);
 		}
 	} else if ( i_iType == -1) {
-		ItrSts = MsGetenv( Mstr("MTEMP"), o_cPasNam);
-		if ( ItrSts != 0)  Mstrcpy( o_cPasNam, Mstr("C:/TEMP"));
+		ItrSts = MsGetenv( Mstr("MTEMP"), o_cPasNam, i_iszPasNam);
+		if ( ItrSts != 0)  Mstrcpy_s( o_cPasNam, i_iszPasNam, Mstr("C:/TEMP"));
 
-		Leng = (MINT)Mstrlen( o_cPasNam);													// •¶Žš”
-		if ( Mstrncmp( &o_cPasNam[Leng-1], Mstr("/"), 1) != 0)  Mstrcat( o_cPasNam, Mstr("/"));
+		Leng = (MINT)Mstrlen( o_cPasNam);						// •¶Žš”
+		if ( Mstrncmp( &o_cPasNam[Leng-1], Mstr("/"), 1) != 0)
+			Mstrcat_s( o_cPasNam, i_iszPasNam, Mstr("/"));
 
-		if ( i_cFilNam)  Mstrcat( o_cPasNam, i_cFilNam);
+		if ( i_cFilNam)  Mstrcat_s( o_cPasNam, i_iszPasNam, i_cFilNam);
 	}
 
 	Status = 0;
@@ -133,9 +138,9 @@ MINT MsAddEnvNam(								// ½Ã°À½	0 : ³í   -1 : ƒGƒ‰[
 //		ƒŒƒWƒXƒgƒŠ‚Ì“o˜^
 MINT MsSetRegistry( void)						// (  O) ½Ã°À½	     0 : ³í   -1 : ƒGƒ‰[
 {
-	MINT		Status;							// ½Ã°À½
-	CRegKey		RKey;
-	MINT		ItrSts;
+						MINT	Status;			// ½Ã°À½
+						CRegKey	RKey;			//
+						MINT	ItrSts;			//
 
 
 	Status = -1;
@@ -160,7 +165,8 @@ MINT MsSetRegistry( void)						// (  O) ½Ã°À½	     0 : ³í   -1 : ƒGƒ‰[
 ////////////////////////////////////////////////////////////////////////////
 //		ƒŒƒWƒXƒgƒŠ‚æ‚èƒpƒX‚ðŽæ“¾
 MINT MsGetRegistryPath(							// (  O) ½Ã°À½	0 : ³í   -1 : ƒGƒ‰[
-						MCHAR*	PName)			// (  O) Êß½ÎÙÀÞ°
+						MCHAR*	o_pPName,		// Êß½ÎÙÀÞ°
+						size_t	i_iszPName)		// Êß½ÎÙÀÞ°‚ÌÅ‘å•¶Žš”+1
 {
 	MINT		Status;							// ½Ã°À½
 	CRegKey		RKey;
@@ -169,7 +175,7 @@ MINT MsGetRegistryPath(							// (  O) ½Ã°À½	0 : ³í   -1 : ƒGƒ‰[
 	MINT		ItrSts;
 
 	Status = -1;
-	Mstrcpy(NameW, Mstr(""));
+	Mstrcpy_s(NameW, i_iszPName, Mstr(""));
 
 	ItrSts = RKey.Open( HKEY_LOCAL_MACHINE, RegSub, KEY_READ);
 	if ( ItrSts == ERROR_SUCCESS) {														// ‚ ‚è
@@ -178,7 +184,7 @@ MINT MsGetRegistryPath(							// (  O) ½Ã°À½	0 : ³í   -1 : ƒGƒ‰[
 		if ( ItrSts == ERROR_SUCCESS)  Status = 0;
 		RKey.Close();
 	}
-	Mstrcpy( PName, NameW);
+	Mstrcpy_s( o_pPName, i_iszPName, NameW);
 
 	return( Status);
 }

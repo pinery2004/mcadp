@@ -60,6 +60,7 @@ public:
 	MgPoint2D	p;																// 通過点
 	MgVect2D	v;																// 直線方向
 
+	// コンストラクタ
 	MgULine2D()			{}
 
 	MgULine2D( const MgPoint2D& p1, const MgVect2D& v1)
@@ -87,6 +88,7 @@ public:
 	MgPoint2D	p;																// 始点
 	MgVect2D	v;																// 半直線方向
 
+	// コンストラクタ
 	MgHLine2D()			{}
 
 	MgHLine2D( const MgPoint2D& p1, const MgVect2D& v1)
@@ -111,6 +113,7 @@ class DLL_EXPORT_LINE MgLine2D
 public:
 	MgPoint2D	p[2];															// 始点、終点
 
+	// コンストラクタ
 	MgLine2D()			{}
 
 	MgLine2D( const MgPoint2D& ps, const MgPoint2D& pe)
@@ -157,6 +160,7 @@ public:
 	MgPoint3D	p;																// 通過点
 	MgVect3D	v;																// 直線方向
 
+	// コンストラクタ
 	MgULine3D()			{}
 	
 	MgULine3D( const MgPoint3D& p1, const MgVect3D& v1)
@@ -187,6 +191,7 @@ public:
 	MgPoint3D	p;																// 始点
 	MgVect3D	v;																// 半直線方向
 
+	// コンストラクタ
 	MgHLine3D()			{}
 
 	MgHLine3D( const MgPoint3D& p1, const MgVect3D& v1)
@@ -215,7 +220,8 @@ class DLL_EXPORT_LINE MgLine3D
 public:
 	MgPoint3D	p[2];															// 始点、終点
 
-	MgLine3D()			{}
+	// コンストラクタ
+	MgLine3D()	{}
 
 	MgLine3D( const MgPoint3D& ps, const MgPoint3D& pe)
 						{ p[0] = ps; p[1] = pe;}
@@ -258,107 +264,238 @@ public:
 						{ MgVect3D v1 = p[1] - p[0]; return v1.Unitize();}		// 線分の方向(単位ベクトル)
 	void Print(MCHAR* s);
 };
-//
-//==========================================================================================
-//
+
 // ---------------------( ２次元 )------------------------------
-//
+
+//==========================================================================================
 //	２次元直線
 //
 inline MgULine2D MgULine2DC( const MgPoint2D& p1, const MgVect2D& v1)						// 通過点と方向単位ベクトルより２次元直線を求める
-						{ MgULine2D ULno; ULno.p = p1; ULno.v = v1; return ULno;}										
+{
+	MgULine2D ULno;
+	ULno.p = p1;
+	ULno.v = v1;
+	return ULno;
+}										
 inline MgULine2D MgULine2DC( const MgULine3D& ULn1)											// ３次元(x,y) → ２次元
-						{ MgULine2D ULno; ULno.p.x = ULn1.p.x; ULno.p.y = ULn1.p.y;
-						  ULno.v.x = ULn1.v.x, ULno.v.y = ULn1.v.y; return ULno;} 
+{
+	MgULine2D ULno;
+	ULno.p.x = ULn1.p.x;
+	ULno.p.y = ULn1.p.y;
+	ULno.v.x = ULn1.v.x,
+	ULno.v.y = ULn1.v.y;
+	return ULno;
+} 
 inline MgULine2D MgULine2D::Set( const MgULine3D& ULn1)										// ３次元(x,y) → ２次元
-						{ MgULine2D ULno; ULno.p.x = ULn1.p.x; ULno.p.y = ULn1.p.y;
-						  ULno.v.x = ULn1.v.x; ULno.v.y = ULn1.v.y; return ULno;} 
-//
+{
+	MgULine2D ULno;
+	ULno.p.x = ULn1.p.x;
+	ULno.p.y = ULn1.p.y;
+	ULno.v.x = ULn1.v.x;
+	ULno.v.y = ULn1.v.y;
+	return ULno;
+} 
+
+//==========================================================================================
 //	２次元線分
 //
 inline MgLine2D MgLine2DC( const MgLine3D& Ln1)												// ３次元(x,y)→２次元
-						{ MgLine2D Lno; Lno.p[0].x = Ln1.p[0].x; Lno.p[0].y = Ln1.p[0].y;
-						  Lno.p[1].x = Ln1.p[1].x; Lno.p[1].y = Ln1.p[1].y; return Lno;} 
+{
+	MgLine2D Lno;
+	Lno.p[0].x = Ln1.p[0].x;
+	Lno.p[0].y = Ln1.p[0].y;
+	Lno.p[1].x = Ln1.p[1].x;
+	Lno.p[1].y = Ln1.p[1].y;
+	return Lno;
+} 
 inline MgLine2D MgLine2DC( const MgPoint3D& Ps, const MgPoint3D& Pe)						// ３次元(x,y)→２次元
-						{ MgLine2D Lno; Lno.p[0].x = Ps.x; Lno.p[0].y = Ps.y;
-						  Lno.p[1].x = Pe.x; Lno.p[1].y = Pe.y; return Lno;} 
+{
+	MgLine2D Lno;
+	Lno.p[0].x = Ps.x;
+	Lno.p[0].y = Ps.y;
+	Lno.p[1].x = Pe.x;
+	Lno.p[1].y = Pe.y;
+	return Lno;
+} 
 inline MgLine2D MgLine2DC( const MgPoint3D *Pi)												// ３次元(x,y)→２次元
-						{ MgLine2D Lno; Lno.p[0].x = Pi[0].x; Lno.p[0].y = Pi[0].y;
-						  Lno.p[1].x = Pi[1].x; Lno.p[1].y = Pi[1].y; return Lno;} 
+{
+	MgLine2D Lno;
+	Lno.p[0].x = Pi[0].x;
+	Lno.p[0].y = Pi[0].y;
+	Lno.p[1].x = Pi[1].x;
+	Lno.p[1].y = Pi[1].y;
+	return Lno;
+} 
 
 inline MgVect2D MgVect2DC( const MgLine2D& Ln1)												// Line2 → Vect2
-						{ return ( Ln1.p[1] - Ln1.p[0]);}
+{
+	return ( Ln1.p[1] - Ln1.p[0]);
+}
 inline MgLine2D MgLine2D::operator + ( const MgVect2D& v) const								// Ln1 = Ln2 + p3
-				 		{ return MgLine2D( MgPoint2D( p[0].x + v.x, p[0].y + v.y),
-										  MgPoint2D( p[1].x + v.x, p[1].y + v.y));}
+{
+	return MgLine2D( MgPoint2D( p[0].x + v.x, p[0].y + v.y),
+					 MgPoint2D( p[1].x + v.x, p[1].y + v.y));
+}
 inline MgLine2D MgLine2D::operator - ( const MgVect2D& v) const								// Ln1 = Ln2 + p3
-				 		{ return MgLine2D( MgPoint2D( p[0].x - v.x, p[0].y - v.y),
-										  MgPoint2D( p[1].x - v.x, p[1].y - v.y));}
+{
+	return MgLine2D( MgPoint2D( p[0].x - v.x, p[0].y - v.y),
+					 MgPoint2D( p[1].x - v.x, p[1].y - v.y));
+}
 inline MgLine2D MgLine2D::operator += ( const MgVect2D& v)									// Ln1 += P2
-				 		{ return MgLine2D( MgPoint2D( p[0].x += v.x, p[0].y += v.y),
-										  MgPoint2D( p[1].x += v.x, p[1].y += v.y));}
+{
+	return MgLine2D( MgPoint2D( p[0].x += v.x, p[0].y += v.y),
+					 MgPoint2D( p[1].x += v.x, p[1].y += v.y));
+}
 inline MgLine2D MgLine2D::operator -= ( const MgVect2D& v)									// Ln1 += P2
-				 		{ return MgLine2D( MgPoint2D( p[0].x -= v.x, p[0].y -= v.y),
-										  MgPoint2D( p[1].x -= v.x, p[1].y -= v.y));}
+{
+	return MgLine2D( MgPoint2D( p[0].x -= v.x, p[0].y -= v.y),
+					 MgPoint2D( p[1].x -= v.x, p[1].y -= v.y));
+}
 inline MgLine2D MgLine2D::Set( const MgLine3D& Ln1)											// ３次元(x,y)→２次元
-						{ MgLine2D Lno; Lno.p[0].x = Ln1.p[0].x; Lno.p[0].y = Ln1.p[0].y;
-						  Lno.p[1].x = Ln1.p[1].x; Lno.p[1].y = Ln1.p[1].y;
-						  return Lno;} 
+{
+	MgLine2D Lno;
+	Lno.p[0].x = Ln1.p[0].x;
+	Lno.p[0].y = Ln1.p[0].y;
+	Lno.p[1].x = Ln1.p[1].x;
+	Lno.p[1].y = Ln1.p[1].y;
+	return Lno;
+} 
+
+//==========================================================================================
+//	２次元ベクトル　コンストラクタ
+//
+inline MgVect2D::MgVect2D( const MgULine2D& uln)											// 2D直線の方向を表す2Dベクトルを求める
+{
+	*this = uln.v;
+}
+inline MgVect2D::MgVect2D( const MgLine2D& ln)												// 2D線分の方向を表す2Dベクトルを求める
+{
+	*this = ln.p[1] - ln.p[0];
+}
 
 // ---------------------( ３次元 )------------------------------
-//
+
+//==========================================================================================
 //	３次元直線
 //
-inline MgULine3D MgULine3DC( const MgULine2D& uln1, const MREAL z1 = 0.f)						// ２次元→３次元　(Z省略0.)
-						{ MgULine3D ULno; ULno.p.x = uln1.p.x; ULno.p.y = uln1.p.y; ULno.p.z = z1;
-//KM					  ULno.v = MgPoint3DC( uln1.p).Unitize(); return ULno;} 
-						  ULno.v = MgVect3DC( uln1.v).Unitize(); return ULno;} 
-inline MgULine3D MgULine3DC( const MgULine2D& ULn1, const MgPlane3D& Pln);						// ２次元→３次元
+inline MgULine3D MgULine3DC( const MgULine2D& uln1, const MREAL z1 = 0.f)					// ２次元→３次元　(Z省略0.)
+{
+	MgULine3D ULno;
+	ULno.p.x = uln1.p.x;
+	ULno.p.y = uln1.p.y;
+	ULno.p.z = z1;
+	ULno.v = MgVect3DC( uln1.v).Unitize();
+	return ULno;
+} 
+inline MgULine3D MgULine3DC( const MgULine2D& ULn1, const MgPlane3D& Pln);					// ２次元→３次元
 
-inline MgLine3D MgLine3DC( const MgLine2D& ln1, MREAL z = 0.)									// ２次元→３次元　(Z省略0.)
-						{ MgLine3D Lno; Lno.p[0].x = ln1.p[0].x; Lno.p[0].y = ln1.p[0].y;
-									   Lno.p[0].z = z;
-									   Lno.p[1].x = ln1.p[1].x; Lno.p[1].y = ln1.p[1].y;
-									   Lno.p[1].z = z; return Lno;}
+//==========================================================================================
+//	３次元線分
+//
+
+inline MgLine3D MgLine3DC( const MgLine2D& ln1, MREAL z = 0.)								// ２次元→３次元　(Z省略0.)
+{
+	MgLine3D Lno;
+	Lno.p[0].x = ln1.p[0].x;
+	Lno.p[0].y = ln1.p[0].y;
+	Lno.p[0].z = z;
+	Lno.p[1].x = ln1.p[1].x; Lno.p[1].y = ln1.p[1].y;
+	Lno.p[1].z = z;
+	return Lno;
+}
 inline MgLine3D MgLine3DC( const MgLine2D& ln1, const MgPlane3D& Pln);							// ２次元→３次元
 
 inline MgLine3D MgLine3DC( const MgPoint2D& ps, const MgPoint2D& pe, MREAL z = 0.)				// ２次元→３次元　(Z省略0.)
-						{ MgLine3D Lno; Lno.p[0].x = ps.x; Lno.p[0].y = ps.y; Lno.p[0].z = z;
-						  Lno.p[1].x = pe.x; Lno.p[1].y = pe.y; Lno.p[1].z = z; return Lno;} 
+{
+	MgLine3D Lno;
+	Lno.p[0].x = ps.x;
+	Lno.p[0].y = ps.y;
+	Lno.p[0].z = z;
+	Lno.p[1].x = pe.x;
+	Lno.p[1].y = pe.y;
+	Lno.p[1].z = z;
+	return Lno;
+} 
 inline MgLine3D MgLine3DC( const MgPoint2D& ps, const MgPoint2D& pe, const MgPlane3D& Pln)		// ２次元→３次元
-							{ return MgLine3DC( MgLine2D( ps, pe), Pln);} 
+{
+	return MgLine3DC( MgLine2D( ps, pe), Pln);
+} 
 inline MgLine3D MgLine3DC( const MgPoint2D *pi, MREAL z = 0.)									// ２次元→３次元　(Z省略0.)
-						{ MgLine3D Lno; Lno.p[0].x = pi[0].x; Lno.p[0].y = pi[0].y; Lno.p[0].z = z;
-						  Lno.p[1].x = pi[1].x; Lno.p[1].y = pi[1].y; Lno.p[1].z = z; return Lno;} 
+{
+	MgLine3D Lno;
+	Lno.p[0].x = pi[0].x;
+	Lno.p[0].y = pi[0].y;
+	Lno.p[0].z = z;
+	Lno.p[1].x = pi[1].x;
+	Lno.p[1].y = pi[1].y;
+	Lno.p[1].z = z;
+	return Lno;
+} 
 inline MgLine3D MgLine3DC( const MgPoint2D *pi, const MgPlane3D& Pln)		// ２次元→３次元
-							{ return MgLine3DC( MgLine2D( pi), Pln);} 
+{
+	return MgLine3DC( MgLine2D( pi), Pln);
+} 
 inline MgVect3D MgVect3DC( const MgLine3D& Ln1)												// Line3 → Vect3
-						{ return ( Ln1.p[1] - Ln1.p[0]);}
+{
+	return ( Ln1.p[1] - Ln1.p[0]);
+}
 inline MgLine3D MgLine3D::operator + ( const MgVect3D& v) const								// Ln1 = Ln2 + p3
-				 		{ return MgLine3D( p[0].x + v.x, p[0].y + v.y, p[0].z + v.z,
-										  p[1].x + v.x, p[1].y + v.y, p[1].z + v.z);}
+{
+	return MgLine3D( p[0].x + v.x, p[0].y + v.y, p[0].z + v.z,
+					 p[1].x + v.x, p[1].y + v.y, p[1].z + v.z);
+}
 inline MgLine3D MgLine3D::operator - ( const MgVect3D& v) const								// Ln1 = Ln2 + p3
-				 		{ return MgLine3D( p[0].x - v.x, p[0].y - v.y, p[0].z - v.z,
-										  p[1].x - v.x, p[1].y - v.y, p[1].z - v.z);}
+{
+	return MgLine3D( p[0].x - v.x, p[0].y - v.y, p[0].z - v.z,
+					 p[1].x - v.x, p[1].y - v.y, p[1].z - v.z);
+}
 inline MgLine3D MgLine3D::operator += ( const MgVect3D& v)									// Ln1 += P2
-				 		{ return MgLine3D( p[0].x += v.x, p[0].y += v.y, p[0].z += v.z,
-										  p[1].x += v.x, p[1].y += v.y, p[1].z += v.z);}
+{
+	return MgLine3D( p[0].x += v.x, p[0].y += v.y, p[0].z += v.z,
+					 p[1].x += v.x, p[1].y += v.y, p[1].z += v.z);
+}
 inline MgLine3D MgLine3D::operator -= ( const MgVect3D& v)									// Ln1 += P2
-				 		{ return MgLine3D( p[0].x -= v.x, p[0].y -= v.y, p[0].z -= v.z,
-										  p[1].x -= v.x, p[1].y -= v.y, p[1].z -= v.z);}
+{
+	return MgLine3D( p[0].x -= v.x, p[0].y -= v.y, p[0].z -= v.z,
+					 p[1].x -= v.x, p[1].y -= v.y, p[1].z -= v.z);
+}
+
+//==========================================================================================
+//	３次元ベクトル　コンストラクタ
+//
+inline MgVect3D::MgVect3D( const MgULine3D& uln)											// 3D直線の方向を表す3Dベクトルを求める
+{
+	*this = uln.v;
+}
+inline MgVect3D::MgVect3D( const MgLine3D& ln)												// 3D線分の方向を表す3Dベクトルを求める
+{
+	*this = ln.p[1] - ln.p[0];
+}
 
 // サイズ
-inline MINT SZMgULine2D( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgULine2D));}
-inline MINT SZMgULine3D( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgULine3D));}
-inline MINT SZMgHLine2D( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgHLine2D));}
-inline MINT SZMgHLine3D( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgHLine3D));}
-inline MINT SZMgLine2D( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgLine2D));}
-inline MINT SZMgLine3D( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgLine3D));}
-inline MINT WSZMgULine2D( MINT i_sz = 1){ return  ( i_sz * (MINT)sizeof( MgULine2D) / SZMINT());}
-inline MINT WSZMgULine3D( MINT i_sz = 1){ return  ( i_sz * (MINT)sizeof( MgULine3D) / SZMINT());}
-inline MINT WSZMgHLine2D( MINT i_sz = 1){ return  ( i_sz * (MINT)sizeof( MgHLine2D) / SZMINT());}
-inline MINT WSZMgHLine3D( MINT i_sz = 1){ return  ( i_sz * (MINT)sizeof( MgHLine3D) / SZMINT());}
-inline MINT WSZMgLine2D( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgLine2D) / SZMINT());}
-inline MINT WSZMgLine3D( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgLine3D) / SZMINT());}
+inline int SZMgULine2D( int i_sz)	{ return  ( i_sz * (int)sizeof( MgULine2D));}
+inline int SZMgULine2D()			{ return  (int)sizeof( MgULine2D);}
+inline int SZMgULine3D( int i_sz)	{ return  ( i_sz * (int)sizeof( MgULine3D));}
+inline int SZMgULine3D()			{ return  (int)sizeof( MgULine3D);}
+inline int SZMgHLine2D( int i_sz)	{ return  ( i_sz * (int)sizeof( MgHLine2D));}
+inline int SZMgHLine2D()			{ return  (int)sizeof( MgHLine2D);}
+inline int SZMgHLine3D( int i_sz)	{ return  ( i_sz * (int)sizeof( MgHLine3D));}
+inline int SZMgHLine3D()			{ return  (int)sizeof( MgHLine3D);}
+inline int SZMgLine2D( int i_sz)	{ return  ( i_sz * (int)sizeof( MgLine2D));}
+inline int SZMgLine2D()				{ return  (int)sizeof( MgLine2D);}
+inline int SZMgLine3D( int i_sz)	{ return  ( i_sz * (int)sizeof( MgLine3D));}
+inline int SZMgLine3D()				{ return  (int)sizeof( MgLine3D);}
+inline int WSZMgULine2D( int i_sz)	{ return  ( i_sz * (int)sizeof( MgULine2D) / SZMINT());}
+inline int WSZMgULine2D()			{ return  (int)sizeof( MgULine2D) / SZMINT();}
+inline int WSZMgULine3D( int i_sz)	{ return  ( i_sz * (int)sizeof( MgULine3D) / SZMINT());}
+inline int WSZMgULine3D()			{ return  (int)sizeof( MgULine3D) / SZMINT();}
+inline int WSZMgHLine2D( int i_sz)	{ return  ( i_sz * (int)sizeof( MgHLine2D) / SZMINT());}
+inline int WSZMgHLine2D()			{ return  (int)sizeof( MgHLine2D) / SZMINT();}
+inline int WSZMgHLine3D( int i_sz)	{ return  ( i_sz * (int)sizeof( MgHLine3D) / SZMINT());}
+inline int WSZMgHLine3D()			{ return  (int)sizeof( MgHLine3D) / SZMINT();}
+inline int WSZMgLine2D( int i_sz)	{ return  ( i_sz * (int)sizeof( MgLine2D) / SZMINT());}
+inline int WSZMgLine2D()			{ return  (int)sizeof( MgLine2D) / SZMINT();}
+inline int WSZMgLine3D( int i_sz)	{ return  ( i_sz * (int)sizeof( MgLine3D) / SZMINT());}
+inline int WSZMgLine3D()			{ return  (int)sizeof( MgLine3D) / SZMINT();}
 
 } // namespace MC

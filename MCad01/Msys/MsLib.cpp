@@ -12,13 +12,11 @@
 #include "MsBasic.h"
 #include "MsLib.h"
 
-
 // SORT SAmple
 namespace MC
 {
-
 //int CDatas::Compare( const void *parg1, const void *parg2) {
-int CARRAY<CData>::Compare( const void *parg1, const void *parg2) {
+int mslib::CARRAY<mslib::CData>::Compare( const void *parg1, const void *parg2) {
 	int int1 = ((CData *)parg1)->lgKey;
 	int int2 = ((CData *)parg2)->lgKey;
 	if ( int1 < int2)
@@ -36,9 +34,9 @@ void SortSample()
 
 	TRACE( L"‚±‚ñ‚É‚¿‚ÍA¢ŠE\n");
 
-	CData Data, SearchData;
+	mslib::CData Data, SearchData;
 //	CDatas Datas;
-	CARRAY<CData> Datas;
+	mslib::CARRAY<mslib::CData> Datas;
 
 	Data.lgKey = 10;
 	Data.sNm = L"‚Ä‚·‚ÆTEST10";
@@ -64,7 +62,7 @@ void SortSample()
 
 	int iC;
 	for( iC=0; iC<Datas.GetCount(); iC++) {
-		CData* pPI = &Datas[iC];
+		mslib::CData* pPI = &Datas[iC];
 		_TCHAR cMsg[512];
 		swprintf_s( cMsg, L"SORT lgKey(%d), sNm(%s), lgN(%d)\n", pPI->lgKey, pPI->sNm, pPI->lgN);
 		TRACE( cMsg);

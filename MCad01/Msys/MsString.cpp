@@ -17,8 +17,8 @@ namespace MC
 
 ///////////////////////////////////////////////////////////////////////////////
 //	CStringの文字列を実数に変換する
-MREAL MsGetMREAL(									// 実数
-						CString&	in_str			// CString文字列
+MREAL mslib::CnvMREAL(							// 実数
+						CString&	in_str		// CString文字列
 				)
 {
 //	MCHAR	sNum[20];
@@ -30,8 +30,8 @@ MREAL MsGetMREAL(									// 実数
 
 ///////////////////////////////////////////////////////////////////////////////
 //	CStringの文字列を整数に変換する
-MINT MsGetMINT(										// 整数
-						CString&	in_str			// CString文字列
+MINT mslib::CnvMINT(							// 整数
+						CString&	in_str		// CString文字列
 				)
 {
 //	MINT	i = atoi( in_str);
@@ -44,9 +44,9 @@ MINT MsGetMINT(										// 整数
 
 ///////////////////////////////////////////////////////////////////////////////
 //	MINTの整数をCStringに変換する
-CString MsCnvSMINT(									// 整数文字列
-						MINT	i_iMode,			// モード　0: "n"形式に変換
-						MINT	i_iNum				// 整数
+CString mslib::CnvSMINT(						// 整数文字列
+						MINT	i_iMode,		// モード　0: "n"形式に変換
+						MINT	i_iNum			// 整数
 				)
 {
 	CString sKoumoku;
@@ -56,9 +56,9 @@ CString MsCnvSMINT(									// 整数文字列
 
 ///////////////////////////////////////////////////////////////////////////////
 //	MINTの実数をCStringに変換する
-CString MsCnvSMREAL(								// 整数文字列
-						MINT	i_iMode,			// モード　1: "0.0"形式に変換
-						MREAL	i_iReal				// 実数
+CString mslib::CnvSMREAL(						// 整数文字列
+						MINT	i_iMode,		// モード　1: "0.0"形式に変換
+						MREAL	i_iReal			// 実数
 				)
 {
 	CString sKoumoku;
@@ -70,7 +70,7 @@ CString MsCnvSMREAL(								// 整数文字列
 // ファイル名の拡張子より形式を得る
 // 返値: ファイル形式 拡張子バッファの配列番号    -1: ｴﾗｰ
 
-MINT MsGetFileExtNo(							// 拡張子バッファの配列番号 -1:ｴﾗｰ
+MINT mslib::GetFileExtNo(						// 拡張子バッファの配列番号 -1:ｴﾗｰ
 						MCHAR*	in_cFileName,	// ﾌｧｲﾙ名
 						MCHAR**	in_ppExt,		// 拡張子バッファ(例 "bmp", "jpg" : 0, 1)
 						MINT	in_NExt)		// 拡張子数
@@ -100,9 +100,9 @@ MINT MsGetFileExtNo(							// 拡張子バッファの配列番号 -1:ｴﾗｰ
 //[ 機能 ] 文字列を";" をデリミタとし分解する
 //[ 返値 ] 行数      0 : なし
 //******************************************************************************************************************/
-//MINT HsSplitString             (														// (  O) 行数         0:なし
-//								MCHAR				String[],							// (I  ) 文字列
-//								MCHAR				SLine[][128])						// (  O) 分解後文字列 [行][列]
+//MINT HsSplitString             (				// (  O) 行数         0:なし
+//						MCHAR	String[],		// (I  ) 文字列
+//						MCHAR	SLine[][128])	// (  O) 分解後文字列 [行][列]
 //{
 //	MINT			NumLne;
 //	
@@ -111,18 +111,18 @@ MINT MsGetFileExtNo(							// 拡張子バッファの配列番号 -1:ｴﾗｰ
 //	MINT			ic;
 //
 //
-//	NumLne = 0;																			// 行数
-//	Num    = 0;																			// 文字数
-//	QFlg   = 0;																			// " なし
+//	NumLne = 0;																		// 行数
+//	Num    = 0;																		// 文字数
+//	QFlg   = 0;																		// " なし
 //	ic     = 0;
 //	while  (String[ic] != NULL && String[ic] != Mchar('\n')) {						// 終わり・改行以外
 //		if (String[ic] == Mchar('"')) {
-//			QFlg = 1 - QFlg;															// 反転
-//		} else if (QFlg == 1) {															// ﾌﾗｸﾞON
+//			QFlg = 1 - QFlg;														// 反転
+//		} else if (QFlg == 1) {														// ﾌﾗｸﾞON
 //			SLine[NumLne][Num] = String[ic];
 //			if (SLine[NumLne][Num] == Mchar('\t'))  SLine[NumLne][Num] = Mchar(' ');
 //			Num++;
-//		} else {																		// ﾌﾗｸﾞOFF
+//		} else {																	// ﾌﾗｸﾞOFF
 //			if (String[ic] == Mchar(';')) {											// ﾃﾞﾘﾐﾀ
 //				SLine[NumLne][Num] = NULL;
 //				NumLne++ ; Num = 0;

@@ -10,6 +10,9 @@
 //  K.Matsu           13/02/20    Created.
 //==========================================================================================
 
+#include "MsLib.h"
+#include "MsMsg.h"
+
 //===========================================================================
 //		文字列操作
 //
@@ -122,7 +125,7 @@ namespace MC
 {
 //===========================================================================
 //		リターン
-class DLL_EXPORT ms
+class DLL_EXPORT ms : public mslib, public msmsg
 {
 public:
 	//===========================================================================
@@ -235,73 +238,73 @@ public:
 	//	}
 	}
 
-	//===========================================================================
-	//	エラーリターンブレークポイント用
-	//
-	static void	ErrorReturn( void);
-	
-	static void	SysError( 
-							MCHAR*				i_pcProgram,						// エラープログラム名
-							int					i_iLineN,							// 行番号
-							int					i_iErrorCode,						// エラーコード
-							MCHAR*				i_cComment = 0						// コメント
-							);
-	static void	SysError( 
-							MCHAR*				i_pcProgram,						// エラープログラム名
-							int					i_iLineN,							// 行番号
-							int					i_iErrorCode,						// エラーコード
-							char*				i_cComment							// コメント
-							);
-	static void	SysError( 
-							char*				i_pcProgram,						// エラープログラム名
-							int					i_iLineN,							// 行番号
-							int					i_iErrorCode,						// エラーコード
-							MCHAR*				i_cComment = 0						// コメント
-							);
-	static void	SysError( 
-							char*				i_pcProgram,						// エラープログラム名
-							int					i_iLineN,							// 行番号
-							int					i_iErrorCode,						// エラーコード
-							char*				i_cComment							// コメント
-							);
-	static void	CmdError( 
-							char*				i_pcProgram,						// エラープログラム名
-							int					i_iLineN,							// 行番号
-							int					i_iErrorCode						// エラーコード
-							);
-	static void	CmdError( 
-							MCHAR*				i_pcProgram,						// エラープログラム名
-							int					i_iLineN,							// 行番号
-							int					i_iErrorCode						// エラーコード
-							);
-
-	/////////////////////////////////////////////////////////////////////////////////
-	//////		リターンコード
-	////
-	////static short shortCast( int i)
-	////{
-	////	ASSERT( -MINSHORT <= i && i <= MAXSHORT);
-	////	return (short)i;
-	////}
-
-	////struct MbRT
-	////{
-	////	int	m_iRt;
-	////
-	////	MbRT()				: m_iRt( 0)		{}
-	////	MbRT( int i_iRt)	: m_iRt( i_iRt)	{}
-	////	
-	////	operator short()			{ return shortCast( m_iRt);}
-	////
-	////	bool operator &&( bool b)	{ return (*this != 0) && b;}
-	////	bool operator ||( bool b)	{ return (*this != 0) || b;}
-	////	bool operator ==( int i)	{ return m_iRt == i;}
-	////	bool operator !=( int i)	{ return m_iRt != i;}
-	////	bool operator < ( int i)	{ return m_iRt <  i;}
-	////	bool operator < ( long lg)	{ return m_iRt <  lg;}
-	////	bool operator <=( int i)	{ return m_iRt <= i;}
-	////	bool operator > ( int i)	{ return m_iRt >  i;}
-	////	bool operator >=( int i)	{ return m_iRt >= i;}
+//S	//===========================================================================
+//	//	エラーリターンブレークポイント用
+//	//
+//	static void	ErrorReturn( void);
+//	
+//	static void	SysError( 
+//							MCHAR*				i_pcProgram,						// エラープログラム名
+//							int					i_iLineN,							// 行番号
+//							int					i_iErrorCode,						// エラーコード
+//							MCHAR*				i_cComment = 0						// コメント
+//							);
+//	static void	SysError( 
+//							MCHAR*				i_pcProgram,						// エラープログラム名
+//							int					i_iLineN,							// 行番号
+//							int					i_iErrorCode,						// エラーコード
+//							char*				i_cComment							// コメント
+//							);
+//	static void	SysError( 
+//							char*				i_pcProgram,						// エラープログラム名
+//							int					i_iLineN,							// 行番号
+//							int					i_iErrorCode,						// エラーコード
+//							MCHAR*				i_cComment = 0						// コメント
+//							);
+//	static void	SysError( 
+//							char*				i_pcProgram,						// エラープログラム名
+//							int					i_iLineN,							// 行番号
+//							int					i_iErrorCode,						// エラーコード
+//							char*				i_cComment							// コメント
+//							);
+//	static void	CmdError( 
+//							char*				i_pcProgram,						// エラープログラム名
+//							int					i_iLineN,							// 行番号
+//							int					i_iErrorCode						// エラーコード
+//							);
+//	static void	CmdError( 
+//							MCHAR*				i_pcProgram,						// エラープログラム名
+//							int					i_iLineN,							// 行番号
+//							int					i_iErrorCode						// エラーコード
+//							);
+//
+//	/////////////////////////////////////////////////////////////////////////////////
+//	//////		リターンコード
+//	////
+//	////static short shortCast( int i)
+//	////{
+//	////	ASSERT( -MINSHORT <= i && i <= MAXSHORT);
+//	////	return (short)i;
+//	////}
+//
+//	////struct MbRT
+//	////{
+//	////	int	m_iRt;
+//	////
+//	////	MbRT()				: m_iRt( 0)		{}
+//	////	MbRT( int i_iRt)	: m_iRt( i_iRt)	{}
+//	////	
+//	////	operator short()			{ return shortCast( m_iRt);}
+//	////
+//	////	bool operator &&( bool b)	{ return (*this != 0) && b;}
+//	////	bool operator ||( bool b)	{ return (*this != 0) || b;}
+//	////	bool operator ==( int i)	{ return m_iRt == i;}
+//	////	bool operator !=( int i)	{ return m_iRt != i;}
+//	////	bool operator < ( int i)	{ return m_iRt <  i;}
+//	////	bool operator < ( long lg)	{ return m_iRt <  lg;}
+//	////	bool operator <=( int i)	{ return m_iRt <= i;}
+//	////	bool operator > ( int i)	{ return m_iRt >  i;}
+//	////	bool operator >=( int i)	{ return m_iRt >= i;}
 
 };
 

@@ -10,6 +10,7 @@
 //  K.Matsu           13/02/20    Created.
 //==========================================================================================
 
+#include <Windows.h>
 
 #ifdef DLL_EXPORT
 	#undef DLL_EXPORT
@@ -43,9 +44,9 @@ public:
 	//===========================================================================
 
 	static MINT msbstowcs( 
-						char*	StrC,			// ( I  ) MBCS文字列
-						MCHAR*	StrU,			// (  O) UNICODE文字列
-						MINT	iSize			// ( I  ) 最大文字数
+						LPCSTR	i_StrC,			// MBCS文字列
+						LPWSTR	o_pStrU,		// UNICODE文字列
+						MINT	i_iSize			// 最大文字数
 						);
 
 	//===========================================================================
@@ -54,57 +55,57 @@ public:
 	//===========================================================================
 
 	static MINT mswcstombs( 
-						MCHAR*	StrU,			// ( I  ) UNICODE文字列
-						char*	StrC,			// (  O) MBCS文字列
-						MINT	iSize			// ( I  ) 最大文字数
+						LPCWSTR	i_StrU,			// UNICODE文字列
+						LPSTR	o_pStrC,		// MBCS文字列
+						MINT	i_iSize			// 最大文字数
 						);
 
 	//===========================================================================
 	// 文字列を小文字に変換
 	//===========================================================================
 	static void msstrtolower(
-							MCHAR	in_pstr[],		// 変換前の文字列
-							MCHAR	out_pstrL[],	// 変換後の文字列バッファ
-							size_t	in_SzstrL)		// 文字列バッファサイズ
+						LPCWSTR	i_pstr,			// 変換前の文字列
+						LPWSTR	o_pstrL,		// 変換後の文字列バッファ
+						size_t	i_iSzstrL)		// 文字列バッファサイズ
 	{
-		MCHAR*	pstr;
-		MCHAR*	pstrL;
+//S		MCHAR*	pstr;
+//		MCHAR*	pstrL;
 		size_t	available;
 
-		pstr = in_pstr;
-		pstrL = out_pstrL;
-		available = in_SzstrL;
-		while( *pstr != 0 && --available) {
-			*pstrL++ = Mtolower( *pstr++);
+//S		pstr = i_pstr;
+//		pstrL = o_pstrL;
+		available = i_iSzstrL;
+		while( *i_pstr != 0 && --available) {
+			*o_pstrL++ = Mtolower( *i_pstr++);
 		}
 		if ( available == 0) {
 			RETURN_OVERFLOW_ERR();
 		}
-		*pstrL = 0;
+		*o_pstrL = 0;
 	}
 
 	//===========================================================================
 	// 文字列を大文字に変換
 	//===========================================================================
 	static void msstrtoupper(
-							MCHAR	in_pstr[],		// 変換前の文字列
-							MCHAR	out_pstrU[],	// 変換後の文字列バッファ
-							MINT	in_SzstrU)		// 最大文字数(バッファサイズ - 1)
+						LPCWSTR	i_pstr,		// 変換前の文字列
+						LPWSTR	o_pstrU,	// 変換後の文字列バッファ
+						MINT	in_SzstrU)		// 最大文字数(バッファサイズ - 1)
 	{
-		MCHAR*	pstr;
-		MCHAR*	pstrU;
+//S		MCHAR*	pstr;
+//		MCHAR*	pstrU;
 		size_t	available;
 
-		pstr = in_pstr;
-		pstrU = out_pstrU;
+//S		pstr = in_pstr;
+//		pstrU = out_pstrU;
 		available = in_SzstrU;
-		while( *pstr != 0 && --available) {
-			*pstrU++ = Mtoupper( *pstr++);
+		while( *i_pstr != 0 && --available) {
+			*o_pstrU++ = Mtoupper( *i_pstr++);
 		}
 		if ( available == 0) {
 			RETURN_OVERFLOW_ERR();
 		}
-		*pstrU = 0;
+		*o_pstrU = 0;
 	}
 
 };

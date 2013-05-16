@@ -41,7 +41,8 @@
 #define MBLOGPRINTF( S, F)		mlLog::Print( S, F)				// 文字列 = 実数　改行
 #define MBLOGPRINTFN( S, F, N)	mlLog::Print( S, F, N)			// 文字列 = N個の実数　改行
 
-#define MBLOGWFMT				mlLog::Write					// フォーマット付きで
+#define MBLOGOUT				mlLog::LogOut					// フォーマット付きで出力する
+#define MBLOGOUTWL				mlLog::LogOutWL					// ログレベルとフォーマット付きで出力する
 
 #include "MsBasic.h"
 

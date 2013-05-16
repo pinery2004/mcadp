@@ -9,6 +9,11 @@
 //  K.Matsu           09/01/04    Created.
 //==========================================================================================
 #include "stdafx.h"
+#include <string>
+#include <vector>
+#include <iterator>
+#include <algorithm>
+
 #include "MrAPI.h"
 
 #include "MgPoint.h"
@@ -36,11 +41,58 @@ void BrkPoint()
 void Test000_Geo()
 {
 	//=======================
+	//	Lambda式
+	std::vector<int> v;
+	for( int i=1; i<10; i++)
+		v.push_back(i);
+	int x = 3;
+	int y = 6;
+	v.erase( std::remove_if(v.begin(), v.end(), [x, y](int n) { return x < n && n < y; }), v.end());
+
+	//=======================
+	//	strcpy_s
+	char* c1 = "1234567890";
+	char c21[] = "1111111111111111111111111111111111111111";
+	strcpy_s( c21, 15, c1);
+
+	MCHAR* cw1 = Mstr("1234567890");
+	MCHAR cw21[] = Mstr("1111111111111111111111111111111111111111");
+	Mstrcpy_s( cw21, 30, cw1);
+
+	//=======================
+	//	Point2D
+	MgVect2D v1( 1., 2.);
+	MgVect2D v2( 2., -1.);
+	MgVect2D v3( 2., 1.);
+	MgVect2D v4( 0., 0.);
+	MgVect2D v5( 1., 0.);
+	MgVect2D v6( 0., 1.);
+	MgPoint2D p1[3];
+	p1[0] = MgPoint2D( 1., 2.);
+	p1[1] = MgPoint2D( 0., 0.);
+	p1[2] = p1[1] + v2;
+	MREAL rAngd[10];
+	//rAngd[0] = MGeo::AngleXVect2D( v1);
+	//rAngd[1] = MGeo::AngleYVect2D( v1);
+	//rAngd[2] = MGeo::Angle2Vect2D( v1, v2);
+	//rAngd[3] = MGeo::Angle2Vect2D( v1, v3);
+	//rAngd[4] = MGeo::Angle2Vect2D( v2, v1);
+	//rAngd[5] = MGeo::Angle2Vect2D( v3, v1);
+	//rAngd[6] = MGeo::Angle3Point2D( p1[0], p1[1], p1[2]);
+	//rAngd[7] = MGeo::AngleXVect2D( v5);
+	//rAngd[8] = MGeo::AngleYVect2D( v6);
+	//mlLog::Print( Mstr("回転角"), rAngd, 9);
+#ifdef BRKPT_TEST2
+	rAngd[9] = MGeo::AngleXVect2D( v4);
+#endif
+	mlLog::Print( Mstr("回転角"), rAngd, 10);
+
+	//=======================
 	//	MatD
 
 	MgPoint2D ptd1 = MgPoint2D( 1., 2.);
 //	MgMat2D matd1 = MgMat2D( 1., 0., 0., 0., 1., 0., 10., 10., 1.);
-	MgMat2D matd1 = MgMat2D( 0.2, .5, 0., 0.8, 0.2, 0., 10., 10., 1.);
+	MgMat2D matd1 = MgMat2D( 0.2f, .5f, 0.f, 0.8f, 0.2f, 0.f, 10.f, 10.f, 1.f);
 	matd1.Print( Mstr("matd1"));
 	MgPoint2D ptd2 = ptd1 * matd1;
 	ptd2.Print( Mstr("Ptd2"));
@@ -55,7 +107,7 @@ void Test000_Geo()
 
 	MgPoint3D Ptd1 = MgPoint3D( 1., 2., 3.);
 //	MgMat3D Matd1 = MgMat3D( 1., 0., 0.,  0.,  0., 1., 0., 0.,  0., 0., 1., 0.,  10., 10., 10., 1.);
-	MgMat3D Matd1 = MgMat3D( 0.2, .5, 0.7, 0.,  0.8, 0.2, 0.3, 0.,  0.2, 0.3, 0.9, 0.,  10., 10., 10., 1.);
+	MgMat3D Matd1 = MgMat3D( 0.2f, .5f, 0.7f, 0.f,  0.8f, 0.2f, 0.3f, 0.f,  0.2f, 0.3f, 0.9f, 0.f,  10.f, 10.f, 10.f, 1.f);
 	Matd1.Print( Mstr("Matd1"));
 	MgPoint3D Ptd2 = Ptd1 * Matd1;
 	Ptd2.Print( Mstr("Ptd2"));
@@ -67,15 +119,16 @@ void Test000_Geo()
 	MgMat3D Matd3;
 	Matd3 = Matd1 * Matd2;
 	Matd3.Print( Mstr("Matd3 = Matd1 * Matd2"));
-
+//#define BRKPT_TEST2
+#ifdef BRKPT_TEST2
 	RETURN_FILEOPEN_ERR_S( "CHECK");
-
+#endif
 	//=======================
 	//	MatE
 
 	MgPoint2D pt1 = MgPoint2D( 1., 2.);
 //	MgMat2E mate1 = MgMat2E( 1., 0., 0., 1., 10., 10.);
-	MgMat2E mate1 = MgMat2E( 0.2, .5, 0.8, 0.2, 10., 10.);
+	MgMat2E mate1 = MgMat2E( 0.2f, .5f, 0.8f, 0.2f, 10.f, 10.f);
 	mate1.Print( Mstr("mate1"));
 	MgPoint2D pt2 = pt1 * mate1;
 	pt2.Print( Mstr("Pt2"));
@@ -90,7 +143,7 @@ void Test000_Geo()
 
 	MgPoint3D Pt1 = MgPoint3D( 1., 2., 3.);
 //	MgMat3E Mate1 = MgMat3E( 1., 0., 0.,  0., 1., 0.,  0., 0., 1.,  10., 10., 10.);
-	MgMat3E Mate1 = MgMat3E( 0.2, .5, 0.7,  0.8, 0.2, 0.3,  0.2, 0.3, 0.9,  10., 10., 10.);
+	MgMat3E Mate1 = MgMat3E( 0.2f, .5f, 0.7f,  0.8f, 0.2f, 0.3f,  0.2f, 0.3f, 0.9f,  10.f, 10.f, 10.f);
 	Mate1.Print( Mstr("Mate1"));
 	MgPoint3D Pt2 = Pt1 * Mate1;
 	Pt2.Print( Mstr("Pt2"));
@@ -186,21 +239,21 @@ void Test001_SelectFile()
 
 	//	読み込み用ファイル選択ダイアログを表示する
 	//
-	MsLoadFileDlg( pWnd, FilePathI, FilePathO, MAX_PATH, NULL);
+	ms::LoadFileDlg( pWnd, FilePathI, FilePathO, MAX_PATH, NULL);
 
 	pWnd->MessageBox( FilePathO, Mstr( "Load File Name"), MB_OK | MB_TOPMOST);
 	MessageBox( hWnd, FilePathO, Mstr( "Load File Name"), MB_OK | MB_TOPMOST);
 
 	//	保存用ファイル選択ダイアログを表示する
 	//
-	MsSaveFileDlg( pWnd, FilePathI, FilePathO, MAX_PATH, NULL);
+	ms::SaveFileDlg( pWnd, FilePathI, FilePathO, MAX_PATH, NULL);
 	MessageBox( hWnd, FilePathO, Mstr( "Save File Name"), MB_OK | MB_TOPMOST);
 
 
 	//	フォルダ選択ダイアログを表示する
 	//
 	MCHAR FolderPath[MAX_PATH] = Mstr( "D:\\Temp");
-	MsForFolderDlg( hWnd, Mstr( "テスト用フォルダの選択"), Mstr( "D:\\Temp"), FolderPath, MAX_PATH);
+	ms::ForFolderDlg( hWnd, Mstr( "テスト用フォルダの選択"), Mstr( "D:\\Temp"), FolderPath, MAX_PATH);
 	MessageBox( hWnd, FolderPath, Mstr( "Folder Name"), MB_OK | MB_TOPMOST);
 	BrkPoint();
 }
@@ -585,7 +638,6 @@ void MCmdTest001()
 
 	//	ＤＢモジュールテスト
 	Test000_Geo();
-//	Test001_SelectFile();
 	Test002_DBModule();
 	Test003_DBModule();
 	Test004_DBModule();

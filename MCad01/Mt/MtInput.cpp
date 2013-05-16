@@ -474,7 +474,7 @@ void mhInput::Marume(
 					ist = MGeo::Intr2Line2D( GLnk.m_ln[ic1], GLnk.m_ln[ic2], &P0);
 					if ( MF_CHECK_OR( ist, (MC_INT | MC_CONNECTION))) {
 						vtDis = P0 - Pi;
-						rDis_2 =MGeo::AbsVect2D_2( vtDis);
+						rDis_2 =MGeo::SqAbsVect2D( vtDis);
 						if ( rDis_2 < rDisMin_2) {
 							rDisMin_2 = rDis_2;
 							Po = P0;
@@ -503,7 +503,7 @@ void mhInput::Marume(
 			for ( ic1=0; ic1<GLnk.m_n; ic1++) {
 				MGeo::PerpPointLine2D( Pi, GLnk.m_ln[ic1], &P0);
 				vtDis = P0 - Pi;
-				rDis_2 =MGeo::AbsVect2D_2( vtDis);
+				rDis_2 =MGeo::SqAbsVect2D( vtDis);
 				if ( rDis_2 < rDisMin_2) {
 					rDisMin_2 = rDis_2;
 					Po = P0;
@@ -530,7 +530,7 @@ void mhInput::Marume(
 				ist = MGeo::Intr2Line2D( GLnk.m_ln[ic1], Lnm[ic2], &P0);
 				if ( MF_CHECK_OR( ist, (MC_INT | MC_CONNECTION))) {
 					vtDis = P0 - Pi;
-					rDis_2 = MGeo::AbsVect2D_2( vtDis);
+					rDis_2 = MGeo::SqAbsVect2D( vtDis);
 					if ( rDis_2 < rDisMin_2) {
 						rDisMin_2 = rDis_2;
 						Po = P0;

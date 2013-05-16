@@ -192,9 +192,9 @@ void MCmdLineAdd()
 				MREAL rYHHosei = MC_YANE_TAKASA_HOSEI;
 				if ( !MGeo::Zero( plnYane.v.z) ) 
 					rYHHosei /= plnYane.v.z;
-				Ln1.p[0] += MgPoint3D( 0., 0., rYHHosei);
-				Ln1.p[1] += MgPoint3D( 0., 0., rYHHosei);
-				PtMltBziAr += MgPoint3D( 0., 0., rYHHosei);
+				Ln1.p[0] += MgVect3D( 0., 0., rYHHosei);
+				Ln1.p[1] += MgVect3D( 0., 0., rYHHosei);
+				PtMltBziAr += MgVect3D( 0., 0., rYHHosei);
 				if ( pPartsSpec->GetPTCdIzon() == MP_IZNCD_YANEMENNARIENCYOKU)
 					vUp = plnYane.v;
 			} else {

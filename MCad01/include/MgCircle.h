@@ -152,9 +152,13 @@ inline MgCir3D MgCir3DC( const MgPoint2D& pc, const MREAL r, const MgPlane3D& Pl
 MINT DLL_EXPORT_CIR MgCir3DDiv ( const MgCir3D &Cir1, MINT n, const MgPoint3D& Parts,	// ‰~‚ðn“™•ª‚·‚é
 							MgGPoint3D *gPto);
 
-inline MINT SZMgCir2D( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgCir2D));}
-inline MINT SZMgCir3D( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgCir3D));}
-inline MINT WSZMgCir2D( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgCir2D) / SZMINT());}
-inline MINT WSZMgCir3D( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MgCir3D) / SZMINT());}
+inline int SZMgCir2D( int i_sz)		{ return  ( i_sz * (int)sizeof( MgCir2D));}
+inline int SZMgCir2D()				{ return  (int)sizeof( MgCir2D);}
+inline int SZMgCir3D( int i_sz)		{ return  ( i_sz * (int)sizeof( MgCir3D));}
+inline int SZMgCir3D()				{ return  (int)sizeof( MgCir3D);}
+inline int WSZMgCir2D( int i_sz)	{ return  ( i_sz * (int)sizeof( MgCir2D) / SZMINT());}
+inline int WSZMgCir2D()				{ return  (int)sizeof( MgCir2D) / SZMINT();}
+inline int WSZMgCir3D( int i_sz)	{ return  ( i_sz * (int)sizeof( MgCir3D) / SZMINT());}
+inline int WSZMgCir3D()				{ return  (int)sizeof( MgCir3D) / SZMINT();}
 
 } // namespace MC

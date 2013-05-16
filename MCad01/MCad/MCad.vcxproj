@@ -273,6 +273,7 @@
     <ClInclude Include="..\include\MsDefine.h" />
     <ClInclude Include="..\include\MsDefMCad.h" />
     <ClInclude Include="..\include\MsDefType.h" />
+    <ClInclude Include="..\include\MsMsg.h" />
     <ClInclude Include="..\include\MsLib.h" />
     <ClInclude Include="..\include\MsMCadDef.h" />
     <ClInclude Include="..\include\MsSynchroObj.h" />
@@ -454,7 +455,7 @@
     <ClCompile Include="..\Msys\MsSort.cpp" />
     <ClCompile Include="..\Msys\MsString.cpp" />
     <ClCompile Include="..\Msys\MsSynchroObj.cpp" />
-    <ClCompile Include="..\Msys\MsSysError.cpp" />
+    <ClCompile Include="..\Msys\MsMsg.cpp" />
     <ClCompile Include="..\Msys\MsTime.cpp" />
     <ClCompile Include="..\Mt\MtAskForPoint.cpp" />
     <ClCompile Include="..\Mt\MtBuildPrcEvent.cpp" />

@@ -97,7 +97,7 @@ MINT mnIoPartsAttr::GetComboPanelNo()
 	else if ( strPanelNo == Mstr( ""))
 		iPanelNo = -1;
 	else
-		iPanelNo = MsGetMINT( strPanelNo);
+		iPanelNo = ms::CnvMINT( strPanelNo);
 	return iPanelNo;
 }
 

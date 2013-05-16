@@ -1,7 +1,6 @@
 class MgGeo {
 MgUnitizeVect2D
 MgUnitizeVect3D
-MgGetAngleVectH2D
 MgMat2DPlus
 MgMat2DPlusEqual
 MgMat2DMinusSingle
@@ -125,7 +124,7 @@ MgDivideAddULinePolygon3D
 MgDivideULinePolygon3D
 ;MgDivideAdd2Polygon2D
 MgDivideAddPolygonGPolygon2D
-MgGetAngleVectH2D
+MgGetAngleXVect2D
 MgGetAngle2Point2DH
 MgGetAngle2V2
 MgGetAngle3Pt2

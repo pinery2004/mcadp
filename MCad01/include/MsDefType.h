@@ -87,8 +87,12 @@ typedef 	long 				MRC;			// リターンコード
 #endif
 
 // サイズ
-inline MINT SZMINT( MINT i_sz = 1)		{ return  ( i_sz * (MINT)sizeof( MINT));}
-inline MINT SZMREAL( MINT i_sz = 1)		{ return  ( i_sz * (MINT)sizeof( MREAL));}
-inline MINT SZMFLOAT( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MFLOAT));}
-inline MINT SZMDOUBLE( MINT i_sz = 1)	{ return  ( i_sz * (MINT)sizeof( MDOUBLE));}
+inline int SZMINT( int i_sz)	{ return ( i_sz * (int)sizeof( MINT));}
+inline int SZMINT()				{ return (int)sizeof( MINT);}
+inline int SZMREAL( int i_sz)	{ return ( i_sz * (int)sizeof( MREAL));}
+inline int SZMREAL()			{ return (int)sizeof( MREAL);}
+inline int SZMFLOAT( int i_sz)	{ return ( i_sz * (int)sizeof( MFLOAT));}
+inline int SZMFLOAT()			{ return (int)sizeof( MFLOAT);}
+inline int SZMDOUBLE( int i_sz)	{ return ( i_sz * (int)sizeof( MDOUBLE));}
+inline int SZMDOUBLE()			{ return (int)sizeof( MDOUBLE);}
 

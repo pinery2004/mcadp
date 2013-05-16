@@ -84,7 +84,7 @@ void	mcs::Init()
 	m_Str[MM_ERR_ID]				= Mstr( "ＩＤ誤りエラー");
 	m_Str[MM_ERR_INPUT]				= Mstr( "入力エラー");
 	m_Str[MM_ERR_NUM_OVER]			= Mstr( "処理可能個数超えエラー");
-	m_Str[MM_ERR_VECT_ZERO]			= Mstr( "ゼロベクトルで処理不可エラー");
+	m_Str[MM_ERR_VECT_ZERO]			= Mstr( "長さゼロのベクトルで処理不可エラー");
 	m_Str[MM_ERR_VALUE_ZERO]		= Mstr( "数値ゼロで処理不可エラー");
 	m_Str[MM_ERR_OFFSET]			= Mstr( "オフセット誤りエラー");
 	m_Str[MM_ERR_FILEOPEN]			= Mstr( "ファイルオープンエラー");

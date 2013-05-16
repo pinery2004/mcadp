@@ -57,7 +57,7 @@ MhMdlIO::MhMdlIO()
 	memset( &m_Header, 0, sizeof(MhMdlHeader));
 	Mstrcpy_s( m_Header.cTitle, z_cTitle);
 	Mstrcpy_s( m_Header.cVer, z_cVer);
-	m_Header.cTime = MsGetCurrentTime();								// 作成日時 
+	m_Header.cTime = ms::GetCurrentTime();						// 作成日時 
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -73,9 +73,9 @@ MhMdlIO::~MhMdlIO          ()
 //		  ≦ -3 : その他エラー
 
 MINT MhMdlIO::Open(
-				const	DWORD		iMode,			// (I ) 使用モード
-													//		== MBREAD:	読み込み専用
-													//		== MBWRITE:	書き込み専用
+				const	DWORD		iMode,		// (I ) 使用モード
+												//		== MBREAD:	読み込み専用
+												//		== MBWRITE:	書き込み専用
 				const	MCHAR*		cFilePath
 				)
 {
@@ -187,7 +187,7 @@ MINT MhMdlIO::ReadItem(
 #endif
 //---
 	*o_Buf = (byte *)new char[iSizeR];
-	ASSERT( *o_Buf);												// メモリ　りアロックエラー　<ERROR>
+	ASSERT( *o_Buf);											// メモリ　りアロックエラー　<ERROR>
 	iSizeW = m_File.Read( *o_Buf, iSizeR);
 
 	if ( iSizeW != iSizeR) {
@@ -228,15 +228,15 @@ exit:
 //		  ≠  0 : その他エラー
 
 MINT MhMdlIO::WriteItems(
-				const	MINT		i_iTp,			// ﾀｲﾌﾟ
-				const	void*		i_Bf,			// 書込み領域
-				const	MINT		i_iSz			// 書込みﾊﾞｲﾄ数
+				const	MINT		i_iTp,		// ﾀｲﾌﾟ
+				const	void*		i_Bf,		// 書込み領域
+				const	MINT		i_iSz		// 書込みﾊﾞｲﾄ数
 				)
 {
 	MINT		ist;
 	ist = -1;
-	m_File.Write( &i_iTp, SZMINT());						// タイプ
-	m_File.Write( &i_iSz, SZMINT());						// サイズ
+	m_File.Write( &i_iTp, SZMINT());							// タイプ
+	m_File.Write( &i_iSz, SZMINT());							// サイズ
 	m_File.Write( i_Bf, i_iSz);									// 任意型データ
 	ist = 0;
 	return( ist);
@@ -248,15 +248,15 @@ MINT MhMdlIO::WriteItems(
 //		  ≠  0 : その他エラー
 
 MINT MhMdlIO::WriteItemIS(
-				const	MINT		i_iTp,			// タイプ
-				const	MSHORT*		i_iBf,			// 書込みSHORT配列
-				const	MINT		i_iSz			// 書込みバイト数
+				const	MINT		i_iTp,		// タイプ
+				const	MSHORT*		i_iBf,		// 書込みSHORT配列
+				const	MINT		i_iSz		// 書込みバイト数
 				)
 {
 	MINT		ist;
 	ist = -1;
-	m_File.Write( &i_iTp, SZMINT());						// タイプ
-	m_File.Write( &i_iSz, SZMINT());						// サイズ
+	m_File.Write( &i_iTp, SZMINT());							// タイプ
+	m_File.Write( &i_iSz, SZMINT());							// サイズ
 	m_File.Write( i_iBf, i_iSz);								// 整数配列
 	ist = 0;
 
@@ -277,18 +277,16 @@ MINT MhMdlIO::WriteItemIS(
 //		  ≠  0 : その他エラー
 
 MINT MhMdlIO::WriteItemI(
-				const	MINT		i_iTp,			// タイプ
-				const	MINT*		i_iBf,			// 書込み整数配列
-				const	MINT		i_iSz			// 書込みバイト数
+				const	MINT		i_iTp,		// タイプ
+				const	MINT*		i_iBf,		// 書込み整数配列
+				const	MINT		i_iSz		// 書込みバイト数
 				)
 {
 	MINT		ist;
 	ist = -1;
-	m_File.Write( &i_iTp, SZMINT());						// タイプ
-	m_File.Write( &i_iSz, SZMINT());						// サイズ
-//S	m_File.Write( i_iBf, i_iWd * SZMINT());					// 整数配列
-//0122
-	m_File.Write( i_iBf, i_iSz);							// 整数配列
+	m_File.Write( &i_iTp, SZMINT());							// タイプ
+	m_File.Write( &i_iSz, SZMINT());							// サイズ
+	m_File.Write( i_iBf, i_iSz);								// 整数配列
 	ist = 0;
 
 #if( TRACE_IO)
@@ -308,15 +306,15 @@ MINT MhMdlIO::WriteItemI(
 //		  ≠  0 : その他エラー
 
 MINT MhMdlIO::WriteItemUI(
-				const	MINT		i_iTp,			// タイプ
-				const	MUINT*		i_iBf,			// 書込み整数配列
-				const	MINT		i_iSz			// 書込みバイト数
+				const	MINT		i_iTp,		// タイプ
+				const	MUINT*		i_iBf,		// 書込み整数配列
+				const	MINT		i_iSz		// 書込みバイト数
 				)
 {
 	MINT		ist;
 	ist = -1;
-	m_File.Write( &i_iTp, SZMINT());						// タイプ
-	m_File.Write( &i_iSz, SZMINT());						// サイズ
+	m_File.Write( &i_iTp, SZMINT());							// タイプ
+	m_File.Write( &i_iSz, SZMINT());							// サイズ
 	m_File.Write( i_iBf, i_iSz);								// 整数配列
 	ist = 0;
 
@@ -337,15 +335,15 @@ MINT MhMdlIO::WriteItemUI(
 //		  ≠  0 : その他エラー
 
 MINT MhMdlIO::WriteItemR(
-				const	MINT		i_iTp,			// タイプ
-				const	float*		i_rBf,			// 書込み実数配列
-				const	MINT		i_iSz			// 書込みバイト数
+				const	MINT		i_iTp,		// タイプ
+				const	float*		i_rBf,		// 書込み実数配列
+				const	MINT		i_iSz		// 書込みバイト数
 				)
 {
 	MINT		ist;
 	ist = -1;
-	m_File.Write( &i_iTp, SZMINT());						// タイプ
-	m_File.Write( &i_iSz, SZMINT());						// サイズ
+	m_File.Write( &i_iTp, SZMINT());							// タイプ
+	m_File.Write( &i_iSz, SZMINT());							// サイズ
 	m_File.Write( i_rBf, i_iSz);								// 実数(float)配列
 	ist = 0;
 
@@ -366,15 +364,15 @@ MINT MhMdlIO::WriteItemR(
 //		  ≠  0 : その他エラー
 
 MINT MhMdlIO::WriteItemR(
-				const	MINT		i_iTp,			// タイプ
-				const	double*		i_rBf,			// 書込み実数配列
-				const	MINT		i_iSz			// 書込みバイト数
+				const	MINT		i_iTp,		// タイプ
+				const	double*		i_rBf,		// 書込み実数配列
+				const	MINT		i_iSz		// 書込みバイト数
 				)
 {
 	MINT		ist;
 	ist = -1;
-	m_File.Write( &i_iTp, SZMINT());						// タイプ
-	m_File.Write( &i_iSz, SZMINT());						// サイズ
+	m_File.Write( &i_iTp, SZMINT());							// タイプ
+	m_File.Write( &i_iSz, SZMINT());							// サイズ
 	m_File.Write( i_rBf, i_iSz);								// 実数(double)配列
 	ist = 0;
 
@@ -395,15 +393,15 @@ MINT MhMdlIO::WriteItemR(
 //		  ≠  0 : その他エラー
 
 MINT MhMdlIO::WriteItemIB(
-				const	MINT		i_iTp,			// タイプ
-				const	MUBYTE*		i_ibBf,			// 書込みBYTE配列
-				const	MINT		i_iSz			// 書込みバイト数
+				const	MINT		i_iTp,		// タイプ
+				const	MUBYTE*		i_ibBf,		// 書込みBYTE配列
+				const	MINT		i_iSz		// 書込みバイト数
 				)
 {
 	MINT		ist;
 	ist = -1;
-	m_File.Write( &i_iTp, SZMINT());						// タイプ
-	m_File.Write( &i_iSz, SZMINT());						// サイズ
+	m_File.Write( &i_iTp, SZMINT());							// タイプ
+	m_File.Write( &i_iSz, SZMINT());							// サイズ
 	m_File.Write( i_ibBf, i_iSz);								// BYTE配列
 	ist = 0;
 	return( ist);
@@ -415,15 +413,15 @@ MINT MhMdlIO::WriteItemIB(
 //		  ≠  0 : その他エラー
 
 MINT MhMdlIO::WriteItemCH(
-				const	MINT		i_iTp,			// タイプ
-				const	char*		i_cDat,			// 書込み文字列
-				const	MINT		i_iSz			// 書込みバイト数
+				const	MINT		i_iTp,		// タイプ
+				const	char*		i_cDat,		// 書込み文字列
+				const	MINT		i_iSz		// 書込みバイト数
 				)
 {
 	MINT		ist;
 	ist = -1;
-	m_File.Write( &i_iTp, SZMINT());						// タイプ
-	m_File.Write( &i_iSz, SZMINT());						// サイズ
+	m_File.Write( &i_iTp, SZMINT());							// タイプ
+	m_File.Write( &i_iSz, SZMINT());							// サイズ
 	m_File.Write( i_cDat, i_iSz);								// 文字列
 	ist = 0;
 
@@ -442,15 +440,15 @@ MINT MhMdlIO::WriteItemCH(
 //		  ≠  0 : その他エラー
 
 MINT MhMdlIO::WriteItemCH(
-				const	MINT		i_iTp,			// タイプ
-				const	_TCHAR*		i_cDat,			// 書込み文字列
-				const	MINT		i_iSz			// 書込みバイト数
+				const	MINT		i_iTp,		// タイプ
+				const	_TCHAR*		i_cDat,		// 書込み文字列
+				const	MINT		i_iSz		// 書込みバイト数
 				)
 {
 	MINT		ist;
 	ist = -1;
-	m_File.Write( &i_iTp, SZMINT());						// タイプ
-	m_File.Write( &i_iSz, SZMINT());						// サイズ
+	m_File.Write( &i_iTp, SZMINT());							// タイプ
+	m_File.Write( &i_iSz, SZMINT());							// サイズ
 	m_File.Write( i_cDat, i_iSz);								// 文字列
 	ist = 0;
 
@@ -469,15 +467,15 @@ MINT MhMdlIO::WriteItemCH(
 //		  ≠  0 : その他エラー
 
 MINT MhMdlIO::WriteItemCS(
-				const	MINT		i_iTp,			// タイプ
-				const	CString*	i_sDat,			// 書込み文字列
-				const	MINT		i_iSz			// 書込みバイト数
+				const	MINT		i_iTp,		// タイプ
+				const	CString*	i_sDat,		// 書込み文字列
+				const	MINT		i_iSz		// 書込みバイト数
 				)
 {
 	MINT		ist;
 	ist = -1;
-	m_File.Write( &i_iTp, SZMINT());						// タイプ
-	m_File.Write( &i_iSz, SZMINT());						// サイズ
+	m_File.Write( &i_iTp, SZMINT());							// タイプ
+	m_File.Write( &i_iSz, SZMINT());							// サイズ
 	m_File.Write( i_sDat, i_iSz);								// 文字列
 	ist = 0;
 
@@ -494,11 +492,11 @@ MINT MhMdlIO::WriteItemCS(
 //	ファイルダイアログを表示しフルパスを取得する
 //	[返値] ステイタス     0 : キャンセル  1 : ＯＫ
 
-MINT IeModel::MhFileDialog(							//
-				const	MINT		i_fRead,		// 読み取りフラグ		true:開く	false:保存
-				const	MCHAR*		i_sPath,		// 指定ファイル名（フルパス）
-						MCHAR*		o_sPath,		// 選択ファイル名（フルパス）
-						int			i_nPath			// 選択ファイル名（フルパス）最大文字数
+MINT IeModel::MhFileDialog(						//
+				const	MINT		i_fRead,	// 読み取りフラグ		true:開く	false:保存
+				const	MCHAR*		i_sPath,	// 指定ファイル名（フルパス）
+						MCHAR*		o_sPath,	// 選択ファイル名（フルパス）
+						int			i_nPath		// 選択ファイル名（フルパス）最大文字数
 				)
 {
 	MINT			ist;
@@ -523,7 +521,7 @@ MINT IeModel::MhFileDialog(							//
 	if ( i_sPath)
 		FDlg.m_ofn.lpstrInitialDir = cFldPath;
 
-	if ( FDlg.DoModal() == IDOK) {													// ダイアログを表示する
+	if ( FDlg.DoModal() == IDOK) {														// ダイアログを表示する
 		Mstrcpy_s( o_sPath, i_nPath, FDlg.GetPathName());
 		ist = 1;
 	}
@@ -534,15 +532,15 @@ MINT IeModel::MhFileDialog(							//
 //	フルパス名から、フォルダーパス名、ファイル名、ファイルタイトル、
 //					ファイル拡張子を取得する
 void IeModel::MhSeparateFname(
-				const	MCHAR*		i_sFullPath,	// ファイルフルパス名
-						MCHAR*		o_sFolderPath,	// フォルダーパス名	または　NULL
-						int			i_nFolderPath,	// フォルダーパス名最大文字数
-						MCHAR*		o_sFileName,	// ファイル名			または　NULL
-						int			i_nFileName,	// ファイル名			または　NULL
-						MCHAR*		o_sFileTitle,	// ファイルタイトル	または　NULL
-						int			i_nFileTitle,	// ファイルタイトル	または　NULL
-						MCHAR*		o_sFileExt,		// ファイル拡張子		または　NULL
-						int			i_nFileExt		// ファイル拡張子		または　NULL
+				const	MCHAR*	i_sFullPath,	// ファイルフルパス名
+						MCHAR*	o_sFolderPath,	// フォルダーパス名	または　NULL
+						int		i_nFolderPath,	// フォルダーパス名最大文字数
+						MCHAR*	o_sFileName,	// ファイル名			または　NULL
+						int		i_nFileName,	// ファイル名			または　NULL
+						MCHAR*	o_sFileTitle,	// ファイルタイトル	または　NULL
+						int		i_nFileTitle,	// ファイルタイトル	または　NULL
+						MCHAR*	o_sFileExt,		// ファイル拡張子		または　NULL
+						int		i_nFileExt		// ファイル拡張子		または　NULL
 				)
 {
 	MINT		ist = 0;
