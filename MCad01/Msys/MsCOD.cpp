@@ -526,27 +526,11 @@ void msCod::Line(
 	MINT		iPenStyle;
 	CPen		Pen;
 	CGdiObject* pBackup;
-//	MgVect2D		vDirect = pa2 - pa1;
 	MINT		iLineWidth;										// 線幅
 
 	p1 = RPtoLP( pa1);
 	p2 = RPtoLP( pa2);
-/*
-//	if (abs(p1.x - p2.x) < MgTol.D) {
-	if (MgZero( vDirect.x)) {
-		if ( p1.y < m_iMinMaxL.min.y)		p1.y = m_iMinMaxL.min.y;
-		else if ( p1.y > m_iMinMaxL.max.y)	p1.y = m_iMinMaxL.max.y;
-		if ( p2.y < m_iMinMaxL.min.y)		p2.y = m_iMinMaxL.min.y;
-		else if ( p2.y > m_iMinMaxL.max.y)	p2.y = m_iMinMaxL.max.y;
-	}
-//	if (abs(p1.y - p2.y) < MgTol.D) {
-	if (MgZero( vDirect.y)) {
-		if ( p1.x < m_iMinMaxL.min.x)		p1.x = m_iMinMaxL.min.x;
-		else if ( p1.x > m_iMinMaxL.max.x)	p1.x = m_iMinMaxL.max.x;
-		if ( p2.x < m_iMinMaxL.min.x)		p2.x = m_iMinMaxL.min.x;
-		else if ( p2.x > m_iMinMaxL.max.x)	p2.x = m_iMinMaxL.max.x;
-	}
-*/
+
 	iPenStyle = PSTbl[z_iLineStyle];
 
 	if (z_bFixedLineWidth)
@@ -563,36 +547,6 @@ void msCod::Line(
 	m_pDC->SelectObject( pBackup);
 	Pen.DeleteObject();
 }
-
-/////////////////////////////////////////////////////////////////////////////
-//  長方形を表示する ( "MsCod.h" で 定義済み )
-//void msCod::Rect(
-//				const	MgRect2D		&rt1
-//				)
-//{
-//	MgPoint2D		p1, p2;
-//	MINT		iPenStyle;
-//	CPen		Pen;
-//	CGdiObject* pBackup;
-//	MINT		iLineWidth;										// 線幅
-
-//	p1 = RPtoLP( rt1.p[0]);
-//	p2 = RPtoLP( rt1.p[1]);
-
-//	iPenStyle = PSTbl[z_iLineStyle];
-
-//	if (z_bFixedLineWidth)
-//		iLineWidth = MGMAX( MINT( z_fLineWidth / m_vsclLPtoDP.x), 1);
-//	else
-//		iLineWidth = MINT( z_fLineWidth * m_sclRPtoLP);
-
-//	Pen.CreatePen( iPenStyle, iLineWidth, z_rgbLine);
-//	pBackup = m_pDC->SelectObject( &Pen);
-
-//	m_pDC->Rectangle( (MINT)p1.x, (MINT)p1.y * m_iUpY, (MINT)p2.x, (MINT)p2.y * m_iUpY);
-//	m_pDC->SelectObject( pBackup);
-//	Pen.DeleteObject();
-//}
 
 /////////////////////////////////////////////////////////////////////////////
 //  長方形を表示する
@@ -620,7 +574,6 @@ void msCod::Rect(
 	Pen.CreatePen(iPenStyle, iLineWidth, z_rgbLine);
 	pBackup = m_pDC->SelectObject( &Pen);
 
-//	m_pDC->Rectangle( p1.x, p1.y * m_iUpY, p2.x, p2.y * m_iUpY);
 	m_pDC->Rectangle( (MINT)p1.x, (MINT)p1.y * m_iUpY, (MINT)p2.x, (MINT)p2.y * m_iUpY);
 	m_pDC->SelectObject( pBackup);
 	Pen.DeleteObject();
@@ -696,19 +649,9 @@ void msCod::Polygon(
 	Pen.CreatePen( iPenStyle, iLineWidth, z_rgbLine);
 	pBackup = m_pDC->SelectObject( &Pen);
 
-//D	CBrush* pTempBrush = NULL;
-//D	CBrush OrigBrush;
-//D	// CBrush::CBrush(COLORREF crColor)
-//D	CBrush brush2(RGB(255,0,0));   // Solid red brush.
-//D	pTempBrush = (CBrush*)m_pDC->SelectObject(&brush2);
-//D	// Save original brush.
-//D	OrigBrush.FromHandle((HBRUSH)pTempBrush);
-
 	m_pDC->Polyline( lpb, inpb);
 	m_pDC->SelectObject( pBackup);
 
-//D	// Reselect original brush into device context.
-//D	m_pDC->SelectObject(&OrigBrush);
 	Pen.DeleteObject();
 }
 
@@ -734,7 +677,6 @@ void msCod::Arc1(
 	pc = RPtoLP( pac);
 	rhw = m_sclRPtoLP * rh;
 	ihw = MINT( rhw);
-//	rhw = RPtoLP( rh);
 	CPoint pr( ihw, -ihw);
 	plu = pc - pr;
 	prd = pc + pr;
