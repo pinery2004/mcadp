@@ -24,7 +24,7 @@ namespace MC
 //
 // ---------------------( ２次元 )------------------------------
 //
-//	ベクトルと水平線(X方向)との角度を求める
+//	ベクトルと水平線(X方向)との角度(ラジアン)を求める
 //
 MREAL	MGeo::AngleXVect2D(						// (  O) 左回転角度　（度）
 												//		ベクトルの長さがMGPTOL->D未満の場合は0度を返す
@@ -34,7 +34,7 @@ MREAL	MGeo::AngleXVect2D(						// (  O) 左回転角度　（度）
 	if ((v1 * v1) < MGPTOL->D_2)
 		RETURN_VECT_ZERO_ERR();
 	
-	return MGDEGREE( MREAL( atan2( v1.y, v1.x)));
+	return MREAL( atan2( v1.y, v1.x));
 }
 
 //S/////////////////////////////////////////////////////////////////////////////
@@ -57,7 +57,7 @@ MREAL	MGeo::AngleXVect2D(						// (  O) 左回転角度　（度）
 //}
 
 /////////////////////////////////////////////////////////////////////////////
-//	ベクトルと垂直線(Y方向)との角度を求める
+//	ベクトルと垂直線(Y方向)との角度(ラジアン)を求める
 //
 MREAL	MGeo::AngleYVect2D(						// (  O) 左回転角度　（度）
 												//		ベクトルの長さがMGPTOL->D未満の場合は0度を返す
@@ -68,7 +68,7 @@ MREAL	MGeo::AngleYVect2D(						// (  O) 左回転角度　（度）
 //S		return 0.0f;
 		RETURN_VECT_ZERO_ERR();
 	
-	return MGDEGREE( MREAL( atan2( - i_v1.x, i_v1.y)));
+	return MREAL( atan2( - i_v1.x, i_v1.y));
 }
 
 //S/////////////////////////////////////////////////////////////////////////////
@@ -91,7 +91,7 @@ MREAL	MGeo::AngleYVect2D(						// (  O) 左回転角度　（度）
 //}
 
 /////////////////////////////////////////////////////////////////////////////
-//	２ベクトルの角度を求める
+//	２ベクトルの角度(ラジアン)を求める
 //
 MREAL	MGeo::Angle2Vect2D(						// (  O) 左回転角度　（度）
 												//		ベクトルの長さがMGPTOL->D未満の場合は0度を返す
@@ -110,7 +110,7 @@ MREAL	MGeo::Angle2Vect2D(						// (  O) 左回転角度　（度）
 	s12 = (v1 ^ v2);
 	c12 = (v1 * v2);
 	
-	return MGDEGREE( MREAL( atan2( s12, c12)));
+	return MREAL( atan2( s12, c12));
 
 /*
 	MREAL ss2, s12, c12, ang;
@@ -202,7 +202,7 @@ MREAL	MGeo::Angle3Point2D(					// (  O) 左回転角度　（度）
 //}
 
 /////////////////////////////////////////////////////////////////////////////
-//	２ベクトルの角度を求める
+//	２ベクトルの角度(ラジアン)を求める
 //
 MREAL	MGeo::Angle2Vect3D(						// (  O) 表から見た半時計方向の回転角度　（度）
 												//		ベクトルの長さがMGPTOL->D未満の場合は0度を返す
@@ -216,7 +216,7 @@ MREAL	MGeo::Angle2Vect3D(						// (  O) 表から見た半時計方向の回転角度　（度）
 	s12 = (v1 ^ v2) * vn;
 	c12 = v1 * v2;
 
-	return MGDEGREE( MREAL( atan2( s12, c12)));
+	return MREAL( atan2( s12, c12));
 
 /*
 	MREAL l1, l2;
@@ -320,7 +320,7 @@ MREAL	MGeo::Angle3Point3D(					// (  O) 表から見た半時計方向の回転角度　（度）
 //
 // ---------------------( ３次元 )------------------------------
 //
-//	ベクトルと平面の角度を求める
+//	ベクトルと平面の角度(ラジアン)を求める
 //
 MREAL	MGeo::AngleVectPln3D(					// (  O) 回転角度　（度）
 												//		2点間の距離がMGPTOL->D未満の場合は0度を返す
@@ -335,7 +335,7 @@ MREAL	MGeo::AngleVectPln3D(					// (  O) 回転角度　（度）
 	c12 = AbsVect3D(v1 ^ Pln2.v);
 	s12 = Abs(v1 * Pln2.v);
 	
-	return MGDEGREE( MREAL( atan2( s12, c12)));
+	return MREAL( atan2( s12, c12));
 
 /*
 	MREAL l1;
