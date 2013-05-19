@@ -80,10 +80,10 @@ public:
 	// MgVect2D, MgPoint2D
 
 	// ベクトルの長さの２乗	Abs**2
-	static MREAL SqAbsVect2D( const MgVect2D& v)
+	static MREAL SqLenVect2D( const MgVect2D& v)
 				 		{ return ( v * v);}
 	// ベクトルの長さ		ABS
-	static MREAL AbsVect2D( const MgVect2D& v)
+	static MREAL LenVect2D( const MgVect2D& v)
 				 		{ return (MREAL)sqrt( v * v);}
 	// ２点間の距離の２乗 MgDist**2
 	static MREAL SqDist2Point2D( const MgPoint2D& P1, const MgPoint2D& P2)
@@ -95,22 +95,22 @@ public:
 						  return (MREAL)sqrt( v * v);}
 	// P1 == (0.,0.)	判定
 	static bool ZeroVect2D( const MgVect2D& v1)
-						{ return SqAbsVect2D( v1) <= MGPTOL->D_2;}
+						{ return SqLenVect2D( v1) <= MGPTOL->D_2;}
 	// P1 == (0.,0.)	誤差指定の判定
 	static bool ZeroVect2D( const MgVect2D& v1, MREAL tol)
-						{ return SqAbsVect2D( v1) <= tol * tol;}
+						{ return SqLenVect2D( v1) <= tol * tol;}
 	// P1 == P2 		判定
 	static bool EqualPoint2D( const MgPoint2D& p1, const MgPoint2D& p2)
-				 		{ MgVect2D pt = p2 - p1; return SqAbsVect2D( pt) <= MGPTOL->D_2;}
+				 		{ MgVect2D pt = p2 - p1; return SqLenVect2D( pt) <= MGPTOL->D_2;}
 	// P1 == P2			誤差指定の判定
 	static bool EqualPoint2D( const MgPoint2D& p1, const MgPoint2D& p2, MREAL tol)
-				 		{ MgVect2D vt = p2 - p1; return SqAbsVect2D( vt) <= tol * tol;}
+				 		{ MgVect2D vt = p2 - p1; return SqLenVect2D( vt) <= tol * tol;}
 	// V1 == V2 		単位ベクトル型式の等号判定
 	static bool EqualVect2D( const MgVect2D& v1, const MgVect2D& v2)
-				 		{ MgVect2D vt = v2 - v1; return SqAbsVect2D( vt) <= MGPTOL->U_2;}
+				 		{ MgVect2D vt = v2 - v1; return SqLenVect2D( vt) <= MGPTOL->U_2;}
 	// V1 == V2			誤差指定の判定
 	static bool EqualVect2D( const MgVect2D& v1, const MgVect2D& v2, MREAL tol)
-				 		{ MgVect2D vt = v2 - v1; return SqAbsVect2D( vt) <= tol * tol;}
+				 		{ MgVect2D vt = v2 - v1; return SqLenVect2D( vt) <= tol * tol;}
 	// V1とV2が平行であるかを確認
 	static bool ParallelVect2D( const MgVect2D& v1, const MgVect2D& v2)
 				 		{ MREAL ro = v1 ^ v2; MREAL ri = v1 * v2;
@@ -142,40 +142,25 @@ public:
 						{ return	MgVect2D( v1.y, -v1.x);}
 
 	// 点列の同一座標をつめる
-	static int PackSamePoint2D( MgPoint2D* io_pPt, int* io_pn)
-	{
-		int iC1, iC2;
-		int iN;
-		bool bPack;
-		if( *io_pn != 0) {
-			bPack = false;
-			iN = *io_pn;
-			iC1 = 0;
-			for ( iC2=1; iC2<iN; iC2++) {
-				if( io_pPt[iC1] == io_pPt[iC2]) {
-					bPack = true;
-				} else {
-					iC1++;
-					if( bPack)
-						memcpy( &io_pPt[iC1], &io_pPt[iC2], SZMgPoint2D());
-				}
-			}
-			*io_pn = iC1 + 1;
-		}
-		return 0;
-	}
-	static int PackSamePoint2D( MREAL* io_pPt, int* io_pn)
-	{
-		return PackSamePoint2D( (MgPoint2D*)io_pPt, io_pn);
-	}
+	static int PackSamePoint2D( MgPoint2D* io_pPt, int* io_pn);
+	static int PackSamePoint2D( MREAL* io_pPt, int* o_pn)
+						{ return PackSamePoint2D( (MgPoint2D*)io_pPt, o_pn);}
+	// 点列を逆順にする
+	static int ReversePoint2D( MgPoint2D* i_pPt, int i_n, MgPoint2D* o__pPt);
+	static int ReversePoint2D( MREAL* i_pPt, int i_n, MREAL* o__pPt)
+						{ return ReversePoint2D( (MgPoint2D*)i_pPt, i_n, (MgPoint2D*)o__pPt);}
+
+	// 点列から直線に対象位置の点列を求める
+	static int SymmetryPointULine2D( MgPoint2D* i_pPt, int i_n, MgULine2D& uln, MgPoint2D* o_pPt);
+
 	//======================( ３次元 )==============================
 	// MgVect3D, MgPoint3D
 
 	// ベクトルの長さの２乗	MgAbs**2
-	static MREAL SqAbsVect3D( const MgVect3D& v)
+	static MREAL SqLenVect3D( const MgVect3D& v)
 				 		{ return v * v;}
 	// ベクトルの長さ		MGABS
-	static MREAL AbsVect3D( const MgVect3D& v)
+	static MREAL LenVect3D( const MgVect3D& v)
 				 		{ return (MREAL)sqrt( v * v);}
 	// ２点間の距離の２乗 MgDist**2
 	static MREAL SqDist2Point3D( const MgPoint3D& P1, const MgPoint3D& P2)
@@ -187,70 +172,56 @@ public:
 						  return (MREAL)sqrt( v * v);}
 	// P1 == (0.,0.,0.)	判定
 	static bool ZeroVect3D( const MgVect3D& v1)
-						{ return SqAbsVect3D(v1) <= MGPTOL->D_2;}
+						{ return SqLenVect3D(v1) <= MGPTOL->D_2;}
 	// P1 == (0.,0.,0.)	誤差指定の判定
 	static bool ZeroVect3D( const MgVect3D& v1, MREAL tol)
-						{ return SqAbsVect3D(v1) <= tol * tol;}
+						{ return SqLenVect3D(v1) <= tol * tol;}
 	// P1 == P2 		判定== 判定
 	static bool EqualVect3D( const MgVect3D& v1, const MgVect3D& v2)
-				 		{ MgVect3D vt = v2 - v1; return SqAbsVect3D(vt) <= MGPTOL->D_2;}  
+				 		{ MgVect3D vt = v2 - v1; return SqLenVect3D(vt) <= MGPTOL->D_2;}  
 	// V1 == V2 		ベクトル型式の角度の等号判定
 	static bool EqualUVect3D( const MgVect3D& v1, const MgVect3D& v2)
-				 		{ MgVect3D vt = v2 - v1; return SqAbsVect3D(vt) <= MGPTOL->U_2;}  
+				 		{ MgVect3D vt = v2 - v1; return SqLenVect3D(vt) <= MGPTOL->U_2;}  
 	// P1 == P2			誤差指定の判定== 判定
 	static bool EqualVect3D( const MgVect3D& v1, const MgVect3D& v2, MREAL tol)
-				 		{ MgVect3D vt = v2 - v1; return SqAbsVect3D(vt) <= tol * tol;}  
+				 		{ MgVect3D vt = v2 - v1; return SqLenVect3D(vt) <= tol * tol;}  
 	// V1とV2が平行であるかを確認
 	static bool ParallelVect3D( const MgVect3D& v1, const MgVect3D& v2)
 				 		{ MgVect3D vo = v1 ^ v2; MREAL fi = v1 * v2;
-						  return ( SqAbsVect3D(vo) <= fi * fi * MGPTOL->A_2);}
+						  return ( SqLenVect3D(vo) <= fi * fi * MGPTOL->A_2);}
 	// V1とV2が平行であるかを確認し、外積と内積を出力
 	static bool ParallelVect3DWP( const MgVect3D& v1, const MgVect3D& v2, MgVect3D *pso, MREAL* si)
 				 		{ MgVect3D vo = v1 ^ v2; MREAL fi = v1 * v2;
 				 		  *pso = vo; *si = fi;
-						  return ( SqAbsVect3D(vo) <= fi * fi * MGPTOL->A_2);}
+						  return ( SqLenVect3D(vo) <= fi * fi * MGPTOL->A_2);}
 	// 単位ベクトルを求める
 	static MgVect3D UnitizeVect3D( const MgVect3D& V1, MREAL i_Tol = MGPTOL->D);
 
 	// 
 	static MgVect3D TaniVect3D( const MgVect3D& V1, MREAL i_Tol = MGPTOL->D);
 
-	// 左90゜回転
+	// 左90゜回転したベクトルを求める
 	static MgVect3D RotL90Vect3D( const MgVect3D& v1)
 						{ return	MgVect3D( -v1.y, v1.x, v1.z);}
-	// 180゜回転
+	// 180゜回転したベクトルを求める
 	static MgVect3D Rot180Vect3D( const MgVect3D& v1)
 						{ return	MgVect3D( -v1.x, -v1.y, v1.z);}
-	// 右90゜回転
+	// 右90゜回転したベクトルを求める
 	static MgVect3D RotR90Vect3D( const MgVect3D& v1)
 						{ return	MgVect3D( v1.y, -v1.x, v1.z);}
 	// 点列の同一座標をつめる
-	static int PackSamePoint3D( MgPoint3D* io_pPt, int* io_pn)
-	{
-		int iC1, iC2;
-		int iN;
-		bool bPack;
-		if( *io_pn != 0) {
-			bPack = false;
-			iN = *io_pn;
-			iC1 = 0;
-			for ( iC2=1; iC2<iN; iC2++) {
-				if( io_pPt[iC1] == io_pPt[iC2]) {
-					bPack = true;
-				} else {
-					iC1++;
-					if( bPack)
-						memcpy( &io_pPt[iC1], &io_pPt[iC2], SZMgPoint2D());
-				}
-			}
-			*io_pn = iC1 + 1;
-		}
-		return 0;
-	}
+	static int PackSamePoint3D( MgPoint3D* io_pPt, int* io_pn);
+
 	static int PackSamePoint3D( MREAL* io_pPt, int* io_pn)
-	{
-		return PackSamePoint3D( (MgPoint3D*)io_pPt, io_pn);
-	}
+						{ return PackSamePoint3D( (MgPoint3D*)io_pPt, io_pn);}
+
+	// 点列を逆順にする
+	static int ReversePoint3D( MgPoint3D* i_pPt, int i_n, MgPoint3D* o__pPt);
+	static int ReversePoint3D( MREAL* i_pPt, int i_n, MREAL* o__pPt)
+						{ return ReversePoint3D( (MgPoint3D*)i_pPt, i_n, (MgPoint3D*)o__pPt);}
+
+	// 点列から直線に対象位置の点列を求める
+	static int SymmetryPointULine3D( MgPoint3D* i_pPt, int i_n, MgULine3D& uln, MgPoint3D* o_pPt);
 
 #ifdef _MgPoint3DA
 	//
@@ -355,19 +326,19 @@ public:
 	//		直線　形状演算
 	//
 	// ---------------------( ２次元 )------------------------------
-	//
+	
 	/////////////////////////////////////////////////////////////////////////////
-	//	水平線(X方向)とベクトル方向との角度を求める
+	//	水平線(X方向)からベクトルまでの角度(ラジアン)を求める
 	//
-	static MREAL AngleXVect2D(						// (  O) 左回転角度　（度）
+	static MREAL AngleXVect2D(						// (  O) 左回転角度　（ラジアン）
 													//		ベクトルの長さがMGPTOL->D未満の場合は0度を返す
 					const	MgVect2D&	i_v1		// (I  ) ベクトル
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
-	//	垂直線(Y方向)とベクトル方向との角度を求める
+	//	垂直線(Y方向)からベクトルまでの角度(ラジアン)を求める
 	//
-	static MREAL AngleYVect2D(						// (  O) 左回転角度　（度）
+	static MREAL AngleYVect2D(						// (  O) 左回転角度　（ラジアン）
 													//		ベクトルの長さがMGPTOL->D未満の場合は0度を返す
 					const	MgVect2D&	i_v1		// (I  ) ベクトル
 			);
@@ -375,7 +346,7 @@ public:
 	/////////////////////////////////////////////////////////////////////////////
 	//	２ベクトルの角度を求める
 	//
-	static MREAL Angle2Vect2D(						// (  O) 左回転角度　（度）
+	static MREAL Angle2Vect2D(						// (  O) 左回転角度　（ラジアン）
 													//		ベクトルの長さがMGPTOL->D未満の場合は0度を返す
 					const	MgVect2D&	i_v1,		// (I  ) ベクトル1
 					const	MgVect2D&	i_v2		// (I  ) ベクトル2
@@ -384,7 +355,7 @@ public:
 	/////////////////////////////////////////////////////////////////////////////
 	//	３点で作られる２線分の角度を求める
 	//
-	static MREAL Angle3Point2D(						// (  O) 左回転角度　（度）
+	static MREAL Angle3Point2D(						// (  O) 左回転角度　（ラジアン）
 													//		2点間の距離がMGPTOL->D未満の場合は0度を返す
 					const	MgPoint2D&	i_p1,		// (I  ) 点1
 					const	MgPoint2D&	i_p2,		// (I  ) 点2
@@ -394,7 +365,7 @@ public:
 	/////////////////////////////////////////////////////////////////////////////
 	//	２ベクトルの角度を求める
 	//
-	static MREAL Angle2Vect3D(						// (  O) 左回転角度　（度）
+	static MREAL Angle2Vect3D(						// (  O) 左回転角度　（ラジアン）
 													//		ベクトルの長さがMGPTOL->D未満の場合は0度を返す
 					const	MgVect3D&	i_v1,		// (I  ) ベクトル1
 					const	MgVect3D&	i_v2,		// (I  ) ベクトル2
@@ -402,9 +373,9 @@ public:
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
-	//	３点で作られる２直線の角度を求める
+	//	３点で作られる２線分の角度を求める
 	//
-	static MREAL Angle3Point3D(						// (  O) 左回転角度　（度）
+	static MREAL Angle3Point3D(						// (  O) 左回転角度　（ラジアン）
 													//		2点間の距離がMGPTOL->D未満の場合は0度を返す
 					const	MgPoint3D&	i_p1,		// (I  ) 点1
 					const	MgPoint3D&	i_p2,		// (I  ) 点2
@@ -416,32 +387,57 @@ public:
 	//		直線　平面　形状演算
 	//
 	// ---------------------( ３次元 )------------------------------
-	//
+	
+	/////////////////////////////////////////////////////////////////////////////
 	//	ベクトルと平面の角度を求める
 	//
-	static MREAL AngleVectPln3D(					// (  O) 左回転角度　（度）
+	static MREAL AngleVectPln3D(					// (  O) 左回転角度　（ラジアン）
 													//		2点間の距離がMGPTOL->D未満の場合は0度を返す
 					const	MgVect3D&	i_v1,		// (I  ) ベクトル1
 					const	MgPlane3D&	i_Pln2		// (I  ) 平面2
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
-	//	直線と平面の角度を求める
+	//	ベクトルとXY平面の角度を求める
 	//
-	static MREAL AngleULinePln3D(					// (  O) 左回転角度　（度）
+	static MREAL AngleVectXYPln3D(					// (  O) 角度　（ラジアン） Z方向が正
 													//		2点間の距離がMGPTOL->D未満の場合は0度を返す
-					const	MgULine3D&	i_ULn1,		// (I  ) 直線1
-					const	MgPlane3D&	i_Pln2		// (I  ) 平面2
+					const	MgVect3D&	i_v1		// (I  ) ベクトル1
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
-	//	線分と平面の角度を求める
+	//	ベクトルとYZ平面の角度を求める
 	//
-	static MREAL AngleLinePln3D(					// (  O) 左回転角度　（度）
+	static MREAL AngleVectYZPln3D(					// (  O) 角度　（ラジアン） X方向が正
 													//		2点間の距離がMGPTOL->D未満の場合は0度を返す
-					const	MgLine3D&	i_Ln1,		// (I  ) 線分1
-					const	MgPlane3D&	i_Pln2		// (I  ) 平面2
+					const	MgVect3D&	i_v1		// (I  ) ベクトル1
 			);
+
+	/////////////////////////////////////////////////////////////////////////////
+	//	ベクトルとZX平面の角度を求める
+	//
+	static MREAL AngleVectZXPln3D(					// (  O) 角度　（ラジアン） Y方向が正
+													//		2点間の距離がMGPTOL->D未満の場合は0度を返す
+					const	MgVect3D&	i_v1		// (I  ) ベクトル1
+			);
+
+//S	/////////////////////////////////////////////////////////////////////////////
+//	//	直線と平面の角度を求める
+//	//
+//	static MREAL AngleULinePln3D(					// (  O) 左回転角度　（ラジアン）
+//													//		2点間の距離がMGPTOL->D未満の場合は0度を返す
+//					const	MgULine3D&	i_ULn1,		// (I  ) 直線1
+//					const	MgPlane3D&	i_Pln2		// (I  ) 平面2
+//			);
+//
+//	/////////////////////////////////////////////////////////////////////////////
+//	//	線分と平面の角度を求める
+//	//
+//	static MREAL AngleLinePln3D(					// (  O) 左回転角度　（ラジアン）
+//													//		2点間の距離がMGPTOL->D未満の場合は0度を返す
+//					const	MgLine3D&	i_Ln1,		// (I  ) 線分1
+//					const	MgPlane3D&	i_Pln2		// (I  ) 平面2
+//			);
 
 	/////////////////////////////////////////////////////////////////////////////
 	//		直線　形状演算
@@ -522,79 +518,70 @@ public:
 							MgULine3D*	o_pULn3		// (  O) 直線3
 			);
 
-	//
 	//======================( ２次元、３次元 )==============================
 	//	２次元、３次元座標変換マトリックス
-	//
+	
 	//======================( ２次元 )==============================
 	//		原点を中心に回転の座標変換マトリックスを作成
 	//
-	static MgMat2E Mat2ERot( MREAL dg)
+	static MgMat2E Mat2ERot( MREAL rd)
 	{
-		MREAL	rd = MGRADIAN( dg);
 		return Mat2ERotV( MgVect2D( MREAL( cos( rd)), MREAL( sin( rd))));
 	}
 
 	//======================( ２次元 )==============================
 	//		原点を中心に逆回転の座標変換マトリックスを作成
 	//
-	static MgMat2E Mat2ERotRev( MREAL dg)
+	static MgMat2E Mat2ERotRev( MREAL rd)
 	{
-		MREAL	rd = MGRADIAN( dg);
 		return Mat2ERotRevV( MgVect2D( MREAL( cos( rd)), MREAL( sin( rd))));
 	}
 
 	//======================( ３次元 )==============================
 	//		ＸＹ平面で原点を中心に回転の座標変換マトリックスを作成
 	//
-	static MgMat3E Mat3ERotZ( MREAL dg)
+	static MgMat3E Mat3ERotZ( MREAL rd)
 	{
-		MREAL	rd = MGRADIAN( dg);
 		return Mat3ERotZV( MgVect2D( MREAL( cos( rd)), MREAL( sin( rd))));
 	}
 
 	//======================( ３次元 )==============================
 	//		ＸＹ平面で原点を中心に逆回転の座標変換マトリックスを作成
 	//
-	static MgMat3E Mat3ERotRevZ( MREAL dg)
+	static MgMat3E Mat3ERotRevZ( MREAL rd)
 	{
-		MREAL	rd = MGRADIAN( dg);
 		return Mat3ERotRevZV( MgVect2D( MREAL( cos( rd)), MREAL( sin( rd))));
 	}
 
 	//======================( ３次元 )==============================
 	//		ＹＺ平面で原点を中心に回転の座標変換マトリックスを作成
 	//
-	static MgMat3E Mat3ERotTX( MREAL dg)
+	static MgMat3E Mat3ERotTX( MREAL rd)
 	{
-		MREAL	rd = MGRADIAN( dg);
 		return  Mat3ERotTXV( MgVect2D( MREAL( cos( rd)), MREAL( sin( rd))));
 	}
 
 	//======================( ３次元 )==============================
 	//		ＹＺ平面で原点を中心に逆回転の座標変換マトリックスを作成
 	//
-	static MgMat3E Mat3ERotRevX( MREAL dg)
+	static MgMat3E Mat3ERotRevX( MREAL rd)
 	{
-		MREAL	rd = MGRADIAN( dg);
 		return Mat3ERotRevXV( MgVect2D( MREAL( cos( rd)), MREAL( sin( rd))));
 	}
 
 	//======================( ３次元 )==============================
 	//		ＺＸ平面で原点を中心に回転の座標変換マトリックスを作成
 	//
-	static MgMat3E Mat3ERotY( MREAL dg)
+	static MgMat3E Mat3ERotY( MREAL rd)
 	{
-		MREAL	rd = MGRADIAN( dg);
 		return Mat3ERotYV( MgVect2D( MREAL( cos( rd)), MREAL( sin( rd))));
 	}
 
 	//======================( ３次元 )==============================
 	//		ＺＸ平面で原点を中心に回転の座標変換マトリックスを作成
 	//
-	static MgMat3E Mat3ERotRevY( MREAL dg)
+	static MgMat3E Mat3ERotRevY( MREAL rd)
 	{
-		MREAL	rd = MGRADIAN( dg);
 		return Mat3ERotRevYV( MgVect2D( MREAL( cos( rd)), MREAL( sin( rd))));
 	}
 
@@ -638,7 +625,6 @@ public:
 	//
 	static MgMat2E Mat2ESingleMinus( const MgMat2E& m1);
 
-	//
 	//===========================================================================
 	//	処理内容
 	//		負の座標変換マトリックスを作成
@@ -1589,18 +1575,16 @@ public:
 	static MgMat3E Mat3EInv( MgMat3E& i_Mt);
 
 	//======================( ２次元 )==============================
-	//		直線に対する鏡像座標変換マトリックスを作成
+	//		直線に関する鏡映変換行列を作成
 	//
 	static MgMat2E Mat2EMirror(						// (  O) 鏡像変換行列
-					const	MgMat2E&	i_mt, 		// (I  ) 変換行列
 					const	MgULine2D&	i_uln		// (I  ) 鏡映の軸とする直線
 			);
 
 	//======================( ３次元 )==============================
-	//		平面に対する鏡像座標変換マトリックスを作成
+	//		平面に関する鏡映変換行列を作成
 	//
 	static MgMat3E Mat3EMirror(						// (  O) 鏡像変換行列
-					const	MgMat3E&  i_Mt,	 		// (I  ) 変換行列
 					const	MgPlane3D& i_Pln		// (I  ) 鏡映の面とする平面
 			);
 
@@ -1609,7 +1593,7 @@ public:
 	//
 	static MgMat2E Mat2ERot(						// (  O) 変換行列
 					const	MgPoint2D&	i_ptc, 		// (I  ) 回転の中心となる点
-					const	MREAL&		i_ar		// (I  ) 回転角 Degree
+							MREAL		i_rd		// (I  ) 回転角 (ラジアン)
 			);
 
 	//======================( ３次元 )==============================
@@ -1617,7 +1601,7 @@ public:
 	//
 	static MgMat3E Mat3ERot(						// (  O) 変換行列
 					const	MgULine3D&	i_ULn, 		// (I  ) 回転軸となる直線
-					const	MREAL&		i_ar		// (I  ) 回転角(Degree)
+							MREAL		i_ar		// (I  ) 回転角(Degree)
 			);
 
 	//======================( ３次元 )==============================
@@ -2825,19 +2809,17 @@ public:
 	static MgMat3D Mat3DInv( MgMat3D& i_Mt);
 
 	//======================( ２次元 )==============================
-	//		直線に対する鏡像座標変換マトリックスを作成
+	//		直線に関する鏡映変換行列を作成
 	//
 	static MgMat2D Mat2DMirror(						// (  O) 鏡像変換行列
-					const	MgMat2D&	i_mt, 		// (I  ) 変換行列
 					const	MgULine2D&	i_uln		// (I  ) 鏡映の軸とする直線
 			);
 
 	//======================( ３次元 )==============================
-	//		平面に対する鏡像座標変換マトリックスを作成
+	//		平面に関する鏡映変換行列を作成
 	//
 	static MgMat3D Mat3DMirror(						// (  O) 鏡像変換行列
-					const	MgMat3D&	i_Mt,		// (I  ) 変換行列
-					const	MgPlane3D&	i_Pln		// (I  ) 鏡映の面とする平面
+					const	MgPlane3D& i_Pln		// (I  ) 鏡映の面とする平面
 			);
 
 	//======================( ２次元 )==============================
@@ -2845,7 +2827,7 @@ public:
 	//
 	static MgMat2D Mat2DRot(						// (  O) 変換行列
 					const	MgPoint2D&	i_ptc, 		// (I  ) 回転の中心となる点
-					const	MREAL&		i_ar		// (I  ) 回転角 Degree
+							MREAL		i_rd		// (I  ) 回転角 (ラジアン)
 			);
 
 	//======================( ３次元 )==============================
@@ -2853,7 +2835,7 @@ public:
 	//
 	static MgMat3D Mat3DRot(						// (  O) 変換行列
 					const	MgULine3D&	i_ULn, 		// (I  ) 回転軸となる直線
-					const	MREAL&		i_ar		// (I  ) 回転角(Degree)
+							MREAL		i_ar		// (I  ) 回転角(Degree)
 			);
 
 	//======================( ３次元 )==============================
@@ -4628,7 +4610,7 @@ public:
 	{
 	//	return (p1 == p2);
 		MgVect2D	V1 = i_p2 - i_p1;
-		return ( SqAbsVect2D( V1) <= rTol * rTol);
+		return ( SqLenVect2D( V1) <= rTol * rTol);
 	}
 	
 	//===========================================================================
@@ -4659,7 +4641,7 @@ public:
 	{
 	//	return (p1 == p2);
 		MgVect3D	V1 = i_p2 - i_p1;
-		return ( SqAbsVect3D( V1) <= rTol * rTol);
+		return ( SqLenVect3D( V1) <= rTol * rTol);
 	}
 	
 	//===========================================================================
@@ -4823,7 +4805,7 @@ public:
 		va1 = v21 ^ i_ULn2.v;
 	//	pa_2 = Abs_2(va1);
 	//	return ( pa_2 <= rTol * rTol);
-		return ( SqAbsVect3D(va1) <= rTol * rTol);
+		return ( SqLenVect3D(va1) <= rTol * rTol);
 	}
 	
 	// ---------------------( ３次元 )------------------------------
@@ -4847,7 +4829,7 @@ public:
 		c1 = v21 * i_HLn2.v;
 	//	pa_2 = Abs_2(va1);
 	//	return ( pa_2 <= rTol * rTol);
-		return ( SqAbsVect3D(va1) <= rTol * rTol && c1 > -rTol);
+		return ( SqLenVect3D(va1) <= rTol * rTol && c1 > -rTol);
 	}
 	
 	// ---------------------( ３次元 )------------------------------
@@ -4931,7 +4913,7 @@ public:
 	{
 		MgVect3D vo = i_v1 ^ i_v2;
 		MREAL fi = i_v1 * i_v2;
-		return (fi * fi <= SqAbsVect3D(vo) * MGPTOL->A_2);
+		return (fi * fi <= SqLenVect3D(vo) * MGPTOL->A_2);
 	}
 
 	// ---------------------( ３次元 )------------------------------
@@ -4946,7 +4928,7 @@ public:
 		MgVect3D vo = i_v1 ^ i_v2;
 		MREAL fi = i_v1 * i_v2;
 		*o_ppso = vo; *o_psi = fi;
-		return (fi * fi <= SqAbsVect3D(vo) * MGPTOL->A_2);
+		return (fi * fi <= SqLenVect3D(vo) * MGPTOL->A_2);
 	}
 
 	//===========================================================================

@@ -624,7 +624,7 @@ MINT MGeo::Intr2Pln3D(							// (  O) ステイタス
 //	平行のチェック
 //
 	vso = Pln1.v ^ Pln2.v;										// (sinΘv1v2)
-	s12 = SqAbsVect3D( vso);
+	s12 = SqLenVect3D( vso);
 	if ( Zero( s12, MGPTOL->A_2)) {
 		ist = MC_NINT;											// 平行
 	} else {

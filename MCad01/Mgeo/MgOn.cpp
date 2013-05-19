@@ -183,8 +183,8 @@ bool MGeo::ChkPointOnLine2DWS(						// (  O) ステイタス
 	//						 ( pa1 * pa1 <= tol * tol * (v2 * v2))
 	// 直線上なら、さらに線分上であるかを調べる
 	tol_2 = rTol * rTol;
-	v2tol_2 = tol_2 * SqAbsVect2D( v2);
-	v2tol_2_1 = tol_2 * SqAbsVect2D( v2) * 0.0001f * 0.0001f;
+	v2tol_2 = tol_2 * SqLenVect2D( v2);
+	v2tol_2_1 = tol_2 * SqLenVect2D( v2) * 0.0001f * 0.0001f;
 	*ist = 0;
 	if ( pa1 * pa1 <= v2tol_2) { 								// 点から線分までの鉛直距離がrTol以内
 		// 延長直線上
@@ -370,10 +370,10 @@ bool MGeo::ChkPointOnLine3DWS(						// (  O) ステイタス
 	//						 ( (va1 * va1) <= tol * tol * (v2 * v2))
 	// 直線上なら、さらに線分上であるかを調べる
 	tol_2 = rTol * rTol;
-	v2tol_2 = tol_2 * SqAbsVect3D( v2);
-	v2tol_2_1 = tol_2 * SqAbsVect3D( v2) * 0.0001f * 0.0001f;
+	v2tol_2 = tol_2 * SqLenVect3D( v2);
+	v2tol_2_1 = tol_2 * SqLenVect3D( v2) * 0.0001f * 0.0001f;
 	*ist = 0;
-	if ( SqAbsVect3D( va1) <= v2tol_2) { 							// 点から線分までの鉛直距離がrTol以内
+	if ( SqLenVect3D( va1) <= v2tol_2) { 							// 点から線分までの鉛直距離がrTol以内
 		cs = v2 * v2s1;
 		ce = v2 * v2e1;
 		if (v2s1 * v2s1 <= tol_2) {
@@ -481,7 +481,7 @@ bool MGeo::ChkLineOnLine3DWS(						// (  O) ステイタス
 	//
 	// 線分1の始点から線分2までの鉛直距離 abs( pa1) <= tol より直線上であるかを調べる
 	//						 ( pa1 * pa1 <= tol * tol)
-	if ( SqAbsVect3D( pa1) > rTol * rTol) 							// 点から線分までの鉛直距離がrTol超の場合は
+	if ( SqLenVect3D( pa1) > rTol * rTol) 							// 点から線分までの鉛直距離がrTol超の場合は
 		MQUIT;													// 重なっていないとする
 	cs21 = 0;
 	cs22 = v2 * vu2;
@@ -688,13 +688,13 @@ MINT MGeo::CountPolygonAroundPoint2D(				// (  O) ステイタス
 	for ( ic=0; ic<Pg.m_n; ic++) {
 		Pe = Pg.m_p[ic];
 		Ve = Pt - Pe;
-		if ( SqAbsVect2D( Ve) <= rTol * rTol) {						// 点が終点上(Pt == Pe)
+		if ( SqLenVect2D( Ve) <= rTol * rTol) {						// 点が終点上(Pt == Pe)
 			ist = MC_ON_TOP;
 			MQUIT;
 		}
 		Vl = Pe - Ps;
 		MREAL Ss = Vl ^ Vs;
-		if ( ( Ss * Ss) <= (rTol * rTol * SqAbsVect2D( Vl))) {			// 点から辺までの距離がrTol以内
+		if ( ( Ss * Ss) <= (rTol * rTol * SqLenVect2D( Vl))) {			// 点から辺までの距離がrTol以内
 			MREAL Cs = Vs * Vl;
 			MREAL Ce = Ve * Vl;
 			if (Cs >= 0.0f && Ce <= 0.0f) {						// 辺上

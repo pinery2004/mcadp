@@ -111,20 +111,20 @@ public :
 	~MmWndInfo();
 
 	// ëÆê´ì«Ç›èëÇ´
-	void	SetWndSyu( const MINT iWndSyu)
+	void	SetWndSyu( MINT iWndSyu)
 						{ 
 							m_iWndSyu = iWndSyu;}
 	MINT	GetWndSyu()
 						{ return m_iWndSyu;}
-	void	SetZuSyu( const MINT iZuSyu)
+	void	SetZuSyu( MINT iZuSyu)
 						{ m_iZuSyu = iZuSyu;}
 	MINT	GetZuSyu()
 						{ return m_iZuSyu;}
-	void	SetInpKai( const MINT iKai)
+	void	SetInpKai( MINT iKai)
 						{ m_iKai = iKai;}
 	MINT	GetInpKai()
 						{ return m_iKai;}
-	void	SetZuNum( const MINT iZuNum)
+	void	SetZuNum( MINT iZuNum)
 						{ m_iZuNum = iZuNum;}
 	MINT	GetZuNum()
 						{ return m_iZuNum;}
@@ -138,7 +138,7 @@ public :
 	CMDIChildWnd* GetFrame()
 						{
 							return m_pChildFrm;}
-	MINT	SetCursor( const MINT iCursor)
+	MINT	SetCursor( MINT iCursor)
 						{ MINT iPrevCursor = m_iCursor;
 						  m_iCursor = iCursor;
 						  return iPrevCursor;}

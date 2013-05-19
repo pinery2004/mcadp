@@ -427,7 +427,7 @@ void MdlDispList::DrawKaiko(
 		   i_pPlcEn->GetPIOkuHosei()) * rB;						// パネル手前側補正値 + 奥行長 + 奥側補正値
 	if ( i_pPlcEn->IsYanePanel()) {
 		vuRt = MgVect2DC( VuRt);
-		rlXY = MGeo::AbsVect2D( vuRt);
+		rlXY = MGeo::LenVect2D( vuRt);
 		if ( !MGeo::Zero( rlXY)) {
 			rTH /= rlXY;
 			rOY /= rlXY;

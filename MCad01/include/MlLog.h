@@ -87,22 +87,37 @@ public:
 
 public:
 	static void	OpenLogFile( MCHAR* i_sFileName);
+	static void	OpenLogFile( char* i_sFileName);
 	static void	CloseLogFile( );
 	static void	Ctrl( int ictrl);
 	static int	Wait( MCHAR* str);
+	static int	Wait( char* str);
 	static void	Flush( );
 	static void	PrintCR( );
 	static void	Print( MCHAR* str);
+	static void	Print( char* str);
 	static void	Print( MCHAR* str, const MCHAR* s1);
+	static void	Print( char* str, const MCHAR* s1);
+	static void	Print( MCHAR* str, const char* s1);
+	static void	Print( char* str, const char* s1);
 	static void	Print( MCHAR* str, MINT i1);
-	static void	Print( MCHAR* str, MINT *i1, int ni1);
+	static void	Print( char* str, MINT i1);
+	static void	Print( MCHAR* str, MINT i1[], int ni1);
+	static void	Print( char* str, MINT i1[], int ni1);
 	static void	Print( MCHAR* str, MUBYTE i1);
-	static void	Print( MCHAR* str, MUBYTE *i1, int ni1);
+	static void	Print( char* str, MUBYTE i1);
+	static void	Print( MCHAR* str, MUBYTE i1[], int ni1);
+	static void	Print( char* str, MUBYTE i1[], int ni1);
 	static void	Print( MCHAR* str, MREAL f1);
-	static void	Print( MCHAR* str, MREAL *f1, int nf1);
+	static void	Print( char* str, MREAL f1);
+	static void	Print( MCHAR* str, MREAL f1[], int nf1);
+	static void	Print( char* str, MREAL f1[], int nf1);
 	static void LogOut( MCHAR* i_cFormat, ...);					// フォーマット付きで出力する
+	static void LogOut( char* i_cFormat, ...);					// フォーマット付きで出力する
 	static void LogOutWL( int i_iLevel, MCHAR* i_cFormat, ...);	// ログレベルとフォーマット付きで出力する
+	static void LogOutWL( int i_iLevel, char* i_cFormat, ...);	// ログレベルとフォーマット付きで出力する
 	static void	Trace( MCHAR* str);
+	static void	Trace( char* str);
 	static void	Trace( );
 };
 
@@ -142,13 +157,19 @@ private:
 public:
 	Trace( void);
 	Trace( MCHAR* i_cFuncName);
+	Trace( char* i_cFuncName);
 	~Trace( void);
 	static void OpenTraceFile(									// ログファイルの削除とオープン
 						MCHAR i_cLogFilePath[]	// ログファイルパス
 						);
+	static void OpenTraceFile(									// ログファイルの削除とオープン
+						char i_cLogFilePath[]	// ログファイルパス
+						);
 	static void CloseTraceFile( void);							// ログファイルのクローズ
 	static void Write( MCHAR i_cFormat[], ...);					// ログデータ書き込み
+	static void Write( char i_cFormat[], ...);					// ログデータ書き込み
 	static void WriteLine( MCHAR i_cOut[]);						// ログデータ行書き込み
+	static void WriteLine( char i_cOut[]);						// ログデータ行書き込み
 };
 //extern	CMbDebug g_MbDbg;
 

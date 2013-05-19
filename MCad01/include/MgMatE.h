@@ -66,14 +66,8 @@ public:
 		m[2][0] = i_m31; m[2][1] = i_m32;}
 	MgMat2E( MREAL i_m[3][2]) {
 		memcpy_s( &m[0][0], 6*sizeof(MREAL), &i_m[0][0], 6*sizeof(MREAL));}
-//S		memcpy( m[0], i_m[0], SZMREAL( 2));
-//		memcpy( m[1], i_m[1], SZMREAL( 2));
-//		memcpy( m[2], i_m[2], SZMREAL( 2));}
 	MgMat2E( MREAL i_m[6]) {
 		memcpy_s( &m[0][0], 6*sizeof(MREAL), i_m, 6*sizeof(MREAL));}
-//S		memcpy( m[0], &i_m[0], SZMREAL( 2));
-//		memcpy( m[1], &i_m[2], SZMREAL( 2));
-//		memcpy( m[2], &i_m[4], SZMREAL( 2));}
 	void SetUnit();																// 単位行列を設定する
 	friend MgMat2E operator +  ( const MgMat2E& m1, const MgMat2E& m2);			// +
 	friend MgMat2E operator += ( MgMat2E& m1,		const MgMat2E& m2);			// +=
@@ -138,16 +132,8 @@ public:
 		m[3][0] = i_m41; m[3][1] = i_m42; m[3][2] = i_m43;}
 	MgMat3E( MREAL i_m[4][3]) {
 		memcpy_s( &m[0][0], 6*sizeof(MREAL), &i_m[0][0], 6*sizeof(MREAL));}
-//S		memcpy( m[0], i_m[0], SZMREAL( 3));
-//		memcpy( m[1], i_m[1], SZMREAL( 3));
-//		memcpy( m[2], i_m[2], SZMREAL( 3));
-//		memcpy( m[3], i_m[3], SZMREAL( 3));}
 	MgMat3E( MREAL i_m[12]) {
 		memcpy_s( &m[0][0], 12*sizeof(MREAL), i_m, 12*sizeof(MREAL));}
-//S		memcpy( m[0], &i_m[0], SZMREAL( 3));
-//		memcpy( m[1], &i_m[3], SZMREAL( 3));
-//		memcpy( m[2], &i_m[6], SZMREAL( 3));
-//		memcpy( m[3], &i_m[9], SZMREAL( 3));}
 	MgMat3E( MgVect3D i_V1, MgVect3D i_V2, MgVect3D i_V3) {
 		m[0][0] = i_V1.x; m[0][1] = i_V2.x; m[0][2] = i_V3.x;
 		m[1][0] = i_V1.y; m[1][1] = i_V2.y; m[1][2] = i_V3.y;
@@ -188,7 +174,7 @@ public:
 	friend MgVect3D operator  *= ( MgVect3D& Vt, const MgMat3E& M1);			// *=	座標変換
 	friend MgULine3D operator *= ( MgULine3D& uL, const MgMat3E& M1);			// *=	座標変換
 	friend MgLine3D operator  *= ( MgLine3D& Ln, const MgMat3E& M1);			// *=	座標変換
-//
+
 	void Print( MCHAR* s);														// print
 	void MgMatPrint3(MCHAR* s);
 };

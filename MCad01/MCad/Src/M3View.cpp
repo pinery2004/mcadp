@@ -175,7 +175,9 @@ BOOL M3View::InitializeOpenGL( void)
 
 	// 座標変換マトリックスの初期化
 	m_rScl = 1.;
-	m_mTrans = MGeo::Mat3ERotRevZ( m_rRotZ) * MGeo::Mat3ERotRevY( m_rRotY) * MGeo::Mat3ERotRevX( m_rRotX);
+	m_mTrans = MGeo::Mat3ERotRevZ( MGRADIAN( m_rRotZ)) *
+			   MGeo::Mat3ERotRevY( MGRADIAN( m_rRotY)) *
+			   MGeo::Mat3ERotRevX( MGRADIAN( m_rRotX));
 
 	return TRUE;
 }

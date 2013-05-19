@@ -117,7 +117,7 @@ MINT MtGetInp( MCHAR* o_sEntry, int i_nEntry)
 	return MTRT_NORM;
 }
 
-void MtSetNFlag( const MINT nflag) {
+void MtSetNFlag( MINT nflag) {
 	MT_znflag = nflag;
 }
 

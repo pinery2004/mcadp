@@ -1289,7 +1289,7 @@ void MgGInt::operator = (const MgGReal &GR)						// ŽÀ”ŒQ ¨ ®”ŒQ
 }
 
 //	\¬®”‚Ì’Ç‰Á
-void MgGInt::operator += ( const MINT &i1)						// GPt += i1
+void MgGInt::operator += ( MINT i1)								// GPt += i1
 {
 	MINT	i1sv;
 	if (m_n >= m_isz) {
@@ -1444,7 +1444,7 @@ void MgGReal::operator = (const MgGInt &GI)						// ®”ŒQ ¨ ŽÀ”ŒQ
 }
 
 //	\¬ŽÀ”‚Ì’Ç‰Á
-void MgGReal::operator += ( const MREAL &r1)					// GPt += i1
+void MgGReal::operator += ( MREAL r1)							// GPt += i1
 {
 	MREAL	r1sv;
 	if (m_n >= m_isz) {

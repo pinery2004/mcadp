@@ -83,7 +83,7 @@ public:
 
 	MgCir3D()			{}
 
-	MgCir3D( const MgPoint3D& Pc1, const MgVect3D V1, const MREAL r1)
+	MgCir3D( const MgPoint3D& Pc1, const MgVect3D& V1, MREAL r1)
 						{ Pc = Pc1; V = V1; r = r1;}
 
 	MgCir3D Set( const MgPoint3D& Pc1, const MgVect3D V1, MREAL r1)
@@ -110,7 +110,7 @@ public:
 //						{ MgCir2D ciro; ciro.pc.Set( Cir1.Pc);
 //						  ciro.r = Cir1.r; return ciro;} 
 //
-//inline MgCir2D MgCir2DC( const MgPoint3D& Pc, const MREAL r1)					// ÇRéüå≥(x,y)Å®ÇQéüå≥
+//inline MgCir2D MgCir2DC( const MgPoint3D& Pc, MREAL r1)						// ÇRéüå≥(x,y)Å®ÇQéüå≥
 //						{ MgCir2D ciro; ciro.pc.Set( Pc);
 //						  ciro.r = r1; return ciro;} 
 
@@ -144,7 +144,7 @@ inline MgCir3D MgCir3DC( const MgPoint2D& pc, MREAL r, MREAL z = 0.)			// ÇQéüå≥
 						  Ciro.V = MgVect3D( 0., 0., 1.);
 						  Ciro.r = r; return Ciro;}
 
-inline MgCir3D MgCir3DC( const MgPoint2D& pc, const MREAL r, const MgPlane3D& Pln)	// ÇQéüå≥Å®ÇRéüå≥	(ïΩñ è„)
+inline MgCir3D MgCir3DC( const MgPoint2D& pc, MREAL r, const MgPlane3D& Pln)	// ÇQéüå≥Å®ÇRéüå≥	(ïΩñ è„)
 						{ MgCir3D Ciro; Ciro.Pc.Set( pc, Pln);
 						  Ciro.V = Pln.v;
 						  Ciro.r = r; return Ciro;}

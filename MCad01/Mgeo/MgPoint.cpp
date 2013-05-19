@@ -43,7 +43,7 @@ void MgPoint2D::Print(MCHAR* s) const				// Print
 //
 MgVect2D MgVect2D::SetUnitize( MREAL i_Tol)		//	(  O) 単位ベクトル
 {
-	MREAL	d1 = MGeo::AbsVect2D( *this);
+	MREAL	d1 = MGeo::LenVect2D( *this);
 		MBCHECK_ZEROVECT( d1, MBCstr( "MgVect2D Unitize"), i_Tol);
 	MREAL	d2 = 1.f / d1;
 	x *= d2;
@@ -52,11 +52,53 @@ MgVect2D MgVect2D::SetUnitize( MREAL i_Tol)		//	(  O) 単位ベクトル
 }
 
 //======================( ２次元 )==============================
+// 点列の同一座標をつめる
+int MGeo::PackSamePoint2D( MgPoint2D* io_pPt, int* io_pn)
+{
+	int iC1, iC2;
+	int iN;
+	bool bPack;
+	if( *io_pn != 0) {
+		bPack = false;
+		iN = *io_pn;
+		iC1 = 0;
+		for ( iC2=1; iC2<iN; iC2++) {
+			if( io_pPt[iC1] == io_pPt[iC2]) {
+				bPack = true;
+			} else {
+				iC1++;
+				if( bPack)
+					memcpy( &io_pPt[iC1], &io_pPt[iC2], SZMgPoint2D());
+			}
+		}
+		*io_pn = iC1 + 1;
+	}
+	return 0;
+}
+
+// 点列を逆順にする
+int MGeo::ReversePoint2D( MgPoint2D* i_pPt, int i_n, MgPoint2D* o_pPt)
+{
+	int i1, i2;
+	if( i_pPt == o_pPt) {
+		for( i1=0,i2=i_n-1; i1<i2;i1++,i2--) {
+			msSwap( o_pPt[i1], o_pPt[i2]);
+		}
+	} else {
+		for( i1=0,i2=i_n-1; i2>=0; i1++,i2--) {
+//E			memcpy( &o_pPt[i2], &i_pPt[i1], SZMgPoint2D());
+			o_pPt[i2] = i_pPt[i1];
+		}
+	}
+	return 0;
+}
+
+//======================( ２次元 )==============================
 //		2Dベクトルの単位ベクトルを求める
 //
 MgVect2D MgVect2D::Unitize( MREAL i_Tol) const	//	(  O) 単位ベクトル
 {
-	MREAL	d1 = MGeo::AbsVect2D( *this);
+	MREAL	d1 = MGeo::LenVect2D( *this);
 		MBCHECK_ZEROVECT( d1, MBCstr( "MgVect2D MgUnitize"), i_Tol);
 	MREAL	d2 = 1.f / d1;
     return	MgVect2D(x * d2, y * d2);
@@ -77,7 +119,7 @@ void MgVect2D::Print(MCHAR* s) const				// Print
 //
 MgVect2D MGeo::UnitizeVect2D( const MgVect2D& i_v, MREAL i_Tol)		//	(  O) 単位ベクトル
 {
-	MREAL	d1 = MGeo::AbsVect2D( i_v);
+	MREAL	d1 = MGeo::LenVect2D( i_v);
 		MBCHECK_ZEROVECT( d1, MBCstr( "MgVect2D MgUnitize"), i_Tol);
 	MREAL	d2 = 1.f / d1;
     return	MgVect2D( i_v.x * d2, i_v.y * d2);
@@ -89,21 +131,67 @@ MgVect3D MGeo::TaniVect3D( const MgVect3D& i_v, MREAL i_Tol)
 {
 	MgVect3D vo;
 	MREAL	ax, ay, az;
-//
+
 	ax = MGeo::Abs( i_v.x);
 	ay = MGeo::Abs( i_v.y);
 	az = MGeo::Abs( i_v.z);
 	vo.x = vo.y = vo.z = 1.;
-//
+
 	if (ax > ay && ax > az)	
 		vo.x = - ( i_v.y + i_v.z) / i_v.x;
 	else if ( ay >= ax && ay >= az)
 		vo.y = - ( i_v.x + i_v.z) / i_v.y;
 	else					 
 		vo.z = - ( i_v.x + i_v.y) / i_v.z;
-//
+
 	return MGeo::UnitizeVect3D( vo, i_Tol);
 }
+
+//======================( ３次元 )==============================
+//		点列の同一座標をつめる
+//
+int MGeo::PackSamePoint3D( MgPoint3D* io_pPt, int* io_pn)
+{
+	int iC1, iC2;
+	int iN;
+	bool bPack;
+	if( *io_pn != 0) {
+		bPack = false;
+		iN = *io_pn;
+		iC1 = 0;
+		for ( iC2=1; iC2<iN; iC2++) {
+			if( io_pPt[iC1] == io_pPt[iC2]) {
+				bPack = true;
+			} else {
+				iC1++;
+				if( bPack)
+					memcpy( &io_pPt[iC1], &io_pPt[iC2], SZMgPoint2D());
+			}
+		}
+		*io_pn = iC1 + 1;
+	}
+	return 0;
+}
+
+
+// 点列を逆順にする
+int MGeo::ReversePoint3D( MgPoint3D* i_pPt, int i_n, MgPoint3D* o_pPt)
+{
+	int i1, i2;
+	if( i_pPt == o_pPt) {
+		for( i1=0,i2=i_n-1; i1<i2;i1++,i2--) {
+			msSwap( o_pPt[i1], o_pPt[i2]);
+		}
+	} else {
+		for( i1=0,i2=i_n-1; i2>=0; i1++,i2--) {
+//E			memcpy( &o_pPt[i2], &i_pPt[i1], SZMgPoint3D());
+			o_pPt[i2] = i_pPt[i1];
+		}
+	}
+	return 0;
+}
+	// 点列から直線に対象位置の点列を求める
+	static int SymmetryPointULine3D( MgPoint3D* i_pPt, int i_n, MgULine3D& uln, MgPoint3D* o_pPt);
 
 //S //======================( ２次元 )==============================
 //#ifdef _MgPoint2DA
@@ -131,7 +219,7 @@ void MgPoint3D::Print(MCHAR* s) const				// Print
 //
 MgVect3D MgVect3D::SetUnitize( MREAL i_Tol)			//	(  O) 単位ベクトル
 {
-	MREAL	d1 = MGeo::AbsVect3D( *this);
+	MREAL	d1 = MGeo::LenVect3D( *this);
 		MBCHECK_ZEROVECT( d1, MBCstr( "MgVect3D Unitize"), i_Tol);
 	MREAL	d2 = 1.f / d1;
 	x *= d2;
@@ -145,7 +233,7 @@ MgVect3D MgVect3D::SetUnitize( MREAL i_Tol)			//	(  O) 単位ベクトル
 //
 MgVect3D MgVect3D::Unitize( MREAL i_Tol) const		//	(  O) 単位ベクトル
 {
-	MREAL	d1= MGeo::AbsVect3D( *this);
+	MREAL	d1= MGeo::LenVect3D( *this);
 		MBCHECK_ZEROVECT( d1, MBCstr( "MgVect2D MgUnitize"), i_Tol);
 	MREAL	d2 = 1.f / d1;
 	return MgVect3D( x * d2, y * d2, z * d2);
@@ -166,7 +254,7 @@ void MgVect3D::Print(MCHAR* s) const				// Print
 //
 MgVect3D MGeo::UnitizeVect3D( const MgVect3D& i_v, MREAL i_Tol)	//	(  O) 単位ベクトル
 {
-	MREAL	d1= MGeo::AbsVect3D( i_v);
+	MREAL	d1= MGeo::LenVect3D( i_v);
 		MBCHECK_ZEROVECT( d1, MBCstr( "MgVect3D MgUnitize"), i_Tol);
 	MREAL	d2 = 1.f / d1;
 	return MgVect3D( i_v.x * d2, i_v.y * d2, i_v.z * d2);

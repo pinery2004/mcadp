@@ -23,8 +23,9 @@ namespace MC
 //		直線　形状演算
 //
 // ---------------------( ２次元 )------------------------------
-//
-//	ベクトルと水平線(X方向)との角度(ラジアン)を求める
+
+/////////////////////////////////////////////////////////////////////////////
+//	水平線(X方向)からベクトルまでの角度(ラジアン)を求める
 //
 MREAL	MGeo::AngleXVect2D(						// (  O) 左回転角度　（度）
 												//		ベクトルの長さがMGPTOL->D未満の場合は0度を返す
@@ -38,7 +39,7 @@ MREAL	MGeo::AngleXVect2D(						// (  O) 左回転角度　（度）
 }
 
 /////////////////////////////////////////////////////////////////////////////
-//	ベクトルと垂直線(Y方向)との角度(ラジアン)を求める
+//	垂直線(Y方向)からベクトルまでの角度(ラジアン)を求める
 //
 MREAL	MGeo::AngleYVect2D(						// (  O) 左回転角度　（度）
 												//		ベクトルの長さがMGPTOL->D未満の場合は0度を返す
@@ -75,7 +76,7 @@ MREAL	MGeo::Angle2Vect2D(						// (  O) 左回転角度　（度）
 }
 
 /////////////////////////////////////////////////////////////////////////////
-//	３点で作られる２直線の角度を求める
+//	３点で作られる２線分の角度(ラジアン)を求める
 //
 MREAL	MGeo::Angle3Point2D(					// (  O) 左回転角度　（度）
 												//		2点間の距離がMGPTOL->D未満の場合は0度を返す
@@ -110,7 +111,7 @@ MREAL	MGeo::Angle2Vect3D(						// (  O) 表から見た半時計方向の回転角度　（度）
 }
 
 /////////////////////////////////////////////////////////////////////////////
-//	３点で作られる２直線の角度を求める
+//	３点で作られる２線分の角度(ラジアン)を求める
 //
 MREAL	MGeo::Angle3Point3D(					// (  O) 表から見た半時計方向の回転角度　（度）
 												//		2点間の距離がMGPTOL->D未満の場合は0度を返す
@@ -131,10 +132,11 @@ MREAL	MGeo::Angle3Point3D(					// (  O) 表から見た半時計方向の回転角度　（度）
 //		直線　平面　形状演算
 //
 // ---------------------( ３次元 )------------------------------
+
+/////////////////////////////////////////////////////////////////////////////
+//	ベクトルと平面の角度を求める
 //
-//	ベクトルと平面の角度(ラジアン)を求める
-//
-MREAL	MGeo::AngleVectPln3D(					// (  O) 回転角度　（度）
+MREAL	MGeo::AngleVectPln3D(					// (  O) 回転角度　（ラジアン）
 												//		2点間の距離がMGPTOL->D未満の場合は0度を返す
 				const	MgVect3D&	v1,			// (I  ) ベクトル1
 				const	MgPlane3D&	Pln2		// (I  ) 平面2
@@ -144,43 +146,98 @@ MREAL	MGeo::AngleVectPln3D(					// (  O) 回転角度　（度）
 
 	if ((v1 * v1) < MGPTOL->D_2) return 0.0f;
 	
-	c12 = AbsVect3D(v1 ^ Pln2.v);
-	s12 = Abs(v1 * Pln2.v);
+	c12 = LenVect3D(v1 ^ Pln2.v);
+	s12 = v1 * Pln2.v;
 	
 	return MREAL( atan2( s12, c12));
 }
 
 /////////////////////////////////////////////////////////////////////////////
-//	直線と平面の角度を求める
+//	ベクトルとXY平面の角度を求める
 //
-MREAL	MGeo::AngleULinePln3D(					// (  O) 左回転角度　（度）
+MREAL MGeo::AngleVectXYPln3D(					// (  O) 角度　（ラジアン） Z方向が正
 												//		2点間の距離がMGPTOL->D未満の場合は0度を返す
-				const	MgULine3D&	ULn1,		// (I  ) 直線1
-				const	MgPlane3D&	Pln2		// (I  ) 平面2
+				const	MgVect3D&	i_v1		// (I  ) ベクトル1
 		)
 {
-	return AngleVectPln3D( ULn1.v, Pln2);
+	MREAL rL, rL_2;
+
+	rL_2 = i_v1.x * i_v1.x + i_v1.y  * i_v1.y;
+	if ((rL_2 + i_v1.z * i_v1.z) < MGPTOL->D_2) return 0.0f;
+
+	rL = sqrt( rL_2);
+	
+	return MREAL( atan2( i_v1.z, rL));
 }
 
 /////////////////////////////////////////////////////////////////////////////
-//	線分と平面の角度を求める
+//	ベクトルとYZ平面の角度を求める
 //
-MREAL	MGeo::AngleLinePln3D(					// (  O) 左回転角度　（度）
+MREAL MGeo::AngleVectYZPln3D(					// (  O) 角度　（ラジアン） X方向が正
 												//		2点間の距離がMGPTOL->D未満の場合は0度を返す
-				const	MgLine3D&	Ln1,		// (I  ) 線分1
-				const	MgPlane3D&	Pln2		// (I  ) 平面2
+				const	MgVect3D&	i_v1		// (I  ) ベクトル1
 		)
 {
-	MgVect3D	v1;
-	v1 = Ln1.p[1] - Ln1.p[0];
-	return AngleVectPln3D( v1, Pln2);
+	MREAL rL, rL_2;
+
+	rL_2 = i_v1.y * i_v1.y + i_v1.z  * i_v1.z;
+	if ((rL_2 + i_v1.x * i_v1.x) < MGPTOL->D_2) return 0.0f;
+
+	rL = sqrt( rL_2);
+	
+	return MREAL( atan2( i_v1.x, rL));
 }
+
+/////////////////////////////////////////////////////////////////////////////
+//	ベクトルとZX平面の角度を求める
+//
+MREAL MGeo:: AngleVectZXPln3D(					// (  O) 角度　（ラジアン） Y方向が正
+												//		2点間の距離がMGPTOL->D未満の場合は0度を返す
+				const	MgVect3D&	i_v1		// (I  ) ベクトル1
+		)
+{
+	MREAL rL, rL_2;
+
+	rL_2 = i_v1.z * i_v1.z + i_v1.x  * i_v1.x;
+	if ((rL_2 + i_v1.y * i_v1.y) < MGPTOL->D_2) return 0.0f;
+
+	rL = sqrt( rL_2);
+	
+	return MREAL( atan2( i_v1.y, rL));
+}
+
+//S /////////////////////////////////////////////////////////////////////////////
+////	直線と平面の角度(ラジアン)を求める
+////
+//MREAL	MGeo::AngleULinePln3D(					// (  O) 左回転角度　（度）
+//												//		2点間の距離がMGPTOL->D未満の場合は0度を返す
+//				const	MgULine3D&	ULn1,		// (I  ) 直線1
+//				const	MgPlane3D&	Pln2		// (I  ) 平面2
+//		)
+//{
+//	return AngleVectPln3D( ULn1.v, Pln2);
+//}
+//
+///////////////////////////////////////////////////////////////////////////////
+////	線分と平面の角度(ラジアン)を求める
+////
+//MREAL	MGeo::AngleLinePln3D(					// (  O) 左回転角度　（度）
+//												//		2点間の距離がMGPTOL->D未満の場合は0度を返す
+//				const	MgLine3D&	Ln1,		// (I  ) 線分1
+//				const	MgPlane3D&	Pln2		// (I  ) 平面2
+//		)
+//{
+//	MgVect3D	v1;
+//	v1 = Ln1.p[1] - Ln1.p[0];
+//	return AngleVectPln3D( v1, Pln2);
+//}
 
 /////////////////////////////////////////////////////////////////////////////
 //		直線　形状演算
 //
 // ---------------------( ２次元 )------------------------------
-//
+
+/////////////////////////////////////////////////////////////////////////////
 //	２直線間の角の2等分線を求める
 //
 void	MGeo::Bisector2ULine2D(					// (  O) ステータス
@@ -221,7 +278,7 @@ void MGeo::BisectorULineLine2D(					// (  O) ステータス
 /////////////////////////////////////////////////////////////////////////////
 //	線分と直線間の角の2等分線を求める
 //
-void MGeo::BisectorLineULine2D(						// (  O) ステータス
+void MGeo::BisectorLineULine2D(					// (  O) ステータス
 				const	MgLine2D&	Ln1,		// (I  ) 線分1
 				const	MgULine2D&	ULn2,		// (I  ) 直線2
 						MgULine2D*	ULn3		// (  O) 直線3
@@ -256,10 +313,11 @@ void MGeo::Bisector2Line2D(						// (  O) ステータス
 /////////////////////////////////////////////////////////////////////////////
 //
 // ---------------------( ３次元 )------------------------------
-//
+
+/////////////////////////////////////////////////////////////////////////////
 //	２直線間の角の2等分線を求める
 //
-void MGeo::Bisector2ULine3D(						// (  O) ステータス
+void MGeo::Bisector2ULine3D(					// (  O) ステータス
 				const	MgULine3D&	ULn1,		// (I  ) 直線1
 				const	MgULine3D&	ULn2,		// (I  ) 直線2
 						MgULine3D*	ULn3		// (  O) 直線3
@@ -285,7 +343,7 @@ void MGeo::Bisector2ULine3D(						// (  O) ステータス
 /////////////////////////////////////////////////////////////////////////////
 //	直線と線分間の角の2等分線を求める
 //
-void MGeo::BisectorULineLine3D(						// (  O) ステータス
+void MGeo::BisectorULineLine3D(					// (  O) ステータス
 				const	MgULine3D&	ULn1,		// (I  ) 直線1
 				const	MgLine3D&	Ln2,		// (I  ) 線分2
 						MgULine3D*	ULn3		// (  O) 直線3
@@ -301,7 +359,7 @@ void MGeo::BisectorULineLine3D(						// (  O) ステータス
 /////////////////////////////////////////////////////////////////////////////
 //	線分と直線間の角の2等分線を求める
 //
-void MGeo::BisectorLineULine3D(						//
+void MGeo::BisectorLineULine3D(					//
 				const	MgLine3D&	Ln1,		// (I  ) 線分1
 				const	MgULine3D&	ULn2,		// (I  ) 直線2
 						MgULine3D*	ULn3		// (  O) 直線3

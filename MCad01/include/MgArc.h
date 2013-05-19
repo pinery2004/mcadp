@@ -94,11 +94,11 @@ public:
 	MgArc3D()			{}
 
 	MgArc3D( const MgPoint3D Pt1[2], const MgPoint3D& Pc1,
-			const MgVect3D& V1, const MREAL r1)
+			const MgVect3D& V1, MREAL r1)
 						{ Pt[0] = Pt1[0]; Pt[1] = Pt1[1]; Pc = Pc1; V = V1; r = r1;}
 
 	MgArc3D( const MgPoint3D& Pt1, const MgPoint3D& Pt2, const MgPoint3D& Pc1,
-			const MgVect3D& V1, const MREAL r1)
+			const MgVect3D& V1, MREAL r1)
 						{ Pt[0] = Pt1; Pt[1] = Pt2; Pc = Pc1; V = V1; r = r1;}
 
 	bool operator == ( const MgArc3D &Arc1) const								// b = (arc == arc1) îªíË
@@ -121,7 +121,7 @@ public:
 						  V = V1; r = r1; return *this;}
 
 	MgArc3D Set( const MgPoint3D Pt1, const MgPoint3D Pt2, const MgPoint3D& Pc1,
-				const MgVect3D V1, const MREAL r1)
+				const MgVect3D V1, MREAL r1)
 						{ Pt[0] = Pt1; Pt[1] = Pt2; Pc = Pc1;
 						  V = V1; r = r1; return *this;}
 
@@ -155,7 +155,7 @@ inline MgArc2D MgArc2DC( const MgArc3D &Arc1)									// ÇRéüå≥(x,y)Å®ÇQéüå≥
 						  return arco;} 
 
 inline MgArc2D MgArc2DC( const MgPoint3D Pt[2], const MgPoint3D& Pc,
-					   const MREAL r1)											// ÇRéüå≥(x,y)Å®ÇQéüå≥
+					     MREAL r1)											// ÇRéüå≥(x,y)Å®ÇQéüå≥
 //						{ MgArc2D arco; arco.pt[0].Set( Pt[0]);
 //						  arco.pt[1].Set( Pt[1]); arco.pc.Set( Pc);
 						{ MgArc2D arco; arco.pt[0] = Pt[0].To2D();
@@ -163,7 +163,7 @@ inline MgArc2D MgArc2DC( const MgPoint3D Pt[2], const MgPoint3D& Pc,
 						  arco.r = r1; return arco;} 
 
 inline MgArc2D MgArc2DC( const MgPoint3D Pt1, const MgPoint3D Pt2,
-					   const MgPoint3D& Pc, const MREAL r1)						// ÇRéüå≥(x,y)Å®ÇQéüå≥
+					     const MgPoint3D& Pc, MREAL r1)						// ÇRéüå≥(x,y)Å®ÇQéüå≥
 //						{ MgArc2D arco; arco.pt[0].Set( Pt1);
 //						  arco.pt[1].Set( Pt2); arco.pc.Set( Pc);
 						{ MgArc2D arco; arco.pt[0] = Pt1.To2D();
@@ -213,7 +213,7 @@ inline MgArc3D MgArc3DC( const MgPoint2D pt1, const MgPoint2D pt2,
 						  Arco.r = r; return Arco;}
 
 inline MgArc3D MgArc3DC( const MgPoint2D pt[2], const MgPoint2D& pc,
-					   const MREAL r, const MgPlane3D& Pln)						// ÇQéüå≥Å®ÇRéüå≥	(ïΩñ è„)
+					     MREAL r, const MgPlane3D& Pln)						// ÇQéüå≥Å®ÇRéüå≥	(ïΩñ è„)
 //						{ MgArc3D Arco; Arco.Pt[0].Set( pt[0], Pln);
 //						  Arco.Pt[1].Set( pt[1], Pln); Arco.Pc.Set( pc, Pln);
 						{ MgArc3D Arco; Arco.Pt[0] = MgPoint3D( pt[0], Pln);
@@ -221,8 +221,8 @@ inline MgArc3D MgArc3DC( const MgPoint2D pt[2], const MgPoint2D& pc,
 						  Arco.V = Pln.v; Arco.r = r; return Arco;}
 
 inline MgArc3D MgArc3DC( const MgPoint2D pt1, const MgPoint2D pt2,
-					   const MgPoint2D& pc,
-					   const MREAL r, const MgPlane3D& Pln)						// ÇQéüå≥Å®ÇRéüå≥	(ïΩñ è„)
+					     const MgPoint2D& pc,
+					     MREAL r, const MgPlane3D& Pln)						// ÇQéüå≥Å®ÇRéüå≥	(ïΩñ è„)
 //						{ MgArc3D Arco; Arco.Pt[0].Set( pt1, Pln);
 //						  Arco.Pt[1].Set( pt2, Pln); Arco.Pc.Set( pc, Pln);
 						{ MgArc3D Arco; Arco.Pt[0] = MgPoint3D( pt1, Pln);

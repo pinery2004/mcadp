@@ -91,7 +91,7 @@ public:
 	void operator = (const MgPolyl3D &Pg);										// ÇRéüå≥Å®ÇQéüå≥
 	void operator += (const MgPoint2D& pt);										// É|ÉäÉSÉìÇ…ì_Çí«â¡		Pg1 += Pt2
 	void operator += (const MgPolyl2D &pg);										// É|ÉäÉSÉìÇ…É|ÉäÉSÉìÇí«â¡	Pg1 += Pg2
-	void operator -= (const MINT dn)											// É|ÉäÉSÉìÇÃç≈èIÇéì_ÇçÌèú
+	void operator -= (MINT dn)													// É|ÉäÉSÉìÇÃç≈èIÇéì_ÇçÌèú
 						{ m_n = max( m_n -= dn, 0);}
 	void operator -- ()															// É|ÉäÉSÉìÇÃç≈èIì_ÇçÌèú
 						{ if ( m_n>0) -- m_n;}
@@ -145,7 +145,7 @@ public:
 //						{ *this = MgPolyl3D( pg);}
 	void operator += (const MgPoint3D& Pt);										// Pg1 += Pt2
 	void operator += (const MgPolyl3D &Pg);										// Pg1 += Pg2
-	void operator -= (const MINT dn)
+	void operator -= (MINT dn)
 						{ m_n = max( m_n -= dn, 0);}
 	void operator -- ()
 						{ if ( m_n>0) -- m_n;}
@@ -192,7 +192,7 @@ public:
 	void operator = (const MgGPolyl3D &GPg);									// ÇRéüå≥Å®ÇQéüå≥
 	void operator += (const MgPolyl2D &pg);										// GPg1 += Pg2
 	void operator += (const MgGPolyl2D &Gpg);									// GPg1 += GPg2
-	void operator -= (const MINT dn)
+	void operator -= (MINT dn)
 						{ int ict; for ( ict=0; ict<dn && m_n>0; ict--) { m_n--; if (m_pg[m_n].m_fa) MBFREE( m_pg[m_n].m_p);}}
 	void operator -- ()
 						{ if (m_n>0) { --m_n; if (m_pg[m_n].m_fa) MBFREE( m_pg[m_n].m_p);}}
@@ -241,7 +241,7 @@ public:
 	void operator = (const MgGPolyl2D &Gpg);									// ÇQéüå≥Å®ÇRéüå≥ (z = 0.)
 	void operator += (const MgPolyl3D &Pg);										// GPg1 += Pg2
 	void operator += (const MgGPolyl3D &GPg);									// GPg1 += GPg2
-	void operator -= (const MINT dn)
+	void operator -= (MINT dn)
 						{ int ict; for ( ict=0; ict<dn && m_n>0; ict--) { m_n--; if ( m_pg[m_n].m_fa) MBFREE( m_pg[m_n].m_p);}}
 	void operator -- ()
 						{ if ( m_n>0) { --m_n; if ( m_pg[m_n].m_fa) MBFREE( m_pg[m_n].m_p);}}

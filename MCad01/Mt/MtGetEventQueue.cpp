@@ -42,6 +42,7 @@ MtInpEventQueueInterface * MtGetMtInpEventQueue( void)
 
 // CLASS IMPLEMENTATION -- class MtEngineVariables
 //
+
 MtEngineVariables::MtEngineVariables( void)
 {
 	m_pMenuQueue = new MtPrcEventQueue( 10);

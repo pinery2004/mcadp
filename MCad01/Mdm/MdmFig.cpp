@@ -175,11 +175,11 @@ inline_nu void	MDFIG::SetPmtN( MDID i_idl, MINT i_n)		// }Œ`—v‘f‚ÌƒTƒCƒY
 
 // }Œ`î•ñŒS‚ÌÅŒã‚Ì}Œ`î•ñ‚É—v‘f‚ð’Ç‰Á
 //	ƒoƒbƒtƒ@ƒTƒCƒY‚ª•s‘«‚·‚éê‡‚Í‚Q”{‚É—ÌˆæŠg’£(Šg’£Œã‚ÌÅ’á—ÌˆæƒTƒCƒY‚Í‚S‚Æ‚·‚é)
-inline_nu void MDFIG::operator += ( const MREAL i_r)				// Fig -= i
+inline_nu void MDFIG::operator += ( MREAL i_r)				// Fig -= i
 {
 	if ( m_pPmtl->GetN() >= m_pPmtl->GetSz()) {
 		ReSize( m_pPmtl->GetSz() + MGMAX( m_pPmtl->GetSz(), 4));
-	}															// ‚Q”{‚É—ÌˆæŠg’£(Šg’£Œã‚ÌÅ’á—ÌˆæƒTƒCƒY‚Í‚S‚Æ‚·‚é)
+	}														// ‚Q”{‚É—ÌˆæŠg’£(Šg’£Œã‚ÌÅ’á—ÌˆæƒTƒCƒY‚Í‚S‚Æ‚·‚é)
 	m_pPmtl->m_dt[m_pPmtl->m_n++] = i_r;
 }
 

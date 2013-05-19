@@ -27,6 +27,7 @@
 #include "MdmFig.h"
 #include "MsLib.h"
 #include "MgGeo.h"
+#include "MlLog.h"
 
 namespace MC
 {
@@ -40,6 +41,166 @@ void BrkPoint()
 }
 void Test000_Geo()
 {
+	{
+	//=======================
+	//	軸回転マトリックス
+	MgULine3D Uln( 0, 1, 2, 1, 1, 1);
+	Uln.v.SetUnitize();
+	MgMat3E Mr;
+	Mr = MGeo::Mat3ERot( Uln, MGRADIAN( 90));
+	Mr.Print( Mstr("軸回転マトリックス"));
+	}
+	{
+	//=======================
+	//	軸回転マトリックス
+	MgULine3D Uln( 0, 1, 2, 1, 1, 1);
+	Uln.v.SetUnitize();
+	MgMat3D Mrd;
+	Mrd = MGeo::Mat3DRot( Uln, MGRADIAN( 90));
+	Mrd.Print( Mstr("軸回転マトリックス"));
+	}
+	{
+	//=======================
+	//	鏡像マトリックス
+	MgMat2E m1, m2, m3, m4;
+	MgULine2D uln1( 1., 2., 1., 1.);
+	uln1.v.SetUnitize();
+	uln1.Print( Mstr("鏡像直線"));
+	m1 = MGeo::Mat2EMirror(uln1);
+	m1.Print( Mstr("鏡像マトリックス m1"));
+	MgPoint2D p01( 1., 0.);
+	MgPoint2D p02;
+	p02 = p01 * m1;
+	p01.Print( Mstr("鏡像前の点"));
+	p02.Print( Mstr("鏡像後の点"));
+
+	MgMat2E m01, m02, m03;
+	m01.SetUnit();
+	m01.Print( Mstr("初期マトリックス m01"));
+	m03 = m01 * m1;
+	p02 = p01 * m03;
+	m03.Print( Mstr("鏡像マトリックス m03 = m01 * m1"));
+//S	m02 = MGeo::Mat2EMirror( m01, uln1);
+//	p02 = p01 * m02;
+//	m02.Print( Mstr("鏡像マトリックス 関数 m02"));
+	p02.Print( Mstr("鏡像後の点"));
+
+	MgPlane3D pln1( 1, 2, 3, 1);
+	pln1.v.SetUnitize();
+	pln1.Print( Mstr("鏡映平面"));
+	MgPoint3D P1( 2, 0, 0);
+	MgMat3E M1;
+	M1.SetUnit();
+	M1.Print( Mstr("初期マトリックス M1"));
+
+//S	MgMat3E M2;
+//	M2 = MGeo::Mat3EMirror( M1, pln1);
+//	M2.Print( Mstr("鏡像マトリックス M2"));
+//	MgPoint3D P2;
+//	P2 = P1 * M2;
+//	P1.Print( Mstr("鏡像前の点"));
+//	P2.Print( Mstr("鏡像後の点"));
+	
+	MgMat3E M3;
+	M3 = MGeo::Mat3EMirror( pln1);
+	MgPoint3D P3;
+	P3 = P1 * M3;
+	M3.Print( Mstr("鏡像マトリックス M3"));
+	P3.Print( Mstr("鏡像後の点"));
+	}
+	{
+	//=======================
+	//	鏡像マトリックス
+	MgMat2D m1, m2, m3, m4;
+	MgULine2D uln1( 1., 2., 1., 1.);
+	uln1.v.SetUnitize();
+	uln1.Print( Mstr("鏡像直線"));
+	m1 = MGeo::Mat2DMirror(uln1);
+	m1.Print( Mstr("鏡像マトリックス m1"));
+	MgPoint2D p01( 1., 0.);
+	MgPoint2D p02;
+	p02 = p01 * m1;
+	p01.Print( Mstr("鏡像前の点"));
+	p02.Print( Mstr("鏡像後の点"));
+
+	MgMat2D m01, m02, m03;
+	m01.SetUnit();
+	m01.Print( Mstr("初期マトリックス m01"));
+	m03 = m01 * m1;
+	p02 = p01 * m03;
+	m03.Print( Mstr("鏡像マトリックス m03 = m01 * m1"));
+//S	m02 = MGeo::Mat2DMirror( m01, uln1);
+//	p02 = p01 * m02;
+//	m02.Print( Mstr("鏡像マトリックス 関数 m02"));
+	p02.Print( Mstr("鏡像後の点"));
+
+	MgPlane3D pln1( 1, 2, 3, 1);
+	pln1.v.SetUnitize();
+	pln1.Print( Mstr("鏡映平面"));
+	MgPoint3D P1( 2, 0, 0);
+	MgMat3D M1;
+	M1.SetUnit();
+	M1.Print( Mstr("初期マトリックス M1"));
+
+//S	MgMat3D M2;
+//	M2 = MGeo::Mat3DMirror( M1, pln1);
+//	M2.Print( Mstr("鏡像マトリックス M2"));
+//	MgPoint3D P2;
+//	P2 = P1 * M2;
+//	P1.Print( Mstr("鏡像前の点"));
+//	P2.Print( Mstr("鏡像後の点"));
+	
+	MgMat3D M3;
+	M3 = MGeo::Mat3DMirror( pln1);
+	MgPoint3D P3;
+	P3 = P1 * M3;
+	M3.Print( Mstr("鏡像マトリックス M3"));
+	P3.Print( Mstr("鏡像後の点"));
+	}
+
+	//=======================
+	//	角度
+	{
+		MgVect2D	v1( 1.f, 0.f);
+		MgVect2D	v2( 1.f, 1.f);
+		MgVect2D	v3( 0.f, 1.f);
+		MgVect2D	v4( -1.f, 1.f);
+		MgVect2D	v5( -1.f, 0.f);
+		MgVect2D	v6( -1.f, -1.f);
+		MgVect2D	v7( 0.f, -1.f);
+		MgVect2D	v8( 1.f, -1.f);
+		mlLog::Print( "v1", MGDEGREE( MGeo::AngleXVect2D( v1)));
+		mlLog::Print( "v2", MGDEGREE( MGeo::AngleXVect2D( v2)));
+		mlLog::Print( "v3", MGDEGREE( MGeo::AngleXVect2D( v3)));
+		mlLog::Print( "v4", MGDEGREE( MGeo::AngleXVect2D( v4)));
+		mlLog::Print( "v5", MGDEGREE( MGeo::AngleXVect2D( v5)));
+		mlLog::Print( "v6", MGDEGREE( MGeo::AngleXVect2D( v6)));
+		mlLog::Print( "v7", MGDEGREE( MGeo::AngleXVect2D( v7)));
+		mlLog::Print( "v8", MGDEGREE( MGeo::AngleXVect2D( v8)));
+
+		MgVect3D	V1( 0.5f, 0.3f, 1.f);
+		mlLog::Print( "V1", MGDEGREE( MGeo::AngleVectXYPln3D( V1)));
+		MgVect3D	V2( 0.f, 1.f, 1.f);
+		mlLog::Print( "V2", MGDEGREE( MGeo::AngleVectYZPln3D( V2)));
+		MgVect3D	V3( 0.f, 1.f, 1.f);
+		mlLog::Print( "V3", MGDEGREE( MGeo::AngleVectZXPln3D( V3)));
+		MgVect3D	V4( 0.5f, 0.3f, 1.f);
+		MgPlane3D	pln1( 1., 1., 1., 0.);
+		mlLog::Print( "V4", MGDEGREE( MGeo::AngleVectPln3D( V4, pln1)));
+		MgVect3D	V5( 1.f, 1.f, 1.f);
+		mlLog::Print( "V5", MGDEGREE( MGeo::AngleVectPln3D( V5, pln1)));
+		MgVect3D V6,V7,V8;
+		V6 = V5;
+		memcpy( &V7, &V5, SZMgPoint3D());
+		memcpy( &V8, &V5, 3*sizeof(float));
+		V8.x = V5.x;
+		V8.y = V5.y;
+		V8.z = V5.z;
+		mlLog::Print( "V6", MGDEGREE( MGeo::AngleVectPln3D( V6, pln1)));
+		mlLog::Print( "V7", MGDEGREE( MGeo::AngleVectPln3D( V7, pln1)));
+		mlLog::Print( "V8", MGDEGREE( MGeo::AngleVectPln3D( V8, pln1)));
+	}
+
 	//=======================
 	//	Lambda式
 	std::vector<int> v;

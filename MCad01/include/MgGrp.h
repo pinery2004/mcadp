@@ -64,7 +64,7 @@ public:
 						  m_st = NULL;}
 	T& operator [] (MINT idx)									// ()のチェック機能と領域拡張機能を取り外し高速版	
 						{ return m_st[idx];}
-	void operator -= (const MINT dn)							// 最後のdn個の構造体を削除
+	void operator -= (MINT dn)									// 最後のdn個の構造体を削除
 						{ m_n = max( m_n -= dn, 0);}
 	void operator -- ()											// 最後の１個の構造体を削除
 						{ if ( m_n>0) -- n;}

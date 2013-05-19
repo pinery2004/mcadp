@@ -39,7 +39,7 @@ MINT MtGetInp( MCHAR (&o_sEntry)[SIZE])
     return MtGetInp( o_sEntry, SIZE);
 }
 
-void MtSetNFlag( const MINT nflag);
+void MtSetNFlag( MINT nflag);
 MINT MtGetNFlag( void);
 MINT MtSendMessage( MINT message, MINT nFlags, MgPoint2D* pPtMR);
 

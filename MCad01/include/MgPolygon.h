@@ -91,7 +91,7 @@ public:
 	void operator = (const MC::MgPolyg3D &Pg);									// ÇRéüå≥Å®ÇQéüå≥
 	void operator += (const MgPoint2D& pt);										// É|ÉäÉSÉìÇ…ì_Çí«â¡		Pg1 += Pt2
 	void operator += (const MgPolyg2D &pg);										// É|ÉäÉSÉìÇ…É|ÉäÉSÉìÇí«â¡	Pg1 += Pg2
-	void operator -= (const MINT dn)											// É|ÉäÉSÉìÇÃç≈èIÇéì_ÇçÌèú
+	void operator -= (MINT dn)													// É|ÉäÉSÉìÇÃç≈èIÇéì_ÇçÌèú
 						{ m_n = max( m_n -= dn, 0);}
 	void operator -- ()															// É|ÉäÉSÉìÇÃç≈èIì_ÇçÌèú
 						{ if ( m_n>0) -- m_n;}
@@ -145,7 +145,7 @@ public:
 //						{ *this = MgPolyg3D( pg);}
 	void operator += (const MgPoint3D& Pt);										// Pg1 += Pt2
 	void operator += (const MgPolyg3D &Pg);										// Pg1 += Pg2
-	void operator -= (const MINT dn)
+	void operator -= (MINT dn)
 						{ m_n = max( m_n -= dn, 0);}
 	void operator -- ()
 						{ if ( m_n>0) -- m_n;}
@@ -191,7 +191,7 @@ public:
 	void operator = (const MgGPolyg3D &gPg);									// ÇRéüå≥Å®ÇQéüå≥
 	void operator += (const MgPolyg2D &pg);										// GPg1 += Pg2
 	void operator += (const MgGPolyg2D &gpg);									// GPg1 += GPg2
-	void operator -= (const MINT dn)
+	void operator -= (MINT dn)
 						{ int ict; for ( ict=0; ict<dn && m_n>0; ict--) { m_n--; if (m_pg[m_n].m_fa) MBFREE( m_pg[m_n].m_p);}}
 	void operator -- ()
 						{ if (m_n>0) { --m_n; if (m_pg[m_n].m_fa) MBFREE( m_pg[m_n].m_p);}}
@@ -239,7 +239,7 @@ public:
 	void operator = (const MgGPolyg2D &Gpg);									// ÇQéüå≥Å®ÇRéüå≥ (z = 0.)
 	void operator += (const MgPolyg3D &Pg);										// GPg1 += Pg2
 	void operator += (const MgGPolyg3D &GPg);									// GPg1 += GPg2
-	void operator -= (const MINT dn)
+	void operator -= (MINT dn)
 						{ int ict; for ( ict=0; ict<dn && m_n>0; ict--) { m_n--; if ( m_Pg[m_n].m_fa) MBFREE( m_Pg[m_n].m_P);}}
 	void operator -- ()
 						{ if ( m_n>0) { --m_n; if ( m_Pg[m_n].m_fa) MBFREE( m_Pg[m_n].m_P);}}
@@ -287,7 +287,7 @@ public:
 	void operator = (const MgGLine3D &GLn);										// ÇRéüå≥Å®ÇQéüå≥
 	void operator += (const MgLine2D& ln);										// GLn1 += ln2
 	void operator += (const MgGLine2D &Gln);									// GLn1 += GLn2
-	void operator -= (const MINT dn)
+	void operator -= (MINT dn)
 						{ m_n = max( m_n -= dn, 0);}
 	void operator -- ()
 						{ if ( m_n>0) -- m_n;}
@@ -335,7 +335,7 @@ public:
 	void operator = (const MgGLine2D &Gln);										// ÇQéüå≥Å®ÇRéüå≥ (z = 0.)
 	void operator += (const MgLine3D& Ln);										// GLn1 += Ln2
 	void operator += (const MgGLine3D &GLn);									// GLn1 += GLn2
-	void operator -= (const MINT dn)
+	void operator -= (MINT dn)
 						{ m_n = max( m_n -= dn, 0);}
 	void operator -- ()
 						{ if ( m_n>0) -- m_n;}
@@ -386,9 +386,9 @@ public:
 						{ return m_i[idx];}
 	void operator = (const MgGInt &GI);
 	void operator = (const MgGReal &GR);										// é¿êîåQ Å® êÆêîåQ
-	void operator += (const MINT &i);											// GPt1 += i2
+	void operator += (MINT i);													// GPt1 += i2
 	void operator += (const MgGInt &GI);										// GPt1 += GI2
-	void operator -= (const MINT dn)
+	void operator -= (MINT dn)
 						{ m_n = max( m_n -= dn, 0);}
 	void operator -- ()
 						{ if ( m_n>0) -- m_n;}
@@ -430,9 +430,9 @@ public:
 						{ return m_r[idx];}
 	void operator = (const MgGReal &GR);
 	void operator = (const MgGInt &GI);											// êÆêîåQ Å® é¿êîåQ
-	void operator += (const MREAL &r);											// GPt1 += r2
+	void operator += (MREAL r);													// GPt1 += r2
 	void operator += (const MgGReal &GR);										// GPt1 += GR2
-	void operator -= (const MINT dn)
+	void operator -= (MINT dn)
 						{ m_n = max( m_n -= dn, 0);}
 	void operator -- ()
 						{ if ( m_n>0) -- m_n;}
@@ -476,7 +476,7 @@ public:
 	void operator = (const MgGPoint3D &GPt);									// ÇRéüå≥Å®ÇQéüå≥
 	void operator += (const MgPoint2D& pt);										// GPt1 += Pt2
 	void operator += (const MgGPoint2D &Gpt);									// GPt1 += GPt2
-	void operator -= (const MINT dn)
+	void operator -= (MINT dn)
 						{ m_n = max( m_n -= dn, 0);}
 	void operator -- ()
 						{ if ( m_n>0) -- m_n;}
@@ -521,7 +521,7 @@ public:
 	void operator = (const MgGPoint2D &Gpt);									// ÇQéüå≥Å®ÇRéüå≥ (z = 0.)	
 	void operator += (const MgPoint3D& Pt);										// GPt1 += Pt2
 	void operator += (const MgGPoint3D &GPt);									// GPt1 += GPt2
-	void operator -= (const MINT dn)
+	void operator -= (MINT dn)
 						{ m_n = max( m_n -= dn, 0);}
 	void operator -- ()
 						{ if ( m_n>0) -- m_n;}

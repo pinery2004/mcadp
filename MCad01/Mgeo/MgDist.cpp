@@ -93,8 +93,8 @@ MREAL MGeo::DistPointLine2D(						// (  O) ü•ª‚©‚ç“_‚Ü‚Å‚Ì‹——£ >0:¶‘¤ <0:‰E‘¤
 //
 	v2s1 = p1 - Ln2.p[0];
 	v2 = Ln2.p[1] - Ln2.p[0];
-	sz2 = AbsVect2D( v2);
-	if (sz2 < MGPTOL->D) return AbsVect2D( v2s1);
+	sz2 = LenVect2D( v2);
+	if (sz2 < MGPTOL->D) return LenVect2D( v2s1);
 	pa1 = (v2 ^ v2s1) / sz2;
 	return pa1;
 }
@@ -111,7 +111,7 @@ MREAL MGeo::DistPointULine3D(						// (  O) ’¼ü‚©‚ç“_‚Ü‚Å‚Ì‹——£
 //
 	v21 = p1 - ULn2.p;
 	va1 = v21 ^ ULn2.v;
-	pa1 = AbsVect3D( va1);
+	pa1 = LenVect3D( va1);
 	return pa1;
 }
 //
@@ -131,10 +131,10 @@ MREAL MGeo::DistPointLine3D(						// (  O) ü•ª‚©‚ç“_‚Ü‚Å‚Ì‹——£
 //
 	v21 = p1 - Ln2.p[0];
 	v2 = Ln2.p[1] - Ln2.p[0];
-	sz2 = AbsVect3D(v2);
-	if (sz2 < MGPTOL->D) return AbsVect3D(v21);
+	sz2 = LenVect3D(v2);
+	if (sz2 < MGPTOL->D) return LenVect3D(v21);
 	va1 = v21 ^ v2;
-	pa1 = AbsVect3D(va1) / sz2;
+	pa1 = LenVect3D(va1) / sz2;
 	return pa1;
 }
 // ---------------------( ‚RŸŒ³ )------------------------------
@@ -173,8 +173,8 @@ MREAL MGeo::DistPointLine3DWH(						// (  O) ü•ª‚©‚ç“_‚Ü‚Å‚Ì‹——£ >0:¶‘¤ <0:‰E‘
 //
 	v2s1 = p1 - Ln2.p[0];
 	v2 = Ln2.p[1] - Ln2.p[0];
-	sz2 = AbsVect3D(v2);
-	if (sz2 < MGPTOL->D) return AbsVect3D(v2s1);
+	sz2 = LenVect3D(v2);
+	if (sz2 < MGPTOL->D) return LenVect3D(v2s1);
 	va1 = v2 ^ v2s1;
 	pa1 = (va1 * vn) / sz2;
 	return pa1;

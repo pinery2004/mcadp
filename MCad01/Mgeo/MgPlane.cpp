@@ -107,7 +107,7 @@ MgPlane3D MGeo::Plane2PointSlope3D(
 	v1 = Pt[1] - Pt[0];
 
 	Pt[2] = Pt[0] + v1.RotL90();
-	h1 = MGeo::AbsVect3D( v1) * rkb;
+	h1 = MGeo::LenVect3D( v1) * rkb;
 	Pt[2].z += h1;
 	v2 = Pt[2] - Pt[0];
 
@@ -136,7 +136,7 @@ MgPlane3D MGeo::PlaneLineSlope3D(
 	v1 = Pt[1] - Pt[0];
 
 	Pt[2] = Pt[0] + v1.RotL90();
-	h1 = MGeo::AbsVect3D( v1) * rkb;
+	h1 = MGeo::LenVect3D( v1) * rkb;
 	Pt[2].z += h1;
 	v2 = Pt[2] - Pt[0];
 
@@ -167,7 +167,7 @@ MgPlane3D MGeo::PlaneLineSlope3D(
 //
 MgPlane3D MgPlane3D::Norm( MREAL i_Tol)
 {
-	MREAL	d1 = MGeo::AbsVect3D( v);
+	MREAL	d1 = MGeo::LenVect3D( v);
 		MBCHECK_ZEROVECT( d1, MBCstr("MgPlane3D Norm"), i_Tol);
 	MREAL	d2 = 1.f / d1;
 	return MgPlane3D(v.x * d2, v.y * d2, v.z * d2, d * d2);
@@ -207,7 +207,7 @@ MgPlane3D MGeo::NormPln(
 						MREAL		i_Tol
 				)
 {
-	MREAL	d1 = MGeo::AbsVect3D( i_pl.v);
+	MREAL	d1 = MGeo::LenVect3D( i_pl.v);
 		MBCHECK_ZEROVECT( d1, MBCstr( "MgPlane3D MgNorm"), i_Tol);
 	MREAL	d2 = 1.f / d1;
 	return MgPlane3D( i_pl.v.x * d2, i_pl.v.y * d2, i_pl.v.z * d2, i_pl.d * d2);

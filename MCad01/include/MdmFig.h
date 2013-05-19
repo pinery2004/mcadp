@@ -65,7 +65,7 @@ public:
 //	MINT1() {}
 	MINT1( MINT i_i)
 		{ i[0] = i_i;}
-	MINT1& operator = ( const MINT i_i)
+	MINT1& operator = ( MINT i_i)
 						{ i[0] = i_i; return *this;}
 	MINT1& operator = ( const MINT i_i[1])
 						{ i[0] = i_i[0]; return *this;}
@@ -111,7 +111,7 @@ public:
 //	MREAL1() {}
 	MREAL1( MREAL i_r)
 		{ r[0] = i_r;}
-	MREAL1& operator = ( const MREAL i_r)
+	MREAL1& operator = ( MREAL i_r)
 						{ r[0] = i_r; return *this;}
 	MREAL1& operator = ( const MREAL i_r[1])
 						{ r[0] = i_r[0]; return *this;}
@@ -498,8 +498,8 @@ public:
 
 	// 図形情報の最後に要素を追加
 	//	バッファサイズが不足する場合は２倍に領域拡張(拡張後の最低領域サイズは４とする)
-	void operator += ( const MREAL i_r); 		// 図形情報郡に図形情報要素の追加	図形情報 += 要素
-	void operator += ( const MINT i_i)			// 図形情報郡に図形情報要素の追加	図形情報 += 要素
+	void operator += ( MREAL i_r); 				// 図形情報郡に図形情報要素の追加	図形情報 += 要素
+	void operator += ( MINT i_i)				// 図形情報郡に図形情報要素の追加	図形情報 += 要素
 				{ *this += *(MREAL*)&i_i;}
 
 	// 図形情報をコピー

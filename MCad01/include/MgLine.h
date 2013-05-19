@@ -63,6 +63,8 @@ public:
 	// コンストラクタ
 	MgULine2D()			{}
 
+	MgULine2D( MREAL x, MREAL y, MREAL vx, MREAL vy)
+						{ p.x = x; p.y = y; v.x = vx; v.y = vy;}
 	MgULine2D( const MgPoint2D& p1, const MgVect2D& v1)
 						{ p = p1; v = v1;}										
 	bool operator == ( const MgULine2D& ULn1) const;							// b = (uln == ULn1) 判定
@@ -91,6 +93,8 @@ public:
 	// コンストラクタ
 	MgHLine2D()			{}
 
+	MgHLine2D( MREAL x, MREAL y, MREAL vx, MREAL vy)
+						{ p.x = x; p.y = y; v.x = vx; v.y = vy;}
 	MgHLine2D( const MgPoint2D& p1, const MgVect2D& v1)
 						{ p = p1; v = v1;}										
 	bool operator == ( const MgHLine2D &ULn1) const;							// b = (uln == ULn1) 判定
@@ -116,6 +120,8 @@ public:
 	// コンストラクタ
 	MgLine2D()			{}
 
+	MgLine2D( MREAL x, MREAL y, MREAL vx, MREAL vy)
+						{ p[0].x = x; p[0].y = y; p[1].x = vx; p[1].y = vy;}
 	MgLine2D( const MgPoint2D& ps, const MgPoint2D& pe)
 						{ p[0] = ps; p[1] = pe;}
 	MgLine2D( const MgPoint2D *pi)
@@ -133,8 +139,8 @@ public:
 
 	bool operator != ( const MgLine2D& Ln1) const								// b = (ln != Ln1) 判定
 						{ return !((*this) == Ln1);}
-	MgLine2D Set( const MREAL &psx, const MREAL &psy,
-				 const MREAL &pex, const MREAL &pey)
+	MgLine2D Set( MREAL psx, MREAL psy,
+				  MREAL pex, MREAL pey)
 						{ p[0].x = psx; p[0].y = psy; 
 						  p[1].x = pex; p[1].y = pey; return *this;}
 	MgLine2D Set( const MgPoint2D& ps, const MgPoint2D& pe)
@@ -163,6 +169,8 @@ public:
 	// コンストラクタ
 	MgULine3D()			{}
 	
+	MgULine3D( MREAL x, MREAL y, MREAL z, MREAL vx, MREAL vy, MREAL vz)
+						{ p.x = x; p.y = y; p.z = z; v.x = vx; v.y = vy; v.z = vz;}
 	MgULine3D( const MgPoint3D& p1, const MgVect3D& v1)
 						{ p = p1; v = v1;}
 	bool operator == ( const MgULine3D& ULn1) const;							// b = (uln == ULn1) 判定
@@ -171,7 +179,7 @@ public:
 						{ return !((*this) == ULn1);}
 	MgULine3D Set( const MgPoint3D& p1, const MgVect3D& v1)
 						{ p = p1; v = v1; return *this;}
-	MgULine3D Set( const MgULine2D& uln1, const MREAL z1 = 0.f, MREAL i_Tol = MGPTOL->D)	// ２次元→３次元　(Z省略0.)
+	MgULine3D Set( const MgULine2D& uln1, MREAL z1 = 0.f, MREAL i_Tol = MGPTOL->D)	// ２次元→３次元　(Z省略0.)
 						{ p.x = uln1.p.x; p.y = uln1.p.y; p.z = z1;
 						  v = MgVect3DC( uln1.v).Unitize(i_Tol); return *this;} 
 	MgULine3D Set( const MgULine2D& ULn1, const MgPlane3D& Pln, MREAL i_Tol = MGPTOL->D);// ２次元→３次元
@@ -194,6 +202,8 @@ public:
 	// コンストラクタ
 	MgHLine3D()			{}
 
+	MgHLine3D( MREAL x, MREAL y, MREAL z, MREAL vx, MREAL vy, MREAL vz)
+						{ p.x = x; p.y = y; p.z = z; v.x = vx; v.y = vy; v.z = vz;}
 	MgHLine3D( const MgPoint3D& p1, const MgVect3D& v1)
 						{ p = p1; v = v1;}
 
@@ -203,7 +213,7 @@ public:
 						{ return !((*this) == ULn1);}
 	MgHLine3D Set( const MgPoint3D& p1, const MgVect3D& v1)
 						{ p = p1; v = v1; return *this;}
-	MgHLine3D Set( const MgHLine2D &uln1, const MREAL z1 = 0.f)					// ２次元→３次元　(Z省略0.)
+	MgHLine3D Set( const MgHLine2D &uln1, MREAL z1 = 0.f)					// ２次元→３次元　(Z省略0.)
 						{ p.x = uln1.p.x; p.y = uln1.p.y; p.z = z1;
 						  v = MgVect3DC( uln1.v).Unitize(); return *this;} 
 	MgHLine3D Set( const MgHLine2D &ULn1, const MgPlane3D& Pln);				// ２次元→３次元
@@ -227,8 +237,8 @@ public:
 						{ p[0] = ps; p[1] = pe;}
 	MgLine3D( const MgPoint3D *pi)
 						{ p[0] = pi[0]; p[1] = pi[1];}										
-	MgLine3D( const MREAL &psx, const MREAL &psy, const MREAL &psz,
-			 const MREAL &pex, const MREAL &pey, const MREAL &pez)
+	MgLine3D( MREAL psx, MREAL psy, MREAL psz,
+			  MREAL pex, MREAL pey, MREAL pez)
 						{ p[0].x = psx; p[0].y = psy; p[0].z = psz; 
 						  p[1].x = pex; p[1].y = pey; p[1].z = pez;}
 	MgLine3D operator + ( const MgVect3D& v) const;								// Ln1 = Ln2 + p3
@@ -247,8 +257,8 @@ public:
 						{ p[0] = ps; p[1] = pe; return *this;}
 	MgLine3D Set( const MgPoint3D *pi)											// ２点
 						{ p[0] = pi[0]; p[1] = pi[1]; return *this;}										
-	MgLine3D Set( const MREAL &psx, const MREAL &psy, const MREAL &psz,			// 2*3実数
-				 const MREAL &pex, const MREAL &pey, const MREAL &pez)
+	MgLine3D Set( MREAL psx, MREAL psy, MREAL psz,			// 2*3実数
+				  MREAL pex, MREAL pey, MREAL pez)
 						{ p[0].x = psx; p[0].y = psy; p[0].z = psz; 
 						  p[1].x = pex; p[1].y = pey; p[1].z = pez;
 						  return *this;}
@@ -378,7 +388,7 @@ inline MgVect2D::MgVect2D( const MgLine2D& ln)												// 2D線分の方向を表す2
 //==========================================================================================
 //	３次元直線
 //
-inline MgULine3D MgULine3DC( const MgULine2D& uln1, const MREAL z1 = 0.f)					// ２次元→３次元　(Z省略0.)
+inline MgULine3D MgULine3DC( const MgULine2D& uln1, MREAL z1 = 0.f)					// ２次元→３次元　(Z省略0.)
 {
 	MgULine3D ULno;
 	ULno.p.x = uln1.p.x;

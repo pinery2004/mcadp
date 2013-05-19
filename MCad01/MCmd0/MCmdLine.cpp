@@ -208,7 +208,7 @@ void MCmdLineAdd()
 			ist = z_mmIA.GetComboAttrR( MC_CMB_INTR, &rIntrv);	//		間隔
 			if ( iNum == MC_INT_AREA) {							//			本数を領域で指定する複数部材の配置
 				VtArea = PtMltBziAr - Ln1.p[0];
-				iNum = MGMIN( MINT( MGeo::AbsVect3D( VtArea) / rIntrv + 1.0 + MGPTOL->D),
+				iNum = MGMIN( MINT( MGeo::LenVect3D( VtArea) / rIntrv + 1.0 + MGPTOL->D),
 							  MMAX_BZI_HONSU);					//			部材配置本数を最大100本に限定
 				if ( iNum > 1)
 					VtBziIntrv = rIntrv * MGeo::UnitizeVect3D( VtArea);

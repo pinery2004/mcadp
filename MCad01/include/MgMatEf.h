@@ -122,61 +122,6 @@ public:
 	}
 */
 
-
-/*
-
-	inline	MgLine2D operator * ( const MgLine2D& i_ln, const MgMat2E& i_mt)		// *	座標変換
-	{ 
-		MgLine2D ln;
-		i_ln.p[0] = i_ln.p[0] * i_mt;
-		i_ln.p[1] = i_ln.p[1] * i_mt;
-		return ln;
-	}
-	inline	MgULine2D operator * ( const MgULine2D& i_uln, const MgMat2E& i_mt)		// *	座標変換
-	{ 
-		MgULine2D uln;
-		i_uln.p = i_uln.p * i_mt;
-		i_uln.v = i_uln.v * i_mt;
-		return uln;
-	}
-	inline	MgLine2D operator *= ( MgLine2D& i_ln, const MgMat2E& i_mt)					// *=	座標変換
-	{ 
-		i_ln.p[0] *= i_mt;
-		i_ln.p[1] *= i_mt;
-		return Ln;
-	}
-	inline	MgULine2D operator *= ( MgULine2D& i_uln, const MgMat2E& i_mt)				// *=	座標変換
-	{ 
-		i_uln.p *= i_mt;
-		i_uln.v *= i_mt;
-		return ULn;
-	}
-	inline	MgLine3D operator * ( const MgLine3D& i_Ln, const MgMat2E& i_mt)			// *	座標変換
-	{
-		MgLine3D Ln;
-		Ln.p[0] = i_Ln.p[0] * i_mt;
-		Ln.p[1] = i_Ln.p[1] * i_mt;
-		return Ln;
-	}
-	inline	MgULine3D operator * ( const MgULine3D& i_ULn, const MgMat2E& i_mt)		// *	座標変換
-	{
-		MgULine3D ULn;
-		ULn.p = i_ULn.p * i_mt;
-		ULn.v = i_ULn.v * i_mt;
-		return ULn;
-	}
-	inline	MgLine3D operator *= ( MgLine3D& i_Ln, const MgMat2E& i_mt)					// *=	座標変換
-	{
-		i_Ln.p[0] *= i_mt;
-		i_Ln.p[1] *= i_mt;
-	}
-	inline	MgULine3D operator *= ( MgULine3D& i_ULn, const MgMat2E& i_mt)				// *=	座標変換
-	{
-		i_ULn.p *= i_mt;
-		i_ULn.v *= i_mt;
-	}
-*/
-//
 //======================( ２次元、３次元 )==============================
 //	２次元、３次元座標変換マトリックス
 //

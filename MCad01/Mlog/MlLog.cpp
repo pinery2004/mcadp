@@ -80,6 +80,24 @@ int mlLog::Wait( MCHAR* str)
 	return 0;
 #endif
 }
+int mlLog::Wait( char* cstr)
+{
+#ifdef LOGOUT
+	int ii;
+	if( m_iCtl != 0) {
+		MCHAR	str[256];
+		Code::msbstowcs( cstr, str, 256);
+		TRACE( Mstr( "%s --- Keyin dumy number >"), str);
+		Mscanf_s( Mstr( "%d"), &ii);
+	}
+	else ii = 0;
+	return ii;
+#else
+	return 0;
+#endif
+}
+
+
 void mlLog::Flush( )
 {
 #ifdef LOGOUT
@@ -107,11 +125,56 @@ void mlLog::Print( MCHAR* str)
 	}
 #endif
 }
+void mlLog::Print( char* cstr)
+{
+#ifdef LOGOUT
+	if( m_iCtl != 0) {
+		MCHAR	str[256];
+		Code::msbstowcs( cstr, str, 256);
+		Mfprintf( m_File, Mstr( "%s\n"), str);
+		TRACE( Mstr( "%s\n"), str);
+	}
+#endif
+}
 
 void mlLog::Print( MCHAR* str, const MCHAR* s1)
 {
 #ifdef LOGOUT
 	if( m_iCtl != 0) {
+		Mfprintf( m_File, Mstr( "%s	= %s\n"), str, s1);
+		TRACE( Mstr( "%s	= %s\n"), str, s1);
+	}
+#endif
+}
+void mlLog::Print( char* cstr, const MCHAR* s1)
+{
+#ifdef LOGOUT
+	if( m_iCtl != 0) {
+		MCHAR	str[256];
+		Code::msbstowcs( cstr, str, 256);
+		Mfprintf( m_File, Mstr( "%s	= %s\n"), str, s1);
+		TRACE( Mstr( "%s	= %s\n"), str, s1);
+	}
+#endif
+}
+void mlLog::Print( MCHAR* str, const char* cs1)
+{
+#ifdef LOGOUT
+	if( m_iCtl != 0) {
+		MCHAR	s1[256];
+		Code::msbstowcs( cs1, s1, 256);
+		Mfprintf( m_File, Mstr( "%s	= %s\n"), str, s1);
+		TRACE( Mstr( "%s	= %s\n"), str, s1);
+	}
+#endif
+}
+void mlLog::Print( char* cstr, const char* cs1)
+{
+#ifdef LOGOUT
+	if( m_iCtl != 0) {
+		MCHAR	str[256], s1[256];
+		Code::msbstowcs( cstr, str, 256);
+		Code::msbstowcs( cs1, s1, 256);
 		Mfprintf( m_File, Mstr( "%s	= %s\n"), str, s1);
 		TRACE( Mstr( "%s	= %s\n"), str, s1);
 	}
@@ -127,8 +190,19 @@ void mlLog::Print( MCHAR* str, MINT i1)
 	}
 #endif
 }
+void mlLog::Print( char* cstr, MINT i1)
+{
+#ifdef LOGOUT
+	if( m_iCtl != 0) {
+		MCHAR	str[256];
+		Code::msbstowcs( cstr, str, 256);
+		Mfprintf( m_File, Mstr( "%s	= %d\n"), str, i1);
+		TRACE( Mstr( "%s	= %d\n"), str, i1);
+	}
+#endif
+}
 
-void mlLog::Print( MCHAR* str, MINT *i1, int ni1)
+void mlLog::Print( MCHAR* str, MINT i1[], int ni1)
 {
 #ifdef LOGOUT
 	if( m_iCtl != 0) {
@@ -153,6 +227,16 @@ void mlLog::Print( MCHAR* str, MINT *i1, int ni1)
 	}
 #endif
 }
+void mlLog::Print( char* cstr, MINT i1[], int ni1)
+{
+#ifdef LOGOUT
+	if( m_iCtl != 0) {
+		MCHAR	str[256];
+		Code::msbstowcs( cstr, str, 256);
+		Print( str, i1, ni1);
+	}
+#endif
+}
 
 void mlLog::Print( MCHAR* str, MUBYTE i1)
 {
@@ -163,8 +247,19 @@ void mlLog::Print( MCHAR* str, MUBYTE i1)
 	}
 #endif
 }
+void mlLog::Print( char* cstr, MUBYTE i1)
+{
+#ifdef LOGOUT
+	if( m_iCtl != 0) {
+		MCHAR	str[256];
+		Code::msbstowcs( cstr, str, 256);
+		Mfprintf( m_File, Mstr( "%s	= %d\n"), str, i1);
+		TRACE( Mstr( "%s	= %d\n"), str, i1);
+	}
+#endif
+}
 
-void mlLog::Print( MCHAR* str, MUBYTE *i1, int ni1)
+void mlLog::Print( MCHAR* str, MUBYTE i1[], int ni1)
 {
 #ifdef LOGOUT
 	if( m_iCtl != 0) {
@@ -185,6 +280,16 @@ void mlLog::Print( MCHAR* str, MUBYTE *i1, int ni1)
 	}
 #endif
 }
+void mlLog::Print( char* cstr, MUBYTE i1[], int ni1)
+{
+#ifdef LOGOUT
+	if( m_iCtl != 0) {
+		MCHAR	str[256];
+		Code::msbstowcs( cstr, str, 256);
+		Print( str, i1, ni1);
+	}
+#endif
+}
 
 void mlLog::Print( MCHAR* str, MREAL f1)
 {
@@ -195,8 +300,19 @@ void mlLog::Print( MCHAR* str, MREAL f1)
 	}
 #endif
 }
+void mlLog::Print( char* cstr, MREAL f1)
+{
+#ifdef LOGOUT
+	if( m_iCtl != 0) {
+		MCHAR	str[256];
+		Code::msbstowcs( cstr, str, 256);
+		Mfprintf( m_File, Mstr( "%s	= %f\n"), str, f1);
+		TRACE( Mstr( "%s	= %f\n"), str, f1);
+	}
+#endif
+}
 
-void mlLog::Print( MCHAR* str, MREAL *f1, int nf1)
+void mlLog::Print( MCHAR* str, MREAL f1[], int nf1)
 {
 #ifdef LOGOUT
 	if( m_iCtl != 0) {
@@ -219,6 +335,16 @@ void mlLog::Print( MCHAR* str, MREAL *f1, int nf1)
 	}
 #endif
 }
+void mlLog::Print( char* cstr, MREAL f1[], int nf1)
+{
+#ifdef LOGOUT
+	if( m_iCtl != 0) {
+		MCHAR	str[256];
+		Code::msbstowcs( cstr, str, 256);
+		Print( str, f1, nf1);
+	}
+#endif
+}
 
 //------------------------------------------------------------------------
 // ログファイルへフォーマット付きで出力する
@@ -231,8 +357,25 @@ void mlLog::LogOut(
 	va_list	cList;
 	if( m_iCtl != 0) {
 		va_start( cList, i_cFormat);
-//		_vftprintf_s( m_File, i_cFormat, cList);
 		_vstprintf_s( CMsg, i_cFormat, cList);
+		Mfprintf( m_File, CMsg);
+		TRACE( CMsg);
+		va_end( cList);
+	}
+#endif
+}
+void mlLog::LogOut(
+						char* i_cFormat, ...	// ログ書き込みデータ
+						)
+{
+#ifdef LOGOUT
+	MCHAR	CMsg[MAX_PATH];
+	va_list	cList;
+	if( m_iCtl != 0) {
+		MCHAR	sFormat[256];
+		Code::msbstowcs( i_cFormat, sFormat, 256);
+		va_start( cList, sFormat);
+		_vstprintf_s( CMsg, sFormat, cList);
 		Mfprintf( m_File, CMsg);
 		TRACE( CMsg);
 		va_end( cList);
@@ -268,8 +411,43 @@ void mlLog::LogOutWL(
 	va_list	cList;
 	if( m_iCtl != 0) {
 		va_start( cList, i_cFormat);
-//		_vftprintf( m_File, i_cFormat, cList);
 		_vstprintf_s( cMsg, i_cFormat, cList);
+		Mfprintf( m_File, cMsg);
+		TRACE( cMsg);
+		va_end( cList);
+	}
+	if( i_iLevel == MC_LOG_ERROR) {
+//S		__debugbreak();											// ブレークポイント
+		AfxDebugBreak();										// ブレークポイント
+	}
+#endif
+}
+void mlLog::LogOutWL(
+						int		i_iLevel,		// ログレベル
+												//				MC_LOG_ERROR
+												//				MC_LOG_WARNING
+												//				MC_LOG_ERROR
+						char*	i_cFormat, ...	// ログ書き込みデータ
+						)
+{
+#ifdef LOGOUT
+	MCHAR	cMsg[MAX_PATH];
+	switch ( i_iLevel) {
+	case MC_LOG_ERROR:
+		fprintf( m_File, "\n *** ERROR *** ");
+		TRACE( "\n *** ERROR *** ");
+		break;
+	case MC_LOG_WARNING:
+		fprintf( m_File, "\n *** WARNING *** ");
+		TRACE( "\n *** WARNING *** ");
+		break;
+	}
+	va_list	cList;
+	if( m_iCtl != 0) {
+		MCHAR	sFormat[256];
+		Code::msbstowcs( i_cFormat, sFormat, 256);
+		va_start( cList, sFormat);
+		_vstprintf_s( cMsg, sFormat, cList);
 		Mfprintf( m_File, cMsg);
 		TRACE( cMsg);
 		va_end( cList);
@@ -286,6 +464,17 @@ void mlLog::Trace( MCHAR* str)
 {
 #ifdef LOGOUT
 	if( m_iCtl != 0) {
+		Mfprintf( m_File, str);
+		TRACE( str);
+	}
+#endif
+}
+void mlLog::Trace( char* cstr)
+{
+#ifdef LOGOUT
+	if( m_iCtl != 0) {
+		MCHAR	str[256];
+		Code::msbstowcs( cstr, str, 256);
 		Mfprintf( m_File, str);
 		TRACE( str);
 	}
@@ -316,6 +505,21 @@ void Trace::OpenTraceFile(
 		err = Mfopen_s( &m_pfp, i_cLogFilePath, Mstr( "at"));
 		if ( err != 0) {
 			RETURN_FILEOPEN_ERR_S( i_cLogFilePath);
+		}
+	}
+}
+void Trace::OpenTraceFile(
+						char i_cLogFilePath[]	// ログファイルパス
+						)
+{
+	errno_t	err;
+
+	if ( m_pfp == NULL) {
+		MCHAR	sLogFilePath[256];
+		Code::msbstowcs( i_cLogFilePath, sLogFilePath, 256);
+		err = Mfopen_s( &m_pfp, sLogFilePath, Mstr( "at"));
+		if ( err != 0) {
+			RETURN_FILEOPEN_ERR_S( sLogFilePath);
 		}
 	}
 }
@@ -352,6 +556,18 @@ Trace::Trace( MCHAR* i_cFuncName)
 	Mstrcpy_s( m_cFuncName, Msizeof( m_cFuncName), i_cFuncName);
 	fprintf( m_pfp, "%s===> Start( %s)", m_cDepth, m_cFuncName);
 }
+Trace::Trace( char* i_cFuncName)
+{
+	MCHAR	sFuncName[256];
+	Code::msbstowcs( i_cFuncName, sFuncName, 256);
+	ASSERT( m_pfp >= 0);
+	m_iDepth++;
+	if ( m_iDepth < MBLOGMAXDEPTH) {
+		Mstrcpy_s( &m_cDepth[m_iDepth * 2], MBLOGMAXDEPTH * 2 + 1, MBLOGINDENT);
+	}
+	Mstrcpy_s( m_cFuncName, Msizeof( m_cFuncName), sFuncName);
+	fprintf( m_pfp, "%s===> Start( %s)", m_cDepth, m_cFuncName);
+}
 
 //===========================================================================
 //【機能】		トレースファイルへ出力デストラクタ
@@ -382,6 +598,17 @@ void Trace::Write(
 	_vftprintf_s( m_pfp, i_cFormat, cList);
 	va_end( cList);
 }
+void Trace::Write(
+						char* i_cFormat, ...	// ログ書き込みデータ
+						)
+{
+	va_list	cList;
+	MCHAR	sFormat[256];
+	Code::msbstowcs( i_cFormat, sFormat, 256);
+	va_start( cList, sFormat);
+	_vftprintf_s( m_pfp, sFormat, cList);
+	va_end( cList);
+}
 
 //------------------------------------------------------------------------
 //【機能】		トレースファイルへ一行出力する
@@ -393,6 +620,14 @@ void Trace::WriteLine(
 						)
 {
 	fprintf( m_pfp, "%s\n", i_cOut);
+}
+void Trace::WriteLine( 
+						char i_cOut[]			// ログ書き込み行データ
+						)
+{
+	MCHAR	sOut[256];
+	Code::msbstowcs( i_cOut, sOut, 256);
+	fprintf( m_pfp, "%s\n", sOut);
 }
 
 } // namespace MC
