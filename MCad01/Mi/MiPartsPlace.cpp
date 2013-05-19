@@ -406,7 +406,7 @@ void mhHaitiIn::MmSrchCrossBuzai(
 /////////////////////////////////////////////////////////////////////////////
 //  部材の形状を求める
 void mhHaitiIn::PartsShape(
-						mhPlcParts	*pPlcEn,	// 部材配置レコード
+						mhPlcParts	*pPlcEn,		// 部材配置レコード
 						MgPolyg2D*	pgPartsShape	// 部材形状
 				)
 {
@@ -432,7 +432,7 @@ void mhHaitiIn::PartsShape(
 
 	// 部材の形を求め検索する
 	VtW = ptW[1] - ptW[0];										// 芯線
-	VtUtW = MGeo::UnitizeVect2D( VtW);								// 部材の形を求める
+	VtUtW = MGeo::UnitizeVect2D( VtW);							// 部材の形を求める
 	if ( pPlcEn->IsFrame()) {									// たて枠用の形状作成
 		VtWidthR = (pPlcEn->GetMbTWidthR() + pPlcEn->GetPISinZure()) * VtUtW.RotR90(); 
 		VtWidth = pPlcEn->GetMbTWidth() * VtUtW.RotL90(); 

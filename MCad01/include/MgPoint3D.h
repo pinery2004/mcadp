@@ -9,19 +9,9 @@
 //
 //  K.Matsu           08/01/04    Created.
 //==========================================================================================
-//
-#include "MgAngle.h"
 
 namespace MC
 {
-
-class MgVect2D;
-class MgVect3D;
-class MgPoint2D;
-class MgPoint3D;
-//class MgPlane3D;
-
-//#include "mdPlex.h"
 
 #ifdef DLL_EXPORT_POINT
 	#undef DLL_EXPORT_POINT
@@ -64,7 +54,7 @@ public:
 	// コピーコンストラクタ
 	MgPoint3D( MREAL x1, MREAL y2, MREAL z3);
 	MgPoint3D( MgPoint2D v1, MREAL z3);
-	MgPoint3D( const MgPoint2D& v1, const MgPlane3D& Pln3);						// ２次元→３次元
+	MgPoint3D( const MgPoint2D& v1, const class MgPlane3D& Pln3);				// ２次元→３次元
 
 //	MgPoint3D( const MgVect3D& v1);
 
@@ -166,7 +156,6 @@ public:
 	MREAL SqAbs();																// ベクトルの長さの２乗
 
 	// 変換
-//	MgVect3D Set( const MgPoint2D& v1, const MgPlane3D& Pln3);					// ２次元→３次元
 	MgVect3D SetUnitize( MREAL i_tol = MgTol_Dt::D);							// 単位ベクトルに変換する
 	MgVect3D& operator = ( const MREAL* pt);
 	MgVect3D Set( const MgPoint2D& v1, const MgPlane3D& Pln3);					// ２次元→３次元

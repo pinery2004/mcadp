@@ -19,34 +19,34 @@ class MdmGeo
 public:
 //		static void Vec2DRotateL90 ( double vec1[2], double vec2[2] );
 //		static void Vec2DRotateR90 ( double vec1[2], double vec2[2] );
-		static long VecLen ( long nd, double vec[], double *len );
-		static long VecAdd ( long nd, double vec1[], double vec2[], double vec[] );
-		static long VecSub ( long nd, double vec1[], double vec2[], double vec[] );
-		static long Vec2DAngle ( double vec1[2], double vec2[2], double nv, double *agl );
-		static long Vec3DAngle ( double vec1[3], double vec2[3], double nv[3], double *agl );
-		static long Vec2DAngleAOB ( double pa[2], double po[2], double pb[2], double nv, double *agl );
-		static long Vec3DAngleAOB ( double pa[3], double po[3], double pb[3], double nv[3], double *agl );
-		static long Vec2DAngleX ( double vec[2], double *agl );
-		static long Vec2DAngleY ( double vec[2], double *agl );
-		static long Vec3DAngleX ( double vec[3], double *agl );
-		static long Vec3DAngleY ( double vec[3], double *agl );
-		static long Vec3DAngleZ ( double vec[3], double *agl );
-		static long Vec3DAngleXY ( double vec[3], double *agl );
-		static long Vec3DAngleYZ ( double vec[3], double *agl );
-		static long Vec3DAngleZX ( double vec[3], double *agl );
-		static void Vec2DOuterProduct ( double vec1[2], double vec2[2], double *vepr );
-		static void Vec3DOuterProduct ( double vec1[3], double vec2[3], double vec[3] );
-		static long VecInnerProduct ( long nd, double vec1[], double vec2[], double *vipr );
-		static long Vec2DUnit ( double vec1[2], double vec2[2] );
-		static long Vec3DUnit ( double vec1[3], double vec2[3] );
-		static void Vec2DRotate ( double vec1[2], double agl, double vec2[2] );
-		static long VecExpansion ( long nd, double vec1[], double erate, double vec2[] );
+//S		static long VecLen ( long nd, double vec[], double *len );
+//		static long VecAdd ( long nd, double vec1[], double vec2[], double vec[] );
+//		static long VecSub ( long nd, double vec1[], double vec2[], double vec[] );
+//		static long Vec2DAngle ( double vec1[2], double vec2[2], double nv, double *agl );
+//		static long Vec3DAngle ( double vec1[3], double vec2[3], double nv[3], double *agl );
+//		static long Vec2DAngleAOB ( double pa[2], double po[2], double pb[2], double nv, double *agl );
+//		static long Vec3DAngleAOB ( double pa[3], double po[3], double pb[3], double nv[3], double *agl );
+//		static long Vec2DAngleX ( double vec[2], double *agl );
+//		static long Vec2DAngleY ( double vec[2], double *agl );
+//		static long Vec3DAngleX ( double vec[3], double *agl );
+//		static long Vec3DAngleY ( double vec[3], double *agl );
+//		static long Vec3DAngleZ ( double vec[3], double *agl );
+//		static long Vec3DAngleXY ( double vec[3], double *agl );
+//		static long Vec3DAngleYZ ( double vec[3], double *agl );
+//		static long Vec3DAngleZX ( double vec[3], double *agl );
+//		static void Vec2DOuterProduct ( double vec1[2], double vec2[2], double *vepr );
+//		static void Vec3DOuterProduct ( double vec1[3], double vec2[3], double vec[3] );
+//		static long VecInnerProduct ( long nd, double vec1[], double vec2[], double *vipr );
+//		static long Vec2DUnit ( double vec1[2], double vec2[2] );
+//		static long Vec3DUnit ( double vec1[3], double vec2[3] );
+//		static void Vec2DRotate ( double vec1[2], double agl, double vec2[2] );
+//		static long VecExpansion ( long nd, double vec1[], double erate, double vec2[] );
 
-		static long Point3DPressSamePoint ( double lp[], long *n );
-		static long Point3DPressSamePointV ( double lp[], long *n );
-		static long PointPressSamePointEx ( long nd, double lp[], long *n, long m );
-		static long PointReverse ( long nd, double lp1[], long n, double lp2[] );
-		static long PointMirrorStraight ( long nd, double lp1[], long n, double slin[], double lp2[] );
+//S		static long Point3DPressSamePoint ( double lp[], long *n );
+//		static long Point3DPressSamePointV ( double lp[], long *n );
+//		static long PointPressSamePointEx ( long nd, double lp[], long *n, long m );
+//		static long PointReverse ( long nd, double lp1[], long n, double lp2[] );
+//		static long PointMirrorStraight ( long nd, double lp1[], long n, double slin[], double lp2[] );
 
 		static long PLCond2DLine ( double p[2], double lin[4], long *cond );
 		static long PLCond3DLine ( double p[3], double lin[6], long *cond );
@@ -176,28 +176,28 @@ public:
 		static double __stdcall ToDegree ( double agl );
 		static double __stdcall ToRadian ( double agl );
 
-		static void Tbl2DMult ( double tbl1[6], double tbl2[6], double tbl[6] );
-		static void Tbl3DMult ( double tbl1[12], double tbl2[12], double tbl[12] );
-		static void Tbl2DInverse ( double tbl1[6], double tbl2[6] );
-		static long Tbl3DInverse ( double tbl1[12], double tbl2[12] );
-		static void Tbl2DGet ( double po[2], double px[2], double tbl[6] );
-		static void Tbl3DGet ( double po[3], double px[3], double pxy[3], double tbl[12] );
-
-
-		static void Tbl2DGetUnit ( double tbl[6] );
-		static void Tbl3DGetUnit ( double tbl[12] );
-		static long Tbl3DGetFromLoop ( double lp[], long n, double tbl[12] );
-		static long Tbl3DGetFromLoopV ( double lp[], long n, double tbl[12] );
-		static void Tbl2DGetFromMatrix ( double mtx[6], double tbl[6] );
-		static void Tbl3DGetFromMatrix ( double mtx[12], double tbl[12] );
-		static void Tbl3DUnit ( double tbl1[12], double tbl2[12] );
-		static long Tbl3DGetBaseXYZ ( long mode, double tbl[12] );
-		static long Tbl2DTransPoint ( double tbl[6], double p1[], long n, double p2[] );
-		static long Tbl3DTransPoint ( double tbl[12], double p1[], long n, double p2[] );
-		static long Tbl2DTransVec ( double tbl[6], double vec1[], long n, double vec2[] );
-		static long Tbl3DTransVec ( double tbl[12], double vec1[], long n, double vec2[] );
-		static long TblTransPoint32 ( double tbl[12], double p1[], long n, double p2[] );
-		static long TblTransPoint23 ( double tbl[12], double p1[], long n, double p2[] );
+//S		static void Tbl2DMult ( double tbl1[6], double tbl2[6], double tbl[6] );
+//		static void Tbl3DMult ( double tbl1[12], double tbl2[12], double tbl[12] );
+//		static void Tbl2DInverse ( double tbl1[6], double tbl2[6] );
+//		static long Tbl3DInverse ( double tbl1[12], double tbl2[12] );
+//		static void Tbl2DGet ( double po[2], double px[2], double tbl[6] );
+//		static void Tbl3DGet ( double po[3], double px[3], double pxy[3], double tbl[12] );
+//
+//
+//		static void Tbl2DGetUnit ( double tbl[6] );
+//		static void Tbl3DGetUnit ( double tbl[12] );
+//		static long Tbl3DGetFromLoop ( double lp[], long n, double tbl[12] );
+//		static long Tbl3DGetFromLoopV ( double lp[], long n, double tbl[12] );
+//		static void Tbl2DGetFromMatrix ( double mtx[6], double tbl[6] );
+//		static void Tbl3DGetFromMatrix ( double mtx[12], double tbl[12] );
+//		static void Tbl3DUnit ( double tbl1[12], double tbl2[12] );
+//		static long Tbl3DGetBaseXYZ ( long mode, double tbl[12] );
+//		static long Tbl2DTransPoint ( double tbl[6], double p1[], long n, double p2[] );
+//		static long Tbl3DTransPoint ( double tbl[12], double p1[], long n, double p2[] );
+//		static long Tbl2DTransVec ( double tbl[6], double vec1[], long n, double vec2[] );
+//		static long Tbl3DTransVec ( double tbl[12], double vec1[], long n, double vec2[] );
+//		static long TblTransPoint32 ( double tbl[12], double p1[], long n, double p2[] );
+//		static long TblTransPoint23 ( double tbl[12], double p1[], long n, double p2[] );
 
 		static long Ellipse2DCreate ( double p0[2], double px[2], double p1[2], double el[8] );
 		static long Ellipse3DCreate ( double p0[3], double px[3], double p1[3], double el[14] );

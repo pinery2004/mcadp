@@ -270,7 +270,7 @@ public:
 
 	MgLine3D SetRev()
 						{ msSwap( p[0], p[1]); return *this;}					// 線分 反転
-	MgVect3D	Vu()
+	MgVect3D Vu()
 						{ MgVect3D v1 = p[1] - p[0]; return v1.Unitize();}		// 線分の方向(単位ベクトル)
 	void Print(MCHAR* s);
 };

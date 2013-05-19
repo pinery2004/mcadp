@@ -1058,7 +1058,7 @@ bool MGeo::MakeGPolygonFromLineInGLine2D(				// (  O) ステイタス　true: 正常作成
 				}
 			}
 			if (PtW1[mxic] == PtF) {
-				*o_pg3 = PgW1;									// 終点と多角形の開始点が同一位置の場合は、１つの多角形とみなす
+				*o_pg3 = PgW1;									// 終点と多角形の開始点が同一位置の場合は、１つの多角形
 				bst = true;
 				break;
 			} else {
@@ -1182,7 +1182,7 @@ void MGeo::ConnectGPolygontoPolygon3D(						//
 				}
 			}
 		}
-		// 最後のポリゴンと距離が一番近いポリゴンを合体し、最後のポリゴンを取り除く（とみなす）
+		// 最後のポリゴンと距離が一番近いポリゴンを合体し、最後のポリゴンを取り除く
 		PgW.m_n = 0;
 		for ( ic0=0; ic0<=ic2amin; ic0++)
 			PgW += gPgW.m_Pg[ic2min].m_P[ic0];
