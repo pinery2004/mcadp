@@ -94,8 +94,8 @@
 //
 //	MGCHECK_ZEROVECT( ゼロチェックのベクトル長, "プログラム名");
 //
-#define 	MBCHECK_ZEROVECT(X,Z,T)\
-								{ if ( ( X) < T)  ms::SysError( Z, __LINE__, MC_ERR_VECT_ZERO);}
+#define 	MBCHECK_ZEROVECT(X,Z)\
+								{ if ( ( X) < MGPTOL->D)  ms::SysError( Z, __LINE__, MC_ERR_VECT_ZERO);}
 
 #define 	MBCHECK_POINTER(P)	{ if ( P == NULL) RETURN_POINTER_ERR();}
 

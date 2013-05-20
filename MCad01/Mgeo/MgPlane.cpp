@@ -165,10 +165,10 @@ MgPlane3D MGeo::PlaneLineSlope3D(
 //===========================================================================
 //		平面の方程式の係数と定数を正規化した(係数a,b,cを単位ベクトルに変換した)平面を求める
 //
-MgPlane3D MgPlane3D::Norm( MREAL i_Tol)
+MgPlane3D MgPlane3D::Norm()
 {
 	MREAL	d1 = MGeo::LenVect3D( v);
-		MBCHECK_ZEROVECT( d1, MBCstr("MgPlane3D Norm"), i_Tol);
+		MBCHECK_ZEROVECT( d1, MBCstr("MgPlane3D Norm"));
 	MREAL	d2 = 1.f / d1;
 	return MgPlane3D(v.x * d2, v.y * d2, v.z * d2, d * d2);
 }
@@ -203,12 +203,12 @@ void MgPlane3D::Print(
 //		平面の方程式の係数と定数を正規化した(係数a,b,cを単位ベクトルに変換した)平面を求める
 //
 MgPlane3D MGeo::NormPln(
-				const	MgPlane3D&	i_pl,
-						MREAL		i_Tol
+				const	MgPlane3D&	i_pl
+//SS						MREAL		i_Tol
 				)
 {
 	MREAL	d1 = MGeo::LenVect3D( i_pl.v);
-		MBCHECK_ZEROVECT( d1, MBCstr( "MgPlane3D MgNorm"), i_Tol);
+		MBCHECK_ZEROVECT( d1, MBCstr( "MgPlane3D MgNorm"));
 	MREAL	d2 = 1.f / d1;
 	return MgPlane3D( i_pl.v.x * d2, i_pl.v.y * d2, i_pl.v.z * d2, i_pl.d * d2);
 }

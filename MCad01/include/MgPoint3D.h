@@ -142,7 +142,7 @@ public:
 	// 演算
 	MgVect2D	To2D() const;													// 3D Point → 2D Point
 
-	MgVect3D Unitize( MREAL i_tol = MgTol_Dt::D) const;							// 単位ベクトルを求める
+	MgVect3D Unitize() const;													// 単位ベクトルを求める
 
 	MgVect3D RotR90() const;													// Z軸を中心軸として右に９０度回転したベクトルを求める
 	MgVect3D RotL90() const;													// Z軸を中心軸として左に９０度回転したベクトルを求める
@@ -156,7 +156,7 @@ public:
 	MREAL SqAbs();																// ベクトルの長さの２乗
 
 	// 変換
-	MgVect3D SetUnitize( MREAL i_tol = MgTol_Dt::D);							// 単位ベクトルに変換する
+	MgVect3D SetUnitize();														// 単位ベクトルに変換する
 	MgVect3D& operator = ( const MREAL* pt);
 	MgVect3D Set( const MgPoint2D& v1, const MgPlane3D& Pln3);					// ２次元→３次元
 	MgVect3D SetRotR90();														// Z軸を中心軸として右に９０度回転する

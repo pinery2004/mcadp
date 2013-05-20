@@ -102,16 +102,16 @@ public:
 	static bool MgGE(MREAL x, MREAL y, MREAL tol = D) {
 						return (x >= y - tol);}
 	// ê›íË
-	static void SetD( MREAL i_rD) {
-						 D = i_rD; D_2 = i_rD * i_rD;}
-	static void SetL( MREAL i_rL) {
-						 L = i_rL; L_2 = i_rL * i_rL;}
-	static void SetU( MREAL i_rU) {
-						 U = i_rU; D_2 = i_rU * i_rU;}
-	static void SetA( MREAL i_rA) {
-						 A = i_rA; A_2 = i_rA * i_rA;}
-	static void SetS( MREAL i_rS) {
-						 S = i_rS; S_2 = i_rS * i_rS;}
+	static MREAL SetD( MREAL i_rD) {
+						 MREAL Dsv = D; D = i_rD; D_2 = i_rD * i_rD; return Dsv;}
+	static MREAL SetL( MREAL i_rL) {
+						 MREAL Lsv = L; L = i_rL; L_2 = i_rL * i_rL; return Lsv;}
+	static MREAL SetU( MREAL i_rU) {
+						 MREAL Usv = U; U = i_rU; D_2 = i_rU * i_rU; return Usv;}
+	static MREAL SetA( MREAL i_rA) {
+						 MREAL Asv = A; A = i_rA; A_2 = i_rA * i_rA; return Asv;}
+	static MREAL SetS( MREAL i_rS) {
+						 MREAL Ssv = S; S = i_rS; S_2 = i_rS * i_rS; return Ssv;}
 };
 
 extern	MgTol_Dt	g_gTol;

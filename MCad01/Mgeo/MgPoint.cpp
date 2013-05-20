@@ -31,7 +31,7 @@ namespace MC
 //======================( ２次元 )==============================
 //		2D点をトレースする
 //
-void MgPoint2D::Print(MCHAR* s) const				// Print
+void MgPoint2D::Print(MCHAR* s) const							// Print
 {
 #ifdef LOGOUT
 	MBLOGOUT( Mstr( "%s	MgPoint2D	: (%7.1f,%7.1f)\n"), s, x, y);
@@ -41,10 +41,10 @@ void MgPoint2D::Print(MCHAR* s) const				// Print
 //======================( ２次元 )==============================
 //		2Dベクトルを単位ベクトルに変換する
 //
-MgVect2D MgVect2D::SetUnitize( MREAL i_Tol)		//	(  O) 単位ベクトル
+MgVect2D MgVect2D::SetUnitize()									//	(  O) 単位ベクトル
 {
 	MREAL	d1 = MGeo::LenVect2D( *this);
-		MBCHECK_ZEROVECT( d1, MBCstr( "MgVect2D Unitize"), i_Tol);
+		MBCHECK_ZEROVECT( d1, MBCstr( "MgVect2D Unitize"));
 	MREAL	d2 = 1.f / d1;
 	x *= d2;
 	y *= d2;
@@ -96,10 +96,10 @@ int MGeo::ReversePoint2D( MgPoint2D* i_pPt, int i_n, MgPoint2D* o_pPt)
 //======================( ２次元 )==============================
 //		2Dベクトルの単位ベクトルを求める
 //
-MgVect2D MgVect2D::Unitize( MREAL i_Tol) const	//	(  O) 単位ベクトル
+MgVect2D MgVect2D::Unitize() const					//	(  O) 単位ベクトル
 {
 	MREAL	d1 = MGeo::LenVect2D( *this);
-		MBCHECK_ZEROVECT( d1, MBCstr( "MgVect2D MgUnitize"), i_Tol);
+		MBCHECK_ZEROVECT( d1, MBCstr( "MgVect2D MgUnitize"));
 	MREAL	d2 = 1.f / d1;
     return	MgVect2D(x * d2, y * d2);
 }
@@ -107,7 +107,7 @@ MgVect2D MgVect2D::Unitize( MREAL i_Tol) const	//	(  O) 単位ベクトル
 //======================( ２次元 )==============================
 //		2Dベクトルをトレースする
 //
-void MgVect2D::Print(MCHAR* s) const				// Print
+void MgVect2D::Print(MCHAR* s) const							// Print
 {
 #ifdef LOGOUT
 	MBLOGOUT( Mstr( "%s	MgVect2D	: (%7.1f,%7.1f)\n"), s, x, y);
@@ -117,17 +117,17 @@ void MgVect2D::Print(MCHAR* s) const				// Print
 //======================( ２次元 )==============================
 //		2Dベクトルの単位ベクトルを求める
 //
-MgVect2D MGeo::UnitizeVect2D( const MgVect2D& i_v, MREAL i_Tol)		//	(  O) 単位ベクトル
+MgVect2D MGeo::UnitizeVect2D( const MgVect2D& i_v)				//	(  O) 単位ベクトル
 {
 	MREAL	d1 = MGeo::LenVect2D( i_v);
-		MBCHECK_ZEROVECT( d1, MBCstr( "MgVect2D MgUnitize"), i_Tol);
+		MBCHECK_ZEROVECT( d1, MBCstr( "MgVect2D MgUnitize"));
 	MREAL	d2 = 1.f / d1;
     return	MgVect2D( i_v.x * d2, i_v.y * d2);
 }
 
 //======================( ３次元 )==============================
 //
-MgVect3D MGeo::TaniVect3D( const MgVect3D& i_v, MREAL i_Tol)
+MgVect3D MGeo::TaniVect3D( const MgVect3D& i_v)
 {
 	MgVect3D vo;
 	MREAL	ax, ay, az;
@@ -144,7 +144,7 @@ MgVect3D MGeo::TaniVect3D( const MgVect3D& i_v, MREAL i_Tol)
 	else					 
 		vo.z = - ( i_v.x + i_v.y) / i_v.z;
 
-	return MGeo::UnitizeVect3D( vo, i_Tol);
+	return MGeo::UnitizeVect3D( vo);
 }
 
 //======================( ３次元 )==============================
@@ -207,7 +207,7 @@ int MGeo::ReversePoint3D( MgPoint3D* i_pPt, int i_n, MgPoint3D* o_pPt)
 //======================( ３次元 )==============================
 //		3D点をトレースする
 //
-void MgPoint3D::Print(MCHAR* s) const				// Print
+void MgPoint3D::Print(MCHAR* s) const							// Print
 {
 #ifdef LOGOUT
 	MBLOGOUT( Mstr( "%s 	MgPoint3D	: (%7.1f, %7.1f, %7.1f)\n"), s, x, y, z);
@@ -217,10 +217,10 @@ void MgPoint3D::Print(MCHAR* s) const				// Print
 //======================( ３次元 )==============================
 //		3Dベクトルを単位ベクトルに変換する
 //
-MgVect3D MgVect3D::SetUnitize( MREAL i_Tol)			//	(  O) 単位ベクトル
+MgVect3D MgVect3D::SetUnitize()									//	(  O) 単位ベクトル
 {
 	MREAL	d1 = MGeo::LenVect3D( *this);
-		MBCHECK_ZEROVECT( d1, MBCstr( "MgVect3D Unitize"), i_Tol);
+		MBCHECK_ZEROVECT( d1, MBCstr( "MgVect3D Unitize"));
 	MREAL	d2 = 1.f / d1;
 	x *= d2;
 	y *= d2;
@@ -231,10 +231,10 @@ MgVect3D MgVect3D::SetUnitize( MREAL i_Tol)			//	(  O) 単位ベクトル
 //======================( ３次元 )==============================
 //		3Dベクトルの単位ベクトルを求める
 //
-MgVect3D MgVect3D::Unitize( MREAL i_Tol) const		//	(  O) 単位ベクトル
+MgVect3D MgVect3D::Unitize() const								//	(  O) 単位ベクトル
 {
 	MREAL	d1= MGeo::LenVect3D( *this);
-		MBCHECK_ZEROVECT( d1, MBCstr( "MgVect2D MgUnitize"), i_Tol);
+		MBCHECK_ZEROVECT( d1, MBCstr( "MgVect2D MgUnitize"));
 	MREAL	d2 = 1.f / d1;
 	return MgVect3D( x * d2, y * d2, z * d2);
 }
@@ -242,7 +242,7 @@ MgVect3D MgVect3D::Unitize( MREAL i_Tol) const		//	(  O) 単位ベクトル
 //======================( ３次元 )==============================
 //		3Dベクトルをトレースする
 //
-void MgVect3D::Print(MCHAR* s) const				// Print
+void MgVect3D::Print(MCHAR* s) const							// Print
 {
 #ifdef LOGOUT
 	MBLOGOUT( Mstr( "%s 	MgVect3D	: (%7.1f, %7.1f, %7.1f)\n"), s, x, y, z);
@@ -252,10 +252,10 @@ void MgVect3D::Print(MCHAR* s) const				// Print
 //======================( ３次元 )==============================
 //		3Dベクトルの単位ベクトルを求める
 //
-MgVect3D MGeo::UnitizeVect3D( const MgVect3D& i_v, MREAL i_Tol)	//	(  O) 単位ベクトル
+MgVect3D MGeo::UnitizeVect3D( const MgVect3D& i_v)				//	(  O) 単位ベクトル
 {
 	MREAL	d1= MGeo::LenVect3D( i_v);
-		MBCHECK_ZEROVECT( d1, MBCstr( "MgVect3D MgUnitize"), i_Tol);
+		MBCHECK_ZEROVECT( d1, MBCstr( "MgVect3D MgUnitize"));
 	MREAL	d2 = 1.f / d1;
 	return MgVect3D( i_v.x * d2, i_v.y * d2, i_v.z * d2);
 }

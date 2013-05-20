@@ -30,11 +30,11 @@ bool MGeo::ChkPointOnULine2DWS(					// (  O) ステイタス
 												//		 	false:	直線上にない
 				const	MgPoint2D&	i_p1,		// (I  ) 点1
 				const	MgULine2D&	i_ULn2,		// (I  ) 直線2
-						MINT*		o_pist,		// (  O) 補助ステイタス
+						MINT*		o_pist		// (  O) 補助ステイタス
 												//			MC_RIGHT			(010): 点が直線の右側
 												//			MC_ON_LINE			(020): 点が直線上
 												//			MC_LEFT				(040): 点が直線の左側
-						MREAL rTol				// (I  ) トレランス
+//SS						MREAL rTol				// (I  ) トレランス
 				)
 {
 	bool		bst;							// ステイタス
@@ -46,7 +46,7 @@ bool MGeo::ChkPointOnULine2DWS(					// (  O) ステイタス
 	pa1 = i_ULn2.v ^ v2s1;						// 直線2の方向（単位ベクトル）と直線2の始点から点1までのベクトルの外積
 
 // 鉛直距離が誤差内なら直線上
-	if ( Zero(pa1, rTol)) {
+	if ( Zero(pa1)) {
 		*o_pist = MC_ON_LINE;
 		bst = true;
 
@@ -72,11 +72,11 @@ bool  MGeo::ChkPointOnHLine2DWS(				// (  O) ステイタス
 												//		 	false:	半直線上にない
 				const	MgPoint2D&	i_p1,		// (I  ) 点1
 				const	MgHLine2D&	i_HLn2,		// (I  ) 半直線2
-						MINT*		o_pist,		// (  O) 補助ステイタス
+						MINT*		o_pist		// (  O) 補助ステイタス
 												//			MC_RIGHT			(010): 点が半直線の右側
 												//			MC_ON_LINE			(020): 点が半直線上
 												//			MC_LEFT				(040): 点が半直線の左側
-						MREAL rTol				// (I  ) トレランス
+//SS						MREAL rTol				// (I  ) トレランス
 				)
 {
 	bool		bst;							// ステイタス
@@ -88,7 +88,7 @@ bool  MGeo::ChkPointOnHLine2DWS(				// (  O) ステイタス
 	pa1 = i_HLn2.v ^ v2s1;						// 半直線2の方向（単位ベクトル）と半直線2の始点から点1までのベクトルの外積
 
 // 鉛直距離が誤差内なら直線上
-	if ( Zero( pa1, rTol)) {
+	if ( Zero( pa1)) {
 		*o_pist = MC_ON_LINE;
 		bst = true;
 
@@ -114,7 +114,7 @@ bool MGeo::ChkPointOnLine2DWS(					// (  O) ステイタス
 												//			false:	線分上にない
 				const	MgPoint2D&	p1,			// (I  ) 点1
 				const	MgLine2D&	Ln2,		// (I  ) 線分2
-						MINT*		ist,		// (  O) 補助ステイタス	(ステイタス1 | ステイタス2)
+						MINT*		ist			// (  O) 補助ステイタス	(ステイタス1 | ステイタス2)
 												//		 ステイタス1
 												//			MC_RIGHT			(010): 点が線分の右側
 												//			MC_ON_LINE			(020): 点が線分延長直線上
@@ -123,7 +123,7 @@ bool MGeo::ChkPointOnLine2DWS(					// (  O) ステイタス
 												//			MC_ON_PS			(001): 点が線分の始点上
 												//			MC_INSIDE			(002): 点が線分の内側上
 												//			MC_ON_PE			(004): 点が線分の終点上
-						MREAL		rTol		// (I  ) トレランス
+//SS						MREAL		rTol		// (I  ) トレランス
 		)
 {
 	bool		bst;
@@ -144,9 +144,9 @@ bool MGeo::ChkPointOnLine2DWS(					// (  O) ステイタス
 	// 点から線分までの鉛直距離( abs( pa1)/abs( v2)) <= tol より直線上であるかを調べ
 	//						 ( pa1 * pa1 <= tol * tol * (v2 * v2))
 	// 直線上なら、さらに線分上であるかを調べる
-	tol_2 = rTol * rTol;
+	tol_2 = MGPTOL->D_2;
 	v2tol_2 = tol_2 * SqLenVect2D( v2);
-	v2tol_2_1 = tol_2 * SqLenVect2D( v2) * 0.0001f * 0.0001f;
+//S	v2tol_2_1 = tol_2 * SqLenVect2D( v2) * 0.0001f * 0.0001f;
 	*ist = 0;
 	if ( pa1 * pa1 <= v2tol_2) { 								// 点から線分までの鉛直距離がrTol以内
 		// 延長直線上
@@ -156,7 +156,8 @@ bool MGeo::ChkPointOnLine2DWS(					// (  O) ステイタス
 			*ist = MC_ON_PS;									// 点が線分の始点上
 		} else if (v2e1 * v2e1 <= tol_2) {
 			*ist = MC_ON_PE;									// 点が線分の終点上
-		} else if (cs > v2tol_2_1 &&  ce < -v2tol_2_1) {
+//S		} else if (cs > v2tol_2_1 &&  ce < -v2tol_2_1) {
+		} else if (cs > 0 &&  ce < 0) {
 			*ist = MC_INSIDE;									// 点が線分の内側上
 		} 
 		bst = (*ist != 0);
@@ -201,8 +202,8 @@ bool MGeo::ChkLineOnLine2D(						// (  O) ステイタス
 												//			true:	重なっている
 												//			false:	重なっていない
 				const	MgLine2D&	Ln1,		// (I  ) 線分1
-				const	MgLine2D&	Ln2,		// (I  ) 線分2
-						MREAL		rTol		// (I  ) トレランス
+				const	MgLine2D&	Ln2			// (I  ) 線分2
+//SS						MREAL		rTol		// (I  ) トレランス
 		)
 {
 	bool		bst = false;
@@ -224,7 +225,7 @@ bool MGeo::ChkLineOnLine2D(						// (  O) ステイタス
 	// 線分1の始点から線分2までの鉛直距離( abs( pa1)/abs( v2)) <= tol より直線上であるかを調べる
 	//						 ( pa1 * pa1 <= tol * tol * (v2 * v2))
 	cs22 = v2 * v2;
-	v2tol_2 = rTol * rTol * cs22;
+	v2tol_2 = MGPTOL->D_2 * cs22;
 	if ( pa1 * pa1 > v2tol_2) 									// 点から線分までの鉛直距離がrTol超の場合は
 		MQUIT;													// 重なっていないとする
 	cs21 = 0;
@@ -303,14 +304,14 @@ bool MGeo::ChkPointOnLine3DWS(					// (  O) ステイタス
 												//			false:	線分上にない
 				const	MgPoint3D&	p1,			// (I  ) 点1
 				const	MgLine3D	&Ln2,		// (I  ) 線分2
-						MINT*		ist,		// (  O) 補助ステイタス	(ステイタス1 | ステイタス2)
+						MINT*		ist			// (  O) 補助ステイタス	(ステイタス1 | ステイタス2)
 												//		 ステイタス1
 												//			MC_ON_LINE			(020): 点が線分延長直線上
 												//		 ステイタス2
 												//			MC_ON_PS			(001): 点が線分の始点上
 												//			MC_INSIDE			(002): 点が線分の内側上
 												//			MC_ON_PE			(004): 点が線分の終点上
-						MREAL		rTol		// (I  ) トレランス
+//SS						MREAL		rTol		// (I  ) トレランス
 		)
 {
 	bool		bst;
@@ -331,7 +332,7 @@ bool MGeo::ChkPointOnLine3DWS(					// (  O) ステイタス
 	// 点から線分までの鉛直距離( abs( va1)/abs( v2)) <= tol より直線上であるかを調べ
 	//						 ( (va1 * va1) <= tol * tol * (v2 * v2))
 	// 直線上なら、さらに線分上であるかを調べる
-	tol_2 = rTol * rTol;
+	tol_2 = MGPTOL->D_2;
 	v2tol_2 = tol_2 * SqLenVect3D( v2);
 	v2tol_2_1 = tol_2 * SqLenVect3D( v2) * 0.0001f * 0.0001f;
 	*ist = 0;
@@ -361,8 +362,8 @@ bool MGeo::ChkLineOnLine3D(						// (  O) ステイタス
 												//			true:	重なっている
 												//			false:	重なっていない
 				const	MgLine3D		&Ln1,	// (I  ) 線分1
-				const	MgLine3D		&Ln2,	// (I  ) 線分2
-						MREAL		rTol		// (I  ) トレランス
+				const	MgLine3D		&Ln2	// (I  ) 線分2
+//SS						MREAL		rTol		// (I  ) トレランス
 		)
 {
 	bool		bst = false;
@@ -384,7 +385,7 @@ bool MGeo::ChkLineOnLine3D(						// (  O) ステイタス
 	// 線分1の始点から線分2までの鉛直距離( abs( pa1)/abs( v2)) <= tol より直線上であるかを調べる
 	//						 ( pa1 * pa1 <= tol * tol * (v2 * v2))
 	cs22 = v2 * v2;
-	v2tol_2 = rTol * rTol * cs22;
+	v2tol_2 = MGPTOL->D_2 * cs22;
 	if ((pa1 * pa1) > v2tol_2) 									// 点から線分までの鉛直距離がrTol超の場合は
 		MQUIT;													// 重なっていないとする
 	cs21 = 0;
@@ -416,34 +417,34 @@ bool MGeo::ChkLineOnLine3DWS(					// (  O) ステイタス
 												//			false:	重なっていない
 				const	MgLine3D	&Ln1,		// (I  ) 線分1
 				const	MgLine3D	&Ln2,		// (I  ) 線分2
-						MINT*		ist,		// (  O) 補助ステイタス　重なりありの場合は次の通り
+						MINT*		ist			// (  O) 補助ステイタス　重なりありの場合は次の通り
 												//        -4    -3   -2   -1    0     1    2    3    4 		   	
 												//		|--   |--  |--- | -- | --- |----| ---|  --|   --|           	  	
 												//		|   --|  --| ---|----| --- | -- |--- |--  |--   |                　	
-						MREAL		rTol		// (I  ) トレランス
+//SS						MREAL		rTol		// (I  ) トレランス
 				)
 {
 	bool		bst = false;
-	MgVect3D		v2s1;							// 線分2の始点から点1へのベクトル
-//	MgVect3D		v2e1;							// 線分2の始点から点1へのベクトル
-	MgVect3D		v2, vu2;						// 線分2の始点から終点へのベクトル、同単位ベクトル
-	MgVect3D		pa1;							// 線分2と線分2の始点から点1へのベクトルの外積
+	MREAL		rTol;
+	MgVect3D	v2s1;							// 線分2の始点から点1へのベクトル
+	MgVect3D	v2, vu2;						// 線分2の始点から終点へのベクトル、同単位ベクトル
+	MgVect3D	pa1;							// 線分2と線分2の始点から点1へのベクトルの外積
 	MREAL		cs11, cs12, cs21, cs22;
 	MREAL		d1, d2, dd;
 	MREAL		d11, d12, d21, d22;
-//
+
 	*ist = 0;
-	if (!MGeo::ParallelLine3D( Ln1, Ln2))								// 平行でない場合は
+	rTol = MGPTOL->D;
+	if (!MGeo::ParallelLine3D( Ln1, Ln2))						// 平行でない場合は
 		MQUIT;													// 重なっていないとする
 	v2s1 = Ln1.p[0] - Ln2.p[0];
-//	v2e1 = Ln1.p[0] - Ln2.p[1];
 	v2 = Ln2.p[1] - Ln2.p[0];
 	vu2 = v2.Unitize();
 	pa1 = vu2 ^ v2s1;
 	//
 	// 線分1の始点から線分2までの鉛直距離 abs( pa1) <= tol より直線上であるかを調べる
 	//						 ( pa1 * pa1 <= tol * tol)
-	if ( SqLenVect3D( pa1) > rTol * rTol) 							// 点から線分までの鉛直距離がrTol超の場合は
+	if ( SqLenVect3D( pa1) > MGPTOL->D_2)						// 点から線分までの鉛直距離がrTol超の場合は
 		MQUIT;													// 重なっていないとする
 	cs21 = 0;
 	cs22 = v2 * vu2;
@@ -500,7 +501,7 @@ bool MGeo::ChkLineOnLine3DWS(					// (  O) ステイタス
 	dd = d2 - d1;
 	// 重なりの始点から終点までの距離( dd/abs( v2)) <= tol より重なっていないかを調べる
 	//						 ( dd * dd <= tol * tol * (v2 * v2))
-	if (dd < 0. || (dd * dd) <= rTol * rTol)					// 重なりがrTol以下の場合は
+	if (dd < 0. || (dd * dd) <= MGPTOL->D_2)					// 重なりがrTol以下の場合は
 		MQUIT;													// 重なっていないとする
 
 	bst = true;
@@ -517,11 +518,11 @@ bool MGeo::ChkPointOnGPolygon2DWS(				// (  O) ステイタス
 												//			false:	穴付き多角形の外側
 				const	MgPoint2D&	i_pt,		// (I  ) 点
 				const	MgGPolyg2D&	i_Gpg,		// (I  ) 穴付き多角形
-						MINT*		o_piSt,		// (  O) ステイタス
+						MINT*		o_piSt		// (  O) ステイタス
 												//			MC_IN_BORDER		(001): 点が穴付き多角形の内側
 												//			MC_ON_BORDER		(002): 点が穴付き多角形の辺上(または頂点上)
 												//			MC_OUT_BORDER		(004): 点が穴付き多角形の外側
-						MREAL		i_rTol		// (I  ) トレランス
+//SS						MREAL		i_rTol		// (I  ) トレランス
 		)
 {
 	bool		bst;
@@ -534,7 +535,7 @@ bool MGeo::ChkPointOnGPolygon2DWS(				// (  O) ステイタス
 		pPg = &(i_Gpg.m_pg[ic1]);
 
 		
-		ist1 = CountPolygonAroundPoint2D( i_pt, NULL, *pPg, &ict, i_rTol);
+		ist1 = CountPolygonAroundPoint2D( i_pt, NULL, *pPg, &ict);
 		if ( ist1) {
 			*o_piSt = MC_ON_BORDER;
 			bst = true;												// 穴付き多角形の辺上(または頂点上)
@@ -563,7 +564,7 @@ bool MGeo::ChkLineOnGPolygon2DWS(				// (  O) ステイタス
 												//			false:	穴付き多角形の外側
 				const	MgLine2D&	Ln1,		// (I  ) 線分
 				const	MgGPolyg2D&	GPg2,		// (I  ) 穴付き多角形
-						MINT*		isth,		// (  O) 補助ステイタス	(ステイタス1 | ステイタス2)
+						MINT*		isth		// (  O) 補助ステイタス	(ステイタス1 | ステイタス2)
 												// 		 テイタス1
 												//			MC_IN_BORDER		(001): 点が穴付き多角形の内側
 												//			MC_ON_BORDER		(002): 点が穴付き多角形の辺上(または頂点上)
@@ -572,7 +573,7 @@ bool MGeo::ChkLineOnGPolygon2DWS(				// (  O) ステイタス
 												//			MC_ON_SIDE_SAME		(010): 辺上(同一方向)	(MC_ON_BORDERと共に設定)
 												//			MC_ON_SIDE_REV		(020): 辺上(逆方向)		(MC_ON_BORDERと共に設定)
 												//			MC_ON_TOP			(040): 頂点上			(MC_ON_BORDERと共に設定)
-						MREAL		rTol		// (I  ) トレランス
+//SS						MREAL		rTol		// (I  ) トレランス
 				)
 {
 	bool		bst;
@@ -589,7 +590,7 @@ bool MGeo::ChkLineOnGPolygon2DWS(				// (  O) ステイタス
 	for ( ic1=0; ic1<GPg2.m_n; ic1++) {
 		pPg = &(GPg2.m_pg[ic1]);
 		
-		ist1 = CountPolygonAroundPoint2D( pt1, &vt1, *pPg, &ict, rTol);
+		ist1 = CountPolygonAroundPoint2D( pt1, &vt1, *pPg, &ict);
 		if ( ist1) {
 			*isth = MC_ON_BORDER | ist1;
 			bst = true;												// 穴付き多角形の辺上(または頂点上)
@@ -623,11 +624,11 @@ MINT MGeo::CountPolygonAroundPoint2D(			// (  O) ステイタス
 												//		 引数がNULLで無ければ点が辺上の場合、
 												//		 辺の線分方向と比較する
 				const	MgPolyg2D&	Pg,			// (I  ) 多角形
-						MINT*		ict,		// (  O) 周回カウント
+						MINT*		ict			// (  O) 周回カウント
 												//			>0: 多角形が実体の場合の周回数	(1:1周)
 												//			=0: 頂点、辺上、多角形の外
 												//			<0: 多角形が穴の場合の周回数	(-1:1周)	
-						MREAL		rTol		// (I  ) トレランス
+//SS						MREAL		rTol		// (I  ) トレランス
 				)
 {
 	MINT		ist;
@@ -650,13 +651,13 @@ MINT MGeo::CountPolygonAroundPoint2D(			// (  O) ステイタス
 	for ( ic=0; ic<Pg.m_n; ic++) {
 		Pe = Pg.m_p[ic];
 		Ve = Pt - Pe;
-		if ( SqLenVect2D( Ve) <= rTol * rTol) {						// 点が終点上(Pt == Pe)
+		if ( SqLenVect2D( Ve) <= MGPTOL->D_2) {						// 点が終点上(Pt == Pe)
 			ist = MC_ON_TOP;
 			MQUIT;
 		}
 		Vl = Pe - Ps;
 		MREAL Ss = Vl ^ Vs;
-		if ( ( Ss * Ss) <= (rTol * rTol * SqLenVect2D( Vl))) {			// 点から辺までの距離がrTol以内
+		if ( ( Ss * Ss) <= ( MGPTOL->D_2 * SqLenVect2D( Vl))) {			// 点から辺までの距離がrTol以内
 			MREAL Cs = Vs * Vl;
 			MREAL Ce = Ve * Vl;
 			if (Cs >= 0.0f && Ce <= 0.0f) {						// 辺上

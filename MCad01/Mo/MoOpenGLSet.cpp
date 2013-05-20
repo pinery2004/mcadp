@@ -471,11 +471,14 @@ void DispList::DspQuads(
 {
 	MgVect3D		VtLng, VtLf;						// 部材の長さ方向ベクトル、左方向ベクトル
 	MgVect3D		VuLng, VuUp;						// 部材の長さ方向単位ベクトル、上向単位ベクトル
-	
+	MREAL			rTolDsv;
+
 	VtLng = LnLf.p[1] - LnLf.p[0];
 	VtLf = LnRt.p[0] - LnLf.p[0];
 	VuUp = VtLng ^ VtLf;
-	VuUp.SetUnitize( MGPTOL->L);									// 論理座標
+	rTolDsv = MgTol::SetD( MgTol::L);
+	VuUp.SetUnitize();											// 論理座標
+	MgTol::SetD( rTolDsv);
 
 	glBegin( GL_QUADS);
 		glNormal3r( VuUp.x, VuUp.y, VuUp.z);					// 面の法線ベクトル

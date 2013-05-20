@@ -53,6 +53,7 @@ void mhInput::GetMarumeKabeLine(
 	MINT		ist1;
 	MINT		iCdMarume;
 	MREAL		rTol;
+	MREAL		rTolDsv;
 	mhPlcParts*	pHaiKabe[MAXHAIKABE];				// •Çƒf[ƒ^
 	MINT		nHaiKabe;							// •Ç”
 	MINT		ic2;
@@ -62,7 +63,6 @@ void mhInput::GetMarumeKabeLine(
 	if ( iCdMarume == 0)
 		rTol = MC_KABE_TOL;
 	else
-//		rTol = g_SysProp.Real[MM_REAL_PITCH] / iCdMarume;
 		rTol = mcs::GetReal( MM_REAL_PITCH) / iCdMarume;
 
 	nHaiKabe = mhHaitiIn::GetParts( iKai, MP_GP_TAIRYOKU, Mstr( "•Ç"), NULL, MAXHAIKABE, pHaiKabe);
@@ -70,8 +70,11 @@ void mhInput::GetMarumeKabeLine(
 	pGLn->m_n = 0;
 	for ( ic2=0; ic2<nHaiKabe; ic2++) {											// •Ç
 		ln1 = MgLine2DC( pHaiKabe[ic2]->GetPIPlcIti());
-		if ( MGeo::ChkPointOnLine2DWS( Pi, ln1, &ist1, MC_KABE_TOL))
+		rTolDsv = MgTol::SetD( rTol);
+//S		if ( MGeo::ChkPointOnLine2DWS( Pi, ln1, &ist1, MC_KABE_TOL))
+		if ( MGeo::ChkPointOnLine2DWS( Pi, ln1, &ist1))
 			(*pGLn) += MgLine2DC( pHaiKabe[ic2]->GetPIPlcIti());
+		MgTol::SetD( rTolDsv);
 	}
 	if ( pGLn->m_n == 0) {
 		Msg::ErrorMsg( Mstr( "•Çã‚É“ü—Í‚µ‚Ä‰º‚³‚¢"), MC_ERR_BASE);				// ""

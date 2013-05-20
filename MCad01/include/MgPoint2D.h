@@ -138,7 +138,7 @@ public:
 //	MgVect2D( const MgPoint2D& pt);
 
 	// 演算
-	MgVect2D Unitize( MREAL i_tol = MgTol_Dt::D) const;							// 単位ベクトルを求める
+	MgVect2D Unitize() const;													// 単位ベクトルを求める
 
 	MgVect2D RotR90() const;													// 右に９０度回転したベクトルを求める
 	MgVect2D RotL90() const;													// 左に９０度回転したベクトルを求める
@@ -151,7 +151,7 @@ public:
 	MREAL SqAbs();																// ベクトルの長さの２乗
 
 	// 変換
-	MgVect2D SetUnitize( MREAL i_tol = MgTol_Dt::D);							// 単位ベクトルに変換する
+	MgVect2D SetUnitize();														// 単位ベクトルに変換する
 	
 	MgVect2D SetRotR90();														// 右に９０度回転したベクトルに変換する
 	MgVect2D SetRotL90();														// 左に９０度回転したベクトルに変換する

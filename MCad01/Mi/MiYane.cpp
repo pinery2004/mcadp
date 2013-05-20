@@ -59,6 +59,7 @@ void mhInput::MmGetMarumeYaneLine(
 	MINT		ist1;
 	MINT		iCdMarume;
 	MREAL		rTol;
+	MREAL		rDsv;
 	MINT		ic1, ic2, ic2b;
 	MhRoofInfo*	pRoofEn;
 	MgPoint3D	Py1;
@@ -83,9 +84,11 @@ void mhInput::MmGetMarumeYaneLine(
 			ic2b = pRoofEn->GetpGRfm()->m_st[ic1].m_Pg.m_n - 1;
 			for ( ic2=0; ic2<pRoofEn->GetpGRfm()->m_st[ic1].m_Pg.m_n; ic2b=ic2,ic2++) {
 				Ln1 = MgLine2D( MgPoint2DC( pRoofEn->GetpGRfm()->m_st[ic1].m_Pg.m_P[ic2b]),
-							   MgPoint2DC( pRoofEn->GetpGRfm()->m_st[ic1].m_Pg.m_P[ic2]));
-				if ( MGeo::ChkPointOnLine2DWS( Pi, Ln1, &ist1, rTol))
+							    MgPoint2DC( pRoofEn->GetpGRfm()->m_st[ic1].m_Pg.m_P[ic2]));
+				rDsv = MgTol::SetD( rTol);
+				if ( MGeo::ChkPointOnLine2DWS( Pi, Ln1, &ist1))
 					(*pGLn) += Ln1;
+				MgTol::SetD( rDsv);
 			}
 		}
 	}

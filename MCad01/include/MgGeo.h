@@ -111,12 +111,12 @@ public:
 	// V1 == V2			誤差指定の判定
 	static bool EqualVect2D( const MgVect2D& v1, const MgVect2D& v2, MREAL tol)
 				 		{ MgVect2D vt = v2 - v1; return SqLenVect2D( vt) <= tol * tol;}
-	// V1とV2が平行であるかを確認
+	// V1とV2が平行であるかを確認	( tol A)
 	static bool ParallelVect2D( const MgVect2D& v1, const MgVect2D& v2)
 				 		{ MREAL ro = v1 ^ v2; MREAL ri = v1 * v2;
 						  if( ro < 0) ro = - ro; if(ri < 0) ri = -ri;
 						  return (ro <= ri * MGPTOL->A);}
-	// V1とV2が平行であるかを確認し、外積と内積を出力
+	// V1とV2が平行であるかを確認し、外積と内積を出力	( tol A)
 	static bool ParallelVect2DWS( const MgVect2D& v1, const MgVect2D& v2, MREAL* so, MREAL* si)
 				 		{ MREAL ro = v1 ^ v2; MREAL ri = v1 * v2;
 				 		  *so = ro; *si = ri;
@@ -129,7 +129,7 @@ public:
 						{ *ss = (v1 ^ (ps - p1));									// 線分2の始点側S
 						  *se = (v1 ^ (pe - p1));}									// 線分2の終点側S
 	// 長さ１に正規化する
-	static MgVect2D UnitizeVect2D( const MgVect2D& v1, MREAL i_Tol = MGPTOL->D	);
+	static MgVect2D UnitizeVect2D( const MgVect2D& v1);
 
 	// 左90゜回転
 	static MgVect2D RotL90Vect2D( const MgVect2D& v1)
@@ -185,20 +185,20 @@ public:
 	// P1 == P2			誤差指定の判定== 判定
 	static bool EqualVect3D( const MgVect3D& v1, const MgVect3D& v2, MREAL tol)
 				 		{ MgVect3D vt = v2 - v1; return SqLenVect3D(vt) <= tol * tol;}  
-	// V1とV2が平行であるかを確認
+	// V1とV2が平行であるかを確認	( tol A)
 	static bool ParallelVect3D( const MgVect3D& v1, const MgVect3D& v2)
 				 		{ MgVect3D vo = v1 ^ v2; MREAL fi = v1 * v2;
 						  return ( SqLenVect3D(vo) <= fi * fi * MGPTOL->A_2);}
-	// V1とV2が平行であるかを確認し、外積と内積を出力
+	// V1とV2が平行であるかを確認し、外積と内積を出力	( tol A)
 	static bool ParallelVect3DWP( const MgVect3D& v1, const MgVect3D& v2, MgVect3D *pso, MREAL* si)
 				 		{ MgVect3D vo = v1 ^ v2; MREAL fi = v1 * v2;
 				 		  *pso = vo; *si = fi;
 						  return ( SqLenVect3D(vo) <= fi * fi * MGPTOL->A_2);}
 	// 単位ベクトルを求める
-	static MgVect3D UnitizeVect3D( const MgVect3D& V1, MREAL i_Tol = MGPTOL->D);
+	static MgVect3D UnitizeVect3D( const MgVect3D& V1);
 
 	// 
-	static MgVect3D TaniVect3D( const MgVect3D& V1, MREAL i_Tol = MGPTOL->D);
+	static MgVect3D TaniVect3D( const MgVect3D& V1);
 
 	// 左90゜回転したベクトルを求める
 	static MgVect3D RotL90Vect3D( const MgVect3D& v1)
@@ -4427,11 +4427,11 @@ public:
 					const	MgPoint2D&	i_p1,		//  (I  ) 移動点1
 					const	MgVect2D&	i_v2,		//	(I  ) 移動方向を示すベクトル
 							MREAL		i_dl,		//	(I  ) 移動距離
-							MgPoint2D*	o_pp3,		//	(  O) 移動された点3
-							MREAL i_Tol = MGPTOL->D	//	(I  ) 許容誤差
+							MgPoint2D*	o_pp3		//	(  O) 移動された点3
+//SS							MREAL i_Tol = MGPTOL->D	//	(I  ) 許容誤差
 					)
 	{
-		*o_pp3 = i_p1 + i_dl * UnitizeVect2D( i_v2, i_Tol);
+		*o_pp3 = i_p1 + i_dl * UnitizeVect2D( i_v2);
 	}
 
 	//	------------------------
@@ -4450,14 +4450,14 @@ public:
 					const	MgPoint2D&	i_p1,		//  (I  ) 移動点1
 					const	MgLine2D&	i_Ln2,		//	(I  ) 移動方向を示す線分2
 							MREAL		i_dl,		//	(I  ) 移動距離
-							MgPoint2D*	o_pp3,		//	(  O) 移動された点3
-							MREAL i_Tol = MGPTOL->D	//	(I  ) 許容誤差
+							MgPoint2D*	o_pp3		//	(  O) 移動された点3
+//SS							MREAL i_Tol = MGPTOL->D	//	(I  ) 許容誤差
 					)
 	{
 		MgVect2D	vd, vn;
 	
 		vd = i_Ln2.p[1] - i_Ln2.p[0];
-		vn = UnitizeVect2D( vd, i_Tol);
+		vn = UnitizeVect2D( vd);
 		*o_pp3 = i_p1 + i_dl * vn;
 	}
 
@@ -4468,11 +4468,11 @@ public:
 					const	MgPoint3D&	i_p1,		//  (I  ) 移動点1
 					const	MgVect3D&	i_v2,		//	(I  ) 移動方向を示すベクトル
 							MREAL		i_dl,		//	(I  ) 移動距離
-							MgPoint3D	*o_pp3,		//	(  O) 移動された点3
-							MREAL i_Tol = MGPTOL->D	//	(I  ) 許容誤差
+							MgPoint3D	*o_pp3		//	(  O) 移動された点3
+//SS							MREAL i_Tol = MGPTOL->D	//	(I  ) 許容誤差
 					)
 	{
-		*o_pp3 = i_p1 + i_dl * UnitizeVect3D( i_v2, i_Tol);
+		*o_pp3 = i_p1 + i_dl * UnitizeVect3D( i_v2);
 	}
 
 	//	------------------------
@@ -4491,14 +4491,14 @@ public:
 					const	MgPoint3D&	i_p1,		//  (I  ) 移動点1
 					const	MgLine3D&	i_Ln2,		//	(I  ) 移動方向を示す線分2
 							MREAL		i_dl,		//	(I  ) 移動距離
-							MgPoint3D*	o_pp3,		//	(  O) 移動された点3
-							MREAL i_Tol = MGPTOL->D	//	(I  ) 許容誤差
+							MgPoint3D*	o_pp3		//	(  O) 移動された点3
+//SS							MREAL i_Tol = MGPTOL->D	//	(I  ) 許容誤差
 					)
 	{
 		MgVect3D	vd, vn;
 	
 		vd = i_Ln2.p[1] - i_Ln2.p[0];
-		vn = UnitizeVect3D(vd, i_Tol);
+		vn = UnitizeVect3D(vd);
 		*o_pp3 = i_p1 + i_dl * vn;
 	}
 
@@ -4524,14 +4524,14 @@ public:
 	static inline void OffsetLine2D(					//	(  O) ステイタス
 					const	MgLine2D&	i_Ln1,		//	(I  ) 線分1
 							MREAL		i_dl,		//	(I  ) オフセット量
-							MgLine2D*	o_pLn2,		//	(  O) オフセットされた線分2
-							MREAL i_Tol = MGPTOL->D	//	(I  ) 許容誤差
+							MgLine2D*	o_pLn2		//	(  O) オフセットされた線分2
+//SS							MREAL i_Tol = MGPTOL->D	//	(I  ) 許容誤差
 					)
 	{
 		MgVect2D	vd, vn;
 	
 		vd = i_Ln1.p[1] - i_Ln1.p[0];
-		vn = UnitizeVect2D( vd, i_Tol);
+		vn = UnitizeVect2D( vd);
 		o_pLn2->p[0] = i_Ln1.p[0] + i_dl * RotL90Vect2D(vn);
 		o_pLn2->p[1] = o_pLn2->p[0] + vd;
 	}
@@ -4555,14 +4555,14 @@ public:
 					const	MgLine3D&	i_Ln1,		//	(I  ) 線分1
 					const	MgPlane3D&	i_Pln2,		//	(I  ) 線分1が乗る平面2
 							MREAL		i_dl,		//	(I  ) オフセット量
-							MgLine3D*	o_pLn3,		//	(  O) オフセットされた線分3
-							MREAL i_Tol = MGPTOL->D	//	(I  ) 許容誤差
+							MgLine3D*	o_pLn3		//	(  O) オフセットされた線分3
+//SS							MREAL i_Tol = MGPTOL->D	//	(I  ) 許容誤差
 					)
 	{
 		MgVect3D	vd, vn;
 		//
 		vd = i_Ln1.p[1] - i_Ln1.p[0];
-		vn = UnitizeVect3D( vd, i_Tol);
+		vn = UnitizeVect3D( vd);
 		MgVect3D vv = vn ^ i_Pln2.v;
 		o_pLn3->p[0] = i_Ln1.p[0] + i_dl * ( i_Pln2.v ^ vn);
 		o_pLn3->p[1] = o_pLn3->p[0] + vd;
@@ -4579,13 +4579,13 @@ public:
 													//			true:	点上にある
 													//			false:	点上にない
 					const	MgPoint2D&	i_p1,		// (I  ) 点1
-					const	MgPoint2D&	i_p2,		// (I  ) 点2
-							MREAL rTol= MGPTOL->D	// (I  ) トレランス
+					const	MgPoint2D&	i_p2		// (I  ) 点2
+//SS							MREAL rTol= MGPTOL->D	// (I  ) トレランス
 					)
 	{
 	//	return (p1 == p2);
 		MgVect2D	V1 = i_p2 - i_p1;
-		return ( SqLenVect2D( V1) <= rTol * rTol);
+		return ( SqLenVect2D( V1) <= MGPTOL->D_2);
 	}
 	
 	//===========================================================================
@@ -4598,8 +4598,8 @@ public:
 													//		 true:  点上にある
 													//		 false: 点上にない
 					const	MgPoint2D&	i_p1,		// (I  ) 点1
-					const	MgPoint2D&	i_p2,		// (I  ) 点2
-							MREAL rTol= MGPTOL->D	// (I  ) トレランス
+					const	MgPoint2D&	i_p2		// (I  ) 点2
+//SS							MREAL rTol= MGPTOL->D	// (I  ) トレランス
 					);
 
 	// ---------------------( ３次元 )------------------------------
@@ -4610,13 +4610,13 @@ public:
 													//			true:	点上にある
 													//			false:	点上にない
 					const	MgPoint3D&	i_p1,		// (I  ) 点1
-					const	MgPoint3D&	i_p2,		// (I  ) 点2
-							MREAL rTol= MGPTOL->D	// (I  ) トレランス
+					const	MgPoint3D&	i_p2		// (I  ) 点2
+//SS							MREAL rTol= MGPTOL->D	// (I  ) トレランス
 					)
 	{
 	//	return (p1 == p2);
 		MgVect3D	V1 = i_p2 - i_p1;
-		return ( SqLenVect3D( V1) <= rTol * rTol);
+		return ( SqLenVect3D( V1) <= MGPTOL->D_2);
 	}
 	
 	//===========================================================================
@@ -4631,11 +4631,11 @@ public:
 													//		 	false:	直線上にない
 					const	MgPoint2D&	i_p1,		// (I  ) 点1
 					const	MgULine2D&	i_ULn2,		// (I  ) 直線2
-							MINT*		o_pist,		// (  O) 補助ステイタス
+							MINT*		o_pist		// (  O) 補助ステイタス
 													//			MC_RIGHT			(010): 点が直線の右側
 													//			MC_ON_LINE			(020): 点が直線上
 													//			MC_LEFT				(040): 点が直線の左側
-							MREAL rTol= MGPTOL->D	// (I  ) トレランス
+//SS							MREAL rTol= MGPTOL->D	// (I  ) トレランス
 					);
 	
 	// ---------------------( ２次元 )------------------------------
@@ -4647,11 +4647,11 @@ public:
 													//		 	false:	半直線上にない
 					const	MgPoint2D&	i_p1,		// (I  ) 点1
 					const	MgHLine2D&	i_HLn2,		// (I  ) 半直線2
-							MINT*		o_pist,		// (  O) 補助ステイタス
+							MINT*		o_pist		// (  O) 補助ステイタス
 													//			MC_RIGHT			(010): 点が半直線の右側
 													//			MC_ON_LINE			(020): 点が半直線上
 													//			MC_LEFT				(040): 点が半直線の左側
-							MREAL rTol= MGPTOL->D	// (I  ) トレランス
+//SS							MREAL rTol= MGPTOL->D	// (I  ) トレランス
 					);
 
 	// ---------------------( ２次元 )------------------------------
@@ -4663,7 +4663,7 @@ public:
 													//			false:	線分上にない
 					const	MgPoint2D&	i_p1,		// (I  ) 点1
 					const	MgLine2D&	i_Ln2,		// (I  ) 線分2
-							MINT*		o_pist,		// (  O) 補助ステイタス	(ステイタス1 | ステイタス2)
+							MINT*		o_pist		// (  O) 補助ステイタス	(ステイタス1 | ステイタス2)
 													//		 ステイタス1
 													//			MC_RIGHT			(010): 点が線分の右側
 													//			MC_ON_LINE			(020): 点が線分延長直線上
@@ -4672,7 +4672,7 @@ public:
 													//			MC_ON_PS			(001): 点が線分の始点上
 													//			MC_INSIDE			(002): 点が線分の内側上
 													//			MC_ON_PE			(004): 点が線分の終点上
-							MREAL rTol= MGPTOL->D	// (I  ) トレランス
+//SS							MREAL rTol= MGPTOL->D	// (I  ) トレランス
 					);
 	
 	// ---------------------( ２次元 )------------------------------
@@ -4685,11 +4685,11 @@ public:
 													//			false:	直線上にない
 					const	MgLine2D&	i_Ln1,		// (I  ) 線分1
 					const	MgULine2D&	i_ULn2,		// (I  ) 直線2
-							MINT*		o_pist,		// (  O) ステイタス
+							MINT*		o_pist		// (  O) ステイタス
 													//			MC_RIGHT			(010): 点が線分の右側
 													//			MC_ON_LINE			(020): 点が直線上
 													//			MC_LEFT				(040): 点が線分の左側
-							MREAL rTol= MGPTOL->D	// (I  ) トレランス
+//SS							MREAL rTol= MGPTOL->D	// (I  ) トレランス
 					)
 	{
 		MgPoint2D Pt1;
@@ -4705,8 +4705,8 @@ public:
 													//			true:	重なっている
 													//			false:	重なっていない
 					const	MgLine2D&	i_Ln1,		// (I  ) 線分1
-					const	MgLine2D&	i_Ln2,		// (I  ) 線分2
-							MREAL rTol= MGPTOL->D	// (I  ) トレランス
+					const	MgLine2D&	i_Ln2		// (I  ) 線分2
+//SS							MREAL rTol= MGPTOL->D	// (I  ) トレランス
 					);
 	
 	// ---------------------( ３次元 )------------------------------
@@ -4717,8 +4717,8 @@ public:
 													//			true:	線分上にある
 													//			false:	線分上にない
 					const	MgPoint3D&	i_p1,		// (I  ) 点1
-					const	MgULine3D&	i_ULn2,		// (I  ) 直線2
-							MREAL rTol= MGPTOL->D	// (I  ) トレランス
+					const	MgULine3D&	i_ULn2		// (I  ) 直線2
+//SS							MREAL rTol= MGPTOL->D	// (I  ) トレランス
 					)
 	{
 		MgVect3D		v21, va1;
@@ -4728,7 +4728,7 @@ public:
 		va1 = v21 ^ i_ULn2.v;
 	//	pa_2 = Abs_2(va1);
 	//	return ( pa_2 <= rTol * rTol);
-		return ( SqLenVect3D(va1) <= rTol * rTol);
+		return ( SqLenVect3D(va1) <= MGPTOL->D_2);
 	}
 	
 	// ---------------------( ３次元 )------------------------------
@@ -4739,8 +4739,8 @@ public:
 													//			true:	線分上にある
 													//			false:	線分上にない
 					const	MgPoint3D&	i_p1,		// (I  ) 点1
-					const	MgHLine3D&	i_HLn2,		// (I  ) 半直線2
-							MREAL rTol= MGPTOL->D	// (I  ) トレランス
+					const	MgHLine3D&	i_HLn2		// (I  ) 半直線2
+//S							MREAL rTol= MGPTOL->D	// (I  ) トレランス
 					)
 	{
 		MgVect3D	v21, va1;
@@ -4752,7 +4752,7 @@ public:
 		c1 = v21 * i_HLn2.v;
 	//	pa_2 = Abs_2(va1);
 	//	return ( pa_2 <= rTol * rTol);
-		return ( SqLenVect3D(va1) <= rTol * rTol && c1 > -rTol);
+		return ( SqLenVect3D(va1) <= MGPTOL->D_2 && c1 > -MGPTOL->D);
 	}
 	
 	// ---------------------( ３次元 )------------------------------
@@ -4764,14 +4764,14 @@ public:
 													//			false:	線分上にない
 					const	MgPoint3D&	i_p1,		// (I  ) 点1
 					const	MgLine3D&	i_Line2,	// (I  ) 線分2
-							MINT*		o_pist,		// (  O) 補助ステイタス	(ステイタス1 | ステイタス2)
+							MINT*		o_pist		// (  O) 補助ステイタス	(ステイタス1 | ステイタス2)
 													//		 ステイタス1
 													//			MC_ON_LINE			(020): 点が線分延長直線上
 													//		 ステイタス2
 													//			MC_ON_PS			(001): 点が線分の始点上
 													//			MC_INSIDE			(002): 点が線分の内側上
 													//			MC_ON_PE			(004): 点が線分の終点上
-							MREAL rTol= MGPTOL->D	// (I  ) トレランス
+//SS							MREAL rTol= MGPTOL->D	// (I  ) トレランス
 					);
 	
 	// ---------------------( ３次元 )------------------------------
@@ -4782,8 +4782,8 @@ public:
 													//			true:	重なっている
 													//			false:	重なっていない
 					const	MgLine3D&	i_Ln1,		// (I  ) 線分1
-					const	MgLine3D&	i_Ln2,		// (I  ) 線分2
-							MREAL rTol= MGPTOL->D	// (I  ) トレランス
+					const	MgLine3D&	i_Ln2		// (I  ) 線分2
+//SS							MREAL rTol= MGPTOL->D	// (I  ) トレランス
 					);
 	
 	// ---------------------( ３次元 )------------------------------
@@ -4795,15 +4795,15 @@ public:
 													//			false:	重なっていない
 					const	MgLine3D&	i_Ln1,		// (I  ) 線分1
 					const	MgLine3D&	i_Ln2,		// (I  ) 線分2
-							MINT*		o_pist,		// (  O) 補助ステイタス　重なりありの場合は次の通り
+							MINT*		o_pist		// (  O) 補助ステイタス　重なりありの場合は次の通り
 													//        -4    -3   -2   -1    0     1    2    3    4 		   	
 													//		|--   |--  |--- | -- | --- |----| ---|  --|   --|           	  	
 													//		|   --|  --| ---|----| --- | -- |--- |--  |--   |                　	
-							MREAL rTol= MGPTOL->D	// (I  ) トレランス
+//SS							MREAL rTol= MGPTOL->D	// (I  ) トレランス
 					);
 
 	// ---------------------( ２次元 )------------------------------
-	//		ベクトルとベクトルが垂直であるかを確認する
+	//		ベクトルとベクトルが垂直であるかを確認する		(tolA)
 	static inline bool ChkPerpVect2D(				// (  O) ステイタス true: 垂直 
 					const	MgVect2D&	i_v1,		// (I  ) ベクトル1
 					const	MgVect2D&	i_v2		// (I  ) ベクトル2
@@ -4865,18 +4865,18 @@ public:
 													//			false:	多角形の外側
 					const	MgPoint2D&	i_Pt,		// (I  ) 点
 					const	MgPolyg2D&	i_Pg,		// (I  ) 多角形
-							MINT*		o_pist,		// (  O) ステイタス
+							MINT*		o_pist		// (  O) ステイタス
 													//			MC_IN_BORDER		(001): 点が多角形の内側
 													//			MC_ON_BORDER		(002): 点が多角形の辺上(または頂点上)
 													//			MC_OUT_BORDER		(004): 点が多角形の外側
-							MREAL rTol= MGPTOL->D	// (I  ) トレランス
+//SS							MREAL rTol= MGPTOL->D	// (I  ) トレランス
 					)
 	{
 		bool	bst;
 		MINT	ist1;
 		MINT	ict;
 		
-		ist1 = CountPolygonAroundPoint2D( i_Pt, NULL, i_Pg, &ict, rTol);
+		ist1 = CountPolygonAroundPoint2D( i_Pt, NULL, i_Pg, &ict);
 		if ( ist1) {
 			*o_pist = MC_ON_BORDER;
 			bst = true;												// 多角形の辺上(または頂点上)
@@ -4901,7 +4901,7 @@ public:
 													//			false:	多角形の外側
 					const	MgLine2D&	i_Ln1,		// (I  ) 線分
 					const	MgPolyg2D&	i_Pg2,		// (I  ) 多角形
-							MINT*		o_pisth,	// (  O) 補助ステイタス	(ステイタス1 | ステイタス2)
+							MINT*		o_pisth		// (  O) 補助ステイタス	(ステイタス1 | ステイタス2)
 													// 		 テイタス1
 													//			MC_IN_BORDER		(001):	点が多角形の内側
 													//			MC_ON_BORDER		(002):	点が多角形の辺上(または頂点上)
@@ -4910,7 +4910,7 @@ public:
 													//			MC_ON_SIDE_SAME 	(010):	辺上(同一方向)
 													//			MC_ON_SIDE_REV		(020):	辺上(逆方向)
 													//			MC_ON_TOP			(040): 頂点上
-							MREAL rTol= MGPTOL->D	// (I  ) トレランス
+//SS							MREAL rTol= MGPTOL->D	// (I  ) トレランス
 					)
 	{
 		bool		bst;
@@ -4922,7 +4922,7 @@ public:
 		pt1 = ( i_Ln1.p[0] + i_Ln1.p[1]) * 0.5;
 		vt1 = i_Ln1.p[1] - i_Ln1.p[0];
 		
-		ist1 = CountPolygonAroundPoint2D( pt1, &vt1, i_Pg2, &ict, rTol);
+		ist1 = CountPolygonAroundPoint2D( pt1, &vt1, i_Pg2, &ict);
 		if ( ist1) {
 			*o_pisth = MC_ON_BORDER | ist1;
 			bst = true;												// 多角形の辺上(または頂点上)
@@ -4947,11 +4947,11 @@ public:
 													//			false:	穴付き多角形の外側
 					const	MgPoint2D&	i_Pt,		// (I  ) 点
 					const	MgGPolyg2D&	i_GPg,		// (I  ) 穴付き多角形
-							MINT*		o_pist,		// (  O) ステイタス
+							MINT*		o_pist		// (  O) ステイタス
 													//			MC_IN_BORDER		(001): 点が穴付き多角形の内側
 													//			MC_ON_BORDER		(002): 点が穴付き多角形の辺上(または頂点上)
 													//			MC_OUT_BORDER		(004): 点が穴付き多角形の外側
-							MREAL rTol= MGPTOL->D	// (I  ) トレランス
+//SS							MREAL rTol = MGPTOL->D	// (I  ) トレランス
 					);
 
 	// ---------------------( ２次元 )------------------------------
@@ -4962,7 +4962,7 @@ public:
 													//			false:	穴付き多角形の外側
 					const	MgLine2D&	i_Ln1,		// (I  ) 線分
 					const	MgGPolyg2D&	i_GPg2,		// (I  ) 穴付き多角形
-							MINT*		o_pisth,	// (  O) 補助ステイタス	(ステイタス1 | ステイタス2)
+							MINT*		o_pisth		// (  O) 補助ステイタス	(ステイタス1 | ステイタス2)
 													// 		 テイタス1
 													//			MC_IN_BORDER		(001): 点が穴付き多角形の内側
 													//			MC_ON_BORDER		(002): 点が穴付き多角形の辺上(または頂点上)
@@ -4971,7 +4971,7 @@ public:
 													//			MC_ON_SIDE_SAME		(010): 辺上(同一方向)	(MC_ON_BORDERと共に設定)
 													//			MC_ON_SIDE_REV		(020): 辺上(逆方向)		(MC_ON_BORDERと共に設定)
 													//			MC_ON_TOP			(040): 頂点上			(MC_ON_BORDERと共に設定)
-							MREAL rTol= MGPTOL->D	// (I  ) トレランス
+//S							MREAL rTol= MGPTOL->D	// (I  ) トレランス
 					);
 	
 	// ---------------------( ２次元 )------------------------------
@@ -4988,11 +4988,11 @@ public:
 													//		 引数がNULLで無ければ点が辺上の場合、
 													//		 辺の線分方向と比較する
 					const	MgPolyg2D&	i_Pg,		// (I  ) 多角形
-							MINT*		o_pict,		// (  O) 周回カウント
+							MINT*		o_pict		// (  O) 周回カウント
 													//			>0: 多角形が実体の場合の周回数	(1:1周)
 													//			=0: 頂点、辺上、多角形の外
 													//			<0: 多角形が穴の場合の周回数	(-1:1周)	
-							MREAL rTol= MGPTOL->D	// (I  ) トレランス
+//SS							MREAL rTol= MGPTOL->D	// (I  ) トレランス
 					);
 	
 	// ---------------------( ３次元 )------------------------------
@@ -5004,7 +5004,7 @@ public:
 													//			false:	多角形の外側
 					const	MgPoint3D&	i_Pt,		// (I  ) 点
 					const	MgPolyg3D&	i_Pg,		// (I  ) 多角形
-							MINT*		o_pist,		// (  O) ステイタス
+							MINT*		o_pist		// (  O) ステイタス
 								  					//		 多角形の平面と点の位置関係
 													//			MC_UPPER			(010): 点が平面の上側	
 													//			MC_ON_PLANE			(020): 点が平面上
@@ -5013,7 +5013,7 @@ public:
 													//			MC_IN_BORDER		(001): 点が多角形の内側
 													//			MC_ON_BORDER		(002): 点が多角形の辺上
 													//			MC_OUT_BORDER		(004): 点が多角形の外側
-							MREAL rTol= MGPTOL->D	// (I  ) トレランス
+//SS							MREAL rTol= MGPTOL->D	// (I  ) トレランス
 					);
 	
 	*/
@@ -5027,7 +5027,7 @@ public:
 													//			false:	多角形外
 					const	MgLine3D&	i_Ln1,		// (I  ) 線分
 					const	MgPolyg3D&	i_Pg2,		// (I  ) 多角形
-							MINT*		o_pist,		// (  O) 補助ステイタス
+							MINT*		o_pist		// (  O) 補助ステイタス
 								  					//		 多角形の平面と点の位置関係
 													//			MC_UPPER			(010): 点が平面の上側	
 													//			MC_ON_PLANE			(020): 点が平面上
@@ -5036,7 +5036,7 @@ public:
 													//			MC_IN_BORDER		(001): 点が多角形の内側
 													//			MC_ON_BORDER		(002): 点が多角形の辺上
 													//			MC_OUT_BORDER		(004): 点が多角形の外側
-							MREAL rTol= MGPTOL->D	// (I  ) トレランス
+//SS							MREAL rTol= MGPTOL->D	// (I  ) トレランス
 					)
 	{
 		MgPoint3D	Pt1;
@@ -5056,21 +5056,21 @@ public:
 													//			false: 平面外
 					const	MgPoint3D&	i_p1,		// (I  ) 点1
 					const	MgPlane3D&	i_Pln2,		// (I  ) 平面2
-							MINT*		o_pist,		// (  O) 補足ステイタス
+							MINT*		o_pist		// (  O) 補足ステイタス
 													//			MC_UPPER			(010): 点が平面の上側	
 													//			MC_ON_PLANE			(020): 点が平面上
 													//			MC_LOWER			(040): 点が平面の下側
-							MREAL rTol= MGPTOL->D	// (I  ) トレランス
+//SS							MREAL rTol= MGPTOL->D	// (I  ) トレランス
 					)
 	{
 		bool	bst;
 		MREAL	pa1;								//	点から平面までの距離
 	//
 		pa1 = ( i_Pln2.v * i_p1) + i_Pln2.d;
-		if ( pa1 > rTol) {
+		if ( pa1 > MGPTOL->D) {
 			*o_pist = MC_UPPER;
 			bst = false;
-		} else if ( pa1 < -rTol) {
+		} else if ( pa1 < -MGPTOL->D) {
 			*o_pist = MC_LOWER;
 			bst = false;
 		} else {
@@ -5087,8 +5087,8 @@ public:
 													//			true:  平面上
 													//			false: 平面外
 					const	MgULine3D&	i_ULn1,		// (I  ) 直線1
-					const	MgPlane3D&	i_Pln2,		// (I  ) 平面2
-							MREAL rTol= MGPTOL->D	// (I  ) トレランス
+					const	MgPlane3D&	i_Pln2		// (I  ) 平面2
+//SS							MREAL rTol= MGPTOL->D	// (I  ) トレランス
 					)
 	{
 		int		ist;
@@ -5110,7 +5110,7 @@ public:
 													//			false: 平面外
 					const	MgLine3D&	i_Ln1,		// (I  ) 線分1
 					const	MgPlane3D&	i_Pln2,		// (I  ) 平面2
-							MINT*		o_pist,		// (  O) 補足ステイタス
+							MINT*		o_pist		// (  O) 補足ステイタス
 								  					//		 多角形の平面と点の位置関係
 													//			MC_PS_UPPER			(001): 始点が平面の上側	
 													//			MC_PS_ON_PLANE		(002): 始点が平面上
@@ -5119,7 +5119,7 @@ public:
 													//			MC_PE_UPPER			(010): 終点が平面の上側	
 													//			MC_PE_ON_PLANE		(020): 終点が平面上
 													//			MC_PE_LOWER			(040): 終点が平面の下側
-							MREAL rTol= MGPTOL->D	// (I  ) トレランス
+//SS							MREAL rTol= MGPTOL->D	// (I  ) トレランス
 					)
 	{
 		bool	bs, be;
@@ -5139,8 +5139,8 @@ public:
 													//		 true   交差あり
 													//		 false  交差なし
 					const	MgRect2D&	i_rct10,	// (I  ) ４角形1 (min,max)
-					const	MgRect2D&	i_rct20,	// (I  ) ４角形2 (min,max)
-							MREAL rTol= MGPTOL->D	// (I  ) トレランス
+					const	MgRect2D&	i_rct20		// (I  ) ４角形2 (min,max)
+//SS							MREAL rTol= MGPTOL->D	// (I  ) トレランス
 					)
 	{
 		return i_rct10.p[0].x < i_rct20.p[1].x + MGPTOL->D &&
@@ -5157,8 +5157,8 @@ public:
 													//		 true   交差あり
 													//		 false  交差なし
 					const	MgRect3D&	i_rct10,	// (I  ) ４角形1 (min,max)
-					const	MgRect3D&	i_rct20,	// (I  ) ４角形2 (min,max)
-							MREAL rTol= MGPTOL->D	// (I  ) トレランス
+					const	MgRect3D&	i_rct20		// (I  ) ４角形2 (min,max)
+//SS							MREAL rTol= MGPTOL->D	// (I  ) トレランス
 					)
 	{
 		return i_rct10.p[0].x < i_rct20.p[1].x + MGPTOL->D &&
@@ -5175,8 +5175,8 @@ public:
 	//
 	static inline	bool ChkPointInMinmaxR2D(
 					const	MgPoint2D&		i_pt1,	// Point
-					const	MgMinMaxR2D&	i_mx2,	// MIN/MAX
-							MREAL rTol= MGPTOL->D	// (I  ) トレランス
+					const	MgMinMaxR2D&	i_mx2	// MIN/MAX
+//SS							MREAL rTol= MGPTOL->D	// (I  ) トレランス
 					)
 	{
 		return i_pt1.x < i_mx2.max.x + MGPTOL->D && i_mx2.min.x - MGPTOL->D < i_pt1.x &&
@@ -5189,8 +5189,8 @@ public:
 	//
 	static inline	bool ChkPt3InMinmaxR3D(
 					const	MgPoint3D&		i_pt1,	// Point
-					const	MgMinMaxR3D&	i_mx2,	// MIN/MAX
-							MREAL rTol= MGPTOL->D	// (I  ) トレランス
+					const	MgMinMaxR3D&	i_mx2	// MIN/MAX
+//SS							MREAL rTol= MGPTOL->D	// (I  ) トレランス
 					)
 	{
 		return i_pt1.x < i_mx2.max.x + MGPTOL->D && i_mx2.min.x - MGPTOL->D < i_pt1.x &&
@@ -5204,8 +5204,8 @@ public:
 	//
 	static inline	bool ChkMinmaxIOnMinmaxI2D(
 					const	MgMinMaxI2D&	i_mx1,	// MIN/MAX
-					const	MgMinMaxI2D&	i_mx2,	// MIN/MAX
-							MREAL rTol= MGPTOL->D	// (I  ) トレランス
+					const	MgMinMaxI2D&	i_mx2	// MIN/MAX
+//SS							MREAL rTol= MGPTOL->D	// (I  ) トレランス
 					)
 	{
 		return i_mx1.min.x <= i_mx2.max.x && i_mx2.min.x <= i_mx1.max.x &&
@@ -5218,8 +5218,8 @@ public:
 	//
 	static inline	bool ChkMinmaxROnMinmaxR2D(
 					const	MgMinMaxR2D&	i_mx1,	// MIN/MAX
-					const	MgMinMaxR2D&	i_mx2,	// MIN/MAX
-							MREAL rTol= MGPTOL->D	// (I  ) トレランス
+					const	MgMinMaxR2D&	i_mx2	// MIN/MAX
+//SS							MREAL rTol= MGPTOL->D	// (I  ) トレランス
 					)
 	{
 		return i_mx1.min.x < i_mx2.max.x + MGPTOL->D && i_mx2.min.x < i_mx1.max.x + MGPTOL->D &&
@@ -5232,8 +5232,8 @@ public:
 	//
 	static inline	bool ChkMinmaxROnMinmaxR3D(
 					const	MgMinMaxR3D&	i_mx1,	// MIN/MAX
-					const	MgMinMaxR3D&	i_mx2,	// MIN/MAX
-							MREAL rTol= MGPTOL->D	// (I  ) トレランス
+					const	MgMinMaxR3D&	i_mx2	// MIN/MAX
+//SS							MREAL rTol= MGPTOL->D	// (I  ) トレランス
 					)
 	{
 		return i_mx1.min.x < i_mx2.max.x + MGPTOL->D && i_mx2.min.x < i_mx1.max.x + MGPTOL->D &&
@@ -5458,8 +5458,8 @@ public:
 	//		ax+by+cz+d=0	(a*a+b*b+c*c=1.0)
 	//
 	static MgPlane3D NormPln(						// (  O) 正規化後の３次元平面
-				const	MgPlane3D&	i_pl,			// (I  ) ３次元平面
-						MREAL i_Tol = MGPTOL->D);	// (I  ) 許容誤差
+				const	MgPlane3D&	i_pl);			// (I  ) ３次元平面
+//SS						MREAL i_Tol = MGPTOL->D);	// (I  ) 許容誤差
 
 
 
@@ -5471,8 +5471,8 @@ public:
 	////	ax+by+cz+d=0
 	////
 	//static inline MgPlane3D Plane3pPoint3D(		// (  O) 平面式
-	//				const	MgPoint3D*	i_pt,		// (I  ) ３点座標
-	//						MREAL i_Tol = MGPTOL->D	// (I  ) 許容誤差
+	//				const	MgPoint3D*	i_pt		// (I  ) ３点座標
+//SS	//						MREAL i_Tol = MGPTOL->D	// (I  ) 許容誤差
 	//				)
 	//{
 	//	MgPlane3D	Plno;
@@ -5492,8 +5492,8 @@ public:
 	//static inline MgPlane3D Plane3Point3D(		// (  O) 平面式
 	//				const	MgPoint3D&	i_p0,		// (I  ) 点１
 	//				const	MgPoint3D&	i_p1,		// (I  ) 点２
-	//				const	MgPoint3D&	i_p2,		// (I  ) 点３
-	//						MREAL i_Tol = MGPTOL->D	// (I  ) 許容誤差
+	//				const	MgPoint3D&	i_p2		// (I  ) 点３
+//SS	//						MREAL i_Tol = MGPTOL->D	// (I  ) 許容誤差
 	//				)
 	//{
 	//	MgPlane3D	Plno;
@@ -5611,20 +5611,20 @@ inline MgPoint3D MgPoint3D::Set(								// ２次元→３次元
 
 inline MgULine3D MgULine3DC(									// ２次元→３次元
 					const	MgULine2D&	i_uln,
-					const	MgPlane3D&	i_Pln,
-							MREAL	i_Tol = MGPTOL->D)
+					const	MgPlane3D&	i_Pln)
+//SS							MREAL	i_Tol = MGPTOL->D)
 						{ MgULine3D ULno; ULno.p.x = i_uln.p.x; ULno.p.y = i_uln.p.y;
 										 ULno.p.z = i_Pln.GetZ( i_uln.p);
 						  ULno.v = MgVect3DC( i_uln.v, - ( i_Pln.v.x * i_uln.v.x + i_Pln.v.y * i_uln.v.y) / i_Pln.v.z);
-						  ULno.v.SetUnitize( i_Tol); return ULno;} 
+						  ULno.v.SetUnitize(); return ULno;} 
 
 inline MgULine3D MgULine3D::Set(								// ２次元→３次元
 					const	MgULine2D&	i_uln,
-					const	MgPlane3D&	i_Pln,
-							MREAL	i_Tol)
+					const	MgPlane3D&	i_Pln)
+//S							MREAL	i_Tol)
 						{ p.x = i_uln.p.x; p.y = i_uln.p.y; p.z = i_Pln.GetZ( i_uln.p);
 						  v = MgVect3DC( i_uln.v, - ( i_Pln.v.x * i_uln.v.x + i_Pln.v.y * i_uln.v.y) / i_Pln.v.z);
-						  v.SetUnitize( i_Tol); return *this;} 
+						  v.SetUnitize(); return *this;} 
 	
 inline MgLine3D MgLine3DC(										// ２次元→３次元
 					const	MgLine2D&	i_ln,
