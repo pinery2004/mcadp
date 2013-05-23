@@ -39,7 +39,7 @@ namespace MC
 	if ( HaitiDb::MdIsNotEmptyParts()) {
 		HaitiDb::MdEjectParts( &UndoPlcEn);
 		HaitiDb::MdPushRedoParts( &UndoPlcEn);
-		if ( mhHaitiIn::ChkParts( NULL, MP_GP_TAIRYOKU, Mstr( "•Ç"), NULL, &UndoPlcEn)) {
+		if ( mhHaitiIn::CheckParts( NULL, MP_GP_TAIRYOKU, Mstr( "•Ç"), NULL, &UndoPlcEn)) {
 			IeModel::MhKabeSetUpFlg();
 			IeModel::MhNormKabe( 0);
 		}
@@ -60,7 +60,7 @@ void HaitiCmd::MmRedo()
 	if ( HaitiDb::MdIsNotEmptyRedoParts()) {
 		HaitiDb::MdPopRedoParts( &RedoPlcEn);
 		HaitiDb::MdInjectParts( &RedoPlcEn);
-		if ( mhHaitiIn::ChkParts( NULL, MP_GP_TAIRYOKU, Mstr( "•Ç"), NULL, &RedoPlcEn)) {
+		if ( mhHaitiIn::CheckParts( NULL, MP_GP_TAIRYOKU, Mstr( "•Ç"), NULL, &RedoPlcEn)) {
 			IeModel::MhKabeSetUpFlg();
 			IeModel::MhNormKabe( 1);
 		}

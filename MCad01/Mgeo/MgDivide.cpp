@@ -45,7 +45,7 @@ MINT MGeo::Divide2Line2D(							// (  O) ステイタス
 //
 	vd1 = Ln1.p[1] - Ln1.p[0];
 	vd2 = Ln2.p[1] - Ln2.p[0];
-	if (!MGeo::ParallelVect2D( vd1, vd2)) {							// 交差
+	if (!MGeo::CheckParallelVect2D( vd1, vd2)) {							// 交差
 		SVal( Ln1.p[0], Ln1.p[1], Ln2.p[0], vd2, &ss1, &se1);
 		SVal( Ln2.p[0], Ln2.p[1], Ln1.p[0], vd1, &ss2, &se2);
 		if (ss1 * se1 < 0) {									// 交点は線分１の内側
@@ -90,7 +90,7 @@ MINT MGeo::DivideLineULine2D(						// (  O) ステイタス
 //　平行のチェック
 //
 	vd1 = Ln1.p[1] - Ln1.p[0];
-	if (!MGeo::ParallelVect2D( vd1, ULn2.v)) {
+	if (!MGeo::CheckParallelVect2D( vd1, ULn2.v)) {
 		SVal( Ln1.p[0], Ln1.p[1], ULn2.p, ULn2.v, &ss, &se);
 		if (ss * se < 0) {										//	交点は線分１の内側
 			po = Ln1.p[0] + (vd1 * (ss / (ss - se)));			//	交点
@@ -156,7 +156,7 @@ MINT MGeo::DivideAddLineULine2D(						// (  O) ステイタス
 	vd1 = Ln1.p[1] - Ln1.p[0];
 	// 線分と直線が平行で線分の端部でない位置で交差する場合は、
 	// 線分を分割し選択条件に合う方を分割後の線分群に追加する
-	if (!MGeo::ParallelVect2D( vd1, ULn2.v)) {
+	if (!MGeo::CheckParallelVect2D( vd1, ULn2.v)) {
 		SVal( Ln1.p[0], Ln1.p[1], ULn2.p, ULn2.v, &ss, &se);
 		if (ss * se < 0) {										// 交点は線分１の内側にあり
 			po = Ln1.p[0] + (vd1 * (ss / (ss - se)));			// 交点を求める
@@ -173,7 +173,7 @@ MINT MGeo::DivideAddLineULine2D(						// (  O) ステイタス
 	}
 	// 平行または分割無しの場合選択条件に合う場合は分割後の線分群に追加する
 	ist = MC_NINT;
-	MGeo::ChkLineOnULine2DWS( Ln1, ULn2, &ist1);					// 線分の中心点が直線と選択条件に合うか調べる
+	MGeo::CheckLineOnULine2DWS( Ln1, ULn2, &ist1);					// 線分の中心点が直線と選択条件に合うか調べる
 	if (MF_CHECK_OR( Sel, MC_SAME_DIR | MC_REV_DIR) &&			// 選択条件に「辺上同一方向または辺上逆方向」が設定されている場合は、
 		MF_CHECK_OR( ist1, MC_ON_LINE)) {						// 分割後の線分が直線上にあると次のように選択する
 		MREAL	cvd1 = vd1 * ULn2.v;
@@ -347,7 +347,7 @@ MINT MGeo::DivideAddULinePolygon2D(						// (  O) ステイタス
 	// 分割後の線分が多角形と選択条件に合うもののみ残す
 	for ( ic1=1; ic1<GPt.m_n; ic1++) {
 		lnw1 = MgLine2D( GPt.m_p[ic1-1], GPt.m_p[ic1]);
-		ChkLineOnPolygon2DWS( lnw1, Pg2, &ist1);							// 線分の中心点が多角形と選択条件の関係か調べる
+		CheckLineOnPolygon2DWS( lnw1, Pg2, &ist1);							// 線分の中心点が多角形と選択条件の関係か調べる
 		if (MF_CHECK_OR( Sel, MC_SAME_DIR) &&						// 選択条件に「辺上同一方向」が設定されている場合は、
 			MF_CHECK_OR( ist1, MC_ON_SIDE)) {						// 分割後の線分が多角形の辺上にあると次のように選択する
 			if (MF_CHECK_OR( ist1, MC_ON_SIDE_SAME)) {				// (1) 同一方向の時残し
@@ -442,7 +442,7 @@ MINT MGeo::DivideAddLinePolygon2D(						// (  O) ステイタス
 	// 分割後の線分が多角形と選択条件に合うもののみ残す
 	for ( ic1=1; ic1<GPt.m_n; ic1++) {
 		lnw1 = MgLine2D( GPt.m_p[ic1-1], GPt.m_p[ic1]);
-		ChkLineOnPolygon2DWS( lnw1, Pg2, &ist1);						// 線分の中心点が多角形と選択条件の関係か調べる
+		CheckLineOnPolygon2DWS( lnw1, Pg2, &ist1);						// 線分の中心点が多角形と選択条件の関係か調べる
 		if (MF_CHECK_OR( Sel, MC_SAME_DIR | MC_REV_DIR) &&		// 選択条件に「辺上同一方向または辺上逆方向」が設定されている場合は、
 			MF_CHECK_OR( ist1, MC_ON_SIDE)) {					// 分割後の線分が多角形の辺上にあると次のように選択する
 			if ((MF_CHECK_OR( Sel, MC_SAME_DIR) && MF_CHECK_OR( ist1, MC_ON_SIDE_SAME)) ||
@@ -530,7 +530,7 @@ MINT MGeo::DivideAddULineGPolygon2D(						// (  O) ステイタス
 	// 分割後の線分が穴付き多角形と選択条件に合うもののみ残す
 	for ( ic1=1; ic1<GPt.m_n; ic1++) {
 		lnw1 = MgLine2D(GPt.m_p[ic1-1], GPt.m_p[ic1]);
-		ChkLineOnGPolygon2DWS( lnw1, gpg2, &ist1);						// 線分の中心点が穴付き多角形と選択条件の関係か調べる
+		CheckLineOnGPolygon2DWS( lnw1, gpg2, &ist1);						// 線分の中心点が穴付き多角形と選択条件の関係か調べる
 		if (MF_CHECK_OR( Sel, MC_SAME_DIR) &&					// 選択条件に「辺上同一方向」が設定されている場合は、
 			MF_CHECK_OR( ist1, MC_ON_SIDE)) {					// 分割後の線分が穴付き多角形の辺上にあると、次のように選択する
 			if (MF_CHECK_OR( ist1, MC_ON_SIDE_SAME)) {			//	(1) 同一方向の時残し
@@ -631,7 +631,7 @@ MINT MGeo::DivideAddLineGPolygon2D(						// (  O) ステイタス
 	// 分割後の線分が穴付き多角形と選択条件に合致するもののみ残す
 	for ( ic1=1; ic1<GPt.m_n; ic1++) {
 		lnw1 = MgLine2D( GPt.m_p[ic1-1], GPt.m_p[ic1]);
-		ChkLineOnGPolygon2DWS( lnw1, GPg2, &ist1);						// 線分の中心点が穴付き多角形と選択条件の関係か調べる
+		CheckLineOnGPolygon2DWS( lnw1, GPg2, &ist1);						// 線分の中心点が穴付き多角形と選択条件の関係か調べる
 		if (MF_CHECK_OR( Sel, MC_SAME_DIR | MC_REV_DIR) &&		// 選択条件に「辺上同一方向または辺上逆方向」が設定されている場合は、
 			MF_CHECK_OR( ist1, MC_ON_SIDE)) {					// 分割後の線分が穴付き多角形の辺上にあると次のように選択する
 			if (MF_CHECK_OR( Sel, MC_ON_BORDER) &&
@@ -879,7 +879,7 @@ MINT MGeo::DivideAddULinePolygon3D(						// (  O) ステイタス
 //			 1: 分割可能
 //			-1: 三角形内に他の入隅点があり分割不可(３角形の辺上は対象外)
 //
-MINT MGeo::ChkDivTriPtPolygon2D( 
+MINT MGeo::CheckDivTriPtPolygon2D( 
 						MgPoint2D*	p3,			// 選択３角形
 				const	MgPolyg2D&	Pgw,		// 分割多角形
 				const	MgGInt		&iGIrisumi	// 入隅点リスト
@@ -921,7 +921,7 @@ MINT MGeo::ChkDivTriPtPolygon2D(
 //			 1: 分割可能
 //			-1: 三角形上または内に他の入隅点があり分割不可(３角形の辺上は対象外)
 //
-MINT MGeo::ChkDivTriPtPolygon3D( 
+MINT MGeo::CheckDivTriPtPolygon3D( 
 						MgPoint3D	*p3,		// 選択３角形
 				const	MgPolyg3D&	Pgw,		// 分割多角形
 				const	MgGInt		&iGIrisumi,	// 入隅点リスト
@@ -1014,7 +1014,7 @@ MINT MGeo::DivideTriPolygon2D(						// (  O) ステイタス
 		ic0 = iGIrisumi.m_i[0];									// ic0: (1 ～ n)、(0 ～ n-1)
 		if ( ic0 >= Pgwn)
 			ic0 = 0;											// ic0: (1 ～ n-1 | 0)、(0 ～ n-1)
-		ist1 = ChkDivTriPtPolygon2D( &Pgw.m_p[ic0], Pgw, iGIrisumi);
+		ist1 = CheckDivTriPtPolygon2D( &Pgw.m_p[ic0], Pgw, iGIrisumi);
 		if ( ist1 == 0)											// 三角形の面積が０
 			goto skip1;
 		else if ( ist1 == -1) {									// 三角形内に他の入隅点あり
@@ -1022,7 +1022,7 @@ MINT MGeo::DivideTriPolygon2D(						// (  O) ステイタス
 			ic0 = iGIrisumi.m_i[0] - 2;							// ic0: (-1 ～ n-2)、(-2 ～ n-3)
 			if ( ic0 < 0)
 				ic0 += Pgwn;									// ic0: (n-1 | 0 ～ n-2)、(n-2 | n-1 | 0 ～ n-2)
-			ist1 = ChkDivTriPtPolygon2D( &Pgw.m_p[ic0], Pgw, iGIrisumi);
+			ist1 = CheckDivTriPtPolygon2D( &Pgw.m_p[ic0], Pgw, iGIrisumi);
 			if ( ist1 == 0)										// 三角形の面積が０
 				goto skip1;
 			else if ( ist1 == -1) {								// 三角形内に他の入隅点あり
@@ -1073,7 +1073,7 @@ skip1:
 	for ( ic1=1; ic1<Pgw.m_n-1; ic1++) {
 		Pg3[1] = Pgw.m_p[ic1];
 		Pg3[2] = Pgw.m_p[ic1 + 1];
-		ist1 = ChkDivTriPtPolygon2D( Pg3.m_p, Pgw, iGIrisumi);
+		ist1 = CheckDivTriPtPolygon2D( Pg3.m_p, Pgw, iGIrisumi);
 		if ( ist != 0)											// 三角形の面積が０でない
 			(*GPg2) += Pg3;
 	}
@@ -1137,7 +1137,7 @@ MINT MGeo::DivideTriPolygon3D(						// (  O) ステイタス
 		ic0 = iGIrisumi.m_i[0];									// 先頭入隅点
 		if ( ic0 >= Pgwn)
 			ic0 = 0;											// ic0: 三角形の開始位置（先頭入隅点）
-		ist1 = ChkDivTriPtPolygon3D( &Pgw.m_P[ic0], Pgw, iGIrisumi, VuPg1);
+		ist1 = CheckDivTriPtPolygon3D( &Pgw.m_P[ic0], Pgw, iGIrisumi, VuPg1);
 		if ( ist1 == 0)											// 三角形の面積が０の場合は間引き
 		{
 //								MBLOGPRINTI( L"三角形の面積が0でskip_ic0", ic0);
@@ -1148,7 +1148,7 @@ MINT MGeo::DivideTriPolygon3D(						// (  O) ステイタス
 			ic0 = iGIrisumi.m_i[0] - 2;							// ic0: 三角形の開始位置（先頭入隅点を３点目とした開始位置）
 			if ( ic0 < 0)
 				ic0 += Pgwn;									//
-			ist1 = ChkDivTriPtPolygon3D( &Pgw.m_P[ic0], Pgw, iGIrisumi, VuPg1);
+			ist1 = CheckDivTriPtPolygon3D( &Pgw.m_P[ic0], Pgw, iGIrisumi, VuPg1);
 			if ( ist1 == 0)										// 三角形の面積が０の場合は間引き
 			{
 //										MBLOGPRINTI( L"三角形の面積が0でskip_ic0", ic0);
@@ -1218,7 +1218,7 @@ skip1:
 	for ( ic1=1; ic1<Pgw.m_n-1; ic1++) {
 		Pg3[1] = Pgw.m_P[ic1];
 		Pg3[2] = Pgw.m_P[ic1 + 1];
-		ist1 = ChkDivTriPtPolygon3D( Pg3.m_P, Pgw, iGIrisumi, VuPg1);
+		ist1 = CheckDivTriPtPolygon3D( Pg3.m_P, Pgw, iGIrisumi, VuPg1);
 		if ( ist1 != 0)										// 三角形の面積が０でない
 			(*gPg2) += Pg3;
 	}

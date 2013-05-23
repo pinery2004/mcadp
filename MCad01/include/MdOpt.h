@@ -192,7 +192,7 @@ public:
 	//【返値】選択ＯＰＴ群含みフラグ
 	//			TRUE:  含む
 	//			FALSE: 含まない
-	static bool MmOptChkC(
+	static bool MmOptCheckC(
 							MsBitSet	*pOptv		// (I  ) ＤＢレコードのOPT群セット
 					);
 
@@ -201,7 +201,7 @@ public:
 	//【返値】選択ＯＰＴ群含みフラグ
 	//			TRUE : 含む		表示ＯＦＦ
 	//			FALSE: 含まない	表示ＯＮ
-	static bool MmOptOffChkC(
+	static bool MmOptOffCheckC(
 							MsBitSet	*pOptv		// (I  ) ＤＢレコードのOPT群セット
 					);
 
@@ -219,7 +219,7 @@ public:
 	//				修正元レコードはＯＰＴ群変更し、新しく書込み対象のOPT群セットのＯＰＴ群を持つ
 	//				コピーレコードを作製しその属性を変更する
 	//
-	static MINT MmOptModChk(								// (  O) 修正後のレコード構成コード
+	static MINT MmOptModCheck(								// (  O) 修正後のレコード構成コード
 							MsBitSet*	*ppOptvRN,	// (I O) 修正前後レコードのOPT群セット　	(修正後のレコード構成コード >= 2 の時有効)
 							MsBitSet*	*ppOptvWN,	// (  O) 修正用に追加レコードのOPT群セット　(修正後のレコード構成コード == 3 の時有効)
 							MhOptV*	*ppOptv			// (  O) ＯＰＴ群管理情報
@@ -236,7 +236,7 @@ public:
 	//				書込みＯＰＴ群以外のＯＰＴ群部分は、削除元レコードをそのまま残しＯＰＴ群コードのみ修正する。
 	//				（ＯＰＴ群コードが入るエリアの開放と確保は本関数で行う）
 	//
-	static MINT MmOptDelChk(								// (  O) 削除後のレコード構成コード
+	static MINT MmOptDelCheck(								// (  O) 削除後のレコード構成コード
 							MsBitSet*	*ppOptvRN,	// (  O) 削除前後のレコードの表示ＯＮOPT群セット
 							MsBitSet*	*ppOptvDN	// (  O) 削除前後のレコードの表示ＯＦＦOPT群セット
 					);

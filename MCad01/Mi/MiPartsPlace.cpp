@@ -179,9 +179,9 @@ MINT mhHaitiIn::GetParts(
 	MINT iHE = 0;
 	for (pPlcEn = HaitiDb::MdGetHeadParts( &pos1); pPlcEn!=0;
 		 pPlcEn = HaitiDb::MdGetNextParts( &pos1)) {
-		if ( !mhHaitiIn::ChkParts( iKai, iIdPartsSpec, cGeneralName, cNmParts1, pPlcEn))
+		if ( !mhHaitiIn::CheckParts( iKai, iIdPartsSpec, cGeneralName, cNmParts1, pPlcEn))
 			continue;											// 対象外部品配置
-		if ( !MmChkValidParts( pPlcEn))							// オプションと履歴のチェック
+		if ( !MmCheckValidParts( pPlcEn))							// オプションと履歴のチェック
 			continue;
 
 		if ( iHE >= szHE) {										// 選択部品配置　オーバフロー　<ERROR>
@@ -199,7 +199,7 @@ MINT mhHaitiIn::GetParts(
 /////////////////////////////////////////////////////////////////////////////
 //	部品配置を調べる
 //	返値 true : 対象部品配置, false : 対象外部品配置
-bool mhHaitiIn::ChkParts(
+bool mhHaitiIn::CheckParts(
 						MINT		iKai,			// (I  ) 階 または NULL
 						MINT		iIdPartsSpec,	// (I  ) 部品ID または NULL
 				const	MCHAR*		cGeneralName,	// (I  ) 総称 または NULL
@@ -265,7 +265,7 @@ mhPlcParts* mhHaitiIn::SrchBuzai(
 		if ( pPlcEn->GetPTCdGp() != iGpC)
 			continue;											// 異なる構成の部材は検索しない
 			
-		if ( !MmChkValidParts( pPlcEn))							// オプションと履歴のチェック
+		if ( !MmCheckValidParts( pPlcEn))							// オプションと履歴のチェック
 			continue;
 
 		if ( iCdBuzai) {										// 部材コードが指定されている場合はチェックする
@@ -283,8 +283,8 @@ mhPlcParts* mhHaitiIn::SrchBuzai(
 		for ( ic1=0; ic1<pgHitBzi.m_n; ic1++) 
 			rMinMax.Ins2( pgHitBzi.m_p[ic1]);
 		// 指示部材を検索
-		if ( MGeo::ChkPointInMinmaxR2D( ptMouthR, rMinMax)) {				// 部材形状のMIN/MAXで検査し
-			if ( MGeo::ChkPointOnPolygon2DWS( ptMouthR, pgHitBzi, &ist1)) {	// さらに部材形状で検査する
+		if ( MGeo::CheckPointInMinmaxR2D( ptMouthR, rMinMax)) {				// 部材形状のMIN/MAXで検査し
+			if ( MGeo::CheckPointOnPolygon2DWS( ptMouthR, pgHitBzi, &ist1)) {	// さらに部材形状で検査する
 				pHitBziEn[nHitBziEn] = pPlcEn;
 				// 複数該当の場合は面積最小を選ぶ
 				rArea = pgHitBzi.Area();
@@ -359,7 +359,7 @@ void mhHaitiIn::MmSrchCrossBuzai(
 		if ( pPlcEn->GetPTCdGp() != iGpC)
 			continue;											// 異なる構成の部材は検索しない
 
-		if ( !MmChkValidParts( pPlcEn))							// オプションと履歴のチェック
+		if ( !MmCheckValidParts( pPlcEn))							// オプションと履歴のチェック
 			continue;
 
 		if ( iCdBuzai) {										// 検索対象の部材コードが指定されている場合はチェックする
@@ -379,12 +379,12 @@ void mhHaitiIn::MmSrchCrossBuzai(
 		BuzaiCode::MhBziSin( pPlcEn, &lnBziSin2);				// 芯線を求める
 
 		// 交差または端部接続部材を検索
-		if ( MGeo::ChkMinmaxROnMinmaxR2D( rMinMax1, rMinMax2)) {		// 部材形状のMIN/MAXで重なりありかを検査する
+		if ( MGeo::CheckMinmaxROnMinmaxR2D( rMinMax1, rMinMax2)) {		// 部材形状のMIN/MAXで重なりありかを検査する
 			iIntr = MGeo::Intr2Line2D( lnBziSin2, lnBziSin1, &po);
 			if ( iIntr != MC_PARALLEL) {						// 交差または接触
 				nT = 0;
 				for ( ic1=0; ic1<pgBzi2.m_n; ic1++) {			// 検索部部位の構成点が長さ調整部材内にある場合は接触とみなす
-					if ( MGeo::ChkPointOnPolygon2DWS( pgBzi2.m_p[ic1], pgBzi1, &ist1))
+					if ( MGeo::CheckPointOnPolygon2DWS( pgBzi2.m_p[ic1], pgBzi1, &ist1))
 						nT++;
 				}
 				if ( nT >= 1) {
@@ -506,7 +506,7 @@ void mhHaitiIn::MhModBzPH(
 	mhPlcParts	*pPlcEnM;							// 長さ調整部材2
 
 	if ( ( pPlcEnR->GetPIPlcIti( iMov) != PtInt) ||
-		( !MGeo::Equal(pPlcEnR->GetPILenHosei( iMov), rLH)) ||
+		( !MGeo::CheckEqual(pPlcEnR->GetPILenHosei( iMov), rLH)) ||
 		 pPlcEnR->GetPICdInpKbCd() == iCdInpKbCd) {
 
 		HaitiDb::MdPartsModify( pPlcEnR, &pPlcEnM);
@@ -611,7 +611,7 @@ MINT mhHaitiIn::MhAdjBzL(							// (  O) ステイタス　
 
 	if ( Bz1.Ln.p[1 - iMov] == PtInt) {
 		rLnWH = Bz1.rLH[1 - iMov] + rLH;
-		if ( !MGeo::Zero( rLnWH))
+		if ( !MGeo::CheckZero( rLnWH))
 			MhModBzPH( MP_INPKB_1PT, iMov, (MgPoint3D&)Bz1.vtUt, rLH, pPlcEn1);	// 長さ調整
 	} else {
 		MhModBzPH( MP_INPKB_LEN2PT, iMov, PtInt, rLH, pPlcEn1);	// 長さ調整
@@ -692,7 +692,7 @@ void mhHaitiIn::MhAdjBzL(							// (  O) ステイタス　
 
 	if (Bz1.Ln.p[1 - iMov] == PtInt) {
 		rLnWH = Bz1.rLH[1 - iMov] + rLH;
-		if ( !MGeo::Zero( rLnWH))
+		if ( !MGeo::CheckZero( rLnWH))
 			MhModBzPH( MP_INPKB_1PT, iMov, (MgPoint3D&)Bz1.vtUt, rLH, pPlcEn1);	// 長さ調整
 	} else {
 		MhModBzPH( MP_INPKB_LEN2PT, iMov, PtInt, rLH, pPlcEn1);		// 長さ調整
@@ -739,7 +739,7 @@ void mhHaitiIn::MhAdjBzL(
 //S	rLH = z_mnIA.GetLengthH1();
 	if ( Bz1.Ln.p[1 - iMov] == PtInt) {
 		rLnWH = Bz1.rLH[1 - iMov] + rLH;
-		if ( !MGeo::Zero( rLnWH))
+		if ( !MGeo::CheckZero( rLnWH))
 			MhModBzPH( MP_INPKB_1PT, iMov, (MgPoint3D&)Bz1.vtUt, rLH, pPlcEn1);	// 長さ調整
 	} else {
 		MhModBzPH( MP_INPKB_LEN2PT, iMov, PtInt, rLH, pPlcEn1);		// 長さ調整

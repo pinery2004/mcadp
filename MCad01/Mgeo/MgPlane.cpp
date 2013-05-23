@@ -182,7 +182,7 @@ bool MgPlane3D::operator == ( const MgPlane3D& pl) const							// b = (Pl1 == Pl
 //	MgPlane3D pl2 = MgNorm( pl); 
 //	return (pl1.v == pl2.v) && MFEQUAL( pl1.d, pl2.d, MGPTOL->D);
 //	return ( v == pl.v) && MFEQUAL( d, pl.d, MGPTOL->D);
-	return ( v == pl.v) && MGeo::Equal( d, pl.d, MGPTOL->D);
+	return ( v == pl.v) && MGeo::CheckEqual( d, pl.d, MGPTOL->D);
 }
 //
 //======================( ‚RŽŸŒ³ )==============================

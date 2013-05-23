@@ -110,7 +110,7 @@ static void	MmPackAreaI(
 			icc = ic2;
 
 		if ( pGifInp->m_i[icc] == pGifInp->m_i[ic1])				// 同一地廻り線種類の場合は
-			MGeo::ChkPointOnLine2DWS( pPg1->m_p[icc], ln1, &ist1);		//	直進か否かを調べる
+			MGeo::CheckPointOnLine2DWS( pPg1->m_p[icc], ln1, &ist1);		//	直進か否かを調べる
 		else													// 異なる地廻り線種類の場合は
 			ist1 = 0;											//	非直進とする
 

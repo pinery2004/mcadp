@@ -121,7 +121,7 @@ void WindowCtrl::MmWndKDrawKabe(
 		// 壁(耐力壁)
 		if ( pPlcEn->IsKabe()) {
 
-			if ( !MmChkValidParts( pPlcEn))						// オプションと履歴のチェック
+			if ( !MmCheckValidParts( pPlcEn))						// オプションと履歴のチェック
 			continue;
 
 			// 床組、壁枠組、耐力壁には、下階の壁芯線を表示する
@@ -143,7 +143,7 @@ void WindowCtrl::MmWndKDrawKabe(
 		// 耐力壁区画
 		} else if ( pPlcEn->IsTaiKabeArea()) {
 
-			if ( !MmChkValidParts( pPlcEn))						// オプションと履歴のチェック
+			if ( !MmCheckValidParts( pPlcEn))						// オプションと履歴のチェック
 			continue;
 
 			// 床組、壁枠組、耐力壁には、下階の耐力壁区画を表示する
@@ -165,7 +165,7 @@ void WindowCtrl::MmWndKDrawKabe(
 		// 耐力壁線
 		} else if ( pPlcEn->IsTaiKabeLine()) {
 
-			if ( !MmChkValidParts( pPlcEn))						// オプションと履歴のチェック
+			if ( !MmCheckValidParts( pPlcEn))						// オプションと履歴のチェック
 			continue;
 
 			// 床組、壁枠組、耐力壁には、下階の耐力壁線を表示する
@@ -187,7 +187,7 @@ void WindowCtrl::MmWndKDrawKabe(
 		// 支持壁線
 		} else if ( pPlcEn->IsSijiKabeLine()) {
 
-			if ( !MmChkValidParts( pPlcEn))						// オプションと履歴のチェック
+			if ( !MmCheckValidParts( pPlcEn))						// オプションと履歴のチェック
 			continue;
 
 			// 床組、壁枠組、耐力壁には、下階の支持壁線を表示する

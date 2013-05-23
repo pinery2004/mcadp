@@ -264,7 +264,7 @@ MgPoint2D MGeo::Mat2DMultPoint2D( const MgPoint2D& i_pt, const MgMat2D& i_mt)
 //				   						  | m31 m32 m33 |
 //
 //MgVect2D operator *= (MgVect2D& pi, const MgMat2D& tm)
-MgVect2D MGeo::Mat2DMultEqualVect2D( MgVect2D& io_pt, const MgMat2D& i_mt)
+MgVect2D MGeo::Mat2DMultCheckEqualVect2D( MgVect2D& io_pt, const MgMat2D& i_mt)
 {
 	MREAL	rwx;
 	rwx	    = i_mt.m[0][0] * io_pt.x + i_mt.m[1][0] * io_pt.y;
@@ -333,7 +333,7 @@ MgVect3D MGeo::Mat2DMultVect3D( const MgVect3D& i_Pt, const MgMat2D& i_mt)
 
 
 //MgPoint3D operator *= (MgPoint3D& Pt1, const MgMat2D&m2)
-MgPoint3D MGeo::Mat2DMultEqualPoint3D( MgPoint3D& io_Pt, const MgMat2D& i_mt)
+MgPoint3D MGeo::Mat2DMultCheckEqualPoint3D( MgPoint3D& io_Pt, const MgMat2D& i_mt)
 {
 	MREAL	rwx;
 	rwx		= i_mt.m[0][0] * io_Pt.x + i_mt.m[1][0] * io_Pt.y + i_mt.m[2][0];
@@ -356,7 +356,7 @@ MgPoint3D MGeo::Mat2DMultEqualPoint3D( MgPoint3D& io_Pt, const MgMat2D& i_mt)
 
 
 //MgVect3D operator *= (MgVect3D& Pt1, const MgMat2D&m2)
-MgVect3D MGeo::Mat2DMultEqualVect3D( MgVect3D& io_Pt, const MgMat2D& i_mt)
+MgVect3D MGeo::Mat2DMultCheckEqualVect3D( MgVect3D& io_Pt, const MgMat2D& i_mt)
 {
 	MREAL	rwx;
 	rwx		= i_mt.m[0][0] * io_Pt.x + i_mt.m[1][0] * io_Pt.y;
@@ -622,7 +622,7 @@ MgVect2D MGeo::Mat3DMultVect2D( const MgVect2D& i_Pt, const MgMat3D& i_Mt)
 //	           									    | m41 m42 m43 m44 |
 //
 //MgPoint2D operator *= (MgVect2D& Pt1o, const MgMat3D&M1)
-MgPoint2D MGeo::Mat3DMultEqualPoint2D( MgPoint2D& io_Pt, const MgMat3D& i_Mt)
+MgPoint2D MGeo::Mat3DMultCheckEqualPoint2D( MgPoint2D& io_Pt, const MgMat3D& i_Mt)
 {
 	MREAL	rwx;
 	rwx		= i_Mt.m[0][0] * io_Pt.x + i_Mt.m[1][0] * io_Pt.y + i_Mt.m[3][0];
@@ -644,7 +644,7 @@ MgPoint2D MGeo::Mat3DMultEqualPoint2D( MgPoint2D& io_Pt, const MgMat3D& i_Mt)
 //	           									    | m41 m42 m43 m44 |
 //
 //MgVect2D operator *= (MgVect2D& Pt1o, const MgMat3D&M1)
-MgVect2D MGeo::Mat3DMultEqualVect2D( MgVect2D& io_Pt, const MgMat3D& i_Mt)
+MgVect2D MGeo::Mat3DMultCheckEqualVect2D( MgVect2D& io_Pt, const MgMat3D& i_Mt)
 {
 	MREAL	rwx;
 	rwx		= i_Mt.m[0][0] * io_Pt.x + i_Mt.m[1][0] * io_Pt.y;
@@ -676,7 +676,7 @@ MgPoint3D MGeo::Mat3DMultPoint3D( const MgPoint3D& i_Pt, const MgMat3D& i_Mt)
 	MREAL		dd;
 	dd 	  = i_Mt.m[0][3] * i_Pt.x + i_Mt.m[1][3] * i_Pt.y + i_Mt.m[2][3] * i_Pt.z + i_Mt.m[3][3];
 //	_ASSERT(dd>MCTOLDN);
-	if (dd > MGPTOL->DN) {
+	if (dd > MGPTOL->D) {
 		MREAL	dd1 = 1. / dd;
 		po.x *= dd1;
 		po.y *= dd1;
@@ -709,7 +709,7 @@ MgVect3D MGeo::Mat3DMultVect3D( const MgVect3D& i_Pt, const MgMat3D& i_Mt)
 	MREAL		dd;
 	dd 	  = i_Mt.m[0][3] * i_Pt.x + i_Mt.m[1][3] * i_Pt.y + i_Mt.m[2][3] * i_Pt.z + i_Mt.m[3][3];
 //	_ASSERT(dd>MCTOLDN);
-	if (dd > MGPTOL->DN) {
+	if (dd > MGPTOL->D) {
 		MREAL	dd1 = 1. / dd;
 		po.x *= dd1;
 		po.y *= dd1;
@@ -732,7 +732,7 @@ MgVect3D MGeo::Mat3DMultVect3D( const MgVect3D& i_Pt, const MgMat3D& i_Mt)
 //												    | m41 m42 m43 m44 |
 //
 //MgVect3D operator *= (MgVect3D& Pt1o, const MgMat3D&M1)
-MgPoint3D MGeo::Mat3DMultEqualPoint3D( MgPoint3D& io_Pt, const MgMat3D& i_Mt)
+MgPoint3D MGeo::Mat3DMultCheckEqualPoint3D( MgPoint3D& io_Pt, const MgMat3D& i_Mt)
 {
 	MgPoint3D	Pto;
 	Pto.x = i_Mt.m[0][0] * io_Pt.x + i_Mt.m[1][0] * io_Pt.y + i_Mt.m[2][0] * io_Pt.z + i_Mt.m[3][0];
@@ -742,7 +742,7 @@ MgPoint3D MGeo::Mat3DMultEqualPoint3D( MgPoint3D& io_Pt, const MgMat3D& i_Mt)
 	MREAL		dd;
 	dd 	  = i_Mt.m[0][3] * io_Pt.x + i_Mt.m[1][3] * io_Pt.y + i_Mt.m[2][3] * io_Pt.z + i_Mt.m[3][3];
 //	_ASSERT(dd>MCTOLDN);
-	if (dd > MGPTOL->DN) {
+	if (dd > MGPTOL->D) {
 		MREAL	dd1 = 1. / dd;
 		po.x *= dd1;
 		po.y *= dd1;
@@ -766,7 +766,7 @@ MgPoint3D MGeo::Mat3DMultEqualPoint3D( MgPoint3D& io_Pt, const MgMat3D& i_Mt)
 //												    | m41 m42 m43 m44 |
 //
 //MgVect3D operator *= (MgVect3D& Pt1o, const MgMat3D&M1)
-MgVect3D MGeo::Mat3DMultEqualVect3D( MgVect3D& io_Pt, const MgMat3D& i_Mt)
+MgVect3D MGeo::Mat3DMultCheckEqualVect3D( MgVect3D& io_Pt, const MgMat3D& i_Mt)
 {
 	MgVect3D	Pto;
 	Pto.x = i_Mt.m[0][0] * io_Pt.x + i_Mt.m[1][0] * io_Pt.y + i_Mt.m[2][0] * io_Pt.z;
@@ -776,7 +776,7 @@ MgVect3D MGeo::Mat3DMultEqualVect3D( MgVect3D& io_Pt, const MgMat3D& i_Mt)
 	MREAL		dd;
 	dd 	  = i_Mt.m[0][3] * io_Pt.x + i_Mt.m[1][3] * io_Pt.y + i_Mt.m[2][3] * io_Pt.z + i_Mt.m[3][3];
 //	_ASSERT(dd>MCTOLDN);
-	if (dd > MGPTOL->DN) {
+	if (dd > MGPTOL->D) {
 		MREAL	dd1 = 1. / dd;
 		po.x *= dd1;
 		po.y *= dd1;

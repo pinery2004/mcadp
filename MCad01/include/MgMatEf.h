@@ -469,7 +469,7 @@ inline	MgULine2D operator * ( const MgULine2D& i_uln, const MgMat2E& i_mt)		// *
 //
 inline	MgPoint2D operator *= ( MgPoint2D& io_pt, const MgMat2E& i_mt)			// *=	ç¿ïWïœä∑
 {
-	return MGeo::Mat2EMultEqualPoint2D( io_pt, i_mt);
+	return MGeo::Mat2EMultCheckEqualPoint2D( io_pt, i_mt);
 }
 
 //===========================================================================
@@ -485,7 +485,7 @@ inline	MgPoint2D operator *= ( MgPoint2D& io_pt, const MgMat2E& i_mt)			// *=	ç¿
 //
 inline	MgVect2D operator *= ( MgVect2D& io_pt, const MgMat2E& i_mt)			// *=	ç¿ïWïœä∑
 {
-	return MGeo::Mat2EMultEqualVect2D( io_pt, i_mt);
+	return MGeo::Mat2EMultCheckEqualVect2D( io_pt, i_mt);
 }
 
 //===========================================================================
@@ -619,7 +619,7 @@ inline	MgULine3D operator * ( const MgULine3D& i_ULn, const MgMat2E& i_mt)		// *
 inline	MgPoint3D operator *= ( MgPoint3D& io_Pt, const MgMat2E& i_mt)			// *=	ç¿ïWïœä∑
 
 {
-	return MGeo::Mat2EMultEqualPoint3D( io_Pt, i_mt);
+	return MGeo::Mat2EMultCheckEqualPoint3D( io_Pt, i_mt);
 }
 
 //===========================================================================
@@ -637,7 +637,7 @@ inline	MgPoint3D operator *= ( MgPoint3D& io_Pt, const MgMat2E& i_mt)			// *=	ç¿
 inline	MgVect3D operator *= ( MgVect3D& io_Pt, const MgMat2E& i_mt)			// *=	ç¿ïWïœä∑
 
 {
-	return MGeo::Mat2EMultEqualVect3D( io_Pt, i_mt);
+	return MGeo::Mat2EMultCheckEqualVect3D( io_Pt, i_mt);
 }
 
 //===========================================================================
@@ -1043,7 +1043,7 @@ inline MgULine2D operator * ( const MgULine2D& i_uln, const MgMat3E& i_Mt)		// ç
 //
 inline MgPoint2D operator *= ( MgPoint2D& io_Pt, const MgMat3E& i_Mt)			// ç¿ïWïœä∑
 {
-	return MGeo::Mat3EMultEqualPoint2D( io_Pt, i_Mt);
+	return MGeo::Mat3EMultCheckEqualPoint2D( io_Pt, i_Mt);
 }
 
 //===========================================================================
@@ -1060,7 +1060,7 @@ inline MgPoint2D operator *= ( MgPoint2D& io_Pt, const MgMat3E& i_Mt)			// ç¿ïWï
 //
 inline MgVect2D operator *= ( MgVect2D& io_Pt, const MgMat3E& i_Mt)			// ç¿ïWïœä∑
 {
-	return MGeo::Mat3EMultEqualVect2D( io_Pt, i_Mt);
+	return MGeo::Mat3EMultCheckEqualVect2D( io_Pt, i_Mt);
 }
 
 //===========================================================================
@@ -1193,7 +1193,7 @@ inline MgULine3D operator * ( const MgULine3D& i_ULn, const MgMat3E& i_Mt)		// ç
 //
 inline MgPoint3D operator *= ( MgPoint3D& io_Pt, const MgMat3E& i_Mt)			// ç¿ïWïœä∑
 {
-	return MGeo::Mat3EMultEqualPoint3D( io_Pt, i_Mt);
+	return MGeo::Mat3EMultCheckEqualPoint3D( io_Pt, i_Mt);
 }
 
 //===========================================================================
@@ -1210,7 +1210,7 @@ inline MgPoint3D operator *= ( MgPoint3D& io_Pt, const MgMat3E& i_Mt)			// ç¿ïWï
 //
 inline MgVect3D operator *= ( MgVect3D& io_Pt, const MgMat3E& i_Mt)			// ç¿ïWïœä∑
 {
-	return MGeo::Mat3EMultEqualVect3D( io_Pt, i_Mt);
+	return MGeo::Mat3EMultCheckEqualVect3D( io_Pt, i_Mt);
 }
 
 //===========================================================================

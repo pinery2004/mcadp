@@ -574,7 +574,7 @@ MINT	MhSenBuzai::MhOn(										// (  O) ステイタス
 
 	ist = MGeo::Intr2Line3D( Bz1.Ln, Bz2.Ln, Po);					// 交点
 	if ( !MF_CHECK_OR( ist, (MC_INT | MC_NINT))) {
-		if ( MGeo::ChkLineOnLine3D( Bz1.LnWH, Bz2.LnWH)) {
+		if ( MGeo::CheckLineOnLine3D( Bz1.LnWH, Bz2.LnWH)) {
 			*ist1 = MC_ON_LINE;									// 線部材1は線部材2の直線上にあり	（平行）
 		} else {
 			*ist1 = 0;

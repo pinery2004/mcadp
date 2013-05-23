@@ -628,7 +628,7 @@ void mmIoPartsAttr::InitComboAttrR(
 	for ( ic1=0; ic1<nComboAttr; ic1++) {
 //		if ( MgEqual( rComboAttr[ic1], 9999.0))
 //			sKomoku = "Ž©“®";
-		if ( MGeo::Equal( rComboAttr[ic1], MREAL( MC_INT_JIDO)))
+		if ( MGeo::CheckEqual( rComboAttr[ic1], MREAL( MC_INT_JIDO)))
 			sKomoku = MC_STR_JIDO;
 		else
 			sKomoku.Format(Mstr( "  %6.1f"), rComboAttr[ic1]);

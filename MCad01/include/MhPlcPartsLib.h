@@ -74,7 +74,7 @@ public:
 	//	部品配置を調べる
 	//	返値 true : 対象部品配置, false : 対象外部品配置
 
-	static bool ChkParts(
+	static bool CheckParts(
 							MINT		i_iKai,			// 階 または NULL
 							MINT		i_iIdPartsSpec,		// 部品ID または NULL
 					const	MCHAR*		i_sGeneralName,	// 総称 または NULL

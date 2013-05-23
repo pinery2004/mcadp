@@ -73,7 +73,7 @@ namespace MC
 	maxKai = 0;
 	for ( pPlcEn = HaitiDb::MdGetHeadParts( &posH); pPlcEn!=0;
 		  pPlcEn = HaitiDb::MdGetNextParts( &posH)) {
-		if ( !MmChkValidParts( pPlcEn))							// オプションと履歴のチェック
+		if ( !MmCheckValidParts( pPlcEn))							// オプションと履歴のチェック
 			continue;
 
 //		LnPlc.Set( pPlcEn->m_lnPlc);
@@ -87,7 +87,7 @@ namespace MC
 	rMmMdl.max.z = mcs::GetStnd( maxKai, MM_STNDH_ROOF) + 200.f;
 	for ( pRoofEn = HaitiDb::MdGetHeadRoof( &posR); pRoofEn!=0;
 		  pRoofEn = HaitiDb::MdGetNextRoof( &posR)) {
-		if ( !MmChkValidRoof( pRoofEn))							// オプションと履歴のチェック
+		if ( !MmCheckValidRoof( pRoofEn))							// オプションと履歴のチェック
 			continue;
 		rRoofZ = mcs::GetStnd( pRoofEn->GetInpKai(),MM_STNDH_ROOF);
 		for ( ic1=0; ic1<pRoofEn->GetpGRfm()->m_n; ic1++) {
@@ -155,12 +155,12 @@ void MdlDispList::DrawKabe(
 	MhTateguInfo	*pAuxTategu;
 	for ( pPlcTEn = HaitiDb::MdGetHeadParts( &PartsPos); pPlcTEn!=0;
 		  pPlcTEn = HaitiDb::MdGetNextParts( &PartsPos)) {
-		if ( !MmChkValidParts( i_pPlcEn))						// オプションと履歴のチェック
+		if ( !MmCheckValidParts( i_pPlcEn))						// オプションと履歴のチェック
 			continue;
 
 		if ( pPlcTEn->GetPIKai() == i_pPlcEn->GetPIKai() &&
 			Mstrcmp( (&pPlcTEn->GetPIPartsSpec()->GetPTNmGeneral()[2]), Mstr( "建具")) == 0) {
-			if ( MGeo::ChkLineOnLine3DWS( pPlcTEn->GetPIPlcIti(), i_pPlcEn->GetPIPlcIti(), &ist1)) {
+			if ( MGeo::CheckLineOnLine3DWS( pPlcTEn->GetPIPlcIti(), i_pPlcEn->GetPIPlcIti(), &ist1)) {
 				MdlDispList::TateguHole( i_pPlcEn, pPlcTEn, &PgR, &PgL);
 				pAuxTategu = (MhTateguInfo*)pPlcTEn->GetPIAuxTategu();
 				if ( MGeo::GE( pAuxTategu->GetHeight(), rZU) ||
@@ -234,7 +234,7 @@ void MdlDispList::DrawYane1(
 
 	for ( ic1=0; ic1<pRoofEn->GetpGRfm()->m_n; ic1++) {
 		pRfm2 = &pRoofEn->GetpGRfm()->m_st[ic1];
-		if ( MGeo::Zero( pRfm2->m_Pln.v.z, MGPTOL->A)) {
+		if ( MGeo::CheckZero( pRfm2->m_Pln.v.z, MGPTOL->A)) {
 			// 矢切
 			continue;
 		} else {
@@ -289,7 +289,7 @@ void MdlDispList::DrawYagiri(
 
 	for ( ic1=0; ic1<pRoofEn->GetpGRfm()->m_n; ic1++) {
 		pRfm2 = &pRoofEn->GetpGRfm()->m_st[ic1];
-		if ( MGeo::Zero( pRfm2->m_Pln.v.z, MGPTOL->A)) {
+		if ( MGeo::CheckZero( pRfm2->m_Pln.v.z, MGPTOL->A)) {
 			// 矢切
 			VtU = pRfm2->m_Pln.v * (89. * 0.5);
 			VtL = -VtU;
@@ -342,7 +342,7 @@ void MdlDispList::DrawYane2(
 
 	for ( ic1=0; ic1<pRoofEn->GetpGRfm()->m_n; ic1++) {
 		pRfm2 = &pRoofEn->GetpGRfm()->m_st[ic1];
-		if ( MGeo::Zero( pRfm2->m_Pln.v.z, MGPTOL->A)) {
+		if ( MGeo::CheckZero( pRfm2->m_Pln.v.z, MGPTOL->A)) {
 			// 矢切
 			VtU = pRfm2->m_Pln.v * (89. * 0.5);
 			VtL = -VtU;
@@ -520,7 +520,7 @@ MINT MdlDispList::DrawIeMdl1(
 	for ( pPlcEn = HaitiDb::MdGetHeadParts( &posH); pPlcEn!=0;
 		  pPlcEn = HaitiDb::MdGetNextParts( &posH)) {
 
-		if ( !MmChkValidParts( pPlcEn))							// オプションと履歴のチェック
+		if ( !MmCheckValidParts( pPlcEn))							// オプションと履歴のチェック
 			continue;
 
 		//	部材のディスプレイリストを作成する
@@ -582,7 +582,7 @@ int MdlDispList::DrawIeMdl2(
 	for ( pPlcEn = HaitiDb::MdGetHeadParts( &posH); pPlcEn!=0;
 		  pPlcEn = HaitiDb::MdGetNextParts( &posH)) {
 
-		if ( !MmChkValidParts( pPlcEn))							// オプションと履歴のチェック
+		if ( !MmCheckValidParts( pPlcEn))							// オプションと履歴のチェック
 			continue;
 
 		//	壁のディスプレイリストを作成する
@@ -599,7 +599,7 @@ int MdlDispList::DrawIeMdl2(
 	for ( pRoofEn = HaitiDb::MdGetHeadRoof( &posR); pRoofEn!=0;
 		  pRoofEn = HaitiDb::MdGetNextRoof( &posR)) {
 
-		if ( !MmChkValidRoof( pRoofEn))							// オプションと履歴のチェック
+		if ( !MmCheckValidRoof( pRoofEn))							// オプションと履歴のチェック
 			continue;
 
 		MdlDispList::DrawYagiri( pRoofEn, PtCtr, rB);
@@ -627,7 +627,7 @@ int MdlDispList::DrawIeMdl3(
 	//	屋根のディスプレイリストを作成する
 	for ( pRoofEn = HaitiDb::MdGetHeadRoof( &posR); pRoofEn!=0;
 		  pRoofEn = HaitiDb::MdGetNextRoof( &posR)) {
-		if ( !MmChkValidRoof( pRoofEn))							// オプションと履歴のチェック
+		if ( !MmCheckValidRoof( pRoofEn))							// オプションと履歴のチェック
 			continue;
 		MdlDispList::DrawYane1( pRoofEn, PtCtr, rB);
 	}

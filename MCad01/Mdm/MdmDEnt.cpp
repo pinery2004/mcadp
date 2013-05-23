@@ -563,8 +563,8 @@ MINT mdmDEnt::GetEntInBox(
 		for ( iCe=0; iCe<GidEnt.m_n; iCe++) {
 			idEnt = GidEnt.m_pst[iCe];
 //			rMnMxEnt = pCurMdl->m_EntBf.m_pst[MIDtoHN( idEnt)].m_Fig.m_pPmts->m_Mmx;
-			if ( MGeo::ChkPt3InMinmaxR3D( rMnMxEnt.min, i_rMnmx) &&
-				 MGeo::ChkPt3InMinmaxR3D( rMnMxEnt.max, i_rMnmx) ) {
+			if ( MGeo::CheckPt3InMinmaxR3D( rMnMxEnt.min, i_rMnmx) &&
+				 MGeo::CheckPt3InMinmaxR3D( rMnMxEnt.max, i_rMnmx) ) {
 				(*o_pGidEnt) += idEnt;
 			}
 		}

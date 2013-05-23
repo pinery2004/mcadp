@@ -58,7 +58,7 @@ public:
 	// コピーコンストラクタ
 	MgPoint2D( MREAL x1, MREAL y2);
 	MgPoint2D( const CPoint& pt);
-	MgPoint2D( const class MgPoint3D& pt);											// ３次元→２次元
+	MgPoint2D( const class MgPoint3D& pt);										// ３次元→２次元
 
 //S	MgPoint2D( const MgVect2D& pt);
 

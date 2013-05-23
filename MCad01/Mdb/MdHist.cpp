@@ -278,7 +278,7 @@ bool MhHist::MmVerGetC(
 //【返値】カレントバージョン含みフラグ
 //			TRUE : 含む
 //			FALSE: 含まない
-bool MhHist::MmVerChkC(
+bool MhHist::MmVerCheckC(
 						MsBitSet	*i_pHstv	// ＤＢレコードのOPT群セット
 				)
 {
@@ -294,7 +294,7 @@ bool MhHist::MmVerChkC(
 			bst = FALSE;
 
 //		MUINT	*iOptv = pOptv->GetSOB();
-//		TRACE3( "MhOptV::MmOptChkC	DB Opt %x, %x, %x		", iOptv[0], iOptv[1], iOptv[2]);
+//		TRACE3( "MhOptV::MmOptCheckC	DB Opt %x, %x, %x		", iOptv[0], iOptv[1], iOptv[2]);
 //		iOptv = z_Optv.bmCurRGOptSet.GetSOB();
 //		TRACE3( "z_Optv.bmCurRGOptSet %x, %x, %x		", iOptv[0], iOptv[1], iOptv[2]);
 //		if ( bst) TRACE0 ( "bst TRUE\n"); else  TRACE0 ( "bst FALSE\n"); 
@@ -314,7 +314,7 @@ bool MhHist::MmVerChkC(
 //				コピーレコードを作製しその属性を変更する
 //
 
-MINT MhHist::MmHistModChk(							// 修正後のレコード構成コード
+MINT MhHist::MmHistModCheck(							// 修正後のレコード構成コード
 						MsBitSet*	*io_ppHstvMod,	// 修正元レコードに設定する履歴管理　(修正後のレコード構成コード >= 2 の時有効)
 						MsBitSet*	*o_ppHstvAdd	// 修正用に追加レコードの履歴管理　(修正後のレコード構成コード == 3 の時有効)
 				)
@@ -358,7 +358,7 @@ MINT MhHist::MmHistModChk(							// 修正後のレコード構成コード
 //				カレントバージョン以外のバージョン部分は、削除元レコードをそのまま残す。（バージョンコードのみ修正）
 //				（バージョンコードが入るエリアの開放と確保は本関数で行う）
 //
-MINT MhHist::MmHistDelChk(							// 削除後のレコード構成コード
+MINT MhHist::MmHistDelCheck(							// 削除後のレコード構成コード
 //						MsBitSet	*i_pHstvR,		// 削除元レコードの履歴管理
 //													// 削除後レコードの履歴管理に変更する
 						MsBitSet*	*io_ppHstvMod	// 削除後のレコードの履歴管理

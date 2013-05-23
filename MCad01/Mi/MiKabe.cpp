@@ -11,24 +11,8 @@
 #include "stdafx.h"
 #include "MsBasic.h"
 #include "MgLib.h"
-#include "MgMatD.h"
 #include "MsDefine.h"
-#include "MsCod.h"
-#include "MmGridNum.h"
-#include "MmDrag.h"
-#include "MmWnd.h"
-#include "MhDefParts.h"
 #include "MmLib.h"
-#include "McSystemProperty.h"
-
-#include "MmCmd.h"
-#include "resource.h"
-
-#include "MsBitSet.h"
-#include "MdHist.h"
-
-#include "MdList.h"
-#include "MhLib.h"
 
 #include "MhPlcParts.h"
 
@@ -71,8 +55,7 @@ void mhInput::GetMarumeKabeLine(
 	for ( ic2=0; ic2<nHaiKabe; ic2++) {											// •Ç
 		ln1 = MgLine2DC( pHaiKabe[ic2]->GetPIPlcIti());
 		rTolDsv = MgTol::SetD( rTol);
-//S		if ( MGeo::ChkPointOnLine2DWS( Pi, ln1, &ist1, MC_KABE_TOL))
-		if ( MGeo::ChkPointOnLine2DWS( Pi, ln1, &ist1))
+		if ( MGeo::CheckPointOnLine2DWS( Pi, ln1, &ist1))
 			(*pGLn) += MgLine2DC( pHaiKabe[ic2]->GetPIPlcIti());
 		MgTol::SetD( rTolDsv);
 	}

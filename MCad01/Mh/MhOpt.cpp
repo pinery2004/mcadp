@@ -121,7 +121,7 @@ MINT Option::MhModOpt(
 	}
 
 	pOptvRN = pPlcEnR->GetPIOpt1();
-	iMod = MhOptV::MmOptModChk( &pOptvRN, &pOptvWN, &pOptv);
+	iMod = MhOptV::MmOptModCheck( &pOptvRN, &pOptvWN, &pOptv);
 
 	if ( iMod < 3) {
 																// C³Œ³‚n‚o‚sŒQ‚Í‘ž‚Ý‚n‚o‚sŒQ‚Æ“¯ˆê‚Ìê‡
@@ -177,7 +177,7 @@ MINT Option::MhDelOpt(
 			MhOptV::MmOptIncSrch( OptC);
 		}
 	}
-	ist = MhOptV::MmOptDelChk( ppOptvRN, ppOptvDN);
+	ist = MhOptV::MmOptDelCheck( ppOptvRN, ppOptvDN);
 	return ist;
 }
 

@@ -173,7 +173,7 @@ bool MhOptV::MmOptGetC(
 //【返値】選択ＯＰＴ群含みフラグ
 //			TRUE : 含む
 //			FALSE: 含まない
-bool MhOptV::MmOptChkC(
+bool MhOptV::MmOptCheckC(
 						MsBitSet*	i_pOptv		// ＤＢレコードのOPT群セット
 				)
 {
@@ -193,7 +193,7 @@ bool MhOptV::MmOptChkC(
 			bst = FALSE;
 
 //D		MUINT	*iOptv = pOptv->GetSOB();
-//D		TRACE3( "MhOptV::MmOptChkC	DB Opt %x, %x, %x		", iOptv[0], iOptv[1], iOptv[2]);
+//D		TRACE3( "MhOptV::MmOptCheckC	DB Opt %x, %x, %x		", iOptv[0], iOptv[1], iOptv[2]);
 //D		iOptv = z_Optv.bmCurRGOptSet.GetSOB();
 //D		TRACE3( "z_Optv.bmCurRGOptSet %x, %x, %x		", iOptv[0], iOptv[1], iOptv[2]);
 //D		if ( bst) TRACE0 ( "bst TRUE\n"); else  TRACE0 ( "bst FALSE\n"); 
@@ -206,7 +206,7 @@ bool MhOptV::MmOptChkC(
 //【返値】選択ＯＰＴ群含みフラグ
 //			TRUE : 含む		表示ＯＦＦ
 //			FALSE: 含まない	表示ＯＮ
-bool MhOptV::MmOptOffChkC(
+bool MhOptV::MmOptOffCheckC(
 						MsBitSet*	i_pOptv		// ＤＢレコードのOPT群セット
 				)
 {
@@ -222,7 +222,7 @@ bool MhOptV::MmOptOffChkC(
 			bst = FALSE;
 
 //D		MUINT	*iOptv = pOptv->GetSOB();
-//D		TRACE3( "MhOptV::MmOptOffChkC	DB Opt %x, %x, %x		", iOptv[0], iOptv[1], iOptv[2]);
+//D		TRACE3( "MhOptV::MmOptOffCheckC	DB Opt %x, %x, %x		", iOptv[0], iOptv[1], iOptv[2]);
 //D		iOptv = z_Optv.bmCurRGOptSet.GetSOB();
 //D		TRACE3( "z_Optv.bmCurRGOptSet %x, %x, %x \n", iOptv[0], iOptv[1], iOptv[2]);
 	}
@@ -244,7 +244,7 @@ bool MhOptV::MmOptOffChkC(
 //				修正元レコードはＯＰＴ群を変更し、新しく書込み対象のOPT群セットのＯＰＴ群を持つ
 //				コピーレコードを作製しその属性を変更する
 //
-MINT MhOptV::MmOptModChk(									// 修正後のレコード構成コード
+MINT MhOptV::MmOptModCheck(									// 修正後のレコード構成コード
 						MsBitSet*	*io_ppOptvRN,	// 修正前後レコードのOPT群セット　	(修正後のレコード構成コード >= 2 の時有効)
 						MsBitSet*	*o_ppOptvWN,	// 修正用に追加レコードのOPT群セット　(修正後のレコード構成コード == 3 の時有効)
 						MhOptV*		*o_ppOptv		// ＯＰＴ群管理情報
@@ -295,7 +295,7 @@ exit:
 //				（本関数で**ppOptvRN,**ppOptvDNを修正)
 //				（ＯＰＴ群コードが入るエリアの開放と確保は本関数で行う）
 //
-MINT MhOptV::MmOptDelChk(							// 削除後のレコード構成コード
+MINT MhOptV::MmOptDelCheck(							// 削除後のレコード構成コード
 						MsBitSet*	*io_ppOptvRN,	// 削除前後のレコードの表示ＯＮOPT群セット
 						MsBitSet*	*o_ppOptvDN		// 削除前後のレコードの表示ＯＦＦOPT群セット
 				)
@@ -449,7 +449,7 @@ void MhOptV::MmOptAddDB()
 	for ( pPlcEn = HaitiDb::MdGetHeadParts( &pos1); pPlcEn!=0; pPlcEn = HaitiDb::MdGetNextParts( &pos1)) {
 		pOptv = pPlcEn->GetPIOpt1();
 		if ( pOptv == NULL) {		// オプション設定無しの参照対象レコード
-		} else if ( MhOptV::MmOptChkC( pOptv)) {						// ＯＰＴ群有りの参照対象レコード
+		} else if ( MhOptV::MmOptCheckC( pOptv)) {						// ＯＰＴ群有りの参照対象レコード
 			*pOptv |= z_Optv.bmCurGOptSet;
 		} else {
 		}
@@ -457,7 +457,7 @@ void MhOptV::MmOptAddDB()
 
 		pOptv = pPlcEn->GetPIOpt2();
 		if ( pOptv == NULL) {		// オプション設定無しの参照対象レコード
-		} else if ( MhOptV::MmOptOffChkC( pOptv)) {						// ＯＰＴ群有りの参照対象レコード
+		} else if ( MhOptV::MmOptOffCheckC( pOptv)) {						// ＯＰＴ群有りの参照対象レコード
 			*pOptv |= z_Optv.bmCurGOptSet;
 		} else {
 		}

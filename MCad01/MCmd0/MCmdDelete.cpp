@@ -60,7 +60,7 @@ void MCmdLineDelete()
 			if ( iGpB != iGpC || iIdPartsSpecB != iIdPartsSpec)
 				continue;										// 異なる構成の部材は表示しない
 
-			if ( !MmChkValidParts( pPlcEn))						// オプションと履歴のチェック
+			if ( !MmCheckValidParts( pPlcEn))						// オプションと履歴のチェック
 				continue;
 
 			ptW[0] = *(MgPoint2D*)&(pPlcEn->GetPIPlcIti( 0));
@@ -76,9 +76,9 @@ void MCmdLineDelete()
 			pg1 += (pg1.m_p[1] + VtWidth);
 			pg1 += (pg1.m_p[0] + VtWidth);
 
-			MGeo::ChkPointOnPolygon2DWS( pt1, pg1, &ist1);
+			MGeo::CheckPointOnPolygon2DWS( pt1, pg1, &ist1);
 			if ( ist1 == MC_IN_BORDER) {
-				if (mhHaitiIn::ChkParts( NULL, MP_GP_TAIRYOKU, Mstr( "壁"), NULL, pPlcEn))
+				if (mhHaitiIn::CheckParts( NULL, MP_GP_TAIRYOKU, Mstr( "壁"), NULL, pPlcEn))
 					IeModel::MhKabeSetUpFlg();
 				break;
 			}
@@ -125,7 +125,7 @@ void MCmdRoofDelete()
 		// 屋根を検索する
 		for ( pRoofEn = HaitiDb::MdGetHeadRoof( &pos1); pRoofEn!=0;
 			  pRoofEn = HaitiDb::MdGetNextRoof( &pos1)) {
-			if ( !MmChkValidRoof( pRoofEn))						// オプションと履歴のチェック
+			if ( !MmCheckValidRoof( pRoofEn))						// オプションと履歴のチェック
 				continue;
 			// 屋根のMINMAXを求める
 			rMmMdl.SetInit();
@@ -136,7 +136,7 @@ void MCmdRoofDelete()
 				}
 			}
 			rmmMdl = MgMinMaxR2D( MgPoint2DC( rMmMdl.min), MgPoint2DC( rMmMdl.max));
-			if ( MGeo::ChkPointInMinmaxR2D( pt1, rmmMdl))
+			if ( MGeo::CheckPointInMinmaxR2D( pt1, rmmMdl))
 				break;
 		}
 

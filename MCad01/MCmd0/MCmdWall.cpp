@@ -134,7 +134,7 @@ void MCmdLineW()
 							   NULL, MAXHAIKABE, pHaiKabe);
 																					// 家モデルよりカレント階の全ての壁を取得する
 		for ( ic2=0; ic2<nHaiKabe; ic2++) {											// 壁
-			if ( MGeo::ChkLineOnLine3D( Ln1, pHaiKabe[ic2]->GetPIPlcIti()))
+			if ( MGeo::CheckLineOnLine3D( Ln1, pHaiKabe[ic2]->GetPIPlcIti()))
 				break;
 		}
 		if ( ic2 == nHaiKabe) {

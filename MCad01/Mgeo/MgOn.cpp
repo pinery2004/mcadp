@@ -25,7 +25,7 @@ namespace MC
 //
 //	点が直線上にあるかを調べる。
 //
-bool MGeo::ChkPointOnULine2DWS(					// (  O) ステイタス
+bool MGeo::CheckPointOnULine2DWS(				// (  O) ステイタス
 												//		 	true:	直線上にある
 												//		 	false:	直線上にない
 				const	MgPoint2D&	i_p1,		// (I  ) 点1
@@ -34,7 +34,6 @@ bool MGeo::ChkPointOnULine2DWS(					// (  O) ステイタス
 												//			MC_RIGHT			(010): 点が直線の右側
 												//			MC_ON_LINE			(020): 点が直線上
 												//			MC_LEFT				(040): 点が直線の左側
-//SS						MREAL rTol				// (I  ) トレランス
 				)
 {
 	bool		bst;							// ステイタス
@@ -46,7 +45,7 @@ bool MGeo::ChkPointOnULine2DWS(					// (  O) ステイタス
 	pa1 = i_ULn2.v ^ v2s1;						// 直線2の方向（単位ベクトル）と直線2の始点から点1までのベクトルの外積
 
 // 鉛直距離が誤差内なら直線上
-	if ( Zero(pa1)) {
+	if ( CheckZero(pa1)) {
 		*o_pist = MC_ON_LINE;
 		bst = true;
 
@@ -67,7 +66,7 @@ bool MGeo::ChkPointOnULine2DWS(					// (  O) ステイタス
 //
 //	点が半直線上にあるかを調べる。
 //
-bool  MGeo::ChkPointOnHLine2DWS(				// (  O) ステイタス
+bool  MGeo::CheckPointOnHLine2DWS(				// (  O) ステイタス
 												//		 	true:	半直線上にある
 												//		 	false:	半直線上にない
 				const	MgPoint2D&	i_p1,		// (I  ) 点1
@@ -76,7 +75,6 @@ bool  MGeo::ChkPointOnHLine2DWS(				// (  O) ステイタス
 												//			MC_RIGHT			(010): 点が半直線の右側
 												//			MC_ON_LINE			(020): 点が半直線上
 												//			MC_LEFT				(040): 点が半直線の左側
-//SS						MREAL rTol				// (I  ) トレランス
 				)
 {
 	bool		bst;							// ステイタス
@@ -88,7 +86,7 @@ bool  MGeo::ChkPointOnHLine2DWS(				// (  O) ステイタス
 	pa1 = i_HLn2.v ^ v2s1;						// 半直線2の方向（単位ベクトル）と半直線2の始点から点1までのベクトルの外積
 
 // 鉛直距離が誤差内なら直線上
-	if ( Zero( pa1)) {
+	if ( CheckZero( pa1)) {
 		*o_pist = MC_ON_LINE;
 		bst = true;
 
@@ -109,7 +107,7 @@ bool  MGeo::ChkPointOnHLine2DWS(				// (  O) ステイタス
 //
 //	点が線分上にあるかを調べる。
 //
-bool MGeo::ChkPointOnLine2DWS(					// (  O) ステイタス
+bool MGeo::CheckPointOnLine2DWS(				// (  O) ステイタス
 												//			true:	線分上にある
 												//			false:	線分上にない
 				const	MgPoint2D&	p1,			// (I  ) 点1
@@ -123,7 +121,6 @@ bool MGeo::ChkPointOnLine2DWS(					// (  O) ステイタス
 												//			MC_ON_PS			(001): 点が線分の始点上
 												//			MC_INSIDE			(002): 点が線分の内側上
 												//			MC_ON_PE			(004): 点が線分の終点上
-//SS						MREAL		rTol		// (I  ) トレランス
 		)
 {
 	bool		bst;
@@ -134,7 +131,7 @@ bool MGeo::ChkPointOnLine2DWS(					// (  O) ステイタス
 	MREAL		cs, ce;							// 線分2と線分2の始点，終点から点1へのベクトルの内積
 	MREAL		tol_2;							// 判定用誤差
 	MREAL		v2tol_2;						// 判定用誤差
-	MREAL		v2tol_2_1;						// 判定用誤差 v2tol_2/10000
+//S	MREAL		v2tol_2_1;						// 判定用誤差 v2tol_2/10000
 //
 	v2s1 = p1 - Ln2.p[0];
 	v2e1 = p1 - Ln2.p[1];
@@ -177,7 +174,7 @@ bool MGeo::ChkPointOnLine2DWS(					// (  O) ステイタス
 ////
 ////	線分の中心点が直線上にあるかを調べる。
 ////
-//bool MGeo::ChkLineOnULine2DWS(				// (  O) ステイタス
+//bool MGeo::CheckLineOnULine2DWS(				// (  O) ステイタス
 //												//			true:	直線上にある
 //												//			false:	直線上にない
 //				const	MgLine2D&	Ln1,		// (I  ) 線分1
@@ -186,24 +183,22 @@ bool MGeo::ChkPointOnLine2DWS(					// (  O) ステイタス
 //												//			MC_RIGHT			(010): 点が線分の右側
 //												//			MC_ON_LINE			(020): 点が直線上
 //												//			MC_LEFT				(040): 点が線分の左側
-//						MREAL		rTol		// (I  ) トレランス
 //		)
 //{
 //	MgPoint2D Pt1;
 //	Pt1 = ( Ln1.p[0] + Ln1.p[1]) * 0.5;
-//	return MgChkPointOnULine2DWS( Pt1, ULn2, ist);
+//	return MgCheckPointOnULine2DWS( Pt1, ULn2, ist);
 //}
 
 // ---------------------( ２次元 )------------------------------
 //
 //	線分と線分が重なっているかを調べる。
 //
-bool MGeo::ChkLineOnLine2D(						// (  O) ステイタス
+bool MGeo::CheckLineOnLine2D(					// (  O) ステイタス
 												//			true:	重なっている
 												//			false:	重なっていない
 				const	MgLine2D&	Ln1,		// (I  ) 線分1
 				const	MgLine2D&	Ln2			// (I  ) 線分2
-//SS						MREAL		rTol		// (I  ) トレランス
 		)
 {
 	bool		bst = false;
@@ -253,12 +248,11 @@ exit:
 ////
 ////	点が直線上にあるかを調べる。
 ////
-//bool MGeo::ChkPt3OnULine3D(					// (  O) ステイタス
+//bool MGeo::CheckPt3OnULine3D(					// (  O) ステイタス
 //												//			true:	線分上にある
 //												//			false:	線分上にない
 //				const	MgPoint3D&	p1,			// (I  ) 点1
 //				const	MgULine3D&	ULn2,		// (I  ) 直線2
-//						MREAL		rTol		// (I  ) トレランス
 //		)
 //{
 //	MgVect3D		v21, va1;
@@ -275,12 +269,11 @@ exit:
 ////
 ////	点が半直線上にあるかを調べる。
 ////
-//bool MGeo::ChkPt3OnHLine3D(					// (  O) ステイタス
+//bool MGeo::CheckPt3OnHLine3D(					// (  O) ステイタス
 //												//			true:	線分上にある
 //												//			false:	線分上にない
 //				const	MgPoint3D&	p1,			// (I  ) 点1
 //				const	MgHLine3D	&HLn2,		// (I  ) 半直線2
-//						MREAL		rTol		// (I  ) トレランス
 //		)
 //{
 //	MgVect3D		v21, va1;
@@ -299,7 +292,7 @@ exit:
 //
 //	点が線分上にあるかを調べる。
 //
-bool MGeo::ChkPointOnLine3DWS(					// (  O) ステイタス
+bool MGeo::CheckPointOnLine3DWS(				// (  O) ステイタス
 												//			true:	線分上にある
 												//			false:	線分上にない
 				const	MgPoint3D&	p1,			// (I  ) 点1
@@ -311,7 +304,6 @@ bool MGeo::ChkPointOnLine3DWS(					// (  O) ステイタス
 												//			MC_ON_PS			(001): 点が線分の始点上
 												//			MC_INSIDE			(002): 点が線分の内側上
 												//			MC_ON_PE			(004): 点が線分の終点上
-//SS						MREAL		rTol		// (I  ) トレランス
 		)
 {
 	bool		bst;
@@ -358,12 +350,11 @@ bool MGeo::ChkPointOnLine3DWS(					// (  O) ステイタス
 //
 //	線分と線分が重なっているかを調べる。
 //
-bool MGeo::ChkLineOnLine3D(						// (  O) ステイタス
+bool MGeo::CheckLineOnLine3D(					// (  O) ステイタス
 												//			true:	重なっている
 												//			false:	重なっていない
 				const	MgLine3D		&Ln1,	// (I  ) 線分1
 				const	MgLine3D		&Ln2	// (I  ) 線分2
-//SS						MREAL		rTol		// (I  ) トレランス
 		)
 {
 	bool		bst = false;
@@ -412,7 +403,7 @@ exit:
 //
 //	線分と線分が重なっているかを調べる。
 //
-bool MGeo::ChkLineOnLine3DWS(					// (  O) ステイタス
+bool MGeo::CheckLineOnLine3DWS(					// (  O) ステイタス
 												//			true:	重なっている
 												//			false:	重なっていない
 				const	MgLine3D	&Ln1,		// (I  ) 線分1
@@ -421,7 +412,6 @@ bool MGeo::ChkLineOnLine3DWS(					// (  O) ステイタス
 												//        -4    -3   -2   -1    0     1    2    3    4 		   	
 												//		|--   |--  |--- | -- | --- |----| ---|  --|   --|           	  	
 												//		|   --|  --| ---|----| --- | -- |--- |--  |--   |                　	
-//SS						MREAL		rTol		// (I  ) トレランス
 				)
 {
 	bool		bst = false;
@@ -513,7 +503,7 @@ exit:
 // ---------------------( ２次元 )------------------------------
 //	点と穴付き多角形の位置関係を求める
 //
-bool MGeo::ChkPointOnGPolygon2DWS(				// (  O) ステイタス
+bool MGeo::CheckPointOnGPolygon2DWS(			// (  O) ステイタス
 												//			true:	穴付き多角形の内側または辺上
 												//			false:	穴付き多角形の外側
 				const	MgPoint2D&	i_pt,		// (I  ) 点
@@ -522,7 +512,6 @@ bool MGeo::ChkPointOnGPolygon2DWS(				// (  O) ステイタス
 												//			MC_IN_BORDER		(001): 点が穴付き多角形の内側
 												//			MC_ON_BORDER		(002): 点が穴付き多角形の辺上(または頂点上)
 												//			MC_OUT_BORDER		(004): 点が穴付き多角形の外側
-//SS						MREAL		i_rTol		// (I  ) トレランス
 		)
 {
 	bool		bst;
@@ -559,7 +548,7 @@ exit:
 // ---------------------( ２次元 )------------------------------
 //	線分の中心点と穴付き多角形の位置関係を求める
 //
-bool MGeo::ChkLineOnGPolygon2DWS(				// (  O) ステイタス
+bool MGeo::CheckLineOnGPolygon2DWS(				// (  O) ステイタス
 												//			true:	穴付き多角形の内側または辺上
 												//			false:	穴付き多角形の外側
 				const	MgLine2D&	Ln1,		// (I  ) 線分
@@ -573,7 +562,6 @@ bool MGeo::ChkLineOnGPolygon2DWS(				// (  O) ステイタス
 												//			MC_ON_SIDE_SAME		(010): 辺上(同一方向)	(MC_ON_BORDERと共に設定)
 												//			MC_ON_SIDE_REV		(020): 辺上(逆方向)		(MC_ON_BORDERと共に設定)
 												//			MC_ON_TOP			(040): 頂点上			(MC_ON_BORDERと共に設定)
-//SS						MREAL		rTol		// (I  ) トレランス
 				)
 {
 	bool		bst;
@@ -628,7 +616,6 @@ MINT MGeo::CountPolygonAroundPoint2D(			// (  O) ステイタス
 												//			>0: 多角形が実体の場合の周回数	(1:1周)
 												//			=0: 頂点、辺上、多角形の外
 												//			<0: 多角形が穴の場合の周回数	(-1:1周)	
-//SS						MREAL		rTol		// (I  ) トレランス
 				)
 {
 	MINT		ist;
@@ -697,7 +684,7 @@ exit:
 //	点と多角形の位置関係を求める ３Ｄ
 //
 /*
-bool MGeo::ChkPt3OnPg3WS(						// (  O) ステイタス
+bool MGeo::CheckPt3OnPg3WS(						// (  O) ステイタス
 												//			true:	多角形の内側または辺上
 												//			false:	多角形の外側
 				const	MgPoint3D&	Pt,			// (I  ) 点
@@ -711,7 +698,7 @@ bool MGeo::ChkPt3OnPg3WS(						// (  O) ステイタス
 												//			MC_IN_BORDER		(001): 点が多角形の内側
 												//			MC_ON_BORDER		(002): 点が多角形の辺上
 												//			MC_OUT_BORDER		(004): 点が多角形の外側
-						MREAL		rTol		// (I  ) トレランス
+//SS						MREAL		rTol		// (I  ) トレランス
 				)
 {
 	MgPoint2D wPt;												// 点の２Ｄ作業用
@@ -723,7 +710,7 @@ bool MGeo::ChkPt3OnPg3WS(						// (  O) ステイタス
 	MgPlane3D Pln = MgPgtoPln( Pg);								// 多角形が乗る平面
 	MREAL pa1 = (Pln.v * Pt) + Pln.d;							// 点から平面までの距離
 	
-	if (!(MgAbs_2( pa1) <= rTol * rTol)) {						// 多角形の平面上で無い場合に、多角形の上下を判定する
+	if (!(MgAbs_2( pa1) <= Geo::D_2)) {							// 多角形の平面上で無い場合に、多角形の上下を判定する
 		if ( pa1 > 0) *ist = MC_UPPER;							// 多角形の構成点を右ねじ回転とみなし進む方向を上側とする
 		else *ist = MC_LOWER;
 		return	false;
@@ -743,12 +730,12 @@ bool MGeo::ChkPt3OnPg3WS(						// (  O) ステイタス
 //	線分の中心点と多角形の位置関係を求める
 //
 /*
-bool MGeo::ChkLn3OnPg3WS(						// (  O) ステイタス
+bool MGeo::CheckLn3OnPg3WS(						// (  O) ステイタス
 												//			true:	多角形上
 												//			false:	多角形外
 				const	MgLine3D	&Ln1,		// (I  ) 線分
 				const	MgPolyg3D&	Pg2,		// (I  ) 多角形
-						MINT*		ist,		// (  O) 補助ステイタス
+						MINT*		ist			// (  O) 補助ステイタス
 							  					//		 多角形の平面と点の位置関係
 												//			MC_UPPER			(010): 点が平面の上側	
 												//			MC_ON_PLANE			(020): 点が平面上
@@ -757,7 +744,6 @@ bool MGeo::ChkLn3OnPg3WS(						// (  O) ステイタス
 												//			MC_IN_BORDER		(001): 点が多角形の内側
 												//			MC_ON_BORDER		(002): 点が多角形の辺上
 												//			MC_OUT_BORDER		(004): 点が多角形の外側
-						MREAL		rTol		// (I  ) トレランス
 		)
 {
 	MgPoint3D	Pt1;
@@ -772,16 +758,16 @@ bool MGeo::ChkLn3OnPg3WS(						// (  O) ステイタス
 ////
 ////	点が平面上にあるかを調べる。
 ////
-//bool MGeo::ChkPt3OnPln3WS(					// (  O) ステイタス
+//bool MGeo::CheckPt3OnPln3WS(					// (  O) ステイタス
 //												//			true:  平面上
 //												//			false: 平面外
 //				const	MgPoint3D&	p1,			// (I  ) 点1
 //				const	MgPlane3D	&Pln2,		// (I  ) 平面2
-//						MINT*		ist,		// (  O) 補足ステイタス
+//						MINT*		ist			// (  O) 補足ステイタス
 //												//			MC_UPPER			(010): 点が平面の上側	
 //												//			MC_ON_PLANE			(020): 点が平面上
 //												//			MC_LOWER			(040): 点が平面の下側
-//						MREAL		rTol		// (I  ) トレランス
+//SS //						MREAL		rTol		// (I  ) トレランス
 //		)
 //{
 //	bool	bst;
@@ -805,12 +791,12 @@ bool MGeo::ChkLn3OnPg3WS(						// (  O) ステイタス
 //// ---------------------( ３次元 )------------------------------
 ////	直線が平面上にあるかを調べる。
 ////
-//bool MGeo::ChkULn3OnPln3D(					// (  O) ステイタス
+//bool MGeo::CheckULn3OnPln3D(					// (  O) ステイタス
 //												//			true:  平面上
 //												//			false: 平面外
 //				const	MgULine3D&	ULn1,		// (I  ) 直線1
-//				const	MgPlane3D	&Pln2,		// (I  ) 平面2
-//						MREAL		rTol		// (I  ) トレランス
+//				const	MgPlane3D	&Pln2		// (I  ) 平面2
+//SS //						MREAL		rTol		// (I  ) トレランス
 //		)
 //{
 //	int		ist;
@@ -818,7 +804,7 @@ bool MGeo::ChkLn3OnPg3WS(						// (  O) ステイタス
 ////
 ////	平行のチェック
 ////
-//		if (MgChkPerp2V3(ULn1.v, Pln2.v)) return true;	//	平面上
+//		if (MgCheckPerp2V3(ULn1.v, Pln2.v)) return true;	//	平面上
 //	}
 //	return false;
 //}
@@ -827,12 +813,12 @@ bool MGeo::ChkLn3OnPg3WS(						// (  O) ステイタス
 //// ---------------------( ３次元 )------------------------------
 ////	線分が平面上にあるかを調べる。
 ////
-//bool MGeo::ChkLn3OnPln3WS(					// (  O) ステイタス
+//bool MGeo::CheckLn3OnPln3WS(					// (  O) ステイタス
 //												//			true:  平面上
 //												//			false: 平面外
 //				const	MgLine3D	&Ln1,		// (I  ) 線分1
 //				const	MgPlane3D	&Pln2,		// (I  ) 平面2
-//						MINT*		ist,		// (  O) 補足ステイタス
+//						MINT*		ist			// (  O) 補足ステイタス
 //							  					//		 多角形の平面と点の位置関係
 //												//			MC_PS_UPPER			(001): 始点が平面の上側	
 //												//			MC_PS_ON_PLANE		(002): 始点が平面上
@@ -841,7 +827,7 @@ bool MGeo::ChkLn3OnPg3WS(						// (  O) ステイタス
 //												//			MC_PE_UPPER			(010): 終点が平面の上側	
 //												//			MC_PE_ON_PLANE		(020): 終点が平面上
 //												//			MC_PE_LOWER			(040): 終点が平面の下側
-//						MREAL		rTol		// (I  ) トレランス
+//SS //						MREAL		rTol		// (I  ) トレランス
 //		)
 //{
 //	bool	bs, be;

@@ -16,7 +16,7 @@ namespace MC
 
 // 部品配置のオプションと履歴のチェック
 // 
-inline bool MmChkValidParts( mhPlcParts*	pPlcEn) 
+inline bool MmCheckValidParts( mhPlcParts*	pPlcEn) 
 {
 	MsBitSet* pOptv1;
 	MsBitSet* pOptv2;
@@ -24,11 +24,11 @@ inline bool MmChkValidParts( mhPlcParts*	pPlcEn)
 
 	// オプションチェック
 	pOptv1 = pPlcEn->GetPIOpt1();
-	if ( MhOptV::MmOptChkC( pOptv1) &&
-		 ( ( pOptv2 = pPlcEn->GetPIOpt2()) == NULL || !MhOptV::MmOptOffChkC( pOptv2)) &&
+	if ( MhOptV::MmOptCheckC( pOptv1) &&
+		 ( ( pOptv2 = pPlcEn->GetPIOpt2()) == NULL || !MhOptV::MmOptOffCheckC( pOptv2)) &&
 
 		// 履歴チェック
-		MhHist::MmVerChkC( pHstv = pPlcEn->GetPIVer()))
+		MhHist::MmVerCheckC( pHstv = pPlcEn->GetPIVer()))
 		return true;
 	else
 		return false;
@@ -36,7 +36,7 @@ inline bool MmChkValidParts( mhPlcParts*	pPlcEn)
 
 // 屋根配置のオプションと履歴のチェック
 //
-inline bool MmChkValidRoof( MhRoofInfo* i_pRoofEn) 
+inline bool MmCheckValidRoof( MhRoofInfo* i_pRoofEn) 
 {
 	MsBitSet* pOptv1;
 	MsBitSet* pOptv2;
@@ -44,11 +44,11 @@ inline bool MmChkValidRoof( MhRoofInfo* i_pRoofEn)
 
 	// オプションチェック
 	pOptv1 = i_pRoofEn->GetPIOpt1();
-	if ( MhOptV::MmOptChkC( pOptv1) &&
-		 ( ( pOptv2 = i_pRoofEn->GetPIOpt2()) == NULL || !MhOptV::MmOptOffChkC( pOptv2)) &&
+	if ( MhOptV::MmOptCheckC( pOptv1) &&
+		 ( ( pOptv2 = i_pRoofEn->GetPIOpt2()) == NULL || !MhOptV::MmOptOffCheckC( pOptv2)) &&
 
 	// 履歴チェック
-		MhHist::MmVerChkC( pHstv = i_pRoofEn->GetPIVer()))
+		MhHist::MmVerCheckC( pHstv = i_pRoofEn->GetPIVer()))
 		return true;
 	else
 		return false;

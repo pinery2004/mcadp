@@ -124,7 +124,7 @@ void WindowCtrl::MmWndKDrawRoof(
 
 		if ( pRoofEn->GetInpKai() != iKaiC)
 			continue;											// 異なる階の部材は表示しない
-		if ( !MmChkValidRoof( pRoofEn))							// オプションと履歴のチェック
+		if ( !MmCheckValidRoof( pRoofEn))							// オプションと履歴のチェック
 			continue;
 
 		RoofLineColor = RGB( 10, 30, 30);
@@ -175,15 +175,15 @@ MhRfm*	mhHaitiIn::SrchRfm(							// (  O) 屋根面　または　NULL
 
 		if ( pRoofEn->GetInpKai() != iKaiC)
 			continue;											// 異なる階の部材は対象外
-		if ( !MmChkValidRoof( pRoofEn))							// オプションと履歴のチェック
+		if ( !MmCheckValidRoof( pRoofEn))							// オプションと履歴のチェック
 			continue;
 
 		for ( ic1=0; ic1<pRoofEn->GetpGRfm()->m_n; ic1++) {
-			if ( MGeo::Zero( pRoofEn->GetpGRfm()->m_st[ic1].m_Pln.v.z))// 矢切は無視
+			if ( MGeo::CheckZero( pRoofEn->GetpGRfm()->m_st[ic1].m_Pln.v.z))// 矢切は無視
 				continue;
 			pgRfm = pRoofEn->GetpGRfm()->m_st[ic1].m_Pg;		// ポリゴン　３Ｄ→２Ｄ
 			
-			if ( MGeo::ChkPointOnPolygon2DWS( pt1, pgRfm, &ist1)) {
+			if ( MGeo::CheckPointOnPolygon2DWS( pt1, pgRfm, &ist1)) {
 				if ( imode == MC_PRI_MIN_AREA) {
 					rArea = pgRfm.Area();
 					if ( rArea < rMinArea) {

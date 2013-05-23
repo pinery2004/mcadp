@@ -117,7 +117,7 @@ static bool MmVerGetC(
 //【返値】カレントバージョン含みフラグ
 //			TRUE : 含む
 //			FALSE: 含まない
-static bool MmHistChkC(
+static bool MmHistCheckC(
 						MsBitSet	*pHstv			// (I  ) ＤＢレコードのOPT群セット
 				);
 
@@ -126,7 +126,7 @@ static bool MmHistChkC(
 //【返値】選択バージョン含みフラグ
 //			TRUE:  含む
 //			FALSE: 含まない
-static bool MmVerChkC(
+static bool MmVerCheckC(
 						MsBitSet	*pVerv			// (I  ) ＤＢレコードのバージョン郡
 				);
 
@@ -142,7 +142,7 @@ static bool MmVerChkC(
 //				修正元レコードはバージョン変更し、新しく書込み対象の履歴管理のバージョンを持つ
 //				コピーレコードを作製しその属性を変更する
 //
-static MINT MmHistModChk(							// (  O) 修正後のレコード構成コード
+static MINT MmHistModCheck(							// (  O) 修正後のレコード構成コード
 //						MsBitSet	*pHstvR,		// (I O) 修正元レコードの履歴管理
 						MsBitSet*	*ppHstvMod,		// (I O) 修正元レコードに設定する履歴管理　(修正後のレコード構成コード >= 2 の時有効)
 						MsBitSet*	*ppHstvAdd		// (  O) 修正用に追加レコードの履歴管理　(修正後のレコード構成コード == 3 の時有効)
@@ -158,7 +158,7 @@ static MINT MmHistModChk(							// (  O) 修正後のレコード構成コード
 //				カレントバージョン以外のバージョン部分は、削除元レコードをそのまま残す。（バージョンコードのみ修正）
 //				（バージョンコードが入るエリアの開放と確保は本関数で行う）
 //
-static MINT MmHistDelChk(							// (  O) 削除後のレコード構成コード
+static MINT MmHistDelCheck(							// (  O) 削除後のレコード構成コード
 //						MsBitSet	*pHstvR,		// (I O) 削除元レコードの履歴管理
 //													// 		 削除後レコードの履歴管理に変更する
 						MsBitSet*	*ppHstvMod		// (I O) 削除後のレコードの表示ＯＮ履歴管理

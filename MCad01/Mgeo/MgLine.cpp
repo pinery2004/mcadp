@@ -59,8 +59,8 @@ MgULine2D MgULine2D::Norm()
 bool MgULine2D::operator == ( const MgULine2D& ULn1) const							// b = (uln == ULn1) ”»’è
 {
 	MINT	ist;
-	return ( MGeo::ChkPointOnULine2DWS( p, ULn1, &ist) &&
-			 ( MGeo::EqualVect2D( v,  ULn1.v) || MGeo::EqualVect2D( v, -ULn1.v)));
+	return ( MGeo::CheckPointOnULine2DWS( p, ULn1, &ist) &&
+			 ( MGeo::CheckEqualVect2D( v,  ULn1.v) || MGeo::CheckEqualVect2D( v, -ULn1.v)));
 }
 
 //======================( ‚QŽŸŒ³ )==============================
@@ -113,8 +113,8 @@ MgHLine2D MgHLine2D::Norm()
 bool MgHLine2D::operator == ( const MgHLine2D &HLn1) const							// b = (uln == ULn1) ”»’è
 {
 	MINT	ist;
-	return ( MGeo::ChkPointOnHLine2DWS( p, HLn1, &ist) &&
-			( MGeo::EqualVect2D( v,  HLn1.v)));
+	return ( MGeo::CheckPointOnHLine2DWS( p, HLn1, &ist) &&
+			( MGeo::CheckEqualVect2D( v,  HLn1.v)));
 }
 //
 //======================( ‚QŽŸŒ³ )==============================
@@ -171,8 +171,8 @@ MgULine3D MgULine3D::Norm()
 //
 bool MgULine3D::operator == ( const MgULine3D& ULn1) const							// b = (uln == ULn1) ”»’è
 {
-	return ( MGeo::ChkPointOnULine3D( p, ULn1) &&
-			 ( MGeo::EqualVect3D( v,  ULn1.v) || MGeo::EqualVect3D( v, -ULn1.v)));
+	return ( MGeo::CheckPointOnULine3D( p, ULn1) &&
+			 ( MGeo::CheckEqualVect3D( v,  ULn1.v) || MGeo::CheckEqualVect3D( v, -ULn1.v)));
 }
 //
 //======================( ‚RŽŸŒ³ )==============================
@@ -208,8 +208,8 @@ MgHLine3D MgHLine3D::Norm()
 //
 bool MgHLine3D::operator == ( const MgHLine3D &HLn1) const							// b = (uln == ULn1) ”»’è
 {
-	return ( MGeo::ChkPointOnHLine3D( p, HLn1) &&
-			( MGeo::EqualVect3D( v,  HLn1.v)));
+	return ( MGeo::CheckPointOnHLine3D( p, HLn1) &&
+			( MGeo::CheckEqualVect3D( v,  HLn1.v)));
 }
 //
 //======================( ‚RŽŸŒ³ )==============================

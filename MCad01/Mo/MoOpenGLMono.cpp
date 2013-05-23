@@ -83,7 +83,7 @@ void Panelfig(
 	LnPlc = i_pPlcEn->GetPIPlcIti();
 
 	VuLng = LnPlc.Vu();
-	if ( MGeo::Zero( VuLng.z))
+	if ( MGeo::CheckZero( VuLng.z))
 		VuRt = VuLng.RotR90();
 	else {
 		MREAL r1_D = 1.f / sqrt( VuLng.x * VuLng.x + VuLng.y * VuLng.y);
@@ -107,7 +107,7 @@ void Panelfig(
 	if ( i_pPlcEn->IsYanePanel()) {
 		vuRt = MgVect2DC( VuRt);
 		rlXY = MGeo::LenVect2D( vuRt);
-		if ( !MGeo::Zero( rlXY)) {
+		if ( !MGeo::CheckZero( rlXY)) {
 			rTH /= rlXY;
 			rOY /= rlXY;
 		}

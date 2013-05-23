@@ -111,7 +111,7 @@ MINT MhOpt::MhHistMod(
 		pHstvMod = &HstvMod;
 	}
 	
-	iMod = MhHist::MmHistModChk( &pHstvMod, &pHstvAdd);
+	iMod = MhHist::MmHistModCheck( &pHstvMod, &pHstvAdd);
 
 	switch ( iMod) {
 		case 1:													// 修正元履歴管理はカレントバージョンのみ設定している場合
@@ -149,7 +149,7 @@ MINT MhOpt::MhHistDel(
 						MsBitSet*		*ppHstvMod		// (I O) 削除後のレコードの表示ＯＮ履歴管理群
 				)
 {
-	return MhHist::MmHistDelChk( ppHstvMod);
+	return MhHist::MmHistDelCheck( ppHstvMod);
 }
 
 } // namespace MC

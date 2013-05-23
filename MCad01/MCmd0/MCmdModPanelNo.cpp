@@ -93,7 +93,7 @@ void MCmdMdPanelNo()
 				if (!pPlcEn->IsPanel())
 					continue;									// パネル以外は対象外とする
 
-				if ( !MmChkValidParts( pPlcEn))					// オプションと履歴のチェック
+				if ( !MmCheckValidParts( pPlcEn))					// オプションと履歴のチェック
 					continue;
 
 				if ( pPlcEn == pPtInfo1)

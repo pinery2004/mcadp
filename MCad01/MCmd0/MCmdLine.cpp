@@ -190,7 +190,7 @@ void MCmdLineAdd()
 					PtMltBziAr = MgPoint3DC( ptln1[2], plnYane.GetZ( ptln1[2]));
 
 				MREAL rYHHosei = MC_YANE_TAKASA_HOSEI;
-				if ( !MGeo::Zero( plnYane.v.z) ) 
+				if ( !MGeo::CheckZero( plnYane.v.z) ) 
 					rYHHosei /= plnYane.v.z;
 				Ln1.p[0] += MgVect3D( 0., 0., rYHHosei);
 				Ln1.p[1] += MgVect3D( 0., 0., rYHHosei);

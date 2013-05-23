@@ -495,7 +495,7 @@ MINT MhRoofInfo::AdjustRfm2()						// (  O) ƒXƒeƒCƒ^ƒX@0: ³í@-1: ‰®ª–ÊŒ`ó
 		pPgRfm = &m_GRfm.m_st[ic1].m_Pg;
 		ppgCdRfm = &m_GRfm.m_st[ic1].m_cdPg;
 
-		//if ( MGeo::Zero( pPln1->v.z))								// XY•½–Ê‚É‚’¼‚Ì‰®ª–Ê‚ÍƒXƒLƒbƒv
+		//if ( MGeo::CheckZero( pPln1->v.z))								// XY•½–Ê‚É‚’¼‚Ì‰®ª–Ê‚ÍƒXƒLƒbƒv
 		//	continue;
 		pgRfm = (*pPgRfm);										// XY•½–Ê‚É“Š‰e‚µ‚QŽŸŒ³‰»
 
@@ -517,7 +517,7 @@ MINT MhRoofInfo::AdjustRfm2()						// (  O) ƒXƒeƒCƒ^ƒX@0: ³í@-1: ‰®ª–ÊŒ`ó
 				for ( ic3b=pPgRfmN->m_n-1,ic3=0; ic3<pPgRfmN->m_n; ic3b=ic3,ic3++) {
 					
 					for ( ic4b=pPgRfm->m_n-1,ic4=0; ic4<pPgRfm->m_n; ic4b=ic4,ic4++) {
-						if ( MGeo::ChkLineOnLine3D( MgLine3D(pPgRfmN->m_P[ic3b], pPgRfmN->m_P[ic3]), MgLine3D(pPgRfm->m_P[ic4b], pPgRfm->m_P[ic4])))
+						if ( MGeo::CheckLineOnLine3D( MgLine3D(pPgRfmN->m_P[ic3b], pPgRfmN->m_P[ic3]), MgLine3D(pPgRfm->m_P[ic4b], pPgRfm->m_P[ic4])))
 							break;
 					}
 					if ( ic4 < pPgRfm->m_n)
@@ -558,8 +558,8 @@ static bool MgChkRfmCls(							// (  O) true:	Œð·ƒ`ƒFƒbƒNŽž‚É‰®ª–Ê2‚Ì‹«ŠE‚ðŠÜ‚
 	MINT	ist1, ist2;
 	bool	bst1, bst2;
 
-	MGeo::ChkLineOnPln3DWS( LnJim1, Pln2, &ist1);							// ‰®ª–Ê1‚Ì’n‰ô‚èüˆÊ’u‚ªA‰®ª–Ê2‚Ìã‰º‚Ç‚¿‚ç‚©‚ð”»’è
-	MGeo::ChkLineOnPln3DWS( LnJim2, Pln1, &ist2);							// ‰®ª–Ê2‚Ì’n‰ô‚èüˆÊ’u‚ªA‰®ª–Ê1‚Ìã‰º‚Ç‚¿‚ç‚©‚ð”»’è
+	MGeo::CheckLineOnPln3DWS( LnJim1, Pln2, &ist1);							// ‰®ª–Ê1‚Ì’n‰ô‚èüˆÊ’u‚ªA‰®ª–Ê2‚Ìã‰º‚Ç‚¿‚ç‚©‚ð”»’è
+	MGeo::CheckLineOnPln3DWS( LnJim2, Pln1, &ist2);							// ‰®ª–Ê2‚Ì’n‰ô‚èüˆÊ’u‚ªA‰®ª–Ê1‚Ìã‰º‚Ç‚¿‚ç‚©‚ð”»’è
 
 	bst1 = !( ist1 & MC_PS_LOWER || ist1 & MC_PE_LOWER);	// ‰®ª–Ê1‚Ì’n‰ô‚èü1‚ª‰®ª–Ê2‚Ìã‚Ü‚½‚Íã‘¤
 	bst2 = !( ist2 & MC_PS_LOWER || ist2 & MC_PE_LOWER);	// ‰®ª–Ê2‚Ì’n‰ô‚èü2‚ª‰®ª–Ê1‚Ìã‚Ü‚½‚Íã‘¤
@@ -671,14 +671,14 @@ void MhRoofInfo::ConnectRfm()
 					fSet = false;
 					for ( ic4b=pPg1->m_n-1,ic4=0; !fSet && ic4<pPg1->m_n; ic4b=ic4,ic4++) {
 						Ln4 = MgLine3D( pPg1->m_P[ic4b], pPg1->m_P[ic4]);
-						if ( MGeo::ChkLineOnLine3D( Ln3, Ln4)) {
+						if ( MGeo::CheckLineOnLine3D( Ln3, Ln4)) {
 							GpgCd += m_GRfm.m_st[ic1].m_cdPg.m_i[ic4];
 							fSet = true;
 						}
 					}
 					for ( ic4b=pPg2->m_n-1,ic4=0; !fSet && ic4<pPg2->m_n; ic4b=ic4,ic4++) {
 						Ln4 = MgLine3D( pPg2->m_P[ic4b], pPg2->m_P[ic4]);
-						if ( MGeo::ChkLineOnLine3D( Ln3, Ln4)) {
+						if ( MGeo::CheckLineOnLine3D( Ln3, Ln4)) {
 							GpgCd += m_GRfm.m_st[ic2].m_cdPg.m_i[ic4];
 							fSet = true;
 						}

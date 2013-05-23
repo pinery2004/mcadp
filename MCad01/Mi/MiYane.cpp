@@ -76,17 +76,17 @@ void mhInput::MmGetMarumeYaneLine(
 		  pRoofEn = HaitiDb::MdGetNextRoof()) {
 		if ( pRoofEn->GetInpKai() != iKai)
 			continue;
-		if ( !MmChkValidRoof( pRoofEn))							// オプションと履歴のチェック
+		if ( !MmCheckValidRoof( pRoofEn))							// オプションと履歴のチェック
 			continue;
 		for ( ic1=0; ic1<pRoofEn->GetpGRfm()->m_n; ic1++) {
-			if ( MGeo::Zero( pRoofEn->GetpGRfm()->m_st[ic1].m_Pln.v.z))				// 矢切は無視
+			if ( MGeo::CheckZero( pRoofEn->GetpGRfm()->m_st[ic1].m_Pln.v.z))				// 矢切は無視
 				continue;
 			ic2b = pRoofEn->GetpGRfm()->m_st[ic1].m_Pg.m_n - 1;
 			for ( ic2=0; ic2<pRoofEn->GetpGRfm()->m_st[ic1].m_Pg.m_n; ic2b=ic2,ic2++) {
 				Ln1 = MgLine2D( MgPoint2DC( pRoofEn->GetpGRfm()->m_st[ic1].m_Pg.m_P[ic2b]),
 							    MgPoint2DC( pRoofEn->GetpGRfm()->m_st[ic1].m_Pg.m_P[ic2]));
 				rDsv = MgTol::SetD( rTol);
-				if ( MGeo::ChkPointOnLine2DWS( Pi, Ln1, &ist1))
+				if ( MGeo::CheckPointOnLine2DWS( Pi, Ln1, &ist1))
 					(*pGLn) += Ln1;
 				MgTol::SetD( rDsv);
 			}

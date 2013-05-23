@@ -65,7 +65,7 @@ namespace MC
 
 			if ( pPlcEn->IsKiso()) {								// 基礎(耐力基礎)部材
 
-			if ( !MmChkValidParts( pPlcEn))							// オプションと履歴のチェック
+			if ( !MmCheckValidParts( pPlcEn))							// オプションと履歴のチェック
 				continue;
 
 				ptW[0] = (*(MgPoint2D*)&(pPlcEn->GetPIPlcIti( 0))) + vKisoSinZ;

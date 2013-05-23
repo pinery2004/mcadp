@@ -89,7 +89,7 @@ void WindowCtrl::MmWndKDrawParts(
 
 		if ( pPlcEn->IsPanel() || pPlcEn->IsKaiko()) {			// パネルまたは開口
 
-			if ( !MmChkValidParts( pPlcEn))						// オプションと履歴のチェック
+			if ( !MmCheckValidParts( pPlcEn))						// オプションと履歴のチェック
 				continue;
 			DrawPart( pCod, iGpC, pPlcEn);
 		}
@@ -142,7 +142,7 @@ void WindowCtrl::MmWndKDrawParts(
 			}
 		}
 
-		if ( !MmChkValidParts( pPlcEn))							// オプションと履歴のチェック
+		if ( !MmCheckValidParts( pPlcEn))							// オプションと履歴のチェック
 			continue;
 
 		if ( pPlcEn->GetPTCdBr() != MP_BR_PANEL) {				// パネル以外の部材を表示
