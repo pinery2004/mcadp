@@ -56,7 +56,7 @@ MgULine2D MgULine2D::Norm()
 //======================( ‚QŸŒ³ )==============================
 //		‚QŸŒ³’¼ü“¯m‚ª“™‚µ‚¢‚©’²‚×‚é
 //
-bool MgULine2D::operator == ( const MgULine2D& ULn1) const							// b = (uln == ULn1) ”»’è
+bool MgULine2D::operator == ( const MgULine2D& ULn1) const						// b = (uln == ULn1) ”»’è
 {
 	MINT	ist;
 	return ( MGeo::CheckPointOnULine2DWS( p, ULn1, &ist) &&
@@ -110,7 +110,7 @@ MgHLine2D MgHLine2D::Norm()
 //======================( ‚QŸŒ³ )==============================
 //		‚QŸŒ³”¼’¼ü“¯m‚ª“™‚µ‚¢‚©’²‚×‚é
 //
-bool MgHLine2D::operator == ( const MgHLine2D &HLn1) const							// b = (uln == ULn1) ”»’è
+bool MgHLine2D::operator == ( const MgHLine2D &HLn1) const						// b = (uln == ULn1) ”»’è
 {
 	MINT	ist;
 	return ( MGeo::CheckPointOnHLine2DWS( p, HLn1, &ist) &&
@@ -132,7 +132,7 @@ void MgHLine2D::Print( MCHAR* s)
 //======================( ‚QŸŒ³ )==============================
 //		‚QŸŒ³ü•ª“¯m‚ª“™‚µ‚¢‚©’²‚×‚é (‹t•ûŒü‚àŠÜ‚Ş)
 //
-bool MgLine2D::operator == ( const MgLine2D& Ln1) const								// b = (ln == Ln1) ”»’è
+bool MgLine2D::operator == ( const MgLine2D& Ln1) const							// b = (ln == Ln1) ”»’è
 { 
 	return (((p[0] == Ln1.p[0]) && (p[1] == Ln1.p[1])) ||
 			((p[0] == Ln1.p[1]) && (p[1] == Ln1.p[0])));
@@ -169,7 +169,7 @@ MgULine3D MgULine3D::Norm()
 //======================( ‚RŸŒ³ )==============================
 //		‚RŸŒ³’¼ü“¯m‚ª“™‚µ‚¢‚©’²‚×‚é
 //
-bool MgULine3D::operator == ( const MgULine3D& ULn1) const							// b = (uln == ULn1) ”»’è
+bool MgULine3D::operator == ( const MgULine3D& ULn1) const						// b = (uln == ULn1) ”»’è
 {
 	return ( MGeo::CheckPointOnULine3D( p, ULn1) &&
 			 ( MGeo::CheckEqualVect3D( v,  ULn1.v) || MGeo::CheckEqualVect3D( v, -ULn1.v)));
@@ -206,7 +206,7 @@ MgHLine3D MgHLine3D::Norm()
 //======================( ‚RŸŒ³ )==============================
 //		‚RŸŒ³”¼’¼ü“¯m‚ª“™‚µ‚¢‚©’²‚×‚é
 //
-bool MgHLine3D::operator == ( const MgHLine3D &HLn1) const							// b = (uln == ULn1) ”»’è
+bool MgHLine3D::operator == ( const MgHLine3D &HLn1) const						// b = (uln == ULn1) ”»’è
 {
 	return ( MGeo::CheckPointOnHLine3D( p, HLn1) &&
 			( MGeo::CheckEqualVect3D( v,  HLn1.v)));
