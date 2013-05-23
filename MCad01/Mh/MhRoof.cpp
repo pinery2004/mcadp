@@ -64,7 +64,7 @@ static void MgAndGLineOnULineAdd(
 													//		 ‚0: d‚È‚èü•ª‚ ‚è
 				);
 
-static bool MgChkRfmCls(									// (  O) true:	Œğ·ƒ`ƒFƒbƒN‘ÎÛ‰®ª–Ê
+static bool MgCheckRfmCls(									// (  O) true:	Œğ·ƒ`ƒFƒbƒN‘ÎÛ‰®ª–Ê
 													//		 false:	Œğ·ƒ`ƒFƒbƒN‘ÎÛŠO‰®ª–Ê
 				const	MgLine3D		&LnJim1,		// (I  ) ‰®ª–Ê1‚Ì’n‰ô‚èü
 				const	MgPlane3D	&Pln1,			// (I  ) ‰®ª–Ê1‚Ì•½–ÊŒW”
@@ -412,7 +412,7 @@ MINT MhRoofInfo::AdjustRfm1()						// (  O) ƒXƒeƒCƒ^ƒX@0: ³í@-1: ‰®ª–ÊŒ`ó
 			if ( ist1 != (MC_INT | MC_MATCH)) 
 				continue;
 																// ‚RŸŒ³‚Å‰®ª–Ê2‚ÌŒ`ó“à‚ÉŠÜ‚Ü‚ê‚éü•ªŒQ2‚ğ‹‚ß‚é
-			if ( MgChkRfmCls( MgLine3D( m_GRfm.m_st[ic1].m_Pg.m_P), *pPln1,
+			if ( MgCheckRfmCls( MgLine3D( m_GRfm.m_st[ic1].m_Pg.m_P), *pPln1,
 							 MgLine3D( m_GRfm.m_st[ic2].m_Pg.m_P), *pPln2))
 				sel1 = MC_IN_BORDER | MC_ON_BORDER;
 			else
@@ -546,7 +546,7 @@ MINT MhRoofInfo::AdjustRfm2()						// (  O) ƒXƒeƒCƒ^ƒX@0: ³í@-1: ‰®ª–ÊŒ`ó
 ////////////////////////////////////////////////////////////////////////////
 //	‰®ª–Ê‚P‚É‘Î‚µ‰®ª–Ê2‚ÌŒğ·‚ğƒ`ƒFƒbƒN‚É‹«ŠE‚ğŠÜ‚ß‚é‚©”Û‚©‚ğ”»’è‚·‚é
 
-static bool MgChkRfmCls(							// (  O) true:	Œğ·ƒ`ƒFƒbƒN‚É‰®ª–Ê2‚Ì‹«ŠE‚ğŠÜ‚ß‚é
+static bool MgCheckRfmCls(							// (  O) true:	Œğ·ƒ`ƒFƒbƒN‚É‰®ª–Ê2‚Ì‹«ŠE‚ğŠÜ‚ß‚é
 													//		 false:	Œğ·ƒ`ƒFƒbƒN‚É‰®ª–Ê2‚Ì‹«ŠE‚ğŠÜ‚ß‚È‚¢
 				const	MgLine3D		&LnJim1,		// (I  ) ‰®ª–Ê1‚Ì’n‰ô‚èü
 				const	MgPlane3D	&Pln1,			// (I  ) ‰®ª–Ê1‚Ì•½–ÊŒW”

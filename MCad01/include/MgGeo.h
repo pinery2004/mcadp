@@ -4997,7 +4997,7 @@ public:
 	// ---------------------( ３次元 )------------------------------
 	//	直線が平面上にあるかを調べる。
 	//
-	static inline bool ChkULineOnPln3D(				// (  O) ステイタス
+	static inline bool CheckULineOnPln3D(				// (  O) ステイタス
 													//			true:  平面上
 													//			false: 平面外
 					const	MgULine3D&	i_ULn1,		// (I  ) 直線1
@@ -5047,7 +5047,7 @@ public:
 	//
 	//		２つの４角形が重なるか否かをチェックする。
 	// 
-	static inline bool	MgChkRectOnRect2D(			// (  O) ステイタス
+	static inline bool	MgCheckRectOnRect2D(			// (  O) ステイタス
 													//		 true   交差あり
 													//		 false  交差なし
 					const	MgRect2D&	i_rct10,	// (I  ) ４角形1 (min,max)
@@ -5064,7 +5064,7 @@ public:
 	//
 	//		２つの４角形が重なるか否かをチェックする。
 	//
-	static inline bool	MgChkRectOnRect3D(			// (  O) ステイタス
+	static inline bool	MgCheckRectOnRect3D(			// (  O) ステイタス
 													//		 true   交差あり
 													//		 false  交差なし
 					const	MgRect3D&	i_rct10,	// (I  ) ４角形1 (min,max)

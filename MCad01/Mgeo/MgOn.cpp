@@ -566,7 +566,7 @@ bool MGeo::CheckLineOnGPolygon2DWS(				// (  O) ステイタス
 {
 	bool		bst;
 	MgPoint2D	pt1;
-	MgVect2D		vt1;
+	MgVect2D	vt1;
 	MINT		ist1;
 	MINT		ic1;
 	MINT		ict, ictSum = 0;									// 内外判定用カウンタ
@@ -638,13 +638,13 @@ MINT MGeo::CountPolygonAroundPoint2D(			// (  O) ステイタス
 	for ( ic=0; ic<Pg.m_n; ic++) {
 		Pe = Pg.m_p[ic];
 		Ve = Pt - Pe;
-		if ( SqLenVect2D( Ve) <= MGPTOL->D_2) {						// 点が終点上(Pt == Pe)
+		if ( SqLenVect2D( Ve) <= MGPTOL->D_2) {					// 点が終点上(Pt == Pe)
 			ist = MC_ON_TOP;
 			MQUIT;
 		}
 		Vl = Pe - Ps;
 		MREAL Ss = Vl ^ Vs;
-		if ( ( Ss * Ss) <= ( MGPTOL->D_2 * SqLenVect2D( Vl))) {			// 点から辺までの距離がrTol以内
+		if ( ( Ss * Ss) <= ( MGPTOL->D_2 * SqLenVect2D( Vl))) {	// 点から辺までの距離がrTol以内
 			MREAL Cs = Vs * Vl;
 			MREAL Ce = Ve * Vl;
 			if (Cs >= 0.0f && Ce <= 0.0f) {						// 辺上
@@ -800,7 +800,7 @@ bool MGeo::CheckLn3OnPg3WS(						// (  O) ステイタス
 //		)
 //{
 //	int		ist;
-//	if (MgChkPt3OnPln3WS(ULn1.p, Pln2, &ist)) {
+//	if (MgCheckPt3OnPln3WS(ULn1.p, Pln2, &ist)) {
 ////
 ////	平行のチェック
 ////
@@ -833,8 +833,8 @@ bool MGeo::CheckLn3OnPg3WS(						// (  O) ステイタス
 //	bool	bs, be;
 //	MINT	ists, iste;
 //
-//	bs = MgChkPt3OnPln3WS(Ln1.p[0], Pln2, &ists);
-//	be = MgChkPt3OnPln3WS(Ln1.p[1], Pln2, &iste);
+//	bs = MgCheckPt3OnPln3WS(Ln1.p[0], Pln2, &ists);
+//	be = MgCheckPt3OnPln3WS(Ln1.p[1], Pln2, &iste);
 //	*ist = (ists * MC_PS_UPPER + iste * MC_PE_UPPER)/ MC_UPPER;
 //	return (bs && be);
 //}
