@@ -165,7 +165,7 @@ MgULine3D MgULine3D::Norm()
 	return *this;
 }
 */
-//
+
 //======================( ‚RŸŒ³ )==============================
 //		‚RŸŒ³’¼ü“¯m‚ª“™‚µ‚¢‚©’²‚×‚é
 //
@@ -174,7 +174,7 @@ bool MgULine3D::operator == ( const MgULine3D& ULn1) const						// b = (uln == U
 	return ( MGeo::CheckPointOnULine3D( p, ULn1) &&
 			 ( MGeo::CheckEqualVect3D( v,  ULn1.v) || MGeo::CheckEqualVect3D( v, -ULn1.v)));
 }
-//
+
 //======================( ‚RŸŒ³ )==============================
 //		‚RŸŒ³’¼ü‚ğƒgƒŒ[ƒX‚·‚é
 //
@@ -186,7 +186,7 @@ void MgULine3D::Print( MCHAR* s)
 	MBLOGPRBF;
 #endif
 }
-//
+
 //======================( ‚RŸŒ³ )==============================
 //		”¼’¼ü‚Ì•ûŒü‚ğ’PˆÊƒxƒNƒgƒ‹‚É³‹K‰»‚·‚é
 //
@@ -202,7 +202,7 @@ MgHLine3D MgHLine3D::Norm()
 	return *this;
 }
 */
-//
+
 //======================( ‚RŸŒ³ )==============================
 //		‚RŸŒ³”¼’¼ü“¯m‚ª“™‚µ‚¢‚©’²‚×‚é
 //
@@ -211,7 +211,7 @@ bool MgHLine3D::operator == ( const MgHLine3D &HLn1) const						// b = (uln == U
 	return ( MGeo::CheckPointOnHLine3D( p, HLn1) &&
 			( MGeo::CheckEqualVect3D( v,  HLn1.v)));
 }
-//
+
 //======================( ‚RŸŒ³ )==============================
 //		‚RŸŒ³”¼’¼ü‚ğƒgƒŒ[ƒX‚·‚é
 //
@@ -223,7 +223,7 @@ void MgHLine3D::Print( MCHAR* s)
 	MBLOGPRBF;
 #endif
 }
-//
+
 //======================( ‚RŸŒ³ )==============================
 //		‚RŸŒ³ü•ª“¯m‚ª“™‚µ‚¢‚©’²‚×‚é
 //
@@ -232,7 +232,7 @@ bool MgLine3D::operator == ( const MgLine3D& Ln1) const							// b = (ln == Ln1)
 	return (((p[0] == Ln1.p[0]) && (p[1] == Ln1.p[1])) ||
 			((p[0] == Ln1.p[1]) && (p[1] == Ln1.p[0])));
 }
-//
+
 //======================( ‚RŸŒ³ )==============================
 //		‚RŸŒ³ü•ª‚ğƒgƒŒ[ƒX‚·‚é
 //

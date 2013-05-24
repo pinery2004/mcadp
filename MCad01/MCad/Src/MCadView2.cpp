@@ -137,12 +137,12 @@ int CMCadView2::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	m_M3View.OnCreate( m_pDC->m_hDC);
 
 #if( DEBUG1)
-	MoGlLib::SetDCPixelFormat( m_pDC->m_hDC);						// OpenGL用にPixel Formatを指定
+	MoGlLib::SetDCPixelFormat( m_pDC->m_hDC);					// OpenGL用にPixel Formatを指定
 	m_GLRC = wglCreateContext( m_pDC->m_hDC);					// Rendering contextの生成
 	wglMakeCurrent( m_pDC->m_hDC, m_GLRC);						// 現在のcontext設定
 
-	MoGlLib::InitializeOpenGL();									//3Dシーンを初期化する関数を用意する
-	MoGlLib::MakeGLObject();										//3Dオブジェクトを生成する
+	MoGlLib::InitializeOpenGL();								//3Dシーンを初期化する関数を用意する
+	MoGlLib::MakeGLObject();									//3Dオブジェクトを生成する
 #endif
 
 	return 0;
@@ -245,7 +245,12 @@ void CMCadView2::OnMouseMove(UINT nFlags, CPoint point)
 																					// 下は (正方向:Ｚ軸に対して右回転)
 																					//			   (Ｚ軸から見て左回転)
 	}
-	m_M3View.OnMouseMove( nFlags, PtD, RtD, SclD);
+
+	static bool bFirst = true;										// １度目はマウスの移動量が未定のためスキップ
+	if ( !bFirst) {
+		m_M3View.OnMouseMove( nFlags, PtD, RtD, SclD);				
+	}
+	bFirst = false;
 
 	m_iPtLast = point;
 

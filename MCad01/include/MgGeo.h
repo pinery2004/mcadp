@@ -799,7 +799,7 @@ public:
 	//	| px  py  1   |  =  | px  py  1   |  X  | m21 m22 0 |
 	//											| m31 m32 1 |
 	//
-//S	inline	MgLine2D operator *= ( MgLine2D& io_ln, const MgMat2E& i_mt)				// *=	座標変換
+//S	inline	MgLine2D operator *= ( MgLine2D& io_ln, const MgMat2E& i_mt)			// *=	座標変換
 	static MgLine2D Mat2EMultEqualLine2D( MgLine2D& io_ln, const MgMat2E& i_mt)
 	{ 
 		io_ln.p[0] *= i_mt;
@@ -4563,7 +4563,7 @@ public:
 													//		 	false:	直線上にない
 					const	MgPoint2D&	i_p1,		// (I  ) 点1
 					const	MgULine2D&	i_ULn2,		// (I  ) 直線2
-							MINT*		o_pist		// (  O) 補助ステイタス
+							int*		o_pist = 0	// (  O) 補助ステイタス
 													//			MC_RIGHT			(010): 点が直線の右側
 													//			MC_ON_LINE			(020): 点が直線上
 													//			MC_LEFT				(040): 点が直線の左側
@@ -4578,7 +4578,7 @@ public:
 													//		 	false:	半直線上にない
 					const	MgPoint2D&	i_p1,		// (I  ) 点1
 					const	MgHLine2D&	i_HLn2,		// (I  ) 半直線2
-							MINT*		o_pist		// (  O) 補助ステイタス
+							int*		o_pist = 0	// (  O) 補助ステイタス
 													//			MC_RIGHT			(010): 点が半直線の右側
 													//			MC_ON_LINE			(020): 点が半直線上
 													//			MC_LEFT				(040): 点が半直線の左側
@@ -4588,12 +4588,12 @@ public:
 	//
 	//	点が線分上にあるかを調べる。
 	//
-	static bool CheckPointOnLine2DWS(					// (  O) ステイタス
+	static bool CheckPointOnLine2DWS(				// (  O) ステイタス
 													//			true:	線分上にある
 													//			false:	線分上にない
 					const	MgPoint2D&	i_p1,		// (I  ) 点1
 					const	MgLine2D&	i_Ln2,		// (I  ) 線分2
-							MINT*		o_pist		// (  O) 補助ステイタス	(ステイタス1 | ステイタス2)
+							int*		o_pist = 0	// (  O) 補助ステイタス	(ステイタス1 | ステイタス2)
 													//		 ステイタス1
 													//			MC_RIGHT			(010): 点が線分の右側
 													//			MC_ON_LINE			(020): 点が線分延長直線上
@@ -4609,12 +4609,12 @@ public:
 	//	線分の中心点が直線上にあるかを調べる。
 	//
 	
-	static inline bool CheckLineOnULine2DWS(			// (  O) ステイタス
+	static inline bool CheckLineOnULine2DWS(		// (  O) ステイタス
 													//			true:	直線上にある
 													//			false:	直線上にない
 					const	MgLine2D&	i_Ln1,		// (I  ) 線分1
 					const	MgULine2D&	i_ULn2,		// (I  ) 直線2
-							MINT*		o_pist		// (  O) ステイタス
+							int*		o_pist = 0	// (  O) ステイタス
 													//			MC_RIGHT			(010): 点が線分の右側
 													//			MC_ON_LINE			(020): 点が直線上
 													//			MC_LEFT				(040): 点が線分の左側
@@ -4684,12 +4684,12 @@ public:
 	//
 	//	点が線分上にあるかを調べる。
 	//
-	static bool	CheckPointOnLine3DWS(					// (  O) ステイタス
+	static bool	CheckPointOnLine3DWS(				// (  O) ステイタス
 													//			true:	線分上にある
 													//			false:	線分上にない
 					const	MgPoint3D&	i_p1,		// (I  ) 点1
 					const	MgLine3D&	i_Line2,	// (I  ) 線分2
-							MINT*		o_pist		// (  O) 補助ステイタス	(ステイタス1 | ステイタス2)
+							int*		o_pist = 0	// (  O) 補助ステイタス	(ステイタス1 | ステイタス2)
 													//		 ステイタス1
 													//			MC_ON_LINE			(020): 点が線分延長直線上
 													//		 ステイタス2
@@ -4713,12 +4713,12 @@ public:
 	//
 	//	線分と線分が重なっているかを調べる。
 	//
-	static bool	CheckLineOnLine3DWS(					// (  O) ステイタス
+	static bool	CheckLineOnLine3DWS(				// (  O) ステイタス
 													//			true:	重なっている
 													//			false:	重なっていない
 					const	MgLine3D&	i_Ln1,		// (I  ) 線分1
 					const	MgLine3D&	i_Ln2,		// (I  ) 線分2
-							MINT*		o_pist		// (  O) 補助ステイタス　重なりありの場合は次の通り
+							int*		o_pist = 0	// (  O) 補助ステイタス　重なりありの場合は次の通り
 													//        -4    -3   -2   -1    0     1    2    3    4 		   	
 													//		|--   |--  |--- | -- | --- |----| ---|  --|   --|           	  	
 													//		|   --|  --| ---|----| --- | -- |--- |--  |--   |                　	
@@ -4731,13 +4731,14 @@ public:
 					const	MgVect2D&	i_v2		// (I  ) ベクトル2
 					)
 	{
-		MREAL fo = i_v1 ^ i_v2; MREAL fi = i_v1 * i_v2;
+		MREAL fo = i_v1 ^ i_v2;
+		MREAL fi = i_v1 * i_v2;
 		return ( MGABS(fi/fo)  <= MGPTOL->A);
 	}
 
 	// ---------------------( ２次元 )------------------------------
 	//		ベクトルとベクトルが垂直であるかを確認し、外積と内積を出力する
-	static inline bool CheckPerpVect2DS(				// (  O) ステイタス true: 垂直
+	static inline bool CheckPerpVect2DS(			// (  O) ステイタス true: 垂直
 					const	MgVect2D&	i_v1,		// (I  ) ベクトル1
 					const	MgVect2D&	i_v2,		// (I  ) ベクトル2
 							MREAL*		o_pso,		// (  O) 外積
@@ -4763,7 +4764,7 @@ public:
 
 	// ---------------------( ３次元 )------------------------------
 	//		ベクトルとベクトルが垂直であるかを確認し、外積と内積を出力する
-	static inline bool CheckPerpVect3DS(				// (  O) ステイタス true: 垂直
+	static inline bool CheckPerpVect3DS(			// (  O) ステイタス true: 垂直
 					const	MgVect3D&	i_v1,		// (I  ) ベクトル1
 					const	MgVect3D&	i_v2,		// (I  ) ベクトル2
 							MgVect3D*	o_ppso,		// (  O) 外積
@@ -4787,30 +4788,33 @@ public:
 													//			false:	多角形の外側
 					const	MgPoint2D&	i_Pt,		// (I  ) 点
 					const	MgPolyg2D&	i_Pg,		// (I  ) 多角形
-							MINT*		o_pist		// (  O) ステイタス
+							int*		o_pist = 0	// (  O) ステイタス
 													//			MC_IN_BORDER		(001): 点が多角形の内側
 													//			MC_ON_BORDER		(002): 点が多角形の辺上(または頂点上)
 													//			MC_OUT_BORDER		(004): 点が多角形の外側
 					)
 	{
 		bool	bst;
+		int		ist;								// 補助ステイタス
 		MINT	ist1;
 		MINT	ict;
 		
 		ist1 = CountPolygonAroundPoint2D( i_Pt, NULL, i_Pg, &ict);
 		if ( ist1) {
-			*o_pist = MC_ON_BORDER;
+			ist = MC_ON_BORDER;
 			bst = true;												// 多角形の辺上(または頂点上)
 		} else {
 			if ( ict) {
-				*o_pist = MC_IN_BORDER;
+				ist = MC_IN_BORDER;
 				bst = true;											// 多角形の内側
 			}
 			else {
-				*o_pist = MC_OUT_BORDER;
+				ist = MC_OUT_BORDER;
 				bst = false;										// 多角形の外側
 			}
 		}
+		if ( o_pist)
+			*o_pist = ist;
 		return bst;
 	}
 	
@@ -4822,7 +4826,7 @@ public:
 													//			false:	多角形の外側
 					const	MgLine2D&	i_Ln1,		// (I  ) 線分
 					const	MgPolyg2D&	i_Pg2,		// (I  ) 多角形
-							MINT*		o_pisth		// (  O) 補助ステイタス	(ステイタス1 | ステイタス2)
+							int*		o_pist = 0	// (  O) 補助ステイタス	(ステイタス1 | ステイタス2)
 													// 		 テイタス1
 													//			MC_IN_BORDER		(001):	点が多角形の内側
 													//			MC_ON_BORDER		(002):	点が多角形の辺上(または頂点上)
@@ -4834,9 +4838,10 @@ public:
 					)
 	{
 		bool		bst;
-		MgPoint2D	pt1;
-		MgVect2D		vt1;
+		int			ist;							// 補助ステイタス
 		MINT		ist1;
+		MgPoint2D	pt1;
+		MgVect2D	vt1;
 		MINT		ict;
 		
 		pt1 = ( i_Ln1.p[0] + i_Ln1.p[1]) * 0.5;
@@ -4844,30 +4849,32 @@ public:
 		
 		ist1 = CountPolygonAroundPoint2D( pt1, &vt1, i_Pg2, &ict);
 		if ( ist1) {
-			*o_pisth = MC_ON_BORDER | ist1;
+			ist = MC_ON_BORDER | ist1;
 			bst = true;												// 多角形の辺上(または頂点上)
 		} else {
 			if ( ict) {
-				*o_pisth = MC_IN_BORDER;
+				ist = MC_IN_BORDER;
 				bst = true;											// 多角形の内側
 			}
 			else {
-				*o_pisth = MC_OUT_BORDER;
+				ist = MC_OUT_BORDER;
 				bst = false;										// 多角形の外側
 			}
 		}
+		if ( o_pist)
+			*o_pist = ist;
 		return bst;
 	}
 	
 	// ---------------------( ２次元 )------------------------------
 	//	点と穴付き多角形の位置関係を求める
 	//
-	static bool CheckPointOnGPolygon2DWS(				// (  O) ステイタス
+	static bool CheckPointOnGPolygon2DWS(			// (  O) ステイタス
 													//			true:	穴付き多角形の内側または辺上
 													//			false:	穴付き多角形の外側
 					const	MgPoint2D&	i_Pt,		// (I  ) 点
 					const	MgGPolyg2D&	i_GPg,		// (I  ) 穴付き多角形
-							MINT*		o_pist		// (  O) ステイタス
+							int*		o_pist =0	// (  O) ステイタス
 													//			MC_IN_BORDER		(001): 点が穴付き多角形の内側
 													//			MC_ON_BORDER		(002): 点が穴付き多角形の辺上(または頂点上)
 													//			MC_OUT_BORDER		(004): 点が穴付き多角形の外側
@@ -4876,12 +4883,12 @@ public:
 	// ---------------------( ２次元 )------------------------------
 	//	線分の中心点と穴付き多角形の位置関係を求める
 	//
-	static bool CheckLineOnGPolygon2DWS(				// (  O) ステイタス
+	static bool CheckLineOnGPolygon2DWS(			// (  O) ステイタス
 													//			true:	穴付き多角形の内側または辺上
 													//			false:	穴付き多角形の外側
 					const	MgLine2D&	i_Ln1,		// (I  ) 線分
 					const	MgGPolyg2D&	i_GPg2,		// (I  ) 穴付き多角形
-							MINT*		o_pisth		// (  O) 補助ステイタス	(ステイタス1 | ステイタス2)
+							int*		o_pist = 0	// (  O) 補助ステイタス	(ステイタス1 | ステイタス2)
 													// 		 テイタス1
 													//			MC_IN_BORDER		(001): 点が穴付き多角形の内側
 													//			MC_ON_BORDER		(002): 点が穴付き多角形の辺上(または頂点上)
@@ -4916,12 +4923,12 @@ public:
 	//	点と多角形の位置関係を求める ３Ｄ
 	//
 	/*
-	static bool CheckPointOnPolygon3DWS(				// (  O) ステイタス
+	static bool CheckPointOnPolygon3DWS(			// (  O) ステイタス
 													//			true:	多角形の内側または辺上
 													//			false:	多角形の外側
 					const	MgPoint3D&	i_Pt,		// (I  ) 点
 					const	MgPolyg3D&	i_Pg,		// (I  ) 多角形
-							MINT*		o_pist		// (  O) ステイタス
+							MINT*		o_pist = 0	// (  O) ステイタス
 								  					//		 多角形の平面と点の位置関係
 													//			MC_UPPER			(010): 点が平面の上側	
 													//			MC_ON_PLANE			(020): 点が平面上
@@ -4943,7 +4950,7 @@ public:
 													//			false:	多角形外
 					const	MgLine3D&	i_Ln1,		// (I  ) 線分
 					const	MgPolyg3D&	i_Pg2,		// (I  ) 多角形
-							MINT*		o_pist		// (  O) 補助ステイタス
+							MINT*		o_pist = 0	// (  O) 補助ステイタス
 								  					//		 多角形の平面と点の位置関係
 													//			MC_UPPER			(010): 点が平面の上側	
 													//			MC_ON_PLANE			(020): 点が平面上
@@ -4971,33 +4978,36 @@ public:
 													//			false: 平面外
 					const	MgPoint3D&	i_p1,		// (I  ) 点1
 					const	MgPlane3D&	i_Pln2,		// (I  ) 平面2
-							MINT*		o_pist		// (  O) 補足ステイタス
+							MINT*		o_pist = 0	// (  O) 補足ステイタス
 													//			MC_UPPER			(010): 点が平面の上側	
 													//			MC_ON_PLANE			(020): 点が平面上
 													//			MC_LOWER			(040): 点が平面の下側
 					)
 	{
 		bool	bst;
+		int		ist;								// 補助ステイタス
 		MREAL	pa1;								//	点から平面までの距離
-	//
+	
 		pa1 = ( i_Pln2.v * i_p1) + i_Pln2.d;
 		if ( pa1 > MGPTOL->D) {
-			*o_pist = MC_UPPER;
+			ist = MC_UPPER;
 			bst = false;
 		} else if ( pa1 < -MGPTOL->D) {
-			*o_pist = MC_LOWER;
+			ist = MC_LOWER;
 			bst = false;
 		} else {
-			*o_pist = MC_ON_PLANE;
+			ist = MC_ON_PLANE;
 			bst = true;
 		}
+		if ( o_pist)
+			*o_pist = ist;
 		return bst;
 	}
 
 	// ---------------------( ３次元 )------------------------------
 	//	直線が平面上にあるかを調べる。
 	//
-	static inline bool CheckULineOnPln3D(				// (  O) ステイタス
+	static inline bool CheckULineOnPln3D(			// (  O) ステイタス
 													//			true:  平面上
 													//			false: 平面外
 					const	MgULine3D&	i_ULn1,		// (I  ) 直線1
@@ -5023,7 +5033,7 @@ public:
 													//			false: 平面外
 					const	MgLine3D&	i_Ln1,		// (I  ) 線分1
 					const	MgPlane3D&	i_Pln2,		// (I  ) 平面2
-							MINT*		o_pist		// (  O) 補足ステイタス
+							MINT*		o_pist = 0	// (  O) 補足ステイタス
 								  					//		 多角形の平面と点の位置関係
 													//			MC_PS_UPPER			(001): 始点が平面の上側	
 													//			MC_PS_ON_PLANE		(002): 始点が平面上
@@ -5039,7 +5049,8 @@ public:
 	
 		bs = CheckPointOnPln3DWS( i_Ln1.p[0], i_Pln2, &ists);
 		be = CheckPointOnPln3DWS( i_Ln1.p[1], i_Pln2, &iste);
-		*o_pist = (ists * MC_PS_UPPER + iste * MC_PE_UPPER)/ MC_UPPER;
+		if ( o_pist)
+			*o_pist = (ists * MC_PS_UPPER + iste * MC_PE_UPPER)/ MC_UPPER;
 		return (bs && be);
 	}
 	
@@ -5047,7 +5058,7 @@ public:
 	//
 	//		２つの４角形が重なるか否かをチェックする。
 	// 
-	static inline bool	MgCheckRectOnRect2D(			// (  O) ステイタス
+	static inline bool	MgCheckRectOnRect2D(		// (  O) ステイタス
 													//		 true   交差あり
 													//		 false  交差なし
 					const	MgRect2D&	i_rct10,	// (I  ) ４角形1 (min,max)
@@ -5064,7 +5075,7 @@ public:
 	//
 	//		２つの４角形が重なるか否かをチェックする。
 	//
-	static inline bool	MgCheckRectOnRect3D(			// (  O) ステイタス
+	static inline bool	MgCheckRectOnRect3D(		// (  O) ステイタス
 													//		 true   交差あり
 													//		 false  交差なし
 					const	MgRect3D&	i_rct10,	// (I  ) ４角形1 (min,max)
@@ -5478,7 +5489,7 @@ inline MgPlane3D PlaneLineSlope3D(									// 線分と勾配より平面の方程式の係数と
 							MREAL		i_rkb,
 							MREAL		i_z = 0.)
 						{ return MGeo::PlaneLineSlope3D( i_ln1, i_rkb, i_z);}
-//
+
 //===========================================================================
 //		平面の方程式の係数と定数を正規化した平面を求める
 //		ax+by+cz+d=0	(a*a+b*b+c*c=1.0)
@@ -5486,7 +5497,7 @@ inline MgPlane3D PlaneLineSlope3D(									// 線分と勾配より平面の方程式の係数と
 inline MgPlane3D MgPlane3DNorm(									// (  O) 正規化後の３次元平面
 					const	MgPlane3D&	i_pl)					// (I  ) ３次元平面
 						{ return MGeo::NormPln( i_pl);}
-//
+
 //===========================================================================
 //		MgPlane3Dを使用のインライン関数
 //	

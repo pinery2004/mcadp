@@ -30,35 +30,38 @@ bool MGeo::CheckPointOnULine2DWS(				// (  O) ステイタス
 												//		 	false:	直線上にない
 				const	MgPoint2D&	i_p1,		// (I  ) 点1
 				const	MgULine2D&	i_ULn2,		// (I  ) 直線2
-						MINT*		o_pist		// (  O) 補助ステイタス
+						int*		o_pist		// (  O) 補助ステイタス
 												//			MC_RIGHT			(010): 点が直線の右側
 												//			MC_ON_LINE			(020): 点が直線上
 												//			MC_LEFT				(040): 点が直線の左側
 				)
 {
 	bool		bst;							// ステイタス
+	int			ist;							// 補助ステイタス
 	MgVect2D	v2s1;							// 直線2の始点から点1までのベクトル
 	MREAL		pa1;							// 直線2から点1までの鉛直距離
 
-// 直線2の方向（単位ベクトル）と直線2の始点から点1までのベクトルの外積より鉛直距離を求める
+	// 直線2の方向（単位ベクトル）と直線2の始点から点1までのベクトルの外積より鉛直距離を求める
 	v2s1 = i_p1 - i_ULn2.p;					
 	pa1 = i_ULn2.v ^ v2s1;						// 直線2の方向（単位ベクトル）と直線2の始点から点1までのベクトルの外積
 
-// 鉛直距離が誤差内なら直線上
+	// 鉛直距離が誤差内なら直線上
 	if ( CheckZero(pa1)) {
-		*o_pist = MC_ON_LINE;
+		ist = MC_ON_LINE;
 		bst = true;
 
-// 鉛直距離が正なら直線の左側
+	// 鉛直距離が正なら直線の左側
 	} else if ( pa1 > 0) {
-		*o_pist = MC_LEFT;
+		ist = MC_LEFT;
 		bst = false;
 
-// 鉛直距離が負なら直線の右側
+	// 鉛直距離が負なら直線の右側
 	} else {
-		*o_pist = MC_RIGHT;
+		ist = MC_RIGHT;
 		bst = false;
 	}
+	if ( o_pist)
+		*o_pist = ist;
 	return bst;
 }
 	
@@ -78,28 +81,31 @@ bool  MGeo::CheckPointOnHLine2DWS(				// (  O) ステイタス
 				)
 {
 	bool		bst;							// ステイタス
+	int			ist;							// 補助ステイタス
 	MgVect2D	v2s1;							// 半直線2の始点から点1までのベクトル
 	MREAL		pa1;							// 半直線2から点1までの鉛直距離
 
-// 半直線2の方向（単位ベクトル）と半直線2の始点から点1までのベクトルの外積より鉛直距離を求める
+	// 半直線2の方向（単位ベクトル）と半直線2の始点から点1までのベクトルの外積より鉛直距離を求める
 	v2s1 = i_p1 - i_HLn2.p;					
 	pa1 = i_HLn2.v ^ v2s1;						// 半直線2の方向（単位ベクトル）と半直線2の始点から点1までのベクトルの外積
 
-// 鉛直距離が誤差内なら直線上
+	// 鉛直距離が誤差内なら直線上
 	if ( CheckZero( pa1)) {
-		*o_pist = MC_ON_LINE;
+		ist = MC_ON_LINE;
 		bst = true;
 
-// 鉛直距離が正なら直線の左側
+	// 鉛直距離が正なら直線の左側
 	} else if ( pa1 > 0) {
-		*o_pist = MC_LEFT;
+		ist = MC_LEFT;
 		bst = false;
 
-// 鉛直距離が負なら直線の右側
+	// 鉛直距離が負なら直線の右側
 	} else {
-		*o_pist = MC_RIGHT;
+		ist = MC_RIGHT;
 		bst = false;
 	}
+	if ( o_pist)
+		*o_pist = ist;
 	return bst;
 }
 
@@ -112,7 +118,7 @@ bool MGeo::CheckPointOnLine2DWS(				// (  O) ステイタス
 												//			false:	線分上にない
 				const	MgPoint2D&	p1,			// (I  ) 点1
 				const	MgLine2D&	Ln2,		// (I  ) 線分2
-						MINT*		ist			// (  O) 補助ステイタス	(ステイタス1 | ステイタス2)
+						MINT*		o_pist		// (  O) 補助ステイタス	(ステイタス1 | ステイタス2)
 												//		 ステイタス1
 												//			MC_RIGHT			(010): 点が線分の右側
 												//			MC_ON_LINE			(020): 点が線分延長直線上
@@ -124,6 +130,7 @@ bool MGeo::CheckPointOnLine2DWS(				// (  O) ステイタス
 		)
 {
 	bool		bst;
+	int			ist;							// 補助ステイタス
 	MgVect2D	v2s1;							// 線分2の始点から点1へのベクトル
 	MgVect2D	v2e1;							// 線分2の始点から点1へのベクトル
 	MgVect2D	v2;								// 線分2の始点から終点へのベクトル
@@ -131,8 +138,7 @@ bool MGeo::CheckPointOnLine2DWS(				// (  O) ステイタス
 	MREAL		cs, ce;							// 線分2と線分2の始点，終点から点1へのベクトルの内積
 	MREAL		tol_2;							// 判定用誤差
 	MREAL		v2tol_2;						// 判定用誤差
-//S	MREAL		v2tol_2_1;						// 判定用誤差 v2tol_2/10000
-//
+
 	v2s1 = p1 - Ln2.p[0];
 	v2e1 = p1 - Ln2.p[1];
 	v2 = Ln2.p[1] - Ln2.p[0];
@@ -143,31 +149,32 @@ bool MGeo::CheckPointOnLine2DWS(				// (  O) ステイタス
 	// 直線上なら、さらに線分上であるかを調べる
 	tol_2 = MGPTOL->D_2;
 	v2tol_2 = tol_2 * SqLenVect2D( v2);
-//S	v2tol_2_1 = tol_2 * SqLenVect2D( v2) * 0.0001f * 0.0001f;
-	*ist = 0;
+	ist = 0;
 	if ( pa1 * pa1 <= v2tol_2) { 								// 点から線分までの鉛直距離がrTol以内
 		// 延長直線上
 		cs = v2 * v2s1;
 		ce = v2 * v2e1;
 		if (v2s1 * v2s1 <= tol_2) {
-			*ist = MC_ON_PS;									// 点が線分の始点上
-		} else if (v2e1 * v2e1 <= tol_2) {
-			*ist = MC_ON_PE;									// 点が線分の終点上
-//S		} else if (cs > v2tol_2_1 &&  ce < -v2tol_2_1) {
-		} else if (cs > 0 &&  ce < 0) {
-			*ist = MC_INSIDE;									// 点が線分の内側上
+			ist = MC_ON_PS;										// 点が線分の始点上
+		} else if ( v2e1 * v2e1 <= tol_2) {
+			ist = MC_ON_PE;										// 点が線分の終点上
+//S		} else if ( cs > v2tol_2_1 &&  ce < -v2tol_2_1) {
+		} else if ( cs > 0 &&  ce < 0) {
+			ist = MC_INSIDE;									// 点が線分の内側上
 		} 
-		bst = (*ist != 0);
-		*ist |= MC_ON_LINE;
+		bst = ( ist != 0);
+		ist |= MC_ON_LINE;
 	} else {
 		// 延長直線上でないなら、線分の左右どちらにあるかを調べる
 		if ( pa1 > 0) {
-			*ist |= MC_LEFT;									// 左側
+			ist |= MC_LEFT;										// 左側
 		} else {
-			*ist |= MC_RIGHT;									// 右側
+			ist |= MC_RIGHT;									// 右側
 		}
 		bst = false;
 	}
+	if ( o_pist)
+		*o_pist = ist;
 	return bst;
 }
 //// ---------------------( ２次元 )------------------------------
@@ -202,14 +209,14 @@ bool MGeo::CheckLineOnLine2D(					// (  O) ステイタス
 		)
 {
 	bool		bst = false;
-	MgVect2D		v2s1;						// 線分2の始点から点1へのベクトル
-//	MgVect2D		v2e1;						// 線分2の始点から点1へのベクトル
-	MgVect2D		v2;							// 線分2の始点から終点へのベクトル
+	MgVect2D	v2s1;							// 線分2の始点から点1へのベクトル
+//	MgVect2D	v2e1;							// 線分2の始点から点1へのベクトル
+	MgVect2D	v2;								// 線分2の始点から終点へのベクトル
 	MREAL		pa1;							// 線分2と線分2の始点から点1へのベクトルの外積
 	MREAL		v2tol_2;						// 判定用誤差
 	MREAL		cs11, cs12, cs21, cs22;
 	MREAL		d1, d2, dd;
-//
+
 	if (!MGeo::ParallelLine2D( Ln1, Ln2))						// 平行でない場合は
 		MQUIT;													// 重なっていないとする
 	v2s1 = Ln1.p[0] - Ln2.p[0];
@@ -297,7 +304,7 @@ bool MGeo::CheckPointOnLine3DWS(				// (  O) ステイタス
 												//			false:	線分上にない
 				const	MgPoint3D&	p1,			// (I  ) 点1
 				const	MgLine3D	&Ln2,		// (I  ) 線分2
-						MINT*		ist			// (  O) 補助ステイタス	(ステイタス1 | ステイタス2)
+						int*		o_pist		// (  O) 補助ステイタス	(ステイタス1 | ステイタス2)
 												//		 ステイタス1
 												//			MC_ON_LINE			(020): 点が線分延長直線上
 												//		 ステイタス2
@@ -307,6 +314,7 @@ bool MGeo::CheckPointOnLine3DWS(				// (  O) ステイタス
 		)
 {
 	bool		bst;
+	int			ist;							// 補助ステイタス
 	MgVect3D	v2s1;							// 線分2の始点から点1へのベクトル
 	MgVect3D	v2e1;							// 線分2の終点から点1へのベクトル
 	MgVect3D	v2;								// 線分2の始点から終点へのベクトル
@@ -315,7 +323,7 @@ bool MGeo::CheckPointOnLine3DWS(				// (  O) ステイタス
 	MREAL		tol_2;							// 判定用誤差
 	MREAL		v2tol_2;						// 判定用誤差
 	MREAL		v2tol_2_1;						// 判定用誤差 v2tol_2/10000
-//
+
 	v2s1 = p1 - Ln2.p[0];
 	v2e1 = p1 - Ln2.p[1];
 	v2 = Ln2.p[1] - Ln2.p[0];
@@ -327,23 +335,25 @@ bool MGeo::CheckPointOnLine3DWS(				// (  O) ステイタス
 	tol_2 = MGPTOL->D_2;
 	v2tol_2 = tol_2 * SqLenVect3D( v2);
 	v2tol_2_1 = tol_2 * SqLenVect3D( v2) * 0.0001f * 0.0001f;
-	*ist = 0;
-	if ( SqLenVect3D( va1) <= v2tol_2) { 					// 点から線分までの鉛直距離がrTol以内
+	ist = 0;
+	if ( SqLenVect3D( va1) <= v2tol_2) { 						// 点から線分までの鉛直距離がrTol以内
 		cs = v2 * v2s1;
 		ce = v2 * v2e1;
 		if (v2s1 * v2s1 <= tol_2) {
-			*ist = MC_ON_PS;								// 点が線分の始点上
+			ist = MC_ON_PS;										// 点が線分の始点上
 		} else if ( v2e1 * v2e1 <= v2tol_2) {
-			*ist = MC_ON_PE;								// 点が線分の終点上
+			ist = MC_ON_PE;										// 点が線分の終点上
 //		} else if ( cs * ce <= 0) {
 		} else if ( cs > v2tol_2_1 &&  ce < -v2tol_2_1) {
-			*ist = MC_INSIDE;								// 点が線分の内側上
+			ist = MC_INSIDE;									// 点が線分の内側上
 		} 
-		bst = ( *ist != 0);
-		*ist |= MC_ON_LINE;
+		bst = ( ist != 0);
+		ist |= MC_ON_LINE;
 	} else {
 		bst = false;
 	}
+	if ( o_pist)
+		*o_pist = ist;
 	return bst;
 }
 // ---------------------( ３次元 )------------------------------
@@ -365,7 +375,7 @@ bool MGeo::CheckLineOnLine3D(					// (  O) ステイタス
 	MREAL		v2tol_2;						// 判定用誤差
 	MREAL		cs11, cs12, cs21, cs22;
 	MREAL		d1, d2, dd;
-//
+
 	if (!MGeo::ParallelLine3D( Ln1, Ln2))						// 平行でない場合は
 		MQUIT;													// 重なっていないとする
 	v2s1 = Ln1.p[0] - Ln2.p[0];
@@ -408,13 +418,14 @@ bool MGeo::CheckLineOnLine3DWS(					// (  O) ステイタス
 												//			false:	重なっていない
 				const	MgLine3D	&Ln1,		// (I  ) 線分1
 				const	MgLine3D	&Ln2,		// (I  ) 線分2
-						MINT*		ist			// (  O) 補助ステイタス　重なりありの場合は次の通り
+						MINT*		o_pist		// (  O) 補助ステイタス　重なりありの場合は次の通り
 												//        -4    -3   -2   -1    0     1    2    3    4 		   	
 												//		|--   |--  |--- | -- | --- |----| ---|  --|   --|           	  	
 												//		|   --|  --| ---|----| --- | -- |--- |--  |--   |                　	
 				)
 {
 	bool		bst = false;
+	int			ist;							// 補助ステイタス
 	MREAL		rTol;
 	MgVect3D	v2s1;							// 線分2の始点から点1へのベクトル
 	MgVect3D	v2, vu2;						// 線分2の始点から終点へのベクトル、同単位ベクトル
@@ -423,7 +434,7 @@ bool MGeo::CheckLineOnLine3DWS(					// (  O) ステイタス
 	MREAL		d1, d2, dd;
 	MREAL		d11, d12, d21, d22;
 
-	*ist = 0;
+	ist = 0;
 	rTol = MGPTOL->D;
 	if (!MGeo::ParallelLine3D( Ln1, Ln2))						// 平行でない場合は
 		MQUIT;													// 重なっていないとする
@@ -462,31 +473,31 @@ bool MGeo::CheckLineOnLine3DWS(					// (  O) ステイタス
 	if (d12 > d22 + rTol) {
 		if (d11 > d22 - rTol) {
 			if (d11 > d22 + rTol)
-				*ist = 4;
+				ist = 4;
 			else
-				*ist = 3;
+				ist = 3;
 		} else {
 			if (d11 > d21 + rTol)
-				*ist = 2;
+				ist = 2;
 			else
-				*ist = 1;
+				ist = 1;
 		}
 	} else if (d11 < d21 - rTol) {
 		if (d12 < d21 + rTol) {
 			if (d12 < d21 - rTol)
-				*ist = -4;
+				ist = -4;
 			else
-				*ist = -3;
+				ist = -3;
 		} else {
 			if (d12 < d22 - rTol)
-				*ist = -2;
+				ist = -2;
 			else
-				*ist = 1;
+				ist = 1;
 		}
 	} else if (d12 > d22 - rTol && d11 < d21 + rTol)
-		*ist = 0;
+		ist = 0;
 	else
-		*ist = -1;
+		ist = -1;
 
 	dd = d2 - d1;
 	// 重なりの始点から終点までの距離( dd/abs( v2)) <= tol より重なっていないかを調べる
@@ -496,6 +507,8 @@ bool MGeo::CheckLineOnLine3DWS(					// (  O) ステイタス
 
 	bst = true;
 exit:
+	if ( o_pist)
+		*o_pist = ist;
 	return bst;
 }
 
@@ -508,39 +521,43 @@ bool MGeo::CheckPointOnGPolygon2DWS(			// (  O) ステイタス
 												//			false:	穴付き多角形の外側
 				const	MgPoint2D&	i_pt,		// (I  ) 点
 				const	MgGPolyg2D&	i_Gpg,		// (I  ) 穴付き多角形
-						MINT*		o_piSt		// (  O) ステイタス
+						int*		o_pist		// (  O) ステイタス
 												//			MC_IN_BORDER		(001): 点が穴付き多角形の内側
 												//			MC_ON_BORDER		(002): 点が穴付き多角形の辺上(または頂点上)
 												//			MC_OUT_BORDER		(004): 点が穴付き多角形の外側
 		)
 {
 	bool		bst;
+	int			ist;							// 補助ステイタス
 	MINT		ist1;
 	MINT		ic1;
-	MINT		ict, ictSum = 0;									// 内外判定用カウンタ
+	MINT		ict, ictSum;
 	MgPolyg2D*	pPg;
 	
+	ictSum = 0;													// 内外判定用カウンタ
 	for ( ic1=0; ic1<i_Gpg.m_n; ic1++) {
 		pPg = &(i_Gpg.m_pg[ic1]);
 
 		
 		ist1 = CountPolygonAroundPoint2D( i_pt, NULL, *pPg, &ict);
 		if ( ist1) {
-			*o_piSt = MC_ON_BORDER;
-			bst = true;												// 穴付き多角形の辺上(または頂点上)
+			ist = MC_ON_BORDER;
+			bst = true;											// 穴付き多角形の辺上(または頂点上)
 			MQUIT;
 		}
 		ictSum += ict;
 	}
 
 	if ( ictSum > 0) {
-		*o_piSt = MC_IN_BORDER;										// 穴付き多角形の内側
+		ist = MC_IN_BORDER;										// 穴付き多角形の内側
 		bst = true;
 	} else {
-		*o_piSt = MC_OUT_BORDER;									// 穴付き多角形の外側
+		ist = MC_OUT_BORDER;									// 穴付き多角形の外側
 		bst = false;
 	}
 exit:
+	if ( o_pist)
+		*o_pist = ist;
 	return bst;
 }
 
@@ -553,7 +570,7 @@ bool MGeo::CheckLineOnGPolygon2DWS(				// (  O) ステイタス
 												//			false:	穴付き多角形の外側
 				const	MgLine2D&	Ln1,		// (I  ) 線分
 				const	MgGPolyg2D&	GPg2,		// (I  ) 穴付き多角形
-						MINT*		isth		// (  O) 補助ステイタス	(ステイタス1 | ステイタス2)
+						int*		o_pist		// (  O) 補助ステイタス	(ステイタス1 | ステイタス2)
 												// 		 テイタス1
 												//			MC_IN_BORDER		(001): 点が穴付き多角形の内側
 												//			MC_ON_BORDER		(002): 点が穴付き多角形の辺上(または頂点上)
@@ -565,11 +582,12 @@ bool MGeo::CheckLineOnGPolygon2DWS(				// (  O) ステイタス
 				)
 {
 	bool		bst;
+	int			ist;							// 補助ステイタス
 	MgPoint2D	pt1;
 	MgVect2D	vt1;
 	MINT		ist1;
 	MINT		ic1;
-	MINT		ict, ictSum = 0;									// 内外判定用カウンタ
+	MINT		ict, ictSum = 0;								// 内外判定用カウンタ
 	MgPolyg2D*	pPg;
 	
 	pt1 = ( Ln1.p[0] + Ln1.p[1]) * 0.5;
@@ -580,21 +598,23 @@ bool MGeo::CheckLineOnGPolygon2DWS(				// (  O) ステイタス
 		
 		ist1 = CountPolygonAroundPoint2D( pt1, &vt1, *pPg, &ict);
 		if ( ist1) {
-			*isth = MC_ON_BORDER | ist1;
-			bst = true;												// 穴付き多角形の辺上(または頂点上)
+			ist = MC_ON_BORDER | ist1;
+			bst = true;											// 穴付き多角形の辺上(または頂点上)
 			MQUIT;
 		}
 		ictSum += ict;
 	}
 
 	if ( ictSum > 0) {
-		*isth = MC_IN_BORDER;										// 穴付き多角形の内側
+		ist = MC_IN_BORDER;										// 穴付き多角形の内側
 		bst = true;
 	} else {
-		*isth = MC_OUT_BORDER;										// 穴付き多角形の外側
+		ist = MC_OUT_BORDER;									// 穴付き多角形の外側
 		bst = false;
 	}
 exit:
+	if ( o_pist)
+		*o_pist = ist;
 	return bst;
 }
 //

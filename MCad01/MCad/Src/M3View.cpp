@@ -179,6 +179,8 @@ BOOL M3View::InitializeOpenGL( void)
 			   MGeo::Mat3ERotRevY( MGRADIAN( m_rRotY)) *
 			   MGeo::Mat3ERotRevX( MGRADIAN( m_rRotX));
 
+	TRACE( " 1st m_rRotX = %f.1, m_rRotY = %f.1, m_rRotZ = %f.1\n", m_rRotX, m_rRotY, m_rRotZ);
+
 	return TRUE;
 }
 
@@ -198,19 +200,20 @@ void M3View::OnSize(UINT nType, int cx, int cy)
 
 void M3View::OnMouseMove(
 						MINT		nFlags,		// 1: 移動
-						MgVect3D		PtD,
-						MgVect3D		RtD,
+						MgVect3D	PtD,
+						MgVect3D	RtD,
 						MREAL		SclD		// 拡大縮小量
 				)
 {
 	// TODO : ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
 
 	CPoint	iPtD;												// マウス移動量	
-	MgVect3D	rdMov1;
+	static MgVect3D	rdMov1 = MgVect3D( 0., 0., 0);
 	MgVect3D	rdMov2;
 	MgMat3E	mTr1, mTr2, mTr3, mTrW, mTrW1, mTrW2;				// 座標変換マトリックス (work)
-	MgVect2D	vRx, vRy, vRz;										// Ｘ軸回転角, Ｙ軸回転角, Ｚ軸回転角
+	MgVect2D	vRx, vRy, vRz;									// Ｘ軸回転角, Ｙ軸回転角, Ｚ軸回転角
 
+	TRACE( " 2nd_1 m_rRotX = %f.1, m_rRotY = %f.1, m_rRotZ = %f.1\n", m_rRotX, m_rRotY, m_rRotZ);
 	if ( nFlags & MK_CONTROL) {
 		rdMov1 = 2.67f * PtD;
 
@@ -248,6 +251,8 @@ void M3View::OnMouseMove(
 	m_rRotX = - (MREAL)atan2( -m_mTrans.m[2][1], m_mTrans.m[2][2]) * MC_RTD;
 	m_rRotY = - (MREAL)asin( m_mTrans.m[2][0]) * MC_RTD;	
 	m_rRotZ = - (MREAL)atan2( -m_mTrans.m[1][0], m_mTrans.m[0][0]) * MC_RTD;
+
+	TRACE( " 2nd_2 m_rRotX = %f.1, m_rRotY = %f.1, m_rRotZ = %f.1\n", m_rRotX, m_rRotY, m_rRotZ);
 }
 
 } // namespace MC
