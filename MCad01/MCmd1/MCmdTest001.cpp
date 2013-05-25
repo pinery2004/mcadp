@@ -28,6 +28,7 @@
 #include "MsLib.h"
 #include "MgGeo.h"
 #include "MlLog.h"
+#include "MdmDB.h"
 
 namespace MC
 {
@@ -42,6 +43,13 @@ void BrkPoint()
 void Test000_Geo()
 {
 	{
+	//=======================
+	//	ウィンドウオープン
+
+	CPoint iRect[2] = { CPoint( 100, 100), CPoint( 1000, 800)};;
+
+	DWin::MdwOpen( 1, iRect,	1.0f, 1);
+
 	//=======================
 	//	直線上の点
 

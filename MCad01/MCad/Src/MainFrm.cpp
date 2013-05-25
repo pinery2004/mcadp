@@ -61,6 +61,7 @@ BEGIN_MESSAGE_MAP(CMainFrame, CMDIFrameWndEx)
 	ON_COMMAND(IDC_VIEW5OPEN, &CMainFrame::OnView5open)
 
 	ON_MESSAGE( WM_MYMESSAGERIBBONIO , OnRibbonIO)
+	ON_MESSAGE( WM_MYMESSAGEWINDOW, OnWindow)
 
 	ON_WM_CLOSE()
 END_MESSAGE_MAP()
@@ -108,6 +109,15 @@ LRESULT CMainFrame::OnRibbonIO( UINT wParam, LONG lParam)
 	return 0;
 }
 
+LRESULT CMainFrame::OnWindow( UINT wParam, LONG lParam)
+{
+	int ist = 0;
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 1, MTYUKAFUSEZU, 1, 1);		// ウィンドウ管理
+	if ( pWndInfo)
+		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
+	z_MCadApp.CreateWnd( 1, MTYUKAFUSEZU, 1, 1);
+	return 0;
+}
 // CMainFrame コンストラクション/デストラクション
 
 CMainFrame::CMainFrame()

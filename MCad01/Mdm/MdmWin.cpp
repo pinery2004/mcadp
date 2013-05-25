@@ -9,14 +9,12 @@
 //  K.Matsu           01/06/08    Created.
 //==========================================================================================
 #include "stdafx.h"
-#include "MsBasic.h"
-#include "MlLog.h"
-#include "MgDefine.h"
-#include "MgPoint.h"
-#include "MgRect.h"
-#include "MgMatD.h"
 
 #include "MdModel.h"
+#include "MdmDB.h"
+#include "Mmlib.h"
+#include "MmCmdMsg.h"
+#include "MainFrm.h"
 
 namespace MC
 {
@@ -908,13 +906,15 @@ MINT	MdwSetDefaultSize (
 //		本関数はタイトル付きウィンドウをオープンする。
 //		カスケードウィンドウをオープンする場合は、OpenExを使用する。
 //
-MINT	MdwOpen (	
+MINT	DWin::MdwOpen (	
 						MDID		i_idWFn,	// ウィンドウ機能番号
 						CPoint		i_iRect[2],	// ウィンドウ領域（ピクセル）(左下、右上)
 						MREAL		i_rScl,		// 拡大率（原寸=1.0）
 						MINT		i_idWin		// ウィンドウId
 				)
 {
+	CMainFrame*	pMainFrame = MC::System::GetpMainFrame();
+	pMainFrame->SendMessage( WM_MYMESSAGEWINDOW);
 	return 0;
 }
 

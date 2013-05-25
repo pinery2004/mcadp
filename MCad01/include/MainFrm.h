@@ -85,6 +85,7 @@ public:
 	afx_msg void OnDummy(UINT id);
 
 	afx_msg LRESULT OnRibbonIO( UINT wParam, LONG lParam);
+	afx_msg LRESULT OnWindow( UINT wParam, LONG lParam);
 
 	void SelectCombo1( MINT iCombo1);
 	void SelectCombo2( MINT iCombo2);
