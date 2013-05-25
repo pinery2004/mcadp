@@ -129,7 +129,7 @@ public:
 	MgVect3D( MREAL x1, MREAL y2, MREAL z3);
 	MgVect3D( MgVect2D v1, MREAL z3);
 	MgVect3D( const class MgLine3D& ln);										// 2D線分の方向を表す2Dベクトルを求める
-	MgVect3D( const class MgULine3D& uln);										// 2D直線の方向を表す2Dベクトルを求める
+	MgVect3D( const class MgSLine3D& sln);										// 2D直線の方向を表す2Dベクトルを求める
 	MgVect3D( const	MgPoint3D& P1, const MgPoint3D& P2);						// 始点から終点方向のベクトル
 
 //	MgVect3D( const MgPoint3D& v1);

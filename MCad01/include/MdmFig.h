@@ -394,7 +394,7 @@ public:
 
 	void Point3( const MgPoint3D&	i_Pt);
 	void Line3D( const MgLine3D&		i_Ln);
-	void ULine3D( const MgULine3D&	i_uLn);
+	void SLine3D( const MgSLine3D&	i_uLn);
 	void HLine3D( const MgHLine3D&	i_hLn);
 	void Polyl3( const MgPolyl3D&	i_Ply);
 	void Polyg3( const MgPolyg3D&	i_Pgn);
@@ -405,7 +405,7 @@ public:
 	void Plane3( const MgPlane3D&	i_Pln);
 	void IPlane3( const MgPlane3D&	i_iPln);
 //U	void Cyl3( const MgCly3&		i_Cly);
-//U	void SLine3D( const MgSLine3&	i_sLn);
+//U	void SLine3D( const MgSLine3&	i_SLn);
 };
 
 // 図形情報
@@ -551,7 +551,7 @@ public:
 	// 図形要素
 	void Point3( const MgPoint3D&	i_Pt);
 	void Line3D( const MgLine3D&		i_Ln);
-	void ULine3D( const MgULine3D&	i_uLn);
+	void SLine3D( const MgSLine3D&	i_uLn);
 	void HLine3D( const MgHLine3D&	i_hLn);
 	void Polyl3( const MgPolyl3D&	i_Ply);
 	void Polyg3( const MgPolyg3D&	i_Pgn);
@@ -562,7 +562,7 @@ public:
 	void Plane3( const MgPlane3D&	i_Pln);
 	void IPlane3( const MgPlane3D&	i_iPln);
 //U	void Cyl3( const MgCly3&		i_Cly);
-//U	void SLine3D( const MgSLine3&	i_sLn);
+//U	void SLine3D( const MgSLine3&	i_SLn);
 
 	// デバッグ用トレース出力
 	void Print( MCHAR* i_s);

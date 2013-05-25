@@ -46,17 +46,17 @@ inline MINT	MgDivide(								// (  O) ƒXƒeƒCƒ^ƒX
 						MINT		Sel,			// (I  ) ‘I‘ğğŒ
 													//		 MC_IN_BORDER	(001): “à‘¤
 													//		 MC_ON_BORDER	(002): •Óã
-				const	MgULine3D	&ULn1,			// (I  ) ’¼ü
+				const	MgSLine3D	&SLn1,			// (I  ) ’¼ü
 				const	MgPolyg3D	&Pg2,			// (I  ) ‘½ŠpŒ`
 						MgGLine3D	*GLn3			// (  O) •ªŠ„Œã‚Ìü•ªŒQ
 				)
 {
 	GLn3->n = 0;
-	return MgDivideAdd( Sel, ULn1, Pg2, GLn3);
+	return MgDivideAdd( Sel, SLn1, Pg2, GLn3);
 }
 */
 
-static void MgAndGLineOnULineAdd(
+static void MgAndGLineOnSLineAdd(
 				const	MgGLine2D	&Gln1,			// (I  ) ü•ªŒQ1	(1‚Â‚Ì’¼üã‚Ìü•ªŒQ)
 				const	MgGLine2D	&Gln2,			// (I  ) ü•ªŒQ2	(ü•ªŒQ1‚Æ“¯ˆê’¼üã‚Ìü•ªŒQ)
 						MgGLine2D	*Glno			// (  O) ü•ªŒQ1‚Æü•ªŒQ2‚Æ‚Ìd‚È‚Á‚½•”•ª‚Ìü•ªŒQ
@@ -64,11 +64,11 @@ static void MgAndGLineOnULineAdd(
 													//		 ‚0: d‚È‚èü•ª‚ ‚è
 				);
 
-static bool MgCheckRfmCls(									// (  O) true:	Œğ·ƒ`ƒFƒbƒN‘ÎÛ‰®ª–Ê
+static bool MgCheckRfmCls(							// (  O) true:	Œğ·ƒ`ƒFƒbƒN‘ÎÛ‰®ª–Ê
 													//		 false:	Œğ·ƒ`ƒFƒbƒN‘ÎÛŠO‰®ª–Ê
-				const	MgLine3D		&LnJim1,		// (I  ) ‰®ª–Ê1‚Ì’n‰ô‚èü
+				const	MgLine3D		&LnJim1,	// (I  ) ‰®ª–Ê1‚Ì’n‰ô‚èü
 				const	MgPlane3D	&Pln1,			// (I  ) ‰®ª–Ê1‚Ì•½–ÊŒW”
-				const	MgLine3D		&LnJim2,		// (I  ) ‰®ª–Ê2‚Ì’n‰ô‚èü
+				const	MgLine3D		&LnJim2,	// (I  ) ‰®ª–Ê2‚Ì’n‰ô‚èü
 				const	MgPlane3D	&Pln2			// (I  ) ‰®ª–Ê2‚Ì•½–ÊŒW”
 				);
 
@@ -238,7 +238,7 @@ void MhRoofInfo::SetJimCd(
 			ic0 = m_GJim1.n;
 			for ( ic1=0; ic1<m_GJim1.n; ic1++) {
 				ist = MgPerpPointLine2D( m_ptH, MgLine2D( m_GJim1[ic0].p, m_GJim1[ic1].p), &pt0);
-				if ( ist == MC_ON_LINE) {
+				if ( ist == MC_ON_SLINE) {
 					rD2 = MgDist_2( pt0, m_ptH);				// ‹——£‚Ì‚Qæ
 					if ( rD2 < rMinD2) {
 						Id = ic0;
@@ -276,7 +276,7 @@ void MhRoofInfo::CreateRfmForJim()
 	MgPoint3D	Pth;
 	MINT		iRfm0, iRfm1;
 	MgPlane3D	Pln0, Pln1;
-	MgULine3D	ULn1;
+	MgSLine3D	SLn1;
 	MgLine3D		Ln0, Ln1, Ln2, Ln3;
 	MgPoint3D	P0, P1;
 //
@@ -307,12 +307,12 @@ void MhRoofInfo::CreateRfmForJim()
 		Pln0 = m_GRfm.m_st[iRfm0].m_Pln;						// ’n‰ô‚èü‚ÉÚ‘±‚·‚é‰®ª–Ê
 		iRfm1 = m_GJim1[ic1].m_iRfm;
 		Pln1 = m_GRfm.m_st[iRfm1].m_Pln;						// Ÿ‚Ì’n‰ô‚èü‚ÉÚ‘±‚·‚é‰®ª–Ê
-		ist = MGeo::Intr2Pln3D( Pln0, Pln1, &ULn1);				// ‰®ª–ÊŠÔ‚ÌŒğü‚ğ‹‚ß‚é
+		ist = MGeo::Intr2Pln3D( Pln0, Pln1, &SLn1);				// ‰®ª–ÊŠÔ‚ÌŒğü‚ğ‹‚ß‚é
 			ASSERT( ist == MC_INT);								// Šñ“•”\¬üì¬ƒGƒ‰[@<ERROR>
-		if ( ULn1.v.z < 0.0)									// Œğü‚Ì•ûŒü‚ğãŒü‚«‚É‚·‚é
-			ULn1.v = - ULn1.v;
+		if ( SLn1.v.z < 0.0)									// Œğü‚Ì•ûŒü‚ğãŒü‚«‚É‚·‚é
+			SLn1.v = - SLn1.v;
 		P0 = MgPoint3DC( m_GJim1[ic0].m_p);
-		P1 = P0 + MCMAXIESIZE * ULn1.v;
+		P1 = P0 + MCMAXIESIZE * SLn1.v;
 		m_GJim1[ic0].m_LnR = MgLine3D( P0, P1);					// ŠO‚©‚çŒ©‚Ä’n‰ô‚èü‚Ì‰E‘¤‚ÉÚ‘±‚·‚é‰®ª\¬üiÅ‘å‰„’·ü•ªj
 		if ( m_GJim1[ic0].m_icd == MHRL_KERABA ||
 			m_GJim1[ic1].m_icd == MHRL_KERABA)
@@ -362,8 +362,8 @@ MINT MhRoofInfo::AdjustRfm1()						// (  O) ƒXƒeƒCƒ^ƒX@0: ³í@-1: ‰®ª–ÊŒ`ó
 	MgMat3E		MatXY;											// Pln to XY•½–Ê ‚R‚cƒ}ƒgƒŠƒbƒNƒX
 	MgMat3E		MatPln;											// XY•½–Ê to Pln ‚R‚cƒ}ƒgƒŠƒbƒNƒX
 	MgLine2D		ln0;
-	MgULine3D	ULn0;
-	MgULine2D	uln1;
+	MgSLine3D	SLn0;
+	MgSLine2D	sln1;
 	MgGLine2D	Gln0, Gln1, Gln2, Gln3;
 	MgGLine3D	GLn2;
 	MgPolyg2D	pg0, pg1, pg3;
@@ -399,14 +399,14 @@ MINT MhRoofInfo::AdjustRfm1()						// (  O) ƒXƒeƒCƒ^ƒX@0: ³í@-1: ‰®ª–ÊŒ`ó
 				MQUIT;
 //			ASSERT(m_GRfm.m_st[ic2].pg.n != 0);
 			pPln2 = &m_GRfm.m_st[ic2].m_Pln;					// ‘¼‚Ì‰®ª–Ê2‚ğæ‚èo‚·
-			ist1 = MGeo::Intr2Pln3D( *pPln1, *pPln2, &ULn0);			// “ñ‚Â‚Ì‰®ª–Ê‚ÌŒğ·’¼ü‚ğ‹‚ß‚é
+			ist1 = MGeo::Intr2Pln3D( *pPln1, *pPln2, &SLn0);			// “ñ‚Â‚Ì‰®ª–Ê‚ÌŒğ·’¼ü‚ğ‹‚ß‚é
 																// ‰®ª–Ê‚Í’n‰ô‚èü‚Ì‡‚É•À‚ñ‚Å‚¨‚èŒğ·’¼ü‚Ì•ûŒü‚Í
 																// ‚QŸŒ³‚É‚µ‚½‚Éx‚ª‘å‚©‚ç¬‚Ì•ûŒü‚ÉŒü‚©‚Á‚Ä‚¢‚é
 			if ( ist1 != MC_INT) 
 				continue;
 
-			MGeo::ULine3Dto2D( ULn0,  MatXY, &uln1);					// Œğ·’¼ü‚ğ‚QŸŒ³‚É•ÏŠ·‚µ
-			ist1 = MGeo::DivideULinePolygon2D( MC_IN_BORDER | MC_ON_BORDER , uln1, pg1, &Gln1);
+			MGeo::SLine3Dto2D( SLn0,  MatXY, &sln1);					// Œğ·’¼ü‚ğ‚QŸŒ³‚É•ÏŠ·‚µ
+			ist1 = MGeo::DivideSLinePolygon2D( MC_IN_BORDER | MC_ON_BORDER , sln1, pg1, &Gln1);
 																// ‰®ª–Ê1‚ÌŒ`ó“à‚ÉŠÜ‚Ü‚ê‚éü•ªŒQ1‚ğ‹‚ß‚é
 //							Gln1.Print( Mstr( "051114 ‰®ª–Ê1‚ÌŒ`ó“à‚ÉŠÜ‚Ü‚ê‚éü•ªŒQ1 Gln1"));
 			if ( ist1 != (MC_INT | MC_MATCH)) 
@@ -419,14 +419,14 @@ MINT MhRoofInfo::AdjustRfm1()						// (  O) ƒXƒeƒCƒ^ƒX@0: ³í@-1: ‰®ª–ÊŒ`ó
 				sel1 = MC_IN_BORDER;
 //				sel1 = MC_IN_BORDER | MC_ON_BORDER;
 
-			ist1 = MGeo::DivideULinePolygon3D( sel1, ULn0, m_GRfm.m_st[ic2].m_Pg, &GLn2);
+			ist1 = MGeo::DivideSLinePolygon3D( sel1, SLn0, m_GRfm.m_st[ic2].m_Pg, &GLn2);
 //							GLn2.Print( Mstr( "051114 ‰®ª–Ê2‚ÌŒ`ó“à‚ÉŠÜ‚Ü‚ê‚éü•ªŒQ2 GLn2"));
 			if ( ist1 != (MC_INT | MC_MATCH)) 
 				continue;
 			MGeo::GLine3Dto2D( GLn2, MatXY, &Gln2);					// ü•ªŒQ‚Q‚ğ‚QŸŒ³‚É•ÏŠ·‚·‚é
 //							Gln2.Print( Mstr( "051114 ‰®ª–Ê2‚ÌŒ`ó“à‚ÉŠÜ‚Ü‚ê‚éü•ªŒQ2 Gln2"));
 			
-			MgAndGLineOnULineAdd( Gln1, Gln2, &Gln3);			// (“¯ˆê’¼üã‚Ì)ü•ªŒQ1‚Æü•ªŒQ2‚Ìd‚È‚è•”•ª‚ğæ‚èo‚·
+			MgAndGLineOnSLineAdd( Gln1, Gln2, &Gln3);			// (“¯ˆê’¼üã‚Ì)ü•ªŒQ1‚Æü•ªŒQ2‚Ìd‚È‚è•”•ª‚ğæ‚èo‚·
 																// i’: “ü—Íƒf[ƒ^‚Ín“_X < I“_X‚ÅA ‚w•ûŒü•À‚Ñ‚Ìƒf[ƒ^j
 //			GLine2Dto3D( Gln3, MatPln, &GLnW);					// ƒfƒoƒbƒO—p
 			Gln0 += Gln3;
@@ -574,7 +574,7 @@ static bool MgCheckRfmCls(							// (  O) true:	Œğ·ƒ`ƒFƒbƒN‚É‰®ª–Ê2‚Ì‹«ŠE‚ğŠ
 ////////////////////////////////////////////////////////////////////////////
 //	“¯ˆê’¼üã‚Ìü•ªŒQ‚Æü•ªŒQ‚Ìd‚È‚è•”•ª‚Ìæ‚èo‚µ
 //	i’: “ü—Íƒf[ƒ^‚Í‚w•ûŒü•À‚Ñ‚Ìƒf[ƒ^j
-static void MgAndGLineOnULineAdd(
+static void MgAndGLineOnSLineAdd(
 				const	MgGLine2D	&Gln1,			// (I  ) ü•ªŒQ1	(1‚Â‚Ì’¼üã‚Ìü•ªŒQ)
 				const	MgGLine2D	&Gln2,			// (I  ) ü•ªŒQ2	(ü•ªŒQ1‚Æ“¯ˆê’¼üã‚Ìü•ªŒQ)
 						MgGLine2D	*Glno			// (  O) ü•ªŒQ1‚Æü•ªŒQ2‚Æ‚Ìd‚È‚Á‚½•”•ª‚Ìü•ªŒQ

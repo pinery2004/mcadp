@@ -151,7 +151,7 @@ public:
 						{ return ReversePoint2D( (MgPoint2D*)i_pPt, i_n, (MgPoint2D*)o__pPt);}
 
 	// 点列から直線に対象位置の点列を求める
-	static int SymmetryPointULine2D( MgPoint2D* i_pPt, int i_n, MgULine2D& uln, MgPoint2D* o_pPt);
+	static int SymmetryPointSLine2D( MgPoint2D* i_pPt, int i_n, MgSLine2D& sln, MgPoint2D* o_pPt);
 
 	//======================( ３次元 )==============================
 	// MgVect3D, MgPoint3D
@@ -221,7 +221,7 @@ public:
 						{ return ReversePoint3D( (MgPoint3D*)i_pPt, i_n, (MgPoint3D*)o__pPt);}
 
 	// 点列から直線に対象位置の点列を求める
-	static int SymmetryPointULine3D( MgPoint3D* i_pPt, int i_n, MgULine3D& uln, MgPoint3D* o_pPt);
+	static int SymmetryPointSLine3D( MgPoint3D* i_pPt, int i_n, MgSLine3D& sln, MgPoint3D* o_pPt);
 
 #ifdef _MgPoint3DA
 	//
@@ -244,8 +244,8 @@ public:
 	//	２次元直線
 	//
 	// 直線反転
-	static MgULine2D RevULine2D( const MgULine2D& ULn1)
-						{ return MgULine2DC( ULn1.p, - ULn1.v);}
+	static MgSLine2D RevSLine2D( const MgSLine2D& SLn1)
+						{ return MgSLine2DC( SLn1.p, - SLn1.v);}
 	//	２次元線分
 	//
 	// 線分 反転
@@ -266,8 +266,8 @@ public:
 	//	３次元直線
 	//
 	// 直線反転
-	static MgULine3D RevLine3D( const MgULine3D& ULn1)
-						{ return MgULine3D(ULn1.p, - ULn1.v);}
+	static MgSLine3D RevLine3D( const MgSLine3D& SLn1)
+						{ return MgSLine3D(SLn1.p, - SLn1.v);}
 
 	// 線分 反転
 	static MgLine3D RevLine3D( const MgLine3D& Ln1)
@@ -429,28 +429,28 @@ public:
 	//
 	//	２直線間の角の2等分線を求める
 	//
-	static void Bisector2ULine2D(					// (  O) ステータス
-					const	MgULine2D&	i_ULn1,		// (I  ) 直線1
-					const	MgULine2D&	i_ULn2,		// (I  ) 直線2
-							MgULine2D*	o_pULn3		// (  O) 直線3
+	static void Bisector2SLine2D(					// (  O) ステータス
+					const	MgSLine2D&	i_SLn1,		// (I  ) 直線1
+					const	MgSLine2D&	i_SLn2,		// (I  ) 直線2
+							MgSLine2D*	o_pSLn3		// (  O) 直線3
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	直線と線分間の角の2等分線を求める
 	//
-	static void BisectorULineLine2D(				// (  O) ステータス
-					const	MgULine2D&	i_ULn1,		// (I  ) 直線1
+	static void BisectorSLineLine2D(				// (  O) ステータス
+					const	MgSLine2D&	i_SLn1,		// (I  ) 直線1
 					const	MgLine2D&	i_Ln2,		// (I  ) 線分2
-							MgULine2D*	o_pULn3		// (  O) 直線3
+							MgSLine2D*	o_pSLn3		// (  O) 直線3
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	線分と直線間の角の2等分線を求める
 	//
-	static void BisectorLineULine2D(				// (  O) ステータス
+	static void BisectorLineSLine2D(				// (  O) ステータス
 					const	MgLine2D&	i_Ln1,		// (I  ) 線分1
-					const	MgULine2D&	i_ULn2,		// (I  ) 直線2
-							MgULine2D*	o_pULn3		// (  O) 直線3
+					const	MgSLine2D&	i_SLn2,		// (I  ) 直線2
+							MgSLine2D*	o_pSLn3		// (  O) 直線3
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -459,7 +459,7 @@ public:
 	static void Bisector2Line2D(					// (  O) ステータス
 					const	MgLine2D&	i_Ln1,		// (I  ) 線分1
 					const	MgLine2D&	i_Ln2,		// (I  ) 線分2
-							MgULine2D*	o_pULn3		// (  O) 直線3
+							MgSLine2D*	o_pSLn3		// (  O) 直線3
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -468,28 +468,28 @@ public:
 	//
 	//	２直線間の角の2等分線を求める
 	//
-	static void Bisector2ULine3D(					// (  O) ステータス
-					const	MgULine3D&	i_ULn1,		// (I  ) 直線1
-					const	MgULine3D&	i_ULn2,		// (I  ) 直線2
-							MgULine3D*	o_pULn3		// (  O) 直線3
+	static void Bisector2SLine3D(					// (  O) ステータス
+					const	MgSLine3D&	i_SLn1,		// (I  ) 直線1
+					const	MgSLine3D&	i_SLn2,		// (I  ) 直線2
+							MgSLine3D*	o_pSLn3		// (  O) 直線3
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	直線と線分間の角の2等分線を求める
 	//
-	static void BisectorULineLine3D(				// (  O) ステータス
-					const	MgULine3D&	i_ULn1,		// (I  ) 直線1
+	static void BisectorSLineLine3D(				// (  O) ステータス
+					const	MgSLine3D&	i_SLn1,		// (I  ) 直線1
 					const	MgLine3D&	i_Ln2,		// (I  ) 線分2
-							MgULine3D*	o_pULn3		// (  O) 直線3
+							MgSLine3D*	o_pSLn3		// (  O) 直線3
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	線分と直線間の角の2等分線を求める
 	//
-	static void BisectorLineULine3D(				//
+	static void BisectorLineSLine3D(				//
 					const	MgLine3D&	i_Ln1,		// (I  ) 線分1
-					const	MgULine3D&	i_ULn2,		// (I  ) 直線2
-							MgULine3D*	o_pULn3		// (  O) 直線3
+					const	MgSLine3D&	i_SLn2,		// (I  ) 直線2
+							MgSLine3D*	o_pSLn3		// (  O) 直線3
 			);
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -498,7 +498,7 @@ public:
 	static void Bisector2Line3D(					//
 					const	MgLine3D&	i_Ln1,		// (I  ) 線分1
 					const	MgLine3D&	i_Ln2,		// (I  ) 線分2
-							MgULine3D*	o_pULn3		// (  O) 直線3
+							MgSLine3D*	o_pSLn3		// (  O) 直線3
 			);
 
 	//======================( ２次元、３次元 )==============================
@@ -747,19 +747,19 @@ public:
 	//		３次元座標変換マトリックスにより３次元データを座標変換する
 	//
 	//	使用法
-	//		MgULine2D = MgULine2D * MgMat2E;
+	//		MgSLine2D = MgSLine2D * MgMat2E;
 	//
 	//	| px  py  1   |     | m11 m12 0 |
 	//	| vx  vy  0   |  X  | m21 m22 0 |
 	//						| m31 m32 1 |
 	//
-//	inline	MgULine2D operator * ( const MgULine2D& i_uln, const MgMat2E& i_mt)		// *	座標変換
-	static MgULine2D Mat2EMultULine2D( const MgULine2D& i_uln, const MgMat2E& i_mt)
+//	inline	MgSLine2D operator * ( const MgSLine2D& i_sln, const MgMat2E& i_mt)		// *	座標変換
+	static MgSLine2D Mat2EMultSLine2D( const MgSLine2D& i_sln, const MgMat2E& i_mt)
 	{ 
-		MgULine2D uln;
-		uln.p = i_uln.p * i_mt;
-		uln.v = i_uln.v * i_mt;
-		return i_uln;
+		MgSLine2D sln;
+		sln.p = i_sln.p * i_mt;
+		sln.v = i_sln.v * i_mt;
+		return i_sln;
 	}
 
 	//===========================================================================
@@ -773,7 +773,7 @@ public:
 	//	| px  py  0  |  =  | px  py  0  |  X  | m21 m22 0 |
 	//				   						  | m31 m32 1 |
 	//
-	static MgPoint2D Mat2EMultCheckEqualPoint2D( MgPoint2D& io_pt, const MgMat2E& i_mt);
+	static MgPoint2D Mat2EMultEqualPoint2D( MgPoint2D& io_pt, const MgMat2E& i_mt);
 
 	//===========================================================================
 	//	処理内容
@@ -786,7 +786,7 @@ public:
 	//	| vx  vy  0  |  =  | vx  vy  0  |  X  | m21 m22 0 |
 	//				   						  | m31 m32 1 |
 	//
-	static MgVect2D Mat2EMultCheckEqualVect2D( MgVect2D& io_pt, const MgMat2E& i_mt);
+	static MgVect2D Mat2EMultEqualVect2D( MgVect2D& io_pt, const MgMat2E& i_mt);
 
 	//===========================================================================
 	//	処理内容
@@ -812,18 +812,18 @@ public:
 	//		３次元座標変換マトリックスにより３次元データを座標変換する
 	//
 	//	使用法
-	//		MgULine2D *= MgMat2E;
+	//		MgSLine2D *= MgMat2E;
 	//
 	//	| px  py  1   |     | px  py  1   |     | m11 m12 0 |
 	//	| vx  vy  0   |  =  | vx  vy  0   |  X  | m21 m22 0 |
 	//											| m31 m32 1 |
 	//
-//S	inline	MgULine2D operator *= ( MgULine2D& i_uln, const MgMat2E& i_mt)			// *=	座標変換
-	static MgULine2D Mat2EMultEqualULine2D( MgULine2D& io_uln, const MgMat2E& i_mt)
+//S	inline	MgSLine2D operator *= ( MgSLine2D& i_sln, const MgMat2E& i_mt)			// *=	座標変換
+	static MgSLine2D Mat2EMultEqualSLine2D( MgSLine2D& io_sln, const MgMat2E& i_mt)
 	{ 
-		io_uln.p *= i_mt;
-		io_uln.v *= i_mt;
-		return io_uln;
+		io_sln.p *= i_mt;
+		io_sln.v *= i_mt;
+		return io_sln;
 	}
 
 	//===============( ２次元座標変換マトリックスで３次元座標処理 )==============
@@ -882,20 +882,20 @@ public:
 	//		３次元座標変換マトリックスにより３次元データを座標変換する
 	//
 	//	使用法
-	//		MgULine3D = MgULine3D1 * MgMat3E;
+	//		MgSLine3D = MgSLine3D1 * MgMat3E;
 	//
 	//	| px  py  pz  1   |     | m11 m12  0  0 |
 	//	| vx  vy  vz  0   |  X  | m21 m22  0  0 |
 	//							|  0   0   1  0 |
 	//							| m31 m32  0  1 |
 	//
-//S	inline	MgULine3D operator * ( const MgULine3D& i_ULn, const MgMat2E& i_mt)		// *	座標変換
-	static MgULine3D Mat2EMultULine3D( const MgULine3D& i_ULn, const MgMat2E& i_mt)
+//S	inline	MgSLine3D operator * ( const MgSLine3D& i_SLn, const MgMat2E& i_mt)		// *	座標変換
+	static MgSLine3D Mat2EMultSLine3D( const MgSLine3D& i_SLn, const MgMat2E& i_mt)
 	{
-		MgULine3D ULn;
-		ULn.p = i_ULn.p * i_mt;
-		ULn.v = i_ULn.v * i_mt;
-		return ULn;
+		MgSLine3D SLn;
+		SLn.p = i_SLn.p * i_mt;
+		SLn.v = i_SLn.v * i_mt;
+		return SLn;
 	}
 
 	//===========================================================================
@@ -910,7 +910,7 @@ public:
 	//			   									|  0   0  1 0 |
 	//			   									| m31 m32 0 1 |
 	//
-	static MgPoint3D Mat2EMultCheckEqualPoint3D( MgPoint3D& io_Pt, const MgMat2E& i_mt);
+	static MgPoint3D Mat2EMultEqualPoint3D( MgPoint3D& io_Pt, const MgMat2E& i_mt);
 
 	//===========================================================================
 	//	処理内容
@@ -924,7 +924,7 @@ public:
 	//			   									|  0   0  1 0 |
 	//			   									| m31 m32 0 1 |
 	//
-	static MgVect3D Mat2EMultCheckEqualVect3D( MgVect3D& io_Pt, const MgMat2E& i_mt);
+	static MgVect3D Mat2EMultEqualVect3D( MgVect3D& io_Pt, const MgMat2E& i_mt);
 
 	//===========================================================================
 	//	処理内容
@@ -951,19 +951,19 @@ public:
 	//		３次元座標変換マトリックスにより３次元データを座標変換する
 	//
 	//	使用法
-	//		MgULine3D *= MgMat3E;
+	//		MgSLine3D *= MgMat3E;
 	//
 	//	| px  py  pz  1   |     | px  py  pz  1   |     | m11 m12  0  0 |
 	//	| vx  vy  vz  0   |  =  | vx  vy  vz  0   |  X  | m21 m22  0  0 |
 	//													|  0   0   1  0 |
 	//													| m31 m32  0  1 |
 	//
-//S	inline	MgULine3D operator *= ( MgULine3D& io_ULn, const MgMat2E& i_mt)			// *=	座標変換
-	static MgULine3D Mat2EMultEqualLine3D( MgULine3D& io_ULn, const MgMat2E& i_mt)
+//S	inline	MgSLine3D operator *= ( MgSLine3D& io_SLn, const MgMat2E& i_mt)			// *=	座標変換
+	static MgSLine3D Mat2EMultEqualLine3D( MgSLine3D& io_SLn, const MgMat2E& i_mt)
 	{ 
-		io_ULn.p *= i_mt;
-		io_ULn.v *= i_mt;
-		return io_ULn;
+		io_SLn.p *= i_mt;
+		io_SLn.v *= i_mt;
+		return io_SLn;
 	}
 
 	//===========================================================================
@@ -1122,20 +1122,20 @@ public:
 	//		３次元座標変換マトリックスにより２次元データを座標変換する
 	//
 	//	使用法
-	//		MgULine2D = MgULine2D1 * MgMat3E1;
+	//		MgSLine2D = MgSLine2D1 * MgMat3E1;
 	//
 	//	| px  py  0   1   |     | m11 m12 m13 0 |
 	//	| vx  vy  0   0   |  X  | m21 m22 m23 0 |
 	//							| m31 m32 m33 0 |
 	//							| m41 m42 m43 1 |
 	//
-//S	inline MgULine2D operator * ( const MgULine2D& i_uln, const MgMat3E& i_Mt)		// 座標変換
-	static MgULine2D Mat3EMultULine2D( const MgULine2D& i_uln, const MgMat3E& i_Mt)
+//S	inline MgSLine2D operator * ( const MgSLine2D& i_sln, const MgMat3E& i_Mt)		// 座標変換
+	static MgSLine2D Mat3EMultSLine2D( const MgSLine2D& i_sln, const MgMat3E& i_Mt)
 	{
-		MgULine2D uln;
-		uln.p = i_uln.p * i_Mt;
-		uln.v = i_uln.v * i_Mt;
-		return uln;
+		MgSLine2D sln;
+		sln.p = i_sln.p * i_Mt;
+		sln.v = i_sln.v * i_Mt;
+		return sln;
 	}
 
 	//===========================================================================
@@ -1150,7 +1150,7 @@ public:
 	//	           									    | m31 m32 m33 0 |
 	//	           									    | m41 m42 m43 1 |
 	//
-	static MgPoint2D Mat3EMultCheckEqualPoint2D( MgPoint2D& io_Pt, const MgMat3E& i_Mt);
+	static MgPoint2D Mat3EMultEqualPoint2D( MgPoint2D& io_Pt, const MgMat3E& i_Mt);
 
 	//===========================================================================
 	//	処理内容
@@ -1164,7 +1164,7 @@ public:
 	//	           									    | m31 m32 m33 0 |
 	//	           									    | m41 m42 m43 1 |
 	//
-	static MgVect2D Mat3EMultCheckEqualVect2D( MgVect2D& io_Pt, const MgMat3E& i_Mt);
+	static MgVect2D Mat3EMultEqualVect2D( MgVect2D& io_Pt, const MgMat3E& i_Mt);
 
 	//===========================================================================
 	//	処理内容
@@ -1191,19 +1191,19 @@ public:
 	//		３次元座標変換マトリックスにより２次元データを座標変換する
 	//
 	//	使用法
-	//		MgULine2D *= MgMat3E;
+	//		MgSLine2D *= MgMat3E;
 	//
 	//	| px  py  0   1   |     | px  py  0   1   |     | m11 m12 m13 0 |
 	//	| vx  vy  0   0   |  =  | vx  vy  0   0   |  X  | m21 m22 m23 0 |
 	//													| m31 m32 m33 0 |
 	//													| m41 m42 m43 1 |
 	//
-//S	inline MgULine2D operator *= ( MgULine2D& io_uln, const MgMat3E& i_Mt)				// 座標変換
-	static MgULine2D MGeo::Mat3EMultEqualULine2D( MgULine2D& io_uln, const MgMat3E& i_Mt)
+//S	inline MgSLine2D operator *= ( MgSLine2D& io_sln, const MgMat3E& i_Mt)				// 座標変換
+	static MgSLine2D MGeo::Mat3EMultEqualSLine2D( MgSLine2D& io_sln, const MgMat3E& i_Mt)
 	{
-		io_uln.p *= i_Mt;
-		io_uln.v *= i_Mt;
-		return io_uln;
+		io_sln.p *= i_Mt;
+		io_sln.v *= i_Mt;
+		return io_sln;
 	}
 
 	//===========================================================================
@@ -1260,20 +1260,20 @@ public:
 	//		３次元座標変換マトリックスにより３次元データを座標変換する
 	//
 	//	使用法
-	//		MgULine3D = MgULine3D1 * MgMat3E1;
+	//		MgSLine3D = MgSLine3D1 * MgMat3E1;
 	//
 	//	| px  py  pz  1   |     | m11 m12 m13 0 |
 	//	| vx  vy  vz  0   |  X  | m21 m22 m23 0 |
 	//							| m31 m32 m33 0 |
 	//							| m41 m42 m43 1 |
 	//
-//S	inline MgULine3D operator * ( const MgULine3D& i_ULn, const MgMat3E& i_Mt)		// 座標変換
-	static MgULine3D Mat3EMultULine3D( const MgULine3D& i_ULn, const MgMat3E& i_Mt)
+//S	inline MgSLine3D operator * ( const MgSLine3D& i_SLn, const MgMat3E& i_Mt)		// 座標変換
+	static MgSLine3D Mat3EMultSLine3D( const MgSLine3D& i_SLn, const MgMat3E& i_Mt)
 	{
-		MgULine3D ULn;
-		ULn.p = i_ULn.p * i_Mt;
-		ULn.v = i_ULn.v * i_Mt;
-		return ULn;
+		MgSLine3D SLn;
+		SLn.p = i_SLn.p * i_Mt;
+		SLn.v = i_SLn.v * i_Mt;
+		return SLn;
 	}
 
 	//===========================================================================
@@ -1288,7 +1288,7 @@ public:
 	//												    | m31 m32 m33 0 |
 	//												    | m41 m42 m43 1 |
 	//
-	static MgPoint3D Mat3EMultCheckEqualPoint3D( MgPoint3D& io_Pt, const MgMat3E& i_Mt);
+	static MgPoint3D Mat3EMultEqualPoint3D( MgPoint3D& io_Pt, const MgMat3E& i_Mt);
 
 	//===========================================================================
 	//	処理内容
@@ -1302,7 +1302,7 @@ public:
 	//												    | m31 m32 m33 0 |
 	//												    | m41 m42 m43 1 |
 	//
-	static MgVect3D Mat3EMultCheckEqualVect3D( MgVect3D& io_Pt, const MgMat3E& i_Mt);
+	static MgVect3D Mat3EMultEqualVect3D( MgVect3D& io_Pt, const MgMat3E& i_Mt);
 
 	//===========================================================================
 	//	処理内容
@@ -1329,19 +1329,19 @@ public:
 	//		３次元座標変換マトリックスにより３次元データを座標変換する
 	//
 	//	使用法
-	//		MgULine3D *= MgMat3E;
+	//		MgSLine3D *= MgMat3E;
 	//
 	//	| px  py  pz  1   |     | px  py  pz  1   |     | m11 m12 m13 0 |
 	//	| vx  vy  vz  0   |  =  | vx  vy  vz  0   |  X  | m21 m22 m23 0 |
 	//													| m31 m32 m33 0 |
 	//													| m41 m42 m43 1 |
 	//
-//S	inline MgULine3D operator *= ( MgULine3D& io_ULn, const MgMat3E& i_Mt)			// 座標変換
-	static MgULine3D Mat3EMultEqualULine3D( MgULine3D& io_ULn, const MgMat3E& i_Mt)
+//S	inline MgSLine3D operator *= ( MgSLine3D& io_SLn, const MgMat3E& i_Mt)			// 座標変換
+	static MgSLine3D Mat3EMultEqualSLine3D( MgSLine3D& io_SLn, const MgMat3E& i_Mt)
 	{
-		io_ULn.p *= i_Mt;
-		io_ULn.v *= i_Mt;
-		return io_ULn;
+		io_SLn.p *= i_Mt;
+		io_SLn.v *= i_Mt;
+		return io_SLn;
 	}
 
 	//======================( ２次元 )==============================
@@ -1561,7 +1561,7 @@ public:
 	//		直線に関する鏡映変換行列を作成
 	//
 	static MgMat2E Mat2EMirror(						// (  O) 鏡像変換行列
-					const	MgULine2D&	i_uln		// (I  ) 鏡映の軸とする直線
+					const	MgSLine2D&	i_sln		// (I  ) 鏡映の軸とする直線
 			);
 
 	//======================( ３次元 )==============================
@@ -1583,7 +1583,7 @@ public:
 	//		回転軸となる直線と回転角より座標変換マトリックスを作成
 	//
 	static MgMat3E Mat3ERot(						// (  O) 変換行列
-					const	MgULine3D&	i_ULn, 		// (I  ) 回転軸となる直線
+					const	MgSLine3D&	i_SLn, 		// (I  ) 回転軸となる直線
 							MREAL		i_ar		// (I  ) 回転角(Degree)
 			);
 
@@ -1752,10 +1752,10 @@ public:
 	//===================(３次元 → ２次元)=========================
 	//		３Ｄ直線を２Ｄ直線へ座標変換する
 	//
-	static void ULine3Dto2D(
-					const	MgULine3D&	i_ULn,		// (I  ) ３Ｄ直線
+	static void SLine3Dto2D(
+					const	MgSLine3D&	i_SLn,		// (I  ) ３Ｄ直線
 					const	MgMat3E&	i_Mt,		// (I  ) 座標変換マトリックス
-						 	MgULine2D*	o_puln		// (  O) ２Ｄ直線
+						 	MgSLine2D*	o_psln		// (  O) ２Ｄ直線
 					);
 
 	//===================(３次元 → ２次元)=========================
@@ -1782,8 +1782,8 @@ public:
 	//===================(３次元 → ２次元)=========================
 	//		３Ｄ直線を２Ｄ直線へ座標変換する
 	//
-	static MgULine2D ULine3Dto2D2(					// (  O) ２Ｄ直線
-					const	MgULine3D&	i_ULn,		// (I  ) ３Ｄ直線
+	static MgSLine2D SLine3Dto2D2(					// (  O) ２Ｄ直線
+					const	MgSLine3D&	i_SLn,		// (I  ) ３Ｄ直線
 					const	MgMat3E&	i_Mt		// (I  ) 座標変換マトリックス
 					);
 
@@ -1849,10 +1849,10 @@ public:
 	//===================(２次元 → ３次元)=========================
 	//		２Ｄ直線を３Ｄ直線へ座標変換する
 	//
-	static void ULine2Dto3D(
-					const	MgULine2D&	i_uln,		// (I  ) ２Ｄ直線
+	static void SLine2Dto3D(
+					const	MgSLine2D&	i_sln,		// (I  ) ２Ｄ直線
 					const	MgMat3E&	i_Mt,		// (I  ) 座標変換マトリックス
-						 	MgULine3D*	o_ULn		// (  O) ３Ｄ直線
+						 	MgSLine3D*	o_SLn		// (  O) ３Ｄ直線
 					);
 
 	//===================(２次元 → ３次元)=========================
@@ -1879,8 +1879,8 @@ public:
 	//===================(２次元 → ３次元)=========================
 	//		２Ｄ直線を３Ｄ直線へ座標変換する
 	//
-	static MgULine3D ULine2Dto3D3(					// (  O) ３Ｄ直線
-					const	MgULine2D	&i_uln,		// (I  ) ２Ｄ直線
+	static MgSLine3D SLine2Dto3D3(					// (  O) ３Ｄ直線
+					const	MgSLine2D	&i_sln,		// (I  ) ２Ｄ直線
 					const	MgMat3E		&i_Mt		// (I  ) 座標変換マトリックス
 					);
 
@@ -2140,7 +2140,7 @@ public:
 	//	| px  py  1  |  =  | px  py  1  |  X  | m21 m22 m23 |
 	//				   						  | m31 m32 m33 |
 	//
-	static MgPoint2D Mat2DMultCheckEqualPoint2D( MgPoint2D& io_pt, const MgMat2D& i_mt);
+	static MgPoint2D Mat2DMultEqualPoint2D( MgPoint2D& io_pt, const MgMat2D& i_mt);
 
 	//===========================================================================
 	//	処理内容
@@ -2153,33 +2153,33 @@ public:
 	//	| vx  vy  0  |  =  | vx  vy  0  |  X  | m21 m22 m23 |
 	//				   						  | m31 m32 m33 |
 	//
-	static MgVect2D Mat2DMultCheckEqualVect2D( MgVect2D& io_pt, const MgMat2D& i_mt);
+	static MgVect2D Mat2DMultEqualVect2D( MgVect2D& io_pt, const MgMat2D& i_mt);
 
 	//===========================================================================
 	//	処理内容
 	//		座標変換マトリックスにより座標変換する
 	//
 	//	使用法
-	//		MgULine2D = MgULine2D *  MgMat2D;
+	//		MgSLine2D = MgSLine2D *  MgMat2D;
 	//
 	//	| px  py  1  |     | m11 m12 m13 |
 	//	| vx  vy  0  |  X  | m21 m22 m23 |
 	//					   | m31 m32 m33 |
 	//
-	static MgULine2D Mat2DMultULine2D( const MgULine2D& i_uln, const MgMat2D& i_mt);
+	static MgSLine2D Mat2DMultSLine2D( const MgSLine2D& i_sln, const MgMat2D& i_mt);
 
 	//===========================================================================
 	//	処理内容
 	//		座標変換マトリックスにより座標変換する
 	//
 	//	使用法
-	//		MgULine2D *= MgMat2D;
+	//		MgSLine2D *= MgMat2D;
 	//
 	//	| px  py  1  |     | px  py  1  |     | m11 m12 m13 |
 	//	| vx  vy  0  |  =  | vx  vy  1  |  X  | m21 m22 m23 |
 	//			             				  | m31 m32 m33 |
 	//
-	static MgULine2D Mat2DMultEqualULine2D( MgULine2D& io_uln, const MgMat2D& i_mt);
+	static MgSLine2D Mat2DMultEqualSLine2D( MgSLine2D& io_sln, const MgMat2D& i_mt);
 
 	//===============( ２次元座標変換マトリックスで３次元座標処理 )==============
 	//
@@ -2224,7 +2224,7 @@ public:
 	//			   									|  0   0  1  0  |
 	//			   									| m31 m32 0 m33 |
 	
-	static MgPoint3D Mat2DMultCheckEqualPoint3D( MgPoint3D& io_Pt, const MgMat2D& i_mt);
+	static MgPoint3D Mat2DMultEqualPoint3D( MgPoint3D& io_Pt, const MgMat2D& i_mt);
 
 	//===========================================================================
 	//	処理内容
@@ -2238,7 +2238,7 @@ public:
 	//			   									|  0   0  1  0  |
 	//			   									| m31 m32 0 m33 |
 	
-	static MgVect3D Mat2DMultCheckEqualVect3D( MgVect3D& io_Pt, const MgMat2D& i_mt);
+	static MgVect3D Mat2DMultEqualVect3D( MgVect3D& io_Pt, const MgMat2D& i_mt);
 
 	//===========================================================================
 	//
@@ -2382,7 +2382,7 @@ public:
 	//	           									    | m31 m32 m33 m34 |
 	//	           									    | m41 m42 m43 m44 |
 	//
-	static MgPoint2D Mat3DMultCheckEqualPoint2D( MgPoint2D& io_Pt, const MgMat3D& i_Mt);
+	static MgPoint2D Mat3DMultEqualPoint2D( MgPoint2D& io_Pt, const MgMat3D& i_Mt);
 
 	//===========================================================================
 	//	処理内容
@@ -2396,7 +2396,7 @@ public:
 	//	           									    | m31 m32 m33 m34 |
 	//	           									    | m41 m42 m43 m44 |
 	//
-	static MgVect2D Mat3DMultCheckEqualVect2D( MgVect2D& io_Pt, const MgMat3D& i_Mt);
+	static MgVect2D Mat3DMultEqualVect2D( MgVect2D& io_Pt, const MgMat3D& i_Mt);
 
 	//===========================================================================
 	//	処理内容
@@ -2438,7 +2438,7 @@ public:
 	//												    | m31 m32 m33 m34 |
 	//												    | m41 m42 m43 m44 |
 	//
-	static MgPoint3D Mat3DMultCheckEqualPoint3D( MgPoint3D& io_Pt, const MgMat3D& i_Mt);
+	static MgPoint3D Mat3DMultEqualPoint3D( MgPoint3D& io_Pt, const MgMat3D& i_Mt);
 
 	//===========================================================================
 	//	処理内容
@@ -2452,7 +2452,7 @@ public:
 	//												    | m31 m32 m33 m34 |
 	//												    | m41 m42 m43 m44 |
 	//
-	static MgVect3D Mat3DMultCheckEqualVect3D( MgVect3D& io_Pt, const MgMat3D& i_Mt);
+	static MgVect3D Mat3DMultEqualVect3D( MgVect3D& io_Pt, const MgMat3D& i_Mt);
 
 	//===========================================================================
 	//	処理内容
@@ -2480,20 +2480,20 @@ public:
 	//		３次元座標変換マトリックスにより３次元データを座標変換する
 	//
 	//	使用法
-	//		MgULine3D_2 = MgULine3D_1 * MgMat3D;
+	//		MgSLine3D_2 = MgSLine3D_1 * MgMat3D;
 	//
 	//	| px  py  pz  1   |     | m11 m12 m13 m14 |
 	//	| vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
 	//							| m31 m32 m33 m34 |
 	//							| m41 m42 m43 m44 |
 	//
-//S	inline MgULine3D operator * ( const MgULine3D& i_Ln, const MgMat3E& i_Mt)	// 座標変換
-	static MgULine3D Mat3DMultULine3D( const MgULine3D& i_ULn, const MgMat3D& i_Mt)
+//S	inline MgSLine3D operator * ( const MgSLine3D& i_Ln, const MgMat3E& i_Mt)	// 座標変換
+	static MgSLine3D Mat3DMultSLine3D( const MgSLine3D& i_SLn, const MgMat3D& i_Mt)
 	{
-		MgULine3D ULn;
-		ULn.p = i_ULn.p * i_Mt;
-		ULn.v = i_ULn.v * i_Mt;
-		return ULn;
+		MgSLine3D SLn;
+		SLn.p = i_SLn.p * i_Mt;
+		SLn.v = i_SLn.v * i_Mt;
+		return SLn;
 	}
 
 	//===========================================================================
@@ -2508,7 +2508,7 @@ public:
 	//													| m31 m32 m33 m34 |
 	//													| m41 m42 m43 m44 |
 	//
-//S	inline MgULine3D operator *= ( MgULine3D& io_ULn, const MgMat3E& i_Mt)			// 座標変換
+//S	inline MgSLine3D operator *= ( MgSLine3D& io_SLn, const MgMat3E& i_Mt)			// 座標変換
 	static MgLine3D Mat3DMultEqualLine3D( MgLine3D& io_Ln, const MgMat3D& i_Mt)
 	{
 		io_Ln.p[0] *= i_Mt;
@@ -2528,12 +2528,12 @@ public:
 	//													| m31 m32 m33 m34 |
 	//													| m41 m42 m43 m44 |
 	//
-//S	inline MgULine3D operator *= ( MgULine3D& io_ULn, const MgMat3E& i_Mt)			// 座標変換
-	static MgULine3D Mat3DMultEqualULine3D( MgULine3D& io_ULn, const MgMat3D& i_Mt)
+//S	inline MgSLine3D operator *= ( MgSLine3D& io_SLn, const MgMat3E& i_Mt)			// 座標変換
+	static MgSLine3D Mat3DMultEqualSLine3D( MgSLine3D& io_SLn, const MgMat3D& i_Mt)
 	{
-		io_ULn.p *= i_Mt;
-		io_ULn.v *= i_Mt;
-		return io_ULn;
+		io_SLn.p *= i_Mt;
+		io_SLn.v *= i_Mt;
+		return io_SLn;
 	}
 
 	//======================( ２次元 )==============================
@@ -2753,7 +2753,7 @@ public:
 	//		直線に関する鏡映変換行列を作成
 	//
 	static MgMat2D Mat2DMirror(						// (  O) 鏡像変換行列
-					const	MgULine2D&	i_uln		// (I  ) 鏡映の軸とする直線
+					const	MgSLine2D&	i_sln		// (I  ) 鏡映の軸とする直線
 			);
 
 	//======================( ３次元 )==============================
@@ -2775,7 +2775,7 @@ public:
 	//		回転軸となる直線と回転角より座標変換マトリックスを作成
 	//
 	static MgMat3D Mat3DRot(						// (  O) 変換行列
-					const	MgULine3D&	i_ULn, 		// (I  ) 回転軸となる直線
+					const	MgSLine3D&	i_SLn, 		// (I  ) 回転軸となる直線
 							MREAL		i_ar		// (I  ) 回転角(Degree)
 			);
 
@@ -2944,10 +2944,10 @@ public:
 	//===================(３次元 → ２次元)=========================
 	//		３Ｄ直線を２Ｄ直線へ座標変換する
 	//
-	static void ULine3Dto2D(
-					const	MgULine3D&	i_ULn,		// (I  ) ３Ｄ直線
+	static void SLine3Dto2D(
+					const	MgSLine3D&	i_SLn,		// (I  ) ３Ｄ直線
 					const	MgMat3D&	i_Mt,		// (I  ) 座標変換マトリックス
-						 	MgULine2D*	o_puln		// (  O) ２Ｄ直線
+						 	MgSLine2D*	o_psln		// (  O) ２Ｄ直線
 					);
 
 	//===================(３次元 → ２次元)=========================
@@ -2974,8 +2974,8 @@ public:
 	//===================(３次元 → ２次元)=========================
 	//		３Ｄ直線を２Ｄ直線へ座標変換する
 	//
-	static MgULine2D ULine3Dto2D2(					// (  O) ２Ｄ直線
-					const	MgULine3D&	i_ULn,		// (I  ) ３Ｄ直線
+	static MgSLine2D SLine3Dto2D2(					// (  O) ２Ｄ直線
+					const	MgSLine3D&	i_SLn,		// (I  ) ３Ｄ直線
 					const	MgMat3D&	i_Mt		// (I  ) 座標変換マトリックス
 					);
 
@@ -3041,10 +3041,10 @@ public:
 	//===================(２次元 → ３次元)=========================
 	//		２Ｄ直線を３Ｄ直線へ座標変換する
 	//
-	static void ULine2Dto3D(
-					const	MgULine2D&	i_uln,		// (I  ) ２Ｄ直線
+	static void SLine2Dto3D(
+					const	MgSLine2D&	i_sln,		// (I  ) ２Ｄ直線
 					const	MgMat3D&	i_Mt,		// (I  ) 座標変換マトリックス
-						 	MgULine3D*	o_pULn		// (  O) ３Ｄ直線
+						 	MgSLine3D*	o_pSLn		// (  O) ３Ｄ直線
 					);
 
 	//===================(２次元 → ３次元)=========================
@@ -3071,8 +3071,8 @@ public:
 	//===================(２次元 → ３次元)=========================
 	//		２Ｄ直線を３Ｄ直線へ座標変換する
 	//
-	static MgULine3D ULine2Dto3D3(					// (  O) ３Ｄ直線
-					const	MgULine2D&	i_uln,		// (I  ) ２Ｄ直線
+	static MgSLine3D SLine2Dto3D3(					// (  O) ３Ｄ直線
+					const	MgSLine2D&	i_sln,		// (I  ) ２Ｄ直線
 					const	MgMat3D&	i_Mt		// (I  ) 座標変換マトリックス
 					);
 
@@ -3128,28 +3128,28 @@ public:
 	// ---------------------( ２次元 )------------------------------
 	//		多角形を直線で切り、直線の指定側の領域を得る			<多角形が穴の場合の考慮不足?>
 	//
-	static MINT DividePolygonULine2D(				// (  O) ステイタス
-													//			MC_NINT			(0): 交差なし
-													//			MC_INT			(1): 交差あり
+	static MINT DividePolygonSLine2D(				// (  O) ステイタス
+													//			MC_NINT			: 交差なし
+													//			MC_INT			: 交差あり
 							MINT		i_Sel,		// (I  ) 選択条件
-													//			MC_LEFT			(010): 左側の領域
-													//			MC_RIGHT		(040): 右側の領域
+													//			MC_LEFT			: 左側の領域
+													//			MC_RIGHT		: 右側の領域
 					const	MgPolyg2D&	i_Pg1,		// (I  ) 多角形
-					const	MgULine2D&	i_ULn2,		// (I  ) 直線
+					const	MgSLine2D&	i_SLn2,		// (I  ) 直線
 							MgGPolyg2D*	o_pGPg3		// (  O) 穴付き多角形群
 					);
 	
 	// ---------------------( ２次元 )------------------------------
 	//		穴付き多角形を直線で切り、直線の指定側の領域を得る
 	//
-	static MINT DivideGPolygonULine2D(				// (  O) ステイタス
-													//			MC_NINT			(0): 交差なし
-													//			MC_INT			(1): 交差あり
+	static MINT DivideGPolygonSLine2D(				// (  O) ステイタス
+													//			MC_NINT			: 交差なし
+													//			MC_INT			: 交差あり
 							MINT		i_Sel,		// (I  ) 選択条件
-													//			MC_LEFT			(010): 左側の領域
-													//			MC_RIGHT		(040): 右側の領域
+													//			MC_LEFT			: 左側の領域
+													//			MC_RIGHT		: 右側の領域
 					const	MgGPolyg2D&	i_GPg1,		// (I  ) 穴付き多角形
-					const	MgULine2D&	i_ULn2,		// (I  ) 直線
+					const	MgSLine2D&	i_SLn2,		// (I  ) 直線
 							MgGPolyg2D*	o_pGPg3		// (  O) 穴付き多角形群
 					);
 	
@@ -3157,15 +3157,15 @@ public:
 	//		多角形1を多角形2で分割し、多角形2の指定側（内側または外側）の領域を得る
 	//
 	static MINT Divide2Polygon2D(					// (  O) ステイタス
-													//			MC_NINT			(0): 交差なし
-													//			MC_INT			(1): 交差あり
-													//			MC_MATCH		(4): 選択条件に合う部分あり
+													//			MC_NINT			: 交差なし
+													//			MC_INT			: 交差あり
+													//			MC_MATCH		: 選択条件に合う部分あり
 													//	例	 (STS == MC_NINT):				交差無しで選択条件に合う部分なし 
 													//		 (STS == (MC_NINT | MC_MATCH)):	交差無しであるが選択条件に合う
 													//		 (STS == (MC_INT | MC_MATCH)):	交差ありで選択条件に合う部分あり
 							MINT		i_Sel,		// (I  ) 選択条件
-													//			MC_IN_BORDER	(001): 内側
-													//			MC_OUT_BORDER	(004): 外側
+													//			MC_IN_BORDER	: 内側
+													//			MC_OUT_BORDER	: 外側
 													//									
 					const	MgPolyg2D&	i_Pg1,		// (I  ) 多角形1
 					const	MgPolyg2D&	i_Pg2,		// (I  ) 多角形2
@@ -3176,15 +3176,15 @@ public:
 	//		穴付き多角形を穴付き多角形で分割し、選択条件に合う領域を得る
 	//
 	static MINT Divide2GPolygon2D(					// (  O) ステイタス
-													//			MC_NINT			(0): 交差なし
-													//			MC_INT			(1): 交差あり
-													//			MC_MATCH		(4): 選択条件に合う部分あり
+													//			MC_NINT			: 交差なし
+													//			MC_INT			: 交差あり
+													//			MC_MATCH		: 選択条件に合う部分あり
 													//	例	 (STS == MC_NINT):				交差無しで選択条件に合う部分なし 
 													//		 (STS == (MC_NINT | MC_MATCH)):	交差無しであるが選択条件に合う
 													//		 (STS == (MC_INT | MC_MATCH)):	交差ありで選択条件に合う部分あり
 							MINT		i_Sel,		// (I  ) 選択条件
-													//			MC_IN_BORDER	(001): 内側
-													//			MC_OUT_BORDER	(004): 外側
+													//			MC_IN_BORDER	: 内側
+													//			MC_OUT_BORDER	: 外側
 					const	MgGPolyg2D&	i_GPg1,		// (I  ) 穴付き多角形1
 					const	MgGPolyg2D&	i_GPg2,		// (I  ) 穴付き多角形2
 							MgGPolyg2D*	o_pGPgo		// (  O) 穴付き多角形3
@@ -3194,15 +3194,15 @@ public:
 	//		多角形1を多角形2で分割し、多角形2の指定側（内側または外側）の領域を得る
 	//
 	static MINT Divide2Polygon3D(					// (  O) ステイタス
-													//			MC_NINT			(0): 交差なし
-													//			MC_INT			(1): 交差あり
-													//			MC_MATCH		(4): 選択条件に合う部分あり
+													//			MC_NINT			: 交差なし
+													//			MC_INT			: 交差あり
+													//			MC_MATCH		: 選択条件に合う部分あり
 													//	例	 (STS == MC_NINT):				交差無しで選択条件に合う部分なし 
 													//		 (STS == (MC_NINT | MC_MATCH)):	交差無しであるが選択条件に合う
 													//		 (STS == (MC_INT | MC_MATCH)):	交差ありで選択条件に合う部分あり
 							MINT		i_Sel,		// (I  ) 選択条件
-													//			MC_IN_BORDER	(001): 内側
-													//			MC_OUT_BORDER	(004): 外側
+													//			MC_IN_BORDER	: 内側
+													//			MC_OUT_BORDER	: 外側
 													//									
 					const	MgPolyg3D&	i_Pg1,		// (I  ) 多角形1
 					const	MgPolyg3D&	i_Pg2,		// (I  ) 多角形2
@@ -3213,15 +3213,15 @@ public:
 	//		穴付き多角形を穴付き多角形で分割し、選択条件に合う領域を得る
 	//
 	static MINT Divide2GPolygon3D(					// (  O) ステイタス
-													//			MC_NINT			(0): 交差なし
-													//			MC_INT			(1): 交差あり
-													//			MC_MATCH		(4): 選択条件に合う部分あり
+													//			MC_NINT			: 交差なし
+													//			MC_INT			: 交差あり
+													//			MC_MATCH		: 選択条件に合う部分あり
 													//	例	 (STS == MC_NINT):				交差無しで選択条件に合う部分なし 
 													//		 (STS == (MC_NINT | MC_MATCH)):	交差無しであるが選択条件に合う
 													//		 (STS == (MC_INT | MC_MATCH)):	交差ありで選択条件に合う部分あり
 							MINT		i_Sel,		// (I  ) 選択条件
-													//			MC_IN_BORDER	(001): 内側
-													//			MC_OUT_BORDER	(004): 外側
+													//			MC_IN_BORDER	: 内側
+													//			MC_OUT_BORDER	: 外側
 					const	MgGPolyg3D&	i_GPg1,		// (I  ) 穴付き多角形1
 					const	MgGPolyg3D&	i_GPg2,		// (I  ) 穴付き多角形2
 							MgGPolyg3D*	o_pGPgo		// (  O) 穴付き多角形3
@@ -3231,16 +3231,16 @@ public:
 	//		多角形と多角形の和、差、積の穴付き多角形を求める
 	//
 	static MINT Merge2PgtoGPolygon2D(				// (  O) ステイタス
-													//			MC_NINT			(0): 交差なし
-													//			MC_INT			(1): 交差あり
-													//			MC_MATCH		(4): 選択条件に合う部分あり
+													//			MC_NINT			: 交差なし
+													//			MC_INT			: 交差あり
+													//			MC_MATCH		: 選択条件に合う部分あり
 													//	例	 (STS == MC_NINT):				交差無しで選択条件に合う部分なし 
 													//		 (STS == (MC_NINT | MC_MATCH)):	交差無しであるが選択条件に合う
 													//		 (STS == (MC_INT | MC_MATCH)):	交差ありで選択条件に合う部分あり
 							MINT		i_Sel,		// (I  ) 選択条件
-													//			MC_OR			(1): 和
-													//			MC_DIFF			(2): 差
-													//			MC_AND			(4): 積
+													//			MC_OR			: 和
+													//			MC_DIFF			: 差
+													//			MC_AND			: 積
 					const	MgPolyg2D&	i_Pg1,		// (I  ) 多角形1
 					const	MgPolyg2D&	i_Pg2,		// (I  ) 多角形2
 							MgGPolyg2D*	o_pGPgo		// (  O) 穴付き多角形3
@@ -3250,16 +3250,16 @@ public:
 	//		多角形と穴付き多角形の和、差、積の穴付き多角形を求める
 	//
 	static MINT MergePgGPgtoGPolygon2D(				// (  O) ステイタス
-													//			MC_NINT			(0): 交差なし
-													//			MC_INT			(1): 交差あり
-													//			MC_MATCH		(4): 選択条件に合う部分あり
+													//			MC_NINT			: 交差なし
+													//			MC_INT			: 交差あり
+													//			MC_MATCH		: 選択条件に合う部分あり
 													//	例	 (STS == MC_NINT):				交差無しで選択条件に合う部分なし 
 													//		 (STS == (MC_NINT | MC_MATCH)):	交差無しであるが選択条件に合う
 													//		 (STS == (MC_INT | MC_MATCH)):	交差ありで選択条件に合う部分あり
 							MINT		i_Sel,		// (I  ) 選択条件
-													//			MC_OR			(1): 和
-													//			MC_DIFF			(2): 差
-													//			MC_AND			(4): 積
+													//			MC_OR			: 和
+													//			MC_DIFF			: 差
+													//			MC_AND			: 積
 					const	MgPolyg2D&	i_Pg1,		// (I  ) 多角形1
 					const	MgGPolyg2D&	i_GPg2,		// (I  ) 穴付き多角形2
 							MgGPolyg2D*	o_pGPgo		// (  O) 穴付き多角形3
@@ -3269,16 +3269,16 @@ public:
 	//		穴付き多角形と多角形の和、差、積の穴付き多角形を求める
 	//
 	static MINT MergeGPgPgtoGPolygon2D(				// (  O) ステイタス
-													//			MC_NINT			(0): 交差なし
-													//			MC_INT			(1): 交差あり
-													//			MC_MATCH		(4): 選択条件に合う部分あり
+													//			MC_NINT			: 交差なし
+													//			MC_INT			: 交差あり
+													//			MC_MATCH		: 選択条件に合う部分あり
 													//	例	 (STS == MC_NINT):				交差無しで選択条件に合う部分なし 
 													//		 (STS == (MC_NINT | MC_MATCH)):	交差無しであるが選択条件に合う
 													//		 (STS == (MC_INT | MC_MATCH)):	交差ありで選択条件に合う部分あり
 							MINT		i_Sel,		// (I  ) 選択条件
-													//			MC_OR			(1): 和
-													//			MC_DIFF			(2): 差
-													//			MC_AND			(4): 積
+													//			MC_OR			: 和
+													//			MC_DIFF			: 差
+													//			MC_AND			: 積
 					const	MgGPolyg2D&	i_GPg1,		// (I  ) 穴付き多角形1
 					const	MgPolyg2D&	i_Pg2,		// (I  ) 多角形2
 							MgGPolyg2D*	o_pGPgo		// (  O) 穴付き多角形3
@@ -3288,16 +3288,16 @@ public:
 	//		穴付き多角形と穴付き多角形の和、差、積の穴付き多角形を求める
 	//
 	static MINT Merge2GPgtoGPolygon2D(				// (  O) ステイタス
-													//			MC_NINT			(x01): 交差なし
-													//			MC_INT			(x02): 交差あり
-													//			MC_MATCH		(x10): 選択条件に合う部分あり
+													//			MC_NINT			: 交差なし
+													//			MC_INT			: 交差あり
+													//			MC_MATCH		: 選択条件に合う部分あり
 													//	例	 (STS == MC_NINT):				交差無しで選択条件に合う部分なし 
 													//		 (STS == (MC_NINT | MC_MATCH)):	交差無しであるが選択条件に合う
 													//		 (STS == (MC_INT | MC_MATCH)):	交差ありで選択条件に合う部分あり
 							MINT		i_Sel,		// (I  ) 選択条件
-													//			MC_OR			(1): 和
-													//			MC_DIFF			(2): 差
-													//			MC_AND			(4): 積
+													//			MC_OR			: 和
+													//			MC_DIFF			: 差
+													//			MC_AND			: 積
 					const	MgGPolyg2D&	i_GPg1,		// (I  ) 穴付き多角形1
 					const	MgGPolyg2D&	i_GPg2,		// (I  ) 穴付き多角形2
 							MgGPolyg2D*	o_pGPgo		// (  O) 穴付き多角形3
@@ -3307,16 +3307,16 @@ public:
 	//		多角形と多角形の和、差、積の穴付き多角形を求める
 	//
 	static MINT Merge2PgtoGPolygon3D(				// (  O) ステイタス
-													//			MC_NINT			(0): 交差なし
-													//			MC_INT			(1): 交差あり
-													//			MC_MATCH		(4): 選択条件に合う部分あり
+													//			MC_NINT			: 交差なし
+													//			MC_INT			: 交差あり
+													//			MC_MATCH		: 選択条件に合う部分あり
 													//	例	 (STS == MC_NINT):				交差無しで選択条件に合う部分なし 
 													//		 (STS == (MC_NINT | MC_MATCH)):	交差無しであるが選択条件に合う
 													//		 (STS == (MC_INT | MC_MATCH)):	交差ありで選択条件に合う部分あり
 							MINT		i_Sel,		// (I  ) 選択条件
-													//			MC_OR			(1): 和
-													//			MC_DIFF			(2): 差
-													//			MC_AND			(4): 積
+													//			MC_OR			: 和
+													//			MC_DIFF			: 差
+													//			MC_AND			: 積
 					const	MgPolyg3D&	i_Pg1,		// (I  ) 多角形1
 					const	MgPolyg3D&	i_Pg2,		// (I  ) 多角形2
 							MgGPolyg3D*	o_pGPgo		// (  O) 穴付き多角形3
@@ -3326,16 +3326,16 @@ public:
 	//		多角形と穴付き多角形の和、差、積の穴付き多角形を求める
 	//
 	static MINT MergePgGPgtoGPolygon3D(				// (  O) ステイタス
-													//			MC_NINT			(0): 交差なし
-													//			MC_INT			(1): 交差あり
-													//			MC_MATCH		(4): 選択条件に合う部分あり
+													//			MC_NINT			: 交差なし
+													//			MC_INT			: 交差あり
+													//			MC_MATCH		: 選択条件に合う部分あり
 													//	例	 (STS == MC_NINT):				交差無しで選択条件に合う部分なし 
 													//		 (STS == (MC_NINT | MC_MATCH)):	交差無しであるが選択条件に合う
 													//		 (STS == (MC_INT | MC_MATCH)):	交差ありで選択条件に合う部分あり
 							MINT		i_Sel,		// (I  ) 選択条件
-													//			MC_OR			(1): 和
-													//			MC_DIFF			(2): 差
-													//			MC_AND			(4): 積
+													//			MC_OR			: 和
+													//			MC_DIFF			: 差
+													//			MC_AND			: 積
 					const	MgPolyg3D&	i_Pg1,		// (I  ) 多角形1
 					const	MgGPolyg3D&	i_GPg2,		// (I  ) 穴付き多角形2
 							MgGPolyg3D*	o_pGPgo		// (  O) 穴付き多角形3
@@ -3345,16 +3345,16 @@ public:
 	//		穴付き多角形と多角形の和、差、積の穴付き多角形を求める
 	//
 	static MINT MergeGPgPgtoGPolygon3D(				// (  O) ステイタス
-													//			MC_NINT			(0): 交差なし
-													//			MC_INT			(1): 交差あり
-													//			MC_MATCH		(4): 選択条件に合う部分あり
+													//			MC_NINT			: 交差なし
+													//			MC_INT			: 交差あり
+													//			MC_MATCH		: 選択条件に合う部分あり
 													//	例	 (STS == MC_NINT):				交差無しで選択条件に合う部分なし 
 													//		 (STS == (MC_NINT | MC_MATCH)):	交差無しであるが選択条件に合う
 													//		 (STS == (MC_INT | MC_MATCH)):	交差ありで選択条件に合う部分あり
 							MINT		i_Sel,		// (I  ) 選択条件
-													//			MC_OR			(1): 和
-													//			MC_DIFF			(2): 差
-													//			MC_AND			(4): 積
+													//			MC_OR			: 和
+													//			MC_DIFF			: 差
+													//			MC_AND			: 積
 					const	MgGPolyg3D&	i_GPg1,		// (I  ) 穴付き多角形1
 					const	MgPolyg3D&	i_Pg2,		// (I  ) 多角形2
 							MgGPolyg3D*	o_pGPgo		// (  O) 穴付き多角形3
@@ -3364,16 +3364,16 @@ public:
 	//		穴付き多角形と穴付き多角形の和、差、積の穴付き多角形を求める
 	//
 	static MINT Merge2GPgtoGPolygon3D(				// (  O) ステイタス
-													//			MC_NINT			(0): 交差なし
-													//			MC_INT			(1): 交差あり
-													//			MC_MATCH		(4): 選択条件に合う部分あり
+													//			MC_NINT			: 交差なし
+													//			MC_INT			: 交差あり
+													//			MC_MATCH		: 選択条件に合う部分あり
 													//	例	 (STS == MC_NINT):				交差無しで選択条件に合う部分なし 
 													//		 (STS == (MC_NINT | MC_MATCH)):	交差無しであるが選択条件に合う
 													//		 (STS == (MC_INT | MC_MATCH)):	交差ありで選択条件に合う部分あり
 							MINT		i_Sel,		// (I  ) 選択条件
-													//			MC_OR			(1): 和
-													//			MC_DIFF			(2): 差
-													//			MC_AND			(4): 積
+													//			MC_OR			: 和
+													//			MC_DIFF			: 差
+													//			MC_AND			: 積
 					const	MgGPolyg3D&	i_GPg1,		// (I  ) 穴付き多角形1
 					const	MgGPolyg3D&	i_GPg2,		// (I  ) 穴付き多角形2
 							MgGPolyg3D*	o_pGPgo		// (  O) 穴付き多角形3
@@ -3387,18 +3387,18 @@ public:
 	//				(3) その他の場合は捨てる
 	//
 	static MINT DivideAdd2Polygon2D(				// (  O) ステイタス
-													//			MC_NINT			(0): 交差なし
-													//			MC_INT			(1): 交差あり
-													//			MC_MATCH		(4): 選択条件に合う部分あり
+													//			MC_NINT			: 交差なし
+													//			MC_INT			: 交差あり
+													//			MC_MATCH		: 選択条件に合う部分あり
 													//	例	 (STS == MC_NINT):				交差無しで選択条件に合う部分なし 
 													//		 (STS == (MC_NINT | MC_MATCH)):	交差無しであるが選択条件に合う
 													//		 (STS == (MC_INT | MC_MATCH)):	交差ありで選択条件に合う部分あり
 							MINT		i_Sel1,		// (I  ) 選択条件1　多角形1の線分を残す条件
-													//			MC_IN_BORDER	(001):	多角形2の領域の内側
-													//			MC_ON_BORDER	(002):  多角形2の辺上
-													//			MC_OUT_BORDER	(004):	多角形2の領域の外側
-													//			MC_SAME_DIR		(0100):	辺上同一方向
-													//			MC_REV_DIR		(0200):	辺上逆方向
+													//			MC_IN_BORDER	: 多角形2の領域の内側
+													//			MC_ON_BORDER	: 多角形2の辺上
+													//			MC_OUT_BORDER	: 多角形2の領域の外側
+													//			MC_SAME_DIR		: 辺上同一方向
+													//			MC_REV_DIR		: 辺上逆方向
 					const	bool		i_fRev,		// (I  ) 反転フラグ	
 													//		 true: 線分の方向を反転する
 					const	MgPolyg2D&	i_Pg1,		// (I  ) 多角形1
@@ -3416,18 +3416,18 @@ public:
 	//
 	
 	static MINT DivideAddPolygonGPolygon2D(			// (  O) ステイタス
-													//			MC_NINT			(0): 交差なし
-													//			MC_INT			(1): 交差あり
-													//			MC_MATCH		(4): 選択条件に合う部分あり
+													//			MC_NINT			: 交差なし
+													//			MC_INT			: 交差あり
+													//			MC_MATCH		: 選択条件に合う部分あり
 													//	例	 (STS == MC_NINT):				交差無しで選択条件に合う部分なし 
 													//		 (STS == (MC_NINT | MC_MATCH)):	交差無しであるが選択条件に合う
 													//		 (STS == (MC_INT | MC_MATCH)):	交差ありで選択条件に合う部分あり
 							MINT		i_Sel1,		// (I  ) 選択条件1　多角形1の線分を残す条件
-													//			MC_IN_BORDER	(001): 多角形2の領域の内側
-													//			MC_ON_BORDER	(002): 多角形2の辺上
-													//			MC_OUT_BORDER	(004): 多角形2の領域の外側
-													//			MC_SAME_DIR		(0100):	辺上同一方向
-													//			MC_REV_DIR		(0200):	辺上逆方向
+													//			MC_IN_BORDER	: 多角形2の領域の内側
+													//			MC_ON_BORDER	: 多角形2の辺上
+													//			MC_OUT_BORDER	: 多角形2の領域の外側
+													//			MC_SAME_DIR		: 辺上同一方向
+													//			MC_REV_DIR		: 辺上逆方向
 					const	bool		i_fRev,		// (I  ) 反転フラグ	
 													//		 true: 線分の方向を反転する
 					const	MgPolyg2D&	i_Pg1,		// (I  ) 多角形1
@@ -3499,9 +3499,9 @@ public:
 	//
 	//		直線から点までの正負方向付き距離を求める。
 	//
-	static MREAL DistPointULine2D(					// (  O) 直線から点までの距離 >0:左側 <0:右側
+	static MREAL DistPointSLine2D(					// (  O) 直線から点までの距離 >0:左側 <0:右側
 					const	MgPoint2D&	i_p1,		// (I  ) 点1
-					const	MgULine2D&	i_ULn2		// (I  ) 直線2
+					const	MgSLine2D&	i_SLn2		// (I  ) 直線2
 					);
 	
 	//	------------------------
@@ -3517,9 +3517,9 @@ public:
 	// ---------------------( ３次元 )------------------------------
 	//		直線から点までの距離を求める。
 	//
-	static MREAL DistPointULine3D(					// (  O) 直線から点までの距離
+	static MREAL DistPointSLine3D(					// (  O) 直線から点までの距離
 					const	MgPoint3D&	i_p1,		// (I  ) 点1
-					const	MgULine3D&	i_ULn2		// (I  ) 直線2
+					const	MgSLine3D&	i_SLn2		// (I  ) 直線2
 					);
 
 	//
@@ -3534,9 +3534,9 @@ public:
 	// ---------------------( ３次元 )------------------------------
 	//		直線から点までの正負方向付き距離を求める。
 	//
-	static MREAL DistPointULineVect3D(				// (  O) 直線から点までの距離 >0:左側 <0:右側
+	static MREAL DistPointSLineVect3D(				// (  O) 直線から点までの距離 >0:左側 <0:右側
 					const	MgPoint3D&	i_p1,		// (I  ) 点1
-					const	MgULine3D&	i_ULn2,		// (I  ) 直線2
+					const	MgSLine3D&	i_SLn2,		// (I  ) 直線2
 					const	MgVect3D&	i_vn		// (I  ) 点と直線に直交する単位ベクトル
 					);
 
@@ -3564,8 +3564,8 @@ public:
 	//		(線分１の端部での交差は交差無しとし分割無し)
 	//
 	static MINT Divide2Line2D(						// (  O) ステイタス
-													//			MC_NINT			(0): 分割無し
-													//			MC_INT			(1): 分割あり
+													//			MC_NINT			: 分割無し
+													//			MC_INT			: 分割あり
 					const	MgLine2D&	i_Ln1, 		// (I  ) 分割対象線分
 					const	MgLine2D&	i_Ln2, 		// (I  ) 分割線分
 							MgGLine2D*	o_pGLn3		// (  O) 分割後の線分群
@@ -3575,11 +3575,11 @@ public:
 	//		線分を直線で分割する
 	//		(線分１の端部での交差は交差無しとし分割無し)
 	//
-	static MINT DivideLineULine2D(					// (  O) ステイタス
-													//			MC_NINT			(0): 交差なし
-													//			MC_INT			(1): 交差あり
+	static MINT DivideLineSLine2D(					// (  O) ステイタス
+													//			MC_NINT			: 交差なし
+													//			MC_INT			: 交差あり
 					const	MgLine2D&	i_Ln1, 		// (I  ) 分割対象線分
-					const	MgULine2D&	i_ULn2,		// (I  ) 分割直線
+					const	MgSLine2D&	i_SLn2,		// (I  ) 分割直線
 							MgGLine2D*	o_pGLn3		// (  O) 分割後の線分群
 					);
 
@@ -3598,21 +3598,21 @@ public:
 	// 		sels = MC_LEFT | MC_ON_BORDER | MC_SAME_DIR;
 	
 	//
-	static MINT DivideAddLineULine2D(				// (  O) ステイタス
-													//			MC_NINT			(0): 交差なし
-													//			MC_INT			(1): 交差あり
-													//			MC_MATCH		(4): 選択条件に合う部分あり
+	static MINT DivideAddLineSLine2D(				// (  O) ステイタス
+													//			MC_NINT			: 交差なし
+													//			MC_INT			: 交差あり
+													//			MC_MATCH		: 選択条件に合う部分あり
 													//	例	 (STS == MC_NINT):				交差無しで選択条件に合う部分なし 
 													//		 (STS == (MC_NINT | MC_MATCH)):	交差無しであるが選択条件に合う
 													//		 (STS == (MC_INT | MC_MATCH)):	交差ありで選択条件に合う部分あり
 							MINT		i_Sel,		// (I  ) 選択条件
-													//			MC_LEFT			(010): 直線の左側
-													//			MC_ON_LINE		(020): 直線上
-													//			MC_RIGHT		(040): 直線の右側
-													//			MC_SAME_DIR		(0100):	辺上同一方向
-													//			MC_REV_DIR		(0200):	辺上逆方向
+													//			MC_LEFT			: 直線の左側
+													//			MC_ON_SLINE		: 直線上
+													//			MC_RIGHT		: 直線の右側
+													//			MC_SAME_DIR		: 辺上同一方向
+													//			MC_REV_DIR		: 辺上逆方向
 					const	MgLine2D&	i_Ln1, 		// (I  ) 分割対象線分
-					const	MgULine2D&	i_ULn2,		// (I  ) 分割直線
+					const	MgSLine2D&	i_SLn2,		// (I  ) 分割直線
 							MgGLine2D*	o_pGLn3		// (I O) 分割後の線分群
 					);
 
@@ -3621,8 +3621,8 @@ public:
 	//		(線分の端部での交差は交差なしとする)
 	//
 	static MINT DivideLineGLine2D(					// (  O) ステイタス
-													//			MC_NINT			(0): 交差なし
-													//			MC_INT			(1): 交差あり
+													//			MC_NINT			: 交差なし
+													//			MC_INT			: 交差あり
 					const	MgLine2D&	i_Ln1, 		// (I  ) 分割対象線分
 					const	MgGLine2D&	i_GLn2,		// (I  ) 分割線分群
 							MgGLine2D*	o_pGLn3		// (  O) 分割後の線分群
@@ -3633,8 +3633,8 @@ public:
 	//		交差判定で２線分が重なる場合は端点で分割する
 	//
 	static MINT DivideGLine2D(						// (  O) ステイタス
-													//			MC_NINT			(0): 交差なし
-													//			MC_INT			(1): 交差あり
+													//			MC_NINT			: 交差なし
+													//			MC_INT			: 交差あり
 					const	MgGLine2D&	i_GLn1,		// (I  ) 線分群
 							MgGLine2D*	o_pGLn2		// (  O) 分割後の線分群
 					);
@@ -3646,18 +3646,18 @@ public:
 	//				(1) 選択条件が辺上同一方向の場合は、同一方向の時残し
 	//				(2) その他の場合は捨てる
 	//
-	static MINT DivideULinePolygon2D(				// (  O) ステイタス
-													//			MC_NINT			(0): 交差なし
-													//			MC_INT			(1): 交差あり
-													//			MC_MATCH		(4): 選択条件に合う部分あり
+	static MINT DivideSLinePolygon2D(				// (  O) ステイタス
+													//			MC_NINT			: 交差なし
+													//			MC_INT			: 交差あり
+													//			MC_MATCH		: 選択条件に合う部分あり
 													//	例	 (STS == MC_NINT):				交差無しで選択条件に合う部分なし 
 													//		 (STS == (MC_NINT | MC_MATCH)):	交差無しであるが選択条件に合う
 													//		 (STS == (MC_INT | MC_MATCH)):	交差ありで選択条件に合う部分あり
 							MINT		i_Sel,		// (I  ) 選択条件
-													//			MC_IN_BORDER	(001): 内側
-													//			MC_ON_BORDER	(002): 辺上
-													//			MC_SAME_DIR		(0100):	辺上同一方向
-					const	MgULine2D&	i_ULn1,		// (I  ) 直線
+													//			MC_IN_BORDER	: 内側
+													//			MC_ON_BORDER	: 辺上
+													//			MC_SAME_DIR		: 辺上同一方向
+					const	MgSLine2D&	i_SLn1,		// (I  ) 直線
 					const	MgPolyg2D&	i_Pg2,		// (I  ) 多角形
 							MgGLine2D*	o_pGLn3		// (  O) 分割後の線分群
 					);
@@ -3669,18 +3669,18 @@ public:
 	//				(1) 選択条件が辺上同一方向の場合は、同一方向の時残し
 	//				(2) その他の場合は捨てる
 	//
-	static MINT DivideAddULinePolygon2D(			// (  O) ステイタス
-													//			MC_NINT			(0): 交差なし
-													//			MC_INT			(1): 交差あり
-													//			MC_MATCH		(4): 選択条件に合う部分あり
+	static MINT DivideAddSLinePolygon2D(			// (  O) ステイタス
+													//			MC_NINT			: 交差なし
+													//			MC_INT			: 交差あり
+													//			MC_MATCH		: 選択条件に合う部分あり
 													//	例	 (STS == MC_NINT):				交差無しで選択条件に合う部分なし 
 													//		 (STS == (MC_NINT | MC_MATCH)):	交差無しであるが選択条件に合う
 													//		 (STS == (MC_INT | MC_MATCH)):	交差ありで選択条件に合う部分あり
 							MINT		i_Sel,		// (I  ) 選択条件
-													//			MC_IN_BORDER	(001): 内側
-													//			MC_ON_BORDER	(002): 辺上
-													//			MC_SAME_DIR		(0100):	辺上同一方向
-					const	MgULine2D&	i_ULn1,		// (I  ) 直線
+													//			MC_IN_BORDER	: 内側
+													//			MC_ON_BORDER	: 辺上
+													//			MC_SAME_DIR		: 辺上同一方向
+					const	MgSLine2D&	i_SLn1,		// (I  ) 直線
 					const	MgPolyg2D&	i_Pg2,		// (I  ) 多角形
 							MgGLine2D*	io_pGLn3	// (I O) 分割後の線分群
 					);
@@ -3694,17 +3694,17 @@ public:
 	//				(3) その他の場合は捨てる
 	//
 	static MINT DivideLinePolygon2D(				// (  O) ステイタス
-													//			MC_NINT			(0): 交差なし
-													//			MC_INT			(1): 交差あり
-													//			MC_MATCH		(4): 選択条件に合う部分あり
+													//			MC_NINT			: 交差なし
+													//			MC_INT			: 交差あり
+													//			MC_MATCH		: 選択条件に合う部分あり
 													//	例	 (STS == MC_NINT):				交差無しで選択条件に合う部分なし 
 													//		 (STS == (MC_NINT | MC_MATCH)):	交差無しであるが選択条件に合う
 													//		 (STS == (MC_INT | MC_MATCH)):	交差ありで選択条件に合う部分あり
 							MINT		i_Sel,		// (I  ) 選択条件
-													//			MC_IN_BORDER	(001): 内側
-													//			MC_ON_BORDER	(002): 辺上
-													//			MC_OUT_BORDER	(004): 外側
-													//			MC_FOR_POLYGON	(0100): 多角形作成用
+													//			MC_IN_BORDER	: 内側
+													//			MC_ON_BORDER	: 辺上
+													//			MC_OUT_BORDER	: 外側
+													//			MC_FOR_POLYGON	: 多角形作成用
 					const	MgLine2D&	i_Ln1,		// (I  ) 線分
 					const	MgPolyg2D&	i_Pg2,		// (I  ) 多角形
 							MgGLine2D*	o_pGLn3		// (  O) 分割後の線分群
@@ -3719,18 +3719,18 @@ public:
 	//				(3) その他の場合は捨てる
 	//
 	static MINT DivideAddLinePolygon2D(				// (  O) ステイタス
-													//			MC_NINT			(0): 交差なし
-													//			MC_INT			(1): 交差あり
-													//			MC_MATCH		(4): 選択条件に合う部分あり
+													//			MC_NINT			: 交差なし
+													//			MC_INT			: 交差あり
+													//			MC_MATCH		: 選択条件に合う部分あり
 													//	例	 (STS == MC_NINT):				交差無しで選択条件に合う部分なし 
 													//		 (STS == (MC_NINT | MC_MATCH)):	交差無しであるが選択条件に合う
 													//		 (STS == (MC_INT | MC_MATCH)):	交差ありで選択条件に合う部分あり
 							MINT		i_Sel,		// (I  ) 選択条件
-													//			MC_IN_BORDER	(001): 内側
-													//			MC_ON_BORDER	(002): 辺上
-													//			MC_OUT_BORDER	(004): 外側
-													//			MC_SAME_DIR		(0100):	辺上同一方向
-													//			MC_REV_DIR		(0200):	辺上逆方向
+													//			MC_IN_BORDER	: 内側
+													//			MC_ON_BORDER	: 辺上
+													//			MC_OUT_BORDER	: 外側
+													//			MC_SAME_DIR		: 辺上同一方向
+													//			MC_REV_DIR		: 辺上逆方向
 					const	MgLine2D&	i_Ln1,		// (I  ) 線分
 					const	MgPolyg2D&	i_Pg2,		// (I  ) 多角形
 							MgGLine2D*	o_pGLn3		// (I O) 分割後の線分群
@@ -3743,14 +3743,14 @@ public:
 	//				(1) 選択条件が辺上同一方向の場合は、同一方向の時残し
 	//				(2) その他の場合は捨てる
 	//
-	static MINT DivideULineGPolygon2D(				// (  O) ステイタス
-													//			MC_NINT			(0): 選択条件に合う線分なし
-													//			MC_INT			(1): 選択条件に合う線分あり
+	static MINT DivideSLineGPolygon2D(				// (  O) ステイタス
+													//			MC_NINT			: 選択条件に合う線分なし
+													//			MC_INT			: 選択条件に合う線分あり
 							MINT		i_Sel,		// (I  ) 選択条件
-													//			MC_IN_BORDER	(001): 内側
-													//			MC_ON_BORDER	(002): 辺上
-													//			MC_SAME_DIR		(0100):	辺上同一方向
-					const	MgULine2D&	i_ULn1,		// (I  ) 直線
+													//			MC_IN_BORDER	: 内側
+													//			MC_ON_BORDER	: 辺上
+													//			MC_SAME_DIR		: 辺上同一方向
+					const	MgSLine2D&	i_SLn1,		// (I  ) 直線
 					const	MgGPolyg2D&	i_GPg2,		// (I  ) 穴付き多角形
 							MgGLine2D*	o_pGLn3		// (  O) 分割後の線分群
 					);
@@ -3761,17 +3761,17 @@ public:
 	//				(1) 選択条件が辺上同一方向の場合は、同一方向の時残し
 	//				(2) その他の場合は捨てる
 	//
-	static MINT DivideAddULineGPolygon2D(			// (  O) ステイタス
-													//			MC_NINT			(0): 選択条件に合う線分なし
-													//			MC_INT			(1): 選択条件に合う線分あり
+	static MINT DivideAddSLineGPolygon2D(			// (  O) ステイタス
+													//			MC_NINT			: 選択条件に合う線分なし
+													//			MC_INT			: 選択条件に合う線分あり
 													//	例	 (STS == MC_NINT):				交差無しで選択条件に合う部分なし 
 													//		 (STS == (MC_NINT | MC_MATCH)):	交差無しであるが選択条件に合う
 													//		 (STS == (MC_INT | MC_MATCH)):	交差ありで選択条件に合う部分あり
 							MINT		i_Sel,		// (I  ) 選択条件
-													//			MC_IN_BORDER	(001): 内側
-													//			MC_ON_BORDER	(002): 辺上
-													//			MC_SAME_DIR		(0100):	辺上同一方向
-					const	MgULine2D&	i_ULn1,		// (I  ) 直線
+													//			MC_IN_BORDER	: 内側
+													//			MC_ON_BORDER	: 辺上
+													//			MC_SAME_DIR		: 辺上同一方向
+					const	MgSLine2D&	i_SLn1,		// (I  ) 直線
 					const	MgGPolyg2D&	i_GPg2,		// (I  ) 穴付き多角形
 							MgGLine2D*	o_pGLn3		// (I O) 分割後の線分群
 					);
@@ -3785,18 +3785,18 @@ public:
 	//				(3) その他の場合は捨てる
 	//
 	static MINT DivideLineGPolygon2D(				// (  O) ステイタス
-													//			MC_NINT			(0): 交差なし
-													//			MC_INT			(1): 交差あり
-													//			MC_MATCH		(4): 選択条件に合う部分あり
+													//			MC_NINT			: 交差なし
+													//			MC_INT			: 交差あり
+													//			MC_MATCH		: 選択条件に合う部分あり
 													//	例	 (STS == MC_NINT):				交差無しで選択条件に合う部分なし 
 													//		 (STS == (MC_NINT | MC_MATCH)):	交差無しであるが選択条件に合う
 													//		 (STS == (MC_INT | MC_MATCH)):	交差ありで選択条件に合う部分あり
 							MINT		i_Sel,		// (I  ) 選択条件
-													//			MC_IN_BORDER	(001): 内側
-													//			MC_ON_BORDER	(002): 辺上
-													//			MC_OUT_BORDER	(004): 外側
-													//			MC_SAME_DIR		(0100):	辺上同一方向
-													//			MC_REV_DIR		(0200):	辺上逆方向
+													//			MC_IN_BORDER	: 内側
+													//			MC_ON_BORDER	: 辺上
+													//			MC_OUT_BORDER	: 外側
+													//			MC_SAME_DIR		: 辺上同一方向
+													//			MC_REV_DIR		: 辺上逆方向
 					const	MgLine2D&	i_Ln1,		// (I  ) 線分
 					const	MgGPolyg2D&	i_GPg2,		// (I  ) 穴付き多角形
 							MgGLine2D*	o_pGLn3		// (  O) 分割後の線分群
@@ -3811,18 +3811,18 @@ public:
 	//				(3) その他の場合は捨てる
 	//
 	static MINT DivideAddLineGPolygon2D(			// (  O) ステイタス
-													//			MC_NINT			(0): 交差なし
-													//			MC_INT			(1): 交差あり
-													//			MC_MATCH		(4): 選択条件に合う部分あり
+													//			MC_NINT			: 交差なし
+													//			MC_INT			: 交差あり
+													//			MC_MATCH		: 選択条件に合う部分あり
 													//	例	 (STS == MC_NINT):				交差無しで選択条件に合う部分なし 
 													//		 (STS == (MC_NINT | MC_MATCH)):	交差無しであるが選択条件に合う
 													//		 (STS == (MC_INT | MC_MATCH)):	交差ありで選択条件に合う部分あり
 							MINT		i_Sel,		// (I  ) 選択条件
-													//			MC_IN_BORDER	(001): 内側
-													//			MC_ON_BORDER	(002): 辺上
-													//			MC_OUT_BORDER	(004): 外側
-													//			MC_SAME_DIR		(0100):	辺上同一方向
-													//			MC_REV_DIR		(0200):	辺上逆方向
+													//			MC_IN_BORDER	: 内側
+													//			MC_ON_BORDER	: 辺上
+													//			MC_OUT_BORDER	: 外側
+													//			MC_SAME_DIR		: 辺上同一方向
+													//			MC_REV_DIR		: 辺上逆方向
 					const	MgLine2D&	i_Ln1,		// (I  ) 線分
 					const	MgGPolyg2D&	i_GPg2,		// (I  ) 穴付き多角形
 							MgGLine2D*	io_pGLn3	// (I O) 分割後の線分群
@@ -3839,13 +3839,13 @@ public:
 	// ---------------------( ３次元 )------------------------------
 	//		直線を多角形で分割し、選択条件に合う線分群を取り出す
 	//
-	static MINT DivideULinePolygon3D(				// (  O) ステイタス
-													//		 MC_NINT		(0): 交差なし
-													//		 MC_INT			(1): 交差あり
+	static MINT DivideSLinePolygon3D(				// (  O) ステイタス
+													//		 MC_NINT			: 交差なし
+													//		 MC_INT				: 交差あり
 							MINT		i_Sel,		// (I  ) 選択条件
-													//		 MC_IN_BORDER	(001): 内側
-													//		 MC_ON_BORDER	(002): 辺上
-					const	MgULine3D&	i_ULn1,		// (I  ) 直線
+													//		 MC_IN_BORDER		: 内側
+													//		 MC_ON_BORDER		: 辺上
+					const	MgSLine3D&	i_SLn1,		// (I  ) 直線
 					const	MgPolyg3D&	i_Pg2,		// (I  ) 多角形
 							MgGLine3D*	o_pGLn3		// (  O) 分割後の線分群
 					);
@@ -3853,67 +3853,61 @@ public:
 	//---------------------( ３次元 )------------------------------
 	//		直線を多角形で分割し、分割条件に合う線分を分割後の線分群に追加する
 	//
-	static MINT DivideAddULinePolygon3D(			// (  O) ステイタス
-													//			MC_NINT			(0): 交差なし
-													//			MC_INT			(1): 交差あり
-													//			MC_MATCH		(4): 選択条件に合う部分あり
+	static MINT DivideAddSLinePolygon3D(			// (  O) ステイタス
+													//			MC_NINT			: 交差なし
+													//			MC_INT			: 交差あり
+													//			MC_MATCH		: 選択条件に合う部分あり
 													//	例	 (STS == MC_NINT):				交差無しで選択条件に合う部分なし 
 													//		 (STS == (MC_NINT | MC_MATCH)):	交差無しであるが選択条件に合う
 													//		 (STS == (MC_INT | MC_MATCH)):	交差ありで選択条件に合う部分あり
 							MINT		i_Sel,		// (I  ) 選択条件
-													//			MC_IN_BORDER	(001): 内側
-													//			MC_ON_BORDER	(002): 辺上
-					const	MgULine3D&	i_ULn1,		// (I  ) 直線
+													//			MC_IN_BORDER	: 内側
+													//			MC_ON_BORDER	: 辺上
+					const	MgSLine3D&	i_SLn1,		// (I  ) 直線
 					const	MgPolyg3D&	i_Pg2,		// (I  ) 多角形
 							MgGLine3D*	io_pGLn3	// (I O) 分割後の線分群
 					);
 
-	//// ---------------------( ２次元 )------------------------------
-	////	２つの線分間の角度の大小に従う数値CCを求める
-	////	[p0からp1に向かう方向]から[p1からp2に向かう方向]への角度により
-	////		0.: -0゜, 0.5: 90゜, 1.: 180゜, 1.5: -90゜, <2.: <360(-)゜
-	////
-	//static MREAL AngSSa3Point2D( 
-	//				const	MgPoint2D&	i_p0,
-	//				const	MgPoint2D&	i_p1,
-	//				const	MgPoint2D&	i_p2
-	//				)
-	////
-	//// ---------------------( ３次元 )------------------------------
-	////	２つの線分間の角度の大小に従う数値CCを求める
-	////	平面pln3上で[p0からp1に向かう方向]から[p1からp2に向かう方向]への角度により
-	////		0.: -0゜, 0.5: 90゜, 1.: 180゜, 1.5: -90゜, <2.: <360(-)゜
-	////
-	//static MREAL AngSSa3Point3D( 
-	//				const	MgPoint3D&	i_P0,
-	//				const	MgPoint3D&	i_P1,
-	//				const	MgPoint3D&	i_P2,
-	//				const	MgPlane3D&	i_Pln3
-	//				)
-	////
-	//// ---------------------( ２次元 )------------------------------
-	////	２つの線分間の角度の大小に従う数値CCを求める
-	////	[p0からp1に向かう方向]から[p1からp2に向かう方向]への角度により
-	////		>-1.: >-180゜, -0.5: -90゜, 0.: -0゜, 0.5: 90゜, 1.: 180゜
-	////
-	//static MREAL AngSSb3Point2D( 
-	//				const	MgPoint2D&	i_p0,
-	//				const	MgPoint2D&	i_p1,
-	//				const	MgPoint2D&	i_p2
-	//				)
-	////
-	//// ---------------------( ３次元 )------------------------------
-	////	２つの線分間の角度の大小に従う数値CCを求める
-	////	平面pln3上で[p0からp1に向かう方向]から[p1からp2に向かう方向]への角度により
-	////		>-1.: >-180゜, -0.5: -90゜, 0.: -0゜, 0.5: 90゜, 1.: 180゜
-	////
-	//static MREAL AngSSb3Point3D( 
-	//				const	MgPoint3D&	i_P0,
-	//				const	MgPoint3D&	i_P1,
-	//				const	MgPoint3D&	i_P2,
-	//				const	MgPlane3D&	i_Pln3
-	//				)
+	// ---------------------( ２次元 )------------------------------
+	//	２つのベクトル間の角度の大小に従う数値CCを求める
+	//		0.: -0゜, 0.5: 90゜, 1.: 180゜, 1.5: -90゜, <2.: <360(-)゜
 	//
+	static MREAL AngSSa2Vect2D( 
+					const	MgVect2D&	i_v1,		// 測定元ベクトル
+					const	MgVect2D&	i_v2		// 測定先ベクトル
+					);
+	
+	// ---------------------( ３次元 )------------------------------
+	//	２つのベクトル間の角度の大小に従う数値CCを求める
+	//	(２つのベクトルに直行するベクトルの方向に右回転の角度)
+	//		0.: -0゜, 0.5: 90゜, 1.: 180゜, 1.5: -90゜, <2.: <360(-)゜
+	//
+	static MREAL AngSSa2Vect3D( 
+					const	MgVect3D&	i_v1,		// 測定元ベクトル
+					const	MgVect3D&	i_v2,		// 測定先ベクトル
+					const	MgVect3D&	i_vp		// 垂直方向ベクトル (平面上で左回転の角度を求める場合は平面の宝仙ベクトル)
+					);
+	
+	// ---------------------( ２次元 )------------------------------
+	//	２つのベクトル間の角度の大小に従う数値CCを求める
+	//		>-1.: >-180゜, -0.5: -90゜, 0.: -0゜, 0.5: 90゜, 1.: 180゜
+	//
+	static MREAL AngSSb2Vect2D( 
+					const	MgVect2D&	i_v1,		// 測定元ベクトル
+					const	MgVect2D&	i_v2		// 測定先ベクトル
+					);
+	
+	// ---------------------( ３次元 )------------------------------
+	//	２つのベクトル間の角度の大小に従う数値CCを求める
+	//	(２つのベクトルに直行するベクトルの方向に右回転の角度)
+	//		>-1.: >-180゜, -0.5: -90゜, 0.: -0゜, 0.5: 90゜, 1.: 180゜
+	//
+	static MREAL AngSSb2Vect3D( 
+					const	MgVect3D&	i_v1,		// 測定元ベクトル
+					const	MgVect3D&	i_v2,		// 測定先ベクトル
+					const	MgVect3D&	i_vp		// 垂直方向ベクトル (平面上で左回転の角度を求める場合は平面の宝仙ベクトル)
+					);
+	
 	// ---------------------( ２次元 )------------------------------
 	//	選択３角形が分割可能か調べる
 	//			 0: 面積が0
@@ -3943,8 +3937,8 @@ public:
 	//		多角形を３角形に分割する
 	//
 	static MINT DivideTriPolygon2D(					// (  O) ステイタス
-													//			MC_NINT			(0): 分割なし
-													//			MC_INT			(1): 分割あり
+													//			MC_NINT			: 分割なし
+													//			MC_INT			: 分割あり
 					const	MgPolyg2D&	i_Pg1,		// (I  ) 多角形
 							MgGPolyg2D*	o_pGPg2		// (  O) 分割後の３角形群
 					);
@@ -3954,8 +3948,8 @@ public:
 	//		多角形を３角形に分割する
 	//
 	static MINT DivideTriPolygon3D(					// (  O) ステイタス
-													//			MC_NINT			(0): 分割なし
-													//			MC_INT			(1): 分割あり
+													//			MC_NINT			: 分割なし
+													//			MC_INT			: 分割あり
 					const	MgPolyg3D&	i_Pg1,		// (I  ) 多角形
 					const	MgVect3D&	i_VuPg1,	// (I  ) 多角形の法線方向
 							MgGPolyg3D*	o_pGPg2		// (  O) 分割後の３角形群
@@ -3967,12 +3961,12 @@ public:
 	// ---------------------( ２次元 )------------------------------
 	//　２本の直線の交点を求める。
 	//
-	static MINT Intr2ULine2D(						// (  O) ステイタス
-													//	MC_PARALLEL (-1) 交差なし（平行）
-													//	MC_NINT	    (0)	交差なし
-													//	MC_INT      (1)	交差あり
-					const	MgULine2D&	i_ULn1,		// (I  ) 直線1
-					const	MgULine2D&	i_ULn2,		// (I  ) 直線2
+	static MINT Intr2SLine2D(						// (  O) ステイタス
+													//	MC_PARALLEL		交差なし（平行）
+													//	MC_NINT			交差なし
+													//	MC_INT			交差あり
+					const	MgSLine2D&	i_SLn1,		// (I  ) 直線1
+					const	MgSLine2D&	i_SLn2,		// (I  ) 直線2
 							MgPoint2D*	o_ppo		// (  O) ２次元交点
 					);
 	
@@ -3980,11 +3974,11 @@ public:
 	//　直線と線分の交点を求める。
 	//　重なっている場合は、交差なし（平行）。
 	//
-	static MINT IntrULineLine2D(					// (  O) ステイタス
-													//	MC_PARALLEL (-1) 交差なし（平行）
-													//	MC_NINT	    (0)	交差なし
-													//	MC_INT      (1)	交差あり
-					const	MgULine2D&	i_ULn1,		// (I  ) 直線1
+	static MINT IntrSLineLine2D(					// (  O) ステイタス
+													//	MC_PARALLEL		交差なし（平行）
+													//	MC_NINT			交差なし
+													//	MC_INT			交差あり
+					const	MgSLine2D&	i_SLn1,		// (I  ) 直線1
 					const	MgLine2D&	i_Ln2,		// (I  ) 線分2
 							MgPoint2D*	o_ppo		// (  O) ２次元交点
 					);
@@ -3993,16 +3987,16 @@ public:
 	//　線分と直線の交点を求める。
 	//　重なっている場合は、交差なし（平行）。
 	//
-	static inline MINT IntrLineULine2D(				// (  O) ステイタス
-													//	MC_PARALLEL (-1) 交差なし（平行）
-													//	MC_NINT	    (0)	交差なし
-													//	MC_INT      (1)	交差あり
+	static inline MINT IntrLineSLine2D(				// (  O) ステイタス
+													//	MC_PARALLEL		交差なし（平行）
+													//	MC_NINT			交差なし
+													//	MC_INT			交差あり
 					const	MgLine2D&	i_Ln1,		// (I  ) 線分1
-					const	MgULine2D&	i_ULn2,		// (I  ) 直線2
+					const	MgSLine2D&	i_SLn2,		// (I  ) 直線2
 							MgPoint2D*	o_ppo		// (  O) ２次元交点
 					)
 	{
-		return IntrULineLine2D( i_ULn2, i_Ln1, o_ppo);
+		return IntrSLineLine2D( i_SLn2, i_Ln1, o_ppo);
 	}
 	
 	// ---------------------( ２次元 )------------------------------
@@ -4010,10 +4004,10 @@ public:
 	//　２線分が重なっている場合は、交差なし（平行）。
 	//  ２線分が重なりなく直線的に端部で接合している場合はその接合点が交点。
 	static MINT Intr2Line2D(						// (  O) ステイタス
-													//	MC_PARALLEL (-1) 交差なし（平行）
-													//  MC_CONNECTION(4) 接続	 （平行）
-													//	MC_NINT	    (0)	交差なし
-													//	MC_INT      (1)	交差あり
+													//	MC_PARALLEL		交差なし（平行）
+													//  MC_CONNECTION	接続	（平行）
+													//	MC_NINT			交差なし
+													//	MC_INT			交差あり
 					const	MgLine2D&	i_Ln1,		// (I  ) 線分1
 					const	MgLine2D&	i_Ln2,		// (I  ) 線分2
 							MgPoint2D*	o_ppo		// (  O) ２次元交点
@@ -4023,12 +4017,12 @@ public:
 	//	線分１と直線２との交点を求め、点群に追加する。
 	//　重なっている場合は、交差なし（平行）。
 	//
-	static MINT IntrAddLineULine2D(					// (  O) ステイタス
-													//	MC_PARALLEL (-1) 交差なし（平行）
-													//	MC_NINT	    (0)	交差なし
-													//	MC_INT      (1)	交差あり
+	static MINT IntrAddLineSLine2D(					// (  O) ステイタス
+													//	MC_PARALLEL		交差なし（平行）
+													//	MC_NINT			交差なし
+													//	MC_INT			交差あり
 					const	MgLine2D&	i_Ln1,		// (I  ) 線分1
-					const	MgULine2D&	i_ULn2,		// (I  ) 直線2
+					const	MgSLine2D&	i_SLn2,		// (I  ) 直線2
 							MgGPoint2D*	io_pGPt3	// (I O) 交点を追加する点群
 													//		 追加交点数(0:交差なし、線分の端部で交差、または重なる
 													//					1:交差あり（線分の端部での交差は含まず))
@@ -4039,10 +4033,10 @@ public:
 	//  交点または重なり部分の端点が線分１の端点である場合は、その点を対象外とする。
 	//
 	static MINT IntrAdd2Line2D(						// (  O) ステイタス
-													//	MC_PARALLEL (-1) 交差なし（平行）
-													//	MC_NINT	    (0)	交差なし
-													//	MC_INT      (1)	交差あり
-													//  MC_REP	    (2)	交差あり（重なり）
+													//	MC_PARALLEL		交差なし（平行）
+													//	MC_NINT			交差なし
+													//	MC_INT			交差あり
+													//  MC_REP			交差あり（重なり）
 					const	MgLine2D&	i_Ln1,		// (I  ) 線分1
 					const	MgLine2D&	i_Ln2,		// (I  ) 線分2
 							MgGPoint2D*	io_pGPt3	// (I O) 交点を追加する線分群
@@ -4054,12 +4048,12 @@ public:
 	// ---------------------( ２次元 )------------------------------
 	//	直線１と線分２との交点または重なり部分の端点を求め、点群に追加する。
 	//
-	static MINT IntrAddULineLine2D(					// (  O) ステイタス
-													//	MC_PARALLEL (-1) 交差なし（平行）
-													//	MC_NINT	    (0)	交差なし
-													//	MC_INT      (1)	交差あり
-													//  MC_REP	    (2)	交差あり（重なり）
-					const	MgULine2D&	i_ULn1,		// (I  ) 直線1
+	static MINT IntrAddSLineLine2D(					// (  O) ステイタス
+													//	MC_PARALLEL	交差なし（平行）
+													//	MC_NINT			交差なし
+													//	MC_INT			交差あり
+													//  MC_REP			交差あり（重なり）
+					const	MgSLine2D&	i_SLn1,		// (I  ) 直線1
 					const	MgLine2D&	i_Ln2,		// (I  ) 線分2
 							MgGPoint2D*	io_pGPt3	// (I O) 交点を追加する線分群
 													// 		 追加交点数(0:交差無し |
@@ -4070,24 +4064,24 @@ public:
 	// ---------------------( ３次元 )------------------------------
 	//	２本の直線の交点を求める。
 	//
-	static MINT Intr2ULine3D(						// (  O) ステイタス
-													//	MC_PARALLEL (-1) 交差なし（平行）
-													//	MC_TWIST	(-2) 交差なし（ねじれ）
-													//	MC_INT      (1)	交差あり
-					const	MgULine3D&	i_ULn1,		// (I  ) 直線1
-					const	MgULine3D&	i_ULn2,		// (I  ) 直線2
+	static MINT Intr2SLine3D(						// (  O) ステイタス
+													//	MC_PARALLEL		交差なし（平行）
+													//	MC_TWIST		交差なし（ねじれ）
+													//	MC_INT			交差あり
+					const	MgSLine3D&	i_SLn1,		// (I  ) 直線1
+					const	MgSLine3D&	i_SLn2,		// (I  ) 直線2
 							MgPoint3D*	o_ppo		// (  O) ３次元交点
 					);
 
 	// ---------------------( ３次元 )------------------------------
 	//　直線と線分の交点を求める。
 	//
-	static MINT IntrULineLine3D(					// (  O) ステイタス
-													//	MC_PARALLEL (-1) 交差なし（平行）
-													//	MC_TWIST    (-2) 交差なし（ねじれ）
-													//	MC_NINT	    (0)	交差なし
-													//	MC_INT      (1)	交差あり
-					const	MgULine3D&	i_ULn1,		// (I  ) 直線1
+	static MINT IntrSLineLine3D(					// (  O) ステイタス
+													//	MC_PARALLEL		交差なし（平行）
+													//	MC_TWIST		交差なし（ねじれ）
+													//	MC_NINT			交差なし
+													//	MC_INT			交差あり
+					const	MgSLine3D&	i_SLn1,		// (I  ) 直線1
 					const	MgLine3D&	i_Ln2,		// (I  ) 線分2
 							MgPoint3D*	o_ppo		// (  O) ３次元交点
 					);
@@ -4095,17 +4089,17 @@ public:
 	// ---------------------( ３次元 )------------------------------
 	//　線分と直線の交点を求める。
 	//
-	static inline MINT IntrLineULine3D(				// (  O) ステイタス
-													//	MC_PARALLEL (-1) 交差なし（平行）
-													//	MC_TWIST    (-2) 交差なし（ねじれ）
-													//	MC_NINT	    (0)	交差なし
-													//	MC_INT      (1)	交差あり
+	static MINT IntrLineSLine3D(					// (  O) ステイタス
+													//	MC_PARALLEL		交差なし（平行）
+													//	MC_TWIST		交差なし（ねじれ）
+													//	MC_NINT			交差なし
+													//	MC_INT			交差あり
 					const	MgLine3D&	i_Ln1,		// (I  ) 線分1
-					const	MgULine3D&	i_ULn2,		// (I  ) 直線2
+					const	MgSLine3D&	i_SLn2,		// (I  ) 直線2
 							MgPoint3D*	o_ppo		// (  O) ３次元交点
 					)
 	{
-		return IntrULineLine3D( i_ULn2, i_Ln1, o_ppo);
+		return IntrSLineLine3D( i_SLn2, i_Ln1, o_ppo);
 	}
 	
 	// ---------------------( ３次元 )------------------------------
@@ -4114,11 +4108,11 @@ public:
 	//  ２線分が重なりなく直線的に端部で接合している場合はその接合点がを交点。
 	//
 	static MINT Intr2Line3D(						// (  O) ステイタス
-													//	MC_PARALLEL (-1) 交差なし（平行）
-													//  MC_CONNECTION(4) 接続	 （平行）
-													//	MC_TWIST    (-2) 交差なし（ねじれ）
-													//	MC_NINT	    (0)	交差なし
-													//	MC_INT      (1)	交差あり
+													//	MC_PARALLEL		交差なし（平行）
+													//  MC_CONNECTION	接続	（平行）
+													//	MC_TWIST		交差なし（ねじれ）
+													//	MC_NINT			交差なし
+													//	MC_INT			交差あり
 					const	MgLine3D&	i_Ln1,		// (I  ) 線分1
 					const	MgLine3D&	i_Ln2,		// (I  ) 線分2
 							MgPoint3D*	o_ppo		// (  O) ３次元交点
@@ -4131,11 +4125,11 @@ public:
 	//
 	//	平面と直線の交点を求める。
 	//
-	static MINT IntrPlnULine3D(						// (  O) ステイタス
-													//	MC_PARALLEL (-1) 交差なし（平行）
-													//	MC_INT      (1)	交差あり
+	static MINT IntrPlnSLine3D(						// (  O) ステイタス
+													//	MC_PARALLEL		交差なし（平行）
+													//	MC_INT			交差あり
 					const	MgPlane3D&	i_Pln1,		// (I  ) 平面1
-					const	MgULine3D&	i_ULn2,		// (I  ) 直線2
+					const	MgSLine3D&	i_SLn2,		// (I  ) 直線2
 							MgPoint3D*	o_ppo		// (  O) ３次元交点(点の標準形式)
 					);
 
@@ -4143,9 +4137,9 @@ public:
 	//	平面と線分の交点を求める。
 	//
 	static MINT IntrPlnLine3D(						// (  O) ステイタス
-													//	MC_PARALLEL (-1) 交差なし（平行）
-													//	MC_NINT	    (0)	交差なし
-													//	MC_INT      (1)	交差あり
+													//	MC_PARALLEL		交差なし（平行）
+													//	MC_NINT			交差なし
+													//	MC_INT			交差あり
 					const	MgPlane3D&	i_Pln1,		// (I  ) 平面1
 					const	MgLine3D&	i_Ln2,		// (I  ) 線分2
 							MgPoint3D*	o_ppo		// (  O) ３次元交点(点の標準形式)
@@ -4154,24 +4148,24 @@ public:
 	// ---------------------( ３次元 )------------------------------
 	//	直線と平面の交点を求める。
 	//
-	static inline MINT IntrULinePln3D(				// (  O) ステイタス
-													//	MC_PARALLEL (-1) 交差なし（平行）
-													//	MC_INT      (1)	交差あり
-					const	MgULine3D&	i_ULn1,		// (I  ) 直線1
+	static MINT IntrSLinePln3D(						// (  O) ステイタス
+													//	MC_PARALLEL		交差なし（平行）
+													//	MC_INT			交差あり
+					const	MgSLine3D&	i_SLn1,		// (I  ) 直線1
 					const	MgPlane3D&	i_Pln2,		// (I  ) 平面2
 							MgPoint3D*	o_ppo		// (  O) ３次元交点(点の標準形式)
 					)
 	{
-		return IntrPlnULine3D( i_Pln2, i_ULn1, o_ppo);
+		return IntrPlnSLine3D( i_Pln2, i_SLn1, o_ppo);
 	}
 	
 	// ---------------------( ３次元 )------------------------------
 	//	線分と平面の交点を求める。
 	//
-	static inline MINT IntrLinePln3D(				// (  O) ステイタス
-													//	MC_PARALLEL (-1) 交差なし（平行）
-													//	MC_NINT	    (0)	交差なし
-													//	MC_INT      (1)	交差あり
+	static MINT IntrLinePln3D(						// (  O) ステイタス
+													//	MC_PARALLEL		交差なし（平行）
+													//	MC_NINT			交差なし
+													//	MC_INT			交差あり
 					const	MgLine3D&	i_Ln1,		// (I  ) 線分1
 					const	MgPlane3D&	i_Pln2,		// (I  ) 平面2
 							MgPoint3D*	o_ppo		// (  O) ３次元交点(点の標準形式)
@@ -4188,11 +4182,11 @@ public:
 	//	平面と平面の交線を求める。
 	//
 	static MINT Intr2Pln3D(							// (  O) ステイタス
-													//	MC_PARALLEL (-1)	交差なし（平行）
-													//	MC_INT		(1)		交差あり
+													//	MC_PARALLEL		交差なし（平行）
+													//	MC_INT			交差あり
 					const	MgPlane3D&	i_Pln1,		// (I  ) 平面1
 					const	MgPlane3D&	i_Pln2,		// (I  ) 平面2
-							MgULine3D*	o_pULn3		// (  O) 直線3
+							MgSLine3D*	o_pSLn3		// (  O) 直線3
 					);
 
 
@@ -4203,21 +4197,21 @@ public:
 	//
 	// ---------------------( ２次元 )------------------------------
 	//		点から直線への垂線の足位置を求める
-	static inline void PerpULinePoint2D(
-					const	MgULine2D&	i_ULn1,		// (I  ) 直線1
+	static void PerpSLinePoint2D(
+					const	MgSLine2D&	i_SLn1,		// (I  ) 直線1
 					const	MgPoint2D&	i_p2,		// (I  ) 点2
 							MgPoint2D*	o_ppo		// (  O) 点から直線への垂線の足
 					)
 	{
 		MREAL		pa1;							//	直線1の始点から垂線の足までの距離
 	//
-		pa1 = ( i_p2 - i_ULn1.p) * i_ULn1.v;				//	cosΘv12v2
-		*o_ppo = i_ULn1.p + i_ULn1.v * pa1;
+		pa1 = ( i_p2 - i_SLn1.p) * i_SLn1.v;				//	cosΘv12v2
+		*o_ppo = i_SLn1.p + i_SLn1.v * pa1;
 	}
 	
 	// ---------------------( ２次元 )------------------------------
 	//		点から線分への垂線の足位置を求める
-	static inline MINT PerpLinePoint2D(				// (  O) ステイタス(=MC_ON_LINE	:線分上,
+	static MINT PerpLinePoint2D(					// (  O) ステイタス(=MC_ON_SLINE	:線分上,
 													//					=0			:線分範囲外)
 					const	MgLine2D&	i_Ln1,		// (I  ) 線分1
 					const	MgPoint2D&	i_p2,		// (I  ) 点2
@@ -4233,28 +4227,28 @@ public:
 	
 		SVal( i_Ln1.p[0], i_Ln1.p[1], i_p2, vd2, &ss, &se);
 	
-		*o_ppo = i_Ln1.p[0] + (vd1 * (ss / (ss - se)));					//	交点
+		*o_ppo = i_Ln1.p[0] + (vd1 * (ss / (ss - se)));							//	交点
 	
-		if (ss * se < 0 ||											//	線分上
-			*o_ppo == i_Ln1.p[0] || *o_ppo == i_Ln1.p[1]) ist = MC_ON_LINE;
-		else ist =  0;												//	線分の外
+		if (ss * se < 0 ||														//	線分上
+			*o_ppo == i_Ln1.p[0] || *o_ppo == i_Ln1.p[1]) ist = MC_ON_SLINE;
+		else ist =  0;															//	線分の外
 		return ist;
 	}
 	
 	// ---------------------( ２次元 )------------------------------
 	//		点から直線への垂線の足位置を求める
-	static inline void	MgPerpPointULine2D(			// (  O) ステイタス
+	static void	MgPerpPointSLine2D(					// (  O) ステイタス
 					const	MgPoint2D&	i_p1,		// (I  ) 点1
-					const	MgULine2D&	i_ULn2,		// (I  ) 直線2
+					const	MgSLine2D&	i_SLn2,		// (I  ) 直線2
 							MgPoint2D*	o_ppo		// (  O) ２次元交点(点の標準形式)
 			)
 	{
-		PerpULinePoint2D( i_ULn2, i_p1, o_ppo);
+		PerpSLinePoint2D( i_SLn2, i_p1, o_ppo);
 	}
 	
 	// ---------------------( ２次元 )------------------------------
 	//		点から線分への垂線の足位置を求める
-	static inline MINT PerpPointLine2D(				// (  O) ステイタス(=MC_ON_LINE	:線分上,
+	static MINT PerpPointLine2D(					// (  O) ステイタス(=MC_ON_SLINE	:線分上,
 													//					=0			:線分範囲外)
 					const	MgPoint2D&	i_p1,		// (I  ) 点1
 					const	MgLine2D&	i_Ln2,		// (I  ) 線分2
@@ -4266,21 +4260,21 @@ public:
 	
 	// ---------------------( ３次元 )------------------------------
 	//		点から直線への垂線の足位置を求める
-	static inline void PerpULinePoint3D(
-					const	MgULine3D&	i_ULn1,		// (I  ) 直線1
+	static void PerpSLinePoint3D(
+					const	MgSLine3D&	i_SLn1,		// (I  ) 直線1
 					const	MgPoint3D&	i_p2,		// (I  ) 点2
 							MgPoint3D*	o_ppo		// (  O) 点から直線への垂線の足
 					)
 	{
 		MREAL	pa1;								//	直線1の始点から垂線の足までの距離
 	//
-		pa1 = ( i_p2 - i_ULn1.p) * i_ULn1.v;					//	cosΘv12v2
-		*o_ppo = i_ULn1.p + i_ULn1.v * pa1;
+		pa1 = ( i_p2 - i_SLn1.p) * i_SLn1.v;					//	cosΘv12v2
+		*o_ppo = i_SLn1.p + i_SLn1.v * pa1;
 	}
 	
 	// ---------------------( ３次元 )------------------------------
 	//		点から線分への垂線の足位置を求める
-	static inline MINT	PerpLinePoint3D(			// (  O) ステイタス(=MC_ON_LINE	:線分上,
+	static MINT	PerpLinePoint3D(					// (  O) ステイタス(=MC_ON_SLINE	:線分上,
 													//					=0			:線分範囲外)
 					const	MgLine3D&	i_Ln1,		// (I  ) 線分1
 					const	MgPoint3D&	i_p2,		// (I  ) 点2
@@ -4302,7 +4296,7 @@ public:
 	
 		if (ss * se < 0 ||											//	線分上
 			*o_ppo == i_Ln1.p[0] || *o_ppo == i_Ln1.p[1])
-			ist = MC_ON_LINE;
+			ist = MC_ON_SLINE;
 		else ist = 0;												//	線分の外
 	
 		return ist;
@@ -4310,7 +4304,7 @@ public:
 
 	// ---------------------( ３次元 )------------------------------
 	//		点から線分への垂線の足位置を求める
-	static inline MINT	MgPerpPointLine3D(			// (  O) ステイタス(=MC_ON_LINE	:線分上,
+	static MINT	MgPerpPointLine3D(					// (  O) ステイタス(=MC_ON_SLINE	:線分上,
 					const	MgPoint3D&	i_p1,		// (I  ) 点1
 					const	MgLine3D&	i_Ln2,		// (I  ) 直線2
 							MgPoint3D*	o_ppo		// (  O) ３次元交点(点の標準形式)
@@ -4321,13 +4315,13 @@ public:
 	
 	// ---------------------( ３次元 )------------------------------
 	//		点から直線への垂線の足位置を求める
-	static inline void	MgPerpPointULine3D(
+	static void	MgPerpPointSLine3D(
 					const	MgPoint3D&	i_p1,		// (I  ) 点1
-					const	MgULine3D&	i_ULn2,		// (I  ) 線分2
+					const	MgSLine3D&	i_SLn2,		// (I  ) 線分2
 							MgPoint3D*	o_ppo		// (  O) ３次元交点(点の標準形式)
 					)
 	{
-		PerpULinePoint3D( i_ULn2, i_p1, o_ppo);
+		PerpSLinePoint3D( i_SLn2, i_p1, o_ppo);
 	}
 	
 	//	-------------------------３Ｄ面・ＰＯＩＮＴ----------------------
@@ -4335,7 +4329,7 @@ public:
 	// ---------------------( ３次元 )------------------------------
 	//		点から面への垂線の足位置を求める
 	//
-	static inline void PerpPlnPoint3D(
+	static void PerpPlnPoint3D(
 					const	MgPlane3D&	i_Pln1,		// (I  ) 面1
 					const	MgPoint3D&	i_p2,		// (I  ) 点2
 							MgPoint3D*	o_ppo		// (  O) 点から直線への垂線の足
@@ -4350,7 +4344,7 @@ public:
 	// ---------------------( ３次元 )------------------------------
 	//		点から面への垂線の足位置を求める
 	//
-	static inline void PerpPointPln3D(
+	static void PerpPointPln3D(
 					const	MgPoint3D&	i_p1,		// (I  ) 点1
 					const	MgPlane3D&	i_Pln2,		// (I  ) 面2
 							MgPoint3D*	o_ppo		// (  O) ３次元交点(点の標準形式)
@@ -4363,8 +4357,8 @@ public:
 	//		点の移動　形状演算
 	//
 	// ---------------------( ２次元 )------------------------------
-	//
-	static inline void MovePt2InDirOfVt2(			//
+	//	
+	static void MovePt2InDirOfVt2(					//
 					const	MgPoint2D&	i_p1,		//  (I  ) 移動点1
 					const	MgVect2D&	i_v2,		//	(I  ) 移動方向を示すベクトル
 							MREAL		i_dl,		//	(I  ) 移動距離
@@ -4375,18 +4369,18 @@ public:
 	}
 
 	//	------------------------
-	static inline void MovePt2AlongULine2D(			//
+	static void MovePt2AlongSLine2D(				//
 					const	MgPoint2D&	i_p1,		//  (I  ) 移動点1
-					const	MgULine2D&	i_ULn2,		//	(I  ) 移動方向を示す直線2
+					const	MgSLine2D&	i_SLn2,		//	(I  ) 移動方向を示す直線2
 							MREAL		i_dl,		//	(I  ) 移動距離
 							MgPoint2D*	o_pp3		//	(  O) 移動された点3
 					)
 	{
-		*o_pp3 = i_p1 + i_dl * i_ULn2.v;
+		*o_pp3 = i_p1 + i_dl * i_SLn2.v;
 	}
 
 	//	------------------------
-	static inline void MovePt2AlongLine2D(				//
+	static void MovePt2AlongLine2D(					//
 					const	MgPoint2D&	i_p1,		//  (I  ) 移動点1
 					const	MgLine2D&	i_Ln2,		//	(I  ) 移動方向を示す線分2
 							MREAL		i_dl,		//	(I  ) 移動距離
@@ -4403,7 +4397,7 @@ public:
 	//
 	// ---------------------( ３次元 )------------------------------
 	//
-	static inline void MovePt3InDirOfVt3(			//
+	static void MovePt3InDirOfVt3(					//
 					const	MgPoint3D&	i_p1,		//  (I  ) 移動点1
 					const	MgVect3D&	i_v2,		//	(I  ) 移動方向を示すベクトル
 							MREAL		i_dl,		//	(I  ) 移動距離
@@ -4414,18 +4408,18 @@ public:
 	}
 
 	//	------------------------
-	static inline void MovePt3AlongULine3D(			//	(  O) ステイタス
+	static void MovePt3AlongSLine3D(				//	(  O) ステイタス
 					const	MgPoint3D&	i_p1,		//  (I  ) 移動点1
-					const	MgULine3D&	i_ULn2,		//	(I  ) 移動方向を示す直線2
+					const	MgSLine3D&	i_SLn2,		//	(I  ) 移動方向を示す直線2
 							MREAL		i_dl,		//	(I  ) 移動距離
 							MgPoint3D*	o_pp3		//	(  O) 移動された点3
 					)
 	{
-		*o_pp3 = i_p1 + i_dl * i_ULn2.v;
+		*o_pp3 = i_p1 + i_dl * i_SLn2.v;
 	}
 
 	//	------------------------
-	static inline void MovePt3AlongLine3D(				//	(  O) ステイタス
+	static void MovePt3AlongLine3D(					//	(  O) ステイタス
 					const	MgPoint3D&	i_p1,		//  (I  ) 移動点1
 					const	MgLine3D&	i_Ln2,		//	(I  ) 移動方向を示す線分2
 							MREAL		i_dl,		//	(I  ) 移動距離
@@ -4446,19 +4440,19 @@ public:
 	//
 	//	直線をオフセットする。
 	//
-	static inline void OffsetULine2D(					//	(  O) ステイタス (=1)
-					const	MgULine2D&	i_ULn1,		//	(I  ) 直線1
+	static void OffsetSLine2D(						//	(  O) ステイタス (=1)
+					const	MgSLine2D&	i_SLn1,		//	(I  ) 直線1
 							MREAL		i_dl,		//	(I  ) オフセット量
-							MgULine2D* 	o_pULn2		//	(  O) オフセットされた直線2
+							MgSLine2D* 	o_pSLn2		//	(  O) オフセットされた直線2
 					)
 	{
 	
-		o_pULn2->p = i_ULn1.p + i_dl * RotL90Vect2D( i_ULn1.v);
-		o_pULn2->v = i_ULn1.v;
+		o_pSLn2->p = i_SLn1.p + i_dl * RotL90Vect2D( i_SLn1.v);
+		o_pSLn2->v = i_SLn1.v;
 	}
 
 	//	------------------------
-	static inline void OffsetLine2D(					//	(  O) ステイタス
+	static void OffsetLine2D(						//	(  O) ステイタス
 					const	MgLine2D&	i_Ln1,		//	(I  ) 線分1
 							MREAL		i_dl,		//	(I  ) オフセット量
 							MgLine2D*	o_pLn2		//	(  O) オフセットされた線分2
@@ -4475,19 +4469,19 @@ public:
 	//
 	// ---------------------( ３次元 )------------------------------
 	//
-	static inline void OffsetULine3D(					//	(  O) ステイタス
-					const	MgULine3D&	i_ULn1,		//	(I  ) 直線1
+	static void OffsetSLine3D(						//	(  O) ステイタス
+					const	MgSLine3D&	i_SLn1,		//	(I  ) 直線1
 					const	MgPlane3D&	i_Pln2,		//	(I  ) 直線1が乗る平面2
 							MREAL		i_dl,		//	(I  ) オフセット量
-							MgULine3D*	o_pULn3		//	(  O) オフセットされた直線3
+							MgSLine3D*	o_pSLn3		//	(  O) オフセットされた直線3
 					)
 	{
-		o_pULn3->p = i_ULn1.p + i_dl * ( i_Pln2.v ^ i_ULn1.v);
-		o_pULn3->v = i_ULn1.v;
+		o_pSLn3->p = i_SLn1.p + i_dl * ( i_Pln2.v ^ i_SLn1.v);
+		o_pSLn3->v = i_SLn1.v;
 	}
 
 	//	------------------------
-	static inline void OffsetLine3D(					//	(  O) ステイタス
+	static void OffsetLine3D(						//	(  O) ステイタス
 					const	MgLine3D&	i_Ln1,		//	(I  ) 線分1
 					const	MgPlane3D&	i_Pln2,		//	(I  ) 線分1が乗る平面2
 							MREAL		i_dl,		//	(I  ) オフセット量
@@ -4510,7 +4504,7 @@ public:
 	//
 	//	点が点上にあるかを調べる。
 	//
-	static inline bool On(							// (  O) ステイタス
+	static bool On(									// (  O) ステイタス
 													//			true:	点上にある
 													//			false:	点上にない
 					const	MgPoint2D&	i_p1,		// (I  ) 点1
@@ -4528,18 +4522,23 @@ public:
 	// ---------------------( ２次元 )------------------------------
 	//		点が点上にあるかを調べる。
 	//
-	static bool	MgCheckPointOnPoint2D(				// (  O) ステイタス
+	static bool	CheckPointOnPoint2D(				// (  O) ステイタス
 													//		 true:  点上にある
 													//		 false: 点上にない
 					const	MgPoint2D&	i_p1,		// (I  ) 点1
 					const	MgPoint2D&	i_p2		// (I  ) 点2
-					);
+					)
+	{
+	//	return (p1 == p2);
+		MgVect2D	v1 = i_p2 - i_p1;
+		return ( SqLenVect2D( v1) <= MGPTOL->D_2);
+	}
 
 	// ---------------------( ３次元 )------------------------------
 	//
 	//	点が点上にあるかを調べる。
 	//
-	static inline bool CheckPointOnPoint3D(			// (  O) ステイタス
+	static bool CheckPointOnPoint3D(				// (  O) ステイタス
 													//			true:	点上にある
 													//			false:	点上にない
 					const	MgPoint3D&	i_p1,		// (I  ) 点1
@@ -4558,50 +4557,57 @@ public:
 	//
 	//	点が直線上にあるかを調べる。
 	//
-	static bool CheckPointOnULine2DWS(				// (  O) ステイタス
+	static bool CheckPointOnSLine2D(				// (  O) ステイタス
 													//		 	true:	直線上にある
 													//		 	false:	直線上にない
 					const	MgPoint2D&	i_p1,		// (I  ) 点1
-					const	MgULine2D&	i_ULn2,		// (I  ) 直線2
+					const	MgSLine2D&	i_SLn2,		// (I  ) 直線2
 							int*		o_pist = 0	// (  O) 補助ステイタス
-													//			MC_RIGHT			(010): 点が直線の右側
-													//			MC_ON_LINE			(020): 点が直線上
-													//			MC_LEFT				(040): 点が直線の左側
+													//			MC_RIGHT			: 点が直線の右側
+													//			MC_ON_SLINE			: 点が直線上
+													//			MC_LEFT				: 点が直線の左側
 					);
 	
 	// ---------------------( ２次元 )------------------------------
 	//
 	//	点が半直線上にあるかを調べる。
 	//
-	static bool CheckPointOnHLine2DWS(				// (  O) ステイタス
+	static bool CheckPointOnHLine2D(				// (  O) ステイタス
 													//		 	true:	半直線上にある
 													//		 	false:	半直線上にない
 					const	MgPoint2D&	i_p1,		// (I  ) 点1
 					const	MgHLine2D&	i_HLn2,		// (I  ) 半直線2
 							int*		o_pist = 0	// (  O) 補助ステイタス
-													//			MC_RIGHT			(010): 点が半直線の右側
-													//			MC_ON_LINE			(020): 点が半直線上
-													//			MC_LEFT				(040): 点が半直線の左側
+													//		 ステイタス1
+													//			MC_RIGHT			: 点が半直線の右側
+													//			MC_ON_SLINE			: 点が半直線の延長直線上
+													//			MC_LEFT				: 点が半直線の左側
+													//		 ステイタス2
+													//			MC_INSIDE			: 点が半直線の内側(始点を除く線上)
+													//			MC_ON_PS			: 点が半直線の始点上
+													//			MC_OUT_PS			: 点が半直線の始点側延長線上
 					);
 
 	// ---------------------( ２次元 )------------------------------
 	//
 	//	点が線分上にあるかを調べる。
 	//
-	static bool CheckPointOnLine2DWS(				// (  O) ステイタス
+	static bool CheckPointOnLine2D(					// (  O) ステイタス
 													//			true:	線分上にある
 													//			false:	線分上にない
 					const	MgPoint2D&	i_p1,		// (I  ) 点1
 					const	MgLine2D&	i_Ln2,		// (I  ) 線分2
 							int*		o_pist = 0	// (  O) 補助ステイタス	(ステイタス1 | ステイタス2)
 													//		 ステイタス1
-													//			MC_RIGHT			(010): 点が線分の右側
-													//			MC_ON_LINE			(020): 点が線分延長直線上
-													//			MC_LEFT				(040): 点が線分の左側
+													//			MC_RIGHT			: 点が線分の右側
+													//			MC_ON_SLINE			: 点が線分延長直線上
+													//			MC_LEFT				: 点が線分の左側
 													//		 ステイタス2
-													//			MC_ON_PS			(001): 点が線分の始点上
-													//			MC_INSIDE			(002): 点が線分の内側上
-													//			MC_ON_PE			(004): 点が線分の終点上
+													//			MC_ON_PS			: 点が線分の始点上
+													//			MC_INSIDE			: 点が線分の内側上
+													//			MC_ON_PE			: 点が線分の終点上
+													//			MC_OUT_PS			: 点が線分の始点側延長線上
+													//			MC_OUT_PE			: 点が線分の終点側延長線上
 					);
 	
 	// ---------------------( ２次元 )------------------------------
@@ -4609,20 +4615,20 @@ public:
 	//	線分の中心点が直線上にあるかを調べる。
 	//
 	
-	static inline bool CheckLineOnULine2DWS(		// (  O) ステイタス
+	static bool CheckLineOnSLine2D(					// (  O) ステイタス
 													//			true:	直線上にある
 													//			false:	直線上にない
 					const	MgLine2D&	i_Ln1,		// (I  ) 線分1
-					const	MgULine2D&	i_ULn2,		// (I  ) 直線2
+					const	MgSLine2D&	i_SLn2,		// (I  ) 直線2
 							int*		o_pist = 0	// (  O) ステイタス
-													//			MC_RIGHT			(010): 点が線分の右側
-													//			MC_ON_LINE			(020): 点が直線上
-													//			MC_LEFT				(040): 点が線分の左側
+													//			MC_RIGHT			: 点が線分の右側
+													//			MC_ON_SLINE			: 点が直線上
+													//			MC_LEFT				: 点が線分の左側
 					)
 	{
 		MgPoint2D Pt1;
 		Pt1 = ( i_Ln1.p[0] + i_Ln1.p[1]) * 0.5;
-		return CheckPointOnULine2DWS( Pt1, i_ULn2, o_pist);
+		return CheckPointOnSLine2D( Pt1, i_SLn2, o_pist);
 	}
 	
 	// ---------------------( ２次元 )------------------------------
@@ -4640,20 +4646,16 @@ public:
 	//
 	//	点が直線上にあるかを調べる。
 	//
-	static inline bool CheckPointOnULine3D(			// (  O) ステイタス
+	static bool CheckPointOnSLine3D(				// (  O) ステイタス
 													//			true:	線分上にある
 													//			false:	線分上にない
 					const	MgPoint3D&	i_p1,		// (I  ) 点1
-					const	MgULine3D&	i_ULn2		// (I  ) 直線2
+					const	MgSLine3D&	i_SLn2		// (I  ) 直線2
 					)
 	{
 		MgVect3D		v21, va1;
-	//	MREAL		pa_2;							//	直線2から点1までの鉛直距離**2
-	//
-		v21 = i_p1 - i_ULn2.p;
-		va1 = v21 ^ i_ULn2.v;
-	//	pa_2 = Abs_2(va1);
-	//	return ( pa_2 <= rTol * rTol);
+		v21 = i_p1 - i_SLn2.p;
+		va1 = v21 ^ i_SLn2.v;
 		return ( SqLenVect3D(va1) <= MGPTOL->D_2);
 	}
 	
@@ -4661,41 +4663,38 @@ public:
 	//
 	//	点が半直線上にあるかを調べる。
 	//
-	static inline bool CheckPointOnHLine3D(			// (  O) ステイタス
+	static bool CheckPointOnHLine3D(				// (  O) ステイタス
 													//			true:	線分上にある
 													//			false:	線分上にない
 					const	MgPoint3D&	i_p1,		// (I  ) 点1
-					const	MgHLine3D&	i_HLn2		// (I  ) 半直線2
-					)
-	{
-		MgVect3D	v21, va1;
-		MREAL		c1;
-	//	MREAL		pa_2;							//	直線2から点1までの鉛直距離**2
-	//
-		v21 = i_p1 - i_HLn2.p;
-		va1 = v21 ^ i_HLn2.v;
-		c1 = v21 * i_HLn2.v;
-	//	pa_2 = Abs_2(va1);
-	//	return ( pa_2 <= rTol * rTol);
-		return ( SqLenVect3D(va1) <= MGPTOL->D_2 && c1 > -MGPTOL->D);
-	}
+					const	MgHLine3D&	i_HLn2,		// (I  ) 半直線2
+							int*		o_pist = 0	// (  O) 補助ステイタス
+													//		 ステイタス1
+													//			MC_ON_SLINE			: 点が半直線の延長直線上
+													//		 ステイタス2
+													//			MC_INSIDE			: 点が半直線の内側(始点を除く線上)
+													//			MC_ON_PS			: 点が半直線の始点上
+													//			MC_OUT_PS			: 点が半直線の始点側延長線上
+					);
 	
 	// ---------------------( ３次元 )------------------------------
 	//
 	//	点が線分上にあるかを調べる。
 	//
-	static bool	CheckPointOnLine3DWS(				// (  O) ステイタス
+	static bool	CheckPointOnLine3D(					// (  O) ステイタス
 													//			true:	線分上にある
 													//			false:	線分上にない
 					const	MgPoint3D&	i_p1,		// (I  ) 点1
 					const	MgLine3D&	i_Line2,	// (I  ) 線分2
 							int*		o_pist = 0	// (  O) 補助ステイタス	(ステイタス1 | ステイタス2)
 													//		 ステイタス1
-													//			MC_ON_LINE			(020): 点が線分延長直線上
+													//			MC_ON_SLINE			: 点が線分延長直線上
 													//		 ステイタス2
-													//			MC_ON_PS			(001): 点が線分の始点上
-													//			MC_INSIDE			(002): 点が線分の内側上
-													//			MC_ON_PE			(004): 点が線分の終点上
+													//			MC_ON_PS			: 点が線分の始点上
+													//			MC_INSIDE			: 点が線分の内側上
+													//			MC_ON_PE			: 点が線分の終点上
+													//			MC_OUT_PS			: 点が線分の始点側延長線上
+													//			MC_OUT_PE			: 点が線分の終点側延長線上
 					);
 	
 	// ---------------------( ３次元 )------------------------------
@@ -4726,7 +4725,7 @@ public:
 
 	// ---------------------( ２次元 )------------------------------
 	//		ベクトルとベクトルが垂直であるかを確認する		(tolA)
-	static inline bool CheckPerpVect2D(				// (  O) ステイタス true: 垂直 
+	static bool CheckPerpVect2D(					// (  O) ステイタス true: 垂直 
 					const	MgVect2D&	i_v1,		// (I  ) ベクトル1
 					const	MgVect2D&	i_v2		// (I  ) ベクトル2
 					)
@@ -4738,7 +4737,7 @@ public:
 
 	// ---------------------( ２次元 )------------------------------
 	//		ベクトルとベクトルが垂直であるかを確認し、外積と内積を出力する
-	static inline bool CheckPerpVect2DS(			// (  O) ステイタス true: 垂直
+	static bool CheckPerpVect2DS(					// (  O) ステイタス true: 垂直
 					const	MgVect2D&	i_v1,		// (I  ) ベクトル1
 					const	MgVect2D&	i_v2,		// (I  ) ベクトル2
 							MREAL*		o_pso,		// (  O) 外積
@@ -4752,7 +4751,7 @@ public:
 
 	// ---------------------( ３次元 )------------------------------
 	//		ベクトルとベクトルが垂直であるかを確認する
-	static inline bool CheckPerpVect3D(				// (  O) ステイタス true: 垂直
+	static bool CheckPerpVect3D(					// (  O) ステイタス true: 垂直
 					const	MgVect3D&	i_v1,		// (I  ) ベクトル1
 					const	MgVect3D&	i_v2		// (I  ) ベクトル2
 					)
@@ -4764,7 +4763,7 @@ public:
 
 	// ---------------------( ３次元 )------------------------------
 	//		ベクトルとベクトルが垂直であるかを確認し、外積と内積を出力する
-	static inline bool CheckPerpVect3DS(			// (  O) ステイタス true: 垂直
+	static bool CheckPerpVect3DS(					// (  O) ステイタス true: 垂直
 					const	MgVect3D&	i_v1,		// (I  ) ベクトル1
 					const	MgVect3D&	i_v2,		// (I  ) ベクトル2
 							MgVect3D*	o_ppso,		// (  O) 外積
@@ -4783,15 +4782,15 @@ public:
 	//	点と多角形の位置関係を求める
 	//
 	
-	static inline bool CheckPointOnPolygon2DWS(		// (  O) ステイタス
+	static bool CheckPointOnPolygon2DWS(			// (  O) ステイタス
 													//			true:	多角形の内側または辺上
 													//			false:	多角形の外側
 					const	MgPoint2D&	i_Pt,		// (I  ) 点
 					const	MgPolyg2D&	i_Pg,		// (I  ) 多角形
 							int*		o_pist = 0	// (  O) ステイタス
-													//			MC_IN_BORDER		(001): 点が多角形の内側
-													//			MC_ON_BORDER		(002): 点が多角形の辺上(または頂点上)
-													//			MC_OUT_BORDER		(004): 点が多角形の外側
+													//			MC_IN_BORDER		: 点が多角形の内側
+													//			MC_ON_BORDER		: 点が多角形の辺上(または頂点上)
+													//			MC_OUT_BORDER		: 点が多角形の外側
 					)
 	{
 		bool	bst;
@@ -4821,20 +4820,20 @@ public:
 	// ---------------------( ２次元 )------------------------------
 	//	線分の中心点と多角形の位置関係を求める ２Ｄ
 	//
-	static inline bool CheckLineOnPolygon2DWS(		// (  O) ステイタス
+	static bool CheckLineOnPolygon2DWS(				// (  O) ステイタス
 													//			true:	多角形の内側または辺上
 													//			false:	多角形の外側
 					const	MgLine2D&	i_Ln1,		// (I  ) 線分
 					const	MgPolyg2D&	i_Pg2,		// (I  ) 多角形
 							int*		o_pist = 0	// (  O) 補助ステイタス	(ステイタス1 | ステイタス2)
 													// 		 テイタス1
-													//			MC_IN_BORDER		(001):	点が多角形の内側
-													//			MC_ON_BORDER		(002):	点が多角形の辺上(または頂点上)
-													//			MC_OUT_BORDER		(004):	点が多角形の外側
+													//			MC_IN_BORDER		: 点が多角形の内側
+													//			MC_ON_BORDER		: 点が多角形の辺上(または頂点上)
+													//			MC_OUT_BORDER		: 点が多角形の外側
 													//		ステイタス2
-													//			MC_ON_SIDE_SAME 	(010):	辺上(同一方向)
-													//			MC_ON_SIDE_REV		(020):	辺上(逆方向)
-													//			MC_ON_TOP			(040): 頂点上
+													//			MC_ON_SIDE_SAME 	: 辺上(同一方向)
+													//			MC_ON_SIDE_REV		: 辺上(逆方向)
+													//			MC_ON_TOP			: 頂点上
 					)
 	{
 		bool		bst;
@@ -4875,9 +4874,9 @@ public:
 					const	MgPoint2D&	i_Pt,		// (I  ) 点
 					const	MgGPolyg2D&	i_GPg,		// (I  ) 穴付き多角形
 							int*		o_pist =0	// (  O) ステイタス
-													//			MC_IN_BORDER		(001): 点が穴付き多角形の内側
-													//			MC_ON_BORDER		(002): 点が穴付き多角形の辺上(または頂点上)
-													//			MC_OUT_BORDER		(004): 点が穴付き多角形の外側
+													//			MC_IN_BORDER		: 点が穴付き多角形の内側
+													//			MC_ON_BORDER		: 点が穴付き多角形の辺上(または頂点上)
+													//			MC_OUT_BORDER		: 点が穴付き多角形の外側
 					);
 
 	// ---------------------( ２次元 )------------------------------
@@ -4890,24 +4889,24 @@ public:
 					const	MgGPolyg2D&	i_GPg2,		// (I  ) 穴付き多角形
 							int*		o_pist = 0	// (  O) 補助ステイタス	(ステイタス1 | ステイタス2)
 													// 		 テイタス1
-													//			MC_IN_BORDER		(001): 点が穴付き多角形の内側
-													//			MC_ON_BORDER		(002): 点が穴付き多角形の辺上(または頂点上)
-													//			MC_OUT_BORDER		(004): 点が穴付き多角形の外側
+													//			MC_IN_BORDER		: 点が穴付き多角形の内側
+													//			MC_ON_BORDER		: 点が穴付き多角形の辺上(または頂点上)
+													//			MC_OUT_BORDER		: 点が穴付き多角形の外側
 													// 		 テイタス2
-													//			MC_ON_SIDE_SAME		(010): 辺上(同一方向)	(MC_ON_BORDERと共に設定)
-													//			MC_ON_SIDE_REV		(020): 辺上(逆方向)		(MC_ON_BORDERと共に設定)
-													//			MC_ON_TOP			(040): 頂点上			(MC_ON_BORDERと共に設定)
+													//			MC_ON_SIDE_SAME		: 辺上(同一方向)	(MC_ON_BORDERと共に設定)
+													//			MC_ON_SIDE_REV		: 辺上(逆方向)		(MC_ON_BORDERと共に設定)
+													//			MC_ON_TOP			: 頂点上			(MC_ON_BORDERと共に設定)
 					);
 	
 	// ---------------------( ２次元 )------------------------------
 	// 点と多角形の位置関係を求める
 	// 多角形の辺が点の周りを回る周回数を求める（実体一周:1　穴一周:-1）
 	static MINT	CountPolygonAroundPoint2D(			// (  O) ステイタス
-													//								(000): 多角形の中または外	
-													//			MC_ON_SIDE_SAME		(010): 辺上(同一方向)
-													//			MC_ON_SIDE_REV		(020): 辺上(逆方向)
-													//			MC_ON_SIDE			(030): 辺上(線分方向=NULL: 線分方向指定無し)
-													//			MC_ON_TOP			(040): 頂点上
+													//			(000)				: 多角形の中または外	
+													//			MC_ON_SIDE_SAME		: 辺上(同一方向)
+													//			MC_ON_SIDE_REV		: 辺上(逆方向)
+													//			MC_ON_SIDE			: 辺上(線分方向=NULL: 線分方向指定無し)
+													//			MC_ON_TOP			: 頂点上
 					const	MgPoint2D&	i_Pt,		// (I  ) 点
 					const	MgVect2D*	i_pvst,		// (I  ) 線分方向 または NULL
 													//		 引数がNULLで無ければ点が辺上の場合、
@@ -4930,13 +4929,13 @@ public:
 					const	MgPolyg3D&	i_Pg,		// (I  ) 多角形
 							MINT*		o_pist = 0	// (  O) ステイタス
 								  					//		 多角形の平面と点の位置関係
-													//			MC_UPPER			(010): 点が平面の上側	
-													//			MC_ON_PLANE			(020): 点が平面上
-													//			MC_LOWER			(040): 点が平面の下側
+													//			MC_UPPER			: 点が平面の上側	
+													//			MC_ON_PLANE			: 点が平面上
+													//			MC_LOWER			: 点が平面の下側
 													//		 多角形と点の位置関係
-													//			MC_IN_BORDER		(001): 点が多角形の内側
-													//			MC_ON_BORDER		(002): 点が多角形の辺上
-													//			MC_OUT_BORDER		(004): 点が多角形の外側
+													//			MC_IN_BORDER		: 点が多角形の内側
+													//			MC_ON_BORDER		: 点が多角形の辺上
+													//			MC_OUT_BORDER		: 点が多角形の外側
 					);
 	
 	*/
@@ -4945,20 +4944,20 @@ public:
 	//	線分の中心点と多角形の位置関係を求める
 	//
 	/*
-	static inline bool CheckLineOnPolygon3DWS(		// (  O) ステイタス
+	static bool CheckLineOnPolygon3DWS(				// (  O) ステイタス
 													//			true:	多角形上
 													//			false:	多角形外
 					const	MgLine3D&	i_Ln1,		// (I  ) 線分
 					const	MgPolyg3D&	i_Pg2,		// (I  ) 多角形
 							MINT*		o_pist = 0	// (  O) 補助ステイタス
 								  					//		 多角形の平面と点の位置関係
-													//			MC_UPPER			(010): 点が平面の上側	
-													//			MC_ON_PLANE			(020): 点が平面上
-													//			MC_LOWER			(040): 点が平面の下側
+													//			MC_UPPER			: 点が平面の上側	
+													//			MC_ON_PLANE			: 点が平面上
+													//			MC_LOWER			: 点が平面の下側
 													//       多角形と点の位置関係
-													//			MC_IN_BORDER		(001): 点が多角形の内側
-													//			MC_ON_BORDER		(002): 点が多角形の辺上
-													//			MC_OUT_BORDER		(004): 点が多角形の外側
+													//			MC_IN_BORDER		: 点が多角形の内側
+													//			MC_ON_BORDER		: 点が多角形の辺上
+													//			MC_OUT_BORDER		: 点が多角形の外側
 					)
 	{
 		MgPoint3D	Pt1;
@@ -4973,15 +4972,15 @@ public:
 	//
 	//	点が平面上にあるかを調べる。
 	//
-	static inline bool CheckPointOnPln3DWS(			// (  O) ステイタス
+	static bool CheckPointOnPln3DWS(				// (  O) ステイタス
 													//			true:  平面上
 													//			false: 平面外
 					const	MgPoint3D&	i_p1,		// (I  ) 点1
 					const	MgPlane3D&	i_Pln2,		// (I  ) 平面2
 							MINT*		o_pist = 0	// (  O) 補足ステイタス
-													//			MC_UPPER			(010): 点が平面の上側	
-													//			MC_ON_PLANE			(020): 点が平面上
-													//			MC_LOWER			(040): 点が平面の下側
+													//			MC_UPPER			: 点が平面の上側	
+													//			MC_ON_PLANE			: 点が平面上
+													//			MC_LOWER			: 点が平面の下側
 					)
 	{
 		bool	bst;
@@ -5007,19 +5006,19 @@ public:
 	// ---------------------( ３次元 )------------------------------
 	//	直線が平面上にあるかを調べる。
 	//
-	static inline bool CheckULineOnPln3D(			// (  O) ステイタス
+	static bool CheckSLineOnPln3D(					// (  O) ステイタス
 													//			true:  平面上
 													//			false: 平面外
-					const	MgULine3D&	i_ULn1,		// (I  ) 直線1
+					const	MgSLine3D&	i_SLn1,		// (I  ) 直線1
 					const	MgPlane3D&	i_Pln2		// (I  ) 平面2
 					)
 	{
 		int		ist;
-		if ( CheckPointOnPln3DWS( i_ULn1.p, i_Pln2, &ist)) {
+		if ( CheckPointOnPln3DWS( i_SLn1.p, i_Pln2, &ist)) {
 	//
 	//	平行のチェック
 	//
-			if ( CheckPerpVect3D( i_ULn1.v, i_Pln2.v))
+			if ( CheckPerpVect3D( i_SLn1.v, i_Pln2.v))
 				return true;									//	平面上
 		}
 		return false;
@@ -5028,20 +5027,20 @@ public:
 	// ---------------------( ３次元 )------------------------------
 	//	線分が平面上にあるかを調べる。
 	//
-	static inline bool CheckLineOnPln3DWS(			// (  O) ステイタス
+	static bool CheckLineOnPln3DWS(					// (  O) ステイタス
 													//			true:  平面上
 													//			false: 平面外
 					const	MgLine3D&	i_Ln1,		// (I  ) 線分1
 					const	MgPlane3D&	i_Pln2,		// (I  ) 平面2
 							MINT*		o_pist = 0	// (  O) 補足ステイタス
 								  					//		 多角形の平面と点の位置関係
-													//			MC_PS_UPPER			(001): 始点が平面の上側	
-													//			MC_PS_ON_PLANE		(002): 始点が平面上
-													//			MC_PS_LOWER			(004): 始点が平面の下側
+													//			MC_PS_UPPER			: 始点が平面の上側	
+													//			MC_PS_ON_PLANE		: 始点が平面上
+													//			MC_PS_LOWER			: 始点が平面の下側
 													//       多角形と点の位置関係
-													//			MC_PE_UPPER			(010): 終点が平面の上側	
-													//			MC_PE_ON_PLANE		(020): 終点が平面上
-													//			MC_PE_LOWER			(040): 終点が平面の下側
+													//			MC_PE_UPPER			: 終点が平面の上側	
+													//			MC_PE_ON_PLANE		: 終点が平面上
+													//			MC_PE_LOWER			: 終点が平面の下側
 					)
 	{
 		bool	bs, be;
@@ -5058,7 +5057,7 @@ public:
 	//
 	//		２つの４角形が重なるか否かをチェックする。
 	// 
-	static inline bool	MgCheckRectOnRect2D(		// (  O) ステイタス
+	static bool	CheckRectOnRect2D(				// (  O) ステイタス
 													//		 true   交差あり
 													//		 false  交差なし
 					const	MgRect2D&	i_rct10,	// (I  ) ４角形1 (min,max)
@@ -5075,7 +5074,7 @@ public:
 	//
 	//		２つの４角形が重なるか否かをチェックする。
 	//
-	static inline bool	MgCheckRectOnRect3D(		// (  O) ステイタス
+	static bool	CheckRectOnRect3D(				// (  O) ステイタス
 													//		 true   交差あり
 													//		 false  交差なし
 					const	MgRect3D&	i_rct10,	// (I  ) ４角形1 (min,max)
@@ -5092,9 +5091,9 @@ public:
 	
 	// ---------------------( ２次元 )------------------------------
 	//
-	//		点がＭＩＮ／ＭＡＸ領域が内にあるか否かをチェックする。
+	//		点がＭＩＮ／ＭＡＸ領域内にあるか否かをチェックする。
 	//
-	static inline	bool CheckPointInMinmaxR2D(
+	static bool CheckPointInMinmaxR2D(
 					const	MgPoint2D&		i_pt1,	// Point
 					const	MgMinMaxR2D&	i_mx2	// MIN/MAX
 					)
@@ -5105,9 +5104,9 @@ public:
 	
 	// ---------------------( ３次元 )------------------------------
 	//
-	//		点がＭＩＮ／ＭＡＸ領域が内にあるか否かをチェックする。
+	//		点がＭＩＮ／ＭＡＸ領域内にあるか否かをチェックする。
 	//
-	static inline	bool CheckPt3InMinmaxR3D(
+	static bool CheckPt3InMinmaxR3D(
 					const	MgPoint3D&		i_pt1,	// Point
 					const	MgMinMaxR3D&	i_mx2	// MIN/MAX
 					)
@@ -5121,7 +5120,7 @@ public:
 	//
 	//		２つのＭＩＮ／ＭＡＸ領域が重なるか否かをチェックする。
 	//
-	static inline	bool CheckMinmaxIOnMinmaxI2D(
+	static bool CheckMinmaxIOnMinmaxI2D(
 					const	MgMinMaxI2D&	i_mx1,	// MIN/MAX
 					const	MgMinMaxI2D&	i_mx2	// MIN/MAX
 					)
@@ -5134,7 +5133,7 @@ public:
 	//
 	//		２つのＭＩＮ／ＭＡＸ領域が重なるか否かをチェックする。
 	//
-	static inline	bool CheckMinmaxROnMinmaxR2D(
+	static bool CheckMinmaxROnMinmaxR2D(
 					const	MgMinMaxR2D&	i_mx1,	// MIN/MAX
 					const	MgMinMaxR2D&	i_mx2	// MIN/MAX
 					)
@@ -5147,7 +5146,7 @@ public:
 	//
 	//		２つのＭＩＮ／ＭＡＸ領域が重なるか否かをチェックする。
 	//
-	static inline	bool CheckMinmaxROnMinmaxR3D(
+	static bool CheckMinmaxROnMinmaxR3D(
 					const	MgMinMaxR3D&	i_mx1,	// MIN/MAX
 					const	MgMinMaxR3D&	i_mx2	// MIN/MAX
 					)
@@ -5160,7 +5159,7 @@ public:
 	// ---------------------( ２次元 )------------------------------
 	// P1を原点としたP2の位置の象限を求める
 	//
-	static inline MINT Quadrant	(					// (  O) 1～4: 象限
+	static MINT Quadrant(							// (  O) 1～4: 象限
 					const	MgPoint2D&	i_p1,		// (I  ) P1
 					const	MgPoint2D&	i_p2		// (I  ) P2
 					)
@@ -5179,7 +5178,7 @@ public:
 	// ---------------------( ２次元 )------------------------------
 	//		点列を線分の始点から終点に向かう方向に従った座標順に並べる（同一点は間引く）
 	//
-	static inline void	SortLineGPoint2D(
+	static void	SortLineGPoint2D(
 					const	MgLine2D&	i_Ln1,		// (I  ) 点列の並べ方向を示す線分
 							MgGPoint2D*	io_pGPt2	// (I O) 並べる点列
 					)
@@ -5200,7 +5199,7 @@ public:
 	//// ---------------------( ３次元 )------------------------------
 	////		点列を線分の始点から終点に向かう方向に従った座標順に並べる（同一点は間引く）
 	////
-	//static inline void	MgSortLineGPoint3D(
+	//static void	MgSortLineGPoint3D(
 	//				const	MgLine3D&	i_Ln1,		// (I  ) 点列の並べ方向を示す線分
 	//						MgGPoint3D*	io_pGPt2	// (I O) 並べる点列
 	//				)
@@ -5213,7 +5212,7 @@ public:
 	//===========================================================================
 	//	線分群を正規化する。（線分の逆方向の重なりを除去する）
 	//
-	static inline void Norm(						//
+	static void Norm(								//
 					const	MgGLine2D&	i_GLn1,		// (I  ) 線分
 							MgGLine2D*	o_pGLn2		// (  O) 重なりを除去後の線分
 					)
@@ -5232,54 +5231,54 @@ public:
 	// ---------------------( ３次元 )------------------------------
 	//		直線と点の位置関係を表すＳ値
 	//
-	static inline MREAL SVal2ULine3D(				// (  O) Ｓ値(２直線の方向ベクトルからなる平行６面体の体積）
-				    const	MgULine3D&	i_ULn1,		// (I  ) 直線1
-					const	MgULine3D&	i_ULn2		// (I  ) 直線2
+	static MREAL SVal2SLine3D(						// (  O) Ｓ値(２直線の方向ベクトルからなる平行６面体の体積）
+				    const	MgSLine3D&	i_SLn1,		// (I  ) 直線1
+					const	MgSLine3D&	i_SLn2		// (I  ) 直線2
 					)
 	{
-	//		( (ULn1.p.x*ULn1.v.y-ULn1.p.y*ULn1.v.x) * (ULn2.p.z*ULn2.v.w-ULn2.p.w*ULn2.v.z)
-	//		- (ULn1.p.x*ULn1.v.z-ULn1.p.z*ULn1.v.x) * (ULn2.p.y*ULn2.v.w-ULn2.p.w*ULn2.v.y)
-	//		+ (ULn1.p.x*ULn1.v.w-ULn1.p.w*ULn1.v.x) * (ULn2.p.y*ULn2.v.z-ULn2.p.z*ULn2.v.y)
-	//		+ (ULn1.p.y*ULn1.v.z-ULn1.p.z*ULn1.v.y) * (ULn2.p.x*ULn2.v.w-ULn2.p.w*ULn2.v.x)
-	//		- (ULn1.p.y*ULn1.v.w-ULn1.p.w*ULn1.v.y) * (ULn2.p.x*ULn2.v.z-ULn2.p.z*ULn2.v.x)
-	//		+ (ULn1.p.z*ULn1.v.w-ULn1.p.w*ULn1.v.z) * (ULn2.p.x*ULn2.v.y-ULn2.p.y*ULn2.v.x))
+	//		( (SLn1.p.x*SLn1.v.y-SLn1.p.y*SLn1.v.x) * (SLn2.p.z*SLn2.v.w-SLn2.p.w*SLn2.v.z)
+	//		- (SLn1.p.x*SLn1.v.z-SLn1.p.z*SLn1.v.x) * (SLn2.p.y*SLn2.v.w-SLn2.p.w*SLn2.v.y)
+	//		+ (SLn1.p.x*SLn1.v.w-SLn1.p.w*SLn1.v.x) * (SLn2.p.y*SLn2.v.z-SLn2.p.z*SLn2.v.y)
+	//		+ (SLn1.p.y*SLn1.v.z-SLn1.p.z*SLn1.v.y) * (SLn2.p.x*SLn2.v.w-SLn2.p.w*SLn2.v.x)
+	//		- (SLn1.p.y*SLn1.v.w-SLn1.p.w*SLn1.v.y) * (SLn2.p.x*SLn2.v.z-SLn2.p.z*SLn2.v.x)
+	//		+ (SLn1.p.z*SLn1.v.w-SLn1.p.w*SLn1.v.z) * (SLn2.p.x*SLn2.v.y-SLn2.p.y*SLn2.v.x))
 	//
-		return	( ( i_ULn1.p.x * i_ULn1.v.y - i_ULn1.p.y * i_ULn1.v.x) * ( -i_ULn2.v.z)
-				- ( i_ULn1.p.x * i_ULn1.v.z - i_ULn1.p.z * i_ULn1.v.x) * ( -i_ULn2.v.y)
-				+ ( -i_ULn1.v.x) * ( i_ULn2.p.y * i_ULn2.v.z - i_ULn2.p.z * i_ULn2.v.y)
-				+ ( i_ULn1.p.y * i_ULn1.v.z - i_ULn1.p.z * i_ULn1.v.y) * ( -i_ULn2.v.x)
-				- ( -i_ULn1.v.y) * ( i_ULn2.p.x * i_ULn2.v.z - i_ULn2.p.z * i_ULn2.v.x)
-				+ ( -i_ULn1.v.z) * ( i_ULn2.p.x * i_ULn2.v.y - i_ULn2.p.y * i_ULn2.v.x));
+		return	( ( i_SLn1.p.x * i_SLn1.v.y - i_SLn1.p.y * i_SLn1.v.x) * ( -i_SLn2.v.z)
+				- ( i_SLn1.p.x * i_SLn1.v.z - i_SLn1.p.z * i_SLn1.v.x) * ( -i_SLn2.v.y)
+				+ ( -i_SLn1.v.x) * ( i_SLn2.p.y * i_SLn2.v.z - i_SLn2.p.z * i_SLn2.v.y)
+				+ ( i_SLn1.p.y * i_SLn1.v.z - i_SLn1.p.z * i_SLn1.v.y) * ( -i_SLn2.v.x)
+				- ( -i_SLn1.v.y) * ( i_SLn2.p.x * i_SLn2.v.z - i_SLn2.p.z * i_SLn2.v.x)
+				+ ( -i_SLn1.v.z) * ( i_SLn2.p.x * i_SLn2.v.y - i_SLn2.p.y * i_SLn2.v.x));
 	}
 
 	// ---------------------( ３次元 )------------------------------
 	//		直線と点の位置関係を表すＳ値
 	//
-	static inline MREAL SValULineLine3D(			// (  O) Ｓ値(直線の方向ベクトルと線分からなる平行６面体の体積）
-				    const	MgULine3D&	i_ULn1,		// (I  ) 直線1
+	static MREAL SValSLineLine3D(					// (  O) Ｓ値(直線の方向ベクトルと線分からなる平行６面体の体積）
+				    const	MgSLine3D&	i_SLn1,		// (I  ) 直線1
 					const	MgLine3D&	i_Ln2		// (I  ) 線分2
 					)
 	{
-	//		( (ULn1.p.x*ULn1.v.y-ULn1.p.y*ULn1.v.x) * (Ln2.p[0].z*Ln2.p[1].w-Ln2.p[0].w*Ln2.p[1].z)
-	//		- (ULn1.p.x*ULn1.v.z-ULn1.p.z*ULn1.v.x) * (Ln2.p[0].y*Ln2.p[1].w-Ln2.p[0].w*Ln2.p[1].y)
-	//		+ (ULn1.p.x*ULn1.v.w-ULn1.p.w*ULn1.v.x) * (Ln2.p[0].y*Ln2.p[1].z-Ln2.p[0].z*Ln2.p[1].y)
-	//		+ (ULn1.p.y*ULn1.v.z-ULn1.p.z*ULn1.v.y) * (Ln2.p[0].x*Ln2.p[1].w-Ln2.p[0].w*Ln2.p[1].x)
-	//		- (ULn1.p.y*ULn1.v.w-ULn1.p.w*ULn1.v.y) * (Ln2.p[0].x*Ln2.p[1].z-Ln2.p[0].z*Ln2.p[1].x)
-	//		+ (ULn1.p.z*ULn1.v.w-ULn1.p.w*ULn1.v.z) * (Ln2.p[0].x*Ln2.p[1].y-Ln2.p[0].y*Ln2.p[1].x))
+	//		( (SLn1.p.x*SLn1.v.y-SLn1.p.y*SLn1.v.x) * (Ln2.p[0].z*Ln2.p[1].w-Ln2.p[0].w*Ln2.p[1].z)
+	//		- (SLn1.p.x*SLn1.v.z-SLn1.p.z*SLn1.v.x) * (Ln2.p[0].y*Ln2.p[1].w-Ln2.p[0].w*Ln2.p[1].y)
+	//		+ (SLn1.p.x*SLn1.v.w-SLn1.p.w*SLn1.v.x) * (Ln2.p[0].y*Ln2.p[1].z-Ln2.p[0].z*Ln2.p[1].y)
+	//		+ (SLn1.p.y*SLn1.v.z-SLn1.p.z*SLn1.v.y) * (Ln2.p[0].x*Ln2.p[1].w-Ln2.p[0].w*Ln2.p[1].x)
+	//		- (SLn1.p.y*SLn1.v.w-SLn1.p.w*SLn1.v.y) * (Ln2.p[0].x*Ln2.p[1].z-Ln2.p[0].z*Ln2.p[1].x)
+	//		+ (SLn1.p.z*SLn1.v.w-SLn1.p.w*SLn1.v.z) * (Ln2.p[0].x*Ln2.p[1].y-Ln2.p[0].y*Ln2.p[1].x))
 	//
 		return
-		(	  ( i_ULn1.p.x * i_ULn1.v.y - i_ULn1.p.y * i_ULn1.v.x) * ( i_Ln2.p[0].z - i_Ln2.p[1].z)
-			- ( i_ULn1.p.x * i_ULn1.v.z - i_ULn1.p.z * i_ULn1.v.x) * ( i_Ln2.p[0].y - i_Ln2.p[1].y)
-			+ ( -i_ULn1.v.x) * ( i_Ln2.p[0].y * i_Ln2.p[1].z - i_Ln2.p[0].z * i_Ln2.p[1].y)
-			+ ( i_ULn1.p.y * i_ULn1.v.z - i_ULn1.p.z * i_ULn1.v.y) * ( i_Ln2.p[0].x - i_Ln2.p[1].x)
-			- ( -i_ULn1.v.y) * ( i_Ln2.p[0].x * i_Ln2.p[1].z - i_Ln2.p[0].z * i_Ln2.p[1].x)
-			+ ( -i_ULn1.v.z) * ( i_Ln2.p[0].x * i_Ln2.p[1].y - i_Ln2.p[0].y * i_Ln2.p[1].x));
+		(	  ( i_SLn1.p.x * i_SLn1.v.y - i_SLn1.p.y * i_SLn1.v.x) * ( i_Ln2.p[0].z - i_Ln2.p[1].z)
+			- ( i_SLn1.p.x * i_SLn1.v.z - i_SLn1.p.z * i_SLn1.v.x) * ( i_Ln2.p[0].y - i_Ln2.p[1].y)
+			+ ( -i_SLn1.v.x) * ( i_Ln2.p[0].y * i_Ln2.p[1].z - i_Ln2.p[0].z * i_Ln2.p[1].y)
+			+ ( i_SLn1.p.y * i_SLn1.v.z - i_SLn1.p.z * i_SLn1.v.y) * ( i_Ln2.p[0].x - i_Ln2.p[1].x)
+			- ( -i_SLn1.v.y) * ( i_Ln2.p[0].x * i_Ln2.p[1].z - i_Ln2.p[0].z * i_Ln2.p[1].x)
+			+ ( -i_SLn1.v.z) * ( i_Ln2.p[0].x * i_Ln2.p[1].y - i_Ln2.p[0].y * i_Ln2.p[1].x));
 	}
 
 	// ---------------------( ３次元 )------------------------------
 	//		直線と点の位置関係を表すＳ値
 	//
-	static inline MREAL SVal2Line3D(				// (  O) Ｓ値(2線分からなる平行６面体の体積）
+	static MREAL SVal2Line3D(						// (  O) Ｓ値(2線分からなる平行６面体の体積）
 				    const	MgLine3D&	i_Ln1,		// (I  ) 線分1
 					const	MgLine3D&	i_Ln2		// (I  ) 線分2
 					)
@@ -5303,9 +5302,9 @@ public:
 	// ---------------------( ３次元 )------------------------------
 	//		直線と点の位置関係を表すＳ値
 	//
-	static inline void SSValLineULine3D(					//
+	static void SSValLineSLine3D(					//
 					const	MgLine3D&	i_Ln1,		// (I  ) 線分1
-				    const	MgULine3D&	i_ULn2,		// (I  ) 直線2
+				    const	MgSLine3D&	i_SLn2,		// (I  ) 直線2
 					const	MgVect3D&	i_vso,		// (I  ) 線分1と直線2がある平面の法線ベクトル
 							MREAL*		o_pss,		// (  O) 線分１の始点側Ｓ値
 													//		(直線2の方向ベクトルと平面の法線ベクトルと
@@ -5318,8 +5317,8 @@ public:
 		MgVect3D	N;								//	直線２と垂直ベクトルからなる平面の係数
 		MREAL		d;								//	基準点から直線1の始点までの同平面に垂直距離
 	//
-		N = i_ULn2.v ^ i_vso;
-		d =  i_ULn2.p * N;
+		N = i_SLn2.v ^ i_vso;
+		d =  i_SLn2.p * N;
 		*o_pss = ( i_Ln1.p[0] * N) - d;
 		*o_pse = ( i_Ln1.p[1] * N) - d;
 	}
@@ -5327,7 +5326,7 @@ public:
 	// ---------------------( ３次元 )------------------------------
 	//		直線と点の位置関係を表すＳ値
 	//
-	static inline void SSVal2Line3D(				// (  O) ステイタス
+	static void SSVal2Line3D(						// (  O) ステイタス
 				    const	MgLine3D&	i_Ln1,		// (I  ) 線分1
 					const	MgLine3D&	i_Ln2,		// (I  ) 線分2
 					const	MgVect3D&	i_vso,		// (I  ) 線分1と線分2がある平面の法線ベクトル
@@ -5361,7 +5360,7 @@ public:
 	static MgPlane3D Plane3Point3D( const MgPoint3D& p0, const MgPoint3D& p1,		// ３点より平面の方程式の係数と定数を求める（正規化）
 					   const MgPoint3D& p2);
 
-	static MgPlane3D Plane3DPolygon3D( const MgPolyg3D &pg);							// 多角形より平面の方程式の係数と定数を求める（正規化）
+	static MgPlane3D Plane3DPolygon3D( const MgPolyg3D &pg);						// 多角形より平面の方程式の係数と定数を求める（正規化）
 
 	static MgPlane3D Plane2PointSlope3D( const MgPoint2D& p1, const MgPoint2D& p2,	// 始点と終点の２点と勾配より平面の方程式の係数と定数を求める（正規化）
 						 MREAL rkb, MREAL z);
@@ -5381,7 +5380,7 @@ public:
 	////
 	////	ax+by+cz+d=0
 	////
-	//static inline MgPlane3D Plane3pPoint3D(		// (  O) 平面式
+	//static MgPlane3D Plane3pPoint3D(				// (  O) 平面式
 	//				const	MgPoint3D*	i_pt		// (I  ) ３点座標
 	//				)
 	//{
@@ -5399,7 +5398,7 @@ public:
 	////===========================================================================
 	////		３点より平面の方程式の係数と定数を求める（正規化）
 	////
-	//static inline MgPlane3D Plane3Point3D(		// (  O) 平面式
+	//static MgPlane3D Plane3Point3D(				// (  O) 平面式
 	//				const	MgPoint3D&	i_p0,		// (I  ) 点１
 	//				const	MgPoint3D&	i_p1,		// (I  ) 点２
 	//				const	MgPoint3D&	i_p2		// (I  ) 点３
@@ -5518,19 +5517,19 @@ inline MgPoint3D MgPoint3D::Set(								// ２次元→３次元
 					const	MgPlane3D&	i_Pln)
 						{ x = i_v1.x; y = i_v1.y; z = i_Pln.GetZ( i_v1); return *this;} 
 
-inline MgULine3D MgULine3DC(									// ２次元→３次元
-					const	MgULine2D&	i_uln,
+inline MgSLine3D MgSLine3DC(									// ２次元→３次元
+					const	MgSLine2D&	i_sln,
 					const	MgPlane3D&	i_Pln)
-						{ MgULine3D ULno; ULno.p.x = i_uln.p.x; ULno.p.y = i_uln.p.y;
-										 ULno.p.z = i_Pln.GetZ( i_uln.p);
-						  ULno.v = MgVect3DC( i_uln.v, - ( i_Pln.v.x * i_uln.v.x + i_Pln.v.y * i_uln.v.y) / i_Pln.v.z);
-						  ULno.v.SetUnitize(); return ULno;} 
+						{ MgSLine3D SLno; SLno.p.x = i_sln.p.x; SLno.p.y = i_sln.p.y;
+										 SLno.p.z = i_Pln.GetZ( i_sln.p);
+						  SLno.v = MgVect3DC( i_sln.v, - ( i_Pln.v.x * i_sln.v.x + i_Pln.v.y * i_sln.v.y) / i_Pln.v.z);
+						  SLno.v.SetUnitize(); return SLno;} 
 
-inline MgULine3D MgULine3D::Set(								// ２次元→３次元
-					const	MgULine2D&	i_uln,
+inline MgSLine3D MgSLine3D::Set(								// ２次元→３次元
+					const	MgSLine2D&	i_sln,
 					const	MgPlane3D&	i_Pln)
-						{ p.x = i_uln.p.x; p.y = i_uln.p.y; p.z = i_Pln.GetZ( i_uln.p);
-						  v = MgVect3DC( i_uln.v, - ( i_Pln.v.x * i_uln.v.x + i_Pln.v.y * i_uln.v.y) / i_Pln.v.z);
+						{ p.x = i_sln.p.x; p.y = i_sln.p.y; p.z = i_Pln.GetZ( i_sln.p);
+						  v = MgVect3DC( i_sln.v, - ( i_Pln.v.x * i_sln.v.x + i_Pln.v.y * i_sln.v.y) / i_Pln.v.z);
 						  v.SetUnitize(); return *this;} 
 	
 inline MgLine3D MgLine3DC(										// ２次元→３次元

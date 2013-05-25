@@ -43,8 +43,159 @@ void Test000_Geo()
 {
 	{
 	//=======================
+	//	直線上の点
+
+						//#define		MC_ON_PS			0x001			// 点が線分の始点上
+						//#define		MC_INSIDE			0x002			// 点が線分の内側上
+						//#define		MC_ON_PE			0x004			// 点が線分の終点上
+						//#define		MC_OUT_PS			0x010			// 点が線分の始点側延長線上
+						//#define		MC_OUT_PE			0x040			// 点が線分の終点側延長線上
+						//
+						//#define		MC_LEFT				0x100			// 点が線分の左側
+						//#define		MC_ON_SLINE			0x200			// 点が線分または延長直線上
+						//#define		MC_RIGHT			0x400			// 点が線分の右側
+	{
+	MgLine2D ln01( 0.f, 10.f, 10.f, 0.f);
+	MgSLine2D ln02( 0.f, 10.f, 1.f, -1.f);
+	MgHLine2D ln03( 0.f, 10.f, 1.f, -1.f);
+	ln03.v.Unitize();
+	MgPoint2D pn01[] = { MgPoint2D( 5.001f, 5.001f), MgPoint2D( 5.001f, 6.001f), MgPoint2D( 5.001f, 4.001f), MgPoint2D( 0.001f, 10.001f), MgPoint2D( 10.001f, 0.001f),
+						 MgPoint2D( 15.001f, -5.001f), MgPoint2D( -5.001f, 15.001f)};
+	int npn01 = sizeof( pn01) / sizeof(MgPoint2D);
+
+	int ist01;
+	bool bC01;
+	CString sMsg;
+	for( int iCl=0; iCl<3; iCl++) {
+		switch (iCl)
+		{
+		case 0: ln01.Print( Mstr(" 線分")); break;
+		case 1: ln02.Print( Mstr(" 直線")); break;
+		case 2: ln03.Print( Mstr(" 半直線")); break;
+		}
+		for ( int iC=0; iC<npn01; iC++) {
+			pn01[iC].Print( Mstr( "点"));
+			switch (iCl)
+			{
+			case 0:
+			bC01 = MGeo::CheckPointOnLine2D( pn01[iC], ln01, &ist01);
+				break;
+			case 1:
+			bC01 = MGeo::CheckPointOnSLine2D( pn01[iC], ln02, &ist01);
+				break;
+			case 2:
+			bC01 = MGeo::CheckPointOnHLine2D( pn01[iC], ln03, &ist01);
+				break;
+			}
+			mlLog::LogOut( Mstr( " 直線上の点 %d, %x : "), bC01, ist01);
+			sMsg = "";
+			if ( bC01) {
+				sMsg += "線分上の点 | ";
+			} else {
+				sMsg += "線分外の点 | ";
+			}
+			if ( ist01 & MC_ON_PS)		sMsg += "線分の始点上 | ";
+			if ( ist01 & MC_INSIDE)		sMsg += "線分の内側上 | ";
+			if ( ist01 & MC_ON_PE)		sMsg += "線分の終点上 | ";
+			if ( ist01 & MC_OUT_PS)		sMsg += "線分の始点側延長線上 | ";
+			if ( ist01 & MC_OUT_PE)		sMsg += "線分の終点側延長線上 | ";
+
+			if ( ist01 & MC_LEFT)		sMsg += "線分の左側 | ";
+			if ( ist01 & MC_ON_SLINE)	sMsg += "線分または延長直線上 | ";
+			if ( ist01 & MC_RIGHT)		sMsg += "線分の右側 | ";
+			mlLog::LogOut( Mstr( "%s\n"), sMsg);
+		}
+		mlLog::Print( "");
+	}
+	}
+	MgLine3D ln01( 0.f, 0.f, 10.f, 0.f, 10.f, 0.f);
+	MgSLine3D ln02( 0.f, 0.f, 10.f, 0.f, 1.f, -1.f);
+	MgHLine3D ln03( 0.f, 0.f, 10.f, 0.f, 1.f, -1.f);
+	ln03.v.Unitize();
+	MgPoint3D pn01[] = { MgPoint3D( 0.f, 5.001f, 5.001f), MgPoint3D( 0.f, 5.001f, 6.001f), MgPoint3D( 0.f, 5.001f, 4.001f),
+						 MgPoint3D( 0.f, 0.001f, 10.001f), MgPoint3D( 0.f, 10.001f, 0.001f),
+						 MgPoint3D( 0.f, 15.001f, -5.001f), MgPoint3D( 0.f, -5.001f, 15.001f)};
+	int npn01 = sizeof( pn01) / sizeof(MgPoint3D);
+
+	int ist01;
+	bool bC01;
+	CString sMsg;
+	for( int iCl=0; iCl<3; iCl++) {
+		switch (iCl)
+		{
+		case 0: ln01.Print( Mstr(" 線分")); break;
+		case 1: ln02.Print( Mstr(" 直線")); break;
+		case 2: ln03.Print( Mstr(" 半直線")); break;
+		}
+		for ( int iC=0; iC<npn01; iC++) {
+			pn01[iC].Print( Mstr( "点"));
+			switch (iCl)
+			{
+			case 0:
+			bC01 = MGeo::CheckPointOnLine3D( pn01[iC], ln01, &ist01);
+				break;
+			case 1:
+			bC01 = MGeo::CheckPointOnSLine3D( pn01[iC], ln02);
+				break;
+			case 2:
+			bC01 = MGeo::CheckPointOnHLine3D( pn01[iC], ln03, &ist01);
+				break;
+			}
+			mlLog::LogOut( Mstr( " 直線上の点 %d, %x : "), bC01, ist01);
+			sMsg = "";
+			if ( bC01) {
+				sMsg += "線分上の点 | ";
+			} else {
+				sMsg += "線分外の点 | ";
+			}
+			if ( ist01 & MC_ON_PS)		sMsg += "線分の始点上 | ";
+			if ( ist01 & MC_INSIDE)		sMsg += "線分の内側上 | ";
+			if ( ist01 & MC_ON_PE)		sMsg += "線分の終点上 | ";
+			if ( ist01 & MC_OUT_PS)		sMsg += "線分の始点側延長線上 | ";
+			if ( ist01 & MC_OUT_PE)		sMsg += "線分の終点側延長線上 | ";
+
+			if ( ist01 & MC_LEFT)		sMsg += "線分の左側 | ";
+			if ( ist01 & MC_ON_SLINE)	sMsg += "線分または延長直線上 | ";
+			if ( ist01 & MC_RIGHT)		sMsg += "線分の右側 | ";
+			mlLog::LogOut( Mstr( "%s\n"), sMsg);
+		}
+		mlLog::Print( "");
+	}
+
+	//=======================
+	//	２ベクトルの角度乗数
+//	MgVect2D v1( 10.f, 0.f), v2( 12.f, 12.f);
+//	MgVect3D V1( 0., 10.f, 0.f), V2( 0., 12.f, 12.f), Vp( 1., 0., 0.);
+	MgVect2D v1( 10.f, -5.f), v2( -12.f, 12.f);
+	MgVect3D V1( 0., 10.f, -5.f), V2( 0., -12.f, 12.f), Vp( 1., 0., 0.);
+	MREAL a211 = MGeo::AngSSa2Vect2D( v1, v2);
+	MREAL a212 = MGeo::AngSSa2Vect2D( v2, v1);
+	MREAL a221 = MGeo::AngSSb2Vect2D( v1, v2);
+	MREAL a222 = MGeo::AngSSb2Vect2D( v2, v1);
+	MREAL a311 = MGeo::AngSSa2Vect3D( V1, V2, Vp);
+	MREAL a312 = MGeo::AngSSa2Vect3D( V2, V1, Vp);
+	MREAL a321 = MGeo::AngSSb2Vect3D( V1, V2, Vp);
+	MREAL a322 = MGeo::AngSSb2Vect3D( V2, V1, Vp);
+	MREAL a411 = MGeo::AngSSa2Vect3D( V1, V2, -Vp);
+	MREAL a412 = MGeo::AngSSa2Vect3D( V2, V1, -Vp);
+	MREAL a421 = MGeo::AngSSb2Vect3D( V1, V2, -Vp);
+	MREAL a422 = MGeo::AngSSb2Vect3D( V2, V1, -Vp);
+	mlLog::LogOut( Mstr( "２ベクトルの角度乗数 2D +: %6.3f, -: %6.3f, +-(+): %6.3f, +-(-): %6.3f\n"),
+				   a211, a212, a221, a222);
+	mlLog::LogOut( Mstr( "２ベクトルの角度乗数 3D +: %6.3f, -: %6.3f, +-(+): %6.3f, +-(-): %6.3f\n"),
+				   a311, a312, a321, a322);
+	mlLog::LogOut( Mstr( "２ベクトルの角度乗数 3D(法線ベクトル反転) +: %6.3f, -: %6.3f, +-(+): %6.3f, +-(-): %6.3f\n"),
+				   a411, a412, a421, a422);
+
+	//=======================
+	//	点の重なり
+	MgPoint2D p1(0, 1), p2(0, 1);
+	if ( p1 == p2) {
+		p1.Print( Mstr( "p1 == p2"));
+	}
+	//=======================
 	//	軸回転マトリックス
-	MgULine3D Uln( 0, 1, 2, 1, 1, 1);
+	MgSLine3D Uln( 0, 1, 2, 1, 1, 1);
 	Uln.v.SetUnitize();
 	MgMat3E Mr;
 	Mr = MGeo::Mat3ERot( Uln, MGRADIAN( 90));
@@ -53,7 +204,7 @@ void Test000_Geo()
 	{
 	//=======================
 	//	軸回転マトリックス
-	MgULine3D Uln( 0, 1, 2, 1, 1, 1);
+	MgSLine3D Uln( 0, 1, 2, 1, 1, 1);
 	Uln.v.SetUnitize();
 	MgMat3D Mrd;
 	Mrd = MGeo::Mat3DRot( Uln, MGRADIAN( 90));
@@ -63,10 +214,10 @@ void Test000_Geo()
 	//=======================
 	//	鏡像マトリックス
 	MgMat2E m1, m2, m3, m4;
-	MgULine2D uln1( 1., 2., 1., 1.);
-	uln1.v.SetUnitize();
-	uln1.Print( Mstr("鏡像直線"));
-	m1 = MGeo::Mat2EMirror(uln1);
+	MgSLine2D sln1( 1., 2., 1., 1.);
+	sln1.v.SetUnitize();
+	sln1.Print( Mstr("鏡像直線"));
+	m1 = MGeo::Mat2EMirror(sln1);
 	m1.Print( Mstr("鏡像マトリックス m1"));
 	MgPoint2D p01( 1., 0.);
 	MgPoint2D p02;
@@ -80,7 +231,7 @@ void Test000_Geo()
 	m03 = m01 * m1;
 	p02 = p01 * m03;
 	m03.Print( Mstr("鏡像マトリックス m03 = m01 * m1"));
-//S	m02 = MGeo::Mat2EMirror( m01, uln1);
+//S	m02 = MGeo::Mat2EMirror( m01, sln1);
 //	p02 = p01 * m02;
 //	m02.Print( Mstr("鏡像マトリックス 関数 m02"));
 	p02.Print( Mstr("鏡像後の点"));
@@ -112,10 +263,10 @@ void Test000_Geo()
 	//=======================
 	//	鏡像マトリックス
 	MgMat2D m1, m2, m3, m4;
-	MgULine2D uln1( 1., 2., 1., 1.);
-	uln1.v.SetUnitize();
-	uln1.Print( Mstr("鏡像直線"));
-	m1 = MGeo::Mat2DMirror(uln1);
+	MgSLine2D sln1( 1., 2., 1., 1.);
+	sln1.v.SetUnitize();
+	sln1.Print( Mstr("鏡像直線"));
+	m1 = MGeo::Mat2DMirror(sln1);
 	m1.Print( Mstr("鏡像マトリックス m1"));
 	MgPoint2D p01( 1., 0.);
 	MgPoint2D p02;
@@ -129,7 +280,7 @@ void Test000_Geo()
 	m03 = m01 * m1;
 	p02 = p01 * m03;
 	m03.Print( Mstr("鏡像マトリックス m03 = m01 * m1"));
-//S	m02 = MGeo::Mat2DMirror( m01, uln1);
+//S	m02 = MGeo::Mat2DMirror( m01, sln1);
 //	p02 = p01 * m02;
 //	m02.Print( Mstr("鏡像マトリックス 関数 m02"));
 	p02.Print( Mstr("鏡像後の点"));
@@ -697,7 +848,7 @@ void Test006_DBModule()
 
 	// 直線
 	MDFIG stFig5( 10);
-	stFig5.ULine3D( MgULine3D( MgPoint3D( 3000., 3000., -2000.), MgVect3D( 1., 0., 0.)));
+	stFig5.SLine3D( MgSLine3D( MgPoint3D( 3000., 3000., -2000.), MgVect3D( 1., 0., 0.)));
 	mdmDEnt::SetFig( idEnt[5], stFig5);
 
 	// 半直線

@@ -70,11 +70,11 @@ exit:
 //		線分を直線で分割する
 //		(線分１の端部での交差は交差無しとし分割無し)
 //
-MINT MGeo::DivideLineULine2D(						// (  O) ステイタス
+MINT MGeo::DivideLineSLine2D(						// (  O) ステイタス
 												//			MC_NINT			(0): 交差なし
 												//			MC_INT			(1): 交差あり
 				const	MgLine2D&	Ln1, 		// (I  ) 分割対象線分
-				const	MgULine2D&	ULn2, 		// (I  ) 分割直線
+				const	MgSLine2D&	SLn2, 		// (I  ) 分割直線
 						MgGLine2D*	GLn3		// (  O) 分割後の線分群
 				)
 {
@@ -90,8 +90,8 @@ MINT MGeo::DivideLineULine2D(						// (  O) ステイタス
 //　平行のチェック
 //
 	vd1 = Ln1.p[1] - Ln1.p[0];
-	if (!MGeo::CheckParallelVect2D( vd1, ULn2.v)) {
-		SVal( Ln1.p[0], Ln1.p[1], ULn2.p, ULn2.v, &ss, &se);
+	if (!MGeo::CheckParallelVect2D( vd1, SLn2.v)) {
+		SVal( Ln1.p[0], Ln1.p[1], SLn2.p, SLn2.v, &ss, &se);
 		if (ss * se < 0) {										//	交点は線分１の内側
 			po = Ln1.p[0] + (vd1 * (ss / (ss - se)));			//	交点
 			if ( po != Ln1.p[0] && po != Ln1.p[1]) {			//	線分１の端部は交点と見なさない
@@ -123,7 +123,7 @@ exit:
 // 		sels = MC_LEFT | MC_ON_BORDER | MC_SAME_DIR;
 
 //
-MINT MGeo::DivideAddLineULine2D(						// (  O) ステイタス
+MINT MGeo::DivideAddLineSLine2D(						// (  O) ステイタス
 												//			MC_NINT			(0): 交差なし
 												//			MC_INT			(1): 交差あり
 												//			MC_MATCH		(4): 選択条件に合う部分あり
@@ -132,12 +132,12 @@ MINT MGeo::DivideAddLineULine2D(						// (  O) ステイタス
 												//		 (STS == (MC_INT | MC_MATCH)):	交差ありで選択条件に合う部分あり
 						MINT		Sel,		// (I  ) 選択条件
 												//			MC_LEFT			(010): 直線の左側
-												//			MC_ON_LINE		(020): 直線上
+												//			MC_ON_SLINE		(020): 直線上
 												//			MC_RIGHT		(040): 直線の右側
 												//			MC_SAME_DIR		(0100):	辺上同一方向
 												//			MC_REV_DIR		(0200):	辺上逆方向
 				const	MgLine2D&	Ln1, 		// (I  ) 分割対象線分
-				const	MgULine2D&	ULn2, 		// (I  ) 分割直線
+				const	MgSLine2D&	SLn2, 		// (I  ) 分割直線
 						MgGLine2D*	GLn3		// (I O) 分割後の線分群
 				)
 {
@@ -156,8 +156,8 @@ MINT MGeo::DivideAddLineULine2D(						// (  O) ステイタス
 	vd1 = Ln1.p[1] - Ln1.p[0];
 	// 線分と直線が平行で線分の端部でない位置で交差する場合は、
 	// 線分を分割し選択条件に合う方を分割後の線分群に追加する
-	if (!MGeo::CheckParallelVect2D( vd1, ULn2.v)) {
-		SVal( Ln1.p[0], Ln1.p[1], ULn2.p, ULn2.v, &ss, &se);
+	if (!MGeo::CheckParallelVect2D( vd1, SLn2.v)) {
+		SVal( Ln1.p[0], Ln1.p[1], SLn2.p, SLn2.v, &ss, &se);
 		if (ss * se < 0) {										// 交点は線分１の内側にあり
 			po = Ln1.p[0] + (vd1 * (ss / (ss - se)));			// 交点を求める
 			if ( po != Ln1.p[0] && po != Ln1.p[1]) {			// 交点が線分１の端部で無いならば
@@ -173,16 +173,16 @@ MINT MGeo::DivideAddLineULine2D(						// (  O) ステイタス
 	}
 	// 平行または分割無しの場合選択条件に合う場合は分割後の線分群に追加する
 	ist = MC_NINT;
-	MGeo::CheckLineOnULine2DWS( Ln1, ULn2, &ist1);					// 線分の中心点が直線と選択条件に合うか調べる
+	MGeo::CheckLineOnSLine2D( Ln1, SLn2, &ist1);					// 線分の中心点が直線と選択条件に合うか調べる
 	if (MF_CHECK_OR( Sel, MC_SAME_DIR | MC_REV_DIR) &&			// 選択条件に「辺上同一方向または辺上逆方向」が設定されている場合は、
-		MF_CHECK_OR( ist1, MC_ON_LINE)) {						// 分割後の線分が直線上にあると次のように選択する
-		MREAL	cvd1 = vd1 * ULn2.v;
+		MF_CHECK_OR( ist1, MC_ON_SLINE)) {						// 分割後の線分が直線上にあると次のように選択する
+		MREAL	cvd1 = vd1 * SLn2.v;
 		if ((MF_CHECK_OR( Sel, MC_SAME_DIR) && cvd1 > 0. ||		//	(1) 選択条件が辺上同一方向の場合は、同一方向の時を分割後の線分群に追加する
 			 MF_CHECK_OR( Sel, MC_REV_DIR) && cvd1 < 0. )) {	//	(2) 選択条件が辺上逆方向の場合は、逆方向の時を分割後の線分群に追加する
 			(*GLn3) += Ln1;
 			ist |= MC_MATCH;
 		}														//	(3) その他の場合は捨てる
-	} else if (MF_CHECK_OR( ist1, Sel & (MC_LEFT | MC_ON_LINE | MC_RIGHT))) {
+	} else if (MF_CHECK_OR( ist1, Sel & (MC_LEFT | MC_ON_SLINE | MC_RIGHT))) {
 																// その他、線分が選択条件に合う場合は分割後の線分群に追加する
 		(*GLn3) += Ln1;
 		ist |= MC_MATCH;
@@ -205,7 +205,7 @@ MINT MGeo::DivideLineGLine2D(						// (  O) ステイタス
 {
 	MINT		ist;
 	MINT		ic2, ic3;
-	MINT		ULn1 = 0;
+	MINT		SLn1 = 0;
 	MGGPOINT2( GPt, MX_PNT1);						// 点集合の作業エリア
 
 		_ASSERTE(Ln1.p[0] != Ln1.p[1]);							// debug --> check same point
@@ -247,7 +247,7 @@ MINT MGeo::DivideGLine2D(							// (  O) ステイタス
 {
 	MINT		ist = MC_NINT;
 	MINT		ic1, ic2, ic3;
-	MINT		ULn1 = 0;
+	MINT		SLn1 = 0;
 	MGGPOINT2( GPt, MX_PNT1);						// 点群の作業エリア
 	
 	GLn2->m_n = 0;
@@ -283,7 +283,7 @@ MINT MGeo::DivideGLine2D(							// (  O) ステイタス
 //				(1) 選択条件が辺上同一方向の場合は、同一方向の時残し
 //				(2) その他の場合は捨てる
 //
-MINT MGeo::DivideULinePolygon2D(						// (  O) ステイタス
+MINT MGeo::DivideSLinePolygon2D(						// (  O) ステイタス
 												//			MC_NINT			(0): 交差なし
 												//			MC_INT			(1): 交差あり
 												//			MC_MATCH		(4): 選択条件に合う部分あり
@@ -294,13 +294,13 @@ MINT MGeo::DivideULinePolygon2D(						// (  O) ステイタス
 												//			MC_IN_BORDER	(001): 内側
 												//			MC_ON_BORDER	(002): 辺上
 												//			MC_SAME_DIR		(0100):	辺上同一方向
-				const	MgULine2D&	ULn1,		// (I  ) 直線
+				const	MgSLine2D&	SLn1,		// (I  ) 直線
 				const	MgPolyg2D&	Pg2,		// (I  ) 多角形
 						MgGLine2D*	GLn3		// (  O) 分割後の線分群
 				)
 {
 	GLn3->m_n = 0;
-	return DivideAddULinePolygon2D( Sel, ULn1, Pg2, GLn3);
+	return DivideAddSLinePolygon2D( Sel, SLn1, Pg2, GLn3);
 }
 
 // ---------------------( ２次元 )------------------------------
@@ -310,7 +310,7 @@ MINT MGeo::DivideULinePolygon2D(						// (  O) ステイタス
 //				(1) 選択条件が辺上同一方向の場合は、同一方向の時残し
 //				(2) その他の場合は捨てる
 //
-MINT MGeo::DivideAddULinePolygon2D(						// (  O) ステイタス
+MINT MGeo::DivideAddSLinePolygon2D(						// (  O) ステイタス
 												//			MC_NINT			(0): 交差なし
 												//			MC_INT			(1): 交差あり
 												//			MC_MATCH		(4): 選択条件に合う部分あり
@@ -321,7 +321,7 @@ MINT MGeo::DivideAddULinePolygon2D(						// (  O) ステイタス
 												//			MC_IN_BORDER	(001): 内側
 												//			MC_ON_BORDER	(002): 辺上
 												//			MC_SAME_DIR		(0100):	辺上同一方向
-				const	MgULine2D&	ULn1,		// (I  ) 直線
+				const	MgSLine2D&	SLn1,		// (I  ) 直線
 				const	MgPolyg2D&	Pg2,		// (I  ) 多角形
 						MgGLine2D*	GLn3		// (I O) 分割後の線分群
 				)
@@ -335,10 +335,10 @@ MINT MGeo::DivideAddULinePolygon2D(						// (  O) ステイタス
 	// 多角形の全ての辺（線分）との交点を求め直線の方向にあわせて並べる
 	for ( icb=Pg2.m_n-1,ic1=0; ic1<Pg2.m_n; icb=ic1,ic1++) {
 		lnw1 = MgLine2D( Pg2.m_p[icb], Pg2.m_p[ic1]);
-		IntrAddULineLine2D( ULn1, lnw1, &GPt);							// 線分と線分の交点（２線分が重なり時には２点もあり）
+		IntrAddSLineLine2D( SLn1, lnw1, &GPt);							// 線分と線分の交点（２線分が重なり時には２点もあり）
 	}
 
-	MGeo::SortVectGPoint2D( ULn1.v, &GPt);									// 求めた交点の同一点を間引いて一列に並べる
+	MGeo::SortVectGPoint2D( SLn1.v, &GPt);									// 求めた交点の同一点を間引いて一列に並べる
 
 	if (GPt.m_n >= 2)
 		ist = MC_INT;
@@ -468,20 +468,20 @@ MINT MGeo::DivideAddLinePolygon2D(						// (  O) ステイタス
 //				(1) 選択条件が辺上同一方向の場合は、同一方向の時残し
 //				(2) その他の場合は捨てる
 //
-MINT MGeo::DivideULineGPolygon2D(						// (  O) ステイタス
+MINT MGeo::DivideSLineGPolygon2D(						// (  O) ステイタス
 												//			MC_NINT			(0): 選択条件に合う線分なし
 												//			MC_INT			(1): 選択条件に合う線分あり
 						MINT		Sel,		// (I  ) 選択条件
 												//			MC_IN_BORDER	(001): 内側
 												//			MC_ON_BORDER	(002): 辺上
 												//			MC_SAME_DIR		(0100):	辺上同一方向
-				const	MgULine2D&	ULn1,		// (I  ) 直線
+				const	MgSLine2D&	SLn1,		// (I  ) 直線
 				const	MgGPolyg2D&	gPg2,		// (I  ) 穴付き多角形
 						MgGLine2D*	GLn3		// (  O) 分割後の線分群
 				)
 {
 	GLn3->m_n = 0;
-	return DivideAddULineGPolygon2D( Sel, ULn1, gPg2, GLn3);
+	return DivideAddSLineGPolygon2D( Sel, SLn1, gPg2, GLn3);
 }
 
 // ---------------------( ２次元 )------------------------------
@@ -490,7 +490,7 @@ MINT MGeo::DivideULineGPolygon2D(						// (  O) ステイタス
 //				(1) 選択条件が辺上同一方向の場合は、同一方向の時残し
 //				(2) その他の場合は捨てる
 //
-MINT MGeo::DivideAddULineGPolygon2D(						// (  O) ステイタス
+MINT MGeo::DivideAddSLineGPolygon2D(						// (  O) ステイタス
 													//			MC_NINT			(0): 選択条件に合う線分なし
 													//			MC_INT			(1): 選択条件に合う線分あり
 													//	例	 (STS == MC_NINT):				交差無しで選択条件に合う部分なし 
@@ -500,7 +500,7 @@ MINT MGeo::DivideAddULineGPolygon2D(						// (  O) ステイタス
 													//			MC_IN_BORDER	(001): 内側
 													//			MC_ON_BORDER	(002): 辺上
 													//			MC_SAME_DIR		(0100):	辺上同一方向
-				const	MgULine2D&	ULn1,			// (I  ) 直線
+				const	MgSLine2D&	SLn1,			// (I  ) 直線
 				const	MgGPolyg2D&	gpg2,			// (I  ) 穴付き多角形
 						MgGLine2D*	gLn3			// (I O) 分割後の線分群
 				)
@@ -517,11 +517,11 @@ MINT MGeo::DivideAddULineGPolygon2D(						// (  O) ステイタス
 																// ポリゴンの全て辺との交点を求める
 		for ( icb=pg2->m_n-1,ic2=0; ic2<pg2->m_n; icb=ic2,ic2++) {
 			lnw1 = MgLine2D( pg2->m_p[icb], pg2->m_p[ic2]);
-			IntrAddULineLine2D( ULn1, lnw1, &GPt);					// 線分と線分の交点（２線分が重なり時には２点もあり）
+			IntrAddSLineLine2D( SLn1, lnw1, &GPt);					// 線分と線分の交点（２線分が重なり時には２点もあり）
 		}
 	}
 
-	MGeo::SortVectGPoint2D( ULn1.v, &GPt);								// 求めた交点の同一点を間引いて一列に並べる
+	MGeo::SortVectGPoint2D( SLn1.v, &GPt);								// 求めた交点の同一点を間引いて一列に並べる
 
 	if (GPt.m_n >= 2)
 		ist = MC_INT;
@@ -682,22 +682,22 @@ void MGeo::MergeGLine2D(
 // ---------------------( ３次元 )------------------------------
 //		直線を多角形で分割し、選択条件に合う線分群を取り出す
 //
-MINT MGeo::DivideULinePolygon3D(						// (  O) ステイタス
+MINT MGeo::DivideSLinePolygon3D(						// (  O) ステイタス
 												//		 MC_NINT		(0): 交差なし
 												//		 MC_INT			(1): 交差あり
 						MINT		Sel,		// (I  ) 選択条件
 												//		 MC_IN_BORDER	(001): 内側
 												//		 MC_ON_BORDER	(002): 辺上
-				const	MgULine3D&	ULn1,		// (I  ) 直線
+				const	MgSLine3D&	SLn1,		// (I  ) 直線
 				const	MgPolyg3D&	Pg2,		// (I  ) 多角形
 						MgGLine3D	*GLn3		// (  O) 分割後の線分群
 				)
 {
 	GLn3->m_n = 0;
-	return DivideAddULinePolygon3D( Sel, ULn1, Pg2, GLn3);
+	return DivideAddSLinePolygon3D( Sel, SLn1, Pg2, GLn3);
 }
 
-/*MINT MGeo::DivideULinePolygon3D(						// (  O) ステイタス
+/*MINT MGeo::DivideSLinePolygon3D(						// (  O) ステイタス
 												//			MC_NINT			(0): 交差なし
 												//			MC_INT			(1): 交差あり
 												//			MC_MATCH		(4): 選択条件に合う部分あり
@@ -707,20 +707,20 @@ MINT MGeo::DivideULinePolygon3D(						// (  O) ステイタス
 						MINT		Sel,		// (I  ) 選択条件
 												//			MC_IN_BORDER	(001): 内側
 												//			MC_ON_BORDER	(002): 辺上
-				const	MgULine3D&	ULn1,		// (I  ) 直線
+				const	MgSLine3D&	SLn1,		// (I  ) 直線
 				const	MgPolyg3D&	Pg2,		// (I  ) 多角形
 						MgGLine3D	*GLn3		// (I O) 分割後の線分群
 				)
 {
 	GLn3->m_n = 0;
-	return DivideAddULinePolygon3D( Sel, ULn1, Pg2, GLn3);
+	return DivideAddSLinePolygon3D( Sel, SLn1, Pg2, GLn3);
 }
 */
 
 // ---------------------( ３次元 )------------------------------
 //		直線を多角形で分割し、分割条件に合う線分を分割後の線分群に追加する
 //
-MINT MGeo::DivideAddULinePolygon3D(						// (  O) ステイタス
+MINT MGeo::DivideAddSLinePolygon3D(						// (  O) ステイタス
 												//			MC_NINT			(0): 交差なし
 												//			MC_INT			(1): 交差あり
 												//			MC_MATCH		(4): 選択条件に合う部分あり
@@ -730,7 +730,7 @@ MINT MGeo::DivideAddULinePolygon3D(						// (  O) ステイタス
 						MINT		Sel,		// (I  ) 選択条件
 												//			MC_IN_BORDER	(001): 内側
 												//			MC_ON_BORDER	(002): 辺上
-				const	MgULine3D&	ULn1,		// (I  ) 直線
+				const	MgSLine3D&	SLn1,		// (I  ) 直線
 				const	MgPolyg3D&	Pg2,		// (I  ) 多角形
 						MgGLine3D	*GLn3		// (I O) 分割後の線分群
 				)
@@ -741,7 +741,7 @@ MINT MGeo::DivideAddULinePolygon3D(						// (  O) ステイタス
 	MgLine3D	Ln3;
 	MgMat3E	MatXY;							// Pln to XY平面 ３Ｄマトリックス
 	MgMat3E	MatPln;							// XY平面 to Pln ３Ｄマトリックス
-	MgULine2D	uln1;
+	MgSLine2D	sln1;
 	MgPolyg2D	pg2;
 	MgGLine2D	Gln3;
 
@@ -749,9 +749,9 @@ MINT MGeo::DivideAddULinePolygon3D(						// (  O) ステイタス
 
 	// 底辺がX軸に平行になるようXY平面に投影マトリックスを求める
 	Mat3EPlntoXY( Pln2, Pg2.m_P[0], &MatXY, &MatPln);
-	ULine3Dto2D( ULn1, MatXY, &uln1);
+	SLine3Dto2D( SLn1, MatXY, &sln1);
 	Polyg3Dto2D( Pg2, MatXY, &pg2);
-	ist = DivideULinePolygon2D( Sel, uln1, pg2, &Gln3);
+	ist = DivideSLinePolygon2D( Sel, sln1, pg2, &Gln3);
 
 	if ( ist == (MC_INT | MC_MATCH)) {
 		for ( ic1=0; ic1<Gln3.m_n; ic1++) {
@@ -762,117 +762,99 @@ MINT MGeo::DivideAddULinePolygon3D(						// (  O) ステイタス
 	return ist;
 }
 
-//S //
-//// ---------------------( ２次元 )------------------------------
-////	２つの線分間の角度の大小に従う数値CCを求める
-////	[p0からp1に向かう方向]から[p1からp2に向かう方向]への角度により
-////		0.: -0゜, 0.5: 90゜, 1.: 180゜, 1.5: -90゜, <2.: <360(-)゜
-////
-//MREAL MGeo::AngSSa3Point2D( 
-//				const	MgPoint2D&	p0,
-//				const	MgPoint2D&	p1,
-//				const	MgPoint2D&	p2
-//				)
-//{
-//	MgVect2D	v1, v2;
-//	MREAL	sp;
-//	MREAL	ss, cc;
-//	MREAL	sse, cce;
+
+// ---------------------( ２次元 )------------------------------
+//	２つのベクトル間の角度の大小に従う数値CCを求める
+//		0.: -0゜, 0.5: 90゜, 1.: 180゜, 1.5: -90゜, <2.: <360(-)゜
 //
-//	v1 = p1 - p0;
-//	v2 = p2 - p1;
-//	sp = MREAL( sqrt( (v1 * v1) * (v2 * v2)));					// MgAbs( v1) * MgAbs( v2)
-//	ss = v1 ^ v2;												// sin( v1 v2) * sp
-//	cc = v1 * v2 / sp;											// cos( v1 v2)
+MREAL MGeo::AngSSa2Vect2D( 
+				const	MgVect2D&	i_v1,		// 測定元ベクトル
+				const	MgVect2D&	i_v2		// 測定先ベクトル
+			)
+{
+	MREAL	sp;
+	MREAL	ss, cc;
+	MREAL	sse, cce;
+
+	sp = MREAL( sqrt( ( i_v1 * i_v1) * ( i_v2 * i_v2)));		// MgAbs( v1) * MgAbs( v2)
+	ss = i_v1 ^ i_v2 / sp;										// sin( v1 v2)
+	cc = i_v1 * i_v2 / sp;										// cos( v1 v2)
+
+	sse = ( ( cc > 0) ? ( ( ss > 0) ? ss : 4 + ss) : 2 - ss);
+	cce = ( ( ss > 0) ? 1 - cc : 3 + cc);
+	return  ( sse + cce) / 4.f;
+}
+
+// ---------------------( ３次元 )------------------------------
+//	２つのベクトル間の角度の大小に従う数値CCを求める
+//	(２つのベクトルに直行するベクトルの方向に右回転の角度)
+//		0.: -0゜, 0.5: 90゜, 1.: 180゜, 1.5: -90゜, <2.: <360(-)゜
 //
-//	sse = ( ( cc > 0) ? ( ( ss > 0) ? sse = ss : sse = ss + 4) : sse = 2 - ss);
-//	cce = ( ( ss > 0) ? cce = 1 - cc : cce = cc + 3);
-//	return  ( sse + cce) / 4.f;
-//}
-////
-//// ---------------------( ３次元 )------------------------------
-////	２つの線分間の角度の大小に従う数値CCを求める
-////	平面pln3上で[p0からp1に向かう方向]から[p1からp2に向かう方向]への角度により
-////		0.: -0゜, 0.5: 90゜, 1.: 180゜, 1.5: -90゜, <2.: <360(-)゜
-////
-//MREAL MGeo::AngSSa3Point3D( 
-//				const	MgPoint3D&	P0,
-//				const	MgPoint3D&	P1,
-//				const	MgPoint3D&	P2,
-//				const	MgPlane3D	&Pln3
-//				)
-//{
-//	MgVect3D	V1, V2;
-//	MREAL	sp;
-//	MREAL	ss, cc;
-//	MREAL	sse, cce;
+MREAL MGeo::AngSSa2Vect3D( 
+				const	MgVect3D&	i_v1,		// 測定元ベクトル
+				const	MgVect3D&	i_v2,		// 測定先ベクトル
+				const	MgVect3D&	i_vp		// 垂直方向ベクトル (平面上で左回転の角度を求める場合は平面の宝仙ベクトル)
+				)
+{
+	MREAL	sp;
+	MREAL	ss, cc;
+	MREAL	sse, cce;
+
+	sp = MREAL( sqrt( ( i_v1 * i_v1) * ( i_v2 * i_v2)));		// MgAbs( v1) * MgAbs( v2)
+	ss = ( i_v1 ^ i_v2) * i_vp / sp;							// sin( v1 v2)
+	cc = i_v1 * i_v2 / sp;										// cos( v1 v2)
+
+	sse = ( ( cc > 0) ? ( ( ss > 0) ? sse = ss : sse = ss + 4) : sse = 2 - ss);
+	cce = ( ( ss > 0) ? cce = 1 - cc : cce = cc + 3);
+	return  ( sse + cce) / 4.f;
+}
+
+// ---------------------( ２次元 )------------------------------
+//	２つのベクトル間の角度の大小に従う数値CCを求める
+//		>-1.: >-180゜, -0.5: -90゜, 0.: -0゜, 0.5: 90゜, 1.: 180゜
 //
-//	V1 = P1 - P0;
-//	V2 = P2 - P1;
-//	sp = MREAL( sqrt( (V1 * V1) * (V2 * V2)));					// MgAbs( v1) * MgAbs( v2)
-//	ss = (V1 ^ V2) * Pln3.v;									// sin( v1 v2) * sp
-//	cc = V1 * V2 / sp;											// cos( v1 v2)
+MREAL MGeo::AngSSb2Vect2D( 
+				const	MgVect2D&	i_v1,		// 測定元ベクトル
+				const	MgVect2D&	i_v2		// 測定先ベクトル
+				)
+{
+	MREAL	sp;
+	MREAL	ss, cc;
+	MREAL	sse, cce;
+
+	sp = MREAL( sqrt( ( i_v1 * i_v1) * ( i_v2 * i_v2)));		// MgAbs( v1) * MgAbs( v2)
+	ss = i_v1 ^ i_v2 / sp;										// sin( v1 v2) * sp
+	cc = i_v1 * i_v2 / sp;										// cos( v1 v2)
+
+	sse = ( ( cc < 0) ? ( ( ss > 0) ? sse = 2 - ss : sse = -2 - ss) : sse = ss);
+	cce = ( ( ss > 0) ? cc = 1 - cc : cc = -1 + cc);
+	return  ( sse + cce) / 4.f;
+}
+
+// ---------------------( ３次元 )------------------------------
+//	２つのベクトル間の角度の大小に従う数値CCを求める
+//	(２つのベクトルに直行するベクトルの方向に右回転の角度)
+//		>-1.: >-180゜, -0.5: -90゜, 0.: -0゜, 0.5: 90゜, 1.: 180゜
 //
-//	sse = ( ( cc > 0) ? ( ( ss > 0) ? sse = ss : sse = ss + 4) : sse = 2 - ss);
-//	cce = ( ( ss > 0) ? cce = 1 - cc : cce = cc + 3);
-//	return  ( sse + cce) / 4.f;
-//}
-////
-//// ---------------------( ２次元 )------------------------------
-////	２つの線分間の角度の大小に従う数値CCを求める
-////	[p0からp1に向かう方向]から[p1からp2に向かう方向]への角度により
-////		>-1.: >-180゜, -0.5: -90゜, 0.: -0゜, 0.5: 90゜, 1.: 180゜
-////
-//MREAL MGeo::AngSSb3Point2D( 
-//				const	MgPoint2D&	p0,
-//				const	MgPoint2D&	p1,
-//				const	MgPoint2D&	p2
-//				)
-//{
-//	MgVect2D	v1, v2;
-//	MREAL	sp;
-//	MREAL	ss, cc;
-//	MREAL	sse, cce;
-//
-//	v1 = p1 - p0;
-//	v2 = p2 - p1;
-//	sp = MREAL( sqrt( (v1 * v1) * (v2 * v2)));					// MgAbs( v1) * MgAbs( v2)
-//	ss = v1 ^ v2;												// sin( v1 v2) * sp
-//	cc = v1 * v2 / sp;											// cos( v1 v2)
-//
-//	sse = ( ( cc < 0) ? ( ( ss > 0) ? sse = 2 - ss : sse = -2 - ss) : sse = ss);
-//	cce = ( ( ss > 0) ? cc = 1 - cc : cc = -1 + cc);
-//	return  ( sse + cce) / 4.f;
-//}
-////
-//// ---------------------( ３次元 )------------------------------
-////	２つの線分間の角度の大小に従う数値CCを求める
-////	平面pln3上で[p0からp1に向かう方向]から[p1からp2に向かう方向]への角度により
-////		>-1.: >-180゜, -0.5: -90゜, 0.: -0゜, 0.5: 90゜, 1.: 180゜
-////
-//MREAL MGeo::AngSSb3Point3D( 
-//				const	MgPoint3D&	P0,
-//				const	MgPoint3D&	P1,
-//				const	MgPoint3D&	P2,
-//				const	MgPlane3D	&Pln3
-//				)
-//{
-//	MgVect3D	V1, V2;
-//	MREAL	sp;
-//	MREAL	ss, cc;
-//	MREAL	sse, cce;
-//
-//	V1 = P1 - P0;
-//	V2 = P2 - P1;
-//	sp = MREAL( sqrt( (V1 * V1) * (V2 * V2)));					// MgAbs( v1) * MgAbs( v2)
-//	ss = (V1 ^ V2) * Pln3.v;									// sin( v1 v2) * sp
-//	cc = V1 * V2 / sp;											// cos( v1 v2)
-//
-//	sse = ( ( cc < 0) ? ( ( ss > 0) ? sse = 2 - ss : sse = -2 - ss) : sse = ss);
-//	cce = ( ( ss > 0) ? cc = 1 - cc : cc = -1 + cc);
-//	return  ( sse + cce) / 4.f;
-//}
-//
+MREAL MGeo::AngSSb2Vect3D( 
+				const	MgVect3D&	i_v1,		// 測定元ベクトル
+				const	MgVect3D&	i_v2,		// 測定先ベクトル
+				const	MgVect3D&	i_vp		// 垂直方向ベクトル (平面上で左回転の角度を求める場合は平面の宝仙ベクトル)
+				)
+{
+	MREAL	sp;
+	MREAL	ss, cc;
+	MREAL	sse, cce;
+
+	sp = MREAL( sqrt( ( i_v1 * i_v1) * ( i_v2 * i_v2)));		// MgAbs( v1) * MgAbs( v2)
+	ss = ( i_v1 ^ i_v2) * i_vp / sp;									// sin( v1 v2) * sp
+	cc = i_v1 * i_v2 / sp;										// cos( v1 v2)
+
+	sse = ( ( cc < 0) ? ( ( ss > 0) ? sse = 2 - ss : sse = -2 - ss) : sse = ss);
+	cce = ( ( ss > 0) ? cc = 1 - cc : cc = -1 + cc);
+	return  ( sse + cce) / 4.f;
+}
+
 // ---------------------( ２次元 )------------------------------
 //	選択３角形が分割可能か調べる
 //			 0: 面積が0
@@ -965,7 +947,7 @@ MINT MGeo::CheckDivTriPtPolygon3D(
 // ---------------------( ２次元 )------------------------------
 //		多角形を３角形に分割する
 //
-MINT MGeo::DivideTriPolygon2D(						// (  O) ステイタス
+MINT MGeo::DivideTriPolygon2D(					// (  O) ステイタス
 												//			MC_NINT			(0): 分割なし
 												//			MC_INT			(1): 分割あり
 				const	MgPolyg2D&	Pg1,		// (I  ) 多角形
@@ -1085,7 +1067,7 @@ exit:
 // ---------------------( ３次元 )------------------------------
 //		多角形を３角形に分割する
 //
-MINT MGeo::DivideTriPolygon3D(						// (  O) ステイタス
+MINT MGeo::DivideTriPolygon3D(					// (  O) ステイタス
 												//			MC_NINT			(0): 分割なし
 												//			MC_INT			(1): 分割あり
 				const	MgPolyg3D&	Pg1,		// (I  ) 多角形

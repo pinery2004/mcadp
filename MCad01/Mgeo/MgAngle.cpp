@@ -209,13 +209,13 @@ MREAL MGeo:: AngleVectZXPln3D(					// (  O) 角度　（ラジアン） Y方向が正
 //S /////////////////////////////////////////////////////////////////////////////
 ////	直線と平面の角度(ラジアン)を求める
 ////
-//MREAL	MGeo::AngleULinePln3D(					// (  O) 左回転角度　（度）
+//MREAL	MGeo::AngleSLinePln3D(					// (  O) 左回転角度　（度）
 //												//		2点間の距離がMGPTOL->D未満の場合は0度を返す
-//				const	MgULine3D&	ULn1,		// (I  ) 直線1
+//				const	MgSLine3D&	SLn1,		// (I  ) 直線1
 //				const	MgPlane3D&	Pln2		// (I  ) 平面2
 //		)
 //{
-//	return AngleVectPln3D( ULn1.v, Pln2);
+//	return AngleVectPln3D( SLn1.v, Pln2);
 //}
 //
 ///////////////////////////////////////////////////////////////////////////////
@@ -240,55 +240,55 @@ MREAL MGeo:: AngleVectZXPln3D(					// (  O) 角度　（ラジアン） Y方向が正
 /////////////////////////////////////////////////////////////////////////////
 //	２直線間の角の2等分線を求める
 //
-void	MGeo::Bisector2ULine2D(					// (  O) ステータス
-				const	MgULine2D&	ULn1,		// (I  ) 直線1
-				const	MgULine2D&	ULn2,		// (I  ) 直線2
-						MgULine2D*	ULn3		// (  O) 直線3
+void	MGeo::Bisector2SLine2D(					// (  O) ステータス
+				const	MgSLine2D&	SLn1,		// (I  ) 直線1
+				const	MgSLine2D&	SLn2,		// (I  ) 直線2
+						MgSLine2D*	SLn3		// (  O) 直線3
 		)
 {
 	MREAL	c12;
 	MgVect2D vd;
 
-	if ( Intr2ULine2D(ULn1, ULn2, &(*ULn3).p) == MC_PARALLEL) (*ULn3).p = ULn1.p;
-	c12 = ULn1.v * ULn2.v;
+	if ( Intr2SLine2D(SLn1, SLn2, &(*SLn3).p) == MC_PARALLEL) (*SLn3).p = SLn1.p;
+	c12 = SLn1.v * SLn2.v;
 	if ( c12 > -0.7) {
-		vd = (ULn1.v + ULn2.v);
+		vd = (SLn1.v + SLn2.v);
 	} else {
-		vd = RotL90Vect2D( ULn1.v - ULn2.v);
+		vd = RotL90Vect2D( SLn1.v - SLn2.v);
 	}
-	(*ULn3).v = MGeo::UnitizeVect2D(vd);
+	(*SLn3).v = MGeo::UnitizeVect2D(vd);
 }
 
 /////////////////////////////////////////////////////////////////////////////
 //	直線と線分間の角の2等分線を求める
 //
-void MGeo::BisectorULineLine2D(					// (  O) ステータス
-				const	MgULine2D&	ULn1,		// (I  ) 直線1
+void MGeo::BisectorSLineLine2D(					// (  O) ステータス
+				const	MgSLine2D&	SLn1,		// (I  ) 直線1
 				const	MgLine2D&	Ln2,		// (I  ) 線分2
-						MgULine2D*	ULn3		// (  O) 直線3
+						MgSLine2D*	SLn3		// (  O) 直線3
 		)
 {
-	MgULine2D	ULn2;
+	MgSLine2D	SLn2;
 
-	ULn2.p = Ln2.p[0];
-	ULn2.v = MGeo::UnitizeVect2D(Ln2.p[1] - Ln2.p[0]);
-	Bisector2ULine2D( ULn1, ULn2, ULn3);
+	SLn2.p = Ln2.p[0];
+	SLn2.v = MGeo::UnitizeVect2D(Ln2.p[1] - Ln2.p[0]);
+	Bisector2SLine2D( SLn1, SLn2, SLn3);
 }
 
 /////////////////////////////////////////////////////////////////////////////
 //	線分と直線間の角の2等分線を求める
 //
-void MGeo::BisectorLineULine2D(					// (  O) ステータス
+void MGeo::BisectorLineSLine2D(					// (  O) ステータス
 				const	MgLine2D&	Ln1,		// (I  ) 線分1
-				const	MgULine2D&	ULn2,		// (I  ) 直線2
-						MgULine2D*	ULn3		// (  O) 直線3
+				const	MgSLine2D&	SLn2,		// (I  ) 直線2
+						MgSLine2D*	SLn3		// (  O) 直線3
 		)
 {
-	MgULine2D	ULn1;
+	MgSLine2D	SLn1;
 
-	ULn1.p = Ln1.p[0];
-	ULn1.v = MGeo::UnitizeVect2D(Ln1.p[1] - Ln1.p[0]);
-	Bisector2ULine2D( ULn1, ULn2, ULn3);
+	SLn1.p = Ln1.p[0];
+	SLn1.v = MGeo::UnitizeVect2D(Ln1.p[1] - Ln1.p[0]);
+	Bisector2SLine2D( SLn1, SLn2, SLn3);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -297,17 +297,17 @@ void MGeo::BisectorLineULine2D(					// (  O) ステータス
 void MGeo::Bisector2Line2D(						// (  O) ステータス
 				const	MgLine2D&	Ln1,		// (I  ) 線分1
 				const	MgLine2D&	Ln2,		// (I  ) 線分2
-						MgULine2D*	ULn3		// (  O) 直線3
+						MgSLine2D*	SLn3		// (  O) 直線3
 		)
 {
-	MgULine2D	ULn1;
-	MgULine2D	ULn2;
+	MgSLine2D	SLn1;
+	MgSLine2D	SLn2;
 
-	ULn1.p = Ln1.p[0];
-	ULn1.v = MGeo::UnitizeVect2D( Ln1.p[1] - Ln1.p[0]);
-	ULn2.p = Ln2.p[0];
-	ULn2.v = MGeo::UnitizeVect2D( Ln2.p[1] - Ln2.p[0]);
-	Bisector2ULine2D( ULn1, ULn2, ULn3);
+	SLn1.p = Ln1.p[0];
+	SLn1.v = MGeo::UnitizeVect2D( Ln1.p[1] - Ln1.p[0]);
+	SLn2.p = Ln2.p[0];
+	SLn2.v = MGeo::UnitizeVect2D( Ln2.p[1] - Ln2.p[0]);
+	Bisector2SLine2D( SLn1, SLn2, SLn3);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -317,10 +317,10 @@ void MGeo::Bisector2Line2D(						// (  O) ステータス
 /////////////////////////////////////////////////////////////////////////////
 //	２直線間の角の2等分線を求める
 //
-void MGeo::Bisector2ULine3D(					// (  O) ステータス
-				const	MgULine3D&	ULn1,		// (I  ) 直線1
-				const	MgULine3D&	ULn2,		// (I  ) 直線2
-						MgULine3D*	ULn3		// (  O) 直線3
+void MGeo::Bisector2SLine3D(					// (  O) ステータス
+				const	MgSLine3D&	SLn1,		// (I  ) 直線1
+				const	MgSLine3D&	SLn2,		// (I  ) 直線2
+						MgSLine3D*	SLn3		// (  O) 直線3
 		)
 {
 	MREAL	c12;
@@ -328,48 +328,48 @@ void MGeo::Bisector2ULine3D(					// (  O) ステータス
 	MgVect3D vp;
 	MgVect3D vd;
 
-	if ( Intr2ULine3D( ULn1, ULn2, &(*ULn3).p) == MC_PARALLEL) (*ULn3).p = ULn1.p;
-	c12 = ULn1.v * ULn2.v;
+	if ( Intr2SLine3D( SLn1, SLn2, &(*SLn3).p) == MC_PARALLEL) (*SLn3).p = SLn1.p;
+	c12 = SLn1.v * SLn2.v;
 	if ( c12 > -0.7) {
-		vd = (ULn1.v + ULn2.v);
+		vd = (SLn1.v + SLn2.v);
 	} else {
-		vt = (ULn1.v - ULn2.v);
-		vp = (ULn1.v ^ ULn2.v);
+		vt = (SLn1.v - SLn2.v);
+		vp = (SLn1.v ^ SLn2.v);
 		vd = vt ^ vp;
 	}
-	ULn3->v = UnitizeVect3D( vd);
+	SLn3->v = UnitizeVect3D( vd);
 }
 
 /////////////////////////////////////////////////////////////////////////////
 //	直線と線分間の角の2等分線を求める
 //
-void MGeo::BisectorULineLine3D(					// (  O) ステータス
-				const	MgULine3D&	ULn1,		// (I  ) 直線1
+void MGeo::BisectorSLineLine3D(					// (  O) ステータス
+				const	MgSLine3D&	SLn1,		// (I  ) 直線1
 				const	MgLine3D&	Ln2,		// (I  ) 線分2
-						MgULine3D*	ULn3		// (  O) 直線3
+						MgSLine3D*	SLn3		// (  O) 直線3
 		)
 {
-	MgULine3D ULn2;
+	MgSLine3D SLn2;
 
-	ULn2.p = Ln2.p[0];
-	ULn2.v = UnitizeVect3D(Ln2.p[1] - Ln2.p[0]);
-	Bisector2ULine3D( ULn1, ULn2, ULn3);
+	SLn2.p = Ln2.p[0];
+	SLn2.v = UnitizeVect3D(Ln2.p[1] - Ln2.p[0]);
+	Bisector2SLine3D( SLn1, SLn2, SLn3);
 }
 
 /////////////////////////////////////////////////////////////////////////////
 //	線分と直線間の角の2等分線を求める
 //
-void MGeo::BisectorLineULine3D(					//
+void MGeo::BisectorLineSLine3D(					//
 				const	MgLine3D&	Ln1,		// (I  ) 線分1
-				const	MgULine3D&	ULn2,		// (I  ) 直線2
-						MgULine3D*	ULn3		// (  O) 直線3
+				const	MgSLine3D&	SLn2,		// (I  ) 直線2
+						MgSLine3D*	SLn3		// (  O) 直線3
 		)
 {
-	MgULine3D ULn1;
+	MgSLine3D SLn1;
 
-	ULn1.p = Ln1.p[0];
-	ULn1.v = UnitizeVect3D(Ln1.p[1] - Ln1.p[0]);
-	Bisector2ULine3D( ULn1, ULn2, ULn3);
+	SLn1.p = Ln1.p[0];
+	SLn1.v = UnitizeVect3D(Ln1.p[1] - Ln1.p[0]);
+	Bisector2SLine3D( SLn1, SLn2, SLn3);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -378,17 +378,17 @@ void MGeo::BisectorLineULine3D(					//
 void MGeo::Bisector2Line3D(						//
 				const	MgLine3D&	Ln1,		// (I  ) 線分1
 				const	MgLine3D&	Ln2,		// (I  ) 線分2
-						MgULine3D*	ULn3		// (  O) 直線3
+						MgSLine3D*	SLn3		// (  O) 直線3
 		)
 {
-	MgULine3D ULn1;
-	MgULine3D ULn2;
+	MgSLine3D SLn1;
+	MgSLine3D SLn2;
 
-	ULn1.p = Ln1.p[0];
-	ULn1.v = UnitizeVect3D(Ln1.p[1] - Ln1.p[0]);
-	ULn2.p = Ln2.p[0];
-	ULn2.v = UnitizeVect3D(Ln2.p[1] - Ln2.p[0]);
-	Bisector2ULine3D( ULn1, ULn2, ULn3);
+	SLn1.p = Ln1.p[0];
+	SLn1.v = UnitizeVect3D(Ln1.p[1] - Ln1.p[0]);
+	SLn2.p = Ln2.p[0];
+	SLn2.v = UnitizeVect3D(Ln2.p[1] - Ln2.p[0]);
+	Bisector2SLine3D( SLn1, SLn2, SLn3);
 }
 
 } // namespace MC

@@ -39,8 +39,8 @@
 namespace MC
 {
 
-class	MgULine2D;
-class	MgULine3D;
+class	MgSLine2D;
+class	MgSLine3D;
 class	MgHLine2D;
 class	MgHLine3D;
 class	MgLine2D;
@@ -54,26 +54,26 @@ class	MgPlane3D;
 //
 //	２次元直線	(UnboundedLine)
 //
-class DLL_EXPORT_LINE MgULine2D
+class DLL_EXPORT_LINE MgSLine2D
 {
 public:
 	MgPoint2D	p;																// 通過点
 	MgVect2D	v;																// 直線方向
 
 	// コンストラクタ
-	MgULine2D()			{}
+	MgSLine2D()			{}
 
-	MgULine2D( MREAL x, MREAL y, MREAL vx, MREAL vy)
+	MgSLine2D( MREAL x, MREAL y, MREAL vx, MREAL vy)
 						{ p.x = x; p.y = y; v.x = vx; v.y = vy;}
-	MgULine2D( const MgPoint2D& p1, const MgVect2D& v1)
+	MgSLine2D( const MgPoint2D& p1, const MgVect2D& v1)
 						{ p = p1; v = v1;}										
-	bool operator == ( const MgULine2D& ULn1) const;							// b = (uln == ULn1) 判定
+	bool operator == ( const MgSLine2D& SLn1) const;							// b = (sln == SLn1) 判定
 
-	bool operator != ( const MgULine2D& ULn1) const								// b = (uln != ULn1) 判定
-						{ return !((*this) == ULn1);}
-	MgULine2D Set( const MgPoint2D& p1, const MgVect2D& v1)
+	bool operator != ( const MgSLine2D& SLn1) const								// b = (sln != SLn1) 判定
+						{ return !((*this) == SLn1);}
+	MgSLine2D Set( const MgPoint2D& p1, const MgVect2D& v1)
 						{ p = p1; v = v1; return *this;}										
-	MgULine2D Set( const MgULine3D& ULn1);										// ３次元直線 → ２次元直線
+	MgSLine2D Set( const MgSLine3D& SLn1);										// ３次元直線 → ２次元直線
 
 	void SetRev()																// 直線反転
 						{ v = - v;}
@@ -97,13 +97,13 @@ public:
 						{ p.x = x; p.y = y; v.x = vx; v.y = vy;}
 	MgHLine2D( const MgPoint2D& p1, const MgVect2D& v1)
 						{ p = p1; v = v1;}										
-	bool operator == ( const MgHLine2D &ULn1) const;							// b = (uln == ULn1) 判定
+	bool operator == ( const MgHLine2D &SLn1) const;							// b = (sln == SLn1) 判定
 
-	bool operator != ( const MgHLine2D &ULn1) const								// b = (uln != ULn1) 判定
-						{ return !((*this) == ULn1);}
+	bool operator != ( const MgHLine2D &SLn1) const								// b = (sln != SLn1) 判定
+						{ return !((*this) == SLn1);}
 	MgHLine2D Set( const MgPoint2D& p1, const MgVect2D& v1)
 						{ p = p1; v = v1; return *this;}										
-	MgHLine2D Set( const MgHLine3D &ULn1);										// ３次元直線 → ２次元直線
+	MgHLine2D Set( const MgHLine3D &SLn1);										// ３次元直線 → ２次元直線
 
 	void SetRev()																// 直線反転
 						{ v = - v;}
@@ -160,31 +160,31 @@ public:
 //
 //	３次元直線
 //
-class DLL_EXPORT_LINE MgULine3D
+class DLL_EXPORT_LINE MgSLine3D
 {
 public:
 	MgPoint3D	p;																// 通過点
 	MgVect3D	v;																// 直線方向
 
 	// コンストラクタ
-	MgULine3D()			{}
+	MgSLine3D()			{}
 	
-	MgULine3D( MREAL x, MREAL y, MREAL z, MREAL vx, MREAL vy, MREAL vz)
+	MgSLine3D( MREAL x, MREAL y, MREAL z, MREAL vx, MREAL vy, MREAL vz)
 						{ p.x = x; p.y = y; p.z = z; v.x = vx; v.y = vy; v.z = vz;}
-	MgULine3D( const MgPoint3D& p1, const MgVect3D& v1)
+	MgSLine3D( const MgPoint3D& p1, const MgVect3D& v1)
 						{ p = p1; v = v1;}
-	bool operator == ( const MgULine3D& ULn1) const;							// b = (uln == ULn1) 判定
+	bool operator == ( const MgSLine3D& SLn1) const;							// b = (sln == SLn1) 判定
 
-	bool operator != ( const MgULine3D& ULn1) const								// b = (uln != ULn1) 判定
-						{ return !((*this) == ULn1);}
-	MgULine3D Set( const MgPoint3D& p1, const MgVect3D& v1)
+	bool operator != ( const MgSLine3D& SLn1) const								// b = (sln != SLn1) 判定
+						{ return !((*this) == SLn1);}
+	MgSLine3D Set( const MgPoint3D& p1, const MgVect3D& v1)
 						{ p = p1; v = v1; return *this;}
-	MgULine3D Set( const MgULine2D& uln1, MREAL z1 = 0.f)						// ２次元→３次元　(Z省略0.)
-						{ p.x = uln1.p.x; p.y = uln1.p.y; p.z = z1;
-						  v = MgVect3DC( uln1.v).Unitize(); return *this;} 
-	MgULine3D Set( const MgULine2D& ULn1, const MgPlane3D& Pln);				// ２次元→３次元
+	MgSLine3D Set( const MgSLine2D& sln1, MREAL z1 = 0.f)						// ２次元→３次元　(Z省略0.)
+						{ p.x = sln1.p.x; p.y = sln1.p.y; p.z = z1;
+						  v = MgVect3DC( sln1.v).Unitize(); return *this;} 
+	MgSLine3D Set( const MgSLine2D& SLn1, const MgPlane3D& Pln);				// ２次元→３次元
 
-	MgULine3D SetRev()	{ v = - v; return *this;}								// 直線反転
+	MgSLine3D SetRev()	{ v = - v; return *this;}								// 直線反転
 	void Print(MCHAR* s);
 };
 
@@ -207,16 +207,16 @@ public:
 	MgHLine3D( const MgPoint3D& p1, const MgVect3D& v1)
 						{ p = p1; v = v1;}
 
-	bool operator == ( const MgHLine3D &ULn1) const;							// b = (uln == ULn1) 判定
+	bool operator == ( const MgHLine3D &SLn1) const;							// b = (sln == SLn1) 判定
 
-	bool operator != ( const MgHLine3D &ULn1) const								// b = (uln != ULn1) 判定
-						{ return !((*this) == ULn1);}
+	bool operator != ( const MgHLine3D &SLn1) const								// b = (sln != SLn1) 判定
+						{ return !((*this) == SLn1);}
 	MgHLine3D Set( const MgPoint3D& p1, const MgVect3D& v1)
 						{ p = p1; v = v1; return *this;}
-	MgHLine3D Set( const MgHLine2D &uln1, MREAL z1 = 0.f)					// ２次元→３次元　(Z省略0.)
-						{ p.x = uln1.p.x; p.y = uln1.p.y; p.z = z1;
-						  v = MgVect3DC( uln1.v).Unitize(); return *this;} 
-	MgHLine3D Set( const MgHLine2D &ULn1, const MgPlane3D& Pln);				// ２次元→３次元
+	MgHLine3D Set( const MgHLine2D &sln1, MREAL z1 = 0.f)					// ２次元→３次元　(Z省略0.)
+						{ p.x = sln1.p.x; p.y = sln1.p.y; p.z = z1;
+						  v = MgVect3DC( sln1.v).Unitize(); return *this;} 
+	MgHLine3D Set( const MgHLine2D &SLn1, const MgPlane3D& Pln);				// ２次元→３次元
 
 	MgHLine3D SetRev()	{ v = - v; return *this;}								// 半直線反転
 	void Print(MCHAR* s);
@@ -280,30 +280,30 @@ public:
 //==========================================================================================
 //	２次元直線
 //
-inline MgULine2D MgULine2DC( const MgPoint2D& p1, const MgVect2D& v1)						// 通過点と方向単位ベクトルより２次元直線を求める
+inline MgSLine2D MgSLine2DC( const MgPoint2D& p1, const MgVect2D& v1)						// 通過点と方向単位ベクトルより２次元直線を求める
 {
-	MgULine2D ULno;
-	ULno.p = p1;
-	ULno.v = v1;
-	return ULno;
+	MgSLine2D SLno;
+	SLno.p = p1;
+	SLno.v = v1;
+	return SLno;
 }										
-inline MgULine2D MgULine2DC( const MgULine3D& ULn1)											// ３次元(x,y) → ２次元
+inline MgSLine2D MgSLine2DC( const MgSLine3D& SLn1)											// ３次元(x,y) → ２次元
 {
-	MgULine2D ULno;
-	ULno.p.x = ULn1.p.x;
-	ULno.p.y = ULn1.p.y;
-	ULno.v.x = ULn1.v.x,
-	ULno.v.y = ULn1.v.y;
-	return ULno;
+	MgSLine2D SLno;
+	SLno.p.x = SLn1.p.x;
+	SLno.p.y = SLn1.p.y;
+	SLno.v.x = SLn1.v.x,
+	SLno.v.y = SLn1.v.y;
+	return SLno;
 } 
-inline MgULine2D MgULine2D::Set( const MgULine3D& ULn1)										// ３次元(x,y) → ２次元
+inline MgSLine2D MgSLine2D::Set( const MgSLine3D& SLn1)										// ３次元(x,y) → ２次元
 {
-	MgULine2D ULno;
-	ULno.p.x = ULn1.p.x;
-	ULno.p.y = ULn1.p.y;
-	ULno.v.x = ULn1.v.x;
-	ULno.v.y = ULn1.v.y;
-	return ULno;
+	MgSLine2D SLno;
+	SLno.p.x = SLn1.p.x;
+	SLno.p.y = SLn1.p.y;
+	SLno.v.x = SLn1.v.x;
+	SLno.v.y = SLn1.v.y;
+	return SLno;
 } 
 
 //==========================================================================================
@@ -374,9 +374,9 @@ inline MgLine2D MgLine2D::Set( const MgLine3D& Ln1)											// ３次元(x,y)→２
 //==========================================================================================
 //	２次元ベクトル　コンストラクタ
 //
-inline MgVect2D::MgVect2D( const MgULine2D& uln)											// 2D直線の方向を表す2Dベクトルを求める
+inline MgVect2D::MgVect2D( const MgSLine2D& sln)											// 2D直線の方向を表す2Dベクトルを求める
 {
-	*this = uln.v;
+	*this = sln.v;
 }
 inline MgVect2D::MgVect2D( const MgLine2D& ln)												// 2D線分の方向を表す2Dベクトルを求める
 {
@@ -388,16 +388,16 @@ inline MgVect2D::MgVect2D( const MgLine2D& ln)												// 2D線分の方向を表す2
 //==========================================================================================
 //	３次元直線
 //
-inline MgULine3D MgULine3DC( const MgULine2D& uln1, MREAL z1 = 0.f)					// ２次元→３次元　(Z省略0.)
+inline MgSLine3D MgSLine3DC( const MgSLine2D& sln1, MREAL z1 = 0.f)					// ２次元→３次元　(Z省略0.)
 {
-	MgULine3D ULno;
-	ULno.p.x = uln1.p.x;
-	ULno.p.y = uln1.p.y;
-	ULno.p.z = z1;
-	ULno.v = MgVect3DC( uln1.v).Unitize();
-	return ULno;
+	MgSLine3D SLno;
+	SLno.p.x = sln1.p.x;
+	SLno.p.y = sln1.p.y;
+	SLno.p.z = z1;
+	SLno.v = MgVect3DC( sln1.v).Unitize();
+	return SLno;
 } 
-inline MgULine3D MgULine3DC( const MgULine2D& ULn1, const MgPlane3D& Pln);					// ２次元→３次元
+inline MgSLine3D MgSLine3DC( const MgSLine2D& SLn1, const MgPlane3D& Pln);					// ２次元→３次元
 
 //==========================================================================================
 //	３次元線分
@@ -473,9 +473,9 @@ inline MgLine3D MgLine3D::operator -= ( const MgVect3D& v)									// Ln1 += P2
 //==========================================================================================
 //	３次元ベクトル　コンストラクタ
 //
-inline MgVect3D::MgVect3D( const MgULine3D& uln)											// 3D直線の方向を表す3Dベクトルを求める
+inline MgVect3D::MgVect3D( const MgSLine3D& sln)											// 3D直線の方向を表す3Dベクトルを求める
 {
-	*this = uln.v;
+	*this = sln.v;
 }
 inline MgVect3D::MgVect3D( const MgLine3D& ln)												// 3D線分の方向を表す3Dベクトルを求める
 {
@@ -483,10 +483,10 @@ inline MgVect3D::MgVect3D( const MgLine3D& ln)												// 3D線分の方向を表す3
 }
 
 // サイズ
-inline int SZMgULine2D( int i_sz)	{ return  ( i_sz * (int)sizeof( MgULine2D));}
-inline int SZMgULine2D()			{ return  (int)sizeof( MgULine2D);}
-inline int SZMgULine3D( int i_sz)	{ return  ( i_sz * (int)sizeof( MgULine3D));}
-inline int SZMgULine3D()			{ return  (int)sizeof( MgULine3D);}
+inline int SZMgSLine2D( int i_sz)	{ return  ( i_sz * (int)sizeof( MgSLine2D));}
+inline int SZMgSLine2D()			{ return  (int)sizeof( MgSLine2D);}
+inline int SZMgSLine3D( int i_sz)	{ return  ( i_sz * (int)sizeof( MgSLine3D));}
+inline int SZMgSLine3D()			{ return  (int)sizeof( MgSLine3D);}
 inline int SZMgHLine2D( int i_sz)	{ return  ( i_sz * (int)sizeof( MgHLine2D));}
 inline int SZMgHLine2D()			{ return  (int)sizeof( MgHLine2D);}
 inline int SZMgHLine3D( int i_sz)	{ return  ( i_sz * (int)sizeof( MgHLine3D));}
@@ -495,10 +495,10 @@ inline int SZMgLine2D( int i_sz)	{ return  ( i_sz * (int)sizeof( MgLine2D));}
 inline int SZMgLine2D()				{ return  (int)sizeof( MgLine2D);}
 inline int SZMgLine3D( int i_sz)	{ return  ( i_sz * (int)sizeof( MgLine3D));}
 inline int SZMgLine3D()				{ return  (int)sizeof( MgLine3D);}
-inline int WSZMgULine2D( int i_sz)	{ return  ( i_sz * (int)sizeof( MgULine2D) / SZMINT());}
-inline int WSZMgULine2D()			{ return  (int)sizeof( MgULine2D) / SZMINT();}
-inline int WSZMgULine3D( int i_sz)	{ return  ( i_sz * (int)sizeof( MgULine3D) / SZMINT());}
-inline int WSZMgULine3D()			{ return  (int)sizeof( MgULine3D) / SZMINT();}
+inline int WSZMgSLine2D( int i_sz)	{ return  ( i_sz * (int)sizeof( MgSLine2D) / SZMINT());}
+inline int WSZMgSLine2D()			{ return  (int)sizeof( MgSLine2D) / SZMINT();}
+inline int WSZMgSLine3D( int i_sz)	{ return  ( i_sz * (int)sizeof( MgSLine3D) / SZMINT());}
+inline int WSZMgSLine3D()			{ return  (int)sizeof( MgSLine3D) / SZMINT();}
 inline int WSZMgHLine2D( int i_sz)	{ return  ( i_sz * (int)sizeof( MgHLine2D) / SZMINT());}
 inline int WSZMgHLine2D()			{ return  (int)sizeof( MgHLine2D) / SZMINT();}
 inline int WSZMgHLine3D( int i_sz)	{ return  ( i_sz * (int)sizeof( MgHLine3D) / SZMINT());}

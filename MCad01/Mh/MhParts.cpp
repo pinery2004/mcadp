@@ -558,10 +558,10 @@ MINT	MhSenBuzai::MhOn(										// (  O) ステイタス
 												// 			MC_LEFT:	線部材1は線部材2の左側にあり	（交差なし）
 												// 			MC_RIGHT:	線部材1は線部材2の右側にあり	（交差なし）
 												//			MC_CLOSS:	線部材1は線部材2と交差			（交差あり）
-												//			MC_ON_LINE:	線部材1は線部材2の直線上にあり	（平行）
+												//			MC_ON_SLINE:	線部材1は線部材2の直線上にあり	（平行）
 						MINT		*ist2		// (  O) 補助ステイタス2
-												// 			MC_PS_NEAR:	線部材1は線部材2より始点側が遠い（交差なしまたは交差あり）
-												// 			MC_PE_NEAR:	線部材1は線部材2より終点側が遠い（交差なしまたは交差あり）
+												// 			MC_NEAR_PS:	線部材1は線部材2より始点側が遠い（交差なしまたは交差あり）
+												// 			MC_NEAR_PE:	線部材1は線部材2より終点側が遠い（交差なしまたは交差あり）
 												// 			MC_PARALEL:	線部材1は線部材2より始点と終点は等距離	（平行）
 				)
 {
@@ -575,7 +575,7 @@ MINT	MhSenBuzai::MhOn(										// (  O) ステイタス
 	ist = MGeo::Intr2Line3D( Bz1.Ln, Bz2.Ln, Po);					// 交点
 	if ( !MF_CHECK_OR( ist, (MC_INT | MC_NINT))) {
 		if ( MGeo::CheckLineOnLine3D( Bz1.LnWH, Bz2.LnWH)) {
-			*ist1 = MC_ON_LINE;									// 線部材1は線部材2の直線上にあり	（平行）
+			*ist1 = MC_ON_SLINE;									// 線部材1は線部材2の直線上にあり	（平行）
 		} else {
 			*ist1 = 0;
 		}
@@ -590,24 +590,24 @@ MINT	MhSenBuzai::MhOn(										// (  O) ステイタス
 	if ( s1 > 0 && s2 > 0) {									// 長さ調整部材は長さ調整先の部材の左側にあり
 		*ist1 = MC_LEFT;
 //		if ( s1 < s2) {
-//			*ist2 = MC_PS_NEAR;									// 配置点側の長さを補正
+//			*ist2 = MC_NEAR_PS;									// 配置点側の長さを補正
 //		} else {
-//			*ist2 = MC_PE_NEAR;									// 配置方向点側の長さを補正
+//			*ist2 = MC_NEAR_PE;									// 配置方向点側の長さを補正
 //		}
 	} else if ( s1 < 0 && s2 < 0) {								// 長さ調整部材は長さ調整先の部材の右側にあり
 		*ist1 = MC_RIGHT;
 //		if ( s1 > s2) {
-//			*ist2 = MC_PS_NEAR;									// 配置点側の長さを補正
+//			*ist2 = MC_NEAR_PS;									// 配置点側の長さを補正
 //		} else {
-//			*ist2 = MC_PE_NEAR;									// 配置方向点側の長さを補正
+//			*ist2 = MC_NEAR_PE;									// 配置方向点側の長さを補正
 //		}
 	} else {													// 長さ調整部材は長さ調整先の部材の左右側にまたがっている
 		*ist1 = MC_CLOSS;
 	}
 	if ( MGABS(s1) < MGABS(s2)) {
-			*ist2 = MC_PS_NEAR;									// 配置点側の長さを補正
+			*ist2 = MC_NEAR_PS;									// 配置点側の長さを補正
 	} else {
-			*ist2 = MC_PE_NEAR;									// 配置方向点側の長さを補正
+			*ist2 = MC_NEAR_PE;									// 配置方向点側の長さを補正
 	}
 exit:;
 	return ist;

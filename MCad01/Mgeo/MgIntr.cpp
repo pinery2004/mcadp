@@ -25,12 +25,12 @@ namespace MC
 // ---------------------( ２次元 )------------------------------
 //　２本の直線の交点を求める。
 //
-MINT MGeo::Intr2ULine2D(						// (  O) ステイタス
-												//	MC_PARALLEL (-1) 交差なし（平行）
-												//	MC_NINT	    (0)	交差なし
-												//	MC_INT      (1)	交差あり
-				const	MgULine2D&	ULn1,		// (I  ) 直線1
-				const	MgULine2D&	ULn2,		// (I  ) 直線2
+MINT MGeo::Intr2SLine2D(						// (  O) ステイタス
+												//	MC_PARALLEL		交差なし（平行）
+												//	MC_NINT			交差なし
+												//	MC_INT			交差あり
+				const	MgSLine2D&	SLn1,		// (I  ) 直線1
+				const	MgSLine2D&	SLn2,		// (I  ) 直線2
 						MgPoint2D*	po			// (  O) ２次元交点
 				)
 {
@@ -40,12 +40,12 @@ MINT MGeo::Intr2ULine2D(						// (  O) ステイタス
 //
 //	平行のチェック
 //
-	so = ULn1.v ^ ULn2.v;										// sinΘv1v2
+	so = SLn1.v ^ SLn2.v;										// sinΘv1v2
 	if ( CheckZero( so, MGPTOL->A)) {
 		ist = MC_PARALLEL;										// 平行
 	} else {
-		pa1 = ( ULn2.p - ULn1.p) ^ ULn2.v / so;					// sinΘv12v2 / sinΘv1v2
-		*po = ULn1.p + pa1 * ULn1.v;
+		pa1 = ( SLn2.p - SLn1.p) ^ SLn2.v / so;					// sinΘv12v2 / sinΘv1v2
+		*po = SLn1.p + pa1 * SLn1.v;
 		ist = MC_INT;
 	}
 	return ist;
@@ -55,11 +55,11 @@ MINT MGeo::Intr2ULine2D(						// (  O) ステイタス
 //　直線と線分の交点を求める。
 //　重なっている場合は、交差なし（平行）。
 //
-MINT MGeo::IntrULineLine2D(						// (  O) ステイタス
-												//	MC_PARALLEL (-1) 交差なし（平行）
-												//	MC_NINT	    (0)	交差なし
-												//	MC_INT      (1)	交差あり
-				const	MgULine2D&	ULn1,		// (I  ) 直線1
+MINT MGeo::IntrSLineLine2D(						// (  O) ステイタス
+												//	MC_PARALLEL		交差なし（平行）
+												//	MC_NINT			交差なし
+												//	MC_INT			交差あり
+				const	MgSLine2D&	SLn1,		// (I  ) 直線1
 				const	MgLine2D&	Ln2,		// (I  ) 線分2
 						MgPoint2D*	po			// (  O) ２次元交点
 				)
@@ -71,11 +71,11 @@ MINT MGeo::IntrULineLine2D(						// (  O) ステイタス
 //　平行のチェック
 //
 	vd2 = Ln2.p[1] - Ln2.p[0];
-	if ( MGeo::CheckParallelVect2D( ULn1.v, vd2)) {
+	if ( MGeo::CheckParallelVect2D( SLn1.v, vd2)) {
 		ist = MC_PARALLEL;										// 平行
 	} else {
 
-		SVal( Ln2.p[0], Ln2.p[1], ULn1.p, ULn1.v, &ss, &se);
+		SVal( Ln2.p[0], Ln2.p[1], SLn1.p, SLn1.v, &ss, &se);
 
 		*po = Ln2.p[0] + ( vd2 * ( ss / ( ss - se)));			// 交点
 
@@ -95,26 +95,26 @@ MINT MGeo::IntrULineLine2D(						// (  O) ステイタス
 //
 //					<< コーディング実体はMgLib.hにあり >>
 //
-// MINT	MgIntrLineULine2D(						// (  O) ステイタス
-//												//	MC_PARALLEL (-1) 交差なし（平行）
-//												//	MC_NINT	    (0)	交差なし
-//												//	MC_INT      (1)	交差あり
+// MINT	MgIntrLineSLine2D(						// (  O) ステイタス
+//												//	MC_PARALLEL		交差なし（平行）
+//												//	MC_NINT			交差なし
+//												//	MC_INT			交差あり
 //				const	MgLine2D&	Ln1,		// (I  ) 線分1
-//				const	MgULine2D&	ULn2,		// (I  ) 直線2
+//				const	MgSLine2D&	SLn2,		// (I  ) 直線2
 //						MgPoint2D*	po			// (  O) ２次元交点
 //				)
 //{
-//	return MgIntr( ULn2, Ln1, po);
+//	return MgIntr( SLn2, Ln1, po);
 // }
 // ---------------------( ２次元 )------------------------------
 //　線分と線分の交点を求める。
 //　２線分が重なっている場合は、交差なし（平行）。
 //  ２線分が重なりなく直線的に端部で接合している場合はその接合点が交点。
 MINT MGeo::Intr2Line2D(							// (  O) ステイタス
-												//	MC_PARALLEL (-1) 交差なし（平行）
-												//  MC_CONNECTION(4) 接続	 （平行）
-												//	MC_NINT	    (0)	交差なし
-												//	MC_INT      (1)	交差あり
+												//	MC_PARALLEL		交差なし（平行）
+												//  MC_CONNECTION	接続	 （平行）
+												//	MC_NINT			交差なし
+												//	MC_INT			交差あり
 				const	MgLine2D&	Ln1,		// (I  ) 線分1
 				const	MgLine2D&	Ln2,		// (I  ) 線分2
 				MgPoint2D			*po			// (  O) ２次元交点
@@ -164,12 +164,12 @@ MINT MGeo::Intr2Line2D(							// (  O) ステイタス
 //	線分１と直線２との交点を求め、点群に追加する。
 //　重なっている場合は、交差なし（平行）。
 //
-MINT MGeo::IntrAddLineULine2D(					// (  O) ステイタス
-												//	MC_PARALLEL (-1) 交差なし（平行）
-												//	MC_NINT	    (0)	交差なし
-												//	MC_INT      (1)	交差あり
+MINT MGeo::IntrAddLineSLine2D(					// (  O) ステイタス
+												//	MC_PARALLEL		交差なし（平行）
+												//	MC_NINT			交差なし
+												//	MC_INT			交差あり
 				const	MgLine2D&	Ln1,		// (I  ) 線分1
-				const	MgULine2D&	ULn2,		// (I  ) 直線2
+				const	MgSLine2D&	SLn2,		// (I  ) 直線2
 						MgGPoint2D	*GPt3		// (I O) 交点を追加する点群
 												//		 追加交点数(0:交差なし、線分の端部で交差、または重なる
 												//					1:交差あり（線分の端部での交差は含まず))
@@ -183,10 +183,10 @@ MINT MGeo::IntrAddLineULine2D(					// (  O) ステイタス
 //	平行のチェック
 //
 	vd1 = Ln1.p[1] - Ln1.p[0];
-	if ( MGeo::CheckParallelVect2D( vd1, ULn2.v)) {				// 平行
+	if ( MGeo::CheckParallelVect2D( vd1, SLn2.v)) {				// 平行
 		ist = MC_PARALLEL;
 	} else {
-		SVal( Ln1.p[0], Ln1.p[1], ULn2.p, ULn2.v, &ss, &se);
+		SVal( Ln1.p[0], Ln1.p[1], SLn2.p, SLn2.v, &ss, &se);
 		if ( ss * se < 0) {										// 交点は線分１の内側
 			po = Ln1.p[0] + ( vd1 * ( ss / ( ss - se)));		// 交点
 			if ( po != Ln1.p[0] && po != Ln1.p[1]) {			// 線分１の端部は交差点と見なさない
@@ -206,10 +206,10 @@ exit:
 //  交点または重なり部分の端点が線分１の端点である場合は、その点を対象外とする。
 //
 MINT MGeo::IntrAdd2Line2D(						// (  O) ステイタス
-												//	MC_PARALLEL (-1) 交差なし（平行）
-												//	MC_NINT	    (0)	交差なし
-												//	MC_INT      (1)	交差あり
-												//  MC_REP	    (2)	交差あり（重なり）
+												//	MC_PARALLEL		交差なし（平行）
+												//	MC_NINT			交差なし
+												//	MC_INT			交差あり
+												//  MC_REP			交差あり（重なり）
 				const	MgLine2D&	Ln1,		// (I  ) 線分1
 				const	MgLine2D&	Ln2,		// (I  ) 線分2
 						MgGPoint2D	*GPt3		// (I O) 交点を追加する線分群
@@ -233,9 +233,9 @@ MINT MGeo::IntrAdd2Line2D(						// (  O) ステイタス
 	if ( MGeo::CheckParallelVect2D( vd1, vd2)) {
 
 		MINT	nb = GPt3->m_n;
-		CheckPointOnLine2DWS( Ln2.p[0], Ln1, &ist1);
+		CheckPointOnLine2D( Ln2.p[0], Ln1, &ist1);
 		if ( MF_CHECK_OR(ist1, MC_INSIDE)) (*GPt3) += Ln2.p[0];		// 線分２の始点が線分１内
-		CheckPointOnLine2DWS( Ln2.p[1], Ln1, &ist1);
+		CheckPointOnLine2D( Ln2.p[1], Ln1, &ist1);
 		if ( MF_CHECK_OR(ist1, MC_INSIDE)) (*GPt3) += Ln2.p[1];		// 線分２の終点が線分１内
 		if ( GPt3->m_n == nb) {
 			ist = MC_PARALLEL;
@@ -263,12 +263,12 @@ MINT MGeo::IntrAdd2Line2D(						// (  O) ステイタス
 // ---------------------( ２次元 )------------------------------
 //	直線１と線分２との交点または重なり部分の端点を求め、点群に追加する。
 //
-MINT MGeo::IntrAddULineLine2D(					// (  O) ステイタス
-												//	MC_PARALLEL (-1) 交差なし（平行）
-												//	MC_NINT	    (0)	交差なし
-												//	MC_INT      (1)	交差あり
-												//  MC_REP	    (2)	交差あり（重なり）
-				const	MgULine2D&	ULn1,		// (I  ) 直線1
+MINT MGeo::IntrAddSLineLine2D(					// (  O) ステイタス
+												//	MC_PARALLEL		交差なし（平行）
+												//	MC_NINT			交差なし
+												//	MC_INT			交差あり
+												//  MC_REP			交差あり（重なり）
+				const	MgSLine2D&	SLn1,		// (I  ) 直線1
 				const	MgLine2D&	Ln2,		// (I  ) 線分2
 						MgGPoint2D	*GPt3		// (I O) 交点を追加する線分群
 												// 		 追加交点数(0:交差無し |
@@ -286,9 +286,9 @@ MINT MGeo::IntrAddULineLine2D(					// (  O) ステイタス
 //	平行のチェック
 //
 	vd2 = Ln2.p[1] - Ln2.p[0];
-	if ( MGeo::CheckParallelVect2D( ULn1.v, vd2)) {
+	if ( MGeo::CheckParallelVect2D( SLn1.v, vd2)) {
 
-		if ( CheckPointOnULine2DWS( Ln2.p[0], ULn1, &ist1)) {
+		if ( CheckPointOnSLine2D( Ln2.p[0], SLn1, &ist1)) {
 			(*GPt3) += Ln2.p[0];								// 線分２の始点が直線１上
 			(*GPt3) += Ln2.p[1];								// (線分２の終点も線分１上)
 			ist = MC_REP;
@@ -297,7 +297,7 @@ MINT MGeo::IntrAddULineLine2D(					// (  O) ステイタス
 		}
 	} else {
 
-		SVal( Ln2.p[0], Ln2.p[1], ULn1.p, ULn1.v, &ss, &se);
+		SVal( Ln2.p[0], Ln2.p[1], SLn1.p, SLn1.v, &ss, &se);
 
 		po = Ln2.p[0] + ( vd2 * ( ss / ( ss - se)));			// 交点
 
@@ -315,12 +315,12 @@ MINT MGeo::IntrAddULineLine2D(					// (  O) ステイタス
 // ---------------------( ３次元 )------------------------------
 //	２本の直線の交点を求める。
 //
-MINT MGeo::Intr2ULine3D(						// (  O) ステイタス
-												//	MC_PARALLEL (-1) 交差なし（平行）
-												//	MC_TWIST	(-2) 交差なし（ねじれ）
-												//	MC_INT      (1)	交差あり
-				const	MgULine3D&	ULn1,		// (I  ) 直線1
-				const	MgULine3D&	ULn2,		// (I  ) 直線2
+MINT MGeo::Intr2SLine3D(						// (  O) ステイタス
+												//	MC_PARALLEL		交差なし（平行）
+												//	MC_TWIST		交差なし（ねじれ）
+												//	MC_INT			交差あり
+				const	MgSLine3D&	SLn1,		// (I  ) 直線1
+				const	MgSLine3D&	SLn2,		// (I  ) 直線2
 						MgPoint3D	*po			// (  O) ３次元交点
 				)
 {
@@ -334,19 +334,19 @@ MINT MGeo::Intr2ULine3D(						// (  O) ステイタス
 //
 //	平行のチェック
 //
-	sp = ULn1.v ^ ULn2.v;										// Vect(sinΘv1v2)
+	sp = SLn1.v ^ SLn2.v;										// Vect(sinΘv1v2)
 	s12_2 = sp * sp;											// (sinΘv1v2)**2
 	if ( s12_2 < MGPTOL->A_2) {
 		ist = MC_PARALLEL;										// 平行
 	} else {
-		V12 = ULn2.p - ULn1.p;									// 直線1の始点から直線2の始点へのベクトル	
+		V12 = SLn2.p - SLn1.p;									// 直線1の始点から直線2の始点へのベクトル	
 
-		Hab12 = SVal2ULine3D( ULn1, ULn2);						// 平行４平面体の体積
+		Hab12 = SVal2SLine3D( SLn1, SLn2);						// 平行４平面体の体積
 		if ( Hab12*Hab12 > MGPTOL->S_2*s12_2) {
 			ist = MC_TWIST;										// 交差なし（ねじれ状態） 
 		} else {
-			pa1 = ((V12 ^ ULn2.v) * sp) / s12_2;				// sinΘv12v2 / sinΘv1v2
-			*po = ULn1.p + pa1 * ULn1.v;
+			pa1 = ((V12 ^ SLn2.v) * sp) / s12_2;				// sinΘv12v2 / sinΘv1v2
+			*po = SLn1.p + pa1 * SLn1.v;
 			ist = MC_INT;
 		}
 	}
@@ -356,12 +356,12 @@ MINT MGeo::Intr2ULine3D(						// (  O) ステイタス
 // ---------------------( ３次元 )------------------------------
 //　直線と線分の交点を求める。
 //
-MINT MGeo::IntrULineLine3D(						// (  O) ステイタス
-												//	MC_PARALLEL (-1) 交差なし（平行）
-												//	MC_TWIST    (-2) 交差なし（ねじれ）
-												//	MC_NINT	    (0)	交差なし
-												//	MC_INT      (1)	交差あり
-				const	MgULine3D&	ULn1,		// (I  ) 直線1
+MINT MGeo::IntrSLineLine3D(						// (  O) ステイタス
+												//	MC_PARALLEL		交差なし（平行）
+												//	MC_TWIST		交差なし（ねじれ）
+												//	MC_NINT			交差なし
+												//	MC_INT			交差あり
+				const	MgSLine3D&	SLn1,		// (I  ) 直線1
 				const	MgLine3D		&Ln2,		// (I  ) 線分2
 						MgPoint3D	*po			// (  O) ３次元交点
 				)
@@ -379,14 +379,14 @@ MINT MGeo::IntrULineLine3D(						// (  O) ステイタス
 //
 	vd2 = Ln2.p[1] - Ln2.p[0];
 
-	if ( MGeo::CheckParallelVect3DWP( ULn1.v, vd2, &vso, &si)) {
+	if ( MGeo::CheckParallelVect3DWP( SLn1.v, vd2, &vso, &si)) {
 		ist = MC_PARALLEL;										//	平行
 	} else {
 
-		V12 = Ln2.p[0] - ULn1.p;								// 直線1の始点から線分2の始点へのベクトル	
+		V12 = Ln2.p[0] - SLn1.p;								// 直線1の始点から線分2の始点へのベクトル	
 
 		s12_2 = vso * vso;
-		Hab12 = SValULineLine3D( ULn1, Ln2);					// 平行４平面体の体積
+		Hab12 = SValSLineLine3D( SLn1, Ln2);					// 平行４平面体の体積
 		if ( Hab12*Hab12 > MGPTOL->S_2*s12_2) {
 			ist = MC_TWIST;		//	交差なし（ねじれ状態） 
 		} else {
@@ -394,7 +394,7 @@ MINT MGeo::IntrULineLine3D(						// (  O) ステイタス
 			MREAL		ss;										// 線分２の始点側Ｓバリュー
 			MREAL		se;										// 線分２の終点側Ｓバリュー
 
-			SSValLineULine3D( Ln2, ULn1, vso, &ss, &se);
+			SSValLineSLine3D( Ln2, SLn1, vso, &ss, &se);
 
 			*po = Ln2.p[0] + ( vd2 * ( ss / ( ss - se)));		// 交点
 
@@ -408,24 +408,24 @@ MINT MGeo::IntrULineLine3D(						// (  O) ステイタス
 	}
 	return ist;
 }
-
+	
 // ---------------------( ３次元 )------------------------------
 //　線分と直線の交点を求める。
 //
 //
 //					<< コーディング実体はMgLib.hにあり >>
 //
-// MINT	MGeo::IntrLineULine3D(					// (  O) ステイタス
-//												//	MC_PARALLEL (-1) 交差なし（平行）
-//												//	MC_TWIST    (-2) 交差なし（ねじれ）
-//												//	MC_NINT	    (0)	交差なし
-//												//	MC_INT      (1)	交差あり
+// MINT	MGeo::IntrLineSLine3D(					// (  O) ステイタス
+//												//	MC_PARALLEL		交差なし（平行）
+//												//	MC_TWIST		交差なし（ねじれ）
+//												//	MC_NINT			交差なし
+//												//	MC_INT			交差あり
 //				const	MgLine3D	&Ln1,		// (I  ) 線分1
-//				const	MgULine3D&	ULn2,		// (I  ) 直線2
+//				const	MgSLine3D&	SLn2,		// (I  ) 直線2
 //						MgPoint3D	*po			// (  O) ３次元交点
 //				)
 // {
-//	return MgIntrULineLine3D( ULn2, Ln1, po);
+//	return MgIntrSLineLine3D( SLn2, Ln1, po);
 // }
 // ---------------------( ３次元 )------------------------------
 //　線分と線分の交点を求める。
@@ -433,11 +433,11 @@ MINT MGeo::IntrULineLine3D(						// (  O) ステイタス
 //  ２線分が重なりなく直線的に端部で接合している場合はその接合点が交点。
 //
 MINT MGeo::Intr2Line3D(							// (  O) ステイタス
-												//	MC_PARALLEL (-1) 交差なし（平行）
-												//  MC_CONNECTION(4) 接続	 （平行）
-												//	MC_TWIST    (-2) 交差なし（ねじれ）
-												//	MC_NINT	    (0)	交差なし
-												//	MC_INT      (1)	交差あり
+												//	MC_PARALLEL		交差なし（平行）
+												//  MC_CONNECTION	接続	 （平行）
+												//	MC_TWIST		交差なし（ねじれ）
+												//	MC_NINT			交差なし
+												//	MC_INT			交差あり
 				const	MgLine3D	&Ln1,		// (I  ) 線分1
 				const	MgLine3D	&Ln2,		// (I  ) 線分2
 						MgPoint3D	*po			// (  O) ３次元交点
@@ -501,11 +501,11 @@ MINT MGeo::Intr2Line3D(							// (  O) ステイタス
 //
 //	平面と直線の交点を求める。
 //
-MINT MGeo::IntrPlnULine3D(						// (  O) ステイタス
-												//	MC_PARALLEL (-1) 交差なし（平行）
-												//	MC_INT      (1)	交差あり
+MINT MGeo::IntrPlnSLine3D(						// (  O) ステイタス
+												//	MC_PARALLEL 交差なし（平行）
+												//	MC_INT      交差あり
 				const	MgPlane3D	&Pln1,		// (I  ) 平面1
-				const	MgULine3D&	ULn2,		// (I  ) 直線2
+				const	MgSLine3D&	SLn2,		// (I  ) 直線2
 						MgPoint3D	*po			// (  O) ３次元交点(点の標準形式)
 				)
 {
@@ -516,14 +516,14 @@ MINT MGeo::IntrPlnULine3D(						// (  O) ステイタス
 //
 //	平行のチェック
 //
-	c12 = Pln1.v * ULn2.v;										// (cosΘv1v2)
+	c12 = Pln1.v * SLn2.v;										// (cosΘv1v2)
 	if ( CheckZero( c12, MGPTOL->A)) {
 		ist = MC_PARALLEL;										// 平行
 	} else {
 
-		ss = ( Pln1.v * ULn2.p) + Pln1.d;
+		ss = ( Pln1.v * SLn2.p) + Pln1.d;
 		pa1 = - ss / c12;										// ss / (ss - se) [se = ss + c12]
-		*po = ULn2.p + ULn2.v * pa1;
+		*po = SLn2.p + SLn2.v * pa1;
 
 		ist = MC_INT;
 	}
@@ -534,9 +534,9 @@ MINT MGeo::IntrPlnULine3D(						// (  O) ステイタス
 //	平面と線分の交点を求める。
 //
 MINT MGeo::IntrPlnLine3D(						// (  O) ステイタス
-												//	MC_PARALLEL (-1) 交差なし（平行）
-												//	MC_NINT	    (0)	交差なし
-												//	MC_INT      (1)	交差あり
+												//	MC_PARALLEL 交差なし（平行）
+												//	MC_NINT	    交差なし
+												//	MC_INT      交差あり
 				const	MgPlane3D	&Pln1,		// (I  ) 平面1
 				const	MgLine3D	&Ln2,		// (I  ) 線分2
 						MgPoint3D	*po			// (  O) ３次元交点(点の標準形式)
@@ -548,7 +548,7 @@ MINT MGeo::IntrPlnLine3D(						// (  O) ステイタス
 	MgVect3D	vd2;							//	線分2のベクトル
 	MREAL	ss;									//	線分２の始点側Ｓバリュー
 	MREAL	se;									//	線分２の終点側Ｓバリュー
-//
+
 	MREAL	pa1;								//	直線2の始点から交点までの距離
 //
 //	平行のチェック
@@ -576,25 +576,25 @@ MINT MGeo::IntrPlnLine3D(						// (  O) ステイタス
 // ---------------------( ３次元 )------------------------------
 //	直線と平面の交点を求める。
 /*
-MINT MGeo::IntrULinePln3D(						// (  O) ステイタス
-												//	MC_PARALLEL (-1) 交差なし（平行）
-												//	MC_INT      (1)	交差あり
-				const	MgULine3D&	ULn1,		// (I  ) 直線1
+MINT MGeo::IntrSLinePln3D(						// (  O) ステイタス
+												//	MC_PARALLEL 交差なし（平行）
+												//	MC_INT      交差あり
+				const	MgSLine3D&	SLn1,		// (I  ) 直線1
 				const	MgPlane3D	&Pln2,		// (I  ) 平面2
 						MgPoint3D	*po			// (  O) ３次元交点(点の標準形式)
 				)
 {
-	return MgIntrPlnULine3D( Pln2, ULn1, po);
+	return MgIntrPlnSLine3D( Pln2, SLn1, po);
 }
 */
 // ---------------------( ３次元 )------------------------------
 //	線分と平面の交点を求める。
 /*
 MINT MGeo::IntrLinePln3D(						// (  O) ステイタス
-												//	MC_PARALLEL (-1) 交差なし（平行）
-												//	MC_NINT	    (0)	交差なし
-												//	MC_INT      (1)	交差あり
-				const	MgLine3D		&Ln1,		// (I  ) 線分1
+												//	MC_PARALLEL		交差なし（平行）
+												//	MC_NINT			交差なし
+												//	MC_INT			交差あり
+				const	MgLine3D		&Ln1,	// (I  ) 線分1
 				const	MgPlane3D	&Pln2,		// (I  ) 平面2
 						MgPoint3D	*po			// (  O) ３次元交点(点の標準形式)
 				)
@@ -610,11 +610,11 @@ MINT MGeo::IntrLinePln3D(						// (  O) ステイタス
 //	平面と平面の交線を求める。
 //
 MINT MGeo::Intr2Pln3D(							// (  O) ステイタス
-												//	MC_PARALLEL (-1) 交差なし（平行）
-												//	MC_INT      (1)	交差あり
+												//	MC_PARALLEL		交差なし（平行）
+												//	MC_INT			交差あり
 				const	MgPlane3D	&Pln1,		// (I  ) 平面1
 				const	MgPlane3D	&Pln2,		// (I  ) 平面2
-						MgULine3D	*ULn3		// (  O) 直線2
+						MgSLine3D	*SLn3		// (  O) 直線2
 				)
 {
 	MINT	ist;
@@ -630,19 +630,19 @@ MINT MGeo::Intr2Pln3D(							// (  O) ステイタス
 	} else {
 
 		if ( !CheckZero( vso.z, 0.5)) {
-			ULn3->p.x = ( Pln2.d * Pln1.v.y - Pln1.d * Pln2.v.y) / vso.z;
-			ULn3->p.y = ( Pln1.d * Pln2.v.x - Pln2.d * Pln1.v.x) / vso.z;
-			ULn3->p.z = 0.0f;
+			SLn3->p.x = ( Pln2.d * Pln1.v.y - Pln1.d * Pln2.v.y) / vso.z;
+			SLn3->p.y = ( Pln1.d * Pln2.v.x - Pln2.d * Pln1.v.x) / vso.z;
+			SLn3->p.z = 0.0f;
 		} else if ( !CheckZero( vso.y, 0.5)) {
-			ULn3->p.x = ( Pln1.d * Pln2.v.z - Pln2.d * Pln1.v.z) / vso.y;
-			ULn3->p.y = 0.0f;
-			ULn3->p.z = ( Pln2.d * Pln1.v.x - Pln1.d * Pln2.v.x) / vso.y;
+			SLn3->p.x = ( Pln1.d * Pln2.v.z - Pln2.d * Pln1.v.z) / vso.y;
+			SLn3->p.y = 0.0f;
+			SLn3->p.z = ( Pln2.d * Pln1.v.x - Pln1.d * Pln2.v.x) / vso.y;
 		} else {
-			ULn3->p.x = 0.0f;
-			ULn3->p.y = ( Pln2.d * Pln1.v.z - Pln1.d * Pln2.v.z) / vso.x;
-			ULn3->p.z = ( Pln1.d * Pln2.v.y - Pln2.d * Pln1.v.y) / vso.x;
+			SLn3->p.x = 0.0f;
+			SLn3->p.y = ( Pln2.d * Pln1.v.z - Pln1.d * Pln2.v.z) / vso.x;
+			SLn3->p.z = ( Pln1.d * Pln2.v.y - Pln2.d * Pln1.v.y) / vso.x;
 		}
-		ULn3->v = vso.Unitize();
+		SLn3->v = vso.Unitize();
 		ist = MC_INT;
 	}
 	return ist;

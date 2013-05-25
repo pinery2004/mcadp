@@ -33,14 +33,14 @@ void MGeo::MovePt2InDirOfVt2(					//
 	*p3 = p1 + dl * MGeo::UnitizeVect2D(v2);
 }
 //	------------------------
-void MGeo::MovePt2AlongULine2D(					//
+void MGeo::MovePt2AlongSLine2D(					//
 				const	MgPoint2D&	p1,			//  (I  ) 移動点1
-				const	MgULine2D&	ULn2,		//	(I  ) 移動方向を示す直線2
+				const	MgSLine2D&	SLn2,		//	(I  ) 移動方向を示す直線2
 						MREAL		dl,			//	(I  ) 移動距離
 						MgPoint2D	*p3			//	(  O) 移動された点3
 		)
 {
-	*p3 = p1 + dl * ULn2.v;
+	*p3 = p1 + dl * SLn2.v;
 }
 //	------------------------
 void MGeo::MovePt2AlongLine2D(						//
@@ -69,14 +69,14 @@ void MGeo::MovePt3InDirOfVt3(					//
 	*p3 = p1 + dl * MgUnitizeVect3D(v2);
 }
 //	------------------------
-void MGeo::MovePt3AlongULine3D(					//	(  O) ステイタス
+void MGeo::MovePt3AlongSLine3D(					//	(  O) ステイタス
 				const	MgPoint3D&	p1,			//  (I  ) 移動点1
-				const	MgULine3D&	ULn2,		//	(I  ) 移動方向を示す直線2
+				const	MgSLine3D&	SLn2,		//	(I  ) 移動方向を示す直線2
 						MREAL		dl,			//	(I  ) 移動距離
 						MgPoint3D	*p3			//	(  O) 移動された点3
 		)
 {
-	*p3 = p1 + dl * ULn2.v;
+	*p3 = p1 + dl * SLn2.v;
 }
 //	------------------------
 void MGeo::MovePt3AlongLine3D(						//	(  O) ステイタス
@@ -99,15 +99,15 @@ void MGeo::MovePt3AlongLine3D(						//	(  O) ステイタス
 //
 //	直線をオフセットする。
 //
-void MGeo::OffsetULine2D(							//	(  O) ステイタス (=1)
-				const	MgULine2D&	ULn1,		//	(I  ) 直線1
+void MGeo::OffsetSLine2D(							//	(  O) ステイタス (=1)
+				const	MgSLine2D&	SLn1,		//	(I  ) 直線1
 						MREAL		dl,			//	(I  ) オフセット量
-						MgULine2D 	*ULn2		//	(  O) オフセットされた直線2
+						MgSLine2D 	*SLn2		//	(  O) オフセットされた直線2
 		)
 {
 
-	ULn2->p = ULn1.p + dl * MgRotL90(ULn1.v);
-	ULn2->v = ULn1.v;
+	SLn2->p = SLn1.p + dl * MgRotL90(SLn1.v);
+	SLn2->v = SLn1.v;
 }
 //	------------------------
 void MGeo::OffsetLine2D(							//	(  O) ステイタス
@@ -126,15 +126,15 @@ void MGeo::OffsetLine2D(							//	(  O) ステイタス
 //
 // ---------------------( ３次元 )------------------------------
 //
-void MGeo::OffsetULine3D(							//	(  O) ステイタス
-				const	MgULine3D&	ULn1,		//	(I  ) 直線1
+void MGeo::OffsetSLine3D(							//	(  O) ステイタス
+				const	MgSLine3D&	SLn1,		//	(I  ) 直線1
 				const	MgPlane3D	&Pln2,		//	(I  ) 直線1が乗る平面2
 						MREAL		dl,			//	(I  ) オフセット量
-						MgULine3D	*ULn3		//	(  O) オフセットされた直線3
+						MgSLine3D	*SLn3		//	(  O) オフセットされた直線3
 		)
 {
-	ULn3->p = ULn1.p + dl * (Pln2.v ^ ULn1.v);
-	ULn3->v = ULn1.v;
+	SLn3->p = SLn1.p + dl * (Pln2.v ^ SLn1.v);
+	SLn3->v = SLn1.v;
 }
 //	------------------------
 void MGeo::OffsetLine3D(							//	(  O) ステイタス

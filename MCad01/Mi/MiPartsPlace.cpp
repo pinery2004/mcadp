@@ -548,8 +548,8 @@ MINT mhHaitiIn::MhAdjBzL(							// (  O) ステイタス　
 	MREAL		s0, s1, s2;							// 長さ調整指示点と部材1の部材2に対する左右位置
 	MINT		iMov;								// 部材1のカット端 0:配置点側 1:配置方向店側
 	MgPoint3D	PtC;
-	MgULine3D	ULnBz1;								// 
-	MgULine3D	ULnBz2;
+	MgSLine3D	SLnBz1;								// 
+	MgSLine3D	SLnBz2;
 	MgPoint3D	PtI[2];
 	MREAL		rLH;
 	MREAL		rLnWH;
@@ -585,18 +585,18 @@ MINT mhHaitiIn::MhAdjBzL(							// (  O) ステイタス　
 	if ( iKati == 1)
 		bLeft = ! bLeft;										// 勝ちの場合は、左右逆にする
 	if ( bLeft) {
-		ULnBz2 = Bz2.ULnW[1];
+		SLnBz2 = Bz2.SLnW[1];
 	} else {
-		ULnBz2 = Bz2.ULnW[0];
+		SLnBz2 = Bz2.SLnW[0];
 	}
 
-	ULnBz1 = Bz1.ULnW[0];										// 部材1左側直線
-	ist = MGeo::Intr2ULine3D( ULnBz1, ULnBz2, &PtI[0]);			// カット直線との交点
+	SLnBz1 = Bz1.SLnW[0];										// 部材1左側直線
+	ist = MGeo::Intr2SLine3D( SLnBz1, SLnBz2, &PtI[0]);			// カット直線との交点
 	if ( ist != MC_INT)
 		goto exit;
 
-	ULnBz1 = Bz1.ULnW[1];										// 部材1右側直線
-	ist = MGeo::Intr2ULine3D( ULnBz1, ULnBz2, &PtI[1]);			// カット直線との交点
+	SLnBz1 = Bz1.SLnW[1];										// 部材1右側直線
+	ist = MGeo::Intr2SLine3D( SLnBz1, SLnBz2, &PtI[1]);			// カット直線との交点
 	if ( ist != MC_INT)
 		goto exit;
 

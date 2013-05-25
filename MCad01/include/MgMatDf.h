@@ -296,7 +296,7 @@ inline	MgVect2D operator * ( const MgVect2D& i_pt, const MgMat2D& i_mt)		// *	ç¿
 //
 inline	MgPoint2D operator *= ( MgPoint2D& io_vt, const MgMat2D& i_mt)			// *=	ç¿ïWïœä∑
 {
-	return MGeo::Mat2DMultCheckEqualPoint2D( io_vt, i_mt);
+	return MGeo::Mat2DMultEqualPoint2D( io_vt, i_mt);
 }
 
 //===========================================================================
@@ -312,7 +312,7 @@ inline	MgPoint2D operator *= ( MgPoint2D& io_vt, const MgMat2D& i_mt)			// *=	ç¿
 //
 inline	MgVect2D operator *= ( MgVect2D& io_pt, const MgMat2D& i_mt)			// *=	ç¿ïWïœä∑
 {
-	return MGeo::Mat2DMultCheckEqualVect2D( io_pt, i_mt);
+	return MGeo::Mat2DMultEqualVect2D( io_pt, i_mt);
 }
 
 //===========================================================================
@@ -320,15 +320,15 @@ inline	MgVect2D operator *= ( MgVect2D& io_pt, const MgMat2D& i_mt)			// *=	ç¿ïW
 //		ç¿ïWïœä∑É}ÉgÉäÉbÉNÉXÇ…ÇÊÇËç¿ïWïœä∑Ç∑ÇÈ
 //
 //	égópñ@
-//		MgULine2D = MgULine2D*  MgMat2D;
+//		MgSLine2D = MgSLine2D*  MgMat2D;
 //
 //	| px  py  1  |     | m11 m12 m13 |
 //	| vx  vy  0  |  X  | m21 m22 m23 |
 //					   | m31 m32 m33 |
 //
-inline	MgULine2D operator * ( const MgULine2D& i_uln, const MgMat2D& i_mt)	// *	ç¿ïWïœä∑
+inline	MgSLine2D operator * ( const MgSLine2D& i_sln, const MgMat2D& i_mt)	// *	ç¿ïWïœä∑
 {
-	return MGeo::Mat2DMultULine2D( i_uln, i_mt);
+	return MGeo::Mat2DMultSLine2D( i_sln, i_mt);
 }
 
 //===========================================================================
@@ -336,15 +336,15 @@ inline	MgULine2D operator * ( const MgULine2D& i_uln, const MgMat2D& i_mt)	// *	
 //		ç¿ïWïœä∑É}ÉgÉäÉbÉNÉXÇ…ÇÊÇËç¿ïWïœä∑Ç∑ÇÈ
 //
 //	égópñ@
-//		MgULine2D* = MgMat2D;
+//		MgSLine2D* = MgMat2D;
 //
 //	| px  py  1  |     | px  py  1  |     | m11 m12 m13 |
 //	| vx  vy  0  |  =  | vx  vy  1  |  X  | m21 m22 m23 |
 //			             				  | m31 m32 m33 |
 //
-inline	MgULine2D operator *= ( MgULine2D& io_uln, const MgMat2D& i_mt)		// *=	ç¿ïWïœä∑
+inline	MgSLine2D operator *= ( MgSLine2D& io_sln, const MgMat2D& i_mt)		// *=	ç¿ïWïœä∑
 {
-	return MGeo::Mat2DMultEqualULine2D( io_uln, i_mt);
+	return MGeo::Mat2DMultEqualSLine2D( io_sln, i_mt);
 }
 
 //U1 //===============( ÇQéüå≥ç¿ïWïœä∑É}ÉgÉäÉbÉNÉXÇ≈ÇRéüå≥ç¿ïWèàóù )==============
@@ -381,7 +381,7 @@ inline	MgULine2D operator *= ( MgULine2D& io_uln, const MgMat2D& i_mt)		// *=	ç¿
 //inline	MgVect3D operator *= ( MgVect3D& io_Pt, const MgMat2D& i_mt)			// *=	ç¿ïWïœä∑
 //
 //{
-//	return MGeo::Mat2DMultCheckEqualPoint3D( io_Pt, i_mt);
+//	return MGeo::Mat2DMultEqualPoint3D( io_Pt, i_mt);
 //}
 //
 ////===========================================================================
@@ -389,16 +389,16 @@ inline	MgULine2D operator *= ( MgULine2D& io_uln, const MgMat2D& i_mt)		// *=	ç¿
 ////		ç¿ïWïœä∑É}ÉgÉäÉbÉNÉXÇ…ÇÊÇËç¿ïWïœä∑Ç∑ÇÈ
 ////
 ////	égópñ@
-////		MgULine2D = MgULine2D*  MgMat2D;
+////		MgSLine2D = MgSLine2D*  MgMat2D;
 ////
 ////	| px  py  pz  1 |	  | m11 m12 0 m13 |
 ////	| vx  vy  vz  0 |  X  | m21 m22 0 m23 |
 ////						  |  0   0  1  0  |
 ////			   			  | m31 m32 0 m33 |
 ////
-//inline MgULine3D operator * ( const MgULine3D& i_ULn, const MgMat2D& i_mt)	// *	ç¿ïWïœä∑
+//inline MgSLine3D operator * ( const MgSLine3D& i_SLn, const MgMat2D& i_mt)	// *	ç¿ïWïœä∑
 //{
-//	return MGeo::Mat2DMultULine3D( i_ULn, i_mt);
+//	return MGeo::Mat2DMultSLine3D( i_SLn, i_mt);
 //}
 //
 ////===========================================================================
@@ -406,16 +406,16 @@ inline	MgULine2D operator *= ( MgULine2D& io_uln, const MgMat2D& i_mt)		// *=	ç¿
 ////		ç¿ïWïœä∑É}ÉgÉäÉbÉNÉXÇ…ÇÊÇËç¿ïWïœä∑Ç∑ÇÈ
 ////
 ////	égópñ@
-////		MgULine2D* = MgMat2D;
+////		MgSLine2D* = MgMat2D;
 ////
 ////	| px  py  pz  1 |     | px  py  pz  1 |		| m11 m12 0 m13 |
 ////	| vx  vy  vz  0 |  =  | vx  vy  vz  0 |  X  | m21 m22 0 m23 |
 ////												|  0   0  1  0  |
 ////				 				   				| m31 m32 0 m33 |
 ////
-//inline MgULine3D operator *= ( MgULine3D& io_ULn, const MgMat2D& i_mt)		// *=	ç¿ïWïœä∑
+//inline MgSLine3D operator *= ( MgSLine3D& io_SLn, const MgMat2D& i_mt)		// *=	ç¿ïWïœä∑
 //{
-//	return MGeo::Mat2DMultEqualULine3D( io_ULn, i_mt);
+//	return MGeo::Mat2DMultEqualSLine3D( io_SLn, i_mt);
 //}
 
 //===========================================================================
@@ -618,7 +618,7 @@ inline MgVect2D operator * ( const MgVect2D& i_Pt, const MgMat3D& i_Mt)			// ç¿ï
 //
 inline MgPoint2D operator *= ( MgPoint2D& io_Pt, const MgMat3D& i_Mt)			// ç¿ïWïœä∑
 {
-	return MGeo::Mat3DMultCheckEqualPoint2D( io_Pt, i_Mt);
+	return MGeo::Mat3DMultEqualPoint2D( io_Pt, i_Mt);
 }
 
 //===========================================================================
@@ -635,7 +635,7 @@ inline MgPoint2D operator *= ( MgPoint2D& io_Pt, const MgMat3D& i_Mt)			// ç¿ïWï
 //
 inline MgVect2D operator *= ( MgVect2D& io_Pt, const MgMat3D& i_Mt)			// ç¿ïWïœä∑
 {
-	return MGeo::Mat3DMultCheckEqualVect2D( io_Pt, i_Mt);
+	return MGeo::Mat3DMultEqualVect2D( io_Pt, i_Mt);
 }
 
 //===========================================================================
@@ -686,7 +686,7 @@ inline MgVect3D operator * ( const MgVect3D& i_Pt, const MgMat3D& i_Mt)		// ç¿ïW
 //
 inline MgPoint3D operator *= ( MgPoint3D& io_Pt, const MgMat3D& i_Mt)				// ç¿ïWïœä∑
 {
-	return MGeo::Mat3DMultCheckEqualPoint3D( io_Pt, i_Mt);
+	return MGeo::Mat3DMultEqualPoint3D( io_Pt, i_Mt);
 }
 
 //===========================================================================
@@ -703,7 +703,7 @@ inline MgPoint3D operator *= ( MgPoint3D& io_Pt, const MgMat3D& i_Mt)				// ç¿ïW
 //
 inline MgVect3D operator *= ( MgVect3D& io_Pt, const MgMat3D& i_Mt)				// ç¿ïWïœä∑
 {
-	return MGeo::Mat3DMultCheckEqualVect3D( io_Pt, i_Mt);
+	return MGeo::Mat3DMultEqualVect3D( io_Pt, i_Mt);
 }
 
 //===========================================================================
@@ -732,16 +732,16 @@ inline MgLine3D operator * ( const MgLine3D& i_Ln1, const MgMat3D& i_Mt2)		// ç¿
 //		ÇRéüå≥ç¿ïWïœä∑É}ÉgÉäÉbÉNÉXÇ…ÇÊÇËÇRéüå≥ÉfÅ[É^Çç¿ïWïœä∑Ç∑ÇÈ
 //
 //	égópñ@
-//		MgULine3D = MgULine3D_1 * MgMat3D;
+//		MgSLine3D = MgSLine3D_1 * MgMat3D;
 //
 //	| px  py  pz  1   |     | m11 m12 m13 m14 |
 //	| vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
 //							| m31 m32 m33 m34 |
 //							| m41 m42 m43 m44 |
 //
-inline MgULine3D operator * ( const MgULine3D& i_ULn1, const MgMat3D& i_Mt2)		// ç¿ïWïœä∑
+inline MgSLine3D operator * ( const MgSLine3D& i_SLn1, const MgMat3D& i_Mt2)		// ç¿ïWïœä∑
 {
-	return MGeo::Mat3DMultULine3D( i_ULn1, i_Mt2);
+	return MGeo::Mat3DMultSLine3D( i_SLn1, i_Mt2);
 }
 
 //===========================================================================
@@ -749,7 +749,7 @@ inline MgULine3D operator * ( const MgULine3D& i_ULn1, const MgMat3D& i_Mt2)		//
 //		ÇRéüå≥ç¿ïWïœä∑É}ÉgÉäÉbÉNÉXÇ…ÇÊÇËÇRéüå≥ÉfÅ[É^Çç¿ïWïœä∑Ç∑ÇÈ
 //
 //	égópñ@
-//		MgULine3D *= MgMat3D;
+//		MgSLine3D *= MgMat3D;
 //
 //	| px  py  pz  1   |     | px  py  pz  1   |     | m11 m12 m13 m14 |
 //	| px  py  pz  1   |  =  | px  py  pz  1   |  X  | m21 m22 m23 m24 |
@@ -769,16 +769,16 @@ inline MgLine3D operator *= ( MgLine3D& io_Ln1, const MgMat3D& i_Mt2)			// ç¿ïWï
 //		ÇRéüå≥ç¿ïWïœä∑É}ÉgÉäÉbÉNÉXÇ…ÇÊÇËÇRéüå≥ÉfÅ[É^Çç¿ïWïœä∑Ç∑ÇÈ
 //
 //	égópñ@
-//		MgULine3D *= MgMat3D;
+//		MgSLine3D *= MgMat3D;
 //
 //	| px  py  pz  1   |     | px  py  pz  1   |     | m11 m12 m13 m14 |
 //	| vx  vy  vz  0   |  =  | vx  vy  vz  0   |  X  | m21 m22 m23 m24 |
 //													| m31 m32 m33 m34 |
 //													| m41 m42 m43 m44 |
 //
-inline MgULine3D operator *= ( MgULine3D& io_ULn1, const MgMat3D& i_Mt2)			// ç¿ïWïœä∑
+inline MgSLine3D operator *= ( MgSLine3D& io_SLn1, const MgMat3D& i_Mt2)			// ç¿ïWïœä∑
 {
-	return MGeo::Mat3DMultEqualULine3D( io_ULn1, i_Mt2);
+	return MGeo::Mat3DMultEqualSLine3D( io_SLn1, i_Mt2);
 }
 
 /*
@@ -841,21 +841,21 @@ inline MgPoint3D MgPoint3D::Set(								// ÇQéüå≥Å®ÇRéüå≥
 					const	MgPlane3D&	i_Pln)
 						{ x = i_v1.x; y = i_v1.y; z = i_Pln.GetZ( i_v1); return *this;} 
 
-inline MgULine3D MgULine3DC(									// ÇQéüå≥Å®ÇRéüå≥
-					const	MgULine2D&	i_uln,
+inline MgSLine3D MgSLine3DC(									// ÇQéüå≥Å®ÇRéüå≥
+					const	MgSLine2D&	i_sln,
 					const	MgPlane3D&	i_Pln,
 							MREAL	i_Tol = MGPTOL->D)
-						{ MgULine3D ULno; ULno.p.x = i_uln.p.x; ULno.p.y = i_uln.p.y;
-										 ULno.p.z = i_Pln.GetZ( i_uln.p);
-						  ULno.v = MgVect3DC( i_uln.v, - ( i_Pln.v.x * i_uln.v.x + i_Pln.v.y * i_uln.v.y) / i_Pln.v.z);
-						  ULno.v.SetUnitize( i_Tol); return ULno;} 
+						{ MgSLine3D SLno; SLno.p.x = i_sln.p.x; SLno.p.y = i_sln.p.y;
+										 SLno.p.z = i_Pln.GetZ( i_sln.p);
+						  SLno.v = MgVect3DC( i_sln.v, - ( i_Pln.v.x * i_sln.v.x + i_Pln.v.y * i_sln.v.y) / i_Pln.v.z);
+						  SLno.v.SetUnitize( i_Tol); return SLno;} 
 
-inline MgULine3D MgULine3D::Set(								// ÇQéüå≥Å®ÇRéüå≥
-					const	MgULine2D&	i_uln,
+inline MgSLine3D MgSLine3D::Set(								// ÇQéüå≥Å®ÇRéüå≥
+					const	MgSLine2D&	i_sln,
 					const	MgPlane3D&	i_Pln,
 							MREAL	i_Tol)
-						{ p.x = i_uln.p.x; p.y = i_uln.p.y; p.z = i_Pln.GetZ( i_uln.p);
-						  v = MgVect3DC( i_uln.v, - ( i_Pln.v.x * i_uln.v.x + i_Pln.v.y * i_uln.v.y) / i_Pln.v.z);
+						{ p.x = i_sln.p.x; p.y = i_sln.p.y; p.z = i_Pln.GetZ( i_sln.p);
+						  v = MgVect3DC( i_sln.v, - ( i_Pln.v.x * i_sln.v.x + i_Pln.v.y * i_sln.v.y) / i_Pln.v.z);
 						  v.SetUnitize( i_Tol); return *this;} 
 	
 inline MgLine3D MgLine3DC(										// ÇQéüå≥Å®ÇRéüå≥

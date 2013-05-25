@@ -53,7 +53,7 @@ typedef struct	_mgeuline2	{
 	MSHORT		Size;						// サイズ	( byte )
 	MgPoint2D	p;							// 点				( x, y )
 	MgVect2D		v;							// 方向ベクトル	( x, y )
-}	MgeULine2;
+}	MgeSLine2;
 
 //
 // 直線	(３次元)
@@ -63,7 +63,7 @@ typedef struct	_mgeuline3	{
 	MSHORT		Size;						// サイズ	( byte )
 	MgPoint3D	P;							// 点				( x, y, z )
 	MgVect3D	V;							// 方向ベクトル	( x, y, z )
-}	MgeULine3;
+}	MgeSLine3;
 
 //
 // 線分	(２次元)

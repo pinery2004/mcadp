@@ -10,8 +10,8 @@ namespace MC
 // MgPoint3D or MgVect3D
 
 // ’¼üŒ^
-// MgULine2D
-// MgULine3D
+// MgSLine2D
+// MgSLine3D
 
 // ü•ªŒ^
 // MgLine2D

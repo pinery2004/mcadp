@@ -113,9 +113,9 @@ public:
 	static void	Print( MCHAR* str, MREAL f1[], int nf1);
 	static void	Print( char* str, MREAL f1[], int nf1);
 	static void LogOut( MCHAR* i_cFormat, ...);					// フォーマット付きで出力する
-	static void LogOut( char* i_cFormat, ...);					// フォーマット付きで出力する
+//S	static void LogOut( char* i_cFormat, ...);					// フォーマット付きで出力する
 	static void LogOutWL( int i_iLevel, MCHAR* i_cFormat, ...);	// ログレベルとフォーマット付きで出力する
-	static void LogOutWL( int i_iLevel, char* i_cFormat, ...);	// ログレベルとフォーマット付きで出力する
+//S	static void LogOutWL( int i_iLevel, char* i_cFormat, ...);	// ログレベルとフォーマット付きで出力する
 	static void	Trace( MCHAR* str);
 	static void	Trace( char* str);
 	static void	Trace( );
@@ -167,7 +167,7 @@ public:
 						);
 	static void CloseTraceFile( void);							// ログファイルのクローズ
 	static void Write( MCHAR i_cFormat[], ...);					// ログデータ書き込み
-	static void Write( char i_cFormat[], ...);					// ログデータ書き込み
+//S	static void Write( char i_cFormat[], ...);					// ログデータ書き込み
 	static void WriteLine( MCHAR i_cOut[]);						// ログデータ行書き込み
 	static void WriteLine( char i_cOut[]);						// ログデータ行書き込み
 };

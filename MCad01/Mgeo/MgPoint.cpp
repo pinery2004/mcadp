@@ -191,7 +191,7 @@ int MGeo::ReversePoint3D( MgPoint3D* i_pPt, int i_n, MgPoint3D* o_pPt)
 	return 0;
 }
 	// “_—ñ‚©‚ç’¼ü‚É‘ÎÛˆÊ’u‚Ì“_—ñ‚ğ‹‚ß‚é
-	static int SymmetryPointULine3D( MgPoint3D* i_pPt, int i_n, MgULine3D& uln, MgPoint3D* o_pPt);
+	static int SymmetryPointSLine3D( MgPoint3D* i_pPt, int i_n, MgSLine3D& sln, MgPoint3D* o_pPt);
 
 //S //======================( ‚QŸŒ³ )==============================
 //#ifdef _MgPoint2DA

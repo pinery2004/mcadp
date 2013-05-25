@@ -38,7 +38,7 @@ void MgMat2D::SetUnit() { *this = McMatN;}
 void MgMat3D::SetUnit() { *this = McMat3N;}
 
 //// w’è²‚ğ’†S‚É‰ñ“]‚·‚é
-//MgRot( MgULine3D& i_UL, MgVect3D& i_VR)
+//MgRot( MgSLine3D& i_UL, MgVect3D& i_VR)
 //{
 //	MREAL	Vx2 = i_UL.v.x * i_UL.v.x;
 //	MREAL	Vy2 = i_UL.v.y * i_UL.v.y;
@@ -264,7 +264,7 @@ MgPoint2D MGeo::Mat2DMultPoint2D( const MgPoint2D& i_pt, const MgMat2D& i_mt)
 //				   						  | m31 m32 m33 |
 //
 //MgVect2D operator *= (MgVect2D& pi, const MgMat2D& tm)
-MgVect2D MGeo::Mat2DMultCheckEqualVect2D( MgVect2D& io_pt, const MgMat2D& i_mt)
+MgVect2D MGeo::Mat2DMultEqualVect2D( MgVect2D& io_pt, const MgMat2D& i_mt)
 {
 	MREAL	rwx;
 	rwx	    = i_mt.m[0][0] * io_pt.x + i_mt.m[1][0] * io_pt.y;
@@ -333,7 +333,7 @@ MgVect3D MGeo::Mat2DMultVect3D( const MgVect3D& i_Pt, const MgMat2D& i_mt)
 
 
 //MgPoint3D operator *= (MgPoint3D& Pt1, const MgMat2D&m2)
-MgPoint3D MGeo::Mat2DMultCheckEqualPoint3D( MgPoint3D& io_Pt, const MgMat2D& i_mt)
+MgPoint3D MGeo::Mat2DMultEqualPoint3D( MgPoint3D& io_Pt, const MgMat2D& i_mt)
 {
 	MREAL	rwx;
 	rwx		= i_mt.m[0][0] * io_Pt.x + i_mt.m[1][0] * io_Pt.y + i_mt.m[2][0];
@@ -356,7 +356,7 @@ MgPoint3D MGeo::Mat2DMultCheckEqualPoint3D( MgPoint3D& io_Pt, const MgMat2D& i_m
 
 
 //MgVect3D operator *= (MgVect3D& Pt1, const MgMat2D&m2)
-MgVect3D MGeo::Mat2DMultCheckEqualVect3D( MgVect3D& io_Pt, const MgMat2D& i_mt)
+MgVect3D MGeo::Mat2DMultEqualVect3D( MgVect3D& io_Pt, const MgMat2D& i_mt)
 {
 	MREAL	rwx;
 	rwx		= i_mt.m[0][0] * io_Pt.x + i_mt.m[1][0] * io_Pt.y;
@@ -622,7 +622,7 @@ MgVect2D MGeo::Mat3DMultVect2D( const MgVect2D& i_Pt, const MgMat3D& i_Mt)
 //	           									    | m41 m42 m43 m44 |
 //
 //MgPoint2D operator *= (MgVect2D& Pt1o, const MgMat3D&M1)
-MgPoint2D MGeo::Mat3DMultCheckEqualPoint2D( MgPoint2D& io_Pt, const MgMat3D& i_Mt)
+MgPoint2D MGeo::Mat3DMultEqualPoint2D( MgPoint2D& io_Pt, const MgMat3D& i_Mt)
 {
 	MREAL	rwx;
 	rwx		= i_Mt.m[0][0] * io_Pt.x + i_Mt.m[1][0] * io_Pt.y + i_Mt.m[3][0];
@@ -644,7 +644,7 @@ MgPoint2D MGeo::Mat3DMultCheckEqualPoint2D( MgPoint2D& io_Pt, const MgMat3D& i_M
 //	           									    | m41 m42 m43 m44 |
 //
 //MgVect2D operator *= (MgVect2D& Pt1o, const MgMat3D&M1)
-MgVect2D MGeo::Mat3DMultCheckEqualVect2D( MgVect2D& io_Pt, const MgMat3D& i_Mt)
+MgVect2D MGeo::Mat3DMultEqualVect2D( MgVect2D& io_Pt, const MgMat3D& i_Mt)
 {
 	MREAL	rwx;
 	rwx		= i_Mt.m[0][0] * io_Pt.x + i_Mt.m[1][0] * io_Pt.y;
@@ -732,7 +732,7 @@ MgVect3D MGeo::Mat3DMultVect3D( const MgVect3D& i_Pt, const MgMat3D& i_Mt)
 //												    | m41 m42 m43 m44 |
 //
 //MgVect3D operator *= (MgVect3D& Pt1o, const MgMat3D&M1)
-MgPoint3D MGeo::Mat3DMultCheckEqualPoint3D( MgPoint3D& io_Pt, const MgMat3D& i_Mt)
+MgPoint3D MGeo::Mat3DMultEqualPoint3D( MgPoint3D& io_Pt, const MgMat3D& i_Mt)
 {
 	MgPoint3D	Pto;
 	Pto.x = i_Mt.m[0][0] * io_Pt.x + i_Mt.m[1][0] * io_Pt.y + i_Mt.m[2][0] * io_Pt.z + i_Mt.m[3][0];
@@ -766,7 +766,7 @@ MgPoint3D MGeo::Mat3DMultCheckEqualPoint3D( MgPoint3D& io_Pt, const MgMat3D& i_M
 //												    | m41 m42 m43 m44 |
 //
 //MgVect3D operator *= (MgVect3D& Pt1o, const MgMat3D&M1)
-MgVect3D MGeo::Mat3DMultCheckEqualVect3D( MgVect3D& io_Pt, const MgMat3D& i_Mt)
+MgVect3D MGeo::Mat3DMultEqualVect3D( MgVect3D& io_Pt, const MgMat3D& i_Mt)
 {
 	MgVect3D	Pto;
 	Pto.x = i_Mt.m[0][0] * io_Pt.x + i_Mt.m[1][0] * io_Pt.y + i_Mt.m[2][0] * io_Pt.z;
@@ -1280,15 +1280,15 @@ MgMat3D MGeo::Mat3DInv( MgMat3D& i_Mt)
 	//								sinƒÆ = v.x
 
 MgMat2D MGeo::Mat2DMirror(						// (  O) ‹¾‰f•ÏŠ·s—ñ
-				const MgULine2D& i_uln			// (I  ) ‹¾‰f‚Ì²‚Æ‚·‚é’¼ü
+				const MgSLine2D& i_sln			// (I  ) ‹¾‰f‚Ì²‚Æ‚·‚é’¼ü
 		)
 {
 	MREAL	d, cos2, msin2;
-	d = i_uln.p.x * ( - i_uln.v.y) + i_uln.p.y * i_uln.v.x;
-	msin2 = 2 * i_uln.v.x * i_uln.v.y;
-	cos2 = 1 - 2 * i_uln.v.x * i_uln.v.x;
+	d = i_sln.p.x * ( - i_sln.v.y) + i_sln.p.y * i_sln.v.x;
+	msin2 = 2 * i_sln.v.x * i_sln.v.y;
+	cos2 = 1 - 2 * i_sln.v.x * i_sln.v.x;
 	return MgMat2D( -cos2, msin2, 0, msin2, cos2, 0,
-					2 * d * ( - i_uln.v.y), 2 * d * i_uln.v.x, 1);
+					2 * d * ( - i_sln.v.y), 2 * d * i_sln.v.x, 1);
 }
 
 //S//===========================================================================
@@ -1298,19 +1298,19 @@ MgMat2D MGeo::Mat2DMirror(						// (  O) ‹¾‰f•ÏŠ·s—ñ
 ////
 //MgMat2D MGeo::Mat2DMirror(							// (  O) ‹¾‘œ•ÏŠ·s—ñ
 //				const MgMat2D&	i_mt, 				// (I  ) •ÏŠ·s—ñ
-//				const MgULine2D& i_uln				// (I  ) ‹¾‰f‚Ì²‚Æ‚·‚é’¼ü
+//				const MgSLine2D& i_sln				// (I  ) ‹¾‰f‚Ì²‚Æ‚·‚é’¼ü
 //		)
 //{
 //	MgMat2D	tmo;
 //
 //	tmo = i_mt;
-//	tmo *= Mat2DMov( - i_uln.p);
-//	tmo *= Mat2DRotRevV( i_uln.v);
+//	tmo *= Mat2DMov( - i_sln.p);
+//	tmo *= Mat2DRotRevV( i_sln.v);
 //
 //	tmo *= Mat2DScl( MgVect2D( 1.0f, -1.0f));
 //
-//	tmo *= Mat2DRotV( i_uln.v);
-//    tmo *= Mat2DMov( i_uln.p);
+//	tmo *= Mat2DRotV( i_sln.v);
+//    tmo *= Mat2DMov( i_sln.p);
 //	return tmo;
 //}
 
@@ -1401,7 +1401,7 @@ MgMat2D MGeo::Mat2DRot(							// (  O) •ÏŠ·s—ñ
 // ---------------------( ‚RŸŒ³ )------------------------------
 //
 MgMat3D MGeo::Mat3DRot(							// (  O) •ÏŠ·s—ñ
-				const	MgULine3D&	i_ULn, 			// (I  ) ‰ñ“]²‚Æ‚È‚é’¼ü
+				const	MgSLine3D&	i_SLn, 			// (I  ) ‰ñ“]²‚Æ‚È‚é’¼ü
 						MREAL		i_rd			// (I  ) ‰ñ“]Šp(Degree)
 		)
 {
@@ -1412,27 +1412,27 @@ MgMat3D MGeo::Mat3DRot(							// (  O) •ÏŠ·s—ñ
 	va = MgVect2D( MREAL( cos( i_rd)), MREAL( sin( i_rd)));
 	rmcos = 1 - va.x;
 
-	Tmw.m[0][0] = i_ULn.v.x * i_ULn.v.x * rmcos + va.x;
-	Tmw.m[1][0] = i_ULn.v.x * i_ULn.v.y * rmcos - i_ULn.v.z * va.y;
-	Tmw.m[2][0] = i_ULn.v.x * i_ULn.v.z * rmcos - i_ULn.v.y * va.y;
+	Tmw.m[0][0] = i_SLn.v.x * i_SLn.v.x * rmcos + va.x;
+	Tmw.m[1][0] = i_SLn.v.x * i_SLn.v.y * rmcos - i_SLn.v.z * va.y;
+	Tmw.m[2][0] = i_SLn.v.x * i_SLn.v.z * rmcos - i_SLn.v.y * va.y;
 		 
-	Tmw.m[0][1] = i_ULn.v.x * i_ULn.v.y * rmcos + i_ULn.v.z * va.y;
-	Tmw.m[1][1] = i_ULn.v.y * i_ULn.v.y * rmcos + va.x;
-	Tmw.m[2][1] = i_ULn.v.y * i_ULn.v.z * rmcos - i_ULn.v.x * va.y;
+	Tmw.m[0][1] = i_SLn.v.x * i_SLn.v.y * rmcos + i_SLn.v.z * va.y;
+	Tmw.m[1][1] = i_SLn.v.y * i_SLn.v.y * rmcos + va.x;
+	Tmw.m[2][1] = i_SLn.v.y * i_SLn.v.z * rmcos - i_SLn.v.x * va.y;
 		 
-	Tmw.m[0][2] = i_ULn.v.x * i_ULn.v.z * rmcos - i_ULn.v.y * va.y;
-	Tmw.m[1][2] = i_ULn.v.y * i_ULn.v.z * rmcos + i_ULn.v.x * va.y;
-	Tmw.m[2][2] = i_ULn.v.z * i_ULn.v.z * rmcos + va.x;
+	Tmw.m[0][2] = i_SLn.v.x * i_SLn.v.z * rmcos - i_SLn.v.y * va.y;
+	Tmw.m[1][2] = i_SLn.v.y * i_SLn.v.z * rmcos + i_SLn.v.x * va.y;
+	Tmw.m[2][2] = i_SLn.v.z * i_SLn.v.z * rmcos + va.x;
 
 	Tmw.m[3][0] = Tmw.m[3][1] = Tmw.m[3][2] = 
 	Tmw.m[0][3] = Tmw.m[1][3] = Tmw.m[2][3] = 0.0f;
 	Tmw.m[3][3] = 1.0f;
 
 //S 	MgMat3D	Tmo;
-//	Tmo = Mat3DMov( -i_ULn.p) * Tmw;
-//	Tmo *= Mat3DMov( i_ULn.p);
+//	Tmo = Mat3DMov( -i_SLn.p) * Tmw;
+//	Tmo *= Mat3DMov( i_SLn.p);
 
-	Tmw += ( - i_ULn.p * Tmw + i_ULn.p); 
+	Tmw += ( - i_SLn.p * Tmw + i_SLn.p); 
 
 	return Tmw;
 }
@@ -1762,17 +1762,17 @@ inline void MGeo::Line3Dto2D(
 //===================(‚RŸŒ³ ¨ ‚QŸŒ³)=========================
 //		‚R‚c’¼ü‚ğ‚Q‚c’¼ü‚ÖÀ•W•ÏŠ·‚·‚é
 //
-void MGeo::ULine3Dto2D(
-				const MgULine3D		&i_ULn,			// (I  ) ‚R‚c’¼ü
+void MGeo::SLine3Dto2D(
+				const MgSLine3D		&i_SLn,			// (I  ) ‚R‚c’¼ü
 				const MgMat3D		&i_Mt,			// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
-					  MgULine2D		*o_uln			// (  O) ‚Q‚c’¼ü
+					  MgSLine2D		*o_sln			// (  O) ‚Q‚c’¼ü
 				)
 {
-	Point3Dto2D( i_ULn.p, i_Mt, &o_uln->p); 
+	Point3Dto2D( i_SLn.p, i_Mt, &o_sln->p); 
 
-	o_uln->v.x = i_Mt.m[0][0] * i_ULn.v.x + i_Mt.m[1][0] * i_ULn.v.y + i_Mt.m[2][0] * i_ULn.v.z;		 
-	o_uln->v.y = i_Mt.m[0][1] * i_ULn.v.x + i_Mt.m[1][1] * i_ULn.v.y + i_Mt.m[2][1] * i_ULn.v.z;
-	o_uln->v.SetUnitize();
+	o_sln->v.x = i_Mt.m[0][0] * i_SLn.v.x + i_Mt.m[1][0] * i_SLn.v.y + i_Mt.m[2][0] * i_SLn.v.z;		 
+	o_sln->v.y = i_Mt.m[0][1] * i_SLn.v.x + i_Mt.m[1][1] * i_SLn.v.y + i_Mt.m[2][1] * i_SLn.v.z;
+	o_sln->v.SetUnitize();
 }
 //
 //===================(‚RŸŒ³ ¨ ‚QŸŒ³)=========================
@@ -1806,18 +1806,18 @@ inline MgLine2D MgLine3DDto2D2(						// (  O) ‚Q‚cü•ª
 //===================(‚RŸŒ³ ¨ ‚QŸŒ³)=========================
 //		‚R‚c’¼ü‚ğ‚Q‚c’¼ü‚ÖÀ•W•ÏŠ·‚·‚é
 //
-MgULine2D MGeo::ULine3Dto2D2(						// (  O) ‚Q‚c’¼ü
-				const MgULine3D		&i_ULn,			// (I  ) ‚R‚c’¼ü
+MgSLine2D MGeo::SLine3Dto2D2(						// (  O) ‚Q‚c’¼ü
+				const MgSLine3D		&i_SLn,			// (I  ) ‚R‚c’¼ü
 				const MgMat3D		&i_Mt			// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
 				)
 {
-	MgULine2D	ulno;
-	Point3Dto2D( i_ULn.p, i_Mt, &ulno.p); 
+	MgSLine2D	slno;
+	Point3Dto2D( i_SLn.p, i_Mt, &slno.p); 
 
-	ulno.v.x = i_Mt.m[0][0] * i_ULn.v.x + i_Mt.m[1][0] * i_ULn.v.y + i_Mt.m[2][0] * i_ULn.v.z;		
-	ulno.v.y = i_Mt.m[0][1] * i_ULn.v.x + i_Mt.m[1][1] * i_ULn.v.y + i_Mt.m[2][1] * i_ULn.v.z;
-	ulno.v.SetUnitize();
-	return ulno;
+	slno.v.x = i_Mt.m[0][0] * i_SLn.v.x + i_Mt.m[1][0] * i_SLn.v.y + i_Mt.m[2][0] * i_SLn.v.z;		
+	slno.v.y = i_Mt.m[0][1] * i_SLn.v.x + i_Mt.m[1][1] * i_SLn.v.y + i_Mt.m[2][1] * i_SLn.v.z;
+	slno.v.SetUnitize();
+	return slno;
 }
 //
 //===================(‚RŸŒ³ ¨ ‚QŸŒ³)=========================
@@ -1917,18 +1917,18 @@ inline void MgLine2DDto3D(
 //===================(‚QŸŒ³ ¨ ‚RŸŒ³)=========================
 //		‚Q‚c’¼ü‚ğ‚R‚c’¼ü‚ÖÀ•W•ÏŠ·‚·‚é
 //
-void MGeo::ULine2Dto3D(
-				const MgULine2D		&i_uln,			// (I  ) ‚Q‚c’¼ü
+void MGeo::SLine2Dto3D(
+				const MgSLine2D		&i_sln,			// (I  ) ‚Q‚c’¼ü
 				const MgMat3D		&i_Mt,			// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
-					  MgULine3D		*o_ULn			// (  O) ‚R‚c’¼ü
+					  MgSLine3D		*o_SLn			// (  O) ‚R‚c’¼ü
 				)
 {
-	Point2Dto3D( i_uln.p, i_Mt, &o_ULn->p); 
+	Point2Dto3D( i_sln.p, i_Mt, &o_SLn->p); 
 
-	o_ULn->v.x = i_Mt.m[0][0] * i_uln.v.x + i_Mt.m[1][0] * i_uln.v.y + i_Mt.m[3][0];
-	o_ULn->v.y = i_Mt.m[0][1] * i_uln.v.x + i_Mt.m[1][1] * i_uln.v.y + i_Mt.m[3][1];
-	o_ULn->v.z = i_Mt.m[0][2] * i_uln.v.x + i_Mt.m[1][2] * i_uln.v.y + i_Mt.m[3][2];
-	o_ULn->v.SetUnitize();
+	o_SLn->v.x = i_Mt.m[0][0] * i_sln.v.x + i_Mt.m[1][0] * i_sln.v.y + i_Mt.m[3][0];
+	o_SLn->v.y = i_Mt.m[0][1] * i_sln.v.x + i_Mt.m[1][1] * i_sln.v.y + i_Mt.m[3][1];
+	o_SLn->v.z = i_Mt.m[0][2] * i_sln.v.x + i_Mt.m[1][2] * i_sln.v.y + i_Mt.m[3][2];
+	o_SLn->v.SetUnitize();
 }
 //
 //===================(‚QŸŒ³ ¨ ‚RŸŒ³)=========================
@@ -1961,19 +1961,19 @@ inline MgLine3D MgLine2DDto3D3(						// (  O) ‚R‚cü•ª
 //===================(‚QŸŒ³ ¨ ‚RŸŒ³)=========================
 //		‚Q‚c’¼ü‚ğ‚R‚c’¼ü‚ÖÀ•W•ÏŠ·‚·‚é
 //
-MgULine3D MGeo::ULine2Dto3D3(						// (  O) ‚R‚c’¼ü
-				const MgULine2D		&i_uln,			// (I  ) ‚Q‚c’¼ü
+MgSLine3D MGeo::SLine2Dto3D3(						// (  O) ‚R‚c’¼ü
+				const MgSLine2D		&i_sln,			// (I  ) ‚Q‚c’¼ü
 				const MgMat3D		&i_Mt			// (I  ) À•W•ÏŠ·ƒ}ƒgƒŠƒbƒNƒX
 				)
 {
-	MgULine3D	ULno;
-	Point2Dto3D( i_uln.p, i_Mt, &ULno.p); 
+	MgSLine3D	SLno;
+	Point2Dto3D( i_sln.p, i_Mt, &SLno.p); 
 
-	ULno.v.x = i_Mt.m[0][0] * i_uln.v.x + i_Mt.m[1][0] * i_uln.v.y;
-	ULno.v.y = i_Mt.m[0][1] * i_uln.v.x + i_Mt.m[1][1] * i_uln.v.y;
-	ULno.v.z = i_Mt.m[0][2] * i_uln.v.x + i_Mt.m[1][2] * i_uln.v.y;
-	ULno.v.SetUnitize();
-	return ULno;
+	SLno.v.x = i_Mt.m[0][0] * i_sln.v.x + i_Mt.m[1][0] * i_sln.v.y;
+	SLno.v.y = i_Mt.m[0][1] * i_sln.v.x + i_Mt.m[1][1] * i_sln.v.y;
+	SLno.v.z = i_Mt.m[0][2] * i_sln.v.x + i_Mt.m[1][2] * i_sln.v.y;
+	SLno.v.SetUnitize();
+	return SLno;
 }
 //
 //===================(‚QŸŒ³ ¨ ‚RŸŒ³)=========================

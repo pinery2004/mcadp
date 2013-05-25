@@ -132,7 +132,7 @@ public:
 	MgVect2D( const CPoint& pt);												// CPointの原点から点までの方向のベクトル
 	MgVect2D( const class MgVect3D& Vt);												// 3Dベクトルの(X,Y)方向のベクトル
 	MgVect2D( const class MgLine2D& ln);										// 線分の終点から終点方向のベクトル
-	MgVect2D( const class MgULine2D& uln);										// 直線の方向ベクトル
+	MgVect2D( const class MgSLine2D& sln);										// 直線の方向ベクトル
 	MgVect2D( const	MgPoint2D& p1, const MgPoint2D& p2);						// 始点から終点方向のベクトル
 
 //	MgVect2D( const MgPoint2D& pt);

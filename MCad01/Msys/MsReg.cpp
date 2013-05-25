@@ -77,7 +77,11 @@ MINT MsGetenv(									// ｽﾃｰﾀｽ	0 : 正常   -1 : エラー
 
 	iSt = -1;
 
+#pragma warning(push)
+#pragma warning(disable:4996)
 	cEnvPtr = _tgetenv( i_cEnvNam);
+#pragma warning(pop)
+
 	if ( cEnvPtr == NULL)  goto  PRG_EXIT;
 
 	Mstrcpy_s( o_cEnvVal, i_iszEnvVal, cEnvPtr);
@@ -152,7 +156,10 @@ MINT MsSetRegistry( void)						// (  O) ｽﾃｰﾀｽ	     0 : 正常   -1 : エラー
 	} else {
 		ItrSts = RKey.Create(HKEY_LOCAL_MACHINE, RegSub); 
 		if (ItrSts == ERROR_SUCCESS) {
+#pragma warning(push)
+#pragma warning(disable:4996)
 			RKey.SetValue(Mstr( ""), SubKey);
+#pragma warning(pop)
 //			RKey.SetKeyValue( SubKey, Mstr(""));
 			RKey.Close();
 			Status = 0;
@@ -180,7 +187,10 @@ MINT MsGetRegistryPath(							// (  O) ｽﾃｰﾀｽ	0 : 正常   -1 : エラー
 	ItrSts = RKey.Open( HKEY_LOCAL_MACHINE, RegSub, KEY_READ);
 	if ( ItrSts == ERROR_SUCCESS) {														// あり
 		Size = sizeof( NameW);
+#pragma warning(push)
+#pragma warning(disable:4996)
 		RKey.QueryValue( NameW, SubKey, (MULONG *)&Size);
+#pragma warning(pop)
 		if ( ItrSts == ERROR_SUCCESS)  Status = 0;
 		RKey.Close();
 	}
@@ -203,7 +213,10 @@ MINT MsSetRegistryPath(							// (  O) ｽﾃｰﾀｽ	0 : 正常   -1 : エラー
 
 	ItrSts = RKey.Open( HKEY_LOCAL_MACHINE, RegSub);
 	if ( ItrSts == ERROR_SUCCESS) {														// あり
+#pragma warning(push)
+#pragma warning(disable:4996)
 		RKey.SetValue( PName, SubKey);
+#pragma warning(pop)
 		RKey.Close();
 		Status = 0;
 	}

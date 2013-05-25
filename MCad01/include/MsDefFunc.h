@@ -350,10 +350,7 @@ inline void MF_SET_ON( MINT &a, MINT mask)						// maskの条件をセットする
 inline void MF_SET_OFF( MINT &a, MINT mask)						// maskの条件をクリアする
 				{ a &= ~( mask);}
 
-inline void MF_RESET_ON( MINT &a, MINT mask)					// maskの条件をクリアする
-				{ a &= ~( mask);}
-
-inline void MF_RESET( MINT &a)									// 前条件をクリアする
+inline void MF_RESET( MINT &a)									// 全条件をクリアする
 				{ a = 0;}
 
 inline bool MI_CHECK_ODD( MINT n)								// 奇数チェック

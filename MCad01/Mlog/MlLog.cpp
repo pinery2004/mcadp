@@ -364,24 +364,24 @@ void mlLog::LogOut(
 	}
 #endif
 }
-void mlLog::LogOut(
-						char* i_cFormat, ...	// ログ書き込みデータ
-						)
-{
-#ifdef LOGOUT
-	MCHAR	CMsg[MAX_PATH];
-	va_list	cList;
-	if( m_iCtl != 0) {
-		MCHAR	sFormat[256];
-		Code::msbstowcs( i_cFormat, sFormat, 256);
-		va_start( cList, sFormat);
-		_vstprintf_s( CMsg, sFormat, cList);
-		Mfprintf( m_File, CMsg);
-		TRACE( CMsg);
-		va_end( cList);
-	}
-#endif
-}
+//S void mlLog::LogOut(
+//						char* i_cFormat, ...	// ログ書き込みデータ
+//						)
+//{
+//#ifdef LOGOUT
+//	MCHAR	CMsg[MAX_PATH];
+//	va_list	cList;
+//	if( m_iCtl != 0) {
+//		MCHAR	sFormat[256];
+//		Code::msbstowcs( i_cFormat, sFormat, 256);
+//		va_start( cList, sFormat);
+//		_vstprintf_s( CMsg, sFormat, cList);
+//		Mfprintf( m_File, CMsg);
+//		TRACE( CMsg);
+//		va_end( cList);
+//	}
+//#endif
+//}
 
 //------------------------------------------------------------------------
 // ログファイルへログレベルとフォーマット付きで出力する
@@ -422,42 +422,42 @@ void mlLog::LogOutWL(
 	}
 #endif
 }
-void mlLog::LogOutWL(
-						int		i_iLevel,		// ログレベル
-												//				MC_LOG_ERROR
-												//				MC_LOG_WARNING
-												//				MC_LOG_ERROR
-						char*	i_cFormat, ...	// ログ書き込みデータ
-						)
-{
-#ifdef LOGOUT
-	MCHAR	cMsg[MAX_PATH];
-	switch ( i_iLevel) {
-	case MC_LOG_ERROR:
-		fprintf( m_File, "\n *** ERROR *** ");
-		TRACE( "\n *** ERROR *** ");
-		break;
-	case MC_LOG_WARNING:
-		fprintf( m_File, "\n *** WARNING *** ");
-		TRACE( "\n *** WARNING *** ");
-		break;
-	}
-	va_list	cList;
-	if( m_iCtl != 0) {
-		MCHAR	sFormat[256];
-		Code::msbstowcs( i_cFormat, sFormat, 256);
-		va_start( cList, sFormat);
-		_vstprintf_s( cMsg, sFormat, cList);
-		Mfprintf( m_File, cMsg);
-		TRACE( cMsg);
-		va_end( cList);
-	}
-	if( i_iLevel == MC_LOG_ERROR) {
-//S		__debugbreak();											// ブレークポイント
-		AfxDebugBreak();										// ブレークポイント
-	}
-#endif
-}
+//S void mlLog::LogOutWL(
+//						int		i_iLevel,		// ログレベル
+//												//				MC_LOG_ERROR
+//												//				MC_LOG_WARNING
+//												//				MC_LOG_ERROR
+//						char*	i_cFormat, ...	// ログ書き込みデータ
+//						)
+//{
+//#ifdef LOGOUT
+//	MCHAR	cMsg[MAX_PATH];
+//	switch ( i_iLevel) {
+//	case MC_LOG_ERROR:
+//		fprintf( m_File, "\n *** ERROR *** ");
+//		TRACE( "\n *** ERROR *** ");
+//		break;
+//	case MC_LOG_WARNING:
+//		fprintf( m_File, "\n *** WARNING *** ");
+//		TRACE( "\n *** WARNING *** ");
+//		break;
+//	}
+//	va_list	cList;
+//	if( m_iCtl != 0) {
+//		MCHAR	sFormat[256];
+//		Code::msbstowcs( i_cFormat, sFormat, 256);
+//		va_start( cList, sFormat);
+//		_vstprintf_s( cMsg, sFormat, cList);
+//		Mfprintf( m_File, cMsg);
+//		TRACE( cMsg);
+//		va_end( cList);
+//	}
+//	if( i_iLevel == MC_LOG_ERROR) {
+////S		__debugbreak();											// ブレークポイント
+//		AfxDebugBreak();										// ブレークポイント
+//	}
+//#endif
+//}
 
 
 void mlLog::Trace( MCHAR* str)
@@ -598,17 +598,17 @@ void Trace::Write(
 	_vftprintf_s( m_pfp, i_cFormat, cList);
 	va_end( cList);
 }
-void Trace::Write(
-						char* i_cFormat, ...	// ログ書き込みデータ
-						)
-{
-	va_list	cList;
-	MCHAR	sFormat[256];
-	Code::msbstowcs( i_cFormat, sFormat, 256);
-	va_start( cList, sFormat);
-	_vftprintf_s( m_pfp, sFormat, cList);
-	va_end( cList);
-}
+//S void Trace::Write(
+//						char* i_cFormat, ...	// ログ書き込みデータ
+//						)
+//{
+//	va_list	cList;
+//	MCHAR	sFormat[256];
+//	Code::msbstowcs( i_cFormat, sFormat, 256);
+//	va_start( cList, sFormat);
+//	_vftprintf_s( m_pfp, sFormat, cList);
+//	va_end( cList);
+//}
 
 //------------------------------------------------------------------------
 //【機能】		トレースファイルへ一行出力する

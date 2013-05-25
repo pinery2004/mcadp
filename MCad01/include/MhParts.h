@@ -14,7 +14,7 @@ public:
 	MREAL		rW[2];								// 部材の右幅、左幅
 	MREAL		rLH[2];								// 部材の長さ補正値
 	MgLine3D		LnWH;								// 部材の補正考慮実長さの線分
-	MgULine3D	ULnW[2];							// 部材の右辺、左辺　直線
+	MgSLine3D	SLnW[2];							// 部材の右辺、左辺　直線
 
 public:
 	MhSenBuzai()		{}
@@ -27,8 +27,8 @@ public:
 		rW[1]  = PlcEn.GetMbWidthL() - PlcEn.GetPISinZure();
 		LnWH = MgLine3D( Ln.p[0] - rLH[0] * vtUt + PlcEn.GetPISinZure() * vtUt.RotR90(),
 						Ln.p[1] + rLH[1] * vtUt + PlcEn.GetPISinZure() * vtUt.RotR90());
-		ULnW[0] = MgULine3D( Ln.p[0] + vtUt.RotR90() * rW[0], vtUt);
-		ULnW[1] = MgULine3D( Ln.p[0] + vtUt.RotL90() * rW[1], vtUt);
+		SLnW[0] = MgSLine3D( Ln.p[0] + vtUt.RotR90() * rW[0], vtUt);
+		SLnW[1] = MgSLine3D( Ln.p[0] + vtUt.RotL90() * rW[1], vtUt);
 	}
 
 	//　横置部材と横置部材の位置関係を調べる。
@@ -45,10 +45,10 @@ public:
 														//		MC_LEFT:	線部材1は線部材2の左側にあり	（交差なし）
 														//		MC_RIGHT:	線部材1は線部材2の右側にあり	（交差なし）
 														//		MC_CLOSS:	線部材1は線部材2と交差			（交差あり）
-														//		MC_ON_LINE:	線部材1は線部材2の直線上にあり	（平行）
+														//		MC_ON_SLINE:	線部材1は線部材2の直線上にあり	（平行）
 							MINT*		o_pist2			// 補助ステイタス2
-														//		MC_PS_FAR:	線部材1は線部材2より始点側が遠い（交差なしまたは交差あり）
-														//		MC_PE_FAR:	線部材1は線部材2より終点側が遠い（交差なしまたは交差あり）
+														//		MC_FAR_PS:	線部材1は線部材2より始点側が遠い（交差なしまたは交差あり）
+														//		MC_FAR_PE:	線部材1は線部材2より終点側が遠い（交差なしまたは交差あり）
 														//		MC_PARALEL:	線部材1は線部材2より始点と終点は等距離	（平行）
 					);
 

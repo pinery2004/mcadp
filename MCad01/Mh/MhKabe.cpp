@@ -100,10 +100,10 @@ void IeModel::MhNormKabe(
 								   MgMinMaxR2D( MgLine2DC(pHaiKabe[ic2]->m_lnPlc))))
 				continue;															// MinMaxの重なりなしの場合は比較対象外
 			if ( MGeo::ParallelLine3D( pHaiKabe[ic1]->m_lnPlc, pHaiKabe[ic2]->m_lnPlc)) {	// 平行
-				ist = MGeo::CheckPointOnLine3DWS( pHaiKabe[ic2]->m_lnPlc.p[0], pHaiKabe[ic1]->m_lnPlc, &ist2s1);	// 壁2の始点が壁1のどこに乗っているか調べる
-				ist = MGeo::CheckPointOnLine3DWS( pHaiKabe[ic2]->m_lnPlc.p[1], pHaiKabe[ic1]->m_lnPlc, &ist2e1);	// 壁2の終点が壁1のどこに乗っているか調べる
-				ist = MGeo::CheckPointOnLine3DWS( pHaiKabe[ic1]->m_lnPlc.p[0], pHaiKabe[ic2]->m_lnPlc, &ist1s2);	// 壁1の始点が壁2のどこに乗っているか調べる
-				ist = MGeo::CheckPointOnLine3DWS( pHaiKabe[ic1]->m_lnPlc.p[1], pHaiKabe[ic2]->m_lnPlc, &ist1e2);	// 壁1の終点が壁2のどこに乗っているか調べる
+				ist = MGeo::CheckPointOnLine3D( pHaiKabe[ic2]->m_lnPlc.p[0], pHaiKabe[ic1]->m_lnPlc, &ist2s1);	// 壁2の始点が壁1のどこに乗っているか調べる
+				ist = MGeo::CheckPointOnLine3D( pHaiKabe[ic2]->m_lnPlc.p[1], pHaiKabe[ic1]->m_lnPlc, &ist2e1);	// 壁2の終点が壁1のどこに乗っているか調べる
+				ist = MGeo::CheckPointOnLine3D( pHaiKabe[ic1]->m_lnPlc.p[0], pHaiKabe[ic2]->m_lnPlc, &ist1s2);	// 壁1の始点が壁2のどこに乗っているか調べる
+				ist = MGeo::CheckPointOnLine3D( pHaiKabe[ic1]->m_lnPlc.p[1], pHaiKabe[ic2]->m_lnPlc, &ist1e2);	// 壁1の終点が壁2のどこに乗っているか調べる
 					// 重なって含まれる壁を削除する
 				if ( ( ist1s2 & (MC_ON_PS | MC_INSIDE | MC_ON_PE)) &&				// 壁1が壁2に重なるまたは含まれる場合				*** 外壁、内壁の調査残 ***
 					( ist1e2 & (MC_ON_PS | MC_INSIDE | MC_ON_PE))) {
@@ -122,8 +122,8 @@ void IeModel::MhNormKabe(
 			if ( idivdel == 0) {
 				ist = MGeo::Intr2Line3D( pHaiKabe[ic1]->m_lnPlc, pHaiKabe[ic2]->m_lnPlc, &po);
 				if ( MF_CHECK_OR( ist, (MC_INT | MC_CONNECTION))) {					// 交差
-					ist = MGeo::CheckPointOnLine3DWS( po, pHaiKabe[ic1]->m_lnPlc, &ist1);
-					if ( ist1 == (MC_ON_LINE | MC_INSIDE)) {						// 壁1の内部で交差があり分割する
+					ist = MGeo::CheckPointOnLine3D( po, pHaiKabe[ic1]->m_lnPlc, &ist1);
+					if ( ist1 == (MC_ON_SLINE | MC_INSIDE)) {						// 壁1の内部で交差があり分割する
 						idivdel = 1;
 					} else {
 						if ( fPlc[ic2] == 1)										// 追加壁と端部で交差する壁
@@ -188,8 +188,8 @@ void IeModel::MhNormKabe(
 					   MgMinMaxR2D( MgLine2DC( pHaiKabe[ic2]->m_lnPlc))))
 				continue;															// MinMaxの重なりなしの場合は比較対象外
 			if ( MGeo::ParallelLine3D( pHaiKabe[ic1]->m_lnPlc, pHaiKabe[ic2]->m_lnPlc)) {	// 平行
-				ist = MGeo::CheckPointOnLine3DWS( pHaiKabe[ic2]->m_lnPlc.p[0], pHaiKabe[ic1]->m_lnPlc, &ist2s1);	// 壁2の始点が壁1のどこに乗っているか調べる
-				ist = MGeo::CheckPointOnLine3DWS( pHaiKabe[ic2]->m_lnPlc.p[1], pHaiKabe[ic1]->m_lnPlc, &ist2e1);	// 壁2の終点が壁1のどこに乗っているか調べる
+				ist = MGeo::CheckPointOnLine3D( pHaiKabe[ic2]->m_lnPlc.p[0], pHaiKabe[ic1]->m_lnPlc, &ist2s1);	// 壁2の始点が壁1のどこに乗っているか調べる
+				ist = MGeo::CheckPointOnLine3D( pHaiKabe[ic2]->m_lnPlc.p[1], pHaiKabe[ic1]->m_lnPlc, &ist2e1);	// 壁2の終点が壁1のどこに乗っているか調べる
 
 				if ( ( ist2s1 & (MC_ON_PS | MC_INSIDE | MC_ON_PE)) &&				// 壁2が壁1に重なるまたは含まれる場合は			*** 外壁、内壁の調査残 ***
 					( ist2e1 & (MC_ON_PS | MC_INSIDE | MC_ON_PE))) {
@@ -218,13 +218,13 @@ void IeModel::MhNormKabe(
 
 			ist = MGeo::Intr2Line3D( pHaiKabe[ic1]->m_lnPlc, pHaiKabe[ic2]->m_lnPlc, &po);
 			if ( MF_CHECK_OR( ist, (MC_INT | MC_CONNECTION))) {						// 交差( または 連結)(連結は前の平行処理でスキップされここには入らない)
-				ist = MGeo::CheckPointOnLine3DWS( po, pHaiKabe[ic1]->m_lnPlc, &ist1);
-					if ( ist1 == (MC_ON_LINE | MC_INSIDE))							// 壁内部で交差あり
+				ist = MGeo::CheckPointOnLine3D( po, pHaiKabe[ic1]->m_lnPlc, &ist1);
+					if ( ist1 == (MC_ON_SLINE | MC_INSIDE))							// 壁内部で交差あり
 					ASSERT( FALSE);													//		交差点で分割済みなので処理エラー　<ERROR>
 				// 交差壁の図形作成
-				if ( ist1 == (MC_ON_LINE | MC_ON_PS)) {
+				if ( ist1 == (MC_ON_SLINE | MC_ON_PS)) {
 					iPlcCn[0] = -1;													//		始点側に交差する壁ありを設定
-				} else if ( ist1 == (MC_ON_LINE | MC_ON_PE)) {
+				} else if ( ist1 == (MC_ON_SLINE | MC_ON_PE)) {
 					iPlcCn[1] = -1;													// 		終点側に交差する壁ありを設定
 				}
 			}
@@ -286,10 +286,10 @@ void IeModel::MhNormKabe(
 							MgMinMaxR2D( MgLine2DC( pHaiKabe[ic2]->m_lnPlc))))
 				continue;															// MinMaxの重なりなしの場合は比較対象外
 			if ( MGeo::ParallelLine3D( pHaiKabe[ic1]->m_lnPlc, pHaiKabe[ic2]->m_lnPlc)) {	// 平行
-				ist = MGeo::CheckPointOnLine3DWS( pHaiKabe[ic2]->m_lnPlc.p[0], pHaiKabe[ic1]->m_lnPlc, &ist2s1);	// 壁2の始点が壁1のどこに乗っているか調べる
-//				if ( !( ist1 & MC_ON_LINE))
+				ist = MGeo::CheckPointOnLine3D( pHaiKabe[ic2]->m_lnPlc.p[0], pHaiKabe[ic1]->m_lnPlc, &ist2s1);	// 壁2の始点が壁1のどこに乗っているか調べる
+//				if ( !( ist1 & MC_ON_SLINE))
 //					continue;														// 離れている壁は結合対象外
-				ist = MGeo::CheckPointOnLine3DWS( pHaiKabe[ic2]->m_lnPlc.p[1], pHaiKabe[ic1]->m_lnPlc, &ist2e1);	// 壁2の終点が壁1のどこに乗っているか調べる
+				ist = MGeo::CheckPointOnLine3D( pHaiKabe[ic2]->m_lnPlc.p[1], pHaiKabe[ic1]->m_lnPlc, &ist2e1);	// 壁2の終点が壁1のどこに乗っているか調べる
 
 				if ( ( ist2s1 & (MC_ON_PS | MC_INSIDE | MC_ON_PE)) &&				// 壁2が壁1に重なるまたは含まれる場合は			*** 外壁、内壁の調査残 ***
 					( ist2e1 & (MC_ON_PS | MC_INSIDE | MC_ON_PE))) {
@@ -308,30 +308,30 @@ void IeModel::MhNormKabe(
 
 			ist = MGeo::Intr2Line3D( pHaiKabe[ic1]->m_lnPlc, pHaiKabe[ic2]->m_lnPlc, &po);
 			if ( MF_CHECK_OR( ist, (MC_INT | MC_CONNECTION))) {						// 交差( または 連結)(連結は前の平行処理でスキップされここには入らない)
-				ist = MGeo::CheckPointOnLine3DWS( po, pHaiKabe[ic1]->m_lnPlc, &ist1);
-				if ( ist1 == (MC_ON_LINE | MC_INSIDE))								// 壁内部で交差あり
+				ist = MGeo::CheckPointOnLine3D( po, pHaiKabe[ic1]->m_lnPlc, &ist1);
+				if ( ist1 == (MC_ON_SLINE | MC_INSIDE))								// 壁内部で交差あり
 					ASSERT( FALSE);													//		交差点で分割済みなので処理エラー　<ERROR>
-				ist = MGeo::CheckPointOnLine3DWS( po, pHaiKabe[ic2]->m_lnPlc, &ist2);
-				if ( ist2 == (MC_ON_LINE | MC_INSIDE))								// 壁内部で交差あり
+				ist = MGeo::CheckPointOnLine3D( po, pHaiKabe[ic2]->m_lnPlc, &ist2);
+				if ( ist2 == (MC_ON_SLINE | MC_INSIDE))								// 壁内部で交差あり
 					ASSERT( FALSE);													// 		交差点で分割済みなので処理エラー　<ERROR>
 
 				// 交差壁の図形作成
                 MgVect3D vtutLn2 = MGeo::UnitizeVect3D( MgVect3DC( pHaiKabe[ic2]->m_lnPlc));
-				MgULine3D ULnR = MgULine3D( pHaiKabe[ic2]->m_pZukei->m_lnZukei[0].p[0], vtutLn2);
-				MgULine3D ULnL = MgULine3D( pHaiKabe[ic2]->m_pZukei->m_lnZukei[1].p[0], vtutLn2);
+				MgSLine3D SLnR = MgSLine3D( pHaiKabe[ic2]->m_pZukei->m_lnZukei[0].p[0], vtutLn2);
+				MgSLine3D SLnL = MgSLine3D( pHaiKabe[ic2]->m_pZukei->m_lnZukei[1].p[0], vtutLn2);
 
 				if ( ( ist1 & (MC_ON_PS | MC_ON_PE)) == ( ist2 & (MC_ON_PS | MC_ON_PE))) {	// 壁の向きが対向
-					istr = MGeo::IntrLineULine3D( lnZukei[0], ULnL, &p0);
-					istl = MGeo::IntrLineULine3D( lnZukei[1], ULnR, &p1);
+					istr = MGeo::IntrLineSLine3D( lnZukei[0], SLnL, &p0);
+					istl = MGeo::IntrLineSLine3D( lnZukei[1], SLnR, &p1);
 				} else {															// 壁の向きが同方向
-					istr = MGeo::IntrLineULine3D( lnZukei[0], ULnR, &p0);
-					istl = MGeo::IntrLineULine3D( lnZukei[1], ULnL, &p1);
+					istr = MGeo::IntrLineSLine3D( lnZukei[0], SLnR, &p0);
+					istl = MGeo::IntrLineSLine3D( lnZukei[1], SLnL, &p1);
 				}
 				if ( ist1 & MC_ON_PS) {
 					if ( MF_CHECK_OR( istr, (MC_INT | MC_CONNECTION))) lnZukei[0].p[0] = p0;
 					if ( MF_CHECK_OR( istl, (MC_INT | MC_CONNECTION))) lnZukei[1].p[0] = p1;
 					iPlcCn[0] = -1;													// 始点点側に交差する壁ありを設定
-				} else if ( ist1 == (MC_ON_LINE | MC_ON_PE)) {
+				} else if ( ist1 == (MC_ON_SLINE | MC_ON_PE)) {
 					if ( MF_CHECK_OR( istr, (MC_INT | MC_CONNECTION))) lnZukei[0].p[1] = p0;
 					if ( MF_CHECK_OR( istl, (MC_INT | MC_CONNECTION))) lnZukei[1].p[1] = p1;
 					iPlcCn[1] = -1;													// 終点側に交差する壁ありを設定

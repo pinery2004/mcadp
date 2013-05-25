@@ -25,47 +25,47 @@ namespace MC
 //		共通　形状演算
 //
 ////	------------- Ｓ値の算出　------------------
-//MREAL MGeo::SVal2ULine3D(						// (  O) Ｓ値(２直線の方向ベクトルからなる平行６面体の体積）
-//			    const	MgULine3D&	ULn1,		// (I  ) 直線1
-//				const	MgULine3D&	ULn2		// (I  ) 直線2
+//MREAL MGeo::SVal2SLine3D(						// (  O) Ｓ値(２直線の方向ベクトルからなる平行６面体の体積）
+//			    const	MgSLine3D&	SLn1,		// (I  ) 直線1
+//				const	MgSLine3D&	SLn2		// (I  ) 直線2
 //		)
 //{
-////		( (ULn1.p.x*ULn1.v.y-ULn1.p.y*ULn1.v.x) * (ULn2.p.z*ULn2.v.w-ULn2.p.w*ULn2.v.z)
-////		- (ULn1.p.x*ULn1.v.z-ULn1.p.z*ULn1.v.x) * (ULn2.p.y*ULn2.v.w-ULn2.p.w*ULn2.v.y)
-////		+ (ULn1.p.x*ULn1.v.w-ULn1.p.w*ULn1.v.x) * (ULn2.p.y*ULn2.v.z-ULn2.p.z*ULn2.v.y)
-////		+ (ULn1.p.y*ULn1.v.z-ULn1.p.z*ULn1.v.y) * (ULn2.p.x*ULn2.v.w-ULn2.p.w*ULn2.v.x)
-////		- (ULn1.p.y*ULn1.v.w-ULn1.p.w*ULn1.v.y) * (ULn2.p.x*ULn2.v.z-ULn2.p.z*ULn2.v.x)
-////		+ (ULn1.p.z*ULn1.v.w-ULn1.p.w*ULn1.v.z) * (ULn2.p.x*ULn2.v.y-ULn2.p.y*ULn2.v.x))
+////		( (SLn1.p.x*SLn1.v.y-SLn1.p.y*SLn1.v.x) * (SLn2.p.z*SLn2.v.w-SLn2.p.w*SLn2.v.z)
+////		- (SLn1.p.x*SLn1.v.z-SLn1.p.z*SLn1.v.x) * (SLn2.p.y*SLn2.v.w-SLn2.p.w*SLn2.v.y)
+////		+ (SLn1.p.x*SLn1.v.w-SLn1.p.w*SLn1.v.x) * (SLn2.p.y*SLn2.v.z-SLn2.p.z*SLn2.v.y)
+////		+ (SLn1.p.y*SLn1.v.z-SLn1.p.z*SLn1.v.y) * (SLn2.p.x*SLn2.v.w-SLn2.p.w*SLn2.v.x)
+////		- (SLn1.p.y*SLn1.v.w-SLn1.p.w*SLn1.v.y) * (SLn2.p.x*SLn2.v.z-SLn2.p.z*SLn2.v.x)
+////		+ (SLn1.p.z*SLn1.v.w-SLn1.p.w*SLn1.v.z) * (SLn2.p.x*SLn2.v.y-SLn2.p.y*SLn2.v.x))
 ////
 //	return
-//	(	  (ULn1.p.x*ULn1.v.y-ULn1.p.y*ULn1.v.x) * (-ULn2.v.z)
-//		- (ULn1.p.x*ULn1.v.z-ULn1.p.z*ULn1.v.x) * (-ULn2.v.y)
-//		+ (-ULn1.v.x) * (ULn2.p.y*ULn2.v.z-ULn2.p.z*ULn2.v.y)
-//		+ (ULn1.p.y*ULn1.v.z-ULn1.p.z*ULn1.v.y) * (-ULn2.v.x)
-//		- (-ULn1.v.y) * (ULn2.p.x*ULn2.v.z-ULn2.p.z*ULn2.v.x)
-//		+ (-ULn1.v.z) * (ULn2.p.x*ULn2.v.y-ULn2.p.y*ULn2.v.x));
+//	(	  (SLn1.p.x*SLn1.v.y-SLn1.p.y*SLn1.v.x) * (-SLn2.v.z)
+//		- (SLn1.p.x*SLn1.v.z-SLn1.p.z*SLn1.v.x) * (-SLn2.v.y)
+//		+ (-SLn1.v.x) * (SLn2.p.y*SLn2.v.z-SLn2.p.z*SLn2.v.y)
+//		+ (SLn1.p.y*SLn1.v.z-SLn1.p.z*SLn1.v.y) * (-SLn2.v.x)
+//		- (-SLn1.v.y) * (SLn2.p.x*SLn2.v.z-SLn2.p.z*SLn2.v.x)
+//		+ (-SLn1.v.z) * (SLn2.p.x*SLn2.v.y-SLn2.p.y*SLn2.v.x));
 //}
 
 ////
-//MREAL MGeo::SValULineLine3D(						// (  O) Ｓ値(直線の方向ベクトルと線分からなる平行６面体の体積）
-//			    const	MgULine3D&	ULn1,		// (I  ) 直線1
+//MREAL MGeo::SValSLineLine3D(						// (  O) Ｓ値(直線の方向ベクトルと線分からなる平行６面体の体積）
+//			    const	MgSLine3D&	SLn1,		// (I  ) 直線1
 //				const	MgLine3D&	Ln2			// (I  ) 線分2
 //		)
 //{
-////		( (ULn1.p.x*ULn1.v.y-ULn1.p.y*ULn1.v.x) * (Ln2.p[0].z*Ln2.p[1].w-Ln2.p[0].w*Ln2.p[1].z)
-////		- (ULn1.p.x*ULn1.v.z-ULn1.p.z*ULn1.v.x) * (Ln2.p[0].y*Ln2.p[1].w-Ln2.p[0].w*Ln2.p[1].y)
-////		+ (ULn1.p.x*ULn1.v.w-ULn1.p.w*ULn1.v.x) * (Ln2.p[0].y*Ln2.p[1].z-Ln2.p[0].z*Ln2.p[1].y)
-////		+ (ULn1.p.y*ULn1.v.z-ULn1.p.z*ULn1.v.y) * (Ln2.p[0].x*Ln2.p[1].w-Ln2.p[0].w*Ln2.p[1].x)
-////		- (ULn1.p.y*ULn1.v.w-ULn1.p.w*ULn1.v.y) * (Ln2.p[0].x*Ln2.p[1].z-Ln2.p[0].z*Ln2.p[1].x)
-////		+ (ULn1.p.z*ULn1.v.w-ULn1.p.w*ULn1.v.z) * (Ln2.p[0].x*Ln2.p[1].y-Ln2.p[0].y*Ln2.p[1].x))
+////		( (SLn1.p.x*SLn1.v.y-SLn1.p.y*SLn1.v.x) * (Ln2.p[0].z*Ln2.p[1].w-Ln2.p[0].w*Ln2.p[1].z)
+////		- (SLn1.p.x*SLn1.v.z-SLn1.p.z*SLn1.v.x) * (Ln2.p[0].y*Ln2.p[1].w-Ln2.p[0].w*Ln2.p[1].y)
+////		+ (SLn1.p.x*SLn1.v.w-SLn1.p.w*SLn1.v.x) * (Ln2.p[0].y*Ln2.p[1].z-Ln2.p[0].z*Ln2.p[1].y)
+////		+ (SLn1.p.y*SLn1.v.z-SLn1.p.z*SLn1.v.y) * (Ln2.p[0].x*Ln2.p[1].w-Ln2.p[0].w*Ln2.p[1].x)
+////		- (SLn1.p.y*SLn1.v.w-SLn1.p.w*SLn1.v.y) * (Ln2.p[0].x*Ln2.p[1].z-Ln2.p[0].z*Ln2.p[1].x)
+////		+ (SLn1.p.z*SLn1.v.w-SLn1.p.w*SLn1.v.z) * (Ln2.p[0].x*Ln2.p[1].y-Ln2.p[0].y*Ln2.p[1].x))
 ////
 //	return
-//	(	  (ULn1.p.x*ULn1.v.y-ULn1.p.y*ULn1.v.x) * (Ln2.p[0].z-Ln2.p[1].z)
-//		- (ULn1.p.x*ULn1.v.z-ULn1.p.z*ULn1.v.x) * (Ln2.p[0].y-Ln2.p[1].y)
-//		+ (-ULn1.v.x) * (Ln2.p[0].y*Ln2.p[1].z-Ln2.p[0].z*Ln2.p[1].y)
-//		+ (ULn1.p.y*ULn1.v.z-ULn1.p.z*ULn1.v.y) * (Ln2.p[0].x-Ln2.p[1].x)
-//		- (-ULn1.v.y) * (Ln2.p[0].x*Ln2.p[1].z-Ln2.p[0].z*Ln2.p[1].x)
-//		+ (-ULn1.v.z) * (Ln2.p[0].x*Ln2.p[1].y-Ln2.p[0].y*Ln2.p[1].x));
+//	(	  (SLn1.p.x*SLn1.v.y-SLn1.p.y*SLn1.v.x) * (Ln2.p[0].z-Ln2.p[1].z)
+//		- (SLn1.p.x*SLn1.v.z-SLn1.p.z*SLn1.v.x) * (Ln2.p[0].y-Ln2.p[1].y)
+//		+ (-SLn1.v.x) * (Ln2.p[0].y*Ln2.p[1].z-Ln2.p[0].z*Ln2.p[1].y)
+//		+ (SLn1.p.y*SLn1.v.z-SLn1.p.z*SLn1.v.y) * (Ln2.p[0].x-Ln2.p[1].x)
+//		- (-SLn1.v.y) * (Ln2.p[0].x*Ln2.p[1].z-Ln2.p[0].z*Ln2.p[1].x)
+//		+ (-SLn1.v.z) * (Ln2.p[0].x*Ln2.p[1].y-Ln2.p[0].y*Ln2.p[1].x));
 //}
 
 ////
@@ -91,9 +91,9 @@ namespace MC
 //}
 
 ////
-//void MGeo::SValLnULnS3(						//
+//void MGeo::SValLnSLnS3(						//
 //				const	MgLine3D&	Ln1,		// (I  ) 線分1
-//			    const	MgULine3D&	ULn2,		// (I  ) 直線2
+//			    const	MgSLine3D&	SLn2,		// (I  ) 直線2
 //				const	MgVect3D&	vso,		// (I  ) 線分1と直線2がある平面の法線ベクトル
 //						MREAL* ss,				// (  O) 線分１の始点側Ｓ値
 //												//		(直線2の方向ベクトルと平面の法線ベクトルと
@@ -106,8 +106,8 @@ namespace MC
 //	MgVect3D		N;							//	直線２と垂直ベクトルからなる平面の係数
 //	MREAL		d;								//	基準点から直線1の始点までの同平面に垂直距離
 ////
-//	N = ULn2.v ^ vso;
-//	d =  ULn2.p * N;
+//	N = SLn2.v ^ vso;
+//	d =  SLn2.p * N;
 //	*ss = (Ln1.p[0] * N) - d;
 //	*se = (Ln1.p[1] * N) - d;
 //}

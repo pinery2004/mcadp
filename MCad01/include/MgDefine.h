@@ -30,61 +30,64 @@
 //		図形演算 選択条件／ステータス
 #define		MC_UNDEF			0				// 未設定状態
 
-#define		MC_PARALLEL			010000000000	// ステイタス：平行
-#define		MC_TWIST			004000000000	// ねじれ
-#define		MC_NINT				001				// 交差なし
-#define		MC_INT				002				// 交差あり
-#define		MC_REP				004				// 重なり
-#define		MC_CONNECTION		010				// 接続：平行
-#define		MC_MATCH			020				// 選択条件に合う線分あり
+#define		MC_NINT				0x001			// 交差なし
+#define		MC_INT				0x002			// 交差あり
+#define		MC_REP				0x004			// 重なり
+#define		MC_CONNECTION		0x010			// 接続：平行
+#define		MC_MATCH			0x020			// 選択条件に合う線分あり
+#define		MC_PARALLEL			0x100			// 無接続：平行
+#define		MC_TWIST			0x200			// ねじれ
 
-#define		MC_SAME_DIR			0100			// 辺上同一方向
-#define		MC_REV_DIR			0200			// 辺上逆方向
+#define		MC_SAME_DIR			0x1000			// 辺上同一方向
+#define		MC_REV_DIR			0x2000			// 辺上逆方向
 
-#define		MC_ON_PS			001				// 点が線分の始点上
-#define		MC_INSIDE			002				// 点が線分の内側上
-#define		MC_ON_PE			004				// 点が線分の終点上
+#define		MC_ON_PS			0x001			// 点が線分の始点上
+#define		MC_INSIDE			0x002			// 点が線分の内側上
+#define		MC_ON_PE			0x004			// 点が線分の終点上
+#define		MC_OUT_PS			0x010			// 点が線分の始点側延長線上
+#define		MC_OUT_PE			0x040			// 点が線分の終点側延長線上
 
-#define		MC_LEFT				010				// 点が線分の左側
-#define		MC_ON_LINE			020				// 点が線分または延長直線上
-#define		MC_RIGHT			040				// 点が線分の右側
-#define		MC_CLOSS			100				// 線分が線分の交差
+#define		MC_LEFT				0x100			// 点が線分の左側
+#define		MC_ON_SLINE			0x200			// 点が線分または延長直線上
+#define		MC_RIGHT			0x400			// 点が線分の右側
 
-#define		MC_PS_NEAR			001				// 始点が終点より近い
-#define		MC_PE_NEAR			002				// 終点が始点より近い
+#define		MC_CLOSS			0x1000			// 線分が線分と交差
 
-#define		MC_PS_FAR			002				// 始点が終点より離れている
-#define		MC_PE_FAR			001				// 終点が始点より離れている
+#define		MC_NEAR_PS			0x010			// 始点が終点より近い
+#define		MC_NEAR_PE			0x020			// 終点が始点より近い
 
-#define		MC_LEFT_ROT			010				// 左回転
-#define		MC_RIGHT_ROT		040				// 右回転
-#define		MC_REAL				010				// 実ポリゴン
-#define		MC_HOLE				040				// 穴ポリゴン
+#define		MC_FAR_PS			0x002			// 始点が終点より離れている
+#define		MC_FAR_PE			0x001			// 終点が始点より離れている
 
-#define		MC_OR				001				// 和
-#define		MC_DIFF				002				// 差
-#define		MC_AND				004				// 積
+#define		MC_ROT_LEFT			0x010			// 左回転
+#define		MC_ROT_RIGHT		0x040			// 右回転
+#define		MC_REAL				0x010			// 実ポリゴン
+#define		MC_HOLE				0x040			// 穴ポリゴン
 
-#define		MC_IN_BORDER		001				// 点が多角形の内側
-#define		MC_ON_BORDER		002				// 点が多角形の辺上
-#define		MC_OUT_BORDER		004				// 点が多角形の外側
+#define		MC_OR				0x001			// 和
+#define		MC_DIFF				0x002			// 差
+#define		MC_AND				0x004			// 積
 
-#define		MC_ON_SIDE_SAME		010				// 線分方向と同一方向の辺上
-#define		MC_ON_SIDE_REV		020				// 線分方向と逆方向の辺上
-#define		MC_ON_SIDE			030				// 辺上（線分方向指定無し）
-#define		MC_ON_TOP			040				// 頂点上
+#define		MC_IN_BORDER		0x001			// 点が多角形の内側
+#define		MC_ON_BORDER		0x002			// 点が多角形の辺上
+#define		MC_OUT_BORDER		0x004			// 点が多角形の外側
 
-#define		MC_UPPER			010				// 点が平面の表側（法線ベクトル方向）
-#define		MC_ON_PLANE			020				// 点が平面上
-#define		MC_LOWER			040				// 点が平面の裏側（法線ベクトル逆方向）
+#define		MC_ON_SIDE_SAME		0x010			// 線分方向と同一方向の辺上
+#define		MC_ON_SIDE_REV		0x020			// 線分方向と逆方向の辺上
+#define		MC_ON_SIDE			0x030			// 辺上（線分方向指定無し）
+#define		MC_ON_TOP			0x040			// 頂点上
 
-#define		MC_PS_UPPER			001				// 始点が平面の表側（法線ベクトル方向）
-#define		MC_PS_ON_PLANE		002				// 始点が平面上
-#define		MC_PS_LOWER			004				// 始点が平面の裏側（法線ベクトル逆方向）
+#define		MC_UPPER			0x010			// 点が平面の表側（法線ベクトル方向）
+#define		MC_ON_PLANE			0x020			// 点が平面上
+#define		MC_LOWER			0x040			// 点が平面の裏側（法線ベクトル逆方向）
 
-#define		MC_PE_UPPER			010				// 終点が平面の表側（法線ベクトル方向）
-#define		MC_PE_ON_PLANE		020				// 終点が平面上
-#define		MC_PE_LOWER			040				// 終点が平面の裏側（法線ベクトル逆方向）
+#define		MC_PS_UPPER			0x001			// 始点が平面の表側（法線ベクトル方向）
+#define		MC_PS_ON_PLANE		0x002			// 始点が平面上
+#define		MC_PS_LOWER			0x004			// 始点が平面の裏側（法線ベクトル逆方向）
+
+#define		MC_PE_UPPER			0x010			// 終点が平面の表側（法線ベクトル方向）
+#define		MC_PE_ON_PLANE		0x020			// 終点が平面上
+#define		MC_PE_LOWER			0x040			// 終点が平面の裏側（法線ベクトル逆方向）
 
 //===========================================================================
 //	図形演算ステータス	(システムエラー)

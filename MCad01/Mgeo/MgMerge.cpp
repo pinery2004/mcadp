@@ -35,24 +35,23 @@ namespace MC
 // ---------------------( ２次元 )------------------------------
 //		多角形を直線で切り、直線の指定側の領域を得る			<多角形が穴の場合の考慮不足?>
 //
-MINT MGeo::DividePolygonULine2D(						// (  O) ステイタス
+MINT MGeo::DividePolygonSLine2D(				// (  O) ステイタス
 												//			MC_NINT			(0): 交差なし
 												//			MC_INT			(1): 交差あり
 						MINT		i_Sel,		// (I  ) 選択条件
 												//			MC_LEFT			(010): 左側の領域
 												//			MC_RIGHT		(040): 右側の領域
 				const	MgPolyg2D&	i_pg1,		// (I  ) 多角形
-				const	MgULine2D&	i_uln2,		// (I  ) 直線
+				const	MgSLine2D&	i_sln2,		// (I  ) 直線
 						MgGPolyg2D*	o_pGpg3		// (  O) 穴付き多角形群
 				)
 {
 	MINT		ist = MC_NINT;
 	MINT		ist1;
 	MINT		ic1, icb;
-	MgLine2D		lnw1;
-	MgULine2D	uln2;
+	MgLine2D	lnw1;
+	MgSLine2D	sln2;
 	MINT		sels;
-	MgVect2D		vULn2;
 	
 	MINT		icls;							// 1: 多角形が直線と交差するか、直線の非選択側にありで、多角形の辺に削除部分がある
 
@@ -61,20 +60,20 @@ MINT MGeo::DividePolygonULine2D(						// (  O) ステイタス
 	MGGLINE2( GLn2, MX_PNT2);					// 直線の分割作業用線分エリア
 	MGGPOLYG2( GPgW1, MX_LIN1, MX_LIN0, MX_LIN0); // 直線の選択側のポリゴン群
 
-	uln2.p  = i_uln2.p;
+	sln2.p  = i_sln2.p;
 	if ( i_Sel == MC_LEFT)
-		uln2.v = i_uln2.v;
+		sln2.v = i_sln2.v;
 	else
-		uln2.v = - i_uln2.v;
+		sln2.v = - i_sln2.v;
 
 	//	多角形の分割
-	sels = MC_LEFT | MC_ON_LINE | MC_SAME_DIR;
+	sels = MC_LEFT | MC_ON_SLINE | MC_SAME_DIR;
 	icls = 0;													// 多角形と直線との交差有無 (0:無し、1:有り)
 
 	GLn1.m_n = 0;
 	for ( icb=i_pg1.m_n-1,ic1=0; ic1<i_pg1.m_n; icb=ic1,icb=ic1,ic1++) {
 		lnw1 = MgLine2D( i_pg1.m_p[icb], i_pg1.m_p[ic1]);
-		ist1 = DivideAddLineULine2D( sels, lnw1, uln2, &GLn1);
+		ist1 = DivideAddLineSLine2D( sels, lnw1, sln2, &GLn1);
 		if ( ist1 != (MC_NINT | MC_MATCH))						// 多角形の辺に削除部分あり
 			 icls = 1;
 	}
@@ -91,7 +90,7 @@ MINT MGeo::DividePolygonULine2D(						// (  O) ステイタス
 //
 //	直線の分割
 
-	ist1 = DivideAddULinePolygon2D( MC_IN_BORDER, uln2, i_pg1, &GLn2);
+	ist1 = DivideAddSLinePolygon2D( MC_IN_BORDER, sln2, i_pg1, &GLn2);
 	
 	ist |= ist1;
 //
@@ -108,14 +107,14 @@ MINT MGeo::DividePolygonULine2D(						// (  O) ステイタス
 // ---------------------( ２次元 )------------------------------
 //		穴付き多角形を直線で切り、直線の指定側の領域を得る
 //
-MINT MGeo::DivideGPolygonULine2D(						// (  O) ステイタス
+MINT MGeo::DivideGPolygonSLine2D(						// (  O) ステイタス
 												//			MC_NINT			(0): 交差なし
 												//			MC_INT			(1): 交差あり
 						MINT		i_Sel,		// (I  ) 選択条件
 												//			MC_LEFT			(010): 左側の領域
 												//			MC_RIGHT		(040): 右側の領域
 				const	MgGPolyg2D&	i_Gpg1,		// (I  ) 穴付き多角形
-				const	MgULine2D&	i_uln2,		// (I  ) 直線
+				const	MgSLine2D&	i_sln2,		// (I  ) 直線
 						MgGPolyg2D*	o_pGpg3		// (  O) 穴付き多角形群
 				)
 {
@@ -124,7 +123,7 @@ MINT MGeo::DivideGPolygonULine2D(						// (  O) ステイタス
 	MINT		ic1, ic2, icb;
 	MgLine2D		lnw1;
 	MINT		sels;
-	MgULine2D	uln2;
+	MgSLine2D	sln2;
 	
 	MgPolyg2D*	pg1;
 	MINT		icls;
@@ -134,11 +133,11 @@ MINT MGeo::DivideGPolygonULine2D(						// (  O) ステイタス
 	MGGLINE2( GLn2, MX_PNT2);					// 直線の分割作業用線分エリア
 	MGGPOLYG2( GPgW1, MX_LIN1, MX_LIN0, MX_LIN0); // 直線の選択側のポリゴン群
 
-	uln2.p  = i_uln2.p;
+	sln2.p  = i_sln2.p;
 	if ( i_Sel == MC_LEFT)
-		uln2.v = i_uln2.v;
+		sln2.v = i_sln2.v;
 	else
-		uln2.v = - i_uln2.v;
+		sln2.v = - i_sln2.v;
 
 	//	穴付き多角形の分割
 																// 直線と穴付き多角形の全てのポリゴンとの交点を求める
@@ -152,7 +151,7 @@ MINT MGeo::DivideGPolygonULine2D(						// (  O) ステイタス
 		GLn1.m_n = 0;
 		for ( icb=pg1->m_n-1,ic2=0; ic2<pg1->m_n; icb=ic2,ic2++) {
 			lnw1 = MgLine2D( pg1->m_p[icb], pg1->m_p[ic2]);
-			ist1 = DivideAddLineULine2D( sels, lnw1, uln2, &GLn1);
+			ist1 = DivideAddLineSLine2D( sels, lnw1, sln2, &GLn1);
 			if ( ist1 != (MC_NINT | MC_MATCH))					// 多角形の辺に削除部分あり
 				 icls = 1;
 		}
@@ -170,7 +169,7 @@ MINT MGeo::DivideGPolygonULine2D(						// (  O) ステイタス
 //
 //	直線の分割
 
-	ist1 = DivideAddULineGPolygon2D( MC_IN_BORDER, uln2, i_Gpg1, &GLn2);
+	ist1 = DivideAddSLineGPolygon2D( MC_IN_BORDER, sln2, i_Gpg1, &GLn2);
 	
 	MF_SET_ON( ist, ist1);
 //
@@ -350,10 +349,10 @@ MINT MGeo::Merge2PgtoGPolygon2D(						// (  O) ステイタス
 	ist  = DivideAdd2Polygon2D( sel1, false, i_pg1, i_pg2, &GLnw, o_pGpgo);
 	ist2 = DivideAdd2Polygon2D( sel2, fRev, i_pg2, i_pg1, &GLnw, o_pGpgo);
 	if (GLnw.m_n > 2) {
-		MakeGPolygonInGLine2D( GLnw, &GPgw);							// 正しい方向を持った線分群より領域群を作成する
+		MakeGPolygonInGLine2D( GLnw, &GPgw);					// 正しい方向を持った線分群より領域群を作成する
 		*o_pGpgo += GPgw;										// 領域群を追加する
 	}
-//	
+	
 	MF_SET_ON( ist, ist2);
 	if ( MF_CHECK_ON( ist, MC_INT))
 		MF_SET_OFF( ist, MC_NINT);								// 交差ありなら交差なしのフラグを消去

@@ -55,7 +55,7 @@ void mhInput::GetMarumeKabeLine(
 	for ( ic2=0; ic2<nHaiKabe; ic2++) {											// •Ç
 		ln1 = MgLine2DC( pHaiKabe[ic2]->GetPIPlcIti());
 		rTolDsv = MgTol::SetD( rTol);
-		if ( MGeo::CheckPointOnLine2DWS( Pi, ln1, &ist1))
+		if ( MGeo::CheckPointOnLine2D( Pi, ln1, &ist1))
 			(*pGLn) += MgLine2DC( pHaiKabe[ic2]->GetPIPlcIti());
 		MgTol::SetD( rTolDsv);
 	}

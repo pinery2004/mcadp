@@ -459,17 +459,17 @@ inline_nu void MDFIG::Line3D(
 }
 
 // 直線（3次元）
-inline_nu void MDPMT::ULine3D(
-				const	MgULine3D& i_uLn)		// 直線データ
+inline_nu void MDPMT::SLine3D(
+				const	MgSLine3D& i_uLn)		// 直線データ
 {
 	SetHd( MZCD_ULINE, MZTP_3D, MZWD_ULINE_3D);
-	(MgULine3D&)m_dt[0] = i_uLn;
+	(MgSLine3D&)m_dt[0] = i_uLn;
 }
 
-inline_nu void MDFIG::ULine3D(
-				const	MgULine3D& i_uLn)		// 直線データ
+inline_nu void MDFIG::SLine3D(
+				const	MgSLine3D& i_uLn)		// 直線データ
 {
-	GetpPmt( m_pPmtl->m_n)->ULine3D( i_uLn);
+	GetpPmt( m_pPmtl->m_n)->SLine3D( i_uLn);
 	IncrN( MZWD_ULINE_3D + 1);
 }
 
@@ -555,17 +555,17 @@ inline_nu void MDFIG::Arc3(
 
 
 //// 楕円（3次元）
-//inline_nu MDZELPS3::MDZELPS3( MgSLine3 i_sLn)
+//inline_nu MDZELPS3::MDZELPS3( MgSLine3 i_SLn)
 //{
 //	SetHd( MZELN3, MZCD_3D, 6);
-//	m_sLn = i_sLn;
+//	m_SLn = i_SLn;
 //}
 
 //// 楕円弧（3次元）
-//inline_nu MDZELA3::MDZELA3( MgSLine3 i_sLn)
+//inline_nu MDZELA3::MDZELA3( MgSLine3 i_SLn)
 //{
 //	SetHd( MZELA3, MZCD_3D, 6);
-//	m_sLn = i_sLn;
+//	m_SLn = i_SLn;
 //}
 
 // 面分（3次元）
@@ -599,53 +599,53 @@ inline_nu void MDFIG::IPlane3(
 }
 
 //// 円筒面（3次元）
-//inline_nu MDZCYL3::MDZCYL3( MgSLine3 i_sLn)
+//inline_nu MDZCYL3::MDZCYL3( MgSLine3 i_SLn)
 //{
 //	SetHd( MZSLINE3, MZCD_3D, 6);
-//	m_sLn = i_sLn;
+//	m_SLn = i_SLn;
 //}
 
 //// ３次スプライン曲線の構成点
-//inline_nu MDZSPLC3::MDZSPLC3( MgSLine3 i_sLn)
+//inline_nu MDZSPLC3::MDZSPLC3( MgSLine3 i_SLn)
 //{
 //	SetHd( MZSLINE3, MZCD_3D, 6);
-//	m_sLn = i_sLn;
+//	m_SLn = i_SLn;
 //}
 //
 //// ３次スプライン曲線（3次元）
-//inline_nu MDZSPL3::MDZSPL3( MgSLine3 i_sLn)
+//inline_nu MDZSPL3::MDZSPL3( MgSLine3 i_SLn)
 //{
 //	SetHd( MZSLINE3, MZCD_3D, 6);00.
-//	m_sLn = i_sLn;
+//	m_SLn = i_SLn;
 //}
 //
 //// 寸法表示要素
-//inline_nu MDZMESLC::MDZMESLC( MgSLine3 i_sLn)
+//inline_nu MDZMESLC::MDZMESLC( MgSLine3 i_SLn)
 //{
 //	SetHd( MZSLINE3, MZCD_3D, 6);
-//	m_sLn = i_sLn;
+//	m_SLn = i_SLn;
 //}
 //
 //// 寸法表示(距離)
-//inline_nu MDZMESL3::MDZMESL3( MgSLine3 i_sLn)
+//inline_nu MDZMESL3::MDZMESL3( MgSLine3 i_SLn)
 //{
 //	SetHd( MZSLINE3, MZCD_3D, 6);
-//	m_sLn = i_sLn;
+//	m_SLn = i_SLn;
 //}
 //
 //
 //// 寸法表示(角度)
-//inline_nu MDZMESA3::MDZMESA3( MgSLine3 i_sLn)
+//inline_nu MDZMESA3::MDZMESA3( MgSLine3 i_SLn)
 //{
 //	SetHd( MZSLINE3, MZCD_3D, 6);
-//	m_sLn = i_sLn;
+//	m_SLn = i_SLn;
 //}
 //
 //// 寸法表示(半径 | 直径)
-//inline_nu MDZMESR3::MDZMESR3( MgSLine3 i_sLn)
+//inline_nu MDZMESR3::MDZMESR3( MgSLine3 i_SLn)
 //{
 //	SetHd( MZSLINE3, MZCD_3D, 6);
-//	m_sLn = i_sLn;
+//	m_SLn = i_SLn;
 //}
 
 //// ビットマップファイルヘッダ

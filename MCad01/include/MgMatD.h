@@ -90,20 +90,20 @@ public:
 	//	２Ｄ
 	friend MgPoint2D operator *  ( const MgPoint2D& Pt, const MgMat2D& m1);		// *	座標変換
 	friend MgVect2D operator  *  ( const MgVect2D& v,	const MgMat2D& m1);		// *	座標変換
-	friend MgULine2D operator *  ( const MgULine2D&,	const MgMat2D& m1);		// *	座標変換
+	friend MgSLine2D operator *  ( const MgSLine2D&,	const MgMat2D& m1);		// *	座標変換
 	friend MgLine2D operator  *  ( const MgLine2D& Ln1, const MgMat2D& m1);		// *	座標変換
 	friend MgPoint2D operator *= ( MgPoint2D& Pt,		const MgMat2D& m1);		// *=	座標変換
 	friend MgVect2D operator  *= ( MgVect2D& V,			const MgMat2D& m1);		// *=	座標変換
-	friend MgULine2D operator *= ( MgULine2D&,			const MgMat2D& m1);		// *=	座標変換
+	friend MgSLine2D operator *= ( MgSLine2D&,			const MgMat2D& m1);		// *=	座標変換
 	friend MgLine2D operator  *= ( MgLine2D& Ln,		const MgMat2D& m1);		// *=	座標変換
 	//	３Ｄ
 	friend MgPoint3D operator *  ( const MgPoint3D& Pt,	const MgMat2D& m1);		// *	座標変換
 	friend MgVect3D operator  *  ( const MgVect3D& Vt,	const MgMat2D& m1);		// *	座標変換
-	friend MgULine3D operator *  ( const MgULine3D&,	const MgMat2D& m1);		// *	座標変換
+	friend MgSLine3D operator *  ( const MgSLine3D&,	const MgMat2D& m1);		// *	座標変換
 	friend MgLine3D operator  *  ( const MgLine3D& Ln1, const MgMat2D& m1);		// *	座標変換
 	friend MgPoint3D operator *= ( MgPoint3D& Pt,		const MgMat2D& m1);		// *=	座標変換
 	friend MgVect3D operator  *= ( MgVect3D& Vt,		const MgMat2D& m1);		// *=	座標変換
-	friend MgULine3D operator *= ( MgULine3D&,			const MgMat2D& m1);		// *=	座標変換
+	friend MgSLine3D operator *= ( MgSLine3D&,			const MgMat2D& m1);		// *=	座標変換
 	friend MgLine3D operator  *= ( MgLine3D& Ln,		const MgMat2D& m1);		// *=	座標変換
 
 	void Print( MCHAR* s);														// print
@@ -169,20 +169,20 @@ public:
 	//	２Ｄ
 	friend MgPoint2D operator *  ( const MgPoint2D& Pt, const MgMat3D& M1);		// *	座標変換
 	friend MgVect2D operator  *	 ( const MgVect2D& Vt,	const MgMat3D& M1);		// *	座標変換
-	friend MgULine2D operator *  ( const MgULine2D& uL, const MgMat3D& M1);		// *	座標変換
+	friend MgSLine2D operator *  ( const MgSLine2D& uL, const MgMat3D& M1);		// *	座標変換
 	friend MgLine2D operator  *	 ( const MgLine2D& Ln,	const MgMat3D& M1);		// *	座標変換
 	friend MgPoint2D operator *= ( MgPoint2D& Pt,		const MgMat3D& M1);		// *=	座標変換
 	friend MgVect2D operator  *= ( MgVect2D& Vt,		const MgMat3D& M1);		// *=	座標変換
-	friend MgULine2D operator *= ( MgULine2D& uL,		const MgMat3D& M1);		// *=	座標変換
+	friend MgSLine2D operator *= ( MgSLine2D& uL,		const MgMat3D& M1);		// *=	座標変換
 	friend MgLine2D operator  *= ( MgLine2D& Ln,		const MgMat3D& M1);		// *=	座標変換
 	//	３Ｄ
 	friend MgPoint3D operator *  ( const MgPoint3D& Pt, const MgMat3D& M1);		// *	座標変換
 	friend MgVect3D operator  *	 ( const MgVect3D& Vt,	const MgMat3D& M1);		// *	座標変換
-	friend MgULine3D operator *  ( const MgULine3D& uL, const MgMat3D& M1);		// *	座標変換
+	friend MgSLine3D operator *  ( const MgSLine3D& uL, const MgMat3D& M1);		// *	座標変換
 	friend MgLine3D operator  *	 ( const MgLine3D& Ln,	const MgMat3D& M1);		// *	座標変換
 	friend MgPoint3D operator *= ( MgPoint3D& Pt,		const MgMat3D& M1);		// *=	座標変換
 	friend MgVect3D operator  *= ( MgVect3D& Vt,		const MgMat3D& M1);		// *=	座標変換
-	friend MgULine3D operator *= ( MgULine3D& uL,		const MgMat3D& M1);		// *=	座標変換
+	friend MgSLine3D operator *= ( MgSLine3D& uL,		const MgMat3D& M1);		// *=	座標変換
 	friend MgLine3D operator  *= ( MgLine3D& Ln,		const MgMat3D& M1);		// *=	座標変換
 
 	void Print( MCHAR* s);														// print

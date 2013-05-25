@@ -102,10 +102,10 @@ void IeModel::MhNormKiso(
 						    MgMinMaxR2D( MgLine2DC(pHaiKiso[ic2]->m_lnPlc))))
 				continue;															// MinMaxの重なりなしの場合は比較対象外
 			if ( MGeo::ParallelLine3D( pHaiKiso[ic1]->m_lnPlc, pHaiKiso[ic2]->m_lnPlc)) {	// 平行
-				ist = MGeo::CheckPointOnLine3DWS( pHaiKiso[ic2]->m_lnPlc.p[0], pHaiKiso[ic1]->m_lnPlc, &ist2s1);	// 基礎2の始点が基礎1のどこに乗っているか調べる
-				ist = MGeo::CheckPointOnLine3DWS( pHaiKiso[ic2]->m_lnPlc.p[1], pHaiKiso[ic1]->m_lnPlc, &ist2e1);	// 基礎2の終点が基礎1のどこに乗っているか調べる
-				ist = MGeo::CheckPointOnLine3DWS( pHaiKiso[ic1]->m_lnPlc.p[0], pHaiKiso[ic2]->m_lnPlc, &ist1s2);	// 基礎1の始点が基礎2のどこに乗っているか調べる
-				ist = MGeo::CheckPointOnLine3DWS( pHaiKiso[ic1]->m_lnPlc.p[1], pHaiKiso[ic2]->m_lnPlc, &ist1e2);	// 基礎1の終点が基礎2のどこに乗っているか調べる
+				ist = MGeo::CheckPointOnLine3D( pHaiKiso[ic2]->m_lnPlc.p[0], pHaiKiso[ic1]->m_lnPlc, &ist2s1);	// 基礎2の始点が基礎1のどこに乗っているか調べる
+				ist = MGeo::CheckPointOnLine3D( pHaiKiso[ic2]->m_lnPlc.p[1], pHaiKiso[ic1]->m_lnPlc, &ist2e1);	// 基礎2の終点が基礎1のどこに乗っているか調べる
+				ist = MGeo::CheckPointOnLine3D( pHaiKiso[ic1]->m_lnPlc.p[0], pHaiKiso[ic2]->m_lnPlc, &ist1s2);	// 基礎1の始点が基礎2のどこに乗っているか調べる
+				ist = MGeo::CheckPointOnLine3D( pHaiKiso[ic1]->m_lnPlc.p[1], pHaiKiso[ic2]->m_lnPlc, &ist1e2);	// 基礎1の終点が基礎2のどこに乗っているか調べる
 					// 重なって含まれる基礎を削除する
 				if ( ( ist1s2 & (MC_ON_PS | MC_INSIDE | MC_ON_PE)) &&				//		基礎1が基礎2に重なるまたは含まれる場合				*** 外基礎、内基礎の調査残 ***
 					( ist1e2 & (MC_ON_PS | MC_INSIDE | MC_ON_PE))) {
@@ -124,8 +124,8 @@ void IeModel::MhNormKiso(
 			if ( idivdel == 0) {
 				ist = MGeo::Intr2Line3D( pHaiKiso[ic1]->m_lnPlc, pHaiKiso[ic2]->m_lnPlc, &po);
 				if ( MF_CHECK_OR( ist, (MC_INT | MC_CONNECTION))) {					// 交差
-					ist = MGeo::CheckPointOnLine3DWS( po, pHaiKiso[ic1]->m_lnPlc, &ist1);
-					if ( ist1 == (MC_ON_LINE | MC_INSIDE)) {						//		基礎1の内部で交差があり分割する
+					ist = MGeo::CheckPointOnLine3D( po, pHaiKiso[ic1]->m_lnPlc, &ist1);
+					if ( ist1 == (MC_ON_SLINE | MC_INSIDE)) {						//		基礎1の内部で交差があり分割する
 						idivdel = 1;
 					} else {
 						if ( fPlc[ic2] == 1)										//		追加基礎と端部で交差する基礎
@@ -179,8 +179,8 @@ void IeModel::MhNormKiso(
 							MgMinMaxR2D( MgLine2DC( pHaiKiso[ic2]->m_lnPlc))))
 				continue;															// MinMaxの重なりなしの場合は比較対象外
 			if ( MGeo::ParallelLine3D( pHaiKiso[ic1]->m_lnPlc, pHaiKiso[ic2]->m_lnPlc)) {	// 平行
-				ist = MGeo::CheckPointOnLine3DWS( pHaiKiso[ic2]->m_lnPlc.p[0], pHaiKiso[ic1]->m_lnPlc, &ist2s1);	// 基礎2の始点が基礎1のどこに乗っているか調べる
-				ist = MGeo::CheckPointOnLine3DWS( pHaiKiso[ic2]->m_lnPlc.p[1], pHaiKiso[ic1]->m_lnPlc, &ist2e1);	// 基礎2の終点が基礎1のどこに乗っているか調べる
+				ist = MGeo::CheckPointOnLine3D( pHaiKiso[ic2]->m_lnPlc.p[0], pHaiKiso[ic1]->m_lnPlc, &ist2s1);	// 基礎2の始点が基礎1のどこに乗っているか調べる
+				ist = MGeo::CheckPointOnLine3D( pHaiKiso[ic2]->m_lnPlc.p[1], pHaiKiso[ic1]->m_lnPlc, &ist2e1);	// 基礎2の終点が基礎1のどこに乗っているか調べる
 
 				if ( ( ist2s1 & (MC_ON_PS | MC_INSIDE | MC_ON_PE)) &&				//		基礎2が基礎1に重なるまたは含まれる場合は			*** 外基礎、内基礎の調査残 ***
 					( ist2e1 & (MC_ON_PS | MC_INSIDE | MC_ON_PE))) {
@@ -213,13 +213,13 @@ void IeModel::MhNormKiso(
 
 			ist = MGeo::Intr2Line3D( pHaiKiso[ic1]->m_lnPlc, pHaiKiso[ic2]->m_lnPlc, &po);
 			if ( MF_CHECK_OR( ist, (MC_INT | MC_CONNECTION))) {						// 交差( または 連結)(連結は前の平行処理でスキップされここには入らない)
-				ist = MGeo::CheckPointOnLine3DWS( po, pHaiKiso[ic1]->m_lnPlc, &ist1);
-					if ( ist1 == (MC_ON_LINE | MC_INSIDE))							//		基礎内部で交差あり
+				ist = MGeo::CheckPointOnLine3D( po, pHaiKiso[ic1]->m_lnPlc, &ist1);
+					if ( ist1 == (MC_ON_SLINE | MC_INSIDE))							//		基礎内部で交差あり
 					ASSERT( FALSE);													//			交差点で分割済みなので処理エラー　<ERROR>
 				// 交差基礎の図形作成
-				if ( ist1 == (MC_ON_LINE | MC_ON_PS)) {
+				if ( ist1 == (MC_ON_SLINE | MC_ON_PS)) {
 					iPlcCn[0] = -1;													//			始点側に交差する基礎ありを設定
-				} else if ( ist1 == (MC_ON_LINE | MC_ON_PE)) {
+				} else if ( ist1 == (MC_ON_SLINE | MC_ON_PE)) {
 					iPlcCn[1] = -1;													//			終点側に交差する基礎ありを設定
 				}
 //				fPlc[ic2] = 2;														// 追加修正基礎と交差ありを設定
@@ -282,10 +282,10 @@ void IeModel::MhNormKiso(
 							MgMinMaxR2D( MgLine2DC( pHaiKiso[ic2]->m_lnPlc))))
 				continue;															// MinMaxの重なりなしの場合は比較対象外
 			if ( MGeo::ParallelLine3D( pHaiKiso[ic1]->m_lnPlc, pHaiKiso[ic2]->m_lnPlc)) {	// 平行
-				ist = MGeo::CheckPointOnLine3DWS( pHaiKiso[ic2]->m_lnPlc.p[0], pHaiKiso[ic1]->m_lnPlc, &ist2s1);	// 基礎2の始点が基礎1のどこに乗っているか調べる
-//				if ( !( ist1 & MC_ON_LINE))
+				ist = MGeo::CheckPointOnLine3D( pHaiKiso[ic2]->m_lnPlc.p[0], pHaiKiso[ic1]->m_lnPlc, &ist2s1);	// 基礎2の始点が基礎1のどこに乗っているか調べる
+//				if ( !( ist1 & MC_ON_SLINE))
 //					continue;														//		離れている基礎は結合対象外
-				ist = MGeo::CheckPointOnLine3DWS( pHaiKiso[ic2]->m_lnPlc.p[1], pHaiKiso[ic1]->m_lnPlc, &ist2e1);	// 基礎2の終点が基礎1のどこに乗っているか調べる
+				ist = MGeo::CheckPointOnLine3D( pHaiKiso[ic2]->m_lnPlc.p[1], pHaiKiso[ic1]->m_lnPlc, &ist2e1);	// 基礎2の終点が基礎1のどこに乗っているか調べる
 
 				if ( ( ist2s1 & (MC_ON_PS | MC_INSIDE | MC_ON_PE)) &&				//		基礎2が基礎1に重なるまたは含まれる場合は			*** 外基礎、内基礎の調査残 ***
 					( ist2e1 & (MC_ON_PS | MC_INSIDE | MC_ON_PE))) {
@@ -304,24 +304,24 @@ void IeModel::MhNormKiso(
 
 			ist = MGeo::Intr2Line3D( pHaiKiso[ic1]->m_lnPlc, pHaiKiso[ic2]->m_lnPlc, &po);
 			if ( MF_CHECK_OR( ist, (MC_INT | MC_CONNECTION))) {						// 交差( または 連結)(連結は前の平行処理でスキップされここには入らない)
-				ist = MGeo::CheckPointOnLine3DWS( po, pHaiKiso[ic1]->m_lnPlc, &ist1);
-				if ( ist1 == (MC_ON_LINE | MC_INSIDE))								//		基礎内部で交差あり
+				ist = MGeo::CheckPointOnLine3D( po, pHaiKiso[ic1]->m_lnPlc, &ist1);
+				if ( ist1 == (MC_ON_SLINE | MC_INSIDE))								//		基礎内部で交差あり
 					ASSERT( FALSE);													//			交差点で分割済みなので処理エラー　<ERROR>
-				ist = MGeo::CheckPointOnLine3DWS( po, pHaiKiso[ic2]->m_lnPlc, &ist2);
-				if ( ist2 == (MC_ON_LINE | MC_INSIDE))								//		基礎内部で交差あり
+				ist = MGeo::CheckPointOnLine3D( po, pHaiKiso[ic2]->m_lnPlc, &ist2);
+				if ( ist2 == (MC_ON_SLINE | MC_INSIDE))								//		基礎内部で交差あり
 					ASSERT( FALSE);													//			交差点で分割済みなので処理エラー　<ERROR>
 
 				// 交差基礎の図形作成
                 MgVect3D vtutLn2 = MGeo::UnitizeVect3D( MgVect3DC( pHaiKiso[ic2]->m_lnPlc));
-				MgULine3D ULnR = MgULine3D( pHaiKiso[ic2]->m_pZukei->m_lnZukei[0].p[0], vtutLn2);
-				MgULine3D ULnL = MgULine3D( pHaiKiso[ic2]->m_pZukei->m_lnZukei[1].p[0], vtutLn2);
+				MgSLine3D SLnR = MgSLine3D( pHaiKiso[ic2]->m_pZukei->m_lnZukei[0].p[0], vtutLn2);
+				MgSLine3D SLnL = MgSLine3D( pHaiKiso[ic2]->m_pZukei->m_lnZukei[1].p[0], vtutLn2);
 
 				if ( ( ist1 & (MC_ON_PS | MC_ON_PE)) == ( ist2 & (MC_ON_PS | MC_ON_PE))) {	// 基礎の向きが対向
-					istr = MGeo::IntrLineULine3D( lnZukei[0], ULnL, &p0);
-					istl = MGeo::IntrLineULine3D( lnZukei[1], ULnR, &p1);
+					istr = MGeo::IntrLineSLine3D( lnZukei[0], SLnL, &p0);
+					istl = MGeo::IntrLineSLine3D( lnZukei[1], SLnR, &p1);
 				} else {															// 基礎の向きが同方向
-					istr = MGeo::IntrLineULine3D( lnZukei[0], ULnR, &p0);
-					istl = MGeo::IntrLineULine3D( lnZukei[1], ULnL, &p1);
+					istr = MGeo::IntrLineSLine3D( lnZukei[0], SLnR, &p0);
+					istl = MGeo::IntrLineSLine3D( lnZukei[1], SLnL, &p1);
 				}
 				if ( ist1 & MC_ON_PS) {
 					if ( MF_CHECK_OR( istr, (MC_INT | MC_CONNECTION)))
@@ -329,7 +329,7 @@ void IeModel::MhNormKiso(
 					if ( MF_CHECK_OR( istl, (MC_INT | MC_CONNECTION)))
 						lnZukei[1].p[0] = p1;
 					iPlcCn[0] = -1;													//			始点点側に交差する基礎ありを設定
-				} else if ( ist1 == (MC_ON_LINE | MC_ON_PE)) {
+				} else if ( ist1 == (MC_ON_SLINE | MC_ON_PE)) {
 					if ( MF_CHECK_OR( istr, (MC_INT | MC_CONNECTION)))
 						lnZukei[0].p[1] = p0;
 					if ( MF_CHECK_OR( istl, (MC_INT | MC_CONNECTION)))

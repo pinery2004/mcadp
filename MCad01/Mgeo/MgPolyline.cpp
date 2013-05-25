@@ -133,7 +133,7 @@ void MgPolyl2D::Set( const MgPolyl3D &Pg)
 		m_p[ic1] = MgPoint2DC( Pg.m_p[ic1]);  
 }
 
-//	‰ñ“]•ûŒü‚ð“¾‚é(MC_LEFT_ROT:¶‰ñ“], MC_RIGHT_ROT:‰E‰ñ“])
+//	‰ñ“]•ûŒü‚ð“¾‚é(MC_ROT_LEFT:¶‰ñ“], MC_ROT_RIGHT:‰E‰ñ“])
 MINT MgPolyl2D::Rotation() const
 {
 	MINT	ist = 0;
@@ -150,9 +150,9 @@ MINT MgPolyl2D::Rotation() const
 		Pb = Pc;
 	}
 	if (s > MGPTOL->D_2) {
-		ist = MC_LEFT_ROT;
+		ist = MC_ROT_LEFT;
 	} else if (s < -MGPTOL->D_2) {
-		ist = MC_RIGHT_ROT;
+		ist = MC_ROT_RIGHT;
 	}							
 	return ist;
 }

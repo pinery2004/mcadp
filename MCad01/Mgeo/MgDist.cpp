@@ -25,16 +25,16 @@ namespace MC
 //
 //		直線から点までの正負方向付き距離を求める。
 //
-MREAL MGeo::DistPointULine2D(					// (  O) 直線から点までの距離 >0:左側 <0:右側
+MREAL MGeo::DistPointSLine2D(					// (  O) 直線から点までの距離 >0:左側 <0:右側
 				const	MgPoint2D&	p1,			// (I  ) 点1
-				const	MgULine2D&	ULn2		// (I  ) 直線2
+				const	MgSLine2D&	SLn2		// (I  ) 直線2
 		)
 {
 	MgVect2D	v1s2;
 	MREAL	pa1;								//	直線から点までの距離
 //
-	v1s2 = p1 - ULn2.p;
-	pa1 = ULn2.v ^ v1s2;
+	v1s2 = p1 - SLn2.p;
+	pa1 = SLn2.v ^ v1s2;
 	return pa1;
 }
 //	------------------------
@@ -61,16 +61,16 @@ MREAL MGeo::DistPointLine2D(					// (  O) 線分から点までの距離 >0:左側 <0:右側
 // ---------------------( ３次元 )------------------------------
 //		直線から点までの距離を求める。
 //
-MREAL MGeo::DistPointULine3D(					// (  O) 直線から点までの距離
+MREAL MGeo::DistPointSLine3D(					// (  O) 直線から点までの距離
 				const	MgPoint3D&	p1,			// (I  ) 点1
-				const	MgULine3D&	ULn2		// (I  ) 直線2
+				const	MgSLine3D&	SLn2		// (I  ) 直線2
 		)
 {
 	MgVect3D	v21, va1;
 	MREAL pa1;									//	直線から点までの距離
 //
-	v21 = p1 - ULn2.p;
-	va1 = v21 ^ ULn2.v;
+	v21 = p1 - SLn2.p;
+	va1 = v21 ^ SLn2.v;
 	pa1 = LenVect3D( va1);
 	return pa1;
 }
@@ -100,17 +100,17 @@ MREAL MGeo::DistPointLine3D(					// (  O) 線分から点までの距離
 // ---------------------( ３次元 )------------------------------
 //		直線から点までの正負方向付き距離を求める。
 //
-MREAL MGeo::DistPointULineVect3D(				// (  O) 直線から点までの距離 >0:左側 <0:右側
+MREAL MGeo::DistPointSLineVect3D(				// (  O) 直線から点までの距離 >0:左側 <0:右側
 				const	MgPoint3D&	p1,			// (I  ) 点1
-				const	MgULine3D&	ULn2,		// (I  ) 直線2
+				const	MgSLine3D&	SLn2,		// (I  ) 直線2
 				const	MgVect3D&	vn			// (I  ) 点と直線に直交する単位ベクトル
 		)
 {
 	MgVect3D	v2s1, va1;
 	MREAL pa1;									//	直線から点までの距離
 //
-	v2s1 = p1 - ULn2.p;
-	va1 = ULn2.v ^ v2s1;
+	v2s1 = p1 - SLn2.p;
+	va1 = SLn2.v ^ v2s1;
 	pa1 = va1 * vn;
 	return pa1;
 }
