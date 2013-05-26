@@ -244,9 +244,9 @@ MINT WindowCtrl::WndTerm        ()					// (  O) 0 : 正常  1 : ｴﾗｰ
 //  カレントウィンドウを追加する
 //						(4th 子ビュー作成開始時にSetCurWnd実行後に設定)
 
-MINT WindowCtrl::AddCurWnd()							// (  O) 0 : 正常  1 : ｴﾗｰ
+MINT WindowCtrl::AddCurWnd()							// (  O) 0 : 正常  1 : ｴﾗｰ ( 同一種のウィンドウが既にあり)
 {
-	MINT		ist = 1;
+	MINT		ist;
 	MmWndInfo	WndInfo(z_wWndC.m_iWndSyu, z_wWndC.m_iZuSyu, z_wWndC.m_iKai, z_wWndC.m_iZuNum);
 
 	WndInfo.SetCursor( IDC_CROSS1);
@@ -254,10 +254,15 @@ MINT WindowCtrl::AddCurWnd()							// (  O) 0 : 正常  1 : ｴﾗｰ
 	WndInfo.SetWnd( z_wWndC.m_pWnd);
 	WndInfo.SetFrame( z_wWndC.m_pChildFrm);
 
+	WndInfo.Print( "AddCurWnd");
+
+	// 同一種のウィンドウがあるか確認して無しなら追加、有りはエラー
 	if ( WindowCtrl::GetWndInfoBySyu( z_wWndC.m_iWndSyu, z_wWndC.m_iZuSyu, z_wWndC.m_iKai, z_wWndC.m_iZuNum) == NULL) {
 		WndInfo.CreateMDC();
 		z_lWnd.Inject( &WndInfo);
 		ist = 0;
+	} else {
+		ist = 1;												// 同一種のウィンドウが既にあり
 	}
 	return( ist);
 }

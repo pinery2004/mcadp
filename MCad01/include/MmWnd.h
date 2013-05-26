@@ -150,15 +150,6 @@ public :
 						{ return m_pDrag;}
 	void	DeleteDrag();
 
-//	void	SetMemBmp( CBitmap*	pMemBmp)
-//						{ m_pMemBmp = pMemBmp;}
-//	CBitmap* GetMemBmp()
-//						{ return m_pMemBmp;}
-//	void	SetOldMemBmp( CBitmap*	pOldMemBmp)
-//						{ m_pOldMemBmp = pOldMemBmp;}
-//	CBitmap* GetOldMemBmp()
-//						{ return m_pOldMemBmp;}
-
 	void	SetMemDC( CDC*	pMemDC)
 						{ m_pMemDC = pMemDC;}
 	CDC*	GetMemDC()
@@ -169,6 +160,13 @@ public :
 	void	AsignMDC();
 	void	FreeMDC();
 	void 	ClearMDC();
+	void 	Print( char* cHdr)	{
+						TRACE( "%s ウィンドウ種類 = %d, 図種類 = %d, 階 = %d, 図番号 = %d, 方向 = %d,"
+							   "ウィンドウ = %x, フレーム = %x\n",
+							   cHdr, m_iWndSyu, m_iZuSyu, m_iKai, m_iZuNum, m_iHoko, m_pWnd, m_pChildFrm);
+	}
+
+
 };
 
 #ifdef DLL_EXPORT
@@ -293,7 +291,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////////
 	////  ウィンドウを追加する
 
-	//static MINT AddWnd(									// (  O) ステイタス 0:正常  1:エラー
+	//static MINT AddWnd(								// (  O) ステイタス 0:正常  1:エラー
 	//						MINT		iWndSyu,		// (I  ) ウィンドウ種類(1,2,3,4,5)
 	//						MINT		iZuSYu,			// (I  ) 図種類
 	//						MINT		iKai,			// (I  ) 階

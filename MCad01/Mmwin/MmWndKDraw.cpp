@@ -68,7 +68,7 @@ MINT WindowCtrl::ReDrawAllWnd()
 			pWndInfo1->GetGridNum( nGrid);
 			pWndInfo->SetGridNum( nGrid);
 			pWndInfo->SetMinMaxRS( pWndInfo->GetMinMaxGA( pWndInfo));	//	実座標(Min/Max)
-			pWndInfo->SetMat();									// 座標変換用マトリックスの設定		//ZZ? なぜ無いの　追加 070901
+			pWndInfo->SetMat();									// 座標変換用マトリックスの設定
 		}
 		WindowCtrl::DrawWndMDC( pWndInfo);
 		pWndInfo->GetWnd()->PostMessage(WM_PAINT);				// 再表示のメッセージを送り処理の終了を待たずに次へ移る
@@ -112,7 +112,7 @@ MINT WindowCtrl::DrawWnd(
 /////////////////////////////////////////////////////////////////////////////
 //  ウィンドウイメージメモリＤＣに組図を表示
 
-void WindowCtrl::DrawWndMDC(									// ステイタス　0:正常  1:エラー
+void WindowCtrl::DrawWndMDC(					// ステイタス　0:正常  1:エラー
 						MmWndInfo*	i_pWndInfo	// ウィンドウ管理情報
 				)
 {
