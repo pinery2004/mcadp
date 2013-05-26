@@ -436,9 +436,9 @@ void CMainFrame::OnCbnSelchangeCombo1()
 	MC::mhPartsSpec* pPartsSpec;
 	pPartsSpec = MC::BuzaiCode::MhGetpPartsSpec( MC::z_mnIA.GetCurPartsNmId());
 	if ( pPartsSpec->GetPTCdBr() >= MP_BR_SENBUN || MC::z_mnIA.GetMode() == MP_MD_DELETE)
-		MC::WindowCtrl::XqtMenuCmd( IDC_PARTSCREATE);			//	部材入力コマンド
+		MC::CmdCtrl::XqtMenuCmd( IDC_PARTSCREATE);				//	部材入力コマンド
 	else 
-		MC::WindowCtrl::XqtMenuCmd( IDC_CANCELCMD);				//	コマンドキャンセル
+		MC::CmdCtrl::XqtMenuCmd( IDC_CANCELCMD);				//	コマンドキャンセル
 }
 
 
@@ -458,7 +458,7 @@ void CMainFrame::OnCbnSelchangeCombo2()
 
 	MC::z_mnIA.SelectComboPartsMbrByKmId( m_iCombo2);
 //S	MC::Window::CurWndFocus();
-	MC::WindowCtrl::XqtMenuCmd( IDC_PARTSCREATE);				//	部品入力
+	MC::CmdCtrl::XqtMenuCmd( IDC_PARTSCREATE);					//	部品入力
 }
 
 // INPUT リボンバー　入力点区分

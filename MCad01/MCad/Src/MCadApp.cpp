@@ -565,7 +565,7 @@ void CMCadApp::OnMainMenuP( UINT nID)
 			MC::GridDispCtrl::SetGridNum( NULL);								// 初期設定
 			MC::GridDispCtrl::XqtGridNum();
 		}
-		MC::WindowCtrl::XqtMenuCmd( nID);										//	メニューコマンド
+		MC::CmdCtrl::XqtMenuCmd( nID);											//	メニューコマンド
 	}
 }
 
@@ -583,7 +583,7 @@ void CMCadApp::OnSubMenuP( UINT nID)
 {
 	// TODO : ここにコマンド ハンドラ コードを追加します。
 	// コマンドキュー
-	MC::WindowCtrl::XqtMenuCmd( nID);											//	メニューコマンド
+	MC::CmdCtrl::XqtMenuCmd( nID);												//	メニューコマンド
 
 }
 
@@ -687,7 +687,7 @@ void CMCadApp::OnBnClickedRadioYane()
 	MC::z_mmIA.InitComboParts();
 	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
-	MC::WindowCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
+	MC::CmdCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
 
 
@@ -707,7 +707,7 @@ void CMCadApp::OnBnClickedRadioTenjo()
 	MC::z_mmIA.InitComboParts();
 	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
-	MC::WindowCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
+	MC::CmdCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
 
 
@@ -727,7 +727,7 @@ void CMCadApp::OnBnClickedRadioTairyoku()
 	MC::z_mmIA.InitComboParts();
 	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
-	MC::WindowCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
+	MC::CmdCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
 
 
@@ -747,7 +747,7 @@ void CMCadApp::OnBnClickedRadioKabe()
 	MC::z_mmIA.InitComboParts();
 	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
-	MC::WindowCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
+	MC::CmdCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
 
 
@@ -767,7 +767,7 @@ void CMCadApp::OnBnClickedRadioYuka()
 	MC::z_mmIA.InitComboParts();
 	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
-	MC::WindowCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
+	MC::CmdCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
 
 
@@ -784,7 +784,7 @@ void CMCadApp::OnBnClickedRadioKoya()
 	MC::z_mnIA.SetKCdGp( MP_GP_KOYA);
 	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
-	MC::WindowCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
+	MC::CmdCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
 
 
@@ -804,7 +804,7 @@ void CMCadApp::OnBnClickedRadioDodai()
 	MC::z_mmIA.InitComboParts();
 	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
-	MC::WindowCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
+	MC::CmdCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
 
 
@@ -824,7 +824,7 @@ void CMCadApp::OnBnClickedRadioKiso()
 	MC::z_mmIA.InitComboParts();
 	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
-	MC::WindowCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
+	MC::CmdCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
 
 
@@ -844,7 +844,7 @@ void CMCadApp::OnBnClickedRadioBuzai()
 	MC::z_mmIA.InitComboParts();
 	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
-	MC::WindowCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
+	MC::CmdCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
 
 
@@ -864,7 +864,7 @@ void CMCadApp::OnBnClickedRadioKanagu()
 	MC::z_mmIA.InitComboParts();
 	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
-	MC::WindowCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
+	MC::CmdCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
 
 
@@ -884,7 +884,7 @@ void CMCadApp::OnBnClickedRadioPanel()
 	MC::z_mmIA.InitComboParts();
 	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
-	MC::WindowCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
+	MC::CmdCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
 
 
@@ -904,7 +904,7 @@ void CMCadApp::OnBnClickedRadioOther()
 	MC::z_mmIA.InitComboParts();
 	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
-	MC::WindowCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
+	MC::CmdCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
 
 

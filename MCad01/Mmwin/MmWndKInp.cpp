@@ -38,7 +38,7 @@ namespace MC
 
 /////////////////////////////////////////////////////////////////////////////
 //	コマンドメニュー処理
-void WindowCtrl::XqtMenuCmd(
+void CmdCtrl::XqtMenuCmd(
 						MINT		i_idCmd			// コマンドID
 				) 
 {

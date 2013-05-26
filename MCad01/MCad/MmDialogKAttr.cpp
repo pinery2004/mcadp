@@ -218,9 +218,9 @@ void CMmDialogKAttr::OnCbnSelchangeCmbkBzi1()
 
 	MC::mhPartsSpec* pPartsSpec	= MC::BuzaiCode::MhGetpPartsSpec( MC::z_mnIA.GetCurPartsNmId());
 	if ( pPartsSpec->GetPTCdBr() >= MP_BR_SENBUN || MC::z_mnIA.GetMode() == MP_MD_DELETE)
-		MC::WindowCtrl::XqtMenuCmd( IDC_PARTSCREATE);							// 部材入力コマンド
+		MC::CmdCtrl::XqtMenuCmd( IDC_PARTSCREATE);								// 部材入力コマンド
 	else 
-		MC::WindowCtrl::XqtMenuCmd( IDC_CANCELCMD);								// コマンドキャンセル
+		MC::CmdCtrl::XqtMenuCmd( IDC_CANCELCMD);								// コマンドキャンセル
 }
 
 
@@ -238,7 +238,7 @@ void CMmDialogKAttr::OnCbnSelchangeCmbkBzi2()
 	MC::z_mmIA.SelectComboPartsMbrByKmId( MC::System::GetpMainFrame()->m_iCombo2);			// 寸法形式を設定
 
 	MC::z_mnIA.SelectComboPartsMbrByKmId( MC::System::GetpMainFrame()->m_iCombo2);
-	MC::WindowCtrl::XqtMenuCmd( IDC_PARTSCREATE);								//	部品入力
+	MC::CmdCtrl::XqtMenuCmd( IDC_PARTSCREATE);									//	部品入力
 }
 
 
