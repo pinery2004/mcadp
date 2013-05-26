@@ -104,7 +104,7 @@ MINT mhInput::GetArea(
 	MINT 		iCdInpKb;
 	MINT		iSeq = 0;						// 入力シークエンス
 
-	MmWndInfo* pWndInfo = WindowCtrl::MmWndKGetCurWnd();		// カレントウィンドウ取得
+	MmWndInfo* pWndInfo = WindowCtrl::GetCurWndInfo();			// カレントウィンドウ取得
 	
 	iCdInpKb = z_mnIA.GetComboInpKbCd();
 
@@ -230,7 +230,7 @@ MINT mhInput::GetLen2Pt(
 																// 屋根面が見つかれば、以降はその屋根面上の部材とみなし、
 																// 屋根面が見つからなければ、初期の状態となる
 					mhHaitiIn::SetCurRfm( mhHaitiIn::SrchRfm( MC_PRI_MIN_AREA, io_ptln_org[0]));
-					WindowCtrl::MmWndKReDraw();
+					WindowCtrl::ReDrawWnd();
 					continue;
 				}
 			}
@@ -282,8 +282,8 @@ MINT mhInput::GetLen2Pt(
 			if ( irt == MTRT_SYSTEMSTOP || irt == MTRT_CAN)
 				break;
 			if ( irt == MTRT_RBTNDWN) {							// マウス右ボタン
-				WindowCtrl::MmWndKReDraw();
-				Window::DragModeEnd();								//	ドラッギングモード終了（ラバーバンド図形表示モード）
+				WindowCtrl::ReDrawWnd();
+				Window::DragModeEnd();							//	ドラッギングモード終了（ラバーバンド図形表示モード）
 				iSeq = 1;										//	２点目より再入力する
 				continue;
 			}
@@ -451,7 +451,7 @@ void mhInput::Marume(
 	MgLine2D		Lnm[2];
 	MGGLINE2( GLnk, 10);
 
-	MmWndInfo* pWndInfo = WindowCtrl::MmWndKGetCurWnd();		// カレントウィンドウを取得する
+	MmWndInfo* pWndInfo = WindowCtrl::GetCurWndInfo();			// カレントウィンドウを取得する
 
 	MINT iKai = z_mnIA.GetInpKai();
 

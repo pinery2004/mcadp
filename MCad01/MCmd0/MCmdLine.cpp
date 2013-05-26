@@ -246,13 +246,13 @@ void MCmdLineAdd()
 			IeModel::MhKisoSetUpFlg();							//		壁データの場合は接続壁を追加、修正する
 		IeModel::MhNormKiso( 1);
 		// 再表示し修正を反映する
-		WindowCtrl::MmWndKReDraw();
+		WindowCtrl::ReDrawWnd();
 		// 正常終了で、エラー標示をクリアする
 		Msg::ClearErrorMsg();
 	}
 	if ( mhHaitiIn::GetCurRfm()) {
 		mhHaitiIn::SetCurRfm( NULL);							// 屋根面の選択を開放する
-		WindowCtrl::MmWndKReDraw();
+		WindowCtrl::ReDrawWnd();
 	}
 	Msg::OperationMsg( MC_OPRT_BASE);							// ステイタスバーの操作表示部へ""を表示
 }
@@ -288,7 +288,7 @@ void MCmdLineAdd()
 void MCmdStructRoof()
 {
 	MINT	ist1;
-	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
+	MmWndInfo*	pWndInfo = WindowCtrl::GetCurWndInfo();					// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();
 
 	ist1 = z_mnIA.SetRibbonBarEnt( MP_GP_YANE, MP_BR_BUZAI, Mstr( "垂木"), Mstr( "204"));
@@ -302,7 +302,7 @@ void MCmdStructRoof()
 void MCmdStructCeiling()
 {
 	MINT	ist1;
-	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
+	MmWndInfo*	pWndInfo = WindowCtrl::GetCurWndInfo();					// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();
 
 	ist1 = z_mnIA.SetRibbonBarEnt( MP_GP_TENJO, MP_BR_BUZAI, Mstr( "天井根太"), Mstr( "204"));
@@ -316,7 +316,7 @@ void MCmdStructCeiling()
 void MCmdStructWall()
 {
 	MINT	ist1;
-	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
+	MmWndInfo*	pWndInfo = WindowCtrl::GetCurWndInfo();					// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();
 
 	ist1 = z_mnIA.SetRibbonBarEnt( MP_GP_KABE, MP_BR_BUZAI, Mstr( "たて枠"), Mstr( "204"));
@@ -331,7 +331,7 @@ void MCmdStructFloor()
 {
 	MINT	ist1;
 
-	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
+	MmWndInfo*	pWndInfo = WindowCtrl::GetCurWndInfo();					// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();
 
 //S	CMainFrame*	pMainFrame = (CMainFrame*)AfxGetMainWnd();
@@ -355,7 +355,7 @@ void MCmdStructFloor()
 void MCmdStructDodai()
 {
 	MINT	ist1;
-	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
+	MmWndInfo*	pWndInfo = WindowCtrl::GetCurWndInfo();					// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();
 
 	ist1 = z_mnIA.SetRibbonBarEnt( MP_GP_DODAI, MP_BR_BUZAI, Mstr( "土台"), Mstr( "404G"));
@@ -369,7 +369,7 @@ void MCmdStructDodai()
 void MCmdKiso()
 {
 	MINT	ist1;
-	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
+	MmWndInfo*	pWndInfo = WindowCtrl::GetCurWndInfo();					// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();
 
 	ist1 = z_mnIA.SetRibbonBarEnt( MP_GP_KISO, MP_BR_OTHER, Mstr( "外部布基礎"), Mstr( "120"));

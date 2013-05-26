@@ -29,7 +29,7 @@ static CMmDialogGrid*	z_pDlgGrid = NULL;						// グリッドダイアログ
 
 void MCmdGridNum()
 {
-	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();				// カレントウィンドウを取得する
+	MmWndInfo*	pWndInfo = WindowCtrl::GetCurWndInfo();			// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();
 	
 	pWnd->PostMessage(WM_MYMESSAGEGRIDNUM);
@@ -55,14 +55,14 @@ void MCmdGridNumInp		(
 
 /////////////////////////////////////////////////////////////////////////////
 //	グリッド数変更終了
-void MCmdGridNumEnd()
+void MCmdEndGridNum()
 {
 	z_pDlgGrid = NULL;
 }
 
 /////////////////////////////////////////////////////////////////////////////
 //	グリッド数変更キャンセル
-void MmGridNumCancel()
+void MmCancelGridNum()
 {
 	if (z_pDlgGrid)
 //		z_pDlgGrid->SendMessage(WM_CLOSE);

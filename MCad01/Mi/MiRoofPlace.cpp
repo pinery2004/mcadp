@@ -88,7 +88,7 @@ exit:
 
 /////////////////////////////////////////////////////////////////////////////
 //	âÆç™Çï\é¶Ç∑ÇÈ
-void WindowCtrl::MmWndKDrawRoof(
+void WindowCtrl::DrawRoof(
 						msCod*		pCod,			// ç¿ïWån
 						MINT		iKaiC,			// äK  	(1,2,3)
 						MINT		iGpC			// ç\ê¨

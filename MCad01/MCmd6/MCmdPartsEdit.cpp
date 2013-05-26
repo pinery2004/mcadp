@@ -28,7 +28,7 @@ static	CMmDialogPartsEdit* z_pDlgPartsEdit = NULL;	// モードレスバージョンダイア
 
 void MCmdPartsEdit()
 {
-	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
+	MmWndInfo*	pWndInfo = WindowCtrl::GetCurWndInfo();					// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();
 	
 	pWnd->PostMessage(WM_MYMESSAGEPARTSEDIT);

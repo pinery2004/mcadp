@@ -62,7 +62,7 @@ void
 MmDrag::RedrawAfter( MmWndInfo* pWndInfo)
 {
 
-	WindowCtrl::MmWndKDrawMDC( pWndInfo);
+	WindowCtrl::DrawWndMDC( pWndInfo);
 	pWndInfo->GetWnd()->PostMessage(WM_PAINT);
 }
 

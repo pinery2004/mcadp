@@ -47,7 +47,7 @@ void msmsg::MsgBox(								// ｽﾃｰﾀｽ
 {
 	MmWndInfo* pWndInfo;
 	CWnd* pWnd;
-	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
+	pWndInfo = WindowCtrl::GetCurWndInfo();					// カレントウィンドウを取得する
 	if ( pWndInfo) {
 		pWnd = pWndInfo->m_pWnd;
 		pWnd->MessageBox( i_pcText, i_pcCaption, MB_OK | MB_TOPMOST);
@@ -164,7 +164,7 @@ void 	msmsg::SysError(
 //U	AfxGetMainWnd( )->PostMessage( WM_CLOSE, 0, 0);								// メインウィンドウ取得・終了
 	CMainFrame*	pMainFrame = MC::System::GetpMainFrame();
 	pMainFrame->PostMessage( WM_CLOSE);
-	WindowCtrl::MmWndKDeleteAll();
+	WindowCtrl::DeleteAllWnd();
 }
 
 //===========================================================================

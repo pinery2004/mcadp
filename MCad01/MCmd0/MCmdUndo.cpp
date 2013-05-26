@@ -20,12 +20,12 @@ void MCmdLine( CWnd* pWnd);
 //	ＵＮＤＯ
 void MCmdUndo()
 {
-	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
+	MmWndInfo*	pWndInfo = WindowCtrl::GetCurWndInfo();					// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();
 
 	HaitiCmd::MmUndo();
 
-	WindowCtrl::MmWndKReDraw();
+	WindowCtrl::ReDrawWnd();
 
 //	ist1 = z_mn.SetRibbonBar( MP_GP_YUKA, MP_BR_BUZAI, Mstr( "床根太"), Mstr( "210"));
 //	if ( ist1 == 0)
@@ -36,12 +36,12 @@ void MCmdUndo()
 //	ＲＥＤＯ
 void MCmdRedo()
 {
-	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
+	MmWndInfo*	pWndInfo = WindowCtrl::GetCurWndInfo();					// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();
 
 	HaitiCmd::MmRedo();
 
-	WindowCtrl::MmWndKReDraw();
+	WindowCtrl::ReDrawWnd();
 
 	MCmdLine( pWnd);
 }
@@ -52,7 +52,7 @@ void MCmdClearRedo()
 {
 	HaitiCmd::MdClearRedo();
 
-	WindowCtrl::MmWndKReDraw();
+	WindowCtrl::ReDrawWnd();
 }
 
 } // namespace MC

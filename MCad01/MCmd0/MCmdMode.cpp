@@ -22,7 +22,7 @@ void MCmdLine( CWnd* pWnd);
 
 void MCmdMdCreate()
 {
-	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
+	MmWndInfo*	pWndInfo = WindowCtrl::GetCurWndInfo();					// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();
 
 	z_mnIA.SetMode( MP_MD_CREATE);
@@ -35,7 +35,7 @@ void MCmdMdCreate()
 
 void MCmdMdDelete()
 {
-	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
+	MmWndInfo*	pWndInfo = WindowCtrl::GetCurWndInfo();					// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();
 
 	z_mnIA.SetMode( MP_MD_DELETE);
@@ -123,7 +123,7 @@ void MCmdBaseHeight()
 
 void MCmdPartsEdit()
 {
-	MmWndInfo*	pWndInfo = MmWndKGetCurWnd();					// カレントウィンドウを取得する
+	MmWndInfo*	pWndInfo = WndKGetCurWnd();								// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();
 	
 	pWnd->PostMessage(WM_MYMESSAGEPARTSEDIT);

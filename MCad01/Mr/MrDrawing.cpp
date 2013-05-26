@@ -31,7 +31,7 @@ namespace MC
 /////////////////////////////////////////////////////////////////////////////
 //  ‚c‚b‚É\‘¢}‚ð•`‚­
 
-void WindowCtrl::MmDrawStructure(
+void WindowCtrl::DrawStructure(
 				MmWndInfo*	pWndInfo,							// (I  ) ƒEƒBƒ“ƒhƒEŠÇ—î•ñ
 				msCod*		pCod
 				)
@@ -62,14 +62,14 @@ void WindowCtrl::MmDrawStructure(
 	pCod->SetMat();
 
 	// ‚c‚b‚É•\Ž¦
-	WindowCtrl::MmWndKDrawGrid( pWndInfo, pCod);
+	WindowCtrl::DrawGridLine( pWndInfo, pCod);
 	MINT iKaiC = z_mnIA.GetInpKai();							// Œ»Ý‚ÌŠK
 	MINT iGpC = z_mnIA.GetKCdGp();								// Œ»Ý‚Ì\¬
-	WindowCtrl::MmWndKDrawKabe( pCod, iKaiC, iGpC);
-	WindowCtrl::MmWndKDrawKiso( pCod, iKaiC, iGpC);
-	WindowCtrl::MmWndKDrawParts( pCod, iKaiC, iGpC);
-	WindowCtrl::MmWndKDrawRoof( pCod, iKaiC, iGpC);
-//	WindowCtrl::MmWndKDrawTemp( pWndInfo, pCod);
+	WindowCtrl::DrawKabeSin( pCod, iKaiC, iGpC);
+	WindowCtrl::DrawKisoSin( pCod, iKaiC, iGpC);
+	WindowCtrl::DrawHaitiParts( pCod, iKaiC, iGpC);
+	WindowCtrl::DrawRoof( pCod, iKaiC, iGpC);
+//	WindowCtrl::DrawWndTemp( pWndInfo, pCod);
 
 	//	ƒ}ƒbƒvƒ‚[ƒh‚ð–ß‚·
 	pWndInfo->m_pMemDC->SetMapMode( iOldMM);

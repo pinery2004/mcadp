@@ -26,12 +26,12 @@ static	CMmDialogHist* z_pDlgHist = NULL;	// モードレスバージョンダイアログの表示
 
 void MCmdHist()
 {
-	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
+	MmWndInfo*	pWndInfo = WindowCtrl::GetCurWndInfo();			// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();
 	
-	pWnd->PostMessage(WM_MYMESSAGEHIST);							// OK: 1st
-//	pWnd->SendMessage(WM_MYMESSAGEHIST);							// OK:
-//	MCmdHistInp( NULL);												// NG: 後ろに隠れてしまう
+	pWnd->PostMessage(WM_MYMESSAGEHIST);						// OK: 1st
+//	pWnd->SendMessage(WM_MYMESSAGEHIST);						// OK:
+//	MCmdHistInp( NULL);											// NG: 後ろに隠れてしまう
 }
 
 /////////////////////////////////////////////////////////////////////////////

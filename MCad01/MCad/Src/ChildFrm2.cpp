@@ -153,7 +153,7 @@ BOOL CChildFrame2::Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD d
 						  CMDIFrameWnd* pParentWnd , CCreateContext* pContext)
 {
 	// TODO: ここに特定なコードを追加するか、もしくは基本クラスを呼び出してください。
-	MC::WindowCtrl::MmWndSetFrameC( 2, this);
+	MC::WindowCtrl::SetCurWndFrame( 2, this);
 
 	return CMDIChildWndEx::Create(lpszClassName, lpszWindowName, dwStyle, rect, pParentWnd, pContext);
 }
@@ -162,8 +162,8 @@ void CChildFrame2::OnClose()
 {
 	// TODO: ここにメッセージ ハンドラー コードを追加するか、既定の処理を呼び出します。
 
-	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindFrm( this);
-	MC::WindowCtrl::MmWndKDelete( pWndInfo);
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoOfFrm( this);
+	MC::WindowCtrl::DeleteWnd( pWndInfo);
 
 	CMDIChildWndEx::OnClose();
 }

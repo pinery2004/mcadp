@@ -152,7 +152,7 @@ MINT Window::DragObject(
 			z_nRDragging = 1;
 			break;
 	}
-	z_pRDragWndInfo = WindowCtrl::MmWndKGetCurWnd();			// ラバーバンド図形表示先カレントウィンドウを設定する
+	z_pRDragWndInfo = WindowCtrl::GetCurWndInfo();				// ラバーバンド図形表示先カレントウィンドウを設定する
 	z_fDragMode = true;											// ラバーバンド図形表示モード開始
 
 	Window::EraseDragging();

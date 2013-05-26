@@ -64,7 +64,7 @@ void Msg::SetSelStatusBar(
 	} else {
 		return;
 	}
-	pWndInfo = WindowCtrl::MmWndKGetCurWnd();							// カレントウィンドウ取得
+	pWndInfo = WindowCtrl::GetCurWndInfo();								// カレントウィンドウ取得
 	if ( pWndInfo) {
 		pWnd = pWndInfo->GetWnd();
 		pWnd->PostMessage(WM_MYMESSAGESTATUSBAR);						// ステイタスバー表示用メッセージハンドラを起動する

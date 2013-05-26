@@ -38,7 +38,7 @@ namespace MC
 
 /////////////////////////////////////////////////////////////////////////////
 //	コマンドメニュー処理
-void WindowCtrl::MmWndKCmdXqt(
+void WindowCtrl::XqtMenuCmd(
 						MINT		i_idCmd			// コマンドID
 				) 
 {
@@ -55,7 +55,7 @@ MINT ViewInp::LButtonDown(
 {
 	MINT		ist = 0;
 
-	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKFindWnd( pWnd);
+	MmWndInfo*	pWndInfo = WindowCtrl::GetWndInfoObWnd( pWnd);
 
 	MgPoint2D	ptMouthR = pWndInfo->DPtoRP( ptMouthD);			// 実座標へ変換
 
@@ -93,7 +93,7 @@ MINT ViewInp::LButtonUp(
 {
 	MINT		ist = 0;
 
-	MmWndInfo* pWndInfo = WindowCtrl::MmWndKFindWnd( pWnd);
+	MmWndInfo* pWndInfo = WindowCtrl::GetWndInfoObWnd( pWnd);
 
 	// ドラッギングズーム操作
 	if ( pWndInfo->GetDrag()) {
@@ -120,7 +120,7 @@ MINT ViewInp::RButtonDown(
 {
 	MINT				ist = 0;
 
-	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKFindWnd( pWnd);
+	MmWndInfo*	pWndInfo = WindowCtrl::GetWndInfoObWnd( pWnd);
 
 	MgPoint2D	ptMouthR = pWndInfo->DPtoRP( ptMouthD);			// 実座標へ変換
 
@@ -147,7 +147,7 @@ MINT ViewInp::RButtonUp(
 				) 
 {
 	MINT		ist = 0;
-	MmWndInfo* pWndInfo = WindowCtrl::MmWndKFindWnd( pWnd);
+	MmWndInfo* pWndInfo = WindowCtrl::GetWndInfoObWnd( pWnd);
 
 	// ドラッギング移動操作終了
 	pWndInfo->DeleteDrag();
@@ -168,7 +168,7 @@ MINT ViewInp::LButtonDblClk(
 {
 	MINT		ist = 0;
 
-	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKFindWnd( pWnd);
+	MmWndInfo*	pWndInfo = WindowCtrl::GetWndInfoObWnd( pWnd);
 
 	MgPoint2D	ptMouthR = pWndInfo->DPtoRP( ptMouthD);			// 実座標へ変換
 
@@ -187,7 +187,7 @@ MINT ViewInp::RButtonDblClk(
 {
 	MINT		ist = 0;
 
-	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKFindWnd( pWnd);
+	MmWndInfo*	pWndInfo = WindowCtrl::GetWndInfoObWnd( pWnd);
 
 	MgPoint2D	ptMouthR = pWndInfo->DPtoRP( ptMouthD);			// 実座標へ変換
 
@@ -206,7 +206,7 @@ MINT ViewInp::MButtonDblClk(
 {
 	MINT		ist = 0;
 
-	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKFindWnd( pWnd);
+	MmWndInfo*	pWndInfo = WindowCtrl::GetWndInfoObWnd( pWnd);
 
 	MgPoint2D	ptMouthR = pWndInfo->DPtoRP( ptMouthD);			// 実座標へ変換
 
@@ -259,7 +259,7 @@ MINT ViewInp::MouseMove(
 	MgPoint2D	ptMouthR;
 	MgPolyg2D	pgHitBzi;
 
-	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKFindWnd( pWnd);
+	MmWndInfo*	pWndInfo = WindowCtrl::GetWndInfoObWnd( pWnd);
 
 	MINT iOldMM = pWndInfo->SetMapMode( NULL);
 
@@ -313,7 +313,7 @@ MINT ViewInp::MButtonDown(
 {
 	MINT		ist = 0;
 
-	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKFindWnd( pWnd);
+	MmWndInfo*	pWndInfo = WindowCtrl::GetWndInfoObWnd( pWnd);
 
 // 070907	MINT iOldMM = pWndInfo->SetMapMode( NULL);
 	
@@ -340,7 +340,7 @@ MINT ViewInp::MButtonUp(
 {
 	MINT				ist = 0;
 
-	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKFindWnd( pWnd);
+	MmWndInfo*	pWndInfo = WindowCtrl::GetWndInfoObWnd( pWnd);
 
 	// ドラッギング移動操作終了
 	pWndInfo->DeleteDrag();
@@ -362,7 +362,7 @@ MINT ViewInp::MouseWheel(
 {
 	MINT		ist = 0;
 
-	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKFindWnd( pWnd);
+	MmWndInfo*	pWndInfo = WindowCtrl::GetWndInfoObWnd( pWnd);
 
 	MgPoint2D	ptMouthR = pWndInfo->DPtoRP( ptMouthD);			// 実座標へ変換
 
@@ -398,7 +398,7 @@ void ViewInp::Size(									// (  O) ステイタス　0 : 正常  1 : エラー
 						CPoint		ptMouthL		// (I  ) 画面サイズ(論理座標)
 				)
 {
-	MmWndInfo* pWndInfo = WindowCtrl::MmWndKFindWnd( pWnd);
+	MmWndInfo* pWndInfo = WindowCtrl::GetWndInfoObWnd( pWnd);
 
 	pWndInfo->SetWinD( 0, 0, ptMouthD.x, ptMouthD.y);				// 表示画面窓枠を設定
 	pWndInfo->SetWinL( 0, 0, ptMouthL.x, ptMouthL.y);				// 論理表示画面窓枠を設定
@@ -410,7 +410,7 @@ void ViewInp::Size(									// (  O) ステイタス　0 : 正常  1 : エラー
 //	Window::ResetDispHitBzi();
 //	Window::InitHitBuzai();
 
-	WindowCtrl::MmWndKDrawMDC( pWndInfo);
+	WindowCtrl::DrawWndMDC( pWndInfo);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -447,7 +447,7 @@ MINT ViewInp::KeyUp(
 
 	// コントロールキーのアップならドラッギング操作終了
 	if ( nChar == 17) {
-		pWndInfo = WindowCtrl::MmWndKFindWnd( pWnd);
+		pWndInfo = WindowCtrl::GetWndInfoObWnd( pWnd);
 		pWndInfo->DeleteDrag();
 	}
 

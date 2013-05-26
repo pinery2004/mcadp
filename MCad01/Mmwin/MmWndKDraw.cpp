@@ -38,11 +38,11 @@ namespace MC
 //	06/03/11　再表示後に部材長さ調整コマンドで修正先の位置を入力時に同一部材上の点を
 //			　指示した時、元選択していた部材の図形が黒く表示され無いように待つように修正したが変わらず元に戻す
 
-MINT WindowCtrl::MmWndKReDraw() 
+MINT WindowCtrl::ReDrawWnd() 
 {
-	MmWndInfo* pWndInfo = WindowCtrl::MmWndKGetCurWnd();		// カレントのウィンドウ管理情報取得
+	MmWndInfo* pWndInfo = WindowCtrl::GetCurWndInfo();			// カレントのウィンドウ管理情報取得
 	pWndInfo->ClearMDC();
-	WindowCtrl::MmWndKDrawMDC( pWndInfo);
+	WindowCtrl::DrawWndMDC( pWndInfo);
 
 //	pWndInfo->GetWnd()->PostMessage(WM_PAINT);					// 再表示のメッセージを送り処理の終了を待たずに次へ移る
 	pWndInfo->GetWnd()->SendMessage(WM_PAINT);					// 再表示のメッセージを送り処理の終了を待って次へ移る 060506 屋根選択後システム終了操作でハングアップ
@@ -53,24 +53,24 @@ MINT WindowCtrl::MmWndKReDraw()
 /////////////////////////////////////////////////////////////////////////////
 //  全ウィンドウを再表示する（メモリーＤＣに書き込み画面に表示する）
 
-MINT WindowCtrl::MmWndKReDrawAll() 
+MINT WindowCtrl::ReDrawAllWnd() 
 {
 	MPOSITION			WndPos;
 	MmWndInfo*			pWndInfo;
 
-	for (pWndInfo=MmGetHeadWnd( &WndPos); pWndInfo!=0; pWndInfo=MmGetNextWnd( &WndPos)) {
+	for (pWndInfo=GetHeadWnd( &WndPos); pWndInfo!=0; pWndInfo=GetNextWnd( &WndPos)) {
 		pWndInfo->ClearMDC();
 		if ( pWndInfo->GetWndSyu() == 5) {
 																// グリッド表示数取り込み
-			MmWndInfo* pWndInfo1 = WindowCtrl::MmWndKFindSyu( 1, MTHEIMENZU, 1, 1);
-//			MmWndInfo* pWndInfo5 = WindowCtrl::MmWndKFind( this);
+			MmWndInfo* pWndInfo1 = WindowCtrl::GetWndInfoBySyu( 1, MTHEIMENZU, 1, 1);
+//			MmWndInfo* pWndInfo5 = WindowCtrl::WndFind( this);
 			MINT nGrid[4];
 			pWndInfo1->GetGridNum( nGrid);
 			pWndInfo->SetGridNum( nGrid);
 			pWndInfo->SetMinMaxRS( pWndInfo->GetMinMaxGA( pWndInfo));	//	実座標(Min/Max)
 			pWndInfo->SetMat();									// 座標変換用マトリックスの設定		//ZZ? なぜ無いの　追加 070901
 		}
-		WindowCtrl::MmWndKDrawMDC( pWndInfo);
+		WindowCtrl::DrawWndMDC( pWndInfo);
 		pWndInfo->GetWnd()->PostMessage(WM_PAINT);				// 再表示のメッセージを送り処理の終了を待たずに次へ移る
 	}
 	return 0;
@@ -79,7 +79,7 @@ MINT WindowCtrl::MmWndKReDrawAll()
 /////////////////////////////////////////////////////////////////////////////
 //  ウィンドウを表示する（メモリーＤＣの内容を画面に表示する）
 
-MINT WindowCtrl::MmWndKDraw( 
+MINT WindowCtrl::DrawWnd( 
 						MmWndInfo*	i_pWndInfo	// ウィンドウ管理情報
 				) 
 {
@@ -112,7 +112,7 @@ MINT WindowCtrl::MmWndKDraw(
 /////////////////////////////////////////////////////////////////////////////
 //  ウィンドウイメージメモリＤＣに組図を表示
 
-void WindowCtrl::MmWndKDrawMDC(								// ステイタス　0:正常  1:エラー
+void WindowCtrl::DrawWndMDC(									// ステイタス　0:正常  1:エラー
 						MmWndInfo*	i_pWndInfo	// ウィンドウ管理情報
 				)
 {
@@ -125,14 +125,14 @@ void WindowCtrl::MmWndKDrawMDC(								// ステイタス　0:正常  1:エラー
 	MINT iOldMM = i_pWndInfo->SetMapMode( NULL);
 
 	//	メモリーＤＣに表示
-	WindowCtrl::MmWndKDrawGrid( i_pWndInfo, pCod);
+	WindowCtrl::DrawGridLine( i_pWndInfo, pCod);
 	MINT iKaiC = z_mnIA.GetInpKai();							// 現在の階
 	MINT iGpC = z_mnIA.GetKCdGp();								// 現在の構成
-	WindowCtrl::MmWndKDrawKabe( pCod, iKaiC, iGpC);
-	WindowCtrl::MmWndKDrawKiso( pCod, iKaiC, iGpC);
-	WindowCtrl::MmWndKDrawParts( pCod, iKaiC, iGpC);
-	WindowCtrl::MmWndKDrawRoof( pCod, iKaiC, iGpC);
-	WindowCtrl::MmWndKDrawTemp( i_pWndInfo, pCod);
+	WindowCtrl::DrawKabeSin( pCod, iKaiC, iGpC);
+	WindowCtrl::DrawKisoSin( pCod, iKaiC, iGpC);
+	WindowCtrl::DrawHaitiParts( pCod, iKaiC, iGpC);
+	WindowCtrl::DrawRoof( pCod, iKaiC, iGpC);
+	WindowCtrl::DrawWndTemp( i_pWndInfo, pCod);
 
 	//	マップモードを戻す
 	i_pWndInfo->m_pMemDC->SetMapMode( iOldMM);
@@ -140,7 +140,7 @@ void WindowCtrl::MmWndKDrawMDC(								// ステイタス　0:正常  1:エラー
 
 /////////////////////////////////////////////////////////////////////////////
 //	グリッドを表示する
-void WindowCtrl::MmWndKDrawGrid(
+void WindowCtrl::DrawGridLine(
 						MmWndInfo*	i_pWndInfo,	// ウィンドウ管理情報
 						msCod*		pCod
 				)

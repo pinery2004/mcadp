@@ -40,7 +40,7 @@ namespace MC
 
 /////////////////////////////////////////////////////////////////////////////
 //	基礎芯線を表示する
-	void WindowCtrl::MmWndKDrawKiso(
+	void WindowCtrl::DrawKisoSin(
 						msCod*		pCod,			// 座標系
 						MINT		iKaiC,			// 階  	(1,2,3)
 						MINT		iGpC			// 構成
@@ -65,7 +65,7 @@ namespace MC
 
 			if ( pPlcEn->IsKiso()) {								// 基礎(耐力基礎)部材
 
-			if ( !MmCheckValidParts( pPlcEn))							// オプションと履歴のチェック
+			if ( !MmCheckValidParts( pPlcEn))						// オプションと履歴のチェック
 				continue;
 
 				ptW[0] = (*(MgPoint2D*)&(pPlcEn->GetPIPlcIti( 0))) + vKisoSinZ;

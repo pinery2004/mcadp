@@ -175,7 +175,7 @@ BOOL CMmDialogTenkai::OnInitDialog()
 						OUT_DEVICE_PRECIS, CLIP_DEFAULT_PRECIS,
 						DEFAULT_QUALITY, DEFAULT_PITCH, Mstr( "ＭＳ Ｐゴシック"));
 
-//	pWndInfo = MmWndKGetCurWnd();							// カレントウィンドウ取得
+//	pWndInfo =  WindowCtrl::GetCurWndInfo();							// カレントウィンドウ取得
 
 ///////////////////////////////////////////////////////////////////////////////
 //	住戸数入力ダイアログを初期化する

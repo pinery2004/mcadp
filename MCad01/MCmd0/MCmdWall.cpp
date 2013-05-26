@@ -27,7 +27,7 @@ void SetInpAt();
 void MCmdWallOuter()
 {
 	MINT	ist1;
-	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
+	MmWndInfo*	pWndInfo = WindowCtrl::GetCurWndInfo();					// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();
 
 //	MhInitInpAt();
@@ -41,7 +41,7 @@ void MCmdWallOuter()
 void MCmdWallInner()
 {
 	MINT	ist1;
-	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
+	MmWndInfo*	pWndInfo = WindowCtrl::GetCurWndInfo();					// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();
 
 //	MhInitInpAt();
@@ -159,7 +159,7 @@ void MCmdLineW()
 
 		HaitiCmd::MmPartsPlc( Ln1.p);
 
-		WindowCtrl::MmWndKReDraw();
+		WindowCtrl::ReDrawWnd();
 		Msg::ClearErrorMsg();
 	}
 	Msg::OperationMsg( MC_OPRT_BASE);								// ステイタスバーの操作表示部へ""を表示

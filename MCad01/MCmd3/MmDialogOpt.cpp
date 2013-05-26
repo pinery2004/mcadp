@@ -53,7 +53,7 @@ BOOL CMmDialogOpt::OnInitDialog()
 						OUT_DEVICE_PRECIS, CLIP_DEFAULT_PRECIS,
 						DEFAULT_QUALITY, DEFAULT_PITCH, Mstr( "ＭＳ Ｐゴシック"));
 
-	pWndInfo = MC::WindowCtrl::MmWndKGetCurWnd();							// カレントウィンドウ取得
+	pWndInfo = MC::WindowCtrl::GetCurWndInfo();							// カレントウィンドウ取得
 	if ( pWndInfo == NULL) MQUIT;
 
 exit:

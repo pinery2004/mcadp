@@ -50,7 +50,7 @@ void DrawPart(
 
 /////////////////////////////////////////////////////////////////////////////
 //	配置部品を表示する
-void WindowCtrl::MmWndKDrawParts(
+void WindowCtrl::DrawHaitiParts(
 						msCod*		pCod,			// 座標系
 						MINT		iKaiC,			// 階  	(1,2,3)
 						MINT		iGpC			// 構成
@@ -89,7 +89,7 @@ void WindowCtrl::MmWndKDrawParts(
 
 		if ( pPlcEn->IsPanel() || pPlcEn->IsKaiko()) {			// パネルまたは開口
 
-			if ( !MmCheckValidParts( pPlcEn))						// オプションと履歴のチェック
+			if ( !MmCheckValidParts( pPlcEn))					// オプションと履歴のチェック
 				continue;
 			DrawPart( pCod, iGpC, pPlcEn);
 		}
@@ -112,18 +112,6 @@ void WindowCtrl::MmWndKDrawParts(
 		if ( pPlcEn->GetPIKai() != iKaiC)
 			continue;											// 異なる階の部材は表示しない
 
-//D		MUINT	*iOptv = pPlcEn->GetPIOpt1()->GetSOB();
-//D		TRACE1( "MmWndKDrawParts(%d)		", iDB);
-//D		if ( iOptv == 0)
-//D			TRACE0( "pOptv_ON NULL		");
-//D		else
-//D			TRACE3( "pOptv_ON %x, %x, %x		", iOptv[0], iOptv[1], iOptv[2]);
-//D		iOptv = pPlcEn->GetPIOpt2()->GetSOB();
-//D		if ( iOptv == 0)
-//D			TRACE0( "pOptv_OFF NULL\n");
-//D		else
-//D			TRACE3( "pOptv_OFF %x, %x, %x\n", iOptv[0], iOptv[1], iOptv[2]);
-
 		if ( pPlcEn->GetPTCdGp() != iGpC) {						// 基礎は
 			if ( pPlcEn->GetPTCdBr() == MP_BR_KISO) {
 				if ( iKaiC == 1 && iGpC == MP_GP_YUKA) {		// １階床組表示の場合は、壁芯線分で表示する
@@ -142,7 +130,7 @@ void WindowCtrl::MmWndKDrawParts(
 			}
 		}
 
-		if ( !MmCheckValidParts( pPlcEn))							// オプションと履歴のチェック
+		if ( !MmCheckValidParts( pPlcEn))						// オプションと履歴のチェック
 			continue;
 
 		if ( pPlcEn->GetPTCdBr() != MP_BR_PANEL) {				// パネル以外の部材を表示

@@ -112,7 +112,7 @@ LRESULT CMainFrame::OnRibbonIO( UINT wParam, LONG lParam)
 LRESULT CMainFrame::OnWindow( UINT wParam, LONG lParam)
 {
 	int ist = 0;
-	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 1, MTYUKAFUSEZU, 1, 1);		// ウィンドウ管理
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 1, MTYUKAFUSEZU, 1, 1);		// ウィンドウ管理
 	if ( pWndInfo)
 		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
 	z_MCadApp.CreateWnd( 1, MTYUKAFUSEZU, 1, 1);
@@ -202,7 +202,7 @@ void CMainFrame::OnClose()
 			return;
 	}
 	MC::MtCmdClose();
-	MC::WindowCtrl::MmWndKDeleteAll();
+	MC::WindowCtrl::DeleteAllWnd();
 
 	CMDIFrameWndEx::OnClose();
 }
@@ -436,9 +436,9 @@ void CMainFrame::OnCbnSelchangeCombo1()
 	MC::mhPartsSpec* pPartsSpec;
 	pPartsSpec = MC::BuzaiCode::MhGetpPartsSpec( MC::z_mnIA.GetCurPartsNmId());
 	if ( pPartsSpec->GetPTCdBr() >= MP_BR_SENBUN || MC::z_mnIA.GetMode() == MP_MD_DELETE)
-		MC::WindowCtrl::MmWndKCmdXqt( IDC_PARTSCREATE);			//	部材入力コマンド
+		MC::WindowCtrl::XqtMenuCmd( IDC_PARTSCREATE);			//	部材入力コマンド
 	else 
-		MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);			//	コマンドキャンセル
+		MC::WindowCtrl::XqtMenuCmd( IDC_CANCELCMD);				//	コマンドキャンセル
 }
 
 
@@ -458,7 +458,7 @@ void CMainFrame::OnCbnSelchangeCombo2()
 
 	MC::z_mnIA.SelectComboPartsMbrByKmId( m_iCombo2);
 //S	MC::Window::CurWndFocus();
-	MC::WindowCtrl::MmWndKCmdXqt( IDC_PARTSCREATE);				//	部品入力
+	MC::WindowCtrl::XqtMenuCmd( IDC_PARTSCREATE);				//	部品入力
 }
 
 // INPUT リボンバー　入力点区分
@@ -504,7 +504,7 @@ void CMainFrame::OnView1open()
 	// TODO: ここにコマンド ハンドラー コードを追加します。
 //S	CChildFrame1 *pChildFrm1 = new CChildFrame1;
 //	TRACE( "new CChildFrame1(%x)\n", pChildFrm1);
-//	MC::WindowCtrl::MmWndSetFrameC( 1, pChildFrm1);
+//	MC::WindowCtrl::SetCurWndFrame( 1, pChildFrm1);
 //	if (!pChildFrm1->Create( NULL, _T("Window1"),
 //		WS_CHILD | WS_VISIBLE | WS_OVERLAPPEDWINDOW, rectDefault, this))
 //		return;
@@ -512,7 +512,7 @@ void CMainFrame::OnView1open()
 	// ウィンドウのオープン
 	CMDIChildWnd* pChildWnd1;
 	pChildWnd1 = OpenView( z_MCadApp.m_pDocTemplate1);
-	MC::WindowCtrl::MmWndSetFrameC( 1, pChildWnd1);
+	MC::WindowCtrl::SetCurWndFrame( 1, pChildWnd1);
 }
 
 
@@ -520,7 +520,7 @@ void CMainFrame::OnView2open()
 {
 //S	// TODO: ここにコマンド ハンドラー コードを追加します。
 //	CChildFrame2 *pChildFrm2 = new CChildFrame2;
-//	MC::WindowCtrl::MmWndSetFrameC( 2, pChildFrm2);
+//	MC::WindowCtrl::SetCurWndFrame( 2, pChildFrm2);
 //	if (!pChildFrm2->Create( NULL, _T("Window2"),
 //		WS_CHILD | WS_VISIBLE | WS_OVERLAPPEDWINDOW, rectDefault, this))
 //		return;
@@ -528,7 +528,7 @@ void CMainFrame::OnView2open()
 	// ウィンドウのオープン
 	CMDIChildWnd* pChildWnd2;
 	pChildWnd2 = OpenView( z_MCadApp.m_pDocTemplate2);
-	MC::WindowCtrl::MmWndSetFrameC( 2, pChildWnd2);
+	MC::WindowCtrl::SetCurWndFrame( 2, pChildWnd2);
 }
 
 
@@ -536,7 +536,7 @@ void CMainFrame::OnView3open()
 {
 //S	// TODO: ここにコマンド ハンドラー コードを追加します。
 //	CChildFrame3 *pChildFrm3 = new CChildFrame3;
-//	MC::WindowCtrl::MmWndSetFrameC( 3, pChildFrm3);
+//	MC::WindowCtrl::SetCurWndFrame( 3, pChildFrm3);
 //	if (!pChildFrm3->Create( NULL, _T("Window3"),
 //		WS_CHILD | WS_VISIBLE | WS_OVERLAPPEDWINDOW, rectDefault, this))
 //		return;
@@ -544,7 +544,7 @@ void CMainFrame::OnView3open()
 	// ウィンドウのオープン
 	CMDIChildWnd* pChildWnd3;
 	pChildWnd3 = OpenView( z_MCadApp.m_pDocTemplate3);
-	MC::WindowCtrl::MmWndSetFrameC( 3, pChildWnd3);
+	MC::WindowCtrl::SetCurWndFrame( 3, pChildWnd3);
 }
 
 
@@ -552,7 +552,7 @@ void CMainFrame::OnView4open()
 {
 //S	// TODO: ここにコマンド ハンドラー コードを追加します。
 //	CChildFrame4 *pChildFrm4 = new CChildFrame4;
-//	MC::WindowCtrl::MmWndSetFrameC( 4, pChildFrm4);
+//	MC::WindowCtrl::SetCurWndFrame( 4, pChildFrm4);
 //	if (!pChildFrm4->Create( NULL, _T("Window4"),
 //		WS_CHILD | WS_VISIBLE | WS_OVERLAPPEDWINDOW, rectDefault, this))
 //		return;
@@ -560,7 +560,7 @@ void CMainFrame::OnView4open()
 	// ウィンドウのオープン
 	CMDIChildWnd* pChildWnd1;
 	pChildWnd1 = OpenView( z_MCadApp.m_pDocTemplate1);
-	MC::WindowCtrl::MmWndSetFrameC( 4, pChildWnd1);
+	MC::WindowCtrl::SetCurWndFrame( 4, pChildWnd1);
 }
 
 
@@ -568,7 +568,7 @@ void CMainFrame::OnView5open()
 {
 //S	// TODO: ここにコマンド ハンドラー コードを追加します。
 //	CChildFrame5 *pChildFrm5 = new CChildFrame5;
-//	MC::WindowCtrl::MmWndSetFrameC( 5, pChildFrm5);
+//	MC::WindowCtrl::SetCurWndFrame( 5, pChildFrm5);
 //	if (!pChildFrm5->Create( NULL, _T("Window5"),
 //		WS_CHILD | WS_VISIBLE | WS_OVERLAPPEDWINDOW, rectDefault, this))
 //		return;
@@ -576,5 +576,5 @@ void CMainFrame::OnView5open()
 	// ウィンドウのオープン
 	CMDIChildWnd* pChildWnd1;
 	pChildWnd1 = OpenView( z_MCadApp.m_pDocTemplate1);
-	MC::WindowCtrl::MmWndSetFrameC( 5, pChildWnd1);
+	MC::WindowCtrl::SetCurWndFrame( 5, pChildWnd1);
 }

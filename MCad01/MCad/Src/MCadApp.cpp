@@ -325,7 +325,7 @@ BOOL CMCadApp::InitInstance()
 	pMainFrame->ShowWindow(m_nCmdShow);
 	pMainFrame->UpdateWindow();
 
-	MC::WindowCtrl::MmWndSetSyubetsuC( 1, MTHEIMENZU, 1, 1);
+	MC::WindowCtrl::SetCurWndSyubetsu( 1, MTHEIMENZU, 1, 1);
 
 	// コマンド ラインで指定されたディスパッチ コマンドです。アプリケーションが
 	// /RegServer、/Register、/Unregserver または /Unregister で起動された場合、False を返します。
@@ -336,9 +336,9 @@ BOOL CMCadApp::InitInstance()
 //S	MC::z_mnIA.InitComboAttr( MP_AT_HRZ_PARTS);									// 属性入力用コンボボックスを初期化する
 
 	//// ウィンドウのオープン
-	MC::WindowCtrl::MmWndSetSyubetsuC( 2, MTHEIMENZU, 1, 1);
+	MC::WindowCtrl::SetCurWndSyubetsu( 2, MTHEIMENZU, 1, 1);
 	pMainFrame->OpenView( m_pDocTemplate2);
-	MC::WindowCtrl::MmWndSetSyubetsuC( 3, MTHEIMENZU, 1, 1);
+	MC::WindowCtrl::SetCurWndSyubetsu( 3, MTHEIMENZU, 1, 1);
 	pMainFrame->OpenView( m_pDocTemplate3);
 	return TRUE;
 }
@@ -426,13 +426,13 @@ void CMCadApp::OnFileNew()
 	}
 
 	//　３次元表示は一旦消す
-	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 2, MTHEIMENZU, 1, 1);
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 2, MTHEIMENZU, 1, 1);
 	if ( pWndInfo) 
 		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
 
 	//	モデルを初期化し表示する
 	ist1 = MC::IeModel::MhMdlLoad( NULL);
-	MC::WindowCtrl::MmWndKReDrawAll();
+	MC::WindowCtrl::ReDrawAllWnd();
 }
 
 void CMCadApp::OnFileOpen()
@@ -453,13 +453,13 @@ void CMCadApp::OnFileOpen()
 
 	if ( ist1 == 1) {																	// OKの場合読み込み
 		//　３次元表示は一旦消す
-		MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 2, MTHEIMENZU, 1, 1);
+		MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 2, MTHEIMENZU, 1, 1);
 		if ( pWndInfo) 
 			pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
 
 		//	モデルを読み込み表示する
 		ist1 = MC::IeModel::MhMdlLoad( PathO);
-		MC::WindowCtrl::MmWndKReDrawAll();
+		MC::WindowCtrl::ReDrawAllWnd();
 
 		//　３次元表示がされていた場合は新しいデータで再度表示する
 		if ( pWndInfo) 
@@ -471,7 +471,7 @@ void CMCadApp::OnFileOpen()
 void CMCadApp::OnView1On()
 {
 	// TODO : ここにコマンド ハンドラ コードを追加します。
-	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 1, MTHEIMENZU, 1, 1);		// ウィンドウ管理
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 1, MTHEIMENZU, 1, 1);		// ウィンドウ管理
 	if ( pWndInfo)
 		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
 	CreateWnd( 1, MTHEIMENZU, 1, 1);
@@ -479,10 +479,10 @@ void CMCadApp::OnView1On()
 
 void CMCadApp::OnView2On()
 {
-	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 2, MTHEIMENZU, 1, 1);		// ウィンドウ管理
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 2, MTHEIMENZU, 1, 1);		// ウィンドウ管理
 	if ( pWndInfo) {
-//		pWndInfo->GetWnd()->SetWindowPos(&CWnd::wndTopMost , 0, 0, 0, 0,		// 前面に表示し直そうとしたが失敗し
-//		SWP_NOMOVE|SWP_NOSIZE|SWP_NOACTIVATE | SWP_NOZORDER);					// 仮に一旦削除後に再表示した
+//		pWndInfo->GetWnd()->SetWindowPos(&CWnd::wndTopMost , 0, 0, 0, 0,					// 前面に表示し直そうとしたが失敗し
+//		SWP_NOMOVE|SWP_NOSIZE|SWP_NOACTIVATE | SWP_NOZORDER);								// 仮に一旦削除後に再表示した
 		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
 
 	}
@@ -491,7 +491,7 @@ void CMCadApp::OnView2On()
 
 void CMCadApp::OnView3On()
 {
-	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 3, MTHEIMENZU, 1, 1);		// ウィンドウ管理
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 3, MTHEIMENZU, 1, 1);		// ウィンドウ管理
 	if ( pWndInfo)
 		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
 	CreateWnd( 3, MTHEIMENZU, 1, 1);
@@ -499,7 +499,7 @@ void CMCadApp::OnView3On()
 
 void CMCadApp::OnView4On()
 {
-	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 4, MTHEIMENZU, 1, 1);		// ウィンドウ管理
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 4, MTHEIMENZU, 1, 1);		// ウィンドウ管理
 	if ( pWndInfo)
 		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
 	CreateWnd( 4, MTHEIMENZU, 1, 1);
@@ -507,7 +507,7 @@ void CMCadApp::OnView4On()
 
 void CMCadApp::OnView5On()
 {
-	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 5, MTHEIMENZU, 1, 1);		// ウィンドウ管理
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 5, MTHEIMENZU, 1, 1);		// ウィンドウ管理
 	if ( pWndInfo)
 		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
 	CreateWnd( 5, MTHEIMENZU, 1, 1);
@@ -516,7 +516,7 @@ void CMCadApp::OnView5On()
 void CMCadApp::OnView1Off()
 {
 	// TODO : ここにコマンド ハンドラ コードを追加します。
-	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 1, MTHEIMENZU, 1, 1);
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 1, MTHEIMENZU, 1, 1);
 	if ( pWndInfo)
 		pWndInfo->m_pChildFrm->PostMessage(WM_CLOSE);
 }
@@ -524,7 +524,7 @@ void CMCadApp::OnView1Off()
 void CMCadApp::OnView2Off()
 {
 	// TODO : ここにコマンド ハンドラ コードを追加します。
-	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 2, MTHEIMENZU, 1, 1);
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 2, MTHEIMENZU, 1, 1);
 	if ( pWndInfo)
 		pWndInfo->m_pChildFrm->PostMessage(WM_CLOSE);
 }
@@ -532,7 +532,7 @@ void CMCadApp::OnView2Off()
 void CMCadApp::OnView3Off()
 {
 	// TODO : ここにコマンド ハンドラ コードを追加します。
-	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 3, MTHEIMENZU, 1, 1);
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 3, MTHEIMENZU, 1, 1);
 	if ( pWndInfo)
 //		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
 		pWndInfo->m_pChildFrm->PostMessage(WM_CLOSE);
@@ -541,7 +541,7 @@ void CMCadApp::OnView3Off()
 void CMCadApp::OnView4Off()
 {
 	// TODO : ここにコマンド ハンドラ コードを追加します。
-	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 4, MTHEIMENZU, 1, 1);
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 4, MTHEIMENZU, 1, 1);
 	if ( pWndInfo)
 		pWndInfo->m_pChildFrm->PostMessage(WM_CLOSE);
 }
@@ -549,7 +549,7 @@ void CMCadApp::OnView4Off()
 void CMCadApp::OnView5Off()
 {
 	// TODO : ここにコマンド ハンドラ コードを追加します。
-	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 5, MTHEIMENZU, 1, 1);
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 5, MTHEIMENZU, 1, 1);
 	if ( pWndInfo)
 		pWndInfo->m_pChildFrm->PostMessage(WM_CLOSE);
 }
@@ -562,10 +562,10 @@ void CMCadApp::OnMainMenuP( UINT nID)
 		OnView2On();
 	} else {
 		if ( nID == IDC_ZOOMINIT) {
-			MC::WindowCtrl::MmGridNumSet( NULL);								// 初期設定
-			MC::WindowCtrl::MmGridNumXqt();
+			MC::GridDispCtrl::SetGridNum( NULL);								// 初期設定
+			MC::GridDispCtrl::XqtGridNum();
 		}
-		MC::WindowCtrl::MmWndKCmdXqt( nID);										//	メニューコマンド
+		MC::WindowCtrl::XqtMenuCmd( nID);										//	メニューコマンド
 	}
 }
 
@@ -583,7 +583,7 @@ void CMCadApp::OnSubMenuP( UINT nID)
 {
 	// TODO : ここにコマンド ハンドラ コードを追加します。
 	// コマンドキュー
-	MC::WindowCtrl::MmWndKCmdXqt( nID);											//	メニューコマンド
+	MC::WindowCtrl::XqtMenuCmd( nID);											//	メニューコマンド
 
 }
 
@@ -601,7 +601,7 @@ void CMCadApp::CreateWnd(
 {
 	CMainFrame* pFrame = STATIC_DOWNCAST(CMainFrame, m_pMainWnd);
 
-	MC::WindowCtrl::MmWndSetSyubetsuC( iWndSyu, iZuSyu, iKai, iZuNum);
+	MC::WindowCtrl::SetCurWndSyubetsu( iWndSyu, iZuSyu, iKai, iZuNum);
 
 	// 新しい MDI 子ウィンドウを作成します
 	switch (iWndSyu)
@@ -637,7 +637,7 @@ void CMCadApp::OnBnClickedRadio1f()
 	MC::z_mnIA.SetInpKai( MP_KAI1);										// １階
 	MC::mtPlcInp::SetInpKai( MC::z_mnIA.GetInpKai());
 //E	MC::Window::CurWndFocus();
-	MC::WindowCtrl::MmWndKReDraw();
+	MC::WindowCtrl::ReDrawWnd();
 }
 
 
@@ -652,7 +652,7 @@ void CMCadApp::OnBnClickedRadio2f()
 	MC::z_mnIA.SetInpKai( MP_KAI2);										// ２階
 	MC::mtPlcInp::SetInpKai( MC::z_mnIA.GetInpKai());
 //E	MC::Window::CurWndFocus();
-	MC::WindowCtrl::MmWndKReDraw();
+	MC::WindowCtrl::ReDrawWnd();
 }
 
 
@@ -667,7 +667,7 @@ void CMCadApp::OnBnClickedRadio3f()
 	MC::z_mnIA.SetInpKai( MP_KAI3);										// ３階
 	MC::mtPlcInp::SetInpKai( MC::z_mnIA.GetInpKai());
 //E	MC::Window::CurWndFocus();
-	MC::WindowCtrl::MmWndKReDraw();
+	MC::WindowCtrl::ReDrawWnd();
 }
 
 
@@ -687,7 +687,7 @@ void CMCadApp::OnBnClickedRadioYane()
 	MC::z_mmIA.InitComboParts();
 	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
-	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
+	MC::WindowCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
 
 
@@ -707,7 +707,7 @@ void CMCadApp::OnBnClickedRadioTenjo()
 	MC::z_mmIA.InitComboParts();
 	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
-	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
+	MC::WindowCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
 
 
@@ -727,7 +727,7 @@ void CMCadApp::OnBnClickedRadioTairyoku()
 	MC::z_mmIA.InitComboParts();
 	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
-	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
+	MC::WindowCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
 
 
@@ -747,7 +747,7 @@ void CMCadApp::OnBnClickedRadioKabe()
 	MC::z_mmIA.InitComboParts();
 	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
-	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
+	MC::WindowCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
 
 
@@ -767,7 +767,7 @@ void CMCadApp::OnBnClickedRadioYuka()
 	MC::z_mmIA.InitComboParts();
 	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
-	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
+	MC::WindowCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
 
 
@@ -784,7 +784,7 @@ void CMCadApp::OnBnClickedRadioKoya()
 	MC::z_mnIA.SetKCdGp( MP_GP_KOYA);
 	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
-	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
+	MC::WindowCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
 
 
@@ -804,7 +804,7 @@ void CMCadApp::OnBnClickedRadioDodai()
 	MC::z_mmIA.InitComboParts();
 	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
-	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
+	MC::WindowCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
 
 
@@ -824,7 +824,7 @@ void CMCadApp::OnBnClickedRadioKiso()
 	MC::z_mmIA.InitComboParts();
 	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
-	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
+	MC::WindowCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
 
 
@@ -844,7 +844,7 @@ void CMCadApp::OnBnClickedRadioBuzai()
 	MC::z_mmIA.InitComboParts();
 	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
-	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
+	MC::WindowCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
 
 
@@ -864,7 +864,7 @@ void CMCadApp::OnBnClickedRadioKanagu()
 	MC::z_mmIA.InitComboParts();
 	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
-	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
+	MC::WindowCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
 
 
@@ -884,7 +884,7 @@ void CMCadApp::OnBnClickedRadioPanel()
 	MC::z_mmIA.InitComboParts();
 	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
-	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
+	MC::WindowCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
 
 
@@ -904,7 +904,7 @@ void CMCadApp::OnBnClickedRadioOther()
 	MC::z_mmIA.InitComboParts();
 	MC::z_mnIA.InitComboParts();
 //	コマンドキャンセル
-	MC::WindowCtrl::MmWndKCmdXqt( IDC_CANCELCMD);							//	コマンドキャンセル
+	MC::WindowCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
 
 

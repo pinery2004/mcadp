@@ -98,7 +98,7 @@ BOOL CChildFrame3::Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD d
 						  CMDIFrameWnd* pParentWnd , CCreateContext* pContext)
 {
 	// TODO: ここに特定なコードを追加するか、もしくは基本クラスを呼び出してください。
-	MC::WindowCtrl::MmWndSetFrameC( 3, this);
+	MC::WindowCtrl::SetCurWndFrame( 3, this);
 
 	return CMDIChildWndEx::Create(lpszClassName, lpszWindowName, dwStyle, rect, pParentWnd, pContext);
 }

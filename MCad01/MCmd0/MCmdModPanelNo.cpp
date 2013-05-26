@@ -54,7 +54,7 @@ void MCmdMdPanelNo()
 	MINT		iPt;
 	MINT		iPtNoMin;
 
-	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
+	MmWndInfo*	pWndInfo = WindowCtrl::GetCurWndInfo();				// カレントウィンドウを取得する
 	MINT		iKaiC   = z_mnIA.GetInpKai();						// 階  	(1,2,3)
 	MINT		iGpC = z_mnIA.GetKCdGp();							// 構成
 
@@ -66,7 +66,7 @@ void MCmdMdPanelNo()
 	MFOREVER {
 		Window::SetDispSelParts( NULL);
 
-		Msg::GuidanceMsg( MC_GUID_MOD_PANELNO);					// パネル番号を設定し、パネル番号を修正するパネルを指示して下さい
+		Msg::GuidanceMsg( MC_GUID_MOD_PANELNO);						// パネル番号を設定し、パネル番号を修正するパネルを指示して下さい
 		irt = MtAskForPoint( &pt1);
 
 		if ( irt == MTRT_SYSTEMSTOP || irt == MTRT_CAN)
@@ -87,11 +87,11 @@ void MCmdMdPanelNo()
 			for ( pPlcEn = HaitiDb::MdGetHeadParts( &posH); pPlcEn!=0;
 				  pPlcEn = HaitiDb::MdGetNextParts( &posH)) {
 				if ( pPlcEn->GetPIKai() != iKaiC)
-					continue;									// 異なる階の部材は対象外とする
+					continue;										// 異なる階の部材は対象外とする
 				if ( pPlcEn->GetPIPartsSpec()->GetPTCdGp() != iGpC)
-					continue;									// 異なる構成の部材は対象外とする
+					continue;										// 異なる構成の部材は対象外とする
 				if (!pPlcEn->IsPanel())
-					continue;									// パネル以外は対象外とする
+					continue;										// パネル以外は対象外とする
 
 				if ( !MmCheckValidParts( pPlcEn))					// オプションと履歴のチェック
 					continue;
@@ -145,7 +145,7 @@ void MCmdMdPanelNo()
 			z_mnIA.RibbonIO( MSET_COMBO_PANELNO, iSetPtNo);			// パネル番号選択用のコンボボックスに表示する
 			
 
-			WindowCtrl::MmWndKReDraw();
+			WindowCtrl::ReDrawWnd();
 			Msg::ClearErrorMsg();
 		}
 	}

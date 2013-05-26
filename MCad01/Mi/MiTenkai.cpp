@@ -169,10 +169,8 @@ void JTTenkai::CreJTTArea()
 	nGrid[3] = MINT(mm.max.x / mcs::GetReal( MM_REAL_PITCH) + 3.99);							// 東
 	nGrid[0] = MINT(mm.max.y / mcs::GetReal( MM_REAL_PITCH) + 1.99 + z_TenkaiPara.nJuko);		// 北
 
-	WindowCtrl::MmGridNumSet( nGrid);									// 初期設定
-	WindowCtrl::MmGridNumXqt();											// グリッド数変更表示
-
-//DDD	MmWndKReDraw();													// MmGridNumXqtで既に表示済み
+	GridDispCtrl::SetGridNum( nGrid);									// 初期設定
+	GridDispCtrl::XqtGridNum();											// グリッド数変更表示
 }
 
 /////////////////////////////////////////////////////////////////////////////

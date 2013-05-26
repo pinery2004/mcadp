@@ -89,7 +89,7 @@ void MCmdLineDelete()
 
 		IeModel::MhNormKabe( 0);
 
-		WindowCtrl::MmWndKReDraw();
+		WindowCtrl::ReDrawWnd();
 		Msg::ClearErrorMsg();
 	}
 	Msg::OperationMsg( MC_OPRT_BASE);								// ステイタスバーの操作表示部へ""を表示
@@ -144,7 +144,7 @@ void MCmdRoofDelete()
 		if ( pRoofEn != 0)
 			HaitiDb::MdRoofDelete( pos1);
 
-		WindowCtrl::MmWndKReDraw();
+		WindowCtrl::ReDrawWnd();
 		Msg::ClearErrorMsg();
 	}
 	Msg::OperationMsg( MC_OPRT_BASE);								// ステイタスバーの操作表示部へ""を表示

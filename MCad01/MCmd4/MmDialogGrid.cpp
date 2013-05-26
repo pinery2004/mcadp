@@ -196,14 +196,14 @@ void CMmDialogGrid::SetSpinGridNum(
 namespace MC
 {
 
-void MCmdGridNumEnd();
+void MCmdEndGridNum();
 
 } // namespace MC
 
 void CMmDialogGrid::PostNcDestroy()
 {
 	if (m_pParent != NULL) {
-		MC::MCmdGridNumEnd();
+		MC::MCmdEndGridNum();
 		delete this;
 	}
 
@@ -241,7 +241,7 @@ BOOL CMmDialogGrid::OnInitDialog()
 	m_SpinGridNum3.SetRange( MINGRIDNUM, MAXGRIDNUM);
 	m_SpinGridNum4.SetRange( MINGRIDNUM, MAXGRIDNUM);
 
-	pWndInfo = MC::WindowCtrl::MmWndKGetCurWnd();							// カレントウィンドウ取得
+	pWndInfo = MC::WindowCtrl::GetCurWndInfo();							// カレントウィンドウ取得
 	if ( pWndInfo == NULL) MQUIT;
 
 	pWndInfo->GetGridNum( nGrid);
@@ -259,7 +259,7 @@ void CMmDialogGrid::SetGridNum(
 						MINT*		nGrid						// (I  ) グリッド数（北、西、南、東）または NULL(初期設定)
 				)
 {
-	MC::WindowCtrl::MmGridNumSet( nGrid);
+	MC::GridDispCtrl::SetGridNum( nGrid);
 	SetSpinGridNum( nGrid);
-	MC::WindowCtrl::MmGridNumXqt();
+	MC::GridDispCtrl::XqtGridNum();
 }

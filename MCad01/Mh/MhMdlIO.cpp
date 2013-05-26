@@ -81,8 +81,8 @@ MINT IeModel::MhMdlLoad(										//
 	if ( i_sPathI == 0) {
 		z_mnIA.SetInpKai( 1);
 		mtPlcInp::SetInpKai( 1);
-		WindowCtrl::MmGridNumSet( NULL);													// 初期設定
-		WindowCtrl::MmGridNumXqt();
+		GridDispCtrl::SetGridNum( NULL);										// 初期設定
+		GridDispCtrl::XqtGridNum();
 		IeModel::MhSetModFIeMdl( false);
 		ist = 0;
 		MQUIT;
@@ -102,36 +102,36 @@ MINT IeModel::MhMdlLoad(										//
 //===
 #if( TRACE_IO)
 		TRACE( "Roof iCrf_IO = %d\n", iCrf_IO++);
-//			__debugbreak();										// ブレークポイント
+//			__debugbreak();														// ブレークポイント
 #endif
 //---
 		if ( iSize <= 0)
 			break;
 
 		switch( iType) {
-			case MDR_ATRCD_GRID:													// グリッド
+			case MDR_ATRCD_GRID:												// グリッド
 				// グリッドの読込
 				pnGrid = (MINT*)pEnt;
-				WindowCtrl::MmGridNumSet( pnGrid);
+				GridDispCtrl::SetGridNum( pnGrid);
 
 				ist = mdmDEnt::CreateEnt( MhModel::m_db.pidLyr[MD_ID_LYR_GRID], &idEnt[iCe], isz);
 				ist = mdmDEnt::SetAttr( idEnt[iCe++],	1, pnGrid);
 				break;
 
-			case MDR_ATRCD_HAITIEN_ST:												// 配置
+			case MDR_ATRCD_HAITIEN_ST:											// 配置
 				// 配置部品の読込
 				MBFREE( pEnt);
 
 				pPlcEn = (mhPlcParts*)malloc( sizeof( mhPlcParts));
 				pPlcEn->Load( &hMdl);
-				HaitiDb::MdPartsAdd( pPlcEn, NULL);										// ＯＰＴ群変更無しで追加
+				HaitiDb::MdPartsAdd( pPlcEn, NULL);								// ＯＰＴ群変更無しで追加
 
 				ist = mdmDEnt::CreateEnt( MhModel::m_db.pidLyr[MD_ID_LYR_HAITI], &idEnt[iCe], isz);
 				ist = mdmDEnt::SetAttr( idEnt[iCe++], 2, pPlcEn);
 				break;
 
 #if (MDR_TYPE2)
-			case MDR_ATRCD_ROOFEN_ST:												// 屋根
+			case MDR_ATRCD_ROOFEN_ST:											// 屋根
 				// 屋根の読込
 				if( iSize == SZMINT()) {
 					pRoofEn = new MhRoofInfo[1];
@@ -179,8 +179,8 @@ MINT IeModel::MhMdlLoad(										//
 	z_mnIA.SetInpKai( 1);
 	mtPlcInp::SetInpKai( 1);
 
-	WindowCtrl::MmGridNumSet( NULL);														// 初期設定
-	WindowCtrl::MmGridNumXqt();
+	GridDispCtrl::SetGridNum( NULL);											// 初期設定
+	GridDispCtrl::XqtGridNum();
 
 	IeModel::MhSetModFIeMdl( false);
 	ist = 0;
@@ -200,7 +200,7 @@ MINT MhOptionSave(								//
 																				//S	i_phMdl->Write( MDW_ATRCD_OPTION_KANRI, (MINT*)MhOptV::bmGOpt, MhOptV::nbmGOpt);
 	i_phMdl->WriteItemI( MDW_ATRCD_OPTION_KANRI, (MINT*)MhOptV::bmGOpt, sizeof(MhOpt) * MhOptV::nbmGOpt);
 
-	i_phMdl->WriteItemI( MDW_ATRCD_VERSION_KANRI0, &MhHistV::nVer);						// バージョン
+	i_phMdl->WriteItemI( MDW_ATRCD_VERSION_KANRI0, &MhHistV::nVer);				// バージョン
 	for (MINT ic=0; ic<MhHistV::nVer; ic++) {
 		i_phMdl->WriteItemCH( MDW_ATRCD_VERSION_KANRI1, MhHistV::sVerC[ic], MSZ_HISTB);
 		i_phMdl->WriteItemCH( MDW_ATRCD_VERSION_KANRI2, MhHistV::sVerB[ic], MSZ_HISTB);
@@ -229,9 +229,9 @@ MINT IeModel::MhMdlSave(									//
 	hMdl.Open( MBWRITE, i_sPathO);
 
 	// グリッドの保存
-	WindowCtrl::MmGridNumGet( nGrid);
+	GridDispCtrl::GetGridNum( nGrid);
 																				//S	hMdl.Write( MDW_ATRCD_GRID, nGrid, SZMINT() * 4);			// グリッド
-	hMdl.WriteItemI( MDW_ATRCD_GRID, nGrid, 4*SZMINT());					// グリッド
+	hMdl.WriteItemI( MDW_ATRCD_GRID, nGrid, 4*SZMINT());						// グリッド
 	
 	// 配置部品の保存
 	for ( pPlcEn1 = HaitiDb::MdGetHeadParts( &posH); pPlcEn1!=0;

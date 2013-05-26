@@ -110,8 +110,8 @@ BOOL CMCadView1::PreCreateWindow(CREATESTRUCT& cs)
 	cs.lpszClass = AfxRegisterWndClass(CS_HREDRAW|CS_VREDRAW|CS_DBLCLKS,
 		NULL,reinterpret_cast<HBRUSH>(COLOR_WINDOW+1),NULL); 
 
-	MC::WindowCtrl::MmWndSetWndC( 1, this);
-	MINT ist = MC::WindowCtrl::MmWndKAddC();
+	MC::WindowCtrl::SetCurWnd( 1, this);
+	MINT ist = MC::WindowCtrl::AddCurWnd();
 	_ASSERTE(ist == 0);
 	return TRUE;
 }
@@ -120,7 +120,7 @@ void CMCadView1::OnPaint()
 {
 	CPaintDC dc(this); // device context for painting
 	// TODO: ここにメッセージ ハンドラー コードを追加します。
-	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindWnd( this);
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoObWnd( this);
 
 	pWndInfo->GetFrame()->SetWindowText( Mstr( "WINDOW_01"));			// ウィンドウタイトル表示
 
@@ -135,7 +135,7 @@ void CMCadView1::OnPaint()
 	MINT iOldMM = pWndInfo->SetMapMode( NULL);
 
 	// メモリーＤＣの内容を画面に表示
-	MC::WindowCtrl::MmWndKDraw( pWndInfo);
+	MC::WindowCtrl::DrawWnd( pWndInfo);
 
 	// クロスヘアーカーソル表示
 	MC::Window::ReDrawCrossHair();

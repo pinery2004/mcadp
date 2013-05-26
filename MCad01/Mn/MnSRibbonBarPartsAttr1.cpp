@@ -40,7 +40,7 @@ void mnIoPartsAttr::InitComboParts()
 	z_mmIA.InitComboParts();
 
 	Window::CurWndFocus();
-	WindowCtrl::MmWndKReDraw();
+	WindowCtrl::ReDrawWnd();
 }
 
 ///////////////////////////////////////////////////////////////////////////////

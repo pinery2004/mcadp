@@ -32,7 +32,7 @@ static MINT				z_nGridI[4] = { 16, -3, -3, 17};
 /*
 /////////////////////////////////////////////////////////////////////////////
 //	グリッド数変更入力
-void WindowCtrl::MmGridNumInp		(
+void GridDispCtrl::GridNumInp		(
 						CWnd*		pWnd						// (I  ) ウィンドウのインスタンス
 				)
 {
@@ -45,7 +45,7 @@ void WindowCtrl::MmGridNumInp		(
 */
 /////////////////////////////////////////////////////////////////////////////
 //	グリッド数設定	（シングルグリッド用）
-void WindowCtrl::MmGridNumSet(
+void GridDispCtrl::SetGridNum(
 						MINT*		nGrid						// (I  ) グリッド数（北、西、南、東）または NULL(初期設定)
 				)
 {
@@ -54,7 +54,7 @@ void WindowCtrl::MmGridNumSet(
 //	MINT		nGridI[4] = { 16, -3, -3, 17};
 	MINT		ic1;
 
-	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウ取得
+	pWndInfo = WindowCtrl::GetCurWndInfo();						// カレントウィンドウ取得
 	if ( pWndInfo == NULL)
 		MQUIT;
 
@@ -73,13 +73,13 @@ exit:;
 
 /////////////////////////////////////////////////////////////////////////////
 //	グリッド数読み込み	（シングルグリッド用）
-void WindowCtrl::MmGridNumGet(
+void GridDispCtrl::GetGridNum(
 						MINT*		nGrid						// (I  ) グリッド数（北、西、南、東）
 				)
 {
 	MmWndInfo*	pWndInfo;
 
-	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウ取得
+	pWndInfo = WindowCtrl::GetCurWndInfo();						// カレントウィンドウ取得
 	if ( pWndInfo == NULL) MQUIT;
 
 	pWndInfo->GetGridNum( nGrid);
@@ -88,18 +88,18 @@ exit:;
 
 /////////////////////////////////////////////////////////////////////////////
 //	グリッド数変更表示実行
-void WindowCtrl::MmGridNumXqt()
+void GridDispCtrl::XqtGridNum()
 {
 	MmWndInfo*	pWndInfo;
 
-	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウ取得
+	pWndInfo = WindowCtrl::GetCurWndInfo();						// カレントウィンドウ取得
 	if ( pWndInfo == NULL)
 		MQUIT;
 
 	pWndInfo->SetMinMaxRS( pWndInfo->GetMinMaxGA( pWndInfo));
 	pWndInfo->SetMat();
 	
-	WindowCtrl::MmWndKDrawMDC( pWndInfo);
+	WindowCtrl::DrawWndMDC( pWndInfo);
 
 	pWndInfo->GetWnd()->PostMessage(WM_PAINT);
 
@@ -109,7 +109,7 @@ exit:;
 /*
 /////////////////////////////////////////////////////////////////////////////
 //	グリッド数変更キャンセル
-void WindowCtrl::MmGridNumCancel()
+void GridDispCtrl::CancelGridNum()
 {
 	if ( z_pDlgGrid)
 //		z_pDlgGrid->SendMessage(WM_CLOSE);
@@ -118,7 +118,7 @@ void WindowCtrl::MmGridNumCancel()
 
 /////////////////////////////////////////////////////////////////////////////
 //	グリッド数変更終了
-void WindowCtrl::MmGridNumEnd()
+void GridDispCtrl::EndGridNum()
 {
 	z_pDlgGrid = NULL;
 }

@@ -26,7 +26,7 @@ static	CMmDialogOpt* z_pDialogOpt = NULL;		// モードレスＯＰＴ群ダイアログの表示
 
 void MCmdOpt()
 {
-	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
+	MmWndInfo*	pWndInfo = WindowCtrl::GetCurWndInfo();					// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();
 	
 	pWnd->PostMessage(WM_MYMESSAGEOPTION);

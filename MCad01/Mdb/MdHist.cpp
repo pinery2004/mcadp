@@ -159,7 +159,7 @@ MINT MhHist::MmVerUp(
 			}
 		}
 	}
-	WindowCtrl::MmWndKReDraw();
+	WindowCtrl::ReDrawWnd();
 exit:
 	*o_pnVer = z_Verv.nVer;
 	*o_ppsVerC = z_Verv.sVerC;
@@ -211,7 +211,7 @@ MINT MhHist::MmVerCng(
 	*o_ppsVerD = z_Verv.sVerD;
 
 	z_Verv.vVerC.SetMask( icf);
-	WindowCtrl::MmWndKReDraw();
+	WindowCtrl::ReDrawWnd();
 
 exit:
 	return ist;
@@ -247,7 +247,7 @@ MINT MhHist::MmSetVer(
 	*m_ppsVerD = z_Verv.sVerD;
 
 	z_Verv.vVerC.SetMask( icf);
-	WindowCtrl::MmWndKReDraw();
+	WindowCtrl::ReDrawWnd();
 exit:
 	return ist;
 }

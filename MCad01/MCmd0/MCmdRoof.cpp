@@ -54,7 +54,7 @@ void MCmdRoofAdd()
 
 	ist1 = z_mnIA.SetRibbonBarEnt( MP_GP_YANE, MP_BR_OTHER, Mstr( "屋根"), Mstr( "204"));
 
-	WindowCtrl::MmWndKReDraw();
+	WindowCtrl::ReDrawWnd();
 
 	Msg::OperationMsg( MC_OPRT_ROOF);								// ステイタスバーの操作表示部へ"屋根入力"を表示
 
@@ -79,7 +79,7 @@ void MCmdRoofAdd()
 
 		ist1 = mhHaitiIn::RoofPlc( pgJim, GifInp, pth);
 
-		WindowCtrl::MmWndKReDraw();
+		WindowCtrl::ReDrawWnd();
 		Msg::ClearErrorMsg();
 	}
 	Msg::OperationMsg( MC_OPRT_BASE);								// ステイタスバーの操作表示部へ""を表示

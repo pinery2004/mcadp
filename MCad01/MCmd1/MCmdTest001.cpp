@@ -550,7 +550,7 @@ void Test001_SelectFile()
 	MCHAR FilePathI[] = Mstr( "D:\\temp\\*.txt");
 	MCHAR FilePathO[MAX_PATH];
 
-	MmWndInfo* pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
+	MmWndInfo* pWndInfo = WindowCtrl::GetCurWndInfo();					// カレントウィンドウを取得する
 	CWnd* pWnd = pWndInfo->m_pWnd;
 
 	HWND hWnd;

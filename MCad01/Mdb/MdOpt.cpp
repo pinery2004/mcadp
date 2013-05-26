@@ -126,18 +126,18 @@ void MhOptV::MmOptSet(
 //D	MUINT	*iOptv = z_Optv.bmCurRGOptSet.GetSOB();
 //D	TRACE3( "z_Optv.bmCurRGOptSet %x, %x, %x\n", iOptv[0], iOptv[1], iOptv[2]);
 
-	WindowCtrl::MmWndKReDraw();
+	WindowCtrl::ReDrawWnd();
 /*
 //-------------------   ３次元表示  -----------------------------------
 
 	//　３次元表示は一旦消す
-	MmWndInfo* pWndInfo = MmWndKFind( 2, MTHEIMENZU, 1, 1);
+	MmWndInfo* pWndInfo = WindowCtrl::WndFind( 2, MTHEIMENZU, 1, 1);
 	if ( pWndInfo) 
 		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
 
 	//	モデルを読み込み表示する
 //	ist1 = MhMdlLoad( PathO);
-//	MmWndKReDrawAll();
+//	WindowCtrl::ReDrawAllWnd();
 
 	//　３次元表示がされていた場合は新しいデータで再度表示する
 	if ( pWndInfo) 

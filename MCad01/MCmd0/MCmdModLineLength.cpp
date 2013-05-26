@@ -54,7 +54,7 @@ namespace MC
 //E	z_mnIA.InitComboAttr( MP_AT_ADJLNG);							// 属性入力用コンボボックスを部材長さ調整用にする
 	z_mnIA.RibbonIO( MINIT_COMBO_ATTR, MP_AT_ADJLNG);
 
-	MmWndInfo* pWndInfo = WindowCtrl::MmWndKGetCurWnd();			// カレントウィンドウを取得する
+	MmWndInfo* pWndInfo = WindowCtrl::GetCurWndInfo();			// カレントウィンドウを取得する
 	Window::CurWndFocus();											// フォーカスをカレントウィンドウに設定する
 
 	MFOREVER {
@@ -69,7 +69,7 @@ namespace MC
 		iBuzaiCd = NULL;
 		if ( pBziInfo1 = mhHaitiIn::SrchBuzai( pWndInfo, pt1, iBuzaiCd, &pgHitBzi)) {
 			Window::SetCurBziFig( &pgHitBzi);						// カレント選択(長さ調整側)の部材(長さ調整側)形状を設定する
-			WindowCtrl::MmWndKReDraw();
+			WindowCtrl::ReDrawWnd();
 		} else {
 			Window::ClrCurBziFig();									// カレント選択の部材形状をクリアする
 			continue;
@@ -144,7 +144,7 @@ namespace MC
 		}
 		Window::ClrCurBziFig();
 		Window::EraseHitBzi();
-		WindowCtrl::MmWndKReDraw();
+		WindowCtrl::ReDrawWnd();
 		Msg::ClearErrorMsg();
 	}
 	Window::SetDispSelParts( -1);

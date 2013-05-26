@@ -81,9 +81,9 @@ BOOL CMCadView2::PreCreateWindow(CREATESTRUCT& cs)
 		::LoadCursor( NULL, IDC_ARROW), reinterpret_cast<HBRUSH>(COLOR_WINDOW+1), NULL);
 
 
-	MC::WindowCtrl::MmWndSetWndC( 2, this);										// ウィンドウ管理
-	ist = MC::WindowCtrl::MmWndKAddC();											// ウィンドウ管理
-	_ASSERTE( ist == 0);														// ウィンドウ管理
+	MC::WindowCtrl::SetCurWnd( 2, this);												// ウィンドウ管理
+	ist = MC::WindowCtrl::AddCurWnd();													// ウィンドウ管理
+	_ASSERTE( ist == 0);																// ウィンドウ管理
 
 //E	return TRUE;
 	return CView::PreCreateWindow(cs);
@@ -96,9 +96,9 @@ void CMCadView2::OnPaint()
 	SetWindowPos(&wndTopMost , 0, 0, 0, 0,
 		SWP_NOMOVE|SWP_NOSIZE|SWP_NOACTIVATE | SWP_NOZORDER);
 
-//	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFind( this);					// ウィンドウ管理
-	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::MmWndKFindSyu( 2, MTHEIMENZU, 1, 1);	// ウィンドウ管理
-	(pWndInfo->GetFrame())->SetWindowText(Mstr( "WINDOW_02"));	// ウィンドウ管理
+//	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::WndFind( this);							// ウィンドウ管理
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 2, MTHEIMENZU, 1, 1);	// ウィンドウ管理
+	(pWndInfo->GetFrame())->SetWindowText(Mstr( "WINDOW_02"));							// ウィンドウ管理
 
 	// 描画メッセージで CWnd::OnPaint() を呼び出さないでください。
 
@@ -246,7 +246,7 @@ void CMCadView2::OnMouseMove(UINT nFlags, CPoint point)
 																					//			   (Ｚ軸から見て左回転)
 	}
 
-	static bool bFirst = true;										// １度目はマウスの移動量が未定のためスキップ
+	static bool bFirst = true;									// １度目はマウスの移動量が未定のためスキップ
 	if ( !bFirst) {
 		m_M3View.OnMouseMove( nFlags, PtD, RtD, SclD);				
 	}

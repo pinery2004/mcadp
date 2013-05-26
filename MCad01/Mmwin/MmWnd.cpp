@@ -41,7 +41,7 @@ static	MPOSITION	z_WndPos;
 /////////////////////////////////////////////////////////////////////////////
 //	先頭のウィンドウを取得する
 //	返値 =NULL: レコードなし !=NULL: 読み込み[部品配置]位置
-MmWndInfo* WindowCtrl::MmGetHeadWnd( MPOSITION *pWndPos)
+MmWndInfo* WindowCtrl::GetHeadWnd( MPOSITION *pWndPos)
 {
 	if ( pWndPos)
 		return (MmWndInfo*)z_lWnd.GetHead( pWndPos);
@@ -52,7 +52,7 @@ MmWndInfo* WindowCtrl::MmGetHeadWnd( MPOSITION *pWndPos)
 /////////////////////////////////////////////////////////////////////////////
 //	次のウィンドウを取得する
 //	返値 =NULL: レコードなし !=NULL: 読み込み[部品配置]位置
-MmWndInfo* WindowCtrl::MmGetNextWnd( MPOSITION *pWndPos)
+MmWndInfo* WindowCtrl::GetNextWnd( MPOSITION *pWndPos)
 {
 	if ( pWndPos)
 		return (MmWndInfo*)z_lWnd.GetNext( pWndPos);
@@ -65,7 +65,7 @@ MmWndInfo* WindowCtrl::MmGetNextWnd( MPOSITION *pWndPos)
 //	カレントのウィンドウ種別を設定
 //						(1st ウィンドウ作成開始時に設定)
 
-void	WindowCtrl::MmWndSetSyubetsuC(
+void	WindowCtrl::SetCurWndSyubetsu(
 						MINT		iWndSyu,		// (I  ) ウィンドウ種類
 						MINT		iZuSyu,			// (I  ) 図種類
 						MINT		iKai,			// (I  ) 階
@@ -82,7 +82,7 @@ void	WindowCtrl::MmWndSetSyubetsuC(
 //	カレントのフレームのインスタンスを設定
 //						(2nd 子フレーム作成開始時に設定)
 
-void	WindowCtrl::MmWndSetFrameC(
+void	WindowCtrl::SetCurWndFrame(
 						MINT		iWndSyu,		// (I  ) ウィンドウ種類
 						CMDIChildWnd* pChildFrm		// (I  ) フレームのインスタンス
 				)
@@ -95,7 +95,7 @@ void	WindowCtrl::MmWndSetFrameC(
 //	カレントのウィンドウのインスタンスを設定
 //						(3rd 子ビュー作成開始時に設定)
 
-void	WindowCtrl::MmWndSetWndC(
+void	WindowCtrl::SetCurWnd(
 						MINT		iWndSyu,		// (I  ) ウィンドウ種類
 						CWnd*		pWnd			// (I  ) ウィンドウのインスタンス
 				)
@@ -223,9 +223,9 @@ void MmWndInfo::ClearMDC()
 /////////////////////////////////////////////////////////////////////////////
 //	初期化
 
-MINT WindowCtrl::MmWndKInit        ()				// (  O) 0 : 正常  1 : ｴﾗｰ
+MINT WindowCtrl::WndInit        ()					// (  O) 0 : 正常  1 : ｴﾗｰ
 {
-	MmWndKDeleteAll();								// ﾘｽﾄを破棄する
+	WndKDeleteAll();								// ﾘｽﾄを破棄する
 
 	return(0);
 }
@@ -233,18 +233,18 @@ MINT WindowCtrl::MmWndKInit        ()				// (  O) 0 : 正常  1 : ｴﾗｰ
 /////////////////////////////////////////////////////////////////////////////
 //	終了
 
-MINT WindowCtrl::MmWndKTerm        ()				// (  O) 0 : 正常  1 : ｴﾗｰ
+MINT WindowCtrl::WndTerm        ()					// (  O) 0 : 正常  1 : ｴﾗｰ
 {
-	MmWndKDeleteAll();								// ﾘｽﾄを破棄する
+	WndKDeleteAll();								// ﾘｽﾄを破棄する
 
 	return(0);
 }
 */
 /////////////////////////////////////////////////////////////////////////////
 //  カレントウィンドウを追加する
-//						(4th 子ビュー作成開始時にMmWndSetWndC実行後に設定)
+//						(4th 子ビュー作成開始時にSetCurWnd実行後に設定)
 
-MINT WindowCtrl::MmWndKAddC()						// (  O) 0 : 正常  1 : ｴﾗｰ
+MINT WindowCtrl::AddCurWnd()							// (  O) 0 : 正常  1 : ｴﾗｰ
 {
 	MINT		ist = 1;
 	MmWndInfo	WndInfo(z_wWndC.m_iWndSyu, z_wWndC.m_iZuSyu, z_wWndC.m_iKai, z_wWndC.m_iZuNum);
@@ -254,7 +254,7 @@ MINT WindowCtrl::MmWndKAddC()						// (  O) 0 : 正常  1 : ｴﾗｰ
 	WndInfo.SetWnd( z_wWndC.m_pWnd);
 	WndInfo.SetFrame( z_wWndC.m_pChildFrm);
 
-	if ( WindowCtrl::MmWndKFindSyu( z_wWndC.m_iWndSyu, z_wWndC.m_iZuSyu, z_wWndC.m_iKai, z_wWndC.m_iZuNum) == NULL) {
+	if ( WindowCtrl::GetWndInfoBySyu( z_wWndC.m_iWndSyu, z_wWndC.m_iZuSyu, z_wWndC.m_iKai, z_wWndC.m_iZuNum) == NULL) {
 		WndInfo.CreateMDC();
 		z_lWnd.Inject( &WndInfo);
 		ist = 0;
@@ -262,30 +262,30 @@ MINT WindowCtrl::MmWndKAddC()						// (  O) 0 : 正常  1 : ｴﾗｰ
 	return( ist);
 }
 
-/////////////////////////////////////////////////////////////////////////////
-//  ウィンドウを追加する
-
-MINT WindowCtrl::MmWndKAdd(							// (  O) 0 : 正常  1 : ｴﾗｰ
-						MINT		iWndSyu,		// (I  ) ウィンドウ種類(1,2,3,4,5)
-						MINT		iZuSyu,			// (I  ) 図種類
-						MINT		iKai,			// (I  ) 階
-						MINT		iZuNum			// (I  ) ウィンドウ情報図番号
-				)
-{
-	MINT		ist = 1;
-	MmWndInfo	*pWndInfo = new MmWndInfo( iWndSyu, iZuSyu, iKai, iZuNum);
-
-	if ( WindowCtrl::MmWndKFindSyu( iWndSyu, iZuSyu, iKai, iZuNum) == NULL) {
-		z_lWnd.Inject( pWndInfo);
-		ist = 0;
-	}
-	return( ist);
-}
+///////////////////////////////////////////////////////////////////////////////
+////  ウィンドウを追加する
+//
+//MINT WindowCtrl::AddWnd(							// (  O) 0 : 正常  1 : ｴﾗｰ
+//						MINT		iWndSyu,		// (I  ) ウィンドウ種類(1,2,3,4,5)
+//						MINT		iZuSyu,			// (I  ) 図種類
+//						MINT		iKai,			// (I  ) 階
+//						MINT		iZuNum			// (I  ) ウィンドウ情報図番号
+//				)
+//{
+//	MINT		ist = 1;
+//	MmWndInfo	*pWndInfo = new MmWndInfo( iWndSyu, iZuSyu, iKai, iZuNum);
+//
+//	if ( WindowCtrl::GetWndInfoBySyu( iWndSyu, iZuSyu, iKai, iZuNum) == NULL) {
+//		z_lWnd.Inject( pWndInfo);
+//		ist = 0;
+//	}
+//	return( ist);
+//}
 
 /////////////////////////////////////////////////////////////////////////////
 //  ウィンドウを削除する
 
-MINT WindowCtrl::MmWndKDelete(						// (  O) ｽﾃｰﾀｽ  0 : 正常  1 : ｴﾗｰ
+MINT WindowCtrl::DeleteWnd(							// (  O) ｽﾃｰﾀｽ  0 : 正常  1 : ｴﾗｰ
 						MmWndInfo*	pWndInfo		// (I  ) ウィンドウ管理情報
 				)
 {
@@ -308,7 +308,7 @@ MINT WindowCtrl::MmWndKDelete(						// (  O) ｽﾃｰﾀｽ  0 : 正常  1 : ｴﾗｰ
 /////////////////////////////////////////////////////////////////////////////
 //  ウィンドウを検索する
 
-MmWndInfo* WindowCtrl::MmWndKFindSyu(				// (  O) ウィンドウ情報へのﾎﾟｲﾝﾀ
+MmWndInfo* WindowCtrl::GetWndInfoBySyu(				// (  O) ウィンドウ情報へのﾎﾟｲﾝﾀ
 						MINT		iWndSyu,		// (I  ) ウィンドウ種類(1,2,3,4,5)
 						MINT		iZuSyu,			// (I  ) 図種類
 						MINT		iKai,			// (I  ) 階
@@ -333,7 +333,7 @@ MmWndInfo* WindowCtrl::MmWndKFindSyu(				// (  O) ウィンドウ情報へのﾎﾟｲﾝﾀ
 /////////////////////////////////////////////////////////////////////////////
 //  ウィンドウを検索する
 
-MmWndInfo* WindowCtrl::MmWndKFindWnd(							// (  O) ウィンドウ情報へのﾎﾟｲﾝﾀ
+MmWndInfo* WindowCtrl::GetWndInfoObWnd(				// (  O) ウィンドウ情報へのﾎﾟｲﾝﾀ
 						CWnd*		pWnd			// (I  ) ウィンドウのインスタンス
 				)
 {
@@ -350,7 +350,7 @@ MmWndInfo* WindowCtrl::MmWndKFindWnd(							// (  O) ウィンドウ情報へのﾎﾟｲﾝﾀ
 /////////////////////////////////////////////////////////////////////////////
 //  ウィンドウを検索する
 
-MmWndInfo* WindowCtrl::MmWndKFindFrm(							// (  O) ウィンドウ情報へのﾎﾟｲﾝﾀ
+MmWndInfo* WindowCtrl::GetWndInfoOfFrm(				// (  O) ウィンドウ情報へのﾎﾟｲﾝﾀ
 						CMDIChildWnd* pChildFrm		// (I  ) フレームのインスタンス
 				)
 {
@@ -367,14 +367,14 @@ MmWndInfo* WindowCtrl::MmWndKFindFrm(							// (  O) ウィンドウ情報へのﾎﾟｲﾝﾀ
 /////////////////////////////////////////////////////////////////////////////
 //	全ウィンドウを削除する
 
-MINT WindowCtrl::MmWndKDeleteAll()								// (  O) ステイタス 0 : 正常  1 : エラー
+MINT WindowCtrl::DeleteAllWnd()						// (  O) ステイタス 0 : 正常  1 : エラー
 {
 	MINT				ist;
 	MPOSITION			Pos;
 	MmWndInfo*			pWndInfo2;
 
 	for (pWndInfo2=(MmWndInfo*)z_lWnd.GetHead( &Pos); pWndInfo2!=0; pWndInfo2=(MmWndInfo*)z_lWnd.GetHead( &Pos)) {
-		ist = MmWndKDelete( pWndInfo2);
+		ist = DeleteWnd( pWndInfo2);
 		if ( ist) return ist;
 	}
 	return 0;
@@ -383,7 +383,7 @@ MINT WindowCtrl::MmWndKDeleteAll()								// (  O) ステイタス 0 : 正常  1 : エラ
 /////////////////////////////////////////////////////////////////////////////
 //	カレントのウィンドウを取得する
 
-MmWndInfo* WindowCtrl::MmWndKGetCurWnd()						// (  O) ステイタス  NULL : エラー 
+MmWndInfo* WindowCtrl::GetCurWndInfo()				// (  O) ステイタス  NULL : エラー 
 {
 	CMainFrame*			pMainFrm;					// メインフレーム
 	CMDIChildWnd*		pChildFrm;					// 子フレーム
@@ -399,7 +399,7 @@ MmWndInfo* WindowCtrl::MmWndKGetCurWnd()						// (  O) ステイタス  NULL : エラー
 
 	pChildFrm = pMainFrm->m_pCurFrame;
 
-	pWndInfo = MmWndKFindFrm( pChildFrm);
+	pWndInfo = GetWndInfoOfFrm( pChildFrm);
 
 	return( pWndInfo);
 }

@@ -16,7 +16,7 @@ void MCmdLoadDxfFile()
 
 //	MDxfFlLoad();
 
-//	MmWndKReDraw();
+//	WndKReDraw();
 
 }
 

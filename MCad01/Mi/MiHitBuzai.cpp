@@ -104,7 +104,7 @@ MhRfm* mhHaitiIn::GetCurRfm()
 /////////////////////////////////////////////////////////////////////////////
 //	ƒeƒ“ƒ|ƒ‰ƒŠ•\Ž¦
 
-void WindowCtrl::MmWndKDrawTemp(
+void WindowCtrl::DrawWndTemp(
 				MmWndInfo*		pWndInfo,
 				msCod*			pCod
 				)

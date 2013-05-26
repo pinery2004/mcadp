@@ -187,61 +187,67 @@ public :
 	#endif
 #endif
 
-class DLL_EXPORT WindowCtrl
+class DLL_EXPORT GridDispCtrl
 {
+	/////////////////////////////////////////////////////////////////////////////
+	//  グリッド表示制御
+
 public:
 	/////////////////////////////////////////////////////////////////////////////
-	//  ウィンドウ管理
-
-	/////////////////////////////////////////////////////////////////////////////
 	//	グリッド数変更入力
-	static void MmGridNumInp(
+	static void GridNumInp(
 					CWnd*		pWnd					// (I  ) ウィンドウのインスタンス
 					);
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	グリッド数設定	（シングルグリッド用）
-	static void MmGridNumSet(
+	static void SetGridNum(
 					MINT*		nGrid					// (I  ) グリッド数（北、西、南、東）
 					);
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	グリッド数読み込み	（シングルグリッド用）
-	static void MmGridNumGet(
+	static void GetGridNum(
 					MINT*		nGrid					// (  O) グリッド数（北、西、南、東）
 					);
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	グリッド数変更表示実行
-	static void MmGridNumXqt();
+	static void XqtGridNum();
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	グリッド数変更キャンセル
-	static void MmGridNumCancel();
+	static void CancelGridNum();
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	グリッド数変更終了
-	static void MmGridNumEnd();
+	static void EndGridNum();
+};
+
+class DLL_EXPORT WindowCtrl
+{
+	/////////////////////////////////////////////////////////////////////////////
+	//  ウィンドウ管理
 
 public:
 	/////////////////////////////////////////////////////////////////////////////
 	//	先頭のウィンドウを取得
 	//	返値 =NULL: レコードなし !=NULL: 読み込み[部品配置]ポインタ
-	static MmWndInfo* MmGetHeadWnd(
+	static MmWndInfo* GetHeadWnd(
 							MPOSITION	*pWndPos = NULL
 					);
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	次のウィンドウを取得
 	//	返値 =NULL: レコードなし !=NULL: 読み込み[部品配置]ポインタ
-	static MmWndInfo* MmGetNextWnd(
+	static MmWndInfo* GetNextWnd(
 							MPOSITION	*pWndPos = NULL
 					);
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	カレントのウィンドウ種別を設定
 
-	static void	MmWndSetSyubetsuC(
+	static void	SetCurWndSyubetsu(
 							MINT		iWndSyu,		// (I  ) ウィンドウ種類
 							MINT		iZuSyu,			// (I  ) 図種類
 							MINT		iKai,			// (I  ) 階
@@ -251,7 +257,7 @@ public:
 	/////////////////////////////////////////////////////////////////////////////
 	//	カレントウィンドウのフレームのインスタンスを設定
 
-	static void	MmWndSetFrameC(
+	static void	SetCurWndFrame(
 							MINT		iWndSyu,		// (I  ) ウィンドウ種類
 							CMDIChildWnd* pChildFrm		// (I  ) フレームのインスタンス
 					);
@@ -259,102 +265,103 @@ public:
 	/////////////////////////////////////////////////////////////////////////////
 	//	カレントウィンドウのウィンドウのインスタンスを設定
 
-	static void	MmWndSetWndC(
+	static void	SetCurWnd(
 							MINT		iWndSyu,		// (I  ) ウィンドウ種類
 							CWnd*		m_pWnd			// (I  ) ウィンドウのインスタンス
 					);
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	コマンドメニュー処理
-	static void MmWndKCmdXqt(
+	static void XqtMenuCmd(
 							MINT		i_idCmd			// コマンドID
 					);
 
 	/////////////////////////////////////////////////////////////////////////////
 	//  カレントウィンドウを追加する
 
-	static MINT MmWndKAddC();									// (  O) ステイタス 0:正常  1:エラー
+	static MINT AddCurWnd();							// (  O) ステイタス 0:正常  1:エラー
 
-	/////////////////////////////////////////////////////////////////////////////
-	//  ウィンドウを追加する
+	///////////////////////////////////////////////////////////////////////////////
+	////  ウィンドウを追加する
 
-	static MINT MmWndKAdd(										// (  O) ステイタス 0:正常  1:エラー
-							MINT		iWndSyu,		// (I  ) ウィンドウ種類(1,2,3,4,5)
-							MINT		iZuSYu,			// (I  ) 図種類
-							MINT		iKai,			// (I  ) 階
-							MINT		iZuNum			// (I  ) 図番号
-					);
+	//static MINT AddWnd(									// (  O) ステイタス 0:正常  1:エラー
+	//						MINT		iWndSyu,		// (I  ) ウィンドウ種類(1,2,3,4,5)
+	//						MINT		iZuSYu,			// (I  ) 図種類
+	//						MINT		iKai,			// (I  ) 階
+	//						MINT		iZuNum			// (I  ) 図番号
+	//				);
 
 	/////////////////////////////////////////////////////////////////////////////
 	//  ウィンドウを検索する
 
-	static MmWndInfo* MmWndKFindSyu(							// (  O) ウィンドウ管理sg情報のポインタ
+	static MmWndInfo* GetWndInfoBySyu(					// (  O) ウィンドウ管理sg情報のポインタ
 							MINT		iWndSyu,		// (I  ) ウィンドウ種類(1,2,3,4,5)
 							MINT		iZuSYu,			// (I  ) 図種類
 							MINT		iKai,			// (I  ) 階
 							MINT		iZuNum			// (I  ) 図番号
 					);
 
-	static MmWndInfo* MmWndKFindWnd(							// (  O) ウィンドウ管理情報のポインタ
-							CWnd*		m_pWnd			// (I  ) ウィンドウのインスタンス
+	static MmWndInfo* GetWndInfoObWnd(					// (  O) ウィンドウ管理情報のポインタ
+							CWnd*		i_pWnd			// (I  ) ウィンドウのインスタンス
 					);
 
-	static MmWndInfo* MmWndKFindFrm(							// (  O) ウィンドウ情報へのﾎﾟｲﾝﾀ
+	static MmWndInfo* GetWndInfoOfFrm(					// (  O) ウィンドウ情報へのﾎﾟｲﾝﾀ
 							CMDIChildWnd* pChildFrm		// (I  ) フレームのインスタンス
 					);
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	ウィンドウを削除する
-	/*
-	static MINT MmWndKDelete(									// (  O) ステイタス 0:正常  1:エラー
-					MINT		iWndSyu,				// (I  ) ウィンドウ種類(1,2,3,4,5)
-					MINT		iZuSYu,					// (I  ) 図種類
-					MINT		iKai,					// (I  ) 階
-					MINT		iZuNum					// (I  ) 図番号
-					);
 
-	static MINT MmWndKDelete(									// (  O) ステイタス 0:正常  1:エラー
-					CWnd*		pWnd					// (I  ) ウィンドウのインスタンス
-					);
-	*/
-	static MINT MmWndKDelete(									// (  O) ステイタス 0:正常  1:エラー
+	//
+	//static MINT DeleteWnd(							// (  O) ステイタス 0:正常  1:エラー
+	//				MINT		iWndSyu,				// (I  ) ウィンドウ種類(1,2,3,4,5)
+	//				MINT		iZuSYu,					// (I  ) 図種類
+	//				MINT		iKai,					// (I  ) 階
+	//				MINT		iZuNum					// (I  ) 図番号
+	//				);
+	//
+	//static MINT DeleteWnd(							// (  O) ステイタス 0:正常  1:エラー
+	//				CWnd*		pWnd					// (I  ) ウィンドウのインスタンス
+	//				);
+
+	static MINT DeleteWnd(								// (  O) ステイタス 0:正常  1:エラー
 							MmWndInfo*	pWndInfo		// (I  ) ウィンドウ管理情報
 					);
 
-	/////////////////////////////////////////////////////////////////////////////
-	//	ウィンドウを開放する
+	///////////////////////////////////////////////////////////////////////////////
+	////	ウィンドウを開放する
 
-	static MINT MmWndKFree(									// (  O) ステイタス 0:正常  1:エラー
-							MINT		iWndSyu,		// (I  ) ウィンドウ種類(1,2,3,4,5)
-							MINT		iZuSYu,			// (I  ) 図種類
-							MINT		iKai,			// (I  ) 階
-							MINT		iZuNum			// (I  ) 図番号
-					);
+	//static MINT WndFree(								// (  O) ステイタス 0:正常  1:エラー
+	//						MINT		iWndSyu,		// (I  ) ウィンドウ種類(1,2,3,4,5)
+	//						MINT		iZuSYu,			// (I  ) 図種類
+	//						MINT		iKai,			// (I  ) 階
+	//						MINT		iZuNum			// (I  ) 図番号
+	//				);
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	全ウィンドウを削除する
 
-	static MINT MmWndKDeleteAll();								// (  O) ステイタス 0:正常  1:エラー
+	static MINT DeleteAllWnd();							// (  O) ステイタス 0:正常  1:エラー
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	カレントのウィンドウを取得する
 
-	static MmWndInfo* MmWndKGetCurWnd();					// (  O) ステイタス  NULL : エラー 
+	static MmWndInfo* GetCurWndInfo();					// (  O) ステイタス  NULL : エラー 
 
 	/////////////////////////////////////////////////////////////////////////////
 	//  ウィンドウを再表示する（メモリーＤＣに書き込み画面に表示する）
 
-	static MINT MmWndKReDraw();
+	static MINT ReDrawWnd();
 
 	/////////////////////////////////////////////////////////////////////////////
 	//  全ウィンドウを再表示する（メモリーＤＣに書き込み画面に表示する）
 
-	static MINT MmWndKReDrawAll();
+	static MINT ReDrawAllWnd();
 
 	/////////////////////////////////////////////////////////////////////////////
 	//  ウィンドウを表示する
 
-	static MINT MmWndKDraw(									// (  O) ステイタス 0:正常  1:エラー
+	static MINT DrawWnd(								// (  O) ステイタス 0:正常  1:エラー
 							MmWndInfo*	pWndInfo		// (I  ) ウィンドウ管理情報
 					);
 
@@ -365,14 +372,14 @@ public:
 	/////////////////////////////////////////////////////////////////////////////
 	//  ウィンドウイメージメモリＤＣにウィンドウを表示
 
-	static void MmWndKDrawMDC(									// (  O) ステイタス 0:正常  1:エラー
+	static void DrawWndMDC(								// (  O) ステイタス 0:正常  1:エラー
 							MmWndInfo*	pWndInfo		// (I  ) ウィンドウ管理情報
 					);
 
 	/////////////////////////////////////////////////////////////////////////////
 	//	グリッドを表示する
 
-	static void MmWndKDrawGrid(
+	static void DrawGridLine(
 							MmWndInfo*	pWndInfo,		// (I  ) ウィンドウ管理情報
 							msCod*		pCod
 					);
@@ -380,7 +387,7 @@ public:
 	/////////////////////////////////////////////////////////////////////////////
 	//	壁芯線を表示する
 
-	static void MmWndKDrawKabe(
+	static void DrawKabeSin(
 							msCod*		pCod,			// 座標系
 							MINT		iKaiC,			// 階  	(1,2,3)
 							MINT		iGpC			// 構成
@@ -389,7 +396,7 @@ public:
 	/////////////////////////////////////////////////////////////////////////////
 	//	基礎芯線を表示する
 
-	static void MmWndKDrawKiso(
+	static void DrawKisoSin(
 							msCod*		pCod,			// 座標系
 							MINT		iKaiC,			// 階  	(1,2,3)
 							MINT		iGpC			// 構成
@@ -398,7 +405,7 @@ public:
 	/////////////////////////////////////////////////////////////////////////////
 	//	配置部品を表示する
 
-	static void MmWndKDrawParts(
+	static void DrawHaitiParts(
 							msCod*		pCod,			// 座標系
 							MINT		iKaiC,			// 階  	(1,2,3)
 							MINT		iGpC			// 構成
@@ -407,7 +414,7 @@ public:
 	/////////////////////////////////////////////////////////////////////////////
 	//	屋根を表示する
 
-	static void MmWndKDrawRoof(
+	static void DrawRoof(
 							msCod*		pCod,			// 座標系
 							MINT		iKaiC,			// 階  	(1,2,3)
 							MINT		iGpC			// 構成
@@ -416,31 +423,31 @@ public:
 	/////////////////////////////////////////////////////////////////////////////
 	//	テンポラリ表示
 
-	static void MmWndKDrawTemp(
+	static void DrawWndTemp(
 							MmWndInfo*	pWndInfo,		// (I  ) ウィンドウ管理情報
 							msCod*		pCod
 					);
 
-	/////////////////////////////////////////////////////////////////////////////
-	//  ウィンドウイメージメモリＤＣに平面図を表示
+	///////////////////////////////////////////////////////////////////////////////
+	////  ウィンドウイメージメモリＤＣに平面図を表示
 
-	static MINT MmWndKDrawHeimenzu(
-							MmWndInfo*	pWndInfo		// (I  ) ウィンドウ管理情報
-					);
+	//static MINT DrawWndHeimenzu(
+	//						MmWndInfo*	pWndInfo		// (I  ) ウィンドウ管理情報
+	//				);
 
-	/////////////////////////////////////////////////////////////////////////////
-	//  座標系の設定
+	///////////////////////////////////////////////////////////////////////////////
+	////  座標系の設定
 
-	static MINT MmWndKSetCod(
-							msCod*		pCod			// (　O) 表示座標系
-					);
+	//static MINT SetWndCod(
+	//						msCod*		pCod			// (　O) 表示座標系
+	//				);
 
 	/////////////////////////////////////////////////////////////////////////////
 	//  ＤＣに構造図を描く
 
-	static void MmDrawStructure(								// (  O) ステイタス　0:正常  1:エラー
-						MmWndInfo*	pWndInfo,			// (I  ) ウィンドウ管理情報
-						msCod*		pCod
+	static void DrawStructure(							// (  O) ステイタス　0:正常  1:エラー
+							MmWndInfo*	pWndInfo,		// (I  ) ウィンドウ管理情報
+							msCod*		pCod
 					);
 };
 

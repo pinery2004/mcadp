@@ -53,7 +53,7 @@ MINT Window::SetCursor(
 	MINT	ist = 1;
 	MINT	iCursor;											// ウィンドウのカレントカーソル番号
 
-	MmWndInfo* pWndInfo = WindowCtrl::MmWndKFindWnd( pWnd);
+	MmWndInfo* pWndInfo = WindowCtrl::GetWndInfoObWnd( pWnd);
 
 	if ( pWndInfo != 0) {
 

@@ -181,7 +181,7 @@ MINT mhHaitiIn::GetParts(
 		 pPlcEn = HaitiDb::MdGetNextParts( &pos1)) {
 		if ( !mhHaitiIn::CheckParts( iKai, iIdPartsSpec, cGeneralName, cNmParts1, pPlcEn))
 			continue;											// 対象外部品配置
-		if ( !MmCheckValidParts( pPlcEn))							// オプションと履歴のチェック
+		if ( !MmCheckValidParts( pPlcEn))						// オプションと履歴のチェック
 			continue;
 
 		if ( iHE >= szHE) {										// 選択部品配置　オーバフロー　<ERROR>
@@ -265,7 +265,7 @@ mhPlcParts* mhHaitiIn::SrchBuzai(
 		if ( pPlcEn->GetPTCdGp() != iGpC)
 			continue;											// 異なる構成の部材は検索しない
 			
-		if ( !MmCheckValidParts( pPlcEn))							// オプションと履歴のチェック
+		if ( !MmCheckValidParts( pPlcEn))						// オプションと履歴のチェック
 			continue;
 
 		if ( iCdBuzai) {										// 部材コードが指定されている場合はチェックする
@@ -359,7 +359,7 @@ void mhHaitiIn::MmSrchCrossBuzai(
 		if ( pPlcEn->GetPTCdGp() != iGpC)
 			continue;											// 異なる構成の部材は検索しない
 
-		if ( !MmCheckValidParts( pPlcEn))							// オプションと履歴のチェック
+		if ( !MmCheckValidParts( pPlcEn))						// オプションと履歴のチェック
 			continue;
 
 		if ( iCdBuzai) {										// 検索対象の部材コードが指定されている場合はチェックする

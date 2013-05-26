@@ -30,7 +30,7 @@ static	CMmDialogTenkai* z_pDlgTenkai = NULL;	// モードレスバージョンダイアログの
 
 void MCmdTenkai()
 {
-	MmWndInfo*	pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウを取得する
+	MmWndInfo*	pWndInfo = WindowCtrl::GetCurWndInfo();					// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();
 	
 	pWnd->PostMessage(WM_MYMESSAGETENKAI);

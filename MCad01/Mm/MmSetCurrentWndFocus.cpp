@@ -27,7 +27,7 @@ namespace MC
 
 	void Window::CurWndFocus( void)
 {
-	MmWndInfo* pWndInfo = WindowCtrl::MmWndKGetCurWnd();					// カレントウィンドウ取得
+	MmWndInfo* pWndInfo = WindowCtrl::GetCurWndInfo();					// カレントウィンドウ取得
 	pWndInfo->GetWnd()->SetFocus();
 }
 
