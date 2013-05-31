@@ -11,20 +11,7 @@
 #include "stdafx.h"
 #include "MsBasic.h"
 
-#include "MlLog.h"
-#include "MgDefine.h"
-#include "MgTol.h"
-
-#include "MgAngle.h"
 #include "MgPoint.h"
-#include "MgLine.h"
-#include "MgPlane.h"
-#include "MgPolygon.h"
-
-#include "MhDefParts.h"
-#include "MsBitSet.h"
-#include "MdOpt.h"
-#include "MdHist.h"
 
 #include "MdList.h"
 #define DLL_EXPORT_IEMODEL_DO
@@ -35,7 +22,6 @@
 #define	DLL_EXPORT_MHPLCINP_DO
 #include "MhInpPlcParts.h"
 
-#include "MainFrm.h"
 #include "MmCmdMsg.h"
 
 namespace MC

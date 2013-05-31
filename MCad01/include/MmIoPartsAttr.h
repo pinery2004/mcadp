@@ -6,7 +6,6 @@
 #include "MCad.h"
 
 #include "MmDialogKAttr.h"
-#include "MnIoPartsAttr.h"
 
 #define		MMAX_HOSEI_DBG	999
 #define		MSZ_CROSS_BZI	100

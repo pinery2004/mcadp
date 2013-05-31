@@ -5,7 +5,6 @@
 #include "MainFrm.h"
 #include "MCad.h"
 
-//#include "MmDialogKAttr.h"
 #include "MmIoPartsAttr.h"
 
 #define		MMAX_HOSEI_DBG	999
