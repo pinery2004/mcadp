@@ -126,7 +126,7 @@ void MCmdPartsEdit()
 	MmWndInfo*	pWndInfo = WndKGetCurWnd();								// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();
 	
-	pWnd->PostMessage(WM_MYMESSAGEPARTSEDIT);
+	pWnd->PostMessage(WM_MYMESSAGE_PARTSEDIT);
 }
 */
 

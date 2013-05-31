@@ -44,25 +44,20 @@ void MCmdRoofAdd()
 	MgGInt		GifInp(20);
 
 	Msg::ClearErrorMsg();
-//S	z_mnIA.SetKCdGp( MP_GP_YANE);
-//	z_mnIA.SetKCdBr( MP_BR_OTHER);
-//	z_mnIA.InitComboAttr( MP_AT_YANE);								// 属性入力用コンボボックスを属性値入力無しにする
-//	z_mnIA.InitComboPartsNm();
-//	z_mnIA.SelectComboPartsNmByPartsNm( Mstr( "屋根"));
-//	z_mnIA.InitComboPartsMbr();
-//	z_mnIA.SelectComboPartsMbrByMbrCd( Mstr( "204"));
 
-	ist1 = z_mnIA.SetRibbonBarEnt( MP_GP_YANE, MP_BR_OTHER, Mstr( "屋根"), Mstr( "204"));
+	ist1 = z_mnIA.SetRibbonBarEntry( MP_GP_YANE, MP_BR_OTHER, Mstr( "屋根"), Mstr( "204"));
 
 	WindowCtrl::ReDrawWnd();
 
 	Msg::OperationMsg( MC_OPRT_ROOF);								// ステイタスバーの操作表示部へ"屋根入力"を表示
 
 	mhPartsSpec* pPartsSpec	= BuzaiCode::MhGetpPartsSpec( z_mnIA.GetCurPartsNmId());
-//E	z_mnIA.SelectComboInpKbnByInpKbnCd( pPartsSpec->GetPTCdInpKb());
-	z_mnIA.RibbonIO( MSET_INPUT_KUBUN_CD, pPartsSpec->GetPTCdInpKb());	// 入力点区分選択用のコンボボックスに表示する
-//E	z_mnIA.SelectComboMarumeByMarumeCd( pPartsSpec->GetPTCdMarume());
-	z_mnIA.RibbonIO( MSET_INPUT_MARUME_CD, pPartsSpec->GetPTCdMarume());	// 丸めコードを選択用のコンボボックスに表示する
+//E	z_mnIA.SelectComboInpKbnByInpKbnCdXqt( pPartsSpec->GetPTCdInpKb());
+//SS	z_mnIA.RibbonIO( MSET_INPUT_KUBUN_CD, pPartsSpec->GetPTCdInpKb());	// 入力点区分選択用のコンボボックスに表示する
+	z_mnIA.SelectComboInpKbnByInpKbnCdEntry( pPartsSpec->GetPTCdInpKb());	// 入力点区分選択用のコンボボックスに表示する
+//E	z_mnIA.SelectComboMarumeByMarumeCdXqt( pPartsSpec->GetPTCdMarume());
+//SS	z_mnIA.RibbonIO( MSET_INPUT_MARUME_CD, pPartsSpec->GetPTCdMarume());	// 丸めコードを選択用のコンボボックスに表示する
+	z_mnIA.SelectComboMarumeByMarumeCdEntry( pPartsSpec->GetPTCdMarume());	// 丸めコードを選択用のコンボボックスに表示する
 
 	MFOREVER {
 		pgJim.m_n = 0;

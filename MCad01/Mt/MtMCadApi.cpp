@@ -196,7 +196,6 @@ MINT MtCmdThread( void)
 
 		try {
 			MtDoOneCommand( fs1,0);								// 対応するコマンドを実行する
-
 		} catch ( ...) {
 			ms::CmdError( __FUNCTION__, __LINE__, MC_ERR_COMMAND);
 

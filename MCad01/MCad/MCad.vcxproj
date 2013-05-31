@@ -253,6 +253,7 @@
     <ClInclude Include="..\include\MmValid.h" />
     <ClInclude Include="..\include\MmWindow.h" />
     <ClInclude Include="..\include\MmWnd.h" />
+    <ClInclude Include="..\include\MnMFCRibbonBar.h" />
     <ClInclude Include="..\include\MoDispList.h" />
     <ClInclude Include="..\include\MoGlLib.h" />
     <ClInclude Include="..\include\MoMaterial.h" />
@@ -433,6 +434,7 @@
     <ClCompile Include="..\Mm\MmIoPartsAttr1.cpp" />
     <ClCompile Include="..\Mm\MmSystem.cpp" />
     <ClCompile Include="..\Mn\MnInp.cpp" />
+    <ClCompile Include="..\Mn\MnMFCRibbonBar.cpp" />
     <ClCompile Include="..\Mn\MnSetRibbonBar.cpp" />
     <ClCompile Include="..\Mn\MnSRibbonBarPartsAttr2.cpp" />
     <ClCompile Include="..\Mn\MnSRibbonBarInp.cpp" />
@@ -467,7 +469,6 @@
     <ClCompile Include="..\Mt\MtPrcEventQueue.cpp" />
     <ClCompile Include="..\Mt\MtSendMessage.cpp" />
     <ClCompile Include="..\Mt\MtWaitLoop.cpp" />
-    <ClCompile Include="mcad.CPP" />
     <ClCompile Include="MmDialogKAttr.cpp" />
     <ClCompile Include="Src\ChildFrm1.cpp" />
     <ClCompile Include="Src\ChildFrm2.cpp" />

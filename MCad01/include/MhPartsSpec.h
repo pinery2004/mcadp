@@ -56,7 +56,7 @@ protected:
 	MINT	m_iPTCdInpKb;						// 入力コード
 	MSTNDH	m_iPTCdHgt;							// 取り付け高さ基準コード
 	MINT	m_iPTCdPlc;							// 配置コード
-	MINT	m_iPTCdIzon;						// 依存コード
+	MINT	m_iPTCdIzon;						// 配置依存コード
 	MINT	m_iPTCdMarume;						// 丸めコード
 	MINT	m_iPTCdToritk;						// 取り付けコード　上下付けコード (0:下付け, 1:上付け)
 public:
@@ -84,9 +84,9 @@ public:
 									m_iPTCdInpKb = iPTCdInpKb;}
 	void	SetPTCdHgt( MSTNDH iPTCdHgt)	{											// 取り付け高さ基準コード
 									m_iPTCdHgt = iPTCdHgt;}
-	void	SetPTCdPlc( MINT iPTCdPlc)	{												// 配置コード
+	void	SetPTCdPlc( MINT iPTCdPlc)	{												// 配置依存1コード
 									m_iPTCdPlc = iPTCdPlc;}
-	void	SetPTCdIzon( MINT iPTCdIzon)	{											// 依存コード
+	void	SetPTCdIzon( MINT iPTCdIzon)	{											// 配置依存コード
 									m_iPTCdIzon = iPTCdIzon;}
 	void	SetPTCdMarume( MINT iPTCdMarume)	{										// 丸めコード
 									m_iPTCdMarume = iPTCdMarume;}
@@ -120,7 +120,7 @@ public:
 	MINT	GetPTCdPlc()	{		
 									return m_iPTCdPlc;}									// 配置コード
 	MINT	GetPTCdIzon()	{		
-									return m_iPTCdIzon;}								// 依存コード
+									return m_iPTCdIzon;}								// 配置依存コード
 	MINT	GetPTCdMarume()	{		
 									return m_iPTCdMarume;}								// 丸めコード
 	MINT	GetPTCdToritk()	{		

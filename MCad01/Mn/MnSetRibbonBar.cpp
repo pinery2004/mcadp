@@ -25,52 +25,62 @@ namespace MC
 //	リボンバーの部品選択用項目を設定する
 //		組、分類、部品タイプ、寸法型式
 //
-MINT mnIoPartsAttr::SetRibbonBar(						// ステイタス 0:正常 -1:エラー
-						MPKOSEI		i_irbKumi,			// 構造	組
-						MPBUNRUI	i_irbBunrui,		// 構造	分類
-						MCHAR*		i_crbPartsSpec,		// 部品種類
-						MCHAR*		i_crbMbr			// 部品メンバー()
+MINT mnIoPartsAttr::SetRibbonBarXqt(						// ステイタス 0:正常 -1:エラー
+						MPKOSEI		i_irbKumi,			// 構造組
+						MPBUNRUI	i_irbBunrui,		// 構造分類
+						MCHAR*		i_crbPartsSpec,		// 部品種類		(部品名)
+						MCHAR*		i_crbMbr			// 部品メンバー	(寸法型式)
 				)
 {
 	MINT	ist;
 	MPATTR	iAttr;
 
+	// 組を選択する
 	z_mnIA.SetKCdGp( i_irbKumi);
+
+	// 分類を選択する
 	z_mnIA.SetKCdBr( i_irbBunrui);
-	// ダイアログの項目を設定する
-	z_mnIA.InitComboPartsNm();									// 組、分類に対応する部品を選択可能項目として設定する
+
+	// 部品種類(部品名)のダイアログの項目を設定し部品名を選択する
+	// 組、分類に対応する部品名を選択可能項目として設定する
+	z_mnIA.InitComboPartsNm();
 	ist = z_mnIA.SelectComboPartsNmByPartsNm( i_crbPartsSpec);
 	if ( ist < 0)
 		MQUIT;
 	if ( z_mnIA.GetCCategory() == MP_SENTAKU_KOUZOU) {
 		z_mmIA.MmDialogKAttrDisp( z_MCadApp.m_pMainFrame);
-//S		z_mmIA.InitComboParts();
 		z_mmIA.InitComboPartsNm();
 		ist = z_mmIA.SelectComboPartsNmByPartsNm( i_crbPartsSpec);
 		if ( ist < 0)
 			MQUIT;
 	}
 
-	z_mnIA.InitComboPartsMbr();									// 部品に対応する寸法型式を選択可能項目として設定する
+	// 部品名に対応するメンバー(寸法型式)を選択可能項目として設定する
+	z_mnIA.InitComboPartsMbr();									// リボンバーの部品名選択用コンボボックス
 	if ( z_mnIA.GetCCategory() == MP_SENTAKU_KOUZOU) {
-		z_mmIA.InitComboPartsMbr();								// 部品に対応する寸法型式を選択可能項目として設定する
+		z_mmIA.InitComboPartsMbr();								// ダイアログの部品名選択用コンボボックス
 	}
 	if ( i_crbMbr >= 0) {
+
+		// リボンバーのメンバー選択用コンボボックスのメンバーを選択する
         ist = z_mnIA.SelectComboPartsMbrByMbrCd( i_crbMbr);
 		if ( ist < 0)
 			MQUIT;
 		if ( z_mnIA.GetCCategory() == MP_SENTAKU_KOUZOU) {
+
+			// ダイアログのメンバー選択用コンボボックスのメンバーを選択する
 			ist = z_mmIA.SelectComboPartsMbrByMbrCd( i_crbMbr);
 			if ( ist < 0)
 				MQUIT;
-		}
 
-		if ( i_irbKumi == MP_GP_YANE) {
-			iAttr = MP_AT_YANE;
-		} else {
-			iAttr = MP_AT_AUTO;
+			// ダイアログの属性入力用コンボボックスを初期化する
+			if ( i_irbKumi == MP_GP_YANE) {
+				iAttr = MP_AT_YANE;
+			} else {
+				iAttr = MP_AT_AUTO;
+			}
+			z_mmIA.InitComboAttrXqt( iAttr);
 		}
-		z_mmIA.InitComboAttr( iAttr);							// 属性入力用コンボボックスを初期化する
 	}
 	WindowCtrl::ReDrawWnd();
 

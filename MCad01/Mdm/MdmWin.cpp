@@ -914,7 +914,7 @@ MINT	DWin::MdwOpen (
 				)
 {
 	CMainFrame*	pMainFrame = MC::System::GetpMainFrame();
-	pMainFrame->SendMessage( WM_MYMESSAGEWINDOW);
+	pMainFrame->SendMessage( WM_MYMESSAGE_WINDOW);
 	return 0;
 }
 

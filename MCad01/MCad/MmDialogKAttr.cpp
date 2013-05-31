@@ -21,22 +21,23 @@ CComboBox* CMmDialogKAttr::GetCmbBzaiAttr(
 				)
 {
 	static 	CComboBox* pCmbBziAttr[6] = { &m_CmbKAttr1, &m_CmbKAttr2, &m_CmbKAttr3,
-										 &m_CmbKAttr4, &m_CmbKAttr5, &m_CmbKAttr6 };
+										  &m_CmbKAttr4, &m_CmbKAttr5, &m_CmbKAttr6 };
 	return pCmbBziAttr[i_iAttrn-1];
 }
 
 /////////////////////////////////////////////////////////////////////////////
-//	部材属性ダイアログ表示・入力処理の起動(別タスクから起動)
+//	部材属性ダイアログを表示する処理を起動
+//	(別プロセスからのエントリーでSendMessageを使用して本体を実行)
 void CMmDialogKAttr::MmDialogKAttr()
 {
 	MC::MmWndInfo*	pWndInfo = MC::WindowCtrl::GetCurWndInfo();					// カレントウィンドウを取得する
-	CWnd*		pWnd = pWndInfo->GetWnd();
+	CWnd*			pWnd = pWndInfo->GetWnd();
 	
-	pWnd->PostMessage(WM_MYMESSAGEKATTR);
+	pWnd->PostMessage( WM_MYMESSAGE_KATTR);
 }
 
 /////////////////////////////////////////////////////////////////////////////
-//	部材属性ダイアログ表示
+//	部材属性ダイアログを表示する	(本体)
 void CMmDialogKAttr::MmDialogKAttrDisp(
 						CWnd*		i_pWnd			// (I  ) ウィンドウのインスタンス
 				)
@@ -52,13 +53,6 @@ void CMmDialogKAttr::MmDialogKAttrDisp(
 	}
 }
 
-/////////////////////////////////////////////////////////////////////////////
-//	部材属性ダイアログ表示　終了
-void CMmDialogKAttr::MmDialogKAttrEnd()
-{
-	m_bDispFlg = false;
-}
-
 // CMmDialogKAttr ダイアログ
 
 IMPLEMENT_DYNAMIC( CMmDialogKAttr, CDialog)
@@ -67,6 +61,7 @@ CMmDialogKAttr::CMmDialogKAttr(CWnd* pParent /*=NULL*/)
 	: CDialogEx(CMmDialogKAttr::IDD, pParent)
 {
 	m_pParent = NULL;
+	m_bDispFlg = false;
 }
 
 CMmDialogKAttr::~CMmDialogKAttr()
@@ -75,8 +70,8 @@ CMmDialogKAttr::~CMmDialogKAttr()
 
 BOOL CMmDialogKAttr::Create(CWnd * pWnd)
 {
-	m_pParent = pWnd;
 	BOOL bret;
+	m_pParent = pWnd;
 	bret = CDialog::Create( CMmDialogKAttr::IDD, m_pParent);
 	if (bret == TRUE)
 	{
@@ -201,44 +196,46 @@ BOOL CMmDialogKAttr::OnInitDialog()
 	// 例外 : OCX プロパティ ページは必ず FALSE を返します。
 }
 
+// 部材名選択処理
 void CMmDialogKAttr::OnCbnSelchangeCmbkBzi1()
 {
 	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
 
 	CComboBox* pCmbBox;
 	pCmbBox = (CComboBox*)GetDlgItem( IDC_CMBK_BZI1);
-	MC::System::GetpMainFrame()->m_iCombo1 = pCmbBox->GetCurSel();				// 選択された部品ID
+	MC::System::GetpMainFrame()->m_iCombo1 = pCmbBox->GetCurSel();					// 選択された部品ID
 
 	MC::z_mnIA.SelectComboPartsNmByKmId( MC::System::GetpMainFrame()->m_iCombo1);
+
 	MC::z_mnIA.InitComboPartsMbr();
 
-	MC::z_mmIA.MmDialogKAttrDisp( this);										// 部材属性ダイアログ表示
-	MC::z_mmIA.InitComboParts();												// 全項目設定
-	MC::z_mmIA.SelectComboPartsNmByKmId( MC::System::GetpMainFrame()->m_iCombo1);
+	MC::z_mmIA.MmDialogKAttrDisp( this);											// 部材属性ダイアログ表示
+	MC::z_mmIA.InitComboParts();													// 全項目設定
+//S	MC::z_mmIA.SelectComboPartsNmByKmId( MC::System::GetpMainFrame()->m_iCombo1);
 
 	MC::mhPartsSpec* pPartsSpec	= MC::BuzaiCode::MhGetpPartsSpec( MC::z_mnIA.GetCurPartsNmId());
 	if ( pPartsSpec->GetPTCdBr() >= MP_BR_SENBUN || MC::z_mnIA.GetMode() == MP_MD_DELETE)
-		MC::CmdCtrl::XqtMenuCmd( IDC_PARTSCREATE);								// 部材入力コマンド
+		MC::CmdCtrl::XqtMenuCmd( IDC_PARTSCREATE);									// 部材入力コマンド
 	else 
-		MC::CmdCtrl::XqtMenuCmd( IDC_CANCELCMD);								// コマンドキャンセル
+		MC::CmdCtrl::XqtMenuCmd( IDC_CANCELCMD);									// コマンドキャンセル
 }
 
-
+// 部材メンバー選択処理
 void CMmDialogKAttr::OnCbnSelchangeCmbkBzi2()
 {
 	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
 
 	CComboBox* pCmbBox;
 	pCmbBox = (CComboBox*)GetDlgItem( IDC_CMBK_BZI2);
-	MC::System::GetpMainFrame()->m_iCombo2 = pCmbBox->GetCurSel();				// 選択された寸法型式ID
+	MC::System::GetpMainFrame()->m_iCombo2 = pCmbBox->GetCurSel();					// 選択された寸法型式ID
 
-	MC::z_mmIA.MmDialogKAttrDisp( this);										// 部材属性ダイアログ表示
-	MC::z_mmIA.InitComboParts();												// 全項目設定
-	MC::z_mmIA.SelectComboPartsNmByKmId( MC::System::GetpMainFrame()->m_iCombo1);			// 部材名を設定
-	MC::z_mmIA.SelectComboPartsMbrByKmId( MC::System::GetpMainFrame()->m_iCombo2);			// 寸法形式を設定
+	MC::z_mmIA.MmDialogKAttrDisp( this);											// 部材属性ダイアログ表示
+	MC::z_mmIA.InitComboParts();													// 全項目設定
+	MC::z_mmIA.SelectComboPartsNmByKmId( MC::System::GetpMainFrame()->m_iCombo1);	// 部材名を設定
+	MC::z_mmIA.SelectComboPartsMbrByKmId( MC::System::GetpMainFrame()->m_iCombo2);	// 寸法形式を設定
 
 	MC::z_mnIA.SelectComboPartsMbrByKmId( MC::System::GetpMainFrame()->m_iCombo2);
-	MC::CmdCtrl::XqtMenuCmd( IDC_PARTSCREATE);									//	部品入力
+	MC::CmdCtrl::XqtMenuCmd( IDC_PARTSCREATE);										//	部品入力
 }
 
 

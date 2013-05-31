@@ -33,7 +33,7 @@ void MCmdTenkai()
 	MmWndInfo*	pWndInfo = WindowCtrl::GetCurWndInfo();					// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();
 	
-	pWnd->PostMessage(WM_MYMESSAGETENKAI);
+	pWnd->PostMessage(WM_MYMESSAGE_TENKAI);
 }
 /////////////////////////////////////////////////////////////////////////////
 //	住棟展開設定入力

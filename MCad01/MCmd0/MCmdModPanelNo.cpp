@@ -141,9 +141,10 @@ void MCmdMdPanelNo()
 			}
 			if ( iSetPtNo < iPt)
 				iSetPtNo++;
-//E			z_mnIA.SetComboPanelNo( iSetPtNo);
-			z_mnIA.RibbonIO( MSET_COMBO_PANELNO, iSetPtNo);			// パネル番号選択用のコンボボックスに表示する
-			
+//E			z_mnIA.SetComboPanelNoXqt( iSetPtNo);
+//S			z_mnIA.RibbonIO( MSET_COMBO_PANELNO, iSetPtNo);			// パネル番号選択用のコンボボックスに表示する
+			z_mnIA.SetComboPanelNoEntry( iSetPtNo);					// パネル番号選択用のコンボボックスに表示する
+
 
 			WindowCtrl::ReDrawWnd();
 			Msg::ClearErrorMsg();

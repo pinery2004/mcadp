@@ -29,8 +29,8 @@ void MCmdHist()
 	MmWndInfo*	pWndInfo = WindowCtrl::GetCurWndInfo();			// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();
 	
-	pWnd->PostMessage(WM_MYMESSAGEHIST);						// OK: 1st
-//	pWnd->SendMessage(WM_MYMESSAGEHIST);						// OK:
+	pWnd->PostMessage(WM_MYMESSAGE_HIST);						// OK: 1st
+//	pWnd->SendMessage(WM_MYMESSAGE_HIST);						// OK:
 //	MCmdHistInp( NULL);											// NG: 後ろに隠れてしまう
 }
 

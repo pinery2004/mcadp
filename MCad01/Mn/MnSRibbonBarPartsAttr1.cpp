@@ -25,7 +25,7 @@ namespace MC
 ////////////////////////////////////////////////////////////////////////////
 //	部材属性入力用コンボボックスの設定
 
-void mnIoPartsAttr::InitComboParts()
+void mnIoPartsAttr::InitComboPartsXqt()
 {
 	//　部品名コンポボックスの項目を設定する
 	InitComboPartsNm();
@@ -37,7 +37,7 @@ void mnIoPartsAttr::InitComboParts()
 	InitComboPanelNo();
 
 	//	部材属性入力ダイアログ
-	z_mmIA.InitComboParts();
+//	z_mmIA.InitComboParts(); //IIP
 
 	Window::CurWndFocus();
 	WindowCtrl::ReDrawWnd();
@@ -125,7 +125,8 @@ void mnIoPartsAttr::InitComboPartsNm()
 		pCmbBox->AddItem( Mstr( "none"));
 	}
 	m_iComboKmIdPartsNm = -1;
-	z_mnIA.SetKCdBrB( false, false, false);						//	部材、金物、パネル、その他のラジオボタンを未選択に設定
+
+//	z_mnIA.SetKCdBrB( false, false, false);						//	部材、金物、パネル、その他のラジオボタンを未選択に設定
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -147,7 +148,7 @@ void mnIoPartsAttr::SelectComboPartsNmByKmId(
 	pPartsSpec = BuzaiCode::MhGetpPartsSpec( iIdPartsSpec);		// 部品仕様
 	int iCdPlc;
 	iCdPlc = pPartsSpec->GetPTCdPlc();							// 配置コードコンボを選択する
-//E	z_mnIA.SelectComboPlcCdByPlcCd( iCdPlc);
+//E	z_mnIA.SelectComboPlcCdByPlcCdXqt( iCdPlc);
 	z_mnIA.RibbonIO( MSET_INPUT_PLACE_CD, iCdPlc);
 
 }

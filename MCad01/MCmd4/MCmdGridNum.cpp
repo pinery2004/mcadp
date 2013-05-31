@@ -32,7 +32,7 @@ void MCmdGridNum()
 	MmWndInfo*	pWndInfo = WindowCtrl::GetCurWndInfo();			// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();
 	
-	pWnd->PostMessage(WM_MYMESSAGEGRIDNUM);
+	pWnd->PostMessage(WM_MYMESSAGE_GRIDNUM);
 
 //	MCmdOptInp( NULL);
 }

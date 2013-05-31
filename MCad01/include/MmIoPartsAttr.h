@@ -6,6 +6,7 @@
 #include "MCad.h"
 
 #include "MmDialogKAttr.h"
+#include "MnIoPartsAttr.h"
 
 #define		MMAX_HOSEI_DBG	999
 #define		MSZ_CROSS_BZI	100
@@ -28,6 +29,15 @@ namespace MC
 		#define DLL_EXPORT						__declspec( dllimport)
 	#endif
 #endif
+
+class MmPartsComboKm {
+	MINT		m_iCombo1;						// 部品ID
+	MINT		m_iCombo2;						// 寸法型式
+	MINT		m_iComboInp1;					// 入力点区分
+	MINT		m_iComboInp2;					// 丸めコード
+	MINT		m_iComboInp3;					// 配置コード
+	MINT		m_iComboPanelNo;				// パネル番号
+};
 
 class DLL_EXPORT mmIoPartsAttr: public CMmDialogKAttr
 {
@@ -64,14 +74,27 @@ public:
 	};
 
 	///////////////////////////////////////////////////////////////////////////////
+	//	ダイアログの設定と取り込み
+public:
+	int RibbonIO(
+						ComboTp	i_iComboTp,			// Combo種類	1:入力点区分コード
+						int		i_iCdArg1 = NULL,	//				
+						MREAL	i_rCdArg2 = NULL	//				
+				);
+
+
+	//==================================//
+	//			   8. 部品名			//
+	//==================================//
+	///////////////////////////////////////////////////////////////////////////////
 	//	部品名コンポボックスの項目を設定する
-protected:
+//protected:
 public:
 	void InitComboPartsNm();
 
 	///////////////////////////////////////////////////////////////////////////////
 	//	部品名コンポボックスを部品名項目番号で選択する
-protected:
+//protected:
 public:
 	void SelectComboPartsNmByKmId(
 						int		i_iKmIdPartsNm	// 部品名項目番号
@@ -81,7 +104,7 @@ public:
 	//	部品名コンポボックスを部品名で選択する
 	//							＝-1: 該当なし
 	//							≧ 0: 部品ID
-protected:
+//protected:
 public:
 	int SelectComboPartsNmByPartsNm(
 						MCHAR* 		i_sNmParts1		// 部品名
@@ -99,31 +122,18 @@ public:
 						MCHAR*		i_sNmParts1		// 部品名
 				);
 
-//S	///////////////////////////////////////////////////////////////////////////////
-//	//	部品名コンポボックスより部品IDを取得する
-//	//							＝-1: 該当なし
-//	//							≧ 0: 部品ID
-//public:
-//	int GetComboPartsNmId(
-//						MCHAR* 		i_sNmParts1		// 部品名
-//				);
-//
-//	///////////////////////////////////////////////////////////////////////////////
-//	//	部品名コンポボックスのカレントの部品IDを取得する
-//	//							＝-1: 未選択
-//	//							≧ 0: 部品ID
-//public:
-//	int GetCurPartsNmId();
-
+	//==================================//
+	//			  9. メンバー			//
+	//==================================//
 	///////////////////////////////////////////////////////////////////////////////
 	//	寸法型式選択用コンポボックスの項目を設定する
-protected:
+//protected:
 public:
 	void InitComboPartsMbr();
 
 	///////////////////////////////////////////////////////////////////////////////
 	//	寸法型式コンボボックスを寸法形式項目番号で選択する
-protected:
+//protected:
 public:
 	void SelectComboPartsMbrByKmId(
 						int			i_iKmIdMbr		// 寸法型式項目番号
@@ -133,38 +143,105 @@ public:
 	//	寸法型式コンボボックスを寸法形式で選択する
 	//							＝-1: 該当なし
 	//							≧ 0: 寸法型式ID
-protected:
+//protected:
 public:
 	int SelectComboPartsMbrByMbrCd(
 						MCHAR* 		i_sCdMbr		// 寸法型式
 				);
 
-//S	///////////////////////////////////////////////////////////////////////////////
-//	//	寸法形式から寸法型式コンボボックスの寸法型式項目番号を取得する
-//	//							＝-1: 該当なし
-//	//							≧ 0: 部品ID
-//public:
-//	int GetComboPartsMbrKmId(
-//						MCHAR*		i_sCdMbr		// 寸法型式
-//				);
-//
-//	///////////////////////////////////////////////////////////////////////////////
-//	//	寸法型式コンボボックスより寸法型式IDを取得する
-//	//							＝-1: 該当なし
-//	//							≧ 0: 寸法型式ID
-//public:
-//	int GetComboPartsMbrCd(
-//						MCHAR* 		i_sCdMbr		// 寸法型式
-//				);
-//
-//	///////////////////////////////////////////////////////////////////////////////
-//	//	寸法型式選択用コンポボックスより寸法型式IDを取得する
-//	//	（カレントの寸法型式IDを取得する）
-//	//							＝-1: 未選択
-//	//							≧ 0: 部品ID
-//public:
-//	int GetComboPartsMbrCdId();
-//
+	//==================================//
+	//			  9. 属性値				//
+	//==================================//
+	///////////////////////////////////////////////////////////////////////////////
+	//	構成コード、分類、部品種類IDより、属性値入力モードを求める
+protected:
+	int MnCalcInpAtMode();
+
+	/////////////////////////////////////////////////////////////////////////////
+	//	カレントの属性値入力モードを取得する
+	//	(部品属性入力用ダイアログの項目設定中の属性値入力モード)
+	//
+public:
+	int GetAtMd()
+	{
+		return m_iIoPartsAttrMd;
+	}
+
+	/////////////////////////////////////////////////////////////////////////////
+	//	属性値入力モードで部品属性入力用ダイアログの項目を設定する
+	//	 (コンボボックスとチェックボックスの項目を設定する)
+	//	
+public:
+	void InitComboAttrEntry(
+						int	i_iIoPartsAttrMd = MP_AT_NONE	// 属性値入力モード
+													//  MP_AT_AUTO(-1)		:自動設定
+													//	MP_AT_NONE(0)		:属性値入力なし
+													//	MP_AT_HRZ_PARTS(1)	:水平部材入力
+													//	MP_AT_VRT_PARTS(2)	:垂直部材入力
+													//	MP_AT_YTPANEL(3)	:床天井パネル入力
+													//	MP_AT_YANEPANEL(4)	:屋根パネル入力
+													//	MP_AT_ADJLNG(5)		:部材長さ調整入力
+													//	MP_AT_YANE(6)		:屋根入力
+													//	MP_AT_TATEGU(7)		:建具入力
+				)
+	{
+			RibbonIO( MINIT_COMBO_ATTR, i_iIoPartsAttrMd);
+
+	}
+
+	/////////////////////////////////////////////////////////////////////////////
+	//	属性値入力モードで部品属性入力用ダイアログの項目を設定する
+	//	 (コンボボックスとチェックボックスの項目を設定する)
+	//	
+public:
+	void InitComboAttrXqt(
+						int	i_iIoPartsAttrMd = MP_AT_NONE	// 属性値入力モード
+													//  MP_AT_AUTO(-1)		:自動設定
+													//	MP_AT_NONE(0)		:属性値入力なし
+													//	MP_AT_HRZ_PARTS(1)	:水平部材入力
+													//	MP_AT_VRT_PARTS(2)	:垂直部材入力
+													//	MP_AT_YTPANEL(3)	:床天井パネル入力
+													//	MP_AT_YANEPANEL(4)	:屋根パネル入力
+													//	MP_AT_ADJLNG(5)		:部材長さ調整入力
+													//	MP_AT_YANE(6)		:屋根入力
+													//	MP_AT_TATEGU(7)		:建具入力
+				);
+
+	/////////////////////////////////////////////////////////////////////////////
+	//	部品属性入力用コンボボックスとチェックボックスの項目を設定する
+protected:
+	void MnsInitComboAttr(
+						MCCMBATTR	i_icombo1,		// 属性入力用コンボボックス1の属性ID
+						MCCMBATTR	i_icombo2,		// 属性入力用コンボボックス2の属性ID
+						MCCMBATTR	i_icombo3,		// 属性入力用コンボボックス3の属性ID
+						MCCMBATTR	i_icombo4,		// 属性入力用コンボボックス4の属性ID
+						MCCMBATTR	i_icombo5,		// 属性入力用コンボボックス5の属性ID
+						MCCMBATTR	i_icombo6,		// 属性入力用コンボボックス6の属性ID
+						MCCHKATTR	i_icheck1,		// 属性入力用チェックボックス1の属性ID
+						MCCHKATTR	i_icheck2,		// 属性入力用チェックボックス2の属性ID
+						MCCHKATTR	i_icheck3,		// 属性入力用チェックボックス3の属性ID
+						MCCHKATTR	i_icheck4		// 属性入力用チェックボックス4の属性ID
+				);
+
+	////////////////////////////////////////////////////////////////////////////
+	//	部品属性入力用コンボボックスの設定
+//protected:
+public:									// 仮設定
+	void InitComboParts();
+
+	///////////////////////////////////////////////////////////////////////////////
+	//	属性値入力用コンボボックスの値を取り込む
+public:
+	void GetComboAttrAEntry( void)
+	{
+		RibbonIO( MGET_PARTS_ATTRA);
+	}
+
+	///////////////////////////////////////////////////////////////////////////////
+	//	属性値入力用コンボボックスの値を取り込む
+protected:
+	void GetComboAttrAXqt( void);
+
 	//////////////////////////////////////////////////////////////////////////////
 	//	属性値入力用コンボボックス番号を取得する
 protected:
@@ -176,31 +253,42 @@ protected:
 	//	属性値入力用コンボボックスのタイトルを設定する
 protected:
 	void SetComboAttrText(
-						int		i_iAttr,			// コンボボックス番号
-						MCHAR*	i_sTitle			// タイトル
+						int			i_iAttr,		// コンボボックス番号
+						MCHAR*		i_sTitle		// タイトル
 				);
 
 	///////////////////////////////////////////////////////////////////////////////
 	//	属性値入力用コンポボックスに実数値の項目(一覧)を設定する
 protected:
 	void InitComboAttrR(
-						int		i_iAttr,			// コンボボックス番号
-						int		i_nComboAttr,		// 選択属性値の数
-						MREAL*	i_rComboAttr,		// 選択属性値
-						MREAL	i_rInitValue		// 初期表示する属性値
+						int			i_iAttr,		// コンボボックス番号
+						int			i_nComboAttr,	// 選択属性値の数
+						MREAL*		i_rComboAttr,	// 選択属性値
+						MREAL		i_rInitValue	// 初期表示する属性値
 				);
 
 	//////////////////////////////////////////////////////////////////////////////
 	//	属性値入力用コンボボックスに実数値を表示する
+public:
+	void SetComboAttrREntry(
+						MCCMBATTR	i_iAttr,		// 属性ID
+						MREAL		i_rValue		// 表示する実数値
+				)
+	{
+		RibbonIO( MSET_COMBO_ATTRR, i_iAttr, i_rValue);
+	}
+
+	//////////////////////////////////////////////////////////////////////////////
+	//	属性値入力用コンボボックスに実数値を表示する
 protected:
-	void SetComboAttrR(
+	void SetComboAttrRXqt(
 						MCCMBATTR	i_iAttr,		// 属性ID
 						MREAL		i_rValue		// 表示する実数値
 				);
 
 	///////////////////////////////////////////////////////////////////////////////
 	//	属性値入力用コンボボックスの実数値を取得する
-protected:
+//protected:
 public:
 	int GetComboAttrR(								// ステイタス0(未設定) 1(設定)
 						MCCMBATTR	i_iAttr,		// 属性ID
@@ -211,8 +299,8 @@ public:
 	//	属性値入力用コンボボックスに実数値を表示する
 protected:
 	void SetComboAttrRCbn(
-						int		i_iAttr,			// コンボボックス番号
-						MREAL	i_rValue			// 表示する実数値
+						int			i_iAttr,		// コンボボックス番号
+						MREAL		i_rValue		// 表示する実数値
 				);
 
 	///////////////////////////////////////////////////////////////////////////////
@@ -220,7 +308,17 @@ protected:
 	//
 protected:
 	MREAL GetComboAttrRCbn(		// (  O) 実数値　または　0(未設定)
-						int		i_iAttr				// コンボボックス番号
+						int			i_iAttr			// コンボボックス番号
+				);
+
+	///////////////////////////////////////////////////////////////////////////////
+	//	属性値入力用指定コンポボックスに整数値の項目(一覧)を設定する
+protected:
+	void InitComboAttrI(
+						int			i_iAttr,		// コンボボックス番号
+						int			i_nComboAttr,	// 選択属性値の数
+						int*		i_iCmbAttr,		// 選択属性値
+						int			i_iInitValue	// 初期表示する属性値
 				);
 
 	///////////////////////////////////////////////////////////////////////////////
@@ -233,7 +331,7 @@ protected:
 
 	///////////////////////////////////////////////////////////////////////////////
 	//	属性値入力用コンボボックスの整数を取得する
-protected:
+//protected:
 public:
 	int GetComboAttrI(								// ステイタス0(未設定) 1(設定)
 						MCCMBATTR	i_iAttr,		// 属性ID
@@ -247,16 +345,6 @@ protected:
 	void SetComboAttrICbn(
 						int			i_iAttr,		// コンボボックス番号
 						int			i_iValue 		// 表示する整数値
-				);
-
-	///////////////////////////////////////////////////////////////////////////////
-	//	属性値入力用指定コンポボックスに整数値の項目(一覧)を設定する
-protected:
-	void InitComboAttrI(
-						int			i_iAttr,		// コンボボックス番号
-						int			i_nComboAttr,	// 選択属性値の数
-						int*		i_iCmbAttr,		// 選択属性値
-						int			i_iInitValue	// 初期表示する属性値
 				);
 
 	///////////////////////////////////////////////////////////////////////////////
@@ -275,7 +363,7 @@ protected:
 //	///////////////////////////////////////////////////////////////////////////////
 //	//	パネル番号コンポボックスにパネル番号を表示する
 //protected:
-//	void SetComboPanelNo(
+//	void SetComboPanelNoXqt(
 //						int			i_iPanelNo		// パネル番号
 //				);
 //
@@ -302,73 +390,7 @@ protected:
 //		return m_iPanelNo;
 //	}
 
-	///////////////////////////////////////////////////////////////////////////////
-	//	構成コード、分類、部品種類IDより、属性値入力モードを求める
-protected:
-	int MnCalcInpAtMode();
-
-	/////////////////////////////////////////////////////////////////////////////
-	//	部品属性入力用コンボボックスとチェックボックスの項目を設定する
-protected:
-	void MnsInitComboAttr(
-						MCCMBATTR	i_icombo1,		// 属性入力用コンボボックス1の属性ID
-						MCCMBATTR	i_icombo2,		// 属性入力用コンボボックス2の属性ID
-						MCCMBATTR	i_icombo3,		// 属性入力用コンボボックス3の属性ID
-						MCCMBATTR	i_icombo4,		// 属性入力用コンボボックス4の属性ID
-						MCCMBATTR	i_icombo5,		// 属性入力用コンボボックス5の属性ID
-						MCCMBATTR	i_icombo6,		// 属性入力用コンボボックス6の属性ID
-						MCCHKATTR	i_icheck1,		// 属性入力用チェックボックス1の属性ID
-						MCCHKATTR	i_icheck2,		// 属性入力用チェックボックス2の属性ID
-						MCCHKATTR	i_icheck3,		// 属性入力用チェックボックス3の属性ID
-						MCCHKATTR	i_icheck4		// 属性入力用チェックボックス4の属性ID
-				);
-
-	////////////////////////////////////////////////////////////////////////////
-	//	部品属性入力用コンボボックスの設定
-protected:
-public:									// 仮設定
-	void InitComboParts();
-
-	/////////////////////////////////////////////////////////////////////////////
-	//	カレントの属性値入力モードを取得する
-	//	(部品属性入力用ダイアログの項目設定中の属性値入力モード)
-	//
-public:
-	int GetAtMd()
-	{
-		return m_iIoPartsAttrMd;
-	}
-
-	/////////////////////////////////////////////////////////////////////////////
-	//	属性値入力モードで部品属性入力用ダイアログの項目を設定する
-	//	 (コンボボックスとチェックボックスの項目を設定する)
-	//	
-public:
-	void InitComboAttr(
-						int	i_iIoPartsAttrMd = MP_AT_NONE	// 属性値入力モード
-													//  MP_AT_AUTO(-1)		:自動設定
-													//	MP_AT_NONE(0)		:属性値入力なし
-													//	MP_AT_HRZ_PARTS(1)	:水平部材入力
-													//	MP_AT_VRT_PARTS(2)	:垂直部材入力
-													//	MP_AT_YTPANEL(3)	:床天井パネル入力
-													//	MP_AT_YANEPANEL(4)	:屋根パネル入力
-													//	MP_AT_ADJLNG(5)		:部材長さ調整入力
-													//	MP_AT_YANE(6)		:屋根入力
-													//	MP_AT_TATEGU(7)		:建具入力
-				);
-
-	///////////////////////////////////////////////////////////////////////////////
-	//	ダイアログのコンボックスの設定　本体
-protected:
-	void SetComboCdBody( void);
-
-	///////////////////////////////////////////////////////////////////////////////
-	//	属性値入力用コンボボックスの値を取り込む
-protected:
-	void GetComboAttrA( void);
-
 };
-
 extern	mmIoPartsAttr z_mmIA;
 
 }// namespace MC

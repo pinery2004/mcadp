@@ -31,14 +31,14 @@ static MINT		z_iComboPlcCd;
 // CMnRibbonBarInp メッセージ ハンドラ
 
 ///////////////////////////////////////////////////////////////////////////////
-//	カレントの入力点区分を設定し、入力点区分選択用のコンボボックスに表示する
+//	リボンバーの入力点区分コード選択用コンボボックスの入力点区分コードを選択する	(本体)
 //
-void mnIoPartsAttr::SelectComboInpKbnByInpKbnCd(
+void mnIoPartsAttr::SelectComboInpKbnByInpKbnCdXqt(
 						MINT		iCdInpKb		// (I  ) 入力点区分
 				)
 {
 	System::GetpMainFrame()->SelectComboInp1( iCdInpKb);
-	z_iComboInpKbCd = iCdInpKb;
+	z_iComboInpKbCd = iCdInpKb;									//	カレントの入力点区分コード
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -55,15 +55,15 @@ MINT mnIoPartsAttr::GetComboInpKbCd()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//	カレントの丸めコードを設定し、コンボボックスに丸めコードを表示する
+//	リボンバーの丸めコード選択用コンボボックスの丸めコードを選択する	(本体)
 //
 
-void mnIoPartsAttr::SelectComboMarumeByMarumeCd(
+void mnIoPartsAttr::SelectComboMarumeByMarumeCdXqt(
 						MINT		iCdMarume		// (I  ) 丸めコード
 					)
 {
 	System::GetpMainFrame()->SelectComboInp2( iCdMarume);
-	z_iComboMarume = iCdMarume;
+	z_iComboMarume = iCdMarume;									// カレントの丸めコード
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -93,15 +93,15 @@ MINT mnIoPartsAttr::GetComboMarumeCd()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//	カレントの配置コードを設定し、コンボボックスに配置コードを表示する
+//	リボンバーの配置コード選択用コンボボックスの配置コードを選択する
 //
 
-void mnIoPartsAttr::SelectComboPlcCdByPlcCd(
+void mnIoPartsAttr::SelectComboPlcCdByPlcCdXqt(
 						MINT		iCdPlc		// (I  ) 配置コード
 					)
 {
 	System::GetpMainFrame()->SelectComboInp3( iCdPlc);
-	z_iComboPlcCd = iCdPlc;
+	z_iComboPlcCd = iCdPlc;										//	カレントの配置コード
 }
 
 ///////////////////////////////////////////////////////////////////////////////

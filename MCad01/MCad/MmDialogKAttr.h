@@ -22,7 +22,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 public:
-	//	部材属性ダイアログ表示を起動 (別タスクから起動)
+	//	部材属性ダイアログ表示を起動 (別タスクからの起動用)
 	void MmDialogKAttr();
 
 	//	部材属性ダイアログ表示
@@ -52,12 +52,12 @@ public:
 protected:
 	/////////////////////////////////////////////////////////////////////////////
 	//	部材属性ダイアログ表示　終了
-	void CMmDialogKAttr::MmDialogKAttrEnd();
+	void CMmDialogKAttr::MmDialogKAttrEnd() {
+		m_bDispFlg = false;
+	}
 
-public:
 protected:
 	CWnd *m_pParent;
-protected:
 	bool m_bDispFlg;								// 表示フラグ	TRUE:表示中、FALSE:無表示
 
 	CStatic m_sBzi1;

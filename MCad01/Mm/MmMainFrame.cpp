@@ -23,58 +23,12 @@
 #include "MCAD.h"
 #include "MainFrm.h"
 
-//namespace MC
-//{
-//// MainFrame Pointer 設定
-//void	MC::System::MmMainFrame( CMainFrame* pMainFrame)
-//{
-//	System::GetpMainFrame = pMainFrame;
-//}
-//
-//// MainFrame Pointer 取得
-//CMainFrame* MC::System::MmGetpMainFrame()
-//{
-//	return System::GetpMainFrame;
-//}
-//
-//// MCADApp Pointer 設定
-//void	MC::System::MmMCADApp( CMCADApp* pMCADApp)
-//{
-//	ms_pMCADApp = pMCADApp;
-//}
-//
-//// MCADApp Pointer 取得
-//CMCADApp* MC::System::MmGetpMCADApp()
-//{
-//	return ms_pMCADApp;
-//}
-//
-//}
-
-// MainFrm.cpp : CMainFrame クラスの実装
-//
-
-// CMainFrame 診断
-
-#ifdef _DEBUG
-//void CMainFrame::AssertValid() const
-//{
-//	CMDIFrameWnd::AssertValid();
-//}
-
-//void CMainFrame::Dump( CDumpContext& dc) const
-//{
-//	CMDIFrameWnd::Dump( dc);
-//}
-
-#endif //_DEBUG
-
-
 // CMainFrame メッセージ ハンドラ
 
 CMFCRibbonComboBox* mmpComboBuzai()
 {
-	CMFCRibbonBar* pRibbonBar;
+//SS	CMFCRibbonBar* pRibbonBar;
+	mnMFCRibbonBar* pRibbonBar;
 	pRibbonBar = &MC::System::GetpMainFrame()->m_wndRibbonBar;
 //---> Debug用
 	CMFCRibbonCategory* pRibbonCategory;
@@ -112,7 +66,8 @@ CMFCRibbonComboBox* mmpComboBuzai()
 
 CMFCRibbonComboBox* mmpComboPartsMbr()
 {
-	CMFCRibbonBar* pRibbonBar;
+//SS	CMFCRibbonBar* pRibbonBar;
+	mnMFCRibbonBar* pRibbonBar;
 	pRibbonBar = &MC::System::GetpMainFrame()->m_wndRibbonBar;
 	int iIdcCmb;
 	int iCCategory;

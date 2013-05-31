@@ -67,7 +67,7 @@ exit:
 ///////////////////////////////////////////////////////////////////////////////
 //	カレントのパネル番号選択項目番号を設定し　コンボボックスにパネル番号を表示する
 
-void mnIoPartsAttr::SetComboPanelNo(
+void mnIoPartsAttr::SetComboPanelNoXqt(
 						MINT	iPanelNo			// (I  ) パネル番号
 				)
 {

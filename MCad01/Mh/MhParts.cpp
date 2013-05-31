@@ -123,6 +123,7 @@ struct	BZMTBK
 	MCHAR*	c;
 	MINT	i;
 };
+// 分類
 static	const	BZMTBK	z_Br[] =	
 {
 	Mstr( "部材"),				MP_BR_BUZAI,
@@ -139,6 +140,7 @@ static	const	BZMTBK	z_Br[] =
 };
 
 #define	NBUNRUI		(sizeof(z_Br)/sizeof(BZMTBK))
+// 入力点区分コード
 static	const	BZMTBK	z_CdInpKb[] =
 {
 //	Mstr( "無指定"),			MP_INPKB_NONE,
@@ -149,6 +151,7 @@ static	const	BZMTBK	z_CdInpKb[] =
 	Mstr( "自由"),				MP_INPKB_FREE
 };
 #define	NCdInpKb	(sizeof(z_CdInpKb)/sizeof(BZMTBK))
+// 高さ基準コード
 static	const	BZMTBK	z_CdHgt[] =
 {
 	Mstr( "SGL"),				MP_HGTCD_SGL,			//ZZZZZ
@@ -159,6 +162,7 @@ static	const	BZMTBK	z_CdHgt[] =
 	Mstr( "屋根基準"),			MP_HGTCD_YANEKJ
 };
 #define	NHEIGHTCD	(sizeof(z_CdHgt)/sizeof(BZMTBK))
+// 配置依存コード1
 static	const	BZMTBK	z_CdPlc[] =
 {
 	Mstr( "任意"),				MP_HAICD_NINI,
@@ -166,21 +170,7 @@ static	const	BZMTBK	z_CdPlc[] =
 	Mstr( "屋根構成線付き"),	MP_HAICD_YANEKOUSEISENZUKE
 };
 #define	NHAITICD	(sizeof(z_CdPlc)/sizeof(BZMTBK))
-/*
-static	const	MCHAR*	z_cCdIzon[] =
-{
-	Mstr( "無し"),
-	Mstr( "水平"), Mstr( "垂直"), Mstr( "天井根太上"),
-	Mstr( "屋根面なり"), Mstr( "屋根面なり垂直"), Mstr( "垂木下"),
-	Mstr( "垂木下屋根面平行"), Mstr( "垂木下垂直"), Mstr( "軒先なり")
-};
-static	const	MINT	z_iCdIzon[] =
-{
-	MP_IZNCD_N, MP_IZNCD_SUIHEI, MP_IZNCD_SUICYOKU, MP_IZNCD_TENJONETAUE,
-	MP_IZNCD_YANEMENNARI, MP_IZNCD_YANEMENNARISUICYOKU, MP_IZNCD_TARUKISITA,
-	MP_IZNCD_TARUKISITAYANEMENHEIKOU, MP_IZNCD_TARUKISITASUICYOKU, MP_IZNCD_NOKISAKINARI 
-};
-*/										  
+// 配置依存コード2
 static	const	BZMTBK	z_CdIzon[] =
 {
 	Mstr( "無し"),				MP_IZNCD_N,
@@ -198,6 +188,7 @@ static	const	BZMTBK	z_CdIzon[] =
 	Mstr( "軒先なり"),			MP_IZNCD_NOKISAKINARI
 };
 #define	NIZONCD	(sizeof(z_CdIzon)/sizeof(BZMTBK))
+// 丸めコード
 static	const	BZMTBK	z_CdMarume[] =
 {
 	Mstr( "無し"),				MP_MRMCDN,
@@ -338,11 +329,11 @@ void MhLoadPartsMst()
 		ist = csvTbl.GetStr( pMPT->GetPTCdMbr(), MHPTSZ_CDMEMBER);		// ・寸法型式コード設定
 		ist = csvTbl.GetStr( cCdInpKb, Msizeof( cCdInpKb));				// ・入力点区分コード
 		pMPT->SetPTCdInpKb( GetCd( cCdInpKb, NCdInpKb, z_CdInpKb));	
-		ist = csvTbl.GetStr( cCdHgt, Msizeof( cCdHgt));					// ・取り付け高さコード
+		ist = csvTbl.GetStr( cCdHgt, Msizeof( cCdHgt));					// ・取り付け高さ基準コード
 		pMPT->SetPTCdHgt( (MSTNDH)GetCd( cCdHgt, NHEIGHTCD, z_CdHgt));								
-		ist = csvTbl.GetStr( cCdPlc, Msizeof( cCdPlc));					// ・配置コード
+		ist = csvTbl.GetStr( cCdPlc, Msizeof( cCdPlc));					// ・配置依存コード1
 		pMPT->SetPTCdPlc( GetCd( cCdPlc, NHAITICD, z_CdPlc));							
-		ist = csvTbl.GetStr( cCdIzon, Msizeof( cCdPlc));				// ・依存コード
+		ist = csvTbl.GetStr( cCdIzon, Msizeof( cCdPlc));				// ・配置依存コード2
 		pMPT->SetPTCdIzon( GetCd( cCdIzon, NIZONCD, z_CdIzon));								
 		ist = csvTbl.GetStr( cCdMarume, Msizeof( cCdMarume));			// ・丸めコード
 		pMPT->SetPTCdMarume( GetCd( cCdMarume, NMARUMECD, z_CdMarume));	

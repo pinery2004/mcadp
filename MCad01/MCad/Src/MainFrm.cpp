@@ -30,7 +30,6 @@
 #include "MgLine.h"
 #include "MmLib.h"
 #include "MhLib.h"
-#include "MnIoPartsAttr.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -60,13 +59,18 @@ BEGIN_MESSAGE_MAP(CMainFrame, CMDIFrameWndEx)
 	ON_COMMAND(IDC_VIEW4OPEN, &CMainFrame::OnView4open)
 	ON_COMMAND(IDC_VIEW5OPEN, &CMainFrame::OnView5open)
 
-	ON_MESSAGE( WM_MYMESSAGERIBBONIO , OnRibbonIO)
-	ON_MESSAGE( WM_MYMESSAGEWINDOW, OnWindow)
+	ON_MESSAGE(WM_MYMESSAGE_RIBBONIO , OnRibbonIO)
+	ON_MESSAGE(WM_MYMESSAGE_RIBBONCATEGORYCHANGED , OnRibbonCategoryChanged)
+	ON_MESSAGE(WM_MYMESSAGE_WINDOW, OnWindow)
+
+	// リボンバーのカテゴリ変更メッセージの取得用に追加したがメッセージ受けられず
+	ON_MESSAGE(AFX_WM_ON_CHANGE_RIBBON_CATEGORY, &mnMFCRibbonBar::OnAfxWmOnChangeRibbonCategory)
 
 	ON_WM_CLOSE()
 END_MESSAGE_MAP()
 
-// User Msg
+/////////////////////////////////////////////////////////////
+// User Msgで起動されるリボンIOのUI関数実行用ディスパッチャ
 
 LRESULT CMainFrame::OnRibbonIO( UINT wParam, LONG lParam)
 {
@@ -75,37 +79,72 @@ LRESULT CMainFrame::OnRibbonIO( UINT wParam, LONG lParam)
 	switch( MC::z_mnIA.m_iComboTp)
 	{
 	case MSET_RIBBON_BAR:
-		ist = MC::z_mnIA.SetRibbonBar( MC::z_mnIA.m_iRBKosei, MC::z_mnIA.m_iRBBunrui,
+		// リボンバーの部品選択用項目を設定する( 組、分類、部品タイプ、寸法型式)
+		ist = MC::z_mnIA.SetRibbonBarXqt( MC::z_mnIA.m_iRBKosei, MC::z_mnIA.m_iRBBunrui,
 									   MC::z_mnIA.m_sRBBuhin, MC::z_mnIA.m_sRBMbr);
 		break;
+
 	case MSET_INPUT_KUBUN_CD:
-		MC::z_mnIA.SelectComboInpKbnByInpKbnCd( MC::z_mnIA.m_iCdArg1);
+		//	リボンバーの入力点区分コード選択用コンボボックスの入力点区分コードを選択する
+		MC::z_mnIA.SelectComboInpKbnByInpKbnCdXqt( MC::z_mnIA.m_iCdArg1);
 		break;
+
 	case MSET_INPUT_MARUME_CD:
-		MC::z_mnIA.SelectComboMarumeByMarumeCd( MC::z_mnIA.m_iCdArg1);
+		//	リボンバーの丸めコード選択用コンボボックスの丸めコードを選択する
+		MC::z_mnIA.SelectComboMarumeByMarumeCdXqt( MC::z_mnIA.m_iCdArg1);
 		break;
+
 	case MSET_INPUT_PLACE_CD:
-		MC::z_mnIA.SelectComboPlcCdByPlcCd( MC::z_mnIA.m_iCdArg1);
+		//	リボンバーの配置コード選択用コンボボックスの配置コードを選択する
+		MC::z_mnIA.SelectComboPlcCdByPlcCdXqt( MC::z_mnIA.m_iCdArg1);
 		break;
-//	case MSET_COMBO_ATTRR:
-//		MC::z_mnIA.SetComboAttrR( MC_CMB_HAIZ, MC::z_mnIA.m_rCdArg2);
-//		break;
+
+	case MSET_COMBO_ATTRR:
+		MC::z_mmIA.SetComboAttrRXqt( (MCCMBATTR)MC::z_mnIA.m_iCdArg1, MC::z_mnIA.m_rCdArg2);
+		break;
+
 	case MGET_PARTS_ATTRA:
+		//	部品仕様と寸法形式を部品配置入力データに取り込む
 		MC::z_mnIA.GetPartsSpec();
-		MC::z_mmIA.GetComboAttrA();
+		//	属性値入力用コンボボックスの値を取り込む
+		MC::z_mmIA.GetComboAttrAXqt();
 		break;
-	case MSET_COMBO_PARTS:
-		MC::z_mnIA.InitComboParts();
-		break;
+
+//S	case MSET_COMBO_PARTS:
+//		MC::z_mnIA.InitComboPartsXqt();
+//		break;
+//
 	case MSET_COMBO_PANELNO:
-		MC::z_mnIA.SetComboPanelNo( MC::z_mnIA.m_iCdArg1);
+		MC::z_mnIA.SetComboPanelNoXqt( MC::z_mnIA.m_iCdArg1);
 		break;
+
 	case MINIT_COMBO_ATTR:
-		MC::z_mmIA.InitComboAttr( MC::z_mnIA.m_iCdArg1);
+		MC::z_mmIA.InitComboAttrXqt( MC::z_mnIA.m_iCdArg1);
 		break;
 	}
-//S	MC::z_mnIA.InitComboAttr( MP_AT_AUTO);						// 部材入力種類に合った属性入力コンボボックスを表示
 	MC::z_mnIA.m_iSts = ist;
+	return 0;
+}
+
+
+LRESULT CMainFrame::OnRibbonCategoryChanged( UINT wParam, LONG lParam)
+{
+	MC::z_mnIA.SetCCategory( wParam - 1);
+	if( wParam == 2) {
+		int i1 = 2;
+		// 意匠カテゴリ選択
+		if( MC::z_mmIA.GetDispFlg()) {
+			MC::z_mmIA.SendMessage(WM_CLOSE);
+		}
+	} else if( wParam == 3) {
+		int i2 = 3;
+		// 構造カテゴリ選択
+		MC::z_mmIA.MmDialogKAttrDisp( this);						// 部材属性ダイアログ表示
+		MC::z_mmIA.InitComboParts();								// 全項目設定
+		MC::z_mmIA.SelectComboPartsNmByKmId(m_iCombo1);				// 部材名を設定
+		MC::z_mmIA.SelectComboPartsMbrByKmId( m_iCombo2);			// 寸法形式を設定
+		MC::z_mnIA.SelectComboPartsMbrByKmId( m_iCombo2);
+	}
 	return 0;
 }
 
@@ -156,6 +195,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 //	m_wndRibbonBar.Create(this);
 //	m_wndRibbonBar.LoadFromResource(IDR_RIBBON);
+
 	if (!CreateRibbonBar ())
 	{
 		TRACE0("Failed to create ribbon bar\n");
@@ -467,7 +507,7 @@ void CMainFrame::OnCbnSelchangeCombo11()
 	CMFCRibbonComboBox *pCmbBox;
 	pCmbBox = mmpComboInpTp();
 	m_iComboInp1 = pCmbBox->GetCurSel();
-	MC::z_mnIA.SelectComboInpKbnByInpKbnCd( m_iComboInp1);
+	MC::z_mnIA.SelectComboInpKbnByInpKbnCdXqt( m_iComboInp1);
 	MC::Window::CurWndFocus();
 }
 
@@ -477,7 +517,7 @@ void CMainFrame::OnCbnSelchangeCombo12()
 	CMFCRibbonComboBox* pCmbBox;
 	pCmbBox = mmpComboMarume();
 	m_iComboInp2 = pCmbBox->GetCurSel();						// 丸めコード
-	MC::z_mnIA.SelectComboMarumeByMarumeCd( m_iComboInp2);
+	MC::z_mnIA.SelectComboMarumeByMarumeCdXqt( m_iComboInp2);
 	MC::Window::CurWndFocus();
 }
 
@@ -487,7 +527,7 @@ void CMainFrame::OnCbnSelchangeCombo13()
 	CMFCRibbonComboBox* pCmbBox;
 	pCmbBox = mmpComboPlcCd();
 	m_iComboInp3 = pCmbBox->GetCurSel();										// 配置コード
-	MC::z_mnIA.SelectComboPlcCdByPlcCd( m_iComboInp3);
+	MC::z_mnIA.SelectComboPlcCdByPlcCdXqt( m_iComboInp3);
 	MC::Window::CurWndFocus();
 }
 
@@ -577,4 +617,10 @@ void CMainFrame::OnView5open()
 	CMDIChildWnd* pChildWnd1;
 	pChildWnd1 = OpenView( z_MCadApp.m_pDocTemplate1);
 	MC::WindowCtrl::SetCurWndFrame( 5, pChildWnd1);
+}
+
+// リボンバーのカテゴリ変更メッセージの取得用に追加したがメッセージ受けられず
+afx_msg LRESULT CMainFrame::OnAfxWmOnChangeRibbonCategory(WPARAM wParam, LPARAM lParam)
+{
+	return 0;
 }

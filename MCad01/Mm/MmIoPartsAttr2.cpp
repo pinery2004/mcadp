@@ -177,10 +177,10 @@ static MREAL z_rKerabanoDe[] = { 650.0, 455.0, 330.0, 44.5, 0.};
 
 
 /////////////////////////////////////////////////////////////////////////////
-//	属性値入力モードで部材属性入力用リボンバーの項目を設定する
+//	属性値入力モードで部材属性入力用ダイアログの項目を設定する
 //	 (コンボボックスとチェックボックスの項目を設定する)
 //	
-void mmIoPartsAttr::InitComboAttr(
+void mmIoPartsAttr::InitComboAttrXqt(
 						int		i_iIoPartsAttrMd	// 属性値入力モード
 												//  MP_AT_AUTO(-1)		:自動設定
 												//	MP_AT_NONE(0)		:属性値入力なし
@@ -209,7 +209,7 @@ void mmIoPartsAttr::InitComboAttr(
 						MC_CHK_NULL, MC_CHK_NULL,				// null, null
 						MC_CHK_NULL, MC_CHK_NULL},				// null, null
 																// MP_AT_YTPANEL:		// 3			// 床・天井パネル
-					  { MC_CMB_LFH1, MC_CMB_RTH1, MC_CMB_TRTH,// 左巾補正, 右巾補正, 取付高さ
+					  { MC_CMB_LFH1, MC_CMB_RTH1, MC_CMB_TRTH,	// 左巾補正, 右巾補正, 取付高さ
 						MC_CMB_FHS1, MC_CMB_OKYK, MC_CMB_OHS2,	// 手前補正, 奥行, 奥行補正
 						MC_CHK_NULL, MC_CHK_NULL,				// null, null
 						MC_CHK_NULL, MC_CHK_NULL},				// null, null
@@ -412,7 +412,7 @@ EXIT:;
 ///////////////////////////////////////////////////////////////////////////////
 //	属性値入力用コンボボックスの値を取り込む
 
-void mmIoPartsAttr::GetComboAttrA( void)
+void mmIoPartsAttr::GetComboAttrAXqt( void)
 {
 	int		ist;
 
@@ -595,7 +595,7 @@ void mmIoPartsAttr::SetComboAttrRCbn(
 //////////////////////////////////////////////////////////////////////////////
 //	属性値入力用コンボボックスに実数値を表示する
 
-void mmIoPartsAttr::SetComboAttrR(
+void mmIoPartsAttr::SetComboAttrRXqt(
 						MCCMBATTR	i_iAttr,	// 属性ID
 						MREAL		i_rValue	// 表示する実数値
 				)

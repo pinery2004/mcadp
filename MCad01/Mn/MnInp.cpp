@@ -104,26 +104,17 @@ int mnIoPartsAttr::RibbonIO(
 	m_iCdArg1 = i_iCdArg1;
 	m_rCdArg2 = i_rCdArg2;
 	CMainFrame*	pMainFrame = MC::System::GetpMainFrame();
-	pMainFrame->SendMessage( WM_MYMESSAGERIBBONIO);
+	pMainFrame->SendMessage( WM_MYMESSAGE_RIBBONIO);
 	return m_iSts;
 }
 
-//	SetComboCd( MSET_INPUT_KUBUN_CD, aaa);
-///////////////////////////////////////////////////////////////////////////////
-//	リボンバーのコンボックスの設定　本体
-void mnIoPartsAttr::SetComboCdBody( void)
+int mmIoPartsAttr::RibbonIO(
+					ComboTp	i_iComboTp,		// Combo種類	1:入力点区分コード
+					int		i_iCdArg1,		//				
+					MREAL	i_rCdArg2		//				
+				)
 {
-	switch ( m_iComboTp)
-	{
-	case MSET_INPUT_KUBUN_CD:
-		SelectComboInpKbnByInpKbnCd( m_iCdArg1);
-		break;
-	case MGET_PARTS_ATTRA:
-		GetPartsSpec();
-//S		GetComboAttrA();
-		break;
-	}
+	return z_mnIA.RibbonIO( i_iComboTp, i_iCdArg1, i_rCdArg2);
 }
-
 
 } // namespace MC

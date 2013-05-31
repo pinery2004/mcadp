@@ -332,8 +332,11 @@ BOOL CMCadApp::InitInstance()
 	if ( !ProcessShellCommand(cmdInfo))
 		return FALSE;
 
-	MC::z_mnIA.InitComboPartsNm();												// 組、分類に対応する部品を選択可能項目として設定する
-//S	MC::z_mnIA.InitComboAttr( MP_AT_HRZ_PARTS);									// 属性入力用コンボボックスを初期化する
+	// 組、分類に対応する部品を選択可能項目として設定する
+	MC::z_mnIA.InitComboPartsNm();
+
+	//	部材、金物、パネル、その他のラジオボタンを未選択に設定
+	MC::z_mnIA.SetKCdBrB( false, false, false);
 
 	//// ウィンドウのオープン
 	MC::WindowCtrl::SetCurWndSyubetsu( 2, MTHEIMENZU, 1, 1);
@@ -685,7 +688,7 @@ void CMCadApp::OnBnClickedRadioYane()
 	MC::z_mmIA.MmDialogKAttrDisp( z_MCadApp.m_pMainFrame);
 	// ダイアログの項目を設定する
 	MC::z_mmIA.InitComboParts();
-	MC::z_mnIA.InitComboParts();
+	MC::z_mnIA.InitComboPartsXqt();
 //	コマンドキャンセル
 	MC::CmdCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -705,7 +708,7 @@ void CMCadApp::OnBnClickedRadioTenjo()
 	MC::z_mmIA.MmDialogKAttrDisp( z_MCadApp.m_pMainFrame);
 	// ダイアログの項目を設定する
 	MC::z_mmIA.InitComboParts();
-	MC::z_mnIA.InitComboParts();
+	MC::z_mnIA.InitComboPartsXqt();
 //	コマンドキャンセル
 	MC::CmdCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -725,7 +728,7 @@ void CMCadApp::OnBnClickedRadioTairyoku()
 	MC::z_mmIA.MmDialogKAttrDisp( z_MCadApp.m_pMainFrame);
 	// ダイアログの項目を設定する
 	MC::z_mmIA.InitComboParts();
-	MC::z_mnIA.InitComboParts();
+	MC::z_mnIA.InitComboPartsXqt();
 //	コマンドキャンセル
 	MC::CmdCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -745,7 +748,7 @@ void CMCadApp::OnBnClickedRadioKabe()
 	MC::z_mmIA.MmDialogKAttrDisp( z_MCadApp.m_pMainFrame);
 	// ダイアログの項目を設定する
 	MC::z_mmIA.InitComboParts();
-	MC::z_mnIA.InitComboParts();
+	MC::z_mnIA.InitComboPartsXqt();
 //	コマンドキャンセル
 	MC::CmdCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -765,7 +768,7 @@ void CMCadApp::OnBnClickedRadioYuka()
 	MC::z_mmIA.MmDialogKAttrDisp( z_MCadApp.m_pMainFrame);
 	// ダイアログの項目を設定する
 	MC::z_mmIA.InitComboParts();
-	MC::z_mnIA.InitComboParts();
+	MC::z_mnIA.InitComboPartsXqt();
 //	コマンドキャンセル
 	MC::CmdCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -782,7 +785,7 @@ void CMCadApp::OnBnClickedRadioKoya()
 	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
 
 	MC::z_mnIA.SetKCdGp( MP_GP_KOYA);
-	MC::z_mnIA.InitComboParts();
+	MC::z_mnIA.InitComboPartsXqt();
 //	コマンドキャンセル
 	MC::CmdCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -802,7 +805,7 @@ void CMCadApp::OnBnClickedRadioDodai()
 	MC::z_mmIA.MmDialogKAttrDisp( z_MCadApp.m_pMainFrame);
 	// ダイアログの項目を設定する
 	MC::z_mmIA.InitComboParts();
-	MC::z_mnIA.InitComboParts();
+	MC::z_mnIA.InitComboPartsXqt();
 //	コマンドキャンセル
 	MC::CmdCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -822,7 +825,7 @@ void CMCadApp::OnBnClickedRadioKiso()
 	MC::z_mmIA.MmDialogKAttrDisp( z_MCadApp.m_pMainFrame);
 	// ダイアログの項目を設定する
 	MC::z_mmIA.InitComboParts();
-	MC::z_mnIA.InitComboParts();
+	MC::z_mnIA.InitComboPartsXqt();
 //	コマンドキャンセル
 	MC::CmdCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -842,7 +845,7 @@ void CMCadApp::OnBnClickedRadioBuzai()
 	MC::z_mmIA.MmDialogKAttrDisp( z_MCadApp.m_pMainFrame);
 	// ダイアログの項目を設定する
 	MC::z_mmIA.InitComboParts();
-	MC::z_mnIA.InitComboParts();
+	MC::z_mnIA.InitComboPartsXqt();
 //	コマンドキャンセル
 	MC::CmdCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -862,7 +865,7 @@ void CMCadApp::OnBnClickedRadioKanagu()
 	MC::z_mmIA.MmDialogKAttrDisp( z_MCadApp.m_pMainFrame);
 	// ダイアログの項目を設定する
 	MC::z_mmIA.InitComboParts();
-	MC::z_mnIA.InitComboParts();
+	MC::z_mnIA.InitComboPartsXqt();
 //	コマンドキャンセル
 	MC::CmdCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -882,7 +885,7 @@ void CMCadApp::OnBnClickedRadioPanel()
 	MC::z_mmIA.MmDialogKAttrDisp( z_MCadApp.m_pMainFrame);
 	// ダイアログの項目を設定する
 	MC::z_mmIA.InitComboParts();
-	MC::z_mnIA.InitComboParts();
+	MC::z_mnIA.InitComboPartsXqt();
 //	コマンドキャンセル
 	MC::CmdCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }
@@ -902,7 +905,7 @@ void CMCadApp::OnBnClickedRadioOther()
 	MC::z_mmIA.MmDialogKAttrDisp( z_MCadApp.m_pMainFrame);
 	// ダイアログの項目を設定する
 	MC::z_mmIA.InitComboParts();
-	MC::z_mnIA.InitComboParts();
+	MC::z_mnIA.InitComboPartsXqt();
 //	コマンドキャンセル
 	MC::CmdCtrl::XqtMenuCmd( IDC_CANCELCMD);							//	コマンドキャンセル
 }

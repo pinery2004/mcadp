@@ -14,6 +14,7 @@
 
 #pragma once
 #include "MsDefType.h"
+#include "mnMFCRibbonBar.h"
 
 //S #define WM_USER100 WM_USER + 100
 
@@ -55,7 +56,8 @@ public:
 
 protected:  // コントロール バー用メンバー
 public:
-	CMFCRibbonBar				m_wndRibbonBar;
+//SS	CMFCRibbonBar				m_wndRibbonBar;
+	mnMFCRibbonBar				m_wndRibbonBar;
 	CMFCRibbonApplicationButton m_MainButton;
 	CMFCToolBarImages			m_PanelImages;
 	CMFCRibbonStatusBar			m_wndStatusBar;
@@ -76,15 +78,10 @@ public:
 	afx_msg void OnCbnSelchangeCombo12();						// 丸めコード
 	afx_msg void OnCbnSelchangeCombo13();						// 配置コード
 	afx_msg void OnCbnSelchangeComboPanelNo();
-//S	afx_msg void OnCbnSelchangeComboAttr1();
-//	afx_msg void OnCbnSelchangeComboAttr2();
-//	afx_msg void OnCbnSelchangeComboAttr3();
-//	afx_msg void OnCbnSelchangeComboAttr4();
-//	afx_msg void OnCbnSelchangeComboAttr5();
-//	afx_msg void OnCbnSelchangeComboAttr6();
 	afx_msg void OnDummy(UINT id);
 
 	afx_msg LRESULT OnRibbonIO( UINT wParam, LONG lParam);
+	afx_msg LRESULT OnRibbonCategoryChanged( UINT wParam, LONG lParam);
 	afx_msg LRESULT OnWindow( UINT wParam, LONG lParam);
 
 	void SelectCombo1( MINT iCombo1);
@@ -108,6 +105,9 @@ public:
 	afx_msg void OnView4open();
 	afx_msg void OnView5open();
 	afx_msg void OnClose();
+
+	// リボンバーのカテゴリ変更メッセージの取得用に追加したがメッセージ受けられず
+	afx_msg LRESULT OnAfxWmOnChangeRibbonCategory(WPARAM wParam, LPARAM lParam);
 };
 
 //S	extern CMainFrame *z_pMainFrame;								// メインフレーム ポインタ (グローバル変数)

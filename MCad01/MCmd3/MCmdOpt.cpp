@@ -29,7 +29,7 @@ void MCmdOpt()
 	MmWndInfo*	pWndInfo = WindowCtrl::GetCurWndInfo();					// カレントウィンドウを取得する
 	CWnd*		pWnd = pWndInfo->GetWnd();
 	
-	pWnd->PostMessage(WM_MYMESSAGEOPTION);
+	pWnd->PostMessage(WM_MYMESSAGE_OPTION);
 
 //	MCmdOptInp( NULL);
 }
