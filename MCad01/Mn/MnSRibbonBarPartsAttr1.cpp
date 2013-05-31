@@ -148,7 +148,7 @@ void mnIoPartsAttr::SelectComboPartsNmByKmId(
 	pPartsSpec = BuzaiCode::MhGetpPartsSpec( iIdPartsSpec);		// 部品仕様
 	int iCdPlc;
 	iCdPlc = pPartsSpec->GetPTCdPlc();							// 配置コードコンボを選択する
-//E	z_mnIA.SelectComboPlcCdByPlcCdXqt( iCdPlc);
+																								//E	z_mnIA.SelectComboPlcCdByPlcCdXqt( iCdPlc);
 	z_mnIA.RibbonIO( MSET_INPUT_PLACE_CD, iCdPlc);
 
 }

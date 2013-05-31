@@ -86,7 +86,7 @@ int MGeo::ReversePoint2D( MgPoint2D* i_pPt, int i_n, MgPoint2D* o_pPt)
 		}
 	} else {
 		for( i1=0,i2=i_n-1; i2>=0; i1++,i2--) {
-//E			memcpy( &o_pPt[i2], &i_pPt[i1], SZMgPoint2D());
+																								//E			memcpy( &o_pPt[i2], &i_pPt[i1], SZMgPoint2D());
 			o_pPt[i2] = i_pPt[i1];
 		}
 	}
@@ -184,7 +184,7 @@ int MGeo::ReversePoint3D( MgPoint3D* i_pPt, int i_n, MgPoint3D* o_pPt)
 		}
 	} else {
 		for( i1=0,i2=i_n-1; i2>=0; i1++,i2--) {
-//E			memcpy( &o_pPt[i2], &i_pPt[i1], SZMgPoint3D());
+																								//E			memcpy( &o_pPt[i2], &i_pPt[i1], SZMgPoint3D());
 			o_pPt[i2] = i_pPt[i1];
 		}
 	}

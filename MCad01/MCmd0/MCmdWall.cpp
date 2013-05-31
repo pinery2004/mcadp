@@ -108,8 +108,8 @@ void MCmdLineW()
 	Msg::ClearErrorMsg();
 	Msg::OperationMsg( MC_OPRT_PARTS);								// ステイタスバーの操作表示部へ"部材追加"を表示
 
-//E	z_mnIA.InitComboAttrXqt( MP_AT_AUTO);								// 建具入力用の属性入力コンボボックスを表示
-//SS	z_mnIA.RibbonIO( MINIT_COMBO_ATTR, MP_AT_AUTO);
+																								//E	z_mnIA.InitComboAttrXqt( MP_AT_AUTO);								// 建具入力用の属性入力コンボボックスを表示
+																								//SS	z_mnIA.RibbonIO( MINIT_COMBO_ATTR, MP_AT_AUTO);
 	z_mmIA.InitComboAttrEntry( MP_AT_AUTO);							// 建具入力用の属性入力コンボボックスを表示
 	
 
@@ -118,11 +118,11 @@ void MCmdLineW()
 
 	iIdPartsSpec = z_mnIA.GetCurPartsNmId();
 	pPartsSpec = BuzaiCode::MhGetpPartsSpec( iIdPartsSpec);
-//E	z_mnIA.SelectComboInpKbnByInpKbnCdXqt( pPartsSpec->GetPTCdInpKb());
-//SS	z_mnIA.RibbonIO( MSET_INPUT_KUBUN_CD, pPartsSpec->GetPTCdInpKb());	// 入力点区分を選択用のコンボボックスに表示する
+																								//E	z_mnIA.SelectComboInpKbnByInpKbnCdXqt( pPartsSpec->GetPTCdInpKb());
+																								//SS	z_mnIA.RibbonIO( MSET_INPUT_KUBUN_CD, pPartsSpec->GetPTCdInpKb());	// 入力点区分を選択用のコンボボックスに表示する
 	z_mnIA.SelectComboInpKbnByInpKbnCdEntry( pPartsSpec->GetPTCdInpKb());	// 入力点区分選択用のコンボボックスに表示する
-//E	z_mnIA.SelectComboMarumeByMarumeCdXqt( pPartsSpec->GetPTCdMarume());
-//SS	z_mnIA.RibbonIO( MSET_INPUT_MARUME_CD, pPartsSpec->GetPTCdMarume());	// 丸めコードを選択用のコンボボックスに表示する
+																								//E	z_mnIA.SelectComboMarumeByMarumeCdXqt( pPartsSpec->GetPTCdMarume());
+																								//SS	z_mnIA.RibbonIO( MSET_INPUT_MARUME_CD, pPartsSpec->GetPTCdMarume());	// 丸めコードを選択用のコンボボックスに表示する
 	z_mnIA.SelectComboMarumeByMarumeCdEntry( pPartsSpec->GetPTCdMarume());	// 丸めコードを選択用のコンボボックスに表示する
 	MFOREVER {
 		iMode = 0;
@@ -149,8 +149,8 @@ void MCmdLineW()
 		mtPlcInp::SetIdMbr( IdMbr);
 		mtPlcInp::SetpMbr( BuzaiCode::MhGetpMbr( IdMbr));
 		HaitiCmd::MmPresetCmd();
-//E		z_mnIA.GetComboAttrAXqt();
-//SS		z_mnIA.RibbonIO( MGET_PARTS_ATTRA, NULL);									// 部品仕様,寸法形式と属性値入力用コンボボックスの値を部品配置入力データに取り込む
+																								//E		z_mnIA.GetComboAttrAXqt();
+																								//SS		z_mnIA.RibbonIO( MGET_PARTS_ATTRA, NULL);									// 部品仕様,寸法形式と属性値入力用コンボボックスの値を部品配置入力データに取り込む
 		z_mmIA.GetComboAttrAEntry();												// 部品仕様,寸法形式と属性値入力用コンボボックスの値を部品配置入力データに取り込む
 
 //DDD		mtPlcInp::SetpAux_xxxxxx();
@@ -185,32 +185,32 @@ void SetInpAt()
 	mtPlcInp::SetLenHosei( 0, -82.5f);
 	mtPlcInp::SetLenHosei( 1, -82.5f);
 //
-//E	z_mnIA.SetComboAttrR( MC_CMB_LHS1, -82.5f);
-//SS	z_mnIA.RibbonIO( MSET_COMBO_ATTRR, MC_CMB_LHS1, -82.5f);
+																								//E	z_mnIA.SetComboAttrR( MC_CMB_LHS1, -82.5f);
+																								//SS	z_mnIA.RibbonIO( MSET_COMBO_ATTRR, MC_CMB_LHS1, -82.5f);
 	z_mmIA.SetComboAttrREntry( MC_CMB_LHS1, -82.5f);
-//E	z_mnIA.SetComboAttrR( MC_CMB_LHS2, -82.5f);
-//SS	z_mnIA.RibbonIO( MSET_COMBO_ATTRR, MC_CMB_LHS2, -82.5f);
+																								//E	z_mnIA.SetComboAttrR( MC_CMB_LHS2, -82.5f);
+																								//SS	z_mnIA.RibbonIO( MSET_COMBO_ATTRR, MC_CMB_LHS2, -82.5f);
 	z_mmIA.SetComboAttrREntry( MC_CMB_LHS2, -82.5f);
 //
 	if ( ifirst == 1) {
-//E		z_mnIA.SetComboAttrR( MC_CMB_KROH, 1000.0f);
-//SS		z_mnIA.RibbonIO( MSET_COMBO_ATTRR, MC_CMB_KROH, 1000.0f);
+																								//E		z_mnIA.SetComboAttrR( MC_CMB_KROH, 1000.0f);
+																								//SS		z_mnIA.RibbonIO( MSET_COMBO_ATTRR, MC_CMB_KROH, 1000.0f);
 		z_mmIA.SetComboAttrREntry( MC_CMB_KROH, 1000.0f);
 	} else {
-//E		z_mnIA.SetComboAttrR( MC_CMB_KROH, 2095.0f);
-//SS		z_mnIA.RibbonIO( MSET_COMBO_ATTRR, MC_CMB_KROH, 2095.0f);
+																								//E		z_mnIA.SetComboAttrR( MC_CMB_KROH, 2095.0f);
+																								//SS		z_mnIA.RibbonIO( MSET_COMBO_ATTRR, MC_CMB_KROH, 2095.0f);
 		z_mmIA.SetComboAttrREntry( MC_CMB_KROH, 2095.0f);
 		ifirst = 1;
 	}
 //
-//E	z_mnIA.SetComboAttrR( MC_CMB_ZJSZ, 0.0f);
-//SS	z_mnIA.RibbonIO( MSET_COMBO_ATTRR, MC_CMB_ZJSZ, 0.0f);
+																								//E	z_mnIA.SetComboAttrR( MC_CMB_ZJSZ, 0.0f);
+																								//SS	z_mnIA.RibbonIO( MSET_COMBO_ATTRR, MC_CMB_ZJSZ, 0.0f);
 	z_mmIA.SetComboAttrREntry( MC_CMB_ZJSZ, 0.0f);
-//E	z_mnIA.SetComboAttrR( MC_CMB_HAIZ, 0.0f);
-//SS	z_mnIA.RibbonIO( MSET_COMBO_ATTRR, MC_CMB_HAIZ, 0.0f);
+																								//E	z_mnIA.SetComboAttrR( MC_CMB_HAIZ, 0.0f);
+																								//SS	z_mnIA.RibbonIO( MSET_COMBO_ATTRR, MC_CMB_HAIZ, 0.0f);
 	z_mmIA.SetComboAttrREntry( MC_CMB_HAIZ, 0.0f);
-//E	z_mnIA.SetComboAttrR( MC_CMB_TRTH, 2095.0f);
-//SS	z_mnIA.RibbonIO( MSET_COMBO_ATTRR, MC_CMB_TRTH, 2095.0f);
+																								//E	z_mnIA.SetComboAttrR( MC_CMB_TRTH, 2095.0f);
+																								//SS	z_mnIA.RibbonIO( MSET_COMBO_ATTRR, MC_CMB_TRTH, 2095.0f);
 	z_mmIA.SetComboAttrREntry( MC_CMB_TRTH, 2095.0f);
 }
 

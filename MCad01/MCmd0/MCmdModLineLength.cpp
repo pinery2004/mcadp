@@ -51,11 +51,11 @@ namespace MC
 	Msg::ClearErrorMsg();
 	Msg::OperationMsg( MC_OPRT_MOD_BUZAI);							// ステイタスバーの操作表示部へ"部材修正"を表示
 
-//E	z_mnIA.InitComboAttrXqt( MP_AT_ADJLNG);							// 属性入力用コンボボックスを部材長さ調整用にする
-//SS	z_mnIA.RibbonIO( MINIT_COMBO_ATTR, MP_AT_ADJLNG);
+																								//E	z_mnIA.InitComboAttrXqt( MP_AT_ADJLNG);							// 属性入力用コンボボックスを部材長さ調整用にする
+																								//SS	z_mnIA.RibbonIO( MINIT_COMBO_ATTR, MP_AT_ADJLNG);
 	z_mmIA.InitComboAttrEntry( MP_AT_ADJLNG);						// 部材長さ調整用の属性入力コンボボックスを表示
 
-	MmWndInfo* pWndInfo = WindowCtrl::GetCurWndInfo();			// カレントウィンドウを取得する
+	MmWndInfo* pWndInfo = WindowCtrl::GetCurWndInfo();				// カレントウィンドウを取得する
 	Window::CurWndFocus();											// フォーカスをカレントウィンドウに設定する
 
 	MFOREVER {

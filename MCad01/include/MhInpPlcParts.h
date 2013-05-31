@@ -59,8 +59,8 @@ public:
 	//	配置用建具データ入力バッファから属性を取得
 	static MhTateguInfo* GetpTateguInp()
 															{ return &m_TateguInp;}
-//E	static void	 GetKCode( MCHAR* cKCode)
-//E															{ Mstrcpy_s( cKCode, m_TateguInp.GetKCode());}
+																								//E	static void	 GetKCode( MCHAR* cKCode)
+																								//E															{ Mstrcpy_s( cKCode, m_TateguInp.GetKCode());}
 	static MREAL GetROW()		
 															{ return m_TateguInp.GetROW();}
 	static MREAL GetROH()				

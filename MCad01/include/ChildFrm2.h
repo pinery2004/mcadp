@@ -33,7 +33,7 @@ public:
 // 実装
 public:
 	// フレームのクライアント領域用のビュー
-//E	CMCadView2 m_wndView2;
+																								//E	CMCadView2 m_wndView2;
 #ifdef _DEBUG
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext& dc) const;

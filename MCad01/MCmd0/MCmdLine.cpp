@@ -100,14 +100,14 @@ void MCmdLineAdd()
 	Msg::ClearErrorMsg();
 	Msg::OperationMsg( MC_OPRT_PARTS);							// ステイタスバーの操作表示部へ"部材追加"を表示
 
-//SS	z_mnIA.RibbonIO( MINIT_COMBO_ATTR, MP_AT_AUTO);				// 部材入力種類に合った属性入力コンボボックスを表示
+																								//SS	z_mnIA.RibbonIO( MINIT_COMBO_ATTR, MP_AT_AUTO);				// 部材入力種類に合った属性入力コンボボックスを表示
 	z_mmIA.InitComboAttrEntry( MP_AT_AUTO);						// 部材入力種類に合った属性入力コンボボックスを表示
 
 	iIdPartsSpec = z_mnIA.GetCurPartsNmId();
 	pPartsSpec = BuzaiCode::MhGetpPartsSpec( iIdPartsSpec);
-//SS	z_mnIA.RibbonIO( MSET_INPUT_KUBUN_CD, pPartsSpec->GetPTCdInpKb());	// 入力点区分選択用のコンボボックスに表示する
+																								//SS	z_mnIA.RibbonIO( MSET_INPUT_KUBUN_CD, pPartsSpec->GetPTCdInpKb());	// 入力点区分選択用のコンボボックスに表示する
 	z_mnIA.SelectComboInpKbnByInpKbnCdEntry( pPartsSpec->GetPTCdInpKb());	// 入力点区分選択用のコンボボックスに表示する
-//SS	z_mnIA.RibbonIO( MSET_INPUT_MARUME_CD, pPartsSpec->GetPTCdMarume());// 丸めコードを選択用のコンボボックスに表示する
+																								//SS	z_mnIA.RibbonIO( MSET_INPUT_MARUME_CD, pPartsSpec->GetPTCdMarume());// 丸めコードを選択用のコンボボックスに表示する
 	z_mnIA.SelectComboMarumeByMarumeCdEntry( pPartsSpec->GetPTCdMarume());	// 丸めコードを選択用のコンボボックスに表示する
 
 		mhHaitiIn::SetCurRfm( NULL);
@@ -157,7 +157,7 @@ void MCmdLineAdd()
 			// 領域(区画)配置、１点目と２点目を始点終点として配置する
 			Ln1.p[0] = MgPoint3DC( pg1.m_p[0]);
 			Ln1.p[1] = MgPoint3DC( pg1.m_p[1]);
-//SS			z_mnIA.RibbonIO( MGET_PARTS_ATTRA, NULL);			//		部品仕様,寸法形式と属性値入力用コンボボックスの値を部品配置入力データに取り込む
+																								//SS			z_mnIA.RibbonIO( MGET_PARTS_ATTRA, NULL);			//		部品仕様,寸法形式と属性値入力用コンボボックスの値を部品配置入力データに取り込む
 			z_mmIA.GetComboAttrAEntry();							//		部品仕様,寸法形式と属性値入力用コンボボックスの値を部品配置入力データに取り込む
 			HaitiCmd::MmPartsPlc( Ln1.p, MgVect3D( 0., 0., 1.), &pg1);	// 領域型の部品配置
 			
@@ -230,10 +230,10 @@ void MCmdLineAdd()
 			HaitiCmd::MmPresetCmd();
 			// 入力した属性を設定する
 			if ( pPartsSpec->IsPanel() || pPartsSpec->IsKaiko()) {
-//SS				z_mnIA.RibbonIO( MGET_PARTS_ATTRA, NULL);		//		部品仕様,寸法形式と属性値入力用コンボボックスの値を部品配置入力データに取り込む
+																								//SS				z_mnIA.RibbonIO( MGET_PARTS_ATTRA, NULL);		//		部品仕様,寸法形式と属性値入力用コンボボックスの値を部品配置入力データに取り込む
 				z_mmIA.GetComboAttrAEntry();					//		部品仕様,寸法形式と属性値入力用コンボボックスの値を部品配置入力データに取り込む
 			} else {
-//SS				z_mnIA.RibbonIO( MGET_PARTS_ATTRA, NULL);		//		部品仕様,寸法形式と属性値入力用コンボボックスの値を部品配置入力データに取り込む
+																								//SS				z_mnIA.RibbonIO( MGET_PARTS_ATTRA, NULL);		//		部品仕様,寸法形式と属性値入力用コンボボックスの値を部品配置入力データに取り込む
 				z_mmIA.GetComboAttrAEntry();					//		部品仕様,寸法形式と属性値入力用コンボボックスの値を部品配置入力データに取り込む
 			}
 			// 本数分配置する

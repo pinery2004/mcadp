@@ -687,7 +687,7 @@ public:
 	//	| m21 m22 0 |  =  | m21 m22 0 |  X  |  0  1  0 |
 	//	| m31 m32 1 |     | m31 m32 1 |     |  vx vy 1 |
 	//
-//E	inline	MgMat2E operator + ( const MgMat2E& i_m1, const MgVect2D& i_v)			// +	•½sˆÚ“®
+																								//E	inline	MgMat2E operator + ( const MgMat2E& i_m1, const MgVect2D& i_v)			// +	•½sˆÚ“®
 	static	MgMat2E Mat2EMoveVect2D( const MgMat2E& i_m1, const MgVect2D& i_v)		// +	•½sˆÚ“®
 	{
 		MgMat2E mw;

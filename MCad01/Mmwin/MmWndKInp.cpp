@@ -254,7 +254,7 @@ MINT ViewInp::MouseMove(
 {
 // 070907	MINT		ist = 1;
 	MINT		ist = 0;
-//E	MCHAR		strPtMouthR[20];
+																								//E	MCHAR		strPtMouthR[20];
 	CPoint		ptMouthL;
 	MgPoint2D	ptMouthR;
 	MgPolyg2D	pgHitBzi;

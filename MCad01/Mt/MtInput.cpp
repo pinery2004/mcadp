@@ -135,8 +135,8 @@ MINT mhInput::GetArea(
 		if ( irt == MTRT_RBTNDWN) {								// マウス右ボタン
 			if ( iSeq == 0) {									//	１点目の入力の場合は、
 				iCdInpKb = MP_INPKB_AREA + MP_INPKB_FREE - iCdInpKb;//	入力点区分を自由入力→対角入力、または、対角入力→自由入力に変更
-//E				z_mnIA.SelectComboInpKbnByInpKbnCdXqt( iCdInpKb);
-//SS				z_mnIA.RibbonIO( MSET_INPUT_KUBUN_CD, iCdInpKb);
+																								//E				z_mnIA.SelectComboInpKbnByInpKbnCdXqt( iCdInpKb);
+																								//SS				z_mnIA.RibbonIO( MSET_INPUT_KUBUN_CD, iCdInpKb);
 				z_mnIA.SelectComboInpKbnByInpKbnCdEntry( iCdInpKb);	// 入力点区分選択用のコンボボックスに表示する
 
 			} else {											//	２点目以降の入力の場合は、
@@ -403,8 +403,8 @@ MINT mhInput::GetAreaI(
 				(*pPg1) --;										// ポリゴンの座標を１点削る
 			} else {
 				iCdInpKb = MP_INPKB_AREA + MP_INPKB_FREE - iCdInpKb;	// 区画入力 | 自由入力 | 
-//E				z_mnIA.SelectComboInpKbnByInpKbnCdXqt( iCdInpKb);
-//SS				z_mnIA.RibbonIO( MSET_INPUT_KUBUN_CD, iCdInpKb);	// 入力点区分選択用のコンボボックスに表示する
+																								//E				z_mnIA.SelectComboInpKbnByInpKbnCdXqt( iCdInpKb);
+																								//SS				z_mnIA.RibbonIO( MSET_INPUT_KUBUN_CD, iCdInpKb);	// 入力点区分選択用のコンボボックスに表示する
 				z_mnIA.SelectComboInpKbnByInpKbnCdEntry( iCdInpKb);	// 入力点区分選択用のコンボボックスに表示する
 			}
 			if ( pPg1->m_n == 0) {

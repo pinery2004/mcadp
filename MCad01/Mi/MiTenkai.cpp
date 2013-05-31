@@ -116,8 +116,8 @@ void JTTenkai::CreJTTArea()
 	}
 
 	ist1 = z_mnIA.SetRibbonBarEntry( MP_GP_KABE, MP_BR_OTHER, Mstr( "住戸区画"));
-//E	z_mnIA.GetComboAttrAXqt();
-//SS	z_mnIA.RibbonIO( MGET_PARTS_ATTRA, NULL);					// 部品仕様,寸法形式と属性値入力用コンボボックスの値を部品配置入力データに取り込む
+																								//E	z_mnIA.GetComboAttrAXqt();
+																								//SS	z_mnIA.RibbonIO( MGET_PARTS_ATTRA, NULL);					// 部品仕様,寸法形式と属性値入力用コンボボックスの値を部品配置入力データに取り込む
 	z_mmIA.GetComboAttrAEntry();								// 部品仕様,寸法形式と属性値入力用コンボボックスの値を部品配置入力データに取り込む
 
 	MgPoint2D	ptJuko[2] = { MgPoint2D( 0., 0.), MgPoint2D( 0., 0.)};
@@ -144,8 +144,8 @@ void JTTenkai::CreJTTArea()
 	mm.Ins2( MgPoint2D( 0., 0.));
 
 	ist1 = z_mnIA.SetRibbonBarEntry( MP_GP_KABE, MP_BR_OTHER, Mstr( "住棟展開"));
-//E	z_mnIA.GetComboAttrAXqt();
-//SS	z_mnIA.RibbonIO( MGET_PARTS_ATTRA, NULL);							// 部品仕様,寸法形式と属性値入力用コンボボックスの値を部品配置入力データに取り込む
+																								//E	z_mnIA.GetComboAttrAXqt();
+																								//SS	z_mnIA.RibbonIO( MGET_PARTS_ATTRA, NULL);							// 部品仕様,寸法形式と属性値入力用コンボボックスの値を部品配置入力データに取り込む
 	z_mmIA.GetComboAttrAEntry();										// 部品仕様,寸法形式と属性値入力用コンボボックスの値を部品配置入力データに取り込む
 
 	pg1.m_n = 0;

@@ -123,7 +123,7 @@ template <typename T> void MgGrp<T>::ReSize( MINT i_sz)
 
 	if ( i_sz > m_isz) {
 		T	*stb = m_st;
-//E		MBMALLOC( m_st, T, i_sz);		 						//	構成点の新領域をmallocで確保
+																								//E		MBMALLOC( m_st, T, i_sz);		 						//	構成点の新領域をmallocで確保
 		MbAlloc<T>( m_st, i_sz);
 		if ( m_isz)
 			memcpy( m_st, stb, m_isz * sizeof( T));				//	構成点の領域にデータがあった場合は新領域へコピーする

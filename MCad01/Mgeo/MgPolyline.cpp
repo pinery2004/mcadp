@@ -31,7 +31,7 @@ MgPolyl2D::MgPolyl2D( MINT sz1)
 	m_isz = sz1;
 	m_n = 0;
 	m_fa = 1;
-//E	MBMALLOC( m_p, MgPoint2D, sz1);
+																								//E	MBMALLOC( m_p, MgPoint2D, sz1);
 	MbAlloc<MgPoint2D>( m_p, sz1);
 }
 
@@ -68,7 +68,7 @@ void MgPolyl2D::operator = ( const MgPolyl2D& Pg)
 		if ( m_fa) MBFREE( m_p);								//	\¬“_‚Ì—Ìˆæ‚ğmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
 		m_isz = nn;
 		m_fa = 1;
-//E		MBMALLOC( m_p, MgPoint2D, nn);							//	\¬“_‚Ì—Ìˆæ‚ğmalloc‚ÅŠm•Û
+																								//E		MBMALLOC( m_p, MgPoint2D, nn);							//	\¬“_‚Ì—Ìˆæ‚ğmalloc‚ÅŠm•Û
 		MbAlloc<MgPoint2D>( m_p, nn);
 	}
 	m_n = nn;
@@ -83,7 +83,7 @@ void MgPolyl2D::operator = ( const MgPolyl3D& Pg)
 		if ( m_fa) MBFREE( m_p);								//	\¬“_‚Ì—Ìˆæ‚ğmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
 		m_isz = nn;
 		m_fa = 1;
-//E		MBMALLOC( m_p, MgPoint2D, nn);							//	\¬“_‚Ì—Ìˆæ‚ğmalloc‚ÅŠm•Û
+																								//E		MBMALLOC( m_p, MgPoint2D, nn);							//	\¬“_‚Ì—Ìˆæ‚ğmalloc‚ÅŠm•Û
 		MbAlloc<MgPoint2D>( m_p, nn);
 	}
 	m_n = nn;
@@ -125,7 +125,7 @@ void MgPolyl2D::Set( const MgPolyl3D &Pg)
 		if ( m_fa) MBFREE( m_p);								//	\¬“_‚Ì—Ìˆæ‚ğmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
 		m_isz = nn;
 		m_fa = 1;
-//E		MBMALLOC( m_p, MgPoint2D, nn);							//	\¬“_‚Ì—Ìˆæ‚ğmalloc‚ÅŠm•Û
+																								//E		MBMALLOC( m_p, MgPoint2D, nn);							//	\¬“_‚Ì—Ìˆæ‚ğmalloc‚ÅŠm•Û
 		MbAlloc<MgPoint2D>( m_p, nn);
 	}
 	m_n = nn;
@@ -185,7 +185,7 @@ void MgPolyl2D::Resize( MINT szn)
 
 	if (szn > m_isz) {
 		MgPoint2D*	pb = m_p;
-//E		MBMALLOC( m_p, MgPoint2D, szn);		 					//	\¬“_‚ÌV—Ìˆæ‚ğmalloc‚ÅŠm•Û
+																								//E		MBMALLOC( m_p, MgPoint2D, szn);		 					//	\¬“_‚ÌV—Ìˆæ‚ğmalloc‚ÅŠm•Û
 		MbAlloc<MgPoint2D>( m_p, szn);
 		if ( m_n)
 			 memcpy( m_p, pb, m_n * sizeof( MgPoint2D));		//	\¬“_‚Ì—Ìˆæ‚Éƒf[ƒ^‚ª‚ ‚Á‚½ê‡‚ÍV—Ìˆæ‚ÖƒRƒs[‚·‚é
@@ -248,7 +248,7 @@ MgPolyl3D::MgPolyl3D( MINT sz1)
 	m_isz = sz1;
 	m_n = 0;
 	m_fa = 1;
-//E	MBMALLOC( m_p, MgPoint3D, sz1);
+																								//E	MBMALLOC( m_p, MgPoint3D, sz1);
 	MbAlloc<MgPoint3D>( m_p, sz1);
 }
 
@@ -285,7 +285,7 @@ void MgPolyl3D::operator = ( const MgPolyl3D& Pg)
 		if ( m_fa) MBFREE( m_p);								//	\¬“_‚Ì—Ìˆæ‚ğmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
 		m_isz = nn;
 		m_fa = 1;
-//E		MBMALLOC( m_p, MgPoint3D, nn);							//	\¬“_‚Ì—Ìˆæ‚ğmalloc‚ÅŠm•Û
+																								//E		MBMALLOC( m_p, MgPoint3D, nn);							//	\¬“_‚Ì—Ìˆæ‚ğmalloc‚ÅŠm•Û
 		MbAlloc<MgPoint3D>( m_p, nn);
 	}
 	memcpy( m_p, Pg.m_p, sizeof( MgPoint3D) * nn);
@@ -300,7 +300,7 @@ void MgPolyl3D::operator = (const MgPolyl2D &pg)				// ‚QŸŒ³¨‚RŸŒ³ (z = 0.)
 		if (m_fa) MBFREE( m_p);									//	\¬“_‚Ì—Ìˆæ‚ğmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
 		m_isz = nn;
 		m_fa = 1;
-//E		MBMALLOC( m_p, MgPoint3D, nn);							//	\¬“_‚Ì—Ìˆæ‚ğmalloc‚ÅŠm•Û
+																								//E		MBMALLOC( m_p, MgPoint3D, nn);							//	\¬“_‚Ì—Ìˆæ‚ğmalloc‚ÅŠm•Û
 		MbAlloc<MgPoint3D>( m_p, nn);
 	}
 	m_n = nn;
@@ -341,7 +341,7 @@ void MgPolyl3D::Set( const MgPolyl2D &pg, MREAL z)				// ‚QŸŒ³¨‚RŸŒ³‘ã“ü—p (z
 		if ( m_fa) MBFREE( m_p);								//	\¬“_‚Ì—Ìˆæ‚ğmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
 		m_isz = nn;
 		m_fa = 1;
-//E		MBMALLOC( m_p, MgPoint3D, nn);							//	\¬“_‚Ì—Ìˆæ‚ğmalloc‚ÅŠm•Û
+																								//E		MBMALLOC( m_p, MgPoint3D, nn);							//	\¬“_‚Ì—Ìˆæ‚ğmalloc‚ÅŠm•Û
 		MbAlloc<MgPoint3D>( m_p, nn);
 	}
 	m_n = nn;
@@ -358,7 +358,7 @@ void MgPolyl3D::Set( const MgPolyl2D &pg, const MgPlane3D& Ply)	// ‚QŸŒ³¨‚RŸŒ
 		if ( m_fa) MBFREE( m_p);								//	\¬“_‚Ì—Ìˆæ‚ğmalloc‚ÅŠm•Û‚µ‚Ä‚¢‚½ê‡‚Íˆê’Ufree
 		m_isz = nn;
 		m_fa = 1;
-//E		MBMALLOC( m_p, MgPoint3D, nn);							//	\¬“_‚Ì—Ìˆæ‚ğmalloc‚ÅŠm•Û
+																								//E		MBMALLOC( m_p, MgPoint3D, nn);							//	\¬“_‚Ì—Ìˆæ‚ğmalloc‚ÅŠm•Û
 		MbAlloc<MgPoint3D>( m_p, nn);
 	}
 	m_n = nn;
@@ -394,7 +394,7 @@ void MgPolyl3D::Resize( MINT szn)
 
 	if (szn > m_isz) {
 		MgPoint3D	*pb = m_p;
-//E		MBMALLOC( m_p, MgPoint3D, szn);		 					//	\¬“_‚ÌV—Ìˆæ‚ğmalloc‚ÅŠm•Û
+																								//E		MBMALLOC( m_p, MgPoint3D, szn);		 					//	\¬“_‚ÌV—Ìˆæ‚ğmalloc‚ÅŠm•Û
 		MbAlloc<MgPoint3D>( m_p, szn);
 		if ( m_n)
 			memcpy( m_p, pb, sizeof( MgPoint3D) * m_n);			//	\¬“_‚Ì—Ìˆæ‚Éƒf[ƒ^‚ª‚ ‚Á‚½ê‡‚ÍV—Ìˆæ‚ÖƒRƒs[‚·‚é
@@ -442,7 +442,7 @@ MgGPolyl2D::MgGPolyl2D( MINT sz1)
 	m_isz = sz1;
 	m_n = 0;
 	m_fa = 1;
-//E	MBMALLOC( m_pg, MgPolyl2D, sz1);
+																								//E	MBMALLOC( m_pg, MgPolyl2D, sz1);
 	MbAlloc<MgPolyl2D>( m_pg, sz1);
 	memset( m_pg, 0, sizeof( MgPolyl2D) * sz1);
 }
@@ -621,7 +621,7 @@ void MgGPolyl2D::Resize( MINT szn)
 
 	if (szn > m_isz) {
 		MgPolyl2D	*pgb = m_pg;
-//E		MBMALLOC( m_pg, MgPolyl2D, szn);			 			//	\¬“_‚ÌV—Ìˆæ‚ğmalloc‚ÅŠm•Û
+																								//E		MBMALLOC( m_pg, MgPolyl2D, szn);			 			//	\¬“_‚ÌV—Ìˆæ‚ğmalloc‚ÅŠm•Û
 		MbAlloc<MgPolyl2D>( m_pg, szn);
 		if ( m_n)
 			 memcpy( m_pg, pgb, m_n * sizeof( MgPolyl2D));		//	\¬“_‚Ì—Ìˆæ‚Éƒf[ƒ^‚ª‚ ‚Á‚½ê‡‚ÍV—Ìˆæ‚ÖƒRƒs[‚·‚é
@@ -654,7 +654,7 @@ MgGPolyl3D::MgGPolyl3D( MINT sz1)
 	m_isz = sz1;
 	m_n = 0;
 	m_fa = 1;
-//E	MBMALLOC( m_pg, MgPolyl3D, sz1);
+																								//E	MBMALLOC( m_pg, MgPolyl3D, sz1);
 	MbAlloc<MgPolyl3D>( m_pg, sz1);
 	memset( m_pg, 0, sizeof( MgPolyl3D) * sz1);
 }
@@ -848,7 +848,7 @@ void MgGPolyl3D::Resize( MINT szn)
 
 	if (szn > m_isz) {
 		MgPolyl3D	*pgb = m_pg;
-//E		MBMALLOC( m_pg, MgPolyl3D, szn);		 					//	\¬“_‚ÌV—Ìˆæ‚ğmalloc‚ÅŠm•Û
+																								//E		MBMALLOC( m_pg, MgPolyl3D, szn);		 					//	\¬“_‚ÌV—Ìˆæ‚ğmalloc‚ÅŠm•Û
 		MbAlloc<MgPolyl3D>( m_pg, szn);
 		if ( m_n)
 			 memcpy( m_pg, pgb, m_n * sizeof( MgPolyl3D));			//	\¬“_‚Ì—Ìˆæ‚Éƒf[ƒ^‚ª‚ ‚Á‚½ê‡‚ÍV—Ìˆæ‚ÖƒRƒs[‚·‚é

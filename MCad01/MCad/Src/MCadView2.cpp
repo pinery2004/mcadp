@@ -71,8 +71,8 @@ CMCadView2::~CMCadView2()
 BOOL CMCadView2::PreCreateWindow(CREATESTRUCT& cs)
 {
 	MINT	ist;
-//E	if ( !CWnd::PreCreateWindow( cs))
-//E		return FALSE;
+																								//E	if ( !CWnd::PreCreateWindow( cs))
+																								//E		return FALSE;
 
 	cs.dwExStyle |= WS_EX_CLIENTEDGE;
 	cs.style &= ~WS_BORDER;
@@ -85,7 +85,7 @@ BOOL CMCadView2::PreCreateWindow(CREATESTRUCT& cs)
 	ist = MC::WindowCtrl::AddCurWnd();													// ウィンドウ管理
 	_ASSERTE( ist == 0);																// ウィンドウ管理
 
-//E	return TRUE;
+																								//E	return TRUE;
 	return CView::PreCreateWindow(cs);
 }
 
@@ -270,8 +270,8 @@ void CMCadView2::OnRButtonDown(UINT nFlags, CPoint point)
 
 void CMCadView2::OnRButtonUp(UINT nFlags, CPoint point)
 {
-//E	ClientToScreen(&point);
-//E	OnContextMenu(this, point);
+																								//E	ClientToScreen(&point);
+																								//E	OnContextMenu(this, point);
 
 	ReleaseCapture();
 

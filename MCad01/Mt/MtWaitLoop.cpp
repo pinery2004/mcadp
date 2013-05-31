@@ -21,7 +21,7 @@
 #include "MmLib.h"
 #include "MdCmds.h"
 
-//E #include "..\\MCAD\\res\\MCADrc2.h"
+																								//E #include "..\\MCAD\\res\\MCADrc2.h"
 
 namespace MC
 {
@@ -192,8 +192,8 @@ void MtProcessEvent( MtInpEvent *event )
 
     case MT_EVM_MENUCOMMAND:									// 入力イベントがメニュー入力の場合
     case MT_EVM_POPUPCOMMAND:
-////E		if( z_IgnoreMenuWQuote && event->m_sMenuStr[0] == '\'' ) 
-////E			break;
+//																								//E		if( z_IgnoreMenuWQuote && event->m_sMenuStr[0] == '\'' ) 
+//																								//E			break;
 //
 //		//tRb.m_restype = MTRT_RBTNDWN;							// コマンドタイプを座標(MTRT_RBTNDWN)とする
 //		//tRb.m_nflag = event->GetNFlag();						// nflag

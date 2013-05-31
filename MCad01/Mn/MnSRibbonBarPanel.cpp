@@ -74,7 +74,7 @@ void mnIoPartsAttr::SetComboPanelNoXqt(
 	CMFCRibbonComboBox *pCmbBox = mmpComboPanelNo();
 	CString strPanelNo;
 	strPanelNo.Format( Mstr( "%5d"), iPanelNo);
-//E	pCmbBox->SetWindowText(strPanelNo);
+																								//E	pCmbBox->SetWindowText(strPanelNo);
 	pCmbBox->SelectItem( strPanelNo);
 }
 
@@ -89,7 +89,7 @@ MINT mnIoPartsAttr::GetComboPanelNo()
 	int	iCurItemNo;
 	CMFCRibbonComboBox *pCmbBox = mmpComboPanelNo();
 	CString strPanelNo;
-//E	pCmbBox->GetWindowText(strPanelNo);
+																								//E	pCmbBox->GetWindowText(strPanelNo);
 	iCurItemNo = pCmbBox->GetCurSel();
 	strPanelNo = pCmbBox->GetItem( iCurItemNo);
 	if ( strPanelNo == MC_PANEL_ALL)

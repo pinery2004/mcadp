@@ -517,7 +517,7 @@ LRESULT CGridCtrl::SendCacheHintToParent(const CCellRange& range) const
 }
 
 BEGIN_MESSAGE_MAP(CGridCtrl, CWnd)
-//EFW - Added ON_WM_RBUTTONUP
+																								//EFW - Added ON_WM_RBUTTONUP
 //{{AFX_MSG_MAP(CGridCtrl)
     ON_WM_PAINT()
     ON_WM_HSCROLL()

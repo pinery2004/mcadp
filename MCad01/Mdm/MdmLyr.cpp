@@ -70,7 +70,7 @@ MINT DLyr::CreateLyr(
 	pCurMdl->m_GrpBf.m_pst[MIDtoHN( i_idGrp)].m_GidC += (*o_pidLyr);
 	pCurMdl->m_ScmBf.m_pst[MIDtoHN( i_idScm)].m_GidC += (*o_pidLyr);
 
-//EXIT:
+																								//EXIT:
 	return 0;
 }
 

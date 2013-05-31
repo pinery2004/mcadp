@@ -937,7 +937,7 @@ void CMCadApp::OnBnClickedRadioSel2()
 	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
 
 	m_iKInpSel = MP_SEL2;
-//E	MC::Window::CurWndFocus();
+																								//E	MC::Window::CurWndFocus();
 }
 
 
@@ -952,7 +952,7 @@ void CMCadApp::OnBnClickedRadioSel3()
 	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
 
 	m_iKInpSel = MP_SEL3;
-//E	MC::Window::CurWndFocus();
+																								//E	MC::Window::CurWndFocus();
 }
 
 
@@ -964,7 +964,7 @@ void CMCadApp::OnUpdateRadioSel3(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedChukiDelete()
 {
-//E	MC::Window::CurWndFocus();
+																								//E	MC::Window::CurWndFocus();
 }
 
 
@@ -976,7 +976,7 @@ void CMCadApp::OnUpdateChukiDelete(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedChukiMove()
 {
-//E	MC::Window::CurWndFocus();
+																								//E	MC::Window::CurWndFocus();
 }
 
 
@@ -988,7 +988,7 @@ void CMCadApp::OnUpdateChukiMove(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedChukiChange()
 {
-//E	MC::Window::CurWndFocus();
+																								//E	MC::Window::CurWndFocus();
 }
 
 
@@ -1001,7 +1001,7 @@ void CMCadApp::OnBnClickedCheckBuzai()
 {
 	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
 
-//E	MC::Window::CurWndFocus();
+																								//E	MC::Window::CurWndFocus();
 	m_bPartsListBuzai = !m_bPartsListBuzai;
 
 //E	MCHAR sTitle[] =Mstr( "ƒeƒXƒg");
@@ -1022,7 +1022,7 @@ void CMCadApp::OnBnClickedCheckKanagu()
 {
 	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
 
-//E	MC::Window::CurWndFocus();
+																								//E	MC::Window::CurWndFocus();
 	m_bPartsListKanagu = !m_bPartsListKanagu;
 }
 
@@ -1037,7 +1037,7 @@ void CMCadApp::OnBnClickedCheckGohan()
 {
 	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
 
-//E	MC::Window::CurWndFocus();
+																								//E	MC::Window::CurWndFocus();
 	m_bPartsListGohan = !m_bPartsListGohan;
 }
 
@@ -1052,7 +1052,7 @@ void CMCadApp::OnBnClickedCheckAttr1()
 {
 	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
 
-//E	MC::Window::CurWndFocus();
+																								//E	MC::Window::CurWndFocus();
 	m_bPartsAttr1 = !m_bPartsAttr1;
 }
 
@@ -1067,7 +1067,7 @@ void CMCadApp::OnBnClickedCheckAttr2()
 {
 	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
 
-//E	MC::Window::CurWndFocus();
+																								//E	MC::Window::CurWndFocus();
 	m_bPartsAttr2 = !m_bPartsAttr2;
 }
 
@@ -1082,7 +1082,7 @@ void CMCadApp::OnBnClickedCheckAttr3()
 {
 	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
 
-//E	MC::Window::CurWndFocus();
+																								//E	MC::Window::CurWndFocus();
 	m_bPartsAttr3 = !m_bPartsAttr3;
 }
 
@@ -1097,7 +1097,7 @@ void CMCadApp::OnBnClickedCheckAttr4()
 {
 	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
 
-//E	MC::Window::CurWndFocus();
+																								//E	MC::Window::CurWndFocus();
 	m_bPartsAttr4 = !m_bPartsAttr4;
 }
 
@@ -1112,7 +1112,7 @@ void CMCadApp::OnBnClickedPanelBefore()
 {
 	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
 
-//E	MC::Window::CurWndFocus();
+																								//E	MC::Window::CurWndFocus();
 }
 
 
@@ -1126,7 +1126,7 @@ void CMCadApp::OnBnClickedPanelNext()
 {
 	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
 
-//E	MC::Window::CurWndFocus();
+																								//E	MC::Window::CurWndFocus();
 }
 
 
@@ -1140,7 +1140,7 @@ void CMCadApp::OnBnClickedPanelAll()
 {
 	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
 
-//E	MC::Window::CurWndFocus();
+																								//E	MC::Window::CurWndFocus();
 }
 
 

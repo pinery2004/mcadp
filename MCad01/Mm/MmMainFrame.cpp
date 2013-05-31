@@ -27,7 +27,7 @@
 
 CMFCRibbonComboBox* mmpComboBuzai()
 {
-//SS	CMFCRibbonBar* pRibbonBar;
+																								//SS	CMFCRibbonBar* pRibbonBar;
 	mnMFCRibbonBar* pRibbonBar;
 	pRibbonBar = &MC::System::GetpMainFrame()->m_wndRibbonBar;
 //---> Debug—p
@@ -66,7 +66,7 @@ CMFCRibbonComboBox* mmpComboBuzai()
 
 CMFCRibbonComboBox* mmpComboPartsMbr()
 {
-//SS	CMFCRibbonBar* pRibbonBar;
+																								//SS	CMFCRibbonBar* pRibbonBar;
 	mnMFCRibbonBar* pRibbonBar;
 	pRibbonBar = &MC::System::GetpMainFrame()->m_wndRibbonBar;
 	int iIdcCmb;

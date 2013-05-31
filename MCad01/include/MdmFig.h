@@ -579,7 +579,7 @@ inline MDFIG::MDFIG(
 						MINT	i_sz			// 図形情報サイズ
 				)
 {
-//E	MBMALLOCF( MDPMTL, m_pPmtl, MINT, i_sz);
+																								//E	MBMALLOCF( MDPMTL, m_pPmtl, MINT, i_sz);
 	MbAllocF<MDPMTL,MINT>( m_pPmtl, i_sz);
 	m_pPmtl->SetSz( i_sz);
 	m_pPmtl->SetN( 0);

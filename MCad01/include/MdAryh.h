@@ -48,7 +48,7 @@ template <typename T> inline MdAryH<T>::MdAryH(
 {
 	m_sz = i_sz;
 	m_n = 0;
-//E	MBMALLOC( m_pst, T, i_sz);
+																								//E	MBMALLOC( m_pst, T, i_sz);
 	MbAlloc<T>( m_pst, i_sz);
 }
 
@@ -57,7 +57,7 @@ template <typename T> inline void MdAryH<T>::Alloc( MUSHORT i_sz)
 {
 	int isz = i_sz * sizeof( T);
 
-//E	MBMALLOC( m_pst, T, i_sz);									//	構成構造体の領域をmallocで確保
+																								//E	MBMALLOC( m_pst, T, i_sz);									//	構成構造体の領域をmallocで確保
 	MbAlloc<T>( m_pst, i_sz);
 	memset( m_pst, 0, sizeof( T) * ( i_sz));
 	m_sz = i_sz;
@@ -68,7 +68,7 @@ template <typename T> inline void MdAryH<T>::ReSize( MUSHORT i_sz)
 {
 	if ( i_sz > m_sz) {
 		T	*stb = m_pst;
-//E		MBMALLOC( m_pst, T, i_sz);		 						//	構成点の新領域をmallocで確保
+																								//E		MBMALLOC( m_pst, T, i_sz);		 						//	構成点の新領域をmallocで確保
 		MbAlloc<T>( m_pst, i_sz);
 		if ( m_sz)
 			memcpy( m_pst, stb, m_sz * sizeof( T));				//	構成点の領域にデータがあった場合は新領域へコピーする
@@ -171,7 +171,7 @@ template <typename T> inline void MdAryH_S<T>::operator = (const MdAryH_S<T>& i_
 	MUSHORT	nn = i_Gst.m_n;
 	if ( nn > m_sz) {
 			MBFREE( m_pst);										//	構成点の領域をmallocで確保していた場合は一旦free
-//E		MBMALLOC( m_pst, T, nn);									//	構成点の領域をmallocで確保
+																								//E		MBMALLOC( m_pst, T, nn);									//	構成点の領域をmallocで確保
 		MbAlloc<T>( m_pst, nn);
 		m_sz = nn;
 	}
@@ -391,7 +391,7 @@ template <typename T> inline void MdAryH_F<T>::operator = (const MdAryH_F<T>& i_
 	MUSHORT	nn = i_Gst.m_n;
 	if ( nn > m_sz) {
 			MBFREE( m_pst);										//	構成点の領域をmallocで確保していた場合は一旦free
-//E		MBMALLOC( m_pst, T, nn);									//	構成点の領域をmallocで確保
+																								//E		MBMALLOC( m_pst, T, nn);									//	構成点の領域をmallocで確保
 		MbAlloc<T>( m_pst, nn);
 		m_sz = nn;
 	}
