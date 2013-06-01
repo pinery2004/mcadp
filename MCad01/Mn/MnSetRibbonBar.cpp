@@ -25,7 +25,7 @@ namespace MC
 //	リボンバーの部品選択用項目を設定する
 //		組、分類、部品タイプ、寸法型式
 //
-MINT mnIoPartsAttr::SetRibbonBarXqt(						// ステイタス 0:正常 -1:エラー
+MINT mnIoPartsAttr::SetRibbonBarXqt(					// ステイタス 0:正常 -1:エラー
 						MPKOSEI		i_irbKumi,			// 構造組
 						MPBUNRUI	i_irbBunrui,		// 構造分類
 						MCHAR*		i_crbPartsSpec,		// 部品種類		(部品名)
@@ -47,7 +47,7 @@ MINT mnIoPartsAttr::SetRibbonBarXqt(						// ステイタス 0:正常 -1:エラー
 	ist = z_mnIA.SelectComboPartsNmByPartsNm( i_crbPartsSpec);
 	if ( ist < 0)
 		MQUIT;
-	if ( z_mnIA.GetCCategory() == MP_SENTAKU_KOUZOU) {
+	if ( z_mnIA.GetCurCategory() == MP_SENTAKU_KOUZOU) {
 		z_mmIA.MmDialogKAttrDisp( z_MCadApp.m_pMainFrame);
 		z_mmIA.InitComboPartsNm();
 		ist = z_mmIA.SelectComboPartsNmByPartsNm( i_crbPartsSpec);
@@ -56,20 +56,20 @@ MINT mnIoPartsAttr::SetRibbonBarXqt(						// ステイタス 0:正常 -1:エラー
 	}
 
 	// 部品名に対応するメンバー(寸法型式)を選択可能項目として設定する
-	z_mnIA.InitComboPartsMbr();									// リボンバーの部品名選択用コンボボックス
-	if ( z_mnIA.GetCCategory() == MP_SENTAKU_KOUZOU) {
-		z_mmIA.InitComboPartsMbr();								// ダイアログの部品名選択用コンボボックス
+	z_mnIA.InitComboMbr();										// リボンバーの部品名選択用コンボボックス
+	if ( z_mnIA.GetCurCategory() == MP_SENTAKU_KOUZOU) {
+		z_mmIA.InitComboMbr();									// ダイアログの部品名選択用コンボボックス
 	}
 	if ( i_crbMbr >= 0) {
 
 		// リボンバーのメンバー選択用コンボボックスのメンバーを選択する
-        ist = z_mnIA.SelectComboPartsMbrByMbrCd( i_crbMbr);
+        ist = z_mnIA.SelectComboMbrByMbrCd( i_crbMbr);
 		if ( ist < 0)
 			MQUIT;
-		if ( z_mnIA.GetCCategory() == MP_SENTAKU_KOUZOU) {
+		if ( z_mnIA.GetCurCategory() == MP_SENTAKU_KOUZOU) {
 
 			// ダイアログのメンバー選択用コンボボックスのメンバーを選択する
-			ist = z_mmIA.SelectComboPartsMbrByMbrCd( i_crbMbr);
+			ist = z_mmIA.SelectComboMbrByMbrCd( i_crbMbr);
 			if ( ist < 0)
 				MQUIT;
 

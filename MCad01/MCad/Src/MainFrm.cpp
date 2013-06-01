@@ -46,11 +46,11 @@ BEGIN_MESSAGE_MAP(CMainFrame, CMDIFrameWndEx)
 	ON_COMMAND(ID_WINDOW_MANAGER, &CMainFrame::OnWindowManager)
 	ON_COMMAND_RANGE(ID_VIEW_APPLOOK_WIN_2000, ID_VIEW_APPLOOK_WINDOWS_7, &CMainFrame::OnApplicationLook)
 	ON_UPDATE_COMMAND_UI_RANGE(ID_VIEW_APPLOOK_WIN_2000, ID_VIEW_APPLOOK_WINDOWS_7, &CMainFrame::OnUpdateApplicationLook)
-	ON_COMMAND(IDC_CMBK_BZI1, &CMainFrame::OnCbnSelchangeCombo1)
-	ON_COMMAND(IDC_CMBK_BZI2, &CMainFrame::OnCbnSelchangeCombo2)
-	ON_COMMAND(IDC_CMB_Inp1, &CMainFrame::OnCbnSelchangeCombo11)
-	ON_COMMAND(IDC_CMB_Inp2, &CMainFrame::OnCbnSelchangeCombo12)
-	ON_COMMAND(IDC_CMB_Inp3, &CMainFrame::OnCbnSelchangeCombo13)
+	ON_COMMAND(IDC_CMBK_BZI1, &CMainFrame::OnCbnSelchangeComboPartsNm)
+	ON_COMMAND(IDC_CMBK_BZI2, &CMainFrame::OnCbnSelchangeComboMbr)
+	ON_COMMAND(IDC_CMB_Inp1, &CMainFrame::OnCbnSelchangeComboInpKbn)
+	ON_COMMAND(IDC_CMB_Inp2, &CMainFrame::OnCbnSelchangeComboMarume)
+	ON_COMMAND(IDC_CMB_Inp3, &CMainFrame::OnCbnSelchangeComboPlcIzon)
 	ON_COMMAND(IDC_COMBOPANELNO, &CMainFrame::OnCbnSelchangeComboPanelNo)
 	ON_COMMAND_RANGE(IDC_RIBBON_A, IDC_RIBBON_Z, OnDummy)
 	ON_COMMAND(IDC_VIEW1OPEN, &CMainFrame::OnView1open)
@@ -95,8 +95,8 @@ LRESULT CMainFrame::OnRibbonIO( UINT wParam, LONG lParam)
 		break;
 
 	case MSET_INPUT_PLACE_CD:
-		//	リボンバーの配置コード選択用コンボボックスの配置コードを選択する
-		MC::z_mnIA.SelectComboPlcCdByPlcCdXqt( MC::z_mnIA.m_iCdArg1);
+		//	リボンバーの配置依存コード選択用コンボボックスの配置依存コードを選択する
+		MC::z_mnIA.SelectComboPlcIzonCdByPlaceCdXqt( MC::z_mnIA.m_iCdArg1);
 		break;
 
 	case MSET_COMBO_ATTRR:
@@ -126,10 +126,9 @@ LRESULT CMainFrame::OnRibbonIO( UINT wParam, LONG lParam)
 	return 0;
 }
 
-
 LRESULT CMainFrame::OnRibbonCategoryChanged( UINT wParam, LONG lParam)
 {
-	MC::z_mnIA.SetCCategory( wParam - 1);
+	MC::z_mnIA.SetCurCategory( wParam - 1);
 	if( wParam == 2) {
 		int i1 = 2;
 		// 意匠カテゴリ選択
@@ -141,9 +140,9 @@ LRESULT CMainFrame::OnRibbonCategoryChanged( UINT wParam, LONG lParam)
 		// 構造カテゴリ選択
 		MC::z_mmIA.MmDialogKAttrDisp( this);						// 部材属性ダイアログ表示
 		MC::z_mmIA.InitComboParts();								// 全項目設定
-		MC::z_mmIA.SelectComboPartsNmByKmId(m_iCombo1);				// 部材名を設定
-		MC::z_mmIA.SelectComboPartsMbrByKmId( m_iCombo2);			// 寸法形式を設定
-		MC::z_mnIA.SelectComboPartsMbrByKmId( m_iCombo2);
+		MC::z_mmIA.SelectComboPartsNmByKmId(m_iComboPartsNm);		// 部品名を設定
+		MC::z_mmIA.SelectComboMbrByKmId( m_iComboMbr);				// 寸法形式を設定
+		MC::z_mnIA.SelectComboMbrByKmId( m_iComboMbr);
 	}
 	return 0;
 }
@@ -183,7 +182,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	OnApplicationLook(z_MCadApp.m_nAppLook);
 
 	// タブ型式のウィンドウ表示
-	if (TAB_WINDOW) {
+	if ( TAB_WINDOW) {
 		CMDITabInfo mdiTabParams;
 		mdiTabParams.m_style = CMFCTabCtrl::STYLE_3D_ONENOTE;	// 使用可能なその他の視覚スタイル...
 		mdiTabParams.m_bActiveTabCloseButton = TRUE;			// タブ領域の右部に [閉じる] ボタンを配置するには、FALSE に設定します
@@ -196,13 +195,13 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 //	m_wndRibbonBar.Create(this);
 //	m_wndRibbonBar.LoadFromResource(IDR_RIBBON);
 
-	if (!CreateRibbonBar ())
+	if ( !CreateRibbonBar ())
 	{
 		TRACE0("Failed to create ribbon bar\n");
 		return -1;      // fail to create
 	}
 
-	if (!m_wndStatusBar.Create(this))
+	if ( !m_wndStatusBar.Create(this))
 	{
 		TRACE0("ステータス バーの作成に失敗しました。\n");
 		return -1;      // 作成できない場合
@@ -236,7 +235,7 @@ void CMainFrame::OnClose()
 {
 	// TODO: ここにメッセージ ハンドラー コードを追加するか、既定の処理を呼び出します。
 	MINT	ist1;
-	if (MC::IeModel::MhGetModFIeMdl()) {
+	if ( MC::IeModel::MhGetModFIeMdl()) {
 		ist1 = MessageBox( Mstr( "終了しますか"), Mstr( "終了確認"), MB_OKCANCEL);
 		if ( ist1 == IDCANCEL)
 			return;
@@ -301,7 +300,7 @@ void CMainFrame::Dump(CDumpContext& dc) const
 
 BOOL CMainFrame::CreateRibbonBar ()
 {
-	if (!m_wndRibbonBar.Create(this))
+	if ( !m_wndRibbonBar.Create(this))
 	{
 		return FALSE;
 	}
@@ -326,7 +325,7 @@ void CMainFrame::OnApplicationLook(UINT id)
 
 	z_MCadApp.m_nAppLook = id;
 
-	switch (z_MCadApp.m_nAppLook)
+	switch ( z_MCadApp.m_nAppLook)
 	{
 	case ID_VIEW_APPLOOK_WIN_2000:
 		CMFCVisualManager::SetDefaultManager(RUNTIME_CLASS(CMFCVisualManager));
@@ -414,42 +413,40 @@ CMDIChildWnd* CMainFrame::OpenView(CDocTemplate *pTemplate)
 
 // PARTS リボンバー　部材名
 
-void CMainFrame::SelectCombo1( MINT i_iCombo1)
+void CMainFrame::SelectComboPartsNm( MINT i_iComboPartsNm)
 {
-	m_iCombo1 = i_iCombo1;
+	m_iComboPartsNm = i_iComboPartsNm;
 	CMFCRibbonComboBox* pComboBuzai = mmpComboBuzai();
-	pComboBuzai->SelectItem( i_iCombo1);
+	pComboBuzai->SelectItem( i_iComboPartsNm);
 }
 
-void CMainFrame::SelectCombo2( MINT i_iCombo2)
+void CMainFrame::SelectComboMbr( MINT i_iComboMbr)
 {
-	m_iCombo2 = i_iCombo2;
-	CMFCRibbonComboBox* pComboPartsMbr = mmpComboPartsMbr();
-	pComboPartsMbr->SelectItem( i_iCombo2);
+	m_iComboMbr = i_iComboMbr;
+	CMFCRibbonComboBox* pComboMbr = mmpComboMbr();
+	pComboMbr->SelectItem( i_iComboMbr);
 }
 
-
-void CMainFrame::SelectComboInp1( MINT i_iCombo11)
+void CMainFrame::SelectComboInp1( MINT i_iComboInpKbn)
 {
-	m_iComboInp1 = i_iCombo11;
+	m_iComboInpKbn = i_iComboInpKbn;
 	CMFCRibbonComboBox* pComboInpTp = mmpComboInpTp();
-	pComboInpTp->SelectItem( i_iCombo11);
+	pComboInpTp->SelectItem( i_iComboInpKbn);
 }
 
-void CMainFrame::SelectComboInp2( MINT i_iCombo12)
+void CMainFrame::SelectComboInp2( MINT i_iComboMarume)
 {
-	m_iComboInp2 = i_iCombo12;
+	m_iComboMarume = i_iComboMarume;
 	CMFCRibbonComboBox* pComboInpTp = mmpComboMarume();
-	pComboInpTp->SelectItem( i_iCombo12);
+	pComboInpTp->SelectItem( i_iComboMarume);
 }
 
-void CMainFrame::SelectComboInp3( MINT i_iCombo13)
+void CMainFrame::SelectComboInp3( MINT i_iComboPlcIzon)
 {
-	m_iComboInp3 = i_iCombo13;
-	CMFCRibbonComboBox* pComboInpTp = mmpComboPlcCd();
-	pComboInpTp->SelectItem( i_iCombo13);
+	m_iComboPlcIzon = i_iComboPlcIzon;
+	CMFCRibbonComboBox* pComboInpTp = mmpComboPlcIzonCd();
+	pComboInpTp->SelectItem( i_iComboPlcIzon);
 }
-
 
 //-------------------------------------------------------
 
@@ -457,21 +454,21 @@ void CMainFrame::OnDummy(UINT /*id*/)
 {
 }
 
-// PARTS リボンバー　部材名
-void CMainFrame::OnCbnSelchangeCombo1()
+// PARTS リボンバー　部品名
+void CMainFrame::OnCbnSelchangeComboPartsNm()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_KOUZOU);
 
 	CMFCRibbonComboBox* pCmbBox;
 	pCmbBox = mmpComboBuzai();
-	m_iCombo1 = pCmbBox->GetCurSel();							// 選択された部品ID
+	m_iComboPartsNm = pCmbBox->GetCurSel();						// 選択された部品名
 
-	MC::z_mnIA.SelectComboPartsNmByKmId( m_iCombo1);
-	MC::z_mnIA.InitComboPartsMbr();
+	MC::z_mnIA.SelectComboPartsNmByKmId( m_iComboPartsNm);
+	MC::z_mnIA.InitComboMbr();
 
 	MC::z_mmIA.MmDialogKAttrDisp( this);						// 部材属性ダイアログ表示
 	MC::z_mmIA.InitComboParts();								// 全項目設定
-	MC::z_mmIA.SelectComboPartsNmByKmId( m_iCombo1);
+	MC::z_mmIA.SelectComboPartsNmByKmId( m_iComboPartsNm);
 
 	MC::mhPartsSpec* pPartsSpec;
 	pPartsSpec = MC::BuzaiCode::MhGetpPartsSpec( MC::z_mnIA.GetCurPartsNmId());
@@ -481,138 +478,96 @@ void CMainFrame::OnCbnSelchangeCombo1()
 		MC::CmdCtrl::XqtMenuCmd( IDC_CANCELCMD);				//	コマンドキャンセル
 }
 
-
 // PARTS リボンバー　寸法型式
-void CMainFrame::OnCbnSelchangeCombo2()
+void CMainFrame::OnCbnSelchangeComboMbr()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_KOUZOU);
 
 	CMFCRibbonComboBox* pCmbBox;
-	pCmbBox = mmpComboPartsMbr();
-	m_iCombo2 = pCmbBox->GetCurSel();							// 選択された寸法型式ID
+	pCmbBox = mmpComboMbr();
+	m_iComboMbr = pCmbBox->GetCurSel();							// 選択された寸法型式ID
 
 	MC::z_mmIA.MmDialogKAttrDisp( this);						// 部材属性ダイアログ表示
 	MC::z_mmIA.InitComboParts();								// 全項目設定
-	MC::z_mmIA.SelectComboPartsNmByKmId(m_iCombo1);				// 部材名を設定
-	MC::z_mmIA.SelectComboPartsMbrByKmId( m_iCombo2);			// 寸法形式を設定
+	MC::z_mmIA.SelectComboPartsNmByKmId(m_iComboPartsNm);		// 部品名を設定
+	MC::z_mmIA.SelectComboMbrByKmId( m_iComboMbr);				// 寸法形式を設定
 
-	MC::z_mnIA.SelectComboPartsMbrByKmId( m_iCombo2);
-//S	MC::Window::CurWndFocus();
+	MC::z_mnIA.SelectComboMbrByKmId( m_iComboMbr);
 	MC::CmdCtrl::XqtMenuCmd( IDC_PARTSCREATE);					//	部品入力
 }
 
 // INPUT リボンバー　入力点区分
-void CMainFrame::OnCbnSelchangeCombo11()
+void CMainFrame::OnCbnSelchangeComboInpKbn()
 {
 	CMFCRibbonComboBox *pCmbBox;
 	pCmbBox = mmpComboInpTp();
-	m_iComboInp1 = pCmbBox->GetCurSel();
-	MC::z_mnIA.SelectComboInpKbnByInpKbnCdXqt( m_iComboInp1);
+	m_iComboInpKbn = pCmbBox->GetCurSel();
+	MC::z_mnIA.SelectComboInpKbnByInpKbnCdXqt( m_iComboInpKbn);
 	MC::Window::CurWndFocus();
 }
 
 // INPUT リボンバー　丸めコード
-void CMainFrame::OnCbnSelchangeCombo12()
+void CMainFrame::OnCbnSelchangeComboMarume()
 {
 	CMFCRibbonComboBox* pCmbBox;
 	pCmbBox = mmpComboMarume();
-	m_iComboInp2 = pCmbBox->GetCurSel();						// 丸めコード
-	MC::z_mnIA.SelectComboMarumeByMarumeCdXqt( m_iComboInp2);
+	m_iComboMarume = pCmbBox->GetCurSel();						// 丸めコード
+	MC::z_mnIA.SelectComboMarumeByMarumeCdXqt( m_iComboMarume);
 	MC::Window::CurWndFocus();
 }
 
-// INPUT リボンバー　配置コード
-void CMainFrame::OnCbnSelchangeCombo13()
+// INPUT リボンバー　配置依存コード
+void CMainFrame::OnCbnSelchangeComboPlcIzon()
 {
 	CMFCRibbonComboBox* pCmbBox;
-	pCmbBox = mmpComboPlcCd();
-	m_iComboInp3 = pCmbBox->GetCurSel();										// 配置コード
-	MC::z_mnIA.SelectComboPlcCdByPlcCdXqt( m_iComboInp3);
+	pCmbBox = mmpComboPlcIzonCd();
+	m_iComboPlcIzon = pCmbBox->GetCurSel();										// 配置依存コード
+	MC::z_mnIA.SelectComboPlcIzonCdByPlaceCdXqt( m_iComboPlcIzon);
 	MC::Window::CurWndFocus();
 }
 
 // PANEL リボンバー　パネル番号
 void CMainFrame::OnCbnSelchangeComboPanelNo()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_KOUZOU);
 
 	int ic1 = 1;
 }
 
 void CMainFrame::OnView1open()
 {
-	// TODO: ここにコマンド ハンドラー コードを追加します。
-//S	CChildFrame1 *pChildFrm1 = new CChildFrame1;
-//	TRACE( "new CChildFrame1(%x)\n", pChildFrm1);
-//	MC::WindowCtrl::SetCurWndFrame( 1, pChildFrm1);
-//	if (!pChildFrm1->Create( NULL, _T("Window1"),
-//		WS_CHILD | WS_VISIBLE | WS_OVERLAPPEDWINDOW, rectDefault, this))
-//		return;
-
 	// ウィンドウのオープン
 	CMDIChildWnd* pChildWnd1;
 	pChildWnd1 = OpenView( z_MCadApp.m_pDocTemplate1);
 	MC::WindowCtrl::SetCurWndFrame( 1, pChildWnd1);
 }
 
-
 void CMainFrame::OnView2open()
 {
-//S	// TODO: ここにコマンド ハンドラー コードを追加します。
-//	CChildFrame2 *pChildFrm2 = new CChildFrame2;
-//	MC::WindowCtrl::SetCurWndFrame( 2, pChildFrm2);
-//	if (!pChildFrm2->Create( NULL, _T("Window2"),
-//		WS_CHILD | WS_VISIBLE | WS_OVERLAPPEDWINDOW, rectDefault, this))
-//		return;
-
 	// ウィンドウのオープン
 	CMDIChildWnd* pChildWnd2;
 	pChildWnd2 = OpenView( z_MCadApp.m_pDocTemplate2);
 	MC::WindowCtrl::SetCurWndFrame( 2, pChildWnd2);
 }
 
-
 void CMainFrame::OnView3open()
 {
-//S	// TODO: ここにコマンド ハンドラー コードを追加します。
-//	CChildFrame3 *pChildFrm3 = new CChildFrame3;
-//	MC::WindowCtrl::SetCurWndFrame( 3, pChildFrm3);
-//	if (!pChildFrm3->Create( NULL, _T("Window3"),
-//		WS_CHILD | WS_VISIBLE | WS_OVERLAPPEDWINDOW, rectDefault, this))
-//		return;
-
 	// ウィンドウのオープン
 	CMDIChildWnd* pChildWnd3;
 	pChildWnd3 = OpenView( z_MCadApp.m_pDocTemplate3);
 	MC::WindowCtrl::SetCurWndFrame( 3, pChildWnd3);
 }
 
-
 void CMainFrame::OnView4open()
 {
-//S	// TODO: ここにコマンド ハンドラー コードを追加します。
-//	CChildFrame4 *pChildFrm4 = new CChildFrame4;
-//	MC::WindowCtrl::SetCurWndFrame( 4, pChildFrm4);
-//	if (!pChildFrm4->Create( NULL, _T("Window4"),
-//		WS_CHILD | WS_VISIBLE | WS_OVERLAPPEDWINDOW, rectDefault, this))
-//		return;
-
 	// ウィンドウのオープン
 	CMDIChildWnd* pChildWnd1;
 	pChildWnd1 = OpenView( z_MCadApp.m_pDocTemplate1);
 	MC::WindowCtrl::SetCurWndFrame( 4, pChildWnd1);
 }
 
-
 void CMainFrame::OnView5open()
 {
-//S	// TODO: ここにコマンド ハンドラー コードを追加します。
-//	CChildFrame5 *pChildFrm5 = new CChildFrame5;
-//	MC::WindowCtrl::SetCurWndFrame( 5, pChildFrm5);
-//	if (!pChildFrm5->Create( NULL, _T("Window5"),
-//		WS_CHILD | WS_VISIBLE | WS_OVERLAPPEDWINDOW, rectDefault, this))
-//		return;
-
 	// ウィンドウのオープン
 	CMDIChildWnd* pChildWnd1;
 	pChildWnd1 = OpenView( z_MCadApp.m_pDocTemplate1);

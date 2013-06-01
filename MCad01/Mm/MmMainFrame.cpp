@@ -52,9 +52,9 @@ CMFCRibbonComboBox* mmpComboBuzai()
 	MC::System::GetpMainFrame()->m_wndRibbonBar.GetElementsByID( IDC_CMBK_BZI1, arButtons);
 //<----
 	int iIdcCmb;
-	int iCCategory;
-	iCCategory = MC::z_mnIA.GetCCategory();
-	if ( iCCategory == MP_SENTAKU_ISYOU) {
+	int iCurCategory;
+	iCurCategory = MC::z_mnIA.GetCurCategory();
+	if ( iCurCategory == MP_SENTAKU_ISYOU) {
 		iIdcCmb = IDC_CMBS_BZI1;
 	} else {
 		iIdcCmb = IDC_CMBK_BZI1;
@@ -64,22 +64,22 @@ CMFCRibbonComboBox* mmpComboBuzai()
 	return pComboBuzai;
 }
 
-CMFCRibbonComboBox* mmpComboPartsMbr()
+CMFCRibbonComboBox* mmpComboMbr()
 {
 																								//SS	CMFCRibbonBar* pRibbonBar;
 	mnMFCRibbonBar* pRibbonBar;
 	pRibbonBar = &MC::System::GetpMainFrame()->m_wndRibbonBar;
 	int iIdcCmb;
-	int iCCategory;
-	iCCategory = MC::z_mnIA.GetCCategory();
-	if ( iCCategory == MP_SENTAKU_ISYOU) {
+	int iCurCategory;
+	iCurCategory = MC::z_mnIA.GetCurCategory();
+	if ( iCurCategory == MP_SENTAKU_ISYOU) {
 		iIdcCmb = IDC_CMBS_BZI2;
 	} else {
 		iIdcCmb = IDC_CMBK_BZI2;
 	}
-	CMFCRibbonComboBox* pComboPartsMbr;
-	pComboPartsMbr = DYNAMIC_DOWNCAST(CMFCRibbonComboBox, pRibbonBar->FindByID(iIdcCmb));
-	return pComboPartsMbr;
+	CMFCRibbonComboBox* pComboMbr;
+	pComboMbr = DYNAMIC_DOWNCAST(CMFCRibbonComboBox, pRibbonBar->FindByID(iIdcCmb));
+	return pComboMbr;
 	//	DYNAMIC_DOWNCAST(CMFCRibbonComboBox, MC::System::GetpMainFrame()->m_wndRibbonBar.FindByID(IDC_CMBK_BZI2));
 }
 
@@ -93,7 +93,7 @@ CMFCRibbonComboBox* mmpComboMarume()
 	return DYNAMIC_DOWNCAST(CMFCRibbonComboBox, MC::System::GetpMainFrame()->m_wndRibbonBar.FindByID(IDC_CMB_Inp2));
 }
 
-CMFCRibbonComboBox* mmpComboPlcCd()
+CMFCRibbonComboBox* mmpComboPlcIzonCd()
 {
 	return DYNAMIC_DOWNCAST(CMFCRibbonComboBox, MC::System::GetpMainFrame()->m_wndRibbonBar.FindByID(IDC_CMB_Inp3));
 }

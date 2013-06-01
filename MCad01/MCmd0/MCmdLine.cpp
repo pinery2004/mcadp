@@ -105,8 +105,8 @@ void MCmdLineAdd()
 
 	iIdPartsSpec = z_mnIA.GetCurPartsNmId();
 	pPartsSpec = BuzaiCode::MhGetpPartsSpec( iIdPartsSpec);
-																								//SS	z_mnIA.RibbonIO( MSET_INPUT_KUBUN_CD, pPartsSpec->GetPTCdInpKb());	// 入力点区分選択用のコンボボックスに表示する
-	z_mnIA.SelectComboInpKbnByInpKbnCdEntry( pPartsSpec->GetPTCdInpKb());	// 入力点区分選択用のコンボボックスに表示する
+																								//SS	z_mnIA.RibbonIO( MSET_INPUT_KUBUN_CD, pPartsSpec->GetPTCdInpKbn());	// 入力点区分選択用のコンボボックスに表示する
+	z_mnIA.SelectComboInpKbnByInpKbnCdEntry( pPartsSpec->GetPTCdInpKbn());	// 入力点区分選択用のコンボボックスに表示する
 																								//SS	z_mnIA.RibbonIO( MSET_INPUT_MARUME_CD, pPartsSpec->GetPTCdMarume());// 丸めコードを選択用のコンボボックスに表示する
 	z_mnIA.SelectComboMarumeByMarumeCdEntry( pPartsSpec->GetPTCdMarume());	// 丸めコードを選択用のコンボボックスに表示する
 
@@ -115,7 +115,7 @@ void MCmdLineAdd()
 	MFOREVER {
 		// 配置座標入力
 		//
-		switch (pPartsSpec->GetPTCdInpKb())
+		switch (pPartsSpec->GetPTCdInpKbn())
 		{
 		case MP_INPKB_1PT:										// 1点入力
 			irt = mhInput::Get1Pt( &pt1, &pt1_org);
@@ -153,7 +153,7 @@ void MCmdLineAdd()
 
 		// 配置
 		//
-		if ( pPartsSpec->GetPTCdInpKb() == MP_INPKB_AREA) {
+		if ( pPartsSpec->GetPTCdInpKbn() == MP_INPKB_AREA) {
 			// 領域(区画)配置、１点目と２点目を始点終点として配置する
 			Ln1.p[0] = MgPoint3DC( pg1.m_p[0]);
 			Ln1.p[1] = MgPoint3DC( pg1.m_p[1]);
@@ -221,7 +221,7 @@ void MCmdLineAdd()
 					
 			} else {											//			本数指定による複数部材の配置
 				MgVect2D vtutBzi = MGeo::UnitizeVect2D( MgVect2DC( Ln1.p[1] - Ln1.p[0]));
-				if ( pPartsSpec->GetPTCdInpKb() != MP_INPKB_DIR1PT)	//			方向１点の場合は方向に向かって複数配置する
+				if ( pPartsSpec->GetPTCdInpKbn() != MP_INPKB_DIR1PT)	//			方向１点の場合は方向に向かって複数配置する
 					vtutBzi.SetRotR90();						//			長さ２点の場合は右側方向に複数配置する
 				VtBziIntrv = rIntrv * MgVect3DC( vtutBzi);
 				

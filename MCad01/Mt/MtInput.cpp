@@ -101,12 +101,12 @@ MINT mhInput::GetArea(
 	MgPoint2D	pt1, pt2;
 	MgMinMaxR2D	mMM;
 	CPoint		ptMouthL;
-	MINT 		iCdInpKb;
+	MINT 		iCdInpKbn;
 	MINT		iSeq = 0;						// 入力シークエンス
 
 	MmWndInfo* pWndInfo = WindowCtrl::GetCurWndInfo();			// カレントウィンドウ取得
 	
-	iCdInpKb = z_mnIA.GetComboInpKbCd();
+	iCdInpKbn = z_mnIA.GetComboInpKbnCd();
 
 	MFOREVER {
 		if ( iSeq == 0) {										// １点目の入力
@@ -114,8 +114,8 @@ MINT mhInput::GetArea(
 			irt = MtAskForPoint( &pt1);							// 点を入力
 
 		} else {												// ２点目以降の入力
-			iCdInpKb = z_mnIA.GetComboInpKbCd();
-			if ( iCdInpKb == MP_INPKB_AREA) {
+			iCdInpKbn = z_mnIA.GetComboInpKbnCd();
+			if ( iCdInpKbn == MP_INPKB_AREA) {
 				Msg::GuidanceMsg( MC_GUID_AREA_TAIKAKUTEN);		// 対角２点タイプ区画
 				irt = Window::DragObject( MC_RBND_RECT, (void*)o_ppg1->m_p, &pt1);	// ラバーバンド図形表示しながら対角点を入力
 																// ドラッギングモード開始
@@ -134,10 +134,10 @@ MINT mhInput::GetArea(
 
 		if ( irt == MTRT_RBTNDWN) {								// マウス右ボタン
 			if ( iSeq == 0) {									//	１点目の入力の場合は、
-				iCdInpKb = MP_INPKB_AREA + MP_INPKB_FREE - iCdInpKb;//	入力点区分を自由入力→対角入力、または、対角入力→自由入力に変更
-																								//E				z_mnIA.SelectComboInpKbnByInpKbnCdXqt( iCdInpKb);
-																								//SS				z_mnIA.RibbonIO( MSET_INPUT_KUBUN_CD, iCdInpKb);
-				z_mnIA.SelectComboInpKbnByInpKbnCdEntry( iCdInpKb);	// 入力点区分選択用のコンボボックスに表示する
+				iCdInpKbn = MP_INPKB_AREA + MP_INPKB_FREE - iCdInpKbn;//	入力点区分を自由入力→対角入力、または、対角入力→自由入力に変更
+																								//E				z_mnIA.SelectComboInpKbnByInpKbnCdXqt( iCdInpKbn);
+																								//SS				z_mnIA.RibbonIO( MSET_INPUT_KUBUN_CD, iCdInpKbn);
+				z_mnIA.SelectComboInpKbnByInpKbnCdEntry( iCdInpKbn);	// 入力点区分選択用のコンボボックスに表示する
 
 			} else {											//	２点目以降の入力の場合は、
 				iSeq --;										//	１点キャンセル
@@ -163,7 +163,7 @@ MINT mhInput::GetArea(
 			iSeq ++;
 		}
 
-		if ( iSeq == 2 && iCdInpKb == MP_INPKB_AREA) {
+		if ( iSeq == 2 && iCdInpKbn == MP_INPKB_AREA) {
 			mMM.SetInit();
 			mMM.Ins2( o_ppg1->m_p[0]);
 			mMM.Ins2( o_ppg1->m_p[1]);
@@ -182,7 +182,7 @@ MINT mhInput::GetArea(
 /////////////////////////////////////////////////////////////////////////////
 //	長さ２点、方向１点入力 ＋　複数部材の領域をあらわす３点目の入力
 //
-// 配置コードが屋根構成線付け丸めの場合は、
+// 配置依存コードが屋根構成線付け丸めの場合は、
 // 最初の点の入力でマウス右ボタンまたはシフトキーが押しながらの入力は、屋根面選択で
 // 屋根面を検索し屋根面が見つかれば、以降はその屋根面上の部材とみなし、
 // 屋根面が見つからなければ、屋根面選択はフリーの初期状態となる
@@ -223,8 +223,8 @@ MINT mhInput::GetLen2Pt(
 
 			if ( irt == MTRT_SYSTEMSTOP || irt == MTRT_CAN)		// システムストップまたはキャンセル
 				break;
-			if ( z_mnIA.GetComboPlcCd() == MP_HAICD_YANEKOUSEISENZUKE) {
-																// 配置コードが屋根構成線付け丸め
+			if ( z_mnIA.GetComboPlcIzonCd() == MP_HAICD_YANEKOUSEISENZUKE) {
+																// 配置依存コードが屋根構成線付け丸め
 				nflag = MtGetNFlag();							// 仮想キー(nflag)取得（1:キー入力無し、5:shiftキー入力あり)
 				if ( irt == MTRT_RBTNDWN || MF_CHECK_OR( nflag, MK_SHIFT)) {	
 																// マウス右ボタンまたはシフトキーが押されている場合は屋根面を検索し
@@ -377,7 +377,7 @@ MINT mhInput::GetAreaI(
 	MgPolyg2D		PgS(20);
 	MgPoint2D		pt1, pt2;
 
-	MINT iCdInpKb = z_mnIA.GetComboInpKbCd();
+	MINT iCdInpKbn = z_mnIA.GetComboInpKbnCd();
 
 	for ( ic=0;;ic++) {
 		if ( ic == 0) {
@@ -402,10 +402,10 @@ MINT mhInput::GetAreaI(
 				(*pGifInp) --;
 				(*pPg1) --;										// ポリゴンの座標を１点削る
 			} else {
-				iCdInpKb = MP_INPKB_AREA + MP_INPKB_FREE - iCdInpKb;	// 区画入力 | 自由入力 | 
-																								//E				z_mnIA.SelectComboInpKbnByInpKbnCdXqt( iCdInpKb);
-																								//SS				z_mnIA.RibbonIO( MSET_INPUT_KUBUN_CD, iCdInpKb);	// 入力点区分選択用のコンボボックスに表示する
-				z_mnIA.SelectComboInpKbnByInpKbnCdEntry( iCdInpKb);	// 入力点区分選択用のコンボボックスに表示する
+				iCdInpKbn = MP_INPKB_AREA + MP_INPKB_FREE - iCdInpKbn;	// 区画入力 | 自由入力 | 
+																								//E				z_mnIA.SelectComboInpKbnByInpKbnCdXqt( iCdInpKbn);
+																								//SS				z_mnIA.RibbonIO( MSET_INPUT_KUBUN_CD, iCdInpKbn);	// 入力点区分選択用のコンボボックスに表示する
+				z_mnIA.SelectComboInpKbnByInpKbnCdEntry( iCdInpKbn);	// 入力点区分選択用のコンボボックスに表示する
 			}
 			if ( pPg1->m_n == 0) {
 				Window::DragModeEnd();							// ドラッギングモード終了（ラバーバンド図形表示モード）
@@ -447,7 +447,7 @@ void mhInput::Marume(
 	MREAL		rDisMin_2;
 	MgPoint2D	Po, P0;
 
-	MINT		iCdPlc;											// 配置コード
+	MINT		iCdPlc;											// 配置依存コード
 	MINT		iCdMarume;										// グリッド丸め分割値
 	MgPoint2D	PtGrid;
 	MgLine2D		Lnm[2];
@@ -458,7 +458,7 @@ void mhInput::Marume(
 	MINT iKai = z_mnIA.GetInpKai();
 
 	iCdMarume = z_mnIA.GetComboMarumeCd();
-	iCdPlc = z_mnIA.GetComboPlcCd();
+	iCdPlc = z_mnIA.GetComboPlcIzonCd();
 
 	if ( iCdPlc == MP_HAICD_KABESINZUKE ||
 		iCdPlc == MP_HAICD_YANEKOUSEISENZUKE) {									// 壁芯付け丸め　または　屋根構成線付け丸め

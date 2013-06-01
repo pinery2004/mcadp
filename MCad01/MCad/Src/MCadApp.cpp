@@ -293,7 +293,8 @@ BOOL CMCadApp::InitInstance()
 	MC::mtPlcInp::SetInpKai( MC::z_mnIA.GetInpKai());
 	MC::z_mnIA.SetMode( MP_MD_CREATE);
 
-	MC::z_mnIA.SetSCdGp( MP_GP_JYUKO);
+//U	MC::z_mnIA.SetSCdGp( MP_GP_JYUKO);
+	MC::z_mnIA.SetSCdGp( MP_GP_KABE);
 
 	MC::z_mnIA.SetKCdGp( MP_GP_KABE);
 	MC::z_mnIA.SetKCdBr( MP_BR_BUZAI);
@@ -537,7 +538,6 @@ void CMCadApp::OnView3Off()
 	// TODO : ここにコマンド ハンドラ コードを追加します。
 	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 3, MTHEIMENZU, 1, 1);
 	if ( pWndInfo)
-//		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
 		pWndInfo->m_pChildFrm->PostMessage(WM_CLOSE);
 }
 
@@ -682,7 +682,7 @@ void CMCadApp::OnUpdateRadio3f(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedRadioYane()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_KOUZOU);
 
 	MC::z_mnIA.SetKCdGp( MP_GP_YANE);
 	MC::z_mmIA.MmDialogKAttrDisp( z_MCadApp.m_pMainFrame);
@@ -702,7 +702,7 @@ void CMCadApp::OnUpdateRadioYane(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedRadioTenjo()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_KOUZOU);
 
 	MC::z_mnIA.SetKCdGp( MP_GP_TENJO);
 	MC::z_mmIA.MmDialogKAttrDisp( z_MCadApp.m_pMainFrame);
@@ -722,7 +722,7 @@ void CMCadApp::OnUpdateRadioTenjo(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedRadioTairyoku()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_KOUZOU);
 
 	MC::z_mnIA.SetKCdGp( MP_GP_TAIRYOKU);
 	MC::z_mmIA.MmDialogKAttrDisp( z_MCadApp.m_pMainFrame);
@@ -742,7 +742,7 @@ void CMCadApp::OnUpdateRadioTairyoku(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedRadioKabe()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_KOUZOU);
 
 	MC::z_mnIA.SetKCdGp( MP_GP_KABE);
 	MC::z_mmIA.MmDialogKAttrDisp( z_MCadApp.m_pMainFrame);
@@ -762,7 +762,7 @@ void CMCadApp::OnUpdateRadioKabe(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedRadioYuka()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_KOUZOU);
 
 	MC::z_mnIA.SetKCdGp( MP_GP_YUKA);
 	MC::z_mmIA.MmDialogKAttrDisp( z_MCadApp.m_pMainFrame);
@@ -782,7 +782,7 @@ void CMCadApp::OnUpdateRadioYuka(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedRadioKoya()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_KOUZOU);
 
 	MC::z_mnIA.SetKCdGp( MP_GP_KOYA);
 	MC::z_mnIA.InitComboPartsXqt();
@@ -799,7 +799,7 @@ void CMCadApp::OnUpdateRadioKoya(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedRadioDodai()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_KOUZOU);
 
 	MC::z_mnIA.SetKCdGp( MP_GP_DODAI);
 	MC::z_mmIA.MmDialogKAttrDisp( z_MCadApp.m_pMainFrame);
@@ -819,7 +819,7 @@ void CMCadApp::OnUpdateRadioDodai(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedRadioKiso()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_KOUZOU);
 
 	MC::z_mnIA.SetKCdGp( MP_GP_KISO);
 	MC::z_mmIA.MmDialogKAttrDisp( z_MCadApp.m_pMainFrame);
@@ -839,7 +839,7 @@ void CMCadApp::OnUpdateRadioKiso(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedRadioBuzai()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_KOUZOU);
 
 	MC::z_mnIA.SetKCdBr( MP_BR_BUZAI);
 	MC::z_mmIA.MmDialogKAttrDisp( z_MCadApp.m_pMainFrame);
@@ -859,7 +859,7 @@ void CMCadApp::OnUpdateRadioBuzai(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedRadioKanagu()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_KOUZOU);
 
 	MC::z_mnIA.SetKCdBr( MP_BR_KANAGU);
 	MC::z_mmIA.MmDialogKAttrDisp( z_MCadApp.m_pMainFrame);
@@ -879,7 +879,7 @@ void CMCadApp::OnUpdateRadioKanagu(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedRadioPanel()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_KOUZOU);
 
 	MC::z_mnIA.SetKCdBr( MP_BR_PANEL);
 	MC::z_mmIA.MmDialogKAttrDisp( z_MCadApp.m_pMainFrame);
@@ -899,7 +899,7 @@ void CMCadApp::OnUpdateRadioPanel(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedRadioOther()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_KOUZOU);
 
 	MC::z_mnIA.SetKCdBr( MP_BR_OTHER);
 	MC::z_mmIA.MmDialogKAttrDisp( z_MCadApp.m_pMainFrame);
@@ -919,7 +919,7 @@ void CMCadApp::OnUpdateRadioOther(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedRadioSel1()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_KOUZOU);
 
 	m_iKInpSel = MP_SEL1;
 //E	MC::Window::CurWndFocus();
@@ -934,7 +934,7 @@ void CMCadApp::OnUpdateRadioSel1(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedRadioSel2()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_KOUZOU);
 
 	m_iKInpSel = MP_SEL2;
 																								//E	MC::Window::CurWndFocus();
@@ -949,7 +949,7 @@ void CMCadApp::OnUpdateRadioSel2(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedRadioSel3()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_KOUZOU);
 
 	m_iKInpSel = MP_SEL3;
 																								//E	MC::Window::CurWndFocus();
@@ -999,7 +999,7 @@ void CMCadApp::OnUpdateChukiChange(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedCheckBuzai()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_KOUZOU);
 
 																								//E	MC::Window::CurWndFocus();
 	m_bPartsListBuzai = !m_bPartsListBuzai;
@@ -1020,7 +1020,7 @@ void CMCadApp::OnUpdateCheckBuzai(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedCheckKanagu()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_KOUZOU);
 
 																								//E	MC::Window::CurWndFocus();
 	m_bPartsListKanagu = !m_bPartsListKanagu;
@@ -1035,7 +1035,7 @@ void CMCadApp::OnUpdateCheckKanagu(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedCheckGohan()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_KOUZOU);
 
 																								//E	MC::Window::CurWndFocus();
 	m_bPartsListGohan = !m_bPartsListGohan;
@@ -1050,7 +1050,7 @@ void CMCadApp::OnUpdateCheckGohan(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedCheckAttr1()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_KOUZOU);
 
 																								//E	MC::Window::CurWndFocus();
 	m_bPartsAttr1 = !m_bPartsAttr1;
@@ -1065,7 +1065,7 @@ void CMCadApp::OnUpdateCheckAttr1(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedCheckAttr2()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_KOUZOU);
 
 																								//E	MC::Window::CurWndFocus();
 	m_bPartsAttr2 = !m_bPartsAttr2;
@@ -1080,7 +1080,7 @@ void CMCadApp::OnUpdateCheckAttr2(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedCheckAttr3()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_KOUZOU);
 
 																								//E	MC::Window::CurWndFocus();
 	m_bPartsAttr3 = !m_bPartsAttr3;
@@ -1095,7 +1095,7 @@ void CMCadApp::OnUpdateCheckAttr3(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedCheckAttr4()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_KOUZOU);
 
 																								//E	MC::Window::CurWndFocus();
 	m_bPartsAttr4 = !m_bPartsAttr4;
@@ -1110,7 +1110,7 @@ void CMCadApp::OnUpdateCheckAttr4(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedPanelBefore()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_KOUZOU);
 
 																								//E	MC::Window::CurWndFocus();
 }
@@ -1124,7 +1124,7 @@ void CMCadApp::OnUpdatePanelBefore(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedPanelNext()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_KOUZOU);
 
 																								//E	MC::Window::CurWndFocus();
 }
@@ -1138,7 +1138,7 @@ void CMCadApp::OnUpdatePanelNext(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedPanelAll()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_KOUZOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_KOUZOU);
 
 																								//E	MC::Window::CurWndFocus();
 }
@@ -1152,9 +1152,9 @@ void CMCadApp::OnUpdatePanelAll(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedRadioJyuuko()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_ISYOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_ISYOU);
 
-	MC::z_mnIA.SetSCdGp( MP_GP_JYUKO);
+	MC::z_mnIA.SetSCdProc( MP_GP_JYUKO);
 }
 
 
@@ -1166,9 +1166,9 @@ void CMCadApp::OnUpdateRadioJyuuko(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedRadioJyuuto()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_ISYOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_ISYOU);
 
-	MC::z_mnIA.SetSCdGp( MP_GP_JYUTO);
+	MC::z_mnIA.SetSCdProc( MP_GP_JYUTO);
 }
 
 
@@ -1180,9 +1180,9 @@ void CMCadApp::OnUpdateRadioJyuuto(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedRadioBukken()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_ISYOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_ISYOU);
 
-	MC::z_mnIA.SetSCdGp( MP_GP_BUKKEN);
+	MC::z_mnIA.SetSCdProc( MP_GP_BUKKEN);
 }
 
 
@@ -1194,9 +1194,9 @@ void CMCadApp::OnUpdateRadioBukken(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedRadioSYane()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_ISYOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_ISYOU);
 
-	MC::z_mnIA.SetSCdGp( MP_GP_S_YANE);
+	MC::z_mnIA.SetSCdProc( MP_GP_S_YANE);
 }
 
 
@@ -1208,9 +1208,9 @@ void CMCadApp::OnUpdateRadioSYane(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedRadioSikiti()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_ISYOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_ISYOU);
 
-	MC::z_mnIA.SetSCdGp( MP_GP_SIKITI);
+	MC::z_mnIA.SetSCdProc( MP_GP_SIKITI);
 }
 
 
@@ -1222,9 +1222,9 @@ void CMCadApp::OnUpdateRadioSikiti(CCmdUI *pCmdUI)
 
 void CMCadApp::OnBnClickedRadioHekiryou()
 {
-	MC::z_mnIA.SetCCategory( MP_SENTAKU_ISYOU);
+	MC::z_mnIA.SetCurCategory( MP_SENTAKU_ISYOU);
 
-	MC::z_mnIA.SetSCdGp( MP_GP_HEKIRYOU);
+	MC::z_mnIA.SetSCdProc( MP_GP_HEKIRYOU);
 }
 
 

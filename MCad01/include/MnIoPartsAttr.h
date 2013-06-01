@@ -28,6 +28,57 @@ namespace MC
 	#endif
 #endif
 
+// 入力属性　意匠と構造の共通項目
+class InpAttrIK
+{
+	int			m_iComboInpKbn;						// 入力点区分
+	int			m_iComboMarume;						// 丸めコード
+	int			m_iComboPlcIzon;					// 配置依存コード
+
+	MPKOSEI		m_iKInpGp;							// 構造入力構成		(屋根、小屋、天井、耐力壁、壁、床、土台、基礎)
+	MPBUNRUI	m_iKInpBr;							// 構造入力種類		(部材、金物、パネル、その他)
+	MPSELECT	m_iKInpSel;							// 構造入力選択		選択1、選択2、選択3						未使用
+
+	int			m_iComboPartsNm;					// 部品名
+	int			m_iComboMbr;						// 寸法型式
+
+};
+
+// 入力属性　意匠+構造
+class InpAttrA
+{
+	int			m_iCurCategory;						// カレントカテゴリ　1:意匠, 2:構造, 3:共通
+	int			m_iInpKai;							// 入力階			(1階,2階,3階)
+
+	MPPROC		m_iSInpProc;						// 意匠: 入力処理	(住戸、住棟、物件、屋根、敷地、壁量)
+
+	InpAttrIK	m_IK;								// 意匠と構造の共通項目
+
+	int			m_iComboPanelNo;					// 構造: パネル番号
+	bool		m_bKDspBuzai;						// 構造: 部材表示フラグ
+	bool		m_bKDspKanagu;						// 構造: 金物表示フラグ
+	bool		m_bKDspGohan;						// 構造: 合板表示フラグ
+
+	MPATTR		m_iAttr;							// 構造: 属性値入力モード
+
+// ======== 部材用 ========
+	MREAL		m_rLngH;							// 長さ補正値
+	MREAL		m_rSinZ;							// 材軸芯ずれ量
+	MREAL		m_rHaiZ;							// 配置点ずれ量
+	MREAL		m_rZ1;								// 取り付け高さ
+	MREAL		m_rZ2;								// ＲＯＨ
+	MREAL		m_rIntv;							// 間隔
+	int			m_iNum;								// 本数
+
+// ======== パネル用 ========
+	MREAL		m_rLngH2;							// パネル幅補正値
+	MREAL		m_rOkuH;							// 手前側補正値、奥行き補正値
+	MREAL		m_rOku;								// 奥行き
+	int			m_iKoubai;							// 屋根勾配
+	MREAL		m_rNokiDe;							// 軒の出
+	MREAL		m_rKerabanoDe;						// ケラバの出
+};
+
 class DLL_EXPORT mnIoPartsAttr
 {
 	friend CMainFrame;
@@ -36,12 +87,14 @@ class DLL_EXPORT mnIoPartsAttr
 	friend mmIoPartsAttr;
 
 protected:
-	int			m_iCCategory;						// カレントカテゴリ　1:意匠, 2:構造, 3:共通
+	MPMODE		m_iInpMd;							// 創成モード		(削除、修正、移動、複写、属性表示)
+
+	int			m_iCurCategory;						// カレントカテゴリ　1:意匠, 2:構造, 3:共通
 
 	int			m_iInpKai;							// 入力階			(1階,2階,3階)
 
-	MPMODE		m_iInpMd;							// 創成モード		(削除、修正、移動、複写、属性表示)
-	MPKOSEI		m_iSInpGp;							// 設計入力構成		(住戸、住棟、物件、屋根、敷地、壁量)
+	MPPROC		m_iSInpProc;						// 意匠: 入力処理	(住戸、住棟、物件、屋根、敷地、壁量)
+	MPKOSEI		m_iSInpGp;							// 意匠入力構成		(屋根、小屋、天井、耐力壁、壁、床、土台、基礎)
 	MPKOSEI		m_iKInpGp;							// 構造入力構成		(屋根、小屋、天井、耐力壁、壁、床、土台、基礎)
 	MPBUNRUI	m_iKInpBr;							// 構造入力種類		(部材、金物、パネル、その他)
 	MPSELECT	m_iKInpSel;							// 構造入力選択		選択1、選択2、選択3						未使用
@@ -57,7 +110,7 @@ public:
 
 	////////////////////////////////////////////////////////////////////////////
 	//	属性値入力用
-public:
+protected:
 	ComboTp		m_iComboTp;							// コンボ種類
 	int			m_iCdArg1;							// 設定コード1 整数
 	MREAL		m_rCdArg2;							// 設定コード2 実数
@@ -66,7 +119,7 @@ public:
 	////////////////////////////////////////////////////////////////////////////
 	// 部品入力用、リボンバーの部品選択用項目を設定する
 	//		組、分類、部品タイプ、寸法型式
-public:
+protected:
 	MPKOSEI		m_iRBKosei;							// 構造	構成
 	MPBUNRUI	m_iRBBunrui;						// 構造	分類
 	MCHAR*		m_sRBBuhin;							// 部品
@@ -78,13 +131,12 @@ public:
 	int		m_iComboKmIdPartsNm;					// 部品名カレント選択項目番号
 
 	// 寸法型式選択用コンボボックス
-	int		m_nComboPartsMbrId;						// 表示項目数
-	int		m_iComboPartsMbrId[MX_CMB_CDMEMBER];	// 表示項目対応寸法型式ID
+	int		m_nComboMbrId;							// 表示項目数
+	int		m_iComboMbrId[MX_CMB_CDMEMBER];			// 表示項目対応寸法型式ID
 	int		m_iComboKmIdMbr;						// 寸法形式カレント選択項目番号
 
 	///////////////////////////////////////////////////////////////////////////////
 	//	リボンバーの設定と取り込み
-//SS public:
 protected:
 	int RibbonIO(
 						ComboTp	i_iComboTp,			// Combo種類	1:入力点区分コード
@@ -125,17 +177,17 @@ protected:
 	/////////////////////////////////////////////////////////////////////////////
 	//	カレントカテゴリ	
 public:
-	void	SetCCategory(
-						int i_iCCategory			// カレントカテゴリ　1:意匠, 2:構造, 3:共通
+	void	SetCurCategory(
+						int i_iCurCategory			// カレントカテゴリ　1:意匠, 2:構造, 3:共通
 				)
 	{
-		m_iCCategory = i_iCCategory;
+		m_iCurCategory = i_iCurCategory;
 
 	}
 
-	int	GetCCategory()
+	int	GetCurCategory()
 	{
-		return m_iCCategory;
+		return m_iCurCategory;
 	}
 
 	//==================================//
@@ -166,10 +218,10 @@ public:
 	//	(別プロセスからのエントリーでSendMessageを使用して本体を実行)
 public:
 	void SelectComboInpKbnByInpKbnCdEntry(
-						int			i_iCdCdInpKb	// 入力点区分
+						int			i_iCdCdInpKbn	// 入力点区分
 				)
 	{
-		RibbonIO( MSET_INPUT_KUBUN_CD, i_iCdCdInpKb);
+		RibbonIO( MSET_INPUT_KUBUN_CD, i_iCdCdInpKbn);
 	}
 
 	///////////////////////////////////////////////////////////////////////////////
@@ -177,7 +229,7 @@ public:
 	//	カレントの入力点区分を設定する	(本体)
 protected:
 	void SelectComboInpKbnByInpKbnCdXqt(
-						int			i_iCdCdInpKb	// 入力点区分
+						int			i_iCdCdInpKbn	// 入力点区分
 				);
 
 	///////////////////////////////////////////////////////////////////////////////
@@ -189,7 +241,7 @@ protected:
 	//							＝4 : 区画入力
 	//							＝5 : 自由入力
 public:
-	int GetComboInpKbCd();
+	int GetComboInpKbnCd();
 
 	//==================================//
 	//			4. 丸めコード			//
@@ -235,7 +287,7 @@ public:
 	//	カレントの配置依存コードを設定する処理を起動
 	//	(別プロセスからのエントリーでSendMessageを使用して本体を実行)
 public:
-	void SelectComboPlcCdByPlcCdEntry(
+	void SelectComboPlcIzonCdByPlaceCdEntry(
 						int			i_iCdPlc		// 配置依存コード
 				)
 	{
@@ -246,18 +298,18 @@ public:
 	//	配置依存コード選択用コンボボックスに配置依存コードを表示し
 	//	カレントの配置依存コードを設定する	(本体)
 protected:
-	void SelectComboPlcCdByPlcCdXqt(
+	void SelectComboPlcIzonCdByPlaceCdXqt(
 						int			i_iCdPlc		// 配置依存コード
 				);
 
 	///////////////////////////////////////////////////////////////////////////////
-	//	配置依存コード選択用コンボボックスより配置コードを取得する
-	//	（カレントの配置コードを取得する）
+	//	配置依存コード選択用コンボボックスより配置依存コードを取得する
+	//	（カレントの配置依存コードを取得する）
 	//							＝0 : 任意
 	//							＝1 : 壁芯付き
 	//							＝2 : 屋根構成線付き
 public:
-	int GetComboPlcCd();
+	int GetComboPlcIzonCd();
 
 	//==================================//
 	//	 6～9. 組,分類,部品名,メンバー	//
@@ -297,7 +349,7 @@ protected:
 				);
 
 	//==================================//
-	//			  6. 部位(組)			//
+	//			  6. 構成(組)			//
 	//==================================//
 	/////////////////////////////////////////////////////////////////////////////
 	// 構造組		屋根、小屋、天井、耐力壁、壁、床、基礎
@@ -392,12 +444,12 @@ public:
 	///////////////////////////////////////////////////////////////////////////////
 	//	寸法型式選択用コンポボックスの項目を設定する
 protected:
-	void InitComboPartsMbr();
+	void InitComboMbr();
 
 	///////////////////////////////////////////////////////////////////////////////
 	//	寸法型式コンボボックスを寸法形式項目番号で選択する
 protected:
-	void SelectComboPartsMbrByKmId(
+	void SelectComboMbrByKmId(
 						int			i_iKmIdMbr		// 寸法型式項目番号
 				);
 
@@ -406,7 +458,7 @@ protected:
 	//							＝-1: 該当なし
 	//							≧ 0: 寸法型式ID
 protected:
-	int SelectComboPartsMbrByMbrCd(
+	int SelectComboMbrByMbrCd(
 						MCHAR* 		i_sCdMbr		// 寸法型式
 				);
 
@@ -415,7 +467,7 @@ protected:
 	//							＝-1: 該当なし
 	//							≧ 0: 部品ID
 public:
-	int GetComboPartsMbrKmId(
+	int GetComboMbrKmId(
 						MCHAR*		i_sCdMbr		// 寸法型式
 				);
 
@@ -424,7 +476,7 @@ public:
 	//							＝-1: 該当なし
 	//							≧ 0: 寸法型式ID
 public:
-	int GetComboPartsMbrCdId(
+	int GetComboMbrCdId(
 						MCHAR* 		i_sCdMbr		// 寸法型式
 				);
 
@@ -434,7 +486,7 @@ public:
 	//							＝-1: 未選択
 	//							≧ 0: 部品ID
 public:
-	int GetCurPartsMbrCdId();
+	int GetCurMbrCdId();
 
 	//==================================//
 	//			  10. 属性				//
@@ -593,6 +645,24 @@ public:
 	/////////////////////////////////////////////////////////////////////////////
 	// 意匠入力構成		住戸、住棟、物件、屋根、敷地、壁量
 public:
+	void SetSCdProc(
+						MPPROC		i_iSInpProc		// 設計　構成
+				)
+	{
+		m_iSInpProc = i_iSInpProc;
+	}
+public:
+	MPPROC GetSCdPrc()
+	{
+		return m_iSInpProc;
+	}
+
+	//==================================//
+	//			 18. 意匠組				//
+	//==================================//
+	/////////////////////////////////////////////////////////////////////////////
+	// 構造組		屋根、小屋、天井、耐力壁、壁、床、基礎
+public:
 	void SetSCdGp(
 						MPKOSEI		i_iSInpGp		// 設計　構成
 				)
@@ -604,10 +674,6 @@ public:
 	{
 		return m_iSInpGp;
 	}
-
-	//==================================//
-	//			 18. 意匠組				//
-	//==================================//
 
 };
 

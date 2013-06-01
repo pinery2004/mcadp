@@ -53,9 +53,9 @@ protected:
 	MINT	m_iPTCdBuzaiW;						// 部材コード	書き込み用(部品仕様テーブルVerUpメインテナンス用)
 	MCHAR	m_sPTTpMbr[MHPTSZ_TPMEMBER+1];		// 寸法型式選択用種類コード
 	MCHAR	m_sPTCdMbr[MHPTSZ_CDMEMBER+1];		// 寸法型式
-	MINT	m_iPTCdInpKb;						// 入力コード
+	MINT	m_iPTCdInpKbn;						// 入力コード
 	MSTNDH	m_iPTCdHgt;							// 取り付け高さ基準コード
-	MINT	m_iPTCdPlc;							// 配置コード
+	MINT	m_iPTCdPlc;							// 配置依存コード
 	MINT	m_iPTCdIzon;						// 配置依存コード
 	MINT	m_iPTCdMarume;						// 丸めコード
 	MINT	m_iPTCdToritk;						// 取り付けコード　上下付けコード (0:下付け, 1:上付け)
@@ -80,8 +80,8 @@ public:
 									Mstrncpy_s( m_sPTTpMbr, sPTTpMbr, MHPTSZ_TPMEMBER);}
 	void	SetPTCdMbr( MCHAR* sPTCdMbr)	{											// 寸法型式
 									Mstrncpy_s( m_sPTCdMbr, sPTCdMbr, MHPTSZ_CDMEMBER);}
-	void	SetPTCdInpKb( MINT iPTCdInpKb)	{											// 入力点区分コード
-									m_iPTCdInpKb = iPTCdInpKb;}
+	void	SetPTCdInpKbn( MINT iPTCdInpKbn)	{											// 入力点区分コード
+									m_iPTCdInpKbn = iPTCdInpKbn;}
 	void	SetPTCdHgt( MSTNDH iPTCdHgt)	{											// 取り付け高さ基準コード
 									m_iPTCdHgt = iPTCdHgt;}
 	void	SetPTCdPlc( MINT iPTCdPlc)	{												// 配置依存1コード
@@ -113,12 +113,12 @@ public:
 									return m_sPTTpMbr;}									// 寸法型式選択用種類コード
 	MCHAR*	GetPTCdMbr()	{		
 									return m_sPTCdMbr;}									// 寸法型式
-	MINT	GetPTCdInpKb()	{		
-									return m_iPTCdInpKb;}								// 入力点区分コード
+	MINT	GetPTCdInpKbn()	{		
+									return m_iPTCdInpKbn;}								// 入力点区分コード
 	MINT	GetPTCdHgt()	{		
 									return m_iPTCdHgt;}									// 取り付け高さ基準コード
 	MINT	GetPTCdPlc()	{		
-									return m_iPTCdPlc;}									// 配置コード
+									return m_iPTCdPlc;}									// 配置依存コード
 	MINT	GetPTCdIzon()	{		
 									return m_iPTCdIzon;}								// 配置依存コード
 	MINT	GetPTCdMarume()	{		

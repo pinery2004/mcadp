@@ -392,7 +392,7 @@ void CMCadView1::OnSetFocus(CWnd* pOldWnd)
 	CView::OnSetFocus(pOldWnd);
 
 	// TODO: ここにメッセージ ハンドラー コードを追加します。
-	z_MCadApp.m_pMainFrame->m_pCurView = this;
+ 	z_MCadApp.m_pMainFrame->m_pCurView = this;
 	TRACE( "OnSetFocus View(this):%x, CWnd:%x\n", this, pOldWnd);	//IIP2
 }
 

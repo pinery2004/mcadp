@@ -87,7 +87,7 @@ void Test000_Geo()
 			{
 			case 0:
 			bC01 = MGeo::CheckPointOnLine2D( pn01[iC], ln01, &ist01);
-				break;
+           				break;
 			case 1:
 			bC01 = MGeo::CheckPointOnSLine2D( pn01[iC], ln02, &ist01);
 				break;

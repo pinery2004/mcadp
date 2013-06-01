@@ -26,7 +26,7 @@ enum MPSELCD {
 //===========================================================================
 //		入力点区分
 //
-enum MPCdInpKb {
+enum MPCdInpKbn {
 	MP_INPKB_NONE,								// 無指定入力
 	MP_INPKB_1PT = 1,							// １点入力
 	MP_INPKB_DIR1PT,							// 方向１点入力
@@ -108,6 +108,15 @@ enum MPMODE {
 	MP_MD_PROPERTY								// 属性表示モード
 };
 
+enum MPPROC {
+	MP_GP_JYUKO = 101,							// "住戸"
+	MP_GP_JYUTO,								// "住棟"
+	MP_GP_BUKKEN,								// "物件"
+	MP_GP_S_YANE,								// "設計屋根"
+	MP_GP_SIKITI,								// "敷地"
+	MP_GP_HEKIRYOU								// "壁量"
+};
+
 //	組
 #define		MMAX_KUMI		10					// 最大組数
 enum MPKOSEI {
@@ -120,13 +129,6 @@ enum MPKOSEI {
 	MP_GP_KOYA,									// "小屋組"
 	MP_GP_YAGIRI,								// "矢切"
 	MP_GP_YANE,									// "屋根"
-
-	MP_GP_JYUKO = 101,							// "住戸"
-	MP_GP_JYUTO,								// "住棟"
-	MP_GP_BUKKEN,								// "物件"
-	MP_GP_S_YANE,								// "設計屋根"
-	MP_GP_SIKITI,								// "敷地"
-	MP_GP_HEKIRYOU								// "壁量"
 };
 
 //	分類

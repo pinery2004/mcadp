@@ -406,7 +406,7 @@ void MmGridNum::DrawGrid(
 ////	MREAL		rDisMin_2;
 ////	MgPoint2D	Po, P0;
 ////
-////	MINT		iCdPlc;										// 配置コード
+////	MINT		iCdPlc;										// 配置依存コード
 ////	MINT		iCdMarume;									// グリッド丸め分割値
 ////	MgPoint2D	PtGrid;
 ////	MgLine2D		Lnm[2];
@@ -415,7 +415,7 @@ void MmGridNum::DrawGrid(
 ////	MINT iKai = z_mn.GetInpKai();
 ////
 ////	iCdMarume = z_mn.GetComboMarumeCd();
-////	iCdPlc = mhHaitiIn::GetComboPlcCd();
+////	iCdPlc = mhHaitiIn::GetComboPlcIzonCd();
 ////
 ////	if ( iCdPlc == MP_HAICD_KABESINZUKE ||
 ////		iCdPlc == MP_HAICD_YANEKOUSEISENZUKE) {									// 壁芯付け丸め　または　屋根構成線付け丸め

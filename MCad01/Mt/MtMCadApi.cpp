@@ -222,7 +222,7 @@ MINT MtDoOneCommand
 	for ( ic=0; ic<z_nInternalCmdList; ic++) {
 		if ( Mstrcmp( z_pInternalCmdList[ic].globalName, argcmd) == 0) {
 			// コマンドタイプ
-			z_mnIA.SetCCategory( z_pInternalCmdList[ic].cmdType);
+			z_mnIA.SetCurCategory( z_pInternalCmdList[ic].cmdType);
 			// 実行
 			fnptr = (MINT(*)(void))( z_pInternalCmdList[ic].funcPtr);
 			ret = MTRT_NORM;

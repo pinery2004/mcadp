@@ -21,9 +21,9 @@
 namespace MC
 {
 
-static MINT		z_iComboInpKbCd;
+static MINT		z_iComboInpKbnCd;
 static MINT		z_iComboMarume;
-static MINT		z_iComboPlcCd;
+static MINT		z_iComboPlcIzonCd;
 
 // CMnRibbonBarInp ダイアログ
 
@@ -34,11 +34,11 @@ static MINT		z_iComboPlcCd;
 //	リボンバーの入力点区分コード選択用コンボボックスの入力点区分コードを選択する	(本体)
 //
 void mnIoPartsAttr::SelectComboInpKbnByInpKbnCdXqt(
-						MINT		iCdInpKb		// (I  ) 入力点区分
+						MINT		iCdInpKbn		// (I  ) 入力点区分
 				)
 {
-	System::GetpMainFrame()->SelectComboInp1( iCdInpKb);
-	z_iComboInpKbCd = iCdInpKb;									//	カレントの入力点区分コード
+	System::GetpMainFrame()->SelectComboInp1( iCdInpKbn);
+	z_iComboInpKbnCd = iCdInpKbn;									//	カレントの入力点区分コード
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -49,9 +49,9 @@ void mnIoPartsAttr::SelectComboInpKbnByInpKbnCdXqt(
 //							＝4 : 区画入力
 //							＝5 : 自由入力
 //
-MINT mnIoPartsAttr::GetComboInpKbCd()
+MINT mnIoPartsAttr::GetComboInpKbnCd()
 {
-	return z_iComboInpKbCd;
+	return z_iComboInpKbnCd;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -93,26 +93,26 @@ MINT mnIoPartsAttr::GetComboMarumeCd()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//	リボンバーの配置コード選択用コンボボックスの配置コードを選択する
+//	リボンバーの配置依存コード選択用コンボボックスの配置依存コードを選択する
 //
 
-void mnIoPartsAttr::SelectComboPlcCdByPlcCdXqt(
-						MINT		iCdPlc		// (I  ) 配置コード
+void mnIoPartsAttr::SelectComboPlcIzonCdByPlaceCdXqt(
+						MINT		iCdPlc		// (I  ) 配置依存コード
 					)
 {
 	System::GetpMainFrame()->SelectComboInp3( iCdPlc);
-	z_iComboPlcCd = iCdPlc;										//	カレントの配置コード
+	z_iComboPlcIzonCd = iCdPlc;									//	カレントの配置依存コード
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//	カレントの配置コードを取得する
+//	カレントの配置依存コードを取得する
 //							＝0 : 任意
 //							＝1 : 壁芯付き
 //							＝2 : 屋根構成線付き
 
-MINT mnIoPartsAttr::GetComboPlcCd()
+MINT mnIoPartsAttr::GetComboPlcIzonCd()
 {
-	return z_iComboPlcCd;
+	return z_iComboPlcIzonCd;
 }
 
 } // namespace MC

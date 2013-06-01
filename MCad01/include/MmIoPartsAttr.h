@@ -30,11 +30,11 @@ namespace MC
 #endif
 
 class MmPartsComboKm {
-	MINT		m_iCombo1;						// 部品ID
-	MINT		m_iCombo2;						// 寸法型式
-	MINT		m_iComboInp1;					// 入力点区分
-	MINT		m_iComboInp2;					// 丸めコード
-	MINT		m_iComboInp3;					// 配置コード
+	MINT		m_iComboPartsNm;				// 部品ID
+	MINT		m_iComboMbr;					// 寸法型式
+	MINT		m_iComboInpKbn;					// 入力点区分
+	MINT		m_iComboMarume;					// 丸めコード
+	MINT		m_iComboPlcIzon;				// 配置依存コード
 	MINT		m_iComboPanelNo;				// パネル番号
 };
 
@@ -50,8 +50,8 @@ protected:
 	int m_iComboKmIdPartsNm;					// カレント選択項目番号
 
 	// 寸法型式選択用コンボボックス
-	int m_nComboPartsMbrId;						// 表示項目数
-	int m_iComboPartsMbrId[MX_CMB_CDMEMBER];	// 表示項目対応寸法型式ID
+	int m_nComboMbrId;							// 表示項目数
+	int m_iComboMbrId[MX_CMB_CDMEMBER];			// 表示項目対応寸法型式ID
 	int m_iComboKmIdMbr;						// カレント選択項目番号
 
 	int	m_iIoPartsAttrMd;						// 属性値入力モード
@@ -128,13 +128,13 @@ public:
 	//	寸法型式選択用コンポボックスの項目を設定する
 //protected:
 public:
-	void InitComboPartsMbr();
+	void InitComboMbr();
 
 	///////////////////////////////////////////////////////////////////////////////
 	//	寸法型式コンボボックスを寸法形式項目番号で選択する
 //protected:
 public:
-	void SelectComboPartsMbrByKmId(
+	void SelectComboMbrByKmId(
 						int			i_iKmIdMbr		// 寸法型式項目番号
 				);
 
@@ -144,7 +144,7 @@ public:
 	//							≧ 0: 寸法型式ID
 //protected:
 public:
-	int SelectComboPartsMbrByMbrCd(
+	int SelectComboMbrByMbrCd(
 						MCHAR* 		i_sCdMbr		// 寸法型式
 				);
 

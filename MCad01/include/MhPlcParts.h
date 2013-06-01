@@ -47,7 +47,7 @@ public:
 	MUINT				m_iTenkai;				// 住棟展開制御 (NULL: 無視)
 	MUBYTE				m_ibKai;				// 階( 1, 2, 3)
 	MUBYTE				m_ibCdHgt;				// 取り付け高さコード
-	MUBYTE				m_ibCdInpKbCd;			// 入力点区分コード
+	MUBYTE				m_ibCdInpKbnCd;			// 入力点区分コード
 	MUBYTE				m_ibDisplayFlg;			// 表示フラグ(図形,注記1,注記2)
 	MSHORT				m_isPanelNo;			// パネル番号
 	MSHORT				m_isKaikoNo;			// 開口番号
@@ -116,8 +116,8 @@ public:
 								m_ibKai = iKai;}				
 	void	SetPICdHgt( MINT iCdCdHgt)	{						// 取り付け高さコード
 								m_ibCdHgt = iCdCdHgt;}			
-	void	SetPICdInpKbCd( MINT iCdInpKbCd)	{				// 入力店区分コード
-								m_ibCdInpKbCd = iCdInpKbCd;}		
+	void	SetPICdInpKbnCd( MINT iCdInpKbnCd)	{				// 入力店区分コード
+								m_ibCdInpKbnCd = iCdInpKbnCd;}		
 	void	SetPIDisplayFlg( MINT iDisplayFlg)	{				// 表示フラグ(図形,注記1,注記2)
 								m_ibDisplayFlg = iDisplayFlg;}	
 	void	SetPIPanelNo( MINT iPanelNo)	{					// パネル番号
@@ -178,8 +178,8 @@ public:
 								return m_ibKai;}				// 階
 	MINT		GetPICdHgt()	{
 								return m_ibCdHgt;}				// 取り付け高さコード
-	MINT		GetPICdInpKbCd()	{
-								return m_ibCdInpKbCd;}			// 入力点区分コード
+	MINT		GetPICdInpKbnCd()	{
+								return m_ibCdInpKbnCd;}			// 入力点区分コード
 	MINT		GetPIDisplayFlg()	{
 								return m_ibDisplayFlg;}			// 表示フラグ(図形,注記1,注記2)
 	MINT		GetPIPanelNo()	{
@@ -253,12 +253,12 @@ public:
 								return m_pPartsSpec->m_sPTTpMbr;}		// 寸法型式選択用種類コード
 	MCHAR*	GetPTCdMbr()	{
 								return m_pPartsSpec->m_sPTCdMbr;}		// 代表寸法型式
-	MINT	GetPTCdInpKb()	{	
-								return m_pPartsSpec->m_iPTCdInpKb;}		// 入力点区分コード
+	MINT	GetPTCdInpKbn()	{	
+								return m_pPartsSpec->m_iPTCdInpKbn;}		// 入力点区分コード
 	MSTNDH	GetPTCdHgt()	{	
 								return m_pPartsSpec->m_iPTCdHgt;}		// 取り付け高さ基準コード
 	MINT	GetPTCdPlc()	{	
-								return m_pPartsSpec->m_iPTCdPlc;}		// 配置コード
+								return m_pPartsSpec->m_iPTCdPlc;}		// 配置依存コード
 	MINT	GetPTCdIzon()	{	
 								return m_pPartsSpec->m_iPTCdIzon;}		// 依存コード
 	MINT	GetPTCdMarume()	{	

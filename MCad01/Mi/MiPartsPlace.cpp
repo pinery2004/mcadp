@@ -496,7 +496,7 @@ void mhHaitiIn::PartsShape(
 /////////////////////////////////////////////////////////////////////////////
 //	部材の配置点と長さ補正値を修正
 void mhHaitiIn::MhModBzPH(
-						MINT		iCdInpKbCd,		// (I  ) 入力点区分コード
+						MINT		iCdInpKbnCd,		// (I  ) 入力点区分コード
 						MINT		iMov,			// (I  ) 修正側　(0:始点、1:終点)
 				const	MgPoint3D	&PtInt,			// (I  ) 配置点
 						MREAL		rLH,			// (I  ) 長さ補整値
@@ -507,11 +507,11 @@ void mhHaitiIn::MhModBzPH(
 
 	if ( ( pPlcEnR->GetPIPlcIti( iMov) != PtInt) ||
 		( !MGeo::CheckEqual(pPlcEnR->GetPILenHosei( iMov), rLH)) ||
-		 pPlcEnR->GetPICdInpKbCd() == iCdInpKbCd) {
+		 pPlcEnR->GetPICdInpKbnCd() == iCdInpKbnCd) {
 
 		HaitiDb::MdPartsModify( pPlcEnR, &pPlcEnM);
-		iCdInpKbCd = pPlcEnM->GetPICdInpKbCd();
-		if ( iCdInpKbCd == MP_INPKB_1PT) {
+		iCdInpKbnCd = pPlcEnM->GetPICdInpKbnCd();
+		if ( iCdInpKbnCd == MP_INPKB_1PT) {
 			if ( iMov == 0) {
 				pPlcEnM->SetPIPlcIti( 0, pPlcEnM->GetPIPlcIti(1));
 			} else {

@@ -44,11 +44,11 @@ public:
 	CMDIChildWnd* OpenView(CDocTemplate *pTemplate);
 
 public:
-	MINT		m_iCombo1;										// 部品ID
-	MINT		m_iCombo2;										// 寸法型式
-	MINT		m_iComboInp1;									// 入力点区分
-	MINT		m_iComboInp2;									// 丸めコード
-	MINT		m_iComboInp3;									// 配置コード
+	MINT		m_iComboPartsNm;								// 部品名
+	MINT		m_iComboMbr;									// 寸法型式
+	MINT		m_iComboInpKbn;									// 入力点区分
+	MINT		m_iComboMarume;									// 丸めコード
+	MINT		m_iComboPlcIzon;								// 配置依存コード
 	MINT		m_iComboPanelNo;								// パネル番号
 
 	MINT		m_iSentaku;
@@ -72,11 +72,11 @@ protected:
 public:
 	class CWnd*				m_pCurView;
 	class CMDIChildWnd*		m_pCurFrame;
-	afx_msg void OnCbnSelchangeCombo1();						// 部材名
-	afx_msg void OnCbnSelchangeCombo2();						// 寸法型式
-	afx_msg void OnCbnSelchangeCombo11();						// 入力点区分
-	afx_msg void OnCbnSelchangeCombo12();						// 丸めコード
-	afx_msg void OnCbnSelchangeCombo13();						// 配置コード
+	afx_msg void OnCbnSelchangeComboPartsNm();					// 部品名
+	afx_msg void OnCbnSelchangeComboMbr();						// 寸法型式
+	afx_msg void OnCbnSelchangeComboInpKbn();					// 入力点区分
+	afx_msg void OnCbnSelchangeComboMarume();					// 丸めコード
+	afx_msg void OnCbnSelchangeComboPlcIzon();					// 配置依存コード
 	afx_msg void OnCbnSelchangeComboPanelNo();
 	afx_msg void OnDummy(UINT id);
 
@@ -84,18 +84,18 @@ public:
 	afx_msg LRESULT OnRibbonCategoryChanged( UINT wParam, LONG lParam);
 	afx_msg LRESULT OnWindow( UINT wParam, LONG lParam);
 
-	void SelectCombo1( MINT iCombo1);
-	void SelectCombo2( MINT iCombo2);
-	void SelectComboInp1( MINT iCombo11);
-	void SelectComboInp2( MINT iCombo12);
-	void SelectComboInp3( MINT iCombo13);
+	void SelectComboPartsNm( MINT iComboPartsNm);
+	void SelectComboMbr( MINT iComboMbr);
+	void SelectComboInp1( MINT iComboInpKbn);
+	void SelectComboInp2( MINT iComboMarume);
+	void SelectComboInp3( MINT iComboPlcIzon);
 //	void SeelectComboPanelNo( MINT iComboPanelNo);
 
 	friend CMFCRibbonComboBox* mmpComboBuzai();
-	friend CMFCRibbonComboBox* mmpComboPartsMbr();
+	friend CMFCRibbonComboBox* mmpComboMbr();
 	friend CMFCRibbonComboBox* mmpComboInpTp();
 	friend CMFCRibbonComboBox* mmpComboMarume();
-	friend CMFCRibbonComboBox* mmpComboPlcCd();
+	friend CMFCRibbonComboBox* mmpComboPlcIzonCd();
 	friend CMFCRibbonComboBox* mmpComboPanelNo();
 
 	BOOL CreateRibbonBar ();

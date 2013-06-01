@@ -32,7 +32,7 @@ void mmIoPartsAttr::InitComboParts()
 	InitComboPartsNm();
 
 	//	寸法型式選択用コンポボックスの項目を設定する
-	InitComboPartsMbr();
+	InitComboMbr();
 
 //S	//	パネル番号選択用コンポボックスの項目を設定する
 //	InitComboPanelNo();
@@ -105,7 +105,7 @@ EXIT:
 //	部品名項目番号で部品名コンポボックスを選択する
 //	カレント部品名項目番号を設定する
 //	部品配置入力データへ部品仕様Idと部品仕様を設定する
-//	部品仕様の配置コードで配置コードコンポボックスをを選択する
+//	部品仕様の配置依存コードで配置依存コードコンポボックスをを選択する
 
 void mmIoPartsAttr::SelectComboPartsNmByKmId(
 						int		i_iKmIdPartsNm	// 部品名項目番号
@@ -131,7 +131,7 @@ EXIT:;
 //	部品名で部品名コンポボックスを選択する
 //	カレントの部品名項目番号を設定する
 //	部品配置入力データへ部品仕様Idと部品仕様を設定する
-//	部品仕様の配置コードで配置コードコンポボックスをを選択する
+//	部品仕様の配置依存コードで配置依存コードコンポボックスをを選択する
 //
 //	返値
 //							≧ 0: 部品ID
@@ -190,7 +190,7 @@ int mmIoPartsAttr::GetComboPartsNmKmIdFromPartsNm( MCHAR* i_sNmParts1)
 //
 //	カレントの部材の寸法型式使用部位コードを持つ寸法型式のみ設定
 
-void mmIoPartsAttr::InitComboPartsMbr()
+void mmIoPartsAttr::InitComboMbr()
 {
 	MhMbr	*pMbr;
 	int		ic1;
@@ -221,7 +221,7 @@ void mmIoPartsAttr::InitComboPartsMbr()
 			if ( cMTp2 == 0) continue;							// 一致しない場合次の寸法型式に移る
 
 			ASSERT( ip < MX_CMB_CDMEMBER - 1);					// 寸法型式選択コンボボックス項目　オーバフロー　<ERROR>
-			m_iComboPartsMbrId[ip] = ic1;
+			m_iComboMbrId[ip] = ic1;
 			pCmbBox->InsertString( -1, pMbr->GetMbrCode());
 			ip++;
 		}
@@ -230,7 +230,7 @@ void mmIoPartsAttr::InitComboPartsMbr()
 		pCmbBox->InsertString( -1, Mstr( "none"));
 	}
 EXIT:
-	m_nComboPartsMbrId = ip;
+	m_nComboMbrId = ip;
 	m_iComboKmIdMbr = -1;
 }
 
@@ -239,8 +239,8 @@ EXIT:
 //	カレントの寸法型式項目番号を設定する
 //	部品配置入力データへ部品仕様Idと部品仕様を設定する
 
-void mmIoPartsAttr::SelectComboPartsMbrByKmId(
-						int		i_iKmIdMbr			// 寸法型式項目番号
+void mmIoPartsAttr::SelectComboMbrByKmId(
+						int		i_iKmIdMbr		// 寸法型式項目番号
 				)
 {
 	if ( !GetDispFlg())	goto EXIT;
@@ -252,7 +252,7 @@ void mmIoPartsAttr::SelectComboPartsMbrByKmId(
 	// 部品配置入力データへ設定
 	int iMbrId;
 	MhMbr* pMbr;
-	iMbrId = m_iComboPartsMbrId[i_iKmIdMbr];					// 寸法形式ID
+	iMbrId = m_iComboMbrId[i_iKmIdMbr];							// 寸法形式ID
 	mtPlcInp::SetIdMbr( iMbrId); 
 	pMbr = BuzaiCode::MhGetpMbr( iMbrId);						// 寸法形式仕様
 	mtPlcInp::SetpMbr( pMbr);
@@ -265,19 +265,19 @@ EXIT:;
 //							＝-1: 該当なし
 //							≧ 0: 寸法型式ID
 
-int mmIoPartsAttr::SelectComboPartsMbrByMbrCd( MCHAR* sCdMbr)
+int mmIoPartsAttr::SelectComboMbrByMbrCd( MCHAR* sCdMbr)
 {
 	int			iMbrId = -1;
 	int			iKmIdMbr;
 
-	iKmIdMbr = z_mnIA.GetComboPartsMbrKmId( sCdMbr);
+	iKmIdMbr = z_mnIA.GetComboMbrKmId( sCdMbr);
 	if ( iKmIdMbr < 0) {
 		Msg::ErrorMsg( sCdMbr, MC_ERR_NOTSET_MEMBER_TABLE);		// "が寸法型式テーブルに未設定です．"
 		MQUIT;
 	}
-	z_mmIA.SelectComboPartsMbrByKmId( iKmIdMbr);
+	z_mmIA.SelectComboMbrByKmId( iKmIdMbr);
 
-	iMbrId = m_iComboPartsMbrId[iKmIdMbr];
+	iMbrId = m_iComboMbrId[iKmIdMbr];
 exit:
 	return iMbrId;
 }

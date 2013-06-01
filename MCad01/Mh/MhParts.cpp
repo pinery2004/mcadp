@@ -141,7 +141,7 @@ static	const	BZMTBK	z_Br[] =
 
 #define	NBUNRUI		(sizeof(z_Br)/sizeof(BZMTBK))
 // 入力点区分コード
-static	const	BZMTBK	z_CdInpKb[] =
+static	const	BZMTBK	z_CdInpKbn[] =
 {
 //	Mstr( "無指定"),			MP_INPKB_NONE,
 	Mstr( "１点"),				MP_INPKB_1PT,
@@ -150,7 +150,7 @@ static	const	BZMTBK	z_CdInpKb[] =
 	Mstr( "区画"),				MP_INPKB_AREA,
 	Mstr( "自由"),				MP_INPKB_FREE
 };
-#define	NCdInpKb	(sizeof(z_CdInpKb)/sizeof(BZMTBK))
+#define	NCdInpKbn	(sizeof(z_CdInpKbn)/sizeof(BZMTBK))
 // 高さ基準コード
 static	const	BZMTBK	z_CdHgt[] =
 {
@@ -257,7 +257,7 @@ void MhLoadPartsMst()
 	MCHAR		cLineNo[3];
 	MCHAR		cGp[16];
 	MCHAR		cBr[16];
-	MCHAR		cCdInpKb[8];
+	MCHAR		cCdInpKbn[8];
 	MCHAR		cCdHgt[8];
 	MCHAR		cCdPlc[10];
 	MCHAR		cCdIzon[10];
@@ -327,8 +327,8 @@ void MhLoadPartsMst()
 		pMPT->SetPTCdBuzaiW( iPTCdBuzaiW);
 		ist = csvTbl.GetStr( pMPT->GetPTTpMbr(), MHPTSZ_TPMEMBER);		// ・寸法型式選択用種類コード設定
 		ist = csvTbl.GetStr( pMPT->GetPTCdMbr(), MHPTSZ_CDMEMBER);		// ・寸法型式コード設定
-		ist = csvTbl.GetStr( cCdInpKb, Msizeof( cCdInpKb));				// ・入力点区分コード
-		pMPT->SetPTCdInpKb( GetCd( cCdInpKb, NCdInpKb, z_CdInpKb));	
+		ist = csvTbl.GetStr( cCdInpKbn, Msizeof( cCdInpKbn));				// ・入力点区分コード
+		pMPT->SetPTCdInpKbn( GetCd( cCdInpKbn, NCdInpKbn, z_CdInpKbn));	
 		ist = csvTbl.GetStr( cCdHgt, Msizeof( cCdHgt));					// ・取り付け高さ基準コード
 		pMPT->SetPTCdHgt( (MSTNDH)GetCd( cCdHgt, NHEIGHTCD, z_CdHgt));								
 		ist = csvTbl.GetStr( cCdPlc, Msizeof( cCdPlc));					// ・配置依存コード1
