@@ -239,9 +239,6 @@ void Test000_Geo()
 	m03 = m01 * m1;
 	p02 = p01 * m03;
 	m03.Print( Mstr("鏡像マトリックス m03 = m01 * m1"));
-//S	m02 = MGeo::Mat2EMirror( m01, sln1);
-//	p02 = p01 * m02;
-//	m02.Print( Mstr("鏡像マトリックス 関数 m02"));
 	p02.Print( Mstr("鏡像後の点"));
 
 	MgPlane3D pln1( 1, 2, 3, 1);
@@ -251,14 +248,6 @@ void Test000_Geo()
 	MgMat3E M1;
 	M1.SetUnit();
 	M1.Print( Mstr("初期マトリックス M1"));
-
-//S	MgMat3E M2;
-//	M2 = MGeo::Mat3EMirror( M1, pln1);
-//	M2.Print( Mstr("鏡像マトリックス M2"));
-//	MgPoint3D P2;
-//	P2 = P1 * M2;
-//	P1.Print( Mstr("鏡像前の点"));
-//	P2.Print( Mstr("鏡像後の点"));
 	
 	MgMat3E M3;
 	M3 = MGeo::Mat3EMirror( pln1);
@@ -288,9 +277,6 @@ void Test000_Geo()
 	m03 = m01 * m1;
 	p02 = p01 * m03;
 	m03.Print( Mstr("鏡像マトリックス m03 = m01 * m1"));
-//S	m02 = MGeo::Mat2DMirror( m01, sln1);
-//	p02 = p01 * m02;
-//	m02.Print( Mstr("鏡像マトリックス 関数 m02"));
 	p02.Print( Mstr("鏡像後の点"));
 
 	MgPlane3D pln1( 1, 2, 3, 1);
@@ -300,14 +286,6 @@ void Test000_Geo()
 	MgMat3D M1;
 	M1.SetUnit();
 	M1.Print( Mstr("初期マトリックス M1"));
-
-//S	MgMat3D M2;
-//	M2 = MGeo::Mat3DMirror( M1, pln1);
-//	M2.Print( Mstr("鏡像マトリックス M2"));
-//	MgPoint3D P2;
-//	P2 = P1 * M2;
-//	P1.Print( Mstr("鏡像前の点"));
-//	P2.Print( Mstr("鏡像後の点"));
 	
 	MgMat3D M3;
 	M3 = MGeo::Mat3DMirror( pln1);

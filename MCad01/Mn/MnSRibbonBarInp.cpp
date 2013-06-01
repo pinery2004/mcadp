@@ -21,14 +21,16 @@
 namespace MC
 {
 
-//S static MINT		z_iComboInpKbnCd;
-//static MINT		z_iComboMarume;
-//static MINT		z_iComboPlcIzonCd;
-
-// CMnRibbonBarInp ダイアログ
-
-
-// CMnRibbonBarInp メッセージ ハンドラ
+//==========================================================================================
+//  Copyright (C) 2006-2008. K.Matsu. All rights reserved.
+//
+//  MODULE: CMnRibbonBarInp.cpp リボンバー
+//
+//		
+//
+//
+//  K.Matsu           13/06/01    Created.
+//==========================================================================================
 
 ///////////////////////////////////////////////////////////////////////////////
 //	リボンバーの入力点区分コード選択用コンボボックスの入力点区分コードを選択する	(本体)
@@ -38,7 +40,6 @@ void mnIoPartsAttr::SelectComboInpKbnByInpKbnCdXqt(
 				)
 {
 	System::GetpMainFrame()->SelectComboInp1( iCdInpKbn);
-//S1	z_iComboInpKbnCd = iCdInpKbn;									//	カレントの入力点区分コード
 	m_IA.m_IK[1].m_iComboInpKbn = iCdInpKbn;							//	カレントの入力点区分コード
 }
 
@@ -52,7 +53,6 @@ void mnIoPartsAttr::SelectComboInpKbnByInpKbnCdXqt(
 //
 MINT mnIoPartsAttr::GetComboInpKbnCd()
 {
-//S1	return z_iComboInpKbnCd;
 	return m_IA.m_IK[1].m_iComboInpKbn;
 }
 
@@ -76,7 +76,6 @@ void mnIoPartsAttr::SelectComboMarumeByMarumeCdXqt(
 		ASSERT( 0);												// 丸めコードエラー　<ERROR>
 	
 	System::GetpMainFrame()->SelectComboInp2( iComboMarume);
-//S1	z_iComboMarume = iCdMarume;									// カレントの丸めコード
 	m_IA.m_IK[1].m_iComboMarume = iComboMarume;					// カレントの丸めコード
 }
 
@@ -119,7 +118,6 @@ void mnIoPartsAttr::SelectComboPlcIzonCdByPlaceCdXqt(
 					)
 {
 	System::GetpMainFrame()->SelectComboInp3( i_iComboInpKbn);
-//S1	z_iComboPlcIzonCd = iCdPlc;									//	カレントの配置依存コード
 	m_IA.m_IK[1].m_iComboPlcIzon = i_iComboInpKbn;					//	カレントの配置依存コード
 }
 
@@ -131,7 +129,6 @@ void mnIoPartsAttr::SelectComboPlcIzonCdByPlaceCdXqt(
 
 MINT mnIoPartsAttr::GetComboPlcIzonCd()
 {
-//S1	return z_iComboPlcIzonCd;
 	return m_IA.m_IK[1].m_iComboPlcIzon;
 }
 

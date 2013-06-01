@@ -37,12 +37,12 @@ public:
 
 	// 部材名コンボボックスの取得
 	CComboBox* GetCmbBzaiNm() {
-		return &m_CmbKbzi1;
+		return &m_CmbKPartsNm;
 	}
 
 	// 部材メンバーコンボボックスの取得
 	CComboBox* GetCmbBzaiMbr() {
-		return &m_CmbKbzi2;
+		return &m_CmbKPartsMbr;
 	}
 
 	// 部材属性コンボボックスの取得
@@ -60,16 +60,16 @@ protected:
 	CWnd *m_pParent;
 	bool m_bDispFlg;								// 表示フラグ	TRUE:表示中、FALSE:無表示
 
-	CStatic m_sBzi1;
-	CStatic m_sBzi2;
+	CStatic m_sPartsNm;
+	CStatic m_sPartsMbr;
 	CStatic m_sAttr1;
 	CStatic m_sAttr2;
 	CStatic m_sAttr3;
 	CStatic m_sAttr4;
 	CStatic m_sAttr5;
 	CStatic m_sAttr6;
-	CComboBox m_CmbKbzi1;
-	CComboBox m_CmbKbzi2;
+	CComboBox m_CmbKPartsNm;
+	CComboBox m_CmbKPartsMbr;
 	CComboBox m_CmbKAttr1;
 	CComboBox m_CmbKAttr2;
 	CComboBox m_CmbKAttr3;
@@ -86,8 +86,8 @@ public:
 	afx_msg void OnBnClickedCancel();
 	virtual BOOL OnInitDialog();
 
-	afx_msg void OnCbnSelchangeCmbkBzi1();
-	afx_msg void OnCbnSelchangeCmbkBzi2();
+	afx_msg void OnCbnSelchangeCmbkPartsNm();
+	afx_msg void OnCbnSelchangeCmbkPartsMbr();
 	afx_msg void OnCbnSelchangeCmbkAttr1();
 	afx_msg void OnCbnSelchangeCmbkAttr2();
 	afx_msg void OnCbnSelchangeCmbkAttr3();

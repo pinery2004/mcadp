@@ -83,16 +83,16 @@ BOOL CMmDialogKAttr::Create(CWnd * pWnd)
 void CMmDialogKAttr::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_TXTK_BZI1, m_sBzi1);
-	DDX_Control(pDX, IDC_TXTK_BZI2, m_sBzi2);
+	DDX_Control(pDX, IDC_TXTK_PARTSNM, m_sPartsNm);
+	DDX_Control(pDX, IDC_TXTK_PARTSMBR, m_sPartsMbr);
 	DDX_Control(pDX, IDC_TXTK_ATTR1, m_sAttr1);
 	DDX_Control(pDX, IDC_TXTK_ATTR2, m_sAttr2);
 	DDX_Control(pDX, IDC_TXT3_ATTR3, m_sAttr3);
 	DDX_Control(pDX, IDC_TXTK_ATTR4, m_sAttr4);
 	DDX_Control(pDX, IDC_TXTK_ATTR5, m_sAttr5);
 	DDX_Control(pDX, IDC_TXTK_ATTR6, m_sAttr6);
-	DDX_Control(pDX, IDC_CMBK_BZI1, m_CmbKbzi1);
-	DDX_Control(pDX, IDC_CMBK_BZI2, m_CmbKbzi2);
+	DDX_Control(pDX, IDC_CMBK_PARTSNM, m_CmbKPartsNm);
+	DDX_Control(pDX, IDC_CMBK_PARTSMBR, m_CmbKPartsMbr);
 	DDX_Control(pDX, IDC_CMBK_ATTR1, m_CmbKAttr1);
 	DDX_Control(pDX, IDC_CMBK_ATTR2, m_CmbKAttr2);
 	DDX_Control(pDX, IDC_CMBK_ATTR3, m_CmbKAttr3);
@@ -105,8 +105,8 @@ BEGIN_MESSAGE_MAP(CMmDialogKAttr, CDialog)
 	ON_WM_CLOSE()
 	ON_BN_CLICKED(IDOK, &CMmDialogKAttr::OnBnClickedOk)
 	ON_BN_CLICKED(IDCANCEL, &CMmDialogKAttr::OnBnClickedCancel)
-	ON_CBN_SELCHANGE(IDC_CMBK_BZI1, &CMmDialogKAttr::OnCbnSelchangeCmbkBzi1)
-	ON_CBN_SELCHANGE(IDC_CMBK_BZI2, &CMmDialogKAttr::OnCbnSelchangeCmbkBzi2)
+	ON_CBN_SELCHANGE(IDC_CMBK_PARTSNM, &CMmDialogKAttr::OnCbnSelchangeCmbkPartsNm)
+	ON_CBN_SELCHANGE(IDC_CMBK_PARTSMBR, &CMmDialogKAttr::OnCbnSelchangeCmbkPartsMbr)
 	ON_CBN_SELCHANGE(IDC_CMBK_ATTR1, &CMmDialogKAttr::OnCbnSelchangeCmbkAttr1)
 	ON_CBN_SELCHANGE(IDC_CMBK_ATTR2, &CMmDialogKAttr::OnCbnSelchangeCmbkAttr2)
 	ON_CBN_SELCHANGE(IDC_CMBK_ATTR3, &CMmDialogKAttr::OnCbnSelchangeCmbkAttr3)
@@ -183,8 +183,8 @@ BOOL CMmDialogKAttr::OnInitDialog()
 	SetWindowPos(&wndTop, iPos[0], iPos[1], rect.right - rect.left, rect.bottom - rect.top,
 		SWP_SHOWWINDOW);
 
-	m_CmbKbzi1.InsertString( -1, _T("none"));
-	m_CmbKbzi2.InsertString( -1, _T("none"));
+	m_CmbKPartsNm.InsertString( -1, _T("none"));
+	m_CmbKPartsMbr.InsertString( -1, _T("none"));
 	m_CmbKAttr1.InsertString( -1, _T("none"));
 	m_CmbKAttr2.InsertString( -1, _T("none"));
 	m_CmbKAttr3.InsertString( -1, _T("none"));
@@ -197,21 +197,21 @@ BOOL CMmDialogKAttr::OnInitDialog()
 }
 
 // 部材名選択処理
-void CMmDialogKAttr::OnCbnSelchangeCmbkBzi1()
+void CMmDialogKAttr::OnCbnSelchangeCmbkPartsNm()
 {
 	MC::z_mnIA.SetCurCategory( MP_SENTAKU_KOUZOU);
 
 	CComboBox* pCmbBox;
-	pCmbBox = (CComboBox*)GetDlgItem( IDC_CMBK_BZI1);
-	MC::System::GetpMainFrame()->m_iComboPartsNm = pCmbBox->GetCurSel();			// 選択された部品名
+	pCmbBox = (CComboBox*)GetDlgItem( IDC_CMBK_PARTSNM);
+	MC::InpAttrIK* pAttrIK = MC::z_mnIA.GetpInpAttr();								// 入力属性　意匠と構造の共通項目
+	pAttrIK->m_iComboPartsNm = pCmbBox->GetCurSel();								// 選択された部品名
 
-	MC::z_mnIA.SelectComboPartsNmByKmId( MC::System::GetpMainFrame()->m_iComboPartsNm);
+	MC::z_mnIA.SelectComboPartsNmByKmId( pAttrIK->m_iComboPartsNm);
 
 	MC::z_mnIA.InitComboMbr();
 
 	MC::z_mmIA.MmDialogKAttrDisp( this);											// 部材属性ダイアログ表示
 	MC::z_mmIA.InitComboParts();													// 全項目設定
-//S	MC::z_mmIA.SelectComboPartsNmByKmId( MC::System::GetpMainFrame()->m_iComboPartsNm);
 
 	MC::mhPartsSpec* pPartsSpec	= MC::BuzaiCode::MhGetpPartsSpec( MC::z_mnIA.GetCurPartsNmId());
 	if ( pPartsSpec->GetPTCdBr() >= MP_BR_SENBUN || MC::z_mnIA.GetMode() == MP_MD_DELETE)
@@ -221,20 +221,21 @@ void CMmDialogKAttr::OnCbnSelchangeCmbkBzi1()
 }
 
 // 部材メンバー選択処理
-void CMmDialogKAttr::OnCbnSelchangeCmbkBzi2()
+void CMmDialogKAttr::OnCbnSelchangeCmbkPartsMbr()
 {
 	MC::z_mnIA.SetCurCategory( MP_SENTAKU_KOUZOU);
 
 	CComboBox* pCmbBox;
-	pCmbBox = (CComboBox*)GetDlgItem( IDC_CMBK_BZI2);
-	MC::System::GetpMainFrame()->m_iComboMbr = pCmbBox->GetCurSel();				// 選択された寸法型式ID
+	pCmbBox = (CComboBox*)GetDlgItem( IDC_CMBK_PARTSMBR);
+	MC::InpAttrIK* pAttrIK = MC::z_mnIA.GetpInpAttr();								// 入力属性　意匠と構造の共通項目
+	pAttrIK->m_iComboMbr = pCmbBox->GetCurSel();									// 選択された寸法型式ID
 
 	MC::z_mmIA.MmDialogKAttrDisp( this);											// 部材属性ダイアログ表示
 	MC::z_mmIA.InitComboParts();													// 全項目設定
-	MC::z_mmIA.SelectComboPartsNmByKmId( MC::System::GetpMainFrame()->m_iComboPartsNm);		// 部品名を設定
-	MC::z_mmIA.SelectComboMbrByKmId( MC::System::GetpMainFrame()->m_iComboMbr);		// 寸法形式を設定
+	MC::z_mmIA.SelectComboPartsNmByKmId( pAttrIK->m_iComboPartsNm);					// 部品名を設定
+	MC::z_mmIA.SelectComboMbrByKmId( pAttrIK->m_iComboMbr);							// 寸法形式を設定
 
-	MC::z_mnIA.SelectComboMbrByKmId( MC::System::GetpMainFrame()->m_iComboMbr);
+	MC::z_mnIA.SelectComboMbrByKmId( pAttrIK->m_iComboMbr);
 	MC::CmdCtrl::XqtMenuCmd( IDC_PARTSCREATE);										//	部品入力
 }
 

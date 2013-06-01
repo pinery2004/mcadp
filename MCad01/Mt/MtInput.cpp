@@ -254,7 +254,6 @@ MINT mhInput::GetLen2Pt(
 			if ( irt == MTRT_SYSTEMSTOP || irt == MTRT_CAN)
 				break;
 			if ( irt == MTRT_RBTNDWN) {							// マウス右ボタン
-//				MmWndKReDraw();
 				Window::DragModeEnd();							//	ドラッギングモード終了（ラバーバンド図形表示モード）
 					iSeq = 0;									//	長さ２点入力 または 方向１点入力の場合は１点目より再入力	
 				continue;
@@ -263,7 +262,6 @@ MINT mhInput::GetLen2Pt(
 				continue;										//	２点目を再入力
 			mhInput::Marume( io_ptln_org[1], &io_ptln[1]);
 			ist1 = z_mmIA.GetComboAttrI( MC_CMB_HONS, &iNum);
-//S			iNum = z_mnIA.GetHonsu();							// 
 			iSeq = 2;
 			if ( ( i_iMode != 1) && ( iNum == MC_INT_AREA)) {	// (長さ２点入力 または 方向１点入力)　かつ　iNum == 9998: 複数部材
 //S				iSeq = 2;

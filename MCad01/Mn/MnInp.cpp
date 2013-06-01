@@ -36,7 +36,6 @@ mnIoPartsAttr	z_mnIA;
 
 mnIoPartsAttr::mnIoPartsAttr()
 {
-//S1	m_iInpKai = 1;
 	m_IA.m_iInpKai = 1;
 	m_iInpMd = MP_MD_CREATE;
 }

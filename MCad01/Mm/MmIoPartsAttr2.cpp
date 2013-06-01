@@ -422,9 +422,6 @@ void mmIoPartsAttr::GetComboAttrAXqt( void)
 	MREAL	rComboAttr4;
 	MREAL	rComboAttr5;
 	MREAL	rComboAttr6;
-//S	int		iMode;
-//
-//	iMode = z_mmIA.GetAtMd();						// ‘®«’l“ü—Íƒ‚[ƒh
 
 	switch ( m_iIoPartsAttrMd)
 	{

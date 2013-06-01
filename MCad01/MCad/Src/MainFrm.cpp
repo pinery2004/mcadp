@@ -46,8 +46,8 @@ BEGIN_MESSAGE_MAP(CMainFrame, CMDIFrameWndEx)
 	ON_COMMAND(ID_WINDOW_MANAGER, &CMainFrame::OnWindowManager)
 	ON_COMMAND_RANGE(ID_VIEW_APPLOOK_WIN_2000, ID_VIEW_APPLOOK_WINDOWS_7, &CMainFrame::OnApplicationLook)
 	ON_UPDATE_COMMAND_UI_RANGE(ID_VIEW_APPLOOK_WIN_2000, ID_VIEW_APPLOOK_WINDOWS_7, &CMainFrame::OnUpdateApplicationLook)
-	ON_COMMAND(IDC_CMBK_BZI1, &CMainFrame::OnCbnSelchangeComboPartsNm)
-	ON_COMMAND(IDC_CMBK_BZI2, &CMainFrame::OnCbnSelchangeComboMbr)
+	ON_COMMAND(IDC_CMBK_PARTSNM, &CMainFrame::OnCbnSelchangeComboPartsNm)
+	ON_COMMAND(IDC_CMBK_PARTSMBR, &CMainFrame::OnCbnSelchangeComboMbr)
 	ON_COMMAND(IDC_CMB_Inp1, &CMainFrame::OnCbnSelchangeComboInpKbn)
 	ON_COMMAND(IDC_CMB_Inp2, &CMainFrame::OnCbnSelchangeComboMarume)
 	ON_COMMAND(IDC_CMB_Inp3, &CMainFrame::OnCbnSelchangeComboPlcIzon)
@@ -138,11 +138,12 @@ LRESULT CMainFrame::OnRibbonCategoryChanged( UINT wParam, LONG lParam)
 	} else if( wParam == 3) {
 		int i2 = 3;
 		// 構造カテゴリ選択
-		MC::z_mmIA.MmDialogKAttrDisp( this);						// 部材属性ダイアログ表示
-		MC::z_mmIA.InitComboParts();								// 全項目設定
-		MC::z_mmIA.SelectComboPartsNmByKmId(m_iComboPartsNm);		// 部品名を設定
-		MC::z_mmIA.SelectComboMbrByKmId( m_iComboMbr);				// 寸法形式を設定
-		MC::z_mnIA.SelectComboMbrByKmId( m_iComboMbr);
+		MC::z_mmIA.MmDialogKAttrDisp( this);									// 部材属性ダイアログ表示
+		MC::z_mmIA.InitComboParts();											// 全項目設定
+		MC::InpAttrIK* pAttrIK = MC::z_mnIA.GetpInpAttr();						// 入力属性　意匠と構造の共通項目
+		MC::z_mmIA.SelectComboPartsNmByKmId( pAttrIK->m_iComboPartsNm);			// 部品名を設定
+		MC::z_mmIA.SelectComboMbrByKmId( pAttrIK->m_iComboMbr);					// 寸法形式を設定
+		MC::z_mnIA.SelectComboMbrByKmId( pAttrIK->m_iComboMbr);
 	}
 	return 0;
 }
@@ -415,35 +416,40 @@ CMDIChildWnd* CMainFrame::OpenView(CDocTemplate *pTemplate)
 
 void CMainFrame::SelectComboPartsNm( MINT i_iComboPartsNm)
 {
-	m_iComboPartsNm = i_iComboPartsNm;
+	MC::InpAttrIK* pAttrIK = MC::z_mnIA.GetpInpAttr();			// 入力属性　意匠と構造の共通項目
+	pAttrIK->m_iComboPartsNm = i_iComboPartsNm;
 	CMFCRibbonComboBox* pComboBuzai = mmpComboBuzai();
 	pComboBuzai->SelectItem( i_iComboPartsNm);
 }
 
 void CMainFrame::SelectComboMbr( MINT i_iComboMbr)
 {
-	m_iComboMbr = i_iComboMbr;
+	MC::InpAttrIK* pAttrIK = MC::z_mnIA.GetpInpAttr();			// 入力属性　意匠と構造の共通項目
+	pAttrIK->m_iComboMbr = i_iComboMbr;
 	CMFCRibbonComboBox* pComboMbr = mmpComboMbr();
 	pComboMbr->SelectItem( i_iComboMbr);
 }
 
 void CMainFrame::SelectComboInp1( MINT i_iComboInpKbn)
 {
-	m_iComboInpKbn = i_iComboInpKbn;
+	MC::InpAttrIK* pAttrIK = MC::z_mnIA.GetpInpAttr();			// 入力属性　意匠と構造の共通項目
+	pAttrIK->m_iComboInpKbn = i_iComboInpKbn;
 	CMFCRibbonComboBox* pComboInpTp = mmpComboInpTp();
 	pComboInpTp->SelectItem( i_iComboInpKbn);
 }
 
 void CMainFrame::SelectComboInp2( MINT i_iComboMarume)
 {
-	m_iComboMarume = i_iComboMarume;
+	MC::InpAttrIK* pAttrIK = MC::z_mnIA.GetpInpAttr();			// 入力属性　意匠と構造の共通項目
+	pAttrIK->m_iComboMarume = i_iComboMarume;
 	CMFCRibbonComboBox* pComboInpTp = mmpComboMarume();
 	pComboInpTp->SelectItem( i_iComboMarume);
 }
 
 void CMainFrame::SelectComboInp3( MINT i_iComboPlcIzon)
 {
-	m_iComboPlcIzon = i_iComboPlcIzon;
+	MC::InpAttrIK* pAttrIK = MC::z_mnIA.GetpInpAttr();			// 入力属性　意匠と構造の共通項目
+	pAttrIK->m_iComboPlcIzon = i_iComboPlcIzon;
 	CMFCRibbonComboBox* pComboInpTp = mmpComboPlcIzonCd();
 	pComboInpTp->SelectItem( i_iComboPlcIzon);
 }
@@ -461,14 +467,15 @@ void CMainFrame::OnCbnSelchangeComboPartsNm()
 
 	CMFCRibbonComboBox* pCmbBox;
 	pCmbBox = mmpComboBuzai();
-	m_iComboPartsNm = pCmbBox->GetCurSel();						// 選択された部品名
+	MC::InpAttrIK* pAttrIK = MC::z_mnIA.GetpInpAttr();			// 入力属性　意匠と構造の共通項目
+	pAttrIK->m_iComboPartsNm = pCmbBox->GetCurSel();			// 選択された部品名
 
-	MC::z_mnIA.SelectComboPartsNmByKmId( m_iComboPartsNm);
+	MC::z_mnIA.SelectComboPartsNmByKmId( pAttrIK->m_iComboPartsNm);
 	MC::z_mnIA.InitComboMbr();
 
 	MC::z_mmIA.MmDialogKAttrDisp( this);						// 部材属性ダイアログ表示
 	MC::z_mmIA.InitComboParts();								// 全項目設定
-	MC::z_mmIA.SelectComboPartsNmByKmId( m_iComboPartsNm);
+	MC::z_mmIA.SelectComboPartsNmByKmId( pAttrIK->m_iComboPartsNm);
 
 	MC::mhPartsSpec* pPartsSpec;
 	pPartsSpec = MC::BuzaiCode::MhGetpPartsSpec( MC::z_mnIA.GetCurPartsNmId());
@@ -485,14 +492,15 @@ void CMainFrame::OnCbnSelchangeComboMbr()
 
 	CMFCRibbonComboBox* pCmbBox;
 	pCmbBox = mmpComboMbr();
-	m_iComboMbr = pCmbBox->GetCurSel();							// 選択された寸法型式ID
+	MC::InpAttrIK* pAttrIK = MC::z_mnIA.GetpInpAttr();			// 入力属性　意匠と構造の共通項目
+	pAttrIK->m_iComboMbr = pCmbBox->GetCurSel();				// 選択された寸法型式ID
 
 	MC::z_mmIA.MmDialogKAttrDisp( this);						// 部材属性ダイアログ表示
 	MC::z_mmIA.InitComboParts();								// 全項目設定
-	MC::z_mmIA.SelectComboPartsNmByKmId(m_iComboPartsNm);		// 部品名を設定
-	MC::z_mmIA.SelectComboMbrByKmId( m_iComboMbr);				// 寸法形式を設定
+	MC::z_mmIA.SelectComboPartsNmByKmId(pAttrIK->m_iComboPartsNm);		// 部品名を設定
+	MC::z_mmIA.SelectComboMbrByKmId( pAttrIK->m_iComboMbr);				// 寸法形式を設定
 
-	MC::z_mnIA.SelectComboMbrByKmId( m_iComboMbr);
+	MC::z_mnIA.SelectComboMbrByKmId( pAttrIK->m_iComboMbr);
 	MC::CmdCtrl::XqtMenuCmd( IDC_PARTSCREATE);					//	部品入力
 }
 
@@ -501,8 +509,9 @@ void CMainFrame::OnCbnSelchangeComboInpKbn()
 {
 	CMFCRibbonComboBox *pCmbBox;
 	pCmbBox = mmpComboInpTp();
-	m_iComboInpKbn = pCmbBox->GetCurSel();
-	MC::z_mnIA.SelectComboInpKbnByInpKbnCdXqt( m_iComboInpKbn);
+	MC::InpAttrIK* pAttrIK = MC::z_mnIA.GetpInpAttr();			// 入力属性　意匠と構造の共通項目
+	pAttrIK->m_iComboInpKbn = pCmbBox->GetCurSel();
+	MC::z_mnIA.SelectComboInpKbnByInpKbnCdXqt( pAttrIK->m_iComboInpKbn);
 	MC::Window::CurWndFocus();
 }
 
@@ -511,8 +520,9 @@ void CMainFrame::OnCbnSelchangeComboMarume()
 {
 	CMFCRibbonComboBox* pCmbBox;
 	pCmbBox = mmpComboMarume();
-	m_iComboMarume = pCmbBox->GetCurSel();						// 丸めコード
-	MC::z_mnIA.SelectComboMarumeByMarumeCdXqt( m_iComboMarume);
+	MC::InpAttrIK* pAttrIK = MC::z_mnIA.GetpInpAttr();			// 入力属性　意匠と構造の共通項目
+	pAttrIK->m_iComboMarume = pCmbBox->GetCurSel();				// 丸めコード
+	MC::z_mnIA.SelectComboMarumeByMarumeCdXqt( pAttrIK->m_iComboMarume);
 	MC::Window::CurWndFocus();
 }
 
@@ -521,8 +531,9 @@ void CMainFrame::OnCbnSelchangeComboPlcIzon()
 {
 	CMFCRibbonComboBox* pCmbBox;
 	pCmbBox = mmpComboPlcIzonCd();
-	m_iComboPlcIzon = pCmbBox->GetCurSel();										// 配置依存コード
-	MC::z_mnIA.SelectComboPlcIzonCdByPlaceCdXqt( m_iComboPlcIzon);
+	MC::InpAttrIK* pAttrIK = MC::z_mnIA.GetpInpAttr();			// 入力属性　意匠と構造の共通項目
+	pAttrIK->m_iComboPlcIzon = pCmbBox->GetCurSel();			// 配置依存コード
+	MC::z_mnIA.SelectComboPlcIzonCdByPlaceCdXqt( pAttrIK->m_iComboPlcIzon);
 	MC::Window::CurWndFocus();
 }
 

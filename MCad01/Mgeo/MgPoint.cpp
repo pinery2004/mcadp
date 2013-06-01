@@ -193,17 +193,6 @@ int MGeo::ReversePoint3D( MgPoint3D* i_pPt, int i_n, MgPoint3D* o_pPt)
 	// 点列から直線に対象位置の点列を求める
 	static int SymmetryPointSLine3D( MgPoint3D* i_pPt, int i_n, MgSLine3D& sln, MgPoint3D* o_pPt);
 
-//S //======================( ２次元 )==============================
-//#ifdef _MgPoint2DA
-//MgPoint2Da Norma( const MgPoint2D& i_p, MREAL i_Tol)
-//{
-//	MREAL	d1 = MgAbs(p);
-////A		MBCHECK_ZEROVECT( d1, MBCstr( "MgPoint2DA Norma"), i_Tol);
-//	MREAL	d2 = 1. / d1;
-//    return MgPoint2Da( i_p.x * d2, i_p.y * d2, d1);
-//}
-//#endif
-
 //======================( ３次元 )==============================
 //		3D点をトレースする
 //
@@ -259,22 +248,5 @@ MgVect3D MGeo::UnitizeVect3D( const MgVect3D& i_v)				//	(  O) 単位ベクトル
 	MREAL	d2 = 1.f / d1;
 	return MgVect3D( i_v.x * d2, i_v.y * d2, i_v.z * d2);
 }
-//S #ifdef _MgPoint3DA
-//
-//MgPoint3Da Norma( const MgPoint3D& i_p, MREAL i_Tol)
-//{
-//	MREAL d1;
-///*
-//	MgPoint3Da p1;
-//	if(fabs(p.x < i_Tol)) p1.x = 0;	else p1.x = i_p.x;
-//	if(fabs(p.y < i_Tol)) p1.y = 0;	else p1.y = i_p.y;
-//	if(fabs(p.z < i_Tol)) p1.z = 0;	else p1.z = i_p.z;
-//*/
-//	MREAL	d1= MgAbs( p);
-//		MBCHECK_ZEROVECT( d1, MBCstr( "MgPoint3Da Norma"), i_Tol);
-//	MREAL	d2 = 1.f / d1;
-//	return MgPoint3Da( i_p.x * d2, i_p.y * d2, i_p.z * d2, d1);
-//}
-//#endif
 
 } // namespace MC

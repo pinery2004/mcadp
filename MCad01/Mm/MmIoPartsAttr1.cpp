@@ -98,7 +98,6 @@ void mmIoPartsAttr::InitComboPartsNm()
 	}
 EXIT:
 	m_iComboKmIdPartsNm = -1;
-																				//S	z_mmIA.SetKCdBrB( false, false, false);						//	部材、金物、パネル、その他のラジオボタンを未選択に設定
 }
 
 ///////////////////////////////////////////////////////////////////////////////

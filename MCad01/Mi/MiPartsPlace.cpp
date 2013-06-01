@@ -319,11 +319,11 @@ void mhHaitiIn::MmSrchCrossBuzai(
 	MINT		ic1;
 	MINT		iTch = 0;
 	MINT		iCrs = 0;
-	MgLine2D		lnBziSin1;
+	MgLine2D	lnBziSin1;
 	MgPolyg2D	pgBzi1;
 	MPOSITION	pos1;
 	mhPlcParts	*pPlcEn;
-	MgLine2D		lnBziSin2;
+	MgLine2D	lnBziSin2;
 	MgPolyg2D	pgBzi2;
 	MINT		nT;
 	MINT		iIntr;
@@ -496,7 +496,7 @@ void mhHaitiIn::PartsShape(
 /////////////////////////////////////////////////////////////////////////////
 //	部材の配置点と長さ補正値を修正
 void mhHaitiIn::MhModBzPH(
-						MINT		iCdInpKbnCd,		// (I  ) 入力点区分コード
+						MINT		iCdInpKbnCd,	// (I  ) 入力点区分コード
 						MINT		iMov,			// (I  ) 修正側　(0:始点、1:終点)
 				const	MgPoint3D	&PtInt,			// (I  ) 配置点
 						MREAL		rLH,			// (I  ) 長さ補整値
@@ -736,7 +736,6 @@ void mhHaitiIn::MhAdjBzL(
 	}
 
 	ist = z_mmIA.GetComboAttrR( MC_CMB_LHS1, &rLH);				// 長さ補正値を取得する
-//S	rLH = z_mnIA.GetLengthH1();
 	if ( Bz1.Ln.p[1 - iMov] == PtInt) {
 		rLnWH = Bz1.rLH[1 - iMov] + rLH;
 		if ( !MGeo::CheckZero( rLnWH))

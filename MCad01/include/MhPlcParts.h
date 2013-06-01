@@ -31,7 +31,6 @@ class	mhPlcParts: public MOBJECT
 	friend	void	MdPartsModify( mhPlcParts *pPlcEnR, mhPlcParts* *ppPlcEnM);
 	friend	void	MdPartsDelete( MPOSITION pPosition);
 	friend	void	MmPartsPlc( const MgPoint3D *Pt, const MgVect3D vUpPlc, const MgPolyg2D *pPg);
-//S	friend	void	MmWndKDrawHaitiParts( class MmWndInfo* pWndInfo);
 	friend	void	IeModel::MhNormKabe( MINT nProc);
 	friend	void	MhNormKiso( MINT nProc);
 	//friend	MINT	MhMdlLoad( MCHAR* PathI);

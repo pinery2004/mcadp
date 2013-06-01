@@ -49,15 +49,15 @@ CMFCRibbonComboBox* mmpComboBuzai()
 	TRACE( _T(" カレントカテゴリ = %s\n"), sTest);
 
 	CArray<CMFCRibbonBaseElement* ,CMFCRibbonBaseElement*> arButtons;
-	MC::System::GetpMainFrame()->m_wndRibbonBar.GetElementsByID( IDC_CMBK_BZI1, arButtons);
+	MC::System::GetpMainFrame()->m_wndRibbonBar.GetElementsByID( IDC_CMBK_PARTSNM, arButtons);
 //<----
 	int iIdcCmb;
 	int iCurCategory;
 	iCurCategory = MC::z_mnIA.GetCurCategory();
 	if ( iCurCategory == MP_SENTAKU_ISYOU) {
-		iIdcCmb = IDC_CMBS_BZI1;
+		iIdcCmb = IDC_CMBS_PARTSNM;
 	} else {
-		iIdcCmb = IDC_CMBK_BZI1;
+		iIdcCmb = IDC_CMBK_PARTSNM;
 	}
 	CMFCRibbonComboBox* pComboBuzai;
 	pComboBuzai = DYNAMIC_DOWNCAST(CMFCRibbonComboBox, pRibbonBar->FindByID(iIdcCmb));
@@ -73,14 +73,14 @@ CMFCRibbonComboBox* mmpComboMbr()
 	int iCurCategory;
 	iCurCategory = MC::z_mnIA.GetCurCategory();
 	if ( iCurCategory == MP_SENTAKU_ISYOU) {
-		iIdcCmb = IDC_CMBS_BZI2;
+		iIdcCmb = IDC_CMBS_PARTSMBR;
 	} else {
-		iIdcCmb = IDC_CMBK_BZI2;
+		iIdcCmb = IDC_CMBK_PARTSMBR;
 	}
 	CMFCRibbonComboBox* pComboMbr;
 	pComboMbr = DYNAMIC_DOWNCAST(CMFCRibbonComboBox, pRibbonBar->FindByID(iIdcCmb));
 	return pComboMbr;
-	//	DYNAMIC_DOWNCAST(CMFCRibbonComboBox, MC::System::GetpMainFrame()->m_wndRibbonBar.FindByID(IDC_CMBK_BZI2));
+	//	DYNAMIC_DOWNCAST(CMFCRibbonComboBox, MC::System::GetpMainFrame()->m_wndRibbonBar.FindByID(IDC_CMBK_PARTSMBR));
 }
 
 CMFCRibbonComboBox* mmpComboInpTp()

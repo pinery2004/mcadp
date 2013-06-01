@@ -16,8 +16,6 @@
 #include "MsDefType.h"
 #include "mnMFCRibbonBar.h"
 
-//S #define WM_USER100 WM_USER + 100
-
 class CMainFrame : public CMDIFrameWndEx
 {
 	DECLARE_DYNAMIC(CMainFrame)
@@ -43,20 +41,8 @@ public:
 #endif
 	CMDIChildWnd* OpenView(CDocTemplate *pTemplate);
 
-public:
-	MINT		m_iComboPartsNm;								// 部品名
-	MINT		m_iComboMbr;									// 寸法型式
-	MINT		m_iComboInpKbn;									// 入力点区分
-	MINT		m_iComboMarume;									// 丸めコード
-	MINT		m_iComboPlcIzon;								// 配置依存コード
-	MINT		m_iComboPanelNo;								// パネル番号
-
-	MINT		m_iSentaku;
-
-
 protected:  // コントロール バー用メンバー
 public:
-																								//SS	CMFCRibbonBar				m_wndRibbonBar;
 	mnMFCRibbonBar				m_wndRibbonBar;
 	CMFCRibbonApplicationButton m_MainButton;
 	CMFCToolBarImages			m_PanelImages;
@@ -109,5 +95,3 @@ public:
 	// リボンバーのカテゴリ変更メッセージの取得用に追加したがメッセージ受けられず
 	afx_msg LRESULT OnAfxWmOnChangeRibbonCategory(WPARAM wParam, LPARAM lParam);
 };
-
-//S	extern CMainFrame *z_pMainFrame;								// メインフレーム ポインタ (グローバル変数)
