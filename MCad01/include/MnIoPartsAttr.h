@@ -31,28 +31,29 @@ namespace MC
 // 入力属性　意匠と構造の共通項目
 class InpAttrIK
 {
+public:
 	int			m_iComboInpKbn;						// 入力点区分
 	int			m_iComboMarume;						// 丸めコード
 	int			m_iComboPlcIzon;					// 配置依存コード
 
-	MPKOSEI		m_iKInpGp;							// 構造入力構成		(屋根、小屋、天井、耐力壁、壁、床、土台、基礎)
-	MPBUNRUI	m_iKInpBr;							// 構造入力種類		(部材、金物、パネル、その他)
-	MPSELECT	m_iKInpSel;							// 構造入力選択		選択1、選択2、選択3						未使用
+	MPKOSEI		m_iInpGp;							// 入力構成		(屋根、小屋、天井、耐力壁、壁、床、土台、基礎)
+	MPBUNRUI	m_iInpBr;							// 入力種類		(部材、金物、パネル、その他)
+	MPSELECT	m_iInpSel;							// 入力選択		選択1、選択2、選択3						未使用
 
 	int			m_iComboPartsNm;					// 部品名
 	int			m_iComboMbr;						// 寸法型式
-
 };
 
 // 入力属性　意匠+構造
 class InpAttrA
 {
+public:
 	int			m_iCurCategory;						// カレントカテゴリ　1:意匠, 2:構造, 3:共通
 	int			m_iInpKai;							// 入力階			(1階,2階,3階)
 
 	MPPROC		m_iSInpProc;						// 意匠: 入力処理	(住戸、住棟、物件、屋根、敷地、壁量)
 
-	InpAttrIK	m_IK;								// 意匠と構造の共通項目
+	InpAttrIK	m_IK[2];							// 意匠と構造の共通項目
 
 	int			m_iComboPanelNo;					// 構造: パネル番号
 	bool		m_bKDspBuzai;						// 構造: 部材表示フラグ
@@ -89,19 +90,21 @@ class DLL_EXPORT mnIoPartsAttr
 protected:
 	MPMODE		m_iInpMd;							// 創成モード		(削除、修正、移動、複写、属性表示)
 
-	int			m_iCurCategory;						// カレントカテゴリ　1:意匠, 2:構造, 3:共通
-
-	int			m_iInpKai;							// 入力階			(1階,2階,3階)
-
-	MPPROC		m_iSInpProc;						// 意匠: 入力処理	(住戸、住棟、物件、屋根、敷地、壁量)
-	MPKOSEI		m_iSInpGp;							// 意匠入力構成		(屋根、小屋、天井、耐力壁、壁、床、土台、基礎)
-	MPKOSEI		m_iKInpGp;							// 構造入力構成		(屋根、小屋、天井、耐力壁、壁、床、土台、基礎)
-	MPBUNRUI	m_iKInpBr;							// 構造入力種類		(部材、金物、パネル、その他)
-	MPSELECT	m_iKInpSel;							// 構造入力選択		選択1、選択2、選択3						未使用
+//U	int			m_iCurCategory;						// カレントカテゴリ　1:意匠, 2:構造, 3:共通
 //
-	bool		m_bKDspBuzai;						// 部材表示フラグ
-	bool		m_bKDspKanagu;						// 金物表示フラグ
-	bool		m_bKDspGohan;						// 合板表示フラグ
+//	int			m_iInpKai;							// 入力階			(1階,2階,3階)
+//
+//	MPPROC		m_iSInpProc;						// 意匠: 入力処理	(住戸、住棟、物件、屋根、敷地、壁量)
+//	MPKOSEI		m_iSInpGp;							// 意匠入力構成		(屋根、小屋、天井、耐力壁、壁、床、土台、基礎)
+//	MPKOSEI		m_iKInpGp;							// 構造入力構成		(屋根、小屋、天井、耐力壁、壁、床、土台、基礎)
+//	MPBUNRUI	m_iKInpBr;							// 構造入力種類		(部材、金物、パネル、その他)
+//	MPSELECT	m_iKInpSel;							// 構造入力選択		選択1、選択2、選択3						未使用
+//
+//	bool		m_bKDspBuzai;						// 部材表示フラグ
+//	bool		m_bKDspKanagu;						// 金物表示フラグ
+//	bool		m_bKDspGohan;						// 合板表示フラグ
+//
+	InpAttrA	m_IA;								// 入力属性
 
 	////////////////////////////////////////////////////////////////////////////
 	//	コンストラクタ
@@ -134,6 +137,44 @@ protected:
 	int		m_nComboMbrId;							// 表示項目数
 	int		m_iComboMbrId[MX_CMB_CDMEMBER];			// 表示項目対応寸法型式ID
 	int		m_iComboKmIdMbr;						// 寸法形式カレント選択項目番号
+
+
+public:
+//S1	///////////////////////////////////////////////////////////////////////////////
+//	// 入力点区分コード
+//	void SetComboInpKbn( int i_iComboInpKbn)
+//	{
+//		m_IA.m_IK[1].m_iComboInpKbn = i_iComboInpKbn;
+//	}
+//
+//	int GetComboInpKbn()
+//	{
+//		return m_IA.m_IK[1].m_iComboInpKbn;
+//	}
+
+	///////////////////////////////////////////////////////////////////////////////
+	// 丸めコード
+	void SetComboMarume( int i_iComboMarume)
+	{
+		m_IA.m_IK[1].m_iComboMarume = i_iComboMarume;
+	}
+
+	int GetComboMarume()
+	{
+		return m_IA.m_IK[1].m_iComboMarume;
+	}
+
+//S1	///////////////////////////////////////////////////////////////////////////////
+//	// 配置依存コード
+//	void SetComboPlcIzon( int i_iComboPlcIzon)
+//	{
+//		m_IA.m_IK[1].m_iComboPlcIzon = i_iComboPlcIzon;
+//	}
+//
+//	int GetComboPlcIzon()
+//	{
+//		return m_IA.m_IK[1].m_iComboPlcIzon;
+//	}
 
 	///////////////////////////////////////////////////////////////////////////////
 	//	リボンバーの設定と取り込み
@@ -181,13 +222,13 @@ public:
 						int i_iCurCategory			// カレントカテゴリ　1:意匠, 2:構造, 3:共通
 				)
 	{
-		m_iCurCategory = i_iCurCategory;
+		m_IA.m_iCurCategory = i_iCurCategory;
 
 	}
 
 	int	GetCurCategory()
 	{
-		return m_iCurCategory;
+		return m_IA.m_iCurCategory;
 	}
 
 	//==================================//
@@ -200,13 +241,13 @@ public:
 						int	 		i_iInpKai		// 階	
 				)
 	{
-		m_iInpKai = i_iInpKai;
+		m_IA.m_iInpKai = i_iInpKai;
 	}
 
 public:
 	int GetInpKai()
 	{
-		return m_iInpKai;
+		return m_IA.m_iInpKai;
 	}
 
 	//==================================//
@@ -358,13 +399,13 @@ public:
 						MPKOSEI		i_iKInpGp		// 構造　構成(組)
 				)
 	{
-		m_iKInpGp = i_iKInpGp;
+		m_IA.m_IK[1].m_iInpGp = i_iKInpGp;
 	}
 
 public:
 	MPKOSEI GetKCdGp()
 	{
-		return m_iKInpGp;
+		return m_IA.m_IK[1].m_iInpGp;
 	}
 
 	//==================================//
@@ -377,13 +418,13 @@ public:
 						MPBUNRUI		i_iKInpBr		// 構造　種類
 				)
 	{
-		m_iKInpBr = i_iKInpBr;
+		m_IA.m_IK[1].m_iInpBr = i_iKInpBr;
 	}
 
 public:
 	MPBUNRUI GetKCdBr()
 	{
-		return m_iKInpBr;
+		return m_IA.m_IK[1].m_iInpBr;
 	}
 
 	//==================================//
@@ -523,13 +564,13 @@ public:
 						MPSELECT	i_iSel			// 選択番号
 				)
 	{
-		m_iKInpSel = i_iSel;
+		m_IA.m_IK[1].m_iInpSel = i_iSel;
 	}
 
 public:
 	MPSELECT GetKSel()
 	{
-		return m_iKInpSel;
+		return m_IA.m_IK[1].m_iInpSel;
 	}
 
 	//==================================//
@@ -547,9 +588,9 @@ public:
 						bool		i_bDspGohan		// 合板表示フラグ
 				)
 	{
-		m_bKDspBuzai  = i_bDspBuzai;
-		m_bKDspKanagu = i_bDspKanagu;
-		m_bKDspGohan  = i_bDspGohan;
+		m_IA.m_bKDspBuzai  = i_bDspBuzai;
+		m_IA.m_bKDspKanagu = i_bDspKanagu;
+		m_IA.m_bKDspGohan  = i_bDspGohan;
 	}
 
 	//==================================//
@@ -649,12 +690,12 @@ public:
 						MPPROC		i_iSInpProc		// 設計　構成
 				)
 	{
-		m_iSInpProc = i_iSInpProc;
+		m_IA.m_iSInpProc = i_iSInpProc;
 	}
 public:
 	MPPROC GetSCdPrc()
 	{
-		return m_iSInpProc;
+		return m_IA.m_iSInpProc;
 	}
 
 	//==================================//
@@ -667,12 +708,12 @@ public:
 						MPKOSEI		i_iSInpGp		// 設計　構成
 				)
 	{
-		m_iSInpGp = i_iSInpGp;
+		m_IA.m_IK[0].m_iInpGp = i_iSInpGp;
 	}
 public:
 	MPKOSEI GetSCdGp()
 	{
-		return m_iSInpGp;
+		return m_IA.m_IK[0].m_iInpGp;
 	}
 
 };

@@ -21,9 +21,9 @@
 namespace MC
 {
 
-static MINT		z_iComboInpKbnCd;
-static MINT		z_iComboMarume;
-static MINT		z_iComboPlcIzonCd;
+//S static MINT		z_iComboInpKbnCd;
+//static MINT		z_iComboMarume;
+//static MINT		z_iComboPlcIzonCd;
 
 // CMnRibbonBarInp ダイアログ
 
@@ -38,7 +38,8 @@ void mnIoPartsAttr::SelectComboInpKbnByInpKbnCdXqt(
 				)
 {
 	System::GetpMainFrame()->SelectComboInp1( iCdInpKbn);
-	z_iComboInpKbnCd = iCdInpKbn;									//	カレントの入力点区分コード
+//S1	z_iComboInpKbnCd = iCdInpKbn;									//	カレントの入力点区分コード
+	m_IA.m_IK[1].m_iComboInpKbn = iCdInpKbn;							//	カレントの入力点区分コード
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -51,7 +52,8 @@ void mnIoPartsAttr::SelectComboInpKbnByInpKbnCdXqt(
 //
 MINT mnIoPartsAttr::GetComboInpKbnCd()
 {
-	return z_iComboInpKbnCd;
+//S1	return z_iComboInpKbnCd;
+	return m_IA.m_IK[1].m_iComboInpKbn;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -59,11 +61,23 @@ MINT mnIoPartsAttr::GetComboInpKbnCd()
 //
 
 void mnIoPartsAttr::SelectComboMarumeByMarumeCdXqt(
-						MINT		iCdMarume		// (I  ) 丸めコード
+						MINT		i_iMarumeCd	// (I  ) 丸めコード
 					)
 {
-	System::GetpMainFrame()->SelectComboInp2( iCdMarume);
-	z_iComboMarume = iCdMarume;									// カレントの丸めコード
+	int		iComboMarume;
+
+	if ( i_iMarumeCd >= MP_MRMCDN && i_iMarumeCd <= MP_MRMCD4)
+		iComboMarume = i_iMarumeCd;
+	else if ( i_iMarumeCd == 6)
+		iComboMarume = MP_MRMCD6;
+	else if ( i_iMarumeCd == 6)
+		iComboMarume = MP_MRMCD6;
+	else
+		ASSERT( 0);												// 丸めコードエラー　<ERROR>
+	
+	System::GetpMainFrame()->SelectComboInp2( iComboMarume);
+//S1	z_iComboMarume = iCdMarume;									// カレントの丸めコード
+	m_IA.m_IK[1].m_iComboMarume = iComboMarume;					// カレントの丸めコード
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -78,13 +92,17 @@ void mnIoPartsAttr::SelectComboMarumeByMarumeCdXqt(
 
 MINT mnIoPartsAttr::GetComboMarumeCd()
 {
-	MINT	iMCD;
+	int		iComboMarume;
+	int		iMCD;
 
-	if ( z_iComboMarume >= MP_MRMCDN && z_iComboMarume <= MP_MRMCD4) 
-		iMCD = z_iComboMarume;
-	else if ( z_iComboMarume == MP_MRMCD6)
+	iComboMarume = m_IA.m_IK[1].m_iComboMarume;
+
+
+	if ( iComboMarume >= MP_MRMCDN && iComboMarume <= MP_MRMCD4) 
+		iMCD = iComboMarume;
+	else if ( iComboMarume == MP_MRMCD6)
 		iMCD = 6;
-	else if ( z_iComboMarume == MP_MRMCD8)
+	else if ( iComboMarume == MP_MRMCD8)
 		iMCD = 8;
 	else
 		ASSERT( 0);												// 丸めコードエラー　<ERROR>
@@ -97,11 +115,12 @@ MINT mnIoPartsAttr::GetComboMarumeCd()
 //
 
 void mnIoPartsAttr::SelectComboPlcIzonCdByPlaceCdXqt(
-						MINT		iCdPlc		// (I  ) 配置依存コード
+						MINT		i_iComboInpKbn	// (I  ) 配置依存コード
 					)
 {
-	System::GetpMainFrame()->SelectComboInp3( iCdPlc);
-	z_iComboPlcIzonCd = iCdPlc;									//	カレントの配置依存コード
+	System::GetpMainFrame()->SelectComboInp3( i_iComboInpKbn);
+//S1	z_iComboPlcIzonCd = iCdPlc;									//	カレントの配置依存コード
+	m_IA.m_IK[1].m_iComboPlcIzon = i_iComboInpKbn;					//	カレントの配置依存コード
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -112,7 +131,8 @@ void mnIoPartsAttr::SelectComboPlcIzonCdByPlaceCdXqt(
 
 MINT mnIoPartsAttr::GetComboPlcIzonCd()
 {
-	return z_iComboPlcIzonCd;
+//S1	return z_iComboPlcIzonCd;
+	return m_IA.m_IK[1].m_iComboPlcIzon;
 }
 
 } // namespace MC
