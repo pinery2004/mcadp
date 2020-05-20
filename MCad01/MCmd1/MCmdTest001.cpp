@@ -900,7 +900,7 @@ void Test006_DBModule()
 	stFig13.zColorPlt( 2);										// 色(パレット)
 	stFig13.zTransmissivity( 0.7f);								// 透過率 ( 0. ～ 1.)
 	stFig13.zLineWd( 0.1f);										// 線幅
-	stFig13.zMaterialRGBA( MC_AMBIENT, MUQUARTER( 100, 255, 200, 150));		// RGB	( A{透過率}, R, G, B)
+	stFig13.zMaterialRGBA( MC_AMBIENT, MUQUARTER( 100, 255, 200, 150));	// RGB	( A{透過率}, R, G, B)
 	stFig13.zMaterialRGBA( MC_DIFFUSE, FLOAT3( 1.f, 0.5f, 0.3f), 0.7f);	// A 透過率	( 0. ～ 1.)
 	stFig13.zMaterialShininess( 100.0f);						// 鏡面光係数 ( 0. ～ 128.)
 	stFig13.zTexture( 5);										// テクスチャＩＤ

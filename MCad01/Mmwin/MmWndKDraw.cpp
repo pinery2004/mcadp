@@ -62,7 +62,8 @@ MINT WindowCtrl::ReDrawAllWnd()
 		pWndInfo->ClearMDC();
 		if ( pWndInfo->GetWndSyu() == 5) {
 																// グリッド表示数取り込み
-			MmWndInfo* pWndInfo1 = WindowCtrl::GetWndInfoBySyu( 1, MTHEIMENZU, 1, 1);
+//S1			MmWndInfo* pWndInfo1 = WindowCtrl::GetWndInfoBySyu( 1, MTHEIMENZU, 1, 1);
+			MmWndInfo* pWndInfo1 = WindowCtrl::GetWndInfoBySyu( 1, MTHEIMENZU, 1);
 //			MmWndInfo* pWndInfo5 = WindowCtrl::WndFind( this);
 			MINT nGrid[4];
 			pWndInfo1->GetGridNum( nGrid);

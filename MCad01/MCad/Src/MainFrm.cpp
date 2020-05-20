@@ -151,10 +151,10 @@ LRESULT CMainFrame::OnRibbonCategoryChanged( UINT wParam, LONG lParam)
 LRESULT CMainFrame::OnWindow( UINT wParam, LONG lParam)
 {
 	int ist = 0;
-	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 1, MTYUKAFUSEZU, 1, 1);		// ウィンドウ管理
-	if ( pWndInfo)
-		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
-	z_MCadApp.CreateWnd( 1, MTYUKAFUSEZU, 1, 1);
+//S1	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 1, MTYUKAFUSEZU, 1, 1);		// ウィンドウ管理
+//	if ( pWndInfo)
+//		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
+	z_MCadApp.CreateWnd( 1, MTYUKAFUSEZU, 1);
 	return 0;
 }
 // CMainFrame コンストラクション/デストラクション
@@ -550,7 +550,8 @@ void CMainFrame::OnView1open()
 	// ウィンドウのオープン
 	CMDIChildWnd* pChildWnd1;
 	pChildWnd1 = OpenView( z_MCadApp.m_pDocTemplate1);
-	MC::WindowCtrl::SetCurWndFrame( 1, pChildWnd1);
+//S1	MC::WindowCtrl::SetCurWndFrame( 1, pChildWnd1);
+	MC::WindowCtrl::SetCurWndFrame( pChildWnd1);
 }
 
 void CMainFrame::OnView2open()
@@ -558,7 +559,8 @@ void CMainFrame::OnView2open()
 	// ウィンドウのオープン
 	CMDIChildWnd* pChildWnd2;
 	pChildWnd2 = OpenView( z_MCadApp.m_pDocTemplate2);
-	MC::WindowCtrl::SetCurWndFrame( 2, pChildWnd2);
+//S1	MC::WindowCtrl::SetCurWndFrame( 2, pChildWnd2);
+	MC::WindowCtrl::SetCurWndFrame( pChildWnd2);
 }
 
 void CMainFrame::OnView3open()
@@ -566,7 +568,8 @@ void CMainFrame::OnView3open()
 	// ウィンドウのオープン
 	CMDIChildWnd* pChildWnd3;
 	pChildWnd3 = OpenView( z_MCadApp.m_pDocTemplate3);
-	MC::WindowCtrl::SetCurWndFrame( 3, pChildWnd3);
+//S1	MC::WindowCtrl::SetCurWndFrame( 3, pChildWnd3);
+	MC::WindowCtrl::SetCurWndFrame( pChildWnd3);
 }
 
 void CMainFrame::OnView4open()
@@ -574,7 +577,8 @@ void CMainFrame::OnView4open()
 	// ウィンドウのオープン
 	CMDIChildWnd* pChildWnd1;
 	pChildWnd1 = OpenView( z_MCadApp.m_pDocTemplate1);
-	MC::WindowCtrl::SetCurWndFrame( 4, pChildWnd1);
+//S1	MC::WindowCtrl::SetCurWndFrame( 4, pChildWnd1);
+	MC::WindowCtrl::SetCurWndFrame( pChildWnd1);
 }
 
 void CMainFrame::OnView5open()
@@ -582,7 +586,8 @@ void CMainFrame::OnView5open()
 	// ウィンドウのオープン
 	CMDIChildWnd* pChildWnd1;
 	pChildWnd1 = OpenView( z_MCadApp.m_pDocTemplate1);
-	MC::WindowCtrl::SetCurWndFrame( 5, pChildWnd1);
+//S1	MC::WindowCtrl::SetCurWndFrame( 5, pChildWnd1);
+	MC::WindowCtrl::SetCurWndFrame( pChildWnd1);
 }
 
 // リボンバーのカテゴリ変更メッセージの取得用に追加したがメッセージ受けられず

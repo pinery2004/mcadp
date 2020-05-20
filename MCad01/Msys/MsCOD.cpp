@@ -473,8 +473,8 @@ void msCod::Text(
 		vOffset /= (m_sclRPtoLP * m_vsclLPtoDP.x);				// x方向とy方向とでずれが異なったためm_vsclLPtoDP.yは不使用
 	} else {
 		iTextHeight = MINT( z_fTextHeight * m_sclRPtoLP * 10 *
-			(MGeo::LenVect2D( MgVect2D( abs(m_vsclLPtoDP.y * vDirect.x),
-									    abs(m_vsclLPtoDP.x * vDirect.y)))));
+			(MGeo::LenVect2D( MgVect2D( MGABS(m_vsclLPtoDP.y * vDirect.x),
+									    MGABS(m_vsclLPtoDP.x * vDirect.y)))));
 //		vOffset *= (m_sclRPtoLP * m_vsclLPtoDP.x);				// x方向とy方向とでずれが異なったためm_vsclLPtoDP.yは不使用
 		if (z_iTextPosUL == 2) 
 			vOffset.y += (z_fTextHeight * 0.5f * 1.2f);			// 中段表示用補正 ( /2 /10 * (補正　1.2)

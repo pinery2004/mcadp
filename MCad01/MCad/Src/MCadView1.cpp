@@ -110,7 +110,8 @@ BOOL CMCadView1::PreCreateWindow(CREATESTRUCT& cs)
 	cs.lpszClass = AfxRegisterWndClass(CS_HREDRAW|CS_VREDRAW|CS_DBLCLKS,
 		NULL,reinterpret_cast<HBRUSH>(COLOR_WINDOW+1),NULL); 
 
-	MC::WindowCtrl::SetCurWnd( 1, this);
+//S1	MC::WindowCtrl::SetCurWnd( 1, this);
+	MC::WindowCtrl::SetCurWnd( this);
 	MINT ist = MC::WindowCtrl::AddCurWnd();
 	_ASSERTE(ist == 0);
 	return TRUE;

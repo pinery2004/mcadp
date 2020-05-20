@@ -24,6 +24,7 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
 
 	DECLARE_MESSAGE_MAP()
+	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 };
 
 

@@ -288,6 +288,7 @@
       <Filter>リソース ファイル</Filter>
     </None>
     <None Include="ClassDiagram1.cd" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -763,6 +764,9 @@
     </ClInclude>
     <ClInclude Include="..\include\MnMFCRibbonBar.h">
       <Filter>Mn\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="MdmObj.h">
+      <Filter>Mdm</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

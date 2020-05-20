@@ -198,7 +198,7 @@ public:
 	CNode		m_sStart;							// 基点
 	MINT		m_nCount;							// 実体数
 
-	CNode*		m_pFree;						// 開放ノードの基点
+	CNode*		m_pFree;							// 開放ノードの基点
 	MINT		m_nEntType;							// 実体サイズ( byte)
 	MINT		m_nRecSize;							// レコードサイズ( byte)
 

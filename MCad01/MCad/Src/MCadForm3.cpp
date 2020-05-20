@@ -28,6 +28,12 @@ void CMCadForm3::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CMCadForm3, CFormView)
 END_MESSAGE_MAP()
 
+BOOL CMCadForm3::PreCreateWindow(CREATESTRUCT& cs)
+{
+	// TODO: ここに特定なコードを追加するか、もしくは基本クラスを呼び出してください。
+
+	return CFormView::PreCreateWindow(cs);
+}
 
 // CMCadForm3 診断
 

@@ -81,7 +81,8 @@ BOOL CMCadView2::PreCreateWindow(CREATESTRUCT& cs)
 		::LoadCursor( NULL, IDC_ARROW), reinterpret_cast<HBRUSH>(COLOR_WINDOW+1), NULL);
 
 
-	MC::WindowCtrl::SetCurWnd( 2, this);												// ウィンドウ管理
+//S1	MC::WindowCtrl::SetCurWnd( 2, this);												// ウィンドウ管理
+	MC::WindowCtrl::SetCurWnd( this);													// ウィンドウ管理
 	ist = MC::WindowCtrl::AddCurWnd();													// ウィンドウ管理
 	_ASSERTE( ist == 0);																// ウィンドウ管理
 
@@ -96,8 +97,8 @@ void CMCadView2::OnPaint()
 	SetWindowPos(&wndTopMost , 0, 0, 0, 0,
 		SWP_NOMOVE|SWP_NOSIZE|SWP_NOACTIVATE | SWP_NOZORDER);
 
-//	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::WndFind( this);							// ウィンドウ管理
-	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 2, MTHEIMENZU, 1, 1);	// ウィンドウ管理
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoObWnd( this);							// ウィンドウ管理
+//S1	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 2, MTHEIMENZU, 1, 1);	// ウィンドウ管理
 	(pWndInfo->GetFrame())->SetWindowText(Mstr( "WINDOW_02"));							// ウィンドウ管理
 
 	// 描画メッセージで CWnd::OnPaint() を呼び出さないでください。

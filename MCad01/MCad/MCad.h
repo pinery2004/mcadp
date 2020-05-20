@@ -51,7 +51,7 @@ public:
 	void CreateWnd(
 				MINT		iWndSyu,							// (I  ) ウィンドウ種類
 				MINT		iZuSyu,								// (I  ) 図種類
-				MINT		iKai,								// (I  ) 階
+//S1				MINT		iKai,								// (I  ) 階
 				MINT		iZuNum								// (I  ) 図番号
 				);
 

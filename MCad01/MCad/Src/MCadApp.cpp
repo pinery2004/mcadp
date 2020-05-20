@@ -326,7 +326,7 @@ BOOL CMCadApp::InitInstance()
 	pMainFrame->ShowWindow(m_nCmdShow);
 	pMainFrame->UpdateWindow();
 
-	MC::WindowCtrl::SetCurWndSyubetsu( 1, MTHEIMENZU, 1, 1);
+	MC::WindowCtrl::SetCurWndSyubetsu( 1, MTHEIMENZU, 1);
 
 	// コマンド ラインで指定されたディスパッチ コマンドです。アプリケーションが
 	// /RegServer、/Register、/Unregserver または /Unregister で起動された場合、False を返します。
@@ -340,9 +340,9 @@ BOOL CMCadApp::InitInstance()
 	MC::z_mnIA.SetKCdBrB( false, false, false);
 
 	//// ウィンドウのオープン
-	MC::WindowCtrl::SetCurWndSyubetsu( 2, MTHEIMENZU, 1, 1);
+	MC::WindowCtrl::SetCurWndSyubetsu( 2, MTHEIMENZU, 1);
 	pMainFrame->OpenView( m_pDocTemplate2);
-	MC::WindowCtrl::SetCurWndSyubetsu( 3, MTHEIMENZU, 1, 1);
+	MC::WindowCtrl::SetCurWndSyubetsu( 3, MTHEIMENZU, 1);
 	pMainFrame->OpenView( m_pDocTemplate3);
 	return TRUE;
 }
@@ -430,7 +430,7 @@ void CMCadApp::OnFileNew()
 	}
 
 	//　３次元表示は一旦消す
-	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 2, MTHEIMENZU, 1, 1);
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 2, MTHEIMENZU, 1);
 	if ( pWndInfo) 
 		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
 
@@ -457,7 +457,7 @@ void CMCadApp::OnFileOpen()
 
 	if ( ist1 == 1) {																	// OKの場合読み込み
 		//　３次元表示は一旦消す
-		MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 2, MTHEIMENZU, 1, 1);
+		MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 2, MTHEIMENZU, 1);
 		if ( pWndInfo) 
 			pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
 
@@ -468,6 +468,10 @@ void CMCadApp::OnFileOpen()
 		//　３次元表示がされていた場合は新しいデータで再度表示する
 		if ( pWndInfo) 
 			OnView2On();
+	//	OnView3On();
+	//	OnView3On();
+	//	OnView3On();
+	//	OnView3On();
 	}
 }
 
@@ -475,52 +479,52 @@ void CMCadApp::OnFileOpen()
 void CMCadApp::OnView1On()
 {
 	// TODO : ここにコマンド ハンドラ コードを追加します。
-	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 1, MTHEIMENZU, 1, 1);		// ウィンドウ管理
-	if ( pWndInfo)
-		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
-	CreateWnd( 1, MTHEIMENZU, 1, 1);
+//S1	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 1, MTHEIMENZU, 1, 1);		// ウィンドウ管理
+//	if ( pWndInfo)
+//		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
+	CreateWnd( 1, MTHEIMENZU, 1);
 }
 
 void CMCadApp::OnView2On()
 {
-	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 2, MTHEIMENZU, 1, 1);		// ウィンドウ管理
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 2, MTHEIMENZU, 1);			// ウィンドウ管理
 	if ( pWndInfo) {
 //		pWndInfo->GetWnd()->SetWindowPos(&CWnd::wndTopMost , 0, 0, 0, 0,					// 前面に表示し直そうとしたが失敗し
 //		SWP_NOMOVE|SWP_NOSIZE|SWP_NOACTIVATE | SWP_NOZORDER);								// 仮に一旦削除後に再表示した
 		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
 
 	}
-	CreateWnd( 2, MTHEIMENZU, 1, 1);
+	CreateWnd( 2, MTHEIMENZU, 1);
 }
 
 void CMCadApp::OnView3On()
 {
-	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 3, MTHEIMENZU, 1, 1);		// ウィンドウ管理
-	if ( pWndInfo)
-		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
-	CreateWnd( 3, MTHEIMENZU, 1, 1);
+//S1	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 3, MTHEIMENZU, 1, 1);		// ウィンドウ管理
+//	if ( pWndInfo)
+//		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
+	CreateWnd( 3, MTHEIMENZU, 1);
 }
 
 void CMCadApp::OnView4On()
 {
-	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 4, MTHEIMENZU, 1, 1);		// ウィンドウ管理
-	if ( pWndInfo)
-		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
-	CreateWnd( 4, MTHEIMENZU, 1, 1);
+//S1	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 4, MTHEIMENZU, 1, 1);		// ウィンドウ管理
+//	if ( pWndInfo)
+//		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
+	CreateWnd( 4, MTHEIMENZU, 1);
 }
 
 void CMCadApp::OnView5On()
 {
-	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 5, MTHEIMENZU, 1, 1);		// ウィンドウ管理
-	if ( pWndInfo)
-		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
-	CreateWnd( 5, MTHEIMENZU, 1, 1);
+//S1	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 5, MTHEIMENZU, 1, 1);		// ウィンドウ管理
+//	if ( pWndInfo)
+//		pWndInfo->m_pChildFrm->SendMessage(WM_CLOSE);
+	CreateWnd( 5, MTHEIMENZU, 1);
 }
 
 void CMCadApp::OnView1Off()
 {
 	// TODO : ここにコマンド ハンドラ コードを追加します。
-	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 1, MTHEIMENZU, 1, 1);
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 1, MTHEIMENZU, 1);
 	if ( pWndInfo)
 		pWndInfo->m_pChildFrm->PostMessage(WM_CLOSE);
 }
@@ -528,7 +532,7 @@ void CMCadApp::OnView1Off()
 void CMCadApp::OnView2Off()
 {
 	// TODO : ここにコマンド ハンドラ コードを追加します。
-	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 2, MTHEIMENZU, 1, 1);
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 2, MTHEIMENZU, 1);
 	if ( pWndInfo)
 		pWndInfo->m_pChildFrm->PostMessage(WM_CLOSE);
 }
@@ -536,7 +540,7 @@ void CMCadApp::OnView2Off()
 void CMCadApp::OnView3Off()
 {
 	// TODO : ここにコマンド ハンドラ コードを追加します。
-	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 3, MTHEIMENZU, 1, 1);
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 3, MTHEIMENZU, 1);
 	if ( pWndInfo)
 		pWndInfo->m_pChildFrm->PostMessage(WM_CLOSE);
 }
@@ -544,7 +548,7 @@ void CMCadApp::OnView3Off()
 void CMCadApp::OnView4Off()
 {
 	// TODO : ここにコマンド ハンドラ コードを追加します。
-	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 4, MTHEIMENZU, 1, 1);
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 4, MTHEIMENZU, 1);
 	if ( pWndInfo)
 		pWndInfo->m_pChildFrm->PostMessage(WM_CLOSE);
 }
@@ -552,7 +556,7 @@ void CMCadApp::OnView4Off()
 void CMCadApp::OnView5Off()
 {
 	// TODO : ここにコマンド ハンドラ コードを追加します。
-	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 5, MTHEIMENZU, 1, 1);
+	MC::MmWndInfo* pWndInfo = MC::WindowCtrl::GetWndInfoBySyu( 5, MTHEIMENZU, 1);
 	if ( pWndInfo)
 		pWndInfo->m_pChildFrm->PostMessage(WM_CLOSE);
 }
@@ -598,13 +602,13 @@ void CMCadApp::OnUpdateSubMenuP( CCmdUI *pCmdUI)
 void CMCadApp::CreateWnd(
 				const	MINT		iWndSyu,		// (I  ) ウィンドウ種類
 				const	MINT		iZuSyu,			// (I  ) 図種類
-				const	MINT		iKai,			// (I  ) 階
+//S1				const	MINT		iKai,			// (I  ) 階
 				const	MINT		iZuNum			// (I  ) 図番号
 				) 
 {
 	CMainFrame* pFrame = STATIC_DOWNCAST(CMainFrame, m_pMainWnd);
 
-	MC::WindowCtrl::SetCurWndSyubetsu( iWndSyu, iZuSyu, iKai, iZuNum);
+	MC::WindowCtrl::SetCurWndSyubetsu( iWndSyu, iZuSyu, iZuNum);
 
 	// 新しい MDI 子ウィンドウを作成します
 	switch (iWndSyu)
